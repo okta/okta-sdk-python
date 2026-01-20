@@ -29,12 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AutoLoginApplicationSettingsSignOn(BaseModel):
     """
     AutoLoginApplicationSettingsSignOn
-    """ # noqa: E501
+    """  # noqa: E501
     login_url: StrictStr = Field(description="Primary URL of the sign-in page for this app", alias="loginUrl")
-    redirect_url: Optional[StrictStr] = Field(default=None, description="Secondary URL of the sign-in page for this app", alias="redirectUrl")
+    redirect_url: Optional[StrictStr] = Field(
+        default=None,
+        description="Secondary URL of the sign-in page for this app",
+        alias="redirectUrl")
     __properties: ClassVar[List[str]] = ["loginUrl", "redirectUrl"]
 
     model_config = ConfigDict(
@@ -91,4 +95,3 @@ class AutoLoginApplicationSettingsSignOn(BaseModel):
             "redirectUrl": obj.get("redirectUrl")
         })
         return _obj
-

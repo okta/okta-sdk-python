@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLHookResponseError(BaseModel):
     """
     An object to return an error. Returning an error causes Okta to record a failure event in the Okta System Log. The string supplied in the `errorSummary` property is recorded in the System Log event. > **Note:** If the error object doesn't include the defined `errorSummary` property, the following common default message is returned to the end user: `The callback service returned an error`.  > **Note:** If a response to a SAML inline hook request isn't received from your external service within three seconds, a timeout occurs. In this scenario, the Okta SAML inline hook process continues, and the user is created.
-    """ # noqa: E501
-    error_summary: Optional[StrictStr] = Field(default=None, description="A human-readable summary of the error", alias="errorSummary")
+    """  # noqa: E501
+    error_summary: Optional[StrictStr] = Field(
+        default=None,
+        description="A human-readable summary of the error",
+        alias="errorSummary")
     __properties: ClassVar[List[str]] = ["errorSummary"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class SAMLHookResponseError(BaseModel):
             "errorSummary": obj.get("errorSummary")
         })
         return _obj
-

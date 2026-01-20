@@ -32,15 +32,22 @@ from okta.models.saml_claims_inner import SamlClaimsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Saml(BaseModel):
     """
     SAML configuration details
-    """ # noqa: E501
-    acs: Annotated[List[SamlAcsInner], Field(min_length=1)] = Field(description="List of Assertion Consumer Service (ACS) URLs. The default ACS URL is required and is indicated by a null `index` value. You can use the org-level variables you defined in the `config` array in the URL. For example: `https://${org.subdomain}.example.com/saml/login`")
-    claims: Optional[List[SamlClaimsInner]] = Field(default=None, description="Attribute statements to appear in the Okta SAML assertion")
-    doc: StrictStr = Field(description="The URL to your customer-facing instructions for configuring your SAML integration. See [Customer configuration document guidelines](https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document-guidelines).")
-    entity_id: StrictStr = Field(description="Globally unique name for your SAML entity. For instance, your Identity Provider (IdP) or Service Provider (SP) URL.", alias="entityId")
-    groups: Optional[List[StrictStr]] = Field(default=None, description="Defines the group attribute names for the SAML assertion statement. Okta inserts the list of Okta user groups into the attribute names in the statement.")
+    """  # noqa: E501
+    acs: Annotated[List[SamlAcsInner], Field(min_length=1)] = Field(
+        description="List of Assertion Consumer Service (ACS) URLs. The default ACS URL is required and is indicated by a null `index` value. You can use the org-level variables you defined in the `config` array in the URL. For example: `https://${org.subdomain}.example.com/saml/login`")
+    claims: Optional[List[SamlClaimsInner]] = Field(default=None,
+                                                    description="Attribute statements to appear in the Okta SAML assertion")
+    doc: StrictStr = Field(
+        description="The URL to your customer-facing instructions for configuring your SAML integration. See [Customer configuration document guidelines](https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document-guidelines).")
+    entity_id: StrictStr = Field(
+        description="Globally unique name for your SAML entity. For instance, your Identity Provider (IdP) or Service Provider (SP) URL.",
+        alias="entityId")
+    groups: Optional[List[StrictStr]] = Field(
+        default=None, description="Defines the group attribute names for the SAML assertion statement. Okta inserts the list of Okta user groups into the attribute names in the statement.")
     __properties: ClassVar[List[str]] = ["acs", "claims", "doc", "entityId", "groups"]
 
     model_config = ConfigDict(
@@ -114,4 +121,3 @@ class Saml(BaseModel):
             "groups": obj.get("groups")
         })
         return _obj
-

@@ -32,10 +32,11 @@ from okta.models.authenticator_enrollment_policy_authenticator_type import Authe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicyAuthenticatorSettings(BaseModel):
     """
     AuthenticatorEnrollmentPolicyAuthenticatorSettings
-    """ # noqa: E501
+    """  # noqa: E501
     constraints: Optional[AuthenticatorEnrollmentPolicyAuthenticatorSettingsConstraints] = None
     enroll: Optional[AuthenticatorEnrollmentPolicyAuthenticatorSettingsEnroll] = None
     key: Optional[AuthenticatorEnrollmentPolicyAuthenticatorType] = None
@@ -115,4 +116,3 @@ class AuthenticatorEnrollmentPolicyAuthenticatorSettings(BaseModel):
             "key": obj.get("key")
         })
         return _obj
-

@@ -30,15 +30,25 @@ from okta.models.identity_provider_properties_idv_metadata import IdentityProvid
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityProviderProperties(BaseModel):
     """
     The properties in the IdP `properties` object vary depending on the IdP type
-    """ # noqa: E501
-    aal_value: Optional[StrictStr] = Field(default=None, description="The [authentication assurance level](https://developers.login.gov/oidc/#aal-values) (AAL) value for the Login.gov IdP. See [Add a Login.gov IdP](https://developer.okta.com/docs/guides/add-logingov-idp/). Applies to `LOGINGOV` and `LOGINGOV_SANDBOX` IdP types.", alias="aalValue")
-    additional_amr: Optional[List[StrictStr]] = Field(default=None, description="The additional Assurance Methods References (AMR) values for Smart Card IdPs. Applies to `X509` IdP type.", alias="additionalAmr")
-    ial_value: Optional[StrictStr] = Field(default=None, description="The [type of identity verification](https://developers.login.gov/oidc/#ial-values) (IAL) value for the Login.gov IdP. See [Add a Login.gov IdP](https://developer.okta.com/docs/guides/add-logingov-idp/). Applies to `LOGINGOV` and `LOGINGOV_SANDBOX` IdP types.", alias="ialValue")
+    """  # noqa: E501
+    aal_value: Optional[StrictStr] = Field(
+        default=None,
+        description="The [authentication assurance level](https://developers.login.gov/oidc/#aal-values) (AAL) value for the Login.gov IdP. See [Add a Login.gov IdP](https://developer.okta.com/docs/guides/add-logingov-idp/). Applies to `LOGINGOV` and `LOGINGOV_SANDBOX` IdP types.",
+        alias="aalValue")
+    additional_amr: Optional[List[StrictStr]] = Field(
+        default=None, description="The additional Assurance Methods References (AMR) values for Smart Card IdPs. Applies to `X509` IdP type.", alias="additionalAmr")
+    ial_value: Optional[StrictStr] = Field(
+        default=None,
+        description="The [type of identity verification](https://developers.login.gov/oidc/#ial-values) (IAL) value for the Login.gov IdP. See [Add a Login.gov IdP](https://developer.okta.com/docs/guides/add-logingov-idp/). Applies to `LOGINGOV` and `LOGINGOV_SANDBOX` IdP types.",
+        alias="ialValue")
     idv_metadata: Optional[IdentityProviderPropertiesIdvMetadata] = Field(default=None, alias="idvMetadata")
-    inquiry_template_id: StrictStr = Field(description="The ID of the inquiry template from your Persona dashboard. The inquiry template always starts with `itmpl`. Applies to the `IDV_PERSONA` IdP type.", alias="inquiryTemplateId")
+    inquiry_template_id: StrictStr = Field(
+        description="The ID of the inquiry template from your Persona dashboard. The inquiry template always starts with `itmpl`. Applies to the `IDV_PERSONA` IdP type.",
+        alias="inquiryTemplateId")
     __properties: ClassVar[List[str]] = ["aalValue", "additionalAmr", "ialValue", "idvMetadata", "inquiryTemplateId"]
 
     @field_validator('additional_amr')
@@ -131,4 +141,3 @@ class IdentityProviderProperties(BaseModel):
             "inquiryTemplateId": obj.get("inquiryTemplateId")
         })
         return _obj
-

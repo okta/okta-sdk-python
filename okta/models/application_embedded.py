@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationEmbedded(BaseModel):
     """
     Embedded resources related to the app using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. If the `expand=user/{userId}` query parameter is specified, then the assigned [Application User](/openapi/okta-management/management/tag/ApplicationUsers/) is embedded.
-    """ # noqa: E501
-    user: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="The specified [Application User](/openapi/okta-management/management/tag/ApplicationUsers/) assigned to the app")
+    """  # noqa: E501
+    user: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="The specified [Application User](/openapi/okta-management/management/tag/ApplicationUsers/) assigned to the app")
     __properties: ClassVar[List[str]] = ["user"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class ApplicationEmbedded(BaseModel):
             "user": obj.get("user")
         })
         return _obj
-

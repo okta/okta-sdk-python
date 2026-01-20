@@ -30,10 +30,11 @@ from okta.models.required_enum import RequiredEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ChannelBinding(BaseModel):
     """
     ChannelBinding
-    """ # noqa: E501
+    """  # noqa: E501
     required: Optional[RequiredEnum] = None
     style: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["required", "style"]
@@ -102,4 +103,3 @@ class ChannelBinding(BaseModel):
             "style": obj.get("style")
         })
         return _obj
-

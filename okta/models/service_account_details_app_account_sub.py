@@ -30,12 +30,19 @@ from okta.models.app_service_account_credentials import AppServiceAccountCredent
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ServiceAccountDetailsAppAccountSub(BaseModel):
     """
     Details for a SaaS app account, which will be managed as a service account
-    """ # noqa: E501
-    app_global_name: Optional[StrictStr] = Field(default=None, description="The name of the SaaS app in the Okta Integration Network catalog", alias="appGlobalName")
-    app_instance_name: Optional[StrictStr] = Field(default=None, description="The instance name of the SaaS app", alias="appInstanceName")
+    """  # noqa: E501
+    app_global_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The name of the SaaS app in the Okta Integration Network catalog",
+        alias="appGlobalName")
+    app_instance_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The instance name of the SaaS app",
+        alias="appInstanceName")
     credentials: AppServiceAccountCredentials
     okta_application_id: StrictStr = Field(description="The Okta app instance ID of the SaaS app", alias="oktaApplicationId")
     __properties: ClassVar[List[str]] = ["appGlobalName", "appInstanceName", "credentials", "oktaApplicationId"]
@@ -107,4 +114,3 @@ class ServiceAccountDetailsAppAccountSub(BaseModel):
             "oktaApplicationId": obj.get("oktaApplicationId")
         })
         return _obj
-

@@ -29,13 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DefaultApp(BaseModel):
     """
     DefaultApp
-    """ # noqa: E501
+    """  # noqa: E501
     app_instance_id: Optional[StrictStr] = Field(default=None, description="ID for the App instance", alias="appInstanceId")
     app_link_name: Optional[StrictStr] = Field(default=None, description="Name for the app instance", alias="appLinkName")
-    classic_application_uri: Optional[StrictStr] = Field(default=None, description="Application URI for classic Orgs", alias="classicApplicationUri")
+    classic_application_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="Application URI for classic Orgs",
+        alias="classicApplicationUri")
     __properties: ClassVar[List[str]] = ["appInstanceId", "appLinkName", "classicApplicationUri"]
 
     model_config = ConfigDict(
@@ -93,4 +97,3 @@ class DefaultApp(BaseModel):
             "classicApplicationUri": obj.get("classicApplicationUri")
         })
         return _obj
-

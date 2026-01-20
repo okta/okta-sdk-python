@@ -30,10 +30,11 @@ from okta.models.log_geographical_context import LogGeographicalContext
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogIpAddress(BaseModel):
     """
     LogIpAddress
-    """ # noqa: E501
+    """  # noqa: E501
     geographical_context: Optional[LogGeographicalContext] = Field(default=None, alias="geographicalContext")
     ip: Optional[StrictStr] = Field(default=None, description="IP address")
     source: Optional[StrictStr] = Field(default=None, description="Details regarding the source")
@@ -109,4 +110,3 @@ class LogIpAddress(BaseModel):
             "version": obj.get("version")
         })
         return _obj
-

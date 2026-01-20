@@ -34,10 +34,11 @@ from okta.models.saml_settings import SamlSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProtocolSaml(BaseModel):
     """
     Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
-    """ # noqa: E501
+    """  # noqa: E501
     algorithms: Optional[SamlAlgorithms] = None
     credentials: Optional[SamlCredentials] = None
     endpoints: Optional[SamlEndpoints] = None
@@ -149,4 +150,3 @@ class ProtocolSaml(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

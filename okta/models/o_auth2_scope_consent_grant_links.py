@@ -34,16 +34,18 @@ from okta.models.user_resource_href_object import UserResourceHrefObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ScopeConsentGrantLinks(BaseModel):
     """
     OAuth2ScopeConsentGrantLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     app: Optional[AppResourceHrefObject] = Field(default=None, description="Link to the app resource")
     client: Optional[AppResourceHrefObject] = Field(default=None, description="Link to the client resource")
     scope: Optional[ScopeResourceHrefObject] = Field(default=None, description="Link to the scope resource")
     user: Optional[UserResourceHrefObject] = Field(default=None, description="Link to the user resource")
-    authorization_server: Optional[AuthorizationServerResourceHrefObject] = Field(default=None, description="Link to the authorization server resource", alias="authorizationServer")
+    authorization_server: Optional[AuthorizationServerResourceHrefObject] = Field(
+        default=None, description="Link to the authorization server resource", alias="authorizationServer")
     __properties: ClassVar[List[str]] = ["self", "app", "client", "scope", "user", "authorizationServer"]
 
     model_config = ConfigDict(
@@ -146,4 +148,3 @@ class OAuth2ScopeConsentGrantLinks(BaseModel):
             "authorizationServer": AuthorizationServerResourceHrefObject.from_dict(obj["authorizationServer"]) if obj.get("authorizationServer") is not None else None
         })
         return _obj
-

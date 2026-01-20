@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogStreamActivateLink(BaseModel):
     """
     LogStreamActivateLink
-    """ # noqa: E501
+    """  # noqa: E501
     href: StrictStr = Field(description="The URI of the resource")
     method: Optional[StrictStr] = Field(default=None, description="HTTP method allowed for the resource")
     __properties: ClassVar[List[str]] = ["href", "method"]
@@ -101,4 +102,3 @@ class LogStreamActivateLink(BaseModel):
             "method": obj.get("method")
         })
         return _obj
-

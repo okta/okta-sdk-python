@@ -26,19 +26,20 @@ import json
 
 from pydantic import ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.policy import Policy
 from okta.models.policy_links import PolicyLinks
-from okta.models.policy_type import PolicyType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class EntityRiskPolicy(Policy):
     """
     EntityRiskPolicy
-    """ # noqa: E501
-    conditions: Optional[StrictStr] = Field(default=None, description="Policy conditions aren't supported for this policy type.")
-    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_embedded", "_links"]
+    """  # noqa: E501
+    conditions: Optional[StrictStr] = Field(default=None,
+                                            description="Policy conditions aren't supported for this policy type.")
+    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated",
+                                         "name", "priority", "status", "system", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,4 +111,3 @@ class EntityRiskPolicy(Policy):
             "_links": PolicyLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

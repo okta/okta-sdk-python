@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApiTokenNetwork(BaseModel):
     """
     The Network Condition of the API Token
-    """ # noqa: E501
+    """  # noqa: E501
     connection: Optional[StrictStr] = Field(default=None, description="The connection type of the Network Condition")
     include: Optional[List[StrictStr]] = Field(default=None, description="List of included IP network zones")
     exclude: Optional[List[StrictStr]] = Field(default=None, description="List of excluded IP network zones")
@@ -93,4 +94,3 @@ class ApiTokenNetwork(BaseModel):
             "exclude": obj.get("exclude")
         })
         return _obj
-

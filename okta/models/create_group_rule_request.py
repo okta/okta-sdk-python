@@ -32,13 +32,15 @@ from okta.models.group_rule_conditions import GroupRuleConditions
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateGroupRuleRequest(BaseModel):
     """
     CreateGroupRuleRequest
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[GroupRuleAction] = None
     conditions: Optional[GroupRuleConditions] = None
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, description="Name of the group rule")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
+        default=None, description="Name of the group rule")
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["actions", "conditions", "name", "type"]
 
@@ -122,4 +124,3 @@ class CreateGroupRuleRequest(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

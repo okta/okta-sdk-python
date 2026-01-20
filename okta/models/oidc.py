@@ -30,14 +30,21 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Oidc(BaseModel):
     """
     OIDC configuration details
-    """ # noqa: E501
-    doc: StrictStr = Field(description="The URL to your customer-facing instructions for configuring your OIDC integration. See [Customer configuration document guidelines](https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document-guidelines).")
-    initiate_login_uri: Optional[StrictStr] = Field(default=None, description="The URL to redirect users when they click on your app from their Okta End-User Dashboard", alias="initiateLoginUri")
-    post_logout_uris: Optional[List[StrictStr]] = Field(default=None, description="The sign-out redirect URIs for your app. You can send a request to `/v1/logout` to sign the user out and redirect them to one of these URIs.", alias="postLogoutUris")
-    redirect_uris: Annotated[List[StrictStr], Field(min_length=1)] = Field(description="List of sign-in redirect URIs", alias="redirectUris")
+    """  # noqa: E501
+    doc: StrictStr = Field(
+        description="The URL to your customer-facing instructions for configuring your OIDC integration. See [Customer configuration document guidelines](https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document-guidelines).")
+    initiate_login_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL to redirect users when they click on your app from their Okta End-User Dashboard",
+        alias="initiateLoginUri")
+    post_logout_uris: Optional[List[StrictStr]] = Field(
+        default=None, description="The sign-out redirect URIs for your app. You can send a request to `/v1/logout` to sign the user out and redirect them to one of these URIs.", alias="postLogoutUris")
+    redirect_uris: Annotated[List[StrictStr], Field(min_length=1)] = Field(
+        description="List of sign-in redirect URIs", alias="redirectUris")
     __properties: ClassVar[List[str]] = ["doc", "initiateLoginUri", "postLogoutUris", "redirectUris"]
 
     model_config = ConfigDict(
@@ -96,4 +103,3 @@ class Oidc(BaseModel):
             "redirectUris": obj.get("redirectUris")
         })
         return _obj
-

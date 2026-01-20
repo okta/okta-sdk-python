@@ -30,10 +30,11 @@ from okta.models.links_next_for_role_assignments_next import LinksNextForRoleAss
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksNextForRoleAssignments(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification.
-    """ # noqa: E501
+    """  # noqa: E501
     next: Optional[LinksNextForRoleAssignmentsNext] = None
     __properties: ClassVar[List[str]] = ["next"]
 
@@ -97,4 +98,3 @@ class LinksNextForRoleAssignments(BaseModel):
             "next": LinksNextForRoleAssignmentsNext.from_dict(obj["next"]) if obj.get("next") is not None else None
         })
         return _obj
-

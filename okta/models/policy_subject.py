@@ -32,12 +32,16 @@ from okta.models.policy_user_name_template import PolicyUserNameTemplate
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicySubject(BaseModel):
     """
     Specifies the behavior for establishing, validating, and matching a username for an IdP user
-    """ # noqa: E501
+    """  # noqa: E501
     filter: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="Optional [regular expression pattern](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions) used to filter untrusted IdP usernames. * As a best security practice, you should define a regular expression pattern to filter untrusted IdP usernames. This is especially important if multiple IdPs are connected to your org. The filter prevents an IdP from issuing an assertion for any user, including partners or directory users in your Okta org. * For example, the filter pattern `(\\S+@example\\.com)` allows only Users that have an `@example.com` username suffix. It rejects assertions that have any other suffix such as `@corp.example.com` or `@partner.com`. * Only `SAML2` and `OIDC` IdP providers support the `filter` property.")
-    match_attribute: Optional[StrictStr] = Field(default=None, description="Okta user profile attribute for matching a transformed IdP username. Only for matchType `CUSTOM_ATTRIBUTE`. The `matchAttribute` must be a valid Okta user profile attribute of one of the following types: * String (with no format or 'email' format only) * Integer * Number", alias="matchAttribute")
+    match_attribute: Optional[StrictStr] = Field(
+        default=None,
+        description="Okta user profile attribute for matching a transformed IdP username. Only for matchType `CUSTOM_ATTRIBUTE`. The `matchAttribute` must be a valid Okta user profile attribute of one of the following types: * String (with no format or 'email' format only) * Integer * Number",
+        alias="matchAttribute")
     match_type: Optional[PolicySubjectMatchType] = Field(default=None, alias="matchType")
     user_name_template: Optional[PolicyUserNameTemplate] = Field(default=None, alias="userNameTemplate")
     __properties: ClassVar[List[str]] = ["filter", "matchAttribute", "matchType", "userNameTemplate"]
@@ -105,4 +109,3 @@ class PolicySubject(BaseModel):
             "userNameTemplate": PolicyUserNameTemplate.from_dict(obj["userNameTemplate"]) if obj.get("userNameTemplate") is not None else None
         })
         return _obj
-

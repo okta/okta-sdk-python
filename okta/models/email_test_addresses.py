@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailTestAddresses(BaseModel):
     """
     EmailTestAddresses
-    """ # noqa: E501
+    """  # noqa: E501
     from_address: StrictStr = Field(description="Email address that sends test emails", alias="fromAddress")
     to_address: StrictStr = Field(description="Email address that receives test emails", alias="toAddress")
     __properties: ClassVar[List[str]] = ["fromAddress", "toAddress"]
@@ -91,4 +92,3 @@ class EmailTestAddresses(BaseModel):
             "toAddress": obj.get("toAddress")
         })
         return _obj
-

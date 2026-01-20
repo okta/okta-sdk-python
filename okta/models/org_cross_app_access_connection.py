@@ -30,17 +30,30 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgCrossAppAccessConnection(BaseModel):
     """
     Connection object for Cross App Access connections
-    """ # noqa: E501
-    created: Optional[datetime] = Field(default=None, description="The ISO 8601 formatted date and time when the connection was created")
+    """  # noqa: E501
+    created: Optional[datetime] = Field(default=None,
+                                        description="The ISO 8601 formatted date and time when the connection was created")
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the connection")
-    last_updated: Optional[datetime] = Field(default=None, description="The ISO 8601 formatted date and time when the connection was last updated", alias="lastUpdated")
-    requesting_app_instance_id: Optional[StrictStr] = Field(default=None, description="ID of the requesting app instance", alias="requestingAppInstanceId")
-    resource_app_instance_id: Optional[StrictStr] = Field(default=None, description="ID of the resource app instance", alias="resourceAppInstanceId")
-    status: Optional[StrictStr] = Field(default=None, description="Indicates if the Cross App Access connection is active or inactive")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "requestingAppInstanceId", "resourceAppInstanceId", "status"]
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="The ISO 8601 formatted date and time when the connection was last updated",
+        alias="lastUpdated")
+    requesting_app_instance_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the requesting app instance",
+        alias="requestingAppInstanceId")
+    resource_app_instance_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the resource app instance",
+        alias="resourceAppInstanceId")
+    status: Optional[StrictStr] = Field(default=None,
+                                        description="Indicates if the Cross App Access connection is active or inactive")
+    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated",
+                                         "requestingAppInstanceId", "resourceAppInstanceId", "status"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -116,4 +129,3 @@ class OrgCrossAppAccessConnection(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

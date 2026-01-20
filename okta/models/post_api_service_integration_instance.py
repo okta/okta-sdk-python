@@ -31,21 +31,40 @@ from okta.models.app_properties_value import AppPropertiesValue
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PostAPIServiceIntegrationInstance(BaseModel):
     """
     PostAPIServiceIntegrationInstance
-    """ # noqa: E501
-    config_guide_url: Optional[StrictStr] = Field(default=None, description="The URL to the API service integration configuration guide", alias="configGuideUrl")
-    created_at: Optional[StrictStr] = Field(default=None, description="Timestamp when the API Service Integration instance was created", alias="createdAt")
-    created_by: Optional[StrictStr] = Field(default=None, description="The user ID of the API Service Integration instance creator", alias="createdBy")
-    granted_scopes: Optional[List[StrictStr]] = Field(default=None, description="The list of Okta management scopes granted to the API Service Integration instance. See [Okta management OAuth 2.0 scopes](/oauth2/#okta-admin-management).", alias="grantedScopes")
+    """  # noqa: E501
+    config_guide_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL to the API service integration configuration guide",
+        alias="configGuideUrl")
+    created_at: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the API Service Integration instance was created",
+        alias="createdAt")
+    created_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The user ID of the API Service Integration instance creator",
+        alias="createdBy")
+    granted_scopes: Optional[List[StrictStr]] = Field(
+        default=None, description="The list of Okta management scopes granted to the API Service Integration instance. See [Okta management OAuth 2.0 scopes](/oauth2/#okta-admin-management).", alias="grantedScopes")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the API Service Integration instance")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the API service integration that corresponds with the `type` property. This is the full name of the API service integration listed in the Okta Integration Network (OIN) catalog.")
+    name: Optional[StrictStr] = Field(
+        default=None,
+        description="The name of the API service integration that corresponds with the `type` property. This is the full name of the API service integration listed in the Okta Integration Network (OIN) catalog.")
     properties: Optional[Dict[str, AppPropertiesValue]] = Field(default=None, description="App instance properties")
-    type: Optional[StrictStr] = Field(default=None, description="The type of the API service integration. This string is an underscore-concatenated, lowercased API service integration name. For example, `my_api_log_integration`.")
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of the API service integration. This string is an underscore-concatenated, lowercased API service integration name. For example, `my_api_log_integration`.")
     links: Optional[APIServiceIntegrationLinks] = Field(default=None, alias="_links")
-    client_secret: Optional[StrictStr] = Field(default=None, description="The client secret for the API Service Integration instance. This property is only returned in a POST response.", alias="clientSecret")
-    __properties: ClassVar[List[str]] = ["configGuideUrl", "createdAt", "createdBy", "grantedScopes", "id", "name", "properties", "type", "_links", "clientSecret"]
+    client_secret: Optional[StrictStr] = Field(
+        default=None,
+        description="The client secret for the API Service Integration instance. This property is only returned in a POST response.",
+        alias="clientSecret")
+    __properties: ClassVar[List[str]] = ["configGuideUrl", "createdAt", "createdBy",
+                                         "grantedScopes", "id", "name", "properties", "type", "_links", "clientSecret"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -140,4 +159,3 @@ class PostAPIServiceIntegrationInstance(BaseModel):
             "clientSecret": obj.get("clientSecret")
         })
         return _obj
-

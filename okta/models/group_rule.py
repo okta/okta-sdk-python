@@ -34,18 +34,21 @@ from okta.models.group_rule_status import GroupRuleStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupRule(BaseModel):
     """
     GroupRule
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[GroupRuleAction] = None
     conditions: Optional[GroupRuleConditions] = None
     created: Optional[datetime] = Field(default=None, description="Creation date for group rule")
     id: Optional[StrictStr] = Field(default=None, description="ID of the group rule")
     last_updated: Optional[datetime] = Field(default=None, description="Date group rule was last updated", alias="lastUpdated")
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, description="Name of the group rule")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
+        default=None, description="Name of the group rule")
     status: Optional[GroupRuleStatus] = None
-    type: Optional[StrictStr] = Field(default=None, description="Type to indicate a group rule operation. Only `group_rule` is allowed.")
+    type: Optional[StrictStr] = Field(default=None,
+                                      description="Type to indicate a group rule operation. Only `group_rule` is allowed.")
     __properties: ClassVar[List[str]] = ["actions", "conditions", "created", "id", "lastUpdated", "name", "status", "type"]
 
     model_config = ConfigDict(
@@ -128,4 +131,3 @@ class GroupRule(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

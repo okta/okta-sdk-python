@@ -32,12 +32,14 @@ from okta.models.ssf_transmitter_security_event_subject import SsfTransmitterSec
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CaepCredentialChangeEvent(BaseModel):
     """
     The credential was created, changed, revoked or deleted
-    """ # noqa: E501
+    """  # noqa: E501
     change_type: StrictStr = Field(description="The type of action done towards the credential")
-    credential_type: StrictStr = Field(description="The credential type of the changed credential. It will one of the supported enum values or any other credential type supported mutually by the Transmitter and the Receiver.")
+    credential_type: StrictStr = Field(
+        description="The credential type of the changed credential. It will one of the supported enum values or any other credential type supported mutually by the Transmitter and the Receiver.")
     event_timestamp: Optional[StrictInt] = Field(default=None, description="The time of the event (UNIX timestamp)")
     fido2_aaguid: Optional[StrictStr] = Field(default=None, description="FIDO2 Authenticator Attestation GUID")
     friendly_name: Optional[StrictStr] = Field(default=None, description="Credential friendly name")
@@ -45,7 +47,8 @@ class CaepCredentialChangeEvent(BaseModel):
     reason_admin: Optional[CaepCredentialChangeEventReasonAdmin] = None
     reason_user: Optional[CaepCredentialChangeEventReasonUser] = None
     subject: Optional[SsfTransmitterSecurityEventSubject] = None
-    __properties: ClassVar[List[str]] = ["change_type", "credential_type", "event_timestamp", "fido2_aaguid", "friendly_name", "initiating_entity", "reason_admin", "reason_user", "subject"]
+    __properties: ClassVar[List[str]] = ["change_type", "credential_type", "event_timestamp",
+                                         "fido2_aaguid", "friendly_name", "initiating_entity", "reason_admin", "reason_user", "subject"]
 
     @field_validator('change_type')
     def change_type_validate_enum(cls, value):
@@ -57,7 +60,8 @@ class CaepCredentialChangeEvent(BaseModel):
     @field_validator('credential_type')
     def credential_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['password', 'pin', 'x509', 'fido2-platform', 'fido2-roaming', 'fido-u2f', 'verifiable-credential', 'phone-voice', 'phone-sms', 'app', 'SECURITY_QUESTION', 'SOFT_TOKEN', 'OKTA_SOFT_TOKEN', 'VIP_FACTOR', 'EMAIL_FACTOR', 'SECUREID_FACTOR', 'DUO_SECURITY', 'OKTA_VERIFY_PUSH', 'YUBIKEY_OTP_FACTOR', 'FIDO_WEBAUTHN', 'CUSTOM_APP_PUSH', 'CLAIMS_AS_FACTOR', 'HOTP_FACTOR', 'SIGNED_NONCE', 'ALL_FACTORS', 'TOTP']):
+        if value not in set(['password', 'pin', 'x509', 'fido2-platform', 'fido2-roaming', 'fido-u2f', 'verifiable-credential', 'phone-voice', 'phone-sms', 'app', 'SECURITY_QUESTION', 'SOFT_TOKEN', 'OKTA_SOFT_TOKEN', 'VIP_FACTOR',
+                            'EMAIL_FACTOR', 'SECUREID_FACTOR', 'DUO_SECURITY', 'OKTA_VERIFY_PUSH', 'YUBIKEY_OTP_FACTOR', 'FIDO_WEBAUTHN', 'CUSTOM_APP_PUSH', 'CLAIMS_AS_FACTOR', 'HOTP_FACTOR', 'SIGNED_NONCE', 'ALL_FACTORS', 'TOTP']):
             raise ValueError("must be one of enum values ('password', 'pin', 'x509', 'fido2-platform', 'fido2-roaming', 'fido-u2f', 'verifiable-credential', 'phone-voice', 'phone-sms', 'app', 'SECURITY_QUESTION', 'SOFT_TOKEN', 'OKTA_SOFT_TOKEN', 'VIP_FACTOR', 'EMAIL_FACTOR', 'SECUREID_FACTOR', 'DUO_SECURITY', 'OKTA_VERIFY_PUSH', 'YUBIKEY_OTP_FACTOR', 'FIDO_WEBAUTHN', 'CUSTOM_APP_PUSH', 'CLAIMS_AS_FACTOR', 'HOTP_FACTOR', 'SIGNED_NONCE', 'ALL_FACTORS', 'TOTP')")
         return value
 
@@ -153,4 +157,3 @@ class CaepCredentialChangeEvent(BaseModel):
             "subject": SsfTransmitterSecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.saml_hook_response_error import SAMLHookResponseError
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLHookResponse(BaseModel):
     """
     SAMLHookResponse
-    """ # noqa: E501
+    """  # noqa: E501
     commands: Optional[List[SAMLHookResponseCommandsInner]] = Field(default=None, description="The `commands` object is where you tell Okta to add additional claims to the assertion or to modify the existing assertion statements.  `commands` is an array, allowing you to send multiple commands. In each array element, include a `type` property and a `value` property. The `type` property is where you specify which of the supported commands you want to execute, and `value` is where you supply an operand for that command. In the case of the SAML assertion inline hook, the `value` property is itself a nested object, in which you specify a particular operation, a path to act on, and a value.")
     error: Optional[SAMLHookResponseError] = None
     __properties: ClassVar[List[str]] = ["commands", "error"]
@@ -107,4 +108,3 @@ class SAMLHookResponse(BaseModel):
             "error": SAMLHookResponseError.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
-

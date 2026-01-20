@@ -31,10 +31,11 @@ from okta.models.managed_connection_list_links import ManagedConnectionListLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ManagedConnectionList(BaseModel):
     """
     ManagedConnectionList
-    """ # noqa: E501
+    """  # noqa: E501
     data: List[ManagedConnection] = Field(description="All connections the agent has established")
     links: ManagedConnectionListLinks = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["data", "_links"]
@@ -107,4 +108,3 @@ class ManagedConnectionList(BaseModel):
             "_links": ManagedConnectionListLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

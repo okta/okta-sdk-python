@@ -30,10 +30,11 @@ from okta.models.password_policy_delegation_settings_options import PasswordPoli
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyDelegationSettings(BaseModel):
     """
     Specifies how to handle password delegation
-    """ # noqa: E501
+    """  # noqa: E501
     options: Optional[PasswordPolicyDelegationSettingsOptions] = None
     __properties: ClassVar[List[str]] = ["options"]
 
@@ -97,4 +98,3 @@ class PasswordPolicyDelegationSettings(BaseModel):
             "options": PasswordPolicyDelegationSettingsOptions.from_dict(obj["options"]) if obj.get("options") is not None else None
         })
         return _obj
-

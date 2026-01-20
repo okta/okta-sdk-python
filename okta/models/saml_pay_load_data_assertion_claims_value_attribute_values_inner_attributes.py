@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionClaimsValueAttributeValuesInnerAttributes(BaseModel):
     """
     SAMLPayLoadDataAssertionClaimsValueAttributeValuesInnerAttributes
-    """ # noqa: E501
-    xsitype: Optional[StrictStr] = Field(default=None, description="Used to derive the type of the attribute", alias="xsi:type")
+    """  # noqa: E501
+    xsitype: Optional[StrictStr] = Field(
+        default=None,
+        description="Used to derive the type of the attribute",
+        alias="xsi:type")
     __properties: ClassVar[List[str]] = ["xsi:type"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class SAMLPayLoadDataAssertionClaimsValueAttributeValuesInnerAttributes(BaseMode
             "xsi:type": obj.get("xsi:type")
         })
         return _obj
-

@@ -33,22 +33,31 @@ from okta.models.authorization_server_policy_conditions import AuthorizationServ
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerPolicy(BaseModel):
     """
     AuthorizationServerPolicy
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="ID of the Policy")
     type: Optional[StrictStr] = Field(default=None, description="Indicates that the Policy is an authorization server Policy")
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, description="Name of the Policy")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]
+                   ] = Field(default=None, description="Name of the Policy")
     conditions: Optional[AuthorizationServerPolicyConditions] = None
-    description: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(default=None, description="Description of the Policy")
-    priority: Optional[StrictInt] = Field(default=None, description="Specifies the order in which this Policy is evaluated in relation to the other Policies in a custom authorization server")
+    description: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(
+        default=None, description="Description of the Policy")
+    priority: Optional[StrictInt] = Field(
+        default=None,
+        description="Specifies the order in which this Policy is evaluated in relation to the other Policies in a custom authorization server")
     status: Optional[StrictStr] = Field(default=None, description="Specifies whether requests have access to this Policy")
     system: Optional[StrictBool] = Field(default=None, description="Specifies whether Okta created this Policy")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the Policy was created")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the Policy was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the Policy was last updated",
+        alias="lastUpdated")
     links: Optional[AuthorizationServerPolicyAllOfLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["id", "type", "name", "conditions", "description", "priority", "status", "system", "created", "lastUpdated", "_links"]
+    __properties: ClassVar[List[str]] = ["id", "type", "name", "conditions",
+                                         "description", "priority", "status", "system", "created", "lastUpdated", "_links"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -151,4 +160,3 @@ class AuthorizationServerPolicy(BaseModel):
             "_links": AuthorizationServerPolicyAllOfLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.inline_hook_response_commands import InlineHookResponseCommands
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookResponse(BaseModel):
     """
     InlineHookResponse
-    """ # noqa: E501
+    """  # noqa: E501
     commands: Optional[List[InlineHookResponseCommands]] = None
     __properties: ClassVar[List[str]] = ["commands"]
 
@@ -97,4 +98,3 @@ class InlineHookResponse(BaseModel):
             "commands": [InlineHookResponseCommands.from_dict(_item) for _item in obj["commands"]] if obj.get("commands") is not None else None
         })
         return _obj
-

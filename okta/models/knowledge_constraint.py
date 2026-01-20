@@ -30,17 +30,26 @@ from okta.models.authentication_method_object import AuthenticationMethodObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class KnowledgeConstraint(BaseModel):
     """
     KnowledgeConstraint
-    """ # noqa: E501
-    authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(default=None, description="This property specifies the precise authenticator and method for authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="authenticationMethods")
-    excluded_authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(default=None, description="This property specifies the precise authenticator and method to exclude from authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="excludedAuthenticationMethods")
+    """  # noqa: E501
+    authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(
+        default=None, description="This property specifies the precise authenticator and method for authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="authenticationMethods")
+    excluded_authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(
+        default=None, description="This property specifies the precise authenticator and method to exclude from authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="excludedAuthenticationMethods")
     methods: Optional[List[StrictStr]] = Field(default=None, description="The authenticator methods that are permitted")
-    reauthenticate_in: Optional[StrictStr] = Field(default=None, description="The duration after which the user must re-authenticate regardless of user activity. This re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).", alias="reauthenticateIn")
-    required: Optional[StrictBool] = Field(default=None, description="This property indicates whether the knowledge or possession factor is required by the assurance. It's optional in the request, but is always returned in the response. By default, this field is `true`. If the knowledge or possession constraint has values for `excludedAuthenticationMethods` the `required` value is false. <x-lifecycle class=\"oie\"></x-lifecycle>")
+    reauthenticate_in: Optional[StrictStr] = Field(
+        default=None,
+        description="The duration after which the user must re-authenticate regardless of user activity. This re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).",
+        alias="reauthenticateIn")
+    required: Optional[StrictBool] = Field(
+        default=None,
+        description="This property indicates whether the knowledge or possession factor is required by the assurance. It's optional in the request, but is always returned in the response. By default, this field is `true`. If the knowledge or possession constraint has values for `excludedAuthenticationMethods` the `required` value is false. <x-lifecycle class=\"oie\"></x-lifecycle>")
     types: Optional[List[StrictStr]] = Field(default=None, description="The authenticator types that are permitted")
-    __properties: ClassVar[List[str]] = ["authenticationMethods", "excludedAuthenticationMethods", "methods", "reauthenticateIn", "required", "types"]
+    __properties: ClassVar[List[str]] = ["authenticationMethods",
+                                         "excludedAuthenticationMethods", "methods", "reauthenticateIn", "required", "types"]
 
     @field_validator('methods')
     def methods_validate_enum(cls, value):
@@ -49,8 +58,10 @@ class KnowledgeConstraint(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', 'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT']):
-                raise ValueError("each list item must be one of ('PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', 'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT')")
+            if i not in set(['PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH',
+                            'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT']):
+                raise ValueError(
+                    "each list item must be one of ('PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', 'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT')")
         return value
 
     @field_validator('types')
@@ -61,7 +72,8 @@ class KnowledgeConstraint(BaseModel):
 
         for i in value:
             if i not in set(['SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', 'APP', 'FEDERATED']):
-                raise ValueError("each list item must be one of ('SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', 'APP', 'FEDERATED')")
+                raise ValueError(
+                    "each list item must be one of ('SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', 'APP', 'FEDERATED')")
         return value
 
     model_config = ConfigDict(
@@ -109,7 +121,8 @@ class KnowledgeConstraint(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['authenticationMethods'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in excluded_authentication_methods (list)
+        # override the default output from pydantic by calling `to_dict()` of each
+        # item in excluded_authentication_methods (list)
         _items = []
         if self.excluded_authentication_methods:
             for _item in self.excluded_authentication_methods:
@@ -136,4 +149,3 @@ class KnowledgeConstraint(BaseModel):
             "types": obj.get("types")
         })
         return _obj
-

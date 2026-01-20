@@ -30,10 +30,11 @@ from okta.models.href_object_governance_resources_link import HrefObjectGovernan
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksGovernanceResources(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the resources using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification.
-    """ # noqa: E501
+    """  # noqa: E501
     resources: Optional[HrefObjectGovernanceResourcesLink] = None
     __properties: ClassVar[List[str]] = ["resources"]
 
@@ -97,4 +98,3 @@ class LinksGovernanceResources(BaseModel):
             "resources": HrefObjectGovernanceResourcesLink.from_dict(obj["resources"]) if obj.get("resources") is not None else None
         })
         return _obj
-

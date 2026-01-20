@@ -30,14 +30,18 @@ from okta.models.api_service_integration_secret_links import APIServiceIntegrati
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class APIServiceIntegrationInstanceSecret(BaseModel):
     """
     APIServiceIntegrationInstanceSecret
-    """ # noqa: E501
-    client_secret: StrictStr = Field(description="The OAuth 2.0 client secret string. The client secret string is returned in the response of a Secret creation request. In other responses (such as list, activate, or deactivate requests), the client secret is returned as an undisclosed hashed value.")
+    """  # noqa: E501
+    client_secret: StrictStr = Field(
+        description="The OAuth 2.0 client secret string. The client secret string is returned in the response of a Secret creation request. In other responses (such as list, activate, or deactivate requests), the client secret is returned as an undisclosed hashed value.")
     created: StrictStr = Field(description="Timestamp when the API Service Integration instance Secret was created")
     id: StrictStr = Field(description="The ID of the API Service Integration instance Secret")
-    last_updated: StrictStr = Field(description="Timestamp when the API Service Integration instance Secret was updated", alias="lastUpdated")
+    last_updated: StrictStr = Field(
+        description="Timestamp when the API Service Integration instance Secret was updated",
+        alias="lastUpdated")
     secret_hash: StrictStr = Field(description="OAuth 2.0 client secret string hash")
     status: StrictStr = Field(description="Status of the API Service Integration instance Secret")
     links: APIServiceIntegrationSecretLinks = Field(alias="_links")
@@ -126,4 +130,3 @@ class APIServiceIntegrationInstanceSecret(BaseModel):
             "_links": APIServiceIntegrationSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

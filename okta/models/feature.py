@@ -33,10 +33,11 @@ from okta.models.feature_type import FeatureType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Feature(BaseModel):
     """
     Specifies feature release cycle information
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Brief description of the feature and what it provides")
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for this feature")
     name: Optional[StrictStr] = Field(default=None, description="Name of the feature")
@@ -121,4 +122,3 @@ class Feature(BaseModel):
             "_links": FeatureLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

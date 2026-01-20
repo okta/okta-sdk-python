@@ -31,10 +31,11 @@ from okta.models.capabilities_import_settings_object import CapabilitiesImportSe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CapabilitiesInboundProvisioningObject(BaseModel):
     """
     Defines the configuration for the INBOUND_PROVISIONING feature
-    """ # noqa: E501
+    """  # noqa: E501
     import_rules: CapabilitiesImportRulesObject = Field(alias="importRules")
     import_settings: CapabilitiesImportSettingsObject = Field(alias="importSettings")
     __properties: ClassVar[List[str]] = ["importRules", "importSettings"]
@@ -107,4 +108,3 @@ class CapabilitiesInboundProvisioningObject(BaseModel):
             "importSettings": CapabilitiesImportSettingsObject.from_dict(obj["importSettings"]) if obj.get("importSettings") is not None else None
         })
         return _obj
-

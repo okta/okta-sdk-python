@@ -32,14 +32,17 @@ from okta.models.inline_hook_channel_config_headers import InlineHookChannelConf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookHttpConfigCreate(BaseModel):
     """
     InlineHookHttpConfigCreate
-    """ # noqa: E501
+    """  # noqa: E501
     auth_scheme: Optional[InlineHookChannelConfigAuthSchemeBody] = Field(default=None, alias="authScheme")
-    headers: Optional[List[InlineHookChannelConfigHeaders]] = Field(default=None, description="An optional list of key/value pairs for headers that you can send with the request to the external service.")
+    headers: Optional[List[InlineHookChannelConfigHeaders]] = Field(
+        default=None, description="An optional list of key/value pairs for headers that you can send with the request to the external service.")
     method: Optional[StrictStr] = Field(default=None, description="The method of the Okta inline hook request")
-    uri: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The external service endpoint that executes the inline hook handler. It must begin with `https://` and be reachable by Okta. No white space is allowed in the URI.")
+    uri: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="The external service endpoint that executes the inline hook handler. It must begin with `https://` and be reachable by Okta. No white space is allowed in the URI.")
     __properties: ClassVar[List[str]] = ["headers", "method", "uri"]
 
     model_config = ConfigDict(
@@ -104,4 +107,3 @@ class InlineHookHttpConfigCreate(BaseModel):
             "uri": obj.get("uri")
         })
         return _obj
-

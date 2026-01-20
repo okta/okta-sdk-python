@@ -30,10 +30,11 @@ from okta.models.profile_mapping_property import ProfileMappingProperty
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProfileMappingRequest(BaseModel):
     """
     The updated request body properties
-    """ # noqa: E501
+    """  # noqa: E501
     properties: Dict[str, ProfileMappingProperty]
     __properties: ClassVar[List[str]] = ["properties"]
 
@@ -102,4 +103,3 @@ class ProfileMappingRequest(BaseModel):
             else None
         })
         return _obj
-

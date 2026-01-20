@@ -30,10 +30,11 @@ from okta.models.catalog_application import CatalogApplication
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StandardRoleEmbeddedTargetsCatalog(BaseModel):
     """
     App targets
-    """ # noqa: E501
+    """  # noqa: E501
     apps: Optional[List[CatalogApplication]] = None
     __properties: ClassVar[List[str]] = ["apps"]
 
@@ -97,4 +98,3 @@ class StandardRoleEmbeddedTargetsCatalog(BaseModel):
             "apps": [CatalogApplication.from_dict(_item) for _item in obj["apps"]] if obj.get("apps") is not None else None
         })
         return _obj
-

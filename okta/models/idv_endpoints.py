@@ -33,10 +33,11 @@ from okta.models.oidc_jwks_endpoint import OidcJwksEndpoint
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IDVEndpoints(BaseModel):
     """
     Contains endpoints for the IDV vendor. When you create an `IDV_STANDARD` IdP, you must include the `par`, `authorization`, `token`, and `jwks` endpoints in the request body.
-    """ # noqa: E501
+    """  # noqa: E501
     authorization: IDVAuthorizationEndpoint
     jwks: OidcJwksEndpoint
     par: IDVParEndpoint
@@ -127,4 +128,3 @@ class IDVEndpoints(BaseModel):
             "token": IDVTokenEndpoint.from_dict(obj["token"]) if obj.get("token") is not None else None
         })
         return _obj
-

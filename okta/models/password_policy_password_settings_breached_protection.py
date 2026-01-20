@@ -29,13 +29,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyPasswordSettingsBreachedProtection(BaseModel):
     """
     Breached Protection settings
-    """ # noqa: E501
-    delegated_workflow_id: Optional[StrictStr] = Field(default=None, description="The `id` of the workflow that runs when a breached password is found during a sign-in attempt.", alias="delegatedWorkflowId")
-    expire_after_days: Optional[StrictInt] = Field(default=None, description="Specifies the number of days after a breached password is found during a sign-in attempt that the user's password should expire. Valid values: 0 through 10. If set to 0, it happens immediately.", alias="expireAfterDays")
-    logout_enabled: Optional[StrictBool] = Field(default=False, description="(Optional, default is false) If true, you must also specify a value for `expireAfterDays`. When enabled, the user's session(s) are terminated immediately the first time the user's credentials are detected as part of a breach.", alias="logoutEnabled")
+    """  # noqa: E501
+    delegated_workflow_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The `id` of the workflow that runs when a breached password is found during a sign-in attempt.",
+        alias="delegatedWorkflowId")
+    expire_after_days: Optional[StrictInt] = Field(
+        default=None,
+        description="Specifies the number of days after a breached password is found during a sign-in attempt that the user's password should expire. Valid values: 0 through 10. If set to 0, it happens immediately.",
+        alias="expireAfterDays")
+    logout_enabled: Optional[StrictBool] = Field(
+        default=False,
+        description="(Optional, default is false) If true, you must also specify a value for `expireAfterDays`. When enabled, the user's session(s) are terminated immediately the first time the user's credentials are detected as part of a breach.",
+        alias="logoutEnabled")
     __properties: ClassVar[List[str]] = ["delegatedWorkflowId", "expireAfterDays", "logoutEnabled"]
 
     model_config = ConfigDict(
@@ -108,4 +118,3 @@ class PasswordPolicyPasswordSettingsBreachedProtection(BaseModel):
             "logoutEnabled": obj.get("logoutEnabled") if obj.get("logoutEnabled") is not None else False
         })
         return _obj
-

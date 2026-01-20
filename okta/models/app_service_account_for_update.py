@@ -30,14 +30,19 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppServiceAccountForUpdate(BaseModel):
     """
     AppServiceAccountForUpdate
-    """ # noqa: E501
-    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the app service account")
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, description="The user-defined name for the app service account")
-    owner_group_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(default=None, description="A list of IDs of the Okta groups who own the app service account", alias="ownerGroupIds")
-    owner_user_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(default=None, description="A list of IDs of the Okta users who own the app service account", alias="ownerUserIds")
+    """  # noqa: E501
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(
+        default=None, description="The description of the app service account")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
+        default=None, description="The user-defined name for the app service account")
+    owner_group_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(
+        default=None, description="A list of IDs of the Okta groups who own the app service account", alias="ownerGroupIds")
+    owner_user_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(
+        default=None, description="A list of IDs of the Okta users who own the app service account", alias="ownerUserIds")
     __properties: ClassVar[List[str]] = ["description", "name", "ownerGroupIds", "ownerUserIds"]
 
     @field_validator('name')
@@ -106,4 +111,3 @@ class AppServiceAccountForUpdate(BaseModel):
             "ownerUserIds": obj.get("ownerUserIds")
         })
         return _obj
-

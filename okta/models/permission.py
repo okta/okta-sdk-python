@@ -32,14 +32,20 @@ from okta.models.permission_links import PermissionLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Permission(BaseModel):
     """
     Permission
-    """ # noqa: E501
+    """  # noqa: E501
     conditions: Optional[PermissionConditions] = None
     created: Optional[datetime] = Field(default=None, description="Timestamp when the permission was assigned")
-    label: Optional[StrictStr] = Field(default=None, description="The assigned Okta [permission](/openapi/okta-management/guides/permissions)")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the permission was last updated", alias="lastUpdated")
+    label: Optional[StrictStr] = Field(
+        default=None,
+        description="The assigned Okta [permission](/openapi/okta-management/guides/permissions)")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the permission was last updated",
+        alias="lastUpdated")
     links: Optional[PermissionLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["conditions", "created", "label", "lastUpdated", "_links"]
 
@@ -125,4 +131,3 @@ class Permission(BaseModel):
             "_links": PermissionLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

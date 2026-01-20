@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceIntegrationsMetadataOneOf2(BaseModel):
     """
     DeviceIntegrationsMetadataOneOf2
-    """ # noqa: E501
+    """  # noqa: E501
     type: StrictStr
     idp_id: StrictStr = Field(alias="idpId")
     __properties: ClassVar[List[str]] = ["type", "idpId"]
@@ -98,4 +99,3 @@ class DeviceIntegrationsMetadataOneOf2(BaseModel):
             "idpId": obj.get("idpId")
         })
         return _obj
-

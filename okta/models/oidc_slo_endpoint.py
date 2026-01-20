@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OidcSloEndpoint(BaseModel):
     """
     OIDC IdP logout endpoint
-    """ # noqa: E501
-    url: Optional[Annotated[str, Field(strict=True, max_length=1014)]] = Field(default=None, description="IdP logout endpoint URL")
+    """  # noqa: E501
+    url: Optional[Annotated[str, Field(strict=True, max_length=1014)]] = Field(
+        default=None, description="IdP logout endpoint URL")
     __properties: ClassVar[List[str]] = ["url"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class OidcSloEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

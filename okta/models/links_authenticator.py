@@ -30,10 +30,11 @@ from okta.models.links_authenticator_authenticator import LinksAuthenticatorAuth
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksAuthenticator(BaseModel):
     """
     LinksAuthenticator
-    """ # noqa: E501
+    """  # noqa: E501
     authenticator: Optional[LinksAuthenticatorAuthenticator] = None
     __properties: ClassVar[List[str]] = ["authenticator"]
 
@@ -97,4 +98,3 @@ class LinksAuthenticator(BaseModel):
             "authenticator": LinksAuthenticatorAuthenticator.from_dict(obj["authenticator"]) if obj.get("authenticator") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.links_user_authenticators_user import LinksUserAuthenticatorsUs
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksUserAuthenticators(BaseModel):
     """
     LinksUserAuthenticators
-    """ # noqa: E501
+    """  # noqa: E501
     user: Optional[LinksUserAuthenticatorsUser] = None
     __properties: ClassVar[List[str]] = ["user"]
 
@@ -97,4 +98,3 @@ class LinksUserAuthenticators(BaseModel):
             "user": LinksUserAuthenticatorsUser.from_dict(obj["user"]) if obj.get("user") is not None else None
         })
         return _obj
-

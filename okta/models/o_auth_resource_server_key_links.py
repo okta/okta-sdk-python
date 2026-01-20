@@ -31,10 +31,11 @@ from okta.models.href_object_delete_link import HrefObjectDeleteLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuthResourceServerKeyLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the current status of a JSON Web Key using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This object is used for dynamic discovery of related resources and lifecycle operations.
-    """ # noqa: E501
+    """  # noqa: E501
     activate: Optional[HrefObjectActivateLink] = None
     delete: Optional[HrefObjectDeleteLink] = None
     __properties: ClassVar[List[str]] = ["activate", "delete"]
@@ -107,4 +108,3 @@ class OAuthResourceServerKeyLinks(BaseModel):
             "delete": HrefObjectDeleteLink.from_dict(obj["delete"]) if obj.get("delete") is not None else None
         })
         return _obj
-

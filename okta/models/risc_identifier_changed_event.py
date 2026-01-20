@@ -30,10 +30,11 @@ from okta.models.security_event_subject import SecurityEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RiscIdentifierChangedEvent(BaseModel):
     """
     The subject's identifier has changed, which is either an email address or a phone number change
-    """ # noqa: E501
+    """  # noqa: E501
     event_timestamp: StrictInt = Field(description="The time of the event (UNIX timestamp)")
     new_value: Optional[StrictStr] = Field(default=None, description="The new identifier value", alias="new-value")
     subject: SecurityEventSubject
@@ -101,4 +102,3 @@ class RiscIdentifierChangedEvent(BaseModel):
             "subject": SecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

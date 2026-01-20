@@ -30,18 +30,21 @@ from okta.models.grant_type import GrantType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenProtocolRequest(BaseModel):
     """
     Details of the token request
-    """ # noqa: E501
+    """  # noqa: E501
     client_id: Optional[StrictStr] = Field(default=None, description="The ID of the client associated with the token")
     grant_type: Optional[GrantType] = None
-    redirect_uri: Optional[StrictStr] = Field(default=None, description="Specifies the callback location where the authorization was sent")
+    redirect_uri: Optional[StrictStr] = Field(default=None,
+                                              description="Specifies the callback location where the authorization was sent")
     response_mode: Optional[StrictStr] = Field(default=None, description="The authorization response mode")
     response_type: Optional[StrictStr] = Field(default=None, description="The authorization response type")
     scope: Optional[StrictStr] = Field(default=None, description="The scopes requested")
     state: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["client_id", "grant_type", "redirect_uri", "response_mode", "response_type", "scope", "state"]
+    __properties: ClassVar[List[str]] = ["client_id", "grant_type",
+                                         "redirect_uri", "response_mode", "response_type", "scope", "state"]
 
     @field_validator('response_mode')
     def response_mode_validate_enum(cls, value):
@@ -122,4 +125,3 @@ class TokenProtocolRequest(BaseModel):
             "state": obj.get("state")
         })
         return _obj
-

@@ -31,15 +31,25 @@ from okta.models.identity_source_session_status import IdentitySourceSessionStat
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentitySourceSession(BaseModel):
     """
     IdentitySourceSession
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="The timestamp when the identity source session was created")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the identity source session")
-    identity_source_id: Optional[StrictStr] = Field(default=None, description="The ID of the custom identity source for which the session is created", alias="identitySourceId")
-    import_type: Optional[StrictStr] = Field(default=None, description="The type of import.  All imports are `INCREMENTAL` imports.", alias="importType")
-    last_updated: Optional[datetime] = Field(default=None, description="The timestamp when the identity source session was created", alias="lastUpdated")
+    identity_source_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the custom identity source for which the session is created",
+        alias="identitySourceId")
+    import_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of import.  All imports are `INCREMENTAL` imports.",
+        alias="importType")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the identity source session was created",
+        alias="lastUpdated")
     status: Optional[IdentitySourceSessionStatus] = None
     __properties: ClassVar[List[str]] = ["created", "id", "identitySourceId", "importType", "lastUpdated", "status"]
 
@@ -111,4 +121,3 @@ class IdentitySourceSession(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

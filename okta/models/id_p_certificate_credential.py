@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdPCertificateCredential(BaseModel):
     """
     IdPCertificateCredential
-    """ # noqa: E501
+    """  # noqa: E501
     x5c: List[StrictStr] = Field(description="Base64-encoded X.509 certificate chain with DER encoding")
     __properties: ClassVar[List[str]] = ["x5c"]
 
@@ -89,4 +90,3 @@ class IdPCertificateCredential(BaseModel):
             "x5c": obj.get("x5c")
         })
         return _obj
-

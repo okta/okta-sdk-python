@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownURIRequest(BaseModel):
     """
     WellKnownURIRequest
-    """ # noqa: E501
+    """  # noqa: E501
     representation: Dict[str, Any] = Field(description="The well-known URI content in JSON object format")
     __properties: ClassVar[List[str]] = ["representation"]
 
@@ -89,4 +90,3 @@ class WellKnownURIRequest(BaseModel):
             "representation": obj.get("representation")
         })
         return _obj
-

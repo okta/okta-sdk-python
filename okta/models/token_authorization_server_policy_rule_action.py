@@ -30,15 +30,26 @@ from okta.models.token_authorization_server_policy_rule_action_inline_hook impor
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenAuthorizationServerPolicyRuleAction(BaseModel):
     """
     TokenAuthorizationServerPolicyRuleAction
-    """ # noqa: E501
-    access_token_lifetime_minutes: Optional[StrictInt] = Field(default=None, description="Lifetime of the access token in minutes. The minimum is five minutes. The maximum is one day.", alias="accessTokenLifetimeMinutes")
+    """  # noqa: E501
+    access_token_lifetime_minutes: Optional[StrictInt] = Field(
+        default=None,
+        description="Lifetime of the access token in minutes. The minimum is five minutes. The maximum is one day.",
+        alias="accessTokenLifetimeMinutes")
     inline_hook: Optional[TokenAuthorizationServerPolicyRuleActionInlineHook] = Field(default=None, alias="inlineHook")
-    refresh_token_lifetime_minutes: Optional[StrictInt] = Field(default=None, description="Lifetime of the refresh token is the minimum access token lifetime.", alias="refreshTokenLifetimeMinutes")
-    refresh_token_window_minutes: Optional[StrictInt] = Field(default=None, description="Timeframe when the refresh token is valid. The minimum is 10 minutes. The maximum is five years (2,628,000 minutes).", alias="refreshTokenWindowMinutes")
-    __properties: ClassVar[List[str]] = ["accessTokenLifetimeMinutes", "inlineHook", "refreshTokenLifetimeMinutes", "refreshTokenWindowMinutes"]
+    refresh_token_lifetime_minutes: Optional[StrictInt] = Field(
+        default=None,
+        description="Lifetime of the refresh token is the minimum access token lifetime.",
+        alias="refreshTokenLifetimeMinutes")
+    refresh_token_window_minutes: Optional[StrictInt] = Field(
+        default=None,
+        description="Timeframe when the refresh token is valid. The minimum is 10 minutes. The maximum is five years (2,628,000 minutes).",
+        alias="refreshTokenWindowMinutes")
+    __properties: ClassVar[List[str]] = ["accessTokenLifetimeMinutes",
+                                         "inlineHook", "refreshTokenLifetimeMinutes", "refreshTokenWindowMinutes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,4 +114,3 @@ class TokenAuthorizationServerPolicyRuleAction(BaseModel):
             "refreshTokenWindowMinutes": obj.get("refreshTokenWindowMinutes")
         })
         return _obj
-

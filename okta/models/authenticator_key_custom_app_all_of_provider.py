@@ -30,10 +30,11 @@ from okta.models.authenticator_key_custom_app_all_of_provider_configuration impo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyCustomAppAllOfProvider(BaseModel):
     """
     AuthenticatorKeyCustomAppAllOfProvider
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = Field(default=None, description="Provider type")
     configuration: Optional[AuthenticatorKeyCustomAppAllOfProviderConfiguration] = None
     __properties: ClassVar[List[str]] = ["type", "configuration"]
@@ -109,4 +110,3 @@ class AuthenticatorKeyCustomAppAllOfProvider(BaseModel):
             "configuration": AuthenticatorKeyCustomAppAllOfProviderConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None
         })
         return _obj
-

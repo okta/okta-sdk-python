@@ -31,10 +31,11 @@ from okta.models.idv_credentials_client import IDVCredentialsClient
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IDVCredentials(BaseModel):
     """
     Credentials for verifying requests to the IDV vendor
-    """ # noqa: E501
+    """  # noqa: E501
     bearer: Optional[IDVCredentialsBearer] = None
     client: Optional[IDVCredentialsClient] = None
     __properties: ClassVar[List[str]] = ["bearer", "client"]
@@ -107,4 +108,3 @@ class IDVCredentials(BaseModel):
             "client": IDVCredentialsClient.from_dict(obj["client"]) if obj.get("client") is not None else None
         })
         return _obj
-

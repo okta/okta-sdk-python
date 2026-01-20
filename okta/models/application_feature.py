@@ -31,17 +31,17 @@ from okta.models.application_feature_links import ApplicationFeatureLinks
 from okta.models.application_feature_type import ApplicationFeatureType
 from okta.models.enabled_status import EnabledStatus
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.inbound_provisioning_application_feature import InboundProvisioningApplicationFeature
     from okta.models.user_provisioning_application_feature import UserProvisioningApplicationFeature
 
+
 class ApplicationFeature(BaseModel):
     """
     The Feature object is used to configure app feature settings. 
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the feature")
     name: Optional[ApplicationFeatureType] = None
     status: Optional[EnabledStatus] = None
@@ -59,7 +59,7 @@ class ApplicationFeature(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'INBOUND_PROVISIONING': 'InboundProvisioningApplicationFeature','USER_PROVISIONING': 'UserProvisioningApplicationFeature'
+        'INBOUND_PROVISIONING': 'InboundProvisioningApplicationFeature', 'USER_PROVISIONING': 'UserProvisioningApplicationFeature'
     }
 
     @classmethod
@@ -81,7 +81,8 @@ class ApplicationFeature(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[InboundProvisioningApplicationFeature, UserProvisioningApplicationFeature]]:
+    def from_json(
+            cls, json_str: str) -> Optional[Union[InboundProvisioningApplicationFeature, UserProvisioningApplicationFeature]]:
         """Create an instance of ApplicationFeature from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -115,17 +116,18 @@ class ApplicationFeature(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[InboundProvisioningApplicationFeature, UserProvisioningApplicationFeature]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[InboundProvisioningApplicationFeature,
+                                                              UserProvisioningApplicationFeature]]:
         """Create an instance of ApplicationFeature from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'InboundProvisioningApplicationFeature':
-            return import_module("okta.models.inbound_provisioning_application_feature").InboundProvisioningApplicationFeature.from_dict(obj)
+            return import_module(
+                "okta.models.inbound_provisioning_application_feature").InboundProvisioningApplicationFeature.from_dict(obj)
         if object_type == 'UserProvisioningApplicationFeature':
-            return import_module("okta.models.user_provisioning_application_feature").UserProvisioningApplicationFeature.from_dict(obj)
+            return import_module(
+                "okta.models.user_provisioning_application_feature").UserProvisioningApplicationFeature.from_dict(obj)
 
         raise ValueError("ApplicationFeature failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

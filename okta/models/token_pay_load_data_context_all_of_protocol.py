@@ -33,10 +33,11 @@ from okta.models.token_protocol_request import TokenProtocolRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataContextAllOfProtocol(BaseModel):
     """
     Details of the authentication protocol
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = Field(default=None, description="The type of authentication protocol used")
     request: Optional[TokenProtocolRequest] = None
     original_grant: Optional[TokenPayLoadDataContextAllOfProtocolOriginalGrant] = Field(default=None, alias="OriginalGrant")
@@ -129,4 +130,3 @@ class TokenPayLoadDataContextAllOfProtocol(BaseModel):
             "client": TokenPayLoadDataContextAllOfProtocolClient.from_dict(obj["client"]) if obj.get("client") is not None else None
         })
         return _obj
-

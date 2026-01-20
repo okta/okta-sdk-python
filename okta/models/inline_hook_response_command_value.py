@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookResponseCommandValue(BaseModel):
     """
     InlineHookResponseCommandValue
-    """ # noqa: E501
+    """  # noqa: E501
     op: Optional[StrictStr] = None
     path: Optional[StrictStr] = None
     value: Optional[StrictStr] = None
@@ -93,4 +94,3 @@ class InlineHookResponseCommandValue(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.app_user_credentials import AppUserCredentials
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppUserCredentialsRequestPayload(BaseModel):
     """
     Updates the assigned user credentials
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[AppUserCredentials] = None
     __properties: ClassVar[List[str]] = ["credentials"]
 
@@ -97,4 +98,3 @@ class AppUserCredentialsRequestPayload(BaseModel):
             "credentials": AppUserCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None
         })
         return _obj
-

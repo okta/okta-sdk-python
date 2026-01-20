@@ -30,18 +30,27 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentitySourceUserProfileForUpsert(BaseModel):
     """
     Contains a set of external user attributes and their values that are mapped to Okta standard and custom profile properties. See the [`profile` object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response) and Declaration of a Custom Identity Source Schema in [Using anything as a source](https://help.okta.com/okta_help.htm?type=oie&id=ext-anything-as-a-source). > **Note:** Profile attributes can only be of the string type.
-    """ # noqa: E501
-    email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(default=None, description="Email address of the user")
-    first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, description="First name of the user", alias="firstName")
-    home_address: Optional[Annotated[str, Field(strict=True, max_length=4096)]] = Field(default=None, description="Home address of the user", alias="homeAddress")
-    last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, description="Last name of the user", alias="lastName")
-    mobile_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="Mobile phone number of the user", alias="mobilePhone")
-    second_email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(default=None, description="Alternative email address of the user", alias="secondEmail")
-    user_name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="Username of the user", alias="userName")
-    __properties: ClassVar[List[str]] = ["email", "firstName", "homeAddress", "lastName", "mobilePhone", "secondEmail", "userName"]
+    """  # noqa: E501
+    email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(
+        default=None, description="Email address of the user")
+    first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
+        default=None, description="First name of the user", alias="firstName")
+    home_address: Optional[Annotated[str, Field(strict=True, max_length=4096)]] = Field(
+        default=None, description="Home address of the user", alias="homeAddress")
+    last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
+        default=None, description="Last name of the user", alias="lastName")
+    mobile_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
+        default=None, description="Mobile phone number of the user", alias="mobilePhone")
+    second_email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(
+        default=None, description="Alternative email address of the user", alias="secondEmail")
+    user_name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
+        default=None, description="Username of the user", alias="userName")
+    __properties: ClassVar[List[str]] = ["email", "firstName",
+                                         "homeAddress", "lastName", "mobilePhone", "secondEmail", "userName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -122,4 +131,3 @@ class IdentitySourceUserProfileForUpsert(BaseModel):
             "userName": obj.get("userName")
         })
         return _obj
-

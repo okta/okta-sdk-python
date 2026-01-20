@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticationMethodObject(BaseModel):
     """
     AuthenticationMethodObject
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="<x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Authenticator ID")
+    """  # noqa: E501
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="<x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Authenticator ID")
     key: StrictStr = Field(description="A label that identifies the authenticator")
     method: Optional[StrictStr] = Field(default=None, description="Specifies the method used for the authenticator")
     __properties: ClassVar[List[str]] = ["id", "key", "method"]
@@ -93,4 +96,3 @@ class AuthenticationMethodObject(BaseModel):
             "method": obj.get("method")
         })
         return _obj
-

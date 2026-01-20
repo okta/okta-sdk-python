@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorActivateRequest(BaseModel):
     """
     Sends an asynchronous push notification to the device for approval by the user. You must poll the transaction to determine the state of the verification. See [Retrieve a factor transaction status](./#tag/UserFactor/operation/getFactorTransactionStatus).  Activations have a short lifetime of several minutes and return a `TIMEOUT` if not completed before the timestamp specified in the `expiresAt` param. Use the published activate link to restart the activation process if the activation expires.
-    """ # noqa: E501
-    use_number_matching_challenge: Optional[StrictBool] = Field(default=None, description="Select whether to use a number matching challenge for a `push` factor.  > **Note:** Sending a request with a body is required when you verify a `push` factor with a number matching challenge.", alias="useNumberMatchingChallenge")
+    """  # noqa: E501
+    use_number_matching_challenge: Optional[StrictBool] = Field(
+        default=None,
+        description="Select whether to use a number matching challenge for a `push` factor.  > **Note:** Sending a request with a body is required when you verify a `push` factor with a number matching challenge.",
+        alias="useNumberMatchingChallenge")
     __properties: ClassVar[List[str]] = ["useNumberMatchingChallenge"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class UserFactorActivateRequest(BaseModel):
             "useNumberMatchingChallenge": obj.get("useNumberMatchingChallenge")
         })
         return _obj
-

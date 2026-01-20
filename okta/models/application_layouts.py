@@ -30,10 +30,11 @@ from okta.models.application_layouts_links import ApplicationLayoutsLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationLayouts(BaseModel):
     """
     ApplicationLayouts
-    """ # noqa: E501
+    """  # noqa: E501
     links: Optional[ApplicationLayoutsLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["_links"]
 
@@ -97,4 +98,3 @@ class ApplicationLayouts(BaseModel):
             "_links": ApplicationLayoutsLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

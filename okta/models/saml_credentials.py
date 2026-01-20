@@ -31,10 +31,11 @@ from okta.models.saml_trust_credentials import SamlTrustCredentials
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlCredentials(BaseModel):
     """
     Federation Trust Credentials for verifying assertions from the IdP and signing requests to the IdP
-    """ # noqa: E501
+    """  # noqa: E501
     signing: Optional[SamlSigningCredentials] = None
     trust: Optional[SamlTrustCredentials] = None
     __properties: ClassVar[List[str]] = ["signing", "trust"]
@@ -107,4 +108,3 @@ class SamlCredentials(BaseModel):
             "trust": SamlTrustCredentials.from_dict(obj["trust"]) if obj.get("trust") is not None else None
         })
         return _obj
-

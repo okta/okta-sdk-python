@@ -31,10 +31,11 @@ from okta.models.standard_role_embedded_targets_catalog import StandardRoleEmbed
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StandardRoleEmbeddedTargets(BaseModel):
     """
     Targets configured for the role assignment
-    """ # noqa: E501
+    """  # noqa: E501
     groups: Optional[List[Group]] = Field(default=None, description="Group targets")
     catalog: Optional[StandardRoleEmbeddedTargetsCatalog] = None
     __properties: ClassVar[List[str]] = ["groups", "catalog"]
@@ -107,4 +108,3 @@ class StandardRoleEmbeddedTargets(BaseModel):
             "catalog": StandardRoleEmbeddedTargetsCatalog.from_dict(obj["catalog"]) if obj.get("catalog") is not None else None
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.device_policy_trust_level import DevicePolicyTrustLevel
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ContextPolicyRuleCondition(BaseModel):
     """
     ContextPolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     migrated: Optional[StrictBool] = None
     platform: Optional[DevicePolicyRuleConditionPlatform] = None
     rooted: Optional[StrictBool] = None
@@ -106,4 +107,3 @@ class ContextPolicyRuleCondition(BaseModel):
             "expression": obj.get("expression")
         })
         return _obj
-

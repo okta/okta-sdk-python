@@ -31,10 +31,11 @@ from okta.models.realm_assignment_operation_response_all_of_assignment_operation
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RealmAssignmentOperationResponseAllOfAssignmentOperationConfiguration(BaseModel):
     """
     Configuration defintion of the realm
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActions] = None
     conditions: Optional[Conditions] = None
     id: Optional[StrictStr] = Field(default=None, description="ID of the realm assignment operation")
@@ -111,4 +112,3 @@ class RealmAssignmentOperationResponseAllOfAssignmentOperationConfiguration(Base
             "name": obj.get("name")
         })
         return _obj
-

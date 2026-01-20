@@ -30,10 +30,11 @@ from okta.models.mtls_sso_endpoint import MtlsSsoEndpoint
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class MtlsEndpoints(BaseModel):
     """
     MtlsEndpoints
-    """ # noqa: E501
+    """  # noqa: E501
     sso: Optional[MtlsSsoEndpoint] = None
     __properties: ClassVar[List[str]] = ["sso"]
 
@@ -97,4 +98,3 @@ class MtlsEndpoints(BaseModel):
             "sso": MtlsSsoEndpoint.from_dict(obj["sso"]) if obj.get("sso") is not None else None
         })
         return _obj
-

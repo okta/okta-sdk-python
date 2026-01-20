@@ -31,16 +31,28 @@ from okta.models.device_assurance_chrome_os_platform_all_of_third_party_signal_p
 from okta.models.device_posture_checks import DevicePostureChecks
 from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
-from okta.models.platform import Platform
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class DeviceAssuranceChromeOSPlatform(DeviceAssurance):
     """
     DeviceAssuranceChromeOSPlatform
-    """ # noqa: E501
-    third_party_signal_providers: Optional[DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders] = Field(default=None, alias="thirdPartySignalProviders")
-    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "devicePostureChecks", "displayRemediationMode", "gracePeriod", "id", "lastUpdate", "lastUpdatedBy", "name", "platform", "_links", "thirdPartySignalProviders"]
+    """  # noqa: E501
+    third_party_signal_providers: Optional[DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders] = Field(
+        default=None, alias="thirdPartySignalProviders")
+    __properties: ClassVar[List[str]] = ["createdBy",
+                                         "createdDate",
+                                         "devicePostureChecks",
+                                         "displayRemediationMode",
+                                         "gracePeriod",
+                                         "id",
+                                         "lastUpdate",
+                                         "lastUpdatedBy",
+                                         "name",
+                                         "platform",
+                                         "_links",
+                                         "thirdPartySignalProviders"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -134,4 +146,3 @@ class DeviceAssuranceChromeOSPlatform(DeviceAssurance):
             "thirdPartySignalProviders": DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders.from_dict(obj["thirdPartySignalProviders"]) if obj.get("thirdPartySignalProviders") is not None else None
         })
         return _obj
-

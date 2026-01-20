@@ -32,11 +32,13 @@ from okta.models.subscription_status import SubscriptionStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Subscription(BaseModel):
     """
     Subscription
-    """ # noqa: E501
-    channels: Optional[List[StrictStr]] = Field(default=None, description="An array of sources send notifications to users. > **Note**: Currently, Okta only allows `email` channels.")
+    """  # noqa: E501
+    channels: Optional[List[StrictStr]] = Field(
+        default=None, description="An array of sources send notifications to users. > **Note**: Currently, Okta only allows `email` channels.")
     notification_type: Optional[NotificationType] = Field(default=None, alias="notificationType")
     status: Optional[SubscriptionStatus] = None
     links: Optional[SubscriptionLinks] = Field(default=None, alias="_links")
@@ -105,4 +107,3 @@ class Subscription(BaseModel):
             "_links": SubscriptionLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

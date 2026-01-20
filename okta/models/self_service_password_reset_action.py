@@ -31,13 +31,15 @@ from okta.models.sspr_requirement import SsprRequirement
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SelfServicePasswordResetAction(BaseModel):
     """
     Enables or disables users to reset their own password and defines the authenticators and constraints needed to complete the reset
-    """ # noqa: E501
+    """  # noqa: E501
     access: Optional[PolicyAccess] = None
     requirement: Optional[SsprRequirement] = None
-    type: Optional[StrictStr] = Field(default=None, description="<x-lifecycle class=\"oie\"></x-lifecycle> The type of rule action")
+    type: Optional[StrictStr] = Field(default=None,
+                                      description="<x-lifecycle class=\"oie\"></x-lifecycle> The type of rule action")
     __properties: ClassVar[List[str]] = ["access", "requirement", "type"]
 
     @field_validator('type')
@@ -112,4 +114,3 @@ class SelfServicePasswordResetAction(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

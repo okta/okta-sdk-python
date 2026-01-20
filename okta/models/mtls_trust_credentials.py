@@ -31,15 +31,25 @@ from okta.models.mtls_trust_credentials_revocation import MtlsTrustCredentialsRe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class MtlsTrustCredentials(BaseModel):
     """
     MtlsTrustCredentials
-    """ # noqa: E501
+    """  # noqa: E501
     audience: Optional[StrictStr] = Field(default=None, description="Not used")
-    issuer: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="Description of the certificate issuer")
-    kid: Optional[StrictStr] = Field(default=None, description="IdP key credential reference to the Okta X.509 signature certificate")
+    issuer: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="Description of the certificate issuer")
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="IdP key credential reference to the Okta X.509 signature certificate")
     revocation: Optional[MtlsTrustCredentialsRevocation] = None
-    revocation_cache_lifetime: Optional[Union[Annotated[float, Field(le=4320, strict=True)], Annotated[int, Field(le=4320, strict=True)]]] = Field(default=None, description="Time in minutes to cache the certificate revocation information  > **Note:** This property isn't supported. Okta now handles CRL caching automatically. As of October 8, 2025, in Preview orgs, and October 13, 2025, in Production orgs, this property is ignored if it's specified in any API requests. Specifying this property in your API requests doesn't cause errors since the property has no effect. > > See [Deprecation Notice - Smart Card IdP Legacy CRL Cache Setting](https://support.okta.com/help/s/article/deprecation-notice-smart-card-idp-legacy-crl-cache-setting?language=en_US).", alias="revocationCacheLifetime")
+    revocation_cache_lifetime: Optional[Union[Annotated[float,
+                                                        Field(le=4320,
+                                                              strict=True)],
+                                              Annotated[int,
+                                                        Field(le=4320,
+                                                              strict=True)]]] = Field(default=None,
+                                                                                      description="Time in minutes to cache the certificate revocation information  > **Note:** This property isn't supported. Okta now handles CRL caching automatically. As of October 8, 2025, in Preview orgs, and October 13, 2025, in Production orgs, this property is ignored if it's specified in any API requests. Specifying this property in your API requests doesn't cause errors since the property has no effect. > > See [Deprecation Notice - Smart Card IdP Legacy CRL Cache Setting](https://support.okta.com/help/s/article/deprecation-notice-smart-card-idp-legacy-crl-cache-setting?language=en_US).",
+                                                                                      alias="revocationCacheLifetime")
     __properties: ClassVar[List[str]] = ["audience", "issuer", "kid", "revocation", "revocationCacheLifetime"]
 
     model_config = ConfigDict(
@@ -99,4 +109,3 @@ class MtlsTrustCredentials(BaseModel):
             "revocationCacheLifetime": obj.get("revocationCacheLifetime")
         })
         return _obj
-

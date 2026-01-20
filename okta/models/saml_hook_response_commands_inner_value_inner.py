@@ -30,10 +30,11 @@ from okta.models.saml_hook_response_commands_inner_value_inner_value import SAML
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLHookResponseCommandsInnerValueInner(BaseModel):
     """
     SAMLHookResponseCommandsInnerValueInner
-    """ # noqa: E501
+    """  # noqa: E501
     op: Optional[StrictStr] = Field(default=None, description="The name of one of the supported ops: `add`:  Add a new claim to the assertion `replace`: Modify any element of the assertion  > **Note:** If a response to the SAML assertion inline hook request isn't received from your external service within three seconds, a timeout occurs. In this scenario, the Okta process flow continues with the original SAML assertion returned.")
     path: Optional[StrictStr] = Field(default=None, description="Location, within the assertion, to apply the operation")
     value: Optional[SAMLHookResponseCommandsInnerValueInnerValue] = None
@@ -101,4 +102,3 @@ class SAMLHookResponseCommandsInnerValueInner(BaseModel):
             "value": SAMLHookResponseCommandsInnerValueInnerValue.from_dict(obj["value"]) if obj.get("value") is not None else None
         })
         return _obj
-

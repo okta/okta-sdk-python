@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceIntegrationsMetadataOneOf(BaseModel):
     """
     DeviceIntegrationsMetadataOneOf
-    """ # noqa: E501
+    """  # noqa: E501
     type: StrictStr
     service_account_name: StrictStr = Field(alias="serviceAccountName")
     service_account_email: StrictStr = Field(alias="serviceAccountEmail")
@@ -100,4 +101,3 @@ class DeviceIntegrationsMetadataOneOf(BaseModel):
             "serviceAccountEmail": obj.get("serviceAccountEmail")
         })
         return _obj
-

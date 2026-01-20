@@ -30,14 +30,17 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TestInfoTestAccount(BaseModel):
     """
     An account on a test instance of your app with admin privileges. A test admin account is required by Okta for integration testing. During OIN QA testing, an Okta analyst uses this admin account to configure your app for the various test case flows.
-    """ # noqa: E501
-    url: Annotated[str, Field(strict=True, max_length=512)] = Field(description="The sign-in URL to a test instance of your app")
+    """  # noqa: E501
+    url: Annotated[str, Field(strict=True, max_length=512)] = Field(
+        description="The sign-in URL to a test instance of your app")
     username: Annotated[str, Field(strict=True, max_length=255)] = Field(description="The username for your app admin account")
     password: Annotated[str, Field(strict=True, max_length=255)] = Field(description="The password for your app admin account")
-    instructions: Optional[Annotated[str, Field(strict=True, max_length=2048)]] = Field(default=None, description="Additional instructions to test the app integration, including instructions for obtaining test accounts")
+    instructions: Optional[Annotated[str, Field(strict=True, max_length=2048)]] = Field(
+        default=None, description="Additional instructions to test the app integration, including instructions for obtaining test accounts")
     __properties: ClassVar[List[str]] = ["url", "username", "password", "instructions"]
 
     model_config = ConfigDict(
@@ -96,4 +99,3 @@ class TestInfoTestAccount(BaseModel):
             "instructions": obj.get("instructions")
         })
         return _obj
-

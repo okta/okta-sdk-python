@@ -27,17 +27,21 @@ import json
 from pydantic import ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.authentication_method_chain import AuthenticationMethodChain
-from okta.models.policy_rule_verification_method_type import PolicyRuleVerificationMethodType
 from okta.models.verification_method import VerificationMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticationMethodChainMethod(VerificationMethod):
     """
     AuthenticationMethodChainMethod
-    """ # noqa: E501
-    chains: Optional[List[AuthenticationMethodChain]] = Field(default=None, description="Authentication method chains. Only supports 5 items in the array. Each chain can support maximum 3 steps.")
-    reauthenticate_in: Optional[StrictStr] = Field(default=None, description="Specifies how often the user is prompted for authentication using duration format for the time period. For example, `PT2H30M` for two and a half hours. Don't set this parameter if you're setting the `reauthenticateIn` parameter in `chains`.", alias="reauthenticateIn")
+    """  # noqa: E501
+    chains: Optional[List[AuthenticationMethodChain]] = Field(
+        default=None, description="Authentication method chains. Only supports 5 items in the array. Each chain can support maximum 3 steps.")
+    reauthenticate_in: Optional[StrictStr] = Field(
+        default=None,
+        description="Specifies how often the user is prompted for authentication using duration format for the time period. For example, `PT2H30M` for two and a half hours. Don't set this parameter if you're setting the `reauthenticateIn` parameter in `chains`.",
+        alias="reauthenticateIn")
     __properties: ClassVar[List[str]] = ["type", "chains", "reauthenticateIn"]
 
     model_config = ConfigDict(
@@ -102,4 +106,3 @@ class AuthenticationMethodChainMethod(VerificationMethod):
             "reauthenticateIn": obj.get("reauthenticateIn")
         })
         return _obj
-

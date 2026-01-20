@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DesktopMFAEnforceNumberMatchingChallengeOrgSetting(BaseModel):
     """
     DesktopMFAEnforceNumberMatchingChallengeOrgSetting
-    """ # noqa: E501
-    desktop_mfa_enforce_number_matching_challenge_enabled: Optional[StrictBool] = Field(default=False, description="Indicates whether or not the Desktop MFA Enforce Number Matching Challenge push notifications feature is enabled", alias="desktopMFAEnforceNumberMatchingChallengeEnabled")
+    """  # noqa: E501
+    desktop_mfa_enforce_number_matching_challenge_enabled: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether or not the Desktop MFA Enforce Number Matching Challenge push notifications feature is enabled",
+        alias="desktopMFAEnforceNumberMatchingChallengeEnabled")
     __properties: ClassVar[List[str]] = ["desktopMFAEnforceNumberMatchingChallengeEnabled"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class DesktopMFAEnforceNumberMatchingChallengeOrgSetting(BaseModel):
             "desktopMFAEnforceNumberMatchingChallengeEnabled": obj.get("desktopMFAEnforceNumberMatchingChallengeEnabled") if obj.get("desktopMFAEnforceNumberMatchingChallengeEnabled") is not None else False
         })
         return _obj
-

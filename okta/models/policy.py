@@ -32,7 +32,6 @@ from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.policy_links import PolicyLinks
 from okta.models.policy_type import PolicyType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -46,22 +45,29 @@ if TYPE_CHECKING:
     from okta.models.post_auth_session_policy import PostAuthSessionPolicy
     from okta.models.profile_enrollment_policy import ProfileEnrollmentPolicy
 
+
 class Policy(BaseModel):
     """
     Policy
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the policy was created")
     description: Optional[StrictStr] = Field(default=None, description="Description of the policy")
     id: Optional[StrictStr] = Field(default='Assigned', description="Identifier of the policy")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the policy was last modified", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the policy was last modified",
+        alias="lastUpdated")
     name: StrictStr = Field(description="Name of the policy")
-    priority: Optional[StrictInt] = Field(default=None, description="Specifies the order in which this policy is evaluated in relation to the other policies")
+    priority: Optional[StrictInt] = Field(
+        default=None,
+        description="Specifies the order in which this policy is evaluated in relation to the other policies")
     status: Optional[LifecycleStatus] = None
     system: Optional[StrictBool] = Field(default=False, description="Specifies whether Okta created the policy")
     type: PolicyType
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
     links: Optional[PolicyLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated",
+                                         "name", "priority", "status", "system", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,7 +80,7 @@ class Policy(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'ACCESS_POLICY': 'AccessPolicy','DEVICE_SIGNAL_COLLECTION': 'DeviceSignalCollectionPolicy','ENTITY_RISK': 'EntityRiskPolicy','IDP_DISCOVERY': 'IdpDiscoveryPolicy','MFA_ENROLL': 'AuthenticatorEnrollmentPolicy','OKTA_SIGN_ON': 'OktaSignOnPolicy','PASSWORD': 'PasswordPolicy','POST_AUTH_SESSION': 'PostAuthSessionPolicy','PROFILE_ENROLLMENT': 'ProfileEnrollmentPolicy'
+        'ACCESS_POLICY': 'AccessPolicy', 'DEVICE_SIGNAL_COLLECTION': 'DeviceSignalCollectionPolicy', 'ENTITY_RISK': 'EntityRiskPolicy', 'IDP_DISCOVERY': 'IdpDiscoveryPolicy', 'MFA_ENROLL': 'AuthenticatorEnrollmentPolicy', 'OKTA_SIGN_ON': 'OktaSignOnPolicy', 'PASSWORD': 'PasswordPolicy', 'POST_AUTH_SESSION': 'PostAuthSessionPolicy', 'PROFILE_ENROLLMENT': 'ProfileEnrollmentPolicy'
     }
 
     @classmethod
@@ -96,7 +102,8 @@ class Policy(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[AccessPolicy, DeviceSignalCollectionPolicy, EntityRiskPolicy, IdpDiscoveryPolicy, AuthenticatorEnrollmentPolicy, OktaSignOnPolicy, PasswordPolicy, PostAuthSessionPolicy, ProfileEnrollmentPolicy]]:
+    def from_json(cls, json_str: str) -> Optional[Union[AccessPolicy, DeviceSignalCollectionPolicy, EntityRiskPolicy, IdpDiscoveryPolicy,
+                                                        AuthenticatorEnrollmentPolicy, OktaSignOnPolicy, PasswordPolicy, PostAuthSessionPolicy, ProfileEnrollmentPolicy]]:
         """Create an instance of Policy from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -136,7 +143,8 @@ class Policy(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AccessPolicy, DeviceSignalCollectionPolicy, EntityRiskPolicy, IdpDiscoveryPolicy, AuthenticatorEnrollmentPolicy, OktaSignOnPolicy, PasswordPolicy, PostAuthSessionPolicy, ProfileEnrollmentPolicy]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AccessPolicy, DeviceSignalCollectionPolicy, EntityRiskPolicy,
+                                                              IdpDiscoveryPolicy, AuthenticatorEnrollmentPolicy, OktaSignOnPolicy, PasswordPolicy, PostAuthSessionPolicy, ProfileEnrollmentPolicy]]:
         """Create an instance of Policy from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -160,7 +168,5 @@ class Policy(BaseModel):
             return import_module("okta.models.profile_enrollment_policy").ProfileEnrollmentPolicy.from_dict(obj)
 
         raise ValueError("Policy failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

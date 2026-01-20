@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ErrorDetails(BaseModel):
     """
     Details about an error that occurred during the operation
-    """ # noqa: E501
+    """  # noqa: E501
     code: Optional[StrictStr] = Field(default=None, description="The error code")
     message: Optional[StrictStr] = Field(default=None, description="The error message")
     __properties: ClassVar[List[str]] = ["code", "message"]
@@ -91,4 +92,3 @@ class ErrorDetails(BaseModel):
             "message": obj.get("message")
         })
         return _obj
-

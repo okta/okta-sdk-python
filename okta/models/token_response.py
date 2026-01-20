@@ -31,19 +31,24 @@ from okta.models.token_type import TokenType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenResponse(BaseModel):
     """
     TokenResponse
-    """ # noqa: E501
+    """  # noqa: E501
     access_token: Optional[StrictStr] = Field(default=None, description="An access token.")
-    device_secret: Optional[StrictStr] = Field(default=None, description="An opaque device secret. This is returned if the `device_sso` scope is granted.")
+    device_secret: Optional[StrictStr] = Field(
+        default=None, description="An opaque device secret. This is returned if the `device_sso` scope is granted.")
     expires_in: Optional[StrictInt] = Field(default=None, description="The expiration time of the access token in seconds.")
-    id_token: Optional[StrictStr] = Field(default=None, description="An ID token. This is returned if the `openid` scope is granted.")
+    id_token: Optional[StrictStr] = Field(default=None,
+                                          description="An ID token. This is returned if the `openid` scope is granted.")
     issued_token_type: Optional[TokenType] = None
-    refresh_token: Optional[StrictStr] = Field(default=None, description="An opaque refresh token. This is returned if the `offline_access` scope is granted.")
+    refresh_token: Optional[StrictStr] = Field(
+        default=None, description="An opaque refresh token. This is returned if the `offline_access` scope is granted.")
     scope: Optional[StrictStr] = Field(default=None, description="The scopes contained in the access token.")
     token_type: Optional[TokenResponseTokenType] = None
-    __properties: ClassVar[List[str]] = ["access_token", "device_secret", "expires_in", "id_token", "issued_token_type", "refresh_token", "scope", "token_type"]
+    __properties: ClassVar[List[str]] = ["access_token", "device_secret", "expires_in",
+                                         "id_token", "issued_token_type", "refresh_token", "scope", "token_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,4 +110,3 @@ class TokenResponse(BaseModel):
             "token_type": obj.get("token_type")
         })
         return _obj
-

@@ -30,18 +30,26 @@ from okta.models.o_auth_resource_server_key_links import OAuthResourceServerKeyL
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ResourceServerJsonWebKey(BaseModel):
     """
     OAuth2ResourceServerJsonWebKey
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[StrictStr] = Field(default=None, description="Timestamp when the JSON Web Key was created")
     e: Optional[StrictStr] = Field(default=None, description="RSA key value (exponent) for key binding")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the JSON Web Key")
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the Custom Authorization Server's Public JWKS")
+    kid: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier of the JSON Web Key in the Custom Authorization Server's Public JWKS")
     kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's key pair")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp when the JSON Web Key was updated", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the JSON Web Key was updated",
+        alias="lastUpdated")
     n: Optional[StrictStr] = Field(default=None, description="RSA key value (modulus) for key binding")
-    status: Optional[StrictStr] = Field(default='ACTIVE', description="The status of the encryption key. You can use only an `ACTIVE` key to encrypt tokens issued by the authorization server.")
+    status: Optional[StrictStr] = Field(
+        default='ACTIVE',
+        description="The status of the encryption key. You can use only an `ACTIVE` key to encrypt tokens issued by the authorization server.")
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key")
     links: Optional[OAuthResourceServerKeyLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "e", "id", "kid", "kty", "lastUpdated", "n", "status", "use", "_links"]
@@ -136,4 +144,3 @@ class OAuth2ResourceServerJsonWebKey(BaseModel):
             "_links": OAuthResourceServerKeyLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -29,18 +29,30 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticationMethod(BaseModel):
     """
     AuthenticationMethod
-    """ # noqa: E501
-    hardware_protection: Optional[StrictStr] = Field(default='OPTIONAL', description="Indicates if any secrets or private keys used during authentication must be hardware protected and not exportable. This property is only set for `POSSESSION` constraints.", alias="hardwareProtection")
+    """  # noqa: E501
+    hardware_protection: Optional[StrictStr] = Field(
+        default='OPTIONAL',
+        description="Indicates if any secrets or private keys used during authentication must be hardware protected and not exportable. This property is only set for `POSSESSION` constraints.",
+        alias="hardwareProtection")
     id: Optional[StrictStr] = Field(default=None, description="An ID that identifies the authenticator")
     key: StrictStr = Field(description="A label that identifies the authenticator")
     method: StrictStr = Field(description="Specifies the method used for the authenticator")
-    phishing_resistant: Optional[StrictStr] = Field(default='OPTIONAL', description="Indicates if phishing-resistant Factors are required. This property is only set for `POSSESSION` constraints", alias="phishingResistant")
-    user_verification: Optional[StrictStr] = Field(default='OPTIONAL', description="Indicates if a user is required to be verified with a verification method.", alias="userVerification")
-    user_verification_methods: Optional[List[StrictStr]] = Field(default=None, description="Indicates which methods can be used for user verification. `userVerificationMethods` can only be used when `userVerification` is `REQUIRED`. `BIOMETRICS` is currently the only supported method.", alias="userVerificationMethods")
-    __properties: ClassVar[List[str]] = ["hardwareProtection", "id", "key", "method", "phishingResistant", "userVerification", "userVerificationMethods"]
+    phishing_resistant: Optional[StrictStr] = Field(
+        default='OPTIONAL',
+        description="Indicates if phishing-resistant Factors are required. This property is only set for `POSSESSION` constraints",
+        alias="phishingResistant")
+    user_verification: Optional[StrictStr] = Field(
+        default='OPTIONAL',
+        description="Indicates if a user is required to be verified with a verification method.",
+        alias="userVerification")
+    user_verification_methods: Optional[List[StrictStr]] = Field(
+        default=None, description="Indicates which methods can be used for user verification. `userVerificationMethods` can only be used when `userVerification` is `REQUIRED`. `BIOMETRICS` is currently the only supported method.", alias="userVerificationMethods")
+    __properties: ClassVar[List[str]] = ["hardwareProtection", "id", "key",
+                                         "method", "phishingResistant", "userVerification", "userVerificationMethods"]
 
     @field_validator('hardware_protection')
     def hardware_protection_validate_enum(cls, value):
@@ -142,4 +154,3 @@ class AuthenticationMethod(BaseModel):
             "userVerificationMethods": obj.get("userVerificationMethods")
         })
         return _obj
-

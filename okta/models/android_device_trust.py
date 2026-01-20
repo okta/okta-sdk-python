@@ -32,18 +32,37 @@ from okta.models.screen_lock_complexity import ScreenLockComplexity
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AndroidDeviceTrust(BaseModel):
     """
     Android Device Trust integration provider
-    """ # noqa: E501
+    """  # noqa: E501
     device_integrity_level: Optional[DeviceIntegrity] = Field(default=None, alias="deviceIntegrityLevel")
-    network_proxy_disabled: Optional[StrictBool] = Field(default=None, description="Indicates whether a device has a network proxy disabled", alias="networkProxyDisabled")
+    network_proxy_disabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether a device has a network proxy disabled",
+        alias="networkProxyDisabled")
     play_protect_verdict: Optional[PlayProtectVerdict] = Field(default=None, alias="playProtectVerdict")
-    require_major_version_update: Optional[StrictBool] = Field(default=None, description="Indicates whether the device needs to be on the latest major version available to the device  **Note:** This option requires an `osVersion.dynamicVersionRequirement` value to be supplied with the `osVersion.dynamicVersionRequirement.type` as either `MINIMUM` or `EXACT`. ", alias="requireMajorVersionUpdate")
+    require_major_version_update: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the device needs to be on the latest major version available to the device  **Note:** This option requires an `osVersion.dynamicVersionRequirement` value to be supplied with the `osVersion.dynamicVersionRequirement.type` as either `MINIMUM` or `EXACT`. ",
+        alias="requireMajorVersionUpdate")
     screen_lock_complexity: Optional[ScreenLockComplexity] = Field(default=None, alias="screenLockComplexity")
-    usb_debugging_disabled: Optional[StrictBool] = Field(default=None, description="Indicates whether Android Debug Bridge (adb) over USB is disabled", alias="usbDebuggingDisabled")
-    wifi_secured: Optional[StrictBool] = Field(default=None, description="Indicates whether a device is on a password-protected Wi-Fi network", alias="wifiSecured")
-    __properties: ClassVar[List[str]] = ["deviceIntegrityLevel", "networkProxyDisabled", "playProtectVerdict", "requireMajorVersionUpdate", "screenLockComplexity", "usbDebuggingDisabled", "wifiSecured"]
+    usb_debugging_disabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether Android Debug Bridge (adb) over USB is disabled",
+        alias="usbDebuggingDisabled")
+    wifi_secured: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether a device is on a password-protected Wi-Fi network",
+        alias="wifiSecured")
+    __properties: ClassVar[List[str]] = ["deviceIntegrityLevel",
+                                         "networkProxyDisabled",
+                                         "playProtectVerdict",
+                                         "requireMajorVersionUpdate",
+                                         "screenLockComplexity",
+                                         "usbDebuggingDisabled",
+                                         "wifiSecured"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,4 +123,3 @@ class AndroidDeviceTrust(BaseModel):
             "wifiSecured": obj.get("wifiSecured")
         })
         return _obj
-

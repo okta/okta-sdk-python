@@ -29,12 +29,19 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaPersonalAdminFeatureSettings(BaseModel):
     """
     Defines a list of Okta Personal settings that can be enabled or disabled for the org
-    """ # noqa: E501
-    enable_enduser_entry_points: Optional[StrictBool] = Field(default=None, description="Allow entry points for an Okta Personal account in a Workforce org", alias="enableEnduserEntryPoints")
-    enable_export_apps: Optional[StrictBool] = Field(default=None, description="Allow users to migrate apps from a Workforce account to an Okta Personal account", alias="enableExportApps")
+    """  # noqa: E501
+    enable_enduser_entry_points: Optional[StrictBool] = Field(
+        default=None,
+        description="Allow entry points for an Okta Personal account in a Workforce org",
+        alias="enableEnduserEntryPoints")
+    enable_export_apps: Optional[StrictBool] = Field(
+        default=None,
+        description="Allow users to migrate apps from a Workforce account to an Okta Personal account",
+        alias="enableExportApps")
     __properties: ClassVar[List[str]] = ["enableEnduserEntryPoints", "enableExportApps"]
 
     model_config = ConfigDict(
@@ -91,4 +98,3 @@ class OktaPersonalAdminFeatureSettings(BaseModel):
             "enableExportApps": obj.get("enableExportApps")
         })
         return _obj
-

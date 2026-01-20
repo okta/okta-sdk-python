@@ -32,10 +32,11 @@ from okta.models.security_event_subject import SecurityEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaUserRiskChangeEvent(BaseModel):
     """
     The user risk level changed
-    """ # noqa: E501
+    """  # noqa: E501
     current_level: StrictStr = Field(description="Current risk level of the user")
     event_timestamp: StrictInt = Field(description="The time of the event (UNIX timestamp)")
     initiating_entity: Optional[StrictStr] = Field(default=None, description="The entity that initiated the event")
@@ -43,7 +44,8 @@ class OktaUserRiskChangeEvent(BaseModel):
     reason_admin: Optional[CaepDeviceComplianceChangeEventReasonAdmin] = None
     reason_user: Optional[CaepDeviceComplianceChangeEventReasonUser] = None
     subject: SecurityEventSubject
-    __properties: ClassVar[List[str]] = ["current_level", "event_timestamp", "initiating_entity", "previous_level", "reason_admin", "reason_user", "subject"]
+    __properties: ClassVar[List[str]] = ["current_level", "event_timestamp",
+                                         "initiating_entity", "previous_level", "reason_admin", "reason_user", "subject"]
 
     @field_validator('current_level')
     def current_level_validate_enum(cls, value):
@@ -149,4 +151,3 @@ class OktaUserRiskChangeEvent(BaseModel):
             "subject": SecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

@@ -30,13 +30,17 @@ from okta.models.dns_record_type_authenticators import DNSRecordTypeAuthenticato
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DNSRecordAuthenticators(BaseModel):
     """
     DNS TXT record that must be registered for an RP ID domain that requires verification. This is used to verify the domain ownership for the WebAuthn RP ID configuration. After the domain ownership is verified, the `DNSRecord` isn't returned in the response.
-    """ # noqa: E501
+    """  # noqa: E501
     fqdn: Optional[StrictStr] = Field(default=None, description="The DNS record name")
     record_type: Optional[DNSRecordTypeAuthenticators] = Field(default=None, alias="recordType")
-    verification_value: Optional[StrictStr] = Field(default=None, description="The DNS record verification value", alias="verificationValue")
+    verification_value: Optional[StrictStr] = Field(
+        default=None,
+        description="The DNS record verification value",
+        alias="verificationValue")
     __properties: ClassVar[List[str]] = ["fqdn", "recordType", "verificationValue"]
 
     model_config = ConfigDict(
@@ -94,4 +98,3 @@ class DNSRecordAuthenticators(BaseModel):
             "verificationValue": obj.get("verificationValue")
         })
         return _obj
-

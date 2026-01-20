@@ -31,10 +31,11 @@ from okta.models.links_next import LinksNext
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IamRoles(BaseModel):
     """
     IamRoles
-    """ # noqa: E501
+    """  # noqa: E501
     roles: Optional[List[IamRole]] = None
     links: Optional[LinksNext] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["roles", "_links"]
@@ -107,4 +108,3 @@ class IamRoles(BaseModel):
             "_links": LinksNext.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -34,20 +34,29 @@ from okta.models.group_type import GroupType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Group(BaseModel):
     """
     Group
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the group was created")
     id: Optional[StrictStr] = Field(default=None, description="Unique ID for the group")
-    last_membership_updated: Optional[datetime] = Field(default=None, description="Timestamp when the groups memberships were last updated", alias="lastMembershipUpdated")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the group's profile was last updated", alias="lastUpdated")
-    object_class: Optional[List[StrictStr]] = Field(default=None, description="Determines the group's `profile`", alias="objectClass")
+    last_membership_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the groups memberships were last updated",
+        alias="lastMembershipUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the group's profile was last updated",
+        alias="lastUpdated")
+    object_class: Optional[List[StrictStr]] = Field(
+        default=None, description="Determines the group's `profile`", alias="objectClass")
     profile: Optional[GroupProfile] = None
     type: Optional[GroupType] = None
     embedded: Optional[GroupEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[GroupLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastMembershipUpdated", "lastUpdated", "objectClass", "profile", "type", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "id", "lastMembershipUpdated",
+                                         "lastUpdated", "objectClass", "profile", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -141,4 +150,3 @@ class Group(BaseModel):
             "_links": GroupLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

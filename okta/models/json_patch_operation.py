@@ -30,10 +30,11 @@ from okta.models.patch_action import PatchAction
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class JsonPatchOperation(BaseModel):
     """
     The update action
-    """ # noqa: E501
+    """  # noqa: E501
     op: Optional[PatchAction] = None
     path: Optional[StrictStr] = Field(default=None, description="The resource path of the attribute to update")
     value: Optional[Dict[str, Any]] = Field(default=None, description="The update operation value")
@@ -94,4 +95,3 @@ class JsonPatchOperation(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

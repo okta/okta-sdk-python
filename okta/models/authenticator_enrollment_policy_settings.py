@@ -31,11 +31,13 @@ from okta.models.authenticator_enrollment_policy_settings_type import Authentica
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicySettings(BaseModel):
     """
     Specifies the policy level settings  > **Note:** In Identity Engine, the Multifactor (MFA) Enrollment policy name has changed to authenticator enrollment policy. The policy type of `MFA_ENROLL` remains unchanged. However, the `settings` data is updated for authenticators. Policy `settings` are included only for those authenticators that are enabled.
-    """ # noqa: E501
-    authenticators: Optional[List[AuthenticatorEnrollmentPolicyAuthenticatorSettings]] = Field(default=None, description="List of authenticator policy settings  <x-lifecycle class=\"oie\"></x-lifecycle> For orgs with the Authenticator enrollment policy feature enabled, the new default authenticator enrollment policy created by Okta contains the `authenticators` property in the policy settings. Existing default authenticator enrollment policies from a migrated Classic Engine org remain unchanged. The policies still use the `factors` property in their settings. The `authenticators` parameter allows you to configure all available authenticators, including authentication and recovery. The `factors` parameter only allows you to configure multifactor authentication. ")
+    """  # noqa: E501
+    authenticators: Optional[List[AuthenticatorEnrollmentPolicyAuthenticatorSettings]] = Field(
+        default=None, description="List of authenticator policy settings  <x-lifecycle class=\"oie\"></x-lifecycle> For orgs with the Authenticator enrollment policy feature enabled, the new default authenticator enrollment policy created by Okta contains the `authenticators` property in the policy settings. Existing default authenticator enrollment policies from a migrated Classic Engine org remain unchanged. The policies still use the `factors` property in their settings. The `authenticators` parameter allows you to configure all available authenticators, including authentication and recovery. The `factors` parameter only allows you to configure multifactor authentication. ")
     type: Optional[AuthenticatorEnrollmentPolicySettingsType] = AuthenticatorEnrollmentPolicySettingsType.FACTORS
     __properties: ClassVar[List[str]] = ["authenticators", "type"]
 
@@ -100,4 +102,3 @@ class AuthenticatorEnrollmentPolicySettings(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

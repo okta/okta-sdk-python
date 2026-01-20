@@ -34,16 +34,19 @@ from okta.models.test_info_test_account import TestInfoTestAccount
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TestInfo(BaseModel):
     """
     Integration Testing Information
-    """ # noqa: E501
-    escalation_support_contact: Annotated[str, Field(strict=True, max_length=255)] = Field(description="An email for Okta to contact your company about your integration. This email isn't shared with customers.", alias="escalationSupportContact")
+    """  # noqa: E501
+    escalation_support_contact: Annotated[str, Field(strict=True, max_length=255)] = Field(
+        description="An email for Okta to contact your company about your integration. This email isn't shared with customers.", alias="escalationSupportContact")
     oidc_test_configuration: Optional[TestInfoOidcTestConfiguration] = Field(default=None, alias="oidcTestConfiguration")
     saml_test_configuration: Optional[TestInfoSamlTestConfiguration] = Field(default=None, alias="samlTestConfiguration")
     scim_test_configuration: Optional[TestInfoScimTestConfiguration] = Field(default=None, alias="scimTestConfiguration")
     test_account: Optional[TestInfoTestAccount] = Field(default=None, alias="testAccount")
-    __properties: ClassVar[List[str]] = ["escalationSupportContact", "oidcTestConfiguration", "samlTestConfiguration", "scimTestConfiguration", "testAccount"]
+    __properties: ClassVar[List[str]] = ["escalationSupportContact", "oidcTestConfiguration",
+                                         "samlTestConfiguration", "scimTestConfiguration", "testAccount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -130,4 +133,3 @@ class TestInfo(BaseModel):
             "testAccount": TestInfoTestAccount.from_dict(obj["testAccount"]) if obj.get("testAccount") is not None else None
         })
         return _obj
-

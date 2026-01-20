@@ -29,13 +29,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityProviderPropertiesIdvMetadata(BaseModel):
     """
     Metadata about the IDV vendor. Available only for `IDV_STANDARD` IdPs.
-    """ # noqa: E501
-    vendor_display_name: Optional[StrictStr] = Field(default=None, description="The display name of the IDV vendor", alias="vendorDisplayName")
-    terms_of_use: Optional[StrictStr] = Field(default=None, description="A URL that links to the terms of use for the IDV vendor", alias="termsOfUse")
-    privacy_policy: Optional[StrictStr] = Field(default=None, description="A URL that links to the privacy policy for the IDV vendor", alias="privacyPolicy")
+    """  # noqa: E501
+    vendor_display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The display name of the IDV vendor",
+        alias="vendorDisplayName")
+    terms_of_use: Optional[StrictStr] = Field(
+        default=None,
+        description="A URL that links to the terms of use for the IDV vendor",
+        alias="termsOfUse")
+    privacy_policy: Optional[StrictStr] = Field(
+        default=None,
+        description="A URL that links to the privacy policy for the IDV vendor",
+        alias="privacyPolicy")
     __properties: ClassVar[List[str]] = ["vendorDisplayName", "termsOfUse", "privacyPolicy"]
 
     model_config = ConfigDict(
@@ -93,4 +103,3 @@ class IdentityProviderPropertiesIdvMetadata(BaseModel):
             "privacyPolicy": obj.get("privacyPolicy")
         })
         return _obj
-

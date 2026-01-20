@@ -28,18 +28,17 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List
 from okta.models.service_account import ServiceAccount
 from okta.models.service_account_details_okta_user_account_sub import ServiceAccountDetailsOktaUserAccountSub
-from okta.models.service_account_status import ServiceAccountStatus
-from okta.models.service_account_status_detail import ServiceAccountStatusDetail
-from okta.models.service_account_type import ServiceAccountType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class ServiceAccountDetailsOktaUserAccount(ServiceAccount):
     """
     Details for managing an Okta user as a service account
-    """ # noqa: E501
+    """  # noqa: E501
     details: ServiceAccountDetailsOktaUserAccountSub
-    __properties: ClassVar[List[str]] = ["accountType", "created", "description", "id", "lastUpdated", "name", "ownerGroupIds", "ownerUserIds", "status", "statusDetail", "details"]
+    __properties: ClassVar[List[str]] = ["accountType", "created", "description", "id",
+                                         "lastUpdated", "name", "ownerGroupIds", "ownerUserIds", "status", "statusDetail", "details"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,4 +110,3 @@ class ServiceAccountDetailsOktaUserAccount(ServiceAccount):
             "details": ServiceAccountDetailsOktaUserAccountSub.from_dict(obj["details"]) if obj.get("details") is not None else None
         })
         return _obj
-

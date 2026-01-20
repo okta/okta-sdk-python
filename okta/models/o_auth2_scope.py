@@ -32,21 +32,29 @@ from okta.models.o_auth2_scope_metadata_publish import OAuth2ScopeMetadataPublis
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2Scope(BaseModel):
     """
     OAuth2Scope
-    """ # noqa: E501
+    """  # noqa: E501
     consent: Optional[OAuth2ScopeConsentType] = OAuth2ScopeConsentType.IMPLICIT
     default: Optional[StrictBool] = Field(default=False, description="Indicates if this Scope is a default scope")
     description: Optional[StrictStr] = Field(default=None, description="Description of the Scope")
-    display_name: Optional[StrictStr] = Field(default=None, description="Name of the end user displayed in a consent dialog", alias="displayName")
+    display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the end user displayed in a consent dialog",
+        alias="displayName")
     id: Optional[StrictStr] = Field(default=None, description="Scope object ID")
-    metadata_publish: Optional[OAuth2ScopeMetadataPublish] = Field(default=OAuth2ScopeMetadataPublish.NO_CLIENTS, alias="metadataPublish")
+    metadata_publish: Optional[OAuth2ScopeMetadataPublish] = Field(
+        default=OAuth2ScopeMetadataPublish.NO_CLIENTS, alias="metadataPublish")
     name: StrictStr = Field(description="Scope name")
-    optional: Optional[StrictBool] = Field(default=False, description="Indicates whether the Scope is optional. When set to `true`, the user can skip consent for the scope.")
+    optional: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether the Scope is optional. When set to `true`, the user can skip consent for the scope.")
     system: Optional[StrictBool] = Field(default=False, description="Indicates if Okta created the Scope")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["consent", "default", "description", "displayName", "id", "metadataPublish", "name", "optional", "system", "_links"]
+    __properties: ClassVar[List[str]] = ["consent", "default", "description",
+                                         "displayName", "id", "metadataPublish", "name", "optional", "system", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -119,4 +127,3 @@ class OAuth2Scope(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

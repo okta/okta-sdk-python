@@ -30,10 +30,11 @@ from okta.models.application_settings_notifications_vpn import ApplicationSettin
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationSettingsNotifications(BaseModel):
     """
     Specifies notifications settings for the app
-    """ # noqa: E501
+    """  # noqa: E501
     vpn: Optional[ApplicationSettingsNotificationsVpn] = None
     __properties: ClassVar[List[str]] = ["vpn"]
 
@@ -97,4 +98,3 @@ class ApplicationSettingsNotifications(BaseModel):
             "vpn": ApplicationSettingsNotificationsVpn.from_dict(obj["vpn"]) if obj.get("vpn") is not None else None
         })
         return _obj
-

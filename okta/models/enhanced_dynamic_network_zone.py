@@ -31,20 +31,20 @@ from okta.models.enhanced_dynamic_network_zone_all_of_ip_service_categories impo
 from okta.models.enhanced_dynamic_network_zone_all_of_locations import EnhancedDynamicNetworkZoneAllOfLocations
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.network_zone import NetworkZone
-from okta.models.network_zone_status import NetworkZoneStatus
-from okta.models.network_zone_type import NetworkZoneType
-from okta.models.network_zone_usage import NetworkZoneUsage
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class EnhancedDynamicNetworkZone(NetworkZone):
     """
     EnhancedDynamicNetworkZone
-    """ # noqa: E501
+    """  # noqa: E501
     asns: Optional[EnhancedDynamicNetworkZoneAllOfAsns] = None
     locations: Optional[EnhancedDynamicNetworkZoneAllOfLocations] = None
-    ip_service_categories: Optional[EnhancedDynamicNetworkZoneAllOfIpServiceCategories] = Field(default=None, alias="ipServiceCategories")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "system", "type", "usage", "_links", "asns", "locations", "ipServiceCategories"]
+    ip_service_categories: Optional[EnhancedDynamicNetworkZoneAllOfIpServiceCategories] = Field(
+        default=None, alias="ipServiceCategories")
+    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status",
+                                         "system", "type", "usage", "_links", "asns", "locations", "ipServiceCategories"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -138,4 +138,3 @@ class EnhancedDynamicNetworkZone(NetworkZone):
             "ipServiceCategories": EnhancedDynamicNetworkZoneAllOfIpServiceCategories.from_dict(obj["ipServiceCategories"]) if obj.get("ipServiceCategories") is not None else None
         })
         return _obj
-

@@ -30,12 +30,16 @@ from okta.models.saml_pay_load_data import SAMLPayLoadData
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoad(BaseModel):
     """
     SAMLPayLoad
-    """ # noqa: E501
+    """  # noqa: E501
     data: Optional[SAMLPayLoadData] = None
-    event_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook. The SAML assertion inline hook type is `com.okta.saml.tokens.transform`.", alias="eventType")
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook. The SAML assertion inline hook type is `com.okta.saml.tokens.transform`.",
+        alias="eventType")
     source: Optional[StrictStr] = Field(default=None, description="The ID and URL of the SAML assertion inline hook")
     __properties: ClassVar[List[str]] = ["data", "eventType", "source"]
 
@@ -101,4 +105,3 @@ class SAMLPayLoad(BaseModel):
             "source": obj.get("source")
         })
         return _obj
-

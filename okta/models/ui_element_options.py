@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UIElementOptions(BaseModel):
     """
     UI Schema element options object
-    """ # noqa: E501
+    """  # noqa: E501
     format: Optional[StrictStr] = Field(default=None, description="Specifies how the input appears")
     __properties: ClassVar[List[str]] = ["format"]
 
@@ -43,7 +44,8 @@ class UIElementOptions(BaseModel):
             return value
 
         if value not in set(['text', 'radio', 'select', 'checkbox', 'radio_yes_no', 'radio_true_false']):
-            raise ValueError("must be one of enum values ('text', 'radio', 'select', 'checkbox', 'radio_yes_no', 'radio_true_false')")
+            raise ValueError(
+                "must be one of enum values ('text', 'radio', 'select', 'checkbox', 'radio_yes_no', 'radio_true_false')")
         return value
 
     model_config = ConfigDict(
@@ -99,4 +101,3 @@ class UIElementOptions(BaseModel):
             "format": obj.get("format")
         })
         return _obj
-

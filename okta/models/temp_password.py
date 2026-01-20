@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TempPassword(BaseModel):
     """
     TempPassword
-    """ # noqa: E501
+    """  # noqa: E501
     temp_password: Optional[StrictStr] = Field(default=None, alias="tempPassword")
     __properties: ClassVar[List[str]] = ["tempPassword"]
 
@@ -91,4 +92,3 @@ class TempPassword(BaseModel):
             "tempPassword": obj.get("tempPassword")
         })
         return _obj
-

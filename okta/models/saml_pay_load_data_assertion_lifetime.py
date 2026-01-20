@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionLifetime(BaseModel):
     """
     Specifies the expiration time, in seconds, of the SAML assertion
-    """ # noqa: E501
+    """  # noqa: E501
     expiration: Optional[StrictInt] = Field(default=None, description="The expiration time in seconds")
     __properties: ClassVar[List[str]] = ["expiration"]
 
@@ -89,4 +90,3 @@ class SAMLPayLoadDataAssertionLifetime(BaseModel):
             "expiration": obj.get("expiration")
         })
         return _obj
-

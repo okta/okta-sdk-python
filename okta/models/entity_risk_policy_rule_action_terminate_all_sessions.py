@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntityRiskPolicyRuleActionTerminateAllSessions(BaseModel):
     """
     EntityRiskPolicyRuleActionTerminateAllSessions
-    """ # noqa: E501
-    action: Optional[StrictStr] = Field(default=None, description="This action revokes or terminates all of the user's active sessions.")
+    """  # noqa: E501
+    action: Optional[StrictStr] = Field(default=None,
+                                        description="This action revokes or terminates all of the user's active sessions.")
     __properties: ClassVar[List[str]] = ["action"]
 
     @field_validator('action')
@@ -99,4 +101,3 @@ class EntityRiskPolicyRuleActionTerminateAllSessions(BaseModel):
             "action": obj.get("action")
         })
         return _obj
-

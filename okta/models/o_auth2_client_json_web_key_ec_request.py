@@ -29,15 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientJsonWebKeyECRequest(BaseModel):
     """
     An EC signing key
-    """ # noqa: E501
+    """  # noqa: E501
     kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's key pair")
     x: StrictStr = Field(description="The public x coordinate for the elliptic curve point")
     y: StrictStr = Field(description="The public y coordinate for the elliptic curve point")
     crv: StrictStr = Field(description="The cryptographic curve used with the key")
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the OAuth 2.0 client's JWKS")
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="Unique identifier of the JSON Web Key in the OAuth 2.0 client's JWKS")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the OAuth 2.0 client JSON Web Key")
     alg: Optional[StrictStr] = Field(default=None, description="Algorithm used in the key")
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key")
@@ -149,4 +151,3 @@ class OAuth2ClientJsonWebKeyECRequest(BaseModel):
             "discriminator": obj.get("discriminator")
         })
         return _obj
-

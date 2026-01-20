@@ -30,11 +30,13 @@ from okta.models.session_identity_provider_type import SessionIdentityProviderTy
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SessionIdentityProvider(BaseModel):
     """
     SessionIdentityProvider
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Identity Provider ID. If the `type` is `OKTA`, then the `id` is the org ID.")
+    """  # noqa: E501
+    id: Optional[StrictStr] = Field(default=None,
+                                    description="Identity Provider ID. If the `type` is `OKTA`, then the `id` is the org ID.")
     type: Optional[SessionIdentityProviderType] = None
     __properties: ClassVar[List[str]] = ["id", "type"]
 
@@ -94,4 +96,3 @@ class SessionIdentityProvider(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

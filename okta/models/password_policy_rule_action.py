@@ -30,10 +30,11 @@ from okta.models.policy_access import PolicyAccess
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRuleAction(BaseModel):
     """
     Indicates if a password can be changed
-    """ # noqa: E501
+    """  # noqa: E501
     access: Optional[PolicyAccess] = None
     __properties: ClassVar[List[str]] = ["access"]
 
@@ -90,4 +91,3 @@ class PasswordPolicyRuleAction(BaseModel):
             "access": obj.get("access")
         })
         return _obj
-

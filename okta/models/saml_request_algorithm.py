@@ -30,10 +30,11 @@ from okta.models.saml_request_signature_algorithm import SamlRequestSignatureAlg
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlRequestAlgorithm(BaseModel):
     """
     Algorithm settings used to secure an `<AuthnRequest>` message
-    """ # noqa: E501
+    """  # noqa: E501
     signature: Optional[SamlRequestSignatureAlgorithm] = None
     __properties: ClassVar[List[str]] = ["signature"]
 
@@ -97,4 +98,3 @@ class SamlRequestAlgorithm(BaseModel):
             "signature": SamlRequestSignatureAlgorithm.from_dict(obj["signature"]) if obj.get("signature") is not None else None
         })
         return _obj
-

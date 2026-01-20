@@ -30,10 +30,11 @@ from okta.models.href_object_grant_aerial_consent import HrefObjectGrantAerialCo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksAerialConsentRevoked(BaseModel):
     """
     LinksAerialConsentRevoked
-    """ # noqa: E501
+    """  # noqa: E501
     grant: Optional[HrefObjectGrantAerialConsent] = None
     __properties: ClassVar[List[str]] = ["grant"]
 
@@ -97,4 +98,3 @@ class LinksAerialConsentRevoked(BaseModel):
             "grant": HrefObjectGrantAerialConsent.from_dict(obj["grant"]) if obj.get("grant") is not None else None
         })
         return _obj
-

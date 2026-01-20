@@ -29,12 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorPushProfile(BaseModel):
     """
     UserFactorPushProfile
-    """ # noqa: E501
+    """  # noqa: E501
     credential_id: Optional[StrictStr] = Field(default=None, description="ID for the factor credential", alias="credentialId")
-    device_token: Optional[StrictStr] = Field(default=None, description="Token used to identify the device", alias="deviceToken")
+    device_token: Optional[StrictStr] = Field(
+        default=None,
+        description="Token used to identify the device",
+        alias="deviceToken")
     device_type: Optional[StrictStr] = Field(default=None, description="Type of device", alias="deviceType")
     name: Optional[StrictStr] = Field(default=None, description="Name of the device")
     platform: Optional[StrictStr] = Field(default=None, description="OS version of the associated device")
@@ -99,4 +103,3 @@ class UserFactorPushProfile(BaseModel):
             "version": obj.get("version")
         })
         return _obj
-

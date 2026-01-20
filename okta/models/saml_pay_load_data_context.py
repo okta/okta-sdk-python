@@ -33,10 +33,11 @@ from okta.models.saml_pay_load_data_context_all_of_protocol import SAMLPayLoadDa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataContext(BaseModel):
     """
     SAMLPayLoadDataContext
-    """ # noqa: E501
+    """  # noqa: E501
     request: Optional[InlineHookRequestObject] = None
     session: Optional[BaseContextSession] = None
     user: Optional[BaseContextUser] = None
@@ -127,4 +128,3 @@ class SAMLPayLoadDataContext(BaseModel):
             "protocol": SAMLPayLoadDataContextAllOfProtocol.from_dict(obj["protocol"]) if obj.get("protocol") is not None else None
         })
         return _obj
-

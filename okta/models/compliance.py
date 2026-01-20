@@ -30,10 +30,11 @@ from okta.models.fips_enum import FipsEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Compliance(BaseModel):
     """
     Compliance
-    """ # noqa: E501
+    """  # noqa: E501
     fips: Optional[FipsEnum] = None
     __properties: ClassVar[List[str]] = ["fips"]
 
@@ -90,4 +91,3 @@ class Compliance(BaseModel):
             "fips": obj.get("fips")
         })
         return _obj
-

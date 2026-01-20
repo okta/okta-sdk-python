@@ -31,10 +31,11 @@ from okta.models.policy_account_link_filter import PolicyAccountLinkFilter
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyAccountLink(BaseModel):
     """
     Specifies the behavior for linking an IdP user to an existing Okta user
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[PolicyAccountLinkAction] = None
     filter: Optional[PolicyAccountLinkFilter] = None
     __properties: ClassVar[List[str]] = ["action", "filter"]
@@ -100,4 +101,3 @@ class PolicyAccountLink(BaseModel):
             "filter": PolicyAccountLinkFilter.from_dict(obj["filter"]) if obj.get("filter") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.mtls_trust_credentials import MtlsTrustCredentials
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class MtlsCredentials(BaseModel):
     """
     Certificate chain description for verifying assertions from the Smart Card
-    """ # noqa: E501
+    """  # noqa: E501
     trust: Optional[MtlsTrustCredentials] = None
     __properties: ClassVar[List[str]] = ["trust"]
 
@@ -97,4 +98,3 @@ class MtlsCredentials(BaseModel):
             "trust": MtlsTrustCredentials.from_dict(obj["trust"]) if obj.get("trust") is not None else None
         })
         return _obj
-

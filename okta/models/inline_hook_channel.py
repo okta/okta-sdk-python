@@ -29,19 +29,21 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from okta.models.inline_hook_channel_type import InlineHookChannelType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.inline_hook_channel_http import InlineHookChannelHttp
     from okta.models.inline_hook_channel_o_auth import InlineHookChannelOAuth
 
+
 class InlineHookChannel(BaseModel):
     """
     InlineHookChannel
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[InlineHookChannelType] = None
-    version: Optional[StrictStr] = Field(default=None, description="Version of the inline hook type. The currently supported version is `1.0.0`.")
+    version: Optional[StrictStr] = Field(
+        default=None,
+        description="Version of the inline hook type. The currently supported version is `1.0.0`.")
     __properties: ClassVar[List[str]] = ["type", "version"]
 
     model_config = ConfigDict(
@@ -55,7 +57,7 @@ class InlineHookChannel(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'HTTP': 'InlineHookChannelHttp','OAUTH': 'InlineHookChannelOAuth'
+        'HTTP': 'InlineHookChannelHttp', 'OAUTH': 'InlineHookChannelOAuth'
     }
 
     @classmethod
@@ -112,7 +114,5 @@ class InlineHookChannel(BaseModel):
             return import_module("okta.models.inline_hook_channel_o_auth").InlineHookChannelOAuth.from_dict(obj)
 
         raise ValueError("InlineHookChannel failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

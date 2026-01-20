@@ -30,12 +30,15 @@ from okta.models.grace_period_expiry import GracePeriodExpiry
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GracePeriod(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Represents the Grace Period configuration for the device assurance policy
-    """ # noqa: E501
+    """  # noqa: E501
     expiry: Optional[GracePeriodExpiry] = None
-    type: Optional[StrictStr] = Field(default=None, description="Represents the type of Grace Period configured for the device assurance policy")
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="Represents the type of Grace Period configured for the device assurance policy")
     __properties: ClassVar[List[str]] = ["expiry", "type"]
 
     @field_validator('type')
@@ -109,4 +112,3 @@ class GracePeriod(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

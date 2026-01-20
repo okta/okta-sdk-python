@@ -26,22 +26,22 @@ import json
 
 from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.password_policy_conditions import PasswordPolicyConditions
 from okta.models.password_policy_settings import PasswordPolicySettings
 from okta.models.policy import Policy
 from okta.models.policy_links import PolicyLinks
-from okta.models.policy_type import PolicyType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class PasswordPolicy(Policy):
     """
     PasswordPolicy
-    """ # noqa: E501
+    """  # noqa: E501
     conditions: Optional[PasswordPolicyConditions] = None
     settings: Optional[PasswordPolicySettings] = None
-    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_embedded", "_links", "conditions", "settings"]
+    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated", "name",
+                                         "priority", "status", "system", "type", "_embedded", "_links", "conditions", "settings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,4 +129,3 @@ class PasswordPolicy(Policy):
             "settings": PasswordPolicySettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

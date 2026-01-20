@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OpenIdConnectApplicationIdpInitiatedLogin(BaseModel):
     """
     The type of IdP-initiated sign-in flow that the client supports
-    """ # noqa: E501
-    default_scope: Optional[List[StrictStr]] = Field(default=None, description="The scopes to use for the request when `mode` is `OKTA`")
+    """  # noqa: E501
+    default_scope: Optional[List[StrictStr]] = Field(default=None,
+                                                     description="The scopes to use for the request when `mode` is `OKTA`")
     mode: StrictStr = Field(description="The mode to use for the IdP-initiated sign-in flow. For `OKTA` or `SPEC` modes, the client must have an `initiate_login_uri` registered. > **Note:** For web and SPA apps, if the mode is `SPEC` or `OKTA`, you must set `grant_types` to `authorization_code`, `implicit`, or `interaction_code`. ")
     __properties: ClassVar[List[str]] = ["default_scope", "mode"]
 
@@ -98,4 +100,3 @@ class OpenIdConnectApplicationIdpInitiatedLogin(BaseModel):
             "mode": obj.get("mode")
         })
         return _obj
-

@@ -29,13 +29,22 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyCustomAppAllOfProviderConfigurationApns(BaseModel):
     """
     AuthenticatorKeyCustomAppAllOfProviderConfigurationApns
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="ID of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)")
-    app_bundle_id: Optional[StrictStr] = Field(default=None, description="AppBundleId of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)", alias="appBundleId")
-    debug_app_bundle_id: Optional[StrictStr] = Field(default=None, description="DebugAppBundleId of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)", alias="debugAppBundleId")
+    """  # noqa: E501
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)")
+    app_bundle_id: Optional[StrictStr] = Field(
+        default=None,
+        description="AppBundleId of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)",
+        alias="appBundleId")
+    debug_app_bundle_id: Optional[StrictStr] = Field(
+        default=None,
+        description="DebugAppBundleId of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)",
+        alias="debugAppBundleId")
     __properties: ClassVar[List[str]] = ["id", "appBundleId", "debugAppBundleId"]
 
     model_config = ConfigDict(
@@ -93,4 +102,3 @@ class AuthenticatorKeyCustomAppAllOfProviderConfigurationApns(BaseModel):
             "debugAppBundleId": obj.get("debugAppBundleId")
         })
         return _obj
-

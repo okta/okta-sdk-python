@@ -30,10 +30,11 @@ from okta.models.hosted_page_type import HostedPageType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class HostedPage(BaseModel):
     """
     HostedPage
-    """ # noqa: E501
+    """  # noqa: E501
     type: HostedPageType
     url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["type", "url"]
@@ -92,4 +93,3 @@ class HostedPage(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

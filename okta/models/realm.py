@@ -32,14 +32,21 @@ from okta.models.realm_profile import RealmProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Realm(BaseModel):
     """
     Realm
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the realm was created")
     id: Optional[StrictStr] = Field(default=None, description="Unique ID for the realm")
-    is_default: Optional[StrictBool] = Field(default=None, description="Indicates the default realm. Existing users will start out in the default realm and can be moved to other realms individually or through realm assignments. See [Realms Assignments API](/openapi/okta-management/management/tag/RealmAssignment/).", alias="isDefault")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the realm was updated", alias="lastUpdated")
+    is_default: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates the default realm. Existing users will start out in the default realm and can be moved to other realms individually or through realm assignments. See [Realms Assignments API](/openapi/okta-management/management/tag/RealmAssignment/).",
+        alias="isDefault")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the realm was updated",
+        alias="lastUpdated")
     profile: Optional[RealmProfile] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "isDefault", "lastUpdated", "profile", "_links"]
@@ -124,4 +131,3 @@ class Realm(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResponseLinks(BaseModel):
     """
     Link objects
-    """ # noqa: E501
+    """  # noqa: E501
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["_links"]
 
@@ -97,4 +98,3 @@ class ResponseLinks(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

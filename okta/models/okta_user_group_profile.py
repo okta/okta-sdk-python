@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaUserGroupProfile(BaseModel):
     """
     Profile for any group that is not imported from Active Directory. Specifies the standard and custom profile properties for a group.  The `objectClass` for these groups is `okta:user_group`.
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the group")
     name: Optional[StrictStr] = Field(default=None, description="Name of the group")
     object_class: Optional[StrictStr] = Field(default=None, description="The object class type", alias="objectClass")
@@ -118,4 +119,3 @@ class OktaUserGroupProfile(BaseModel):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-

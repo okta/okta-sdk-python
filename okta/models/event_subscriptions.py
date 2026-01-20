@@ -31,10 +31,11 @@ from okta.models.event_subscription_type import EventSubscriptionType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EventSubscriptions(BaseModel):
     """
     EventSubscriptions
-    """ # noqa: E501
+    """  # noqa: E501
     filter: Optional[EventHookFilters] = None
     items: List[StrictStr] = Field(description="The subscribed event types that trigger the event hook. When you register an event hook you need to specify which events you want to subscribe to. To see the list of event types currently eligible for use in event hooks, use the [Event Types catalog](https://developer.okta.com/docs/reference/api/event-types/#catalog) and search with the parameter `event-hook-eligible`.")
     type: EventSubscriptionType
@@ -107,4 +108,3 @@ class EventSubscriptions(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

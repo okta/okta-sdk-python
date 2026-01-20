@@ -30,10 +30,11 @@ from okta.models.protocol_endpoint_binding import ProtocolEndpointBinding
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OidcJwksEndpoint(BaseModel):
     """
     Endpoint for the JSON Web Key Set (JWKS) document. This document contains signing keys that are used to validate the signatures from the provider. For more information on JWKS, see [JSON Web Key](https://tools.ietf.org/html/rfc7517).
-    """ # noqa: E501
+    """  # noqa: E501
     binding: Optional[ProtocolEndpointBinding] = None
     url: Optional[StrictStr] = Field(default=None, description="URL of the endpoint to the JWK Set")
     __properties: ClassVar[List[str]] = ["binding", "url"]
@@ -92,4 +93,3 @@ class OidcJwksEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

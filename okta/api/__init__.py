@@ -125,4 +125,3 @@ from okta.api.user_risk_api import UserRiskApi
 from okta.api.user_sessions_api import UserSessionsApi
 from okta.api.user_type_api import UserTypeApi
 from okta.api.web_authn_preregistration_api import WebAuthnPreregistrationApi
-

@@ -32,10 +32,11 @@ from okta.models.resource_set_binding_members_links_all_of_next import ResourceS
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindingMembersLinks(BaseModel):
     """
     ResourceSetBindingMembersLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     next: Optional[ResourceSetBindingMembersLinksAllOfNext] = None
     binding: Optional[HrefObjectBindingLink] = None
@@ -117,4 +118,3 @@ class ResourceSetBindingMembersLinks(BaseModel):
             "binding": HrefObjectBindingLink.from_dict(obj["binding"]) if obj.get("binding") is not None else None
         })
         return _obj
-

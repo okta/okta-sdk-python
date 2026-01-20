@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ByDurationExpiry(BaseModel):
     """
     A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). Must be between 1 and 180 days inclusive.
-    """ # noqa: E501
-    value: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="A time duration in ISO 8601 duration format.")
+    """  # noqa: E501
+    value: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="A time duration in ISO 8601 duration format.")
     __properties: ClassVar[List[str]] = ["value"]
 
     @field_validator('value')
@@ -44,7 +46,8 @@ class ByDurationExpiry(BaseModel):
             return value
 
         if not re.match(r"^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$", value):
-            raise ValueError(r"must validate the regular expression /^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$/")
+            raise ValueError(
+                r"must validate the regular expression /^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$/")
         return value
 
     model_config = ConfigDict(
@@ -100,4 +103,3 @@ class ByDurationExpiry(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

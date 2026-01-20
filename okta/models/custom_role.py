@@ -34,21 +34,26 @@ from okta.models.role_type import RoleType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomRole(BaseModel):
     """
     CustomRole
-    """ # noqa: E501
+    """  # noqa: E501
     assignment_type: Optional[RoleAssignmentType] = Field(default=None, alias="assignmentType")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     id: Optional[StrictStr] = Field(default=None, description="Binding object ID")
     label: Optional[StrictStr] = Field(default=None, description="Label for the role assignment")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
     resource_set: Optional[StrictStr] = Field(default=None, description="Resource set ID", alias="resource-set")
     role: Optional[StrictStr] = Field(default=None, description="Role ID")
     status: Optional[LifecycleStatus] = None
     type: RoleType
     links: Optional[LinksCustomRoleResponse] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["assignmentType", "created", "id", "label", "lastUpdated", "resource-set", "role", "status", "type", "_links"]
+    __properties: ClassVar[List[str]] = ["assignmentType", "created", "id",
+                                         "label", "lastUpdated", "resource-set", "role", "status", "type", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -131,4 +136,3 @@ class CustomRole(BaseModel):
             "_links": LinksCustomRoleResponse.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

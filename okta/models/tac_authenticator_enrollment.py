@@ -33,21 +33,26 @@ from okta.models.authenticator_type import AuthenticatorType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TacAuthenticatorEnrollment(BaseModel):
     """
     TacAuthenticatorEnrollment
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the authenticator enrollment was created")
     id: Optional[StrictStr] = Field(default=None, description="A unique identifier of the authenticator enrollment")
     key: Optional[StrictStr] = Field(default=None, description="A human-readable string that identifies the authenticator")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the authenticator enrollment was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the authenticator enrollment was last updated",
+        alias="lastUpdated")
     name: Optional[StrictStr] = Field(default=None, description="The authenticator display name")
     nickname: Optional[StrictStr] = Field(default=None, description="A user-friendly name for the authenticator enrollment")
     profile: Optional[AuthenticatorProfileTacResponsePost] = None
     status: Optional[StrictStr] = Field(default=None, description="Status of the enrollment")
     type: Optional[AuthenticatorType] = None
     links: Optional[AuthenticatorEnrollmentLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "id", "key", "lastUpdated", "name", "nickname", "profile", "status", "type", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "id", "key", "lastUpdated",
+                                         "name", "nickname", "profile", "status", "type", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -125,4 +130,3 @@ class TacAuthenticatorEnrollment(BaseModel):
             "_links": AuthenticatorEnrollmentLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

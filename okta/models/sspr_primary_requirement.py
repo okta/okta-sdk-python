@@ -30,12 +30,15 @@ from okta.models.authenticator_method_constraint import AuthenticatorMethodConst
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SsprPrimaryRequirement(BaseModel):
     """
     Defines the authenticators permitted for the initial authentication step of password recovery
-    """ # noqa: E501
-    method_constraints: Optional[List[AuthenticatorMethodConstraint]] = Field(default=None, description="Constraints on the values specified in the `methods` array. Specifying a constraint limits methods to specific authenticator(s). Currently, Google OTP is the only accepted constraint.", alias="methodConstraints")
-    methods: Optional[List[StrictStr]] = Field(default=None, description="Authenticator methods allowed for the initial authentication step of password recovery. Method `otp` requires a constraint limiting it to a Google authenticator.")
+    """  # noqa: E501
+    method_constraints: Optional[List[AuthenticatorMethodConstraint]] = Field(
+        default=None, description="Constraints on the values specified in the `methods` array. Specifying a constraint limits methods to specific authenticator(s). Currently, Google OTP is the only accepted constraint.", alias="methodConstraints")
+    methods: Optional[List[StrictStr]] = Field(
+        default=None, description="Authenticator methods allowed for the initial authentication step of password recovery. Method `otp` requires a constraint limiting it to a Google authenticator.")
     __properties: ClassVar[List[str]] = ["methodConstraints", "methods"]
 
     @field_validator('methods')
@@ -110,4 +113,3 @@ class SsprPrimaryRequirement(BaseModel):
             "methods": obj.get("methods")
         })
         return _obj
-

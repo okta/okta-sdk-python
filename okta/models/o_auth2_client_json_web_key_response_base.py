@@ -30,13 +30,18 @@ from okta.models.o_auth_client_secret_links import OAuthClientSecretLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientJsonWebKeyResponseBase(BaseModel):
     """
     OAuth2ClientJsonWebKeyResponseBase
-    """ # noqa: E501
-    created: Optional[StrictStr] = Field(default=None, description="Timestamp when the OAuth 2.0 client JSON Web Key was created")
+    """  # noqa: E501
+    created: Optional[StrictStr] = Field(default=None,
+                                         description="Timestamp when the OAuth 2.0 client JSON Web Key was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the OAuth Client JSON Web Key")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp when the OAuth 2.0 client JSON Web Key was updated", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the OAuth 2.0 client JSON Web Key was updated",
+        alias="lastUpdated")
     links: Optional[OAuthClientSecretLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "_links"]
 
@@ -109,4 +114,3 @@ class OAuth2ClientJsonWebKeyResponseBase(BaseModel):
             "_links": OAuthClientSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

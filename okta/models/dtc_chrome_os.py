@@ -34,26 +34,73 @@ from okta.models.safe_browsing_protection_level import SafeBrowsingProtectionLev
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DTCChromeOS(BaseModel):
     """
     Google Chrome Device Trust Connector provider
-    """ # noqa: E501
-    allow_screen_lock: Optional[StrictBool] = Field(default=None, description="Indicates whether the AllowScreenLock enterprise policy is enabled", alias="allowScreenLock")
+    """  # noqa: E501
+    allow_screen_lock: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the AllowScreenLock enterprise policy is enabled",
+        alias="allowScreenLock")
     browser_version: Optional[ChromeBrowserVersion] = Field(default=None, alias="browserVersion")
-    built_in_dns_client_enabled: Optional[StrictBool] = Field(default=None, description="Indicates if a software stack is used to communicate with the DNS server", alias="builtInDnsClientEnabled")
-    chrome_remote_desktop_app_blocked: Optional[StrictBool] = Field(default=None, description="Indicates whether access to the Chrome Remote Desktop application is blocked through a policy", alias="chromeRemoteDesktopAppBlocked")
-    device_enrollment_domain: Optional[StrictStr] = Field(default=None, description="Enrollment domain of the customer that is currently managing the device", alias="deviceEnrollmentDomain")
-    disk_encrypted: Optional[StrictBool] = Field(default=None, description="Indicates whether the main disk is encrypted", alias="diskEncrypted")
+    built_in_dns_client_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if a software stack is used to communicate with the DNS server",
+        alias="builtInDnsClientEnabled")
+    chrome_remote_desktop_app_blocked: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether access to the Chrome Remote Desktop application is blocked through a policy",
+        alias="chromeRemoteDesktopAppBlocked")
+    device_enrollment_domain: Optional[StrictStr] = Field(
+        default=None,
+        description="Enrollment domain of the customer that is currently managing the device",
+        alias="deviceEnrollmentDomain")
+    disk_encrypted: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the main disk is encrypted",
+        alias="diskEncrypted")
     key_trust_level: Optional[KeyTrustLevelOSMode] = Field(default=None, alias="keyTrustLevel")
-    managed_device: Optional[StrictBool] = Field(default=None, description="Indicates whether the device is enrolled in ChromeOS device management", alias="managedDevice")
-    os_firewall: Optional[StrictBool] = Field(default=None, description="Indicates whether a firewall is enabled at the OS-level on the device", alias="osFirewall")
+    managed_device: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the device is enrolled in ChromeOS device management",
+        alias="managedDevice")
+    os_firewall: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether a firewall is enabled at the OS-level on the device",
+        alias="osFirewall")
     os_version: Optional[OSVersionFourComponents] = Field(default=None, alias="osVersion")
-    password_protection_warning_trigger: Optional[PasswordProtectionWarningTrigger] = Field(default=None, alias="passwordProtectionWarningTrigger")
-    realtime_url_check_mode: Optional[StrictBool] = Field(default=None, description="Indicates whether enterprise-grade (custom) unsafe URL scanning is enabled", alias="realtimeUrlCheckMode")
-    safe_browsing_protection_level: Optional[SafeBrowsingProtectionLevel] = Field(default=None, alias="safeBrowsingProtectionLevel")
-    screen_lock_secured: Optional[StrictBool] = Field(default=None, description="Indicates whether the device is password-protected", alias="screenLockSecured")
-    site_isolation_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the Site Isolation (also known as **Site Per Process**) setting is enabled", alias="siteIsolationEnabled")
-    __properties: ClassVar[List[str]] = ["allowScreenLock", "browserVersion", "builtInDnsClientEnabled", "chromeRemoteDesktopAppBlocked", "deviceEnrollmentDomain", "diskEncrypted", "keyTrustLevel", "managedDevice", "osFirewall", "osVersion", "passwordProtectionWarningTrigger", "realtimeUrlCheckMode", "safeBrowsingProtectionLevel", "screenLockSecured", "siteIsolationEnabled"]
+    password_protection_warning_trigger: Optional[PasswordProtectionWarningTrigger] = Field(
+        default=None, alias="passwordProtectionWarningTrigger")
+    realtime_url_check_mode: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether enterprise-grade (custom) unsafe URL scanning is enabled",
+        alias="realtimeUrlCheckMode")
+    safe_browsing_protection_level: Optional[SafeBrowsingProtectionLevel] = Field(
+        default=None, alias="safeBrowsingProtectionLevel")
+    screen_lock_secured: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the device is password-protected",
+        alias="screenLockSecured")
+    site_isolation_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the Site Isolation (also known as **Site Per Process**) setting is enabled",
+        alias="siteIsolationEnabled")
+    __properties: ClassVar[List[str]] = ["allowScreenLock",
+                                         "browserVersion",
+                                         "builtInDnsClientEnabled",
+                                         "chromeRemoteDesktopAppBlocked",
+                                         "deviceEnrollmentDomain",
+                                         "diskEncrypted",
+                                         "keyTrustLevel",
+                                         "managedDevice",
+                                         "osFirewall",
+                                         "osVersion",
+                                         "passwordProtectionWarningTrigger",
+                                         "realtimeUrlCheckMode",
+                                         "safeBrowsingProtectionLevel",
+                                         "screenLockSecured",
+                                         "siteIsolationEnabled"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -136,4 +183,3 @@ class DTCChromeOS(BaseModel):
             "siteIsolationEnabled": obj.get("siteIsolationEnabled")
         })
         return _obj
-

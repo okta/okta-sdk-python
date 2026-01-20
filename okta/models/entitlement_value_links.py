@@ -32,10 +32,11 @@ from okta.models.href_object_resource_set_link import HrefObjectResourceSetLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntitlementValueLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
-    """ # noqa: E501
+    """  # noqa: E501
     group: Optional[HrefObjectGroupLink] = None
     app: Optional[HrefObjectAppLink] = None
     resource_set: Optional[HrefObjectResourceSetLink] = Field(default=None, alias="resource-set")
@@ -117,4 +118,3 @@ class EntitlementValueLinks(BaseModel):
             "resource-set": HrefObjectResourceSetLink.from_dict(obj["resource-set"]) if obj.get("resource-set") is not None else None
         })
         return _obj
-

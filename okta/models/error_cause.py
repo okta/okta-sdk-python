@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ErrorCause(BaseModel):
     """
     ErrorCause
-    """ # noqa: E501
+    """  # noqa: E501
     error_summary: Optional[StrictStr] = Field(default=None, alias="errorSummary")
     __properties: ClassVar[List[str]] = ["errorSummary"]
 
@@ -89,4 +90,3 @@ class ErrorCause(BaseModel):
             "errorSummary": obj.get("errorSummary")
         })
         return _obj
-

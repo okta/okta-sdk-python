@@ -30,10 +30,11 @@ from okta.models.access_policy_rule_application_sign_on import AccessPolicyRuleA
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AccessPolicyRuleActions(BaseModel):
     """
     AccessPolicyRuleActions
-    """ # noqa: E501
+    """  # noqa: E501
     app_sign_on: Optional[AccessPolicyRuleApplicationSignOn] = Field(default=None, alias="appSignOn")
     __properties: ClassVar[List[str]] = ["appSignOn"]
 
@@ -97,4 +98,3 @@ class AccessPolicyRuleActions(BaseModel):
             "appSignOn": AccessPolicyRuleApplicationSignOn.from_dict(obj["appSignOn"]) if obj.get("appSignOn") is not None else None
         })
         return _obj
-

@@ -32,10 +32,11 @@ from okta.models.ssf_transmitter_security_event_subject import SsfTransmitterSec
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CaepEvent(BaseModel):
     """
     CaepEvent
-    """ # noqa: E501
+    """  # noqa: E501
     event_timestamp: Optional[StrictInt] = Field(default=None, description="The time of the event (UNIX timestamp)")
     reason_admin: Optional[CaepCredentialChangeEventReasonAdmin] = None
     reason_user: Optional[CaepCredentialChangeEventReasonUser] = None
@@ -119,4 +120,3 @@ class CaepEvent(BaseModel):
             "subject": SsfTransmitterSecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

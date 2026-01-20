@@ -30,11 +30,13 @@ from okta.models.realm_assignment_operation_response_all_of_assignment_operation
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActions(BaseModel):
     """
     Realm assignment action
-    """ # noqa: E501
-    assign_user_to_realm: Optional[RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActionsAssignUserToRealm] = Field(default=None, alias="assignUserToRealm")
+    """  # noqa: E501
+    assign_user_to_realm: Optional[RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActionsAssignUserToRealm] = Field(
+        default=None, alias="assignUserToRealm")
     __properties: ClassVar[List[str]] = ["assignUserToRealm"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActio
             "assignUserToRealm": RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActionsAssignUserToRealm.from_dict(obj["assignUserToRealm"]) if obj.get("assignUserToRealm") is not None else None
         })
         return _obj
-

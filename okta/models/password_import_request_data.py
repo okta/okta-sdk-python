@@ -31,10 +31,11 @@ from okta.models.password_import_request_data_context import PasswordImportReque
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordImportRequestData(BaseModel):
     """
     PasswordImportRequestData
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[PasswordImportRequestDataAction] = None
     context: Optional[PasswordImportRequestDataContext] = None
     __properties: ClassVar[List[str]] = ["action", "context"]
@@ -107,4 +108,3 @@ class PasswordImportRequestData(BaseModel):
             "context": PasswordImportRequestDataContext.from_dict(obj["context"]) if obj.get("context") is not None else None
         })
         return _obj
-

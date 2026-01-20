@@ -30,13 +30,16 @@ from okta.models.entitlement_value_links import EntitlementValueLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntitlementValue(BaseModel):
     """
     EntitlementValue
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Entitlement value ID")
     name: Optional[StrictStr] = Field(default=None, description="The entitlement value resource name")
-    value: Optional[StrictStr] = Field(default=None, description="The entitlement value resource [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn)")
+    value: Optional[StrictStr] = Field(
+        default=None,
+        description="The entitlement value resource [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn)")
     links: Optional[EntitlementValueLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "name", "value", "_links"]
 
@@ -103,4 +106,3 @@ class EntitlementValue(BaseModel):
             "_links": EntitlementValueLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

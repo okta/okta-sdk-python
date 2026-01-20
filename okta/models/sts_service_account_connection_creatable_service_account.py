@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class STSServiceAccountConnectionCreatableServiceAccount(BaseModel):
     """
     Reference to a service account in [ORN](/openapi/okta-management/guides/roles/#okta-resource-name-orn) format
-    """ # noqa: E501
-    orn: StrictStr = Field(description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the service account")
+    """  # noqa: E501
+    orn: StrictStr = Field(
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the service account")
     __properties: ClassVar[List[str]] = ["orn"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class STSServiceAccountConnectionCreatableServiceAccount(BaseModel):
             "orn": obj.get("orn")
         })
         return _obj
-

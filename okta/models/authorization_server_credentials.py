@@ -30,10 +30,11 @@ from okta.models.authorization_server_credentials_signing_config import Authoriz
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerCredentials(BaseModel):
     """
     AuthorizationServerCredentials
-    """ # noqa: E501
+    """  # noqa: E501
     signing: Optional[AuthorizationServerCredentialsSigningConfig] = None
     __properties: ClassVar[List[str]] = ["signing"]
 
@@ -97,4 +98,3 @@ class AuthorizationServerCredentials(BaseModel):
             "signing": AuthorizationServerCredentialsSigningConfig.from_dict(obj["signing"]) if obj.get("signing") is not None else None
         })
         return _obj
-

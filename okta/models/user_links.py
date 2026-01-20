@@ -30,26 +30,59 @@ from okta.models.href_object import HrefObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://datatracker.ietf.org/doc/html/rfc8288) available for the current status of a user. The links object is used for dynamic discovery of related resources, lifecycle operations, and credential operations. The links object is read-only.  For an individual user result, the links object contains a full set of link relations available for that user as determined by your policies. For a collection of users, the links object contains only the `self` link. Operations that return a collection of users include [List all users](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/listUsers) and [List all group member users](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroupUsers).
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObject] = Field(default=None, description="URL to the individual user", alias="self")
     activate: Optional[HrefObject] = Field(default=None, description="URL to activate the user")
-    reset_password: Optional[HrefObject] = Field(default=None, description="URL to reset the user's password", alias="resetPassword")
-    reset_factors: Optional[HrefObject] = Field(default=None, description="URL to reset the user's factors", alias="resetFactors")
-    expire_password: Optional[HrefObject] = Field(default=None, description="URL to expire the user's password", alias="expirePassword")
-    forgot_password: Optional[HrefObject] = Field(default=None, description="URL to initiate a forgot password operation", alias="forgotPassword")
-    change_recovery_question: Optional[HrefObject] = Field(default=None, description="URL to change the user's recovery question", alias="changeRecoveryQuestion")
+    reset_password: Optional[HrefObject] = Field(
+        default=None,
+        description="URL to reset the user's password",
+        alias="resetPassword")
+    reset_factors: Optional[HrefObject] = Field(
+        default=None,
+        description="URL to reset the user's factors",
+        alias="resetFactors")
+    expire_password: Optional[HrefObject] = Field(
+        default=None,
+        description="URL to expire the user's password",
+        alias="expirePassword")
+    forgot_password: Optional[HrefObject] = Field(
+        default=None,
+        description="URL to initiate a forgot password operation",
+        alias="forgotPassword")
+    change_recovery_question: Optional[HrefObject] = Field(
+        default=None,
+        description="URL to change the user's recovery question",
+        alias="changeRecoveryQuestion")
     deactivate: Optional[HrefObject] = Field(default=None, description="URL to deactivate a user")
     reactivate: Optional[HrefObject] = Field(default=None, description="URL to reactivate the user")
-    change_password: Optional[HrefObject] = Field(default=None, description="URL to change the user's password", alias="changePassword")
+    change_password: Optional[HrefObject] = Field(
+        default=None,
+        description="URL to change the user's password",
+        alias="changePassword")
     var_schema: Optional[HrefObject] = Field(default=None, description="URL to the user's profile schema", alias="schema")
     suspend: Optional[HrefObject] = Field(default=None, description="URL to suspend the user")
     unsuspend: Optional[HrefObject] = Field(default=None, description="URL to unsuspend the user")
     unlock: Optional[HrefObject] = Field(default=None, description="URL to unlock the locked-out user")
     type: Optional[HrefObject] = Field(default=None, description="URL to the user type")
-    __properties: ClassVar[List[str]] = ["self", "activate", "resetPassword", "resetFactors", "expirePassword", "forgotPassword", "changeRecoveryQuestion", "deactivate", "reactivate", "changePassword", "schema", "suspend", "unsuspend", "unlock", "type"]
+    __properties: ClassVar[List[str]] = ["self",
+                                         "activate",
+                                         "resetPassword",
+                                         "resetFactors",
+                                         "expirePassword",
+                                         "forgotPassword",
+                                         "changeRecoveryQuestion",
+                                         "deactivate",
+                                         "reactivate",
+                                         "changePassword",
+                                         "schema",
+                                         "suspend",
+                                         "unsuspend",
+                                         "unlock",
+                                         "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -223,4 +256,3 @@ class UserLinks(BaseModel):
             "type": HrefObject.from_dict(obj["type"]) if obj.get("type") is not None else None
         })
         return _obj
-

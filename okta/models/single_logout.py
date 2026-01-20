@@ -29,13 +29,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SingleLogout(BaseModel):
     """
     Determines if the app supports Single Logout (SLO)
-    """ # noqa: E501
+    """  # noqa: E501
     enabled: Optional[StrictBool] = Field(default=None, description="Whether the application supports SLO")
-    issuer: Optional[StrictStr] = Field(default=None, description="The issuer of the Service Provider that generates the SLO request")
-    logout_url: Optional[StrictStr] = Field(default=None, description="The location where the logout response is sent", alias="logoutUrl")
+    issuer: Optional[StrictStr] = Field(default=None,
+                                        description="The issuer of the Service Provider that generates the SLO request")
+    logout_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The location where the logout response is sent",
+        alias="logoutUrl")
     __properties: ClassVar[List[str]] = ["enabled", "issuer", "logoutUrl"]
 
     model_config = ConfigDict(
@@ -93,4 +98,3 @@ class SingleLogout(BaseModel):
             "logoutUrl": obj.get("logoutUrl")
         })
         return _obj
-

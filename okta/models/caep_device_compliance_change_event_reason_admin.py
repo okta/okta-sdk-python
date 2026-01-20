@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CaepDeviceComplianceChangeEventReasonAdmin(BaseModel):
     """
     CaepDeviceComplianceChangeEventReasonAdmin
-    """ # noqa: E501
+    """  # noqa: E501
     en: StrictStr = Field(description="The event reason in English")
     __properties: ClassVar[List[str]] = ["en"]
 
@@ -89,4 +90,3 @@ class CaepDeviceComplianceChangeEventReasonAdmin(BaseModel):
             "en": obj.get("en")
         })
         return _obj
-

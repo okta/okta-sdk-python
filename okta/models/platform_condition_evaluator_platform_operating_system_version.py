@@ -30,10 +30,11 @@ from okta.models.platform_condition_operating_system_version_match_type import P
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PlatformConditionEvaluatorPlatformOperatingSystemVersion(BaseModel):
     """
     PlatformConditionEvaluatorPlatformOperatingSystemVersion
-    """ # noqa: E501
+    """  # noqa: E501
     match_type: Optional[PlatformConditionOperatingSystemVersionMatchType] = Field(default=None, alias="matchType")
     value: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["matchType", "value"]
@@ -92,4 +93,3 @@ class PlatformConditionEvaluatorPlatformOperatingSystemVersion(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

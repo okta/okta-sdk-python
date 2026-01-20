@@ -32,10 +32,11 @@ from okta.models.json_web_key_use import JsonWebKeyUse
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceServerJsonWebKey(BaseModel):
     """
     A [JSON Web Key (JWK)](https://tools.ietf.org/html/rfc7517) is a JSON representation of a cryptographic key. Okta can use the active key to encrypt the access token minted by the authorization server. Okta supports only RSA keys with 'use: enc'.
-    """ # noqa: E501
+    """  # noqa: E501
     e: Optional[StrictStr] = Field(default=None, description="The key exponent of a RSA key")
     kid: Optional[StrictStr] = Field(default=None, description="The unique identifier of the key")
     kty: Optional[JsonWebKeyType] = None
@@ -102,4 +103,3 @@ class ResourceServerJsonWebKey(BaseModel):
             "use": obj.get("use")
         })
         return _obj
-

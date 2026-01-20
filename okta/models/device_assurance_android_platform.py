@@ -34,21 +34,39 @@ from okta.models.device_posture_checks import DevicePostureChecks
 from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
 from okta.models.os_version import OSVersion
-from okta.models.platform import Platform
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class DeviceAssuranceAndroidPlatform(DeviceAssurance):
     """
     DeviceAssuranceAndroidPlatform
-    """ # noqa: E501
-    disk_encryption_type: Optional[DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType] = Field(default=None, alias="diskEncryptionType")
+    """  # noqa: E501
+    disk_encryption_type: Optional[DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType] = Field(
+        default=None, alias="diskEncryptionType")
     jailbreak: Optional[StrictBool] = None
     os_version: Optional[OSVersion] = Field(default=None, alias="osVersion")
     screen_lock_type: Optional[DeviceAssuranceAndroidPlatformAllOfScreenLockType] = Field(default=None, alias="screenLockType")
     secure_hardware_present: Optional[StrictBool] = Field(default=None, alias="secureHardwarePresent")
-    third_party_signal_providers: Optional[DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders] = Field(default=None, alias="thirdPartySignalProviders")
-    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "devicePostureChecks", "displayRemediationMode", "gracePeriod", "id", "lastUpdate", "lastUpdatedBy", "name", "platform", "_links", "diskEncryptionType", "jailbreak", "osVersion", "screenLockType", "secureHardwarePresent", "thirdPartySignalProviders"]
+    third_party_signal_providers: Optional[DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders] = Field(
+        default=None, alias="thirdPartySignalProviders")
+    __properties: ClassVar[List[str]] = ["createdBy",
+                                         "createdDate",
+                                         "devicePostureChecks",
+                                         "displayRemediationMode",
+                                         "gracePeriod",
+                                         "id",
+                                         "lastUpdate",
+                                         "lastUpdatedBy",
+                                         "name",
+                                         "platform",
+                                         "_links",
+                                         "diskEncryptionType",
+                                         "jailbreak",
+                                         "osVersion",
+                                         "screenLockType",
+                                         "secureHardwarePresent",
+                                         "thirdPartySignalProviders"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -168,4 +186,3 @@ class DeviceAssuranceAndroidPlatform(DeviceAssurance):
             "thirdPartySignalProviders": DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders.from_dict(obj["thirdPartySignalProviders"]) if obj.get("thirdPartySignalProviders") is not None else None
         })
         return _obj
-

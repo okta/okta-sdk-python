@@ -29,18 +29,21 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from okta.models.registration_inline_hook_request_type import RegistrationInlineHookRequestType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.registration_inline_hook_pp_data import RegistrationInlineHookPPData
     from okta.models.registration_inline_hook_ssr_data import RegistrationInlineHookSSRData
 
+
 class RegistrationInlineHookRequest(BaseModel):
     """
     Registration inline hook request
-    """ # noqa: E501
-    event_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook. The registration inline hook type is `com.okta.user.pre-registration`.", alias="eventType")
+    """  # noqa: E501
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook. The registration inline hook type is `com.okta.user.pre-registration`.",
+        alias="eventType")
     request_type: Optional[RegistrationInlineHookRequestType] = Field(default=None, alias="requestType")
     source: Optional[StrictStr] = Field(default=None, description="The ID of the registration inline hook")
     __properties: ClassVar[List[str]] = ["eventType", "requestType", "source"]
@@ -56,7 +59,7 @@ class RegistrationInlineHookRequest(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'progressive.profile': 'RegistrationInlineHookPPData','self.service.registration': 'RegistrationInlineHookSSRData'
+        'progressive.profile': 'RegistrationInlineHookPPData', 'self.service.registration': 'RegistrationInlineHookSSRData'
     }
 
     @classmethod
@@ -113,7 +116,5 @@ class RegistrationInlineHookRequest(BaseModel):
             return import_module("okta.models.registration_inline_hook_ssr_data").RegistrationInlineHookSSRData.from_dict(obj)
 
         raise ValueError("RegistrationInlineHookRequest failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

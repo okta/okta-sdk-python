@@ -32,11 +32,15 @@ from okta.models.org_okta_support_settings_obj_links import OrgOktaSupportSettin
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgOktaSupportSettingsObj(BaseModel):
     """
     OrgOktaSupportSettingsObj
-    """ # noqa: E501
-    case_number: Optional[StrictStr] = Field(default=None, description="Support case number for the Okta Support access grant", alias="caseNumber")
+    """  # noqa: E501
+    case_number: Optional[StrictStr] = Field(
+        default=None,
+        description="Support case number for the Okta Support access grant",
+        alias="caseNumber")
     expiration: Optional[datetime] = Field(default=None, description="Expiration of Okta Support")
     support: Optional[OrgOktaSupportSetting] = None
     links: Optional[OrgOktaSupportSettingsObjLinks] = Field(default=None, alias="_links")
@@ -119,4 +123,3 @@ class OrgOktaSupportSettingsObj(BaseModel):
             "_links": OrgOktaSupportSettingsObjLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

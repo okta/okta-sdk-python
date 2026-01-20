@@ -33,19 +33,27 @@ from okta.models.operational_status import OperationalStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentPool(BaseModel):
     """
     An agent pool is a collection of agents that serve a common purpose. An agent pool has a unique ID within an org, and contains a collection of agents disjoint to every other agent pool, meaning that no two agent pools share an agent.
-    """ # noqa: E501
+    """  # noqa: E501
     agents: Optional[List[Agent]] = None
-    disrupted_agents: Optional[StrictInt] = Field(default=None, description="Number of agents in the pool that are in a disrupted state", alias="disruptedAgents")
+    disrupted_agents: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of agents in the pool that are in a disrupted state",
+        alias="disruptedAgents")
     id: Optional[StrictStr] = Field(default=None, description="Agent pool ID")
-    inactive_agents: Optional[StrictInt] = Field(default=None, description="Number of agents in the pool that are in an inactive state", alias="inactiveAgents")
+    inactive_agents: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of agents in the pool that are in an inactive state",
+        alias="inactiveAgents")
     name: Optional[StrictStr] = Field(default=None, description="Agent pool name")
     operational_status: Optional[OperationalStatus] = Field(default=None, alias="operationalStatus")
     type: Optional[AgentType] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["agents", "disruptedAgents", "id", "inactiveAgents", "name", "operationalStatus", "type", "_links"]
+    __properties: ClassVar[List[str]] = ["agents", "disruptedAgents", "id",
+                                         "inactiveAgents", "name", "operationalStatus", "type", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -123,4 +131,3 @@ class AgentPool(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

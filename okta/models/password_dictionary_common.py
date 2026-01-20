@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordDictionaryCommon(BaseModel):
     """
     Lookup settings for commonly used passwords
-    """ # noqa: E501
-    exclude: Optional[StrictBool] = Field(default=False, description="Indicates whether to check passwords against the common password dictionary")
+    """  # noqa: E501
+    exclude: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether to check passwords against the common password dictionary")
     __properties: ClassVar[List[str]] = ["exclude"]
 
     model_config = ConfigDict(
@@ -89,4 +92,3 @@ class PasswordDictionaryCommon(BaseModel):
             "exclude": obj.get("exclude") if obj.get("exclude") is not None else False
         })
         return _obj
-

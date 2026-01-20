@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgAerialConsent(BaseModel):
     """
     OrgAerialConsent
-    """ # noqa: E501
+    """  # noqa: E501
     account_id: StrictStr = Field(description="The unique ID of the Aerial account", alias="accountId")
     __properties: ClassVar[List[str]] = ["accountId"]
 
@@ -89,4 +90,3 @@ class OrgAerialConsent(BaseModel):
             "accountId": obj.get("accountId")
         })
         return _obj
-

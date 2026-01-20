@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BasicApplicationSettingsApplication(BaseModel):
     """
     BasicApplicationSettingsApplication
-    """ # noqa: E501
+    """  # noqa: E501
     auth_url: StrictStr = Field(description="The URL of the authenticating site for this app", alias="authURL")
     url: StrictStr = Field(description="The URL of the sign-in page for this app")
     __properties: ClassVar[List[str]] = ["authURL", "url"]
@@ -91,4 +92,3 @@ class BasicApplicationSettingsApplication(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

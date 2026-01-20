@@ -33,10 +33,11 @@ from okta.models.resource_set_resource_links_users import ResourceSetResourceLin
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetResourceLinks(BaseModel):
     """
     Related discoverable resources
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[ResourceSetResourceLinksSelf] = Field(default=None, alias="self")
     resource: Optional[ResourceSetResourceLinksResource] = None
     groups: Optional[ResourceSetResourceLinksGroups] = None
@@ -127,4 +128,3 @@ class ResourceSetResourceLinks(BaseModel):
             "users": ResourceSetResourceLinksUsers.from_dict(obj["users"]) if obj.get("users") is not None else None
         })
         return _obj
-

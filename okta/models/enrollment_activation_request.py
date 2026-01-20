@@ -31,18 +31,28 @@ from okta.models.web_authn_cred_response import WebAuthnCredResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EnrollmentActivationRequest(BaseModel):
     """
     Enrollment Initialization Request
-    """ # noqa: E501
-    cred_responses: Optional[List[WebAuthnCredResponse]] = Field(default=None, description="List of credential responses from the fulfillment provider", alias="credResponses")
-    fulfillment_provider: Optional[StrictStr] = Field(default=None, description="Name of the fulfillment provider for the WebAuthn preregistration factor", alias="fulfillmentProvider")
-    pin_response_jwe: Optional[StrictStr] = Field(default=None, description="Encrypted JWE of the PIN response from the fulfillment provider", alias="pinResponseJwe")
+    """  # noqa: E501
+    cred_responses: Optional[List[WebAuthnCredResponse]] = Field(
+        default=None, description="List of credential responses from the fulfillment provider", alias="credResponses")
+    fulfillment_provider: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the fulfillment provider for the WebAuthn preregistration factor",
+        alias="fulfillmentProvider")
+    pin_response_jwe: Optional[StrictStr] = Field(
+        default=None,
+        description="Encrypted JWE of the PIN response from the fulfillment provider",
+        alias="pinResponseJwe")
     serial: Optional[StrictStr] = Field(default=None, description="Serial number of the YubiKey")
     user_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Okta user", alias="userId")
     version: Optional[StrictStr] = Field(default=None, description="Firmware version of the YubiKey")
-    yubico_signing_jwks: Optional[List[ECKeyJWK]] = Field(default=None, description="List of usable signing keys from Yubico (in JSON Web Key Sets (JWKS) format). The signing keys are used to verify the JSON Web Signature (JWS) inside the JWE.", alias="yubicoSigningJwks")
-    __properties: ClassVar[List[str]] = ["credResponses", "fulfillmentProvider", "pinResponseJwe", "serial", "userId", "version", "yubicoSigningJwks"]
+    yubico_signing_jwks: Optional[List[ECKeyJWK]] = Field(
+        default=None, description="List of usable signing keys from Yubico (in JSON Web Key Sets (JWKS) format). The signing keys are used to verify the JSON Web Signature (JWS) inside the JWE.", alias="yubicoSigningJwks")
+    __properties: ClassVar[List[str]] = ["credResponses", "fulfillmentProvider",
+                                         "pinResponseJwe", "serial", "userId", "version", "yubicoSigningJwks"]
 
     @field_validator('fulfillment_provider')
     def fulfillment_provider_validate_enum(cls, value):
@@ -127,4 +137,3 @@ class EnrollmentActivationRequest(BaseModel):
             "yubicoSigningJwks": [ECKeyJWK.from_dict(_item) for _item in obj["yubicoSigningJwks"]] if obj.get("yubicoSigningJwks") is not None else None
         })
         return _obj
-

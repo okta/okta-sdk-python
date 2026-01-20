@@ -29,14 +29,14 @@ from typing import Any, ClassVar, Dict, List
 from okta.models.log_stream import LogStream
 from okta.models.log_stream_links_self_and_lifecycle import LogStreamLinksSelfAndLifecycle
 from okta.models.log_stream_settings_splunk import LogStreamSettingsSplunk
-from okta.models.log_stream_type import LogStreamType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class LogStreamSplunk(LogStream):
     """
     LogStreamSplunk
-    """ # noqa: E501
+    """  # noqa: E501
     settings: LogStreamSettingsSplunk
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "type", "_links", "settings"]
 
@@ -114,4 +114,3 @@ class LogStreamSplunk(LogStream):
             "settings": LogStreamSettingsSplunk.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

@@ -31,12 +31,14 @@ from okta.models.protocol_endpoint_binding import ProtocolEndpointBinding
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlSloEndpoint(BaseModel):
     """
     IdP's `SingleLogoutService` endpoint where Okta sends a `<LogoutRequest>` message
-    """ # noqa: E501
+    """  # noqa: E501
     binding: Optional[ProtocolEndpointBinding] = None
-    url: Optional[Annotated[str, Field(strict=True, max_length=1014)]] = Field(default=None, description="URL of the binding-specific IdP endpoint where Okta sends a `<LogoutRequest>`")
+    url: Optional[Annotated[str, Field(strict=True, max_length=1014)]] = Field(
+        default=None, description="URL of the binding-specific IdP endpoint where Okta sends a `<LogoutRequest>`")
     __properties: ClassVar[List[str]] = ["binding", "url"]
 
     model_config = ConfigDict(
@@ -93,4 +95,3 @@ class SamlSloEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

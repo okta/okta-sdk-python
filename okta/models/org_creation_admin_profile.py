@@ -30,14 +30,19 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgCreationAdminProfile(BaseModel):
     """
     Specifies the profile attributes for the first super admin user. The minimal set of required attributes are `email`, `firstName`, `lastName`, and `login`. See [profile](/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response) for additional profile attributes.
-    """ # noqa: E501
-    first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(description="Given name of the User (`givenName`)", alias="firstName")
-    last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(description="The family name of the User (`familyName`)", alias="lastName")
-    email: Annotated[str, Field(min_length=5, strict=True, max_length=100)] = Field(description="The primary email address of the User. For validation, see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).")
-    login: Annotated[str, Field(strict=True, max_length=100)] = Field(description="The unique identifier for the User (`username`)")
+    """  # noqa: E501
+    first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
+        description="Given name of the User (`givenName`)", alias="firstName")
+    last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
+        description="The family name of the User (`familyName`)", alias="lastName")
+    email: Annotated[str, Field(min_length=5, strict=True, max_length=100)] = Field(
+        description="The primary email address of the User. For validation, see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).")
+    login: Annotated[str, Field(strict=True, max_length=100)] = Field(
+        description="The unique identifier for the User (`username`)")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["firstName", "lastName", "email", "login"]
 
@@ -119,4 +124,3 @@ class OrgCreationAdminProfile(BaseModel):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-

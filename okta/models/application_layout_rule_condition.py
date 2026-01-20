@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationLayoutRuleCondition(BaseModel):
     """
     ApplicationLayoutRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     var_schema: Optional[Dict[str, Any]] = Field(default=None, alias="schema")
     scope: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["schema", "scope"]
@@ -91,4 +92,3 @@ class ApplicationLayoutRuleCondition(BaseModel):
             "scope": obj.get("scope")
         })
         return _obj
-

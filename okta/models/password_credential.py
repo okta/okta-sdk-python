@@ -31,13 +31,16 @@ from okta.models.password_credential_hook import PasswordCredentialHook
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordCredential(BaseModel):
     """
     Specifies a password for a user.  When a user has a valid password, imported hashed password, or password hook, and a response object contains a password credential, then the password object is a bare object without the value property defined (for example, `password: {}`). This indicates that a password value exists. You can modify password policy requirements in the Admin Console by editing the Password authenticator:  **Security** > **Authenticators** > **Password** (or for Okta Classic orgs, use **Security** > **Authentication** > **Password**).  For information on defaults and configuring your password policies, see [Configure the password authenticator](https://help.okta.com/okta_help.htm?type=oie&id=ext-configure-password) in the help documentation.
-    """ # noqa: E501
+    """  # noqa: E501
     hash: Optional[PasswordCredentialHash] = None
     hook: Optional[PasswordCredentialHook] = None
-    value: Optional[SecretStr] = Field(default=None, description="Specifies the password for a user. The password policy validates this password.")
+    value: Optional[SecretStr] = Field(
+        default=None,
+        description="Specifies the password for a user. The password policy validates this password.")
     __properties: ClassVar[List[str]] = ["hash", "hook", "value"]
 
     model_config = ConfigDict(
@@ -109,4 +112,3 @@ class PasswordCredential(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

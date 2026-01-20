@@ -30,10 +30,11 @@ from okta.models.href_hints_guidance_object import HrefHintsGuidanceObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class HrefObjectAuthorizeLink(BaseModel):
     """
     Link to authorize scopes
-    """ # noqa: E501
+    """  # noqa: E501
     hints: Optional[HrefHintsGuidanceObject] = None
     href: StrictStr = Field(description="Link URI")
     __properties: ClassVar[List[str]] = ["hints", "href"]
@@ -99,4 +100,3 @@ class HrefObjectAuthorizeLink(BaseModel):
             "href": obj.get("href")
         })
         return _obj
-

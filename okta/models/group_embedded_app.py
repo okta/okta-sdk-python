@@ -29,14 +29,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupEmbeddedApp(BaseModel):
     """
     If the group is sourced from an app, this object contains information about that app
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The ID of the `AppInstance`")
     name: Optional[StrictStr] = Field(default=None, description="The name of the `AppInstance`")
     label: Optional[StrictStr] = Field(default=None, description="The user-facing display name of the `AppInstance`")
-    sign_on_mode: Optional[StrictStr] = Field(default=None, description="The configured sign-on mode for the `AppInstance`", alias="signOnMode")
+    sign_on_mode: Optional[StrictStr] = Field(
+        default=None,
+        description="The configured sign-on mode for the `AppInstance`",
+        alias="signOnMode")
     __properties: ClassVar[List[str]] = ["id", "name", "label", "signOnMode"]
 
     model_config = ConfigDict(
@@ -95,4 +99,3 @@ class GroupEmbeddedApp(BaseModel):
             "signOnMode": obj.get("signOnMode")
         })
         return _obj
-

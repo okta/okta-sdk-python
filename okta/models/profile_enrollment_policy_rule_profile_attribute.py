@@ -29,13 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProfileEnrollmentPolicyRuleProfileAttribute(BaseModel):
     """
     ProfileEnrollmentPolicyRuleProfileAttribute
-    """ # noqa: E501
+    """  # noqa: E501
     label: Optional[StrictStr] = Field(default=None, description="A display-friendly label for this property")
-    name: Optional[StrictStr] = Field(default=None, description="The name of a user profile property. Can be an existing property.")
-    required: Optional[StrictBool] = Field(default=False, description="(Optional, default `FALSE`) Indicates if this property is required for enrollment")
+    name: Optional[StrictStr] = Field(default=None,
+                                      description="The name of a user profile property. Can be an existing property.")
+    required: Optional[StrictBool] = Field(
+        default=False,
+        description="(Optional, default `FALSE`) Indicates if this property is required for enrollment")
     __properties: ClassVar[List[str]] = ["label", "name", "required"]
 
     model_config = ConfigDict(
@@ -93,4 +97,3 @@ class ProfileEnrollmentPolicyRuleProfileAttribute(BaseModel):
             "required": obj.get("required") if obj.get("required") is not None else False
         })
         return _obj
-

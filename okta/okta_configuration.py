@@ -29,10 +29,12 @@ try:
 except ImportError:
     from yaml import Loader
 
+
 class OktaConfiguration():
     """
     Configuraiton Provider
     """
+
     def get_configuration(self) -> Configuration:
         return self.read_configuration(os.path.expanduser('~/.okta/okta.yaml'))
 

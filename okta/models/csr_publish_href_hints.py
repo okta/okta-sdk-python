@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CsrPublishHrefHints(BaseModel):
     """
     Describes allowed HTTP verbs for the `href`
-    """ # noqa: E501
+    """  # noqa: E501
     allow: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["allow"]
 
@@ -100,4 +101,3 @@ class CsrPublishHrefHints(BaseModel):
             "allow": obj.get("allow")
         })
         return _obj
-

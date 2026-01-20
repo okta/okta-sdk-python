@@ -31,10 +31,11 @@ from okta.models.provisioning_suspended_condition import ProvisioningSuspendedCo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningConditions(BaseModel):
     """
     Conditional behaviors for an IdP user during authentication
-    """ # noqa: E501
+    """  # noqa: E501
     deprovisioned: Optional[ProvisioningDeprovisionedCondition] = None
     suspended: Optional[ProvisioningSuspendedCondition] = None
     __properties: ClassVar[List[str]] = ["deprovisioned", "suspended"]
@@ -107,4 +108,3 @@ class ProvisioningConditions(BaseModel):
             "suspended": ProvisioningSuspendedCondition.from_dict(obj["suspended"]) if obj.get("suspended") is not None else None
         })
         return _obj
-

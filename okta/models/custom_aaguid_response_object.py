@@ -32,16 +32,22 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomAAGUIDResponseObject(BaseModel):
     """
     CustomAAGUIDResponseObject
-    """ # noqa: E501
-    aaguid: Optional[StrictStr] = Field(default=None, description="A unique 128-bit identifier that's assigned to a specific model of security key or authenticator")
-    attestation_root_certificates: Optional[List[AttestationRootCertificatesResponseInner]] = Field(default=None, alias="attestationRootCertificates")
-    authenticator_characteristics: Optional[AAGUIDAuthenticatorCharacteristics] = Field(default=None, alias="authenticatorCharacteristics")
+    """  # noqa: E501
+    aaguid: Optional[StrictStr] = Field(
+        default=None,
+        description="A unique 128-bit identifier that's assigned to a specific model of security key or authenticator")
+    attestation_root_certificates: Optional[List[AttestationRootCertificatesResponseInner]] = Field(
+        default=None, alias="attestationRootCertificates")
+    authenticator_characteristics: Optional[AAGUIDAuthenticatorCharacteristics] = Field(
+        default=None, alias="authenticatorCharacteristics")
     name: Optional[StrictStr] = Field(default=None, description="The product name associated with the AAGUID")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["aaguid", "attestationRootCertificates", "authenticatorCharacteristics", "name", "_links"]
+    __properties: ClassVar[List[str]] = ["aaguid", "attestationRootCertificates",
+                                         "authenticatorCharacteristics", "name", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,4 +127,3 @@ class CustomAAGUIDResponseObject(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

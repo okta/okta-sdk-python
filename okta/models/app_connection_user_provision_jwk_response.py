@@ -30,10 +30,11 @@ from okta.models.app_connection_user_provision_jwk_list import AppConnectionUser
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppConnectionUserProvisionJWKResponse(BaseModel):
     """
     AppConnectionUserProvisionJWKResponse
-    """ # noqa: E501
+    """  # noqa: E501
     jwks: AppConnectionUserProvisionJWKList
     __properties: ClassVar[List[str]] = ["jwks"]
 
@@ -97,4 +98,3 @@ class AppConnectionUserProvisionJWKResponse(BaseModel):
             "jwks": AppConnectionUserProvisionJWKList.from_dict(obj["jwks"]) if obj.get("jwks") is not None else None
         })
         return _obj
-

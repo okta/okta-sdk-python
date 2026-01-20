@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ChromeBrowserVersion(BaseModel):
     """
     Current version of the Chrome Browser
-    """ # noqa: E501
+    """  # noqa: E501
     minimum: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["minimum"]
 
@@ -89,4 +90,3 @@ class ChromeBrowserVersion(BaseModel):
             "minimum": obj.get("minimum")
         })
         return _obj
-

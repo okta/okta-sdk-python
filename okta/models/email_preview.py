@@ -30,10 +30,11 @@ from okta.models.email_preview_links import EmailPreviewLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailPreview(BaseModel):
     """
     EmailPreview
-    """ # noqa: E501
+    """  # noqa: E501
     body: Optional[StrictStr] = Field(default=None, description="The email's HTML body")
     subject: Optional[StrictStr] = Field(default=None, description="The email's subject")
     links: Optional[EmailPreviewLinks] = Field(default=None, alias="_links")
@@ -105,4 +106,3 @@ class EmailPreview(BaseModel):
             "_links": EmailPreviewLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

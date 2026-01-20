@@ -32,10 +32,11 @@ from okta.models.import_schedule_object_incremental_import import ImportSchedule
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ImportScheduleObject(BaseModel):
     """
     Import schedule configuration
-    """ # noqa: E501
+    """  # noqa: E501
     full_import: Optional[ImportScheduleObjectFullImport] = Field(default=None, alias="fullImport")
     incremental_import: Optional[ImportScheduleObjectIncrementalImport] = Field(default=None, alias="incrementalImport")
     status: Optional[EnabledStatus] = None
@@ -110,4 +111,3 @@ class ImportScheduleObject(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.authentication_provider_type_writable import AuthenticationProv
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticationProviderWritable(BaseModel):
     """
     Specifies the authentication provider that validates the user password credential. The user's current provider is managed by the **Delegated Authentication** settings in your org. See [Create user with authentication provider](/openapi/okta-management/management/tag/User/#create-user-with-authentication-provider).
-    """ # noqa: E501
+    """  # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The name of the authentication provider")
     type: Optional[AuthenticationProviderTypeWritable] = None
     __properties: ClassVar[List[str]] = ["name", "type"]
@@ -92,4 +93,3 @@ class AuthenticationProviderWritable(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

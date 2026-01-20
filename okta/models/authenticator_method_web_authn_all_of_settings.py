@@ -33,15 +33,20 @@ from okta.models.web_authn_rp_id import WebAuthnRpId
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
     """
     The settings for the WebAuthn authenticator method
-    """ # noqa: E501
-    aaguid_groups: Optional[List[AAGUIDGroupObject]] = Field(default=None, description="The FIDO2 Authenticator Attestation Global Unique Identifiers (AAGUID) groups available to the WebAuthn authenticator", alias="aaguidGroups")
+    """  # noqa: E501
+    aaguid_groups: Optional[List[AAGUIDGroupObject]] = Field(
+        default=None, description="The FIDO2 Authenticator Attestation Global Unique Identifiers (AAGUID) groups available to the WebAuthn authenticator", alias="aaguidGroups")
     user_verification: Optional[UserVerificationEnum] = Field(default=None, alias="userVerification")
     attachment: Optional[WebAuthnAttachmentEnum] = None
     rp_id: Optional[WebAuthnRpId] = Field(default=None, alias="rpId")
-    enable_autofill_ui: Optional[StrictBool] = Field(default=False, description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Enables the passkeys autofill UI to display available WebAuthn discoverable credentials (\"resident key\") from the Sign-In Widget username field", alias="enableAutofillUI")
+    enable_autofill_ui: Optional[StrictBool] = Field(
+        default=False,
+        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Enables the passkeys autofill UI to display available WebAuthn discoverable credentials (\"resident key\") from the Sign-In Widget username field",
+        alias="enableAutofillUI")
     __properties: ClassVar[List[str]] = ["aaguidGroups", "userVerification", "attachment", "rpId", "enableAutofillUI"]
 
     model_config = ConfigDict(
@@ -115,4 +120,3 @@ class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
             "enableAutofillUI": obj.get("enableAutofillUI") if obj.get("enableAutofillUI") is not None else False
         })
         return _obj
-

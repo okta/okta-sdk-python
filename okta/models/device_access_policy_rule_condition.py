@@ -30,13 +30,18 @@ from okta.models.device_policy_rule_condition_assurance import DevicePolicyRuleC
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceAccessPolicyRuleCondition(BaseModel):
     """
     <x-lifecycle class=\"oie\"></x-lifecycle> Specifies the device condition to match on
-    """ # noqa: E501
+    """  # noqa: E501
     assurance: Optional[DevicePolicyRuleConditionAssurance] = None
-    managed: Optional[StrictBool] = Field(default=None, description="Indicates if the device is managed. A device is considered managed if it's part of a device management system.")
-    registered: Optional[StrictBool] = Field(default=None, description="Indicates if the device is registered. A device is registered if the User enrolls with Okta Verify that's installed on the device. When the `managed` property is passed, you must also include the `registered` property and set it to `true`. ")
+    managed: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is managed. A device is considered managed if it's part of a device management system.")
+    registered: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is registered. A device is registered if the User enrolls with Okta Verify that's installed on the device. When the `managed` property is passed, you must also include the `registered` property and set it to `true`. ")
     __properties: ClassVar[List[str]] = ["assurance", "managed", "registered"]
 
     model_config = ConfigDict(
@@ -101,4 +106,3 @@ class DeviceAccessPolicyRuleCondition(BaseModel):
             "registered": obj.get("registered")
         })
         return _obj
-

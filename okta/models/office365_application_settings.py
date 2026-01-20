@@ -33,19 +33,33 @@ from okta.models.oin_saml11_application_settings_sign_on import OINSaml11Applica
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Office365ApplicationSettings(BaseModel):
     """
     Office365ApplicationSettings
-    """ # noqa: E501
-    em_opt_in_status: Optional[StrictStr] = Field(default=None, description="The entitlement management opt-in status for the app", alias="emOptInStatus")
-    identity_store_id: Optional[StrictStr] = Field(default=None, description="Identifies an additional identity store app, if your app supports it. The `identityStoreId` value must be a valid identity store app ID. This identity store app must be created in the same org as your app.", alias="identityStoreId")
-    implicit_assignment: Optional[StrictBool] = Field(default=None, description="Controls whether Okta automatically assigns users to the app based on the user's role or group membership.", alias="implicitAssignment")
-    inline_hook_id: Optional[StrictStr] = Field(default=None, description="Identifier of an inline hook. Inline hooks are outbound calls from Okta to your own custom code, triggered at specific points in Okta process flows. They allow you to integrate custom functionality into those flows. See [Inline hooks](/openapi/okta-management/management/tag/InlineHook/).", alias="inlineHookId")
+    """  # noqa: E501
+    em_opt_in_status: Optional[StrictStr] = Field(
+        default=None,
+        description="The entitlement management opt-in status for the app",
+        alias="emOptInStatus")
+    identity_store_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Identifies an additional identity store app, if your app supports it. The `identityStoreId` value must be a valid identity store app ID. This identity store app must be created in the same org as your app.",
+        alias="identityStoreId")
+    implicit_assignment: Optional[StrictBool] = Field(
+        default=None,
+        description="Controls whether Okta automatically assigns users to the app based on the user's role or group membership.",
+        alias="implicitAssignment")
+    inline_hook_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Identifier of an inline hook. Inline hooks are outbound calls from Okta to your own custom code, triggered at specific points in Okta process flows. They allow you to integrate custom functionality into those flows. See [Inline hooks](/openapi/okta-management/management/tag/InlineHook/).",
+        alias="inlineHookId")
     notes: Optional[ApplicationSettingsNotes] = None
     notifications: Optional[ApplicationSettingsNotifications] = None
     app: Office365ApplicationSettingsApplication
     sign_on: Optional[OINSaml11ApplicationSettingsSignOn] = Field(default=None, alias="signOn")
-    __properties: ClassVar[List[str]] = ["emOptInStatus", "identityStoreId", "implicitAssignment", "inlineHookId", "notes", "notifications", "app", "signOn"]
+    __properties: ClassVar[List[str]] = ["emOptInStatus", "identityStoreId",
+                                         "implicitAssignment", "inlineHookId", "notes", "notifications", "app", "signOn"]
 
     @field_validator('em_opt_in_status')
     def em_opt_in_status_validate_enum(cls, value):
@@ -147,4 +161,3 @@ class Office365ApplicationSettings(BaseModel):
             "signOn": OINSaml11ApplicationSettingsSignOn.from_dict(obj["signOn"]) if obj.get("signOn") is not None else None
         })
         return _obj
-

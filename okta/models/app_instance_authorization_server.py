@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppInstanceAuthorizationServer(BaseModel):
     """
     Authorization server for app instance connections
-    """ # noqa: E501
+    """  # noqa: E501
     issuer_url: StrictStr = Field(description="Issuer URL for the authorization server", alias="issuerUrl")
     __properties: ClassVar[List[str]] = ["issuerUrl"]
 
@@ -89,4 +90,3 @@ class AppInstanceAuthorizationServer(BaseModel):
             "issuerUrl": obj.get("issuerUrl")
         })
         return _obj
-

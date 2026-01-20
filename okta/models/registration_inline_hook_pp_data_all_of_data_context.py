@@ -31,10 +31,11 @@ from okta.models.registration_inline_hook_pp_data_all_of_data_context_user impor
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationInlineHookPPDataAllOfDataContext(BaseModel):
     """
     RegistrationInlineHookPPDataAllOfDataContext
-    """ # noqa: E501
+    """  # noqa: E501
     request: Optional[InlineHookRequestObject] = None
     user: Optional[RegistrationInlineHookPPDataAllOfDataContextUser] = None
     __properties: ClassVar[List[str]] = ["request", "user"]
@@ -107,4 +108,3 @@ class RegistrationInlineHookPPDataAllOfDataContext(BaseModel):
             "user": RegistrationInlineHookPPDataAllOfDataContextUser.from_dict(obj["user"]) if obj.get("user") is not None else None
         })
         return _obj
-

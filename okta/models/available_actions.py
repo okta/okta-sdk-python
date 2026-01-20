@@ -30,10 +30,11 @@ from okta.models.available_action import AvailableAction
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AvailableActions(BaseModel):
     """
     AvailableActions
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[List[AvailableAction]] = None
     __properties: ClassVar[List[str]] = ["actions"]
 
@@ -97,4 +98,3 @@ class AvailableActions(BaseModel):
             "actions": [AvailableAction.from_dict(_item) for _item in obj["actions"]] if obj.get("actions") is not None else None
         })
         return _obj
-

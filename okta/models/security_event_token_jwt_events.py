@@ -31,13 +31,17 @@ from okta.models.ssf_transmitter_caep_session_revoked_event import SsfTransmitte
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventTokenJwtEvents(BaseModel):
     """
     A non-empty set of events. Expected size is 1 for each SET
-    """ # noqa: E501
-    https__schemas_openid_net_secevent_caep_event_type_credential_change: Optional[CaepCredentialChangeEvent] = Field(default=None, alias="https://schemas.openid.net/secevent/caep/event-type/credential-change")
-    https__schemas_openid_net_secevent_caep_event_type_session_revoked: Optional[SsfTransmitterCaepSessionRevokedEvent] = Field(default=None, alias="https://schemas.openid.net/secevent/caep/event-type/session-revoked")
-    __properties: ClassVar[List[str]] = ["https://schemas.openid.net/secevent/caep/event-type/credential-change", "https://schemas.openid.net/secevent/caep/event-type/session-revoked"]
+    """  # noqa: E501
+    https__schemas_openid_net_secevent_caep_event_type_credential_change: Optional[CaepCredentialChangeEvent] = Field(
+        default=None, alias="https://schemas.openid.net/secevent/caep/event-type/credential-change")
+    https__schemas_openid_net_secevent_caep_event_type_session_revoked: Optional[SsfTransmitterCaepSessionRevokedEvent] = Field(
+        default=None, alias="https://schemas.openid.net/secevent/caep/event-type/session-revoked")
+    __properties: ClassVar[List[str]] = ["https://schemas.openid.net/secevent/caep/event-type/credential-change",
+                                         "https://schemas.openid.net/secevent/caep/event-type/session-revoked"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,14 +81,16 @@ class SecurityEventTokenJwtEvents(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of https__schemas_openid_net_secevent_caep_event_type_credential_change
+        # override the default output from pydantic by calling `to_dict()` of
+        # https__schemas_openid_net_secevent_caep_event_type_credential_change
         if self.https__schemas_openid_net_secevent_caep_event_type_credential_change:
             if not isinstance(self.https__schemas_openid_net_secevent_caep_event_type_credential_change, dict):
                 _dict['https://schemas.openid.net/secevent/caep/event-type/credential-change'] = self.https__schemas_openid_net_secevent_caep_event_type_credential_change.to_dict()
             else:
                 _dict['https://schemas.openid.net/secevent/caep/event-type/credential-change'] = self.https__schemas_openid_net_secevent_caep_event_type_credential_change
 
-        # override the default output from pydantic by calling `to_dict()` of https__schemas_openid_net_secevent_caep_event_type_session_revoked
+        # override the default output from pydantic by calling `to_dict()` of
+        # https__schemas_openid_net_secevent_caep_event_type_session_revoked
         if self.https__schemas_openid_net_secevent_caep_event_type_session_revoked:
             if not isinstance(self.https__schemas_openid_net_secevent_caep_event_type_session_revoked, dict):
                 _dict['https://schemas.openid.net/secevent/caep/event-type/session-revoked'] = self.https__schemas_openid_net_secevent_caep_event_type_session_revoked.to_dict()
@@ -107,4 +113,3 @@ class SecurityEventTokenJwtEvents(BaseModel):
             "https://schemas.openid.net/secevent/caep/event-type/session-revoked": SsfTransmitterCaepSessionRevokedEvent.from_dict(obj["https://schemas.openid.net/secevent/caep/event-type/session-revoked"]) if obj.get("https://schemas.openid.net/secevent/caep/event-type/session-revoked") is not None else None
         })
         return _obj
-

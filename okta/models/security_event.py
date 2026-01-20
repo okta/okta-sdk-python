@@ -30,10 +30,11 @@ from okta.models.security_event_subject import SecurityEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEvent(BaseModel):
     """
     SecurityEvent
-    """ # noqa: E501
+    """  # noqa: E501
     event_timestamp: StrictInt = Field(description="The time of the event (UNIX timestamp)")
     subject: SecurityEventSubject
     __properties: ClassVar[List[str]] = ["event_timestamp", "subject"]
@@ -99,4 +100,3 @@ class SecurityEvent(BaseModel):
             "subject": SecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

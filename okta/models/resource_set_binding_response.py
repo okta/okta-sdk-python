@@ -30,10 +30,11 @@ from okta.models.resource_set_binding_response_links import ResourceSetBindingRe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindingResponse(BaseModel):
     """
     ResourceSetBindingResponse
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="`id` of the role resource set binding")
     links: Optional[ResourceSetBindingResponseLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "_links"]
@@ -99,4 +100,3 @@ class ResourceSetBindingResponse(BaseModel):
             "_links": ResourceSetBindingResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

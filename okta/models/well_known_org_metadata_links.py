@@ -31,10 +31,11 @@ from okta.models.well_known_org_metadata_links_organization import WellKnownOrgM
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownOrgMetadataLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for this object using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
-    """ # noqa: E501
+    """  # noqa: E501
     alternate: Optional[WellKnownOrgMetadataLinksAlternate] = None
     organization: Optional[WellKnownOrgMetadataLinksOrganization] = None
     __properties: ClassVar[List[str]] = ["alternate", "organization"]
@@ -107,4 +108,3 @@ class WellKnownOrgMetadataLinks(BaseModel):
             "organization": WellKnownOrgMetadataLinksOrganization.from_dict(obj["organization"]) if obj.get("organization") is not None else None
         })
         return _obj
-

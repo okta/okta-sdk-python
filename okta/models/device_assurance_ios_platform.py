@@ -33,19 +33,34 @@ from okta.models.device_posture_checks import DevicePostureChecks
 from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
 from okta.models.os_version import OSVersion
-from okta.models.platform import Platform
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class DeviceAssuranceIOSPlatform(DeviceAssurance):
     """
     DeviceAssuranceIOSPlatform
-    """ # noqa: E501
+    """  # noqa: E501
     jailbreak: Optional[StrictBool] = None
     os_version: Optional[OSVersion] = Field(default=None, alias="osVersion")
     screen_lock_type: Optional[DeviceAssuranceAndroidPlatformAllOfScreenLockType] = Field(default=None, alias="screenLockType")
-    third_party_signal_providers: Optional[DeviceAssuranceIOSPlatformAllOfThirdPartySignalProviders] = Field(default=None, alias="thirdPartySignalProviders")
-    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "devicePostureChecks", "displayRemediationMode", "gracePeriod", "id", "lastUpdate", "lastUpdatedBy", "name", "platform", "_links", "jailbreak", "osVersion", "screenLockType", "thirdPartySignalProviders"]
+    third_party_signal_providers: Optional[DeviceAssuranceIOSPlatformAllOfThirdPartySignalProviders] = Field(
+        default=None, alias="thirdPartySignalProviders")
+    __properties: ClassVar[List[str]] = ["createdBy",
+                                         "createdDate",
+                                         "devicePostureChecks",
+                                         "displayRemediationMode",
+                                         "gracePeriod",
+                                         "id",
+                                         "lastUpdate",
+                                         "lastUpdatedBy",
+                                         "name",
+                                         "platform",
+                                         "_links",
+                                         "jailbreak",
+                                         "osVersion",
+                                         "screenLockType",
+                                         "thirdPartySignalProviders"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -156,4 +171,3 @@ class DeviceAssuranceIOSPlatform(DeviceAssurance):
             "thirdPartySignalProviders": DeviceAssuranceIOSPlatformAllOfThirdPartySignalProviders.from_dict(obj["thirdPartySignalProviders"]) if obj.get("thirdPartySignalProviders") is not None else None
         })
         return _obj
-

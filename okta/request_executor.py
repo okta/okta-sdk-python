@@ -10,7 +10,6 @@ import asyncio
 from okta.http_client import HTTPClient
 from okta.user_agent import UserAgent
 from okta.oauth import OAuth
-from okta.api_response import OktaAPIResponse
 from okta.error_messages import ERROR_MESSAGE_429_MISSING_DATE_X_RESET
 from okta.utils import convert_date_time_to_seconds
 import time

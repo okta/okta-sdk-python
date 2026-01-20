@@ -33,17 +33,20 @@ from okta.models.user_lifecycle_attribute_policy_rule_condition import UserLifec
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserPolicyRuleCondition(BaseModel):
     """
     Specifies a set of Users to be included or excluded
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[List[StrictStr]] = Field(default=None, description="Users to be excluded")
     inactivity: Optional[InactivityPolicyRuleCondition] = None
     include: Optional[List[StrictStr]] = Field(default=None, description="Users to be included")
     lifecycle_expiration: Optional[LifecycleExpirationPolicyRuleCondition] = Field(default=None, alias="lifecycleExpiration")
     password_expiration: Optional[PasswordExpirationPolicyRuleCondition] = Field(default=None, alias="passwordExpiration")
-    user_lifecycle_attribute: Optional[UserLifecycleAttributePolicyRuleCondition] = Field(default=None, alias="userLifecycleAttribute")
-    __properties: ClassVar[List[str]] = ["exclude", "inactivity", "include", "lifecycleExpiration", "passwordExpiration", "userLifecycleAttribute"]
+    user_lifecycle_attribute: Optional[UserLifecycleAttributePolicyRuleCondition] = Field(
+        default=None, alias="userLifecycleAttribute")
+    __properties: ClassVar[List[str]] = ["exclude", "inactivity", "include",
+                                         "lifecycleExpiration", "passwordExpiration", "userLifecycleAttribute"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -131,4 +134,3 @@ class UserPolicyRuleCondition(BaseModel):
             "userLifecycleAttribute": UserLifecycleAttributePolicyRuleCondition.from_dict(obj["userLifecycleAttribute"]) if obj.get("userLifecycleAttribute") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.saml_relay_state_format import SamlRelayStateFormat
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlRelayState(BaseModel):
     """
     Relay state settings for IdP
-    """ # noqa: E501
+    """  # noqa: E501
     format: Optional[SamlRelayStateFormat] = None
     __properties: ClassVar[List[str]] = ["format"]
 
@@ -90,4 +91,3 @@ class SamlRelayState(BaseModel):
             "format": obj.get("format")
         })
         return _obj
-

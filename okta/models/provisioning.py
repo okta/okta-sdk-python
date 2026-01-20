@@ -32,14 +32,18 @@ from okta.models.provisioning_groups import ProvisioningGroups
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Provisioning(BaseModel):
     """
     Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a new Okta user and their group memberships
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[ProvisioningAction] = None
     conditions: Optional[ProvisioningConditions] = None
     groups: Optional[ProvisioningGroups] = None
-    profile_master: Optional[StrictBool] = Field(default=None, description="Determines if the IdP should act as a source of truth for user profile attributes", alias="profileMaster")
+    profile_master: Optional[StrictBool] = Field(
+        default=None,
+        description="Determines if the IdP should act as a source of truth for user profile attributes",
+        alias="profileMaster")
     __properties: ClassVar[List[str]] = ["action", "conditions", "groups", "profileMaster"]
 
     model_config = ConfigDict(
@@ -112,4 +116,3 @@ class Provisioning(BaseModel):
             "profileMaster": obj.get("profileMaster")
         })
         return _obj
-

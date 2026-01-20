@@ -31,10 +31,11 @@ from okta.models.policy_platform_type import PolicyPlatformType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PlatformConditionEvaluatorPlatform(BaseModel):
     """
     PlatformConditionEvaluatorPlatform
-    """ # noqa: E501
+    """  # noqa: E501
     os: Optional[PlatformConditionEvaluatorPlatformOperatingSystem] = None
     type: Optional[PolicyPlatformType] = None
     __properties: ClassVar[List[str]] = ["os", "type"]
@@ -100,4 +101,3 @@ class PlatformConditionEvaluatorPlatform(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

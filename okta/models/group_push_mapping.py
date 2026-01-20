@@ -32,21 +32,38 @@ from okta.models.group_push_mapping_links import GroupPushMappingLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupPushMapping(BaseModel):
     """
     GroupPushMapping
-    """ # noqa: E501
+    """  # noqa: E501
     app_config: Optional[AppConfig] = Field(default=None, alias="appConfig")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the group push mapping was created")
-    error_summary: Optional[StrictStr] = Field(default=None, description="The error message summary if the latest push failed", alias="errorSummary")
+    error_summary: Optional[StrictStr] = Field(
+        default=None,
+        description="The error message summary if the latest push failed",
+        alias="errorSummary")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the group push mapping")
-    last_push: Optional[datetime] = Field(default=None, description="Timestamp when the group push mapping was pushed", alias="lastPush")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the group push mapping was last updated", alias="lastUpdated")
-    source_group_id: Optional[StrictStr] = Field(default=None, description="The ID of the source group for the group push mapping", alias="sourceGroupId")
+    last_push: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the group push mapping was pushed",
+        alias="lastPush")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the group push mapping was last updated",
+        alias="lastUpdated")
+    source_group_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the source group for the group push mapping",
+        alias="sourceGroupId")
     status: Optional[StrictStr] = None
-    target_group_id: Optional[StrictStr] = Field(default=None, description="The ID of the target group for the group push mapping", alias="targetGroupId")
+    target_group_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the target group for the group push mapping",
+        alias="targetGroupId")
     links: Optional[GroupPushMappingLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["appConfig", "created", "errorSummary", "id", "lastPush", "lastUpdated", "sourceGroupId", "status", "targetGroupId", "_links"]
+    __properties: ClassVar[List[str]] = ["appConfig", "created", "errorSummary", "id",
+                                         "lastPush", "lastUpdated", "sourceGroupId", "status", "targetGroupId", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -138,4 +155,3 @@ class GroupPushMapping(BaseModel):
             "_links": GroupPushMappingLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlSpCertificate(BaseModel):
     """
     The certificate that Okta uses to validate Single Logout (SLO) requests and responses
-    """ # noqa: E501
-    x5c: Optional[List[StrictStr]] = Field(default=None, description="A list that contains exactly one x509 encoded certificate")
+    """  # noqa: E501
+    x5c: Optional[List[StrictStr]] = Field(default=None,
+                                           description="A list that contains exactly one x509 encoded certificate")
     __properties: ClassVar[List[str]] = ["x5c"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class SamlSpCertificate(BaseModel):
             "x5c": obj.get("x5c")
         })
         return _obj
-

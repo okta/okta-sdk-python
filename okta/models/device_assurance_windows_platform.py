@@ -36,21 +36,39 @@ from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
 from okta.models.os_version_constraint import OSVersionConstraint
 from okta.models.os_version_four_components import OSVersionFourComponents
-from okta.models.platform import Platform
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class DeviceAssuranceWindowsPlatform(DeviceAssurance):
     """
     DeviceAssuranceWindowsPlatform
-    """ # noqa: E501
-    disk_encryption_type: Optional[DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType] = Field(default=None, alias="diskEncryptionType")
+    """  # noqa: E501
+    disk_encryption_type: Optional[DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType] = Field(
+        default=None, alias="diskEncryptionType")
     os_version: Optional[OSVersionFourComponents] = Field(default=None, alias="osVersion")
     os_version_constraints: Optional[Annotated[List[OSVersionConstraint], Field(min_length=1, max_length=2)]] = Field(default=None, description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Specifies the Windows version requirements for the assurance policy. Each requirement must correspond to a different major version (Windows 11 or Windows 10). If a requirement isn't specified for a major version, then devices on that major version satisfy the condition.  There are two types of OS requirements: * **Static**: A specific Windows version requirement that doesn't change until you update the policy. A static OS Windows requirement is specified with `majorVersionConstraint` and `minimum`. * **Dynamic**: A Windows version requirement that is relative to the latest major release and security patch. A dynamic OS Windows requirement is specified with `majorVersionConstraint` and `dynamicVersionRequirement`.  > **Note:** Dynamic OS requirements are available only if the **Dynamic OS version compliance** [self-service EA](/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature is enabled. The `osVersionConstraints` property is only supported for the Windows platform. You can't specify both `osVersion.minimum` and `osVersionConstraints` properties at the same time. ", alias="osVersionConstraints")
     screen_lock_type: Optional[DeviceAssuranceAndroidPlatformAllOfScreenLockType] = Field(default=None, alias="screenLockType")
     secure_hardware_present: Optional[StrictBool] = Field(default=None, alias="secureHardwarePresent")
-    third_party_signal_providers: Optional[DeviceAssuranceWindowsPlatformAllOfThirdPartySignalProviders] = Field(default=None, alias="thirdPartySignalProviders")
-    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "devicePostureChecks", "displayRemediationMode", "gracePeriod", "id", "lastUpdate", "lastUpdatedBy", "name", "platform", "_links", "diskEncryptionType", "osVersion", "osVersionConstraints", "screenLockType", "secureHardwarePresent", "thirdPartySignalProviders"]
+    third_party_signal_providers: Optional[DeviceAssuranceWindowsPlatformAllOfThirdPartySignalProviders] = Field(
+        default=None, alias="thirdPartySignalProviders")
+    __properties: ClassVar[List[str]] = ["createdBy",
+                                         "createdDate",
+                                         "devicePostureChecks",
+                                         "displayRemediationMode",
+                                         "gracePeriod",
+                                         "id",
+                                         "lastUpdate",
+                                         "lastUpdatedBy",
+                                         "name",
+                                         "platform",
+                                         "_links",
+                                         "diskEncryptionType",
+                                         "osVersion",
+                                         "osVersionConstraints",
+                                         "screenLockType",
+                                         "secureHardwarePresent",
+                                         "thirdPartySignalProviders"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -177,4 +195,3 @@ class DeviceAssuranceWindowsPlatform(DeviceAssurance):
             "thirdPartySignalProviders": DeviceAssuranceWindowsPlatformAllOfThirdPartySignalProviders.from_dict(obj["thirdPartySignalProviders"]) if obj.get("thirdPartySignalProviders") is not None else None
         })
         return _obj
-

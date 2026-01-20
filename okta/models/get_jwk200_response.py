@@ -22,15 +22,15 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.o_auth2_client_json_encryption_key_response import OAuth2ClientJsonEncryptionKeyResponse
 from okta.models.o_auth2_client_json_signing_key_response import OAuth2ClientJsonSigningKeyResponse
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
 GETJWK200RESPONSE_ONE_OF_SCHEMAS = ["OAuth2ClientJsonEncryptionKeyResponse", "OAuth2ClientJsonSigningKeyResponse"]
+
 
 class GetJwk200Response(BaseModel):
     """
@@ -41,13 +41,12 @@ class GetJwk200Response(BaseModel):
     # data type: OAuth2ClientJsonEncryptionKeyResponse
     oneof_schema_2_validator: Optional[OAuth2ClientJsonEncryptionKeyResponse] = None
     actual_instance: Optional[Union[OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse]] = None
-    one_of_schemas: Set[str] = { "OAuth2ClientJsonEncryptionKeyResponse", "OAuth2ClientJsonSigningKeyResponse" }
+    one_of_schemas: Set[str] = {"OAuth2ClientJsonEncryptionKeyResponse", "OAuth2ClientJsonSigningKeyResponse"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     discriminator_value_class_map: Dict[str, str] = {
     }
@@ -79,10 +78,14 @@ class GetJwk200Response(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in GetJwk200Response with oneOf schemas: OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in GetJwk200Response with oneOf schemas: OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in GetJwk200Response with oneOf schemas: OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in GetJwk200Response with oneOf schemas: OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -137,10 +140,14 @@ class GetJwk200Response(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into GetJwk200Response with oneOf schemas: OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into GetJwk200Response with oneOf schemas: OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into GetJwk200Response with oneOf schemas: OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into GetJwk200Response with oneOf schemas: OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -154,7 +161,8 @@ class GetJwk200Response(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], OAuth2ClientJsonEncryptionKeyResponse, OAuth2ClientJsonSigningKeyResponse]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], OAuth2ClientJsonEncryptionKeyResponse,
+                                        OAuth2ClientJsonSigningKeyResponse]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
@@ -168,5 +176,3 @@ class GetJwk200Response(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

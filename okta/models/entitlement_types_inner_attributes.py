@@ -29,12 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntitlementTypesInnerAttributes(BaseModel):
     """
     Attributes for the entitlement type
-    """ # noqa: E501
-    required: Optional[StrictBool] = Field(default=False, description="A boolean value to indicate if this entitlement type is required for the user")
-    multivalued: Optional[StrictBool] = Field(default=False, description="A boolean value to indicate if a user can have multiple entitlements of this type")
+    """  # noqa: E501
+    required: Optional[StrictBool] = Field(
+        default=False,
+        description="A boolean value to indicate if this entitlement type is required for the user")
+    multivalued: Optional[StrictBool] = Field(
+        default=False, description="A boolean value to indicate if a user can have multiple entitlements of this type")
     __properties: ClassVar[List[str]] = ["required", "multivalued"]
 
     model_config = ConfigDict(
@@ -91,4 +95,3 @@ class EntitlementTypesInnerAttributes(BaseModel):
             "multivalued": obj.get("multivalued") if obj.get("multivalued") is not None else False
         })
         return _obj
-

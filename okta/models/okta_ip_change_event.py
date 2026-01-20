@@ -32,10 +32,11 @@ from okta.models.security_event_subject import SecurityEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaIpChangeEvent(BaseModel):
     """
     IP changed for the subject's session
-    """ # noqa: E501
+    """  # noqa: E501
     current_ip_address: StrictStr = Field(description="Current IP address of the subject")
     event_timestamp: StrictInt = Field(description="The time of the event (UNIX timestamp)")
     initiating_entity: Optional[StrictStr] = Field(default=None, description="The entity that initiated the event")
@@ -43,7 +44,8 @@ class OktaIpChangeEvent(BaseModel):
     reason_admin: Optional[CaepDeviceComplianceChangeEventReasonAdmin] = None
     reason_user: Optional[CaepDeviceComplianceChangeEventReasonUser] = None
     subject: SecurityEventSubject
-    __properties: ClassVar[List[str]] = ["current_ip_address", "event_timestamp", "initiating_entity", "previous_ip_address", "reason_admin", "reason_user", "subject"]
+    __properties: ClassVar[List[str]] = ["current_ip_address", "event_timestamp",
+                                         "initiating_entity", "previous_ip_address", "reason_admin", "reason_user", "subject"]
 
     @field_validator('initiating_entity')
     def initiating_entity_validate_enum(cls, value):
@@ -135,4 +137,3 @@ class OktaIpChangeEvent(BaseModel):
             "subject": SecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

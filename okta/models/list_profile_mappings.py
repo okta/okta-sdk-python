@@ -32,10 +32,11 @@ from okta.models.profile_mapping_target import ProfileMappingTarget
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ListProfileMappings(BaseModel):
     """
     A collection of the profile mappings that include a subset of the profile mapping object's properties. The profile mapping object describes a mapping between an Okta user's and an app user's properties using [JSON Schema Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).  > **Note:** Same type source/target mappings aren't supported by this API. Profile mappings must either be Okta->App or App->Okta.
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for profile mapping")
     source: Optional[ProfileMappingSource] = None
     target: Optional[ProfileMappingTarget] = None
@@ -121,4 +122,3 @@ class ListProfileMappings(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

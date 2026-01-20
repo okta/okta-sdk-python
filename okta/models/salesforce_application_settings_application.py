@@ -29,13 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SalesforceApplicationSettingsApplication(BaseModel):
     """
     Salesforce app instance properties
-    """ # noqa: E501
+    """  # noqa: E501
     instance_type: StrictStr = Field(description="Salesforce instance that you want to connect to", alias="instanceType")
     integration_type: StrictStr = Field(description="Salesforce integration type", alias="integrationType")
-    login_url: Optional[StrictStr] = Field(default=None, description="The Login URL specified in your Salesforce Single Sign-On settings", alias="loginUrl")
+    login_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The Login URL specified in your Salesforce Single Sign-On settings",
+        alias="loginUrl")
     logout_url: Optional[StrictStr] = Field(default=None, description="Salesforce Logout URL", alias="logoutUrl")
     __properties: ClassVar[List[str]] = ["instanceType", "integrationType", "loginUrl", "logoutUrl"]
 
@@ -109,4 +113,3 @@ class SalesforceApplicationSettingsApplication(BaseModel):
             "logoutUrl": obj.get("logoutUrl")
         })
         return _obj
-

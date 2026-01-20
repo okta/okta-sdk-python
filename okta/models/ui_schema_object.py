@@ -30,13 +30,18 @@ from okta.models.ui_element import UIElement
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UISchemaObject(BaseModel):
     """
     Properties of the UI schema
-    """ # noqa: E501
-    button_label: Optional[StrictStr] = Field(default='Submit', description="Specifies the button label for the `Submit` button at the bottom of the enrollment form", alias="buttonLabel")
+    """  # noqa: E501
+    button_label: Optional[StrictStr] = Field(
+        default='Submit',
+        description="Specifies the button label for the `Submit` button at the bottom of the enrollment form",
+        alias="buttonLabel")
     elements: Optional[List[UIElement]] = None
-    label: Optional[StrictStr] = Field(default='Sign in', description="Specifies the label at the top of the enrollment form under the logo")
+    label: Optional[StrictStr] = Field(default='Sign in',
+                                       description="Specifies the label at the top of the enrollment form under the logo")
     type: Optional[StrictStr] = Field(default=None, description="Specifies the type of layout")
     __properties: ClassVar[List[str]] = ["buttonLabel", "elements", "label", "type"]
 
@@ -103,4 +108,3 @@ class UISchemaObject(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

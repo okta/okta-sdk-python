@@ -31,18 +31,33 @@ from okta.models.inline_hook_channel_config_headers import InlineHookChannelConf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookOAuthClientSecretConfigCreate(BaseModel):
     """
     InlineHookOAuthClientSecretConfigCreate
-    """ # noqa: E501
-    client_secret: Optional[StrictStr] = Field(default=None, description="A private value provided by the service used to authenticate the identity of the app to the service", alias="clientSecret")
-    method: Optional[StrictStr] = Field(default=None, description="The method of the Okta inline hook request. Only accepts `POST`.")
+    """  # noqa: E501
+    client_secret: Optional[StrictStr] = Field(
+        default=None,
+        description="A private value provided by the service used to authenticate the identity of the app to the service",
+        alias="clientSecret")
+    method: Optional[StrictStr] = Field(default=None,
+                                        description="The method of the Okta inline hook request. Only accepts `POST`.")
     auth_type: Optional[StrictStr] = Field(default=None, alias="authType")
-    client_id: Optional[StrictStr] = Field(default=None, description="A publicly exposed string provided by the service that's used to identify the OAuth app and build authorization URLs", alias="clientId")
-    scope: Optional[StrictStr] = Field(default=None, description="Include the scopes that allow you to perform the actions on the hook endpoint that you want to access")
-    token_url: Optional[StrictStr] = Field(default=None, description="The URI where inline hooks can exchange an authorization code for access and refresh tokens", alias="tokenUrl")
-    headers: Optional[List[InlineHookChannelConfigHeaders]] = Field(default=None, description="An optional list of key/value pairs for headers that you can send with the request to the external service")
-    uri: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The external service endpoint that executes the inline hook handler. It must begin with `https://` and be reachable by Okta. No white space is allowed in the URI.")
+    client_id: Optional[StrictStr] = Field(
+        default=None,
+        description="A publicly exposed string provided by the service that's used to identify the OAuth app and build authorization URLs",
+        alias="clientId")
+    scope: Optional[StrictStr] = Field(
+        default=None,
+        description="Include the scopes that allow you to perform the actions on the hook endpoint that you want to access")
+    token_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The URI where inline hooks can exchange an authorization code for access and refresh tokens",
+        alias="tokenUrl")
+    headers: Optional[List[InlineHookChannelConfigHeaders]] = Field(
+        default=None, description="An optional list of key/value pairs for headers that you can send with the request to the external service")
+    uri: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="The external service endpoint that executes the inline hook handler. It must begin with `https://` and be reachable by Okta. No white space is allowed in the URI.")
     __properties: ClassVar[List[str]] = ["authType", "clientId", "scope", "tokenUrl", "headers", "method", "uri"]
 
     model_config = ConfigDict(
@@ -111,4 +126,3 @@ class InlineHookOAuthClientSecretConfigCreate(BaseModel):
             "uri": obj.get("uri")
         })
         return _obj
-

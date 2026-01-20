@@ -33,10 +33,11 @@ from okta.models.user_import_request_data_user import UserImportRequestDataUser
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportRequestData(BaseModel):
     """
     UserImportRequestData
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[UserImportRequestDataAction] = None
     app_user: Optional[UserImportRequestDataAppUser] = Field(default=None, alias="appUser")
     context: Optional[UserImportRequestDataContext] = None
@@ -127,4 +128,3 @@ class UserImportRequestData(BaseModel):
             "user": UserImportRequestDataUser.from_dict(obj["user"]) if obj.get("user") is not None else None
         })
         return _obj
-

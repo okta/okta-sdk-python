@@ -30,13 +30,21 @@ from okta.models.application_visibility_hide import ApplicationVisibilityHide
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationVisibility(BaseModel):
     """
     Specifies visibility settings for the app
-    """ # noqa: E501
-    app_links: Optional[Dict[str, StrictBool]] = Field(default=None, description="Links or icons that appear on the End-User Dashboard if they're set to `true`.", alias="appLinks")
-    auto_launch: Optional[StrictBool] = Field(default=None, description="Automatically signs in to the app when user signs into Okta", alias="autoLaunch")
-    auto_submit_toolbar: Optional[StrictBool] = Field(default=None, description="Automatically sign in when user lands on the sign-in page", alias="autoSubmitToolbar")
+    """  # noqa: E501
+    app_links: Optional[Dict[str, StrictBool]] = Field(
+        default=None, description="Links or icons that appear on the End-User Dashboard if they're set to `true`.", alias="appLinks")
+    auto_launch: Optional[StrictBool] = Field(
+        default=None,
+        description="Automatically signs in to the app when user signs into Okta",
+        alias="autoLaunch")
+    auto_submit_toolbar: Optional[StrictBool] = Field(
+        default=None,
+        description="Automatically sign in when user lands on the sign-in page",
+        alias="autoSubmitToolbar")
     hide: Optional[ApplicationVisibilityHide] = None
     __properties: ClassVar[List[str]] = ["appLinks", "autoLaunch", "autoSubmitToolbar", "hide"]
 
@@ -103,4 +111,3 @@ class ApplicationVisibility(BaseModel):
             "hide": ApplicationVisibilityHide.from_dict(obj["hide"]) if obj.get("hide") is not None else None
         })
         return _obj
-

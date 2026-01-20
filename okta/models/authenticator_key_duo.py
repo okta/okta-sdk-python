@@ -27,18 +27,16 @@ import json
 from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.authenticator_key_duo_all_of_provider import AuthenticatorKeyDuoAllOfProvider
-from okta.models.authenticator_key_enum import AuthenticatorKeyEnum
 from okta.models.authenticator_links import AuthenticatorLinks
 from okta.models.authenticator_simple import AuthenticatorSimple
-from okta.models.authenticator_type import AuthenticatorType
-from okta.models.lifecycle_status import LifecycleStatus
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class AuthenticatorKeyDuo(AuthenticatorSimple):
     """
     AuthenticatorKeyDuo
-    """ # noqa: E501
+    """  # noqa: E501
     provider: Optional[AuthenticatorKeyDuoAllOfProvider] = None
     __properties: ClassVar[List[str]] = ["created", "id", "key", "lastUpdated", "name", "status", "type", "_links", "provider"]
 
@@ -117,4 +115,3 @@ class AuthenticatorKeyDuo(AuthenticatorSimple):
             "provider": AuthenticatorKeyDuoAllOfProvider.from_dict(obj["provider"]) if obj.get("provider") is not None else None
         })
         return _obj
-

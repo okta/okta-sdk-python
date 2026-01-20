@@ -33,22 +33,29 @@ from okta.models.policy_type import PolicyType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateOrUpdatePolicy(BaseModel):
     """
     CreateOrUpdatePolicy
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the policy was created")
     description: Optional[StrictStr] = Field(default=None, description="Description of the policy")
     id: Optional[StrictStr] = Field(default='Assigned', description="Identifier of the policy")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the policy was last modified", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the policy was last modified",
+        alias="lastUpdated")
     name: StrictStr = Field(description="Name of the policy")
-    priority: Optional[StrictInt] = Field(default=None, description="Specifies the order in which this policy is evaluated in relation to the other policies")
+    priority: Optional[StrictInt] = Field(
+        default=None,
+        description="Specifies the order in which this policy is evaluated in relation to the other policies")
     status: Optional[LifecycleStatus] = None
     system: Optional[StrictBool] = Field(default=False, description="Specifies whether Okta created the policy")
     type: PolicyType
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
     links: Optional[PolicyLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated",
+                                         "name", "priority", "status", "system", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -128,4 +135,3 @@ class CreateOrUpdatePolicy(BaseModel):
             "_links": PolicyLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

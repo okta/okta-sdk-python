@@ -30,20 +30,41 @@ from okta.models.password_dictionary import PasswordDictionary
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyPasswordSettingsComplexity(BaseModel):
     """
     Complexity settings
-    """ # noqa: E501
+    """  # noqa: E501
     dictionary: Optional[PasswordDictionary] = None
-    exclude_attributes: Optional[List[StrictStr]] = Field(default=None, description="The User profile attributes whose values must be excluded from the password: currently only supports `firstName` and `lastName`", alias="excludeAttributes")
-    exclude_username: Optional[StrictBool] = Field(default=True, description="Indicates if the Username must be excluded from the password", alias="excludeUsername")
+    exclude_attributes: Optional[List[StrictStr]] = Field(
+        default=None, description="The User profile attributes whose values must be excluded from the password: currently only supports `firstName` and `lastName`", alias="excludeAttributes")
+    exclude_username: Optional[StrictBool] = Field(
+        default=True,
+        description="Indicates if the Username must be excluded from the password",
+        alias="excludeUsername")
     min_length: Optional[StrictInt] = Field(default=8, description="Minimum password length", alias="minLength")
-    min_lower_case: Optional[StrictInt] = Field(default=1, description="Indicates if a password must contain at least one lower case letter: `0` indicates no, `1` indicates yes", alias="minLowerCase")
-    min_number: Optional[StrictInt] = Field(default=1, description="Indicates if a password must contain at least one number: `0` indicates no, `1` indicates yes", alias="minNumber")
-    min_symbol: Optional[StrictInt] = Field(default=1, description="Indicates if a password must contain at least one symbol (For example: !@#$%^&*): `0` indicates no, `1` indicates yes", alias="minSymbol")
-    min_upper_case: Optional[StrictInt] = Field(default=1, description="Indicates if a password must contain at least one upper case letter: `0` indicates no, `1` indicates yes", alias="minUpperCase")
-    oel_statement: Optional[StrictStr] = Field(default=None, description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle> <x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Use an [Expression Language](https://developer.okta.com/docs/reference/okta-expression-language-in-identity-engine/) expression to block a word from being used in a password. You can only block one word per expression. Use the `OR` operator to connect multiple expressions to block multiple words.", alias="oelStatement")
-    __properties: ClassVar[List[str]] = ["dictionary", "excludeAttributes", "excludeUsername", "minLength", "minLowerCase", "minNumber", "minSymbol", "minUpperCase", "oelStatement"]
+    min_lower_case: Optional[StrictInt] = Field(
+        default=1,
+        description="Indicates if a password must contain at least one lower case letter: `0` indicates no, `1` indicates yes",
+        alias="minLowerCase")
+    min_number: Optional[StrictInt] = Field(
+        default=1,
+        description="Indicates if a password must contain at least one number: `0` indicates no, `1` indicates yes",
+        alias="minNumber")
+    min_symbol: Optional[StrictInt] = Field(
+        default=1,
+        description="Indicates if a password must contain at least one symbol (For example: !@#$%^&*): `0` indicates no, `1` indicates yes",
+        alias="minSymbol")
+    min_upper_case: Optional[StrictInt] = Field(
+        default=1,
+        description="Indicates if a password must contain at least one upper case letter: `0` indicates no, `1` indicates yes",
+        alias="minUpperCase")
+    oel_statement: Optional[StrictStr] = Field(
+        default=None,
+        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle> <x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Use an [Expression Language](https://developer.okta.com/docs/reference/okta-expression-language-in-identity-engine/) expression to block a word from being used in a password. You can only block one word per expression. Use the `OR` operator to connect multiple expressions to block multiple words.",
+        alias="oelStatement")
+    __properties: ClassVar[List[str]] = ["dictionary", "excludeAttributes", "excludeUsername",
+                                         "minLength", "minLowerCase", "minNumber", "minSymbol", "minUpperCase", "oelStatement"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,4 +134,3 @@ class PasswordPolicyPasswordSettingsComplexity(BaseModel):
             "oelStatement": obj.get("oelStatement")
         })
         return _obj
-

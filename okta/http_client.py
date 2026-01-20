@@ -99,9 +99,9 @@ class HTTPClient:
                     filename = request['form']['file'].split('/')[-1]
                 data = aiohttp.FormData()
                 data.add_field('file',
-                                      open(request['form']['file'], 'rb'),
-                                      filename=filename,
-                                      content_type=self._default_headers['Content-Type'])
+                               open(request['form']['file'], 'rb'),
+                               filename=filename,
+                               content_type=self._default_headers['Content-Type'])
                 params['data'] = data
             json_data = request.get('json')
             # empty json param may cause issue, so include it if needed only

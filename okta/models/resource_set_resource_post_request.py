@@ -30,10 +30,11 @@ from okta.models.resource_conditions import ResourceConditions
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetResourcePostRequest(BaseModel):
     """
     ResourceSetResourcePostRequest
-    """ # noqa: E501
+    """  # noqa: E501
     conditions: ResourceConditions
     resource_orn_or_url: StrictStr = Field(description="Resource in ORN or REST API URL format", alias="resourceOrnOrUrl")
     __properties: ClassVar[List[str]] = ["conditions", "resourceOrnOrUrl"]
@@ -99,4 +100,3 @@ class ResourceSetResourcePostRequest(BaseModel):
             "resourceOrnOrUrl": obj.get("resourceOrnOrUrl")
         })
         return _obj
-

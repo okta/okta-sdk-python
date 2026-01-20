@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupRuleGroupCondition(BaseModel):
     """
     Currently not supported
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[List[StrictStr]] = Field(default=None, description="Currently not supported")
     __properties: ClassVar[List[str]] = ["exclude"]
 
@@ -89,4 +90,3 @@ class GroupRuleGroupCondition(BaseModel):
             "exclude": obj.get("exclude")
         })
         return _obj
-

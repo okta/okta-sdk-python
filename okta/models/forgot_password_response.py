@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ForgotPasswordResponse(BaseModel):
     """
     ForgotPasswordResponse
-    """ # noqa: E501
+    """  # noqa: E501
     reset_password_url: Optional[StrictStr] = Field(default=None, alias="resetPasswordUrl")
     __properties: ClassVar[List[str]] = ["resetPasswordUrl"]
 
@@ -91,4 +92,3 @@ class ForgotPasswordResponse(BaseModel):
             "resetPasswordUrl": obj.get("resetPasswordUrl")
         })
         return _obj
-

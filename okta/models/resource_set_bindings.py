@@ -31,11 +31,13 @@ from okta.models.resource_set_bindings_links import ResourceSetBindingsLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindings(BaseModel):
     """
     ResourceSetBindings
-    """ # noqa: E501
-    roles: Optional[List[ResourceSetBindingRole]] = Field(default=None, description="Roles associated with the resource set binding. If there are more than 100 bindings for the specified resource set, then the `_links.next` resource is returned with the next list of bindings.")
+    """  # noqa: E501
+    roles: Optional[List[ResourceSetBindingRole]] = Field(
+        default=None, description="Roles associated with the resource set binding. If there are more than 100 bindings for the specified resource set, then the `_links.next` resource is returned with the next list of bindings.")
     links: Optional[ResourceSetBindingsLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["roles", "_links"]
 
@@ -107,4 +109,3 @@ class ResourceSetBindings(BaseModel):
             "_links": ResourceSetBindingsLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

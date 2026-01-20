@@ -31,11 +31,13 @@ from okta.models.user_import_response_error import UserImportResponseError
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportResponse(BaseModel):
     """
     UserImportResponse
-    """ # noqa: E501
-    commands: Optional[List[UserImportResponseCommandsInner]] = Field(default=None, description="The `commands` object is where you can provide commands to Okta. It is an array that allows you to send multiple commands. Each array element needs to consist of a type-value pair.")
+    """  # noqa: E501
+    commands: Optional[List[UserImportResponseCommandsInner]] = Field(
+        default=None, description="The `commands` object is where you can provide commands to Okta. It is an array that allows you to send multiple commands. Each array element needs to consist of a type-value pair.")
     error: Optional[UserImportResponseError] = None
     __properties: ClassVar[List[str]] = ["commands", "error"]
 
@@ -107,4 +109,3 @@ class UserImportResponse(BaseModel):
             "error": UserImportResponseError.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
-

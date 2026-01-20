@@ -29,14 +29,21 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TelephonyResponseCommandsInnerValueInner(BaseModel):
     """
     TelephonyResponseCommandsInnerValueInner
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[StrictStr] = Field(default=None, description="Status of telephony callout")
     provider: Optional[StrictStr] = Field(default=None, description="Telephony provider for sms/voice")
-    transaction_id: Optional[StrictStr] = Field(default=None, description="Transaction ID for sms/voice", alias="transactionId")
-    transaction_metadata: Optional[StrictStr] = Field(default=None, description="Any relevant metadata for the telephony transaction", alias="transactionMetadata")
+    transaction_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Transaction ID for sms/voice",
+        alias="transactionId")
+    transaction_metadata: Optional[StrictStr] = Field(
+        default=None,
+        description="Any relevant metadata for the telephony transaction",
+        alias="transactionMetadata")
     __properties: ClassVar[List[str]] = ["status", "provider", "transactionId", "transactionMetadata"]
 
     @field_validator('status')
@@ -105,4 +112,3 @@ class TelephonyResponseCommandsInnerValueInner(BaseModel):
             "transactionMetadata": obj.get("transactionMetadata")
         })
         return _obj
-

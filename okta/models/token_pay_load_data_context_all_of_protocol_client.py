@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataContextAllOfProtocolClient(BaseModel):
     """
     The client making the token request
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the client")
     name: Optional[StrictStr] = Field(default=None, description="The name of the client")
     type: Optional[StrictStr] = Field(default=None, description="The type of client")
@@ -93,4 +94,3 @@ class TokenPayLoadDataContextAllOfProtocolClient(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

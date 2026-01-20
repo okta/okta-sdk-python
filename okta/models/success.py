@@ -30,13 +30,20 @@ from okta.models.success_success_message_inner import SuccessSuccessMessageInner
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Success(BaseModel):
     """
     Success
-    """ # noqa: E501
+    """  # noqa: E501
     success_message: Optional[List[SuccessSuccessMessageInner]] = Field(default=None, alias="successMessage")
-    success_code: Optional[StrictStr] = Field(default=None, description="An Okta code for this type of success", alias="successCode")
-    success_summary: Optional[StrictStr] = Field(default=None, description="A short description of success message. Sometimes this contains dynamically-generated information about your specific response.", alias="successSummary")
+    success_code: Optional[StrictStr] = Field(
+        default=None,
+        description="An Okta code for this type of success",
+        alias="successCode")
+    success_summary: Optional[StrictStr] = Field(
+        default=None,
+        description="A short description of success message. Sometimes this contains dynamically-generated information about your specific response.",
+        alias="successSummary")
     __properties: ClassVar[List[str]] = ["successMessage", "successCode", "successSummary"]
 
     model_config = ConfigDict(
@@ -101,4 +108,3 @@ class Success(BaseModel):
             "successSummary": obj.get("successSummary")
         })
         return _obj
-

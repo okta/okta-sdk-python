@@ -29,12 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SlackApplicationSettingsApplication(BaseModel):
     """
     Slack app instance properties
-    """ # noqa: E501
+    """  # noqa: E501
     domain: StrictStr = Field(description="The Slack app domain name")
-    user_email_value: Optional[StrictStr] = Field(default=None, description="The `User.Email` attribute value", alias="userEmailValue")
+    user_email_value: Optional[StrictStr] = Field(
+        default=None,
+        description="The `User.Email` attribute value",
+        alias="userEmailValue")
     __properties: ClassVar[List[str]] = ["domain", "userEmailValue"]
 
     model_config = ConfigDict(
@@ -91,4 +95,3 @@ class SlackApplicationSettingsApplication(BaseModel):
             "userEmailValue": obj.get("userEmailValue")
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.href_object_next_link import HrefObjectNextLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetResourcesLinks(BaseModel):
     """
     ResourceSetResourcesLinks
-    """ # noqa: E501
+    """  # noqa: E501
     next: Optional[HrefObjectNextLink] = None
     resource_set: Optional[HrefObject] = Field(default=None, alias="resource-set")
     __properties: ClassVar[List[str]] = ["next", "resource-set"]
@@ -107,4 +108,3 @@ class ResourceSetResourcesLinks(BaseModel):
             "resource-set": HrefObject.from_dict(obj["resource-set"]) if obj.get("resource-set") is not None else None
         })
         return _obj
-

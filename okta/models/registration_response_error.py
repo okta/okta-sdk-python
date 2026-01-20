@@ -30,11 +30,15 @@ from okta.models.registration_response_error_error_causes_inner import Registrat
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationResponseError(BaseModel):
     """
     For the registration inline hook, the `error` object provides a way of displaying an error message to the end user who is trying to register or update their profile.  * If you're using the Okta Sign-In Widget for Profile Enrollment, only the `errorSummary` messages of the `errorCauses` objects that your external service returns appear as inline errors, given the following:   * You don't customize the error handling behavior of the widget.   * The `location` of `errorSummary` in the `errorCauses` object specifies the request object's user profile attribute. * If you don't return a value for the `errorCauses` object, and deny the user's registration attempt through the `commands` object in your response to Okta, one of the following generic messages appears to the end user:   * \"Registration cannot be completed at this time.\" (SSR)   * \"We found some errors. Please review the form and make corrections.\" (Progressive Enrollment) * If you don't return an `error` object at all and the registration is denied, the following generic message appears to the end user:   * \"Registration denied.\" (SSR)   * \"Profile update denied.\" (Progressive Enrollment)  >**Note:** If you include an error object in your response, no commands are executed and the registration fails. This holds true even if the top-level `errorSummary` and the `errorCauses` objects are omitted.
-    """ # noqa: E501
-    error_summary: Optional[StrictStr] = Field(default=None, description="Human-readable summary of one or more errors", alias="errorSummary")
+    """  # noqa: E501
+    error_summary: Optional[StrictStr] = Field(
+        default=None,
+        description="Human-readable summary of one or more errors",
+        alias="errorSummary")
     error_causes: Optional[List[RegistrationResponseErrorErrorCausesInner]] = Field(default=None, alias="errorCauses")
     __properties: ClassVar[List[str]] = ["errorSummary", "errorCauses"]
 
@@ -99,4 +103,3 @@ class RegistrationResponseError(BaseModel):
             "errorCauses": [RegistrationResponseErrorErrorCausesInner.from_dict(_item) for _item in obj["errorCauses"]] if obj.get("errorCauses") is not None else None
         })
         return _obj
-

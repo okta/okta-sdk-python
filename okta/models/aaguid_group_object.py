@@ -29,12 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AAGUIDGroupObject(BaseModel):
     """
     AAGUIDGroupObject
-    """ # noqa: E501
-    aaguids: Optional[List[StrictStr]] = Field(default=None, description="A list of YubiKey hardware FIDO2 AAGUIDs. The available [AAGUIDs](https://support.yubico.com/hc/en-us/articles/360016648959-YubiKey-Hardware-FIDO2-AAGUIDs) are provided by the FIDO Alliance Metadata Service.")
-    name: Optional[StrictStr] = Field(default=None, description="A name to identify the group of YubiKey hardware FIDO2 AAGUIDs")
+    """  # noqa: E501
+    aaguids: Optional[List[StrictStr]] = Field(
+        default=None, description="A list of YubiKey hardware FIDO2 AAGUIDs. The available [AAGUIDs](https://support.yubico.com/hc/en-us/articles/360016648959-YubiKey-Hardware-FIDO2-AAGUIDs) are provided by the FIDO Alliance Metadata Service.")
+    name: Optional[StrictStr] = Field(default=None,
+                                      description="A name to identify the group of YubiKey hardware FIDO2 AAGUIDs")
     __properties: ClassVar[List[str]] = ["aaguids", "name"]
 
     model_config = ConfigDict(
@@ -91,4 +94,3 @@ class AAGUIDGroupObject(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

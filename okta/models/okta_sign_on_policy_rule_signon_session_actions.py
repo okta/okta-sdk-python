@@ -29,13 +29,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
     """
     Properties governing the user's session lifetime
-    """ # noqa: E501
-    max_session_idle_minutes: Optional[StrictInt] = Field(default=120, description="Maximum number of minutes that a user session can be idle before the session is ended", alias="maxSessionIdleMinutes")
-    max_session_lifetime_minutes: Optional[StrictInt] = Field(default=0, description="Maximum number of minutes (from when the user signs in) that a user's session is active. Set this to force users to sign in again after the number of specified minutes. Disable by setting to `0`.", alias="maxSessionLifetimeMinutes")
-    use_persistent_cookie: Optional[StrictBool] = Field(default=False, description="If set to `false`, user session cookies only last the length of a browser session. If set to `true`, user session cookies last across browser sessions. This setting doesn't impact administrators who can never have persistent session cookies. This property is read-only for the default rule of the default global session policy.", alias="usePersistentCookie")
+    """  # noqa: E501
+    max_session_idle_minutes: Optional[StrictInt] = Field(
+        default=120,
+        description="Maximum number of minutes that a user session can be idle before the session is ended",
+        alias="maxSessionIdleMinutes")
+    max_session_lifetime_minutes: Optional[StrictInt] = Field(
+        default=0,
+        description="Maximum number of minutes (from when the user signs in) that a user's session is active. Set this to force users to sign in again after the number of specified minutes. Disable by setting to `0`.",
+        alias="maxSessionLifetimeMinutes")
+    use_persistent_cookie: Optional[StrictBool] = Field(
+        default=False,
+        description="If set to `false`, user session cookies only last the length of a browser session. If set to `true`, user session cookies last across browser sessions. This setting doesn't impact administrators who can never have persistent session cookies. This property is read-only for the default rule of the default global session policy.",
+        alias="usePersistentCookie")
     __properties: ClassVar[List[str]] = ["maxSessionIdleMinutes", "maxSessionLifetimeMinutes", "usePersistentCookie"]
 
     model_config = ConfigDict(
@@ -93,4 +103,3 @@ class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
             "usePersistentCookie": obj.get("usePersistentCookie") if obj.get("usePersistentCookie") is not None else False
         })
         return _obj
-

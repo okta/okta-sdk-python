@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppInstanceProperty(BaseModel):
     """
     AppInstanceProperty
-    """ # noqa: E501
+    """  # noqa: E501
     label: StrictStr
     name: StrictStr
     __properties: ClassVar[List[str]] = ["label", "name"]
@@ -91,4 +92,3 @@ class AppInstanceProperty(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.group_schema_custom import GroupSchemaCustom
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupSchemaDefinitions(BaseModel):
     """
     GroupSchemaDefinitions
-    """ # noqa: E501
+    """  # noqa: E501
     base: Optional[GroupSchemaBase] = None
     custom: Optional[GroupSchemaCustom] = None
     __properties: ClassVar[List[str]] = ["base", "custom"]
@@ -107,4 +108,3 @@ class GroupSchemaDefinitions(BaseModel):
             "custom": GroupSchemaCustom.from_dict(obj["custom"]) if obj.get("custom") is not None else None
         })
         return _obj
-

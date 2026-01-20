@@ -34,25 +34,54 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DevicePostureCheck(BaseModel):
     """
     DevicePostureCheck
-    """ # noqa: E501
-    created_by: Optional[StrictStr] = Field(default=None, description="User who created the device posture check", alias="createdBy")
-    created_date: Optional[StrictStr] = Field(default=None, description="Time the device posture check was created", alias="createdDate")
+    """  # noqa: E501
+    created_by: Optional[StrictStr] = Field(
+        default=None,
+        description="User who created the device posture check",
+        alias="createdBy")
+    created_date: Optional[StrictStr] = Field(
+        default=None,
+        description="Time the device posture check was created",
+        alias="createdDate")
     description: Optional[StrictStr] = Field(default=None, description="Description of the device posture check")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the device posture check")
-    last_update: Optional[StrictStr] = Field(default=None, description="Time the device posture check was updated", alias="lastUpdate")
-    last_updated_by: Optional[StrictStr] = Field(default=None, description="User who updated the device posture check", alias="lastUpdatedBy")
+    last_update: Optional[StrictStr] = Field(
+        default=None,
+        description="Time the device posture check was updated",
+        alias="lastUpdate")
+    last_updated_by: Optional[StrictStr] = Field(
+        default=None,
+        description="User who updated the device posture check",
+        alias="lastUpdatedBy")
     mapping_type: Optional[DevicePostureChecksMappingType] = Field(default=None, alias="mappingType")
     name: Optional[StrictStr] = Field(default=None, description="Display name of the device posture check")
     platform: Optional[DevicePostureChecksPlatform] = None
     query: Optional[StrictStr] = Field(default=None, description="OSQuery for the device posture check")
     remediation_settings: Optional[DevicePostureChecksRemediationSettings] = Field(default=None, alias="remediationSettings")
     type: Optional[DevicePostureChecksType] = None
-    variable_name: Optional[StrictStr] = Field(default=None, description="Unique name of the device posture check", alias="variableName")
+    variable_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique name of the device posture check",
+        alias="variableName")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "description", "id", "lastUpdate", "lastUpdatedBy", "mappingType", "name", "platform", "query", "remediationSettings", "type", "variableName", "_links"]
+    __properties: ClassVar[List[str]] = ["createdBy",
+                                         "createdDate",
+                                         "description",
+                                         "id",
+                                         "lastUpdate",
+                                         "lastUpdatedBy",
+                                         "mappingType",
+                                         "name",
+                                         "platform",
+                                         "query",
+                                         "remediationSettings",
+                                         "type",
+                                         "variableName",
+                                         "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -144,4 +173,3 @@ class DevicePostureCheck(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

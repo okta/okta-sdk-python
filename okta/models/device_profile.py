@@ -32,27 +32,63 @@ from okta.models.disk_encryption_type_def import DiskEncryptionTypeDef
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceProfile(BaseModel):
     """
     DeviceProfile
-    """ # noqa: E501
+    """  # noqa: E501
     disk_encryption_type: Optional[DiskEncryptionTypeDef] = Field(default=None, alias="diskEncryptionType")
-    display_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="Display name of the device", alias="displayName")
-    imei: Optional[Annotated[str, Field(min_length=14, strict=True, max_length=17)]] = Field(default=None, description="International Mobile Equipment Identity (IMEI) of the device")
-    integrity_jailbreak: Optional[StrictBool] = Field(default=None, description="Indicates if the device is jailbroken or rooted. Only applicable to `IOS` and `ANDROID` platforms", alias="integrityJailbreak")
-    managed: Optional[StrictBool] = Field(default=None, description="Indicates if the device is managed by mobile device management (MDM) software")
-    manufacturer: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(default=None, description="Name of the manufacturer of the device")
-    meid: Optional[Annotated[str, Field(strict=True, max_length=14)]] = Field(default=None, description="Mobile equipment identifier of the device")
-    model: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(default=None, description="Model of the device")
-    os_version: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(default=None, description="Version of the device OS", alias="osVersion")
+    display_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(
+        description="Display name of the device", alias="displayName")
+    imei: Optional[Annotated[str, Field(min_length=14, strict=True, max_length=17)]] = Field(
+        default=None, description="International Mobile Equipment Identity (IMEI) of the device")
+    integrity_jailbreak: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is jailbroken or rooted. Only applicable to `IOS` and `ANDROID` platforms",
+        alias="integrityJailbreak")
+    managed: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is managed by mobile device management (MDM) software")
+    manufacturer: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
+        default=None, description="Name of the manufacturer of the device")
+    meid: Optional[Annotated[str, Field(strict=True, max_length=14)]] = Field(
+        default=None, description="Mobile equipment identifier of the device")
+    model: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
+        default=None, description="Model of the device")
+    os_version: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
+        default=None, description="Version of the device OS", alias="osVersion")
     platform: DevicePlatform
     registered: StrictBool = Field(description="Indicates if the device is registered at Okta")
-    secure_hardware_present: Optional[StrictBool] = Field(default=None, description="Indicates if the device contains a secure hardware functionality", alias="secureHardwarePresent")
-    serial_number: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(default=None, description="Serial number of the device", alias="serialNumber")
-    sid: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="Windows Security identifier of the device")
-    tpm_public_key_hash: Optional[StrictStr] = Field(default=None, description="Windows Trusted Platform Module hash value", alias="tpmPublicKeyHash")
-    udid: Optional[Annotated[str, Field(strict=True, max_length=47)]] = Field(default=None, description="macOS Unique device identifier of the device")
-    __properties: ClassVar[List[str]] = ["diskEncryptionType", "displayName", "imei", "integrityJailbreak", "managed", "manufacturer", "meid", "model", "osVersion", "platform", "registered", "secureHardwarePresent", "serialNumber", "sid", "tpmPublicKeyHash", "udid"]
+    secure_hardware_present: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device contains a secure hardware functionality",
+        alias="secureHardwarePresent")
+    serial_number: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
+        default=None, description="Serial number of the device", alias="serialNumber")
+    sid: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(
+        default=None, description="Windows Security identifier of the device")
+    tpm_public_key_hash: Optional[StrictStr] = Field(
+        default=None,
+        description="Windows Trusted Platform Module hash value",
+        alias="tpmPublicKeyHash")
+    udid: Optional[Annotated[str, Field(strict=True, max_length=47)]] = Field(
+        default=None, description="macOS Unique device identifier of the device")
+    __properties: ClassVar[List[str]] = ["diskEncryptionType",
+                                         "displayName",
+                                         "imei",
+                                         "integrityJailbreak",
+                                         "managed",
+                                         "manufacturer",
+                                         "meid",
+                                         "model",
+                                         "osVersion",
+                                         "platform",
+                                         "registered",
+                                         "secureHardwarePresent",
+                                         "serialNumber",
+                                         "sid",
+                                         "tpmPublicKeyHash",
+                                         "udid"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -122,4 +158,3 @@ class DeviceProfile(BaseModel):
             "udid": obj.get("udid")
         })
         return _obj
-

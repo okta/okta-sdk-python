@@ -31,10 +31,11 @@ from okta.models.source_links_all_of_schema import SourceLinksAllOfSchema
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SourceLinks(BaseModel):
     """
     SourceLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     var_schema: Optional[SourceLinksAllOfSchema] = Field(default=None, alias="schema")
     __properties: ClassVar[List[str]] = ["self", "schema"]
@@ -107,4 +108,3 @@ class SourceLinks(BaseModel):
             "schema": SourceLinksAllOfSchema.from_dict(obj["schema"]) if obj.get("schema") is not None else None
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.href_csr_self_link import HrefCsrSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CSRLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the current status of a CSR object using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This object is used for dynamic discovery of related resources and lifecycle operations.
-    """ # noqa: E501
+    """  # noqa: E501
     publish: Optional[HrefCsrPublishLink] = None
     var_self: Optional[HrefCsrSelfLink] = Field(default=None, alias="self")
     __properties: ClassVar[List[str]] = ["publish", "self"]
@@ -107,4 +108,3 @@ class CSRLinks(BaseModel):
             "self": HrefCsrSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None
         })
         return _obj
-

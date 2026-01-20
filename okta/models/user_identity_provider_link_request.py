@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserIdentityProviderLinkRequest(BaseModel):
     """
     UserIdentityProviderLinkRequest
-    """ # noqa: E501
-    external_id: Optional[StrictStr] = Field(default=None, description="Unique IdP-specific identifier for a user", alias="externalId")
+    """  # noqa: E501
+    external_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique IdP-specific identifier for a user",
+        alias="externalId")
     __properties: ClassVar[List[str]] = ["externalId"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class UserIdentityProviderLinkRequest(BaseModel):
             "externalId": obj.get("externalId")
         })
         return _obj
-

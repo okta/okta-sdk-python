@@ -30,13 +30,20 @@ from okta.models.telephony_request_data import TelephonyRequestData
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TelephonyRequest(BaseModel):
     """
     TelephonyRequest
-    """ # noqa: E501
+    """  # noqa: E501
     data: Optional[TelephonyRequestData] = None
-    event_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook. The telephony inline hook type is `com.okta.telephony.provider`.", alias="eventType")
-    request_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook request. For example, `com.okta.user.telephony.pre-enrollment`.", alias="requestType")
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook. The telephony inline hook type is `com.okta.telephony.provider`.",
+        alias="eventType")
+    request_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook request. For example, `com.okta.user.telephony.pre-enrollment`.",
+        alias="requestType")
     source: Optional[StrictStr] = Field(default=None, description="The ID and URL of the telephony inline hook")
     __properties: ClassVar[List[str]] = ["data", "eventType", "requestType", "source"]
 
@@ -103,4 +110,3 @@ class TelephonyRequest(BaseModel):
             "source": obj.get("source")
         })
         return _obj
-

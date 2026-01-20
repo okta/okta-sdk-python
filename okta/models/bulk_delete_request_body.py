@@ -30,12 +30,17 @@ from okta.models.identity_source_user_profile_for_delete import IdentitySourceUs
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BulkDeleteRequestBody(BaseModel):
     """
     BulkDeleteRequestBody
-    """ # noqa: E501
-    entity_type: Optional[StrictStr] = Field(default=None, description="The type of data to bulk delete in a session. Currently, only `USERS` is supported.", alias="entityType")
-    profiles: Optional[List[IdentitySourceUserProfileForDelete]] = Field(default=None, description="Array of profiles to be deleted")
+    """  # noqa: E501
+    entity_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of data to bulk delete in a session. Currently, only `USERS` is supported.",
+        alias="entityType")
+    profiles: Optional[List[IdentitySourceUserProfileForDelete]] = Field(
+        default=None, description="Array of profiles to be deleted")
     __properties: ClassVar[List[str]] = ["entityType", "profiles"]
 
     @field_validator('entity_type')
@@ -109,4 +114,3 @@ class BulkDeleteRequestBody(BaseModel):
             "profiles": [IdentitySourceUserProfileForDelete.from_dict(_item) for _item in obj["profiles"]] if obj.get("profiles") is not None else None
         })
         return _obj
-

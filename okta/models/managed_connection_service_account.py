@@ -30,12 +30,14 @@ from okta.models.custom_authorization_server_links import CustomAuthorizationSer
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ManagedConnectionServiceAccount(BaseModel):
     """
     Service account for the managed connection
-    """ # noqa: E501
+    """  # noqa: E501
     name: StrictStr = Field(description="Display name of the service account")
-    orn: StrictStr = Field(description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the service account")
+    orn: StrictStr = Field(
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the service account")
     links: CustomAuthorizationServerLinks = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["name", "orn", "_links"]
 
@@ -101,4 +103,3 @@ class ManagedConnectionServiceAccount(BaseModel):
             "_links": CustomAuthorizationServerLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

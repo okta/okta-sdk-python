@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppPropertiesValue(BaseModel):
     """
     AppPropertiesValue
-    """ # noqa: E501
+    """  # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="Name of the property")
     value: Optional[StrictStr] = Field(default=None, description="Value of the property")
     __properties: ClassVar[List[str]] = ["name", "value"]
@@ -91,4 +92,3 @@ class AppPropertiesValue(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ScimScimServerConfigPatch(BaseModel):
     """
     PATCH operation options
-    """ # noqa: E501
+    """  # noqa: E501
     supported: Optional[StrictBool] = Field(default=False, description="Specifies if the PATCH operation is supported")
     __properties: ClassVar[List[str]] = ["supported"]
 
@@ -89,4 +90,3 @@ class ScimScimServerConfigPatch(BaseModel):
             "supported": obj.get("supported") if obj.get("supported") is not None else False
         })
         return _obj
-

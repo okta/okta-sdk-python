@@ -29,13 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IAMBundleEntitlement(BaseModel):
     """
     An entitlement in a governance bundle
-    """ # noqa: E501
-    resource_sets: Optional[List[StrictStr]] = Field(default=None, description="List of resource set IDs for the custom role", alias="resourceSets")
+    """  # noqa: E501
+    resource_sets: Optional[List[StrictStr]] = Field(
+        default=None, description="List of resource set IDs for the custom role", alias="resourceSets")
     role: Optional[StrictStr] = Field(default=None, description="The role")
-    targets: Optional[List[StrictStr]] = Field(default=None, description="List of target resource IDs to scope the entitlement with the role")
+    targets: Optional[List[StrictStr]] = Field(default=None,
+                                               description="List of target resource IDs to scope the entitlement with the role")
     __properties: ClassVar[List[str]] = ["resourceSets", "role", "targets"]
 
     model_config = ConfigDict(
@@ -93,4 +96,3 @@ class IAMBundleEntitlement(BaseModel):
             "targets": obj.get("targets")
         })
         return _obj
-

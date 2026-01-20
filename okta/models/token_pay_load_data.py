@@ -33,10 +33,11 @@ from okta.models.token_pay_load_data_identity import TokenPayLoadDataIdentity
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadData(BaseModel):
     """
     TokenPayLoadData
-    """ # noqa: E501
+    """  # noqa: E501
     context: Optional[TokenPayLoadDataContext] = None
     identity: Optional[TokenPayLoadDataIdentity] = None
     access: Optional[TokenPayLoadDataAccess] = None
@@ -127,4 +128,3 @@ class TokenPayLoadData(BaseModel):
             "refresh_token": RefreshToken.from_dict(obj["refresh_token"]) if obj.get("refresh_token") is not None else None
         })
         return _obj
-

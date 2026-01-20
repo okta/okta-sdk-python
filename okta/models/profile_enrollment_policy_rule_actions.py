@@ -30,10 +30,11 @@ from okta.models.profile_enrollment_policy_rule_action import ProfileEnrollmentP
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProfileEnrollmentPolicyRuleActions(BaseModel):
     """
     ProfileEnrollmentPolicyRuleActions
-    """ # noqa: E501
+    """  # noqa: E501
     profile_enrollment: Optional[ProfileEnrollmentPolicyRuleAction] = Field(default=None, alias="profileEnrollment")
     __properties: ClassVar[List[str]] = ["profileEnrollment"]
 
@@ -97,4 +98,3 @@ class ProfileEnrollmentPolicyRuleActions(BaseModel):
             "profileEnrollment": ProfileEnrollmentPolicyRuleAction.from_dict(obj["profileEnrollment"]) if obj.get("profileEnrollment") is not None else None
         })
         return _obj
-

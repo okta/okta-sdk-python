@@ -32,7 +32,6 @@ from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.policy_links import PolicyLinks
 from okta.models.policy_rule_type import PolicyRuleType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -46,20 +45,27 @@ if TYPE_CHECKING:
     from okta.models.profile_enrollment_policy_rule import ProfileEnrollmentPolicyRule
     from okta.models.okta_sign_on_policy_rule import OktaSignOnPolicyRule
 
+
 class PolicyRule(BaseModel):
     """
     PolicyRule
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the rule was created")
     id: Optional[StrictStr] = Field(default=None, description="Identifier for the rule")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the rule was last modified", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the rule was last modified",
+        alias="lastUpdated")
     name: Optional[StrictStr] = Field(default=None, description="Name of the rule")
     priority: Optional[StrictInt] = Field(default=None, description="Priority of the rule")
     status: Optional[LifecycleStatus] = None
-    system: Optional[StrictBool] = Field(default=False, description="Specifies whether Okta created the policy rule (`system=true`). You can't delete policy rules that have `system` set to `true`.")
+    system: Optional[StrictBool] = Field(
+        default=False,
+        description="Specifies whether Okta created the policy rule (`system=true`). You can't delete policy rules that have `system` set to `true`.")
     type: Optional[PolicyRuleType] = None
     links: Optional[PolicyLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated",
+                                         "name", "priority", "status", "system", "type", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,7 +78,7 @@ class PolicyRule(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'ACCESS_POLICY': 'AccessPolicyRule','DEVICE_SIGNAL_COLLECTION': 'DeviceSignalCollectionPolicyRule','ENTITY_RISK': 'EntityRiskPolicyRule','IDP_DISCOVERY': 'IdpDiscoveryPolicyRule','MFA_ENROLL': 'AuthenticatorEnrollmentPolicyRule','PASSWORD': 'PasswordPolicyRule','POST_AUTH_SESSION': 'PostAuthSessionPolicyRule','PROFILE_ENROLLMENT': 'ProfileEnrollmentPolicyRule','SIGN_ON': 'OktaSignOnPolicyRule'
+        'ACCESS_POLICY': 'AccessPolicyRule', 'DEVICE_SIGNAL_COLLECTION': 'DeviceSignalCollectionPolicyRule', 'ENTITY_RISK': 'EntityRiskPolicyRule', 'IDP_DISCOVERY': 'IdpDiscoveryPolicyRule', 'MFA_ENROLL': 'AuthenticatorEnrollmentPolicyRule', 'PASSWORD': 'PasswordPolicyRule', 'POST_AUTH_SESSION': 'PostAuthSessionPolicyRule', 'PROFILE_ENROLLMENT': 'ProfileEnrollmentPolicyRule', 'SIGN_ON': 'OktaSignOnPolicyRule'
     }
 
     @classmethod
@@ -94,7 +100,8 @@ class PolicyRule(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[AccessPolicyRule, DeviceSignalCollectionPolicyRule, EntityRiskPolicyRule, IdpDiscoveryPolicyRule, AuthenticatorEnrollmentPolicyRule, PasswordPolicyRule, PostAuthSessionPolicyRule, ProfileEnrollmentPolicyRule, OktaSignOnPolicyRule]]:
+    def from_json(cls, json_str: str) -> Optional[Union[AccessPolicyRule, DeviceSignalCollectionPolicyRule, EntityRiskPolicyRule, IdpDiscoveryPolicyRule,
+                                                        AuthenticatorEnrollmentPolicyRule, PasswordPolicyRule, PostAuthSessionPolicyRule, ProfileEnrollmentPolicyRule, OktaSignOnPolicyRule]]:
         """Create an instance of PolicyRule from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -147,20 +154,23 @@ class PolicyRule(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AccessPolicyRule, DeviceSignalCollectionPolicyRule, EntityRiskPolicyRule, IdpDiscoveryPolicyRule, AuthenticatorEnrollmentPolicyRule, PasswordPolicyRule, PostAuthSessionPolicyRule, ProfileEnrollmentPolicyRule, OktaSignOnPolicyRule]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AccessPolicyRule, DeviceSignalCollectionPolicyRule, EntityRiskPolicyRule, IdpDiscoveryPolicyRule,
+                                                              AuthenticatorEnrollmentPolicyRule, PasswordPolicyRule, PostAuthSessionPolicyRule, ProfileEnrollmentPolicyRule, OktaSignOnPolicyRule]]:
         """Create an instance of PolicyRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'AccessPolicyRule':
             return import_module("okta.models.access_policy_rule").AccessPolicyRule.from_dict(obj)
         if object_type == 'DeviceSignalCollectionPolicyRule':
-            return import_module("okta.models.device_signal_collection_policy_rule").DeviceSignalCollectionPolicyRule.from_dict(obj)
+            return import_module(
+                "okta.models.device_signal_collection_policy_rule").DeviceSignalCollectionPolicyRule.from_dict(obj)
         if object_type == 'EntityRiskPolicyRule':
             return import_module("okta.models.entity_risk_policy_rule").EntityRiskPolicyRule.from_dict(obj)
         if object_type == 'IdpDiscoveryPolicyRule':
             return import_module("okta.models.idp_discovery_policy_rule").IdpDiscoveryPolicyRule.from_dict(obj)
         if object_type == 'AuthenticatorEnrollmentPolicyRule':
-            return import_module("okta.models.authenticator_enrollment_policy_rule").AuthenticatorEnrollmentPolicyRule.from_dict(obj)
+            return import_module(
+                "okta.models.authenticator_enrollment_policy_rule").AuthenticatorEnrollmentPolicyRule.from_dict(obj)
         if object_type == 'PasswordPolicyRule':
             return import_module("okta.models.password_policy_rule").PasswordPolicyRule.from_dict(obj)
         if object_type == 'PostAuthSessionPolicyRule':
@@ -171,7 +181,5 @@ class PolicyRule(BaseModel):
             return import_module("okta.models.okta_sign_on_policy_rule").OktaSignOnPolicyRule.from_dict(obj)
 
         raise ValueError("PolicyRule failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

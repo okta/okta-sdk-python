@@ -33,15 +33,21 @@ from okta.models.risk_provider_action import RiskProviderAction
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RiskProvider(BaseModel):
     """
     RiskProvider
-    """ # noqa: E501
+    """  # noqa: E501
     action: RiskProviderAction
-    client_id: StrictStr = Field(description="The ID of the [OAuth 2.0 service app](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app-and-grant-scopes) that's used to send risk events to Okta", alias="clientId")
+    client_id: StrictStr = Field(
+        description="The ID of the [OAuth 2.0 service app](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app-and-grant-scopes) that's used to send risk events to Okta",
+        alias="clientId")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the risk provider object was created")
     id: StrictStr = Field(description="The ID of the risk provider object")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the risk provider object was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the risk provider object was last updated",
+        alias="lastUpdated")
     name: Annotated[str, Field(strict=True, max_length=50)] = Field(description="Name of the risk provider")
     links: LinksSelf = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["action", "clientId", "created", "id", "lastUpdated", "name", "_links"]
@@ -118,4 +124,3 @@ class RiskProvider(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

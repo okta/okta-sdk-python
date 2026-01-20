@@ -28,16 +28,16 @@ from importlib import import_module
 from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.app_config_active_directory import AppConfigActiveDirectory
 
+
 class AppConfig(BaseModel):
     """
     Additional app configuration for group push mappings. Currently only required for Active Directory.
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["type"]
 
@@ -107,7 +107,5 @@ class AppConfig(BaseModel):
             return import_module("okta.models.app_config_active_directory").AppConfigActiveDirectory.from_dict(obj)
 
         raise ValueError("AppConfig failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

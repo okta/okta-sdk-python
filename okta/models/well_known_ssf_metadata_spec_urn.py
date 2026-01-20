@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownSSFMetadataSpecUrn(BaseModel):
     """
     WellKnownSSFMetadataSpecUrn
-    """ # noqa: E501
-    spec_urn: Optional[StrictStr] = Field(default=None, description="The URN that describes the specification of the protocol being used")
+    """  # noqa: E501
+    spec_urn: Optional[StrictStr] = Field(default=None,
+                                          description="The URN that describes the specification of the protocol being used")
     __properties: ClassVar[List[str]] = ["spec_urn"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class WellKnownSSFMetadataSpecUrn(BaseModel):
             "spec_urn": obj.get("spec_urn")
         })
         return _obj
-

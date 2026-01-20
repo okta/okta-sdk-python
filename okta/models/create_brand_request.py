@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateBrandRequest(BaseModel):
     """
     CreateBrandRequest
-    """ # noqa: E501
-    name: StrictStr = Field(description="The name of the brand  > **Note:** You can't use the reserved `DRAPP_DOMAIN_BRAND` name.")
+    """  # noqa: E501
+    name: StrictStr = Field(
+        description="The name of the brand  > **Note:** You can't use the reserved `DRAPP_DOMAIN_BRAND` name.")
     __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class CreateBrandRequest(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

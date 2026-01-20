@@ -31,11 +31,13 @@ from okta.models.scim import Scim
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningDetails(BaseModel):
     """
     Supported provisioning configurations for your integration
-    """ # noqa: E501
-    features: Annotated[List[StrictStr], Field(min_length=1)] = Field(description="List of provisioning features supported in this integration")
+    """  # noqa: E501
+    features: Annotated[List[StrictStr], Field(min_length=1)] = Field(
+        description="List of provisioning features supported in this integration")
     scim: Scim
     __properties: ClassVar[List[str]] = ["features", "scim"]
 
@@ -43,8 +45,10 @@ class ProvisioningDetails(BaseModel):
     def features_validate_enum(cls, value):
         """Validates the enum"""
         for i in value:
-            if i not in set(['CREATE_USER', 'READ_USER', 'UPDATE_USER', 'DEACTIVATE_USER', 'CREATE_GROUP', 'READ_GROUP', 'UPDATE_GROUP', 'DEACTIVATE_GROUP']):
-                raise ValueError("each list item must be one of ('CREATE_USER', 'READ_USER', 'UPDATE_USER', 'DEACTIVATE_USER', 'CREATE_GROUP', 'READ_GROUP', 'UPDATE_GROUP', 'DEACTIVATE_GROUP')")
+            if i not in set(['CREATE_USER', 'READ_USER', 'UPDATE_USER', 'DEACTIVATE_USER',
+                            'CREATE_GROUP', 'READ_GROUP', 'UPDATE_GROUP', 'DEACTIVATE_GROUP']):
+                raise ValueError(
+                    "each list item must be one of ('CREATE_USER', 'READ_USER', 'UPDATE_USER', 'DEACTIVATE_USER', 'CREATE_GROUP', 'READ_GROUP', 'UPDATE_GROUP', 'DEACTIVATE_GROUP')")
         return value
 
     model_config = ConfigDict(
@@ -108,4 +112,3 @@ class ProvisioningDetails(BaseModel):
             "scim": Scim.from_dict(obj["scim"]) if obj.get("scim") is not None else None
         })
         return _obj
-

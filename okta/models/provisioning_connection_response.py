@@ -33,10 +33,11 @@ from okta.models.provisioning_connection_token_auth_scheme import ProvisioningCo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningConnectionResponse(BaseModel):
     """
     ProvisioningConnectionResponse
-    """ # noqa: E501
+    """  # noqa: E501
     auth_scheme: Optional[ProvisioningConnectionTokenAuthScheme] = Field(default=None, alias="authScheme")
     base_url: Optional[StrictStr] = Field(default=None, description="Base URL", alias="baseUrl")
     profile: ProvisioningConnectionResponseProfile
@@ -115,4 +116,3 @@ class ProvisioningConnectionResponse(BaseModel):
             "_links": LinksSelfLifecycleAndAuthorize.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

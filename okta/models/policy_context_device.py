@@ -29,14 +29,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyContextDevice(BaseModel):
     """
     PolicyContextDevice
-    """ # noqa: E501
+    """  # noqa: E501
     platform: Optional[StrictStr] = Field(default=None, description="The platform of the device, for example, IOS.")
     registered: Optional[StrictBool] = Field(default=None, description="If the device is registered")
     managed: Optional[StrictBool] = Field(default=None, description="If the device is managed")
-    assurance_id: Optional[StrictStr] = Field(default=None, description="The device assurance policy ID for the simulation", alias="assuranceId")
+    assurance_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The device assurance policy ID for the simulation",
+        alias="assuranceId")
     __properties: ClassVar[List[str]] = ["platform", "registered", "managed", "assuranceId"]
 
     model_config = ConfigDict(
@@ -95,4 +99,3 @@ class PolicyContextDevice(BaseModel):
             "assuranceId": obj.get("assuranceId")
         })
         return _obj
-

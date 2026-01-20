@@ -31,11 +31,15 @@ from okta.models.classification_type import ClassificationType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserClassification(BaseModel):
     """
     UserClassification
-    """ # noqa: E501
-    last_updated: Optional[datetime] = Field(default=None, description="The timestamp when the user classification was last updated", alias="lastUpdated")
+    """  # noqa: E501
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user classification was last updated",
+        alias="lastUpdated")
     type: Optional[ClassificationType] = None
     __properties: ClassVar[List[str]] = ["lastUpdated", "type"]
 
@@ -95,4 +99,3 @@ class UserClassification(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

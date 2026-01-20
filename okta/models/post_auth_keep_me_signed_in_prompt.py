@@ -29,14 +29,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PostAuthKeepMeSignedInPrompt(BaseModel):
     """
     PostAuthKeepMeSignedInPrompt
-    """ # noqa: E501
-    accept_button_text: Optional[StrictStr] = Field(default=None, description="The label on the accept button when prompting for Stay signed in", alias="acceptButtonText")
-    reject_button_text: Optional[StrictStr] = Field(default=None, description="The label on the reject button when prompting for Stay signed in", alias="rejectButtonText")
-    subtitle: Optional[StrictStr] = Field(default=None, description="The subtitle on the Sign-In Widget when prompting for Stay signed in")
-    title: Optional[StrictStr] = Field(default=None, description="The title on the Sign-In Widget when prompting for Stay signed in")
+    """  # noqa: E501
+    accept_button_text: Optional[StrictStr] = Field(
+        default=None,
+        description="The label on the accept button when prompting for Stay signed in",
+        alias="acceptButtonText")
+    reject_button_text: Optional[StrictStr] = Field(
+        default=None,
+        description="The label on the reject button when prompting for Stay signed in",
+        alias="rejectButtonText")
+    subtitle: Optional[StrictStr] = Field(default=None,
+                                          description="The subtitle on the Sign-In Widget when prompting for Stay signed in")
+    title: Optional[StrictStr] = Field(default=None,
+                                       description="The title on the Sign-In Widget when prompting for Stay signed in")
     __properties: ClassVar[List[str]] = ["acceptButtonText", "rejectButtonText", "subtitle", "title"]
 
     model_config = ConfigDict(
@@ -95,4 +104,3 @@ class PostAuthKeepMeSignedInPrompt(BaseModel):
             "title": obj.get("title")
         })
         return _obj
-

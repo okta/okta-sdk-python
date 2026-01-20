@@ -30,10 +30,11 @@ from okta.models.o_auth2_refresh_token_links_all_of_revoke_all_of_hints import O
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2RefreshTokenLinksAllOfRevoke(BaseModel):
     """
     Link to revoke the refresh Token
-    """ # noqa: E501
+    """  # noqa: E501
     href: Optional[StrictStr] = Field(default=None, description="Link URI")
     hints: Optional[OAuth2RefreshTokenLinksAllOfRevokeAllOfHints] = None
     __properties: ClassVar[List[str]] = ["href", "hints"]
@@ -99,4 +100,3 @@ class OAuth2RefreshTokenLinksAllOfRevoke(BaseModel):
             "hints": OAuth2RefreshTokenLinksAllOfRevokeAllOfHints.from_dict(obj["hints"]) if obj.get("hints") is not None else None
         })
         return _obj
-

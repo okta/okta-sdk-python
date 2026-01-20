@@ -31,13 +31,18 @@ from okta.models.managed_connection_patchable_scope_condition import ManagedConn
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ManagedConnectionPatchable(BaseModel):
     """
     Update an existing managed connection. All fields are optional for partial updates.  **Field Applicability by Connection Type:** - `resourceIndicator`: Valid for IDENTITY_ASSERTION_APP_INSTANCE, IDENTITY_ASSERTION_CUSTOM_AS, STS_SERVICE_ACCOUNT, and STS_VAULT_SECRET. Set to `null` to reset to the default value (the resource's ORN). - `scopeCondition` and `scopes`: Only valid for IDENTITY_ASSERTION_APP_INSTANCE and IDENTITY_ASSERTION_CUSTOM_AS connections. The server returns a validation error if these fields are sent for STS connection types.  **Validation:** - If `scopeCondition` is provided, `scopes` must also be provided, and vice versa. - For STS_VAULT_SECRET and STS_SERVICE_ACCOUNT connection types, only `resourceIndicator` can be updated.
-    """ # noqa: E501
-    resource_indicator: Optional[StrictStr] = Field(default=None, description="Resource indicator used when requesting tokens. Set to `null` to reset to the default value based on the connection type (app instance ORN, authorization server ORN, secret ORN, or service account ORN).", alias="resourceIndicator")
+    """  # noqa: E501
+    resource_indicator: Optional[StrictStr] = Field(
+        default=None,
+        description="Resource indicator used when requesting tokens. Set to `null` to reset to the default value based on the connection type (app instance ORN, authorization server ORN, secret ORN, or service account ORN).",
+        alias="resourceIndicator")
     scope_condition: Optional[ManagedConnectionPatchableScopeCondition] = Field(default=None, alias="scopeCondition")
-    scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="Array of scopes for the connection. For `ALL_SCOPES`, this array must contain a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.  **Restrictions:** - Only valid for IDENTITY_ASSERTION_APP_INSTANCE and IDENTITY_ASSERTION_CUSTOM_AS connection types - Must be provided together with `scopeCondition` - Returns a 400 error if sent for STS_VAULT_SECRET or STS_SERVICE_ACCOUNT connection types")
+    scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(
+        default=None, description="Array of scopes for the connection. For `ALL_SCOPES`, this array must contain a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.  **Restrictions:** - Only valid for IDENTITY_ASSERTION_APP_INSTANCE and IDENTITY_ASSERTION_CUSTOM_AS connection types - Must be provided together with `scopeCondition` - Returns a 400 error if sent for STS_VAULT_SECRET or STS_SERVICE_ACCOUNT connection types")
     __properties: ClassVar[List[str]] = ["resourceIndicator", "scopeCondition", "scopes"]
 
     model_config = ConfigDict(
@@ -110,4 +115,3 @@ class ManagedConnectionPatchable(BaseModel):
             "scopes": obj.get("scopes")
         })
         return _obj
-

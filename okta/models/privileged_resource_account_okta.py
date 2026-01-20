@@ -29,19 +29,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.credential_sync_info import CredentialSyncInfo
 from okta.models.privileged_resource import PrivilegedResource
 from okta.models.privileged_resource_credentials import PrivilegedResourceCredentials
-from okta.models.privileged_resource_status import PrivilegedResourceStatus
-from okta.models.privileged_resource_type import PrivilegedResourceType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class PrivilegedResourceAccountOkta(PrivilegedResource):
     """
     PrivilegedResourceAccountOkta
-    """ # noqa: E501
-    resource_id: Optional[StrictStr] = Field(default=None, description="The user ID associated with the Okta privileged resource", alias="resourceId")
+    """  # noqa: E501
+    resource_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The user ID associated with the Okta privileged resource",
+        alias="resourceId")
     credentials: Optional[PrivilegedResourceCredentials] = None
-    profile: Optional[Dict[str, Any]] = Field(default=None, description="Specific profile properties for the privileged resource")
-    __properties: ClassVar[List[str]] = ["created", "credentialSyncInfo", "id", "lastUpdated", "resourceType", "status", "resourceId", "credentials", "profile"]
+    profile: Optional[Dict[str, Any]] = Field(
+        default=None, description="Specific profile properties for the privileged resource")
+    __properties: ClassVar[List[str]] = ["created", "credentialSyncInfo", "id",
+                                         "lastUpdated", "resourceType", "status", "resourceId", "credentials", "profile"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,4 +124,3 @@ class PrivilegedResourceAccountOkta(PrivilegedResource):
             "profile": obj.get("profile")
         })
         return _obj
-

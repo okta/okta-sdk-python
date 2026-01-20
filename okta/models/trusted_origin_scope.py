@@ -31,11 +31,13 @@ from okta.models.trusted_origin_scope_type import TrustedOriginScopeType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TrustedOriginScope(BaseModel):
     """
     TrustedOriginScope
-    """ # noqa: E501
-    allowed_okta_apps: Optional[List[IframeEmbedScopeAllowedApps]] = Field(default=None, description="The allowed Okta apps for the trusted origin scope", alias="allowedOktaApps")
+    """  # noqa: E501
+    allowed_okta_apps: Optional[List[IframeEmbedScopeAllowedApps]] = Field(
+        default=None, description="The allowed Okta apps for the trusted origin scope", alias="allowedOktaApps")
     type: Optional[TrustedOriginScopeType] = None
     __properties: ClassVar[List[str]] = ["allowedOktaApps", "type"]
 
@@ -93,4 +95,3 @@ class TrustedOriginScope(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

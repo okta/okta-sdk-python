@@ -29,14 +29,21 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationUniversalLogout(BaseModel):
     """
     <div class=\"x-lifecycle-container\"><x-lifecycle class=\"oie\"></x-lifecycle></div> Universal Logout properties for the app. These properties are only returned and can't be updated.
-    """ # noqa: E501
-    identity_stack: Optional[StrictStr] = Field(default=None, description="Indicates whether the app uses a shared identity stack that may cause the user to sign out of other apps by the same company", alias="identityStack")
+    """  # noqa: E501
+    identity_stack: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates whether the app uses a shared identity stack that may cause the user to sign out of other apps by the same company",
+        alias="identityStack")
     protocol: Optional[StrictStr] = Field(default=None, description="The protocol used for Universal Logout")
     status: Optional[StrictStr] = Field(default=None, description="Universal Logout status for the app instance")
-    support_type: Optional[StrictStr] = Field(default=None, description="Indicates whether the app supports full or partial Universal Logout (UL).", alias="supportType")
+    support_type: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates whether the app supports full or partial Universal Logout (UL).",
+        alias="supportType")
     __properties: ClassVar[List[str]] = ["identityStack", "protocol", "status", "supportType"]
 
     @field_validator('identity_stack')
@@ -135,4 +142,3 @@ class ApplicationUniversalLogout(BaseModel):
             "supportType": obj.get("supportType")
         })
         return _obj
-

@@ -34,7 +34,6 @@ from okta.models.network_zone_status import NetworkZoneStatus
 from okta.models.network_zone_type import NetworkZoneType
 from okta.models.network_zone_usage import NetworkZoneUsage
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -42,16 +41,22 @@ if TYPE_CHECKING:
     from okta.models.enhanced_dynamic_network_zone import EnhancedDynamicNetworkZone
     from okta.models.ip_network_zone import IPNetworkZone
 
+
 class NetworkZone(BaseModel):
     """
     NetworkZone
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the Network Zone")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last modified", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last modified",
+        alias="lastUpdated")
     name: Annotated[str, Field(strict=True, max_length=128)] = Field(description="Unique name for this Network Zone")
     status: Optional[NetworkZoneStatus] = None
-    system: Optional[StrictBool] = Field(default=None, description="Indicates a system Network Zone: * `true` for system Network Zones * `false` for custom Network Zones  The Okta org provides the following default system Network Zones: * `LegacyIpZone` * `BlockedIpZone` * `DefaultEnhancedDynamicZone` * `DefaultExemptIpZone`  Admins can modify the name of the default system Network Zone and add up to 5000 gateway or proxy IP entries. ")
+    system: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates a system Network Zone: * `true` for system Network Zones * `false` for custom Network Zones  The Okta org provides the following default system Network Zones: * `LegacyIpZone` * `BlockedIpZone` * `DefaultEnhancedDynamicZone` * `DefaultExemptIpZone`  Admins can modify the name of the default system Network Zone and add up to 5000 gateway or proxy IP entries. ")
     type: NetworkZoneType
     usage: Optional[NetworkZoneUsage] = None
     links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
@@ -68,7 +73,7 @@ class NetworkZone(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'DYNAMIC': 'DynamicNetworkZone','DYNAMIC_V2': 'EnhancedDynamicNetworkZone','IP': 'IPNetworkZone'
+        'DYNAMIC': 'DynamicNetworkZone', 'DYNAMIC_V2': 'EnhancedDynamicNetworkZone', 'IP': 'IPNetworkZone'
     }
 
     @classmethod
@@ -142,7 +147,5 @@ class NetworkZone(BaseModel):
             return import_module("okta.models.ip_network_zone").IPNetworkZone.from_dict(obj)
 
         raise ValueError("NetworkZone failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

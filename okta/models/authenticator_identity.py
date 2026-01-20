@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorIdentity(BaseModel):
     """
     Represents a particular authenticator serving as a constraint on a method
-    """ # noqa: E501
+    """  # noqa: E501
     key: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["key"]
 
@@ -89,4 +90,3 @@ class AuthenticatorIdentity(BaseModel):
             "key": obj.get("key")
         })
         return _obj
-

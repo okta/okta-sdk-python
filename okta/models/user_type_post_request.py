@@ -29,12 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserTypePostRequest(BaseModel):
     """
     UserTypePostRequest
-    """ # noqa: E501
-    description: Optional[StrictStr] = Field(default=None, description="The updated human-readable description of the user type")
-    display_name: Optional[StrictStr] = Field(default=None, description="The updated human-readable display name for the user type", alias="displayName")
+    """  # noqa: E501
+    description: Optional[StrictStr] = Field(default=None,
+                                             description="The updated human-readable description of the user type")
+    display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The updated human-readable display name for the user type",
+        alias="displayName")
     __properties: ClassVar[List[str]] = ["description", "displayName"]
 
     model_config = ConfigDict(
@@ -91,4 +96,3 @@ class UserTypePostRequest(BaseModel):
             "displayName": obj.get("displayName")
         })
         return _obj
-

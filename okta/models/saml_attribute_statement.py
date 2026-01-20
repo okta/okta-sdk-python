@@ -20,19 +20,18 @@
 
 
 from __future__ import annotations
-from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
+from pydantic import BaseModel, ValidationError, field_validator
 from typing import Optional
 from okta.models.saml_attribute_statement_expression import SamlAttributeStatementExpression
 from okta.models.saml_attribute_statement_group import SamlAttributeStatementGroup
-from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
-from typing_extensions import Literal, Self
-from pydantic import Field
+from typing import Union, Any, Set, TYPE_CHECKING, Optional, Dict
+from typing_extensions import Self
 
 SAMLATTRIBUTESTATEMENT_ANY_OF_SCHEMAS = ["SamlAttributeStatementExpression", "SamlAttributeStatementGroup"]
+
 
 class SamlAttributeStatement(BaseModel):
     """
@@ -47,7 +46,7 @@ class SamlAttributeStatement(BaseModel):
         actual_instance: Optional[Union[SamlAttributeStatementExpression, SamlAttributeStatementGroup]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "SamlAttributeStatementExpression", "SamlAttributeStatementGroup" }
+    any_of_schemas: Set[str] = {"SamlAttributeStatementExpression", "SamlAttributeStatementGroup"}
 
     model_config = {
         "validate_assignment": True,
@@ -85,7 +84,9 @@ class SamlAttributeStatement(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in SamlAttributeStatement with anyOf schemas: SamlAttributeStatementExpression, SamlAttributeStatementGroup. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting the actual_instance in SamlAttributeStatement with anyOf schemas: SamlAttributeStatementExpression, SamlAttributeStatementGroup. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -103,17 +104,19 @@ class SamlAttributeStatement(BaseModel):
             instance.actual_instance = SamlAttributeStatementExpression.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
+            error_messages.append(str(e))
         # anyof_schema_2_validator: Optional[SamlAttributeStatementGroup] = None
         try:
             instance.actual_instance = SamlAttributeStatementGroup.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
+            error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into SamlAttributeStatement with anyOf schemas: SamlAttributeStatementExpression, SamlAttributeStatementGroup. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into SamlAttributeStatement with anyOf schemas: SamlAttributeStatementExpression, SamlAttributeStatementGroup. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -140,5 +143,3 @@ class SamlAttributeStatement(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

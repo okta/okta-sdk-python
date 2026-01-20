@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportRequestDataAppUser(BaseModel):
     """
     The app user profile being imported
-    """ # noqa: E501
-    profile: Optional[Dict[str, StrictStr]] = Field(default=None, description="Provides the name-value pairs of the attributes contained in the app user profile of the user who is being imported. You can change the values of attributes in the user's app profile by means of the `commands` object you return. If you change attributes in the app profile, they then flow through to the Okta user profile, based on matching and mapping rules.")
+    """  # noqa: E501
+    profile: Optional[Dict[str, StrictStr]] = Field(
+        default=None, description="Provides the name-value pairs of the attributes contained in the app user profile of the user who is being imported. You can change the values of attributes in the user's app profile by means of the `commands` object you return. If you change attributes in the app profile, they then flow through to the Okta user profile, based on matching and mapping rules.")
     __properties: ClassVar[List[str]] = ["profile"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class UserImportRequestDataAppUser(BaseModel):
             "profile": obj.get("profile")
         })
         return _obj
-

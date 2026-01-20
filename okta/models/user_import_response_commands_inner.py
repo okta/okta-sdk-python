@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportResponseCommandsInner(BaseModel):
     """
     UserImportResponseCommandsInner
-    """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="The command types supported for the import inline hook. When using the `com.okta.action.update` command to specify that the user should be treated as a match, you need to also provide a `com.okta.user.update` command that sets the ID of the Okta user.")
+    """  # noqa: E501
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="The command types supported for the import inline hook. When using the `com.okta.action.update` command to specify that the user should be treated as a match, you need to also provide a `com.okta.user.update` command that sets the ID of the Okta user.")
     value: Optional[Dict[str, StrictStr]] = Field(default=None, description="The `value` object is the parameter to pass to the command. In the case of the `com.okta.appUser.profile.update` and `com.okta.user.profile.update` commands, the parameter should be a list of one or more profile attributes and the values you wish to set them to. In the case of the `com.okta.action.update` command, the parameter should be a `result` property set to either `CREATE_USER` or `LINK_USER`.")
     __properties: ClassVar[List[str]] = ["type", "value"]
 
@@ -43,8 +46,10 @@ class UserImportResponseCommandsInner(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['com.okta.appUser.profile.update', 'com.okta.user.profile.update', 'com.okta.action.update', 'com.okta.user.update']):
-            raise ValueError("must be one of enum values ('com.okta.appUser.profile.update', 'com.okta.user.profile.update', 'com.okta.action.update', 'com.okta.user.update')")
+        if value not in set(['com.okta.appUser.profile.update', 'com.okta.user.profile.update',
+                            'com.okta.action.update', 'com.okta.user.update']):
+            raise ValueError(
+                "must be one of enum values ('com.okta.appUser.profile.update', 'com.okta.user.profile.update', 'com.okta.action.update', 'com.okta.user.update')")
         return value
 
     model_config = ConfigDict(
@@ -101,4 +106,3 @@ class UserImportResponseCommandsInner(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

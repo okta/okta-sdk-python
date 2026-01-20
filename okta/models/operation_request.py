@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OperationRequest(BaseModel):
     """
     OperationRequest
-    """ # noqa: E501
+    """  # noqa: E501
     assignment_id: Optional[StrictStr] = Field(default=None, description="ID of the realm", alias="assignmentId")
     __properties: ClassVar[List[str]] = ["assignmentId"]
 
@@ -89,4 +90,3 @@ class OperationRequest(BaseModel):
             "assignmentId": obj.get("assignmentId")
         })
         return _obj
-

@@ -35,25 +35,53 @@ from okta.models.sign_in_page_touch_point_variant import SignInPageTouchPointVar
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ThemeResponse(BaseModel):
     """
     ThemeResponse
-    """ # noqa: E501
+    """  # noqa: E501
     background_image: Optional[StrictStr] = Field(default=None, alias="backgroundImage")
-    email_template_touch_point_variant: Optional[EmailTemplateTouchPointVariant] = Field(default=EmailTemplateTouchPointVariant.OKTA_DEFAULT, alias="emailTemplateTouchPointVariant")
-    end_user_dashboard_touch_point_variant: Optional[EndUserDashboardTouchPointVariant] = Field(default=EndUserDashboardTouchPointVariant.OKTA_DEFAULT, alias="endUserDashboardTouchPointVariant")
-    error_page_touch_point_variant: Optional[ErrorPageTouchPointVariant] = Field(default=ErrorPageTouchPointVariant.OKTA_DEFAULT, alias="errorPageTouchPointVariant")
+    email_template_touch_point_variant: Optional[EmailTemplateTouchPointVariant] = Field(
+        default=EmailTemplateTouchPointVariant.OKTA_DEFAULT, alias="emailTemplateTouchPointVariant")
+    end_user_dashboard_touch_point_variant: Optional[EndUserDashboardTouchPointVariant] = Field(
+        default=EndUserDashboardTouchPointVariant.OKTA_DEFAULT, alias="endUserDashboardTouchPointVariant")
+    error_page_touch_point_variant: Optional[ErrorPageTouchPointVariant] = Field(
+        default=ErrorPageTouchPointVariant.OKTA_DEFAULT, alias="errorPageTouchPointVariant")
     favicon: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
-    loading_page_touch_point_variant: Optional[LoadingPageTouchPointVariant] = Field(default=LoadingPageTouchPointVariant.OKTA_DEFAULT, alias="loadingPageTouchPointVariant")
+    loading_page_touch_point_variant: Optional[LoadingPageTouchPointVariant] = Field(
+        default=LoadingPageTouchPointVariant.OKTA_DEFAULT, alias="loadingPageTouchPointVariant")
     logo: Optional[StrictStr] = None
-    primary_color_contrast_hex: Optional[StrictStr] = Field(default=None, description="Primary color contrast hex code", alias="primaryColorContrastHex")
+    primary_color_contrast_hex: Optional[StrictStr] = Field(
+        default=None,
+        description="Primary color contrast hex code",
+        alias="primaryColorContrastHex")
     primary_color_hex: Optional[StrictStr] = Field(default=None, description="Primary color hex code", alias="primaryColorHex")
-    secondary_color_contrast_hex: Optional[StrictStr] = Field(default=None, description="Secondary color contrast hex code", alias="secondaryColorContrastHex")
-    secondary_color_hex: Optional[StrictStr] = Field(default=None, description="Secondary color hex code", alias="secondaryColorHex")
-    sign_in_page_touch_point_variant: Optional[SignInPageTouchPointVariant] = Field(default=None, alias="signInPageTouchPointVariant")
+    secondary_color_contrast_hex: Optional[StrictStr] = Field(
+        default=None,
+        description="Secondary color contrast hex code",
+        alias="secondaryColorContrastHex")
+    secondary_color_hex: Optional[StrictStr] = Field(
+        default=None,
+        description="Secondary color hex code",
+        alias="secondaryColorHex")
+    sign_in_page_touch_point_variant: Optional[SignInPageTouchPointVariant] = Field(
+        default=None, alias="signInPageTouchPointVariant")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["backgroundImage", "emailTemplateTouchPointVariant", "endUserDashboardTouchPointVariant", "errorPageTouchPointVariant", "favicon", "id", "loadingPageTouchPointVariant", "logo", "primaryColorContrastHex", "primaryColorHex", "secondaryColorContrastHex", "secondaryColorHex", "signInPageTouchPointVariant", "_links"]
+    __properties: ClassVar[List[str]] = ["backgroundImage",
+                                         "emailTemplateTouchPointVariant",
+                                         "endUserDashboardTouchPointVariant",
+                                         "errorPageTouchPointVariant",
+                                         "favicon",
+                                         "id",
+                                         "loadingPageTouchPointVariant",
+                                         "logo",
+                                         "primaryColorContrastHex",
+                                         "primaryColorHex",
+                                         "secondaryColorContrastHex",
+                                         "secondaryColorHex",
+                                         "signInPageTouchPointVariant",
+                                         "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -136,4 +164,3 @@ class ThemeResponse(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

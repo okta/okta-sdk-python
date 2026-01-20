@@ -35,20 +35,27 @@ from okta.models.inline_hook_type import InlineHookType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHook(BaseModel):
     """
     An inline hook object that specifies the details of the inline hook
-    """ # noqa: E501
+    """  # noqa: E501
     channel: Optional[InlineHookChannel] = None
     created: Optional[datetime] = Field(default=None, description="Date of the inline hook creation")
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the inline hook")
-    last_updated: Optional[datetime] = Field(default=None, description="Date of the last inline hook update", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Date of the last inline hook update",
+        alias="lastUpdated")
     name: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The display name of the inline hook")
     status: Optional[InlineHookStatus] = None
     type: Optional[InlineHookType] = None
-    version: Optional[StrictStr] = Field(default=None, description="Version of the inline hook type. The currently supported version is `1.0.0`.")
+    version: Optional[StrictStr] = Field(
+        default=None,
+        description="Version of the inline hook type. The currently supported version is `1.0.0`.")
     links: Optional[InlineHookLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["channel", "created", "id", "lastUpdated", "name", "status", "type", "version", "_links"]
+    __properties: ClassVar[List[str]] = ["channel", "created", "id",
+                                         "lastUpdated", "name", "status", "type", "version", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -133,4 +140,3 @@ class InlineHook(BaseModel):
             "_links": InlineHookLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

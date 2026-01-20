@@ -30,12 +30,16 @@ from okta.models.telephony_response_commands_inner_value_inner import TelephonyR
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TelephonyResponseCommandsInner(BaseModel):
     """
     TelephonyResponseCommandsInner
-    """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="The location where you specify the command. For the telephony inline hook, there's only one command, `com.okta.telephony.action`.")
-    value: Optional[List[TelephonyResponseCommandsInnerValueInner]] = Field(default=None, description="The status of the telephony operation along with optional additional information about the provider, transaction ID and any other transaction metadata.")
+    """  # noqa: E501
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="The location where you specify the command. For the telephony inline hook, there's only one command, `com.okta.telephony.action`.")
+    value: Optional[List[TelephonyResponseCommandsInnerValueInner]] = Field(
+        default=None, description="The status of the telephony operation along with optional additional information about the provider, transaction ID and any other transaction metadata.")
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     model_config = ConfigDict(
@@ -99,4 +103,3 @@ class TelephonyResponseCommandsInner(BaseModel):
             "value": [TelephonyResponseCommandsInnerValueInner.from_dict(_item) for _item in obj["value"]] if obj.get("value") is not None else None
         })
         return _obj
-

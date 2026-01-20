@@ -31,10 +31,11 @@ from okta.models.o_auth_credentials_client import OAuthCredentialsClient
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuthCredentials(BaseModel):
     """
     Client authentication credentials for an [OAuth 2.0 Authorization Server](https://tools.ietf.org/html/rfc6749#section-2.3)
-    """ # noqa: E501
+    """  # noqa: E501
     client: Optional[OAuthCredentialsClient] = None
     signing: Optional[AppleClientSigning] = None
     __properties: ClassVar[List[str]] = ["client", "signing"]
@@ -107,4 +108,3 @@ class OAuthCredentials(BaseModel):
             "signing": AppleClientSigning.from_dict(obj["signing"]) if obj.get("signing") is not None else None
         })
         return _obj
-

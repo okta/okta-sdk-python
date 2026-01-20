@@ -30,10 +30,11 @@ from okta.models.links_deactivate_deactivate import LinksDeactivateDeactivate
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksDeactivate(BaseModel):
     """
     LinksDeactivate
-    """ # noqa: E501
+    """  # noqa: E501
     deactivate: Optional[LinksDeactivateDeactivate] = None
     __properties: ClassVar[List[str]] = ["deactivate"]
 
@@ -97,4 +98,3 @@ class LinksDeactivate(BaseModel):
             "deactivate": LinksDeactivateDeactivate.from_dict(obj["deactivate"]) if obj.get("deactivate") is not None else None
         })
         return _obj
-

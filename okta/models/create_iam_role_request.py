@@ -29,13 +29,15 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateIamRoleRequest(BaseModel):
     """
     CreateIamRoleRequest
-    """ # noqa: E501
+    """  # noqa: E501
     description: StrictStr = Field(description="Description of the role")
     label: StrictStr = Field(description="Unique label for the role")
-    permissions: List[StrictStr] = Field(description="Array of permissions that the role grants. See [Permissions](/openapi/okta-management/guides/permissions).")
+    permissions: List[StrictStr] = Field(
+        description="Array of permissions that the role grants. See [Permissions](/openapi/okta-management/guides/permissions).")
     __properties: ClassVar[List[str]] = ["description", "label", "permissions"]
 
     model_config = ConfigDict(
@@ -93,4 +95,3 @@ class CreateIamRoleRequest(BaseModel):
             "permissions": obj.get("permissions")
         })
         return _obj
-

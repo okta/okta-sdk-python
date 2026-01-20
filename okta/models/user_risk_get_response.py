@@ -30,7 +30,6 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from okta.models.user_risk_get_response_links import UserRiskGetResponseLinks
 from okta.models.user_risk_level_all import UserRiskLevelAll
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -39,10 +38,11 @@ if TYPE_CHECKING:
     from okta.models.user_risk_level_exists import UserRiskLevelExists
     from okta.models.user_risk_level_none import UserRiskLevelNone
 
+
 class UserRiskGetResponse(BaseModel):
     """
     UserRiskGetResponse
-    """ # noqa: E501
+    """  # noqa: E501
     risk_level: Optional[UserRiskLevelAll] = Field(default=None, alias="riskLevel")
     links: Optional[UserRiskGetResponseLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["riskLevel", "_links"]
@@ -58,7 +58,7 @@ class UserRiskGetResponse(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'HIGH': 'UserRiskLevelExists','LOW': 'UserRiskLevelExists','MEDIUM': 'UserRiskLevelExists','NONE': 'UserRiskLevelNone'
+        'HIGH': 'UserRiskLevelExists', 'LOW': 'UserRiskLevelExists', 'MEDIUM': 'UserRiskLevelExists', 'NONE': 'UserRiskLevelNone'
     }
 
     @classmethod
@@ -80,7 +80,8 @@ class UserRiskGetResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[UserRiskLevelExists, UserRiskLevelExists, UserRiskLevelExists, UserRiskLevelNone]]:
+    def from_json(cls, json_str: str) -> Optional[Union[UserRiskLevelExists,
+                                                        UserRiskLevelExists, UserRiskLevelExists, UserRiskLevelNone]]:
         """Create an instance of UserRiskGetResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -112,7 +113,8 @@ class UserRiskGetResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[UserRiskLevelExists, UserRiskLevelExists, UserRiskLevelExists, UserRiskLevelNone]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[UserRiskLevelExists,
+                                                              UserRiskLevelExists, UserRiskLevelExists, UserRiskLevelNone]]:
         """Create an instance of UserRiskGetResponse from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -126,7 +128,5 @@ class UserRiskGetResponse(BaseModel):
             return import_module("okta.models.user_risk_level_none").UserRiskLevelNone.from_dict(obj)
 
         raise ValueError("UserRiskGetResponse failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

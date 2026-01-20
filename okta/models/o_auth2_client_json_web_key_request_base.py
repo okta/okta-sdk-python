@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientJsonWebKeyRequestBase(BaseModel):
     """
     OAuth2ClientJsonWebKeyRequestBase
-    """ # noqa: E501
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the OAUth 2.0 client's JWKS")
+    """  # noqa: E501
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="Unique identifier of the JSON Web Key in the OAUth 2.0 client's JWKS")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the OAuth 2.0 client JSON Web Key")
     __properties: ClassVar[List[str]] = ["kid", "status"]
 
@@ -106,4 +108,3 @@ class OAuth2ClientJsonWebKeyRequestBase(BaseModel):
             "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE'
         })
         return _obj
-

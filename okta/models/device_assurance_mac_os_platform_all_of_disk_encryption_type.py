@@ -30,10 +30,11 @@ from okta.models.disk_encryption_type_desktop import DiskEncryptionTypeDesktop
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType(BaseModel):
     """
     DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType
-    """ # noqa: E501
+    """  # noqa: E501
     include: Optional[List[DiskEncryptionTypeDesktop]] = None
     __properties: ClassVar[List[str]] = ["include"]
 
@@ -90,4 +91,3 @@ class DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

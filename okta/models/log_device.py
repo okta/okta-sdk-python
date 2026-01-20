@@ -31,22 +31,39 @@ from okta.models.log_screen_lock_type import LogScreenLockType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogDevice(BaseModel):
     """
     The entity that describes a device enrolled with passwordless authentication using Okta Verify.
-    """ # noqa: E501
-    device_integrator: Optional[Dict[str, Any]] = Field(default=None, description="The integration platform or software used with the device")
+    """  # noqa: E501
+    device_integrator: Optional[Dict[str, Any]] = Field(
+        default=None, description="The integration platform or software used with the device")
     disk_encryption_type: Optional[LogDiskEncryptionType] = None
     id: Optional[StrictStr] = Field(default=None, description="ID of the device")
     jailbreak: Optional[StrictBool] = Field(default=None, description="If the device has removed software restrictions")
-    managed: Optional[StrictBool] = Field(default=None, description="Indicates if the device is configured for device management and is registered with Okta")
+    managed: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is configured for device management and is registered with Okta")
     name: Optional[StrictStr] = None
     os_platform: Optional[StrictStr] = None
     os_version: Optional[StrictStr] = None
-    registered: Optional[StrictBool] = Field(default=None, description="Indicates if the device is registered with an Okta org and is bound to an Okta Verify instance on the device")
+    registered: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is registered with an Okta org and is bound to an Okta Verify instance on the device")
     screen_lock_type: Optional[LogScreenLockType] = None
-    secure_hardware_present: Optional[StrictBool] = Field(default=None, description="The availability of hardware security on the device")
-    __properties: ClassVar[List[str]] = ["device_integrator", "disk_encryption_type", "id", "jailbreak", "managed", "name", "os_platform", "os_version", "registered", "screen_lock_type", "secure_hardware_present"]
+    secure_hardware_present: Optional[StrictBool] = Field(default=None,
+                                                          description="The availability of hardware security on the device")
+    __properties: ClassVar[List[str]] = ["device_integrator",
+                                         "disk_encryption_type",
+                                         "id",
+                                         "jailbreak",
+                                         "managed",
+                                         "name",
+                                         "os_platform",
+                                         "os_version",
+                                         "registered",
+                                         "screen_lock_type",
+                                         "secure_hardware_present"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,4 +146,3 @@ class LogDevice(BaseModel):
             "secure_hardware_present": obj.get("secure_hardware_present")
         })
         return _obj
-

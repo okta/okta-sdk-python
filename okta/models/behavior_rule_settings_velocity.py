@@ -30,10 +30,11 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BehaviorRuleSettingsVelocity(BaseModel):
     """
     BehaviorRuleSettingsVelocity
-    """ # noqa: E501
+    """  # noqa: E501
     velocity_kph: Annotated[int, Field(strict=True, ge=1)] = Field(alias="velocityKph")
     __properties: ClassVar[List[str]] = ["velocityKph"]
 
@@ -90,4 +91,3 @@ class BehaviorRuleSettingsVelocity(BaseModel):
             "velocityKph": obj.get("velocityKph") if obj.get("velocityKph") is not None else 805
         })
         return _obj
-

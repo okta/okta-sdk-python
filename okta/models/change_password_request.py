@@ -30,13 +30,17 @@ from okta.models.password_credential import PasswordCredential
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ChangePasswordRequest(BaseModel):
     """
     ChangePasswordRequest
-    """ # noqa: E501
+    """  # noqa: E501
     new_password: Optional[PasswordCredential] = Field(default=None, alias="newPassword")
     old_password: Optional[PasswordCredential] = Field(default=None, alias="oldPassword")
-    revoke_sessions: Optional[StrictBool] = Field(default=False, description="When set to `true`, revokes all user sessions, except for the current session", alias="revokeSessions")
+    revoke_sessions: Optional[StrictBool] = Field(
+        default=False,
+        description="When set to `true`, revokes all user sessions, except for the current session",
+        alias="revokeSessions")
     __properties: ClassVar[List[str]] = ["newPassword", "oldPassword", "revokeSessions"]
 
     model_config = ConfigDict(
@@ -108,4 +112,3 @@ class ChangePasswordRequest(BaseModel):
             "revokeSessions": obj.get("revokeSessions") if obj.get("revokeSessions") is not None else False
         })
         return _obj
-

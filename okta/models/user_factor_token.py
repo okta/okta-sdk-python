@@ -28,20 +28,20 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.user_factor import UserFactor
 from okta.models.user_factor_links import UserFactorLinks
-from okta.models.user_factor_status import UserFactorStatus
 from okta.models.user_factor_token_all_of_verify import UserFactorTokenAllOfVerify
 from okta.models.user_factor_token_profile import UserFactorTokenProfile
-from okta.models.user_factor_type import UserFactorType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class UserFactorToken(UserFactor):
     """
     UserFactorToken
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[UserFactorTokenProfile] = None
     verify: Optional[UserFactorTokenAllOfVerify] = None
-    __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated", "profile", "provider", "status", "vendorName", "_embedded", "_links", "verify"]
+    __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated",
+                                         "profile", "provider", "status", "vendorName", "_embedded", "_links", "verify"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -127,4 +127,3 @@ class UserFactorToken(UserFactor):
             "verify": UserFactorTokenAllOfVerify.from_dict(obj["verify"]) if obj.get("verify") is not None else None
         })
         return _obj
-

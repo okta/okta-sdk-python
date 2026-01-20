@@ -31,10 +31,11 @@ from okta.models.dtc_windows import DTCWindows
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceAssuranceWindowsPlatformAllOfThirdPartySignalProviders(BaseModel):
     """
     Settings for third-party signal providers (based on the `WINDOWS` platform)
-    """ # noqa: E501
+    """  # noqa: E501
     dtc: Optional[DTCWindows] = None
     device_posture_id_p: Optional[DevicePostureIdP] = Field(default=None, alias="devicePostureIdP")
     __properties: ClassVar[List[str]] = ["dtc", "devicePostureIdP"]
@@ -107,4 +108,3 @@ class DeviceAssuranceWindowsPlatformAllOfThirdPartySignalProviders(BaseModel):
             "devicePostureIdP": DevicePostureIdP.from_dict(obj["devicePostureIdP"]) if obj.get("devicePostureIdP") is not None else None
         })
         return _obj
-

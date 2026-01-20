@@ -31,10 +31,11 @@ from okta.models.scim_scim_server_config_patch import ScimScimServerConfigPatch
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ScimScimServerConfig(BaseModel):
     """
     SCIM server schema configuration
-    """ # noqa: E501
+    """  # noqa: E501
     patch: Optional[ScimScimServerConfigPatch] = None
     change_password: Optional[ScimScimServerConfigChangePassword] = Field(default=None, alias="changePassword")
     __properties: ClassVar[List[str]] = ["patch", "changePassword"]
@@ -107,4 +108,3 @@ class ScimScimServerConfig(BaseModel):
             "changePassword": ScimScimServerConfigChangePassword.from_dict(obj["changePassword"]) if obj.get("changePassword") is not None else None
         })
         return _obj
-

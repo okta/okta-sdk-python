@@ -30,10 +30,11 @@ from okta.models.number_factor_challenge_embedded_links_challenge import NumberF
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorVerifyResponseWaitingEmbedded(BaseModel):
     """
     UserFactorVerifyResponseWaitingEmbedded
-    """ # noqa: E501
+    """  # noqa: E501
     challenge: Optional[NumberFactorChallengeEmbeddedLinksChallenge] = None
     __properties: ClassVar[List[str]] = ["challenge"]
 
@@ -102,4 +103,3 @@ class UserFactorVerifyResponseWaitingEmbedded(BaseModel):
             "challenge": NumberFactorChallengeEmbeddedLinksChallenge.from_dict(obj["challenge"]) if obj.get("challenge") is not None else None
         })
         return _obj
-

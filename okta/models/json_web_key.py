@@ -30,21 +30,37 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class JsonWebKey(BaseModel):
     """
     JsonWebKey
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     e: Optional[StrictStr] = Field(default=None, description="RSA key value (public exponent) for Key binding")
-    expires_at: Optional[datetime] = Field(default=None, description="Timestamp when the certificate expires", alias="expiresAt")
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the certificate expires",
+        alias="expiresAt")
     kid: Optional[StrictStr] = Field(default=None, description="Unique identifier for the certificate")
-    kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
-    n: Optional[StrictStr] = Field(default=None, description="RSA modulus value that is used by both the public and private keys and provides a link between them")
+    kty: Optional[StrictStr] = Field(
+        default=None,
+        description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
+    n: Optional[StrictStr] = Field(
+        default=None,
+        description="RSA modulus value that is used by both the public and private keys and provides a link between them")
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the certificate. Valid value: `sig`")
-    x5c: Optional[List[StrictStr]] = Field(default=None, description="X.509 certificate chain that contains a chain of one or more certificates")
-    x5t_s256: Optional[StrictStr] = Field(default=None, description="X.509 certificate SHA-256 thumbprint, which is the base64url-encoded SHA-256 thumbprint (digest) of the DER encoding of an X.509 certificate", alias="x5t#S256")
-    __properties: ClassVar[List[str]] = ["created", "e", "expiresAt", "kid", "kty", "lastUpdated", "n", "use", "x5c", "x5t#S256"]
+    x5c: Optional[List[StrictStr]] = Field(
+        default=None, description="X.509 certificate chain that contains a chain of one or more certificates")
+    x5t_s256: Optional[StrictStr] = Field(
+        default=None,
+        description="X.509 certificate SHA-256 thumbprint, which is the base64url-encoded SHA-256 thumbprint (digest) of the DER encoding of an X.509 certificate",
+        alias="x5t#S256")
+    __properties: ClassVar[List[str]] = ["created", "e", "expiresAt",
+                                         "kid", "kty", "lastUpdated", "n", "use", "x5c", "x5t#S256"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -126,4 +142,3 @@ class JsonWebKey(BaseModel):
             "x5t#S256": obj.get("x5t#S256")
         })
         return _obj
-

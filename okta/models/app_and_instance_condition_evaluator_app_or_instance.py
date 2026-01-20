@@ -30,10 +30,11 @@ from okta.models.app_and_instance_type import AppAndInstanceType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppAndInstanceConditionEvaluatorAppOrInstance(BaseModel):
     """
     AppAndInstanceConditionEvaluatorAppOrInstance
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="ID of the app")
     name: Optional[StrictStr] = Field(default=None, description="Name of the app type")
     type: Optional[AppAndInstanceType] = None
@@ -94,4 +95,3 @@ class AppAndInstanceConditionEvaluatorAppOrInstance(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

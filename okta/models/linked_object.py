@@ -31,10 +31,11 @@ from okta.models.linked_object_links_self import LinkedObjectLinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinkedObject(BaseModel):
     """
     LinkedObject
-    """ # noqa: E501
+    """  # noqa: E501
     associated: Optional[LinkedObjectDetails] = None
     primary: Optional[LinkedObjectDetails] = None
     links: Optional[LinkedObjectLinksSelf] = Field(default=None, alias="_links")
@@ -116,4 +117,3 @@ class LinkedObject(BaseModel):
             "_links": LinkedObjectLinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

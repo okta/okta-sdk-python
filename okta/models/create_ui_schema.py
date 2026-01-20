@@ -30,10 +30,11 @@ from okta.models.ui_schema_object import UISchemaObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateUISchema(BaseModel):
     """
     The request body properties for the new UI Schema
-    """ # noqa: E501
+    """  # noqa: E501
     ui_schema: Optional[UISchemaObject] = Field(default=None, alias="uiSchema")
     __properties: ClassVar[List[str]] = ["uiSchema"]
 
@@ -97,4 +98,3 @@ class CreateUISchema(BaseModel):
             "uiSchema": UISchemaObject.from_dict(obj["uiSchema"]) if obj.get("uiSchema") is not None else None
         })
         return _obj
-

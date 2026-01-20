@@ -32,13 +32,16 @@ from okta.models.idp_selection_type import IdpSelectionType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdpPolicyRuleActionIdp(BaseModel):
     """
     Specifies IdP settings
-    """ # noqa: E501
-    providers: Optional[List[IdpPolicyRuleActionProvider]] = Field(default=None, description="List of configured identity providers that a given rule can route to. Ability to define multiple providers is a part of the Identity Engine. This allows users to choose a provider when they sign in. Contact support for information on the Identity Engine.")
+    """  # noqa: E501
+    providers: Optional[List[IdpPolicyRuleActionProvider]] = Field(
+        default=None, description="List of configured identity providers that a given rule can route to. Ability to define multiple providers is a part of the Identity Engine. This allows users to choose a provider when they sign in. Contact support for information on the Identity Engine.")
     idp_selection_type: Optional[IdpSelectionType] = Field(default=None, alias="idpSelectionType")
-    match_criteria: Optional[List[IdpPolicyRuleActionMatchCriteria]] = Field(default=None, description="Required if `idpSelectionType` is set to `DYNAMIC`", alias="matchCriteria")
+    match_criteria: Optional[List[IdpPolicyRuleActionMatchCriteria]] = Field(
+        default=None, description="Required if `idpSelectionType` is set to `DYNAMIC`", alias="matchCriteria")
     __properties: ClassVar[List[str]] = ["providers", "idpSelectionType", "matchCriteria"]
 
     model_config = ConfigDict(
@@ -110,4 +113,3 @@ class IdpPolicyRuleActionIdp(BaseModel):
             "matchCriteria": [IdpPolicyRuleActionMatchCriteria.from_dict(_item) for _item in obj["matchCriteria"]] if obj.get("matchCriteria") is not None else None
         })
         return _obj
-

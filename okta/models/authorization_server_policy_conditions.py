@@ -30,10 +30,11 @@ from okta.models.client_policy_condition import ClientPolicyCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerPolicyConditions(BaseModel):
     """
     AuthorizationServerPolicyConditions
-    """ # noqa: E501
+    """  # noqa: E501
     clients: Optional[ClientPolicyCondition] = None
     __properties: ClassVar[List[str]] = ["clients"]
 
@@ -97,4 +98,3 @@ class AuthorizationServerPolicyConditions(BaseModel):
             "clients": ClientPolicyCondition.from_dict(obj["clients"]) if obj.get("clients") is not None else None
         })
         return _obj
-

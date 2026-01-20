@@ -29,14 +29,21 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UploadYubikeyOtpTokenSeedRequest(BaseModel):
     """
     UploadYubikeyOtpTokenSeedRequest
-    """ # noqa: E501
-    serial_number: Optional[StrictStr] = Field(default=None, description="The unique identifier assigned to each YubiKey device", alias="serialNumber")
+    """  # noqa: E501
+    serial_number: Optional[StrictStr] = Field(
+        default=None,
+        description="The unique identifier assigned to each YubiKey device",
+        alias="serialNumber")
     public_id: Optional[StrictStr] = Field(default=None, description="The YubiKey's public ID", alias="publicId")
     private_id: Optional[StrictStr] = Field(default=None, description="The YubiKey's private ID", alias="privateId")
-    aes_key: Optional[StrictStr] = Field(default=None, description="The cryptographic key used in the AES (Advanced Encryption Standard) algorithm to encrypt and decrypt the YubiKey OTP", alias="aesKey")
+    aes_key: Optional[StrictStr] = Field(
+        default=None,
+        description="The cryptographic key used in the AES (Advanced Encryption Standard) algorithm to encrypt and decrypt the YubiKey OTP",
+        alias="aesKey")
     __properties: ClassVar[List[str]] = ["serialNumber", "publicId", "privateId", "aesKey"]
 
     model_config = ConfigDict(
@@ -95,4 +102,3 @@ class UploadYubikeyOtpTokenSeedRequest(BaseModel):
             "aesKey": obj.get("aesKey")
         })
         return _obj
-

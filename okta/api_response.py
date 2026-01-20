@@ -196,9 +196,11 @@ class OktaAPIResponse():
                 # yield next page
                 yield (next_response.get_body(), None, next_response)
 
+
 """API response object."""
 
 T = TypeVar("T")
+
 
 class ApiResponse(BaseModel, Generic[T]):
     """

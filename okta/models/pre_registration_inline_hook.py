@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PreRegistrationInlineHook(BaseModel):
     """
     PreRegistrationInlineHook
-    """ # noqa: E501
+    """  # noqa: E501
     inline_hook_id: Optional[StrictStr] = Field(default=None, alias="inlineHookId")
     __properties: ClassVar[List[str]] = ["inlineHookId"]
 
@@ -89,4 +90,3 @@ class PreRegistrationInlineHook(BaseModel):
             "inlineHookId": obj.get("inlineHookId")
         })
         return _obj
-

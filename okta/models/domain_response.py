@@ -34,10 +34,11 @@ from okta.models.domain_validation_status import DomainValidationStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DomainResponse(BaseModel):
     """
     The properties that define an individual domain.
-    """ # noqa: E501
+    """  # noqa: E501
     brand_id: Optional[StrictStr] = Field(default=None, description="The ID number of the brand", alias="brandId")
     certificate_source_type: Optional[DomainCertificateSourceType] = Field(default=None, alias="certificateSourceType")
     dns_records: Optional[List[DNSRecordDomains]] = Field(default=None, alias="dnsRecords")
@@ -46,7 +47,8 @@ class DomainResponse(BaseModel):
     public_certificate: Optional[DomainCertificateMetadata] = Field(default=None, alias="publicCertificate")
     validation_status: Optional[DomainValidationStatus] = Field(default=None, alias="validationStatus")
     links: Optional[DomainLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["brandId", "certificateSourceType", "dnsRecords", "domain", "id", "publicCertificate", "validationStatus", "_links"]
+    __properties: ClassVar[List[str]] = ["brandId", "certificateSourceType",
+                                         "dnsRecords", "domain", "id", "publicCertificate", "validationStatus", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,4 +131,3 @@ class DomainResponse(BaseModel):
             "_links": DomainLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

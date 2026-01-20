@@ -30,12 +30,14 @@ from okta.models.domain_certificate_source_type import DomainCertificateSourceTy
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DomainRequest(BaseModel):
     """
     DomainRequest
-    """ # noqa: E501
+    """  # noqa: E501
     certificate_source_type: DomainCertificateSourceType = Field(alias="certificateSourceType")
-    domain: StrictStr = Field(description="Custom domain name  > **Note:** You can't use the reserved `drapp.{yourOrgSubDomain}.okta.com` domain.")
+    domain: StrictStr = Field(
+        description="Custom domain name  > **Note:** You can't use the reserved `drapp.{yourOrgSubDomain}.okta.com` domain.")
     __properties: ClassVar[List[str]] = ["certificateSourceType", "domain"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class DomainRequest(BaseModel):
             "domain": obj.get("domain")
         })
         return _obj
-

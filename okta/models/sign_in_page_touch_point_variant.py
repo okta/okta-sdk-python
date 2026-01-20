@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class SignInPageTouchPointVariant(str, Enum):
     """
-    Variant for the Okta sign-in page. You can publish a theme for sign-in page with different combinations of assets. Variants are preset combinations of those assets. > **Note:**  For a non-`OKTA_DEFAULT` variant, `primaryColorHex` is used for button background color and `primaryColorContrastHex` is used to optimize the opacity for button text. 
+    Variant for the Okta sign-in page. You can publish a theme for sign-in page with different combinations of assets. Variants are preset combinations of those assets. > **Note:**  For a non-`OKTA_DEFAULT` variant, `primaryColorHex` is used for button background color and `primaryColorContrastHex` is used to optimize the opacity for button text.
     """
 
     """
@@ -41,5 +41,3 @@ class SignInPageTouchPointVariant(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of SignInPageTouchPointVariant from a JSON string"""
         return cls(json.loads(json_str))
-
-

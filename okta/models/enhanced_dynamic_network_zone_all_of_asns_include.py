@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EnhancedDynamicNetworkZoneAllOfAsnsInclude(BaseModel):
     """
     EnhancedDynamicNetworkZoneAllOfAsnsInclude
-    """ # noqa: E501
+    """  # noqa: E501
     __properties: ClassVar[List[str]] = []
 
     model_config = ConfigDict(
@@ -87,4 +88,3 @@ class EnhancedDynamicNetworkZoneAllOfAsnsInclude(BaseModel):
         _obj = cls.model_validate({
         })
         return _obj
-

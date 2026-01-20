@@ -30,20 +30,32 @@ from okta.models.agent_secret_links import AgentSecretLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentJsonWebKeyRsaResponse(BaseModel):
     """
     An RSA signing key
-    """ # noqa: E501
-    e: Optional[StrictStr] = Field(default=None, description="The public exponent of the RSA key, represented as a Base64URL-encoded string.  This value is used in combination with the modulus (`n`) to verify signatures and encrypt data.")
+    """  # noqa: E501
+    e: Optional[StrictStr] = Field(
+        default=None,
+        description="The public exponent of the RSA key, represented as a Base64URL-encoded string.  This value is used in combination with the modulus (`n`) to verify signatures and encrypt data.")
     kty: StrictStr = Field(description="Cryptographic algorithm family for the certificate's key pair")
-    n: Optional[StrictStr] = Field(default=None, description="The modulus of the RSA public key, represented as a Base64URL-encoded string.  This is the primary component of the RSA key and, with the exponent (`e`), is used for cryptographic signature verification and encryption.")
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the AI agent's JSON Web Key Set (JWKS)")
+    n: Optional[StrictStr] = Field(
+        default=None,
+        description="The modulus of the RSA public key, represented as a Base64URL-encoded string.  This is the primary component of the RSA key and, with the exponent (`e`), is used for cryptographic signature verification and encryption.")
+    kid: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier of the JSON Web Key in the AI agent's JSON Web Key Set (JWKS)")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the AI agent JSON Web Key")
     alg: Optional[StrictStr] = Field(default=None, description="Algorithm that's used in the JSON Web Key")
-    use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key  You can only use signing keys for AI agents, so the value of `use` is always `sig`.")
+    use: Optional[StrictStr] = Field(
+        default=None,
+        description="Acceptable use of the JSON Web Key  You can only use signing keys for AI agents, so the value of `use` is always `sig`.")
     created: Optional[StrictStr] = Field(default=None, description="Timestamp of when the AI agent JSON Web Key was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the AI agent JSON Web Key")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp of when the AI agent JSON Web Key was last updated", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp of when the AI agent JSON Web Key was last updated",
+        alias="lastUpdated")
     links: Optional[AgentSecretLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["kid", "status", "alg", "use", "created", "id", "lastUpdated", "_links"]
 
@@ -147,4 +159,3 @@ class AgentJsonWebKeyRsaResponse(BaseModel):
             "_links": AgentSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.user_block import UserBlock
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserGetSingletonAllOfEmbedded(BaseModel):
     """
     The embedded resources related to the object if the `expand` query parameter is specified
-    """ # noqa: E501
+    """  # noqa: E501
     blocks: Optional[List[UserBlock]] = Field(default=None, description="A list of access block details for the user account")
     __properties: ClassVar[List[str]] = ["blocks"]
 
@@ -97,4 +98,3 @@ class UserGetSingletonAllOfEmbedded(BaseModel):
             "blocks": [UserBlock.from_dict(_item) for _item in obj["blocks"]] if obj.get("blocks") is not None else None
         })
         return _obj
-

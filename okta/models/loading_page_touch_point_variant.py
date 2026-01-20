@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class LoadingPageTouchPointVariant(str, Enum):
     """
-    Variant for the Okta loading page. You can publish a theme for Okta loading page with different combinations of assets. Variants are preset combinations of those assets. 
+    Variant for the Okta loading page. You can publish a theme for Okta loading page with different combinations of assets. Variants are preset combinations of those assets.
     """
 
     """
@@ -40,5 +40,3 @@ class LoadingPageTouchPointVariant(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of LoadingPageTouchPointVariant from a JSON string"""
         return cls(json.loads(json_str))
-
-

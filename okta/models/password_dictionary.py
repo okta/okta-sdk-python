@@ -30,10 +30,11 @@ from okta.models.password_dictionary_common import PasswordDictionaryCommon
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordDictionary(BaseModel):
     """
     Weak password dictionary lookup settings
-    """ # noqa: E501
+    """  # noqa: E501
     common: Optional[PasswordDictionaryCommon] = None
     __properties: ClassVar[List[str]] = ["common"]
 
@@ -97,4 +98,3 @@ class PasswordDictionary(BaseModel):
             "common": PasswordDictionaryCommon.from_dict(obj["common"]) if obj.get("common") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.okta_user_group_profile import OktaUserGroupProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AddGroupRequest(BaseModel):
     """
     AddGroupRequest
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[OktaUserGroupProfile] = None
     __properties: ClassVar[List[str]] = ["profile"]
 
@@ -97,4 +98,3 @@ class AddGroupRequest(BaseModel):
             "profile": OktaUserGroupProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

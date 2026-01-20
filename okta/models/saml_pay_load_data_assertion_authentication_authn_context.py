@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionAuthenticationAuthnContext(BaseModel):
     """
     Details of the authentication methods used for the SAML assertion
-    """ # noqa: E501
-    authn_context_class_ref: Optional[StrictStr] = Field(default=None, description="Describes the identity provider's supported authentication context classes", alias="authnContextClassRef")
+    """  # noqa: E501
+    authn_context_class_ref: Optional[StrictStr] = Field(
+        default=None,
+        description="Describes the identity provider's supported authentication context classes",
+        alias="authnContextClassRef")
     __properties: ClassVar[List[str]] = ["authnContextClassRef"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class SAMLPayLoadDataAssertionAuthenticationAuthnContext(BaseModel):
             "authnContextClassRef": obj.get("authnContextClassRef")
         })
         return _obj
-

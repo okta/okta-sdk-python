@@ -31,10 +31,11 @@ from okta.models.token_protocol_request import TokenProtocolRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataContextAllOfProtocolOriginalGrant(BaseModel):
     """
     Information about the original token request used to get the refresh token being used, when in a refresh token request
-    """ # noqa: E501
+    """  # noqa: E501
     authorization: Optional[TokenProtocolRequest] = None
     refresh_token: Optional[RefreshToken] = None
     __properties: ClassVar[List[str]] = ["authorization", "refresh_token"]
@@ -107,4 +108,3 @@ class TokenPayLoadDataContextAllOfProtocolOriginalGrant(BaseModel):
             "refresh_token": RefreshToken.from_dict(obj["refresh_token"]) if obj.get("refresh_token") is not None else None
         })
         return _obj
-

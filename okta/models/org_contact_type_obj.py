@@ -20,19 +20,18 @@
 
 
 from __future__ import annotations
-from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
+from pydantic import BaseModel, ValidationError, field_validator
 from typing import Optional
 from okta.models.org_billing_contact_type import OrgBillingContactType
 from okta.models.org_technical_contact_type import OrgTechnicalContactType
-from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
-from typing_extensions import Literal, Self
-from pydantic import Field
+from typing import Union, Any, Set, TYPE_CHECKING, Optional, Dict
+from typing_extensions import Self
 
 ORGCONTACTTYPEOBJ_ANY_OF_SCHEMAS = ["OrgBillingContactType", "OrgTechnicalContactType"]
+
 
 class OrgContactTypeObj(BaseModel):
     """
@@ -47,7 +46,7 @@ class OrgContactTypeObj(BaseModel):
         actual_instance: Optional[Union[OrgBillingContactType, OrgTechnicalContactType]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "OrgBillingContactType", "OrgTechnicalContactType" }
+    any_of_schemas: Set[str] = {"OrgBillingContactType", "OrgTechnicalContactType"}
 
     model_config = {
         "validate_assignment": True,
@@ -85,7 +84,9 @@ class OrgContactTypeObj(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in OrgContactTypeObj with anyOf schemas: OrgBillingContactType, OrgTechnicalContactType. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting the actual_instance in OrgContactTypeObj with anyOf schemas: OrgBillingContactType, OrgTechnicalContactType. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -103,17 +104,19 @@ class OrgContactTypeObj(BaseModel):
             instance.actual_instance = OrgBillingContactType.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
+            error_messages.append(str(e))
         # anyof_schema_2_validator: Optional[OrgTechnicalContactType] = None
         try:
             instance.actual_instance = OrgTechnicalContactType.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
+            error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into OrgContactTypeObj with anyOf schemas: OrgBillingContactType, OrgTechnicalContactType. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into OrgContactTypeObj with anyOf schemas: OrgBillingContactType, OrgTechnicalContactType. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -140,5 +143,3 @@ class OrgContactTypeObj(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

@@ -34,20 +34,28 @@ from okta.models.user_factor_type import UserFactorType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WebAuthnPreregistrationFactor(BaseModel):
     """
     User factor variant used for WebAuthn preregistration factors
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp indicating when the factor was enrolled")
     factor_type: Optional[UserFactorType] = Field(default=None, alias="factorType")
     id: Optional[StrictStr] = Field(default=None, description="ID of the factor")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp indicating when the factor was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp indicating when the factor was last updated",
+        alias="lastUpdated")
     profile: Optional[Dict[str, Any]] = Field(default=None, description="Specific attributes related to the factor")
     provider: Optional[UserFactorProvider] = None
     status: Optional[UserFactorStatus] = None
-    vendor_name: Optional[StrictStr] = Field(default=None, description="Name of the factor vendor. This is usually the same as the provider.", alias="vendorName")
+    vendor_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the factor vendor. This is usually the same as the provider.",
+        alias="vendorName")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated", "profile", "provider", "status", "vendorName", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "factorType", "id",
+                                         "lastUpdated", "profile", "provider", "status", "vendorName", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -125,4 +133,3 @@ class WebAuthnPreregistrationFactor(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

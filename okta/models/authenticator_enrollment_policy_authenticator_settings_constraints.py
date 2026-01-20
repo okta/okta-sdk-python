@@ -30,10 +30,11 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicyAuthenticatorSettingsConstraints(BaseModel):
     """
     Constraints for the authenticator
-    """ # noqa: E501
+    """  # noqa: E501
     aaguid_groups: Optional[List[Annotated[str, Field(strict=True)]]] = Field(default=None, description="The list of FIDO2 WebAuthn authenticator groups allowed for enrollment. The authenticators in the group are based on FIDO Alliance Metadata Service that's identified by name or the Authenticator Attestation Global Unique Identifier ([AAGUID](https://support.yubico.com/hc/en-us/articles/360016648959-YubiKey-Hardware-FIDO2-AAGUIDs)) number. These groups are defined in the [WebAuthn authenticator method settings](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Authenticator/#tag/Authenticator/operation/listAuthenticatorMethods).", alias="aaguidGroups")
     __properties: ClassVar[List[str]] = ["aaguidGroups"]
 
@@ -90,4 +91,3 @@ class AuthenticatorEnrollmentPolicyAuthenticatorSettingsConstraints(BaseModel):
             "aaguidGroups": obj.get("aaguidGroups")
         })
         return _obj
-

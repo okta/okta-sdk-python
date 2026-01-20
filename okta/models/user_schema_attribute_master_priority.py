@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaAttributeMasterPriority(BaseModel):
     """
     UserSchemaAttributeMasterPriority
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = None
     value: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["type", "value"]
@@ -91,4 +92,3 @@ class UserSchemaAttributeMasterPriority(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

@@ -29,12 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentJsonSigningKeyCommon(BaseModel):
     """
     AgentJsonSigningKeyCommon
-    """ # noqa: E501
+    """  # noqa: E501
     alg: Optional[StrictStr] = Field(default=None, description="Algorithm that's used in the JSON Web Key")
-    use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key  You can only use signing keys for AI agents, so the value of `use` is always `sig`.")
+    use: Optional[StrictStr] = Field(
+        default=None,
+        description="Acceptable use of the JSON Web Key  You can only use signing keys for AI agents, so the value of `use` is always `sig`.")
     __properties: ClassVar[List[str]] = ["alg", "use"]
 
     @field_validator('use')
@@ -101,4 +104,3 @@ class AgentJsonSigningKeyCommon(BaseModel):
             "use": obj.get("use")
         })
         return _obj
-

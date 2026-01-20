@@ -32,14 +32,18 @@ from okta.models.user_verification_enum import UserVerificationEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyOktaVerifyAllOfSettings(BaseModel):
     """
     AuthenticatorKeyOktaVerifyAllOfSettings
-    """ # noqa: E501
+    """  # noqa: E501
     channel_binding: Optional[ChannelBinding] = Field(default=None, alias="channelBinding")
     compliance: Optional[Compliance] = None
     user_verification: Optional[UserVerificationEnum] = Field(default=None, alias="userVerification")
-    app_instance_id: Optional[StrictStr] = Field(default=None, description="The application instance ID", alias="appInstanceId")
+    app_instance_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The application instance ID",
+        alias="appInstanceId")
     __properties: ClassVar[List[str]] = ["channelBinding", "compliance", "userVerification", "appInstanceId"]
 
     model_config = ConfigDict(
@@ -112,4 +116,3 @@ class AuthenticatorKeyOktaVerifyAllOfSettings(BaseModel):
             "appInstanceId": obj.get("appInstanceId")
         })
         return _obj
-

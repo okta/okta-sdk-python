@@ -32,10 +32,11 @@ from okta.models.policy_mapping_links_all_of_policy import PolicyMappingLinksAll
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyMappingLinks(BaseModel):
     """
     PolicyMappingLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     application: Optional[PolicyMappingLinksAllOfApplication] = None
     policy: Optional[PolicyMappingLinksAllOfPolicy] = None
@@ -117,4 +118,3 @@ class PolicyMappingLinks(BaseModel):
             "policy": PolicyMappingLinksAllOfPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None
         })
         return _obj
-

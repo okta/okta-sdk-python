@@ -30,10 +30,11 @@ from okta.models.authenticator_profile_tac_request import AuthenticatorProfileTa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentCreateRequestTac(BaseModel):
     """
     AuthenticatorEnrollmentCreateRequestTac
-    """ # noqa: E501
+    """  # noqa: E501
     authenticator_id: StrictStr = Field(description="Unique identifier of the TAC authenticator", alias="authenticatorId")
     profile: Optional[AuthenticatorProfileTacRequest] = None
     __properties: ClassVar[List[str]] = ["authenticatorId", "profile"]
@@ -99,4 +100,3 @@ class AuthenticatorEnrollmentCreateRequestTac(BaseModel):
             "profile": AuthenticatorProfileTacRequest.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

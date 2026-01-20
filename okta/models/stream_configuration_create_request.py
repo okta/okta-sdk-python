@@ -31,13 +31,16 @@ from okta.models.stream_configuration_delivery import StreamConfigurationDeliver
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StreamConfigurationCreateRequest(BaseModel):
     """
     StreamConfigurationCreateRequest
-    """ # noqa: E501
+    """  # noqa: E501
     delivery: StreamConfigurationDelivery
-    events_requested: Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=50)] = Field(description="The events (mapped by the array of event type URIs) that the receiver wants to receive")
-    format: Optional[StrictStr] = Field(default=None, description="The Subject Identifier format expected for any SET transmitted.")
+    events_requested: Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=50)] = Field(
+        description="The events (mapped by the array of event type URIs) that the receiver wants to receive")
+    format: Optional[StrictStr] = Field(default=None,
+                                        description="The Subject Identifier format expected for any SET transmitted.")
     __properties: ClassVar[List[str]] = ["delivery", "events_requested", "format"]
 
     @field_validator('format')
@@ -112,4 +115,3 @@ class StreamConfigurationCreateRequest(BaseModel):
             "format": obj.get("format")
         })
         return _obj
-

@@ -31,19 +31,27 @@ from okta.models.user_factor_links import UserFactorLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorYubikeyOtpToken(BaseModel):
     """
     UserFactorYubikeyOtpToken
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the token was created")
     id: Optional[StrictStr] = Field(default=None, description="ID of the token")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the token was last updated", alias="lastUpdated")
-    last_verified: Optional[datetime] = Field(default=None, description="Timestamp when the token was last verified", alias="lastVerified")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the token was last updated",
+        alias="lastUpdated")
+    last_verified: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the token was last verified",
+        alias="lastVerified")
     profile: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Specified profile information for token")
     status: Optional[StrictStr] = Field(default=None, description="Token status")
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
     links: Optional[UserFactorLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "lastVerified", "profile", "status", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated",
+                                         "lastVerified", "profile", "status", "_embedded", "_links"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -130,4 +138,3 @@ class UserFactorYubikeyOtpToken(BaseModel):
             "_links": UserFactorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

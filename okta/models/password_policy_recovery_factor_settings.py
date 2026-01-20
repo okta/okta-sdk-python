@@ -30,10 +30,11 @@ from okta.models.lifecycle_status import LifecycleStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRecoveryFactorSettings(BaseModel):
     """
     PasswordPolicyRecoveryFactorSettings
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[LifecycleStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
@@ -90,4 +91,3 @@ class PasswordPolicyRecoveryFactorSettings(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

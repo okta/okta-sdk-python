@@ -34,31 +34,98 @@ from okta.models.safe_browsing_protection_level import SafeBrowsingProtectionLev
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DTCWindows(BaseModel):
     """
     Google Chrome Device Trust Connector provider
-    """ # noqa: E501
-    antivirus_enabled: Optional[StrictBool] = Field(default=None, description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Indicates whether antivirus software is enabled", alias="antivirusEnabled")
+    """  # noqa: E501
+    antivirus_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Indicates whether antivirus software is enabled",
+        alias="antivirusEnabled")
     browser_version: Optional[ChromeBrowserVersion] = Field(default=None, alias="browserVersion")
-    built_in_dns_client_enabled: Optional[StrictBool] = Field(default=None, description="Indicates if a software stack is used to communicate with the DNS server", alias="builtInDnsClientEnabled")
-    chrome_remote_desktop_app_blocked: Optional[StrictBool] = Field(default=None, description="Indicates whether access to the Chrome Remote Desktop application is blocked through a policy", alias="chromeRemoteDesktopAppBlocked")
-    crowd_strike_agent_id: Optional[StrictStr] = Field(default=None, description="Agent ID of an installed CrowdStrike agent", alias="crowdStrikeAgentId")
-    crowd_strike_customer_id: Optional[StrictStr] = Field(default=None, description="Customer ID of an installed CrowdStrike agent", alias="crowdStrikeCustomerId")
-    device_enrollment_domain: Optional[StrictStr] = Field(default=None, description="Enrollment domain of the customer that is currently managing the device", alias="deviceEnrollmentDomain")
-    disk_encrypted: Optional[StrictBool] = Field(default=None, description="Indicates whether the main disk is encrypted", alias="diskEncrypted")
+    built_in_dns_client_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if a software stack is used to communicate with the DNS server",
+        alias="builtInDnsClientEnabled")
+    chrome_remote_desktop_app_blocked: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether access to the Chrome Remote Desktop application is blocked through a policy",
+        alias="chromeRemoteDesktopAppBlocked")
+    crowd_strike_agent_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Agent ID of an installed CrowdStrike agent",
+        alias="crowdStrikeAgentId")
+    crowd_strike_customer_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Customer ID of an installed CrowdStrike agent",
+        alias="crowdStrikeCustomerId")
+    device_enrollment_domain: Optional[StrictStr] = Field(
+        default=None,
+        description="Enrollment domain of the customer that is currently managing the device",
+        alias="deviceEnrollmentDomain")
+    disk_encrypted: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the main disk is encrypted",
+        alias="diskEncrypted")
     key_trust_level: Optional[KeyTrustLevelBrowserKey] = Field(default=None, alias="keyTrustLevel")
-    os_firewall: Optional[StrictBool] = Field(default=None, description="Indicates whether a firewall is enabled at the OS-level on the device", alias="osFirewall")
+    os_firewall: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether a firewall is enabled at the OS-level on the device",
+        alias="osFirewall")
     os_version: Optional[OSVersionFourComponents] = Field(default=None, alias="osVersion")
-    password_protection_warning_trigger: Optional[PasswordProtectionWarningTrigger] = Field(default=None, alias="passwordProtectionWarningTrigger")
-    realtime_url_check_mode: Optional[StrictBool] = Field(default=None, description="Indicates whether enterprise-grade (custom) unsafe URL scanning is enabled", alias="realtimeUrlCheckMode")
-    safe_browsing_protection_level: Optional[SafeBrowsingProtectionLevel] = Field(default=None, alias="safeBrowsingProtectionLevel")
-    screen_lock_secured: Optional[StrictBool] = Field(default=None, description="Indicates whether the device is password-protected", alias="screenLockSecured")
-    secure_boot_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the device's startup software has its Secure Boot feature enabled", alias="secureBootEnabled")
-    site_isolation_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the Site Isolation (also known as **Site Per Process**) setting is enabled", alias="siteIsolationEnabled")
-    third_party_blocking_enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether Chrome is blocking third-party software injection", alias="thirdPartyBlockingEnabled")
-    windows_machine_domain: Optional[StrictStr] = Field(default=None, description="Windows domain that the current machine has joined", alias="windowsMachineDomain")
-    windows_user_domain: Optional[StrictStr] = Field(default=None, description="Windows domain for the current OS user", alias="windowsUserDomain")
-    __properties: ClassVar[List[str]] = ["antivirusEnabled", "browserVersion", "builtInDnsClientEnabled", "chromeRemoteDesktopAppBlocked", "crowdStrikeAgentId", "crowdStrikeCustomerId", "deviceEnrollmentDomain", "diskEncrypted", "keyTrustLevel", "osFirewall", "osVersion", "passwordProtectionWarningTrigger", "realtimeUrlCheckMode", "safeBrowsingProtectionLevel", "screenLockSecured", "secureBootEnabled", "siteIsolationEnabled", "thirdPartyBlockingEnabled", "windowsMachineDomain", "windowsUserDomain"]
+    password_protection_warning_trigger: Optional[PasswordProtectionWarningTrigger] = Field(
+        default=None, alias="passwordProtectionWarningTrigger")
+    realtime_url_check_mode: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether enterprise-grade (custom) unsafe URL scanning is enabled",
+        alias="realtimeUrlCheckMode")
+    safe_browsing_protection_level: Optional[SafeBrowsingProtectionLevel] = Field(
+        default=None, alias="safeBrowsingProtectionLevel")
+    screen_lock_secured: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the device is password-protected",
+        alias="screenLockSecured")
+    secure_boot_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the device's startup software has its Secure Boot feature enabled",
+        alias="secureBootEnabled")
+    site_isolation_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the Site Isolation (also known as **Site Per Process**) setting is enabled",
+        alias="siteIsolationEnabled")
+    third_party_blocking_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether Chrome is blocking third-party software injection",
+        alias="thirdPartyBlockingEnabled")
+    windows_machine_domain: Optional[StrictStr] = Field(
+        default=None,
+        description="Windows domain that the current machine has joined",
+        alias="windowsMachineDomain")
+    windows_user_domain: Optional[StrictStr] = Field(
+        default=None,
+        description="Windows domain for the current OS user",
+        alias="windowsUserDomain")
+    __properties: ClassVar[List[str]] = ["antivirusEnabled",
+                                         "browserVersion",
+                                         "builtInDnsClientEnabled",
+                                         "chromeRemoteDesktopAppBlocked",
+                                         "crowdStrikeAgentId",
+                                         "crowdStrikeCustomerId",
+                                         "deviceEnrollmentDomain",
+                                         "diskEncrypted",
+                                         "keyTrustLevel",
+                                         "osFirewall",
+                                         "osVersion",
+                                         "passwordProtectionWarningTrigger",
+                                         "realtimeUrlCheckMode",
+                                         "safeBrowsingProtectionLevel",
+                                         "screenLockSecured",
+                                         "secureBootEnabled",
+                                         "siteIsolationEnabled",
+                                         "thirdPartyBlockingEnabled",
+                                         "windowsMachineDomain",
+                                         "windowsUserDomain"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -146,4 +213,3 @@ class DTCWindows(BaseModel):
             "windowsUserDomain": obj.get("windowsUserDomain")
         })
         return _obj
-

@@ -30,12 +30,14 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SubmissionResponseConfigInner(BaseModel):
     """
     SubmissionResponseConfigInner
-    """ # noqa: E501
+    """  # noqa: E501
     label: Optional[StrictStr] = Field(default=None, description="Display name of the variable in the Admin Console")
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=1024)]] = Field(default=None, description="Name of the variable")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=1024)]
+                   ] = Field(default=None, description="Name of the variable")
     __properties: ClassVar[List[str]] = ["label", "name"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class SubmissionResponseConfigInner(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

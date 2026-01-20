@@ -32,10 +32,11 @@ from okta.models.risk_detection_types_policy_rule_condition import RiskDetection
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntityRiskPolicyRuleConditions(BaseModel):
     """
     EntityRiskPolicyRuleConditions
-    """ # noqa: E501
+    """  # noqa: E501
     entity_risk: Optional[EntityRiskScorePolicyRuleCondition] = Field(default=None, alias="entityRisk")
     people: Optional[PolicyPeopleCondition] = None
     risk_detection_types: Optional[RiskDetectionTypesPolicyRuleCondition] = Field(default=None, alias="riskDetectionTypes")
@@ -117,4 +118,3 @@ class EntityRiskPolicyRuleConditions(BaseModel):
             "riskDetectionTypes": RiskDetectionTypesPolicyRuleCondition.from_dict(obj["riskDetectionTypes"]) if obj.get("riskDetectionTypes") is not None else None
         })
         return _obj
-

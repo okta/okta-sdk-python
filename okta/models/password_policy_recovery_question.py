@@ -31,10 +31,11 @@ from okta.models.password_policy_recovery_question_properties import PasswordPol
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRecoveryQuestion(BaseModel):
     """
     PasswordPolicyRecoveryQuestion
-    """ # noqa: E501
+    """  # noqa: E501
     properties: Optional[PasswordPolicyRecoveryQuestionProperties] = None
     status: Optional[LifecycleStatus] = None
     __properties: ClassVar[List[str]] = ["properties", "status"]
@@ -100,4 +101,3 @@ class PasswordPolicyRecoveryQuestion(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

@@ -32,10 +32,11 @@ from okta.models.inline_hook_request_object import InlineHookRequestObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BaseContext(BaseModel):
     """
     This object contains a number of sub-objects, each of which provide some type of contextual information.
-    """ # noqa: E501
+    """  # noqa: E501
     request: Optional[InlineHookRequestObject] = None
     session: Optional[BaseContextSession] = None
     user: Optional[BaseContextUser] = None
@@ -117,4 +118,3 @@ class BaseContext(BaseModel):
             "user": BaseContextUser.from_dict(obj["user"]) if obj.get("user") is not None else None
         })
         return _obj
-

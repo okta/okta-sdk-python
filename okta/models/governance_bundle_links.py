@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GovernanceBundleLinks(BaseModel):
     """
     Link relations available
-    """ # noqa: E501
+    """  # noqa: E501
     entitlements: Optional[EntitlementsLink] = None
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     __properties: ClassVar[List[str]] = ["entitlements", "self"]
@@ -107,4 +108,3 @@ class GovernanceBundleLinks(BaseModel):
             "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None
         })
         return _obj
-

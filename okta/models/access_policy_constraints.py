@@ -31,10 +31,11 @@ from okta.models.possession_constraint import PossessionConstraint
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AccessPolicyConstraints(BaseModel):
     """
     Specifies constraints for the authenticator. Constraints are logically evaluated such that only one constraint object needs to be satisfied. But, within a constraint object, each constraint property must be satisfied.
-    """ # noqa: E501
+    """  # noqa: E501
     knowledge: Optional[KnowledgeConstraint] = None
     possession: Optional[PossessionConstraint] = None
     __properties: ClassVar[List[str]] = ["knowledge", "possession"]
@@ -107,4 +108,3 @@ class AccessPolicyConstraints(BaseModel):
             "possession": PossessionConstraint.from_dict(obj["possession"]) if obj.get("possession") is not None else None
         })
         return _obj
-

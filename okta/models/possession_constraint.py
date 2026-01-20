@@ -30,23 +30,58 @@ from okta.models.authentication_method_object import AuthenticationMethodObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PossessionConstraint(BaseModel):
     """
     PossessionConstraint
-    """ # noqa: E501
-    authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(default=None, description="This property specifies the precise authenticator and method for authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="authenticationMethods")
-    excluded_authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(default=None, description="This property specifies the precise authenticator and method to exclude from authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="excludedAuthenticationMethods")
+    """  # noqa: E501
+    authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(
+        default=None, description="This property specifies the precise authenticator and method for authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="authenticationMethods")
+    excluded_authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(
+        default=None, description="This property specifies the precise authenticator and method to exclude from authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="excludedAuthenticationMethods")
     methods: Optional[List[StrictStr]] = Field(default=None, description="The authenticator methods that are permitted")
-    reauthenticate_in: Optional[StrictStr] = Field(default=None, description="The duration after which the user must re-authenticate regardless of user activity. This re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).", alias="reauthenticateIn")
-    required: Optional[StrictBool] = Field(default=None, description="This property indicates whether the knowledge or possession factor is required by the assurance. It's optional in the request, but is always returned in the response. By default, this field is `true`. If the knowledge or possession constraint has values for `excludedAuthenticationMethods` the `required` value is false. <x-lifecycle class=\"oie\"></x-lifecycle>")
+    reauthenticate_in: Optional[StrictStr] = Field(
+        default=None,
+        description="The duration after which the user must re-authenticate regardless of user activity. This re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).",
+        alias="reauthenticateIn")
+    required: Optional[StrictBool] = Field(
+        default=None,
+        description="This property indicates whether the knowledge or possession factor is required by the assurance. It's optional in the request, but is always returned in the response. By default, this field is `true`. If the knowledge or possession constraint has values for `excludedAuthenticationMethods` the `required` value is false. <x-lifecycle class=\"oie\"></x-lifecycle>")
     types: Optional[List[StrictStr]] = Field(default=None, description="The authenticator types that are permitted")
-    device_bound: Optional[StrictStr] = Field(default='OPTIONAL', description="Indicates if device-bound Factors are required. This property is only set for `POSSESSION` constraints.", alias="deviceBound")
-    hardware_protection: Optional[StrictStr] = Field(default='OPTIONAL', description="Indicates if any secrets or private keys used during authentication must be hardware protected and not exportable. This property is only set for `POSSESSION` constraints.", alias="hardwareProtection")
-    phishing_resistant: Optional[StrictStr] = Field(default='OPTIONAL', description="Indicates if phishing-resistant Factors are required. This property is only set for `POSSESSION` constraints.", alias="phishingResistant")
-    user_presence: Optional[StrictStr] = Field(default='REQUIRED', description="Indicates if the user needs to approve an Okta Verify prompt or provide biometrics (meets NIST AAL2 requirements). This property is only set for `POSSESSION` constraints.", alias="userPresence")
-    user_verification: Optional[StrictStr] = Field(default='OPTIONAL', description="Indicates the user interaction requirement (PIN or biometrics) to ensure verification of a possession factor", alias="userVerification")
-    user_verification_methods: Optional[List[StrictStr]] = Field(default=None, description="Indicates which methods can be used for user verification. `userVerificationMethods` can only be used when `userVerification` is `REQUIRED`. `BIOMETRICS` is currently the only supported method.", alias="userVerificationMethods")
-    __properties: ClassVar[List[str]] = ["authenticationMethods", "excludedAuthenticationMethods", "methods", "reauthenticateIn", "required", "types", "deviceBound", "hardwareProtection", "phishingResistant", "userPresence", "userVerification", "userVerificationMethods"]
+    device_bound: Optional[StrictStr] = Field(
+        default='OPTIONAL',
+        description="Indicates if device-bound Factors are required. This property is only set for `POSSESSION` constraints.",
+        alias="deviceBound")
+    hardware_protection: Optional[StrictStr] = Field(
+        default='OPTIONAL',
+        description="Indicates if any secrets or private keys used during authentication must be hardware protected and not exportable. This property is only set for `POSSESSION` constraints.",
+        alias="hardwareProtection")
+    phishing_resistant: Optional[StrictStr] = Field(
+        default='OPTIONAL',
+        description="Indicates if phishing-resistant Factors are required. This property is only set for `POSSESSION` constraints.",
+        alias="phishingResistant")
+    user_presence: Optional[StrictStr] = Field(
+        default='REQUIRED',
+        description="Indicates if the user needs to approve an Okta Verify prompt or provide biometrics (meets NIST AAL2 requirements). This property is only set for `POSSESSION` constraints.",
+        alias="userPresence")
+    user_verification: Optional[StrictStr] = Field(
+        default='OPTIONAL',
+        description="Indicates the user interaction requirement (PIN or biometrics) to ensure verification of a possession factor",
+        alias="userVerification")
+    user_verification_methods: Optional[List[StrictStr]] = Field(
+        default=None, description="Indicates which methods can be used for user verification. `userVerificationMethods` can only be used when `userVerification` is `REQUIRED`. `BIOMETRICS` is currently the only supported method.", alias="userVerificationMethods")
+    __properties: ClassVar[List[str]] = ["authenticationMethods",
+                                         "excludedAuthenticationMethods",
+                                         "methods",
+                                         "reauthenticateIn",
+                                         "required",
+                                         "types",
+                                         "deviceBound",
+                                         "hardwareProtection",
+                                         "phishingResistant",
+                                         "userPresence",
+                                         "userVerification",
+                                         "userVerificationMethods"]
 
     @field_validator('methods')
     def methods_validate_enum(cls, value):
@@ -55,8 +90,10 @@ class PossessionConstraint(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', 'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT']):
-                raise ValueError("each list item must be one of ('PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', 'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT')")
+            if i not in set(['PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH',
+                            'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT']):
+                raise ValueError(
+                    "each list item must be one of ('PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', 'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT')")
         return value
 
     @field_validator('types')
@@ -67,7 +104,8 @@ class PossessionConstraint(BaseModel):
 
         for i in value:
             if i not in set(['SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', 'APP', 'FEDERATED']):
-                raise ValueError("each list item must be one of ('SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', 'APP', 'FEDERATED')")
+                raise ValueError(
+                    "each list item must be one of ('SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', 'APP', 'FEDERATED')")
         return value
 
     @field_validator('device_bound')
@@ -176,7 +214,8 @@ class PossessionConstraint(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['authenticationMethods'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in excluded_authentication_methods (list)
+        # override the default output from pydantic by calling `to_dict()` of each
+        # item in excluded_authentication_methods (list)
         _items = []
         if self.excluded_authentication_methods:
             for _item in self.excluded_authentication_methods:
@@ -209,4 +248,3 @@ class PossessionConstraint(BaseModel):
             "userVerificationMethods": obj.get("userVerificationMethods")
         })
         return _obj
-

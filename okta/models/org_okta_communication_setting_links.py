@@ -31,10 +31,11 @@ from okta.models.org_okta_communication_setting_links_opt_out import OrgOktaComm
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgOktaCommunicationSettingLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for this object using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
-    """ # noqa: E501
+    """  # noqa: E501
     opt_in: Optional[OrgOktaCommunicationSettingLinksOptIn] = Field(default=None, alias="optIn")
     opt_out: Optional[OrgOktaCommunicationSettingLinksOptOut] = Field(default=None, alias="optOut")
     __properties: ClassVar[List[str]] = ["optIn", "optOut"]
@@ -107,4 +108,3 @@ class OrgOktaCommunicationSettingLinks(BaseModel):
             "optOut": OrgOktaCommunicationSettingLinksOptOut.from_dict(obj["optOut"]) if obj.get("optOut") is not None else None
         })
         return _obj
-

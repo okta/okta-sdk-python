@@ -32,7 +32,6 @@ from okta.models.behavior_rule_type import BehaviorRuleType
 from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self import LinksSelf
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -42,13 +41,17 @@ if TYPE_CHECKING:
     from okta.models.behavior_rule_anomalous_location import BehaviorRuleAnomalousLocation
     from okta.models.behavior_rule_velocity import BehaviorRuleVelocity
 
+
 class BehaviorRule(BaseModel):
     """
     BehaviorRule
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[StrictStr] = Field(default=None, description="Timestamp when the Behavior Detection Rule was created")
     id: Optional[StrictStr] = Field(default=None, description="ID of the Behavior Detection Rule")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp when the Behavior Detection Rule was last modified", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the Behavior Detection Rule was last modified",
+        alias="lastUpdated")
     name: Annotated[str, Field(strict=True, max_length=128)] = Field(description="Name of the Behavior Detection Rule")
     status: Optional[LifecycleStatus] = None
     type: BehaviorRuleType
@@ -66,7 +69,7 @@ class BehaviorRule(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'ANOMALOUS_ASN': 'BehaviorRuleASN','ANOMALOUS_DEVICE': 'BehaviorRuleAnomalousDevice','ANOMALOUS_IP': 'BehaviorRuleAnomalousIP','ANOMALOUS_LOCATION': 'BehaviorRuleAnomalousLocation','VELOCITY': 'BehaviorRuleVelocity'
+        'ANOMALOUS_ASN': 'BehaviorRuleASN', 'ANOMALOUS_DEVICE': 'BehaviorRuleAnomalousDevice', 'ANOMALOUS_IP': 'BehaviorRuleAnomalousIP', 'ANOMALOUS_LOCATION': 'BehaviorRuleAnomalousLocation', 'VELOCITY': 'BehaviorRuleVelocity'
     }
 
     @classmethod
@@ -88,7 +91,8 @@ class BehaviorRule(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[BehaviorRuleASN, BehaviorRuleAnomalousDevice, BehaviorRuleAnomalousIP, BehaviorRuleAnomalousLocation, BehaviorRuleVelocity]]:
+    def from_json(cls, json_str: str) -> Optional[Union[BehaviorRuleASN, BehaviorRuleAnomalousDevice,
+                                                        BehaviorRuleAnomalousIP, BehaviorRuleAnomalousLocation, BehaviorRuleVelocity]]:
         """Create an instance of BehaviorRule from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -126,7 +130,8 @@ class BehaviorRule(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[BehaviorRuleASN, BehaviorRuleAnomalousDevice, BehaviorRuleAnomalousIP, BehaviorRuleAnomalousLocation, BehaviorRuleVelocity]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[BehaviorRuleASN, BehaviorRuleAnomalousDevice,
+                                                              BehaviorRuleAnomalousIP, BehaviorRuleAnomalousLocation, BehaviorRuleVelocity]]:
         """Create an instance of BehaviorRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -142,7 +147,5 @@ class BehaviorRule(BaseModel):
             return import_module("okta.models.behavior_rule_velocity").BehaviorRuleVelocity.from_dict(obj)
 
         raise ValueError("BehaviorRule failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

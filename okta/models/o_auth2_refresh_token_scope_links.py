@@ -30,10 +30,11 @@ from okta.models.offline_access_scope_resource_href_object import OfflineAccessS
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2RefreshTokenScopeLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the current status of an application using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This object is used for dynamic discovery of related resources and lifecycle operations.
-    """ # noqa: E501
+    """  # noqa: E501
     scope: Optional[OfflineAccessScopeResourceHrefObject] = Field(default=None, description="Link to Scope resource")
     __properties: ClassVar[List[str]] = ["scope"]
 
@@ -97,4 +98,3 @@ class OAuth2RefreshTokenScopeLinks(BaseModel):
             "scope": OfflineAccessScopeResourceHrefObject.from_dict(obj["scope"]) if obj.get("scope") is not None else None
         })
         return _obj
-

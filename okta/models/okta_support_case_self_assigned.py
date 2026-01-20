@@ -30,10 +30,11 @@ from okta.models.self_assigned_status import SelfAssignedStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaSupportCaseSelfAssigned(BaseModel):
     """
     Customer allows Okta Support access to self-assigned cases. Support cases are self-assigned when an Okta Support team member creates and assigns the case to themselves.
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[SelfAssignedStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
@@ -90,4 +91,3 @@ class OktaSupportCaseSelfAssigned(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

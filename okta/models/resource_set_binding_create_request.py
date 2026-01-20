@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindingCreateRequest(BaseModel):
     """
     ResourceSetBindingCreateRequest
-    """ # noqa: E501
-    members: Optional[List[StrictStr]] = Field(default=None, description="URLs to user and/or group instances that are assigned to the role")
+    """  # noqa: E501
+    members: Optional[List[StrictStr]] = Field(default=None,
+                                               description="URLs to user and/or group instances that are assigned to the role")
     role: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
     __properties: ClassVar[List[str]] = ["members", "role"]
 
@@ -91,4 +93,3 @@ class ResourceSetBindingCreateRequest(BaseModel):
             "role": obj.get("role")
         })
         return _obj
-

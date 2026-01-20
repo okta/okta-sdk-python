@@ -68,4 +68,3 @@ ERROR_MESSAGE_PROXY_MISSING_AUTH = (
 ERROR_MESSAGE_PROXY_INVALID_PORT = (
     "Proxy port number must be a number, and between 1 and 65535 (inclusive)"
 )
-

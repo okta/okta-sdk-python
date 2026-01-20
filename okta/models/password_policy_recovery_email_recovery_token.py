@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRecoveryEmailRecoveryToken(BaseModel):
     """
     PasswordPolicyRecoveryEmailRecoveryToken
-    """ # noqa: E501
-    token_lifetime_minutes: Optional[StrictInt] = Field(default=10080, description="Lifetime (in minutes) of the recovery token", alias="tokenLifetimeMinutes")
+    """  # noqa: E501
+    token_lifetime_minutes: Optional[StrictInt] = Field(
+        default=10080,
+        description="Lifetime (in minutes) of the recovery token",
+        alias="tokenLifetimeMinutes")
     __properties: ClassVar[List[str]] = ["tokenLifetimeMinutes"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class PasswordPolicyRecoveryEmailRecoveryToken(BaseModel):
             "tokenLifetimeMinutes": obj.get("tokenLifetimeMinutes") if obj.get("tokenLifetimeMinutes") is not None else 10080
         })
         return _obj
-

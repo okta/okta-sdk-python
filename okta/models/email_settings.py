@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailSettings(BaseModel):
     """
     EmailSettings
-    """ # noqa: E501
+    """  # noqa: E501
     recipients: StrictStr
     __properties: ClassVar[List[str]] = ["recipients"]
 
@@ -96,4 +97,3 @@ class EmailSettings(BaseModel):
             "recipients": obj.get("recipients")
         })
         return _obj
-

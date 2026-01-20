@@ -30,10 +30,11 @@ from okta.models.identity_source_user_profile_for_upsert import IdentitySourceUs
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UsersUpdateRequestSchema(BaseModel):
     """
     UsersUpdateRequestSchema
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[IdentitySourceUserProfileForUpsert] = None
     __properties: ClassVar[List[str]] = ["profile"]
 
@@ -97,4 +98,3 @@ class UsersUpdateRequestSchema(BaseModel):
             "profile": IdentitySourceUserProfileForUpsert.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

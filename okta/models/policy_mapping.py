@@ -30,10 +30,11 @@ from okta.models.policy_mapping_links import PolicyMappingLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyMapping(BaseModel):
     """
     PolicyMapping
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = None
     links: Optional[PolicyMappingLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "_links"]
@@ -99,4 +100,3 @@ class PolicyMapping(BaseModel):
             "_links": PolicyMappingLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

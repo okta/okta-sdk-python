@@ -30,13 +30,20 @@ from okta.models.sts_vault_secret_connection_creatable_secret import STSVaultSec
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class STSVaultSecretConnectionCreatable(BaseModel):
     """
     Create an STS connection for a vaulted secret
-    """ # noqa: E501
+    """  # noqa: E501
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
-    protocol_type: Optional[StrictStr] = Field(default=None, description="The authentication protocol type used for the connection", alias="protocolType")
-    resource_indicator: Optional[StrictStr] = Field(default=None, description="Resource indicator used when requesting tokens. Defaults to the vaulted secret's ORN if not specified.", alias="resourceIndicator")
+    protocol_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The authentication protocol type used for the connection",
+        alias="protocolType")
+    resource_indicator: Optional[StrictStr] = Field(
+        default=None,
+        description="Resource indicator used when requesting tokens. Defaults to the vaulted secret's ORN if not specified.",
+        alias="resourceIndicator")
     secret: STSVaultSecretConnectionCreatableSecret
     __properties: ClassVar[List[str]] = ["connectionType", "protocolType", "resourceIndicator", "secret"]
 
@@ -120,4 +127,3 @@ class STSVaultSecretConnectionCreatable(BaseModel):
             "secret": STSVaultSecretConnectionCreatableSecret.from_dict(obj["secret"]) if obj.get("secret") is not None else None
         })
         return _obj
-

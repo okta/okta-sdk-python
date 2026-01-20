@@ -30,13 +30,17 @@ from okta.models.agent_secret_links import AgentSecretLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentJsonWebKeyResponseBase(BaseModel):
     """
     AgentJsonWebKeyResponseBase
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[StrictStr] = Field(default=None, description="Timestamp of when the AI agent JSON Web Key was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the AI agent JSON Web Key")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp of when the AI agent JSON Web Key was last updated", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp of when the AI agent JSON Web Key was last updated",
+        alias="lastUpdated")
     links: Optional[AgentSecretLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "_links"]
 
@@ -109,4 +113,3 @@ class AgentJsonWebKeyResponseBase(BaseModel):
             "_links": AgentSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.feature_stage_value import FeatureStageValue
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FeatureStage(BaseModel):
     """
     Current release cycle stage of a feature  If a feature's stage value is `EA`, the state is `null` and not returned. If the value is `BETA`, the state is `OPEN` or `CLOSED` depending on whether the `BETA` feature is manageable.  > **Note:** If a feature's stage is `OPEN BETA`, you can update it only in Preview cells. If a feature's stage is `CLOSED BETA`, you can disable it only in Preview cells.
-    """ # noqa: E501
+    """  # noqa: E501
     state: Optional[FeatureStageState] = None
     value: Optional[FeatureStageValue] = None
     __properties: ClassVar[List[str]] = ["state", "value"]
@@ -93,4 +94,3 @@ class FeatureStage(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

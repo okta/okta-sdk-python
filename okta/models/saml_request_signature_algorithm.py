@@ -31,10 +31,11 @@ from okta.models.saml_signing_algorithm import SamlSigningAlgorithm
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlRequestSignatureAlgorithm(BaseModel):
     """
     XML digital Signature Algorithm settings for signing `<AuthnRequest>` messages sent to the IdP > **Note:**  The `algorithm` property is ignored when you disable request signatures (`scope` set as `NONE`).
-    """ # noqa: E501
+    """  # noqa: E501
     algorithm: Optional[SamlSigningAlgorithm] = None
     scope: Optional[ProtocolAlgorithmRequestScope] = None
     __properties: ClassVar[List[str]] = ["algorithm", "scope"]
@@ -93,4 +94,3 @@ class SamlRequestSignatureAlgorithm(BaseModel):
             "scope": obj.get("scope")
         })
         return _obj
-

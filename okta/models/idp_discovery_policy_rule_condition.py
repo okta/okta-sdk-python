@@ -33,10 +33,11 @@ from okta.models.user_identifier_policy_rule_condition import UserIdentifierPoli
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdpDiscoveryPolicyRuleCondition(BaseModel):
     """
     IdpDiscoveryPolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     app: Optional[AppAndInstancePolicyRuleCondition] = None
     network: Optional[PolicyNetworkCondition] = None
     platform: Optional[PlatformPolicyRuleCondition] = None
@@ -127,4 +128,3 @@ class IdpDiscoveryPolicyRuleCondition(BaseModel):
             "userIdentifier": UserIdentifierPolicyRuleCondition.from_dict(obj["userIdentifier"]) if obj.get("userIdentifier") is not None else None
         })
         return _obj
-

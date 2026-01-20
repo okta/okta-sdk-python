@@ -29,14 +29,21 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TelephonyRequestDataMessageProfile(BaseModel):
     """
     Message profile specifies information about the telephony (sms/voice) message to be sent to the Okta user
-    """ # noqa: E501
-    msg_template: Optional[StrictStr] = Field(default=None, description="Default or Okta org configured sms or voice message template", alias="msgTemplate")
+    """  # noqa: E501
+    msg_template: Optional[StrictStr] = Field(
+        default=None,
+        description="Default or Okta org configured sms or voice message template",
+        alias="msgTemplate")
     phone_number: Optional[StrictStr] = Field(default=None, description="The Okta's user's phone number", alias="phoneNumber")
     otp_expires: Optional[StrictStr] = Field(default=None, description="The time when OTP expires", alias="otpExpires")
-    delivery_channel: Optional[StrictStr] = Field(default=None, description="The channel for OTP delivery - SMS or voice", alias="deliveryChannel")
+    delivery_channel: Optional[StrictStr] = Field(
+        default=None,
+        description="The channel for OTP delivery - SMS or voice",
+        alias="deliveryChannel")
     otp_code: Optional[StrictStr] = Field(default=None, description="The OTP code requested by the Okta user", alias="otpCode")
     locale: Optional[StrictStr] = Field(default=None, description="The locale associated with the Okta user")
     __properties: ClassVar[List[str]] = ["msgTemplate", "phoneNumber", "otpExpires", "deliveryChannel", "otpCode", "locale"]
@@ -99,4 +106,3 @@ class TelephonyRequestDataMessageProfile(BaseModel):
             "locale": obj.get("locale")
         })
         return _obj
-

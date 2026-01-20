@@ -30,10 +30,11 @@ from okta.models.bundle_entitlement_links_values import BundleEntitlementLinksVa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BundleEntitlementLinks(BaseModel):
     """
     Link relations available
-    """ # noqa: E501
+    """  # noqa: E501
     values: Optional[BundleEntitlementLinksValues] = None
     __properties: ClassVar[List[str]] = ["values"]
 
@@ -97,4 +98,3 @@ class BundleEntitlementLinks(BaseModel):
             "values": BundleEntitlementLinksValues.from_dict(obj["values"]) if obj.get("values") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.group_rule_group_assignment import GroupRuleGroupAssignment
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupRuleAction(BaseModel):
     """
     Defines which users and groups to assign
-    """ # noqa: E501
+    """  # noqa: E501
     assign_user_to_groups: Optional[GroupRuleGroupAssignment] = Field(default=None, alias="assignUserToGroups")
     __properties: ClassVar[List[str]] = ["assignUserToGroups"]
 
@@ -97,4 +98,3 @@ class GroupRuleAction(BaseModel):
             "assignUserToGroups": GroupRuleGroupAssignment.from_dict(obj["assignUserToGroups"]) if obj.get("assignUserToGroups") is not None else None
         })
         return _obj
-

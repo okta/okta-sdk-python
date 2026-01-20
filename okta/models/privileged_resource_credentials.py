@@ -30,12 +30,14 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PrivilegedResourceCredentials(BaseModel):
     """
     Credentials for the privileged resource
-    """ # noqa: E501
+    """  # noqa: E501
     password: Optional[SecretStr] = Field(default=None, description="The password associated with the privileged resource")
-    user_name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The username associated with the privileged resource", alias="userName")
+    user_name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(
+        description="The username associated with the privileged resource", alias="userName")
     __properties: ClassVar[List[str]] = ["password", "userName"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class PrivilegedResourceCredentials(BaseModel):
             "userName": obj.get("userName")
         })
         return _obj
-

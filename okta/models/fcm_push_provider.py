@@ -28,15 +28,15 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.fcm_configuration import FCMConfiguration
 from okta.models.links_self import LinksSelf
-from okta.models.provider_type import ProviderType
 from okta.models.push_provider import PushProvider
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FCMPushProvider(PushProvider):
     """
     FCMPushProvider
-    """ # noqa: E501
+    """  # noqa: E501
     configuration: Optional[FCMConfiguration] = None
     __properties: ClassVar[List[str]] = ["id", "lastUpdatedDate", "name", "providerType", "_links", "configuration"]
 
@@ -112,4 +112,3 @@ class FCMPushProvider(PushProvider):
             "configuration": FCMConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None
         })
         return _obj
-

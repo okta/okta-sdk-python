@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AdminConsoleSettings(BaseModel):
     """
     Settings specific to the Okta Admin Console
-    """ # noqa: E501
-    session_idle_timeout_minutes: Optional[Annotated[int, Field(le=720, strict=True, ge=5)]] = Field(default=15, description="The maximum idle time before the Okta Admin Console session expires. Must be no more than 12 hours.", alias="sessionIdleTimeoutMinutes")
-    session_max_lifetime_minutes: Optional[Annotated[int, Field(le=10080, strict=True, ge=5)]] = Field(default=720, description="The absolute maximum session lifetime of the Okta Admin Console. Must be no more than 7 days.", alias="sessionMaxLifetimeMinutes")
+    """  # noqa: E501
+    session_idle_timeout_minutes: Optional[Annotated[int, Field(le=720, strict=True, ge=5)]] = Field(
+        default=15, description="The maximum idle time before the Okta Admin Console session expires. Must be no more than 12 hours.", alias="sessionIdleTimeoutMinutes")
+    session_max_lifetime_minutes: Optional[Annotated[int, Field(le=10080, strict=True, ge=5)]] = Field(
+        default=720, description="The absolute maximum session lifetime of the Okta Admin Console. Must be no more than 7 days.", alias="sessionMaxLifetimeMinutes")
     __properties: ClassVar[List[str]] = ["sessionIdleTimeoutMinutes", "sessionMaxLifetimeMinutes"]
 
     model_config = ConfigDict(
@@ -92,4 +95,3 @@ class AdminConsoleSettings(BaseModel):
             "sessionMaxLifetimeMinutes": obj.get("sessionMaxLifetimeMinutes") if obj.get("sessionMaxLifetimeMinutes") is not None else 720
         })
         return _obj
-

@@ -31,13 +31,16 @@ from okta.models.protocol_endpoint_binding import ProtocolEndpointBinding
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlSsoEndpoint(BaseModel):
     """
     IdP's `SingleSignOnService` endpoint where Okta sends an `<AuthnRequest>` message
-    """ # noqa: E501
+    """  # noqa: E501
     binding: Optional[ProtocolEndpointBinding] = None
-    destination: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(default=None, description="URI reference that indicates the address to which the `<AuthnRequest>` message is sent. The `destination` property is required if request signatures are specified. See [SAML 2.0 Request Algorithm object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=protocol/0/algorithms/request&t=request).")
-    url: Optional[Annotated[str, Field(strict=True, max_length=1014)]] = Field(default=None, description="URL of the binding-specific endpoint to send an `<AuthnRequest>` message to the IdP. The value of `url` defaults to the same value as the `sso` endpoint if omitted during creation of a new IdP instance. The `url` should be the same value as the `Location` attribute for a published binding in the IdP's SAML Metadata `IDPSSODescriptor`.")
+    destination: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
+        default=None, description="URI reference that indicates the address to which the `<AuthnRequest>` message is sent. The `destination` property is required if request signatures are specified. See [SAML 2.0 Request Algorithm object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=protocol/0/algorithms/request&t=request).")
+    url: Optional[Annotated[str, Field(strict=True, max_length=1014)]] = Field(
+        default=None, description="URL of the binding-specific endpoint to send an `<AuthnRequest>` message to the IdP. The value of `url` defaults to the same value as the `sso` endpoint if omitted during creation of a new IdP instance. The `url` should be the same value as the `Location` attribute for a published binding in the IdP's SAML Metadata `IDPSSODescriptor`.")
     __properties: ClassVar[List[str]] = ["binding", "destination", "url"]
 
     model_config = ConfigDict(
@@ -95,4 +98,3 @@ class SamlSsoEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

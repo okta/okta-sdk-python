@@ -31,15 +31,19 @@ from okta.models.iam_role_links import IamRoleLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IamRole(BaseModel):
     """
     IamRole
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the role was created")
     description: StrictStr = Field(description="Description of the role")
     id: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
     label: StrictStr = Field(description="Unique label for the role")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the role was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the role was last updated",
+        alias="lastUpdated")
     links: Optional[IamRoleLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "description", "id", "label", "lastUpdated", "_links"]
 
@@ -114,4 +118,3 @@ class IamRole(BaseModel):
             "_links": IamRoleLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

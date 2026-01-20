@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ClientPolicyCondition(BaseModel):
     """
     Specifies which clients are included in the Policy
-    """ # noqa: E501
+    """  # noqa: E501
     include: Optional[List[StrictStr]] = Field(default=None, description="Which clients are included in the Policy")
     __properties: ClassVar[List[str]] = ["include"]
 
@@ -89,4 +90,3 @@ class ClientPolicyCondition(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

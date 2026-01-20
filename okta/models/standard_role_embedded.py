@@ -30,10 +30,11 @@ from okta.models.standard_role_embedded_targets import StandardRoleEmbeddedTarge
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StandardRoleEmbedded(BaseModel):
     """
     Optional embedded resources for the role assignment
-    """ # noqa: E501
+    """  # noqa: E501
     targets: Optional[StandardRoleEmbeddedTargets] = None
     __properties: ClassVar[List[str]] = ["targets"]
 
@@ -97,4 +98,3 @@ class StandardRoleEmbedded(BaseModel):
             "targets": StandardRoleEmbeddedTargets.from_dict(obj["targets"]) if obj.get("targets") is not None else None
         })
         return _obj
-

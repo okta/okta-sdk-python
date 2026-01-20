@@ -30,10 +30,11 @@ from okta.models.group_schema_attribute import GroupSchemaAttribute
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupSchemaCustom(BaseModel):
     """
     All custom profile properties are defined in a profile subschema with the resolution scope `#custom`
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The subschema name")
     properties: Optional[Dict[str, GroupSchemaAttribute]] = Field(default=None, description="The `#custom` object properties")
     required: Optional[List[StrictStr]] = Field(default=None, description="A collection indicating required property names")
@@ -114,4 +115,3 @@ class GroupSchemaCustom(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

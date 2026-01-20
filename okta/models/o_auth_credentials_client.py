@@ -30,14 +30,19 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuthCredentialsClient(BaseModel):
     """
     OAuth 2.0 and OpenID Connect Client object > **Note:** You must complete client registration with the IdP Authorization Server for your Okta IdP instance to obtain client credentials.
-    """ # noqa: E501
-    client_id: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="The [Unique identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the AS for the Okta IdP instance")
-    client_secret: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="The [Client secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the AS for the Okta IdP instance")
-    pkce_required: Optional[StrictBool] = Field(default=None, description="Require Proof Key for Code Exchange (PKCE) for additional verification")
-    token_endpoint_auth_method: Optional[StrictStr] = Field(default=None, description="Client authentication methods supported by the token endpoint")
+    """  # noqa: E501
+    client_id: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="The [Unique identifier](https://tools.ietf.org/html/rfc6749#section-2.2) issued by the AS for the Okta IdP instance")
+    client_secret: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="The [Client secret](https://tools.ietf.org/html/rfc6749#section-2.3.1) issued by the AS for the Okta IdP instance")
+    pkce_required: Optional[StrictBool] = Field(
+        default=None, description="Require Proof Key for Code Exchange (PKCE) for additional verification")
+    token_endpoint_auth_method: Optional[StrictStr] = Field(
+        default=None, description="Client authentication methods supported by the token endpoint")
     __properties: ClassVar[List[str]] = ["client_id", "client_secret", "pkce_required", "token_endpoint_auth_method"]
 
     @field_validator('token_endpoint_auth_method')
@@ -106,4 +111,3 @@ class OAuthCredentialsClient(BaseModel):
             "token_endpoint_auth_method": obj.get("token_endpoint_auth_method")
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PostAuthSessionFailureActionsObject(BaseModel):
     """
     PostAuthSessionFailureActionsObject
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["action"]
 
@@ -99,4 +100,3 @@ class PostAuthSessionFailureActionsObject(BaseModel):
             "action": obj.get("action")
         })
         return _obj
-

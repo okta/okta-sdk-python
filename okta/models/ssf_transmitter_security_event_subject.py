@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SsfTransmitterSecurityEventSubject(BaseModel):
     """
     The event subject
-    """ # noqa: E501
+    """  # noqa: E501
     format: Optional[StrictStr] = Field(default=None, description="The format of the subject")
     iss: Optional[StrictStr] = Field(default=None, description="An identifier of the actor")
     sub: Optional[StrictStr] = Field(default=None, description="An identifier for the subject that was acted on")
@@ -93,4 +94,3 @@ class SsfTransmitterSecurityEventSubject(BaseModel):
             "sub": obj.get("sub")
         })
         return _obj
-

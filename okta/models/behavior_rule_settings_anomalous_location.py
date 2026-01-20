@@ -31,15 +31,22 @@ from okta.models.location_granularity import LocationGranularity
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BehaviorRuleSettingsAnomalousLocation(BaseModel):
     """
     BehaviorRuleSettingsAnomalousLocation
-    """ # noqa: E501
-    max_events_used_for_evaluation: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(default=20, alias="maxEventsUsedForEvaluation")
-    min_events_needed_for_evaluation: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=0, alias="minEventsNeededForEvaluation")
+    """  # noqa: E501
+    max_events_used_for_evaluation: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(
+        default=20, alias="maxEventsUsedForEvaluation")
+    min_events_needed_for_evaluation: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(
+        default=0, alias="minEventsNeededForEvaluation")
     granularity: LocationGranularity
-    radius_kilometers: Optional[StrictInt] = Field(default=None, description="Required when `granularity` is `LAT_LONG`. Radius from the provided coordinates in kilometers.", alias="radiusKilometers")
-    __properties: ClassVar[List[str]] = ["maxEventsUsedForEvaluation", "minEventsNeededForEvaluation", "granularity", "radiusKilometers"]
+    radius_kilometers: Optional[StrictInt] = Field(
+        default=None,
+        description="Required when `granularity` is `LAT_LONG`. Radius from the provided coordinates in kilometers.",
+        alias="radiusKilometers")
+    __properties: ClassVar[List[str]] = ["maxEventsUsedForEvaluation",
+                                         "minEventsNeededForEvaluation", "granularity", "radiusKilometers"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,4 +104,3 @@ class BehaviorRuleSettingsAnomalousLocation(BaseModel):
             "radiusKilometers": obj.get("radiusKilometers")
         })
         return _obj
-

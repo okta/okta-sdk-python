@@ -30,11 +30,15 @@ from okta.models.org_preferences_links import OrgPreferencesLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgPreferences(BaseModel):
     """
     OrgPreferences
-    """ # noqa: E501
-    show_end_user_footer: Optional[StrictBool] = Field(default=None, description="Indicates if the footer is shown on the End-User Dashboard", alias="showEndUserFooter")
+    """  # noqa: E501
+    show_end_user_footer: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the footer is shown on the End-User Dashboard",
+        alias="showEndUserFooter")
     links: Optional[OrgPreferencesLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["showEndUserFooter", "_links"]
 
@@ -101,4 +105,3 @@ class OrgPreferences(BaseModel):
             "_links": OrgPreferencesLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

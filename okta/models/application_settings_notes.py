@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationSettingsNotes(BaseModel):
     """
     App notes visible to either the admin or end user
-    """ # noqa: E501
+    """  # noqa: E501
     admin: Optional[StrictStr] = Field(default=None, description="An app message that's visible to admins")
     enduser: Optional[StrictStr] = Field(default=None, description="A message that's visible in the End-User Dashboard")
     __properties: ClassVar[List[str]] = ["admin", "enduser"]
@@ -91,4 +92,3 @@ class ApplicationSettingsNotes(BaseModel):
             "enduser": obj.get("enduser")
         })
         return _obj
-

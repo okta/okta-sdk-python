@@ -30,11 +30,13 @@ from okta.models.bounces_remove_list_error import BouncesRemoveListError
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BouncesRemoveListResult(BaseModel):
     """
     BouncesRemoveListResult
-    """ # noqa: E501
-    errors: Optional[List[BouncesRemoveListError]] = Field(default=None, description="A list of emails that wasn't added to the email-bounced remove list and the error reason")
+    """  # noqa: E501
+    errors: Optional[List[BouncesRemoveListError]] = Field(
+        default=None, description="A list of emails that wasn't added to the email-bounced remove list and the error reason")
     __properties: ClassVar[List[str]] = ["errors"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class BouncesRemoveListResult(BaseModel):
             "errors": [BouncesRemoveListError.from_dict(_item) for _item in obj["errors"]] if obj.get("errors") is not None else None
         })
         return _obj
-

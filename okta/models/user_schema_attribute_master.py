@@ -31,10 +31,11 @@ from okta.models.user_schema_attribute_master_type import UserSchemaAttributeMas
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaAttributeMaster(BaseModel):
     """
     UserSchemaAttributeMaster
-    """ # noqa: E501
+    """  # noqa: E501
     priority: Optional[List[UserSchemaAttributeMasterPriority]] = None
     type: Optional[UserSchemaAttributeMasterType] = None
     __properties: ClassVar[List[str]] = ["priority", "type"]
@@ -100,4 +101,3 @@ class UserSchemaAttributeMaster(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

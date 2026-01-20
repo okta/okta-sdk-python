@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorCallProfile(BaseModel):
     """
     UserFactorCallProfile
-    """ # noqa: E501
-    phone_extension: Optional[Annotated[str, Field(strict=True, max_length=15)]] = Field(default=None, description="Extension of the associated `phoneNumber`", alias="phoneExtension")
-    phone_number: Optional[Annotated[str, Field(strict=True, max_length=15)]] = Field(default=None, description="Phone number of the factor. Format phone numbers to use the [E.164 standard](https://www.itu.int/rec/T-REC-E.164/).", alias="phoneNumber")
+    """  # noqa: E501
+    phone_extension: Optional[Annotated[str, Field(strict=True, max_length=15)]] = Field(
+        default=None, description="Extension of the associated `phoneNumber`", alias="phoneExtension")
+    phone_number: Optional[Annotated[str, Field(strict=True, max_length=15)]] = Field(
+        default=None, description="Phone number of the factor. Format phone numbers to use the [E.164 standard](https://www.itu.int/rec/T-REC-E.164/).", alias="phoneNumber")
     __properties: ClassVar[List[str]] = ["phoneExtension", "phoneNumber"]
 
     @field_validator('phone_number')
@@ -107,4 +110,3 @@ class UserFactorCallProfile(BaseModel):
             "phoneNumber": obj.get("phoneNumber")
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientSecretRequestBody(BaseModel):
     """
     OAuth2ClientSecretRequestBody
-    """ # noqa: E501
+    """  # noqa: E501
     client_secret: Optional[StrictStr] = Field(default=None, description="The OAuth 2.0 client secret string")
     status: Optional[StrictStr] = Field(default=None, description="Status of the OAuth 2.0 Client Secret")
     __properties: ClassVar[List[str]] = ["client_secret", "status"]
@@ -101,4 +102,3 @@ class OAuth2ClientSecretRequestBody(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

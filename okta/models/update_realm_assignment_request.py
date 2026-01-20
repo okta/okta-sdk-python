@@ -31,14 +31,17 @@ from okta.models.conditions import Conditions
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UpdateRealmAssignmentRequest(BaseModel):
     """
     UpdateRealmAssignmentRequest
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[Actions] = None
     conditions: Optional[Conditions] = None
     name: Optional[StrictStr] = None
-    priority: Optional[StrictInt] = Field(default=None, description="The priority of the realm assignment. The lower the number, the higher the priority. This helps resolve conflicts between realm assignments. > **Note:** When you create realm assignments in bulk, realm assignment priorities must be unique.")
+    priority: Optional[StrictInt] = Field(
+        default=None,
+        description="The priority of the realm assignment. The lower the number, the higher the priority. This helps resolve conflicts between realm assignments. > **Note:** When you create realm assignments in bulk, realm assignment priorities must be unique.")
     __properties: ClassVar[List[str]] = ["actions", "conditions", "name", "priority"]
 
     model_config = ConfigDict(
@@ -111,4 +114,3 @@ class UpdateRealmAssignmentRequest(BaseModel):
             "priority": obj.get("priority")
         })
         return _obj
-

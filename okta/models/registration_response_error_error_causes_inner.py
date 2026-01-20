@@ -29,15 +29,28 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationResponseErrorErrorCausesInner(BaseModel):
     """
     RegistrationResponseErrorErrorCausesInner
-    """ # noqa: E501
-    error_summary: Optional[StrictStr] = Field(default=None, description="Human-readable summary of the error.", alias="errorSummary")
-    reason: Optional[StrictStr] = Field(default=None, description="A brief, enum-like string that indicates the nature of the error. For example, `UNIQUE_CONSTRAINT` for a property uniqueness violation.")
-    location_type: Optional[StrictStr] = Field(default=None, description="Where in the request the error was found (`body`, `header`, `url`, or `query`).", alias="locationType")
-    location: Optional[StrictStr] = Field(default=None, description="The valid JSON path to the location of the error. For example, if there was an error in the user's `login` field, the `location` might be `data.userProfile.login`.")
-    domain: Optional[StrictStr] = Field(default=None, description="Indicates the source of the error. If the error was in the user's profile, for example, you might use `end-user`. If the error occurred in the external service, you might use `external-service`.")
+    """  # noqa: E501
+    error_summary: Optional[StrictStr] = Field(
+        default=None,
+        description="Human-readable summary of the error.",
+        alias="errorSummary")
+    reason: Optional[StrictStr] = Field(
+        default=None,
+        description="A brief, enum-like string that indicates the nature of the error. For example, `UNIQUE_CONSTRAINT` for a property uniqueness violation.")
+    location_type: Optional[StrictStr] = Field(
+        default=None,
+        description="Where in the request the error was found (`body`, `header`, `url`, or `query`).",
+        alias="locationType")
+    location: Optional[StrictStr] = Field(
+        default=None,
+        description="The valid JSON path to the location of the error. For example, if there was an error in the user's `login` field, the `location` might be `data.userProfile.login`.")
+    domain: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates the source of the error. If the error was in the user's profile, for example, you might use `end-user`. If the error occurred in the external service, you might use `external-service`.")
     __properties: ClassVar[List[str]] = ["errorSummary", "reason", "locationType", "location", "domain"]
 
     model_config = ConfigDict(
@@ -97,4 +110,3 @@ class RegistrationResponseErrorErrorCausesInner(BaseModel):
             "domain": obj.get("domain")
         })
         return _obj
-

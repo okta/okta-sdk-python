@@ -32,16 +32,25 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AIAgent(BaseModel):
     """
     AIAgent
-    """ # noqa: E501
-    app_id: Optional[StrictStr] = Field(default=None, description="The ID of the connected app for the AI agent", alias="appId")
+    """  # noqa: E501
+    app_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the connected app for the AI agent",
+        alias="appId")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the AI agent was created")
     id: Optional[StrictStr] = Field(default=None, description="Unique ID for the AI agent")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the AI agent was updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the AI agent was updated",
+        alias="lastUpdated")
     profile: Optional[AIAgentProfile] = None
-    status: Optional[StrictStr] = Field(default=None, description="When an AI agent is created, it's in the STAGED status.  After credentials and owners are associated with the agent, it can be set to the ACTIVE status.")
+    status: Optional[StrictStr] = Field(
+        default=None,
+        description="When an AI agent is created, it's in the STAGED status.  After credentials and owners are associated with the agent, it can be set to the ACTIVE status.")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["appId", "created", "id", "lastUpdated", "profile", "status", "_links"]
 
@@ -134,4 +143,3 @@ class AIAgent(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenHookResponseError(BaseModel):
     """
     When an error object is returned, it causes Okta to return an OAuth 2.0 error to the requester of the token. In the error response, the value of `error` is `server_error`, and the value of `error_description` is the string that you supplied in the `errorSummary` property of the `error` object that you returned.
-    """ # noqa: E501
-    error_summary: Optional[StrictStr] = Field(default=None, description="Human-readable summary of the error. If the error object doesn't include the `errorSummary` property defined, the following common default message is returned to the end user: `The callback service returned an error`.", alias="errorSummary")
+    """  # noqa: E501
+    error_summary: Optional[StrictStr] = Field(
+        default=None,
+        description="Human-readable summary of the error. If the error object doesn't include the `errorSummary` property defined, the following common default message is returned to the end user: `The callback service returned an error`.",
+        alias="errorSummary")
     __properties: ClassVar[List[str]] = ["errorSummary"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class TokenHookResponseError(BaseModel):
             "errorSummary": obj.get("errorSummary")
         })
         return _obj
-

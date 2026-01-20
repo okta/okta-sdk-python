@@ -29,13 +29,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FulfillmentDataOrderDetails(BaseModel):
     """
     Information about the fulfillment order that includes the factor’s make and model, the custom configuration of the factor, and inventory details.
-    """ # noqa: E501
-    customization_id: Optional[StrictStr] = Field(default=None, description="ID for the set of custom configurations of the requested factor", alias="customizationId")
-    inventory_product_id: Optional[StrictStr] = Field(default=None, description="ID for the specific inventory bucket of the requested factor", alias="inventoryProductId")
-    product_id: Optional[StrictStr] = Field(default=None, description="ID for the make and model of the requested factor", alias="productId")
+    """  # noqa: E501
+    customization_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID for the set of custom configurations of the requested factor",
+        alias="customizationId")
+    inventory_product_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID for the specific inventory bucket of the requested factor",
+        alias="inventoryProductId")
+    product_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID for the make and model of the requested factor",
+        alias="productId")
     __properties: ClassVar[List[str]] = ["customizationId", "inventoryProductId", "productId"]
 
     model_config = ConfigDict(
@@ -93,4 +103,3 @@ class FulfillmentDataOrderDetails(BaseModel):
             "productId": obj.get("productId")
         })
         return _obj
-

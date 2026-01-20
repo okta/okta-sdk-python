@@ -31,13 +31,21 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RoleTarget(BaseModel):
     """
     RoleTarget
-    """ # noqa: E501
-    assignment_type: Optional[StrictStr] = Field(default=None, description="The assignment type of how the user receives this target", alias="assignmentType")
-    expiration: Optional[datetime] = Field(default=None, description="The expiry time stamp of the associated target. It's only included in the response if the associated target will expire.")
-    orn: Optional[StrictStr] = Field(default=None, description="The [Okta Resource Name (ORN)](https://support.okta.com/help/s/article/understanding-okta-resource-name-orn) of the app target or group target")
+    """  # noqa: E501
+    assignment_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The assignment type of how the user receives this target",
+        alias="assignmentType")
+    expiration: Optional[datetime] = Field(
+        default=None,
+        description="The expiry time stamp of the associated target. It's only included in the response if the associated target will expire.")
+    orn: Optional[StrictStr] = Field(
+        default=None,
+        description="The [Okta Resource Name (ORN)](https://support.okta.com/help/s/article/understanding-okta-resource-name-orn) of the app target or group target")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["assignmentType", "expiration", "orn", "_links"]
 
@@ -110,4 +118,3 @@ class RoleTarget(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

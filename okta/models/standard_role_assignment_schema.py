@@ -29,17 +29,20 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StandardRoleAssignmentSchema(BaseModel):
     """
     StandardRoleAssignmentSchema
-    """ # noqa: E501
-    type: StrictStr = Field(description="Specify a [standard admin role](/openapi/okta-management/guides/roles/#standard-roles), an [IAM-based standard role](/openapi/okta-management/guides/roles/#iam-based-standard-roles), or `CUSTOM` for a custom role type:")
+    """  # noqa: E501
+    type: StrictStr = Field(
+        description="Specify a [standard admin role](/openapi/okta-management/guides/roles/#standard-roles), an [IAM-based standard role](/openapi/okta-management/guides/roles/#iam-based-standard-roles), or `CUSTOM` for a custom role type:")
     __properties: ClassVar[List[str]] = ["type"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['ACCESS_CERTIFICATIONS_ADMIN', 'ACCESS_REQUESTS_ADMIN', 'API_ACCESS_MANAGEMENT_ADMIN', 'APP_ADMIN', 'GROUP_MEMBERSHIP_ADMIN', 'HELP_DESK_ADMIN', 'ORG_ADMIN', 'READ_ONLY_ADMIN', 'REPORT_ADMIN', 'SUPER_ADMIN', 'USER_ADMIN', 'WORKFLOWS_ADMIN']):
+        if value not in set(['ACCESS_CERTIFICATIONS_ADMIN', 'ACCESS_REQUESTS_ADMIN', 'API_ACCESS_MANAGEMENT_ADMIN', 'APP_ADMIN', 'GROUP_MEMBERSHIP_ADMIN',
+                            'HELP_DESK_ADMIN', 'ORG_ADMIN', 'READ_ONLY_ADMIN', 'REPORT_ADMIN', 'SUPER_ADMIN', 'USER_ADMIN', 'WORKFLOWS_ADMIN']):
             raise ValueError("must be one of enum values ('ACCESS_CERTIFICATIONS_ADMIN', 'ACCESS_REQUESTS_ADMIN', 'API_ACCESS_MANAGEMENT_ADMIN', 'APP_ADMIN', 'GROUP_MEMBERSHIP_ADMIN', 'HELP_DESK_ADMIN', 'ORG_ADMIN', 'READ_ONLY_ADMIN', 'REPORT_ADMIN', 'SUPER_ADMIN', 'USER_ADMIN', 'WORKFLOWS_ADMIN')")
         return value
 
@@ -96,4 +99,3 @@ class StandardRoleAssignmentSchema(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

@@ -29,12 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogIssuer(BaseModel):
     """
     Describes the issuer of the authorization server when the authentication is performed through OAuth. This is the location where well-known resources regarding the details of the authorization servers are published.
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Varies depending on the type of authentication. If authentication is SAML 2.0, `id` is the issuer in the SAML assertion. For social login, `id` is the issuer of the token.")
-    type: Optional[StrictStr] = Field(default=None, description="Information on the `issuer` and source of the SAML assertion or token")
+    """  # noqa: E501
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="Varies depending on the type of authentication. If authentication is SAML 2.0, `id` is the issuer in the SAML assertion. For social login, `id` is the issuer of the token.")
+    type: Optional[StrictStr] = Field(default=None,
+                                      description="Information on the `issuer` and source of the SAML assertion or token")
     __properties: ClassVar[List[str]] = ["id", "type"]
 
     model_config = ConfigDict(
@@ -95,4 +99,3 @@ class LogIssuer(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

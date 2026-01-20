@@ -30,13 +30,18 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorSecurityQuestionProfile(BaseModel):
     """
     UserFactorSecurityQuestionProfile
-    """ # noqa: E501
-    answer: Optional[Annotated[str, Field(min_length=4, strict=True)]] = Field(default=None, description="Answer to the question")
+    """  # noqa: E501
+    answer: Optional[Annotated[str, Field(min_length=4, strict=True)]] = Field(
+        default=None, description="Answer to the question")
     question: Optional[StrictStr] = Field(default=None, description="Unique key for the question")
-    question_text: Optional[StrictStr] = Field(default=None, description="Human-readable text that's displayed to the user", alias="questionText")
+    question_text: Optional[StrictStr] = Field(
+        default=None,
+        description="Human-readable text that's displayed to the user",
+        alias="questionText")
     __properties: ClassVar[List[str]] = ["answer", "question", "questionText"]
 
     @field_validator('question')
@@ -45,7 +50,8 @@ class UserFactorSecurityQuestionProfile(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['disliked_food', 'name_of_first_plush_toy', 'first_award', 'favorite_security_question', 'favorite_toy', 'first_computer_game', 'favorite_movie_quote', 'first_sports_team_mascot', 'first_music_purchase', 'favorite_art_piece', 'grandmother_favorite_desert', 'first_thing_cooked', 'childhood_dream_job', 'first_kiss_location', 'place_where_significant_other_was_met', 'favorite_vacation_location', 'new_years_two_thousand', 'favorite_speaker_actor', 'favorite_book_movie_character', 'favorite_sports_player']):
+        if value not in set(['disliked_food', 'name_of_first_plush_toy', 'first_award', 'favorite_security_question', 'favorite_toy', 'first_computer_game', 'favorite_movie_quote', 'first_sports_team_mascot', 'first_music_purchase', 'favorite_art_piece', 'grandmother_favorite_desert',
+                            'first_thing_cooked', 'childhood_dream_job', 'first_kiss_location', 'place_where_significant_other_was_met', 'favorite_vacation_location', 'new_years_two_thousand', 'favorite_speaker_actor', 'favorite_book_movie_character', 'favorite_sports_player']):
             raise ValueError("must be one of enum values ('disliked_food', 'name_of_first_plush_toy', 'first_award', 'favorite_security_question', 'favorite_toy', 'first_computer_game', 'favorite_movie_quote', 'first_sports_team_mascot', 'first_music_purchase', 'favorite_art_piece', 'grandmother_favorite_desert', 'first_thing_cooked', 'childhood_dream_job', 'first_kiss_location', 'place_where_significant_other_was_met', 'favorite_vacation_location', 'new_years_two_thousand', 'favorite_speaker_actor', 'favorite_book_movie_character', 'favorite_sports_player')")
         return value
 
@@ -106,4 +112,3 @@ class UserFactorSecurityQuestionProfile(BaseModel):
             "questionText": obj.get("questionText")
         })
         return _obj
-

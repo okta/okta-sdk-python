@@ -30,10 +30,11 @@ from okta.models.provisioning_suspended_action import ProvisioningSuspendedActio
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningSuspendedCondition(BaseModel):
     """
     Behavior for a previously suspended IdP user during authentication. Not supported with OIDC IdPs.
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[ProvisioningSuspendedAction] = None
     __properties: ClassVar[List[str]] = ["action"]
 
@@ -90,4 +91,3 @@ class ProvisioningSuspendedCondition(BaseModel):
             "action": obj.get("action")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.enabled_status import EnabledStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LifecycleDeactivateSettingObject(BaseModel):
     """
     Determines whether deprovisioning occurs when the app is unassigned
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
@@ -90,4 +91,3 @@ class LifecycleDeactivateSettingObject(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

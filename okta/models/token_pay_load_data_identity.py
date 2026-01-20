@@ -30,11 +30,13 @@ from okta.models.base_token_token import BaseTokenToken
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataIdentity(BaseModel):
     """
     TokenPayLoadDataIdentity
-    """ # noqa: E501
-    claims: Optional[Dict[str, Any]] = Field(default=None, description="Claims included in the token. Consists of name-value pairs for each included claim. For descriptions of the claims that you can include, see the Okta [OpenID Connect and OAuth 2.0 API reference](/openapi/okta-oauth/guides/overview/#claims).")
+    """  # noqa: E501
+    claims: Optional[Dict[str, Any]] = Field(
+        default=None, description="Claims included in the token. Consists of name-value pairs for each included claim. For descriptions of the claims that you can include, see the Okta [OpenID Connect and OAuth 2.0 API reference](/openapi/okta-oauth/guides/overview/#claims).")
     token: Optional[BaseTokenToken] = None
     __properties: ClassVar[List[str]] = ["claims", "token"]
 
@@ -99,4 +101,3 @@ class TokenPayLoadDataIdentity(BaseModel):
             "token": BaseTokenToken.from_dict(obj["token"]) if obj.get("token") is not None else None
         })
         return _obj
-

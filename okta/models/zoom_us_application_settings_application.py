@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ZoomUsApplicationSettingsApplication(BaseModel):
     """
     Zoom app instance properties
-    """ # noqa: E501
+    """  # noqa: E501
     sub_domain: StrictStr = Field(description="Your Zoom subdomain", alias="subDomain")
     __properties: ClassVar[List[str]] = ["subDomain"]
 
@@ -89,4 +90,3 @@ class ZoomUsApplicationSettingsApplication(BaseModel):
             "subDomain": obj.get("subDomain")
         })
         return _obj
-

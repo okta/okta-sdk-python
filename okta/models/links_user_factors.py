@@ -30,10 +30,11 @@ from okta.models.links_user_factors_user import LinksUserFactorsUser
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksUserFactors(BaseModel):
     """
     LinksUserFactors
-    """ # noqa: E501
+    """  # noqa: E501
     user: Optional[LinksUserFactorsUser] = None
     __properties: ClassVar[List[str]] = ["user"]
 
@@ -97,4 +98,3 @@ class LinksUserFactors(BaseModel):
             "user": LinksUserFactorsUser.from_dict(obj["user"]) if obj.get("user") is not None else None
         })
         return _obj
-

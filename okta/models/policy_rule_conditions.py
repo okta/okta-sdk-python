@@ -50,15 +50,17 @@ from okta.models.user_status_policy_rule_condition import UserStatusPolicyRuleCo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyRuleConditions(BaseModel):
     """
     PolicyRuleConditions
-    """ # noqa: E501
+    """  # noqa: E501
     app: Optional[AppAndInstancePolicyRuleCondition] = None
     apps: Optional[AppInstancePolicyRuleCondition] = None
     auth_context: Optional[PolicyRuleAuthContextCondition] = Field(default=None, alias="authContext")
     auth_provider: Optional[PasswordPolicyAuthenticationProviderCondition] = Field(default=None, alias="authProvider")
-    before_scheduled_action: Optional[BeforeScheduledActionPolicyRuleCondition] = Field(default=None, alias="beforeScheduledAction")
+    before_scheduled_action: Optional[BeforeScheduledActionPolicyRuleCondition] = Field(
+        default=None, alias="beforeScheduledAction")
     clients: Optional[ClientPolicyCondition] = None
     context: Optional[ContextPolicyRuleCondition] = None
     device: Optional[DevicePolicyRuleCondition] = None
@@ -75,7 +77,27 @@ class PolicyRuleConditions(BaseModel):
     user_identifier: Optional[UserIdentifierPolicyRuleCondition] = Field(default=None, alias="userIdentifier")
     users: Optional[UserPolicyRuleCondition] = None
     user_status: Optional[UserStatusPolicyRuleCondition] = Field(default=None, alias="userStatus")
-    __properties: ClassVar[List[str]] = ["app", "apps", "authContext", "authProvider", "beforeScheduledAction", "clients", "context", "device", "grantTypes", "groups", "identityProvider", "mdmEnrollment", "network", "people", "platform", "risk", "riskScore", "scopes", "userIdentifier", "users", "userStatus"]
+    __properties: ClassVar[List[str]] = ["app",
+                                         "apps",
+                                         "authContext",
+                                         "authProvider",
+                                         "beforeScheduledAction",
+                                         "clients",
+                                         "context",
+                                         "device",
+                                         "grantTypes",
+                                         "groups",
+                                         "identityProvider",
+                                         "mdmEnrollment",
+                                         "network",
+                                         "people",
+                                         "platform",
+                                         "risk",
+                                         "riskScore",
+                                         "scopes",
+                                         "userIdentifier",
+                                         "users",
+                                         "userStatus"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -297,4 +319,3 @@ class PolicyRuleConditions(BaseModel):
             "userStatus": UserStatusPolicyRuleCondition.from_dict(obj["userStatus"]) if obj.get("userStatus") is not None else None
         })
         return _obj
-

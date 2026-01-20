@@ -30,10 +30,11 @@ from okta.models.csr_publish_href_hints import CsrPublishHrefHints
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class HrefCsrPublishLink(BaseModel):
     """
     Link to publish CSR
-    """ # noqa: E501
+    """  # noqa: E501
     hints: Optional[CsrPublishHrefHints] = None
     href: StrictStr = Field(description="Link URI")
     __properties: ClassVar[List[str]] = ["hints", "href"]
@@ -99,4 +100,3 @@ class HrefCsrPublishLink(BaseModel):
             "href": obj.get("href")
         })
         return _obj
-

@@ -30,11 +30,13 @@ from okta.models.telephony_response_commands_inner import TelephonyResponseComma
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TelephonyResponse(BaseModel):
     """
     Telephony inline hook response
-    """ # noqa: E501
-    commands: Optional[List[TelephonyResponseCommandsInner]] = Field(default=None, description="The `commands` object specifies whether Okta accepts the end user's sign-in credentials as valid or not. For the telephony inline hook, you typically only return one `commands` object with one array element in it.")
+    """  # noqa: E501
+    commands: Optional[List[TelephonyResponseCommandsInner]] = Field(
+        default=None, description="The `commands` object specifies whether Okta accepts the end user's sign-in credentials as valid or not. For the telephony inline hook, you typically only return one `commands` object with one array element in it.")
     __properties: ClassVar[List[str]] = ["commands"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class TelephonyResponse(BaseModel):
             "commands": [TelephonyResponseCommandsInner.from_dict(_item) for _item in obj["commands"]] if obj.get("commands") is not None else None
         })
         return _obj
-

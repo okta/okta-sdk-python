@@ -29,12 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DevicePostureIdP(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Device Posture IdP provider
-    """ # noqa: E501
-    compliant: Optional[StrictBool] = Field(default=None, description="Indicates whether the device is compliant according to the custom IDP")
-    managed: Optional[StrictBool] = Field(default=None, description="Indicates whether the device is managed according to the custom IDP")
+    """  # noqa: E501
+    compliant: Optional[StrictBool] = Field(default=None,
+                                            description="Indicates whether the device is compliant according to the custom IDP")
+    managed: Optional[StrictBool] = Field(default=None,
+                                          description="Indicates whether the device is managed according to the custom IDP")
     __properties: ClassVar[List[str]] = ["compliant", "managed"]
 
     model_config = ConfigDict(
@@ -91,4 +94,3 @@ class DevicePostureIdP(BaseModel):
             "managed": obj.get("managed")
         })
         return _obj
-

@@ -31,12 +31,14 @@ from okta.models.per_client_rate_limit_settings_use_case_mode_overrides import P
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PerClientRateLimitSettings(BaseModel):
     """
-    
-    """ # noqa: E501
+
+    """  # noqa: E501
     default_mode: PerClientRateLimitMode = Field(alias="defaultMode")
-    use_case_mode_overrides: Optional[PerClientRateLimitSettingsUseCaseModeOverrides] = Field(default=None, alias="useCaseModeOverrides")
+    use_case_mode_overrides: Optional[PerClientRateLimitSettingsUseCaseModeOverrides] = Field(
+        default=None, alias="useCaseModeOverrides")
     __properties: ClassVar[List[str]] = ["defaultMode", "useCaseModeOverrides"]
 
     model_config = ConfigDict(
@@ -100,4 +102,3 @@ class PerClientRateLimitSettings(BaseModel):
             "useCaseModeOverrides": PerClientRateLimitSettingsUseCaseModeOverrides.from_dict(obj["useCaseModeOverrides"]) if obj.get("useCaseModeOverrides") is not None else None
         })
         return _obj
-

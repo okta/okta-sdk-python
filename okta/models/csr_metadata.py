@@ -31,10 +31,11 @@ from okta.models.csr_metadata_subject_alt_names import CsrMetadataSubjectAltName
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CsrMetadata(BaseModel):
     """
     CsrMetadata
-    """ # noqa: E501
+    """  # noqa: E501
     subject: Optional[CsrMetadataSubject] = None
     subject_alt_names: Optional[CsrMetadataSubjectAltNames] = Field(default=None, alias="subjectAltNames")
     __properties: ClassVar[List[str]] = ["subject", "subjectAltNames"]
@@ -107,4 +108,3 @@ class CsrMetadata(BaseModel):
             "subjectAltNames": CsrMetadataSubjectAltNames.from_dict(obj["subjectAltNames"]) if obj.get("subjectAltNames") is not None else None
         })
         return _obj
-

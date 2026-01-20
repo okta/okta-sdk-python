@@ -32,15 +32,21 @@ from okta.models.sign_in_page_all_of_widget_customizations import SignInPageAllO
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SignInPage(BaseModel):
     """
     SignInPage
-    """ # noqa: E501
+    """  # noqa: E501
     page_content: Optional[StrictStr] = Field(default=None, description="The HTML for the page", alias="pageContent")
-    content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(default=None, alias="contentSecurityPolicySetting")
+    content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(
+        default=None, alias="contentSecurityPolicySetting")
     widget_customizations: Optional[SignInPageAllOfWidgetCustomizations] = Field(default=None, alias="widgetCustomizations")
-    widget_version: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The version specified as a [Semantic Version](https://semver.org/). This value can be a wildcard (`*`), a major version range (for example, `^2`), a major-only version (for example, `7`), or a specific `Major.Minor` version (for example, `5.15`).", alias="widgetVersion")
-    __properties: ClassVar[List[str]] = ["pageContent", "contentSecurityPolicySetting", "widgetCustomizations", "widgetVersion"]
+    widget_version: Optional[Annotated[str,
+                                       Field(strict=True)]] = Field(default=None,
+                                                                    description="The version specified as a [Semantic Version](https://semver.org/). This value can be a wildcard (`*`), a major version range (for example, `^2`), a major-only version (for example, `7`), or a specific `Major.Minor` version (for example, `5.15`).",
+                                                                    alias="widgetVersion")
+    __properties: ClassVar[List[str]] = ["pageContent",
+                                         "contentSecurityPolicySetting", "widgetCustomizations", "widgetVersion"]
 
     @field_validator('widget_version')
     def widget_version_validate_regular_expression(cls, value):
@@ -122,4 +128,3 @@ class SignInPage(BaseModel):
             "widgetVersion": obj.get("widgetVersion")
         })
         return _obj
-

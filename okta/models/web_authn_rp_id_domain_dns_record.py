@@ -30,13 +30,17 @@ from okta.models.dns_record_type_authenticators import DNSRecordTypeAuthenticato
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WebAuthnRpIdDomainDnsRecord(BaseModel):
     """
     WebAuthnRpIdDomainDnsRecord
-    """ # noqa: E501
+    """  # noqa: E501
     fqdn: Optional[StrictStr] = Field(default=None, description="The DNS record name")
     record_type: Optional[DNSRecordTypeAuthenticators] = Field(default=None, alias="recordType")
-    verification_value: Optional[StrictStr] = Field(default=None, description="The DNS record verification value", alias="verificationValue")
+    verification_value: Optional[StrictStr] = Field(
+        default=None,
+        description="The DNS record verification value",
+        alias="verificationValue")
     __properties: ClassVar[List[str]] = ["fqdn", "recordType", "verificationValue"]
 
     model_config = ConfigDict(
@@ -94,4 +98,3 @@ class WebAuthnRpIdDomainDnsRecord(BaseModel):
             "verificationValue": obj.get("verificationValue")
         })
         return _obj
-

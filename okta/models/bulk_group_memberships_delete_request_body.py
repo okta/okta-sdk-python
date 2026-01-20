@@ -31,11 +31,13 @@ from okta.models.identity_source_group_memberships_delete_profile_inner import I
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BulkGroupMembershipsDeleteRequestBody(BaseModel):
     """
     BulkGroupMembershipsDeleteRequestBody
-    """ # noqa: E501
-    memberships: Optional[Annotated[List[IdentitySourceGroupMembershipsDeleteProfileInner], Field(min_length=1, max_length=200)]] = Field(default=None, description="Array of group memberships that need to be deleted in Okta")
+    """  # noqa: E501
+    memberships: Optional[Annotated[List[IdentitySourceGroupMembershipsDeleteProfileInner], Field(min_length=1, max_length=200)]] = Field(
+        default=None, description="Array of group memberships that need to be deleted in Okta")
     __properties: ClassVar[List[str]] = ["memberships"]
 
     model_config = ConfigDict(
@@ -98,4 +100,3 @@ class BulkGroupMembershipsDeleteRequestBody(BaseModel):
             "memberships": [IdentitySourceGroupMembershipsDeleteProfileInner.from_dict(_item) for _item in obj["memberships"]] if obj.get("memberships") is not None else None
         })
         return _obj
-

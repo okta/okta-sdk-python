@@ -31,10 +31,11 @@ from okta.models.org_contact_type import OrgContactType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgBillingContactType(BaseModel):
     """
     Org billing contact
-    """ # noqa: E501
+    """  # noqa: E501
     contact_type: Optional[OrgContactType] = Field(default=None, alias="contactType")
     links: Optional[OrgBillingContactTypeLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["contactType", "_links"]
@@ -100,4 +101,3 @@ class OrgBillingContactType(BaseModel):
             "_links": OrgBillingContactTypeLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

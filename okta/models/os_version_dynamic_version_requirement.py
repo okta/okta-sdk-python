@@ -30,13 +30,18 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OSVersionDynamicVersionRequirement(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Contains the necessary properties for a dynamic version requirement
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = Field(default=None, description="Indicates the type of the dynamic OS version requirement")
-    distance_from_latest_major: Optional[Annotated[int, Field(le=1, strict=True, ge=0)]] = Field(default=None, description="Indicates the distance from the latest major version", alias="distanceFromLatestMajor")
-    latest_security_patch: Optional[StrictBool] = Field(default=None, description="Indicates whether the device needs to be on the latest security patch", alias="latestSecurityPatch")
+    distance_from_latest_major: Optional[Annotated[int, Field(le=1, strict=True, ge=0)]] = Field(
+        default=None, description="Indicates the distance from the latest major version", alias="distanceFromLatestMajor")
+    latest_security_patch: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the device needs to be on the latest security patch",
+        alias="latestSecurityPatch")
     __properties: ClassVar[List[str]] = ["type", "distanceFromLatestMajor", "latestSecurityPatch"]
 
     @field_validator('type')
@@ -104,4 +109,3 @@ class OSVersionDynamicVersionRequirement(BaseModel):
             "latestSecurityPatch": obj.get("latestSecurityPatch")
         })
         return _obj
-

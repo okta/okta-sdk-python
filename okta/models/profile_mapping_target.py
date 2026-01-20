@@ -30,12 +30,15 @@ from okta.models.source_links import SourceLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProfileMappingTarget(BaseModel):
     """
     The parameter is the target of a profile mapping and is a valid [JSON Schema Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04) document with the following properties. The data type can be an app instance or an Okta object.   > **Note:** If the target is Okta and the UserTypes feature isn't enabled, then the target `_links` only has a link to the schema.
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the application instance or UserType")
-    name: Optional[StrictStr] = Field(default=None, description="Variable name of the application instance or name of the referenced userType")
+    name: Optional[StrictStr] = Field(
+        default=None,
+        description="Variable name of the application instance or name of the referenced userType")
     type: Optional[StrictStr] = Field(default=None, description="Type of user referenced in the mapping")
     links: Optional[SourceLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "name", "type", "_links"]
@@ -109,4 +112,3 @@ class ProfileMappingTarget(BaseModel):
             "_links": SourceLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

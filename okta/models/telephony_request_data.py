@@ -32,10 +32,11 @@ from okta.models.telephony_request_data_user_profile import TelephonyRequestData
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TelephonyRequestData(BaseModel):
     """
     TelephonyRequestData
-    """ # noqa: E501
+    """  # noqa: E501
     context: Optional[RegistrationInlineHookSSRDataAllOfDataContext] = None
     message_profile: Optional[TelephonyRequestDataMessageProfile] = Field(default=None, alias="messageProfile")
     user_profile: Optional[TelephonyRequestDataUserProfile] = Field(default=None, alias="userProfile")
@@ -117,4 +118,3 @@ class TelephonyRequestData(BaseModel):
             "userProfile": TelephonyRequestDataUserProfile.from_dict(obj["userProfile"]) if obj.get("userProfile") is not None else None
         })
         return _obj
-

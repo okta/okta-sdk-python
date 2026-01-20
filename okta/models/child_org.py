@@ -32,24 +32,38 @@ from okta.models.org_creation_admin import OrgCreationAdmin
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ChildOrg(BaseModel):
     """
     ChildOrg
-    """ # noqa: E501
+    """  # noqa: E501
     admin: OrgCreationAdmin
     created: Optional[datetime] = Field(default=None, description="Timestamp when the org was created")
     edition: StrictStr = Field(description="Edition for the org. `SKU` is the only supported value.")
     id: Optional[StrictStr] = Field(default=None, description="Org ID")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the org was last updated", alias="lastUpdated")
-    name: Annotated[str, Field(strict=True)] = Field(description="Unique name of the org. This name appears in the HTML `<title>` tag of the new org sign-in page. Only less than 4-width UTF-8 encoded characters are allowed.")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the org was last updated",
+        alias="lastUpdated")
+    name: Annotated[str, Field(strict=True)] = Field(
+        description="Unique name of the org. This name appears in the HTML `<title>` tag of the new org sign-in page. Only less than 4-width UTF-8 encoded characters are allowed.")
     settings: Optional[Dict[str, Any]] = Field(default=None, description="Settings associated with the created org")
-    status: Optional[StrictStr] = Field(default=None, description="Status of the org. `ACTIVE` is returned after the org is created.")
-    subdomain: Annotated[str, Field(strict=True)] = Field(description="Subdomain of the org. Must be unique and include no spaces.")
+    status: Optional[StrictStr] = Field(default=None,
+                                        description="Status of the org. `ACTIVE` is returned after the org is created.")
+    subdomain: Annotated[str, Field(strict=True)] = Field(
+        description="Subdomain of the org. Must be unique and include no spaces.")
     token: Optional[StrictStr] = Field(default=None, description="API token associated with the child org super admin account. Use this API token to provision resources (such as policies, apps, and groups) on the newly created child org. This token is revoked if the super admin account is deactivated. > **Note:** If this API token expires, sign in to the Admin Console as the super admin user and create a new API token. See [Create an API token](https://developer.okta.com/docs/guides/create-an-api-token/).")
-    token_type: Optional[StrictStr] = Field(default=None, description="Type of returned `token`. See [Okta API tokens](https://developer.okta.com/docs/guides/create-an-api-token/main/#okta-api-tokens).", alias="tokenType")
+    token_type: Optional[StrictStr] = Field(
+        default=None,
+        description="Type of returned `token`. See [Okta API tokens](https://developer.okta.com/docs/guides/create-an-api-token/main/#okta-api-tokens).",
+        alias="tokenType")
     website: Optional[StrictStr] = Field(default=None, description="Default website for the org")
-    links: Optional[Dict[str, Any]] = Field(default=None, description="Specifies available link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification", alias="_links")
-    __properties: ClassVar[List[str]] = ["admin", "created", "edition", "id", "lastUpdated", "name", "settings", "status", "subdomain", "token", "tokenType", "website", "_links"]
+    links: Optional[Dict[str,
+                         Any]] = Field(default=None,
+                                       description="Specifies available link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification",
+                                       alias="_links")
+    __properties: ClassVar[List[str]] = ["admin", "created", "edition", "id", "lastUpdated",
+                                         "name", "settings", "status", "subdomain", "token", "tokenType", "website", "_links"]
 
     @field_validator('edition')
     def edition_validate_enum(cls, value):
@@ -166,4 +180,3 @@ class ChildOrg(BaseModel):
             "_links": obj.get("_links")
         })
         return _obj
-

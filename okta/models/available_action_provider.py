@@ -29,18 +29,20 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Union
 from okta.models.action_provider_payload_type import ActionProviderPayloadType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.workflow_available_action_provider import WorkflowAvailableActionProvider
 
+
 class AvailableActionProvider(BaseModel):
     """
     AvailableActionProvider
-    """ # noqa: E501
+    """  # noqa: E501
     action_name: StrictStr = Field(description="The name of the action flow", alias="actionName")
-    external_id: StrictStr = Field(description="The unique identifier of the action flow in the provider system", alias="externalId")
+    external_id: StrictStr = Field(
+        description="The unique identifier of the action flow in the provider system",
+        alias="externalId")
     type: ActionProviderPayloadType
     url: StrictStr = Field(description="The URL to the action flow")
     __properties: ClassVar[List[str]] = ["actionName", "externalId", "type", "url"]
@@ -108,10 +110,9 @@ class AvailableActionProvider(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'WorkflowAvailableActionProvider':
-            return import_module("okta.models.workflow_available_action_provider").WorkflowAvailableActionProvider.from_dict(obj)
+            return import_module(
+                "okta.models.workflow_available_action_provider").WorkflowAvailableActionProvider.from_dict(obj)
 
         raise ValueError("AvailableActionProvider failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

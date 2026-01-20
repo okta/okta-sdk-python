@@ -32,10 +32,11 @@ from okta.models.links_user_authenticators_user import LinksUserAuthenticatorsUs
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentLinks(BaseModel):
     """
     AuthenticatorEnrollmentLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     user: Optional[LinksUserAuthenticatorsUser] = None
     authenticator: Optional[LinksAuthenticatorAuthenticator] = None
@@ -117,4 +118,3 @@ class AuthenticatorEnrollmentLinks(BaseModel):
             "authenticator": LinksAuthenticatorAuthenticator.from_dict(obj["authenticator"]) if obj.get("authenticator") is not None else None
         })
         return _obj
-

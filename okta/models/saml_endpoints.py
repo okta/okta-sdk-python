@@ -32,10 +32,11 @@ from okta.models.saml_sso_endpoint import SamlSsoEndpoint
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlEndpoints(BaseModel):
     """
     SAML 2.0 HTTP binding settings for IdP and SP (Okta)
-    """ # noqa: E501
+    """  # noqa: E501
     acs: Optional[SamlAcsEndpoint] = None
     slo: Optional[SamlSloEndpoint] = None
     sso: Optional[SamlSsoEndpoint] = None
@@ -117,4 +118,3 @@ class SamlEndpoints(BaseModel):
             "sso": SamlSsoEndpoint.from_dict(obj["sso"]) if obj.get("sso") is not None else None
         })
         return _obj
-

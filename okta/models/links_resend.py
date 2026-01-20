@@ -30,10 +30,11 @@ from okta.models.links_resend_resend import LinksResendResend
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksResend(BaseModel):
     """
     LinksResend
-    """ # noqa: E501
+    """  # noqa: E501
     resend: Optional[LinksResendResend] = None
     __properties: ClassVar[List[str]] = ["resend"]
 
@@ -97,4 +98,3 @@ class LinksResend(BaseModel):
             "resend": LinksResendResend.from_dict(obj["resend"]) if obj.get("resend") is not None else None
         })
         return _obj
-

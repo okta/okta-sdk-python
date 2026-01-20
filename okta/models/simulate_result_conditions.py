@@ -30,10 +30,11 @@ from okta.models.simulate_result_status import SimulateResultStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SimulateResultConditions(BaseModel):
     """
     SimulateResultConditions
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[SimulateResultStatus] = None
     type: Optional[StrictStr] = Field(default=None, description="The type of condition")
     __properties: ClassVar[List[str]] = ["status", "type"]
@@ -92,4 +93,3 @@ class SimulateResultConditions(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

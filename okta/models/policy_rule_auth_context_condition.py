@@ -30,10 +30,11 @@ from okta.models.policy_rule_auth_context_type import PolicyRuleAuthContextType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyRuleAuthContextCondition(BaseModel):
     """
     Specifies an authentication entry point
-    """ # noqa: E501
+    """  # noqa: E501
     auth_type: Optional[PolicyRuleAuthContextType] = Field(default=None, alias="authType")
     __properties: ClassVar[List[str]] = ["authType"]
 
@@ -90,4 +91,3 @@ class PolicyRuleAuthContextCondition(BaseModel):
             "authType": obj.get("authType")
         })
         return _obj
-

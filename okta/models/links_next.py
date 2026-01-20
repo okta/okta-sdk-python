@@ -30,10 +30,11 @@ from okta.models.href_object_next_link import HrefObjectNextLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksNext(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the current status of an application using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. Use the `LinksNext` object for dynamic discovery of related resources and lifecycle operations.
-    """ # noqa: E501
+    """  # noqa: E501
     next: Optional[HrefObjectNextLink] = None
     __properties: ClassVar[List[str]] = ["next"]
 
@@ -97,4 +98,3 @@ class LinksNext(BaseModel):
             "next": HrefObjectNextLink.from_dict(obj["next"]) if obj.get("next") is not None else None
         })
         return _obj
-

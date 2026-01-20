@@ -28,21 +28,34 @@ from pydantic import ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.registration_inline_hook_pp_data_all_of_data import RegistrationInlineHookPPDataAllOfData
 from okta.models.registration_inline_hook_request import RegistrationInlineHookRequest
-from okta.models.registration_inline_hook_request_type import RegistrationInlineHookRequestType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class RegistrationInlineHookPPData(RegistrationInlineHookRequest):
     """
     RegistrationInlineHookPPData
-    """ # noqa: E501
-    cloud_event_version: Optional[StrictStr] = Field(default=None, description="The inline hook cloud version", alias="cloudEventVersion")
-    content_type: Optional[StrictStr] = Field(default=None, description="The inline hook request header content", alias="contentType")
+    """  # noqa: E501
+    cloud_event_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook cloud version",
+        alias="cloudEventVersion")
+    content_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook request header content",
+        alias="contentType")
     event_id: Optional[StrictStr] = Field(default=None, description="The individual inline hook request ID", alias="eventId")
-    event_time: Optional[StrictStr] = Field(default=None, description="The time the inline hook request was sent", alias="eventTime")
-    event_type_version: Optional[StrictStr] = Field(default=None, description="The inline hook version", alias="eventTypeVersion")
+    event_time: Optional[StrictStr] = Field(
+        default=None,
+        description="The time the inline hook request was sent",
+        alias="eventTime")
+    event_type_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook version",
+        alias="eventTypeVersion")
     data: Optional[RegistrationInlineHookPPDataAllOfData] = None
-    __properties: ClassVar[List[str]] = ["cloudEventVersion", "contentType", "eventId", "eventTime", "eventTypeVersion", "eventType", "requestType", "source", "data"]
+    __properties: ClassVar[List[str]] = ["cloudEventVersion", "contentType", "eventId",
+                                         "eventTime", "eventTypeVersion", "eventType", "requestType", "source", "data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -112,4 +125,3 @@ class RegistrationInlineHookPPData(RegistrationInlineHookRequest):
             "data": RegistrationInlineHookPPDataAllOfData.from_dict(obj["data"]) if obj.get("data") is not None else None
         })
         return _obj
-

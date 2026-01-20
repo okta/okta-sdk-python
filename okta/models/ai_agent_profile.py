@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AIAgentProfile(BaseModel):
     """
     AI agent profile
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the AI agent")
     name: StrictStr = Field(description="Unique name of the AI agent")
     __properties: ClassVar[List[str]] = ["description", "name"]
@@ -91,4 +92,3 @@ class AIAgentProfile(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

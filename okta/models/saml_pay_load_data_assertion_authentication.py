@@ -30,11 +30,15 @@ from okta.models.saml_pay_load_data_assertion_authentication_authn_context impor
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionAuthentication(BaseModel):
     """
     Provides a JSON representation of the `<saml:AuthnStatement>` element of the SAML assertion
-    """ # noqa: E501
-    session_index: Optional[StrictStr] = Field(default=None, description="The unique identifier describing the assertion statement", alias="sessionIndex")
+    """  # noqa: E501
+    session_index: Optional[StrictStr] = Field(
+        default=None,
+        description="The unique identifier describing the assertion statement",
+        alias="sessionIndex")
     authn_context: Optional[SAMLPayLoadDataAssertionAuthenticationAuthnContext] = Field(default=None, alias="authnContext")
     __properties: ClassVar[List[str]] = ["sessionIndex", "authnContext"]
 
@@ -99,4 +103,3 @@ class SAMLPayLoadDataAssertionAuthentication(BaseModel):
             "authnContext": SAMLPayLoadDataAssertionAuthenticationAuthnContext.from_dict(obj["authnContext"]) if obj.get("authnContext") is not None else None
         })
         return _obj
-

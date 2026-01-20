@@ -30,10 +30,11 @@ from okta.models.customizable_page import CustomizablePage
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PageRootEmbedded(BaseModel):
     """
     PageRootEmbedded
-    """ # noqa: E501
+    """  # noqa: E501
     default: Optional[CustomizablePage] = None
     customized: Optional[CustomizablePage] = None
     customized_url: Optional[StrictStr] = Field(default=None, alias="customizedUrl")
@@ -119,4 +120,3 @@ class PageRootEmbedded(BaseModel):
             "previewUrl": obj.get("previewUrl")
         })
         return _obj
-

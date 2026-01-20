@@ -30,11 +30,13 @@ from okta.models.domain_response import DomainResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DomainListResponse(BaseModel):
     """
     Defines a list of domains with a subset of the properties for each domain
-    """ # noqa: E501
-    domains: Optional[List[DomainResponse]] = Field(default=None, description="Each element of the array defines an individual domain")
+    """  # noqa: E501
+    domains: Optional[List[DomainResponse]] = Field(default=None,
+                                                    description="Each element of the array defines an individual domain")
     __properties: ClassVar[List[str]] = ["domains"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class DomainListResponse(BaseModel):
             "domains": [DomainResponse.from_dict(_item) for _item in obj["domains"]] if obj.get("domains") is not None else None
         })
         return _obj
-

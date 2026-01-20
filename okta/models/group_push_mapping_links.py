@@ -31,10 +31,11 @@ from okta.models.href_object_group_link import HrefObjectGroupLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupPushMappingLinks(BaseModel):
     """
     Discoverable resources related to the group push mapping
-    """ # noqa: E501
+    """  # noqa: E501
     app: Optional[HrefObjectAppLink] = None
     source_group: Optional[HrefObjectGroupLink] = Field(default=None, alias="sourceGroup")
     target_group: Optional[HrefObjectGroupLink] = Field(default=None, alias="targetGroup")
@@ -116,4 +117,3 @@ class GroupPushMappingLinks(BaseModel):
             "targetGroup": HrefObjectGroupLink.from_dict(obj["targetGroup"]) if obj.get("targetGroup") is not None else None
         })
         return _obj
-

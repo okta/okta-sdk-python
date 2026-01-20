@@ -34,10 +34,11 @@ from okta.models.org_okta_support_settings_obj_links_revoke import OrgOktaSuppor
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgOktaSupportSettingsObjLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the Okta Support Settings object using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
-    """ # noqa: E501
+    """  # noqa: E501
     extend: Optional[OrgOktaSupportSettingsObjLinksExtend] = None
     revoke: Optional[OrgOktaSupportSettingsObjLinksRevoke] = None
     grant: Optional[OrgOktaSupportSettingsObjLinksGrant] = None
@@ -137,4 +138,3 @@ class OrgOktaSupportSettingsObjLinks(BaseModel):
             "cases": OrgOktaSupportSettingsObjLinksCases.from_dict(obj["cases"]) if obj.get("cases") is not None else None
         })
         return _obj
-

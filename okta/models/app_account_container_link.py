@@ -31,10 +31,11 @@ from okta.models.href_object_logo_link import HrefObjectLogoLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppAccountContainerLink(BaseModel):
     """
     AppAccountContainerLink
-    """ # noqa: E501
+    """  # noqa: E501
     login: Optional[HrefObjectAppLink] = None
     logo: Optional[HrefObjectLogoLink] = None
     __properties: ClassVar[List[str]] = ["login", "logo"]
@@ -107,4 +108,3 @@ class AppAccountContainerLink(BaseModel):
             "logo": HrefObjectLogoLink.from_dict(obj["logo"]) if obj.get("logo") is not None else None
         })
         return _obj
-

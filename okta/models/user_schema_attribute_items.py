@@ -30,10 +30,11 @@ from okta.models.user_schema_attribute_enum import UserSchemaAttributeEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaAttributeItems(BaseModel):
     """
     UserSchemaAttributeItems
-    """ # noqa: E501
+    """  # noqa: E501
     enum: Optional[List[StrictStr]] = None
     one_of: Optional[List[UserSchemaAttributeEnum]] = Field(default=None, alias="oneOf")
     type: Optional[StrictStr] = None
@@ -101,4 +102,3 @@ class UserSchemaAttributeItems(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

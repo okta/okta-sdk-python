@@ -30,10 +30,11 @@ from okta.models.role_type import RoleType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AssignRoleRequest(BaseModel):
     """
     AssignRoleRequest
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[RoleType] = None
     __properties: ClassVar[List[str]] = ["type"]
 
@@ -90,4 +91,3 @@ class AssignRoleRequest(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

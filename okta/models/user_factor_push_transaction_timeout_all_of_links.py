@@ -31,10 +31,11 @@ from okta.models.user_factor import UserFactor
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorPushTransactionTimeoutAllOfLinks(BaseModel):
     """
     UserFactorPushTransactionTimeoutAllOfLinks
-    """ # noqa: E501
+    """  # noqa: E501
     verify: Optional[LinksVerifyVerify] = None
     factor: Optional[UserFactor] = None
     __properties: ClassVar[List[str]] = ["verify", "factor"]
@@ -107,4 +108,3 @@ class UserFactorPushTransactionTimeoutAllOfLinks(BaseModel):
             "factor": UserFactor.from_dict(obj["factor"]) if obj.get("factor") is not None else None
         })
         return _obj
-

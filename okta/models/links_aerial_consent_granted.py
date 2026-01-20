@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksAerialConsentGranted(BaseModel):
     """
     LinksAerialConsentGranted
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     revoke: Optional[HrefObjectRevokeAerialConsent] = None
     __properties: ClassVar[List[str]] = ["self", "revoke"]
@@ -107,4 +108,3 @@ class LinksAerialConsentGranted(BaseModel):
             "revoke": HrefObjectRevokeAerialConsent.from_dict(obj["revoke"]) if obj.get("revoke") is not None else None
         })
         return _obj
-

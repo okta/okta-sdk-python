@@ -35,6 +35,7 @@ JSON_SCHEMA_VALIDATION_KEYWORDS = {
     'minLength', 'pattern', 'maxItems', 'minItems'
 }
 
+
 class Configuration:
     """This class contains various settings of the API client.
 
@@ -436,8 +437,8 @@ conf = okta.Configuration(
                     'yourOktaDomain': {
                         'description': "The domain of your organization. This can be a provided subdomain of an official okta domain (okta.com, oktapreview.com, etc) or one of your configured custom domains.",
                         'default_value': "subdomain.okta.com",
-                        }
                     }
+                }
             }
         ]
 

@@ -32,10 +32,11 @@ from okta.models.user_factor_push_transaction_timeout_all_of_links import UserFa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorPushTransactionTimeout(UserFactorPushTransaction):
     """
     UserFactorPushTransactionTimeout
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[UserFactorPushTransactionRejectedAllOfProfile] = None
     links: Optional[UserFactorPushTransactionTimeoutAllOfLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["factorResult", "profile", "_links"]
@@ -109,4 +110,3 @@ class UserFactorPushTransactionTimeout(UserFactorPushTransaction):
             "_links": UserFactorPushTransactionTimeoutAllOfLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

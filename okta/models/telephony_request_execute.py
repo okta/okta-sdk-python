@@ -30,20 +30,40 @@ from okta.models.telephony_request_data import TelephonyRequestData
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TelephonyRequestExecute(BaseModel):
     """
     Telephony inline hook request body
-    """ # noqa: E501
-    cloud_event_version: Optional[StrictStr] = Field(default=None, description="The inline hook cloud version", alias="cloudEventVersion")
-    content_type: Optional[StrictStr] = Field(default=None, description="The inline hook request header content", alias="contentType")
+    """  # noqa: E501
+    cloud_event_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook cloud version",
+        alias="cloudEventVersion")
+    content_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook request header content",
+        alias="contentType")
     event_id: Optional[StrictStr] = Field(default=None, description="The individual inline hook request ID", alias="eventId")
-    event_time: Optional[StrictStr] = Field(default=None, description="The time the inline hook request was sent", alias="eventTime")
-    event_type_version: Optional[StrictStr] = Field(default=None, description="The inline hook version", alias="eventTypeVersion")
+    event_time: Optional[StrictStr] = Field(
+        default=None,
+        description="The time the inline hook request was sent",
+        alias="eventTime")
+    event_type_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook version",
+        alias="eventTypeVersion")
     data: Optional[TelephonyRequestData] = None
-    event_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook. The telephony inline hook type is `com.okta.telephony.provider`.", alias="eventType")
-    request_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook request. For example, `com.okta.user.telephony.pre-enrollment`.", alias="requestType")
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook. The telephony inline hook type is `com.okta.telephony.provider`.",
+        alias="eventType")
+    request_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook request. For example, `com.okta.user.telephony.pre-enrollment`.",
+        alias="requestType")
     source: Optional[StrictStr] = Field(default=None, description="The ID and URL of the telephony inline hook")
-    __properties: ClassVar[List[str]] = ["cloudEventVersion", "contentType", "eventId", "eventTime", "eventTypeVersion", "data", "eventType", "requestType", "source"]
+    __properties: ClassVar[List[str]] = ["cloudEventVersion", "contentType", "eventId",
+                                         "eventTime", "eventTypeVersion", "data", "eventType", "requestType", "source"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,4 +133,3 @@ class TelephonyRequestExecute(BaseModel):
             "source": obj.get("source")
         })
         return _obj
-

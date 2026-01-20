@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AccessPolicyRuleCustomCondition(BaseModel):
     """
     Specifies [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language-in-identity-engine/) expressions
-    """ # noqa: E501
+    """  # noqa: E501
     condition: StrictStr = Field(description="expression to match")
     __properties: ClassVar[List[str]] = ["condition"]
 
@@ -89,4 +90,3 @@ class AccessPolicyRuleCustomCondition(BaseModel):
             "condition": obj.get("condition")
         })
         return _obj
-

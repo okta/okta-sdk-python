@@ -29,14 +29,22 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SloParticipate(BaseModel):
     """
     Determines if the app participates in Single Logout (SLO)
-    """ # noqa: E501
+    """  # noqa: E501
     binding_type: Optional[StrictStr] = Field(default=None, description="Request binding type", alias="bindingType")
-    enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether the app is allowed to participate in front-channel SLO")
-    logout_request_url: Optional[StrictStr] = Field(default=None, description="URL where Okta sends the logout request", alias="logoutRequestUrl")
-    session_index_required: Optional[StrictBool] = Field(default=None, description="Determines whether Okta sends the `SessionIndex` elements in the logout request", alias="sessionIndexRequired")
+    enabled: Optional[StrictBool] = Field(
+        default=None, description="Indicates whether the app is allowed to participate in front-channel SLO")
+    logout_request_url: Optional[StrictStr] = Field(
+        default=None,
+        description="URL where Okta sends the logout request",
+        alias="logoutRequestUrl")
+    session_index_required: Optional[StrictBool] = Field(
+        default=None,
+        description="Determines whether Okta sends the `SessionIndex` elements in the logout request",
+        alias="sessionIndexRequired")
     __properties: ClassVar[List[str]] = ["bindingType", "enabled", "logoutRequestUrl", "sessionIndexRequired"]
 
     @field_validator('binding_type')
@@ -105,4 +113,3 @@ class SloParticipate(BaseModel):
             "sessionIndexRequired": obj.get("sessionIndexRequired")
         })
         return _obj
-

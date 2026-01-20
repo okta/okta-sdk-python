@@ -29,12 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PermissionConditions(BaseModel):
     """
     Conditions for further restricting a permission. See [Permission conditions](https://help.okta.com/okta_help.htm?type=oie&id=ext-permission-conditions).
-    """ # noqa: E501
-    exclude: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Exclude attributes with specific values for the permission")
-    include: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Include attributes with specific values for the permission")
+    """  # noqa: E501
+    exclude: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Exclude attributes with specific values for the permission")
+    include: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Include attributes with specific values for the permission")
     __properties: ClassVar[List[str]] = ["exclude", "include"]
 
     model_config = ConfigDict(
@@ -101,4 +104,3 @@ class PermissionConditions(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

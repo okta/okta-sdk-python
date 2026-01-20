@@ -32,10 +32,11 @@ from okta.models.seed_enum import SeedEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordSettingObject(BaseModel):
     """
     Determines whether Okta creates and pushes a password in the app for each assigned user
-    """ # noqa: E501
+    """  # noqa: E501
     change: Optional[ChangeEnum] = ChangeEnum.KEEP_EXISTING
     seed: Optional[SeedEnum] = SeedEnum.RANDOM
     status: Optional[EnabledStatus] = None
@@ -96,4 +97,3 @@ class PasswordSettingObject(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

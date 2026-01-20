@@ -30,10 +30,11 @@ from okta.models.enabled_status import EnabledStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProfileSettingObject(BaseModel):
     """
     This setting determines whether a user in the app gets updated when they're updated in Okta.  If enabled, Okta updates a user's attributes in the app when the app is assigned. Future changes made to the Okta user's profile automatically overwrite the corresponding attribute value in the app. 
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
@@ -90,4 +91,3 @@ class ProfileSettingObject(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

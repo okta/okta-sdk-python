@@ -30,10 +30,11 @@ from okta.models.resource_set_binding_role_links import ResourceSetBindingRoleLi
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindingRole(BaseModel):
     """
     ResourceSetBindingRole
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="`id` of the role")
     links: Optional[ResourceSetBindingRoleLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "_links"]
@@ -99,4 +100,3 @@ class ResourceSetBindingRole(BaseModel):
             "_links": ResourceSetBindingRoleLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

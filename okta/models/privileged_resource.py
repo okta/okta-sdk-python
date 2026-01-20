@@ -32,7 +32,6 @@ from okta.models.credential_sync_info import CredentialSyncInfo
 from okta.models.privileged_resource_status import PrivilegedResourceStatus
 from okta.models.privileged_resource_type import PrivilegedResourceType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -40,14 +39,18 @@ if TYPE_CHECKING:
     from okta.models.privileged_resource_account_okta import PrivilegedResourceAccountOkta
     from okta.models.privileged_resource_account_app_response import PrivilegedResourceAccountAppResponse
 
+
 class PrivilegedResource(BaseModel):
     """
     Base class for PrivilegedResourceRequest and PrivilegedResourceResponse
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     credential_sync_info: Optional[CredentialSyncInfo] = Field(default=None, alias="credentialSyncInfo")
     id: Optional[StrictStr] = Field(default=None, description="ID of the privileged resource")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
     resource_type: PrivilegedResourceType = Field(alias="resourceType")
     status: Optional[PrivilegedResourceStatus] = None
     __properties: ClassVar[List[str]] = ["created", "credentialSyncInfo", "id", "lastUpdated", "resourceType", "status"]
@@ -63,7 +66,7 @@ class PrivilegedResource(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'APP_ACCOUNT': 'PrivilegedResourceAccountAppRequest','OKTA_USER_ACCOUNT': 'PrivilegedResourceAccountOkta','PrivilegedResourceAccountAppResponse': 'PrivilegedResourceAccountAppResponse'
+        'APP_ACCOUNT': 'PrivilegedResourceAccountAppRequest', 'OKTA_USER_ACCOUNT': 'PrivilegedResourceAccountOkta', 'PrivilegedResourceAccountAppResponse': 'PrivilegedResourceAccountAppResponse'
     }
 
     @classmethod
@@ -85,7 +88,8 @@ class PrivilegedResource(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[PrivilegedResourceAccountAppRequest, PrivilegedResourceAccountOkta, PrivilegedResourceAccountAppResponse]]:
+    def from_json(cls, json_str: str) -> Optional[Union[PrivilegedResourceAccountAppRequest,
+                                                        PrivilegedResourceAccountOkta, PrivilegedResourceAccountAppResponse]]:
         """Create an instance of PrivilegedResource from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -123,19 +127,20 @@ class PrivilegedResource(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[PrivilegedResourceAccountAppRequest, PrivilegedResourceAccountOkta, PrivilegedResourceAccountAppResponse]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[PrivilegedResourceAccountAppRequest,
+                                                              PrivilegedResourceAccountOkta, PrivilegedResourceAccountAppResponse]]:
         """Create an instance of PrivilegedResource from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'PrivilegedResourceAccountAppRequest':
-            return import_module("okta.models.privileged_resource_account_app_request").PrivilegedResourceAccountAppRequest.from_dict(obj)
+            return import_module(
+                "okta.models.privileged_resource_account_app_request").PrivilegedResourceAccountAppRequest.from_dict(obj)
         if object_type == 'PrivilegedResourceAccountOkta':
             return import_module("okta.models.privileged_resource_account_okta").PrivilegedResourceAccountOkta.from_dict(obj)
         if object_type == 'PrivilegedResourceAccountAppResponse':
-            return import_module("okta.models.privileged_resource_account_app_response").PrivilegedResourceAccountAppResponse.from_dict(obj)
+            return import_module(
+                "okta.models.privileged_resource_account_app_response").PrivilegedResourceAccountAppResponse.from_dict(obj)
 
         raise ValueError("PrivilegedResource failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

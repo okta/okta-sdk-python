@@ -30,10 +30,11 @@ from okta.models.assign_user_to_realm import AssignUserToRealm
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Actions(BaseModel):
     """
     Action to apply to a user
-    """ # noqa: E501
+    """  # noqa: E501
     assign_user_to_realm: Optional[AssignUserToRealm] = Field(default=None, alias="assignUserToRealm")
     __properties: ClassVar[List[str]] = ["assignUserToRealm"]
 
@@ -97,4 +98,3 @@ class Actions(BaseModel):
             "assignUserToRealm": AssignUserToRealm.from_dict(obj["assignUserToRealm"]) if obj.get("assignUserToRealm") is not None else None
         })
         return _obj
-

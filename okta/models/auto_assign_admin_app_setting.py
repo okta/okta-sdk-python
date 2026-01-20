@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AutoAssignAdminAppSetting(BaseModel):
     """
     The org setting that automatically assigns the Okta Admin Console when an admin role is assigned
-    """ # noqa: E501
-    auto_assign_admin_app_setting: Optional[StrictBool] = Field(default=None, description="Automatically assigns the Okta Admin Console to the user when an admin role is assigned", alias="autoAssignAdminAppSetting")
+    """  # noqa: E501
+    auto_assign_admin_app_setting: Optional[StrictBool] = Field(
+        default=None,
+        description="Automatically assigns the Okta Admin Console to the user when an admin role is assigned",
+        alias="autoAssignAdminAppSetting")
     __properties: ClassVar[List[str]] = ["autoAssignAdminAppSetting"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class AutoAssignAdminAppSetting(BaseModel):
             "autoAssignAdminAppSetting": obj.get("autoAssignAdminAppSetting")
         })
         return _obj
-

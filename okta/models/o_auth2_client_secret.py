@@ -30,14 +30,18 @@ from okta.models.o_auth_client_secret_links import OAuthClientSecretLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientSecret(BaseModel):
     """
     OAuth2ClientSecret
-    """ # noqa: E501
+    """  # noqa: E501
     client_secret: Optional[StrictStr] = Field(default=None, description="The OAuth 2.0 client secret string")
     created: Optional[StrictStr] = Field(default=None, description="Timestamp when the OAuth Client 2.0 Secret was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the OAuth Client Secret")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp when the OAuth Client 2.0 Secret was updated", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the OAuth Client 2.0 Secret was updated",
+        alias="lastUpdated")
     secret_hash: Optional[StrictStr] = Field(default=None, description="OAuth 2.0 client secret string hash")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the OAuth 2.0 Client Secret")
     links: Optional[OAuthClientSecretLinks] = Field(default=None, alias="_links")
@@ -129,4 +133,3 @@ class OAuth2ClientSecret(BaseModel):
             "_links": OAuthClientSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

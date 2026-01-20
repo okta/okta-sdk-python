@@ -30,10 +30,11 @@ from okta.models.policy_rule_actions_enroll_self import PolicyRuleActionsEnrollS
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyRuleActionsEnroll(BaseModel):
     """
     PolicyRuleActionsEnroll
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[PolicyRuleActionsEnrollSelf] = Field(default=None, alias="self")
     __properties: ClassVar[List[str]] = ["self"]
 
@@ -90,4 +91,3 @@ class PolicyRuleActionsEnroll(BaseModel):
             "self": obj.get("self")
         })
         return _obj
-

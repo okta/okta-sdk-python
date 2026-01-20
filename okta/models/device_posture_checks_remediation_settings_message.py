@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DevicePostureChecksRemediationSettingsMessage(BaseModel):
     """
     DevicePostureChecksRemediationSettingsMessage
-    """ # noqa: E501
-    default_i18n_key: Optional[StrictStr] = Field(default=None, description="Default i18n key for the message. This property is only relevant if type is set to `BUILTIN`. If type is set to `CUSTOM`, this field is ignored.", alias="defaultI18nKey")
+    """  # noqa: E501
+    default_i18n_key: Optional[StrictStr] = Field(
+        default=None,
+        description="Default i18n key for the message. This property is only relevant if type is set to `BUILTIN`. If type is set to `CUSTOM`, this field is ignored.",
+        alias="defaultI18nKey")
     custom_text: Optional[StrictStr] = Field(default=None, description="Custom text for the message", alias="customText")
     __properties: ClassVar[List[str]] = ["defaultI18nKey", "customText"]
 
@@ -91,4 +95,3 @@ class DevicePostureChecksRemediationSettingsMessage(BaseModel):
             "customText": obj.get("customText")
         })
         return _obj
-

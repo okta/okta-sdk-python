@@ -30,12 +30,15 @@ from okta.models.app_and_instance_condition_evaluator_app_or_instance import App
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppAndInstancePolicyRuleCondition(BaseModel):
     """
     Specifies apps to include or exclude. If `include` is empty, then the condition is met for all apps.
-    """ # noqa: E501
-    exclude: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = Field(default=None, description="The list of apps or app instances to exclude")
-    include: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = Field(default=None, description="The list of apps or app instances to match on")
+    """  # noqa: E501
+    exclude: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = Field(
+        default=None, description="The list of apps or app instances to exclude")
+    include: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = Field(
+        default=None, description="The list of apps or app instances to match on")
     __properties: ClassVar[List[str]] = ["exclude", "include"]
 
     model_config = ConfigDict(
@@ -106,4 +109,3 @@ class AppAndInstancePolicyRuleCondition(BaseModel):
             "include": [AppAndInstanceConditionEvaluatorAppOrInstance.from_dict(_item) for _item in obj["include"]] if obj.get("include") is not None else None
         })
         return _obj
-

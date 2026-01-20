@@ -30,12 +30,17 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class KeepMeSignedIn(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Controls how often the post-authentication prompt is presented to users
-    """ # noqa: E501
-    post_auth: Optional[StrictStr] = Field(default=None, description="Whether the post-authentication [Keep Me Signed In (KMSI)](https://help.okta.com/oie/en-us/content/topics/security/stay-signed-in.htm) flow is allowed", alias="postAuth")
-    post_auth_prompt_frequency: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).", alias="postAuthPromptFrequency")
+    """  # noqa: E501
+    post_auth: Optional[StrictStr] = Field(
+        default=None,
+        description="Whether the post-authentication [Keep Me Signed In (KMSI)](https://help.okta.com/oie/en-us/content/topics/security/stay-signed-in.htm) flow is allowed",
+        alias="postAuth")
+    post_auth_prompt_frequency: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).", alias="postAuthPromptFrequency")
     __properties: ClassVar[List[str]] = ["postAuth", "postAuthPromptFrequency"]
 
     @field_validator('post_auth')
@@ -55,7 +60,8 @@ class KeepMeSignedIn(BaseModel):
             return value
 
         if not re.match(r"^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$", value):
-            raise ValueError(r"must validate the regular expression /^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$/")
+            raise ValueError(
+                r"must validate the regular expression /^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$/")
         return value
 
     model_config = ConfigDict(
@@ -112,4 +118,3 @@ class KeepMeSignedIn(BaseModel):
             "postAuthPromptFrequency": obj.get("postAuthPromptFrequency")
         })
         return _obj
-

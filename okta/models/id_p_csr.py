@@ -31,10 +31,11 @@ from okta.models.id_p_csr_links import IdPCsrLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdPCsr(BaseModel):
     """
     Defines a CSR for a signature or decryption credential for an IdP
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     csr: Optional[StrictStr] = Field(default=None, description="Base64-encoded CSR in DER format")
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the CSR")
@@ -112,4 +113,3 @@ class IdPCsr(BaseModel):
             "_links": IdPCsrLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

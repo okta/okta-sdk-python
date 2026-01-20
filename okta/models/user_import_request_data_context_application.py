@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportRequestDataContextApplication(BaseModel):
     """
     Details of the app from which the user is being imported
-    """ # noqa: E501
+    """  # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The app name")
     id: Optional[StrictStr] = Field(default=None, description="The app ID")
     label: Optional[StrictStr] = Field(default=None, description="The user-defined display name for the app")
@@ -105,4 +106,3 @@ class UserImportRequestDataContextApplication(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

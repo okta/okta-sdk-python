@@ -31,10 +31,11 @@ from okta.models.device_policy_platform_type import DevicePolicyPlatformType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DevicePolicyRuleConditionPlatform(BaseModel):
     """
     DevicePolicyRuleConditionPlatform
-    """ # noqa: E501
+    """  # noqa: E501
     supported_mdm_frameworks: Optional[List[DevicePolicyMDMFramework]] = Field(default=None, alias="supportedMDMFrameworks")
     types: Optional[List[DevicePolicyPlatformType]] = None
     __properties: ClassVar[List[str]] = ["supportedMDMFrameworks", "types"]
@@ -93,4 +94,3 @@ class DevicePolicyRuleConditionPlatform(BaseModel):
             "types": obj.get("types")
         })
         return _obj
-

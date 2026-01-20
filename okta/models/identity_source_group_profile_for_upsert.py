@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentitySourceGroupProfileForUpsert(BaseModel):
     """
     Contains a set of external group attributes and their values that are mapped to Okta standard properties. See the group [`profile` object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/getGroup!c=200&path=profile&t=response) and Declaration of a Custom Identity Source Schema in [Using anything as a source](https://help.okta.com/okta_help.htm?type=oie&id=ext-anything-as-a-source). > **Note:** Profile attributes can only be of the string type.
-    """ # noqa: E501
-    description: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="Description of the group")
-    display_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(default=None, description="Name of the group", alias="displayName")
+    """  # noqa: E501
+    description: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="Description of the group")
+    display_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(
+        default=None, description="Name of the group", alias="displayName")
     __properties: ClassVar[List[str]] = ["description", "displayName"]
 
     model_config = ConfigDict(
@@ -97,4 +100,3 @@ class IdentitySourceGroupProfileForUpsert(BaseModel):
             "displayName": obj.get("displayName")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.entity_risk_policy_rule_action_run_workflow_workflow import Ent
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntityRiskPolicyRuleActionRunWorkflow(BaseModel):
     """
     EntityRiskPolicyRuleActionRunWorkflow
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[StrictStr] = None
     workflow: Optional[EntityRiskPolicyRuleActionRunWorkflowWorkflow] = None
     __properties: ClassVar[List[str]] = ["action", "workflow"]
@@ -109,4 +110,3 @@ class EntityRiskPolicyRuleActionRunWorkflow(BaseModel):
             "workflow": EntityRiskPolicyRuleActionRunWorkflowWorkflow.from_dict(obj["workflow"]) if obj.get("workflow") is not None else None
         })
         return _obj
-

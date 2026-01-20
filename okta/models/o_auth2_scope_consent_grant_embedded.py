@@ -30,10 +30,11 @@ from okta.models.o_auth2_scope_consent_grant_embedded_scope import OAuth2ScopeCo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ScopeConsentGrantEmbedded(BaseModel):
     """
     Embedded resources related to the Grant
-    """ # noqa: E501
+    """  # noqa: E501
     scope: Optional[OAuth2ScopeConsentGrantEmbeddedScope] = None
     __properties: ClassVar[List[str]] = ["scope"]
 
@@ -97,4 +98,3 @@ class OAuth2ScopeConsentGrantEmbedded(BaseModel):
             "scope": OAuth2ScopeConsentGrantEmbeddedScope.from_dict(obj["scope"]) if obj.get("scope") is not None else None
         })
         return _obj
-

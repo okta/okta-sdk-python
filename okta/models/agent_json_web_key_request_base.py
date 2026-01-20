@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentJsonWebKeyRequestBase(BaseModel):
     """
     AgentJsonWebKeyRequestBase
-    """ # noqa: E501
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the AI agent's JSON Web Key Set (JWKS)")
+    """  # noqa: E501
+    kid: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier of the JSON Web Key in the AI agent's JSON Web Key Set (JWKS)")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the AI agent JSON Web Key")
     __properties: ClassVar[List[str]] = ["kid", "status"]
 
@@ -101,4 +104,3 @@ class AgentJsonWebKeyRequestBase(BaseModel):
             "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE'
         })
         return _obj
-

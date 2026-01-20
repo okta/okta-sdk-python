@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FeatureLinksAllOfDependencies(BaseModel):
     """
     Link to feature dependencies
-    """ # noqa: E501
+    """  # noqa: E501
     href: Optional[StrictStr] = Field(default=None, description="Link URI")
     __properties: ClassVar[List[str]] = ["href"]
 
@@ -91,4 +92,3 @@ class FeatureLinksAllOfDependencies(BaseModel):
             "href": obj.get("href")
         })
         return _obj
-

@@ -35,22 +35,34 @@ from okta.models.scope_condition import ScopeCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityAssertionAppInstanceConnection(BaseModel):
     """
     Identity assertion connection for an app instance
-    """ # noqa: E501
+    """  # noqa: E501
     app: ManagedConnectionAppInstance
     authorization_server: Optional[AppInstanceAuthorizationServer] = Field(default=None, alias="authorizationServer")
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
-    id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the managed connection. Only present for managed connections.")
-    orn: Optional[StrictStr] = Field(default=None, description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the managed connection")
-    protocol_type: Optional[StrictStr] = Field(default=None, description="The authentication protocol type used for the connection", alias="protocolType")
-    resource_indicator: StrictStr = Field(description="Resource indicator used when requesting tokens.", alias="resourceIndicator")
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier for the managed connection. Only present for managed connections.")
+    orn: Optional[StrictStr] = Field(
+        default=None,
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the managed connection")
+    protocol_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The authentication protocol type used for the connection",
+        alias="protocolType")
+    resource_indicator: StrictStr = Field(
+        description="Resource indicator used when requesting tokens.",
+        alias="resourceIndicator")
     scope_condition: Optional[ScopeCondition] = Field(default=None, alias="scopeCondition")
-    scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
+    scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(
+        default=None, description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
     status: Optional[ManagedConnectionStatus] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["app", "authorizationServer", "connectionType", "id", "orn", "protocolType", "resourceIndicator", "scopeCondition", "scopes", "status", "_links"]
+    __properties: ClassVar[List[str]] = ["app", "authorizationServer", "connectionType", "id",
+                                         "orn", "protocolType", "resourceIndicator", "scopeCondition", "scopes", "status", "_links"]
 
     @field_validator('connection_type')
     def connection_type_validate_enum(cls, value):
@@ -153,4 +165,3 @@ class IdentityAssertionAppInstanceConnection(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

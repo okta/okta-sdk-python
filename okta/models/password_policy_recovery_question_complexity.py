@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRecoveryQuestionComplexity(BaseModel):
     """
     PasswordPolicyRecoveryQuestionComplexity
-    """ # noqa: E501
-    min_length: Optional[StrictInt] = Field(default=4, description="Minimum length of the password recovery question answer", alias="minLength")
+    """  # noqa: E501
+    min_length: Optional[StrictInt] = Field(
+        default=4,
+        description="Minimum length of the password recovery question answer",
+        alias="minLength")
     __properties: ClassVar[List[str]] = ["minLength"]
 
     model_config = ConfigDict(
@@ -91,4 +95,3 @@ class PasswordPolicyRecoveryQuestionComplexity(BaseModel):
             "minLength": obj.get("minLength") if obj.get("minLength") is not None else 4
         })
         return _obj
-

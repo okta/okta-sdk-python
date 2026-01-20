@@ -31,10 +31,11 @@ from okta.models.email_template_response_links import EmailTemplateResponseLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailTemplateResponse(BaseModel):
     """
     EmailTemplateResponse
-    """ # noqa: E501
+    """  # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The name of this email template")
     embedded: Optional[EmailTemplateResponseEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[EmailTemplateResponseLinks] = Field(default=None, alias="_links")
@@ -111,4 +112,3 @@ class EmailTemplateResponse(BaseModel):
             "_links": EmailTemplateResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

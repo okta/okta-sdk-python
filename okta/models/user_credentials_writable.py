@@ -32,10 +32,11 @@ from okta.models.recovery_question_credential import RecoveryQuestionCredential
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserCredentialsWritable(BaseModel):
     """
     Specifies primary authentication and recovery credentials for a user. Credential types and requirements vary depending on the provider and security policy of the org.
-    """ # noqa: E501
+    """  # noqa: E501
     password: Optional[PasswordCredential] = None
     provider: Optional[AuthenticationProviderWritable] = None
     recovery_question: Optional[RecoveryQuestionCredential] = None
@@ -117,4 +118,3 @@ class UserCredentialsWritable(BaseModel):
             "recovery_question": RecoveryQuestionCredential.from_dict(obj["recovery_question"]) if obj.get("recovery_question") is not None else None
         })
         return _obj
-

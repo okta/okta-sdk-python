@@ -30,10 +30,11 @@ from okta.models.links_questions_question import LinksQuestionsQuestion
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksQuestions(BaseModel):
     """
     LinksQuestions
-    """ # noqa: E501
+    """  # noqa: E501
     question: Optional[LinksQuestionsQuestion] = None
     __properties: ClassVar[List[str]] = ["question"]
 
@@ -97,4 +98,3 @@ class LinksQuestions(BaseModel):
             "question": LinksQuestionsQuestion.from_dict(obj["question"]) if obj.get("question") is not None else None
         })
         return _obj
-

@@ -31,15 +31,22 @@ from okta.models.api_token_network import ApiTokenNetwork
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApiTokenUpdate(BaseModel):
     """
     An API Token Update Object for an Okta user. This token is NOT scoped any further and can be used for any API that the user has permissions to call.
-    """ # noqa: E501
-    client_name: Optional[StrictStr] = Field(default=None, description="The client name associated with the API Token", alias="clientName")
+    """  # noqa: E501
+    client_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The client name associated with the API Token",
+        alias="clientName")
     created: Optional[datetime] = Field(default=None, description="The creation date of the API Token")
     name: Optional[StrictStr] = Field(default=None, description="The name associated with the API Token")
     network: Optional[ApiTokenNetwork] = None
-    user_id: Optional[StrictStr] = Field(default=None, description="The userId of the user who created the API Token", alias="userId")
+    user_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The userId of the user who created the API Token",
+        alias="userId")
     __properties: ClassVar[List[str]] = ["clientName", "created", "name", "network", "userId"]
 
     model_config = ConfigDict(
@@ -110,4 +117,3 @@ class ApiTokenUpdate(BaseModel):
             "userId": obj.get("userId")
         })
         return _obj
-

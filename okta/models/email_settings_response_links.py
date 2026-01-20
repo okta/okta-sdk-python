@@ -30,10 +30,11 @@ from okta.models.href_object import HrefObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailSettingsResponseLinks(BaseModel):
     """
     EmailSettingsResponseLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObject] = Field(default=None, alias="self")
     template: Optional[HrefObject] = None
     __properties: ClassVar[List[str]] = ["self", "template"]
@@ -106,4 +107,3 @@ class EmailSettingsResponseLinks(BaseModel):
             "template": HrefObject.from_dict(obj["template"]) if obj.get("template") is not None else None
         })
         return _obj
-

@@ -29,18 +29,32 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InterclientTrustMapping(BaseModel):
     """
     InterclientTrustMapping
-    """ # noqa: E501
-    app_instance_id: Optional[StrictStr] = Field(default=None, description="The app ID of the target app", alias="appInstanceId")
+    """  # noqa: E501
+    app_instance_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The app ID of the target app",
+        alias="appInstanceId")
     created: Optional[StrictStr] = Field(default=None, description="Timestamp when the interclient trust mapping was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the interclient trust mapping")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp when the interclient trust mapping was updated", alias="lastUpdated")
-    last_updated_by: Optional[StrictStr] = Field(default=None, description="ID of the user who created the interclient trust mapping", alias="lastUpdatedBy")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the interclient trust mapping was updated",
+        alias="lastUpdated")
+    last_updated_by: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the user who created the interclient trust mapping",
+        alias="lastUpdatedBy")
     org_id: Optional[StrictStr] = Field(default=None, description="ID of the org", alias="orgId")
-    trusted_app_instance_id: Optional[StrictStr] = Field(default=None, description="The app ID of the allowed app", alias="trustedAppInstanceId")
-    __properties: ClassVar[List[str]] = ["appInstanceId", "created", "id", "lastUpdated", "lastUpdatedBy", "orgId", "trustedAppInstanceId"]
+    trusted_app_instance_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The app ID of the allowed app",
+        alias="trustedAppInstanceId")
+    __properties: ClassVar[List[str]] = ["appInstanceId", "created", "id",
+                                         "lastUpdated", "lastUpdatedBy", "orgId", "trustedAppInstanceId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -115,4 +129,3 @@ class InterclientTrustMapping(BaseModel):
             "trustedAppInstanceId": obj.get("trustedAppInstanceId")
         })
         return _obj
-

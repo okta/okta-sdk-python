@@ -30,12 +30,14 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RotatePasswordRequest(BaseModel):
     """
     Rotate password request for the privileged resource
-    """ # noqa: E501
+    """  # noqa: E501
     password: SecretStr = Field(description="The password associated with the privileged resource")
-    secret_version_id: Annotated[str, Field(min_length=1, strict=True, max_length=36)] = Field(description="The version ID of the password secret from the OPA vault", alias="secretVersionId")
+    secret_version_id: Annotated[str, Field(min_length=1, strict=True, max_length=36)] = Field(
+        description="The version ID of the password secret from the OPA vault", alias="secretVersionId")
     __properties: ClassVar[List[str]] = ["password", "secretVersionId"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class RotatePasswordRequest(BaseModel):
             "secretVersionId": obj.get("secretVersionId")
         })
         return _obj
-

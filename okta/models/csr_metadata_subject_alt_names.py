@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CsrMetadataSubjectAltNames(BaseModel):
     """
     CsrMetadataSubjectAltNames
-    """ # noqa: E501
+    """  # noqa: E501
     dns_names: Optional[List[StrictStr]] = Field(default=None, description="DNS names of the subject", alias="dnsNames")
     __properties: ClassVar[List[str]] = ["dnsNames"]
 
@@ -89,4 +90,3 @@ class CsrMetadataSubjectAltNames(BaseModel):
             "dnsNames": obj.get("dnsNames")
         })
         return _obj
-

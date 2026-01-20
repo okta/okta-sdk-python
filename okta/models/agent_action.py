@@ -30,10 +30,11 @@ from okta.models.parameters import Parameters
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentAction(BaseModel):
     """
     Details about the Active Directory group membership update
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="ID of the Active Directory group to update")
     parameters: Optional[Parameters] = None
     __properties: ClassVar[List[str]] = ["id", "parameters"]
@@ -99,4 +100,3 @@ class AgentAction(BaseModel):
             "parameters": Parameters.from_dict(obj["parameters"]) if obj.get("parameters") is not None else None
         })
         return _obj
-

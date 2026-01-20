@@ -32,16 +32,23 @@ from okta.models.identity_provider_application_user_links import IdentityProvide
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityProviderApplicationUser(BaseModel):
     """
     IdentityProviderApplicationUser
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
-    external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(default=None, description="Unique IdP-specific identifier for the user", alias="externalId")
+    external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
+        default=None, description="Unique IdP-specific identifier for the user", alias="externalId")
     id: Optional[StrictStr] = Field(default=None, description="Unique key of the user")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
-    profile: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="IdP-specific profile for the user.  IdP user profiles are IdP-specific but may be customized by the Profile Editor in the Admin Console.  > **Note:** Okta variable names have reserved characters that may conflict with the name of an IdP assertion attribute. You can use the **External name** to define the attribute name as defined in an IdP assertion such as a SAML attribute name.")
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Embedded resources related to the IdP user", alias="_embedded")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
+    profile: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="IdP-specific profile for the user.  IdP user profiles are IdP-specific but may be customized by the Profile Editor in the Admin Console.  > **Note:** Okta variable names have reserved characters that may conflict with the name of an IdP assertion attribute. You can use the **External name** to define the attribute name as defined in an IdP assertion such as a SAML attribute name.")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Embedded resources related to the IdP user", alias="_embedded")
     links: Optional[IdentityProviderApplicationUserLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "externalId", "id", "lastUpdated", "profile", "_embedded", "_links"]
 
@@ -121,4 +128,3 @@ class IdentityProviderApplicationUser(BaseModel):
             "_links": IdentityProviderApplicationUserLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

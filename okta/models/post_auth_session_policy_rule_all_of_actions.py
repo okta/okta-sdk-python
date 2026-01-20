@@ -30,11 +30,13 @@ from okta.models.post_auth_session_policy_rule_all_of_actions_post_auth_session 
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PostAuthSessionPolicyRuleAllOfActions(BaseModel):
     """
     The action to take in response to a failure of the reevaluated global session policy or authentication polices
-    """ # noqa: E501
-    post_auth_session: Optional[PostAuthSessionPolicyRuleAllOfActionsPostAuthSession] = Field(default=None, alias="postAuthSession")
+    """  # noqa: E501
+    post_auth_session: Optional[PostAuthSessionPolicyRuleAllOfActionsPostAuthSession] = Field(
+        default=None, alias="postAuthSession")
     __properties: ClassVar[List[str]] = ["postAuthSession"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class PostAuthSessionPolicyRuleAllOfActions(BaseModel):
             "postAuthSession": PostAuthSessionPolicyRuleAllOfActionsPostAuthSession.from_dict(obj["postAuthSession"]) if obj.get("postAuthSession") is not None else None
         })
         return _obj
-

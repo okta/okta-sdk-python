@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RoleGovernanceResource(BaseModel):
     """
     The resource of a grant
-    """ # noqa: E501
+    """  # noqa: E501
     label: Optional[StrictStr] = Field(default=None, description="The resource name")
     resource: Optional[StrictStr] = Field(default=None, description="The resources id")
     __properties: ClassVar[List[str]] = ["label", "resource"]
@@ -91,4 +92,3 @@ class RoleGovernanceResource(BaseModel):
             "resource": obj.get("resource")
         })
         return _obj
-

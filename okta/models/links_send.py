@@ -30,10 +30,11 @@ from okta.models.links_send_send import LinksSendSend
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksSend(BaseModel):
     """
     LinksSend
-    """ # noqa: E501
+    """  # noqa: E501
     send: Optional[LinksSendSend] = None
     __properties: ClassVar[List[str]] = ["send"]
 
@@ -97,4 +98,3 @@ class LinksSend(BaseModel):
             "send": LinksSendSend.from_dict(obj["send"]) if obj.get("send") is not None else None
         })
         return _obj
-

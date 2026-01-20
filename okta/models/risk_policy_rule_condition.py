@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RiskPolicyRuleCondition(BaseModel):
     """
     RiskPolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     behaviors: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["behaviors"]
 
@@ -89,4 +90,3 @@ class RiskPolicyRuleCondition(BaseModel):
             "behaviors": obj.get("behaviors")
         })
         return _obj
-

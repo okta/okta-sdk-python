@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class NumberFactorChallengeEmbeddedLinksChallenge(BaseModel):
     """
     Number matching challenge for a `push` factor
-    """ # noqa: E501
-    correct_answer: Optional[StrictInt] = Field(default=None, description="The correct answer for a `push` factor that uses a number matching challenge", alias="correctAnswer")
+    """  # noqa: E501
+    correct_answer: Optional[StrictInt] = Field(
+        default=None,
+        description="The correct answer for a `push` factor that uses a number matching challenge",
+        alias="correctAnswer")
     __properties: ClassVar[List[str]] = ["correctAnswer"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class NumberFactorChallengeEmbeddedLinksChallenge(BaseModel):
             "correctAnswer": obj.get("correctAnswer")
         })
         return _obj
-

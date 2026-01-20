@@ -30,20 +30,22 @@ from okta.models.dynamic_network_zone_all_of_asns import DynamicNetworkZoneAllOf
 from okta.models.dynamic_network_zone_all_of_locations import DynamicNetworkZoneAllOfLocations
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.network_zone import NetworkZone
-from okta.models.network_zone_status import NetworkZoneStatus
-from okta.models.network_zone_type import NetworkZoneType
-from okta.models.network_zone_usage import NetworkZoneUsage
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class DynamicNetworkZone(NetworkZone):
     """
     DynamicNetworkZone
-    """ # noqa: E501
+    """  # noqa: E501
     asns: Optional[DynamicNetworkZoneAllOfAsns] = None
-    proxy_type: Optional[StrictStr] = Field(default=None, description="The proxy type used for a Dynamic Network Zone", alias="proxyType")
+    proxy_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The proxy type used for a Dynamic Network Zone",
+        alias="proxyType")
     locations: Optional[DynamicNetworkZoneAllOfLocations] = None
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "system", "type", "usage", "_links", "asns", "proxyType", "locations"]
+    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name",
+                                         "status", "system", "type", "usage", "_links", "asns", "proxyType", "locations"]
 
     @field_validator('proxy_type')
     def proxy_type_validate_enum(cls, value):
@@ -140,4 +142,3 @@ class DynamicNetworkZone(NetworkZone):
             "locations": DynamicNetworkZoneAllOfLocations.from_dict(obj["locations"]) if obj.get("locations") is not None else None
         })
         return _obj
-

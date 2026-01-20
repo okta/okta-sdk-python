@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IDVCredentialsBearer(BaseModel):
     """
     Client credential for `IDV_PERSONA` IdP type
-    """ # noqa: E501
+    """  # noqa: E501
     api_key: StrictStr = Field(description="The API key that you generate in your Persona dashboard", alias="apiKey")
     __properties: ClassVar[List[str]] = ["apiKey"]
 
@@ -89,4 +90,3 @@ class IDVCredentialsBearer(BaseModel):
             "apiKey": obj.get("apiKey")
         })
         return _obj
-

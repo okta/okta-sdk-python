@@ -30,10 +30,11 @@ from okta.models.security_event_token_jwt_events import SecurityEventTokenJwtEve
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventTokenJwtBody(BaseModel):
     """
     JSON Web Token body payload for a Security Event Token sent by the SSF Transmitter. For examples and more information, see [SSF Transmitter SET payload structures](https://developer.okta.com/docs/reference/ssf-transmitter-sets).
-    """ # noqa: E501
+    """  # noqa: E501
     aud: StrictStr = Field(description="Audience")
     events: SecurityEventTokenJwtEvents
     iat: StrictInt = Field(description="Token issue time (UNIX timestamp)")
@@ -105,4 +106,3 @@ class SecurityEventTokenJwtBody(BaseModel):
             "jti": obj.get("jti")
         })
         return _obj
-

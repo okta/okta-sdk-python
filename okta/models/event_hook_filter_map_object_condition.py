@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EventHookFilterMapObjectCondition(BaseModel):
     """
     EventHookFilterMapObjectCondition
-    """ # noqa: E501
-    expression: Optional[StrictStr] = Field(default=None, description="The Okta Expression language statement that filters the event type")
+    """  # noqa: E501
+    expression: Optional[StrictStr] = Field(default=None,
+                                            description="The Okta Expression language statement that filters the event type")
     version: Optional[StrictStr] = Field(default=None, description="Internal field")
     __properties: ClassVar[List[str]] = ["expression", "version"]
 
@@ -98,4 +100,3 @@ class EventHookFilterMapObjectCondition(BaseModel):
             "version": obj.get("version")
         })
         return _obj
-

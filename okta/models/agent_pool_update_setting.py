@@ -31,18 +31,29 @@ from okta.models.release_channel import ReleaseChannel
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentPoolUpdateSetting(BaseModel):
     """
     Setting for auto-update
-    """ # noqa: E501
+    """  # noqa: E501
     agent_type: Optional[AgentType] = Field(default=None, alias="agentType")
-    continue_on_error: Optional[StrictBool] = Field(default=None, description="Continues the update even if some agents fail to update", alias="continueOnError")
+    continue_on_error: Optional[StrictBool] = Field(
+        default=None,
+        description="Continues the update even if some agents fail to update",
+        alias="continueOnError")
     latest_version: Optional[StrictStr] = Field(default=None, description="Latest version of the agent", alias="latestVersion")
-    minimal_supported_version: Optional[StrictStr] = Field(default=None, description="Minimal version of the agent", alias="minimalSupportedVersion")
-    pool_id: Optional[StrictStr] = Field(default=None, description="ID of the agent pool that the settings apply to", alias="poolId")
+    minimal_supported_version: Optional[StrictStr] = Field(
+        default=None,
+        description="Minimal version of the agent",
+        alias="minimalSupportedVersion")
+    pool_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the agent pool that the settings apply to",
+        alias="poolId")
     pool_name: Optional[StrictStr] = Field(default=None, description="Pool name", alias="poolName")
     release_channel: Optional[ReleaseChannel] = Field(default=None, alias="releaseChannel")
-    __properties: ClassVar[List[str]] = ["agentType", "continueOnError", "latestVersion", "minimalSupportedVersion", "poolId", "poolName", "releaseChannel"]
+    __properties: ClassVar[List[str]] = ["agentType", "continueOnError", "latestVersion",
+                                         "minimalSupportedVersion", "poolId", "poolName", "releaseChannel"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,4 +116,3 @@ class AgentPoolUpdateSetting(BaseModel):
             "releaseChannel": obj.get("releaseChannel")
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupLinks(BaseModel):
     """
     [Discoverable resources](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=_links&t=response) related to the group
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     apps: Optional[HrefObject] = None
     logo: Optional[List[HrefObject]] = None
@@ -134,4 +135,3 @@ class GroupLinks(BaseModel):
             "users": HrefObject.from_dict(obj["users"]) if obj.get("users") is not None else None
         })
         return _obj
-

@@ -147,7 +147,8 @@ class PaginationHelper:
                     if 'after' in query_params:
                         cursor = query_params['after'][0] if isinstance(query_params['after'], list) else query_params['after']
                     elif 'before' in query_params:
-                        cursor = query_params['before'][0] if isinstance(query_params['before'], list) else query_params['before']
+                        cursor = query_params['before'][0] if isinstance(
+                            query_params['before'], list) else query_params['before']
 
                     info[rel_type] = cursor
 
@@ -278,4 +279,3 @@ async def paginate_pages(
         # No more pages
         if not has_more:
             break
-

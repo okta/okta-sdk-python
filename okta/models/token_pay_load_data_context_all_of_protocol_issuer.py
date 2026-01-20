@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataContextAllOfProtocolIssuer(BaseModel):
     """
     The authorization server's issuer identifier
-    """ # noqa: E501
+    """  # noqa: E501
     uri: Optional[StrictStr] = Field(default=None, description="The authorization server's issuer identifier")
     __properties: ClassVar[List[str]] = ["uri"]
 
@@ -89,4 +90,3 @@ class TokenPayLoadDataContextAllOfProtocolIssuer(BaseModel):
             "uri": obj.get("uri")
         })
         return _obj
-

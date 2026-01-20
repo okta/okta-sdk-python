@@ -30,10 +30,11 @@ from okta.models.authenticator_identity import AuthenticatorIdentity
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorMethodConstraint(BaseModel):
     """
     Limits the authenticators that can be used for a given method. Currently, only the `otp` method supports constraints, and Google authenticator (key : 'google_otp') is the only allowed authenticator.
-    """ # noqa: E501
+    """  # noqa: E501
     allowed_authenticators: Optional[List[AuthenticatorIdentity]] = Field(default=None, alias="allowedAuthenticators")
     method: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["allowedAuthenticators", "method"]
@@ -109,4 +110,3 @@ class AuthenticatorMethodConstraint(BaseModel):
             "method": obj.get("method")
         })
         return _obj
-

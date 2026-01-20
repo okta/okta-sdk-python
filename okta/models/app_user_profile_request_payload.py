@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppUserProfileRequestPayload(BaseModel):
     """
     Updates the assigned user profile > **Note:** The Okta API currently doesn't support entity tags for conditional updates. As long as you're the only user updating the the user profile, Okta recommends you fetch the most recent profile with [Retrieve an Application User](/openapi/okta-management/management/tag/ApplicationUsers/#tag/ApplicationUsers/operation/getApplicationUser), apply your profile update, and then `POST` back the updated profile.
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[Dict[str, Any]] = Field(default=None, description="Specifies the default and custom profile properties for a user. Properties that are visible in the Admin Console for an app assignment can also be assigned through the API. Some properties are reference properties that are imported from the target app and can't be configured. See [profile](/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response). ")
     __properties: ClassVar[List[str]] = ["profile"]
 
@@ -89,4 +90,3 @@ class AppUserProfileRequestPayload(BaseModel):
             "profile": obj.get("profile")
         })
         return _obj
-

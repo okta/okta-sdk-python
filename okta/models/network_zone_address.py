@@ -30,10 +30,11 @@ from okta.models.network_zone_address_type import NetworkZoneAddressType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class NetworkZoneAddress(BaseModel):
     """
     Specifies the value of an IP address expressed using either `range` or `CIDR` form.
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[NetworkZoneAddressType] = None
     value: Optional[StrictStr] = Field(default=None, description="Value in CIDR/range form, depending on the `type` specified")
     __properties: ClassVar[List[str]] = ["type", "value"]
@@ -92,4 +93,3 @@ class NetworkZoneAddress(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

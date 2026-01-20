@@ -30,13 +30,21 @@ from okta.models.web_authn_cred_request import WebAuthnCredRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EnrollmentInitializationResponse(BaseModel):
     """
     Yubico transport key in the form of a JSON Web Token (JWK), used to encrypt our fulfillment request to Yubico. The currently agreed protocol uses P-384.
-    """ # noqa: E501
-    cred_requests: Optional[List[WebAuthnCredRequest]] = Field(default=None, description="List of credential requests for the fulfillment provider", alias="credRequests")
-    fulfillment_provider: Optional[StrictStr] = Field(default=None, description="Name of the fulfillment provider for the WebAuthn preregistration factor", alias="fulfillmentProvider")
-    pin_request_jwe: Optional[StrictStr] = Field(default=None, description="Encrypted JWE of PIN request for the fulfillment provider", alias="pinRequestJwe")
+    """  # noqa: E501
+    cred_requests: Optional[List[WebAuthnCredRequest]] = Field(
+        default=None, description="List of credential requests for the fulfillment provider", alias="credRequests")
+    fulfillment_provider: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the fulfillment provider for the WebAuthn preregistration factor",
+        alias="fulfillmentProvider")
+    pin_request_jwe: Optional[StrictStr] = Field(
+        default=None,
+        description="Encrypted JWE of PIN request for the fulfillment provider",
+        alias="pinRequestJwe")
     user_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Okta user", alias="userId")
     __properties: ClassVar[List[str]] = ["credRequests", "fulfillmentProvider", "pinRequestJwe", "userId"]
 
@@ -113,4 +121,3 @@ class EnrollmentInitializationResponse(BaseModel):
             "userId": obj.get("userId")
         })
         return _obj
-

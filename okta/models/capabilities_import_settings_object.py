@@ -31,10 +31,11 @@ from okta.models.import_username_object import ImportUsernameObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CapabilitiesImportSettingsObject(BaseModel):
     """
     Defines import settings
-    """ # noqa: E501
+    """  # noqa: E501
     schedule: Optional[ImportScheduleObject] = None
     username: Optional[ImportUsernameObject] = None
     __properties: ClassVar[List[str]] = ["schedule", "username"]
@@ -107,4 +108,3 @@ class CapabilitiesImportSettingsObject(BaseModel):
             "username": ImportUsernameObject.from_dict(obj["username"]) if obj.get("username") is not None else None
         })
         return _obj
-

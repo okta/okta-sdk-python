@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorPushTransactionRejectedAllOfProfile(BaseModel):
     """
     UserFactorPushTransactionRejectedAllOfProfile
-    """ # noqa: E501
+    """  # noqa: E501
     credential_id: Optional[StrictStr] = Field(default=None, description="ID for the factor credential", alias="credentialId")
     __properties: ClassVar[List[str]] = ["credentialId"]
 
@@ -89,4 +90,3 @@ class UserFactorPushTransactionRejectedAllOfProfile(BaseModel):
             "credentialId": obj.get("credentialId")
         })
         return _obj
-

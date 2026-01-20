@@ -35,25 +35,48 @@ from okta.models.resource_server_json_web_keys import ResourceServerJsonWebKeys
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServer(BaseModel):
     """
     AuthorizationServer
-    """ # noqa: E501
-    access_token_encrypted_response_algorithm: Optional[AccessTokenKeyEncryptionAlgorithm] = Field(default=None, alias="accessTokenEncryptedResponseAlgorithm")
-    audiences: Optional[List[StrictStr]] = Field(default=None, description="The recipients that the tokens are intended for. This becomes the `aud` claim in an access token. Okta currently supports only one audience.")
+    """  # noqa: E501
+    access_token_encrypted_response_algorithm: Optional[AccessTokenKeyEncryptionAlgorithm] = Field(
+        default=None, alias="accessTokenEncryptedResponseAlgorithm")
+    audiences: Optional[List[StrictStr]] = Field(
+        default=None, description="The recipients that the tokens are intended for. This becomes the `aud` claim in an access token. Okta currently supports only one audience.")
     created: Optional[datetime] = None
     credentials: Optional[AuthorizationServerCredentials] = None
     description: Optional[StrictStr] = Field(default=None, description="The description of the custom authorization server")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the custom authorization server")
-    issuer: Optional[StrictStr] = Field(default=None, description="The complete URL for the custom authorization server. This becomes the `iss` claim in an access token.")
-    issuer_mode: Optional[StrictStr] = Field(default=None, description="Indicates which value is specified in the issuer of the tokens that a custom authorization server returns: the Okta org domain URL or a custom domain URL.  `issuerMode` is visible if you have a custom URL domain configured or the Dynamic Issuer Mode feature enabled. If you have a custom URL domain configured, you can set a custom domain URL in a custom authorization server, and this property is returned in the appropriate responses.  When set to `ORG_URL`, then in responses, `issuer` is the Okta org domain URL: `https://${yourOktaDomain}`.  When set to `CUSTOM_URL`, then in responses, `issuer` is the custom domain URL configured in the administration user interface.  When set to `DYNAMIC`, then in responses, `issuer` is the custom domain URL if the OAuth 2.0 request was sent to the custom domain, or is the Okta org's domain URL if the OAuth 2.0 request was sent to the original Okta org domain.  After you configure a custom URL domain, all new custom authorization servers use `CUSTOM_URL` by default. If the Dynamic Issuer Mode feature is enabled, then all new custom authorization servers use `DYNAMIC` by default. All existing custom authorization servers continue to use the original value until they're changed using the Admin Console or the API. This way, existing integrations with the client and resource server continue to work after the feature is enabled.", alias="issuerMode")
+    issuer: Optional[StrictStr] = Field(
+        default=None,
+        description="The complete URL for the custom authorization server. This becomes the `iss` claim in an access token.")
+    issuer_mode: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates which value is specified in the issuer of the tokens that a custom authorization server returns: the Okta org domain URL or a custom domain URL.  `issuerMode` is visible if you have a custom URL domain configured or the Dynamic Issuer Mode feature enabled. If you have a custom URL domain configured, you can set a custom domain URL in a custom authorization server, and this property is returned in the appropriate responses.  When set to `ORG_URL`, then in responses, `issuer` is the Okta org domain URL: `https://${yourOktaDomain}`.  When set to `CUSTOM_URL`, then in responses, `issuer` is the custom domain URL configured in the administration user interface.  When set to `DYNAMIC`, then in responses, `issuer` is the custom domain URL if the OAuth 2.0 request was sent to the custom domain, or is the Okta org's domain URL if the OAuth 2.0 request was sent to the original Okta org domain.  After you configure a custom URL domain, all new custom authorization servers use `CUSTOM_URL` by default. If the Dynamic Issuer Mode feature is enabled, then all new custom authorization servers use `DYNAMIC` by default. All existing custom authorization servers continue to use the original value until they're changed using the Admin Console or the API. This way, existing integrations with the client and resource server continue to work after the feature is enabled.",
+        alias="issuerMode")
     jwks: Optional[ResourceServerJsonWebKeys] = None
-    jwks_uri: Optional[StrictStr] = Field(default=None, description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>URL string that references a JSON Web Key Set for encrypting JWTs minted by the custom authorization server")
+    jwks_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>URL string that references a JSON Web Key Set for encrypting JWTs minted by the custom authorization server")
     last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     name: Optional[StrictStr] = Field(default=None, description="The name of the custom authorization server")
     status: Optional[LifecycleStatus] = None
     links: Optional[AuthServerLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["accessTokenEncryptedResponseAlgorithm", "audiences", "created", "credentials", "description", "id", "issuer", "issuerMode", "jwks", "jwks_uri", "lastUpdated", "name", "status", "_links"]
+    __properties: ClassVar[List[str]] = ["accessTokenEncryptedResponseAlgorithm",
+                                         "audiences",
+                                         "created",
+                                         "credentials",
+                                         "description",
+                                         "id",
+                                         "issuer",
+                                         "issuerMode",
+                                         "jwks",
+                                         "jwks_uri",
+                                         "lastUpdated",
+                                         "name",
+                                         "status",
+                                         "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -148,4 +171,3 @@ class AuthorizationServer(BaseModel):
             "_links": AuthServerLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.dns_record_type_domains import DNSRecordTypeDomains
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DNSRecordDomains(BaseModel):
     """
     DNS TXT and CNAME records to be registered for the Domain
-    """ # noqa: E501
+    """  # noqa: E501
     expiration: Optional[StrictStr] = Field(default=None, description="DNS TXT record expiration")
     fqdn: Optional[StrictStr] = Field(default=None, description="DNS record name")
     record_type: Optional[DNSRecordTypeDomains] = Field(default=None, alias="recordType")
@@ -96,4 +97,3 @@ class DNSRecordDomains(BaseModel):
             "values": obj.get("values")
         })
         return _obj
-

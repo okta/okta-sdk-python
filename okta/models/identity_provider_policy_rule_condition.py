@@ -30,10 +30,11 @@ from okta.models.identity_provider_policy_provider import IdentityProviderPolicy
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityProviderPolicyRuleCondition(BaseModel):
     """
     Specifies the IdP that's used to sign in
-    """ # noqa: E501
+    """  # noqa: E501
     idp_ids: Optional[List[StrictStr]] = Field(default=None, description="Specifies the IdP ID", alias="idpIds")
     provider: Optional[IdentityProviderPolicyProvider] = None
     __properties: ClassVar[List[str]] = ["idpIds", "provider"]
@@ -92,4 +93,3 @@ class IdentityProviderPolicyRuleCondition(BaseModel):
             "provider": obj.get("provider")
         })
         return _obj
-

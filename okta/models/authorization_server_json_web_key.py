@@ -30,15 +30,20 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerJsonWebKey(BaseModel):
     """
     AuthorizationServerJsonWebKey
-    """ # noqa: E501
+    """  # noqa: E501
     alg: Optional[StrictStr] = Field(default=None, description="The algorithm used with the Key. Valid value: `RS256`")
     e: Optional[StrictStr] = Field(default=None, description="RSA key value (public exponent) for Key binding")
     kid: Optional[StrictStr] = Field(default=None, description="Unique identifier for the key")
-    kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`")
-    n: Optional[StrictStr] = Field(default=None, description="RSA modulus value that is used by both the public and private keys and provides a link between them")
+    kty: Optional[StrictStr] = Field(
+        default=None,
+        description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`")
+    n: Optional[StrictStr] = Field(
+        default=None,
+        description="RSA modulus value that is used by both the public and private keys and provides a link between them")
     status: Optional[StrictStr] = Field(default=None, description="An `ACTIVE` Key is used to sign tokens issued by the authorization server. Supported values: `ACTIVE`, `NEXT`, or `EXPIRED`<br> A `NEXT` Key is the next Key that the authorization server uses to sign tokens when Keys are rotated. The `NEXT` Key might not be listed if it hasn't been generated. An `EXPIRED` Key is the previous Key that the authorization server used to sign tokens. The `EXPIRED` Key might not be listed if no Key has expired or the expired Key was deleted.")
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the key. Valid value: `sig`")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
@@ -119,4 +124,3 @@ class AuthorizationServerJsonWebKey(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

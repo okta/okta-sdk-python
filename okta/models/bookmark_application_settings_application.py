@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BookmarkApplicationSettingsApplication(BaseModel):
     """
     BookmarkApplicationSettingsApplication
-    """ # noqa: E501
-    request_integration: Optional[StrictBool] = Field(default=False, description="Would you like Okta to add an integration for this app?", alias="requestIntegration")
+    """  # noqa: E501
+    request_integration: Optional[StrictBool] = Field(
+        default=False,
+        description="Would you like Okta to add an integration for this app?",
+        alias="requestIntegration")
     url: StrictStr = Field(description="The URL of the launch page for this app")
     __properties: ClassVar[List[str]] = ["requestIntegration", "url"]
 
@@ -91,4 +95,3 @@ class BookmarkApplicationSettingsApplication(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

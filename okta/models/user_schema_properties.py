@@ -30,10 +30,11 @@ from okta.models.user_schema_properties_profile import UserSchemaPropertiesProfi
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaProperties(BaseModel):
     """
     UserSchemaProperties
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[UserSchemaPropertiesProfile] = None
     __properties: ClassVar[List[str]] = ["profile"]
 
@@ -97,4 +98,3 @@ class UserSchemaProperties(BaseModel):
             "profile": UserSchemaPropertiesProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

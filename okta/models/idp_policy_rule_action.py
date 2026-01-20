@@ -30,10 +30,11 @@ from okta.models.idp_policy_rule_action_idp import IdpPolicyRuleActionIdp
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdpPolicyRuleAction(BaseModel):
     """
     Specifies where to route users when they are attempting to sign in to your org, if the rule conditions are satisfied. You can add up to 10 providers to a single `idp` policy action.
-    """ # noqa: E501
+    """  # noqa: E501
     idp: Optional[IdpPolicyRuleActionIdp] = None
     __properties: ClassVar[List[str]] = ["idp"]
 
@@ -97,4 +98,3 @@ class IdpPolicyRuleAction(BaseModel):
             "idp": IdpPolicyRuleActionIdp.from_dict(obj["idp"]) if obj.get("idp") is not None else None
         })
         return _obj
-

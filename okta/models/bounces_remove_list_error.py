@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BouncesRemoveListError(BaseModel):
     """
     BouncesRemoveListError
-    """ # noqa: E501
-    email_address: Optional[StrictStr] = Field(default=None, description="An email address with a validation error", alias="emailAddress")
+    """  # noqa: E501
+    email_address: Optional[StrictStr] = Field(
+        default=None,
+        description="An email address with a validation error",
+        alias="emailAddress")
     reason: Optional[StrictStr] = Field(default=None, description="Validation error reason")
     __properties: ClassVar[List[str]] = ["emailAddress", "reason"]
 
@@ -91,4 +95,3 @@ class BouncesRemoveListError(BaseModel):
             "reason": obj.get("reason")
         })
         return _obj
-

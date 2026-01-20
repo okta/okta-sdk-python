@@ -30,10 +30,11 @@ from okta.models.token_authorization_server_policy_rule_action import TokenAutho
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerPolicyRuleActions(BaseModel):
     """
     AuthorizationServerPolicyRuleActions
-    """ # noqa: E501
+    """  # noqa: E501
     token: Optional[TokenAuthorizationServerPolicyRuleAction] = None
     __properties: ClassVar[List[str]] = ["token"]
 
@@ -97,4 +98,3 @@ class AuthorizationServerPolicyRuleActions(BaseModel):
             "token": TokenAuthorizationServerPolicyRuleAction.from_dict(obj["token"]) if obj.get("token") is not None else None
         })
         return _obj
-

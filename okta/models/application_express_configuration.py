@@ -30,12 +30,15 @@ from okta.models.application_capability import ApplicationCapability
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationExpressConfiguration(BaseModel):
     """
     <div class=\"x-lifecycle-container\"><x-lifecycle class=\"oie\"></x-lifecycle></div> Indicates which Express Configuration capabilities the app supports and has enabled
-    """ # noqa: E501
-    enabled_capabilities: Optional[List[ApplicationCapability]] = Field(default=None, description="Capabilities currently enabled for the app", alias="enabledCapabilities")
-    supported_capabilities: Optional[List[ApplicationCapability]] = Field(default=None, description="Capabilities supported by the app", alias="supportedCapabilities")
+    """  # noqa: E501
+    enabled_capabilities: Optional[List[ApplicationCapability]] = Field(
+        default=None, description="Capabilities currently enabled for the app", alias="enabledCapabilities")
+    supported_capabilities: Optional[List[ApplicationCapability]] = Field(
+        default=None, description="Capabilities supported by the app", alias="supportedCapabilities")
     __properties: ClassVar[List[str]] = ["enabledCapabilities", "supportedCapabilities"]
 
     model_config = ConfigDict(
@@ -92,4 +95,3 @@ class ApplicationExpressConfiguration(BaseModel):
             "supportedCapabilities": obj.get("supportedCapabilities")
         })
         return _obj
-

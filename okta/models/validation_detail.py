@@ -30,10 +30,11 @@ from okta.models.workflows_validation_detail_provider import WorkflowsValidation
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ValidationDetail(BaseModel):
     """
     Validation detail
-    """ # noqa: E501
+    """  # noqa: E501
     id: StrictStr = Field(description="Action identifier")
     provider: WorkflowsValidationDetailProvider
     __properties: ClassVar[List[str]] = ["id", "provider"]
@@ -99,4 +100,3 @@ class ValidationDetail(BaseModel):
             "provider": WorkflowsValidationDetailProvider.from_dict(obj["provider"]) if obj.get("provider") is not None else None
         })
         return _obj
-

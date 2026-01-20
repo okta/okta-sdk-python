@@ -31,10 +31,11 @@ from okta.models.token_hook_response_error import TokenHookResponseError
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenHookResponse(BaseModel):
     """
     For the token inline hook, the `commands` and `error` objects that you can return in the JSON payload of your response are defined in the following sections. > **Note:** The size of your response payload must be less than 256 KB.
-    """ # noqa: E501
+    """  # noqa: E501
     commands: Optional[List[TokenHookResponseCommandsInner]] = Field(default=None, description="You can use the `commands` object to provide commands to Okta. It's where you can tell Okta to add more claims to the token. The `commands` object is an array, allowing you to send multiple commands. In each array element, there needs to be a `type` property and `value` property. The `type` property is where you specify which of the supported commands you want to execute, and `value` is where you supply an operand for that command. In the case of the token hook type, the `value` property is itself a nested object in which you specify a particular operation, a path to act on, and a value.")
     error: Optional[TokenHookResponseError] = None
     __properties: ClassVar[List[str]] = ["commands", "error"]
@@ -107,4 +108,3 @@ class TokenHookResponse(BaseModel):
             "error": TokenHookResponseError.from_dict(obj["error"]) if obj.get("error") is not None else None
         })
         return _obj
-

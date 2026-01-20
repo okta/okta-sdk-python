@@ -30,11 +30,13 @@ from okta.models.o_auth2_refresh_token_scope import OAuth2RefreshTokenScope
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2RefreshTokenEmbedded(BaseModel):
     """
     The embedded resources related to the object if the `expand` query parameter is specified
-    """ # noqa: E501
-    scopes: Optional[List[OAuth2RefreshTokenScope]] = Field(default=None, description="The scope objects attached to the Token")
+    """  # noqa: E501
+    scopes: Optional[List[OAuth2RefreshTokenScope]] = Field(
+        default=None, description="The scope objects attached to the Token")
     __properties: ClassVar[List[str]] = ["scopes"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class OAuth2RefreshTokenEmbedded(BaseModel):
             "scopes": [OAuth2RefreshTokenScope.from_dict(_item) for _item in obj["scopes"]] if obj.get("scopes") is not None else None
         })
         return _obj
-

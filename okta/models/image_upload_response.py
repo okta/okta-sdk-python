@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ImageUploadResponse(BaseModel):
     """
     ImageUploadResponse
-    """ # noqa: E501
+    """  # noqa: E501
     url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["url"]
 
@@ -91,4 +92,3 @@ class ImageUploadResponse(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

@@ -26,18 +26,16 @@ import json
 
 from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List
-from okta.models.authenticator_key_enum import AuthenticatorKeyEnum
 from okta.models.authenticator_links import AuthenticatorLinks
 from okta.models.authenticator_simple import AuthenticatorSimple
-from okta.models.authenticator_type import AuthenticatorType
-from okta.models.lifecycle_status import LifecycleStatus
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class AuthenticatorKeySymantecVip(AuthenticatorSimple):
     """
     AuthenticatorKeySymantecVip
-    """ # noqa: E501
+    """  # noqa: E501
     __properties: ClassVar[List[str]] = ["created", "id", "key", "lastUpdated", "name", "status", "type", "_links"]
 
     model_config = ConfigDict(
@@ -107,4 +105,3 @@ class AuthenticatorKeySymantecVip(AuthenticatorSimple):
             "_links": AuthenticatorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

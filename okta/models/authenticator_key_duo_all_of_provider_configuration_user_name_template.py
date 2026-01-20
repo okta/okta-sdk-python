@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyDuoAllOfProviderConfigurationUserNameTemplate(BaseModel):
     """
     AuthenticatorKeyDuoAllOfProviderConfigurationUserNameTemplate
-    """ # noqa: E501
+    """  # noqa: E501
     template: Optional[StrictStr] = Field(default=None, description="The Duo Security user template name")
     __properties: ClassVar[List[str]] = ["template"]
 
@@ -89,4 +90,3 @@ class AuthenticatorKeyDuoAllOfProviderConfigurationUserNameTemplate(BaseModel):
             "template": obj.get("template")
         })
         return _obj
-

@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class OktaSignOnPolicyFactorPromptMode(str, Enum):
     """
-    Indicates if the User should be challenged for a second factor (MFA) based on the device being used, a Factor session lifetime, or on every sign-in attempt  > **Note:** Required only if `requireFactor` is set to `true`. 
+    Indicates if the User should be challenged for a second factor (MFA) based on the device being used, a Factor session lifetime, or on every sign-in attempt  > **Note:** Required only if `requireFactor` is set to `true`.
     """
 
     """
@@ -41,5 +41,3 @@ class OktaSignOnPolicyFactorPromptMode(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of OktaSignOnPolicyFactorPromptMode from a JSON string"""
         return cls(json.loads(json_str))
-
-

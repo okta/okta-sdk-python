@@ -30,10 +30,11 @@ from okta.models.per_client_rate_limit_mode import PerClientRateLimitMode
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PerClientRateLimitSettingsUseCaseModeOverrides(BaseModel):
     """
     A map of Per-Client Rate Limit Use Case to the applicable PerClientRateLimitMode. Overrides the `defaultMode` property for the specified use cases.
-    """ # noqa: E501
+    """  # noqa: E501
     login_page: Optional[PerClientRateLimitMode] = Field(default=None, alias="LOGIN_PAGE")
     oauth2_authorize: Optional[PerClientRateLimitMode] = Field(default=None, alias="OAUTH2_AUTHORIZE")
     oie_app_intent: Optional[PerClientRateLimitMode] = Field(default=None, alias="OIE_APP_INTENT")
@@ -94,4 +95,3 @@ class PerClientRateLimitSettingsUseCaseModeOverrides(BaseModel):
             "OIE_APP_INTENT": obj.get("OIE_APP_INTENT")
         })
         return _obj
-

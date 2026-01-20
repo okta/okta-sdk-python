@@ -28,22 +28,24 @@ from pydantic import ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.authenticator_key_custom_app_all_of_provider import AuthenticatorKeyCustomAppAllOfProvider
 from okta.models.authenticator_key_custom_app_all_of_settings import AuthenticatorKeyCustomAppAllOfSettings
-from okta.models.authenticator_key_enum import AuthenticatorKeyEnum
 from okta.models.authenticator_links import AuthenticatorLinks
 from okta.models.authenticator_simple import AuthenticatorSimple
-from okta.models.authenticator_type import AuthenticatorType
-from okta.models.lifecycle_status import LifecycleStatus
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class AuthenticatorKeyCustomApp(AuthenticatorSimple):
     """
     AuthenticatorKeyCustomApp
-    """ # noqa: E501
-    agree_to_terms: Optional[StrictBool] = Field(default=None, description="A value of `true` indicates that the administrator accepts the [terms](https://www.okta.com/privacy-policy/) for creating a new authenticator. Okta requires that you accept the terms when creating a new `custom_app` authenticator. Other authenticators don't require this field.", alias="agreeToTerms")
+    """  # noqa: E501
+    agree_to_terms: Optional[StrictBool] = Field(
+        default=None,
+        description="A value of `true` indicates that the administrator accepts the [terms](https://www.okta.com/privacy-policy/) for creating a new authenticator. Okta requires that you accept the terms when creating a new `custom_app` authenticator. Other authenticators don't require this field.",
+        alias="agreeToTerms")
     provider: Optional[AuthenticatorKeyCustomAppAllOfProvider] = None
     settings: Optional[AuthenticatorKeyCustomAppAllOfSettings] = None
-    __properties: ClassVar[List[str]] = ["created", "id", "key", "lastUpdated", "name", "status", "type", "_links", "agreeToTerms", "provider", "settings"]
+    __properties: ClassVar[List[str]] = ["created", "id", "key", "lastUpdated",
+                                         "name", "status", "type", "_links", "agreeToTerms", "provider", "settings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,4 +131,3 @@ class AuthenticatorKeyCustomApp(AuthenticatorSimple):
             "settings": AuthenticatorKeyCustomAppAllOfSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

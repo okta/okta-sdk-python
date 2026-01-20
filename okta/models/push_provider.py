@@ -30,19 +30,22 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from okta.models.links_self import LinksSelf
 from okta.models.provider_type import ProviderType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.apns_push_provider import APNSPushProvider
     from okta.models.fcm_push_provider import FCMPushProvider
 
+
 class PushProvider(BaseModel):
     """
     PushProvider
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique key for the Push Provider")
-    last_updated_date: Optional[StrictStr] = Field(default=None, description="Timestamp when the Push Provider was last modified", alias="lastUpdatedDate")
+    last_updated_date: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the Push Provider was last modified",
+        alias="lastUpdatedDate")
     name: Optional[StrictStr] = Field(default=None, description="Display name of the push provider")
     provider_type: Optional[ProviderType] = Field(default=None, alias="providerType")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
@@ -59,7 +62,7 @@ class PushProvider(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'APNS': 'APNSPushProvider','FCM': 'FCMPushProvider'
+        'APNS': 'APNSPushProvider', 'FCM': 'FCMPushProvider'
     }
 
     @classmethod
@@ -127,7 +130,5 @@ class PushProvider(BaseModel):
             return import_module("okta.models.fcm_push_provider").FCMPushProvider.from_dict(obj)
 
         raise ValueError("PushProvider failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

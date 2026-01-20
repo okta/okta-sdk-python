@@ -30,12 +30,16 @@ from okta.models.inline_hook_request_object_url import InlineHookRequestObjectUr
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookRequestObject(BaseModel):
     """
     The API request that triggered the inline hook
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier that Okta assigned to the API request")
-    ip_address: Optional[StrictStr] = Field(default=None, description="The IP address of the client that made the API request", alias="ipAddress")
+    ip_address: Optional[StrictStr] = Field(
+        default=None,
+        description="The IP address of the client that made the API request",
+        alias="ipAddress")
     method: Optional[StrictStr] = Field(default=None, description="The HTTP request method of the API request")
     url: Optional[InlineHookRequestObjectUrl] = None
     __properties: ClassVar[List[str]] = ["id", "ipAddress", "method", "url"]
@@ -103,4 +107,3 @@ class InlineHookRequestObject(BaseModel):
             "url": InlineHookRequestObjectUrl.from_dict(obj["url"]) if obj.get("url") is not None else None
         })
         return _obj
-

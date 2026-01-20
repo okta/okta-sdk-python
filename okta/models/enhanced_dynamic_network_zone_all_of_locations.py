@@ -31,10 +31,11 @@ from okta.models.enhanced_dynamic_network_zone_all_of_locations_include import E
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EnhancedDynamicNetworkZoneAllOfLocations(BaseModel):
     """
     The list of geolocations to include or exclude for an Enhanced Dynamic Network Zone
-    """ # noqa: E501
+    """  # noqa: E501
     include: Optional[EnhancedDynamicNetworkZoneAllOfLocationsInclude] = None
     exclude: Optional[EnhancedDynamicNetworkZoneAllOfLocationsExclude] = None
     __properties: ClassVar[List[str]] = ["include", "exclude"]
@@ -107,4 +108,3 @@ class EnhancedDynamicNetworkZoneAllOfLocations(BaseModel):
             "exclude": EnhancedDynamicNetworkZoneAllOfLocationsExclude.from_dict(obj["exclude"]) if obj.get("exclude") is not None else None
         })
         return _obj
-

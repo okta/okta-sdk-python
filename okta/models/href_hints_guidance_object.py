@@ -30,12 +30,14 @@ from okta.models.http_method import HttpMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class HrefHintsGuidanceObject(BaseModel):
     """
     HrefHintsGuidanceObject
-    """ # noqa: E501
+    """  # noqa: E501
     allow: Optional[List[HttpMethod]] = None
-    guidance: Optional[List[StrictStr]] = Field(default=None, description="Specifies the URI to invoke for granting scope consent required to complete the OAuth 2.0 connection ")
+    guidance: Optional[List[StrictStr]] = Field(
+        default=None, description="Specifies the URI to invoke for granting scope consent required to complete the OAuth 2.0 connection ")
     __properties: ClassVar[List[str]] = ["allow", "guidance"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class HrefHintsGuidanceObject(BaseModel):
             "guidance": obj.get("guidance")
         })
         return _obj
-

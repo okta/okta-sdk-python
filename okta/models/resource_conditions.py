@@ -30,10 +30,11 @@ from okta.models.resource_conditions_exclude import ResourceConditionsExclude
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceConditions(BaseModel):
     """
     Conditions for further restricting a resource.
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[ResourceConditionsExclude] = Field(default=None, alias="Exclude")
     __properties: ClassVar[List[str]] = ["Exclude"]
 
@@ -97,4 +98,3 @@ class ResourceConditions(BaseModel):
             "Exclude": ResourceConditionsExclude.from_dict(obj["Exclude"]) if obj.get("Exclude") is not None else None
         })
         return _obj
-

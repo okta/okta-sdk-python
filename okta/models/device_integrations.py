@@ -34,11 +34,15 @@ from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceIntegrations(BaseModel):
     """
     DeviceIntegrations
-    """ # noqa: E501
-    display_name: Optional[StrictStr] = Field(default=None, description="The display name of the device integration", alias="displayName")
+    """  # noqa: E501
+    display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The display name of the device integration",
+        alias="displayName")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the device integration")
     metadata: Optional[DeviceIntegrationsMetadata] = None
     name: Optional[DeviceIntegrationsName] = None
@@ -122,4 +126,3 @@ class DeviceIntegrations(BaseModel):
             "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

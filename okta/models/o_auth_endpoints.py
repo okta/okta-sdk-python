@@ -34,10 +34,11 @@ from okta.models.oidc_user_info_endpoint import OidcUserInfoEndpoint
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuthEndpoints(BaseModel):
     """
     The `OAUTH2` and `OIDC` protocols support the `authorization` and `token` endpoints. Also, the `OIDC` protocol supports the `userInfo` and `jwks` endpoints.  The IdP Authorization Server (AS) endpoints are currently defined as part of the [IdP provider]((https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request)) and are read-only.
-    """ # noqa: E501
+    """  # noqa: E501
     authorization: Optional[OAuthAuthorizationEndpoint] = None
     jwks: Optional[OidcJwksEndpoint] = None
     slo: Optional[OidcSloEndpoint] = None
@@ -137,4 +138,3 @@ class OAuthEndpoints(BaseModel):
             "userInfo": OidcUserInfoEndpoint.from_dict(obj["userInfo"]) if obj.get("userInfo") is not None else None
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntitlementTypesInnerMappings(BaseModel):
     """
     The property mapping between an Okta entitlement and an app entitlement
-    """ # noqa: E501
+    """  # noqa: E501
     id: StrictStr = Field(description="The field that maps to the entitlement ID")
     display_name: StrictStr = Field(description="The field that maps to the entitlement display name", alias="displayName")
     description: Optional[StrictStr] = Field(default=None, description="The field that maps to entitlement description")
@@ -93,4 +94,3 @@ class EntitlementTypesInnerMappings(BaseModel):
             "description": obj.get("description")
         })
         return _obj
-

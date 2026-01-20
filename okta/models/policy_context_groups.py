@@ -30,10 +30,11 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyContextGroups(BaseModel):
     """
     An array of Group IDs for the simulate operation. Only user IDs or Group IDs are allowed, not both.
-    """ # noqa: E501
+    """  # noqa: E501
     ids: List[Annotated[str, Field(strict=True)]]
     __properties: ClassVar[List[str]] = ["ids"]
 
@@ -90,4 +91,3 @@ class PolicyContextGroups(BaseModel):
             "ids": obj.get("ids")
         })
         return _obj
-

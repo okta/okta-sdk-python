@@ -30,10 +30,11 @@ from okta.models.event_hook_filter_map_object_condition import EventHookFilterMa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EventHookFilterMapObject(BaseModel):
     """
     EventHookFilterMapObject
-    """ # noqa: E501
+    """  # noqa: E501
     condition: Optional[EventHookFilterMapObjectCondition] = None
     event: Optional[StrictStr] = Field(default=None, description="The filtered event type")
     __properties: ClassVar[List[str]] = ["condition", "event"]
@@ -99,4 +100,3 @@ class EventHookFilterMapObject(BaseModel):
             "event": obj.get("event")
         })
         return _obj
-

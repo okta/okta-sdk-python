@@ -33,10 +33,11 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApiToken(BaseModel):
     """
     An API token for an Okta User. This token is NOT scoped any further and can be used for any API the user has permissions to call.
-    """ # noqa: E501
+    """  # noqa: E501
     client_name: Optional[StrictStr] = Field(default=None, alias="clientName")
     created: Optional[datetime] = None
     expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
@@ -44,10 +45,12 @@ class ApiToken(BaseModel):
     last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     name: StrictStr
     network: Optional[ApiTokenNetwork] = None
-    token_window: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).", alias="tokenWindow")
+    token_window: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).", alias="tokenWindow")
     user_id: Optional[StrictStr] = Field(default=None, alias="userId")
     link: Optional[LinksSelf] = Field(default=None, alias="_link")
-    __properties: ClassVar[List[str]] = ["clientName", "created", "expiresAt", "id", "lastUpdated", "name", "network", "tokenWindow", "userId", "_link"]
+    __properties: ClassVar[List[str]] = ["clientName", "created", "expiresAt",
+                                         "id", "lastUpdated", "name", "network", "tokenWindow", "userId", "_link"]
 
     @field_validator('token_window')
     def token_window_validate_regular_expression(cls, value):
@@ -150,4 +153,3 @@ class ApiToken(BaseModel):
             "_link": LinksSelf.from_dict(obj["_link"]) if obj.get("_link") is not None else None
         })
         return _obj
-

@@ -31,12 +31,14 @@ from okta.models.risk_event_subject_risk_level import RiskEventSubjectRiskLevel
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RiskEventSubject(BaseModel):
     """
     RiskEventSubject
-    """ # noqa: E501
+    """  # noqa: E501
     ip: StrictStr = Field(description="The risk event subject IP address (either an IPv4 or IPv6 address)")
-    message: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(default=None, description="Additional reasons for the risk level of the IP")
+    message: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
+        default=None, description="Additional reasons for the risk level of the IP")
     risk_level: RiskEventSubjectRiskLevel = Field(alias="riskLevel")
     __properties: ClassVar[List[str]] = ["ip", "message", "riskLevel"]
 
@@ -105,4 +107,3 @@ class RiskEventSubject(BaseModel):
             "riskLevel": obj.get("riskLevel")
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationInlineHookCommand(BaseModel):
     """
     RegistrationInlineHookCommand
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["type"]
 
@@ -42,8 +43,10 @@ class RegistrationInlineHookCommand(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['com.okta.user.profile.update', 'com.okta.action.update', 'com.okta.user.progressive.profile.update']):
-            raise ValueError("must be one of enum values ('com.okta.user.profile.update', 'com.okta.action.update', 'com.okta.user.progressive.profile.update')")
+        if value not in set(['com.okta.user.profile.update', 'com.okta.action.update',
+                            'com.okta.user.progressive.profile.update']):
+            raise ValueError(
+                "must be one of enum values ('com.okta.user.profile.update', 'com.okta.action.update', 'com.okta.user.progressive.profile.update')")
         return value
 
     model_config = ConfigDict(
@@ -99,4 +102,3 @@ class RegistrationInlineHookCommand(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

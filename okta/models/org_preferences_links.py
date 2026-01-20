@@ -31,10 +31,11 @@ from okta.models.org_preferences_links_show_end_user_footer import OrgPreference
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgPreferencesLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for this object using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
-    """ # noqa: E501
+    """  # noqa: E501
     hide_end_user_footer: Optional[OrgPreferencesLinksHideEndUserFooter] = Field(default=None, alias="hideEndUserFooter")
     show_end_user_footer: Optional[OrgPreferencesLinksShowEndUserFooter] = Field(default=None, alias="showEndUserFooter")
     __properties: ClassVar[List[str]] = ["hideEndUserFooter", "showEndUserFooter"]
@@ -107,4 +108,3 @@ class OrgPreferencesLinks(BaseModel):
             "showEndUserFooter": OrgPreferencesLinksShowEndUserFooter.from_dict(obj["showEndUserFooter"]) if obj.get("showEndUserFooter") is not None else None
         })
         return _obj
-

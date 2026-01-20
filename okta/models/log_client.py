@@ -31,16 +31,25 @@ from okta.models.log_user_agent import LogUserAgent
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogClient(BaseModel):
     """
     When an event is triggered by an HTTP request, the `client` object describes the [client](https://datatracker.ietf.org/doc/html/rfc2616) that issues the HTTP request. For instance, the web browser is the client when a user accesses Okta. When this request is received and processed, a sign-in event is fired. When the event isn't sourced to an HTTP request, such as an automatic update, the `client` object field is blank.
-    """ # noqa: E501
-    device: Optional[StrictStr] = Field(default=None, description="Type of device that the client operates from (for example, computer)")
+    """  # noqa: E501
+    device: Optional[StrictStr] = Field(default=None,
+                                        description="Type of device that the client operates from (for example, computer)")
     geographical_context: Optional[LogGeographicalContext] = Field(default=None, alias="geographicalContext")
-    id: Optional[StrictStr] = Field(default=None, description="For OAuth requests, this is the ID of the OAuth [client](https://datatracker.ietf.org/doc/html/rfc6749#section-1.1) making the request. For SSWS token requests, this is the ID of the agent making the request.")
-    ip_address: Optional[StrictStr] = Field(default=None, description="IP address that the client is making its request from", alias="ipAddress")
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="For OAuth requests, this is the ID of the OAuth [client](https://datatracker.ietf.org/doc/html/rfc6749#section-1.1) making the request. For SSWS token requests, this is the ID of the agent making the request.")
+    ip_address: Optional[StrictStr] = Field(
+        default=None,
+        description="IP address that the client is making its request from",
+        alias="ipAddress")
     user_agent: Optional[LogUserAgent] = Field(default=None, alias="userAgent")
-    zone: Optional[StrictStr] = Field(default=None, description="The `name` of the [Zone](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/NetworkZone/#tag/NetworkZone/operation/getNetworkZone) that the client's location is mapped to")
+    zone: Optional[StrictStr] = Field(
+        default=None,
+        description="The `name` of the [Zone](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/NetworkZone/#tag/NetworkZone/operation/getNetworkZone) that the client's location is mapped to")
     __properties: ClassVar[List[str]] = ["device", "geographicalContext", "id", "ipAddress", "userAgent", "zone"]
 
     model_config = ConfigDict(
@@ -123,4 +132,3 @@ class LogClient(BaseModel):
             "zone": obj.get("zone")
         })
         return _obj
-

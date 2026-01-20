@@ -31,9 +31,7 @@ from okta.models.application_accessibility import ApplicationAccessibility
 from okta.models.application_embedded import ApplicationEmbedded
 from okta.models.application_express_configuration import ApplicationExpressConfiguration
 from okta.models.application_licensing import ApplicationLicensing
-from okta.models.application_lifecycle_status import ApplicationLifecycleStatus
 from okta.models.application_links import ApplicationLinks
-from okta.models.application_sign_on_mode import ApplicationSignOnMode
 from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.o_auth_application_credentials import OAuthApplicationCredentials
@@ -41,14 +39,33 @@ from okta.models.open_id_connect_application_settings import OpenIdConnectApplic
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OpenIdConnectApplication(Application):
     """
     OpenIdConnectApplication
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: OAuthApplicationCredentials
     name: StrictStr = Field(description="`oidc_client` is the key name for an OAuth 2.0 client app instance")
     settings: OpenIdConnectApplicationSettings
-    __properties: ClassVar[List[str]] = ["accessibility", "created", "expressConfiguration", "features", "id", "label", "lastUpdated", "licensing", "orn", "profile", "signOnMode", "status", "universalLogout", "visibility", "_embedded", "_links", "credentials", "name", "settings"]
+    __properties: ClassVar[List[str]] = ["accessibility",
+                                         "created",
+                                         "expressConfiguration",
+                                         "features",
+                                         "id",
+                                         "label",
+                                         "lastUpdated",
+                                         "licensing",
+                                         "orn",
+                                         "profile",
+                                         "signOnMode",
+                                         "status",
+                                         "universalLogout",
+                                         "visibility",
+                                         "_embedded",
+                                         "_links",
+                                         "credentials",
+                                         "name",
+                                         "settings"]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -191,4 +208,3 @@ class OpenIdConnectApplication(Application):
             "settings": OpenIdConnectApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

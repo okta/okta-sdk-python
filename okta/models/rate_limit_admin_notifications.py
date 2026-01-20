@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RateLimitAdminNotifications(BaseModel):
     """
-    
-    """ # noqa: E501
+
+    """  # noqa: E501
     notifications_enabled: StrictBool = Field(alias="notificationsEnabled")
     __properties: ClassVar[List[str]] = ["notificationsEnabled"]
 
@@ -89,4 +90,3 @@ class RateLimitAdminNotifications(BaseModel):
             "notificationsEnabled": obj.get("notificationsEnabled")
         })
         return _obj
-

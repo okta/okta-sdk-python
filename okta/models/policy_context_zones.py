@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyContextZones(BaseModel):
     """
     The zone ID under the network rule condition.
-    """ # noqa: E501
+    """  # noqa: E501
     ids: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["ids"]
 
@@ -89,4 +90,3 @@ class PolicyContextZones(BaseModel):
             "ids": obj.get("ids")
         })
         return _obj
-

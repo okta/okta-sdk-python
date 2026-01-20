@@ -30,15 +30,22 @@ from okta.models.error_cause import ErrorCause
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Error(BaseModel):
     """
     Error
-    """ # noqa: E501
+    """  # noqa: E501
     error_causes: Optional[List[ErrorCause]] = Field(default=None, alias="errorCauses")
     error_code: Optional[StrictStr] = Field(default=None, description="An Okta code for this type of error", alias="errorCode")
-    error_id: Optional[StrictStr] = Field(default=None, description="A unique identifier for this error. This can be used by Okta Support to help with troubleshooting.", alias="errorId")
+    error_id: Optional[StrictStr] = Field(
+        default=None,
+        description="A unique identifier for this error. This can be used by Okta Support to help with troubleshooting.",
+        alias="errorId")
     error_link: Optional[StrictStr] = Field(default=None, description="An Okta code for this type of error", alias="errorLink")
-    error_summary: Optional[StrictStr] = Field(default=None, description="A short description of what caused this error. Sometimes this contains dynamically-generated information about your specific error.", alias="errorSummary")
+    error_summary: Optional[StrictStr] = Field(
+        default=None,
+        description="A short description of what caused this error. Sometimes this contains dynamically-generated information about your specific error.",
+        alias="errorSummary")
     __properties: ClassVar[List[str]] = ["errorCauses", "errorCode", "errorId", "errorLink", "errorSummary"]
 
     model_config = ConfigDict(
@@ -105,4 +112,3 @@ class Error(BaseModel):
             "errorSummary": obj.get("errorSummary")
         })
         return _obj
-

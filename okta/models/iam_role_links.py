@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IamRoleLinks(BaseModel):
     """
     IamRoleLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     permissions: Optional[HrefObject] = None
     __properties: ClassVar[List[str]] = ["self", "permissions"]
@@ -107,4 +108,3 @@ class IamRoleLinks(BaseModel):
             "permissions": HrefObject.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })
         return _obj
-

@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SubmissionResponseAppContactDetailsInner(BaseModel):
     """
     SubmissionResponseAppContactDetailsInner
-    """ # noqa: E501
-    contact_type: StrictStr = Field(description="Type of contact * `CUSTOMER_SUPPORT` - Public support contact details visible on your OIN catalog page for end users needing assistance with your integration. * `ESCALATION_SUPPORT` - Private support contact used by Okta to reach your organization during emergencies or escalations post-publication of the app (not shared with customers). ", alias="contactType")
+    """  # noqa: E501
+    contact_type: StrictStr = Field(
+        description="Type of contact * `CUSTOMER_SUPPORT` - Public support contact details visible on your OIN catalog page for end users needing assistance with your integration. * `ESCALATION_SUPPORT` - Private support contact used by Okta to reach your organization during emergencies or escalations post-publication of the app (not shared with customers). ",
+        alias="contactType")
     contact_value_type: StrictStr = Field(description="Format of the contact value", alias="contactValueType")
     contact: StrictStr = Field(description="The contact value (email, phone, or URL)")
     __properties: ClassVar[List[str]] = ["contactType", "contactValueType", "contact"]
@@ -107,4 +110,3 @@ class SubmissionResponseAppContactDetailsInner(BaseModel):
             "contact": obj.get("contact")
         })
         return _obj
-

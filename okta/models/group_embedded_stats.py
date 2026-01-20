@@ -29,14 +29,24 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupEmbeddedStats(BaseModel):
     """
     Statistics about the group
-    """ # noqa: E501
+    """  # noqa: E501
     users_count: Optional[StrictInt] = Field(default=None, description="Number of users in the group", alias="usersCount")
-    apps_count: Optional[StrictInt] = Field(default=None, description="Number of apps associated with the group", alias="appsCount")
-    group_push_mappings_count: Optional[StrictInt] = Field(default=None, description="Number of group push mappings associated with the group", alias="groupPushMappingsCount")
-    has_admin_privlege: Optional[StrictBool] = Field(default=None, description="Indicates if the group has admin privileges via a group-level role assignment", alias="hasAdminPrivlege")
+    apps_count: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of apps associated with the group",
+        alias="appsCount")
+    group_push_mappings_count: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of group push mappings associated with the group",
+        alias="groupPushMappingsCount")
+    has_admin_privlege: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the group has admin privileges via a group-level role assignment",
+        alias="hasAdminPrivlege")
     __properties: ClassVar[List[str]] = ["usersCount", "appsCount", "groupPushMappingsCount", "hasAdminPrivlege"]
 
     model_config = ConfigDict(
@@ -95,4 +105,3 @@ class GroupEmbeddedStats(BaseModel):
             "hasAdminPrivlege": obj.get("hasAdminPrivlege")
         })
         return _obj
-

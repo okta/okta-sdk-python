@@ -34,23 +34,31 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentPoolUpdate(BaseModel):
     """
     Various information about agent auto-update configuration
-    """ # noqa: E501
+    """  # noqa: E501
     agents: Optional[List[Agent]] = None
     agent_type: Optional[AgentType] = Field(default=None, alias="agentType")
     enabled: Optional[StrictBool] = Field(default=None, description="Indicates if auto-update is enabled for the agent pool")
     id: Optional[StrictStr] = Field(default=None, description="ID of the agent pool update")
     name: Optional[StrictStr] = Field(default=None, description="Name of the agent pool update")
-    notify_admin: Optional[StrictBool] = Field(default=None, description="Indicates if the admin is notified about the update", alias="notifyAdmin")
+    notify_admin: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the admin is notified about the update",
+        alias="notifyAdmin")
     reason: Optional[StrictStr] = Field(default=None, description="Reason for the update")
     schedule: Optional[AutoUpdateSchedule] = None
     sort_order: Optional[StrictInt] = Field(default=None, description="Specifies the sort order", alias="sortOrder")
     status: Optional[AgentUpdateJobStatus] = None
-    target_version: Optional[StrictStr] = Field(default=None, description="The agent version to update to", alias="targetVersion")
+    target_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The agent version to update to",
+        alias="targetVersion")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["agents", "agentType", "enabled", "id", "name", "notifyAdmin", "reason", "schedule", "sortOrder", "status", "targetVersion", "_links"]
+    __properties: ClassVar[List[str]] = ["agents", "agentType", "enabled", "id", "name",
+                                         "notifyAdmin", "reason", "schedule", "sortOrder", "status", "targetVersion", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -139,4 +147,3 @@ class AgentPoolUpdate(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

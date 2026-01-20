@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationLicensing(BaseModel):
     """
     Licenses for the app
-    """ # noqa: E501
-    seat_count: Optional[StrictInt] = Field(default=None, description="Number of licenses purchased for the app", alias="seatCount")
+    """  # noqa: E501
+    seat_count: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of licenses purchased for the app",
+        alias="seatCount")
     __properties: ClassVar[List[str]] = ["seatCount"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class ApplicationLicensing(BaseModel):
             "seatCount": obj.get("seatCount")
         })
         return _obj
-

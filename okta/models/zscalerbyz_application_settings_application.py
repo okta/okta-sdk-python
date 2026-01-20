@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ZscalerbyzApplicationSettingsApplication(BaseModel):
     """
     Zscaler app instance properties
-    """ # noqa: E501
+    """  # noqa: E501
     site_domain: Optional[StrictStr] = Field(default=None, description="Your Zscaler domain", alias="siteDomain")
     __properties: ClassVar[List[str]] = ["siteDomain"]
 
@@ -89,4 +90,3 @@ class ZscalerbyzApplicationSettingsApplication(BaseModel):
             "siteDomain": obj.get("siteDomain")
         })
         return _obj
-

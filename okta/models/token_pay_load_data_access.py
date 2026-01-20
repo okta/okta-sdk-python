@@ -30,13 +30,16 @@ from okta.models.base_token_token import BaseTokenToken
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataAccess(BaseModel):
     """
     TokenPayLoadDataAccess
-    """ # noqa: E501
-    claims: Optional[Dict[str, Any]] = Field(default=None, description="Claims included in the token. Consists of name-value pairs for each included claim. For descriptions of the claims that you can include, see the Okta [OpenID Connect and OAuth 2.0 API reference](/openapi/okta-oauth/guides/overview/#claims).")
+    """  # noqa: E501
+    claims: Optional[Dict[str, Any]] = Field(
+        default=None, description="Claims included in the token. Consists of name-value pairs for each included claim. For descriptions of the claims that you can include, see the Okta [OpenID Connect and OAuth 2.0 API reference](/openapi/okta-oauth/guides/overview/#claims).")
     token: Optional[BaseTokenToken] = None
-    scopes: Optional[Dict[str, Any]] = Field(default=None, description="The scopes contained in the token. For descriptions of the scopes that you can include, see the Okta [OpenID Connect and OAuth 2.0 API reference](/openapi/okta-oauth/guides/overview/#scopes).")
+    scopes: Optional[Dict[str, Any]] = Field(
+        default=None, description="The scopes contained in the token. For descriptions of the scopes that you can include, see the Okta [OpenID Connect and OAuth 2.0 API reference](/openapi/okta-oauth/guides/overview/#scopes).")
     __properties: ClassVar[List[str]] = ["claims", "token", "scopes"]
 
     model_config = ConfigDict(
@@ -101,4 +104,3 @@ class TokenPayLoadDataAccess(BaseModel):
             "scopes": obj.get("scopes")
         })
         return _obj
-

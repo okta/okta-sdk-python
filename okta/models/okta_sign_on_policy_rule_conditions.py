@@ -33,10 +33,11 @@ from okta.models.policy_rule_auth_context_condition import PolicyRuleAuthContext
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaSignOnPolicyRuleConditions(BaseModel):
     """
     OktaSignOnPolicyRuleConditions
-    """ # noqa: E501
+    """  # noqa: E501
     auth_context: Optional[PolicyRuleAuthContextCondition] = Field(default=None, alias="authContext")
     identity_provider: Optional[IdentityProviderPolicyRuleCondition] = Field(default=None, alias="identityProvider")
     network: Optional[PolicyNetworkCondition] = None
@@ -127,4 +128,3 @@ class OktaSignOnPolicyRuleConditions(BaseModel):
             "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None
         })
         return _obj
-

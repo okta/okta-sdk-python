@@ -32,10 +32,11 @@ from okta.models.password_policy_recovery_question import PasswordPolicyRecovery
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRecoveryFactors(BaseModel):
     """
     Settings for the factors that can be used for recovery
-    """ # noqa: E501
+    """  # noqa: E501
     okta_call: Optional[PasswordPolicyRecoveryFactorSettings] = None
     okta_email: Optional[PasswordPolicyRecoveryEmail] = None
     okta_sms: Optional[PasswordPolicyRecoveryFactorSettings] = None
@@ -126,4 +127,3 @@ class PasswordPolicyRecoveryFactors(BaseModel):
             "recovery_question": PasswordPolicyRecoveryQuestion.from_dict(obj["recovery_question"]) if obj.get("recovery_question") is not None else None
         })
         return _obj
-

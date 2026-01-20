@@ -32,10 +32,11 @@ from okta.models.token_resources_href_object import TokenResourcesHrefObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientLinks(BaseModel):
     """
     OAuth2ClientLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     grants: Optional[GrantResourcesHrefObject] = Field(default=None, description="Link to the grant resources")
     tokens: Optional[TokenResourcesHrefObject] = Field(default=None, description="Link to the token resources")
@@ -117,4 +118,3 @@ class OAuth2ClientLinks(BaseModel):
             "tokens": TokenResourcesHrefObject.from_dict(obj["tokens"]) if obj.get("tokens") is not None else None
         })
         return _obj
-

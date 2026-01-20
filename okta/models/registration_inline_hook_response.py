@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationInlineHookResponse(BaseModel):
     """
     Registration inline hook response
-    """ # noqa: E501
+    """  # noqa: E501
     commands: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["commands"]
 
@@ -89,4 +90,3 @@ class RegistrationInlineHookResponse(BaseModel):
             "commands": obj.get("commands")
         })
         return _obj
-

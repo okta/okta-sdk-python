@@ -30,10 +30,11 @@ from okta.models.href_object import HrefObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BaseContextUserLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the current status of the user. These links are used to discover what groups the user is a part of and what factors they have enrolled.
-    """ # noqa: E501
+    """  # noqa: E501
     groups: Optional[HrefObject] = Field(default=None, description="URL to retrieve the individual user's group memberships")
     factors: Optional[HrefObject] = Field(default=None, description="URL to retrieve individual user's factor enrollments")
     __properties: ClassVar[List[str]] = ["groups", "factors"]
@@ -106,4 +107,3 @@ class BaseContextUserLinks(BaseModel):
             "factors": HrefObject.from_dict(obj["factors"]) if obj.get("factors") is not None else None
         })
         return _obj
-

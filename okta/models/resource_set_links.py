@@ -32,10 +32,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetLinks(BaseModel):
     """
     ResourceSetLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     resources: Optional[HrefObjectResourceSetResourcesLink] = None
     bindings: Optional[HrefObjectBindingsLink] = None
@@ -117,4 +118,3 @@ class ResourceSetLinks(BaseModel):
             "bindings": HrefObjectBindingsLink.from_dict(obj["bindings"]) if obj.get("bindings") is not None else None
         })
         return _obj
-

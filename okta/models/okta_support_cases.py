@@ -30,10 +30,11 @@ from okta.models.okta_support_case import OktaSupportCase
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaSupportCases(BaseModel):
     """
     OktaSupportCases
-    """ # noqa: E501
+    """  # noqa: E501
     support_cases: Optional[List[OktaSupportCase]] = Field(default=None, alias="supportCases")
     __properties: ClassVar[List[str]] = ["supportCases"]
 
@@ -97,4 +98,3 @@ class OktaSupportCases(BaseModel):
             "supportCases": [OktaSupportCase.from_dict(_item) for _item in obj["supportCases"]] if obj.get("supportCases") is not None else None
         })
         return _obj
-

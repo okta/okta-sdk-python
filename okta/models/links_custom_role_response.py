@@ -34,10 +34,11 @@ from okta.models.href_object_role_link import HrefObjectRoleLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksCustomRoleResponse(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This object is used for dynamic discovery of related resources.
-    """ # noqa: E501
+    """  # noqa: E501
     assignee: Optional[HrefObjectAssigneeLink] = None
     member: Optional[HrefObjectMemberLink] = None
     permissions: Optional[HrefObjectPermissionsLink] = None
@@ -137,4 +138,3 @@ class LinksCustomRoleResponse(BaseModel):
             "role": HrefObjectRoleLink.from_dict(obj["role"]) if obj.get("role") is not None else None
         })
         return _obj
-

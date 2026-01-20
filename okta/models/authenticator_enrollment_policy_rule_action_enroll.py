@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicyRuleActionEnroll(BaseModel):
     """
     Specifies whether the user is to be enrolled the first time they `LOGIN`, the next time they are in the `CHALLENGE` process, or `NEVER`
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[StrictStr] = Field(default=None, alias="self")
     __properties: ClassVar[List[str]] = ["self"]
 
@@ -99,4 +100,3 @@ class AuthenticatorEnrollmentPolicyRuleActionEnroll(BaseModel):
             "self": obj.get("self")
         })
         return _obj
-

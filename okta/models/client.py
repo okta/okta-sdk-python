@@ -35,30 +35,68 @@ from okta.models.signing_algorithm import SigningAlgorithm
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Client(BaseModel):
     """
     Client
-    """ # noqa: E501
+    """  # noqa: E501
     application_type: Optional[ApplicationType] = None
-    client_id: Optional[StrictStr] = Field(default=None, description="Unique key for the client application. The `client_id` is immutable. When you create a client Application, you can't specify the `client_id` because Okta uses the application ID for the `client_id`.")
-    client_id_issued_at: Optional[StrictInt] = Field(default=None, description="Time at which the `client_id` was issued (measured in unix seconds)")
+    client_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique key for the client application. The `client_id` is immutable. When you create a client Application, you can't specify the `client_id` because Okta uses the application ID for the `client_id`.")
+    client_id_issued_at: Optional[StrictInt] = Field(
+        default=None, description="Time at which the `client_id` was issued (measured in unix seconds)")
     client_name: Optional[StrictStr] = Field(default=None, description="Human-readable string name of the client application")
-    client_secret: Optional[StrictStr] = Field(default=None, description="OAuth 2.0 client secret string (used for confidential clients). The `client_secret` is shown only on the response of the creation or update of a client Application (and only if the `token_endpoint_auth_method` is one that requires a client secret). You can't specify the `client_secret`. If the `token_endpoint_auth_method` requires one, Okta generates a random `client_secret` for the client Application.")
-    client_secret_expires_at: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="Time at which the `client_secret` expires or 0 if it doesn't expire (measured in unix seconds)")
-    frontchannel_logout_session_required: Optional[StrictBool] = Field(default=None, description="Include user session details")
+    client_secret: Optional[StrictStr] = Field(
+        default=None,
+        description="OAuth 2.0 client secret string (used for confidential clients). The `client_secret` is shown only on the response of the creation or update of a client Application (and only if the `token_endpoint_auth_method` is one that requires a client secret). You can't specify the `client_secret`. If the `token_endpoint_auth_method` requires one, Okta generates a random `client_secret` for the client Application.")
+    client_secret_expires_at: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(
+        default=None, description="Time at which the `client_secret` expires or 0 if it doesn't expire (measured in unix seconds)")
+    frontchannel_logout_session_required: Optional[StrictBool] = Field(
+        default=None, description="Include user session details")
     frontchannel_logout_uri: Optional[StrictStr] = Field(default=None, description="URL where Okta sends the logout request")
-    grant_types: Optional[List[GrantType]] = Field(default=None, description="Array of OAuth 2.0 grant type strings. Default value: `[authorization_code]`")
-    initiate_login_uri: Optional[StrictStr] = Field(default=None, description="URL that a third party can use to initiate a login by the client")
-    jwks_uri: Optional[StrictStr] = Field(default=None, description="URL string that references a [JSON Web Key Set](https://tools.ietf.org/html/rfc7517#section-5) for validating JWTs presented to Okta")
-    logo_uri: Optional[StrictStr] = Field(default=None, description="URL string that references a logo for the client consent dialog (not the sign-in dialog)")
-    policy_uri: Optional[StrictStr] = Field(default=None, description="URL string of a web page providing the client's policy document")
-    post_logout_redirect_uris: Optional[List[StrictStr]] = Field(default=None, description="Array of redirection URI strings for use for relying party initiated logouts")
+    grant_types: Optional[List[GrantType]] = Field(
+        default=None, description="Array of OAuth 2.0 grant type strings. Default value: `[authorization_code]`")
+    initiate_login_uri: Optional[StrictStr] = Field(
+        default=None, description="URL that a third party can use to initiate a login by the client")
+    jwks_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="URL string that references a [JSON Web Key Set](https://tools.ietf.org/html/rfc7517#section-5) for validating JWTs presented to Okta")
+    logo_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="URL string that references a logo for the client consent dialog (not the sign-in dialog)")
+    policy_uri: Optional[StrictStr] = Field(default=None,
+                                            description="URL string of a web page providing the client's policy document")
+    post_logout_redirect_uris: Optional[List[StrictStr]] = Field(
+        default=None, description="Array of redirection URI strings for use for relying party initiated logouts")
     redirect_uris: Optional[List[StrictStr]] = Field(default=None, description="Array of redirection URI strings for use in redirect-based flows. All redirect URIs must be absolute URIs and must not include a fragment component. At least one redirect URI and response type is required for all client types, with the following exceptions: If the client uses the Resource Owner Password flow (if `grant_type` contains the value password) or the Client Credentials flow (if `grant_type` contains the value `client_credentials`), then no redirect URI or response type is necessary. In these cases, you can pass either null or an empty array for these attributes.")
-    request_object_signing_alg: Optional[List[SigningAlgorithm]] = Field(default=None, description="The type of [JSON Web Key Set](https://tools.ietf.org/html/rfc7517#section-5) algorithm that must be used for signing request objects")
-    response_types: Optional[List[ResponseType]] = Field(default=None, description="Array of OAuth 2.0 response type strings. Default value: `[code]`")
+    request_object_signing_alg: Optional[List[SigningAlgorithm]] = Field(
+        default=None, description="The type of [JSON Web Key Set](https://tools.ietf.org/html/rfc7517#section-5) algorithm that must be used for signing request objects")
+    response_types: Optional[List[ResponseType]] = Field(
+        default=None, description="Array of OAuth 2.0 response type strings. Default value: `[code]`")
     token_endpoint_auth_method: Optional[EndpointAuthMethod] = None
-    tos_uri: Optional[StrictStr] = Field(default=None, description="URL string of a web page providing the client's terms of service document")
-    __properties: ClassVar[List[str]] = ["application_type", "client_id", "client_id_issued_at", "client_name", "client_secret", "client_secret_expires_at", "frontchannel_logout_session_required", "frontchannel_logout_uri", "grant_types", "initiate_login_uri", "jwks_uri", "logo_uri", "policy_uri", "post_logout_redirect_uris", "redirect_uris", "request_object_signing_alg", "response_types", "token_endpoint_auth_method", "tos_uri"]
+    tos_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="URL string of a web page providing the client's terms of service document")
+    __properties: ClassVar[List[str]] = ["application_type",
+                                         "client_id",
+                                         "client_id_issued_at",
+                                         "client_name",
+                                         "client_secret",
+                                         "client_secret_expires_at",
+                                         "frontchannel_logout_session_required",
+                                         "frontchannel_logout_uri",
+                                         "grant_types",
+                                         "initiate_login_uri",
+                                         "jwks_uri",
+                                         "logo_uri",
+                                         "policy_uri",
+                                         "post_logout_redirect_uris",
+                                         "redirect_uris",
+                                         "request_object_signing_alg",
+                                         "response_types",
+                                         "token_endpoint_auth_method",
+                                         "tos_uri"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -169,4 +207,3 @@ class Client(BaseModel):
             "tos_uri": obj.get("tos_uri")
         })
         return _obj
-

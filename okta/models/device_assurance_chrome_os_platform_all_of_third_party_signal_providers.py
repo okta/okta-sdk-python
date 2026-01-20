@@ -31,10 +31,11 @@ from okta.models.dtc_chrome_os import DTCChromeOS
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders(BaseModel):
     """
     Settings for third-party signal providers (based on the `CHROMEOS` platform)
-    """ # noqa: E501
+    """  # noqa: E501
     dtc: Optional[DTCChromeOS] = None
     device_posture_id_p: Optional[DevicePostureIdP] = Field(default=None, alias="devicePostureIdP")
     __properties: ClassVar[List[str]] = ["dtc", "devicePostureIdP"]
@@ -107,4 +108,3 @@ class DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders(BaseModel):
             "devicePostureIdP": DevicePostureIdP.from_dict(obj["devicePostureIdP"]) if obj.get("devicePostureIdP") is not None else None
         })
         return _obj
-

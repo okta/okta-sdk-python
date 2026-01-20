@@ -35,10 +35,11 @@ from okta.models.org_general_setting_links_upload_logo import OrgGeneralSettingL
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgGeneralSettingLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the org using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
-    """ # noqa: E501
+    """  # noqa: E501
     contacts: Optional[OrgGeneralSettingLinksContacts] = None
     logo: Optional[OrgGeneralSettingLinksLogo] = None
     okta_communication: Optional[OrgGeneralSettingLinksOktaCommunication] = Field(default=None, alias="oktaCommunication")
@@ -147,4 +148,3 @@ class OrgGeneralSettingLinks(BaseModel):
             "uploadLogo": OrgGeneralSettingLinksUploadLogo.from_dict(obj["uploadLogo"]) if obj.get("uploadLogo") is not None else None
         })
         return _obj
-

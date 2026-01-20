@@ -31,13 +31,15 @@ from okta.models.policy_type_simulation import PolicyTypeSimulation
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SimulatePolicyBody(BaseModel):
     """
     The request body required for a simulate policy operation
-    """ # noqa: E501
+    """  # noqa: E501
     app_instance: StrictStr = Field(description="The application instance ID for a simulate operation", alias="appInstance")
     policy_context: Optional[PolicyContext] = Field(default=None, alias="policyContext")
-    policy_types: Optional[List[PolicyTypeSimulation]] = Field(default=None, description="Supported policy types for a simulate operation. The default value, `null`, returns all types.", alias="policyTypes")
+    policy_types: Optional[List[PolicyTypeSimulation]] = Field(
+        default=None, description="Supported policy types for a simulate operation. The default value, `null`, returns all types.", alias="policyTypes")
     __properties: ClassVar[List[str]] = ["appInstance", "policyContext", "policyTypes"]
 
     model_config = ConfigDict(
@@ -102,4 +104,3 @@ class SimulatePolicyBody(BaseModel):
             "policyTypes": obj.get("policyTypes")
         })
         return _obj
-

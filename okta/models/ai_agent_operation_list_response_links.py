@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AIAgentOperationListResponseLinks(BaseModel):
     """
     AIAgentOperationListResponseLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     next: Optional[HrefObjectNextLink] = None
     __properties: ClassVar[List[str]] = ["self", "next"]
@@ -107,4 +108,3 @@ class AIAgentOperationListResponseLinks(BaseModel):
             "next": HrefObjectNextLink.from_dict(obj["next"]) if obj.get("next") is not None else None
         })
         return _obj
-

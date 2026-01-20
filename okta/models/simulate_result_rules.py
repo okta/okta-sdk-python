@@ -31,11 +31,13 @@ from okta.models.simulate_result_status import SimulateResultStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SimulateResultRules(BaseModel):
     """
     SimulateResultRules
-    """ # noqa: E501
-    conditions: Optional[List[SimulateResultConditions]] = Field(default=None, description="List of all conditions involved for this rule evaluation")
+    """  # noqa: E501
+    conditions: Optional[List[SimulateResultConditions]] = Field(
+        default=None, description="List of all conditions involved for this rule evaluation")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID number of the policy rule")
     name: Optional[StrictStr] = Field(default=None, description="The name of the policy rule")
     status: Optional[SimulateResultStatus] = None
@@ -104,4 +106,3 @@ class SimulateResultRules(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

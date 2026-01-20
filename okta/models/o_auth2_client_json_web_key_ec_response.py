@@ -31,10 +31,11 @@ from okta.models.o_auth_client_secret_links import OAuthClientSecretLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientJsonWebKeyECResponse(OAuth2ClientJsonSigningKeyResponse):
     """
     An EC signing key
-    """ # noqa: E501
+    """  # noqa: E501
     x: StrictStr = Field(description="The public x coordinate for the elliptic curve point")
     y: StrictStr = Field(description="The public y coordinate for the elliptic curve point")
     crv: StrictStr = Field(description="The cryptographic curve used with the key")
@@ -120,4 +121,3 @@ class OAuth2ClientJsonWebKeyECResponse(OAuth2ClientJsonSigningKeyResponse):
             "use": obj.get("use")
         })
         return _obj
-

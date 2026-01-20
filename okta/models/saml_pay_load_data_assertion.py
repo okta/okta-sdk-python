@@ -34,14 +34,16 @@ from okta.models.saml_pay_load_data_assertion_subject import SAMLPayLoadDataAsse
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertion(BaseModel):
     """
     Details of the SAML assertion that was generated
-    """ # noqa: E501
+    """  # noqa: E501
     subject: Optional[SAMLPayLoadDataAssertionSubject] = None
     authentication: Optional[SAMLPayLoadDataAssertionAuthentication] = None
     conditions: Optional[SAMLPayLoadDataAssertionConditions] = None
-    claims: Optional[Dict[str, SAMLPayLoadDataAssertionClaimsValue]] = Field(default=None, description="Provides a JSON representation of the `<saml:AttributeStatement>` element contained in the generated SAML assertion. Contains any optional SAML attribute statements that you have defined for the app using the Admin Console's **SAML Settings**.")
+    claims: Optional[Dict[str, SAMLPayLoadDataAssertionClaimsValue]] = Field(
+        default=None, description="Provides a JSON representation of the `<saml:AttributeStatement>` element contained in the generated SAML assertion. Contains any optional SAML attribute statements that you have defined for the app using the Admin Console's **SAML Settings**.")
     lifetime: Optional[SAMLPayLoadDataAssertionLifetime] = None
     __properties: ClassVar[List[str]] = ["subject", "authentication", "conditions", "claims", "lifetime"]
 
@@ -142,4 +144,3 @@ class SAMLPayLoadDataAssertion(BaseModel):
             "lifetime": SAMLPayLoadDataAssertionLifetime.from_dict(obj["lifetime"]) if obj.get("lifetime") is not None else None
         })
         return _obj
-

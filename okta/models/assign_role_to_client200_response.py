@@ -22,15 +22,15 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.custom_role import CustomRole
 from okta.models.standard_role import StandardRole
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
 ASSIGNROLETOCLIENT200RESPONSE_ONE_OF_SCHEMAS = ["CustomRole", "StandardRole"]
+
 
 class AssignRoleToClient200Response(BaseModel):
     """
@@ -41,13 +41,12 @@ class AssignRoleToClient200Response(BaseModel):
     # data type: CustomRole
     oneof_schema_2_validator: Optional[CustomRole] = None
     actual_instance: Optional[Union[CustomRole, StandardRole]] = None
-    one_of_schemas: Set[str] = { "CustomRole", "StandardRole" }
+    one_of_schemas: Set[str] = {"CustomRole", "StandardRole"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     discriminator_value_class_map: Dict[str, str] = {
     }
@@ -79,10 +78,14 @@ class AssignRoleToClient200Response(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in AssignRoleToClient200Response with oneOf schemas: CustomRole, StandardRole. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in AssignRoleToClient200Response with oneOf schemas: CustomRole, StandardRole. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in AssignRoleToClient200Response with oneOf schemas: CustomRole, StandardRole. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in AssignRoleToClient200Response with oneOf schemas: CustomRole, StandardRole. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -192,10 +195,14 @@ class AssignRoleToClient200Response(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into AssignRoleToClient200Response with oneOf schemas: CustomRole, StandardRole. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into AssignRoleToClient200Response with oneOf schemas: CustomRole, StandardRole. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into AssignRoleToClient200Response with oneOf schemas: CustomRole, StandardRole. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into AssignRoleToClient200Response with oneOf schemas: CustomRole, StandardRole. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -223,5 +230,3 @@ class AssignRoleToClient200Response(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

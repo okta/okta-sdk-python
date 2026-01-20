@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InactivityPolicyRuleCondition(BaseModel):
     """
     InactivityPolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     number: Optional[StrictInt] = None
     unit: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["number", "unit"]
@@ -91,4 +92,3 @@ class InactivityPolicyRuleCondition(BaseModel):
             "unit": obj.get("unit")
         })
         return _obj
-

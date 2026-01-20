@@ -31,10 +31,11 @@ from okta.models.group_rule_people_condition import GroupRulePeopleCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupRuleConditions(BaseModel):
     """
     Defines group rule conditions
-    """ # noqa: E501
+    """  # noqa: E501
     expression: Optional[GroupRuleExpression] = None
     people: Optional[GroupRulePeopleCondition] = None
     __properties: ClassVar[List[str]] = ["expression", "people"]
@@ -107,4 +108,3 @@ class GroupRuleConditions(BaseModel):
             "people": GroupRulePeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None
         })
         return _obj
-

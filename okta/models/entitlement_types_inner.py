@@ -31,10 +31,11 @@ from okta.models.entitlement_types_inner_mappings import EntitlementTypesInnerMa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntitlementTypesInner(BaseModel):
     """
     EntitlementTypesInner
-    """ # noqa: E501
+    """  # noqa: E501
     name: StrictStr = Field(description="The entitlement type name")
     description: Optional[StrictStr] = Field(default=None, description="Description of the entitlement type")
     endpoint: StrictStr = Field(description="URL of the entitlement type endpoint")
@@ -113,4 +114,3 @@ class EntitlementTypesInner(BaseModel):
             "mappings": EntitlementTypesInnerMappings.from_dict(obj["mappings"]) if obj.get("mappings") is not None else None
         })
         return _obj
-

@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentitySourceUserProfileForDelete(BaseModel):
     """
     IdentitySourceUserProfileForDelete
-    """ # noqa: E501
-    external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(default=None, description="The external ID of the entity that needs to be deleted in Okta", alias="externalId")
+    """  # noqa: E501
+    external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
+        default=None, description="The external ID of the entity that needs to be deleted in Okta", alias="externalId")
     __properties: ClassVar[List[str]] = ["externalId"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class IdentitySourceUserProfileForDelete(BaseModel):
             "externalId": obj.get("externalId")
         })
         return _obj
-

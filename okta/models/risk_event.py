@@ -31,13 +31,19 @@ from okta.models.risk_event_subject import RiskEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RiskEvent(BaseModel):
     """
     RiskEvent
-    """ # noqa: E501
-    expires_at: Optional[datetime] = Field(default=None, description="Timestamp at which the event expires (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`). If this optional field isn't included, Okta automatically expires the event 24 hours after the event is consumed.", alias="expiresAt")
+    """  # noqa: E501
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp at which the event expires (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`). If this optional field isn't included, Okta automatically expires the event 24 hours after the event is consumed.",
+        alias="expiresAt")
     subjects: List[RiskEventSubject] = Field(description="List of risk event subjects")
-    timestamp: Optional[datetime] = Field(default=None, description="Timestamp of when the event is produced (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`)")
+    timestamp: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp of when the event is produced (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`)")
     __properties: ClassVar[List[str]] = ["expiresAt", "subjects", "timestamp"]
 
     model_config = ConfigDict(
@@ -102,4 +108,3 @@ class RiskEvent(BaseModel):
             "timestamp": obj.get("timestamp")
         })
         return _obj
-

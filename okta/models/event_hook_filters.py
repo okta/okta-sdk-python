@@ -30,12 +30,15 @@ from okta.models.event_hook_filter_map_object import EventHookFilterMapObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EventHookFilters(BaseModel):
     """
     The optional filter defined on a specific event type  > **Note:** Event hook filters is a [self-service Early Access (EA)](/openapi/okta-management/guides/release-lifecycle/#early-access-ea) to enable. If you want to disable this feature, it's recommended to first remove all event filters.
-    """ # noqa: E501
-    event_filter_map: Optional[List[EventHookFilterMapObject]] = Field(default=None, description="The object that maps the filter to the event type", alias="eventFilterMap")
-    type: Optional[StrictStr] = Field(default=None, description="The type of filter. Currently only supports `EXPRESSION_LANGUAGE`")
+    """  # noqa: E501
+    event_filter_map: Optional[List[EventHookFilterMapObject]] = Field(
+        default=None, description="The object that maps the filter to the event type", alias="eventFilterMap")
+    type: Optional[StrictStr] = Field(default=None,
+                                      description="The type of filter. Currently only supports `EXPRESSION_LANGUAGE`")
     __properties: ClassVar[List[str]] = ["eventFilterMap", "type"]
 
     model_config = ConfigDict(
@@ -101,4 +104,3 @@ class EventHookFilters(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

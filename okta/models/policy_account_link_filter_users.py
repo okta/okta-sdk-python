@@ -29,12 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyAccountLinkFilterUsers(BaseModel):
     """
     Filters on which users are available for account linking
-    """ # noqa: E501
-    exclude: Optional[List[StrictStr]] = Field(default=None, description="Specifies the blocklist of user identifiers to exclude from account linking")
-    exclude_admins: Optional[StrictBool] = Field(default=False, description="Specifies whether admin users should be excluded from account linking", alias="excludeAdmins")
+    """  # noqa: E501
+    exclude: Optional[List[StrictStr]] = Field(
+        default=None, description="Specifies the blocklist of user identifiers to exclude from account linking")
+    exclude_admins: Optional[StrictBool] = Field(
+        default=False,
+        description="Specifies whether admin users should be excluded from account linking",
+        alias="excludeAdmins")
     __properties: ClassVar[List[str]] = ["exclude", "excludeAdmins"]
 
     model_config = ConfigDict(
@@ -91,4 +96,3 @@ class PolicyAccountLinkFilterUsers(BaseModel):
             "excludeAdmins": obj.get("excludeAdmins") if obj.get("excludeAdmins") is not None else False
         })
         return _obj
-

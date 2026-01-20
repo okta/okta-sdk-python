@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationVisibilityHide(BaseModel):
     """
     Hides the app for specific end-user apps
-    """ # noqa: E501
-    i_os: Optional[StrictBool] = Field(default=False, description="Okta Mobile for iOS or Android (pre-dates Android)", alias="iOS")
+    """  # noqa: E501
+    i_os: Optional[StrictBool] = Field(
+        default=False,
+        description="Okta Mobile for iOS or Android (pre-dates Android)",
+        alias="iOS")
     web: Optional[StrictBool] = Field(default=False, description="Okta End-User Dashboard on a web browser")
     __properties: ClassVar[List[str]] = ["iOS", "web"]
 
@@ -91,4 +95,3 @@ class ApplicationVisibilityHide(BaseModel):
             "web": obj.get("web") if obj.get("web") is not None else False
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.provisioning_deprovisioned_action import ProvisioningDeprovisio
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningDeprovisionedCondition(BaseModel):
     """
     Behavior for a previously deprovisioned IdP user during authentication. Not supported with OIDC IdPs.
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[ProvisioningDeprovisionedAction] = None
     __properties: ClassVar[List[str]] = ["action"]
 
@@ -90,4 +91,3 @@ class ProvisioningDeprovisionedCondition(BaseModel):
             "action": obj.get("action")
         })
         return _obj
-

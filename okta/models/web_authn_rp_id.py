@@ -30,12 +30,15 @@ from okta.models.web_authn_rp_id_domain import WebAuthnRpIdDomain
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WebAuthnRpId(BaseModel):
     """
     The [RP ID](https://www.w3.org/TR/webauthn/#relying-party-identifier) object for WebAuthn configuration
-    """ # noqa: E501
+    """  # noqa: E501
     domain: Optional[WebAuthnRpIdDomain] = None
-    enabled: Optional[StrictBool] = Field(default=False, description="Indicates whether the RP ID is active and is used for WebAuthn operations. It can only be set to `true` once the `validationStatus` of the `domain` object is `VERIFIED`. `enabled` can only be `true` for this same `domain`. Its value must be `false` to be able to configure the `domain`.")
+    enabled: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether the RP ID is active and is used for WebAuthn operations. It can only be set to `true` once the `validationStatus` of the `domain` object is `VERIFIED`. `enabled` can only be `true` for this same `domain`. Its value must be `false` to be able to configure the `domain`.")
     __properties: ClassVar[List[str]] = ["domain", "enabled"]
 
     model_config = ConfigDict(
@@ -99,4 +102,3 @@ class WebAuthnRpId(BaseModel):
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else False
         })
         return _obj
-

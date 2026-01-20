@@ -32,14 +32,19 @@ from okta.models.user_profile import UserProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateUserRequest(BaseModel):
     """
     CreateUserRequest
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[UserCredentialsWritable] = None
-    group_ids: Optional[List[StrictStr]] = Field(default=None, description="The list of group IDs of groups that the user is added to at the time of creation", alias="groupIds")
+    group_ids: Optional[List[StrictStr]] = Field(
+        default=None, description="The list of group IDs of groups that the user is added to at the time of creation", alias="groupIds")
     profile: UserProfile
-    realm_id: Optional[StrictStr] = Field(default=None, description="The ID of the realm in which the user is residing. See [Realms](/openapi/okta-management/management/tag/Realm/).", alias="realmId")
+    realm_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the realm in which the user is residing. See [Realms](/openapi/okta-management/management/tag/Realm/).",
+        alias="realmId")
     type: Optional[CreateUserRequestType] = None
     __properties: ClassVar[List[str]] = ["credentials", "groupIds", "profile", "realmId", "type"]
 
@@ -121,4 +126,3 @@ class CreateUserRequest(BaseModel):
             "type": CreateUserRequestType.from_dict(obj["type"]) if obj.get("type") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.authenticator_profile import AuthenticatorProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentCreateRequest(BaseModel):
     """
     AuthenticatorEnrollmentCreateRequest
-    """ # noqa: E501
+    """  # noqa: E501
     authenticator_id: StrictStr = Field(description="Unique identifier of the `phone` authenticator", alias="authenticatorId")
     profile: AuthenticatorProfile
     __properties: ClassVar[List[str]] = ["authenticatorId", "profile"]
@@ -99,4 +100,3 @@ class AuthenticatorEnrollmentCreateRequest(BaseModel):
             "profile": AuthenticatorProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

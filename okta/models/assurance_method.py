@@ -28,19 +28,26 @@ from pydantic import ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.access_policy_constraints import AccessPolicyConstraints
 from okta.models.assurance_method_factor_mode import AssuranceMethodFactorMode
-from okta.models.policy_rule_verification_method_type import PolicyRuleVerificationMethodType
 from okta.models.verification_method import VerificationMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AssuranceMethod(VerificationMethod):
     """
     AssuranceMethod
-    """ # noqa: E501
-    constraints: Optional[List[AccessPolicyConstraints]] = Field(default=None, description="Specifies constraints for the authenticator. Constraints are logically evaluated such that only one constraint object needs to be satisfied. But, within a constraint object, each constraint property must be satisfied.")
+    """  # noqa: E501
+    constraints: Optional[List[AccessPolicyConstraints]] = Field(
+        default=None, description="Specifies constraints for the authenticator. Constraints are logically evaluated such that only one constraint object needs to be satisfied. But, within a constraint object, each constraint property must be satisfied.")
     factor_mode: Optional[AssuranceMethodFactorMode] = Field(default=None, alias="factorMode")
-    inactivity_period: Optional[StrictStr] = Field(default=None, description="The inactivity duration after which the user must re-authenticate. Use the ISO 8601 period format (for example, PT2H).", alias="inactivityPeriod")
-    reauthenticate_in: Optional[StrictStr] = Field(default=None, description="The duration after which the user must re-authenticate, regardless of user activity. Keep in mind that the re-authentication intervals for constraints take precedent over this value. Use the ISO 8601 period format for recurring time intervals (for example, PT2H, PT0S, PT43800H, and so on).", alias="reauthenticateIn")
+    inactivity_period: Optional[StrictStr] = Field(
+        default=None,
+        description="The inactivity duration after which the user must re-authenticate. Use the ISO 8601 period format (for example, PT2H).",
+        alias="inactivityPeriod")
+    reauthenticate_in: Optional[StrictStr] = Field(
+        default=None,
+        description="The duration after which the user must re-authenticate, regardless of user activity. Keep in mind that the re-authentication intervals for constraints take precedent over this value. Use the ISO 8601 period format for recurring time intervals (for example, PT2H, PT0S, PT43800H, and so on).",
+        alias="reauthenticateIn")
     __properties: ClassVar[List[str]] = ["type", "constraints", "factorMode", "inactivityPeriod", "reauthenticateIn"]
 
     model_config = ConfigDict(
@@ -107,4 +114,3 @@ class AssuranceMethod(VerificationMethod):
             "reauthenticateIn": obj.get("reauthenticateIn")
         })
         return _obj
-

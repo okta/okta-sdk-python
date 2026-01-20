@@ -30,14 +30,19 @@ from okta.models.authenticator_key_duo_all_of_provider_configuration_user_name_t
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyDuoAllOfProviderConfiguration(BaseModel):
     """
     AuthenticatorKeyDuoAllOfProviderConfiguration
-    """ # noqa: E501
+    """  # noqa: E501
     host: Optional[StrictStr] = Field(default=None, description="The Duo Security API hostname")
-    integration_key: Optional[StrictStr] = Field(default=None, description="The Duo Security integration key", alias="integrationKey")
+    integration_key: Optional[StrictStr] = Field(
+        default=None,
+        description="The Duo Security integration key",
+        alias="integrationKey")
     secret_key: Optional[StrictStr] = Field(default=None, description="The Duo Security secret key", alias="secretKey")
-    user_name_template: Optional[AuthenticatorKeyDuoAllOfProviderConfigurationUserNameTemplate] = Field(default=None, alias="userNameTemplate")
+    user_name_template: Optional[AuthenticatorKeyDuoAllOfProviderConfigurationUserNameTemplate] = Field(
+        default=None, alias="userNameTemplate")
     __properties: ClassVar[List[str]] = ["host", "integrationKey", "secretKey", "userNameTemplate"]
 
     model_config = ConfigDict(
@@ -103,4 +108,3 @@ class AuthenticatorKeyDuoAllOfProviderConfiguration(BaseModel):
             "userNameTemplate": AuthenticatorKeyDuoAllOfProviderConfigurationUserNameTemplate.from_dict(obj["userNameTemplate"]) if obj.get("userNameTemplate") is not None else None
         })
         return _obj
-

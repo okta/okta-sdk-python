@@ -22,19 +22,25 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.password_import_response import PasswordImportResponse
 from okta.models.registration_inline_hook_response import RegistrationInlineHookResponse
 from okta.models.saml_hook_response import SAMLHookResponse
 from okta.models.telephony_response import TelephonyResponse
 from okta.models.token_hook_response import TokenHookResponse
 from okta.models.user_import_response import UserImportResponse
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
-EXECUTEINLINEHOOK200RESPONSE_ONE_OF_SCHEMAS = ["PasswordImportResponse", "RegistrationInlineHookResponse", "SAMLHookResponse", "TelephonyResponse", "TokenHookResponse", "UserImportResponse"]
+EXECUTEINLINEHOOK200RESPONSE_ONE_OF_SCHEMAS = [
+    "PasswordImportResponse",
+    "RegistrationInlineHookResponse",
+    "SAMLHookResponse",
+    "TelephonyResponse",
+    "TokenHookResponse",
+    "UserImportResponse"]
+
 
 class ExecuteInlineHook200Response(BaseModel):
     """
@@ -52,14 +58,20 @@ class ExecuteInlineHook200Response(BaseModel):
     oneof_schema_5_validator: Optional[SAMLHookResponse] = None
     # data type: UserImportResponse
     oneof_schema_6_validator: Optional[UserImportResponse] = None
-    actual_instance: Optional[Union[PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse]] = None
-    one_of_schemas: Set[str] = { "PasswordImportResponse", "RegistrationInlineHookResponse", "SAMLHookResponse", "TelephonyResponse", "TokenHookResponse", "UserImportResponse" }
+    actual_instance: Optional[Union[PasswordImportResponse, RegistrationInlineHookResponse,
+                                    SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse]] = None
+    one_of_schemas: Set[str] = {
+        "PasswordImportResponse",
+        "RegistrationInlineHookResponse",
+        "SAMLHookResponse",
+        "TelephonyResponse",
+        "TokenHookResponse",
+        "UserImportResponse"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -108,10 +120,14 @@ class ExecuteInlineHook200Response(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ExecuteInlineHook200Response with oneOf schemas: PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in ExecuteInlineHook200Response with oneOf schemas: PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ExecuteInlineHook200Response with oneOf schemas: PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in ExecuteInlineHook200Response with oneOf schemas: PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -165,10 +181,14 @@ class ExecuteInlineHook200Response(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ExecuteInlineHook200Response with oneOf schemas: PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into ExecuteInlineHook200Response with oneOf schemas: PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ExecuteInlineHook200Response with oneOf schemas: PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into ExecuteInlineHook200Response with oneOf schemas: PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -182,7 +202,8 @@ class ExecuteInlineHook200Response(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], PasswordImportResponse, RegistrationInlineHookResponse, SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], PasswordImportResponse, RegistrationInlineHookResponse,
+                                        SAMLHookResponse, TelephonyResponse, TokenHookResponse, UserImportResponse]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
@@ -196,5 +217,3 @@ class ExecuteInlineHook200Response(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

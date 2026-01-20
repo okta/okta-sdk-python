@@ -30,10 +30,11 @@ from okta.models.permission_conditions import PermissionConditions
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateUpdateIamRolePermissionRequest(BaseModel):
     """
     CreateUpdateIamRolePermissionRequest
-    """ # noqa: E501
+    """  # noqa: E501
     conditions: Optional[PermissionConditions] = None
     __properties: ClassVar[List[str]] = ["conditions"]
 
@@ -102,4 +103,3 @@ class CreateUpdateIamRolePermissionRequest(BaseModel):
             "conditions": PermissionConditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None
         })
         return _obj
-

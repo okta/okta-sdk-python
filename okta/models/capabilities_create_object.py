@@ -30,10 +30,11 @@ from okta.models.lifecycle_create_setting_object import LifecycleCreateSettingOb
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CapabilitiesCreateObject(BaseModel):
     """
     Determines whether Okta assigns a new app account to each user managed by Okta.  Okta doesn't create a new account if it detects that the username specified in Okta already exists in the app. The user's Okta username is assigned by default. 
-    """ # noqa: E501
+    """  # noqa: E501
     lifecycle_create: Optional[LifecycleCreateSettingObject] = Field(default=None, alias="lifecycleCreate")
     __properties: ClassVar[List[str]] = ["lifecycleCreate"]
 
@@ -97,4 +98,3 @@ class CapabilitiesCreateObject(BaseModel):
             "lifecycleCreate": LifecycleCreateSettingObject.from_dict(obj["lifecycleCreate"]) if obj.get("lifecycleCreate") is not None else None
         })
         return _obj
-

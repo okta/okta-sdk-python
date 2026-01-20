@@ -29,13 +29,20 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FCMConfiguration(BaseModel):
     """
     FCMConfiguration
-    """ # noqa: E501
-    file_name: Optional[StrictStr] = Field(default=None, description="(Optional) File name for Admin Console display", alias="fileName")
+    """  # noqa: E501
+    file_name: Optional[StrictStr] = Field(
+        default=None,
+        description="(Optional) File name for Admin Console display",
+        alias="fileName")
     project_id: Optional[StrictStr] = Field(default=None, description="Project ID of FCM configuration", alias="projectId")
-    service_account_json: Optional[Dict[str, Any]] = Field(default=None, description="JSON containing the private service account key and service account details. See [Creating and managing service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for more information on creating service account keys in JSON.", alias="serviceAccountJson")
+    service_account_json: Optional[Dict[str,
+                                        Any]] = Field(default=None,
+                                                      description="JSON containing the private service account key and service account details. See [Creating and managing service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for more information on creating service account keys in JSON.",
+                                                      alias="serviceAccountJson")
     __properties: ClassVar[List[str]] = ["fileName", "projectId", "serviceAccountJson"]
 
     model_config = ConfigDict(
@@ -95,4 +102,3 @@ class FCMConfiguration(BaseModel):
             "serviceAccountJson": obj.get("serviceAccountJson")
         })
         return _obj
-

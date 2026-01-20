@@ -30,10 +30,11 @@ from okta.models.org_technical_contact_type_links_technical import OrgTechnicalC
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgTechnicalContactTypeLinks(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the org technical Contact Type object using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
-    """ # noqa: E501
+    """  # noqa: E501
     technical: Optional[OrgTechnicalContactTypeLinksTechnical] = None
     __properties: ClassVar[List[str]] = ["technical"]
 
@@ -97,4 +98,3 @@ class OrgTechnicalContactTypeLinks(BaseModel):
             "technical": OrgTechnicalContactTypeLinksTechnical.from_dict(obj["technical"]) if obj.get("technical") is not None else None
         })
         return _obj
-

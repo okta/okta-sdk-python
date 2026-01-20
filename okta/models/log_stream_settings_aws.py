@@ -31,12 +31,15 @@ from okta.models.aws_region import AwsRegion
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogStreamSettingsAws(BaseModel):
     """
     Specifies the configuration for the `aws_eventbridge` log stream type. This configuration can't be modified after creation.
-    """ # noqa: E501
-    account_id: Annotated[str, Field(min_length=12, strict=True, max_length=12)] = Field(description="Your AWS account ID", alias="accountId")
-    event_source_name: Annotated[str, Field(min_length=1, strict=True, max_length=75)] = Field(description="An alphanumeric name (no spaces) to identify this event source in AWS EventBridge", alias="eventSourceName")
+    """  # noqa: E501
+    account_id: Annotated[str, Field(min_length=12, strict=True, max_length=12)] = Field(
+        description="Your AWS account ID", alias="accountId")
+    event_source_name: Annotated[str, Field(min_length=1, strict=True, max_length=75)] = Field(
+        description="An alphanumeric name (no spaces) to identify this event source in AWS EventBridge", alias="eventSourceName")
     region: AwsRegion
     __properties: ClassVar[List[str]] = ["accountId", "eventSourceName", "region"]
 
@@ -102,4 +105,3 @@ class LogStreamSettingsAws(BaseModel):
             "region": obj.get("region")
         })
         return _obj
-

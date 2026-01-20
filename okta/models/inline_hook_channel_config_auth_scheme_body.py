@@ -29,13 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookChannelConfigAuthSchemeBody(BaseModel):
     """
     The authentication scheme to use for this request
-    """ # noqa: E501
+    """  # noqa: E501
     key: Optional[StrictStr] = Field(default=None, description="The header name for the authorization server")
-    type: Optional[StrictStr] = Field(default=None, description="The authentication scheme type. Supported type&mdash;`HEADER`.")
-    value: Optional[StrictStr] = Field(default=None, description="The header value. This secret value is passed to your external service endpoint. Your external service can check it as a security measure.")
+    type: Optional[StrictStr] = Field(default=None,
+                                      description="The authentication scheme type. Supported type&mdash;`HEADER`.")
+    value: Optional[StrictStr] = Field(
+        default=None,
+        description="The header value. This secret value is passed to your external service endpoint. Your external service can check it as a security measure.")
     __properties: ClassVar[List[str]] = ["key", "type", "value"]
 
     model_config = ConfigDict(
@@ -93,4 +97,3 @@ class InlineHookChannelConfigAuthSchemeBody(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.password_policy_recovery_question_complexity import PasswordPol
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRecoveryQuestionProperties(BaseModel):
     """
     PasswordPolicyRecoveryQuestionProperties
-    """ # noqa: E501
+    """  # noqa: E501
     complexity: Optional[PasswordPolicyRecoveryQuestionComplexity] = None
     __properties: ClassVar[List[str]] = ["complexity"]
 
@@ -97,4 +98,3 @@ class PasswordPolicyRecoveryQuestionProperties(BaseModel):
             "complexity": PasswordPolicyRecoveryQuestionComplexity.from_dict(obj["complexity"]) if obj.get("complexity") is not None else None
         })
         return _obj
-

@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionConditions(BaseModel):
     """
     Provides a JSON representation of the `<saml:Conditions>` element of the SAML assertion
-    """ # noqa: E501
-    audience_restriction: Optional[List[StrictStr]] = Field(default=None, description="Describes which service providers the assertion is valid for", alias="audienceRestriction")
+    """  # noqa: E501
+    audience_restriction: Optional[List[StrictStr]] = Field(
+        default=None, description="Describes which service providers the assertion is valid for", alias="audienceRestriction")
     __properties: ClassVar[List[str]] = ["audienceRestriction"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class SAMLPayLoadDataAssertionConditions(BaseModel):
             "audienceRestriction": obj.get("audienceRestriction")
         })
         return _obj
-

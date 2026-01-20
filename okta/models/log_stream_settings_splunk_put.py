@@ -31,12 +31,14 @@ from okta.models.splunk_edition import SplunkEdition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogStreamSettingsSplunkPut(BaseModel):
     """
     Specifies the configuration for the `splunk_cloud_logstreaming` log stream type.
-    """ # noqa: E501
+    """  # noqa: E501
     edition: SplunkEdition
-    host: Annotated[str, Field(min_length=17, strict=True, max_length=116)] = Field(description="The domain name for your Splunk Cloud instance. Don't include `http` or `https` in the string. For example: `acme.splunkcloud.com`")
+    host: Annotated[str, Field(min_length=17, strict=True, max_length=116)] = Field(
+        description="The domain name for your Splunk Cloud instance. Don't include `http` or `https` in the string. For example: `acme.splunkcloud.com`")
     __properties: ClassVar[List[str]] = ["edition", "host"]
 
     model_config = ConfigDict(
@@ -93,4 +95,3 @@ class LogStreamSettingsSplunkPut(BaseModel):
             "host": obj.get("host")
         })
         return _obj
-

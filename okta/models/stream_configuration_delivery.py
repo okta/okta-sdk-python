@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StreamConfigurationDelivery(BaseModel):
     """
     Contains information about the intended SET delivery method by the receiver
-    """ # noqa: E501
-    authorization_header: Optional[Annotated[str, Field(strict=True, max_length=8192)]] = Field(default=None, description="The HTTP Authorization header that is included for each HTTP POST request")
-    endpoint_url: Annotated[str, Field(strict=True, max_length=2048)] = Field(description="The target endpoint URL where the transmitter delivers the SET using HTTP POST requests")
+    """  # noqa: E501
+    authorization_header: Optional[Annotated[str, Field(strict=True, max_length=8192)]] = Field(
+        default=None, description="The HTTP Authorization header that is included for each HTTP POST request")
+    endpoint_url: Annotated[str, Field(strict=True, max_length=2048)] = Field(
+        description="The target endpoint URL where the transmitter delivers the SET using HTTP POST requests")
     method: StrictStr = Field(description="The delivery method that the transmitter uses for delivering a SET")
     __properties: ClassVar[List[str]] = ["authorization_header", "endpoint_url", "method"]
 
@@ -43,7 +46,8 @@ class StreamConfigurationDelivery(BaseModel):
     def method_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(['https://schemas.openid.net/secevent/risc/delivery-method/push', 'urn:ietf:rfc:8935']):
-            raise ValueError("must be one of enum values ('https://schemas.openid.net/secevent/risc/delivery-method/push', 'urn:ietf:rfc:8935')")
+            raise ValueError(
+                "must be one of enum values ('https://schemas.openid.net/secevent/risc/delivery-method/push', 'urn:ietf:rfc:8935')")
         return value
 
     model_config = ConfigDict(
@@ -106,4 +110,3 @@ class StreamConfigurationDelivery(BaseModel):
             "method": obj.get("method")
         })
         return _obj
-

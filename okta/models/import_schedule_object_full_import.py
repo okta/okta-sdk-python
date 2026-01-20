@@ -30,12 +30,14 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ImportScheduleObjectFullImport(BaseModel):
     """
     ImportScheduleObjectFullImport
-    """ # noqa: E501
+    """  # noqa: E501
     expression: StrictStr = Field(description="The import schedule in UNIX cron format")
-    timezone: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=64)]] = Field(default=None, description="The import schedule time zone in Internet Assigned Numbers Authority (IANA) time zone name format")
+    timezone: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=64)]] = Field(
+        default=None, description="The import schedule time zone in Internet Assigned Numbers Authority (IANA) time zone name format")
     __properties: ClassVar[List[str]] = ["expression", "timezone"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class ImportScheduleObjectFullImport(BaseModel):
             "timezone": obj.get("timezone")
         })
         return _obj
-

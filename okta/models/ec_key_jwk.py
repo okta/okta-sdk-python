@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ECKeyJWK(BaseModel):
     """
     Elliptic curve key in JSON Web Key (JWK) format. It's used during enrollment to encrypt fulfillment requests to Yubico, or during activation to verify Yubico's JWS (JSON Web Signature) objects in fulfillment responses. The currently agreed protocol uses P-384.
-    """ # noqa: E501
+    """  # noqa: E501
     crv: StrictStr = Field(description="The elliptic curve protocol")
     kid: StrictStr = Field(description="The unique identifier of the key")
     kty: StrictStr = Field(description="The type of public key")
@@ -120,4 +121,3 @@ class ECKeyJWK(BaseModel):
             "y": obj.get("y")
         })
         return _obj
-

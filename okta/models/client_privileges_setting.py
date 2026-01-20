@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ClientPrivilegesSetting(BaseModel):
     """
     The org setting that assigns the super admin role by default to a public client app
-    """ # noqa: E501
-    client_privileges_setting: Optional[StrictBool] = Field(default=None, description="If true, assigns the super admin role by default to new public client apps", alias="clientPrivilegesSetting")
+    """  # noqa: E501
+    client_privileges_setting: Optional[StrictBool] = Field(
+        default=None,
+        description="If true, assigns the super admin role by default to new public client apps",
+        alias="clientPrivilegesSetting")
     __properties: ClassVar[List[str]] = ["clientPrivilegesSetting"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class ClientPrivilegesSetting(BaseModel):
             "clientPrivilegesSetting": obj.get("clientPrivilegesSetting")
         })
         return _obj
-

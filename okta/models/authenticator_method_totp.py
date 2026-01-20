@@ -28,16 +28,15 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.authenticator_method_base import AuthenticatorMethodBase
 from okta.models.authenticator_method_totp_all_of_settings import AuthenticatorMethodTotpAllOfSettings
-from okta.models.authenticator_method_type import AuthenticatorMethodType
-from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorMethodTotp(AuthenticatorMethodBase):
     """
     AuthenticatorMethodTotp
-    """ # noqa: E501
+    """  # noqa: E501
     settings: Optional[AuthenticatorMethodTotpAllOfSettings] = None
     __properties: ClassVar[List[str]] = ["status", "type", "_links", "settings"]
 
@@ -111,4 +110,3 @@ class AuthenticatorMethodTotp(AuthenticatorMethodBase):
             "settings": AuthenticatorMethodTotpAllOfSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

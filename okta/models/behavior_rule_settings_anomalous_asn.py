@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BehaviorRuleSettingsAnomalousASN(BaseModel):
     """
     BehaviorRuleSettingsAnomalousASN
-    """ # noqa: E501
-    max_events_used_for_evaluation: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(default=20, alias="maxEventsUsedForEvaluation")
-    min_events_needed_for_evaluation: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=0, alias="minEventsNeededForEvaluation")
+    """  # noqa: E501
+    max_events_used_for_evaluation: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(
+        default=20, alias="maxEventsUsedForEvaluation")
+    min_events_needed_for_evaluation: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(
+        default=0, alias="minEventsNeededForEvaluation")
     __properties: ClassVar[List[str]] = ["maxEventsUsedForEvaluation", "minEventsNeededForEvaluation"]
 
     model_config = ConfigDict(
@@ -92,4 +95,3 @@ class BehaviorRuleSettingsAnomalousASN(BaseModel):
             "minEventsNeededForEvaluation": obj.get("minEventsNeededForEvaluation") if obj.get("minEventsNeededForEvaluation") is not None else 0
         })
         return _obj
-

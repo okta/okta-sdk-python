@@ -31,10 +31,11 @@ from okta.models.href_object_user_link import HrefObjectUserLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserRiskGetResponseLinks(BaseModel):
     """
     UserRiskGetResponseLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     user: Optional[HrefObjectUserLink] = None
     __properties: ClassVar[List[str]] = ["self", "user"]
@@ -107,4 +108,3 @@ class UserRiskGetResponseLinks(BaseModel):
             "user": HrefObjectUserLink.from_dict(obj["user"]) if obj.get("user") is not None else None
         })
         return _obj
-

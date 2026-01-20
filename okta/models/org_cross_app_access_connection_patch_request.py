@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgCrossAppAccessConnectionPatchRequest(BaseModel):
     """
     Patch request object for Cross App Access Connections
-    """ # noqa: E501
+    """  # noqa: E501
     status: StrictStr = Field(description="Requested value of Cross App Access connection status")
     __properties: ClassVar[List[str]] = ["status"]
 
@@ -96,4 +97,3 @@ class OrgCrossAppAccessConnectionPatchRequest(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

@@ -32,10 +32,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationGroupAssignmentLinks(BaseModel):
     """
     ApplicationGroupAssignmentLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     app: Optional[HrefObjectAppLink] = None
     group: Optional[HrefObjectGroupLink] = None
@@ -117,4 +118,3 @@ class ApplicationGroupAssignmentLinks(BaseModel):
             "group": HrefObjectGroupLink.from_dict(obj["group"]) if obj.get("group") is not None else None
         })
         return _obj
-

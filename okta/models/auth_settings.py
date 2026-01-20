@@ -32,10 +32,11 @@ from okta.models.o_auth2_settings import OAuth2Settings
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthSettings(BaseModel):
     """
     AuthSettings
-    """ # noqa: E501
+    """  # noqa: E501
     auth_type: AuthType = Field(alias="authType")
     custom_settings: Optional[CustomAuthSettings] = Field(default=None, alias="customSettings")
     o_auth2_settings: Optional[OAuth2Settings] = Field(default=None, alias="oAuth2Settings")
@@ -110,4 +111,3 @@ class AuthSettings(BaseModel):
             "oAuth2Settings": OAuth2Settings.from_dict(obj["oAuth2Settings"]) if obj.get("oAuth2Settings") is not None else None
         })
         return _obj
-

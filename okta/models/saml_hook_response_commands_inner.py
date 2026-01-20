@@ -30,10 +30,11 @@ from okta.models.saml_hook_response_commands_inner_value_inner import SAMLHookRe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLHookResponseCommandsInner(BaseModel):
     """
     SAMLHookResponseCommandsInner
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = Field(default=None, description="One of the supported commands `com.okta.assertion.patch`")
     value: Optional[List[SAMLHookResponseCommandsInnerValueInner]] = None
     __properties: ClassVar[List[str]] = ["type", "value"]
@@ -99,4 +100,3 @@ class SAMLHookResponseCommandsInner(BaseModel):
             "value": [SAMLHookResponseCommandsInnerValueInner.from_dict(_item) for _item in obj["value"]] if obj.get("value") is not None else None
         })
         return _obj
-

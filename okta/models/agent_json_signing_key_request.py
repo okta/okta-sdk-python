@@ -22,15 +22,15 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.agent_json_web_key_ec_request import AgentJsonWebKeyECRequest
 from okta.models.agent_json_web_key_rsa_request import AgentJsonWebKeyRsaRequest
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
 AGENTJSONSIGNINGKEYREQUEST_ONE_OF_SCHEMAS = ["AgentJsonWebKeyECRequest", "AgentJsonWebKeyRsaRequest"]
+
 
 class AgentJsonSigningKeyRequest(BaseModel):
     """
@@ -41,13 +41,12 @@ class AgentJsonSigningKeyRequest(BaseModel):
     # data type: AgentJsonWebKeyECRequest
     oneof_schema_2_validator: Optional[AgentJsonWebKeyECRequest] = None
     actual_instance: Optional[Union[AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest]] = None
-    one_of_schemas: Set[str] = { "AgentJsonWebKeyECRequest", "AgentJsonWebKeyRsaRequest" }
+    one_of_schemas: Set[str] = {"AgentJsonWebKeyECRequest", "AgentJsonWebKeyRsaRequest"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     discriminator_value_class_map: Dict[str, str] = {
     }
@@ -79,10 +78,14 @@ class AgentJsonSigningKeyRequest(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in AgentJsonSigningKeyRequest with oneOf schemas: AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in AgentJsonSigningKeyRequest with oneOf schemas: AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in AgentJsonSigningKeyRequest with oneOf schemas: AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in AgentJsonSigningKeyRequest with oneOf schemas: AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -137,10 +140,14 @@ class AgentJsonSigningKeyRequest(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into AgentJsonSigningKeyRequest with oneOf schemas: AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into AgentJsonSigningKeyRequest with oneOf schemas: AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into AgentJsonSigningKeyRequest with oneOf schemas: AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into AgentJsonSigningKeyRequest with oneOf schemas: AgentJsonWebKeyECRequest, AgentJsonWebKeyRsaRequest. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -168,5 +175,3 @@ class AgentJsonSigningKeyRequest(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

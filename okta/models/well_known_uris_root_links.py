@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownURIsRootLinks(BaseModel):
     """
     WellKnownURIsRootLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     apple_app_site_association: Optional[HrefObject] = Field(default=None, alias="apple-app-site-association")
     assetlinks_json: Optional[HrefObject] = Field(default=None, alias="assetlinks.json")
@@ -125,4 +126,3 @@ class WellKnownURIsRootLinks(BaseModel):
             "webauthn": HrefObject.from_dict(obj["webauthn"]) if obj.get("webauthn") is not None else None
         })
         return _obj
-

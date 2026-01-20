@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionClaimsValueAttributes(BaseModel):
     """
     SAMLPayLoadDataAssertionClaimsValueAttributes
-    """ # noqa: E501
-    name_format: Optional[StrictStr] = Field(default=None, description="Indicates how to interpret the attribute name", alias="NameFormat")
+    """  # noqa: E501
+    name_format: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates how to interpret the attribute name",
+        alias="NameFormat")
     __properties: ClassVar[List[str]] = ["NameFormat"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class SAMLPayLoadDataAssertionClaimsValueAttributes(BaseModel):
             "NameFormat": obj.get("NameFormat")
         })
         return _obj
-

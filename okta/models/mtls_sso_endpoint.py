@@ -30,10 +30,11 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class MtlsSsoEndpoint(BaseModel):
     """
     The Single Sign-On (SSO) endpoint is the IdP's `SingleSignOnService` endpoint
-    """ # noqa: E501
+    """  # noqa: E501
     url: Optional[Annotated[str, Field(strict=True, max_length=1014)]] = None
     __properties: ClassVar[List[str]] = ["url"]
 
@@ -90,4 +91,3 @@ class MtlsSsoEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

@@ -36,26 +36,57 @@ from okta.models.user_type import UserType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserGetSingleton(BaseModel):
     """
     UserGetSingleton
-    """ # noqa: E501
-    activated: Optional[datetime] = Field(default=None, description="The timestamp when the user status transitioned to `ACTIVE`")
+    """  # noqa: E501
+    activated: Optional[datetime] = Field(default=None,
+                                          description="The timestamp when the user status transitioned to `ACTIVE`")
     created: Optional[datetime] = Field(default=None, description="The timestamp when the user was created")
     credentials: Optional[UserCredentials] = None
     id: Optional[StrictStr] = Field(default=None, description="The unique key for the user")
     last_login: Optional[datetime] = Field(default=None, description="The timestamp of the last login", alias="lastLogin")
-    last_updated: Optional[datetime] = Field(default=None, description="The timestamp when the user was last updated", alias="lastUpdated")
-    password_changed: Optional[datetime] = Field(default=None, description="The timestamp when the user's password was last updated", alias="passwordChanged")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user was last updated",
+        alias="lastUpdated")
+    password_changed: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user's password was last updated",
+        alias="passwordChanged")
     profile: Optional[UserProfile] = None
-    realm_id: Optional[StrictStr] = Field(default=None, description="The ID of the realm in which the user is residing. See [Realms](/openapi/okta-management/management/tag/Realm/).", alias="realmId")
+    realm_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the realm in which the user is residing. See [Realms](/openapi/okta-management/management/tag/Realm/).",
+        alias="realmId")
     status: Optional[UserStatus] = None
-    status_changed: Optional[datetime] = Field(default=None, description="The timestamp when the status of the user last changed", alias="statusChanged")
-    transitioning_to_status: Optional[StrictStr] = Field(default=None, description="The target status of an in-progress asynchronous status transition. This property is only returned if the user's state is transitioning.", alias="transitioningToStatus")
+    status_changed: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the status of the user last changed",
+        alias="statusChanged")
+    transitioning_to_status: Optional[StrictStr] = Field(
+        default=None,
+        description="The target status of an in-progress asynchronous status transition. This property is only returned if the user's state is transitioning.",
+        alias="transitioningToStatus")
     type: Optional[UserType] = None
     embedded: Optional[UserGetSingletonAllOfEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[UserLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["activated", "created", "credentials", "id", "lastLogin", "lastUpdated", "passwordChanged", "profile", "realmId", "status", "statusChanged", "transitioningToStatus", "type", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["activated",
+                                         "created",
+                                         "credentials",
+                                         "id",
+                                         "lastLogin",
+                                         "lastUpdated",
+                                         "passwordChanged",
+                                         "profile",
+                                         "realmId",
+                                         "status",
+                                         "statusChanged",
+                                         "transitioningToStatus",
+                                         "type",
+                                         "_embedded",
+                                         "_links"]
 
     @field_validator('transitioning_to_status')
     def transitioning_to_status_validate_enum(cls, value):
@@ -212,4 +243,3 @@ class UserGetSingleton(BaseModel):
             "_links": UserLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

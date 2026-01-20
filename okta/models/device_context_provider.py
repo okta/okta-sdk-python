@@ -29,13 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceContextProvider(BaseModel):
     """
     DeviceContextProvider
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the device context provider")
     key: StrictStr = Field(description="Identifies the type of device context provider")
-    user_identification: Optional[StrictStr] = Field(default=None, description="Whether or not the device context provider is used to identify the user. `IGNORE` prevents the device context provider from being used to authenticate the user. Identification of the device and device context collection happens regardless of this setting.", alias="userIdentification")
+    user_identification: Optional[StrictStr] = Field(
+        default=None,
+        description="Whether or not the device context provider is used to identify the user. `IGNORE` prevents the device context provider from being used to authenticate the user. Identification of the device and device context collection happens regardless of this setting.",
+        alias="userIdentification")
     __properties: ClassVar[List[str]] = ["id", "key", "userIdentification"]
 
     @field_validator('key')
@@ -110,4 +114,3 @@ class DeviceContextProvider(BaseModel):
             "userIdentification": obj.get("userIdentification")
         })
         return _obj
-

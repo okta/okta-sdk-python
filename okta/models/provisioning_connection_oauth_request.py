@@ -30,10 +30,11 @@ from okta.models.provisioning_connection_oauth_request_profile import Provisioni
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningConnectionOauthRequest(BaseModel):
     """
     ProvisioningConnectionOauthRequest
-    """ # noqa: E501
+    """  # noqa: E501
     profile: ProvisioningConnectionOauthRequestProfile
     __properties: ClassVar[List[str]] = ["profile"]
 
@@ -97,4 +98,3 @@ class ProvisioningConnectionOauthRequest(BaseModel):
             "profile": ProvisioningConnectionOauthRequestProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

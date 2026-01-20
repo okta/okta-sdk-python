@@ -29,15 +29,20 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2Settings(BaseModel):
     """
     OAuth 2.0 configuration used for authType `OAUTH2`
-    """ # noqa: E501
-    authorize_endpoint: StrictStr = Field(description="The URL to the authorization server's authorization endpoint", alias="authorizeEndpoint")
+    """  # noqa: E501
+    authorize_endpoint: StrictStr = Field(
+        description="The URL to the authorization server's authorization endpoint",
+        alias="authorizeEndpoint")
     client_id: StrictStr = Field(description="The OAuth 2.0 client identifier", alias="clientId")
     client_secret: StrictStr = Field(description="The OAuth 2.0 client secret", alias="clientSecret")
     scopes: Optional[List[StrictStr]] = Field(default=None, description="List of OAuth 2.0 scopes")
-    token_endpoint: StrictStr = Field(description="The URL to the authorization server's token endpoint", alias="tokenEndpoint")
+    token_endpoint: StrictStr = Field(
+        description="The URL to the authorization server's token endpoint",
+        alias="tokenEndpoint")
     __properties: ClassVar[List[str]] = ["authorizeEndpoint", "clientId", "clientSecret", "scopes", "tokenEndpoint"]
 
     model_config = ConfigDict(
@@ -97,4 +102,3 @@ class OAuth2Settings(BaseModel):
             "tokenEndpoint": obj.get("tokenEndpoint")
         })
         return _obj
-

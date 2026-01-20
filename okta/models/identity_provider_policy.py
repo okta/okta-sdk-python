@@ -32,12 +32,16 @@ from okta.models.provisioning import Provisioning
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityProviderPolicy(BaseModel):
     """
     Policy settings for the IdP. The following provisioning and account linking actions are supported by each IdP provider: | IdP type                                                           | User provisioning actions | Group provisioning actions            | Account link actions | Account link filters | | -----------------------------------------------------------------  | ------------------------- | ------------------------------------- | -------------------- | -------------------- | | `SAML2`                                                            | `AUTO` or `DISABLED`      | `NONE`, `ASSIGN`, `APPEND`, or `SYNC` | `AUTO`, `DISABLED`   | `groups`, `users`    | | `X509`, `IDV_PERSONA`, `IDV_INCODE`, `IDV_CLEAR` and `IDV_STANDARD`| `DISABLED`                | No support for JIT provisioning       |                      |                      | | All other IdP types                                                | `AUTO`, `DISABLED`        | `NONE` or `ASSIGN`                    | `AUTO`, `DISABLED`   | `groups`, `users`    |
-    """ # noqa: E501
+    """  # noqa: E501
     account_link: Optional[PolicyAccountLink] = Field(default=None, alias="accountLink")
-    max_clock_skew: Optional[StrictInt] = Field(default=None, description="Maximum allowable clock skew when processing messages from the IdP", alias="maxClockSkew")
+    max_clock_skew: Optional[StrictInt] = Field(
+        default=None,
+        description="Maximum allowable clock skew when processing messages from the IdP",
+        alias="maxClockSkew")
     provisioning: Optional[Provisioning] = None
     subject: Optional[PolicySubject] = None
     __properties: ClassVar[List[str]] = ["accountLink", "maxClockSkew", "provisioning", "subject"]
@@ -119,4 +123,3 @@ class IdentityProviderPolicy(BaseModel):
             "subject": PolicySubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

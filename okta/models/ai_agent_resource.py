@@ -30,10 +30,11 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AIAgentResource(BaseModel):
     """
     The AI agent resource associated with the operation. These properties are available after the operation completes successfully.
-    """ # noqa: E501
+    """  # noqa: E501
     id: StrictStr = Field(description="The ID of the AI agent resource")
     status: StrictStr = Field(description="The status of the AI agent resource")
     type: StrictStr = Field(description="The type of resource")
@@ -103,4 +104,3 @@ class AIAgentResource(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

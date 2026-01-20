@@ -29,12 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordImportRequestDataContextCredential(BaseModel):
     """
     PasswordImportRequestDataContextCredential
-    """ # noqa: E501
-    username: Optional[StrictStr] = Field(default=None, description="The `username` that the user supplied when attempting to sign in to Okta.")
-    password: Optional[StrictStr] = Field(default=None, description="The `password` that the user supplied when attempting to sign in to Okta.")
+    """  # noqa: E501
+    username: Optional[StrictStr] = Field(
+        default=None, description="The `username` that the user supplied when attempting to sign in to Okta.")
+    password: Optional[StrictStr] = Field(
+        default=None, description="The `password` that the user supplied when attempting to sign in to Okta.")
     __properties: ClassVar[List[str]] = ["username", "password"]
 
     model_config = ConfigDict(
@@ -91,4 +94,3 @@ class PasswordImportRequestDataContextCredential(BaseModel):
             "password": obj.get("password")
         })
         return _obj
-

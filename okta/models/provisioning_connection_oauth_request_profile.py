@@ -32,12 +32,16 @@ from okta.models.provisioning_connection_oauth_auth_scheme import ProvisioningCo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningConnectionOauthRequestProfile(BaseModel):
     """
     ProvisioningConnectionOauthRequestProfile
-    """ # noqa: E501
+    """  # noqa: E501
     auth_scheme: ProvisioningConnectionOauthAuthScheme = Field(alias="authScheme")
-    client_id: Optional[StrictStr] = Field(default=None, description="Only used for the Okta Org2Org (`okta_org2org`) app. The unique client identifier for the OAuth 2.0 service app from the target org.", alias="clientId")
+    client_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Only used for the Okta Org2Org (`okta_org2org`) app. The unique client identifier for the OAuth 2.0 service app from the target org.",
+        alias="clientId")
     settings: Optional[Office365ProvisioningSettings] = None
     signing: Optional[Org2OrgProvisioningOAuthSigningSettings] = None
     __properties: ClassVar[List[str]] = ["authScheme", "clientId", "settings", "signing"]
@@ -112,4 +116,3 @@ class ProvisioningConnectionOauthRequestProfile(BaseModel):
             "signing": Org2OrgProvisioningOAuthSigningSettings.from_dict(obj["signing"]) if obj.get("signing") is not None else None
         })
         return _obj
-

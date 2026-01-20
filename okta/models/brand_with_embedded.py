@@ -30,22 +30,36 @@ from okta.models.default_app import DefaultApp
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BrandWithEmbedded(BaseModel):
     """
     BrandWithEmbedded
-    """ # noqa: E501
+    """  # noqa: E501
     embedded: Optional[object] = Field(default=None, alias="_embedded")
     links: Optional[Any] = Field(default=None, alias="_links")
-    agree_to_custom_privacy_policy: Optional[StrictBool] = Field(default=None, description="Consent for updating the custom privacy URL. Not required when resetting the URL.", alias="agreeToCustomPrivacyPolicy")
-    custom_privacy_policy_url: Optional[StrictStr] = Field(default=None, description="Custom privacy policy URL", alias="customPrivacyPolicyUrl")
+    agree_to_custom_privacy_policy: Optional[StrictBool] = Field(
+        default=None,
+        description="Consent for updating the custom privacy URL. Not required when resetting the URL.",
+        alias="agreeToCustomPrivacyPolicy")
+    custom_privacy_policy_url: Optional[StrictStr] = Field(
+        default=None, description="Custom privacy policy URL", alias="customPrivacyPolicyUrl")
     default_app: Optional[DefaultApp] = Field(default=None, alias="defaultApp")
     email_domain_id: Optional[StrictStr] = Field(default=None, description="The ID of the email domain", alias="emailDomainId")
     id: Optional[StrictStr] = Field(default=None, description="The Brand ID")
-    is_default: Optional[StrictBool] = Field(default=None, description="If `true`, the Brand is used for the Okta subdomain", alias="isDefault")
-    locale: Optional[StrictStr] = Field(default=None, description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
+    is_default: Optional[StrictBool] = Field(
+        default=None,
+        description="If `true`, the Brand is used for the Okta subdomain",
+        alias="isDefault")
+    locale: Optional[StrictStr] = Field(
+        default=None,
+        description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
     name: Optional[StrictStr] = Field(default=None, description="The name of the Brand")
-    remove_powered_by_okta: Optional[StrictBool] = Field(default=False, description="Removes \"Powered by Okta\" from the sign-in page in redirect authentication deployments, and \"© [current year] Okta, Inc.\" from the Okta End-User Dashboard", alias="removePoweredByOkta")
-    __properties: ClassVar[List[str]] = ["agreeToCustomPrivacyPolicy", "customPrivacyPolicyUrl", "defaultApp", "emailDomainId", "id", "isDefault", "locale", "name", "removePoweredByOkta"]
+    remove_powered_by_okta: Optional[StrictBool] = Field(
+        default=False,
+        description="Removes \"Powered by Okta\" from the sign-in page in redirect authentication deployments, and \"© [current year] Okta, Inc.\" from the Okta End-User Dashboard",
+        alias="removePoweredByOkta")
+    __properties: ClassVar[List[str]] = ["agreeToCustomPrivacyPolicy", "customPrivacyPolicyUrl",
+                                         "defaultApp", "emailDomainId", "id", "isDefault", "locale", "name", "removePoweredByOkta"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,4 +135,3 @@ class BrandWithEmbedded(BaseModel):
             "removePoweredByOkta": obj.get("removePoweredByOkta") if obj.get("removePoweredByOkta") is not None else False
         })
         return _obj
-

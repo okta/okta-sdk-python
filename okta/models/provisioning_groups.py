@@ -31,14 +31,18 @@ from okta.models.provisioning_groups_action import ProvisioningGroupsAction
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningGroups(BaseModel):
     """
     Provisioning settings for a user's group memberships
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[ProvisioningGroupsAction] = None
-    assignments: Optional[List[StrictStr]] = Field(default=None, description="List of `OKTA_GROUP` group identifiers to add an IdP user as a member with the `ASSIGN` action")
-    filter: Optional[List[StrictStr]] = Field(default=None, description="Allowlist of `OKTA_GROUP` group identifiers for the `APPEND` or `SYNC` provisioning action")
-    source_attribute_name: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="IdP user profile attribute name (case-insensitive) for an array value that contains group memberships", alias="sourceAttributeName")
+    assignments: Optional[List[StrictStr]] = Field(
+        default=None, description="List of `OKTA_GROUP` group identifiers to add an IdP user as a member with the `ASSIGN` action")
+    filter: Optional[List[StrictStr]] = Field(
+        default=None, description="Allowlist of `OKTA_GROUP` group identifiers for the `APPEND` or `SYNC` provisioning action")
+    source_attribute_name: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="IdP user profile attribute name (case-insensitive) for an array value that contains group memberships", alias="sourceAttributeName")
     __properties: ClassVar[List[str]] = ["action", "assignments", "filter", "sourceAttributeName"]
 
     model_config = ConfigDict(
@@ -97,4 +101,3 @@ class ProvisioningGroups(BaseModel):
             "sourceAttributeName": obj.get("sourceAttributeName")
         })
         return _obj
-

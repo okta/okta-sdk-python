@@ -28,7 +28,6 @@ from importlib import import_module
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -38,11 +37,15 @@ if TYPE_CHECKING:
     from okta.models.user_factor_push_transaction_waiting_no_nmc import UserFactorPushTransactionWaitingNoNMC
     from okta.models.user_factor_push_transaction_waiting_nmc import UserFactorPushTransactionWaitingNMC
 
+
 class UserFactorPushTransaction(BaseModel):
     """
     UserFactorPushTransaction
-    """ # noqa: E501
-    factor_result: Optional[StrictStr] = Field(default=None, description="Result of the verification transaction", alias="factorResult")
+    """  # noqa: E501
+    factor_result: Optional[StrictStr] = Field(
+        default=None,
+        description="Result of the verification transaction",
+        alias="factorResult")
     __properties: ClassVar[List[str]] = ["factorResult"]
 
     @field_validator('factor_result')
@@ -52,7 +55,8 @@ class UserFactorPushTransaction(BaseModel):
             return value
 
         if value not in set(['WAITING (with number matching challenge)', 'WAITING', 'SUCCESS', 'REJECTED', 'TIMEOUT']):
-            raise ValueError("must be one of enum values ('WAITING (with number matching challenge)', 'WAITING', 'SUCCESS', 'REJECTED', 'TIMEOUT')")
+            raise ValueError(
+                "must be one of enum values ('WAITING (with number matching challenge)', 'WAITING', 'SUCCESS', 'REJECTED', 'TIMEOUT')")
         return value
 
     model_config = ConfigDict(
@@ -66,7 +70,7 @@ class UserFactorPushTransaction(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'REJECTED': 'UserFactorPushTransactionRejected','SUCCESS': 'UserFactorPushTransaction','TIMEOUT': 'UserFactorPushTransactionTimeout','WAITING': 'UserFactorPushTransactionWaitingNoNMC','WAITING (with number matching challenge)': 'UserFactorPushTransactionWaitingNMC'
+        'REJECTED': 'UserFactorPushTransactionRejected', 'SUCCESS': 'UserFactorPushTransaction', 'TIMEOUT': 'UserFactorPushTransactionTimeout', 'WAITING': 'UserFactorPushTransactionWaitingNoNMC', 'WAITING (with number matching challenge)': 'UserFactorPushTransactionWaitingNMC'
     }
 
     @classmethod
@@ -88,7 +92,8 @@ class UserFactorPushTransaction(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[UserFactorPushTransactionRejected, UserFactorPushTransaction, UserFactorPushTransactionTimeout, UserFactorPushTransactionWaitingNoNMC, UserFactorPushTransactionWaitingNMC]]:
+    def from_json(cls, json_str: str) -> Optional[Union[UserFactorPushTransactionRejected, UserFactorPushTransaction,
+                                                        UserFactorPushTransactionTimeout, UserFactorPushTransactionWaitingNoNMC, UserFactorPushTransactionWaitingNMC]]:
         """Create an instance of UserFactorPushTransaction from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -113,23 +118,26 @@ class UserFactorPushTransaction(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[UserFactorPushTransactionRejected, UserFactorPushTransaction, UserFactorPushTransactionTimeout, UserFactorPushTransactionWaitingNoNMC, UserFactorPushTransactionWaitingNMC]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[UserFactorPushTransactionRejected, UserFactorPushTransaction,
+                                                              UserFactorPushTransactionTimeout, UserFactorPushTransactionWaitingNoNMC, UserFactorPushTransactionWaitingNMC]]:
         """Create an instance of UserFactorPushTransaction from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'UserFactorPushTransactionRejected':
-            return import_module("okta.models.user_factor_push_transaction_rejected").UserFactorPushTransactionRejected.from_dict(obj)
+            return import_module(
+                "okta.models.user_factor_push_transaction_rejected").UserFactorPushTransactionRejected.from_dict(obj)
         if object_type == 'UserFactorPushTransaction':
             return import_module("okta.models.user_factor_push_transaction").UserFactorPushTransaction.from_dict(obj)
         if object_type == 'UserFactorPushTransactionTimeout':
-            return import_module("okta.models.user_factor_push_transaction_timeout").UserFactorPushTransactionTimeout.from_dict(obj)
+            return import_module(
+                "okta.models.user_factor_push_transaction_timeout").UserFactorPushTransactionTimeout.from_dict(obj)
         if object_type == 'UserFactorPushTransactionWaitingNoNMC':
-            return import_module("okta.models.user_factor_push_transaction_waiting_no_nmc").UserFactorPushTransactionWaitingNoNMC.from_dict(obj)
+            return import_module(
+                "okta.models.user_factor_push_transaction_waiting_no_nmc").UserFactorPushTransactionWaitingNoNMC.from_dict(obj)
         if object_type == 'UserFactorPushTransactionWaitingNMC':
-            return import_module("okta.models.user_factor_push_transaction_waiting_nmc").UserFactorPushTransactionWaitingNMC.from_dict(obj)
+            return import_module(
+                "okta.models.user_factor_push_transaction_waiting_nmc").UserFactorPushTransactionWaitingNMC.from_dict(obj)
 
         raise ValueError("UserFactorPushTransaction failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

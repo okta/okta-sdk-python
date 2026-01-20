@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Duration(BaseModel):
     """
     Duration
-    """ # noqa: E501
+    """  # noqa: E501
     number: Optional[StrictInt] = None
     unit: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["number", "unit"]
@@ -91,4 +92,3 @@ class Duration(BaseModel):
             "unit": obj.get("unit")
         })
         return _obj
-

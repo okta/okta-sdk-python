@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class KeepCurrent(BaseModel):
     """
     KeepCurrent
-    """ # noqa: E501
-    keep_current: Optional[StrictBool] = Field(default=True, description="Skip deleting the user's current session when set to `true`", alias="keepCurrent")
+    """  # noqa: E501
+    keep_current: Optional[StrictBool] = Field(
+        default=True,
+        description="Skip deleting the user's current session when set to `true`",
+        alias="keepCurrent")
     __properties: ClassVar[List[str]] = ["keepCurrent"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class KeepCurrent(BaseModel):
             "keepCurrent": obj.get("keepCurrent") if obj.get("keepCurrent") is not None else True
         })
         return _obj
-

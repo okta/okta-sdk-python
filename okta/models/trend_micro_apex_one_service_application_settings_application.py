@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TrendMicroApexOneServiceApplicationSettingsApplication(BaseModel):
     """
     Trend Micro Apex One as a Service app instance properties
-    """ # noqa: E501
+    """  # noqa: E501
     base_url: StrictStr = Field(description="Base Trend Micro Apex One Service URL", alias="baseURL")
     __properties: ClassVar[List[str]] = ["baseURL"]
 
@@ -89,4 +90,3 @@ class TrendMicroApexOneServiceApplicationSettingsApplication(BaseModel):
             "baseURL": obj.get("baseURL")
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AssociatedServerMediated(BaseModel):
     """
     AssociatedServerMediated
-    """ # noqa: E501
+    """  # noqa: E501
     trusted: Optional[List[StrictStr]] = Field(default=None, description="A list of the authorization server IDs")
     __properties: ClassVar[List[str]] = ["trusted"]
 
@@ -89,4 +90,3 @@ class AssociatedServerMediated(BaseModel):
             "trusted": obj.get("trusted")
         })
         return _obj
-

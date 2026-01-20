@@ -29,12 +29,19 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OidcSettings(BaseModel):
     """
     Advanced settings for the OpenID Connect protocol
-    """ # noqa: E501
-    participate_slo: Optional[StrictBool] = Field(default=None, description="Set to `true` to have Okta send a logout request to the upstream IdP when a user signs out of Okta or a downstream app.", alias="participateSlo")
-    send_application_context: Optional[StrictBool] = Field(default=False, description="Determines if the IdP should send the application context as `OktaAppInstanceId` and `OktaAppName` params in the request", alias="sendApplicationContext")
+    """  # noqa: E501
+    participate_slo: Optional[StrictBool] = Field(
+        default=None,
+        description="Set to `true` to have Okta send a logout request to the upstream IdP when a user signs out of Okta or a downstream app.",
+        alias="participateSlo")
+    send_application_context: Optional[StrictBool] = Field(
+        default=False,
+        description="Determines if the IdP should send the application context as `OktaAppInstanceId` and `OktaAppName` params in the request",
+        alias="sendApplicationContext")
     __properties: ClassVar[List[str]] = ["participateSlo", "sendApplicationContext"]
 
     model_config = ConfigDict(
@@ -91,4 +98,3 @@ class OidcSettings(BaseModel):
             "sendApplicationContext": obj.get("sendApplicationContext") if obj.get("sendApplicationContext") is not None else False
         })
         return _obj
-

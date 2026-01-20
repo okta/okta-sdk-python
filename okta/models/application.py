@@ -38,7 +38,6 @@ from okta.models.application_sign_on_mode import ApplicationSignOnMode
 from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -52,17 +51,22 @@ if TYPE_CHECKING:
     from okta.models.secure_password_store_application import SecurePasswordStoreApplication
     from okta.models.ws_federation_application import WsFederationApplication
 
+
 class Application(BaseModel):
     """
     Application
-    """ # noqa: E501
+    """  # noqa: E501
     accessibility: Optional[ApplicationAccessibility] = None
     created: Optional[datetime] = Field(default=None, description="Timestamp when the application object was created")
     express_configuration: Optional[ApplicationExpressConfiguration] = Field(default=None, alias="expressConfiguration")
-    features: Optional[List[StrictStr]] = Field(default=None, description="Enabled app features > **Note:** See [Application Features](/openapi/okta-management/management/tag/ApplicationFeatures/) for app provisioning features. ")
+    features: Optional[List[StrictStr]] = Field(
+        default=None, description="Enabled app features > **Note:** See [Application Features](/openapi/okta-management/management/tag/ApplicationFeatures/) for app provisioning features. ")
     id: Optional[StrictStr] = Field(default=None, description="Unique ID for the app instance")
     label: StrictStr = Field(description="User-defined display name for app")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the application object was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the application object was last updated",
+        alias="lastUpdated")
     licensing: Optional[ApplicationLicensing] = None
     orn: Optional[StrictStr] = Field(default=None, description="The Okta resource name (ORN) for the current app instance")
     profile: Optional[Dict[str, Any]] = Field(default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps). For example, add an app manager contact email address or define an allowlist of groups that you can then reference using the Okta Expression Language `getFilteredGroups` function.  > **Notes:** > * `profile` isn't encrypted, so don't store sensitive data in it. > * `profile` doesn't limit the level of nesting in the JSON schema you created, but there is a practical size limit. Okta recommends a JSON schema size of 1 MB or less for best performance.")
@@ -72,7 +76,22 @@ class Application(BaseModel):
     visibility: Optional[ApplicationVisibility] = None
     embedded: Optional[ApplicationEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[ApplicationLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["accessibility", "created", "expressConfiguration", "features", "id", "label", "lastUpdated", "licensing", "orn", "profile", "signOnMode", "status", "universalLogout", "visibility", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["accessibility",
+                                         "created",
+                                         "expressConfiguration",
+                                         "features",
+                                         "id",
+                                         "label",
+                                         "lastUpdated",
+                                         "licensing",
+                                         "orn",
+                                         "profile",
+                                         "signOnMode",
+                                         "status",
+                                         "universalLogout",
+                                         "visibility",
+                                         "_embedded",
+                                         "_links"]
 
     @field_validator('features')
     def features_validate_enum(cls, value):
@@ -81,7 +100,8 @@ class Application(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['GROUP_PUSH', 'IMPORT_NEW_USERS', 'IMPORT_PROFILE_UPDATES', 'IMPORT_USER_SCHEMA', 'PROFILE_MASTERING', 'PUSH_NEW_USERS', 'PUSH_PASSWORD_UPDATES', 'PUSH_PROFILE_UPDATES', 'PUSH_USER_DEACTIVATION', 'REACTIVATE_USERS', 'OUTBOUND_DEL_AUTH', 'DESKTOP_SSO', 'FEDERATED_PROFILE', 'SUPPRESS_ACTIVATION_EMAIL', 'PUSH_PENDING_USERS', 'MFA', 'UPDATE_EXISTING_USERNAME', 'EXCLUDE_USERNAME_UPDATE_ON_PROFILE_PUSH', 'EXCHANGE_ACTIVE_SYNC', 'IMPORT_SYNC', 'IMPORT_SYNC_CONTACTS', 'DEVICE_COMPLIANCE', 'VPN_CONFIG', 'IMPORT_SCHEMA_ENUM_VALUES', 'SCIM_PROVISIONING', 'DEVICE_FILTER_IN_SIGN_ON_RULES', 'PROFILE_TEMPLATE_UPGRADE', 'DEFAULT_PUSH_STATUS_TO_PUSH', 'REAL_TIME_SYNC', 'SSO', 'AUTHN_CONTEXT', 'JIT_PROVISIONING', 'GROUP_SYNC', 'OPP_SCIM_INCREMENTAL_IMPORTS', 'IN_MEMORY_APP_USER', 'LOG_STREAMING', 'OAUTH_INTEGRATION', 'IDP', 'PUSH_NEW_USERS_WITHOUT_PASSWORD', 'SKYHOOK_SERVICE', 'ENTITLEMENT_MANAGEMENT', 'PUSH_NEW_USERS_WITH_HASHED_PASSWORD']):
+            if i not in set(['GROUP_PUSH', 'IMPORT_NEW_USERS', 'IMPORT_PROFILE_UPDATES', 'IMPORT_USER_SCHEMA', 'PROFILE_MASTERING', 'PUSH_NEW_USERS', 'PUSH_PASSWORD_UPDATES', 'PUSH_PROFILE_UPDATES', 'PUSH_USER_DEACTIVATION', 'REACTIVATE_USERS', 'OUTBOUND_DEL_AUTH', 'DESKTOP_SSO', 'FEDERATED_PROFILE', 'SUPPRESS_ACTIVATION_EMAIL', 'PUSH_PENDING_USERS', 'MFA', 'UPDATE_EXISTING_USERNAME', 'EXCLUDE_USERNAME_UPDATE_ON_PROFILE_PUSH', 'EXCHANGE_ACTIVE_SYNC', 'IMPORT_SYNC', 'IMPORT_SYNC_CONTACTS',
+                            'DEVICE_COMPLIANCE', 'VPN_CONFIG', 'IMPORT_SCHEMA_ENUM_VALUES', 'SCIM_PROVISIONING', 'DEVICE_FILTER_IN_SIGN_ON_RULES', 'PROFILE_TEMPLATE_UPGRADE', 'DEFAULT_PUSH_STATUS_TO_PUSH', 'REAL_TIME_SYNC', 'SSO', 'AUTHN_CONTEXT', 'JIT_PROVISIONING', 'GROUP_SYNC', 'OPP_SCIM_INCREMENTAL_IMPORTS', 'IN_MEMORY_APP_USER', 'LOG_STREAMING', 'OAUTH_INTEGRATION', 'IDP', 'PUSH_NEW_USERS_WITHOUT_PASSWORD', 'SKYHOOK_SERVICE', 'ENTITLEMENT_MANAGEMENT', 'PUSH_NEW_USERS_WITH_HASHED_PASSWORD']):
                 raise ValueError("each list item must be one of ('GROUP_PUSH', 'IMPORT_NEW_USERS', 'IMPORT_PROFILE_UPDATES', 'IMPORT_USER_SCHEMA', 'PROFILE_MASTERING', 'PUSH_NEW_USERS', 'PUSH_PASSWORD_UPDATES', 'PUSH_PROFILE_UPDATES', 'PUSH_USER_DEACTIVATION', 'REACTIVATE_USERS', 'OUTBOUND_DEL_AUTH', 'DESKTOP_SSO', 'FEDERATED_PROFILE', 'SUPPRESS_ACTIVATION_EMAIL', 'PUSH_PENDING_USERS', 'MFA', 'UPDATE_EXISTING_USERNAME', 'EXCLUDE_USERNAME_UPDATE_ON_PROFILE_PUSH', 'EXCHANGE_ACTIVE_SYNC', 'IMPORT_SYNC', 'IMPORT_SYNC_CONTACTS', 'DEVICE_COMPLIANCE', 'VPN_CONFIG', 'IMPORT_SCHEMA_ENUM_VALUES', 'SCIM_PROVISIONING', 'DEVICE_FILTER_IN_SIGN_ON_RULES', 'PROFILE_TEMPLATE_UPGRADE', 'DEFAULT_PUSH_STATUS_TO_PUSH', 'REAL_TIME_SYNC', 'SSO', 'AUTHN_CONTEXT', 'JIT_PROVISIONING', 'GROUP_SYNC', 'OPP_SCIM_INCREMENTAL_IMPORTS', 'IN_MEMORY_APP_USER', 'LOG_STREAMING', 'OAUTH_INTEGRATION', 'IDP', 'PUSH_NEW_USERS_WITHOUT_PASSWORD', 'SKYHOOK_SERVICE', 'ENTITLEMENT_MANAGEMENT', 'PUSH_NEW_USERS_WITH_HASHED_PASSWORD')")
         return value
 
@@ -96,7 +116,7 @@ class Application(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'AUTO_LOGIN': 'AutoLoginApplication','BASIC_AUTH': 'BasicAuthApplication','BOOKMARK': 'BookmarkApplication','BROWSER_PLUGIN': 'BrowserPluginApplication','OPENID_CONNECT': 'OpenIdConnectApplication','SAML_1_1': 'Saml11Application','SAML_2_0': 'SamlApplication','SECURE_PASSWORD_STORE': 'SecurePasswordStoreApplication','WS_FEDERATION': 'WsFederationApplication'
+        'AUTO_LOGIN': 'AutoLoginApplication', 'BASIC_AUTH': 'BasicAuthApplication', 'BOOKMARK': 'BookmarkApplication', 'BROWSER_PLUGIN': 'BrowserPluginApplication', 'OPENID_CONNECT': 'OpenIdConnectApplication', 'SAML_1_1': 'Saml11Application', 'SAML_2_0': 'SamlApplication', 'SECURE_PASSWORD_STORE': 'SecurePasswordStoreApplication', 'WS_FEDERATION': 'WsFederationApplication'
     }
 
     @classmethod
@@ -118,7 +138,8 @@ class Application(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[AutoLoginApplication, BasicAuthApplication, BookmarkApplication, BrowserPluginApplication, OpenIdConnectApplication, Saml11Application, SamlApplication, SecurePasswordStoreApplication, WsFederationApplication]]:
+    def from_json(cls, json_str: str) -> Optional[Union[AutoLoginApplication, BasicAuthApplication, BookmarkApplication, BrowserPluginApplication,
+                                                        OpenIdConnectApplication, Saml11Application, SamlApplication, SecurePasswordStoreApplication, WsFederationApplication]]:
         """Create an instance of Application from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -202,7 +223,8 @@ class Application(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AutoLoginApplication, BasicAuthApplication, BookmarkApplication, BrowserPluginApplication, OpenIdConnectApplication, Saml11Application, SamlApplication, SecurePasswordStoreApplication, WsFederationApplication]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AutoLoginApplication, BasicAuthApplication, BookmarkApplication, BrowserPluginApplication,
+                                                              OpenIdConnectApplication, Saml11Application, SamlApplication, SecurePasswordStoreApplication, WsFederationApplication]]:
         """Create an instance of Application from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -226,7 +248,5 @@ class Application(BaseModel):
             return import_module("okta.models.ws_federation_application").WsFederationApplication.from_dict(obj)
 
         raise ValueError("Application failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

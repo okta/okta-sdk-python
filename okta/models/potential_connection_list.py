@@ -31,10 +31,11 @@ from okta.models.potential_connection_list_links import PotentialConnectionListL
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PotentialConnectionList(BaseModel):
     """
     PotentialConnectionList
-    """ # noqa: E501
+    """  # noqa: E501
     data: List[PotentialConnection] = Field(description="Potential connections that can be established")
     links: PotentialConnectionListLinks = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["data", "_links"]
@@ -107,4 +108,3 @@ class PotentialConnectionList(BaseModel):
             "_links": PotentialConnectionListLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

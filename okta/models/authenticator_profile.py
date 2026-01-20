@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorProfile(BaseModel):
     """
     Defines the authenticator specific parameters
-    """ # noqa: E501
-    phone_number: StrictStr = Field(description="The phone number for a `call` or `sms` authenticator enrollment.", alias="phoneNumber")
+    """  # noqa: E501
+    phone_number: StrictStr = Field(
+        description="The phone number for a `call` or `sms` authenticator enrollment.",
+        alias="phoneNumber")
     __properties: ClassVar[List[str]] = ["phoneNumber"]
 
     model_config = ConfigDict(
@@ -89,4 +92,3 @@ class AuthenticatorProfile(BaseModel):
             "phoneNumber": obj.get("phoneNumber")
         })
         return _obj
-

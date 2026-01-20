@@ -42,10 +42,11 @@ from okta.models.links_verify_verify import LinksVerifyVerify
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorLinks(BaseModel):
     """
     UserFactorLinks
-    """ # noqa: E501
+    """  # noqa: E501
     activate: Optional[LinksActivateActivate] = None
     cancel: Optional[LinksCancelCancel] = None
     deactivate: Optional[LinksDeactivateDeactivate] = None
@@ -59,7 +60,8 @@ class UserFactorLinks(BaseModel):
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     user: Optional[LinksUserFactorsUser] = None
     verify: Optional[LinksVerifyVerify] = None
-    __properties: ClassVar[List[str]] = ["activate", "cancel", "deactivate", "enroll", "factor", "poll", "qrcode", "question", "resend", "send", "self", "user", "verify"]
+    __properties: ClassVar[List[str]] = ["activate", "cancel", "deactivate", "enroll",
+                                         "factor", "poll", "qrcode", "question", "resend", "send", "self", "user", "verify"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -217,4 +219,3 @@ class UserFactorLinks(BaseModel):
             "verify": LinksVerifyVerify.from_dict(obj["verify"]) if obj.get("verify") is not None else None
         })
         return _obj
-

@@ -30,16 +30,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SocialAuthToken(BaseModel):
     """
     The social authentication token object provides the tokens and associated metadata provided by social providers during social authentication.
-    """ # noqa: E501
+    """  # noqa: E501
     expires_at: Optional[datetime] = Field(default=None, description="Timestamp when the object expires", alias="expiresAt")
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the token")
     scopes: Optional[List[StrictStr]] = Field(default=None, description="The scopes that the token is good for")
     token: Optional[StrictStr] = Field(default=None, description="The raw token")
-    token_auth_scheme: Optional[StrictStr] = Field(default=None, description="The token authentication scheme as defined by the social provider", alias="tokenAuthScheme")
-    token_type: Optional[StrictStr] = Field(default=None, description="The type of token defined by the [OAuth Token Exchange Spec](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-07#section-3)", alias="tokenType")
+    token_auth_scheme: Optional[StrictStr] = Field(
+        default=None,
+        description="The token authentication scheme as defined by the social provider",
+        alias="tokenAuthScheme")
+    token_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of token defined by the [OAuth Token Exchange Spec](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-07#section-3)",
+        alias="tokenType")
     __properties: ClassVar[List[str]] = ["expiresAt", "id", "scopes", "token", "tokenAuthScheme", "tokenType"]
 
     model_config = ConfigDict(
@@ -112,4 +119,3 @@ class SocialAuthToken(BaseModel):
             "tokenType": obj.get("tokenType")
         })
         return _obj
-

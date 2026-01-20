@@ -30,15 +30,19 @@ from okta.models.href_hints import HrefHints
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class HrefObject(BaseModel):
     """
     HrefObject
-    """ # noqa: E501
+    """  # noqa: E501
     hints: Optional[HrefHints] = None
     href: StrictStr = Field(description="Link URI")
     name: Optional[StrictStr] = Field(default=None, description="Link name")
-    templated: Optional[StrictBool] = Field(default=None, description="Indicates whether the link object's `href` property is a URI template.")
-    type: Optional[StrictStr] = Field(default=None, description="The media type of the link. If omitted, it is implicitly `application/json`.")
+    templated: Optional[StrictBool] = Field(
+        default=None, description="Indicates whether the link object's `href` property is a URI template.")
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="The media type of the link. If omitted, it is implicitly `application/json`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["hints", "href", "name", "templated", "type"]
 
@@ -124,4 +128,3 @@ class HrefObject(BaseModel):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-

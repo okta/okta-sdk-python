@@ -32,10 +32,11 @@ from okta.models.log_stream_self_link import LogStreamSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogStreamLinksSelfAndLifecycle(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the current status of an application using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This object is used for dynamic discovery of related resources and lifecycle operations.
-    """ # noqa: E501
+    """  # noqa: E501
     activate: Optional[LogStreamActivateLink] = None
     deactivate: Optional[LogStreamDeactivateLink] = None
     var_self: LogStreamSelfLink = Field(alias="self")
@@ -117,4 +118,3 @@ class LogStreamLinksSelfAndLifecycle(BaseModel):
             "self": LogStreamSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None
         })
         return _obj
-

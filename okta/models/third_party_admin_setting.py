@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ThirdPartyAdminSetting(BaseModel):
     """
     The third-party admin setting
-    """ # noqa: E501
-    third_party_admin: Optional[StrictBool] = Field(default=None, description="Indicates if the third-party admin functionality is enabled", alias="thirdPartyAdmin")
+    """  # noqa: E501
+    third_party_admin: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the third-party admin functionality is enabled",
+        alias="thirdPartyAdmin")
     __properties: ClassVar[List[str]] = ["thirdPartyAdmin"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class ThirdPartyAdminSetting(BaseModel):
             "thirdPartyAdmin": obj.get("thirdPartyAdmin")
         })
         return _obj
-

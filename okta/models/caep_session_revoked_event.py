@@ -32,10 +32,11 @@ from okta.models.security_event_subject import SecurityEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CaepSessionRevokedEvent(BaseModel):
     """
     The session of the subject was revoked
-    """ # noqa: E501
+    """  # noqa: E501
     current_ip: Optional[StrictStr] = Field(default=None, description="Current IP of the session")
     current_user_agent: Optional[StrictStr] = Field(default=None, description="Current User Agent of the session")
     event_timestamp: StrictInt = Field(description="The time of the event (UNIX timestamp)")
@@ -45,7 +46,15 @@ class CaepSessionRevokedEvent(BaseModel):
     reason_admin: Optional[CaepDeviceComplianceChangeEventReasonAdmin] = None
     reason_user: Optional[CaepDeviceComplianceChangeEventReasonUser] = None
     subject: SecurityEventSubject
-    __properties: ClassVar[List[str]] = ["current_ip", "current_user_agent", "event_timestamp", "initiating_entity", "last_known_ip", "last_known_user_agent", "reason_admin", "reason_user", "subject"]
+    __properties: ClassVar[List[str]] = ["current_ip",
+                                         "current_user_agent",
+                                         "event_timestamp",
+                                         "initiating_entity",
+                                         "last_known_ip",
+                                         "last_known_user_agent",
+                                         "reason_admin",
+                                         "reason_user",
+                                         "subject"]
 
     @field_validator('initiating_entity')
     def initiating_entity_validate_enum(cls, value):
@@ -139,4 +148,3 @@ class CaepSessionRevokedEvent(BaseModel):
             "subject": SecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

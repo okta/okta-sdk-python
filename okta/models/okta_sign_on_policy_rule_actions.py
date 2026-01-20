@@ -30,10 +30,11 @@ from okta.models.okta_sign_on_policy_rule_signon_actions import OktaSignOnPolicy
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaSignOnPolicyRuleActions(BaseModel):
     """
     OktaSignOnPolicyRuleActions
-    """ # noqa: E501
+    """  # noqa: E501
     signon: Optional[OktaSignOnPolicyRuleSignonActions] = None
     __properties: ClassVar[List[str]] = ["signon"]
 
@@ -97,4 +98,3 @@ class OktaSignOnPolicyRuleActions(BaseModel):
             "signon": OktaSignOnPolicyRuleSignonActions.from_dict(obj["signon"]) if obj.get("signon") is not None else None
         })
         return _obj
-

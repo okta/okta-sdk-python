@@ -32,10 +32,11 @@ from okta.models.profile_setting_object import ProfileSettingObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CapabilitiesUpdateObject(BaseModel):
     """
     Determines whether updates to a user's profile are pushed to the app
-    """ # noqa: E501
+    """  # noqa: E501
     lifecycle_deactivate: Optional[LifecycleDeactivateSettingObject] = Field(default=None, alias="lifecycleDeactivate")
     password: Optional[PasswordSettingObject] = None
     profile: Optional[ProfileSettingObject] = None
@@ -117,4 +118,3 @@ class CapabilitiesUpdateObject(BaseModel):
             "profile": ProfileSettingObject.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

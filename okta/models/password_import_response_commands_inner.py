@@ -30,11 +30,14 @@ from okta.models.password_import_response_commands_inner_value import PasswordIm
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordImportResponseCommandsInner(BaseModel):
     """
     PasswordImportResponseCommandsInner
-    """ # noqa: E501
-    type: Optional[Any] = Field(default=None, description="The location where you specify the command. For the password import inline hook, there's only one command, `com.okta.action.update`.")
+    """  # noqa: E501
+    type: Optional[Any] = Field(
+        default=None,
+        description="The location where you specify the command. For the password import inline hook, there's only one command, `com.okta.action.update`.")
     value: Optional[PasswordImportResponseCommandsInnerValue] = None
     __properties: ClassVar[List[str]] = ["type", "value"]
 
@@ -104,4 +107,3 @@ class PasswordImportResponseCommandsInner(BaseModel):
             "value": PasswordImportResponseCommandsInnerValue.from_dict(obj["value"]) if obj.get("value") is not None else None
         })
         return _obj
-

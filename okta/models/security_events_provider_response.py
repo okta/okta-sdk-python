@@ -32,15 +32,19 @@ from okta.models.security_events_provider_settings_response import SecurityEvent
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventsProviderResponse(BaseModel):
     """
     The Security Events Provider response
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier of this instance")
-    name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="The name of the Security Events Provider instance")
+    name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
+        default=None, description="The name of the Security Events Provider instance")
     settings: Optional[SecurityEventsProviderSettingsResponse] = None
-    status: Optional[StrictStr] = Field(default=None, description="Indicates whether the Security Events Provider is active or not")
-    type: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The application type of the Security Events Provider")
+    status: Optional[StrictStr] = Field(default=None,
+                                        description="Indicates whether the Security Events Provider is active or not")
+    type: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(
+        default=None, description="The application type of the Security Events Provider")
     links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "name", "settings", "status", "type", "_links"]
 
@@ -130,4 +134,3 @@ class SecurityEventsProviderResponse(BaseModel):
             "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

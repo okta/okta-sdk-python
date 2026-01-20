@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RecoveryQuestionCredential(BaseModel):
     """
     Specifies a secret question and answer that's validated (case insensitive) when a user forgets their password or unlocks their account. The answer property is write-only.
-    """ # noqa: E501
-    answer: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The answer to the recovery question")
+    """  # noqa: E501
+    answer: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="The answer to the recovery question")
     question: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The recovery question")
     __properties: ClassVar[List[str]] = ["answer", "question"]
 
@@ -92,4 +94,3 @@ class RecoveryQuestionCredential(BaseModel):
             "question": obj.get("question")
         })
         return _obj
-

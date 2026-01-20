@@ -30,10 +30,11 @@ from okta.models.number_factor_challenge_embedded_links_challenge import NumberF
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class NumberFactorChallengeEmbeddedLinks(BaseModel):
     """
     Contains the `challenge` and `correctAnswer` objects for `push` factors that use a number matching challenge
-    """ # noqa: E501
+    """  # noqa: E501
     challenge: Optional[NumberFactorChallengeEmbeddedLinksChallenge] = None
     __properties: ClassVar[List[str]] = ["challenge"]
 
@@ -102,4 +103,3 @@ class NumberFactorChallengeEmbeddedLinks(BaseModel):
             "challenge": NumberFactorChallengeEmbeddedLinksChallenge.from_dict(obj["challenge"]) if obj.get("challenge") is not None else None
         })
         return _obj
-

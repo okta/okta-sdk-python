@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceDisplayName(BaseModel):
     """
     Display name of the device
-    """ # noqa: E501
-    sensitive: Optional[StrictBool] = Field(default=False, description="Indicates whether the associated value is Personal Identifiable Information (PII) and requires masking")
+    """  # noqa: E501
+    sensitive: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether the associated value is Personal Identifiable Information (PII) and requires masking")
     value: Optional[StrictStr] = Field(default=None, description="Display name of the device")
     __properties: ClassVar[List[str]] = ["sensitive", "value"]
 
@@ -91,4 +94,3 @@ class DeviceDisplayName(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

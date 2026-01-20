@@ -31,14 +31,21 @@ from okta.models.sts_service_account_connection_creatable_service_account import
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class STSServiceAccountConnectionCreatable(BaseModel):
     """
     Create an STS connection for a service account
-    """ # noqa: E501
+    """  # noqa: E501
     app: IdentityAssertionAppInstanceConnectionCreatableApp
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
-    protocol_type: Optional[StrictStr] = Field(default=None, description="The authentication protocol type used for the connection", alias="protocolType")
-    resource_indicator: Optional[StrictStr] = Field(default=None, description="Resource indicator used when requesting tokens. Defaults to the service account's ORN if not specified.", alias="resourceIndicator")
+    protocol_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The authentication protocol type used for the connection",
+        alias="protocolType")
+    resource_indicator: Optional[StrictStr] = Field(
+        default=None,
+        description="Resource indicator used when requesting tokens. Defaults to the service account's ORN if not specified.",
+        alias="resourceIndicator")
     service_account: STSServiceAccountConnectionCreatableServiceAccount = Field(alias="serviceAccount")
     __properties: ClassVar[List[str]] = ["app", "connectionType", "protocolType", "resourceIndicator", "serviceAccount"]
 
@@ -130,4 +137,3 @@ class STSServiceAccountConnectionCreatable(BaseModel):
             "serviceAccount": STSServiceAccountConnectionCreatableServiceAccount.from_dict(obj["serviceAccount"]) if obj.get("serviceAccount") is not None else None
         })
         return _obj
-

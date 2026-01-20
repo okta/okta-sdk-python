@@ -31,10 +31,11 @@ from okta.models.o_auth_client_secret_links import OAuthClientSecretLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
     """
     An RSA signing key
-    """ # noqa: E501
+    """  # noqa: E501
     e: StrictStr = Field(description="RSA key value (exponent) for key binding")
     n: StrictStr = Field(description="RSA key value (modulus) for key binding")
     __properties: ClassVar[List[str]] = ["id", "created", "lastUpdated", "_links", "kid", "status", "kty", "alg", "use"]
@@ -112,4 +113,3 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
             "use": obj.get("use")
         })
         return _obj
-

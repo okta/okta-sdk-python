@@ -29,12 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Parameters(BaseModel):
     """
     Attributes used for processing Active Directory group membership update
-    """ # noqa: E501
+    """  # noqa: E501
     action: Optional[StrictStr] = Field(default=None, description="The update action to take")
-    attribute: Optional[StrictStr] = Field(default=None, description="The attribute that tracks group memberships in Active Directory. For Active Directory, use `member`.")
+    attribute: Optional[StrictStr] = Field(
+        default=None,
+        description="The attribute that tracks group memberships in Active Directory. For Active Directory, use `member`.")
     values: Optional[List[StrictStr]] = Field(default=None, description="List of user IDs whose group memberships to update")
     __properties: ClassVar[List[str]] = ["action", "attribute", "values"]
 
@@ -103,4 +106,3 @@ class Parameters(BaseModel):
             "values": obj.get("values")
         })
         return _obj
-

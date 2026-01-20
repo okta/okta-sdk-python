@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Subject(BaseModel):
     """
     Subject
-    """ # noqa: E501
+    """  # noqa: E501
     format: Optional[StrictStr] = Field(default=None, description="The user identifier")
     id: Optional[StrictStr] = Field(default=None, description="ID of the user")
     __properties: ClassVar[List[str]] = ["format", "id"]
@@ -101,4 +102,3 @@ class Subject(BaseModel):
             "id": obj.get("id")
         })
         return _obj
-

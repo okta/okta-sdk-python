@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AssignedAppLink(BaseModel):
     """
     AssignedAppLink
-    """ # noqa: E501
+    """  # noqa: E501
     app_assignment_id: Optional[StrictStr] = Field(default=None, alias="appAssignmentId")
     app_instance_id: Optional[StrictStr] = Field(default=None, alias="appInstanceId")
     app_name: Optional[StrictStr] = Field(default=None, alias="appName")
@@ -43,7 +44,8 @@ class AssignedAppLink(BaseModel):
     link_url: Optional[StrictStr] = Field(default=None, alias="linkUrl")
     logo_url: Optional[StrictStr] = Field(default=None, alias="logoUrl")
     sort_order: Optional[StrictInt] = Field(default=None, alias="sortOrder")
-    __properties: ClassVar[List[str]] = ["appAssignmentId", "appInstanceId", "appName", "credentialsSetup", "hidden", "id", "label", "linkUrl", "logoUrl", "sortOrder"]
+    __properties: ClassVar[List[str]] = ["appAssignmentId", "appInstanceId", "appName",
+                                         "credentialsSetup", "hidden", "id", "label", "linkUrl", "logoUrl", "sortOrder"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -127,4 +129,3 @@ class AssignedAppLink(BaseModel):
             "sortOrder": obj.get("sortOrder")
         })
         return _obj
-

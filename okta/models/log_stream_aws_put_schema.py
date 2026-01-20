@@ -28,14 +28,14 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List
 from okta.models.log_stream_put_schema import LogStreamPutSchema
 from okta.models.log_stream_settings_aws import LogStreamSettingsAws
-from okta.models.log_stream_type import LogStreamType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class LogStreamAwsPutSchema(LogStreamPutSchema):
     """
     LogStreamAwsPutSchema
-    """ # noqa: E501
+    """  # noqa: E501
     settings: LogStreamSettingsAws
     __properties: ClassVar[List[str]] = ["name", "type", "settings"]
 
@@ -101,4 +101,3 @@ class LogStreamAwsPutSchema(LogStreamPutSchema):
             "settings": LogStreamSettingsAws.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

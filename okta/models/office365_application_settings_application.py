@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Office365ApplicationSettingsApplication(BaseModel):
     """
     Office365 app instance properties
-    """ # noqa: E501
+    """  # noqa: E501
     domain: StrictStr = Field(description="The domain for your Office 365 account")
     msft_tenant: StrictStr = Field(description="Microsoft tenant name", alias="msftTenant")
     __properties: ClassVar[List[str]] = ["domain", "msftTenant"]
@@ -91,4 +92,3 @@ class Office365ApplicationSettingsApplication(BaseModel):
             "msftTenant": obj.get("msftTenant")
         })
         return _obj
-

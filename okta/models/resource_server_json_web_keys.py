@@ -30,10 +30,11 @@ from okta.models.resource_server_json_web_key import ResourceServerJsonWebKey
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceServerJsonWebKeys(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A [JSON Web Key Set](https://tools.ietf.org/html/rfc7517#section-5) for encrypting JWTs minted by the custom authorization server
-    """ # noqa: E501
+    """  # noqa: E501
     keys: Optional[List[ResourceServerJsonWebKey]] = None
     __properties: ClassVar[List[str]] = ["keys"]
 
@@ -97,4 +98,3 @@ class ResourceServerJsonWebKeys(BaseModel):
             "keys": [ResourceServerJsonWebKey.from_dict(_item) for _item in obj["keys"]] if obj.get("keys") is not None else None
         })
         return _obj
-

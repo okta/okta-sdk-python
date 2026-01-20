@@ -32,15 +32,26 @@ from okta.models.credential_sync_state import CredentialSyncState
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CredentialSyncInfo(BaseModel):
     """
     CredentialSyncInfo
-    """ # noqa: E501
-    error_code: Optional[StrictStr] = Field(default=None, description="The error code for the type of error", alias="errorCode")
-    error_reason: Optional[StrictStr] = Field(default=None, description="A short description of the error", alias="errorReason")
-    secret_version_id: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=36)]] = Field(default=None, description="The version ID of the password secret from the OPA vault.", alias="secretVersionId")
+    """  # noqa: E501
+    error_code: Optional[StrictStr] = Field(
+        default=None,
+        description="The error code for the type of error",
+        alias="errorCode")
+    error_reason: Optional[StrictStr] = Field(
+        default=None,
+        description="A short description of the error",
+        alias="errorReason")
+    secret_version_id: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=36)]] = Field(
+        default=None, description="The version ID of the password secret from the OPA vault.", alias="secretVersionId")
     sync_state: Optional[CredentialSyncState] = Field(default=None, alias="syncState")
-    sync_time: Optional[datetime] = Field(default=None, description="Timestamp when the credential was changed", alias="syncTime")
+    sync_time: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the credential was changed",
+        alias="syncTime")
     __properties: ClassVar[List[str]] = ["errorCode", "errorReason", "secretVersionId", "syncState", "syncTime"]
 
     model_config = ConfigDict(
@@ -106,4 +117,3 @@ class CredentialSyncInfo(BaseModel):
             "syncTime": obj.get("syncTime")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.enabled_status import EnabledStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LifecycleCreateSettingObject(BaseModel):
     """
     Determines whether to update a user in the app when a user in Okta is updated
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
@@ -90,4 +91,3 @@ class LifecycleCreateSettingObject(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

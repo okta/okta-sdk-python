@@ -30,10 +30,11 @@ from okta.models.user_factor_activate_response_links import UserFactorActivateRe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorActivateResponse(BaseModel):
     """
     UserFactorActivateResponse
-    """ # noqa: E501
+    """  # noqa: E501
     factor_type: Optional[StrictStr] = Field(default=None, description="Type of the factor", alias="factorType")
     links: Optional[UserFactorActivateResponseLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["factorType", "_links"]
@@ -45,7 +46,8 @@ class UserFactorActivateResponse(BaseModel):
             return value
 
         if value not in set(['call', 'email', 'sms', 'push', 'token:software:totp', 'u2f', 'webauthn']):
-            raise ValueError("must be one of enum values ('call', 'email', 'sms', 'push', 'token:software:totp', 'u2f', 'webauthn')")
+            raise ValueError(
+                "must be one of enum values ('call', 'email', 'sms', 'push', 'token:software:totp', 'u2f', 'webauthn')")
         return value
 
     model_config = ConfigDict(
@@ -109,4 +111,3 @@ class UserFactorActivateResponse(BaseModel):
             "_links": UserFactorActivateResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

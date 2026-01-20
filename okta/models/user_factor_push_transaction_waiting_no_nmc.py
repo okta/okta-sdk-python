@@ -32,10 +32,11 @@ from okta.models.user_factor_push_transaction_waiting_no_nmc_all_of_links import
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorPushTransactionWaitingNoNMC(UserFactorPushTransaction):
     """
     UserFactorPushTransactionWaitingNoNMC
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[UserFactorPushTransactionRejectedAllOfProfile] = None
     links: Optional[UserFactorPushTransactionWaitingNoNMCAllOfLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["factorResult", "profile", "_links"]
@@ -109,4 +110,3 @@ class UserFactorPushTransactionWaitingNoNMC(UserFactorPushTransaction):
             "_links": UserFactorPushTransactionWaitingNoNMCAllOfLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

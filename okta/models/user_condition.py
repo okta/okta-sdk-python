@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserCondition(BaseModel):
     """
     Specifies a set of users to be included or excluded
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[List[StrictStr]] = Field(default=None, description="Users to be excluded")
     include: Optional[List[StrictStr]] = Field(default=None, description="Users to be included")
     __properties: ClassVar[List[str]] = ["exclude", "include"]
@@ -91,4 +92,3 @@ class UserCondition(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

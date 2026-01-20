@@ -35,21 +35,24 @@ from okta.models.scheme_application_credentials import SchemeApplicationCredenti
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Org2OrgApplication(BaseModel):
     """
     Schema for the Okta Org2Org app (key name: `okta_org2org`)  To create an Org2Org app, use the [Create an Application](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication) request with the following parameters in the request body. > **Notes:** > * The Okta Org2Org (`okta_org2org`) app isn't available in Okta Integrator Free Plan orgs. If you need to test this feature in your Integrator Free Plan org, contact your Okta account team. > * The Okta Org2Org app supports `SAML_2_0` and `AUTO_LOGIN` sign-on modes. 
-    """ # noqa: E501
+    """  # noqa: E501
     accessibility: Optional[ApplicationAccessibility] = None
     credentials: Optional[SchemeApplicationCredentials] = None
     label: StrictStr = Field(description="User-defined display name for app")
     licensing: Optional[ApplicationLicensing] = None
     name: StrictStr
-    profile: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
+    profile: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
     sign_on_mode: Optional[StrictStr] = Field(default='SAML_2_0', alias="signOnMode")
     status: Optional[ApplicationLifecycleStatus] = None
     visibility: Optional[ApplicationVisibility] = None
     settings: Org2OrgApplicationSettings
-    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label", "licensing", "name", "profile", "signOnMode", "status", "visibility", "settings"]
+    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label",
+                                         "licensing", "name", "profile", "signOnMode", "status", "visibility", "settings"]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -165,4 +168,3 @@ class Org2OrgApplication(BaseModel):
             "settings": Org2OrgApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

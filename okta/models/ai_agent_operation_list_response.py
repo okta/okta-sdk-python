@@ -31,10 +31,11 @@ from okta.models.ai_agent_operation_response import AIAgentOperationResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AIAgentOperationListResponse(BaseModel):
     """
     AIAgentOperationListResponse
-    """ # noqa: E501
+    """  # noqa: E501
     data: Optional[List[AIAgentOperationResponse]] = None
     links: Optional[AIAgentOperationListResponseLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["data", "_links"]
@@ -107,4 +108,3 @@ class AIAgentOperationListResponse(BaseModel):
             "_links": AIAgentOperationListResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

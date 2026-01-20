@@ -30,15 +30,22 @@ from okta.models.application_group_assignment_links import ApplicationGroupAssig
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationGroupAssignment(BaseModel):
     """
     The Application Group object that defines a group of users' app-specific profile and credentials for an app
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="ID of the [group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/)")
+    """  # noqa: E501
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the [group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/)")
     last_updated: Optional[Any] = Field(default=None, alias="lastUpdated")
     priority: Optional[StrictInt] = Field(default=None, description="Priority assigned to the group. If an app has more than one group assigned to the same user, then the group with the higher priority has its profile applied to the [application user](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/ApplicationUsers/). If a priority value isn't specified, then the next highest priority is assigned by default. See [Assign attribute group priority](https://help.okta.com/okta_help.htm?type=oie&id=ext-usgp-app-group-priority) and the [sample priority use case](https://help.okta.com/okta_help.htm?type=oie&id=ext-usgp-combine-values-use).")
     profile: Optional[Dict[str, Any]] = Field(default=None, description="Specifies the profile properties applied to [application users](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/ApplicationUsers/) that are assigned to the app through group membership. Some reference properties are imported from the target app and can't be configured. See [profile](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response).")
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Embedded resource related to the Application Group using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. If the `expand=group` query parameter is specified, then the [group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) object is embedded. If the `expand=metadata` query parameter is specified, then the group assignment metadata is embedded.", alias="_embedded")
+    embedded: Optional[Dict[str,
+                            Dict[str,
+                                 Any]]] = Field(default=None,
+                                                description="Embedded resource related to the Application Group using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. If the `expand=group` query parameter is specified, then the [group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) object is embedded. If the `expand=metadata` query parameter is specified, then the group assignment metadata is embedded.",
+                                                alias="_embedded")
     links: Optional[ApplicationGroupAssignmentLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "lastUpdated", "priority", "profile", "_embedded", "_links"]
 
@@ -111,4 +118,3 @@ class ApplicationGroupAssignment(BaseModel):
             "_links": ApplicationGroupAssignmentLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

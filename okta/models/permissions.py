@@ -30,11 +30,13 @@ from okta.models.permission import Permission
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Permissions(BaseModel):
     """
     Permissions assigned to the role
-    """ # noqa: E501
-    permissions: Optional[List[Permission]] = Field(default=None, description="Array of permissions assigned to the role. See [Permissions](/openapi/okta-management/guides/permissions).")
+    """  # noqa: E501
+    permissions: Optional[List[Permission]] = Field(
+        default=None, description="Array of permissions assigned to the role. See [Permissions](/openapi/okta-management/guides/permissions).")
     __properties: ClassVar[List[str]] = ["permissions"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class Permissions(BaseModel):
             "permissions": [Permission.from_dict(_item) for _item in obj["permissions"]] if obj.get("permissions") is not None else None
         })
         return _obj
-

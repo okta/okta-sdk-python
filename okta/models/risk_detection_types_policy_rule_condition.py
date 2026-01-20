@@ -30,12 +30,15 @@ from okta.models.detected_risk_events import DetectedRiskEvents
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RiskDetectionTypesPolicyRuleCondition(BaseModel):
     """
     <x-lifecycle class=\"oie\"></x-lifecycle> An object that references detected risk events. This object can have an `include` parameter or an `exclude` parameter, but not both.
-    """ # noqa: E501
-    exclude: List[DetectedRiskEvents] = Field(description="An array of detected risk events to exclude in the entity policy rule")
-    include: List[DetectedRiskEvents] = Field(description="An array of detected risk events to include in the entity policy rule")
+    """  # noqa: E501
+    exclude: List[DetectedRiskEvents] = Field(
+        description="An array of detected risk events to exclude in the entity policy rule")
+    include: List[DetectedRiskEvents] = Field(
+        description="An array of detected risk events to include in the entity policy rule")
     __properties: ClassVar[List[str]] = ["exclude", "include"]
 
     model_config = ConfigDict(
@@ -92,4 +95,3 @@ class RiskDetectionTypesPolicyRuleCondition(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

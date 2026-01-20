@@ -31,10 +31,11 @@ from okta.models.application_credentials_username_template import ApplicationCre
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationCredentials(BaseModel):
     """
     Credentials for the specified `signOnMode`
-    """ # noqa: E501
+    """  # noqa: E501
     signing: Optional[ApplicationCredentialsSigning] = None
     user_name_template: Optional[ApplicationCredentialsUsernameTemplate] = Field(default=None, alias="userNameTemplate")
     __properties: ClassVar[List[str]] = ["signing", "userNameTemplate"]
@@ -107,4 +108,3 @@ class ApplicationCredentials(BaseModel):
             "userNameTemplate": ApplicationCredentialsUsernameTemplate.from_dict(obj["userNameTemplate"]) if obj.get("userNameTemplate") is not None else None
         })
         return _obj
-

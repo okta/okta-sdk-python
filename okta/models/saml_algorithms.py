@@ -31,10 +31,11 @@ from okta.models.saml_response_algorithm import SamlResponseAlgorithm
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlAlgorithms(BaseModel):
     """
     Settings for signing and verifying SAML messages
-    """ # noqa: E501
+    """  # noqa: E501
     request: Optional[SamlRequestAlgorithm] = None
     response: Optional[SamlResponseAlgorithm] = None
     __properties: ClassVar[List[str]] = ["request", "response"]
@@ -107,4 +108,3 @@ class SamlAlgorithms(BaseModel):
             "response": SamlResponseAlgorithm.from_dict(obj["response"]) if obj.get("response") is not None else None
         })
         return _obj
-

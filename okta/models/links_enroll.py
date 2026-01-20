@@ -30,10 +30,11 @@ from okta.models.links_enroll_enroll import LinksEnrollEnroll
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksEnroll(BaseModel):
     """
     LinksEnroll
-    """ # noqa: E501
+    """  # noqa: E501
     enroll: Optional[LinksEnrollEnroll] = None
     __properties: ClassVar[List[str]] = ["enroll"]
 
@@ -97,4 +98,3 @@ class LinksEnroll(BaseModel):
             "enroll": LinksEnrollEnroll.from_dict(obj["enroll"]) if obj.get("enroll") is not None else None
         })
         return _obj
-

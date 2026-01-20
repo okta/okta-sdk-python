@@ -32,10 +32,11 @@ from okta.models.links_verify_verify import LinksVerifyVerify
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorActivateResponseLinks(BaseModel):
     """
     UserFactorActivateResponseLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     user: Optional[LinksUserFactorsUser] = None
     verify: Optional[LinksVerifyVerify] = None
@@ -117,4 +118,3 @@ class UserFactorActivateResponseLinks(BaseModel):
             "verify": LinksVerifyVerify.from_dict(obj["verify"]) if obj.get("verify") is not None else None
         })
         return _obj
-

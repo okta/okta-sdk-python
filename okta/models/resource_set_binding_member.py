@@ -31,13 +31,17 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindingMember(BaseModel):
     """
     ResourceSetBindingMember
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the member was created")
     id: Optional[StrictStr] = Field(default=None, description="Role resource set binding member ID")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the member was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the member was last updated",
+        alias="lastUpdated")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "_links"]
 
@@ -110,4 +114,3 @@ class ResourceSetBindingMember(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

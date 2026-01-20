@@ -30,10 +30,11 @@ from okta.models.resource_conditions import ResourceConditions
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetResourcePutRequest(BaseModel):
     """
     ResourceSetResourcePutRequest
-    """ # noqa: E501
+    """  # noqa: E501
     conditions: Optional[ResourceConditions] = None
     __properties: ClassVar[List[str]] = ["conditions"]
 
@@ -97,4 +98,3 @@ class ResourceSetResourcePutRequest(BaseModel):
             "conditions": ResourceConditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None
         })
         return _obj
-

@@ -31,11 +31,13 @@ from okta.models.enrollment_policy_authenticator_grace_period import EnrollmentP
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicyAuthenticatorSettingsEnroll(BaseModel):
     """
     Enrollment requirements for the authenticator
-    """ # noqa: E501
-    var_self: Optional[AuthenticatorEnrollmentPolicyAuthenticatorStatus] = Field(default=AuthenticatorEnrollmentPolicyAuthenticatorStatus.NOT_ALLOWED, alias="self")
+    """  # noqa: E501
+    var_self: Optional[AuthenticatorEnrollmentPolicyAuthenticatorStatus] = Field(
+        default=AuthenticatorEnrollmentPolicyAuthenticatorStatus.NOT_ALLOWED, alias="self")
     grace_period: Optional[EnrollmentPolicyAuthenticatorGracePeriod] = Field(default=None, alias="gracePeriod")
     __properties: ClassVar[List[str]] = ["self", "gracePeriod"]
 
@@ -100,4 +102,3 @@ class AuthenticatorEnrollmentPolicyAuthenticatorSettingsEnroll(BaseModel):
             "gracePeriod": EnrollmentPolicyAuthenticatorGracePeriod.from_dict(obj["gracePeriod"]) if obj.get("gracePeriod") is not None else None
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PageRootLinks(BaseModel):
     """
     PageRootLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     default: Optional[HrefObject] = None
     customized: Optional[HrefObject] = None
@@ -125,4 +126,3 @@ class PageRootLinks(BaseModel):
             "preview": HrefObject.from_dict(obj["preview"]) if obj.get("preview") is not None else None
         })
         return _obj
-

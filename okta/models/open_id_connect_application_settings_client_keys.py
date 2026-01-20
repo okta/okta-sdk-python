@@ -30,10 +30,11 @@ from okta.models.list_jwk200_response_inner import ListJwk200ResponseInner
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OpenIdConnectApplicationSettingsClientKeys(BaseModel):
     """
     A [JSON Web Key Set](https://tools.ietf.org/html/rfc7517#section-5) for validating JWTs presented to Okta or for encrypting ID tokens minted by Okta for the client
-    """ # noqa: E501
+    """  # noqa: E501
     keys: Optional[List[ListJwk200ResponseInner]] = None
     __properties: ClassVar[List[str]] = ["keys"]
 
@@ -97,4 +98,3 @@ class OpenIdConnectApplicationSettingsClientKeys(BaseModel):
             "keys": [ListJwk200ResponseInner.from_dict(_item) for _item in obj["keys"]] if obj.get("keys") is not None else None
         })
         return _obj
-

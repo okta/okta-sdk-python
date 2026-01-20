@@ -33,21 +33,35 @@ from okta.models.well_known_app_authenticator_configuration_settings import Well
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownAppAuthenticatorConfiguration(BaseModel):
     """
     WellKnownAppAuthenticatorConfiguration
-    """ # noqa: E501
-    app_authenticator_enroll_endpoint: Optional[StrictStr] = Field(default=None, description="The authenticator enrollment endpoint", alias="appAuthenticatorEnrollEndpoint")
-    authenticator_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the app authenticator", alias="authenticatorId")
-    created_date: Optional[datetime] = Field(default=None, description="Timestamp when the authenticator was created", alias="createdDate")
+    """  # noqa: E501
+    app_authenticator_enroll_endpoint: Optional[StrictStr] = Field(
+        default=None,
+        description="The authenticator enrollment endpoint",
+        alias="appAuthenticatorEnrollEndpoint")
+    authenticator_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The unique identifier of the app authenticator",
+        alias="authenticatorId")
+    created_date: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the authenticator was created",
+        alias="createdDate")
     key: Optional[AuthenticatorKeyEnum] = None
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the authenticator was last modified", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the authenticator was last modified",
+        alias="lastUpdated")
     name: Optional[StrictStr] = Field(default=None, description="The authenticator display name")
     org_id: Optional[StrictStr] = Field(default=None, description="The `id` of the Okta Org", alias="orgId")
     settings: Optional[WellKnownAppAuthenticatorConfigurationSettings] = None
     supported_methods: Optional[List[SupportedMethods]] = Field(default=None, alias="supportedMethods")
     type: Optional[StrictStr] = Field(default=None, description="The type of authenticator")
-    __properties: ClassVar[List[str]] = ["appAuthenticatorEnrollEndpoint", "authenticatorId", "createdDate", "key", "lastUpdated", "name", "orgId", "settings", "supportedMethods", "type"]
+    __properties: ClassVar[List[str]] = ["appAuthenticatorEnrollEndpoint", "authenticatorId",
+                                         "createdDate", "key", "lastUpdated", "name", "orgId", "settings", "supportedMethods", "type"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -135,4 +149,3 @@ class WellKnownAppAuthenticatorConfiguration(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

@@ -35,20 +35,25 @@ from okta.models.standard_role_embedded import StandardRoleEmbedded
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StandardRole(BaseModel):
     """
     StandardRole
-    """ # noqa: E501
+    """  # noqa: E501
     assignment_type: Optional[RoleAssignmentType] = Field(default=None, alias="assignmentType")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     id: Optional[StrictStr] = Field(default=None, description="Role assignment ID")
     label: Optional[StrictStr] = Field(default=None, description="Label for the role assignment")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
     status: Optional[LifecycleStatus] = None
     type: RoleType
     embedded: Optional[StandardRoleEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[LinksAssignee] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["assignmentType", "created", "id", "label", "lastUpdated", "status", "type", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["assignmentType", "created", "id",
+                                         "label", "lastUpdated", "status", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -133,4 +138,3 @@ class StandardRole(BaseModel):
             "_links": LinksAssignee.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

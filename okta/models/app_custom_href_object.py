@@ -30,14 +30,17 @@ from okta.models.app_custom_href_object_hints import AppCustomHrefObjectHints
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppCustomHrefObject(BaseModel):
     """
     AppCustomHrefObject
-    """ # noqa: E501
+    """  # noqa: E501
     hints: Optional[AppCustomHrefObjectHints] = None
     href: StrictStr = Field(description="Link URI")
     title: Optional[StrictStr] = Field(default=None, description="Link name")
-    type: Optional[StrictStr] = Field(default=None, description="The media type of the link. If omitted, it is implicitly `application/json`.")
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="The media type of the link. If omitted, it is implicitly `application/json`.")
     __properties: ClassVar[List[str]] = ["hints", "href", "title", "type"]
 
     model_config = ConfigDict(
@@ -103,4 +106,3 @@ class AppCustomHrefObject(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

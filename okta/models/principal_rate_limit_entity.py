@@ -31,21 +31,43 @@ from okta.models.principal_type import PrincipalType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PrincipalRateLimitEntity(BaseModel):
     """
-    
-    """ # noqa: E501
-    created_by: Optional[StrictStr] = Field(default=None, description="The Okta user ID of the user who created the principle rate limit entity", alias="createdBy")
-    created_date: Optional[datetime] = Field(default=None, description="The date and time the principle rate limit entity was created", alias="createdDate")
-    default_concurrency_percentage: Optional[StrictInt] = Field(default=None, description="The default percentage of a given concurrency limit threshold that the owning principal can consume", alias="defaultConcurrencyPercentage")
-    default_percentage: Optional[StrictInt] = Field(default=None, description="The default percentage of a given rate limit threshold that the owning principal can consume", alias="defaultPercentage")
+
+    """  # noqa: E501
+    created_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The Okta user ID of the user who created the principle rate limit entity",
+        alias="createdBy")
+    created_date: Optional[datetime] = Field(
+        default=None,
+        description="The date and time the principle rate limit entity was created",
+        alias="createdDate")
+    default_concurrency_percentage: Optional[StrictInt] = Field(
+        default=None,
+        description="The default percentage of a given concurrency limit threshold that the owning principal can consume",
+        alias="defaultConcurrencyPercentage")
+    default_percentage: Optional[StrictInt] = Field(
+        default=None,
+        description="The default percentage of a given rate limit threshold that the owning principal can consume",
+        alias="defaultPercentage")
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the principle rate limit entity")
-    last_update: Optional[datetime] = Field(default=None, description="The date and time the principle rate limit entity was last updated", alias="lastUpdate")
-    last_updated_by: Optional[StrictStr] = Field(default=None, description="The Okta user ID of the user who last updated the principle rate limit entity", alias="lastUpdatedBy")
+    last_update: Optional[datetime] = Field(
+        default=None,
+        description="The date and time the principle rate limit entity was last updated",
+        alias="lastUpdate")
+    last_updated_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The Okta user ID of the user who last updated the principle rate limit entity",
+        alias="lastUpdatedBy")
     org_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Okta org", alias="orgId")
-    principal_id: StrictStr = Field(description="The unique identifier of the principal. This is the ID of the API token or OAuth 2.0 app.", alias="principalId")
+    principal_id: StrictStr = Field(
+        description="The unique identifier of the principal. This is the ID of the API token or OAuth 2.0 app.",
+        alias="principalId")
     principal_type: PrincipalType = Field(alias="principalType")
-    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "defaultConcurrencyPercentage", "defaultPercentage", "id", "lastUpdate", "lastUpdatedBy", "orgId", "principalId", "principalType"]
+    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "defaultConcurrencyPercentage",
+                                         "defaultPercentage", "id", "lastUpdate", "lastUpdatedBy", "orgId", "principalId", "principalType"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,4 +143,3 @@ class PrincipalRateLimitEntity(BaseModel):
             "principalType": obj.get("principalType")
         })
         return _obj
-

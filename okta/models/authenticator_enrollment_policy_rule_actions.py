@@ -30,10 +30,11 @@ from okta.models.authenticator_enrollment_policy_rule_action_enroll import Authe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicyRuleActions(BaseModel):
     """
     AuthenticatorEnrollmentPolicyRuleActions
-    """ # noqa: E501
+    """  # noqa: E501
     enroll: Optional[AuthenticatorEnrollmentPolicyRuleActionEnroll] = None
     __properties: ClassVar[List[str]] = ["enroll"]
 
@@ -97,4 +98,3 @@ class AuthenticatorEnrollmentPolicyRuleActions(BaseModel):
             "enroll": AuthenticatorEnrollmentPolicyRuleActionEnroll.from_dict(obj["enroll"]) if obj.get("enroll") is not None else None
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorTokenFactorVerificationObject(BaseModel):
     """
     UserFactorTokenFactorVerificationObject
-    """ # noqa: E501
+    """  # noqa: E501
     next_pass_code: Optional[StrictStr] = Field(default=None, description="OTP for the next time window", alias="nextPassCode")
     pass_code: Optional[StrictStr] = Field(default=None, description="OTP for the current time window", alias="passCode")
     __properties: ClassVar[List[str]] = ["nextPassCode", "passCode"]
@@ -91,4 +92,3 @@ class UserFactorTokenFactorVerificationObject(BaseModel):
             "passCode": obj.get("passCode")
         })
         return _obj
-

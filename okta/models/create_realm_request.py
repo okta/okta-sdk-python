@@ -30,10 +30,11 @@ from okta.models.realm_profile import RealmProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateRealmRequest(BaseModel):
     """
     CreateRealmRequest
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[RealmProfile] = None
     __properties: ClassVar[List[str]] = ["profile"]
 
@@ -97,4 +98,3 @@ class CreateRealmRequest(BaseModel):
             "profile": RealmProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

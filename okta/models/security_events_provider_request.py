@@ -31,13 +31,16 @@ from okta.models.security_events_provider_request_settings import SecurityEvents
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventsProviderRequest(BaseModel):
     """
     The request schema for creating or updating a Security Events Provider. The `settings` must match one of the schemas.
-    """ # noqa: E501
-    name: Annotated[str, Field(strict=True, max_length=100)] = Field(description="The name of the Security Events Provider instance")
+    """  # noqa: E501
+    name: Annotated[str, Field(strict=True, max_length=100)] = Field(
+        description="The name of the Security Events Provider instance")
     settings: SecurityEventsProviderRequestSettings
-    type: Annotated[str, Field(strict=True, max_length=255)] = Field(description="The application type of the Security Events Provider")
+    type: Annotated[str, Field(strict=True, max_length=255)] = Field(
+        description="The application type of the Security Events Provider")
     __properties: ClassVar[List[str]] = ["name", "settings", "type"]
 
     model_config = ConfigDict(
@@ -102,4 +105,3 @@ class SecurityEventsProviderRequest(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

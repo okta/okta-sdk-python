@@ -30,11 +30,13 @@ from okta.models.device_context_provider import DeviceContextProvider
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceSignalCollectionPolicyRuleDeviceSignalCollection(BaseModel):
     """
     Specifies how device context is collected when a user attempts to sign in
-    """ # noqa: E501
-    device_context_providers: Optional[List[DeviceContextProvider]] = Field(default=None, description="Contains the device context provider configuration", alias="deviceContextProviders")
+    """  # noqa: E501
+    device_context_providers: Optional[List[DeviceContextProvider]] = Field(
+        default=None, description="Contains the device context provider configuration", alias="deviceContextProviders")
     __properties: ClassVar[List[str]] = ["deviceContextProviders"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class DeviceSignalCollectionPolicyRuleDeviceSignalCollection(BaseModel):
             "deviceContextProviders": [DeviceContextProvider.from_dict(_item) for _item in obj["deviceContextProviders"]] if obj.get("deviceContextProviders") is not None else None
         })
         return _obj
-

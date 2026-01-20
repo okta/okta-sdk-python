@@ -30,12 +30,15 @@ from okta.models.ip_service_category import IPServiceCategory
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EnhancedDynamicNetworkZoneAllOfIpServiceCategories(BaseModel):
     """
     IP services, such as a proxy or VPN, to include or exclude for an Enhanced Dynamic Network Zone
-    """ # noqa: E501
-    include: Optional[List[IPServiceCategory]] = Field(default=None, description="IP services to include for an Enhanced Dynamic Network Zone")
-    exclude: Optional[List[IPServiceCategory]] = Field(default=None, description="IP services to exclude for an Enhanced Dynamic Network Zone")
+    """  # noqa: E501
+    include: Optional[List[IPServiceCategory]] = Field(default=None,
+                                                       description="IP services to include for an Enhanced Dynamic Network Zone")
+    exclude: Optional[List[IPServiceCategory]] = Field(default=None,
+                                                       description="IP services to exclude for an Enhanced Dynamic Network Zone")
     __properties: ClassVar[List[str]] = ["include", "exclude"]
 
     model_config = ConfigDict(
@@ -92,4 +95,3 @@ class EnhancedDynamicNetworkZoneAllOfIpServiceCategories(BaseModel):
             "exclude": obj.get("exclude")
         })
         return _obj
-

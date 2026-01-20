@@ -30,13 +30,15 @@ from okta.models.custom_authorization_server_links import CustomAuthorizationSer
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ManagedConnectionVaultedSecret(BaseModel):
     """
     Secret for the managed connection
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Optional description of the secret")
     name: StrictStr = Field(description="Display name of the secret")
-    orn: StrictStr = Field(description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the vaulted secret")
+    orn: StrictStr = Field(
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the vaulted secret")
     path: Optional[StrictStr] = Field(default=None, description="Secret path in Okta Privileged Access (OPA)")
     links: CustomAuthorizationServerLinks = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["description", "name", "orn", "path", "_links"]
@@ -105,4 +107,3 @@ class ManagedConnectionVaultedSecret(BaseModel):
             "_links": CustomAuthorizationServerLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

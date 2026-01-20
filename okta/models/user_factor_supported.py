@@ -33,16 +33,22 @@ from okta.models.user_factor_type import UserFactorType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorSupported(BaseModel):
     """
     UserFactorSupported
-    """ # noqa: E501
-    enrollment: Optional[StrictStr] = Field(default=None, description="Indicates if the factor is required for the specified user")
+    """  # noqa: E501
+    enrollment: Optional[StrictStr] = Field(default=None,
+                                            description="Indicates if the factor is required for the specified user")
     factor_type: Optional[UserFactorType] = Field(default=None, alias="factorType")
     provider: Optional[UserFactorProvider] = None
     status: Optional[UserFactorStatus] = None
-    vendor_name: Optional[StrictStr] = Field(default=None, description="Name of the factor vendor. This is usually the same as the provider except for On-Prem MFA, which depends on admin settings.", alias="vendorName")
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Embedded resources related to the factor", alias="_embedded")
+    vendor_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the factor vendor. This is usually the same as the provider except for On-Prem MFA, which depends on admin settings.",
+        alias="vendorName")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Embedded resources related to the factor", alias="_embedded")
     links: Optional[UserFactorLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["enrollment", "factorType", "provider", "status", "vendorName", "_embedded", "_links"]
 
@@ -126,4 +132,3 @@ class UserFactorSupported(BaseModel):
             "_links": UserFactorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -31,11 +31,15 @@ from okta.models.sspr_step_up_requirement import SsprStepUpRequirement
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SsprRequirement(BaseModel):
     """
     <x-lifecycle class=\"oie\"></x-lifecycle> Describes the initial and secondary authenticator requirements a user needs to reset their password
-    """ # noqa: E501
-    access_control: Optional[StrictStr] = Field(default=None, description="Determines which authentication requirements a user needs to perform self-service operations. `AUTH_POLICY` defers conditions and authentication requirements to the [Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/). `LEGACY` refers to the requirements described by this rule.", alias="accessControl")
+    """  # noqa: E501
+    access_control: Optional[StrictStr] = Field(
+        default=None,
+        description="Determines which authentication requirements a user needs to perform self-service operations. `AUTH_POLICY` defers conditions and authentication requirements to the [Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/). `LEGACY` refers to the requirements described by this rule.",
+        alias="accessControl")
     primary: Optional[SsprPrimaryRequirement] = None
     step_up: Optional[SsprStepUpRequirement] = Field(default=None, alias="stepUp")
     __properties: ClassVar[List[str]] = ["accessControl", "primary", "stepUp"]
@@ -119,4 +123,3 @@ class SsprRequirement(BaseModel):
             "stepUp": SsprStepUpRequirement.from_dict(obj["stepUp"]) if obj.get("stepUp") is not None else None
         })
         return _obj
-

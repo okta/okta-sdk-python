@@ -32,12 +32,19 @@ from okta.models.user_factor_verify_result import UserFactorVerifyResult
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorVerifyResponse(BaseModel):
     """
     UserFactorVerifyResponse
-    """ # noqa: E501
-    expires_at: Optional[datetime] = Field(default=None, description="Timestamp when the verification expires", alias="expiresAt")
-    factor_message: Optional[StrictStr] = Field(default=None, description="Optional display message for factor verification", alias="factorMessage")
+    """  # noqa: E501
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the verification expires",
+        alias="expiresAt")
+    factor_message: Optional[StrictStr] = Field(
+        default=None,
+        description="Optional display message for factor verification",
+        alias="factorMessage")
     factor_result: Optional[UserFactorVerifyResult] = Field(default=None, alias="factorResult")
     profile: Optional[Dict[str, Dict[str, Any]]] = None
     embedded: Optional[Dict[str, Optional[Dict[str, Any]]]] = Field(default=None, alias="_embedded")
@@ -120,4 +127,3 @@ class UserFactorVerifyResponse(BaseModel):
             "_links": UserFactorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

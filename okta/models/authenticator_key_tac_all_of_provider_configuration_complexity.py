@@ -29,13 +29,19 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyTacAllOfProviderConfigurationComplexity(BaseModel):
     """
     Define the complexity of the TAC
-    """ # noqa: E501
-    numbers: Optional[StrictBool] = Field(default=None, description="Use numbers in the TAC. `numbers` is always `true` for the TAC authenticator.")
+    """  # noqa: E501
+    numbers: Optional[StrictBool] = Field(
+        default=None,
+        description="Use numbers in the TAC. `numbers` is always `true` for the TAC authenticator.")
     letters: Optional[StrictBool] = Field(default=None, description="Use letters in the TAC")
-    special_characters: Optional[StrictBool] = Field(default=None, description="Use special characters in the TAC", alias="specialCharacters")
+    special_characters: Optional[StrictBool] = Field(
+        default=None,
+        description="Use special characters in the TAC",
+        alias="specialCharacters")
     __properties: ClassVar[List[str]] = ["numbers", "letters", "specialCharacters"]
 
     model_config = ConfigDict(
@@ -93,4 +99,3 @@ class AuthenticatorKeyTacAllOfProviderConfigurationComplexity(BaseModel):
             "specialCharacters": obj.get("specialCharacters")
         })
         return _obj
-

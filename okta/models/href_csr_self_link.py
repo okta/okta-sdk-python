@@ -30,10 +30,11 @@ from okta.models.csr_self_href_hints import CsrSelfHrefHints
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class HrefCsrSelfLink(BaseModel):
     """
     Link to the resource (self)
-    """ # noqa: E501
+    """  # noqa: E501
     hints: Optional[CsrSelfHrefHints] = None
     href: StrictStr = Field(description="Link URI")
     __properties: ClassVar[List[str]] = ["hints", "href"]
@@ -99,4 +100,3 @@ class HrefCsrSelfLink(BaseModel):
             "href": obj.get("href")
         })
         return _obj
-

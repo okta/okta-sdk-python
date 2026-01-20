@@ -14,7 +14,7 @@ from enum import Enum
 from datetime import datetime as dt
 from urllib.parse import urlsplit, urlunsplit
 
-from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH,\
+from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH, \
     EPOCH_YEAR
 
 

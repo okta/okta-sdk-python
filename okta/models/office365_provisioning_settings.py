@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Office365ProvisioningSettings(BaseModel):
     """
     Settings required for the Microsoft Office 365 provisioning connection
-    """ # noqa: E501
+    """  # noqa: E501
     admin_password: StrictStr = Field(description="Microsoft Office 365 global administrator password", alias="adminPassword")
     admin_username: StrictStr = Field(description="Microsoft Office 365 global administrator username", alias="adminUsername")
     __properties: ClassVar[List[str]] = ["adminPassword", "adminUsername"]
@@ -91,4 +92,3 @@ class Office365ProvisioningSettings(BaseModel):
             "adminUsername": obj.get("adminUsername")
         })
         return _obj
-

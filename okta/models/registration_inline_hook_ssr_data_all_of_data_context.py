@@ -30,10 +30,11 @@ from okta.models.inline_hook_request_object import InlineHookRequestObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationInlineHookSSRDataAllOfDataContext(BaseModel):
     """
     RegistrationInlineHookSSRDataAllOfDataContext
-    """ # noqa: E501
+    """  # noqa: E501
     request: Optional[InlineHookRequestObject] = None
     __properties: ClassVar[List[str]] = ["request"]
 
@@ -97,4 +98,3 @@ class RegistrationInlineHookSSRDataAllOfDataContext(BaseModel):
             "request": InlineHookRequestObject.from_dict(obj["request"]) if obj.get("request") is not None else None
         })
         return _obj
-

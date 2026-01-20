@@ -29,17 +29,17 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Union
 from okta.models.log_stream_type import LogStreamType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.log_stream_aws_put_schema import LogStreamAwsPutSchema
     from okta.models.log_stream_splunk_put_schema import LogStreamSplunkPutSchema
 
+
 class LogStreamPutSchema(BaseModel):
     """
     LogStreamPutSchema
-    """ # noqa: E501
+    """  # noqa: E501
     name: StrictStr = Field(description="Unique name for the log stream object")
     type: LogStreamType
     __properties: ClassVar[List[str]] = ["name", "type"]
@@ -55,7 +55,7 @@ class LogStreamPutSchema(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'aws_eventbridge': 'LogStreamAwsPutSchema','splunk_cloud_logstreaming': 'LogStreamSplunkPutSchema'
+        'aws_eventbridge': 'LogStreamAwsPutSchema', 'splunk_cloud_logstreaming': 'LogStreamSplunkPutSchema'
     }
 
     @classmethod
@@ -112,7 +112,5 @@ class LogStreamPutSchema(BaseModel):
             return import_module("okta.models.log_stream_splunk_put_schema").LogStreamSplunkPutSchema.from_dict(obj)
 
         raise ValueError("LogStreamPutSchema failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

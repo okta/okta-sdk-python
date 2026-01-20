@@ -30,13 +30,22 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorProfileTacResponsePost(BaseModel):
     """
     Defines the authenticator specific parameters
-    """ # noqa: E501
-    expires_at: Optional[datetime] = Field(default=None, description="The time when the TAC enrollment expires in the UTC timezone", alias="expiresAt")
-    multi_use: Optional[StrictBool] = Field(default=None, description="Determines whether an enrollment can be used more than once", alias="multiUse")
-    tac: Optional[StrictStr] = Field(default=None, description="A temporary access code used for authentication. It can be used one or more times and is valid for a defined period specified by the `ttl` property. The `tac` is returned in the response when the enrollment is created. It is not returned when the enrollment is retrieved. Issuing a new TAC invalidates any existing TAC for this user.")
+    """  # noqa: E501
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="The time when the TAC enrollment expires in the UTC timezone",
+        alias="expiresAt")
+    multi_use: Optional[StrictBool] = Field(
+        default=None,
+        description="Determines whether an enrollment can be used more than once",
+        alias="multiUse")
+    tac: Optional[StrictStr] = Field(
+        default=None,
+        description="A temporary access code used for authentication. It can be used one or more times and is valid for a defined period specified by the `ttl` property. The `tac` is returned in the response when the enrollment is created. It is not returned when the enrollment is retrieved. Issuing a new TAC invalidates any existing TAC for this user.")
     __properties: ClassVar[List[str]] = ["expiresAt", "multiUse", "tac"]
 
     model_config = ConfigDict(
@@ -94,4 +103,3 @@ class AuthenticatorProfileTacResponsePost(BaseModel):
             "tac": obj.get("tac")
         })
         return _obj
-

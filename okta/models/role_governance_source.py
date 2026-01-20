@@ -32,12 +32,16 @@ from okta.models.role_governance_source_links import RoleGovernanceSourceLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RoleGovernanceSource(BaseModel):
     """
     User role governance source
-    """ # noqa: E501
+    """  # noqa: E501
     bundle_id: Optional[StrictStr] = Field(default=None, description="`id` of the entitlement bundle", alias="bundleId")
-    expiration_date: Optional[datetime] = Field(default=None, description="The expiration date of the entitlement bundle", alias="expirationDate")
+    expiration_date: Optional[datetime] = Field(
+        default=None,
+        description="The expiration date of the entitlement bundle",
+        alias="expirationDate")
     grant_id: StrictStr = Field(description="`id` of the grant", alias="grantId")
     type: GovernanceSourceType
     links: Optional[RoleGovernanceSourceLinks] = Field(default=None, alias="_links")
@@ -113,4 +117,3 @@ class RoleGovernanceSource(BaseModel):
             "_links": RoleGovernanceSourceLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

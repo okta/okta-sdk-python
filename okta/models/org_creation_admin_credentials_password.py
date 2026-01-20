@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgCreationAdminCredentialsPassword(BaseModel):
     """
     Specifies a password for a user > **Note:** For information on defaults and configuring your password policies, see [Configure the password authenticator](https://help.okta.com/okta_help.htm?type=oie&id=ext-configure-password) in the help documentation.
-    """ # noqa: E501
+    """  # noqa: E501
     value: Optional[SecretStr] = Field(default=None, description="Password value (which is validated by the password policy)")
     __properties: ClassVar[List[str]] = ["value"]
 
@@ -89,4 +90,3 @@ class OrgCreationAdminCredentialsPassword(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

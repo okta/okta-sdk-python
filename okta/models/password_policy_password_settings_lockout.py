@@ -29,15 +29,27 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyPasswordSettingsLockout(BaseModel):
     """
     Lockout settings
-    """ # noqa: E501
-    auto_unlock_minutes: Optional[StrictInt] = Field(default=0, description="Specifies the time interval (in minutes) a locked account remains locked before it is automatically unlocked: `0` indicates no limit", alias="autoUnlockMinutes")
-    max_attempts: Optional[StrictInt] = Field(default=10, description="Specifies the number of times Users can attempt to sign in to their accounts with an invalid password before their accounts are locked: `0` indicates no limit", alias="maxAttempts")
-    show_lockout_failures: Optional[StrictBool] = Field(default=False, description="Indicates if the User should be informed when their account is locked", alias="showLockoutFailures")
-    user_lockout_notification_channels: Optional[List[StrictStr]] = Field(default=None, description="How the user is notified when their account becomes locked. The only acceptable values are `[]` and `['EMAIL']`.", alias="userLockoutNotificationChannels")
-    __properties: ClassVar[List[str]] = ["autoUnlockMinutes", "maxAttempts", "showLockoutFailures", "userLockoutNotificationChannels"]
+    """  # noqa: E501
+    auto_unlock_minutes: Optional[StrictInt] = Field(
+        default=0,
+        description="Specifies the time interval (in minutes) a locked account remains locked before it is automatically unlocked: `0` indicates no limit",
+        alias="autoUnlockMinutes")
+    max_attempts: Optional[StrictInt] = Field(
+        default=10,
+        description="Specifies the number of times Users can attempt to sign in to their accounts with an invalid password before their accounts are locked: `0` indicates no limit",
+        alias="maxAttempts")
+    show_lockout_failures: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates if the User should be informed when their account is locked",
+        alias="showLockoutFailures")
+    user_lockout_notification_channels: Optional[List[StrictStr]] = Field(
+        default=None, description="How the user is notified when their account becomes locked. The only acceptable values are `[]` and `['EMAIL']`.", alias="userLockoutNotificationChannels")
+    __properties: ClassVar[List[str]] = ["autoUnlockMinutes", "maxAttempts",
+                                         "showLockoutFailures", "userLockoutNotificationChannels"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,4 +107,3 @@ class PasswordPolicyPasswordSettingsLockout(BaseModel):
             "userLockoutNotificationChannels": obj.get("userLockoutNotificationChannels")
         })
         return _obj
-

@@ -32,10 +32,11 @@ from okta.models.href_object_user_link import HrefObjectUserLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksAppAndUser(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This object is used for dynamic discovery of resources related to the application user.
-    """ # noqa: E501
+    """  # noqa: E501
     app: Optional[HrefObjectAppLink] = None
     group: Optional[HrefObjectGroupLink] = None
     user: Optional[HrefObjectUserLink] = None
@@ -117,4 +118,3 @@ class LinksAppAndUser(BaseModel):
             "user": HrefObjectUserLink.from_dict(obj["user"]) if obj.get("user") is not None else None
         })
         return _obj
-

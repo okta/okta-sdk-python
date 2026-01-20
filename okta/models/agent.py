@@ -33,14 +33,25 @@ from okta.models.operational_status import OperationalStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Agent(BaseModel):
     """
     Agent details
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the agent that's generated during installation")
-    is_hidden: Optional[StrictBool] = Field(default=None, description="Determines if an agent is hidden from the Admin Console", alias="isHidden")
-    is_latest_g_aed_version: Optional[StrictBool] = Field(default=None, description="Determines if the agent is on the latest generally available version", alias="isLatestGAedVersion")
-    last_connection: Optional[StrictInt] = Field(default=None, description="Unix timestamp in milliseconds when the agent last connected to Okta", alias="lastConnection")
+    """  # noqa: E501
+    id: Optional[StrictStr] = Field(default=None,
+                                    description="Unique identifier for the agent that's generated during installation")
+    is_hidden: Optional[StrictBool] = Field(
+        default=None,
+        description="Determines if an agent is hidden from the Admin Console",
+        alias="isHidden")
+    is_latest_g_aed_version: Optional[StrictBool] = Field(
+        default=None,
+        description="Determines if the agent is on the latest generally available version",
+        alias="isLatestGAedVersion")
+    last_connection: Optional[StrictInt] = Field(
+        default=None,
+        description="Unix timestamp in milliseconds when the agent last connected to Okta",
+        alias="lastConnection")
     name: Optional[StrictStr] = Field(default=None, description="Agent name")
     operational_status: Optional[OperationalStatus] = Field(default=None, alias="operationalStatus")
     pool_id: Optional[StrictStr] = Field(default=None, description="Pool ID", alias="poolId")
@@ -49,7 +60,8 @@ class Agent(BaseModel):
     update_status: Optional[AgentUpdateInstanceStatus] = Field(default=None, alias="updateStatus")
     version: Optional[StrictStr] = Field(default=None, description="Agent version number")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["id", "isHidden", "isLatestGAedVersion", "lastConnection", "name", "operationalStatus", "poolId", "type", "updateMessage", "updateStatus", "version", "_links"]
+    __properties: ClassVar[List[str]] = ["id", "isHidden", "isLatestGAedVersion", "lastConnection",
+                                         "name", "operationalStatus", "poolId", "type", "updateMessage", "updateStatus", "version", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -124,4 +136,3 @@ class Agent(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

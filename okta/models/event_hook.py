@@ -34,22 +34,30 @@ from okta.models.event_subscriptions import EventSubscriptions
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EventHook(BaseModel):
     """
     EventHook
-    """ # noqa: E501
+    """  # noqa: E501
     channel: EventHookChannel
     created: Optional[datetime] = Field(default=None, description="Timestamp of the event hook creation")
-    created_by: Optional[StrictStr] = Field(default=None, description="The ID of the user who created the event hook", alias="createdBy")
+    created_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the user who created the event hook",
+        alias="createdBy")
     description: Optional[StrictStr] = Field(default=None, description="Description of the event hook")
     events: EventSubscriptions
     id: Optional[StrictStr] = Field(default=None, description="Unique key for the event hook")
-    last_updated: Optional[datetime] = Field(default=None, description="Date of the last event hook update", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Date of the last event hook update",
+        alias="lastUpdated")
     name: StrictStr = Field(description="Display name for the event hook")
     status: Optional[StrictStr] = Field(default=None, description="Status of the event hook")
     verification_status: Optional[EventHookVerificationStatus] = Field(default=None, alias="verificationStatus")
     links: Optional[EventHookLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["channel", "created", "createdBy", "description", "events", "id", "lastUpdated", "name", "status", "verificationStatus", "_links"]
+    __properties: ClassVar[List[str]] = ["channel", "created", "createdBy", "description",
+                                         "events", "id", "lastUpdated", "name", "status", "verificationStatus", "_links"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -160,4 +168,3 @@ class EventHook(BaseModel):
             "_links": EventHookLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

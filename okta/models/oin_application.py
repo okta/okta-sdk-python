@@ -34,20 +34,23 @@ from okta.models.scheme_application_credentials import SchemeApplicationCredenti
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OINApplication(BaseModel):
     """
     OINApplication
-    """ # noqa: E501
+    """  # noqa: E501
     accessibility: Optional[ApplicationAccessibility] = None
     credentials: Optional[SchemeApplicationCredentials] = None
     label: Optional[StrictStr] = Field(default=None, description="User-defined display name for app")
     licensing: Optional[ApplicationLicensing] = None
     name: Optional[StrictStr] = Field(default=None, description="The key name for the OIN app definition")
-    profile: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
+    profile: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
     sign_on_mode: Optional[StrictStr] = Field(default=None, description="Authentication mode for the app", alias="signOnMode")
     status: Optional[ApplicationLifecycleStatus] = None
     visibility: Optional[ApplicationVisibility] = None
-    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label", "licensing", "name", "profile", "signOnMode", "status", "visibility"]
+    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label",
+                                         "licensing", "name", "profile", "signOnMode", "status", "visibility"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -138,4 +141,3 @@ class OINApplication(BaseModel):
             "visibility": ApplicationVisibility.from_dict(obj["visibility"]) if obj.get("visibility") is not None else None
         })
         return _obj
-

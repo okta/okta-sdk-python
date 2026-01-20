@@ -32,10 +32,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BundleEntitlementsResponseLinks(BaseModel):
     """
     BundleEntitlementsResponseLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     next: Optional[HrefObjectNextLink] = None
     bundle: Optional[BundleLink] = None
@@ -117,4 +118,3 @@ class BundleEntitlementsResponseLinks(BaseModel):
             "bundle": BundleLink.from_dict(obj["bundle"]) if obj.get("bundle") is not None else None
         })
         return _obj
-

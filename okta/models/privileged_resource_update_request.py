@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PrivilegedResourceUpdateRequest(BaseModel):
     """
     Update request for a privileged resource
-    """ # noqa: E501
-    profile: Optional[Dict[str, Any]] = Field(default=None, description="Specific profile properties for the privileged resource")
-    user_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, description="The username associated with the privileged resource", alias="userName")
+    """  # noqa: E501
+    profile: Optional[Dict[str, Any]] = Field(
+        default=None, description="Specific profile properties for the privileged resource")
+    user_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(
+        default=None, description="The username associated with the privileged resource", alias="userName")
     __properties: ClassVar[List[str]] = ["profile", "userName"]
 
     model_config = ConfigDict(
@@ -94,4 +97,3 @@ class PrivilegedResourceUpdateRequest(BaseModel):
             "userName": obj.get("userName")
         })
         return _obj
-

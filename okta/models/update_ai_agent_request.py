@@ -30,11 +30,15 @@ from okta.models.ai_agent_profile import AIAgentProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UpdateAIAgentRequest(BaseModel):
     """
     UpdateAIAgentRequest
-    """ # noqa: E501
-    app_id: Optional[StrictStr] = Field(default=None, description="The ID of the connected app for the AI agent", alias="appId")
+    """  # noqa: E501
+    app_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the connected app for the AI agent",
+        alias="appId")
     profile: Optional[AIAgentProfile] = None
     __properties: ClassVar[List[str]] = ["appId", "profile"]
 
@@ -99,4 +103,3 @@ class UpdateAIAgentRequest(BaseModel):
             "profile": AIAgentProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

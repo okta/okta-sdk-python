@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerPolicyRuleUserCondition(BaseModel):
     """
     Specifies a set of Users to be included
-    """ # noqa: E501
+    """  # noqa: E501
     include: Optional[List[StrictStr]] = Field(default=None, description="Users to be included")
     __properties: ClassVar[List[str]] = ["include"]
 
@@ -89,4 +90,3 @@ class AuthorizationServerPolicyRuleUserCondition(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

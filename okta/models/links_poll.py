@@ -30,10 +30,11 @@ from okta.models.links_poll_poll import LinksPollPoll
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksPoll(BaseModel):
     """
     LinksPoll
-    """ # noqa: E501
+    """  # noqa: E501
     poll: Optional[LinksPollPoll] = None
     __properties: ClassVar[List[str]] = ["poll"]
 
@@ -97,4 +98,3 @@ class LinksPoll(BaseModel):
             "poll": LinksPollPoll.from_dict(obj["poll"]) if obj.get("poll") is not None else None
         })
         return _obj
-

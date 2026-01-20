@@ -31,11 +31,13 @@ from okta.models.identity_source_user_profile_for_upsert import IdentitySourceUs
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BulkUpsertRequestBodyProfilesInner(BaseModel):
     """
     BulkUpsertRequestBodyProfilesInner
-    """ # noqa: E501
-    external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(default=None, description="The external ID of the entity that needs to be created or updated in Okta", alias="externalId")
+    """  # noqa: E501
+    external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
+        default=None, description="The external ID of the entity that needs to be created or updated in Okta", alias="externalId")
     profile: Optional[IdentitySourceUserProfileForUpsert] = None
     __properties: ClassVar[List[str]] = ["externalId", "profile"]
 
@@ -100,4 +102,3 @@ class BulkUpsertRequestBodyProfilesInner(BaseModel):
             "profile": IdentitySourceUserProfileForUpsert.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

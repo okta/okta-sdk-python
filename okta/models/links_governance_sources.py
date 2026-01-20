@@ -31,10 +31,11 @@ from okta.models.href_object_user_link import HrefObjectUserLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksGovernanceSources(BaseModel):
     """
     Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the sources using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification.
-    """ # noqa: E501
+    """  # noqa: E501
     assignee: Optional[HrefObjectUserLink] = None
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     __properties: ClassVar[List[str]] = ["assignee", "self"]
@@ -107,4 +108,3 @@ class LinksGovernanceSources(BaseModel):
             "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None
         })
         return _obj
-

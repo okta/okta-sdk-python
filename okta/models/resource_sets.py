@@ -31,10 +31,11 @@ from okta.models.resource_set import ResourceSet
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSets(BaseModel):
     """
     ResourceSets
-    """ # noqa: E501
+    """  # noqa: E501
     resource_sets: Optional[List[ResourceSet]] = Field(default=None, alias="resource-sets")
     links: Optional[LinksNext] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["resource-sets", "_links"]
@@ -107,4 +108,3 @@ class ResourceSets(BaseModel):
             "_links": LinksNext.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

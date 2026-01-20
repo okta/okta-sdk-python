@@ -35,21 +35,24 @@ from okta.models.zscalerbyz_application_settings import ZscalerbyzApplicationSet
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ZscalerbyzApplication(BaseModel):
     """
     Schema for the Zscaler 2.0 app (key name: `zscalerbyz`)  To create a Zscaler 2.0 app, use the [Create an Application](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication) request with the following parameters in the request body. > **Note:** The Zscaler 2.0 app only supports `BROWSER_PLUGIN` and `SAML_2_0` sign-on modes. 
-    """ # noqa: E501
+    """  # noqa: E501
     accessibility: Optional[ApplicationAccessibility] = None
     credentials: Optional[SchemeApplicationCredentials] = None
     label: StrictStr = Field(description="User-defined display name for app")
     licensing: Optional[ApplicationLicensing] = None
     name: StrictStr
-    profile: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
+    profile: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
     sign_on_mode: Optional[StrictStr] = Field(default=None, alias="signOnMode")
     status: Optional[ApplicationLifecycleStatus] = None
     visibility: Optional[ApplicationVisibility] = None
     settings: ZscalerbyzApplicationSettings
-    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label", "licensing", "name", "profile", "signOnMode", "status", "visibility", "settings"]
+    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label",
+                                         "licensing", "name", "profile", "signOnMode", "status", "visibility", "settings"]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -165,4 +168,3 @@ class ZscalerbyzApplication(BaseModel):
             "settings": ZscalerbyzApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

@@ -32,10 +32,11 @@ from okta.models.security_event_subject import SecurityEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CaepDeviceComplianceChangeEvent(BaseModel):
     """
     The subject's device compliance was revoked
-    """ # noqa: E501
+    """  # noqa: E501
     current_status: StrictStr = Field(description="Current device compliance status")
     event_timestamp: StrictInt = Field(description="The time of the event (UNIX timestamp)")
     initiating_entity: Optional[StrictStr] = Field(default=None, description="The entity that initiated the event")
@@ -43,7 +44,8 @@ class CaepDeviceComplianceChangeEvent(BaseModel):
     reason_admin: Optional[CaepDeviceComplianceChangeEventReasonAdmin] = None
     reason_user: Optional[CaepDeviceComplianceChangeEventReasonUser] = None
     subject: SecurityEventSubject
-    __properties: ClassVar[List[str]] = ["current_status", "event_timestamp", "initiating_entity", "previous_status", "reason_admin", "reason_user", "subject"]
+    __properties: ClassVar[List[str]] = ["current_status", "event_timestamp",
+                                         "initiating_entity", "previous_status", "reason_admin", "reason_user", "subject"]
 
     @field_validator('current_status')
     def current_status_validate_enum(cls, value):
@@ -149,4 +151,3 @@ class CaepDeviceComplianceChangeEvent(BaseModel):
             "subject": SecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

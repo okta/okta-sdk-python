@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActionsAssignUserToRealm(BaseModel):
     """
     Action that assigns a user to a realm
-    """ # noqa: E501
+    """  # noqa: E501
     realm_id: Optional[StrictStr] = Field(default=None, description="ID of the realm", alias="realmId")
     __properties: ClassVar[List[str]] = ["realmId"]
 
@@ -89,4 +90,3 @@ class RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActio
             "realmId": obj.get("realmId")
         })
         return _obj
-

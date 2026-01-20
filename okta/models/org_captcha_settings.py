@@ -31,12 +31,17 @@ from okta.models.org_captcha_settings_links import OrgCAPTCHASettingsLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgCAPTCHASettings(BaseModel):
     """
-    
-    """ # noqa: E501
-    captcha_id: Optional[StrictStr] = Field(default=None, description="The unique key of the associated CAPTCHA instance", alias="captchaId")
-    enabled_pages: Optional[List[EnabledPagesType]] = Field(default=None, description="An array of pages that have CAPTCHA enabled", alias="enabledPages")
+
+    """  # noqa: E501
+    captcha_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The unique key of the associated CAPTCHA instance",
+        alias="captchaId")
+    enabled_pages: Optional[List[EnabledPagesType]] = Field(
+        default=None, description="An array of pages that have CAPTCHA enabled", alias="enabledPages")
     links: Optional[OrgCAPTCHASettingsLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["captchaId", "enabledPages", "_links"]
 
@@ -102,4 +107,3 @@ class OrgCAPTCHASettings(BaseModel):
             "_links": OrgCAPTCHASettingsLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

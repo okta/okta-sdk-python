@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DevicePostureChecksRemediationSettingsLink(BaseModel):
     """
     DevicePostureChecksRemediationSettingsLink
-    """ # noqa: E501
-    default_url: Optional[StrictStr] = Field(default=None, description="Default URL for the link. This property is only relevant if type is set to `BUILTIN`. If type is set to `CUSTOM`, this field is ignored.", alias="defaultUrl")
+    """  # noqa: E501
+    default_url: Optional[StrictStr] = Field(
+        default=None,
+        description="Default URL for the link. This property is only relevant if type is set to `BUILTIN`. If type is set to `CUSTOM`, this field is ignored.",
+        alias="defaultUrl")
     custom_url: Optional[StrictStr] = Field(default=None, description="Custom URL for the link", alias="customUrl")
     __properties: ClassVar[List[str]] = ["defaultUrl", "customUrl"]
 
@@ -91,4 +95,3 @@ class DevicePostureChecksRemediationSettingsLink(BaseModel):
             "customUrl": obj.get("customUrl")
         })
         return _obj
-

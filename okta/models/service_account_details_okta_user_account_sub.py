@@ -30,10 +30,11 @@ from okta.models.okta_user_service_account_credentials import OktaUserServiceAcc
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ServiceAccountDetailsOktaUserAccountSub(BaseModel):
     """
     Details for managing an Okta user as a service account
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[OktaUserServiceAccountCredentials] = None
     email: Optional[StrictStr] = Field(default=None, description="The email address for the Okta user")
     okta_user_id: StrictStr = Field(description="The ID of the Okta user to manage as a service account", alias="oktaUserId")
@@ -103,4 +104,3 @@ class ServiceAccountDetailsOktaUserAccountSub(BaseModel):
             "oktaUserId": obj.get("oktaUserId")
         })
         return _obj
-

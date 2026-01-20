@@ -29,14 +29,24 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlAttributeStatementGroup(BaseModel):
     """
     `GROUP` attribute statements
-    """ # noqa: E501
-    filter_type: Optional[StrictStr] = Field(default=None, description="The operation to filter groups based on `filterValue`", alias="filterType")
-    filter_value: Optional[StrictStr] = Field(default=None, description="Filter the groups based on a specific value.", alias="filterValue")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the group attribute in your app. The attribute name must be unique across all user and group attribute statements.")
-    namespace: Optional[StrictStr] = Field(default=None, description="The name format of the group attribute. Supported values:")
+    """  # noqa: E501
+    filter_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The operation to filter groups based on `filterValue`",
+        alias="filterType")
+    filter_value: Optional[StrictStr] = Field(
+        default=None,
+        description="Filter the groups based on a specific value.",
+        alias="filterValue")
+    name: Optional[StrictStr] = Field(
+        default=None,
+        description="The name of the group attribute in your app. The attribute name must be unique across all user and group attribute statements.")
+    namespace: Optional[StrictStr] = Field(default=None,
+                                           description="The name format of the group attribute. Supported values:")
     type: Optional[StrictStr] = Field(default=None, description="The type of attribute statements object")
     __properties: ClassVar[List[str]] = ["filterType", "filterValue", "name", "namespace", "type"]
 
@@ -56,8 +66,10 @@ class SamlAttributeStatementGroup(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['urn:oasis:names:tc:SAML:2.0:attrname-format:basic', 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified']):
-            raise ValueError("must be one of enum values ('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified')")
+        if value not in set(['urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+                            'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified']):
+            raise ValueError(
+                "must be one of enum values ('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified')")
         return value
 
     @field_validator('type')
@@ -127,4 +139,3 @@ class SamlAttributeStatementGroup(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

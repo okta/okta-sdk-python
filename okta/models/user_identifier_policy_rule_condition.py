@@ -31,11 +31,14 @@ from okta.models.user_identifier_type import UserIdentifierType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserIdentifierPolicyRuleCondition(BaseModel):
     """
     Specifies a user identifier condition to match on
-    """ # noqa: E501
-    attribute: Optional[StrictStr] = Field(default=None, description="The name of the profile attribute to match against. Only used when type is `ATTRIBUTE`.")
+    """  # noqa: E501
+    attribute: Optional[StrictStr] = Field(
+        default=None,
+        description="The name of the profile attribute to match against. Only used when type is `ATTRIBUTE`.")
     patterns: List[UserIdentifierConditionEvaluatorPattern]
     type: UserIdentifierType
     __properties: ClassVar[List[str]] = ["attribute", "patterns", "type"]
@@ -102,4 +105,3 @@ class UserIdentifierPolicyRuleCondition(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BaseTokenTokenLifetime(BaseModel):
     """
     Lifetime of the token
-    """ # noqa: E501
+    """  # noqa: E501
     expiration: Optional[StrictInt] = Field(default=None, description="Time in seconds until the token expires")
     __properties: ClassVar[List[str]] = ["expiration"]
 
@@ -89,4 +90,3 @@ class BaseTokenTokenLifetime(BaseModel):
             "expiration": obj.get("expiration")
         })
         return _obj
-

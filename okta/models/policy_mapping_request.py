@@ -30,11 +30,15 @@ from okta.models.policy_mapping_resource_type import PolicyMappingResourceType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyMappingRequest(BaseModel):
     """
     PolicyMappingRequest
-    """ # noqa: E501
-    resource_id: Optional[StrictStr] = Field(default=None, description="[Policy ID](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/listPolicies!c=200&path=0/id&t=response) of the app sign-in policy that you want to map", alias="resourceId")
+    """  # noqa: E501
+    resource_id: Optional[StrictStr] = Field(
+        default=None,
+        description="[Policy ID](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/listPolicies!c=200&path=0/id&t=response) of the app sign-in policy that you want to map",
+        alias="resourceId")
     resource_type: Optional[PolicyMappingResourceType] = Field(default=None, alias="resourceType")
     __properties: ClassVar[List[str]] = ["resourceId", "resourceType"]
 
@@ -92,4 +96,3 @@ class PolicyMappingRequest(BaseModel):
             "resourceType": obj.get("resourceType")
         })
         return _obj
-

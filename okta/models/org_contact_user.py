@@ -30,10 +30,11 @@ from okta.models.org_contact_user_links import OrgContactUserLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgContactUser(BaseModel):
     """
     OrgContactUser
-    """ # noqa: E501
+    """  # noqa: E501
     user_id: Optional[StrictStr] = Field(default=None, description="Contact user ID", alias="userId")
     links: Optional[OrgContactUserLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["userId", "_links"]
@@ -99,4 +100,3 @@ class OrgContactUser(BaseModel):
             "_links": OrgContactUserLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

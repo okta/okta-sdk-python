@@ -27,14 +27,14 @@ import json
 from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List
 from okta.models.action_provider import ActionProvider
-from okta.models.action_provider_payload_type import ActionProviderPayloadType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class WorkflowActionProvider(ActionProvider):
     """
     WorkflowActionProvider
-    """ # noqa: E501
+    """  # noqa: E501
     __properties: ClassVar[List[str]] = ["externalId", "type", "url"]
 
     model_config = ConfigDict(
@@ -92,4 +92,3 @@ class WorkflowActionProvider(ActionProvider):
             "url": obj.get("url")
         })
         return _obj
-

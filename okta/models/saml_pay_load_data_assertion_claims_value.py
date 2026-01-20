@@ -31,12 +31,14 @@ from okta.models.saml_pay_load_data_assertion_claims_value_attributes import SAM
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionClaimsValue(BaseModel):
     """
     SAMLPayLoadDataAssertionClaimsValue
-    """ # noqa: E501
+    """  # noqa: E501
     attributes: Optional[SAMLPayLoadDataAssertionClaimsValueAttributes] = None
-    attribute_values: Optional[List[SAMLPayLoadDataAssertionClaimsValueAttributeValuesInner]] = Field(default=None, alias="attributeValues")
+    attribute_values: Optional[List[SAMLPayLoadDataAssertionClaimsValueAttributeValuesInner]
+                               ] = Field(default=None, alias="attributeValues")
     __properties: ClassVar[List[str]] = ["attributes", "attributeValues"]
 
     model_config = ConfigDict(
@@ -107,4 +109,3 @@ class SAMLPayLoadDataAssertionClaimsValue(BaseModel):
             "attributeValues": [SAMLPayLoadDataAssertionClaimsValueAttributeValuesInner.from_dict(_item) for _item in obj["attributeValues"]] if obj.get("attributeValues") is not None else None
         })
         return _obj
-

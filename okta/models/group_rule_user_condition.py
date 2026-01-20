@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupRuleUserCondition(BaseModel):
     """
     Defines conditions specific to user exclusion
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[List[StrictStr]] = Field(default=None, description="Excluded `userIds` when processing rules")
     __properties: ClassVar[List[str]] = ["exclude"]
 
@@ -89,4 +90,3 @@ class GroupRuleUserCondition(BaseModel):
             "exclude": obj.get("exclude")
         })
         return _obj
-

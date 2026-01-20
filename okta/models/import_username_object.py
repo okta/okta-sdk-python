@@ -29,12 +29,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ImportUsernameObject(BaseModel):
     """
     Determines the Okta username for the imported user
-    """ # noqa: E501
-    user_name_expression: Optional[StrictStr] = Field(default=None, description="For `usernameFormat=CUSTOM`, specifies the Okta Expression Language statement for a username format that imported users use to sign in to Okta", alias="userNameExpression")
-    username_format: StrictStr = Field(description="Determines the username format when users sign in to Okta", alias="usernameFormat")
+    """  # noqa: E501
+    user_name_expression: Optional[StrictStr] = Field(
+        default=None,
+        description="For `usernameFormat=CUSTOM`, specifies the Okta Expression Language statement for a username format that imported users use to sign in to Okta",
+        alias="userNameExpression")
+    username_format: StrictStr = Field(
+        description="Determines the username format when users sign in to Okta",
+        alias="usernameFormat")
     __properties: ClassVar[List[str]] = ["userNameExpression", "usernameFormat"]
 
     @field_validator('username_format')
@@ -98,4 +104,3 @@ class ImportUsernameObject(BaseModel):
             "usernameFormat": obj.get("usernameFormat") if obj.get("usernameFormat") is not None else 'EMAIL'
         })
         return _obj
-

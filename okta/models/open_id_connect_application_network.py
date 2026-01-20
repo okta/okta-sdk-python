@@ -29,13 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OpenIdConnectApplicationNetwork(BaseModel):
     """
     The network restrictions of the client
-    """ # noqa: E501
+    """  # noqa: E501
     connection: StrictStr = Field(description="The connection type of the network. Can be `ANYWHERE` or `ZONE`. ")
-    exclude: Optional[List[StrictStr]] = Field(default=None, description="If `ZONE` is specified as a connection, then specify the excluded IP network zones here. Value can be \"ALL_IP_ZONES\" or an array of zone IDs.")
-    include: Optional[List[StrictStr]] = Field(default=None, description="If `ZONE` is specified as a connection, then specify the included IP network zones here. Value can be \"ALL_IP_ZONES\" or an array of zone IDs.")
+    exclude: Optional[List[StrictStr]] = Field(
+        default=None, description="If `ZONE` is specified as a connection, then specify the excluded IP network zones here. Value can be \"ALL_IP_ZONES\" or an array of zone IDs.")
+    include: Optional[List[StrictStr]] = Field(
+        default=None, description="If `ZONE` is specified as a connection, then specify the included IP network zones here. Value can be \"ALL_IP_ZONES\" or an array of zone IDs.")
     __properties: ClassVar[List[str]] = ["connection", "exclude", "include"]
 
     @field_validator('connection')
@@ -100,4 +103,3 @@ class OpenIdConnectApplicationNetwork(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

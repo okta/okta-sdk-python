@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClaimConditions(BaseModel):
     """
     Specifies the scopes for the Claim
-    """ # noqa: E501
+    """  # noqa: E501
     scopes: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["scopes"]
 
@@ -89,4 +90,3 @@ class OAuth2ClaimConditions(BaseModel):
             "scopes": obj.get("scopes")
         })
         return _obj
-

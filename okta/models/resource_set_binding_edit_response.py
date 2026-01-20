@@ -30,10 +30,11 @@ from okta.models.resource_set_binding_edit_response_links import ResourceSetBind
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindingEditResponse(BaseModel):
     """
     ResourceSetBindingEditResponse
-    """ # noqa: E501
+    """  # noqa: E501
     links: Optional[ResourceSetBindingEditResponseLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["_links"]
 
@@ -97,4 +98,3 @@ class ResourceSetBindingEditResponse(BaseModel):
             "_links": ResourceSetBindingEditResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupCondition(BaseModel):
     """
     Specifies a set of groups whose users are to be included or excluded
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[List[StrictStr]] = Field(default=None, description="Groups to be excluded")
     include: Optional[List[StrictStr]] = Field(default=None, description="Groups to be included")
     __properties: ClassVar[List[str]] = ["exclude", "include"]
@@ -91,4 +92,3 @@ class GroupCondition(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

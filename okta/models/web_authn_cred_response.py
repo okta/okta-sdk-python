@@ -29,12 +29,19 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WebAuthnCredResponse(BaseModel):
     """
     Credential response object for enrolled credential details, along with enrollment and key identifiers to associate the credential
-    """ # noqa: E501
-    authenticator_enrollment_id: Optional[StrictStr] = Field(default=None, description="ID for a WebAuthn preregistration factor in Okta", alias="authenticatorEnrollmentId")
-    cred_response_jwe: Optional[StrictStr] = Field(default=None, description="Encrypted JSON Web Encryption (JWE) of the credential response from the fulfillment provider", alias="credResponseJwe")
+    """  # noqa: E501
+    authenticator_enrollment_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID for a WebAuthn preregistration factor in Okta",
+        alias="authenticatorEnrollmentId")
+    cred_response_jwe: Optional[StrictStr] = Field(
+        default=None,
+        description="Encrypted JSON Web Encryption (JWE) of the credential response from the fulfillment provider",
+        alias="credResponseJwe")
     __properties: ClassVar[List[str]] = ["authenticatorEnrollmentId", "credResponseJwe"]
 
     model_config = ConfigDict(
@@ -91,4 +98,3 @@ class WebAuthnCredResponse(BaseModel):
             "credResponseJwe": obj.get("credResponseJwe")
         })
         return _obj
-

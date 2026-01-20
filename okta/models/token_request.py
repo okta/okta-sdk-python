@@ -30,19 +30,36 @@ from okta.models.token_pay_load_data import TokenPayLoadData
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenRequest(BaseModel):
     """
     Token inline hook request
-    """ # noqa: E501
-    cloud_event_version: Optional[StrictStr] = Field(default=None, description="The inline hook cloud version", alias="cloudEventVersion")
-    content_type: Optional[StrictStr] = Field(default=None, description="The inline hook request header content", alias="contentType")
+    """  # noqa: E501
+    cloud_event_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook cloud version",
+        alias="cloudEventVersion")
+    content_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook request header content",
+        alias="contentType")
     event_id: Optional[StrictStr] = Field(default=None, description="The individual inline hook request ID", alias="eventId")
-    event_time: Optional[StrictStr] = Field(default=None, description="The time the inline hook request was sent", alias="eventTime")
-    event_type_version: Optional[StrictStr] = Field(default=None, description="The inline hook version", alias="eventTypeVersion")
+    event_time: Optional[StrictStr] = Field(
+        default=None,
+        description="The time the inline hook request was sent",
+        alias="eventTime")
+    event_type_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The inline hook version",
+        alias="eventTypeVersion")
     data: Optional[TokenPayLoadData] = None
-    event_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook. The token inline hook type is `com.okta.oauth2.tokens.transform`.", alias="eventType")
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook. The token inline hook type is `com.okta.oauth2.tokens.transform`.",
+        alias="eventType")
     source: Optional[StrictStr] = Field(default=None, description="The URL of the token inline hook")
-    __properties: ClassVar[List[str]] = ["cloudEventVersion", "contentType", "eventId", "eventTime", "eventTypeVersion", "data", "eventType", "source"]
+    __properties: ClassVar[List[str]] = ["cloudEventVersion", "contentType",
+                                         "eventId", "eventTime", "eventTypeVersion", "data", "eventType", "source"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,4 +128,3 @@ class TokenRequest(BaseModel):
             "source": obj.get("source")
         })
         return _obj
-

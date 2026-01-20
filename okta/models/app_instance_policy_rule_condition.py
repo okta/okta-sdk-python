@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppInstancePolicyRuleCondition(BaseModel):
     """
     AppInstancePolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[List[StrictStr]] = None
     include: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["exclude", "include"]
@@ -91,4 +92,3 @@ class AppInstancePolicyRuleCondition(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

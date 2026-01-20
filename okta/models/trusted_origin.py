@@ -34,21 +34,34 @@ from okta.models.trusted_origin_scope import TrustedOriginScope
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TrustedOrigin(BaseModel):
     """
     TrustedOrigin
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the trusted origin was created")
-    created_by: Optional[StrictStr] = Field(default=None, description="The ID of the user who created the trusted origin", alias="createdBy")
+    created_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the user who created the trusted origin",
+        alias="createdBy")
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the trusted origin")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the trusted origin was last updated", alias="lastUpdated")
-    last_updated_by: Optional[StrictStr] = Field(default=None, description="The ID of the user who last updated the trusted origin", alias="lastUpdatedBy")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the trusted origin was last updated",
+        alias="lastUpdated")
+    last_updated_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the user who last updated the trusted origin",
+        alias="lastUpdatedBy")
     name: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Unique name for the trusted origin")
-    origin: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Unique origin URL for the trusted origin. The supported schemes for this attribute are HTTP, HTTPS, FTP, Ionic 2, and Capacitor.")
-    scopes: Optional[List[TrustedOriginScope]] = Field(default=None, description="Array of scope types that this trusted origin is used for")
+    origin: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="Unique origin URL for the trusted origin. The supported schemes for this attribute are HTTP, HTTPS, FTP, Ionic 2, and Capacitor.")
+    scopes: Optional[List[TrustedOriginScope]] = Field(default=None,
+                                                       description="Array of scope types that this trusted origin is used for")
     status: Optional[LifecycleStatus] = None
     links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "createdBy", "id", "lastUpdated", "lastUpdatedBy", "name", "origin", "scopes", "status", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "createdBy", "id", "lastUpdated",
+                                         "lastUpdatedBy", "name", "origin", "scopes", "status", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -132,4 +145,3 @@ class TrustedOrigin(BaseModel):
             "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

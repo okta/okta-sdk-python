@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserLifecycleAttributePolicyRuleCondition(BaseModel):
     """
     UserLifecycleAttributePolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     attribute_name: Optional[StrictStr] = Field(default=None, alias="attributeName")
     matching_value: Optional[StrictStr] = Field(default=None, alias="matchingValue")
     __properties: ClassVar[List[str]] = ["attributeName", "matchingValue"]
@@ -91,4 +92,3 @@ class UserLifecycleAttributePolicyRuleCondition(BaseModel):
             "matchingValue": obj.get("matchingValue")
         })
         return _obj
-

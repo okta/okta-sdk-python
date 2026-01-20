@@ -31,12 +31,16 @@ from okta.models.organizational_unit import OrganizationalUnit
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PrivilegedResourceFilters(BaseModel):
     """
     PrivilegedResourceFilters
-    """ # noqa: E501
-    app_groups: Optional[List[AppGroup]] = Field(default=None, description="Array of app groups whose members might be privileged app users", alias="appGroups")
-    organizational_units: Optional[List[OrganizationalUnit]] = Field(default=None, description="Array of organizational units where privileged app users are present", alias="organizationalUnits")
+    """  # noqa: E501
+    app_groups: Optional[List[AppGroup]] = Field(default=None,
+                                                 description="Array of app groups whose members might be privileged app users",
+                                                 alias="appGroups")
+    organizational_units: Optional[List[OrganizationalUnit]] = Field(
+        default=None, description="Array of organizational units where privileged app users are present", alias="organizationalUnits")
     __properties: ClassVar[List[str]] = ["appGroups", "organizationalUnits"]
 
     model_config = ConfigDict(
@@ -107,4 +111,3 @@ class PrivilegedResourceFilters(BaseModel):
             "organizationalUnits": [OrganizationalUnit.from_dict(_item) for _item in obj["organizationalUnits"]] if obj.get("organizationalUnits") is not None else None
         })
         return _obj
-

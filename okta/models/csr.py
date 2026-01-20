@@ -31,10 +31,11 @@ from okta.models.csr_links import CSRLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Csr(BaseModel):
     """
     Csr
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     csr: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
@@ -114,4 +115,3 @@ class Csr(BaseModel):
             "_links": CSRLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

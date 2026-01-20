@@ -31,10 +31,11 @@ from okta.models.okta_support_access_status import OktaSupportAccessStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaSupportCaseImpersonation(BaseModel):
     """
     Allows the Okta Support team to sign in to your org as an admin and troubleshoot issues
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[OktaSupportAccessStatus] = None
     expiration: Optional[datetime] = Field(default=None, description="Expiration date of Okta Support access")
     __properties: ClassVar[List[str]] = ["status", "expiration"]
@@ -98,4 +99,3 @@ class OktaSupportCaseImpersonation(BaseModel):
             "expiration": obj.get("expiration")
         })
         return _obj
-

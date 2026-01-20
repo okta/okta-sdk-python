@@ -35,11 +35,15 @@ from okta.models.o_auth2_claim_value_type import OAuth2ClaimValueType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2Claim(BaseModel):
     """
     OAuth2Claim
-    """ # noqa: E501
-    always_include_in_token: Optional[StrictBool] = Field(default=None, description="Specifies whether to include Claims in the token. The value is always `TRUE` for access token Claims. If the value is set to `FALSE` for an ID token claim, the Claim isn't included in the ID token when the token is requested with the access token or with the `authorization_code`. The client instead uses the access token to get Claims from the `/userinfo` endpoint.", alias="alwaysIncludeInToken")
+    """  # noqa: E501
+    always_include_in_token: Optional[StrictBool] = Field(
+        default=None,
+        description="Specifies whether to include Claims in the token. The value is always `TRUE` for access token Claims. If the value is set to `FALSE` for an ID token claim, the Claim isn't included in the ID token when the token is requested with the access token or with the `authorization_code`. The client instead uses the access token to get Claims from the `/userinfo` endpoint.",
+        alias="alwaysIncludeInToken")
     claim_type: Optional[OAuth2ClaimType] = Field(default=None, alias="claimType")
     conditions: Optional[OAuth2ClaimConditions] = None
     group_filter_type: Optional[OAuth2ClaimGroupFilterType] = None
@@ -47,10 +51,13 @@ class OAuth2Claim(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="Name of the Claim")
     status: Optional[LifecycleStatus] = None
     system: Optional[StrictBool] = Field(default=None, description="When `true`, indicates that Okta created the Claim")
-    value: Optional[StrictStr] = Field(default=None, description="Specifies the value of the Claim. This value must be a string literal if `valueType` is `GROUPS`, and the string literal is matched with the selected `group_filter_type`. The value must be an Okta EL expression if `valueType` is `EXPRESSION`.")
+    value: Optional[StrictStr] = Field(
+        default=None,
+        description="Specifies the value of the Claim. This value must be a string literal if `valueType` is `GROUPS`, and the string literal is matched with the selected `group_filter_type`. The value must be an Okta EL expression if `valueType` is `EXPRESSION`.")
     value_type: Optional[OAuth2ClaimValueType] = Field(default=None, alias="valueType")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["alwaysIncludeInToken", "claimType", "conditions", "group_filter_type", "id", "name", "status", "system", "value", "valueType", "_links"]
+    __properties: ClassVar[List[str]] = ["alwaysIncludeInToken", "claimType", "conditions",
+                                         "group_filter_type", "id", "name", "status", "system", "value", "valueType", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -131,4 +138,3 @@ class OAuth2Claim(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

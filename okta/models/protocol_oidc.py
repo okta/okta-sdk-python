@@ -33,18 +33,21 @@ from okta.models.oidc_settings import OidcSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProtocolOidc(BaseModel):
     """
     Protocol settings for authentication using the [OpenID Connect Protocol](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth)
-    """ # noqa: E501
+    """  # noqa: E501
     algorithms: Optional[OidcAlgorithms] = None
     credentials: Optional[OAuthCredentials] = None
     endpoints: Optional[OAuthEndpoints] = None
     okta_idp_org_url: Optional[StrictStr] = Field(default=None, description="URL of the IdP org", alias="oktaIdpOrgUrl")
-    scopes: Optional[List[StrictStr]] = Field(default=None, description="OpenID Connect and IdP-defined permission bundles to request delegated access from the user > **Note:** The [IdP type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request) table lists the scopes that are supported for each IdP.")
+    scopes: Optional[List[StrictStr]] = Field(
+        default=None, description="OpenID Connect and IdP-defined permission bundles to request delegated access from the user > **Note:** The [IdP type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request) table lists the scopes that are supported for each IdP.")
     settings: Optional[OidcSettings] = None
     type: Optional[StrictStr] = Field(default=None, description="OpenID Connect Authorization Code flow")
-    __properties: ClassVar[List[str]] = ["algorithms", "credentials", "endpoints", "oktaIdpOrgUrl", "scopes", "settings", "type"]
+    __properties: ClassVar[List[str]] = ["algorithms", "credentials",
+                                         "endpoints", "oktaIdpOrgUrl", "scopes", "settings", "type"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -143,4 +146,3 @@ class ProtocolOidc(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

@@ -31,11 +31,13 @@ from okta.models.well_known_uris_root_embedded_assetlinks_json import WellKnownU
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownURIsRootEmbedded(BaseModel):
     """
     WellKnownURIsRootEmbedded
-    """ # noqa: E501
-    apple_app_site_association: Optional[WellKnownURIsRootEmbeddedAppleAppSiteAssociation] = Field(default=None, alias="apple-app-site-association")
+    """  # noqa: E501
+    apple_app_site_association: Optional[WellKnownURIsRootEmbeddedAppleAppSiteAssociation] = Field(
+        default=None, alias="apple-app-site-association")
     assetlinks_json: Optional[WellKnownURIsRootEmbeddedAssetlinksJson] = Field(default=None, alias="assetlinks.json")
     webauthn: Optional[WellKnownURIsRootEmbeddedAppleAppSiteAssociation] = None
     __properties: ClassVar[List[str]] = ["apple-app-site-association", "assetlinks.json", "webauthn"]
@@ -116,4 +118,3 @@ class WellKnownURIsRootEmbedded(BaseModel):
             "webauthn": WellKnownURIsRootEmbeddedAppleAppSiteAssociation.from_dict(obj["webauthn"]) if obj.get("webauthn") is not None else None
         })
         return _obj
-

@@ -30,13 +30,17 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppleClientSigning(BaseModel):
     """
     Information used to generate the secret JSON Web Token for the token requests to Apple IdP > **Note:** The `privateKey` property is required for a CREATE request. For an UPDATE request, it can be null and keeps the existing value if it's null. The `privateKey` property isn't returned for LIST and GET requests or UPDATE requests if it's null.
-    """ # noqa: E501
-    kid: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="The key ID that you obtained from Apple when you created the private key for the client")
-    private_key: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="The PKCS \\#8 encoded private key that you created for the client and downloaded from Apple", alias="privateKey")
-    team_id: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="The Team ID associated with your Apple developer account", alias="teamId")
+    """  # noqa: E501
+    kid: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="The key ID that you obtained from Apple when you created the private key for the client")
+    private_key: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="The PKCS \\#8 encoded private key that you created for the client and downloaded from Apple", alias="privateKey")
+    team_id: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="The Team ID associated with your Apple developer account", alias="teamId")
     __properties: ClassVar[List[str]] = ["kid", "privateKey", "teamId"]
 
     model_config = ConfigDict(
@@ -94,4 +98,3 @@ class AppleClientSigning(BaseModel):
             "teamId": obj.get("teamId")
         })
         return _obj
-

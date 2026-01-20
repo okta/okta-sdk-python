@@ -30,12 +30,17 @@ from okta.models.fulfillment_data_order_details import FulfillmentDataOrderDetai
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FulfillmentRequest(BaseModel):
     """
     Fulfillment request
-    """ # noqa: E501
-    fulfillment_data: Optional[List[FulfillmentDataOrderDetails]] = Field(default=None, description="List of fulfillment order details", alias="fulfillmentData")
-    fulfillment_provider: Optional[StrictStr] = Field(default=None, description="Name of the fulfillment provider for the WebAuthn preregistration factor", alias="fulfillmentProvider")
+    """  # noqa: E501
+    fulfillment_data: Optional[List[FulfillmentDataOrderDetails]] = Field(
+        default=None, description="List of fulfillment order details", alias="fulfillmentData")
+    fulfillment_provider: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the fulfillment provider for the WebAuthn preregistration factor",
+        alias="fulfillmentProvider")
     user_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Okta user", alias="userId")
     __properties: ClassVar[List[str]] = ["fulfillmentData", "fulfillmentProvider", "userId"]
 
@@ -111,4 +116,3 @@ class FulfillmentRequest(BaseModel):
             "userId": obj.get("userId")
         })
         return _obj
-

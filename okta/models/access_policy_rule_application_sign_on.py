@@ -32,10 +32,11 @@ from okta.models.verification_method import VerificationMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AccessPolicyRuleApplicationSignOn(BaseModel):
     """
     Specifies the results when a user attempts to sign in
-    """ # noqa: E501
+    """  # noqa: E501
     access: Optional[AccessPolicyRuleApplicationSignOnAccess] = None
     keep_me_signed_in: Optional[KeepMeSignedIn] = Field(default=None, alias="keepMeSignedIn")
     verification_method: Optional[VerificationMethod] = Field(default=None, alias="verificationMethod")
@@ -110,4 +111,3 @@ class AccessPolicyRuleApplicationSignOn(BaseModel):
             "verificationMethod": VerificationMethod.from_dict(obj["verificationMethod"]) if obj.get("verificationMethod") is not None else None
         })
         return _obj
-

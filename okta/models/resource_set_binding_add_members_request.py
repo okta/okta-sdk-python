@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindingAddMembersRequest(BaseModel):
     """
     ResourceSetBindingAddMembersRequest
-    """ # noqa: E501
-    additions: Optional[List[StrictStr]] = Field(default=None, description="A list of member resources to add to the role resource set binding")
+    """  # noqa: E501
+    additions: Optional[List[StrictStr]] = Field(
+        default=None, description="A list of member resources to add to the role resource set binding")
     __properties: ClassVar[List[str]] = ["additions"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class ResourceSetBindingAddMembersRequest(BaseModel):
             "additions": obj.get("additions")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OperationResponse(BaseModel):
     """
     OperationResponse
-    """ # noqa: E501
+    """  # noqa: E501
     completed: Optional[datetime] = Field(default=None, description="Timestamp of when the operation completed")
     created: datetime = Field(description="Timestamp of when the operation was created")
     id: StrictStr = Field(description="ID of the asynchronous operation")
@@ -107,4 +108,3 @@ class OperationResponse(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

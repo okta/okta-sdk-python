@@ -29,12 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AttestationRootCertificatesResponseInner(BaseModel):
     """
     AttestationRootCertificatesResponseInner
-    """ # noqa: E501
+    """  # noqa: E501
     x5c: Optional[StrictStr] = Field(default=None, description="X.509 certificate chain")
-    x5t_s256: Optional[StrictStr] = Field(default=None, description="SHA-256 hash (thumbprint) of the X.509 certificate", alias="x5t#S256")
+    x5t_s256: Optional[StrictStr] = Field(
+        default=None,
+        description="SHA-256 hash (thumbprint) of the X.509 certificate",
+        alias="x5t#S256")
     iss: Optional[StrictStr] = Field(default=None, description="Issuer of certificate")
     exp: Optional[StrictStr] = Field(default=None, description="Expiry date of certificate")
     __properties: ClassVar[List[str]] = ["x5c", "x5t#S256", "iss", "exp"]
@@ -95,4 +99,3 @@ class AttestationRootCertificatesResponseInner(BaseModel):
             "exp": obj.get("exp")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.disk_encryption_type_android import DiskEncryptionTypeAndroid
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(BaseModel):
     """
     DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType
-    """ # noqa: E501
+    """  # noqa: E501
     include: Optional[List[DiskEncryptionTypeAndroid]] = None
     __properties: ClassVar[List[str]] = ["include"]
 
@@ -90,4 +91,3 @@ class DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

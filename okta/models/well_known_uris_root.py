@@ -31,10 +31,11 @@ from okta.models.well_known_uris_root_links import WellKnownURIsRootLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownURIsRoot(BaseModel):
     """
     WellKnownURIsRoot
-    """ # noqa: E501
+    """  # noqa: E501
     embedded: Optional[WellKnownURIsRootEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[WellKnownURIsRootLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["_embedded", "_links"]
@@ -107,4 +108,3 @@ class WellKnownURIsRoot(BaseModel):
             "_links": WellKnownURIsRootLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

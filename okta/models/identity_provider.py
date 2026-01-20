@@ -38,22 +38,28 @@ from okta.models.lifecycle_status import LifecycleStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityProvider(BaseModel):
     """
     IdentityProvider
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     id: Optional[StrictStr] = Field(default=None, description="Unique key for the IdP")
     issuer_mode: Optional[IdentityProviderIssuerMode] = Field(default=IdentityProviderIssuerMode.DYNAMIC, alias="issuerMode")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
-    name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="Unique name for the IdP")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
+    name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
+        default=None, description="Unique name for the IdP")
     policy: Optional[IdentityProviderPolicy] = None
     properties: Optional[IdentityProviderProperties] = None
     protocol: Optional[IdentityProviderProtocol] = None
     status: Optional[LifecycleStatus] = None
     type: Optional[IdentityProviderType] = None
     links: Optional[IdentityProviderLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "id", "issuerMode", "lastUpdated", "name", "policy", "properties", "protocol", "status", "type", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "id", "issuerMode", "lastUpdated",
+                                         "name", "policy", "properties", "protocol", "status", "type", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -157,4 +163,3 @@ class IdentityProvider(BaseModel):
             "_links": IdentityProviderLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

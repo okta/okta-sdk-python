@@ -31,15 +31,19 @@ from okta.models.user_import_request_data_context_job import UserImportRequestDa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportRequestDataContext(BaseModel):
     """
     UserImportRequestDataContext
-    """ # noqa: E501
-    conflicts: Optional[List[Dict[str, Any]]] = Field(default=None, description="An array of user profile attributes that are in conflict")
+    """  # noqa: E501
+    conflicts: Optional[List[Dict[str, Any]]] = Field(
+        default=None, description="An array of user profile attributes that are in conflict")
     application: Optional[UserImportRequestDataContextApplication] = None
     job: Optional[UserImportRequestDataContextJob] = None
-    matches: Optional[List[Dict[str, Any]]] = Field(default=None, description="The list of Okta users currently matched to the app user based on import matching. There can be more than one match.")
-    policy: Optional[List[Dict[str, Any]]] = Field(default=None, description="The list of any policies that apply to the import matching")
+    matches: Optional[List[Dict[str, Any]]] = Field(
+        default=None, description="The list of Okta users currently matched to the app user based on import matching. There can be more than one match.")
+    policy: Optional[List[Dict[str, Any]]] = Field(
+        default=None, description="The list of any policies that apply to the import matching")
     __properties: ClassVar[List[str]] = ["conflicts", "application", "job", "matches", "policy"]
 
     model_config = ConfigDict(
@@ -113,4 +117,3 @@ class UserImportRequestDataContext(BaseModel):
             "policy": obj.get("policy")
         })
         return _obj
-

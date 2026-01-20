@@ -29,14 +29,27 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Saml11ApplicationSettingsSignOn(BaseModel):
     """
     SAML 1.1 sign-on mode attributes
-    """ # noqa: E501
-    audience_override: Optional[StrictStr] = Field(default=None, description="The intended audience of the SAML assertion. This is usually the Entity ID of your application.", alias="audienceOverride")
-    default_relay_state: Optional[StrictStr] = Field(default=None, description="The URL of the resource to direct users after they successfully sign in to the SP using SAML. See the SP documentation to check if you need to specify a RelayState. In most instances, you can leave this field blank.", alias="defaultRelayState")
-    recipient_override: Optional[StrictStr] = Field(default=None, description="The location where the application can present the SAML assertion. This is usually the Single Sign-On (SSO) URL.", alias="recipientOverride")
-    sso_acs_url_override: Optional[StrictStr] = Field(default=None, description="Assertion Consumer Services (ACS) URL value for the Service Provider (SP). This URL is always used for Identity Provider (IdP) initiated sign-on requests.", alias="ssoAcsUrlOverride")
+    """  # noqa: E501
+    audience_override: Optional[StrictStr] = Field(
+        default=None,
+        description="The intended audience of the SAML assertion. This is usually the Entity ID of your application.",
+        alias="audienceOverride")
+    default_relay_state: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL of the resource to direct users after they successfully sign in to the SP using SAML. See the SP documentation to check if you need to specify a RelayState. In most instances, you can leave this field blank.",
+        alias="defaultRelayState")
+    recipient_override: Optional[StrictStr] = Field(
+        default=None,
+        description="The location where the application can present the SAML assertion. This is usually the Single Sign-On (SSO) URL.",
+        alias="recipientOverride")
+    sso_acs_url_override: Optional[StrictStr] = Field(
+        default=None,
+        description="Assertion Consumer Services (ACS) URL value for the Service Provider (SP). This URL is always used for Identity Provider (IdP) initiated sign-on requests.",
+        alias="ssoAcsUrlOverride")
     __properties: ClassVar[List[str]] = ["audienceOverride", "defaultRelayState", "recipientOverride", "ssoAcsUrlOverride"]
 
     model_config = ConfigDict(
@@ -95,4 +108,3 @@ class Saml11ApplicationSettingsSignOn(BaseModel):
             "ssoAcsUrlOverride": obj.get("ssoAcsUrlOverride")
         })
         return _obj
-

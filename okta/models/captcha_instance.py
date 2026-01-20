@@ -31,14 +31,21 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CAPTCHAInstance(BaseModel):
     """
-    
-    """ # noqa: E501
+
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The unique key for the CAPTCHA instance")
     name: Optional[StrictStr] = Field(default=None, description="The name of the CAPTCHA instance")
-    secret_key: Optional[StrictStr] = Field(default=None, description="The secret key issued from the CAPTCHA provider to perform server-side validation for a CAPTCHA token", alias="secretKey")
-    site_key: Optional[StrictStr] = Field(default=None, description="The site key issued from the CAPTCHA provider to render a CAPTCHA on a page", alias="siteKey")
+    secret_key: Optional[StrictStr] = Field(
+        default=None,
+        description="The secret key issued from the CAPTCHA provider to perform server-side validation for a CAPTCHA token",
+        alias="secretKey")
+    site_key: Optional[StrictStr] = Field(
+        default=None,
+        description="The site key issued from the CAPTCHA provider to render a CAPTCHA on a page",
+        alias="siteKey")
     type: Optional[CAPTCHAType] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "name", "secretKey", "siteKey", "type", "_links"]
@@ -110,4 +117,3 @@ class CAPTCHAInstance(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

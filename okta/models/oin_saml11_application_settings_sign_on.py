@@ -29,14 +29,27 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OINSaml11ApplicationSettingsSignOn(BaseModel):
     """
     Contains SAML 1.1 sign-on mode attributes
-    """ # noqa: E501
-    audience_override: Optional[StrictStr] = Field(default=None, description="Audience override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).", alias="audienceOverride")
-    default_relay_state: Optional[StrictStr] = Field(default=None, description="Identifies a specific application resource in an IdP-initiated SSO scenario", alias="defaultRelayState")
-    recipient_override: Optional[StrictStr] = Field(default=None, description="Recipient override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).", alias="recipientOverride")
-    sso_acs_url_override: Optional[StrictStr] = Field(default=None, description="Assertion Consumer Service (ACS) URL override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).", alias="ssoAcsUrlOverride")
+    """  # noqa: E501
+    audience_override: Optional[StrictStr] = Field(
+        default=None,
+        description="Audience override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="audienceOverride")
+    default_relay_state: Optional[StrictStr] = Field(
+        default=None,
+        description="Identifies a specific application resource in an IdP-initiated SSO scenario",
+        alias="defaultRelayState")
+    recipient_override: Optional[StrictStr] = Field(
+        default=None,
+        description="Recipient override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="recipientOverride")
+    sso_acs_url_override: Optional[StrictStr] = Field(
+        default=None,
+        description="Assertion Consumer Service (ACS) URL override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="ssoAcsUrlOverride")
     __properties: ClassVar[List[str]] = ["audienceOverride", "defaultRelayState", "recipientOverride", "ssoAcsUrlOverride"]
 
     model_config = ConfigDict(
@@ -95,4 +108,3 @@ class OINSaml11ApplicationSettingsSignOn(BaseModel):
             "ssoAcsUrlOverride": obj.get("ssoAcsUrlOverride")
         })
         return _obj
-

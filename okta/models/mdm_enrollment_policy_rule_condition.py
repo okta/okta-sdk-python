@@ -30,10 +30,11 @@ from okta.models.mdm_enrollment_policy_enrollment import MDMEnrollmentPolicyEnro
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class MDMEnrollmentPolicyRuleCondition(BaseModel):
     """
     MDMEnrollmentPolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     block_non_safe_android: Optional[StrictBool] = Field(default=None, alias="blockNonSafeAndroid")
     enrollment: Optional[MDMEnrollmentPolicyEnrollment] = None
     __properties: ClassVar[List[str]] = ["blockNonSafeAndroid", "enrollment"]
@@ -92,4 +93,3 @@ class MDMEnrollmentPolicyRuleCondition(BaseModel):
             "enrollment": obj.get("enrollment")
         })
         return _obj
-

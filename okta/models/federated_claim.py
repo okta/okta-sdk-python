@@ -29,14 +29,19 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FederatedClaim(BaseModel):
     """
     FederatedClaim
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[StrictStr] = Field(default=None, description="Timestamp when the federated claim was created")
-    expression: Optional[StrictStr] = Field(default=None, description="The Okta Expression Language expression to be evaluated at runtime")
+    expression: Optional[StrictStr] = Field(default=None,
+                                            description="The Okta Expression Language expression to be evaluated at runtime")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the federated claim")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp when the federated claim was updated", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the federated claim was updated",
+        alias="lastUpdated")
     name: Optional[StrictStr] = Field(default=None, description="The name of the claim to be used in the produced token")
     __properties: ClassVar[List[str]] = ["created", "expression", "id", "lastUpdated", "name"]
 
@@ -103,4 +108,3 @@ class FederatedClaim(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

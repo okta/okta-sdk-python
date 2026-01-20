@@ -31,21 +31,37 @@ from okta.models.session_identity_provider import SessionIdentityProvider
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BaseContextSession(BaseModel):
     """
     Details of the user session
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the user's session")
     user_id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the user", alias="userId")
-    login: Optional[StrictStr] = Field(default=None, description="The username used to identify the user. This is often the user's email address.")
-    created_at: Optional[datetime] = Field(default=None, description="Timestamp of when the session was created", alias="createdAt")
-    expires_at: Optional[datetime] = Field(default=None, description="Timestamp of when the session expires", alias="expiresAt")
+    login: Optional[StrictStr] = Field(
+        default=None,
+        description="The username used to identify the user. This is often the user's email address.")
+    created_at: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp of when the session was created",
+        alias="createdAt")
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp of when the session expires",
+        alias="expiresAt")
     status: Optional[StrictStr] = Field(default=None, description="Represents the current status of the user's session")
-    last_password_verification: Optional[datetime] = Field(default=None, description="Timestamp of when the user was last authenticated", alias="lastPasswordVerification")
+    last_password_verification: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp of when the user was last authenticated",
+        alias="lastPasswordVerification")
     amr: Optional[List[StrictStr]] = Field(default=None, description="The authentication method reference")
     idp: Optional[SessionIdentityProvider] = None
-    mfa_active: Optional[StrictBool] = Field(default=None, description="Describes whether multifactor authentication was enabled", alias="mfaActive")
-    __properties: ClassVar[List[str]] = ["id", "userId", "login", "createdAt", "expiresAt", "status", "lastPasswordVerification", "amr", "idp", "mfaActive"]
+    mfa_active: Optional[StrictBool] = Field(
+        default=None,
+        description="Describes whether multifactor authentication was enabled",
+        alias="mfaActive")
+    __properties: ClassVar[List[str]] = ["id", "userId", "login", "createdAt",
+                                         "expiresAt", "status", "lastPasswordVerification", "amr", "idp", "mfaActive"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,4 +132,3 @@ class BaseContextSession(BaseModel):
             "mfaActive": obj.get("mfaActive")
         })
         return _obj
-

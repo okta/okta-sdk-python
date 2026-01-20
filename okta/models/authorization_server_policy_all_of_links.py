@@ -33,10 +33,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerPolicyAllOfLinks(BaseModel):
     """
     AuthorizationServerPolicyAllOfLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     activate: Optional[HrefObjectActivateLink] = None
     deactivate: Optional[HrefObjectDeactivateLink] = None
@@ -127,4 +128,3 @@ class AuthorizationServerPolicyAllOfLinks(BaseModel):
             "rules": AuthorizationServerPolicyAllOfLinksAllOfRules.from_dict(obj["rules"]) if obj.get("rules") is not None else None
         })
         return _obj
-

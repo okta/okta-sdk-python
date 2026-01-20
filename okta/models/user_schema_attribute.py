@@ -38,29 +38,69 @@ from okta.models.user_schema_attribute_type import UserSchemaAttributeType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaAttribute(BaseModel):
     """
     UserSchemaAttribute
-    """ # noqa: E501
-    default: Optional[Any] = Field(default=None, description="If specified, assigns the value as the default value for the custom attribute. This is a nullable property. If you don't specify a value for this custom attribute during user creation or update, the `default` is used instead of setting the value to `null` or empty.")
+    """  # noqa: E501
+    default: Optional[Any] = Field(
+        default=None,
+        description="If specified, assigns the value as the default value for the custom attribute. This is a nullable property. If you don't specify a value for this custom attribute during user creation or update, the `default` is used instead of setting the value to `null` or empty.")
     description: Optional[StrictStr] = Field(default=None, description="Description of the property")
-    enum: Optional[List[GroupSchemaAttributeEnumInner]] = Field(default=None, description="Enumerated value of the property.  The value of the property is limited to one of the values specified in the enum definition. The list of values for the enum must consist of unique elements.")
-    external_name: Optional[StrictStr] = Field(default=None, description="Name of the property as it exists in an external application  **NOTE**: When you add a custom property, only Identity Provider app user schemas require `externalName` to be included in the request body. If an existing custom Identity Provider app user schema property has an empty `externalName`, requests aren't allowed to update other properties until the `externalName` is defined.", alias="externalName")
-    external_namespace: Optional[StrictStr] = Field(default=None, description="Namespace from the external application", alias="externalNamespace")
-    format: Optional[UserSchemaAttributeFormat] = Field(default=None, description="Identifies the type of data represented by the string")
+    enum: Optional[List[GroupSchemaAttributeEnumInner]] = Field(
+        default=None, description="Enumerated value of the property.  The value of the property is limited to one of the values specified in the enum definition. The list of values for the enum must consist of unique elements.")
+    external_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the property as it exists in an external application  **NOTE**: When you add a custom property, only Identity Provider app user schemas require `externalName` to be included in the request body. If an existing custom Identity Provider app user schema property has an empty `externalName`, requests aren't allowed to update other properties until the `externalName` is defined.",
+        alias="externalName")
+    external_namespace: Optional[StrictStr] = Field(
+        default=None,
+        description="Namespace from the external application",
+        alias="externalNamespace")
+    format: Optional[UserSchemaAttributeFormat] = Field(default=None,
+                                                        description="Identifies the type of data represented by the string")
     master: Optional[UserSchemaAttributeMaster] = Field(default=None, description="Identifies where the property is mastered")
-    max_length: Optional[StrictInt] = Field(default=None, description="Maximum character length of a string property", alias="maxLength")
-    min_length: Optional[StrictInt] = Field(default=None, description="Minimum character length of a string property", alias="minLength")
-    mutability: Optional[UserSchemaAttributeMutabilityString] = Field(default=None, description="Defines the mutability of the property")
-    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(default=None, description="Non-empty array of valid JSON schemas.  The `oneOf` key is only supported in conjunction with `enum` and provides a mechanism to return a display name for the `enum` value.<br> Each schema has the following format:  ``` {   \"const\": \"enumValue\",   \"title\": \"display name\" } ```  When `enum` is used in conjunction with `oneOf`, you must keep the set of enumerated values and their order.<br> For example:  ``` \"enum\": [\"S\",\"M\",\"L\",\"XL\"], \"oneOf\": [     {\"const\": \"S\", \"title\": \"Small\"},     {\"const\": \"M\", \"title\": \"Medium\"},     {\"const\": \"L\", \"title\": \"Large\"},     {\"const\": \"XL\", \"title\": \"Extra Large\"}   ] ```", alias="oneOf")
-    pattern: Optional[StrictStr] = Field(default=None, description="For `string` property types, specifies the regular expression used to validate the property")
-    permissions: Optional[List[UserSchemaAttributePermission]] = Field(default=None, description="Access control permissions for the property")
+    max_length: Optional[StrictInt] = Field(
+        default=None,
+        description="Maximum character length of a string property",
+        alias="maxLength")
+    min_length: Optional[StrictInt] = Field(
+        default=None,
+        description="Minimum character length of a string property",
+        alias="minLength")
+    mutability: Optional[UserSchemaAttributeMutabilityString] = Field(
+        default=None, description="Defines the mutability of the property")
+    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(
+        default=None, description="Non-empty array of valid JSON schemas.  The `oneOf` key is only supported in conjunction with `enum` and provides a mechanism to return a display name for the `enum` value.<br> Each schema has the following format:  ``` {   \"const\": \"enumValue\",   \"title\": \"display name\" } ```  When `enum` is used in conjunction with `oneOf`, you must keep the set of enumerated values and their order.<br> For example:  ``` \"enum\": [\"S\",\"M\",\"L\",\"XL\"], \"oneOf\": [     {\"const\": \"S\", \"title\": \"Small\"},     {\"const\": \"M\", \"title\": \"Medium\"},     {\"const\": \"L\", \"title\": \"Large\"},     {\"const\": \"XL\", \"title\": \"Extra Large\"}   ] ```", alias="oneOf")
+    pattern: Optional[StrictStr] = Field(
+        default=None,
+        description="For `string` property types, specifies the regular expression used to validate the property")
+    permissions: Optional[List[UserSchemaAttributePermission]] = Field(
+        default=None, description="Access control permissions for the property")
     required: Optional[StrictBool] = Field(default=None, description="Determines whether the property is required")
     scope: Optional[UserSchemaAttributeScope] = None
-    title: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="User-defined display name for the property")
+    title: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(
+        default=None, description="User-defined display name for the property")
     type: Optional[UserSchemaAttributeType] = Field(default=None, description="Type of property")
     unique: Optional[StrictBool] = Field(default=None, description="Determines whether property values must be unique")
-    __properties: ClassVar[List[str]] = ["default", "description", "enum", "externalName", "externalNamespace", "format", "master", "maxLength", "minLength", "mutability", "oneOf", "pattern", "permissions", "required", "scope", "title", "type", "unique"]
+    __properties: ClassVar[List[str]] = ["default",
+                                         "description",
+                                         "enum",
+                                         "externalName",
+                                         "externalNamespace",
+                                         "format",
+                                         "master",
+                                         "maxLength",
+                                         "minLength",
+                                         "mutability",
+                                         "oneOf",
+                                         "pattern",
+                                         "permissions",
+                                         "required",
+                                         "scope",
+                                         "title",
+                                         "type",
+                                         "unique"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -205,4 +245,3 @@ class UserSchemaAttribute(BaseModel):
             "unique": obj.get("unique")
         })
         return _obj
-

@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentitySourceGroupMembershipsDeleteProfileInner(BaseModel):
     """
     IdentitySourceGroupMembershipsDeleteProfileInner
-    """ # noqa: E501
-    group_external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The external ID of the group whose memberships need to be deleted in Okta", alias="groupExternalId")
-    member_external_ids: Optional[List[Annotated[str, Field(strict=True, max_length=255)]]] = Field(default=None, description="Array of external IDs of member profiles that need to be inserted in this group in Okta", alias="memberExternalIds")
+    """  # noqa: E501
+    group_external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(
+        default=None, description="The external ID of the group whose memberships need to be deleted in Okta", alias="groupExternalId")
+    member_external_ids: Optional[List[Annotated[str, Field(strict=True, max_length=255)]]] = Field(
+        default=None, description="Array of external IDs of member profiles that need to be inserted in this group in Okta", alias="memberExternalIds")
     __properties: ClassVar[List[str]] = ["groupExternalId", "memberExternalIds"]
 
     model_config = ConfigDict(
@@ -92,4 +95,3 @@ class IdentitySourceGroupMembershipsDeleteProfileInner(BaseModel):
             "memberExternalIds": obj.get("memberExternalIds")
         })
         return _obj
-

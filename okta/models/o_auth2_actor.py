@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2Actor(BaseModel):
     """
     User that created the object
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="User ID")
     type: Optional[StrictStr] = Field(default=None, description="Type of user")
     __properties: ClassVar[List[str]] = ["id", "type"]
@@ -93,4 +94,3 @@ class OAuth2Actor(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

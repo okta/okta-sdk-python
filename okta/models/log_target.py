@@ -30,13 +30,15 @@ from okta.models.log_target_change_details import LogTargetChangeDetails
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogTarget(BaseModel):
     """
     LogTarget
-    """ # noqa: E501
+    """  # noqa: E501
     alternate_id: Optional[StrictStr] = Field(default=None, description="The alternate ID of the target", alias="alternateId")
     change_details: Optional[LogTargetChangeDetails] = Field(default=None, alias="changeDetails")
-    detail_entry: Optional[Dict[str, Any]] = Field(default=None, description="Further details on the target", alias="detailEntry")
+    detail_entry: Optional[Dict[str, Any]] = Field(
+        default=None, description="Further details on the target", alias="detailEntry")
     display_name: Optional[StrictStr] = Field(default=None, description="The display name of the target", alias="displayName")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the target")
     type: Optional[StrictStr] = Field(default=None, description="The type of target")
@@ -117,4 +119,3 @@ class LogTarget(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

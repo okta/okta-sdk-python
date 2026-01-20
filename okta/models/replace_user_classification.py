@@ -30,10 +30,11 @@ from okta.models.classification_type import ClassificationType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ReplaceUserClassification(BaseModel):
     """
     ReplaceUserClassification
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[ClassificationType] = None
     __properties: ClassVar[List[str]] = ["type"]
 
@@ -90,4 +91,3 @@ class ReplaceUserClassification(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

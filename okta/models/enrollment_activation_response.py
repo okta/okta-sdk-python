@@ -29,12 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EnrollmentActivationResponse(BaseModel):
     """
     Enrollment initialization response
-    """ # noqa: E501
-    authenticator_enrollment_ids: Optional[List[StrictStr]] = Field(default=None, description="List of IDs for preregistered WebAuthn factors in Okta", alias="authenticatorEnrollmentIds")
-    fulfillment_provider: Optional[StrictStr] = Field(default=None, description="Name of the fulfillment provider for the WebAuthn preregistration factor", alias="fulfillmentProvider")
+    """  # noqa: E501
+    authenticator_enrollment_ids: Optional[List[StrictStr]] = Field(
+        default=None, description="List of IDs for preregistered WebAuthn factors in Okta", alias="authenticatorEnrollmentIds")
+    fulfillment_provider: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the fulfillment provider for the WebAuthn preregistration factor",
+        alias="fulfillmentProvider")
     user_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Okta user", alias="userId")
     __properties: ClassVar[List[str]] = ["authenticatorEnrollmentIds", "fulfillmentProvider", "userId"]
 
@@ -103,4 +108,3 @@ class EnrollmentActivationResponse(BaseModel):
             "userId": obj.get("userId")
         })
         return _obj
-

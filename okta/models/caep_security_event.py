@@ -32,10 +32,11 @@ from okta.models.security_event_subject import SecurityEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CaepSecurityEvent(BaseModel):
     """
     CaepSecurityEvent
-    """ # noqa: E501
+    """  # noqa: E501
     event_timestamp: StrictInt = Field(description="The time of the event (UNIX timestamp)")
     initiating_entity: Optional[StrictStr] = Field(default=None, description="The entity that initiated the event")
     reason_admin: Optional[CaepDeviceComplianceChangeEventReasonAdmin] = None
@@ -131,4 +132,3 @@ class CaepSecurityEvent(BaseModel):
             "subject": SecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
         })
         return _obj
-

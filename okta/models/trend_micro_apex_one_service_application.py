@@ -35,21 +35,24 @@ from okta.models.trend_micro_apex_one_service_application_settings import TrendM
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TrendMicroApexOneServiceApplication(BaseModel):
     """
     Schema for Trend Micro Apex One as a Service app (key name: `trendmicroapexoneservice`)  To create a Trend Micro Apex One as a Service app, use the [Create an Application](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication) request with the following parameters in the request body. > **Note:** The Trend Micro Apex One as a Service app only supports `SAML_2_0` sign-on mode. 
-    """ # noqa: E501
+    """  # noqa: E501
     accessibility: Optional[ApplicationAccessibility] = None
     credentials: Optional[SchemeApplicationCredentials] = None
     label: StrictStr = Field(description="User-defined display name for app")
     licensing: Optional[ApplicationLicensing] = None
     name: StrictStr
-    profile: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
+    profile: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
     sign_on_mode: Optional[StrictStr] = Field(default=None, alias="signOnMode")
     status: Optional[ApplicationLifecycleStatus] = None
     visibility: Optional[ApplicationVisibility] = None
     settings: TrendMicroApexOneServiceApplicationSettings
-    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label", "licensing", "name", "profile", "signOnMode", "status", "visibility", "settings"]
+    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label",
+                                         "licensing", "name", "profile", "signOnMode", "status", "visibility", "settings"]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -165,4 +168,3 @@ class TrendMicroApexOneServiceApplication(BaseModel):
             "settings": TrendMicroApexOneServiceApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

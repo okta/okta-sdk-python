@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LifecycleExpirationPolicyRuleCondition(BaseModel):
     """
     LifecycleExpirationPolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     lifecycle_status: Optional[StrictStr] = Field(default=None, alias="lifecycleStatus")
     number: Optional[StrictInt] = None
     unit: Optional[StrictStr] = None
@@ -93,4 +94,3 @@ class LifecycleExpirationPolicyRuleCondition(BaseModel):
             "unit": obj.get("unit")
         })
         return _obj
-

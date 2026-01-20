@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RiskScorePolicyRuleCondition(BaseModel):
     """
     Specifies a particular level of risk to match on
-    """ # noqa: E501
+    """  # noqa: E501
     level: StrictStr = Field(description="The level to match")
     __properties: ClassVar[List[str]] = ["level"]
 
@@ -96,4 +97,3 @@ class RiskScorePolicyRuleCondition(BaseModel):
             "level": obj.get("level")
         })
         return _obj
-

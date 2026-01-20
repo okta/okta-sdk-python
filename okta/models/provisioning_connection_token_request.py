@@ -30,11 +30,15 @@ from okta.models.provisioning_connection_token_request_profile import Provisioni
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningConnectionTokenRequest(BaseModel):
     """
     ProvisioningConnectionTokenRequest
-    """ # noqa: E501
-    base_url: Optional[StrictStr] = Field(default=None, description="Only used for the Zscaler 2.0 (`zscalerbyz`) app. The base URL for the Zscaler 2.0 target app, which also contains the Zscaler ID.", alias="baseUrl")
+    """  # noqa: E501
+    base_url: Optional[StrictStr] = Field(
+        default=None,
+        description="Only used for the Zscaler 2.0 (`zscalerbyz`) app. The base URL for the Zscaler 2.0 target app, which also contains the Zscaler ID.",
+        alias="baseUrl")
     profile: ProvisioningConnectionTokenRequestProfile
     __properties: ClassVar[List[str]] = ["baseUrl", "profile"]
 
@@ -99,4 +103,3 @@ class ProvisioningConnectionTokenRequest(BaseModel):
             "profile": ProvisioningConnectionTokenRequestProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

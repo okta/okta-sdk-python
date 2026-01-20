@@ -30,11 +30,14 @@ from okta.models.profile_mapping_property_push_status import ProfileMappingPrope
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProfileMappingProperty(BaseModel):
     """
     A target property, in string form, that maps to a valid [JSON Schema Draft](https://tools.ietf.org/html/draft-zyp-json-schema-04) document.
-    """ # noqa: E501
-    expression: Optional[StrictStr] = Field(default=None, description="Combination or single source properties that are mapped to the target property. See [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/).")
+    """  # noqa: E501
+    expression: Optional[StrictStr] = Field(
+        default=None,
+        description="Combination or single source properties that are mapped to the target property. See [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/).")
     push_status: Optional[ProfileMappingPropertyPushStatus] = Field(default=None, alias="pushStatus")
     __properties: ClassVar[List[str]] = ["expression", "pushStatus"]
 
@@ -92,4 +95,3 @@ class ProfileMappingProperty(BaseModel):
             "pushStatus": obj.get("pushStatus")
         })
         return _obj
-

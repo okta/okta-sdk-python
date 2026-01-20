@@ -30,12 +30,16 @@ from okta.models.saml_pay_load_data_assertion_subject_confirmation import SAMLPa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionSubject(BaseModel):
     """
     Provides a JSON representation of the `<saml:Subject>` element of the SAML assertion
-    """ # noqa: E501
+    """  # noqa: E501
     name_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the user", alias="nameId")
-    name_format: Optional[StrictStr] = Field(default=None, description="Indicates how to interpret the attribute name", alias="nameFormat")
+    name_format: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates how to interpret the attribute name",
+        alias="nameFormat")
     confirmation: Optional[SAMLPayLoadDataAssertionSubjectConfirmation] = None
     __properties: ClassVar[List[str]] = ["nameId", "nameFormat", "confirmation"]
 
@@ -101,4 +105,3 @@ class SAMLPayLoadDataAssertionSubject(BaseModel):
             "confirmation": SAMLPayLoadDataAssertionSubjectConfirmation.from_dict(obj["confirmation"]) if obj.get("confirmation") is not None else None
         })
         return _obj
-

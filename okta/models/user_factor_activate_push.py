@@ -31,11 +31,15 @@ from okta.models.user_factor_activate_push_result import UserFactorActivatePushR
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorActivatePush(BaseModel):
     """
     Activation requests have a short lifetime and expire if the activation isn't completed before the indicated timestamp. If the activation expires, use the returned `activate` link to restart the process.
-    """ # noqa: E501
-    expires_at: Optional[datetime] = Field(default=None, description="Timestamp when the factor verification attempt expires", alias="expiresAt")
+    """  # noqa: E501
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the factor verification attempt expires",
+        alias="expiresAt")
     factor_result: Optional[UserFactorActivatePushResult] = Field(default=None, alias="factorResult")
     __properties: ClassVar[List[str]] = ["expiresAt", "factorResult"]
 
@@ -95,4 +99,3 @@ class UserFactorActivatePush(BaseModel):
             "factorResult": obj.get("factorResult")
         })
         return _obj
-

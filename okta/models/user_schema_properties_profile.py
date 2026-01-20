@@ -30,10 +30,11 @@ from okta.models.user_schema_properties_profile_item import UserSchemaProperties
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaPropertiesProfile(BaseModel):
     """
     UserSchemaPropertiesProfile
-    """ # noqa: E501
+    """  # noqa: E501
     all_of: Optional[List[UserSchemaPropertiesProfileItem]] = Field(default=None, alias="allOf")
     __properties: ClassVar[List[str]] = ["allOf"]
 
@@ -97,4 +98,3 @@ class UserSchemaPropertiesProfile(BaseModel):
             "allOf": [UserSchemaPropertiesProfileItem.from_dict(_item) for _item in obj["allOf"]] if obj.get("allOf") is not None else None
         })
         return _obj
-

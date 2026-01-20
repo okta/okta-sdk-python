@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DomainCertificateMetadata(BaseModel):
     """
     Certificate metadata for the domain
-    """ # noqa: E501
+    """  # noqa: E501
     expiration: Optional[StrictStr] = Field(default=None, description="Certificate expiration")
     fingerprint: Optional[StrictStr] = Field(default=None, description="Certificate fingerprint")
     subject: Optional[StrictStr] = Field(default=None, description="Certificate subject")
@@ -93,4 +94,3 @@ class DomainCertificateMetadata(BaseModel):
             "subject": obj.get("subject")
         })
         return _obj
-

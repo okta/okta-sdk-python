@@ -31,29 +31,59 @@ from okta.models.org_general_setting_links import OrgGeneralSettingLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgSetting(BaseModel):
     """
     OrgSetting
-    """ # noqa: E501
-    address1: Optional[StrictStr] = Field(default=None, description="Primary address of the organization associated with the org")
-    address2: Optional[StrictStr] = Field(default=None, description="Secondary address of the organization associated with the org")
+    """  # noqa: E501
+    address1: Optional[StrictStr] = Field(default=None,
+                                          description="Primary address of the organization associated with the org")
+    address2: Optional[StrictStr] = Field(default=None,
+                                          description="Secondary address of the organization associated with the org")
     city: Optional[StrictStr] = Field(default=None, description="City of the organization associated with the org")
     company_name: Optional[StrictStr] = Field(default=None, description="Name of org", alias="companyName")
     country: Optional[StrictStr] = Field(default=None, description="County of the organization associated with the org")
     created: Optional[datetime] = Field(default=None, description="When org was created")
-    end_user_support_help_url: Optional[StrictStr] = Field(default=None, description="Support link of org", alias="endUserSupportHelpURL")
+    end_user_support_help_url: Optional[StrictStr] = Field(
+        default=None, description="Support link of org", alias="endUserSupportHelpURL")
     expires_at: Optional[datetime] = Field(default=None, description="Expiration of org", alias="expiresAt")
     id: Optional[StrictStr] = Field(default=None, description="Org ID")
     last_updated: Optional[datetime] = Field(default=None, description="When org was last updated", alias="lastUpdated")
-    phone_number: Optional[StrictStr] = Field(default=None, description="Phone number of the organization associated with the org", alias="phoneNumber")
-    postal_code: Optional[StrictStr] = Field(default=None, description="Postal code of the organization associated with the org", alias="postalCode")
+    phone_number: Optional[StrictStr] = Field(
+        default=None,
+        description="Phone number of the organization associated with the org",
+        alias="phoneNumber")
+    postal_code: Optional[StrictStr] = Field(
+        default=None,
+        description="Postal code of the organization associated with the org",
+        alias="postalCode")
     state: Optional[StrictStr] = Field(default=None, description="State of the organization associated with the org")
     status: Optional[StrictStr] = Field(default=None, description="Status of org")
     subdomain: Optional[StrictStr] = Field(default=None, description="Subdomain of org")
-    support_phone_number: Optional[StrictStr] = Field(default=None, description="Support help phone of the organization associated with the org", alias="supportPhoneNumber")
+    support_phone_number: Optional[StrictStr] = Field(
+        default=None,
+        description="Support help phone of the organization associated with the org",
+        alias="supportPhoneNumber")
     website: Optional[StrictStr] = Field(default=None, description="Website of the organization associated with the org")
     links: Optional[OrgGeneralSettingLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["address1", "address2", "city", "companyName", "country", "created", "endUserSupportHelpURL", "expiresAt", "id", "lastUpdated", "phoneNumber", "postalCode", "state", "status", "subdomain", "supportPhoneNumber", "website", "_links"]
+    __properties: ClassVar[List[str]] = ["address1",
+                                         "address2",
+                                         "city",
+                                         "companyName",
+                                         "country",
+                                         "created",
+                                         "endUserSupportHelpURL",
+                                         "expiresAt",
+                                         "id",
+                                         "lastUpdated",
+                                         "phoneNumber",
+                                         "postalCode",
+                                         "state",
+                                         "status",
+                                         "subdomain",
+                                         "supportPhoneNumber",
+                                         "website",
+                                         "_links"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -154,4 +184,3 @@ class OrgSetting(BaseModel):
             "_links": OrgGeneralSettingLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

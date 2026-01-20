@@ -30,13 +30,17 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TestInfoScimTestConfiguration(BaseModel):
     """
     SCIM test details
-    """ # noqa: E501
-    spec_test_results: Annotated[str, Field(strict=True, max_length=512)] = Field(description="The Runscope URL to your SCIM server specification test results. See [Test your SCIM API](https://developer.okta.com/docs/guides/build-provisioning-integration/test-scim-api/).", alias="specTestResults")
-    crud_test_results: Annotated[str, Field(strict=True, max_length=512)] = Field(description="The Runscope URL to your Okta SCIM CRUD test results. See [Test your Okta SCIM integration](https://developer.okta.com/docs/guides/scim-provisioning-integration-test/main/).", alias="crudTestResults")
-    entitlements_test_results: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(default=None, description="The Runscope URL to your entitlements test results", alias="entitlementsTestResults")
+    """  # noqa: E501
+    spec_test_results: Annotated[str, Field(strict=True, max_length=512)] = Field(
+        description="The Runscope URL to your SCIM server specification test results. See [Test your SCIM API](https://developer.okta.com/docs/guides/build-provisioning-integration/test-scim-api/).", alias="specTestResults")
+    crud_test_results: Annotated[str, Field(strict=True, max_length=512)] = Field(
+        description="The Runscope URL to your Okta SCIM CRUD test results. See [Test your Okta SCIM integration](https://developer.okta.com/docs/guides/scim-provisioning-integration-test/main/).", alias="crudTestResults")
+    entitlements_test_results: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
+        default=None, description="The Runscope URL to your entitlements test results", alias="entitlementsTestResults")
     __properties: ClassVar[List[str]] = ["specTestResults", "crudTestResults", "entitlementsTestResults"]
 
     model_config = ConfigDict(
@@ -94,4 +98,3 @@ class TestInfoScimTestConfiguration(BaseModel):
             "entitlementsTestResults": obj.get("entitlementsTestResults")
         })
         return _obj
-

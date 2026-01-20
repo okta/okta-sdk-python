@@ -35,21 +35,39 @@ from okta.models.sign_in_page_touch_point_variant import SignInPageTouchPointVar
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UpdateThemeRequest(BaseModel):
     """
     UpdateThemeRequest
-    """ # noqa: E501
+    """  # noqa: E501
     email_template_touch_point_variant: EmailTemplateTouchPointVariant = Field(alias="emailTemplateTouchPointVariant")
-    end_user_dashboard_touch_point_variant: EndUserDashboardTouchPointVariant = Field(alias="endUserDashboardTouchPointVariant")
+    end_user_dashboard_touch_point_variant: EndUserDashboardTouchPointVariant = Field(
+        alias="endUserDashboardTouchPointVariant")
     error_page_touch_point_variant: ErrorPageTouchPointVariant = Field(alias="errorPageTouchPointVariant")
-    loading_page_touch_point_variant: Optional[LoadingPageTouchPointVariant] = Field(default=LoadingPageTouchPointVariant.OKTA_DEFAULT, alias="loadingPageTouchPointVariant")
-    primary_color_contrast_hex: Optional[StrictStr] = Field(default=None, description="Primary color contrast hex code", alias="primaryColorContrastHex")
+    loading_page_touch_point_variant: Optional[LoadingPageTouchPointVariant] = Field(
+        default=LoadingPageTouchPointVariant.OKTA_DEFAULT, alias="loadingPageTouchPointVariant")
+    primary_color_contrast_hex: Optional[StrictStr] = Field(
+        default=None,
+        description="Primary color contrast hex code",
+        alias="primaryColorContrastHex")
     primary_color_hex: StrictStr = Field(description="Primary color hex code", alias="primaryColorHex")
-    secondary_color_contrast_hex: Optional[StrictStr] = Field(default=None, description="Secondary color contrast hex code", alias="secondaryColorContrastHex")
+    secondary_color_contrast_hex: Optional[StrictStr] = Field(
+        default=None,
+        description="Secondary color contrast hex code",
+        alias="secondaryColorContrastHex")
     secondary_color_hex: StrictStr = Field(description="Secondary color hex code", alias="secondaryColorHex")
     sign_in_page_touch_point_variant: SignInPageTouchPointVariant = Field(alias="signInPageTouchPointVariant")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["emailTemplateTouchPointVariant", "endUserDashboardTouchPointVariant", "errorPageTouchPointVariant", "loadingPageTouchPointVariant", "primaryColorContrastHex", "primaryColorHex", "secondaryColorContrastHex", "secondaryColorHex", "signInPageTouchPointVariant", "_links"]
+    __properties: ClassVar[List[str]] = ["emailTemplateTouchPointVariant",
+                                         "endUserDashboardTouchPointVariant",
+                                         "errorPageTouchPointVariant",
+                                         "loadingPageTouchPointVariant",
+                                         "primaryColorContrastHex",
+                                         "primaryColorHex",
+                                         "secondaryColorContrastHex",
+                                         "secondaryColorHex",
+                                         "signInPageTouchPointVariant",
+                                         "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,4 +138,3 @@ class UpdateThemeRequest(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

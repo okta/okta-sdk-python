@@ -29,15 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientJsonEncryptionKeyRequest(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A [JSON Web Key (JWK)](https://tools.ietf.org/html/rfc7517) is a JSON representation of a cryptographic key. Okta uses an encryption key to encrypt an ID token JWT minted by the org authorization server or custom authorization server. Okta supports only RSA keys for encrypting tokens.
-    """ # noqa: E501
+    """  # noqa: E501
     e: Optional[StrictStr] = Field(default=None, description="RSA key value (exponent) for key binding")
     kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's key pair")
     n: Optional[StrictStr] = Field(default=None, description="RSA key value (modulus) for key binding")
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key")
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the OAUth 2.0 client's JWKS")
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="Unique identifier of the JSON Web Key in the OAUth 2.0 client's JWKS")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the OAuth 2.0 client JSON Web Key")
     __properties: ClassVar[List[str]] = ["kid", "status"]
 
@@ -130,4 +132,3 @@ class OAuth2ClientJsonEncryptionKeyRequest(BaseModel):
             "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE'
         })
         return _obj
-

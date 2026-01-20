@@ -30,10 +30,11 @@ from okta.models.token_pay_load_data_context_all_of_policy_rule import TokenPayL
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataContextAllOfPolicy(BaseModel):
     """
     The authorization server policy used to mint the token
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the policy")
     rule: Optional[TokenPayLoadDataContextAllOfPolicyRule] = None
     __properties: ClassVar[List[str]] = ["id", "rule"]
@@ -99,4 +100,3 @@ class TokenPayLoadDataContextAllOfPolicy(BaseModel):
             "rule": TokenPayLoadDataContextAllOfPolicyRule.from_dict(obj["rule"]) if obj.get("rule") is not None else None
         })
         return _obj
-

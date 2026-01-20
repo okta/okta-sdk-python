@@ -30,10 +30,11 @@ from okta.models.policy_user_status import PolicyUserStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserStatusPolicyRuleCondition(BaseModel):
     """
     UserStatusPolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     value: Optional[PolicyUserStatus] = None
     __properties: ClassVar[List[str]] = ["value"]
 
@@ -90,4 +91,3 @@ class UserStatusPolicyRuleCondition(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

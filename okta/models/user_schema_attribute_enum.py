@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaAttributeEnum(BaseModel):
     """
     UserSchemaAttributeEnum
-    """ # noqa: E501
+    """  # noqa: E501
     const: Optional[StrictStr] = Field(default=None, description="The enumerated value")
     title: Optional[StrictStr] = Field(default=None, description="The display label for the enumerated value")
     __properties: ClassVar[List[str]] = ["const", "title"]
@@ -91,4 +92,3 @@ class UserSchemaAttributeEnum(BaseModel):
             "title": obj.get("title")
         })
         return _obj
-

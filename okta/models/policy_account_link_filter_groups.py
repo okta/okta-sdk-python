@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyAccountLinkFilterGroups(BaseModel):
     """
     Group memberships used to determine link candidates
-    """ # noqa: E501
-    include: Optional[List[StrictStr]] = Field(default=None, description="Specifies the allowlist of Group identifiers to match against. Group memberships are restricted to type `OKTA_GROUP`.")
+    """  # noqa: E501
+    include: Optional[List[StrictStr]] = Field(
+        default=None, description="Specifies the allowlist of Group identifiers to match against. Group memberships are restricted to type `OKTA_GROUP`.")
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class PolicyAccountLinkFilterGroups(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

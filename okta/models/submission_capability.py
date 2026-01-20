@@ -31,10 +31,11 @@ from okta.models.protocol import Protocol
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SubmissionCapability(BaseModel):
     """
     SubmissionCapability
-    """ # noqa: E501
+    """  # noqa: E501
     capability: Capability
     supported_protocols: List[Protocol] = Field(alias="supportedProtocols")
     __properties: ClassVar[List[str]] = ["capability", "supportedProtocols"]
@@ -93,4 +94,3 @@ class SubmissionCapability(BaseModel):
             "supportedProtocols": obj.get("supportedProtocols")
         })
         return _obj
-

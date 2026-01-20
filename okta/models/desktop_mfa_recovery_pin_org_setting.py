@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DesktopMFARecoveryPinOrgSetting(BaseModel):
     """
     DesktopMFARecoveryPinOrgSetting
-    """ # noqa: E501
-    desktop_mfa_recovery_pin_enabled: Optional[StrictBool] = Field(default=False, description="Indicates whether or not the Desktop MFA Recovery PIN feature is enabled", alias="desktopMFARecoveryPinEnabled")
+    """  # noqa: E501
+    desktop_mfa_recovery_pin_enabled: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether or not the Desktop MFA Recovery PIN feature is enabled",
+        alias="desktopMFARecoveryPinEnabled")
     __properties: ClassVar[List[str]] = ["desktopMFARecoveryPinEnabled"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class DesktopMFARecoveryPinOrgSetting(BaseModel):
             "desktopMFARecoveryPinEnabled": obj.get("desktopMFARecoveryPinEnabled") if obj.get("desktopMFARecoveryPinEnabled") is not None else False
         })
         return _obj
-

@@ -31,12 +31,15 @@ from okta.models.attestation_root_certificates_request_inner import AttestationR
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomAAGUIDUpdateRequestObject(BaseModel):
     """
     CustomAAGUIDUpdateRequestObject
-    """ # noqa: E501
-    attestation_root_certificates: Optional[List[AttestationRootCertificatesRequestInner]] = Field(default=None, description="Contains the certificate and information about it", alias="attestationRootCertificates")
-    authenticator_characteristics: Optional[AAGUIDAuthenticatorCharacteristics] = Field(default=None, alias="authenticatorCharacteristics")
+    """  # noqa: E501
+    attestation_root_certificates: Optional[List[AttestationRootCertificatesRequestInner]] = Field(
+        default=None, description="Contains the certificate and information about it", alias="attestationRootCertificates")
+    authenticator_characteristics: Optional[AAGUIDAuthenticatorCharacteristics] = Field(
+        default=None, alias="authenticatorCharacteristics")
     name: Optional[StrictStr] = Field(default=None, description="The product name associated with this AAGUID.")
     __properties: ClassVar[List[str]] = ["attestationRootCertificates", "authenticatorCharacteristics", "name"]
 
@@ -109,4 +112,3 @@ class CustomAAGUIDUpdateRequestObject(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

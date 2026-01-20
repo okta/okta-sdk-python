@@ -30,10 +30,11 @@ from okta.models.application_layout_rule import ApplicationLayoutRule
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationLayout(BaseModel):
     """
     ApplicationLayout
-    """ # noqa: E501
+    """  # noqa: E501
     elements: Optional[List[Dict[str, Any]]] = None
     label: Optional[StrictStr] = None
     options: Optional[Dict[str, Any]] = None
@@ -107,4 +108,3 @@ class ApplicationLayout(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

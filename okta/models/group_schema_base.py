@@ -30,10 +30,11 @@ from okta.models.group_schema_base_properties import GroupSchemaBaseProperties
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupSchemaBase(BaseModel):
     """
     GroupSchemaBase
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The subschema name")
     properties: Optional[GroupSchemaBaseProperties] = Field(default=None, description="The `#base` object properties")
     required: Optional[List[StrictStr]] = Field(default=None, description="A collection indicating required property names")
@@ -109,4 +110,3 @@ class GroupSchemaBase(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

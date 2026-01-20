@@ -30,22 +30,32 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdPKeyCredential(BaseModel):
     """
     A [JSON Web Key](https://tools.ietf.org/html/rfc7517) for a signature or encryption credential for an IdP
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     e: Optional[StrictStr] = Field(default=None, description="The exponent value for the RSA public key")
     expires_at: Optional[datetime] = Field(default=None, description="Timestamp when the object expires", alias="expiresAt")
     kid: Optional[StrictStr] = Field(default=None, description="Unique identifier for the key")
-    kty: Optional[StrictStr] = Field(default=None, description="Identifies the cryptographic algorithm family used with the key")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
+    kty: Optional[StrictStr] = Field(default=None,
+                                     description="Identifies the cryptographic algorithm family used with the key")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
     n: Optional[StrictStr] = Field(default=None, description="The modulus value for the RSA public key")
     use: Optional[StrictStr] = Field(default=None, description="Intended use of the public key")
-    x5c: Optional[List[StrictStr]] = Field(default=None, description="Base64-encoded X.509 certificate chain with DER encoding")
-    x5t_s256: Optional[StrictStr] = Field(default=None, description="Base64url-encoded SHA-256 thumbprint of the DER encoding of an X.509 certificate", alias="x5t#S256")
+    x5c: Optional[List[StrictStr]] = Field(default=None,
+                                           description="Base64-encoded X.509 certificate chain with DER encoding")
+    x5t_s256: Optional[StrictStr] = Field(
+        default=None,
+        description="Base64url-encoded SHA-256 thumbprint of the DER encoding of an X.509 certificate",
+        alias="x5t#S256")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["created", "e", "expiresAt", "kid", "kty", "lastUpdated", "n", "use", "x5c", "x5t#S256"]
+    __properties: ClassVar[List[str]] = ["created", "e", "expiresAt",
+                                         "kid", "kty", "lastUpdated", "n", "use", "x5c", "x5t#S256"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -127,4 +137,3 @@ class IdPKeyCredential(BaseModel):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-

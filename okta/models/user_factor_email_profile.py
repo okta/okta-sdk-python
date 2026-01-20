@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorEmailProfile(BaseModel):
     """
     UserFactorEmailProfile
-    """ # noqa: E501
-    email: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="Email address of the user. This must be either the primary or secondary email address associated with the Okta user account.  > **Note:** For Identity Engine orgs, you can only enroll the primary email address of the user.")
+    """  # noqa: E501
+    email: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
+        default=None, description="Email address of the user. This must be either the primary or secondary email address associated with the Okta user account.  > **Note:** For Identity Engine orgs, you can only enroll the primary email address of the user.")
     __properties: ClassVar[List[str]] = ["email"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class UserFactorEmailProfile(BaseModel):
             "email": obj.get("email")
         })
         return _obj
-

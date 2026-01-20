@@ -30,19 +30,25 @@ from okta.models.o_auth_client_secret_links import OAuthClientSecretLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientJsonEncryptionKeyResponse(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A [JSON Web Key (JWK)](https://tools.ietf.org/html/rfc7517) is a JSON representation of a cryptographic key. Okta uses an encryption key to encrypt an ID token JWT minted by the org authorization server or custom authorization server. Okta supports only RSA keys for encrypting tokens.
-    """ # noqa: E501
+    """  # noqa: E501
     e: Optional[StrictStr] = Field(default=None, description="RSA key value (exponent) for key binding")
     kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's key pair")
     n: Optional[StrictStr] = Field(default=None, description="RSA key value (modulus) for key binding")
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key")
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the OAUth 2.0 client's JWKS")
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="Unique identifier of the JSON Web Key in the OAUth 2.0 client's JWKS")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the OAuth 2.0 client JSON Web Key")
-    created: Optional[StrictStr] = Field(default=None, description="Timestamp when the OAuth 2.0 client JSON Web Key was created")
+    created: Optional[StrictStr] = Field(default=None,
+                                         description="Timestamp when the OAuth 2.0 client JSON Web Key was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the OAuth Client JSON Web Key")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp when the OAuth 2.0 client JSON Web Key was updated", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the OAuth 2.0 client JSON Web Key was updated",
+        alias="lastUpdated")
     links: Optional[OAuthClientSecretLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["kid", "status", "created", "id", "lastUpdated", "_links"]
 
@@ -152,4 +158,3 @@ class OAuth2ClientJsonEncryptionKeyResponse(BaseModel):
             "_links": OAuthClientSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

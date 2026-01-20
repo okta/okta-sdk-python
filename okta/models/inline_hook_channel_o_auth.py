@@ -27,15 +27,15 @@ import json
 from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.inline_hook_channel import InlineHookChannel
-from okta.models.inline_hook_channel_type import InlineHookChannelType
 from okta.models.inline_hook_o_auth_channel_config import InlineHookOAuthChannelConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookChannelOAuth(InlineHookChannel):
     """
     InlineHookChannelOAuth
-    """ # noqa: E501
+    """  # noqa: E501
     config: Optional[InlineHookOAuthChannelConfig] = None
     __properties: ClassVar[List[str]] = ["type", "version", "config"]
 
@@ -101,4 +101,3 @@ class InlineHookChannelOAuth(InlineHookChannel):
             "config": InlineHookOAuthChannelConfig.from_dict(obj["config"]) if obj.get("config") is not None else None
         })
         return _obj
-

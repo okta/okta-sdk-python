@@ -30,14 +30,18 @@ from okta.models.o_auth2_client_links import OAuth2ClientLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2Client(BaseModel):
     """
     OAuth2Client
-    """ # noqa: E501
-    client_id: Optional[StrictStr] = Field(default=None, description="Unique key for the client application. The `client_id` is immutable.")
+    """  # noqa: E501
+    client_id: Optional[StrictStr] = Field(default=None,
+                                           description="Unique key for the client application. The `client_id` is immutable.")
     client_name: Optional[StrictStr] = Field(default=None, description="Human-readable string name of the client application")
     client_uri: Optional[StrictStr] = None
-    logo_uri: Optional[StrictStr] = Field(default=None, description="URL string that references a logo for the client consent dialog (not the sign-in dialog)")
+    logo_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="URL string that references a logo for the client consent dialog (not the sign-in dialog)")
     links: Optional[OAuth2ClientLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["client_id", "client_name", "client_uri", "logo_uri", "_links"]
 
@@ -113,4 +117,3 @@ class OAuth2Client(BaseModel):
             "_links": OAuth2ClientLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

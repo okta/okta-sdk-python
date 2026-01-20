@@ -31,16 +31,24 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class HookKey(BaseModel):
     """
     The `id` property in the response as `id` serves as the unique ID for the key, which you can specify when invoking other CRUD operations.  The `keyId` provided in the response is the alias of the public key that you can use to get details of the public key data in a separate call.
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the key was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the key")
-    is_used: Optional[StrictStr] = Field(default=None, description="Whether this key is currently in use by other applications", alias="isUsed")
+    is_used: Optional[StrictStr] = Field(
+        default=None,
+        description="Whether this key is currently in use by other applications",
+        alias="isUsed")
     key_id: Optional[StrictStr] = Field(default=None, description="The alias of the public key", alias="keyId")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the key was updated", alias="lastUpdated")
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(default=None, description="Display name of the key")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the key was updated",
+        alias="lastUpdated")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(
+        default=None, description="Display name of the key")
     __properties: ClassVar[List[str]] = ["created", "id", "isUsed", "keyId", "lastUpdated", "name"]
 
     model_config = ConfigDict(
@@ -121,4 +129,3 @@ class HookKey(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

@@ -33,14 +33,16 @@ from okta.models.password_policy_password_settings_lockout import PasswordPolicy
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyPasswordSettings(BaseModel):
     """
     Specifies the password settings for the policy
-    """ # noqa: E501
+    """  # noqa: E501
     age: Optional[PasswordPolicyPasswordSettingsAge] = None
     complexity: Optional[PasswordPolicyPasswordSettingsComplexity] = None
     lockout: Optional[PasswordPolicyPasswordSettingsLockout] = None
-    breached_protection: Optional[PasswordPolicyPasswordSettingsBreachedProtection] = Field(default=None, alias="breachedProtection")
+    breached_protection: Optional[PasswordPolicyPasswordSettingsBreachedProtection] = Field(
+        default=None, alias="breachedProtection")
     __properties: ClassVar[List[str]] = ["age", "complexity", "lockout", "breachedProtection"]
 
     model_config = ConfigDict(
@@ -127,4 +129,3 @@ class PasswordPolicyPasswordSettings(BaseModel):
             "breachedProtection": PasswordPolicyPasswordSettingsBreachedProtection.from_dict(obj["breachedProtection"]) if obj.get("breachedProtection") is not None else None
         })
         return _obj
-

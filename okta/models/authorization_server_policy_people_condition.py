@@ -31,10 +31,11 @@ from okta.models.authorization_server_policy_rule_user_condition import Authoriz
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerPolicyPeopleCondition(BaseModel):
     """
     Identifies Users and Groups that are used together
-    """ # noqa: E501
+    """  # noqa: E501
     groups: Optional[AuthorizationServerPolicyRuleGroupCondition] = None
     users: Optional[AuthorizationServerPolicyRuleUserCondition] = None
     __properties: ClassVar[List[str]] = ["groups", "users"]
@@ -107,4 +108,3 @@ class AuthorizationServerPolicyPeopleCondition(BaseModel):
             "users": AuthorizationServerPolicyRuleUserCondition.from_dict(obj["users"]) if obj.get("users") is not None else None
         })
         return _obj
-

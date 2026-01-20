@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogTargetChangeDetails(BaseModel):
     """
     Details on the target's changes. Not all event types support the `changeDetails` property, and not all `target` objects contain the `changeDetails` property.  > **Note:** You can't run queries on `changeDetails` or the object's `to` or `from` properties.
-    """ # noqa: E501
+    """  # noqa: E501
     var_from: Optional[Dict[str, Any]] = Field(default=None, description="The original properties of the target", alias="from")
     to: Optional[Dict[str, Any]] = Field(default=None, description="The updated properties of the target")
     __properties: ClassVar[List[str]] = ["from", "to"]
@@ -91,4 +92,3 @@ class LogTargetChangeDetails(BaseModel):
             "to": obj.get("to")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.platform_condition_evaluator_platform import PlatformConditionE
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PlatformPolicyRuleCondition(BaseModel):
     """
     Specifies a particular platform or device to match on
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[List[PlatformConditionEvaluatorPlatform]] = None
     include: Optional[List[PlatformConditionEvaluatorPlatform]] = None
     __properties: ClassVar[List[str]] = ["exclude", "include"]
@@ -106,4 +107,3 @@ class PlatformPolicyRuleCondition(BaseModel):
             "include": [PlatformConditionEvaluatorPlatform.from_dict(_item) for _item in obj["include"]] if obj.get("include") is not None else None
         })
         return _obj
-

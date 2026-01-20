@@ -30,10 +30,11 @@ from okta.models.submission_action import SubmissionAction
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SubmissionActions(BaseModel):
     """
     SubmissionActions
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[List[SubmissionAction]] = None
     __properties: ClassVar[List[str]] = ["actions"]
 
@@ -97,4 +98,3 @@ class SubmissionActions(BaseModel):
             "actions": [SubmissionAction.from_dict(_item) for _item in obj["actions"]] if obj.get("actions") is not None else None
         })
         return _obj
-

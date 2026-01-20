@@ -31,10 +31,11 @@ from okta.models.capabilities_update_object import CapabilitiesUpdateObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CapabilitiesObject(BaseModel):
     """
     Defines the configurations for the USER_PROVISIONING feature
-    """ # noqa: E501
+    """  # noqa: E501
     create: Optional[CapabilitiesCreateObject] = None
     update: Optional[CapabilitiesUpdateObject] = None
     __properties: ClassVar[List[str]] = ["create", "update"]
@@ -107,4 +108,3 @@ class CapabilitiesObject(BaseModel):
             "update": CapabilitiesUpdateObject.from_dict(obj["update"]) if obj.get("update") is not None else None
         })
         return _obj
-

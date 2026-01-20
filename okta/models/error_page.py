@@ -30,12 +30,14 @@ from okta.models.content_security_policy_setting import ContentSecurityPolicySet
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ErrorPage(BaseModel):
     """
     ErrorPage
-    """ # noqa: E501
+    """  # noqa: E501
     page_content: Optional[StrictStr] = Field(default=None, description="The HTML for the page", alias="pageContent")
-    content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(default=None, alias="contentSecurityPolicySetting")
+    content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(
+        default=None, alias="contentSecurityPolicySetting")
     __properties: ClassVar[List[str]] = ["pageContent", "contentSecurityPolicySetting"]
 
     model_config = ConfigDict(
@@ -99,4 +101,3 @@ class ErrorPage(BaseModel):
             "contentSecurityPolicySetting": ContentSecurityPolicySetting.from_dict(obj["contentSecurityPolicySetting"]) if obj.get("contentSecurityPolicySetting") is not None else None
         })
         return _obj
-

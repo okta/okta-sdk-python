@@ -29,13 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataContextAllOfProtocolIssuer(BaseModel):
     """
     SAMLPayLoadDataContextAllOfProtocolIssuer
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the issuer that provided the SAML assertion")
+    """  # noqa: E501
+    id: Optional[StrictStr] = Field(default=None,
+                                    description="The unique identifier of the issuer that provided the SAML assertion")
     name: Optional[StrictStr] = Field(default=None, description="The name of the issuer that provided the SAML assertion")
-    uri: Optional[StrictStr] = Field(default=None, description="The base URI of the SAML endpoint that's used to assert the authorization")
+    uri: Optional[StrictStr] = Field(default=None,
+                                     description="The base URI of the SAML endpoint that's used to assert the authorization")
     __properties: ClassVar[List[str]] = ["id", "name", "uri"]
 
     model_config = ConfigDict(
@@ -93,4 +96,3 @@ class SAMLPayLoadDataContextAllOfProtocolIssuer(BaseModel):
             "uri": obj.get("uri")
         })
         return _obj
-

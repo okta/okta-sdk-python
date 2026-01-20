@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class ApplicationFeatureType(str, Enum):
     """
-    Key name of the feature  | Feature name | Description   | | --------- | ------------- | | USER_PROVISIONING  | User profiles are pushed from Okta to the third-party app. Represents the **To App** provisioning feature setting in the Admin Console. | | INBOUND_PROVISIONING | User profiles are imported from the third-party app into Okta. This feature represents the **To Okta** provisioning feature setting in the Admin Console. |  Select the feature: 
+    Key name of the feature  | Feature name | Description   | | --------- | ------------- | | USER_PROVISIONING  | User profiles are pushed from Okta to the third-party app. Represents the **To App** provisioning feature setting in the Admin Console. | | INBOUND_PROVISIONING | User profiles are imported from the third-party app into Okta. This feature represents the **To Okta** provisioning feature setting in the Admin Console. |  Select the feature:
     """
 
     """
@@ -40,5 +40,3 @@ class ApplicationFeatureType(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ApplicationFeatureType from a JSON string"""
         return cls(json.loads(json_str))
-
-

@@ -32,16 +32,24 @@ from okta.models.embedded import Embedded
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DetailedHookKeyInstance(BaseModel):
     """
     A key object with public key details
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the key was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique Okta ID of this key record")
-    is_used: Optional[StrictStr] = Field(default=None, description="Whether this key is currently in use by other applications", alias="isUsed")
+    is_used: Optional[StrictStr] = Field(
+        default=None,
+        description="Whether this key is currently in use by other applications",
+        alias="isUsed")
     key_id: Optional[StrictStr] = Field(default=None, description="The alias of the public key", alias="keyId")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the key was updated", alias="lastUpdated")
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(default=None, description="Display name of the key")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the key was updated",
+        alias="lastUpdated")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(
+        default=None, description="Display name of the key")
     embedded: Optional[Embedded] = Field(default=None, alias="_embedded")
     __properties: ClassVar[List[str]] = ["created", "id", "isUsed", "keyId", "lastUpdated", "name", "_embedded"]
 
@@ -131,4 +139,3 @@ class DetailedHookKeyInstance(BaseModel):
             "_embedded": Embedded.from_dict(obj["_embedded"]) if obj.get("_embedded") is not None else None
         })
         return _obj
-

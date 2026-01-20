@@ -22,18 +22,19 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.protocol_id_verification import ProtocolIdVerification
 from okta.models.protocol_mtls import ProtocolMtls
 from okta.models.protocol_o_auth import ProtocolOAuth
 from okta.models.protocol_oidc import ProtocolOidc
 from okta.models.protocol_saml import ProtocolSaml
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
-IDENTITYPROVIDERPROTOCOL_ONE_OF_SCHEMAS = ["ProtocolIdVerification", "ProtocolMtls", "ProtocolOAuth", "ProtocolOidc", "ProtocolSaml"]
+IDENTITYPROVIDERPROTOCOL_ONE_OF_SCHEMAS = ["ProtocolIdVerification",
+                                           "ProtocolMtls", "ProtocolOAuth", "ProtocolOidc", "ProtocolSaml"]
+
 
 class IdentityProviderProtocol(BaseModel):
     """
@@ -50,13 +51,12 @@ class IdentityProviderProtocol(BaseModel):
     # data type: ProtocolIdVerification
     oneof_schema_5_validator: Optional[ProtocolIdVerification] = None
     actual_instance: Optional[Union[ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml]] = None
-    one_of_schemas: Set[str] = { "ProtocolIdVerification", "ProtocolMtls", "ProtocolOAuth", "ProtocolOidc", "ProtocolSaml" }
+    one_of_schemas: Set[str] = {"ProtocolIdVerification", "ProtocolMtls", "ProtocolOAuth", "ProtocolOidc", "ProtocolSaml"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -100,10 +100,14 @@ class IdentityProviderProtocol(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in IdentityProviderProtocol with oneOf schemas: ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in IdentityProviderProtocol with oneOf schemas: ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in IdentityProviderProtocol with oneOf schemas: ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in IdentityProviderProtocol with oneOf schemas: ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -151,10 +155,14 @@ class IdentityProviderProtocol(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into IdentityProviderProtocol with oneOf schemas: ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into IdentityProviderProtocol with oneOf schemas: ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into IdentityProviderProtocol with oneOf schemas: ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into IdentityProviderProtocol with oneOf schemas: ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -168,7 +176,8 @@ class IdentityProviderProtocol(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], ProtocolIdVerification, ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], ProtocolIdVerification,
+                                        ProtocolMtls, ProtocolOAuth, ProtocolOidc, ProtocolSaml]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
@@ -182,5 +191,3 @@ class IdentityProviderProtocol(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

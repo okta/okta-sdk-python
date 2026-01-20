@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProfileEnrollmentPolicyRuleActivationRequirement(BaseModel):
     """
     Contains a single Boolean property that indicates whether `emailVerification` should occur (`true`) or not (`false`, default)
-    """ # noqa: E501
+    """  # noqa: E501
     email_verification: Optional[StrictBool] = Field(default=None, alias="emailVerification")
     __properties: ClassVar[List[str]] = ["emailVerification"]
 
@@ -89,4 +90,3 @@ class ProfileEnrollmentPolicyRuleActivationRequirement(BaseModel):
             "emailVerification": obj.get("emailVerification")
         })
         return _obj
-

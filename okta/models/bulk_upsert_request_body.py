@@ -30,12 +30,17 @@ from okta.models.bulk_upsert_request_body_profiles_inner import BulkUpsertReques
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BulkUpsertRequestBody(BaseModel):
     """
     BulkUpsertRequestBody
-    """ # noqa: E501
-    entity_type: Optional[StrictStr] = Field(default=None, description="The type of data to upsert into the session. Currently, only `USERS` is supported.", alias="entityType")
-    profiles: Optional[List[BulkUpsertRequestBodyProfilesInner]] = Field(default=None, description="Array of user profiles to be uploaded")
+    """  # noqa: E501
+    entity_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of data to upsert into the session. Currently, only `USERS` is supported.",
+        alias="entityType")
+    profiles: Optional[List[BulkUpsertRequestBodyProfilesInner]] = Field(
+        default=None, description="Array of user profiles to be uploaded")
     __properties: ClassVar[List[str]] = ["entityType", "profiles"]
 
     @field_validator('entity_type')
@@ -109,4 +114,3 @@ class BulkUpsertRequestBody(BaseModel):
             "profiles": [BulkUpsertRequestBodyProfilesInner.from_dict(_item) for _item in obj["profiles"]] if obj.get("profiles") is not None else None
         })
         return _obj
-

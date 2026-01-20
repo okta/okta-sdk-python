@@ -22,15 +22,17 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.security_events_provider_settings_non_ssf_compliant import SecurityEventsProviderSettingsNonSSFCompliant
 from okta.models.security_events_provider_settings_ssf_compliant import SecurityEventsProviderSettingsSSFCompliant
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
-SECURITYEVENTSPROVIDERREQUESTSETTINGS_ONE_OF_SCHEMAS = ["SecurityEventsProviderSettingsNonSSFCompliant", "SecurityEventsProviderSettingsSSFCompliant"]
+SECURITYEVENTSPROVIDERREQUESTSETTINGS_ONE_OF_SCHEMAS = [
+    "SecurityEventsProviderSettingsNonSSFCompliant",
+    "SecurityEventsProviderSettingsSSFCompliant"]
+
 
 class SecurityEventsProviderRequestSettings(BaseModel):
     """
@@ -40,14 +42,14 @@ class SecurityEventsProviderRequestSettings(BaseModel):
     oneof_schema_1_validator: Optional[SecurityEventsProviderSettingsSSFCompliant] = None
     # data type: SecurityEventsProviderSettingsNonSSFCompliant
     oneof_schema_2_validator: Optional[SecurityEventsProviderSettingsNonSSFCompliant] = None
-    actual_instance: Optional[Union[SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant]] = None
-    one_of_schemas: Set[str] = { "SecurityEventsProviderSettingsNonSSFCompliant", "SecurityEventsProviderSettingsSSFCompliant" }
+    actual_instance: Optional[Union[SecurityEventsProviderSettingsNonSSFCompliant,
+                                    SecurityEventsProviderSettingsSSFCompliant]] = None
+    one_of_schemas: Set[str] = {"SecurityEventsProviderSettingsNonSSFCompliant", "SecurityEventsProviderSettingsSSFCompliant"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -76,10 +78,14 @@ class SecurityEventsProviderRequestSettings(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in SecurityEventsProviderRequestSettings with oneOf schemas: SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in SecurityEventsProviderRequestSettings with oneOf schemas: SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in SecurityEventsProviderRequestSettings with oneOf schemas: SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in SecurityEventsProviderRequestSettings with oneOf schemas: SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -109,10 +115,14 @@ class SecurityEventsProviderRequestSettings(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into SecurityEventsProviderRequestSettings with oneOf schemas: SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into SecurityEventsProviderRequestSettings with oneOf schemas: SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into SecurityEventsProviderRequestSettings with oneOf schemas: SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into SecurityEventsProviderRequestSettings with oneOf schemas: SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -126,7 +136,8 @@ class SecurityEventsProviderRequestSettings(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], SecurityEventsProviderSettingsNonSSFCompliant, SecurityEventsProviderSettingsSSFCompliant]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], SecurityEventsProviderSettingsNonSSFCompliant,
+                                        SecurityEventsProviderSettingsSSFCompliant]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
@@ -140,5 +151,3 @@ class SecurityEventsProviderRequestSettings(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

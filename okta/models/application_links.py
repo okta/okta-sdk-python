@@ -38,10 +38,11 @@ from okta.models.users_link import UsersLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationLinks(BaseModel):
     """
     Discoverable resources related to the app
-    """ # noqa: E501
+    """  # noqa: E501
     access_policy: Optional[AccessPolicyLink] = Field(default=None, alias="accessPolicy")
     activate: Optional[HrefObjectActivateLink] = None
     app_links: Optional[List[HrefObject]] = Field(default=None, description="List of app link resources", alias="appLinks")
@@ -52,7 +53,8 @@ class ApplicationLinks(BaseModel):
     metadata: Optional[MetadataLink] = None
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     users: Optional[UsersLink] = None
-    __properties: ClassVar[List[str]] = ["accessPolicy", "activate", "appLinks", "deactivate", "groups", "help", "logo", "metadata", "self", "users"]
+    __properties: ClassVar[List[str]] = ["accessPolicy", "activate", "appLinks",
+                                         "deactivate", "groups", "help", "logo", "metadata", "self", "users"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -186,4 +188,3 @@ class ApplicationLinks(BaseModel):
             "users": UsersLink.from_dict(obj["users"]) if obj.get("users") is not None else None
         })
         return _obj
-

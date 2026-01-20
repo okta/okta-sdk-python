@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportRequestDataAction(BaseModel):
     """
     The object that specifies the default action Okta is set to take
-    """ # noqa: E501
-    result: Optional[StrictStr] = Field(default=None, description="The current default action that results when Okta imports a user. The two possible values are `CREATE_USER` and `LINK_USER`. You can change the action that is taken by means of the commands object you return.")
+    """  # noqa: E501
+    result: Optional[StrictStr] = Field(
+        default=None,
+        description="The current default action that results when Okta imports a user. The two possible values are `CREATE_USER` and `LINK_USER`. You can change the action that is taken by means of the commands object you return.")
     __properties: ClassVar[List[str]] = ["result"]
 
     @field_validator('result')
@@ -99,4 +102,3 @@ class UserImportRequestDataAction(BaseModel):
             "result": obj.get("result")
         })
         return _obj
-

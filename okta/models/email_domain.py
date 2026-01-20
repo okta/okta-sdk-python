@@ -29,13 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailDomain(BaseModel):
     """
     EmailDomain
-    """ # noqa: E501
+    """  # noqa: E501
     brand_id: StrictStr = Field(alias="brandId")
     domain: StrictStr
-    validation_subdomain: Optional[StrictStr] = Field(default='mail', description="Subdomain for the email sender's custom mail domain. Specify your subdomain when you configure a custom mail domain.", alias="validationSubdomain")
+    validation_subdomain: Optional[StrictStr] = Field(
+        default='mail',
+        description="Subdomain for the email sender's custom mail domain. Specify your subdomain when you configure a custom mail domain.",
+        alias="validationSubdomain")
     display_name: StrictStr = Field(alias="displayName")
     user_name: StrictStr = Field(alias="userName")
     __properties: ClassVar[List[str]] = ["displayName", "userName"]
@@ -94,4 +98,3 @@ class EmailDomain(BaseModel):
             "userName": obj.get("userName")
         })
         return _obj
-

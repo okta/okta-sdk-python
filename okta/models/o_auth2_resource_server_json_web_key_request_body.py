@@ -29,12 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ResourceServerJsonWebKeyRequestBody(BaseModel):
     """
     OAuth2ResourceServerJsonWebKeyRequestBody
-    """ # noqa: E501
+    """  # noqa: E501
     e: Optional[StrictStr] = Field(default=None, description="RSA key value (exponent) for key binding")
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON web key in the custom authorization server's public JWKS")
+    kid: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier of the JSON web key in the custom authorization server's public JWKS")
     kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's key pair")
     n: Optional[StrictStr] = Field(default=None, description="RSA key value (modulus) for key binding")
     status: Optional[StrictStr] = Field(default=None, description="Status of the JSON Web Key")
@@ -114,4 +117,3 @@ class OAuth2ResourceServerJsonWebKeyRequestBody(BaseModel):
             "use": obj.get("use")
         })
         return _obj
-

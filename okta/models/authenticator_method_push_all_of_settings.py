@@ -32,10 +32,11 @@ from okta.models.push_method_key_protection import PushMethodKeyProtection
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorMethodPushAllOfSettings(BaseModel):
     """
     AuthenticatorMethodPushAllOfSettings
-    """ # noqa: E501
+    """  # noqa: E501
     algorithms: Optional[List[AuthenticatorMethodAlgorithm]] = None
     key_protection: Optional[PushMethodKeyProtection] = Field(default=None, alias="keyProtection")
     transaction_types: Optional[List[AuthenticatorMethodTransactionType]] = Field(default=None, alias="transactionTypes")
@@ -96,4 +97,3 @@ class AuthenticatorMethodPushAllOfSettings(BaseModel):
             "transactionTypes": obj.get("transactionTypes")
         })
         return _obj
-

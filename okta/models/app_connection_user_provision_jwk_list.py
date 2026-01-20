@@ -30,10 +30,11 @@ from okta.models.json_web_key import JsonWebKey
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppConnectionUserProvisionJWKList(BaseModel):
     """
     AppConnectionUserProvisionJWKList
-    """ # noqa: E501
+    """  # noqa: E501
     keys: List[JsonWebKey]
     __properties: ClassVar[List[str]] = ["keys"]
 
@@ -97,4 +98,3 @@ class AppConnectionUserProvisionJWKList(BaseModel):
             "keys": [JsonWebKey.from_dict(_item) for _item in obj["keys"]] if obj.get("keys") is not None else None
         })
         return _obj
-

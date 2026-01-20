@@ -29,13 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationSettingsNotificationsVpnNetwork(BaseModel):
     """
     Defines network zones for VPN notification
-    """ # noqa: E501
-    connection: Optional[StrictStr] = Field(default=None, description="Specifies the VPN connection details required to access the app")
-    exclude: Optional[List[StrictStr]] = Field(default=None, description="Defines the IP addresses or network ranges that are excluded from the VPN requirement")
-    include: Optional[List[StrictStr]] = Field(default=None, description="Defines the IP addresses or network ranges that are required to use the VPN")
+    """  # noqa: E501
+    connection: Optional[StrictStr] = Field(default=None,
+                                            description="Specifies the VPN connection details required to access the app")
+    exclude: Optional[List[StrictStr]] = Field(
+        default=None, description="Defines the IP addresses or network ranges that are excluded from the VPN requirement")
+    include: Optional[List[StrictStr]] = Field(
+        default=None, description="Defines the IP addresses or network ranges that are required to use the VPN")
     __properties: ClassVar[List[str]] = ["connection", "exclude", "include"]
 
     @field_validator('connection')
@@ -103,4 +107,3 @@ class ApplicationSettingsNotificationsVpnNetwork(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

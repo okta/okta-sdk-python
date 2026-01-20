@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyCustomAppAllOfProviderConfigurationFcm(BaseModel):
     """
     AuthenticatorKeyCustomAppAllOfProviderConfigurationFcm
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="ID of the FCM (Firebase Cloud Messaging Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)")
+    """  # noqa: E501
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the FCM (Firebase Cloud Messaging Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)")
     __properties: ClassVar[List[str]] = ["id"]
 
     model_config = ConfigDict(
@@ -89,4 +92,3 @@ class AuthenticatorKeyCustomAppAllOfProviderConfigurationFcm(BaseModel):
             "id": obj.get("id")
         })
         return _obj
-

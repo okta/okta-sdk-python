@@ -32,11 +32,13 @@ from okta.models.simulate_result_status import SimulateResultStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SimulateResultPoliciesItems(BaseModel):
     """
     SimulateResultPoliciesItems
-    """ # noqa: E501
-    conditions: Optional[List[SimulateResultConditions]] = Field(default=None, description="List of all conditions involved for this policy evaluation")
+    """  # noqa: E501
+    conditions: Optional[List[SimulateResultConditions]] = Field(
+        default=None, description="List of all conditions involved for this policy evaluation")
     id: Optional[StrictStr] = Field(default=None, description="ID of the specified policy type")
     name: Optional[StrictStr] = Field(default=None, description="Policy name")
     rules: Optional[List[SimulateResultRules]] = None
@@ -114,4 +116,3 @@ class SimulateResultPoliciesItems(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

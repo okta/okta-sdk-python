@@ -30,10 +30,11 @@ from okta.models.authenticator_enrollment_policy_conditions_all_of_people_groups
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicyConditionsAllOfPeople(BaseModel):
     """
     Identifies users and groups that are used together
-    """ # noqa: E501
+    """  # noqa: E501
     groups: Optional[AuthenticatorEnrollmentPolicyConditionsAllOfPeopleGroups] = None
     __properties: ClassVar[List[str]] = ["groups"]
 
@@ -97,4 +98,3 @@ class AuthenticatorEnrollmentPolicyConditionsAllOfPeople(BaseModel):
             "groups": AuthenticatorEnrollmentPolicyConditionsAllOfPeopleGroups.from_dict(obj["groups"]) if obj.get("groups") is not None else None
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.okta_support_case_self_assigned import OktaSupportCaseSelfAssig
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaSupportCase(BaseModel):
     """
     OktaSupportCase
-    """ # noqa: E501
+    """  # noqa: E501
     case_number: Optional[StrictStr] = Field(default=None, description="Okta Support case number", alias="caseNumber")
     impersonation: Optional[OktaSupportCaseImpersonation] = None
     self_assigned: Optional[OktaSupportCaseSelfAssigned] = Field(default=None, alias="selfAssigned")
@@ -115,4 +116,3 @@ class OktaSupportCase(BaseModel):
             "subject": obj.get("subject")
         })
         return _obj
-

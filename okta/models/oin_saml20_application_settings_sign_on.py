@@ -30,18 +30,39 @@ from okta.models.saml_attribute_statement import SamlAttributeStatement
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OINSaml20ApplicationSettingsSignOn(BaseModel):
     """
     Contains SAML 2.0 sign-on mode attributes. > **Note:** Set `destinationOverride` to configure any other SAML 2.0 attributes in this section.
-    """ # noqa: E501
-    attribute_statements: Optional[List[SamlAttributeStatement]] = Field(default=None, description="A list of custom attribute statements for the app's SAML assertion. See [SAML 2.0 Technical Overview](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html).  There are two types of attribute statements: | Type | Description | | ---- | ----------- | | EXPRESSION | Generic attribute statement that can be dynamic and supports [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/) | | GROUP | Group attribute statement | ", alias="attributeStatements")
-    audience_override: Optional[StrictStr] = Field(default=None, description="Audience override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).", alias="audienceOverride")
-    default_relay_state: Optional[StrictStr] = Field(default=None, description="Identifies a specific application resource in an IdP-initiated SSO scenario", alias="defaultRelayState")
-    destination_override: Optional[StrictStr] = Field(default=None, description="Destination override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).", alias="destinationOverride")
-    recipient_override: Optional[StrictStr] = Field(default=None, description="Recipient override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).", alias="recipientOverride")
-    saml_assertion_lifetime_seconds: Optional[StrictInt] = Field(default=None, description="Determines the SAML app session lifetimes with Okta", alias="samlAssertionLifetimeSeconds")
-    sso_acs_url_override: Optional[StrictStr] = Field(default=None, description="Assertion Consumer Service (ACS) URL override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).", alias="ssoAcsUrlOverride")
-    __properties: ClassVar[List[str]] = ["attributeStatements", "audienceOverride", "defaultRelayState", "destinationOverride", "recipientOverride", "samlAssertionLifetimeSeconds", "ssoAcsUrlOverride"]
+    """  # noqa: E501
+    attribute_statements: Optional[List[SamlAttributeStatement]] = Field(
+        default=None, description="A list of custom attribute statements for the app's SAML assertion. See [SAML 2.0 Technical Overview](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html).  There are two types of attribute statements: | Type | Description | | ---- | ----------- | | EXPRESSION | Generic attribute statement that can be dynamic and supports [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/) | | GROUP | Group attribute statement | ", alias="attributeStatements")
+    audience_override: Optional[StrictStr] = Field(
+        default=None,
+        description="Audience override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="audienceOverride")
+    default_relay_state: Optional[StrictStr] = Field(
+        default=None,
+        description="Identifies a specific application resource in an IdP-initiated SSO scenario",
+        alias="defaultRelayState")
+    destination_override: Optional[StrictStr] = Field(
+        default=None,
+        description="Destination override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="destinationOverride")
+    recipient_override: Optional[StrictStr] = Field(
+        default=None,
+        description="Recipient override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="recipientOverride")
+    saml_assertion_lifetime_seconds: Optional[StrictInt] = Field(
+        default=None,
+        description="Determines the SAML app session lifetimes with Okta",
+        alias="samlAssertionLifetimeSeconds")
+    sso_acs_url_override: Optional[StrictStr] = Field(
+        default=None,
+        description="Assertion Consumer Service (ACS) URL override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="ssoAcsUrlOverride")
+    __properties: ClassVar[List[str]] = ["attributeStatements", "audienceOverride", "defaultRelayState",
+                                         "destinationOverride", "recipientOverride", "samlAssertionLifetimeSeconds", "ssoAcsUrlOverride"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -134,4 +155,3 @@ class OINSaml20ApplicationSettingsSignOn(BaseModel):
             "ssoAcsUrlOverride": obj.get("ssoAcsUrlOverride")
         })
         return _obj
-

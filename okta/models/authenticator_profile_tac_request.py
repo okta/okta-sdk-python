@@ -29,12 +29,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorProfileTacRequest(BaseModel):
     """
     Defines the authenticator specific parameters
-    """ # noqa: E501
-    multi_use: Optional[StrictBool] = Field(default=None, description="Determines whether the enrollment can be used more than once. To enable multi-use, the org-level authenticator’s configuration must allow multi-use.", alias="multiUse")
-    ttl: Optional[StrictStr] = Field(default=None, description="Time-to-live (TTL) in minutes.  Specifies how long the TAC enrollment is valid after it's created and activated. The configured value must be between 10 minutes (`10`) and 10 days (`14400`), inclusive. The actual allowed range depends on the org-level authenticator configuration.")
+    """  # noqa: E501
+    multi_use: Optional[StrictBool] = Field(
+        default=None,
+        description="Determines whether the enrollment can be used more than once. To enable multi-use, the org-level authenticator’s configuration must allow multi-use.",
+        alias="multiUse")
+    ttl: Optional[StrictStr] = Field(
+        default=None,
+        description="Time-to-live (TTL) in minutes.  Specifies how long the TAC enrollment is valid after it's created and activated. The configured value must be between 10 minutes (`10`) and 10 days (`14400`), inclusive. The actual allowed range depends on the org-level authenticator configuration.")
     __properties: ClassVar[List[str]] = ["multiUse", "ttl"]
 
     model_config = ConfigDict(
@@ -91,4 +97,3 @@ class AuthenticatorProfileTacRequest(BaseModel):
             "ttl": obj.get("ttl")
         })
         return _obj
-

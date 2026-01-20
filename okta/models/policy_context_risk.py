@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyContextRisk(BaseModel):
     """
     The risk rule condition level
-    """ # noqa: E501
+    """  # noqa: E501
     level: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["level"]
 
@@ -99,4 +100,3 @@ class PolicyContextRisk(BaseModel):
             "level": obj.get("level")
         })
         return _obj
-

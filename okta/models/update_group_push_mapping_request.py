@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UpdateGroupPushMappingRequest(BaseModel):
     """
     UpdateGroupPushMappingRequest
-    """ # noqa: E501
+    """  # noqa: E501
     status: StrictStr
     __properties: ClassVar[List[str]] = ["status"]
 
@@ -89,4 +90,3 @@ class UpdateGroupPushMappingRequest(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

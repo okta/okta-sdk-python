@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppUserPasswordCredential(BaseModel):
     """
     The user's password. This is a write-only property. An empty `password` object is returned to indicate that a password value exists.
-    """ # noqa: E501
+    """  # noqa: E501
     value: Optional[SecretStr] = Field(default=None, description="Password value")
     __properties: ClassVar[List[str]] = ["value"]
 
@@ -89,4 +90,3 @@ class AppUserPasswordCredential(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

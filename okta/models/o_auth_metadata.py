@@ -37,36 +37,84 @@ from okta.models.token_delivery_mode import TokenDeliveryMode
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuthMetadata(BaseModel):
     """
     OAuthMetadata
-    """ # noqa: E501
-    authorization_endpoint: Optional[StrictStr] = Field(default=None, description="URL of the authorization server's authorization endpoint.")
-    backchannel_authentication_request_signing_alg_values_supported: Optional[List[SigningAlgorithm]] = Field(default=None, description="<x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>A list of signing algorithms that this authorization server supports for signed requests.")
-    backchannel_token_delivery_modes_supported: Optional[List[TokenDeliveryMode]] = Field(default=None, description="<x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>The delivery modes that this authorization server supports for Client-Initiated Backchannel Authentication.")
-    claims_supported: Optional[List[StrictStr]] = Field(default=None, description="A list of the claims supported by this authorization server.")
-    code_challenge_methods_supported: Optional[List[CodeChallengeMethod]] = Field(default=None, description="A list of PKCE code challenge methods supported by this authorization server.")
+    """  # noqa: E501
+    authorization_endpoint: Optional[StrictStr] = Field(default=None,
+                                                        description="URL of the authorization server's authorization endpoint.")
+    backchannel_authentication_request_signing_alg_values_supported: Optional[List[SigningAlgorithm]] = Field(
+        default=None, description="<x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>A list of signing algorithms that this authorization server supports for signed requests.")
+    backchannel_token_delivery_modes_supported: Optional[List[TokenDeliveryMode]] = Field(
+        default=None, description="<x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>The delivery modes that this authorization server supports for Client-Initiated Backchannel Authentication.")
+    claims_supported: Optional[List[StrictStr]] = Field(
+        default=None, description="A list of the claims supported by this authorization server.")
+    code_challenge_methods_supported: Optional[List[CodeChallengeMethod]] = Field(
+        default=None, description="A list of PKCE code challenge methods supported by this authorization server.")
     device_authorization_endpoint: Optional[StrictStr] = None
-    dpop_signing_alg_values_supported: Optional[List[StrictStr]] = Field(default=None, description="A list of signing algorithms supported by this authorization server for Demonstrating Proof-of-Possession (DPoP) JWTs.")
-    end_session_endpoint: Optional[StrictStr] = Field(default=None, description="URL of the authorization server's logout endpoint.")
-    grant_types_supported: Optional[List[GrantType]] = Field(default=None, description="A list of the grant type values that this authorization server supports.")
-    introspection_endpoint: Optional[StrictStr] = Field(default=None, description="URL of the authorization server's introspection endpoint.")
-    introspection_endpoint_auth_methods_supported: Optional[List[EndpointAuthMethod]] = Field(default=None, description="A list of client authentication methods supported by this introspection endpoint.")
-    issuer: Optional[StrictStr] = Field(default=None, description="The authorization server's issuer identifier. In the context of this document, this is your authorization server's base URL. This becomes the `iss` claim in an access token.")
-    jwks_uri: Optional[StrictStr] = Field(default=None, description="URL of the authorization server's JSON Web Key Set document.")
+    dpop_signing_alg_values_supported: Optional[List[StrictStr]] = Field(
+        default=None, description="A list of signing algorithms supported by this authorization server for Demonstrating Proof-of-Possession (DPoP) JWTs.")
+    end_session_endpoint: Optional[StrictStr] = Field(default=None,
+                                                      description="URL of the authorization server's logout endpoint.")
+    grant_types_supported: Optional[List[GrantType]] = Field(
+        default=None, description="A list of the grant type values that this authorization server supports.")
+    introspection_endpoint: Optional[StrictStr] = Field(default=None,
+                                                        description="URL of the authorization server's introspection endpoint.")
+    introspection_endpoint_auth_methods_supported: Optional[List[EndpointAuthMethod]] = Field(
+        default=None, description="A list of client authentication methods supported by this introspection endpoint.")
+    issuer: Optional[StrictStr] = Field(
+        default=None,
+        description="The authorization server's issuer identifier. In the context of this document, this is your authorization server's base URL. This becomes the `iss` claim in an access token.")
+    jwks_uri: Optional[StrictStr] = Field(default=None,
+                                          description="URL of the authorization server's JSON Web Key Set document.")
     pushed_authorization_request_endpoint: Optional[StrictStr] = None
-    registration_endpoint: Optional[StrictStr] = Field(default=None, description="URL of the authorization server's JSON Web Key Set document.")
-    request_object_signing_alg_values_supported: Optional[List[SigningAlgorithm]] = Field(default=None, description="A list of signing algorithms that this authorization server supports for signed requests.")
-    request_parameter_supported: Optional[StrictBool] = Field(default=None, description="Indicates if Request Parameters are supported by this authorization server.")
-    response_modes_supported: Optional[List[ResponseMode]] = Field(default=None, description="A list of the `response_mode` values that this authorization server supports. More information here.")
-    response_types_supported: Optional[List[ResponseTypesSupported]] = Field(default=None, description="A list of the `response_type` values that this authorization server supports. Can be a combination of `code`, `token`, and `id_token`.")
-    revocation_endpoint: Optional[StrictStr] = Field(default=None, description="URL of the authorization server's revocation endpoint.")
-    revocation_endpoint_auth_methods_supported: Optional[List[EndpointAuthMethod]] = Field(default=None, description="A list of client authentication methods supported by this revocation endpoint.")
-    scopes_supported: Optional[List[StrictStr]] = Field(default=None, description="A list of the scope values that this authorization server supports.")
-    subject_types_supported: Optional[List[SubjectType]] = Field(default=None, description="A list of the Subject Identifier types that this authorization server supports. Valid types include `pairwise` and `public`, but only `public` is currently supported. See the [Subject Identifier Types](https://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes) section in the OpenID Connect specification.")
+    registration_endpoint: Optional[StrictStr] = Field(
+        default=None, description="URL of the authorization server's JSON Web Key Set document.")
+    request_object_signing_alg_values_supported: Optional[List[SigningAlgorithm]] = Field(
+        default=None, description="A list of signing algorithms that this authorization server supports for signed requests.")
+    request_parameter_supported: Optional[StrictBool] = Field(
+        default=None, description="Indicates if Request Parameters are supported by this authorization server.")
+    response_modes_supported: Optional[List[ResponseMode]] = Field(
+        default=None, description="A list of the `response_mode` values that this authorization server supports. More information here.")
+    response_types_supported: Optional[List[ResponseTypesSupported]] = Field(
+        default=None, description="A list of the `response_type` values that this authorization server supports. Can be a combination of `code`, `token`, and `id_token`.")
+    revocation_endpoint: Optional[StrictStr] = Field(default=None,
+                                                     description="URL of the authorization server's revocation endpoint.")
+    revocation_endpoint_auth_methods_supported: Optional[List[EndpointAuthMethod]] = Field(
+        default=None, description="A list of client authentication methods supported by this revocation endpoint.")
+    scopes_supported: Optional[List[StrictStr]] = Field(
+        default=None, description="A list of the scope values that this authorization server supports.")
+    subject_types_supported: Optional[List[SubjectType]] = Field(
+        default=None, description="A list of the Subject Identifier types that this authorization server supports. Valid types include `pairwise` and `public`, but only `public` is currently supported. See the [Subject Identifier Types](https://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes) section in the OpenID Connect specification.")
     token_endpoint: Optional[StrictStr] = Field(default=None, description="URL of the authorization server's token endpoint.")
-    token_endpoint_auth_methods_supported: Optional[List[EndpointAuthMethod]] = Field(default=None, description="A list of client authentication methods supported by this token endpoint.")
-    __properties: ClassVar[List[str]] = ["authorization_endpoint", "backchannel_authentication_request_signing_alg_values_supported", "backchannel_token_delivery_modes_supported", "claims_supported", "code_challenge_methods_supported", "device_authorization_endpoint", "dpop_signing_alg_values_supported", "end_session_endpoint", "grant_types_supported", "introspection_endpoint", "introspection_endpoint_auth_methods_supported", "issuer", "jwks_uri", "pushed_authorization_request_endpoint", "registration_endpoint", "request_object_signing_alg_values_supported", "request_parameter_supported", "response_modes_supported", "response_types_supported", "revocation_endpoint", "revocation_endpoint_auth_methods_supported", "scopes_supported", "subject_types_supported", "token_endpoint", "token_endpoint_auth_methods_supported"]
+    token_endpoint_auth_methods_supported: Optional[List[EndpointAuthMethod]] = Field(
+        default=None, description="A list of client authentication methods supported by this token endpoint.")
+    __properties: ClassVar[List[str]] = ["authorization_endpoint",
+                                         "backchannel_authentication_request_signing_alg_values_supported",
+                                         "backchannel_token_delivery_modes_supported",
+                                         "claims_supported",
+                                         "code_challenge_methods_supported",
+                                         "device_authorization_endpoint",
+                                         "dpop_signing_alg_values_supported",
+                                         "end_session_endpoint",
+                                         "grant_types_supported",
+                                         "introspection_endpoint",
+                                         "introspection_endpoint_auth_methods_supported",
+                                         "issuer",
+                                         "jwks_uri",
+                                         "pushed_authorization_request_endpoint",
+                                         "registration_endpoint",
+                                         "request_object_signing_alg_values_supported",
+                                         "request_parameter_supported",
+                                         "response_modes_supported",
+                                         "response_types_supported",
+                                         "revocation_endpoint",
+                                         "revocation_endpoint_auth_methods_supported",
+                                         "scopes_supported",
+                                         "subject_types_supported",
+                                         "token_endpoint",
+                                         "token_endpoint_auth_methods_supported"]
 
     @field_validator('dpop_signing_alg_values_supported')
     def dpop_signing_alg_values_supported_validate_enum(cls, value):
@@ -156,4 +204,3 @@ class OAuthMetadata(BaseModel):
             "token_endpoint_auth_methods_supported": obj.get("token_endpoint_auth_methods_supported")
         })
         return _obj
-

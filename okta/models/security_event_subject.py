@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventSubject(BaseModel):
     """
     The event subjects
-    """ # noqa: E501
+    """  # noqa: E501
     device: Optional[Dict[str, Any]] = Field(default=None, description="The device involved with the event")
     user: Optional[Dict[str, Any]] = Field(default=None, description="The user involved with the event")
     __properties: ClassVar[List[str]] = ["device", "user"]
@@ -91,4 +92,3 @@ class SecurityEventSubject(BaseModel):
             "user": obj.get("user")
         })
         return _obj
-

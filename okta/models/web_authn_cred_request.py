@@ -29,13 +29,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WebAuthnCredRequest(BaseModel):
     """
     Credential request object for the initialized credential, along with the enrollment and key identifiers to associate with the credential
-    """ # noqa: E501
-    authenticator_enrollment_id: Optional[StrictStr] = Field(default=None, description="ID for a WebAuthn preregistration factor in Okta", alias="authenticatorEnrollmentId")
-    cred_request_jwe: Optional[StrictStr] = Field(default=None, description="Encrypted JWE of credential request for the fulfillment provider", alias="credRequestJwe")
-    key_id: Optional[StrictStr] = Field(default=None, description="ID for the Okta response key-pair used to encrypt and decrypt credential requests and responses", alias="keyId")
+    """  # noqa: E501
+    authenticator_enrollment_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID for a WebAuthn preregistration factor in Okta",
+        alias="authenticatorEnrollmentId")
+    cred_request_jwe: Optional[StrictStr] = Field(
+        default=None,
+        description="Encrypted JWE of credential request for the fulfillment provider",
+        alias="credRequestJwe")
+    key_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID for the Okta response key-pair used to encrypt and decrypt credential requests and responses",
+        alias="keyId")
     __properties: ClassVar[List[str]] = ["authenticatorEnrollmentId", "credRequestJwe", "keyId"]
 
     model_config = ConfigDict(
@@ -93,4 +103,3 @@ class WebAuthnCredRequest(BaseModel):
             "keyId": obj.get("keyId")
         })
         return _obj
-

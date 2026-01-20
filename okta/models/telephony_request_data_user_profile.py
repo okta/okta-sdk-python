@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TelephonyRequestDataUserProfile(BaseModel):
     """
     User profile specifies information about the Okta user
-    """ # noqa: E501
+    """  # noqa: E501
     first_name: Optional[StrictStr] = Field(default=None, description="The user's first name", alias="firstName")
     last_name: Optional[StrictStr] = Field(default=None, description="The user's last name", alias="lastName")
     login: Optional[StrictStr] = Field(default=None, description="The user's Okta login")
@@ -95,4 +96,3 @@ class TelephonyRequestDataUserProfile(BaseModel):
             "userId": obj.get("userId")
         })
         return _obj
-

@@ -26,19 +26,17 @@ import json
 
 from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.authenticator_key_enum import AuthenticatorKeyEnum
 from okta.models.authenticator_key_okta_verify_all_of_settings import AuthenticatorKeyOktaVerifyAllOfSettings
 from okta.models.authenticator_links import AuthenticatorLinks
 from okta.models.authenticator_simple import AuthenticatorSimple
-from okta.models.authenticator_type import AuthenticatorType
-from okta.models.lifecycle_status import LifecycleStatus
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class AuthenticatorKeyOktaVerify(AuthenticatorSimple):
     """
     AuthenticatorKeyOktaVerify
-    """ # noqa: E501
+    """  # noqa: E501
     settings: Optional[AuthenticatorKeyOktaVerifyAllOfSettings] = None
     __properties: ClassVar[List[str]] = ["created", "id", "key", "lastUpdated", "name", "status", "type", "_links", "settings"]
 
@@ -117,4 +115,3 @@ class AuthenticatorKeyOktaVerify(AuthenticatorSimple):
             "settings": AuthenticatorKeyOktaVerifyAllOfSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

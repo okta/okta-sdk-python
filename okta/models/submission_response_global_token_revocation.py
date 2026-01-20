@@ -29,14 +29,20 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SubmissionResponseGlobalTokenRevocation(BaseModel):
     """
     SubmissionResponseGlobalTokenRevocation
-    """ # noqa: E501
+    """  # noqa: E501
     endpoint: StrictStr = Field(description="URL of the authorization server's global token revocation endpoint")
     subject_format: StrictStr = Field(description="The format of the subject", alias="subjectFormat")
-    auth_method: StrictStr = Field(description="Authentication method <br> **Note:** Currently, only the `SIGNED_JWT` method is supported.", alias="authMethod")
-    partial_logout: Optional[StrictBool] = Field(default=False, description="Allow partial support for Universal Logout", alias="partialLogout")
+    auth_method: StrictStr = Field(
+        description="Authentication method <br> **Note:** Currently, only the `SIGNED_JWT` method is supported.",
+        alias="authMethod")
+    partial_logout: Optional[StrictBool] = Field(
+        default=False,
+        description="Allow partial support for Universal Logout",
+        alias="partialLogout")
     __properties: ClassVar[List[str]] = ["endpoint", "subjectFormat", "authMethod", "partialLogout"]
 
     @field_validator('subject_format')
@@ -109,4 +115,3 @@ class SubmissionResponseGlobalTokenRevocation(BaseModel):
             "partialLogout": obj.get("partialLogout") if obj.get("partialLogout") is not None else False
         })
         return _obj
-

@@ -32,19 +32,30 @@ from okta.models.managed_connection_vaulted_secret import ManagedConnectionVault
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class STSVaultSecretConnection(BaseModel):
     """
     STS connection to a vaulted secret
-    """ # noqa: E501
+    """  # noqa: E501
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
-    id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the managed connection. Only present for managed connections.")
-    orn: Optional[StrictStr] = Field(default=None, description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the managed connection")
-    protocol_type: Optional[StrictStr] = Field(default=None, description="The authentication protocol type used for the connection", alias="protocolType")
-    resource_indicator: StrictStr = Field(description="Resource indicator used when requesting tokens.", alias="resourceIndicator")
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier for the managed connection. Only present for managed connections.")
+    orn: Optional[StrictStr] = Field(
+        default=None,
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the managed connection")
+    protocol_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The authentication protocol type used for the connection",
+        alias="protocolType")
+    resource_indicator: StrictStr = Field(
+        description="Resource indicator used when requesting tokens.",
+        alias="resourceIndicator")
     secret: ManagedConnectionVaultedSecret
     status: Optional[ManagedConnectionStatus] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["connectionType", "id", "orn", "protocolType", "resourceIndicator", "secret", "status", "_links"]
+    __properties: ClassVar[List[str]] = ["connectionType", "id", "orn",
+                                         "protocolType", "resourceIndicator", "secret", "status", "_links"]
 
     @field_validator('connection_type')
     def connection_type_validate_enum(cls, value):
@@ -137,4 +148,3 @@ class STSVaultSecretConnection(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

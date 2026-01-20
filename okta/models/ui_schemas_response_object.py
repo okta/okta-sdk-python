@@ -32,13 +32,16 @@ from okta.models.ui_schema_object import UISchemaObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UISchemasResponseObject(BaseModel):
     """
     UISchemasResponseObject
-    """ # noqa: E501
+    """  # noqa: E501
     created: datetime = Field(description="Timestamp when the UI Schema was created (ISO 86001)")
     id: StrictStr = Field(description="Unique identifier for the UI Schema")
-    last_updated: datetime = Field(description="Timestamp when the UI Schema was last modified (ISO 86001)", alias="lastUpdated")
+    last_updated: datetime = Field(
+        description="Timestamp when the UI Schema was last modified (ISO 86001)",
+        alias="lastUpdated")
     ui_schema: UISchemaObject = Field(alias="uiSchema")
     links: LinksSelf = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "uiSchema", "_links"]
@@ -120,4 +123,3 @@ class UISchemasResponseObject(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

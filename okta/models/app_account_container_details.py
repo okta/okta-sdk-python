@@ -31,19 +31,30 @@ from okta.models.app_instance_container_status import AppInstanceContainerStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppAccountContainerDetails(BaseModel):
     """
     Container details for resource type APP_ACCOUNT
-    """ # noqa: E501
+    """  # noqa: E501
     app_name: Optional[StrictStr] = Field(default=None, description="The application name", alias="appName")
     container_id: StrictStr = Field(description="The app ID associated with the privileged resource", alias="containerId")
-    display_name: Optional[StrictStr] = Field(default=None, description="Human-readable name of the container that owns the privileged resource", alias="displayName")
+    display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Human-readable name of the container that owns the privileged resource",
+        alias="displayName")
     global_app_id: Optional[StrictStr] = Field(default=None, description="The application global ID", alias="globalAppId")
-    password_push_supported: Optional[StrictBool] = Field(default=None, description="Indicates if the application supports password push", alias="passwordPushSupported")
-    provisioning_enabled: Optional[StrictBool] = Field(default=None, description="Indicates if provisioning is enabled for this application", alias="provisioningEnabled")
+    password_push_supported: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the application supports password push",
+        alias="passwordPushSupported")
+    provisioning_enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if provisioning is enabled for this application",
+        alias="provisioningEnabled")
     status: Optional[AppInstanceContainerStatus] = None
     links: Optional[AppAccountContainerLink] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["appName", "containerId", "displayName", "globalAppId", "passwordPushSupported", "provisioningEnabled", "status", "_links"]
+    __properties: ClassVar[List[str]] = ["appName", "containerId", "displayName",
+                                         "globalAppId", "passwordPushSupported", "provisioningEnabled", "status", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -122,4 +133,3 @@ class AppAccountContainerDetails(BaseModel):
             "_links": AppAccountContainerLink.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

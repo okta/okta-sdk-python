@@ -31,10 +31,11 @@ from okta.models.saml_pay_load_data_context import SAMLPayLoadDataContext
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadData(BaseModel):
     """
     SAMLPayLoadData
-    """ # noqa: E501
+    """  # noqa: E501
     context: Optional[SAMLPayLoadDataContext] = None
     assertion: Optional[SAMLPayLoadDataAssertion] = None
     __properties: ClassVar[List[str]] = ["context", "assertion"]
@@ -107,4 +108,3 @@ class SAMLPayLoadData(BaseModel):
             "assertion": SAMLPayLoadDataAssertion.from_dict(obj["assertion"]) if obj.get("assertion") is not None else None
         })
         return _obj
-

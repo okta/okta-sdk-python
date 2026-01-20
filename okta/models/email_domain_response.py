@@ -31,15 +31,19 @@ from okta.models.email_domain_status import EmailDomainStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailDomainResponse(BaseModel):
     """
     EmailDomainResponse
-    """ # noqa: E501
+    """  # noqa: E501
     dns_validation_records: Optional[List[EmailDomainDNSRecord]] = Field(default=None, alias="dnsValidationRecords")
     domain: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
     validation_status: Optional[EmailDomainStatus] = Field(default=None, alias="validationStatus")
-    validation_subdomain: Optional[StrictStr] = Field(default='mail', description="The subdomain for the email sender's custom mail domain", alias="validationSubdomain")
+    validation_subdomain: Optional[StrictStr] = Field(
+        default='mail',
+        description="The subdomain for the email sender's custom mail domain",
+        alias="validationSubdomain")
     display_name: StrictStr = Field(alias="displayName")
     user_name: StrictStr = Field(alias="userName")
     __properties: ClassVar[List[str]] = ["displayName", "userName"]
@@ -98,4 +102,3 @@ class EmailDomainResponse(BaseModel):
             "userName": obj.get("userName")
         })
         return _obj
-

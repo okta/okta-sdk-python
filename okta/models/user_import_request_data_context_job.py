@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportRequestDataContextJob(BaseModel):
     """
     The details of the running import job
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The ID number of the import job")
     type: Optional[StrictStr] = Field(default=None, description="The type of import job")
     __properties: ClassVar[List[str]] = ["id", "type"]
@@ -91,4 +92,3 @@ class UserImportRequestDataContextJob(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

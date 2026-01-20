@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ClientJsonSigningKeyRequest(BaseModel):
     """
     A [JSON Web Key (JWK)](https://tools.ietf.org/html/rfc7517) is a JSON representation of a cryptographic key. Okta uses signing keys to verify the signature of a JWT when provided for the `private_key_jwt` client authentication method or for a signed authorize request object. Okta supports both RSA and Elliptic Curve (EC) keys for signing tokens.
-    """ # noqa: E501
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the OAuth 2.0 client's JWKS")
+    """  # noqa: E501
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="Unique identifier of the JSON Web Key in the OAuth 2.0 client's JWKS")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the OAuth 2.0 client JSON Web Key")
     kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's key pair")
     alg: Optional[StrictStr] = Field(default=None, description="Algorithm used in the key")
@@ -139,4 +141,3 @@ class OAuth2ClientJsonSigningKeyRequest(BaseModel):
             "discriminator": obj.get("discriminator")
         })
         return _obj
-

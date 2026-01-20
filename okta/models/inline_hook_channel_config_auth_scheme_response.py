@@ -29,12 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookChannelConfigAuthSchemeResponse(BaseModel):
     """
     The authentication scheme to use for this request
-    """ # noqa: E501
+    """  # noqa: E501
     key: Optional[StrictStr] = Field(default=None, description="The header name for the authorization server")
-    type: Optional[StrictStr] = Field(default=None, description="The authentication scheme type. Supported type&mdash;`HEADER`")
+    type: Optional[StrictStr] = Field(default=None,
+                                      description="The authentication scheme type. Supported type&mdash;`HEADER`")
     __properties: ClassVar[List[str]] = ["key", "type"]
 
     model_config = ConfigDict(
@@ -91,4 +93,3 @@ class InlineHookChannelConfigAuthSchemeResponse(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

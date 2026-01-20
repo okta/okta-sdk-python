@@ -29,14 +29,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlAttributeStatementExpression(BaseModel):
     """
     Generic `EXPRESSION` attribute statements
-    """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of the attribute in your app. The attribute name must be unique across all user and group attribute statements.")
+    """  # noqa: E501
+    name: Optional[StrictStr] = Field(
+        default=None,
+        description="The name of the attribute in your app. The attribute name must be unique across all user and group attribute statements.")
     namespace: Optional[StrictStr] = Field(default=None, description="The name format of the attribute. Supported values:")
     type: Optional[StrictStr] = Field(default=None, description="The type of attribute statements object")
-    values: Optional[List[StrictStr]] = Field(default=None, description="The attribute values (supports [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/))")
+    values: Optional[List[StrictStr]] = Field(
+        default=None, description="The attribute values (supports [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/))")
     __properties: ClassVar[List[str]] = ["name", "namespace", "type", "values"]
 
     @field_validator('namespace')
@@ -45,8 +49,10 @@ class SamlAttributeStatementExpression(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['urn:oasis:names:tc:SAML:2.0:attrname-format:basic', 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified']):
-            raise ValueError("must be one of enum values ('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified')")
+        if value not in set(['urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+                            'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified']):
+            raise ValueError(
+                "must be one of enum values ('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified')")
         return value
 
     @field_validator('type')
@@ -115,4 +121,3 @@ class SamlAttributeStatementExpression(BaseModel):
             "values": obj.get("values")
         })
         return _obj
-

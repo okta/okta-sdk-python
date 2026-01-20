@@ -29,12 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BaseEmailServer(BaseModel):
     """
     BaseEmailServer
-    """ # noqa: E501
+    """  # noqa: E501
     alias: Optional[StrictStr] = Field(default=None, description="Human-readable name for your SMTP server")
-    enabled: Optional[StrictBool] = Field(default=None, description="If `true`, routes all email traffic through your SMTP server")
+    enabled: Optional[StrictBool] = Field(default=None,
+                                          description="If `true`, routes all email traffic through your SMTP server")
     host: Optional[StrictStr] = Field(default=None, description="Hostname or IP address of your SMTP server")
     port: Optional[StrictInt] = Field(default=None, description="Port number of your SMTP server")
     username: Optional[StrictStr] = Field(default=None, description="Username used to access your SMTP server")
@@ -97,4 +99,3 @@ class BaseEmailServer(BaseModel):
             "username": obj.get("username")
         })
         return _obj
-

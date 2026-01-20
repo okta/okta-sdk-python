@@ -29,22 +29,25 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from okta.models.o_auth_client_secret_links import OAuthClientSecretLinks
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.o_auth2_client_json_web_key_ec_response import OAuth2ClientJsonWebKeyECResponse
     from okta.models.o_auth2_client_json_web_key_rsa_response import OAuth2ClientJsonWebKeyRsaResponse
 
+
 class OAuth2ClientJsonSigningKeyResponse(BaseModel):
     """
     A [JSON Web Key (JWK)](https://tools.ietf.org/html/rfc7517) is a JSON representation of a cryptographic key. Okta uses signing keys to verify the signature of a JWT when provided for the `private_key_jwt` client authentication method or for a signed authorize request object. Okta supports both RSA and Elliptic Curve (EC) keys for signing tokens.
-    """ # noqa: E501
+    """  # noqa: E501
     id: StrictStr = Field(description="The unique ID of the OAuth Client JSON Web Key")
     created: StrictStr = Field(description="Timestamp when the OAuth 2.0 client JSON Web Key was created")
-    last_updated: StrictStr = Field(description="Timestamp when the OAuth 2.0 client JSON Web Key was updated", alias="lastUpdated")
+    last_updated: StrictStr = Field(
+        description="Timestamp when the OAuth 2.0 client JSON Web Key was updated",
+        alias="lastUpdated")
     links: Optional[OAuthClientSecretLinks] = Field(default=None, alias="_links")
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the OAuth 2.0 client's JWKS")
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="Unique identifier of the JSON Web Key in the OAuth 2.0 client's JWKS")
     status: Optional[StrictStr] = Field(default=None, description="Status of the OAuth 2.0 client JSON Web Key")
     kty: StrictStr = Field(description="Cryptographic algorithm family for the certificate's key pair")
     alg: StrictStr = Field(description="Algorithm used in the key")
@@ -86,7 +89,7 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'EC': 'OAuth2ClientJsonWebKeyECResponse','RSA': 'OAuth2ClientJsonWebKeyRsaResponse'
+        'EC': 'OAuth2ClientJsonWebKeyECResponse', 'RSA': 'OAuth2ClientJsonWebKeyRsaResponse'
     }
 
     @classmethod
@@ -151,17 +154,18 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[OAuth2ClientJsonWebKeyECResponse, OAuth2ClientJsonWebKeyRsaResponse]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[OAuth2ClientJsonWebKeyECResponse,
+                                                              OAuth2ClientJsonWebKeyRsaResponse]]:
         """Create an instance of OAuth2ClientJsonSigningKeyResponse from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'OAuth2ClientJsonWebKeyECResponse':
-            return import_module("okta.models.o_auth2_client_json_web_key_ec_response").OAuth2ClientJsonWebKeyECResponse.from_dict(obj)
+            return import_module(
+                "okta.models.o_auth2_client_json_web_key_ec_response").OAuth2ClientJsonWebKeyECResponse.from_dict(obj)
         if object_type == 'OAuth2ClientJsonWebKeyRsaResponse':
-            return import_module("okta.models.o_auth2_client_json_web_key_rsa_response").OAuth2ClientJsonWebKeyRsaResponse.from_dict(obj)
+            return import_module(
+                "okta.models.o_auth2_client_json_web_key_rsa_response").OAuth2ClientJsonWebKeyRsaResponse.from_dict(obj)
 
         raise ValueError("OAuth2ClientJsonSigningKeyResponse failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

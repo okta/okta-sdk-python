@@ -30,11 +30,13 @@ from okta.models.well_known_uri_array_response_links import WellKnownURIArrayRes
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownURIArrayResponse(BaseModel):
     """
     WellKnownURIArrayResponse
-    """ # noqa: E501
-    representation: Optional[List[StrictStr]] = Field(default=None, description="The well-known URI content in a JSON array of objects format")
+    """  # noqa: E501
+    representation: Optional[List[StrictStr]] = Field(default=None,
+                                                      description="The well-known URI content in a JSON array of objects format")
     links: Optional[WellKnownURIArrayResponseLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["representation", "_links"]
 
@@ -99,4 +101,3 @@ class WellKnownURIArrayResponse(BaseModel):
             "_links": WellKnownURIArrayResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

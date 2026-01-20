@@ -31,11 +31,13 @@ from okta.models.bulk_group_upsert_request_body_profiles_inner import BulkGroupU
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BulkGroupUpsertRequestBody(BaseModel):
     """
     BulkGroupUpsertRequestBody
-    """ # noqa: E501
-    profiles: Optional[Annotated[List[BulkGroupUpsertRequestBodyProfilesInner], Field(min_length=1, max_length=200)]] = Field(default=None, description="Array of group profiles that needs to be inserted or updated in Okta")
+    """  # noqa: E501
+    profiles: Optional[Annotated[List[BulkGroupUpsertRequestBodyProfilesInner], Field(min_length=1, max_length=200)]] = Field(
+        default=None, description="Array of group profiles that needs to be inserted or updated in Okta")
     __properties: ClassVar[List[str]] = ["profiles"]
 
     model_config = ConfigDict(
@@ -98,4 +100,3 @@ class BulkGroupUpsertRequestBody(BaseModel):
             "profiles": [BulkGroupUpsertRequestBodyProfilesInner.from_dict(_item) for _item in obj["profiles"]] if obj.get("profiles") is not None else None
         })
         return _obj
-

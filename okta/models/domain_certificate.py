@@ -30,10 +30,11 @@ from okta.models.domain_certificate_type import DomainCertificateType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DomainCertificate(BaseModel):
     """
     Defines the properties of the certificate
-    """ # noqa: E501
+    """  # noqa: E501
     certificate: StrictStr = Field(description="Certificate content")
     certificate_chain: StrictStr = Field(description="Certificate chain", alias="certificateChain")
     private_key: StrictStr = Field(description="Certificate private key", alias="privateKey")
@@ -96,4 +97,3 @@ class DomainCertificate(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

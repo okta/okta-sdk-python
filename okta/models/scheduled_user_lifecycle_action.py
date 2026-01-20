@@ -30,10 +30,11 @@ from okta.models.policy_user_status import PolicyUserStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ScheduledUserLifecycleAction(BaseModel):
     """
     ScheduledUserLifecycleAction
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[PolicyUserStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
@@ -90,4 +91,3 @@ class ScheduledUserLifecycleAction(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

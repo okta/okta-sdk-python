@@ -30,13 +30,17 @@ from okta.models.web_authn_rp_id_domain_dns_record import WebAuthnRpIdDomainDnsR
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WebAuthnRpIdDomain(BaseModel):
     """
     The RP domain object for the WebAuthn configuration
-    """ # noqa: E501
+    """  # noqa: E501
     dns_record: Optional[WebAuthnRpIdDomainDnsRecord] = Field(default=None, alias="dnsRecord")
     name: Optional[StrictStr] = Field(default=None, description="The [RP ID](https://www.w3.org/TR/webauthn/#relying-party-identifier) domain value to be used for all WebAuthn operations.  If it isn't specified, the `domain` object isn't included in the request, and the domain value defaults to the domain of the current page (the domain of your org or a custom domain, for example).  > **Note:** If you don't use a custom RP ID (the default behavior), the domain value defaults to the end user's current page. The domain value defaults to the full domain name of the page that the end user is on when they're attempting the WebAuthn credential operation (enrollment or verification).")
-    validation_status: Optional[StrictStr] = Field(default=None, description="Indicates the validation status of the domain", alias="validationStatus")
+    validation_status: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates the validation status of the domain",
+        alias="validationStatus")
     __properties: ClassVar[List[str]] = ["dnsRecord", "name", "validationStatus"]
 
     @field_validator('validation_status')
@@ -113,4 +117,3 @@ class WebAuthnRpIdDomain(BaseModel):
             "validationStatus": obj.get("validationStatus")
         })
         return _obj
-

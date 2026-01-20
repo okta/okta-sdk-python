@@ -30,10 +30,11 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AcsEndpoint(BaseModel):
     """
     An array of ACS endpoints. You can configure a maximum of 100 endpoints.
-    """ # noqa: E501
+    """  # noqa: E501
     index: StrictInt = Field(description="Index of the URL in the array of ACS endpoints")
     url: Annotated[str, Field(strict=True, max_length=1024)] = Field(description="URL of the ACS")
     __properties: ClassVar[List[str]] = ["index", "url"]
@@ -92,4 +93,3 @@ class AcsEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

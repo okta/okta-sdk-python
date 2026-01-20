@@ -29,13 +29,15 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateResourceSetRequest(BaseModel):
     """
     CreateResourceSetRequest
-    """ # noqa: E501
+    """  # noqa: E501
     description: StrictStr = Field(description="Description of the resource set")
     label: StrictStr = Field(description="Unique name for the resource set")
-    resources: List[StrictStr] = Field(description="The endpoint (URL) that references all resource objects included in the resource set. Resources are identified by either an Okta Resource Name (ORN) or by a REST URL format. See [Okta Resource Name](/openapi/okta-management/guides/roles/#okta-resource-name-orn).")
+    resources: List[StrictStr] = Field(
+        description="The endpoint (URL) that references all resource objects included in the resource set. Resources are identified by either an Okta Resource Name (ORN) or by a REST URL format. See [Okta Resource Name](/openapi/okta-management/guides/roles/#okta-resource-name-orn).")
     __properties: ClassVar[List[str]] = ["description", "label", "resources"]
 
     model_config = ConfigDict(
@@ -93,4 +95,3 @@ class CreateResourceSetRequest(BaseModel):
             "resources": obj.get("resources")
         })
         return _obj
-

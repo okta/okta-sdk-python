@@ -30,14 +30,17 @@ from okta.models.governance_bundle_links import GovernanceBundleLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GovernanceBundle(BaseModel):
     """
     GovernanceBundle
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the governance bundle")
     id: Optional[StrictStr] = Field(default=None, description="Governance bundle ID")
     name: Optional[StrictStr] = Field(default=None, description="Name of the governance bundle")
-    orn: Optional[StrictStr] = Field(default=None, description="The governance bundle resource, in [ORN format](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn)")
+    orn: Optional[StrictStr] = Field(
+        default=None,
+        description="The governance bundle resource, in [ORN format](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn)")
     status: Optional[StrictStr] = Field(default=None, description="Status of the governance bundle")
     links: Optional[GovernanceBundleLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["description", "id", "name", "orn", "status", "_links"]
@@ -107,4 +110,3 @@ class GovernanceBundle(BaseModel):
             "_links": GovernanceBundleLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

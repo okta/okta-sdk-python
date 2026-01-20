@@ -29,14 +29,24 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlAssertionEncryption(BaseModel):
     """
     Determines if the app supports encrypted assertions
-    """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="Indicates whether Okta encrypts the assertions that it sends to the Service Provider")
-    encryption_algorithm: Optional[StrictStr] = Field(default=None, description="The encryption algorithm used to encrypt the SAML assertion", alias="encryptionAlgorithm")
-    key_transport_algorithm: Optional[StrictStr] = Field(default=None, description="The key transport algorithm used to encrypt the SAML assertion", alias="keyTransportAlgorithm")
-    x5c: Optional[List[StrictStr]] = Field(default=None, description="A list that contains exactly one x509 encoded certificate which Okta uses to encrypt the SAML assertion with")
+    """  # noqa: E501
+    enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether Okta encrypts the assertions that it sends to the Service Provider")
+    encryption_algorithm: Optional[StrictStr] = Field(
+        default=None,
+        description="The encryption algorithm used to encrypt the SAML assertion",
+        alias="encryptionAlgorithm")
+    key_transport_algorithm: Optional[StrictStr] = Field(
+        default=None,
+        description="The key transport algorithm used to encrypt the SAML assertion",
+        alias="keyTransportAlgorithm")
+    x5c: Optional[List[StrictStr]] = Field(
+        default=None, description="A list that contains exactly one x509 encoded certificate which Okta uses to encrypt the SAML assertion with")
     __properties: ClassVar[List[str]] = ["enabled", "encryptionAlgorithm", "keyTransportAlgorithm", "x5c"]
 
     @field_validator('encryption_algorithm')
@@ -115,4 +125,3 @@ class SamlAssertionEncryption(BaseModel):
             "x5c": obj.get("x5c")
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.user_schema_public import UserSchemaPublic
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaDefinitions(BaseModel):
     """
     UserSchemaDefinitions
-    """ # noqa: E501
+    """  # noqa: E501
     base: Optional[UserSchemaBase] = None
     custom: Optional[UserSchemaPublic] = None
     __properties: ClassVar[List[str]] = ["base", "custom"]
@@ -107,4 +108,3 @@ class UserSchemaDefinitions(BaseModel):
             "custom": UserSchemaPublic.from_dict(obj["custom"]) if obj.get("custom") is not None else None
         })
         return _obj
-

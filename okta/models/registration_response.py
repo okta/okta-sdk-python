@@ -31,10 +31,11 @@ from okta.models.registration_response_error import RegistrationResponseError
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationResponse(BaseModel):
     """
     RegistrationResponse
-    """ # noqa: E501
+    """  # noqa: E501
     commands: Optional[List[RegistrationResponseCommandsInner]] = Field(default=None, description="The `commands` object lets you invoke commands to modify or add values to the attributes in the Okta user profile that are created for this user. The object also lets you control whether or not the registration attempt is allowed to proceed.  This object is an array, allowing you to send multiple commands in your response. Each array element requires a `type` property and a `value` property. The `type` property is where you specify which of the supported commands you wish to execute, and `value` is where you supply parameters for that command.  The registration inline hook supports these three commands: * `com.okta.user.profile.update`: Change attribute values in the user's Okta user profile. For SSR only. Invalid if used with a Progressive Profile response. * `com.okta.action.update`: Allow or deny the user's registration. * `com.okta.user.progressive.profile.update`: Change attribute values in the user's Okta Progressive Profile.")
     error: Optional[RegistrationResponseError] = Field(default=None, alias="Error")
     __properties: ClassVar[List[str]] = ["commands", "Error"]
@@ -107,4 +108,3 @@ class RegistrationResponse(BaseModel):
             "Error": RegistrationResponseError.from_dict(obj["Error"]) if obj.get("Error") is not None else None
         })
         return _obj
-

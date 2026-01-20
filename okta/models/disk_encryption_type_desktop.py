@@ -39,5 +39,3 @@ class DiskEncryptionTypeDesktop(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of DiskEncryptionTypeDesktop from a JSON string"""
         return cls(json.loads(json_str))
-
-

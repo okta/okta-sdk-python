@@ -30,14 +30,26 @@ from okta.models.saml_name_id_format import SamlNameIdFormat
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlSettings(BaseModel):
     """
     Advanced settings for the SAML 2.0 protocol
-    """ # noqa: E501
-    honor_persistent_name_id: Optional[StrictBool] = Field(default=True, description="Determines if the IdP should persist account linking when the incoming assertion NameID format is `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`", alias="honorPersistentNameId")
-    name_format: Optional[SamlNameIdFormat] = Field(default=SamlNameIdFormat.URN_COLON_OASIS_COLON_NAMES_COLON_TC_COLON_SAML_COLON_1_DOT_1_COLON_NAMEID_MINUS_FORMAT_COLON_UNSPECIFIED, alias="nameFormat")
-    participate_slo: Optional[StrictBool] = Field(default=None, description="Set to `true` to have Okta send a logout request to the upstream IdP when a user signs out of Okta or a downstream app.", alias="participateSlo")
-    send_application_context: Optional[StrictBool] = Field(default=False, description="Determines if the IdP should send the application context as `<OktaAppInstanceId>` and `<OktaAppName>` in the `<saml2p:Extensions>` element of the `<AuthnRequest>` message", alias="sendApplicationContext")
+    """  # noqa: E501
+    honor_persistent_name_id: Optional[StrictBool] = Field(
+        default=True,
+        description="Determines if the IdP should persist account linking when the incoming assertion NameID format is `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`",
+        alias="honorPersistentNameId")
+    name_format: Optional[SamlNameIdFormat] = Field(
+        default=SamlNameIdFormat.URN_COLON_OASIS_COLON_NAMES_COLON_TC_COLON_SAML_COLON_1_DOT_1_COLON_NAMEID_MINUS_FORMAT_COLON_UNSPECIFIED,
+        alias="nameFormat")
+    participate_slo: Optional[StrictBool] = Field(
+        default=None,
+        description="Set to `true` to have Okta send a logout request to the upstream IdP when a user signs out of Okta or a downstream app.",
+        alias="participateSlo")
+    send_application_context: Optional[StrictBool] = Field(
+        default=False,
+        description="Determines if the IdP should send the application context as `<OktaAppInstanceId>` and `<OktaAppName>` in the `<saml2p:Extensions>` element of the `<AuthnRequest>` message",
+        alias="sendApplicationContext")
     __properties: ClassVar[List[str]] = ["honorPersistentNameId", "nameFormat", "participateSlo", "sendApplicationContext"]
 
     model_config = ConfigDict(
@@ -96,4 +108,3 @@ class SamlSettings(BaseModel):
             "sendApplicationContext": obj.get("sendApplicationContext") if obj.get("sendApplicationContext") is not None else False
         })
         return _obj
-

@@ -30,11 +30,15 @@ from okta.models.patch_ai_agent_profile import PatchAIAgentProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PatchAIAgentRequest(BaseModel):
     """
     JSON Merge Patch for AI agent. Send only the fields to update. Use null to remove a value.
-    """ # noqa: E501
-    app_id: Optional[StrictStr] = Field(default=None, description="The ID of the connected app for the AI Agent", alias="appId")
+    """  # noqa: E501
+    app_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the connected app for the AI Agent",
+        alias="appId")
     profile: Optional[PatchAIAgentProfile] = None
     __properties: ClassVar[List[str]] = ["appId", "profile"]
 
@@ -104,4 +108,3 @@ class PatchAIAgentRequest(BaseModel):
             "profile": PatchAIAgentProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

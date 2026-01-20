@@ -32,7 +32,6 @@ from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
 from okta.models.platform import Platform
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -42,14 +41,18 @@ if TYPE_CHECKING:
     from okta.models.device_assurance_mac_os_platform import DeviceAssuranceMacOSPlatform
     from okta.models.device_assurance_windows_platform import DeviceAssuranceWindowsPlatform
 
+
 class DeviceAssurance(BaseModel):
     """
     DeviceAssurance
-    """ # noqa: E501
+    """  # noqa: E501
     created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
     created_date: Optional[StrictStr] = Field(default=None, alias="createdDate")
     device_posture_checks: Optional[DevicePostureChecks] = Field(default=None, alias="devicePostureChecks")
-    display_remediation_mode: Optional[StrictStr] = Field(default=None, description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Represents the remediation mode of this device assurance policy when users are denied access due to device noncompliance", alias="displayRemediationMode")
+    display_remediation_mode: Optional[StrictStr] = Field(
+        default=None,
+        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Represents the remediation mode of this device assurance policy when users are denied access due to device noncompliance",
+        alias="displayRemediationMode")
     grace_period: Optional[GracePeriod] = Field(default=None, alias="gracePeriod")
     id: Optional[StrictStr] = None
     last_update: Optional[StrictStr] = Field(default=None, alias="lastUpdate")
@@ -57,7 +60,17 @@ class DeviceAssurance(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="Display name of the device assurance policy")
     platform: Optional[Platform] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "devicePostureChecks", "displayRemediationMode", "gracePeriod", "id", "lastUpdate", "lastUpdatedBy", "name", "platform", "_links"]
+    __properties: ClassVar[List[str]] = ["createdBy",
+                                         "createdDate",
+                                         "devicePostureChecks",
+                                         "displayRemediationMode",
+                                         "gracePeriod",
+                                         "id",
+                                         "lastUpdate",
+                                         "lastUpdatedBy",
+                                         "name",
+                                         "platform",
+                                         "_links"]
 
     @field_validator('display_remediation_mode')
     def display_remediation_mode_validate_enum(cls, value):
@@ -80,7 +93,7 @@ class DeviceAssurance(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'ANDROID': 'DeviceAssuranceAndroidPlatform','CHROMEOS': 'DeviceAssuranceChromeOSPlatform','IOS': 'DeviceAssuranceIOSPlatform','MACOS': 'DeviceAssuranceMacOSPlatform','WINDOWS': 'DeviceAssuranceWindowsPlatform'
+        'ANDROID': 'DeviceAssuranceAndroidPlatform', 'CHROMEOS': 'DeviceAssuranceChromeOSPlatform', 'IOS': 'DeviceAssuranceIOSPlatform', 'MACOS': 'DeviceAssuranceMacOSPlatform', 'WINDOWS': 'DeviceAssuranceWindowsPlatform'
     }
 
     @classmethod
@@ -102,7 +115,8 @@ class DeviceAssurance(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[DeviceAssuranceAndroidPlatform, DeviceAssuranceChromeOSPlatform, DeviceAssuranceIOSPlatform, DeviceAssuranceMacOSPlatform, DeviceAssuranceWindowsPlatform]]:
+    def from_json(cls, json_str: str) -> Optional[Union[DeviceAssuranceAndroidPlatform, DeviceAssuranceChromeOSPlatform,
+                                                        DeviceAssuranceIOSPlatform, DeviceAssuranceMacOSPlatform, DeviceAssuranceWindowsPlatform]]:
         """Create an instance of DeviceAssurance from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -158,14 +172,16 @@ class DeviceAssurance(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeviceAssuranceAndroidPlatform, DeviceAssuranceChromeOSPlatform, DeviceAssuranceIOSPlatform, DeviceAssuranceMacOSPlatform, DeviceAssuranceWindowsPlatform]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeviceAssuranceAndroidPlatform, DeviceAssuranceChromeOSPlatform,
+                                                              DeviceAssuranceIOSPlatform, DeviceAssuranceMacOSPlatform, DeviceAssuranceWindowsPlatform]]:
         """Create an instance of DeviceAssurance from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'DeviceAssuranceAndroidPlatform':
             return import_module("okta.models.device_assurance_android_platform").DeviceAssuranceAndroidPlatform.from_dict(obj)
         if object_type == 'DeviceAssuranceChromeOSPlatform':
-            return import_module("okta.models.device_assurance_chrome_os_platform").DeviceAssuranceChromeOSPlatform.from_dict(obj)
+            return import_module(
+                "okta.models.device_assurance_chrome_os_platform").DeviceAssuranceChromeOSPlatform.from_dict(obj)
         if object_type == 'DeviceAssuranceIOSPlatform':
             return import_module("okta.models.device_assurance_ios_platform").DeviceAssuranceIOSPlatform.from_dict(obj)
         if object_type == 'DeviceAssuranceMacOSPlatform':
@@ -174,7 +190,5 @@ class DeviceAssurance(BaseModel):
             return import_module("okta.models.device_assurance_windows_platform").DeviceAssuranceWindowsPlatform.from_dict(obj)
 
         raise ValueError("DeviceAssurance failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

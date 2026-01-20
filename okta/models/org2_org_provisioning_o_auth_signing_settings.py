@@ -30,10 +30,11 @@ from okta.models.connections_signing_rotation_mode import ConnectionsSigningRota
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Org2OrgProvisioningOAuthSigningSettings(BaseModel):
     """
     Only used for the Okta Org2Org (`okta_org2org`) app.  The signing key rotation setting.
-    """ # noqa: E501
+    """  # noqa: E501
     rotation_mode: ConnectionsSigningRotationMode = Field(alias="rotationMode")
     __properties: ClassVar[List[str]] = ["rotationMode"]
 
@@ -90,4 +91,3 @@ class Org2OrgProvisioningOAuthSigningSettings(BaseModel):
             "rotationMode": obj.get("rotationMode")
         })
         return _obj
-

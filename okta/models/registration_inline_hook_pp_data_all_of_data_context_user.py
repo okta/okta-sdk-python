@@ -31,11 +31,15 @@ from okta.models.base_context_user_links import BaseContextUserLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationInlineHookPPDataAllOfDataContextUser(BaseModel):
     """
     RegistrationInlineHookPPDataAllOfDataContextUser
-    """ # noqa: E501
-    password_changed: Optional[datetime] = Field(default=None, description="The last time the user's password was updated", alias="passwordChanged")
+    """  # noqa: E501
+    password_changed: Optional[datetime] = Field(
+        default=None,
+        description="The last time the user's password was updated",
+        alias="passwordChanged")
     links: Optional[BaseContextUserLinks] = Field(default=None, alias="_links")
     profile: Optional[Dict[str, Any]] = Field(default=None, description="The user to update's current attributes")
     id: Optional[StrictStr] = None
@@ -104,4 +108,3 @@ class RegistrationInlineHookPPDataAllOfDataContextUser(BaseModel):
             "id": obj.get("id")
         })
         return _obj
-

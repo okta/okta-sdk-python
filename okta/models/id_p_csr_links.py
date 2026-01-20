@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdPCsrLinks(BaseModel):
     """
     IdPCsrLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     publish: Optional[HrefObject] = Field(default=None, description="Publish the CSR")
     additional_properties: Dict[str, Any] = {}
@@ -120,4 +121,3 @@ class IdPCsrLinks(BaseModel):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-

@@ -22,13 +22,14 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, ValidationError, field_validator
-from typing import Any, Dict, List, Optional
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr, ValidationError, field_validator
+from typing import Any, Dict, Optional
+from pydantic import StrictStr
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
 SAMLHOOKRESPONSECOMMANDSINNERVALUEINNERVALUE_ONE_OF_SCHEMAS = ["int", "object", "str"]
+
 
 class SAMLHookResponseCommandsInnerValueInnerValue(BaseModel):
     """
@@ -41,13 +42,12 @@ class SAMLHookResponseCommandsInnerValueInnerValue(BaseModel):
     # data type: object
     oneof_schema_3_validator: Optional[Dict[str, Any]] = None
     actual_instance: Optional[Union[int, object, str]] = None
-    one_of_schemas: Set[str] = { "int", "object", "str" }
+    one_of_schemas: Set[str] = {"int", "object", "str"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -84,10 +84,14 @@ class SAMLHookResponseCommandsInnerValueInnerValue(BaseModel):
             error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -132,10 +136,14 @@ class SAMLHookResponseCommandsInnerValueInnerValue(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -163,5 +171,3 @@ class SAMLHookResponseCommandsInnerValueInnerValue(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

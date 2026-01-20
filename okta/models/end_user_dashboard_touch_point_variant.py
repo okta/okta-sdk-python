@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class EndUserDashboardTouchPointVariant(str, Enum):
     """
-    Variant for the Okta End-User Dashboard. You can publish a theme for end-user dashboard with different combinations of assets. Variants are preset combinations of those assets. 
+    Variant for the Okta End-User Dashboard. You can publish a theme for end-user dashboard with different combinations of assets. Variants are preset combinations of those assets.
     """
 
     """
@@ -42,5 +42,3 @@ class EndUserDashboardTouchPointVariant(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of EndUserDashboardTouchPointVariant from a JSON string"""
         return cls(json.loads(json_str))
-
-

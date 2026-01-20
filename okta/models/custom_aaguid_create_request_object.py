@@ -31,13 +31,18 @@ from okta.models.attestation_root_certificates_request_inner import AttestationR
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomAAGUIDCreateRequestObject(BaseModel):
     """
     CustomAAGUIDCreateRequestObject
-    """ # noqa: E501
-    aaguid: Optional[StrictStr] = Field(default=None, description="An Authenticator Attestation Global Unique Identifier (AAGUID) is a 128-bit identifier indicating the model.")
-    attestation_root_certificates: Optional[List[AttestationRootCertificatesRequestInner]] = Field(default=None, description="Contains the certificate and information about it", alias="attestationRootCertificates")
-    authenticator_characteristics: Optional[AAGUIDAuthenticatorCharacteristics] = Field(default=None, alias="authenticatorCharacteristics")
+    """  # noqa: E501
+    aaguid: Optional[StrictStr] = Field(
+        default=None,
+        description="An Authenticator Attestation Global Unique Identifier (AAGUID) is a 128-bit identifier indicating the model.")
+    attestation_root_certificates: Optional[List[AttestationRootCertificatesRequestInner]] = Field(
+        default=None, description="Contains the certificate and information about it", alias="attestationRootCertificates")
+    authenticator_characteristics: Optional[AAGUIDAuthenticatorCharacteristics] = Field(
+        default=None, alias="authenticatorCharacteristics")
     __properties: ClassVar[List[str]] = ["aaguid", "attestationRootCertificates", "authenticatorCharacteristics"]
 
     model_config = ConfigDict(
@@ -109,4 +114,3 @@ class CustomAAGUIDCreateRequestObject(BaseModel):
             "authenticatorCharacteristics": AAGUIDAuthenticatorCharacteristics.from_dict(obj["authenticatorCharacteristics"]) if obj.get("authenticatorCharacteristics") is not None else None
         })
         return _obj
-

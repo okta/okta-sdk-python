@@ -31,17 +31,26 @@ from okta.models.email_customization_all_of_links import EmailCustomizationAllOf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailCustomization(BaseModel):
     """
     EmailCustomization
-    """ # noqa: E501
+    """  # noqa: E501
     body: StrictStr = Field(description="The HTML body of the email. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).  <x-lifecycle class=\"ea\"></x-lifecycle> Not required if Custom languages for Okta Email Templates is enabled. A `null` body is replaced with a default value from one of the following in priority order:  1. An existing default email customization, if one exists 2. Okta-provided translated content for the specified language, if one exists 3. Okta-provided translated content for the brand locale, if it's set 4. Okta-provided content in English ")
     subject: StrictStr = Field(description="The email subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).  <x-lifecycle class=\"ea\"></x-lifecycle> Not required if Custom languages for Okta Email Templates is enabled. A `null` subject is replaced with a default value from one of the following in priority order:  1. An existing default email customization, if one exists 2. Okta-provided translated content for the specified language, if one exists 3. Okta-provided translated content for the brand locale, if it's set 4. Okta-provided content in English ")
-    created: Optional[datetime] = Field(default=None, description="The UTC time at which this email customization was created.")
+    created: Optional[datetime] = Field(default=None,
+                                        description="The UTC time at which this email customization was created.")
     id: Optional[StrictStr] = Field(default=None, description="A unique identifier for this email customization")
-    is_default: Optional[StrictBool] = Field(default=None, description="Whether this is the default customization for the email template. Each customized email template must have exactly one default customization. Defaults to `true` for the first customization and `false` thereafter.", alias="isDefault")
-    language: StrictStr = Field(description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
-    last_updated: Optional[datetime] = Field(default=None, description="The UTC time at which this email customization was last updated.", alias="lastUpdated")
+    is_default: Optional[StrictBool] = Field(
+        default=None,
+        description="Whether this is the default customization for the email template. Each customized email template must have exactly one default customization. Defaults to `true` for the first customization and `false` thereafter.",
+        alias="isDefault")
+    language: StrictStr = Field(
+        description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="The UTC time at which this email customization was last updated.",
+        alias="lastUpdated")
     links: Optional[EmailCustomizationAllOfLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["body", "subject", "created", "id", "isDefault", "language", "lastUpdated", "_links"]
 
@@ -118,4 +127,3 @@ class EmailCustomization(BaseModel):
             "_links": EmailCustomizationAllOfLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

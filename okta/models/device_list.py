@@ -35,13 +35,17 @@ from okta.models.links_self_and_full_users_lifecycle import LinksSelfAndFullUser
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceList(BaseModel):
     """
     DeviceList
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the device was created")
     id: Optional[StrictStr] = Field(default=None, description="Unique key for the device")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the device record was last updated. Updates occur when Okta collects and saves device signals during authentication, and when the lifecycle state of the device changes.", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the device record was last updated. Updates occur when Okta collects and saves device signals during authentication, and when the lifecycle state of the device changes.",
+        alias="lastUpdated")
     profile: Optional[DeviceProfile] = None
     resource_alternate_id: Optional[StrictStr] = Field(default=None, alias="resourceAlternateId")
     resource_display_name: Optional[DeviceDisplayName] = Field(default=None, alias="resourceDisplayName")
@@ -50,7 +54,8 @@ class DeviceList(BaseModel):
     status: Optional[DeviceStatus] = None
     links: Optional[LinksSelfAndFullUsersLifecycle] = Field(default=None, alias="_links")
     embedded: Optional[DeviceListAllOfEmbedded] = Field(default=None, alias="_embedded")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "profile", "resourceAlternateId", "resourceDisplayName", "resourceId", "resourceType", "status", "_links", "_embedded"]
+    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "profile", "resourceAlternateId",
+                                         "resourceDisplayName", "resourceId", "resourceType", "status", "_links", "_embedded"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -155,4 +160,3 @@ class DeviceList(BaseModel):
             "_embedded": DeviceListAllOfEmbedded.from_dict(obj["_embedded"]) if obj.get("_embedded") is not None else None
         })
         return _obj
-

@@ -30,12 +30,16 @@ from okta.models.user_import_request_data import UserImportRequestData
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserImportRequest(BaseModel):
     """
     UserImportRequest
-    """ # noqa: E501
+    """  # noqa: E501
     data: Optional[UserImportRequestData] = None
-    event_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook. The user import inline hook type is `com.okta.import.transform`.", alias="eventType")
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook. The user import inline hook type is `com.okta.import.transform`.",
+        alias="eventType")
     source: Optional[StrictStr] = Field(default=None, description="The ID of the user import inline hook")
     __properties: ClassVar[List[str]] = ["data", "eventType", "source"]
 
@@ -101,4 +105,3 @@ class UserImportRequest(BaseModel):
             "source": obj.get("source")
         })
         return _obj
-

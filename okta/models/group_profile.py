@@ -20,19 +20,18 @@
 
 
 from __future__ import annotations
-from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
+from pydantic import BaseModel, ValidationError, field_validator
 from typing import Optional
 from okta.models.okta_active_directory_group_profile import OktaActiveDirectoryGroupProfile
 from okta.models.okta_user_group_profile import OktaUserGroupProfile
-from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
-from typing_extensions import Literal, Self
-from pydantic import Field
+from typing import Union, Any, Set, TYPE_CHECKING, Optional, Dict
+from typing_extensions import Self
 
 GROUPPROFILE_ANY_OF_SCHEMAS = ["OktaActiveDirectoryGroupProfile", "OktaUserGroupProfile"]
+
 
 class GroupProfile(BaseModel):
     """
@@ -47,7 +46,7 @@ class GroupProfile(BaseModel):
         actual_instance: Optional[Union[OktaActiveDirectoryGroupProfile, OktaUserGroupProfile]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "OktaActiveDirectoryGroupProfile", "OktaUserGroupProfile" }
+    any_of_schemas: Set[str] = {"OktaActiveDirectoryGroupProfile", "OktaUserGroupProfile"}
 
     model_config = {
         "validate_assignment": True,
@@ -82,7 +81,9 @@ class GroupProfile(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in GroupProfile with anyOf schemas: OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting the actual_instance in GroupProfile with anyOf schemas: OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -100,17 +101,19 @@ class GroupProfile(BaseModel):
             instance.actual_instance = OktaUserGroupProfile.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
+            error_messages.append(str(e))
         # anyof_schema_2_validator: Optional[OktaActiveDirectoryGroupProfile] = None
         try:
             instance.actual_instance = OktaActiveDirectoryGroupProfile.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
+            error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into GroupProfile with anyOf schemas: OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into GroupProfile with anyOf schemas: OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -137,5 +140,3 @@ class GroupProfile(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

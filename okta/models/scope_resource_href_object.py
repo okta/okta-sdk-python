@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ScopeResourceHrefObject(BaseModel):
     """
     ScopeResourceHrefObject
-    """ # noqa: E501
+    """  # noqa: E501
     href: Optional[StrictStr] = Field(default=None, description="Link URI")
     title: Optional[StrictStr] = Field(default=None, description="Link name")
     __properties: ClassVar[List[str]] = ["href", "title"]
@@ -91,4 +92,3 @@ class ScopeResourceHrefObject(BaseModel):
             "title": obj.get("title")
         })
         return _obj
-

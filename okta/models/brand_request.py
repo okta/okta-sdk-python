@@ -30,18 +30,30 @@ from okta.models.default_app import DefaultApp
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BrandRequest(BaseModel):
     """
     BrandRequest
-    """ # noqa: E501
-    agree_to_custom_privacy_policy: Optional[StrictBool] = Field(default=None, description="Consent for updating the custom privacy URL. Not required when resetting the URL.", alias="agreeToCustomPrivacyPolicy")
-    custom_privacy_policy_url: Optional[StrictStr] = Field(default=None, description="Custom privacy policy URL", alias="customPrivacyPolicyUrl")
+    """  # noqa: E501
+    agree_to_custom_privacy_policy: Optional[StrictBool] = Field(
+        default=None,
+        description="Consent for updating the custom privacy URL. Not required when resetting the URL.",
+        alias="agreeToCustomPrivacyPolicy")
+    custom_privacy_policy_url: Optional[StrictStr] = Field(
+        default=None, description="Custom privacy policy URL", alias="customPrivacyPolicyUrl")
     default_app: Optional[DefaultApp] = Field(default=None, alias="defaultApp")
     email_domain_id: Optional[StrictStr] = Field(default=None, description="The ID of the email domain", alias="emailDomainId")
-    locale: Optional[StrictStr] = Field(default=None, description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
-    name: StrictStr = Field(description="The name of the brand  > **Note:** You can't use the reserved `DRAPP_DOMAIN_BRAND` name.")
-    remove_powered_by_okta: Optional[StrictBool] = Field(default=False, description="Removes \"Powered by Okta\" from the sign-in page in redirect authentication deployments, and \"© [current year] Okta, Inc.\" from the Okta End-User Dashboard", alias="removePoweredByOkta")
-    __properties: ClassVar[List[str]] = ["agreeToCustomPrivacyPolicy", "customPrivacyPolicyUrl", "defaultApp", "emailDomainId", "locale", "name", "removePoweredByOkta"]
+    locale: Optional[StrictStr] = Field(
+        default=None,
+        description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
+    name: StrictStr = Field(
+        description="The name of the brand  > **Note:** You can't use the reserved `DRAPP_DOMAIN_BRAND` name.")
+    remove_powered_by_okta: Optional[StrictBool] = Field(
+        default=False,
+        description="Removes \"Powered by Okta\" from the sign-in page in redirect authentication deployments, and \"© [current year] Okta, Inc.\" from the Okta End-User Dashboard",
+        alias="removePoweredByOkta")
+    __properties: ClassVar[List[str]] = ["agreeToCustomPrivacyPolicy", "customPrivacyPolicyUrl",
+                                         "defaultApp", "emailDomainId", "locale", "name", "removePoweredByOkta"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,4 +121,3 @@ class BrandRequest(BaseModel):
             "removePoweredByOkta": obj.get("removePoweredByOkta") if obj.get("removePoweredByOkta") is not None else False
         })
         return _obj
-

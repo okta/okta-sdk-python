@@ -31,9 +31,7 @@ from okta.models.application_accessibility import ApplicationAccessibility
 from okta.models.application_embedded import ApplicationEmbedded
 from okta.models.application_express_configuration import ApplicationExpressConfiguration
 from okta.models.application_licensing import ApplicationLicensing
-from okta.models.application_lifecycle_status import ApplicationLifecycleStatus
 from okta.models.application_links import ApplicationLinks
-from okta.models.application_sign_on_mode import ApplicationSignOnMode
 from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.auto_login_application_settings import AutoLoginApplicationSettings
@@ -41,14 +39,35 @@ from okta.models.scheme_application_credentials import SchemeApplicationCredenti
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AutoLoginApplication(Application):
     """
     AutoLoginApplication
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[SchemeApplicationCredentials] = None
-    name: Optional[StrictStr] = Field(default=None, description="A unique key is generated for the custom SWA app instance when you use AUTO_LOGIN `signOnMode`.")
+    name: Optional[StrictStr] = Field(
+        default=None,
+        description="A unique key is generated for the custom SWA app instance when you use AUTO_LOGIN `signOnMode`.")
     settings: Optional[AutoLoginApplicationSettings] = None
-    __properties: ClassVar[List[str]] = ["accessibility", "created", "expressConfiguration", "features", "id", "label", "lastUpdated", "licensing", "orn", "profile", "signOnMode", "status", "universalLogout", "visibility", "_embedded", "_links", "credentials", "name", "settings"]
+    __properties: ClassVar[List[str]] = ["accessibility",
+                                         "created",
+                                         "expressConfiguration",
+                                         "features",
+                                         "id",
+                                         "label",
+                                         "lastUpdated",
+                                         "licensing",
+                                         "orn",
+                                         "profile",
+                                         "signOnMode",
+                                         "status",
+                                         "universalLogout",
+                                         "visibility",
+                                         "_embedded",
+                                         "_links",
+                                         "credentials",
+                                         "name",
+                                         "settings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -186,4 +205,3 @@ class AutoLoginApplication(Application):
             "settings": AutoLoginApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

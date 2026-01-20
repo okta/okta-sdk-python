@@ -29,22 +29,61 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SwaApplicationSettingsApplication(BaseModel):
     """
     SwaApplicationSettingsApplication
-    """ # noqa: E501
-    button_field: StrictStr = Field(description="CSS selector for the **Sign-In** button in the sign-in form (for SWA apps with the `template_swa` app name definition)", alias="buttonField")
-    button_selector: Optional[StrictStr] = Field(default=None, description="CSS selector for the **Sign-In**  button in the sign-in form (for three-field SWA apps with the `template_swa3field` app name definition)", alias="buttonSelector")
-    extra_field_selector: Optional[StrictStr] = Field(default=None, description="Enter the CSS selector for the extra field (for three-field SWA apps with the `template_swa3field` app name definition).", alias="extraFieldSelector")
-    extra_field_value: Optional[StrictStr] = Field(default=None, description="Enter the value for the extra field in the form (for three-field SWA apps with the `template_swa3field` app name definition).", alias="extraFieldValue")
-    login_url_regex: Optional[StrictStr] = Field(default=None, description="A regular expression that further restricts targetURL to the specified regular expression", alias="loginUrlRegex")
-    password_field: StrictStr = Field(description="CSS selector for the **Password** field in the sign-in form (for SWA apps with the `template_swa` app name definition)", alias="passwordField")
-    password_selector: Optional[StrictStr] = Field(default=None, description="CSS selector for the **Password** field in the sign-in form (for three-field SWA apps with the `template_swa3field` app name definition)", alias="passwordSelector")
-    target_url: Optional[StrictStr] = Field(default=None, description="The URL of the sign-in page for this app (for three-field SWA apps with the `template_swa3field` app name definition)", alias="targetURL")
-    url: StrictStr = Field(description="The URL of the sign-in page for this app (for SWA apps with the `template_swa` app name definition)")
-    username_field: StrictStr = Field(description="CSS selector for the **Username** field in the sign-in form (for SWA apps with the `template_swa` app name definition)", alias="usernameField")
-    user_name_selector: Optional[StrictStr] = Field(default=None, description="CSS selector for the **Username** field in the sign-in form (for three-field SWA apps with the `template_swa3field` app name definition)", alias="userNameSelector")
-    __properties: ClassVar[List[str]] = ["buttonField", "buttonSelector", "extraFieldSelector", "extraFieldValue", "loginUrlRegex", "passwordField", "passwordSelector", "targetURL", "url", "usernameField", "userNameSelector"]
+    """  # noqa: E501
+    button_field: StrictStr = Field(
+        description="CSS selector for the **Sign-In** button in the sign-in form (for SWA apps with the `template_swa` app name definition)",
+        alias="buttonField")
+    button_selector: Optional[StrictStr] = Field(
+        default=None,
+        description="CSS selector for the **Sign-In**  button in the sign-in form (for three-field SWA apps with the `template_swa3field` app name definition)",
+        alias="buttonSelector")
+    extra_field_selector: Optional[StrictStr] = Field(
+        default=None,
+        description="Enter the CSS selector for the extra field (for three-field SWA apps with the `template_swa3field` app name definition).",
+        alias="extraFieldSelector")
+    extra_field_value: Optional[StrictStr] = Field(
+        default=None,
+        description="Enter the value for the extra field in the form (for three-field SWA apps with the `template_swa3field` app name definition).",
+        alias="extraFieldValue")
+    login_url_regex: Optional[StrictStr] = Field(
+        default=None,
+        description="A regular expression that further restricts targetURL to the specified regular expression",
+        alias="loginUrlRegex")
+    password_field: StrictStr = Field(
+        description="CSS selector for the **Password** field in the sign-in form (for SWA apps with the `template_swa` app name definition)",
+        alias="passwordField")
+    password_selector: Optional[StrictStr] = Field(
+        default=None,
+        description="CSS selector for the **Password** field in the sign-in form (for three-field SWA apps with the `template_swa3field` app name definition)",
+        alias="passwordSelector")
+    target_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL of the sign-in page for this app (for three-field SWA apps with the `template_swa3field` app name definition)",
+        alias="targetURL")
+    url: StrictStr = Field(
+        description="The URL of the sign-in page for this app (for SWA apps with the `template_swa` app name definition)")
+    username_field: StrictStr = Field(
+        description="CSS selector for the **Username** field in the sign-in form (for SWA apps with the `template_swa` app name definition)",
+        alias="usernameField")
+    user_name_selector: Optional[StrictStr] = Field(
+        default=None,
+        description="CSS selector for the **Username** field in the sign-in form (for three-field SWA apps with the `template_swa3field` app name definition)",
+        alias="userNameSelector")
+    __properties: ClassVar[List[str]] = ["buttonField",
+                                         "buttonSelector",
+                                         "extraFieldSelector",
+                                         "extraFieldValue",
+                                         "loginUrlRegex",
+                                         "passwordField",
+                                         "passwordSelector",
+                                         "targetURL",
+                                         "url",
+                                         "usernameField",
+                                         "userNameSelector"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -109,4 +148,3 @@ class SwaApplicationSettingsApplication(BaseModel):
             "userNameSelector": obj.get("userNameSelector")
         })
         return _obj
-

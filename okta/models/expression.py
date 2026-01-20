@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Expression(BaseModel):
     """
     Conditional expression
-    """ # noqa: E501
+    """  # noqa: E501
     value: Optional[StrictStr] = Field(default=None, description="Value of the condition expression")
     __properties: ClassVar[List[str]] = ["value"]
 
@@ -89,4 +90,3 @@ class Expression(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

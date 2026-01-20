@@ -30,10 +30,11 @@ from okta.models.links_qrcode_qrcode import LinksQrcodeQrcode
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksQrcode(BaseModel):
     """
     LinksQrcode
-    """ # noqa: E501
+    """  # noqa: E501
     qrcode: Optional[LinksQrcodeQrcode] = None
     __properties: ClassVar[List[str]] = ["qrcode"]
 
@@ -97,4 +98,3 @@ class LinksQrcode(BaseModel):
             "qrcode": LinksQrcodeQrcode.from_dict(obj["qrcode"]) if obj.get("qrcode") is not None else None
         })
         return _obj
-

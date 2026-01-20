@@ -30,10 +30,11 @@ from okta.models.jwk_use_type import JwkUseType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class JwkUse(BaseModel):
     """
     JwkUse
-    """ # noqa: E501
+    """  # noqa: E501
     use: Optional[JwkUseType] = None
     __properties: ClassVar[List[str]] = ["use"]
 
@@ -90,4 +91,3 @@ class JwkUse(BaseModel):
             "use": obj.get("use")
         })
         return _obj
-

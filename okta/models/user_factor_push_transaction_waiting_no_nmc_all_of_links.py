@@ -31,10 +31,11 @@ from okta.models.links_poll_poll import LinksPollPoll
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorPushTransactionWaitingNoNMCAllOfLinks(BaseModel):
     """
     UserFactorPushTransactionWaitingNoNMCAllOfLinks
-    """ # noqa: E501
+    """  # noqa: E501
     poll: Optional[LinksPollPoll] = None
     cancel: Optional[LinksCancelCancel] = None
     __properties: ClassVar[List[str]] = ["poll", "cancel"]
@@ -107,4 +108,3 @@ class UserFactorPushTransactionWaitingNoNMCAllOfLinks(BaseModel):
             "cancel": LinksCancelCancel.from_dict(obj["cancel"]) if obj.get("cancel") is not None else None
         })
         return _obj
-

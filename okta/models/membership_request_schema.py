@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class MembershipRequestSchema(BaseModel):
     """
     MembershipRequestSchema
-    """ # noqa: E501
-    member_external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The external ID of the user to be added as a member of the group in Okta", alias="memberExternalId")
+    """  # noqa: E501
+    member_external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(
+        default=None, description="The external ID of the user to be added as a member of the group in Okta", alias="memberExternalId")
     __properties: ClassVar[List[str]] = ["memberExternalId"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class MembershipRequestSchema(BaseModel):
             "memberExternalId": obj.get("memberExternalId")
         })
         return _obj
-

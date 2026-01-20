@@ -34,22 +34,30 @@ from okta.models.session_status import SessionStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Session(BaseModel):
     """
     Session
-    """ # noqa: E501
+    """  # noqa: E501
     amr: Optional[List[SessionAuthenticationMethod]] = Field(default=None, description="Authentication method reference")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     expires_at: Optional[datetime] = Field(default=None, description="A timestamp when the Session expires", alias="expiresAt")
     id: Optional[StrictStr] = Field(default=None, description="A unique key for the Session")
     idp: Optional[SessionIdentityProvider] = None
-    last_factor_verification: Optional[datetime] = Field(default=None, description="A timestamp when the user last performed multifactor authentication", alias="lastFactorVerification")
-    last_password_verification: Optional[datetime] = Field(default=None, description="A timestamp when the user last performed the primary or step-up authentication with a password", alias="lastPasswordVerification")
+    last_factor_verification: Optional[datetime] = Field(
+        default=None,
+        description="A timestamp when the user last performed multifactor authentication",
+        alias="lastFactorVerification")
+    last_password_verification: Optional[datetime] = Field(
+        default=None,
+        description="A timestamp when the user last performed the primary or step-up authentication with a password",
+        alias="lastPasswordVerification")
     login: Optional[StrictStr] = Field(default=None, description="A unique identifier for the user (username)")
     status: Optional[SessionStatus] = None
     user_id: Optional[StrictStr] = Field(default=None, description="A unique key for the user", alias="userId")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["amr", "createdAt", "expiresAt", "id", "idp", "lastFactorVerification", "lastPasswordVerification", "login", "status", "userId", "_links"]
+    __properties: ClassVar[List[str]] = ["amr", "createdAt", "expiresAt", "id", "idp",
+                                         "lastFactorVerification", "lastPasswordVerification", "login", "status", "userId", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -144,4 +152,3 @@ class Session(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

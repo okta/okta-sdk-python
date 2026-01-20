@@ -31,10 +31,11 @@ from okta.models.saml_endpoint_type import SamlEndpointType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlAcsEndpoint(BaseModel):
     """
     Okta's `SPSSODescriptor` endpoint where the IdP sends a `<SAMLResponse>` message
-    """ # noqa: E501
+    """  # noqa: E501
     binding: Optional[ProtocolEndpointBinding] = None
     type: Optional[SamlEndpointType] = SamlEndpointType.INSTANCE
     __properties: ClassVar[List[str]] = ["binding", "type"]
@@ -93,4 +94,3 @@ class SamlAcsEndpoint(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

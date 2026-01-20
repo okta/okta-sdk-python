@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserTypePutRequest(BaseModel):
     """
     UserTypePutRequest
-    """ # noqa: E501
+    """  # noqa: E501
     description: StrictStr = Field(description="The human-readable description of the user type")
     display_name: StrictStr = Field(description="The human-readable name of the user type", alias="displayName")
     name: StrictStr = Field(description="The name of the existing type")
@@ -93,4 +94,3 @@ class UserTypePutRequest(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

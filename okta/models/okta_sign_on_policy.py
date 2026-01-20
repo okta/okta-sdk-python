@@ -26,20 +26,20 @@ import json
 
 from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.okta_sign_on_policy_conditions import OktaSignOnPolicyConditions
 from okta.models.policy import Policy
 from okta.models.policy_links import PolicyLinks
-from okta.models.policy_type import PolicyType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class OktaSignOnPolicy(Policy):
     """
     OktaSignOnPolicy
-    """ # noqa: E501
+    """  # noqa: E501
     conditions: Optional[OktaSignOnPolicyConditions] = None
-    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_embedded", "_links", "conditions"]
+    __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated",
+                                         "name", "priority", "status", "system", "type", "_embedded", "_links", "conditions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -119,4 +119,3 @@ class OktaSignOnPolicy(Policy):
             "conditions": OktaSignOnPolicyConditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None
         })
         return _obj
-

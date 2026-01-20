@@ -29,23 +29,46 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaActiveDirectoryGroupProfile(BaseModel):
     """
     Profile for a group that is imported from Active Directory.  The `objectClass` for such groups is `okta:windows_security_principal`.
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the Windows group")
     dn: Optional[StrictStr] = Field(default=None, description="The distinguished name of the Windows group")
-    external_id: Optional[StrictStr] = Field(default=None, description="Base-64 encoded GUID (`objectGUID`) of the Windows group", alias="externalId")
-    group_scope: Optional[StrictStr] = Field(default=None, description="The scope of the Windows group (DomainLocal, Global, or Universal)", alias="groupScope")
-    group_type: Optional[StrictStr] = Field(default=None, description="The type of the Windows group (Security or Distribution)", alias="groupType")
-    managed_by: Optional[StrictStr] = Field(default=None, description="Distinguished name of the group that manages this group", alias="managedBy")
+    external_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Base-64 encoded GUID (`objectGUID`) of the Windows group",
+        alias="externalId")
+    group_scope: Optional[StrictStr] = Field(
+        default=None,
+        description="The scope of the Windows group (DomainLocal, Global, or Universal)",
+        alias="groupScope")
+    group_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of the Windows group (Security or Distribution)",
+        alias="groupType")
+    managed_by: Optional[StrictStr] = Field(
+        default=None,
+        description="Distinguished name of the group that manages this group",
+        alias="managedBy")
     name: Optional[StrictStr] = Field(default=None, description="Name of the Windows group")
     object_class: Optional[StrictStr] = Field(default=None, description="The object class type", alias="objectClass")
-    object_sid: Optional[StrictStr] = Field(default=None, description="The Windows Security Identifier (SID) for the group", alias="objectSid")
-    sam_account_name: Optional[StrictStr] = Field(default=None, description="Pre-Windows 2000 name of the Windows group", alias="samAccountName")
-    windows_domain_qualified_name: Optional[StrictStr] = Field(default=None, description="Fully qualified name of the Windows group", alias="windowsDomainQualifiedName")
+    object_sid: Optional[StrictStr] = Field(
+        default=None,
+        description="The Windows Security Identifier (SID) for the group",
+        alias="objectSid")
+    sam_account_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Pre-Windows 2000 name of the Windows group",
+        alias="samAccountName")
+    windows_domain_qualified_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Fully qualified name of the Windows group",
+        alias="windowsDomainQualifiedName")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["description", "dn", "externalId", "groupScope", "groupType", "managedBy", "name", "objectClass", "objectSid", "samAccountName", "windowsDomainQualifiedName"]
+    __properties: ClassVar[List[str]] = ["description", "dn", "externalId", "groupScope", "groupType",
+                                         "managedBy", "name", "objectClass", "objectSid", "samAccountName", "windowsDomainQualifiedName"]
 
     @field_validator('object_class')
     def object_class_validate_enum(cls, value):
@@ -139,4 +162,3 @@ class OktaActiveDirectoryGroupProfile(BaseModel):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-

@@ -28,19 +28,22 @@ from pydantic import ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.user_factor import UserFactor
 from okta.models.user_factor_links import UserFactorLinks
-from okta.models.user_factor_status import UserFactorStatus
 from okta.models.user_factor_token_hotp_profile import UserFactorTokenHOTPProfile
-from okta.models.user_factor_type import UserFactorType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class UserFactorTokenHOTP(UserFactor):
     """
     UserFactorTokenHOTP
-    """ # noqa: E501
-    factor_profile_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Custom TOTP factor profile. To create this, see [Custom TOTP factor](https://help.okta.com/okta_help.htm?id=ext-mfa-totp).", alias="factorProfileId")
+    """  # noqa: E501
+    factor_profile_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of an existing Custom TOTP factor profile. To create this, see [Custom TOTP factor](https://help.okta.com/okta_help.htm?id=ext-mfa-totp).",
+        alias="factorProfileId")
     profile: Optional[UserFactorTokenHOTPProfile] = None
-    __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated", "profile", "provider", "status", "vendorName", "_embedded", "_links", "factorProfileId"]
+    __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated",
+                                         "profile", "provider", "status", "vendorName", "_embedded", "_links", "factorProfileId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -119,4 +122,3 @@ class UserFactorTokenHOTP(UserFactor):
             "factorProfileId": obj.get("factorProfileId")
         })
         return _obj
-

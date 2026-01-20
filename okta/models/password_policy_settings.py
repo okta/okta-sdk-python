@@ -32,10 +32,11 @@ from okta.models.password_policy_recovery_settings import PasswordPolicyRecovery
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicySettings(BaseModel):
     """
     Specifies the policy level settings
-    """ # noqa: E501
+    """  # noqa: E501
     delegation: Optional[PasswordPolicyDelegationSettings] = None
     password: Optional[PasswordPolicyPasswordSettings] = None
     recovery: Optional[PasswordPolicyRecoverySettings] = None
@@ -117,4 +118,3 @@ class PasswordPolicySettings(BaseModel):
             "recovery": PasswordPolicyRecoverySettings.from_dict(obj["recovery"]) if obj.get("recovery") is not None else None
         })
         return _obj
-

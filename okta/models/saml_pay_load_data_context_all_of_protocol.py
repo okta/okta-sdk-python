@@ -30,11 +30,13 @@ from okta.models.saml_pay_load_data_context_all_of_protocol_issuer import SAMLPa
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataContextAllOfProtocol(BaseModel):
     """
     Details of the assertion protocol being used
-    """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="The type of authentication protocol being used for the assertion")
+    """  # noqa: E501
+    type: Optional[StrictStr] = Field(default=None,
+                                      description="The type of authentication protocol being used for the assertion")
     issuer: Optional[SAMLPayLoadDataContextAllOfProtocolIssuer] = None
     __properties: ClassVar[List[str]] = ["type", "issuer"]
 
@@ -99,4 +101,3 @@ class SAMLPayLoadDataContextAllOfProtocol(BaseModel):
             "issuer": SAMLPayLoadDataContextAllOfProtocolIssuer.from_dict(obj["issuer"]) if obj.get("issuer") is not None else None
         })
         return _obj
-

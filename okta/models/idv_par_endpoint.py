@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IDVParEndpoint(BaseModel):
     """
     IDV [PAR](https://datatracker.ietf.org/doc/html/rfc9126) endpoint
-    """ # noqa: E501
+    """  # noqa: E501
     binding: Optional[StrictStr] = None
     url: Optional[StrictStr] = Field(default=None, description="URL of the `par` endpoint of the IDV vendor")
     __properties: ClassVar[List[str]] = ["binding", "url"]
@@ -101,4 +102,3 @@ class IDVParEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

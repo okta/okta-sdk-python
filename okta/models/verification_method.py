@@ -29,7 +29,6 @@ from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from okta.models.policy_rule_verification_method_type import PolicyRuleVerificationMethodType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -37,10 +36,11 @@ if TYPE_CHECKING:
     from okta.models.authentication_method_chain_method import AuthenticationMethodChainMethod
     from okta.models.id_proofing_method import IdProofingMethod
 
+
 class VerificationMethod(BaseModel):
     """
     The method used to verify a user
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[PolicyRuleVerificationMethodType] = None
     __properties: ClassVar[List[str]] = ["type"]
 
@@ -55,7 +55,7 @@ class VerificationMethod(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'ASSURANCE': 'AssuranceMethod','AUTH_METHOD_CHAIN': 'AuthenticationMethodChainMethod','ID_PROOFING': 'IdProofingMethod'
+        'ASSURANCE': 'AssuranceMethod', 'AUTH_METHOD_CHAIN': 'AuthenticationMethodChainMethod', 'ID_PROOFING': 'IdProofingMethod'
     }
 
     @classmethod
@@ -102,19 +102,19 @@ class VerificationMethod(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AssuranceMethod, AuthenticationMethodChainMethod, IdProofingMethod]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AssuranceMethod,
+                                                              AuthenticationMethodChainMethod, IdProofingMethod]]:
         """Create an instance of VerificationMethod from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'AssuranceMethod':
             return import_module("okta.models.assurance_method").AssuranceMethod.from_dict(obj)
         if object_type == 'AuthenticationMethodChainMethod':
-            return import_module("okta.models.authentication_method_chain_method").AuthenticationMethodChainMethod.from_dict(obj)
+            return import_module(
+                "okta.models.authentication_method_chain_method").AuthenticationMethodChainMethod.from_dict(obj)
         if object_type == 'IdProofingMethod':
             return import_module("okta.models.id_proofing_method").IdProofingMethod.from_dict(obj)
 
         raise ValueError("VerificationMethod failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

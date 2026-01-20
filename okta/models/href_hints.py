@@ -30,10 +30,11 @@ from okta.models.http_method import HttpMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class HrefHints(BaseModel):
     """
     Describes allowed HTTP verbs for the `href`
-    """ # noqa: E501
+    """  # noqa: E501
     allow: Optional[List[HttpMethod]] = None
     __properties: ClassVar[List[str]] = ["allow"]
 
@@ -90,4 +91,3 @@ class HrefHints(BaseModel):
             "allow": obj.get("allow")
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.policy_account_link_filter_users import PolicyAccountLinkFilter
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyAccountLinkFilter(BaseModel):
     """
     Specifies filters on which users are available for account linking by an IdP
-    """ # noqa: E501
+    """  # noqa: E501
     groups: Optional[PolicyAccountLinkFilterGroups] = None
     users: Optional[PolicyAccountLinkFilterUsers] = None
     __properties: ClassVar[List[str]] = ["groups", "users"]
@@ -107,4 +108,3 @@ class PolicyAccountLinkFilter(BaseModel):
             "users": PolicyAccountLinkFilterUsers.from_dict(obj["users"]) if obj.get("users") is not None else None
         })
         return _obj
-

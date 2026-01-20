@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventTokenJwtHeader(BaseModel):
     """
     JSON Web Token header for a Security Event Token sent by the SSF Transmitter
-    """ # noqa: E501
+    """  # noqa: E501
     alg: StrictStr = Field(description="Algorithm used to sign or encrypt the JWT")
     kid: StrictStr = Field(description="Key ID used to sign or encrypt the JWT")
     typ: StrictStr = Field(description="The type of content being signed or encrypted")
@@ -93,4 +94,3 @@ class SecurityEventTokenJwtHeader(BaseModel):
             "typ": obj.get("typ")
         })
         return _obj
-

@@ -22,15 +22,15 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.capabilities_inbound_provisioning_object import CapabilitiesInboundProvisioningObject
 from okta.models.capabilities_object import CapabilitiesObject
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
 UPDATEFEATUREFORAPPLICATIONREQUEST_ONE_OF_SCHEMAS = ["CapabilitiesInboundProvisioningObject", "CapabilitiesObject"]
+
 
 class UpdateFeatureForApplicationRequest(BaseModel):
     """
@@ -41,13 +41,12 @@ class UpdateFeatureForApplicationRequest(BaseModel):
     # data type: CapabilitiesInboundProvisioningObject
     oneof_schema_2_validator: Optional[CapabilitiesInboundProvisioningObject] = None
     actual_instance: Optional[Union[CapabilitiesInboundProvisioningObject, CapabilitiesObject]] = None
-    one_of_schemas: Set[str] = { "CapabilitiesInboundProvisioningObject", "CapabilitiesObject" }
+    one_of_schemas: Set[str] = {"CapabilitiesInboundProvisioningObject", "CapabilitiesObject"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -76,10 +75,14 @@ class UpdateFeatureForApplicationRequest(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in UpdateFeatureForApplicationRequest with oneOf schemas: CapabilitiesInboundProvisioningObject, CapabilitiesObject. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in UpdateFeatureForApplicationRequest with oneOf schemas: CapabilitiesInboundProvisioningObject, CapabilitiesObject. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in UpdateFeatureForApplicationRequest with oneOf schemas: CapabilitiesInboundProvisioningObject, CapabilitiesObject. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in UpdateFeatureForApplicationRequest with oneOf schemas: CapabilitiesInboundProvisioningObject, CapabilitiesObject. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -109,10 +112,14 @@ class UpdateFeatureForApplicationRequest(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into UpdateFeatureForApplicationRequest with oneOf schemas: CapabilitiesInboundProvisioningObject, CapabilitiesObject. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into UpdateFeatureForApplicationRequest with oneOf schemas: CapabilitiesInboundProvisioningObject, CapabilitiesObject. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into UpdateFeatureForApplicationRequest with oneOf schemas: CapabilitiesInboundProvisioningObject, CapabilitiesObject. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into UpdateFeatureForApplicationRequest with oneOf schemas: CapabilitiesInboundProvisioningObject, CapabilitiesObject. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -140,5 +147,3 @@ class UpdateFeatureForApplicationRequest(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

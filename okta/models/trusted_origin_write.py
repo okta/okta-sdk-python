@@ -31,13 +31,16 @@ from okta.models.trusted_origin_scope import TrustedOriginScope
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TrustedOriginWrite(BaseModel):
     """
     TrustedOriginWrite
-    """ # noqa: E501
+    """  # noqa: E501
     name: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Unique name for the trusted origin")
-    origin: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Unique origin URL for the trusted origin. The supported schemes for this attribute are HTTP, HTTPS, FTP, Ionic 2, and Capacitor.")
-    scopes: Optional[List[TrustedOriginScope]] = Field(default=None, description="Array of scope types that this trusted origin is used for")
+    origin: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="Unique origin URL for the trusted origin. The supported schemes for this attribute are HTTP, HTTPS, FTP, Ionic 2, and Capacitor.")
+    scopes: Optional[List[TrustedOriginScope]] = Field(default=None,
+                                                       description="Array of scope types that this trusted origin is used for")
     __properties: ClassVar[List[str]] = ["name", "origin", "scopes"]
 
     model_config = ConfigDict(
@@ -102,4 +105,3 @@ class TrustedOriginWrite(BaseModel):
             "scopes": [TrustedOriginScope.from_dict(_item) for _item in obj["scopes"]] if obj.get("scopes") is not None else None
         })
         return _obj
-

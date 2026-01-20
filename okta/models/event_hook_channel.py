@@ -31,10 +31,11 @@ from okta.models.event_hook_channel_type import EventHookChannelType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EventHookChannel(BaseModel):
     """
     EventHookChannel
-    """ # noqa: E501
+    """  # noqa: E501
     config: EventHookChannelConfig
     type: EventHookChannelType
     version: StrictStr = Field(description="Version of the channel. Currently the only supported version is `1.0.0`.")
@@ -102,4 +103,3 @@ class EventHookChannel(BaseModel):
             "version": obj.get("version")
         })
         return _obj
-

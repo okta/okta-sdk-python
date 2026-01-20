@@ -30,10 +30,11 @@ from okta.models.screen_lock_type import ScreenLockType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceAssuranceAndroidPlatformAllOfScreenLockType(BaseModel):
     """
     DeviceAssuranceAndroidPlatformAllOfScreenLockType
-    """ # noqa: E501
+    """  # noqa: E501
     include: Optional[List[ScreenLockType]] = None
     __properties: ClassVar[List[str]] = ["include"]
 
@@ -90,4 +91,3 @@ class DeviceAssuranceAndroidPlatformAllOfScreenLockType(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

@@ -32,15 +32,20 @@ from okta.models.scope_condition import ScopeCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityAssertionCustomASConnectionCreatable(BaseModel):
     """
     Create an identity assertion connection for a custom authorization server
-    """ # noqa: E501
+    """  # noqa: E501
     authorization_server: IdentityAssertionCustomASConnectionCreatableAuthorizationServer = Field(alias="authorizationServer")
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
-    protocol_type: Optional[StrictStr] = Field(default=None, description="The authentication protocol type used for the connection", alias="protocolType")
+    protocol_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The authentication protocol type used for the connection",
+        alias="protocolType")
     scope_condition: ScopeCondition = Field(alias="scopeCondition")
-    scopes: Annotated[List[StrictStr], Field(min_length=1)] = Field(description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
+    scopes: Annotated[List[StrictStr], Field(min_length=1)] = Field(
+        description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
     __properties: ClassVar[List[str]] = ["authorizationServer", "connectionType", "protocolType", "scopeCondition", "scopes"]
 
     @field_validator('connection_type')
@@ -124,4 +129,3 @@ class IdentityAssertionCustomASConnectionCreatable(BaseModel):
             "scopes": obj.get("scopes")
         })
         return _obj
-

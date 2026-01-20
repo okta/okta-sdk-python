@@ -35,23 +35,33 @@ from okta.models.o_auth2_scope_consent_grant_source import OAuth2ScopeConsentGra
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2ScopeConsentGrant(BaseModel):
     """
     Grant object that represents an app consent scope grant
-    """ # noqa: E501
+    """  # noqa: E501
     client_id: Optional[StrictStr] = Field(default=None, description="Client ID of the app integration", alias="clientId")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
     created_by: Optional[OAuth2Actor] = Field(default=None, alias="createdBy")
     id: Optional[StrictStr] = Field(default=None, description="ID of the Grant object")
     issuer: StrictStr = Field(description="The issuer of your org authorization server. This is typically your Okta domain.")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
-    scope_id: StrictStr = Field(description="The name of the [Okta scope](https://developer.okta.com/docs/api/oauth2/#oauth-20-scopes) for which consent is granted", alias="scopeId")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
+    scope_id: StrictStr = Field(
+        description="The name of the [Okta scope](https://developer.okta.com/docs/api/oauth2/#oauth-20-scopes) for which consent is granted",
+        alias="scopeId")
     source: Optional[OAuth2ScopeConsentGrantSource] = None
     status: Optional[GrantOrTokenStatus] = None
-    user_id: Optional[StrictStr] = Field(default=None, description="User ID that granted consent (if `source` is `END_USER`)", alias="userId")
+    user_id: Optional[StrictStr] = Field(
+        default=None,
+        description="User ID that granted consent (if `source` is `END_USER`)",
+        alias="userId")
     embedded: Optional[OAuth2ScopeConsentGrantEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[OAuth2ScopeConsentGrantLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["clientId", "created", "createdBy", "id", "issuer", "lastUpdated", "scopeId", "source", "status", "userId", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["clientId", "created", "createdBy", "id", "issuer",
+                                         "lastUpdated", "scopeId", "source", "status", "userId", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -148,4 +158,3 @@ class OAuth2ScopeConsentGrant(BaseModel):
             "_links": OAuth2ScopeConsentGrantLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

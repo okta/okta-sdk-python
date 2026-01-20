@@ -30,12 +30,16 @@ from okta.models.token_pay_load_data import TokenPayLoadData
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoad(BaseModel):
     """
     TokenPayLoad
-    """ # noqa: E501
+    """  # noqa: E501
     data: Optional[TokenPayLoadData] = None
-    event_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook. The token inline hook type is `com.okta.oauth2.tokens.transform`.", alias="eventType")
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook. The token inline hook type is `com.okta.oauth2.tokens.transform`.",
+        alias="eventType")
     source: Optional[StrictStr] = Field(default=None, description="The URL of the token inline hook")
     __properties: ClassVar[List[str]] = ["data", "eventType", "source"]
 
@@ -101,4 +105,3 @@ class TokenPayLoad(BaseModel):
             "source": obj.get("source")
         })
         return _obj
-

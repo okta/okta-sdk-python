@@ -34,22 +34,33 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RealmAssignment(BaseModel):
     """
     RealmAssignment
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[Actions] = None
     conditions: Optional[Conditions] = None
     created: Optional[datetime] = Field(default=None, description="Timestamp when the realm assignment was created")
-    domains: Optional[List[StrictStr]] = Field(default=None, description="Array of allowed domains. No user in this realm can be created or updated unless they have a username and email from one of these domains.  The following characters aren't allowed in the domain name: `!$%^&()=*+,:;<>'[]|/?\\`")
+    domains: Optional[List[StrictStr]] = Field(
+        default=None, description="Array of allowed domains. No user in this realm can be created or updated unless they have a username and email from one of these domains.  The following characters aren't allowed in the domain name: `!$%^&()=*+,:;<>'[]|/?\\`")
     id: Optional[StrictStr] = Field(default=None, description="Unique ID of the realm assignment")
-    is_default: Optional[StrictBool] = Field(default=None, description="Indicates the default realm. Existing users will start out in the default realm and can be moved individually to other realms.", alias="isDefault")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp of when the realm assignment was updated", alias="lastUpdated")
+    is_default: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates the default realm. Existing users will start out in the default realm and can be moved individually to other realms.",
+        alias="isDefault")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp of when the realm assignment was updated",
+        alias="lastUpdated")
     name: Optional[StrictStr] = Field(default=None, description="Name of the realm")
-    priority: Optional[StrictInt] = Field(default=None, description="The priority of the realm assignment. The lower the number, the higher the priority. This helps resolve conflicts between realm assignments. > **Note:** When you create realm assignments in bulk, realm assignment priorities must be unique.")
+    priority: Optional[StrictInt] = Field(
+        default=None,
+        description="The priority of the realm assignment. The lower the number, the higher the priority. This helps resolve conflicts between realm assignments. > **Note:** When you create realm assignments in bulk, realm assignment priorities must be unique.")
     status: Optional[LifecycleStatus] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["actions", "conditions", "created", "domains", "id", "isDefault", "lastUpdated", "name", "priority", "status", "_links"]
+    __properties: ClassVar[List[str]] = ["actions", "conditions", "created", "domains",
+                                         "id", "isDefault", "lastUpdated", "name", "priority", "status", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -143,4 +154,3 @@ class RealmAssignment(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

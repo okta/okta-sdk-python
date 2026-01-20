@@ -32,12 +32,16 @@ from okta.models.base_context_user_profile import BaseContextUserProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BaseContextUser(BaseModel):
     """
     Identifies the Okta user that the token was generated to authenticate and provides details of their Okta user profile
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the user")
-    password_changed: Optional[datetime] = Field(default=None, description="The timestamp when the user's password was last updated", alias="passwordChanged")
+    password_changed: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user's password was last updated",
+        alias="passwordChanged")
     profile: Optional[BaseContextUserProfile] = None
     links: Optional[BaseContextUserLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "passwordChanged", "profile", "_links"]
@@ -112,4 +116,3 @@ class BaseContextUser(BaseModel):
             "_links": BaseContextUserLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

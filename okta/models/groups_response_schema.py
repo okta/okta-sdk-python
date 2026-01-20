@@ -31,11 +31,13 @@ from okta.models.groups_response_schema_profile import GroupsResponseSchemaProfi
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupsResponseSchema(BaseModel):
     """
     GroupsResponseSchema
-    """ # noqa: E501
-    external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The external ID of the identity source group", alias="externalId")
+    """  # noqa: E501
+    external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(
+        default=None, description="The external ID of the identity source group", alias="externalId")
     id: Optional[StrictStr] = Field(default=None, description="The Okta group ID of the identity source group")
     profile: Optional[GroupsResponseSchemaProfile] = None
     __properties: ClassVar[List[str]] = ["externalId", "id", "profile"]
@@ -104,4 +106,3 @@ class GroupsResponseSchema(BaseModel):
             "profile": GroupsResponseSchemaProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

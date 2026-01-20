@@ -30,10 +30,11 @@ from okta.models.oidc_request_signature_algorithm import OidcRequestSignatureAlg
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OidcRequestAlgorithm(BaseModel):
     """
     Algorithm settings used to sign an authorization request
-    """ # noqa: E501
+    """  # noqa: E501
     signature: Optional[OidcRequestSignatureAlgorithm] = None
     __properties: ClassVar[List[str]] = ["signature"]
 
@@ -97,4 +98,3 @@ class OidcRequestAlgorithm(BaseModel):
             "signature": OidcRequestSignatureAlgorithm.from_dict(obj["signature"]) if obj.get("signature") is not None else None
         })
         return _obj
-

@@ -31,21 +31,30 @@ from okta.models.user_schema_attribute_enum import UserSchemaAttributeEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogStreamSchema(BaseModel):
     """
     LogStreamSchema
-    """ # noqa: E501
+    """  # noqa: E501
     var_schema: Optional[StrictStr] = Field(default=None, description="JSON schema version identifier", alias="$schema")
-    error_message: Optional[Dict[str, Any]] = Field(default=None, description="A collection of error messages for individual properties in the schema. Okta implements a subset of [ajv-errors](https://github.com/ajv-validator/ajv-errors).", alias="errorMessage")
+    error_message: Optional[Dict[str,
+                                 Any]] = Field(default=None,
+                                               description="A collection of error messages for individual properties in the schema. Okta implements a subset of [ajv-errors](https://github.com/ajv-validator/ajv-errors).",
+                                               alias="errorMessage")
     id: Optional[StrictStr] = Field(default=None, description="URI of log stream schema")
-    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(default=None, description="Non-empty array of valid JSON schemas.  Okta only supports `oneOf` for specifying display names for an `enum`. Each schema has the following format:  ``` {   \"const\": \"enumValue\",   \"title\": \"display name\" } ```", alias="oneOf")
-    pattern: Optional[StrictStr] = Field(default=None, description="For `string` log stream schema property type, specifies the regular expression used to validate the property")
+    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(
+        default=None, description="Non-empty array of valid JSON schemas.  Okta only supports `oneOf` for specifying display names for an `enum`. Each schema has the following format:  ``` {   \"const\": \"enumValue\",   \"title\": \"display name\" } ```", alias="oneOf")
+    pattern: Optional[StrictStr] = Field(
+        default=None,
+        description="For `string` log stream schema property type, specifies the regular expression used to validate the property")
     properties: Optional[Dict[str, Any]] = Field(default=None, description="log stream schema properties object")
-    required: Optional[List[StrictStr]] = Field(default=None, description="Required properties for this log stream schema object")
+    required: Optional[List[StrictStr]] = Field(default=None,
+                                                description="Required properties for this log stream schema object")
     title: Optional[StrictStr] = Field(default=None, description="Name of the log streaming integration")
     type: Optional[StrictStr] = Field(default=None, description="Type of log stream schema property")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["$schema", "errorMessage", "id", "oneOf", "pattern", "properties", "required", "title", "type", "_links"]
+    __properties: ClassVar[List[str]] = ["$schema", "errorMessage", "id",
+                                         "oneOf", "pattern", "properties", "required", "title", "type", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -134,4 +143,3 @@ class LogStreamSchema(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -34,10 +34,11 @@ from okta.models.role_type import RoleType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Role(BaseModel):
     """
     Role
-    """ # noqa: E501
+    """  # noqa: E501
     assignment_type: Optional[RoleAssignmentType] = Field(default=None, alias="assignmentType")
     created: Optional[datetime] = None
     description: Optional[StrictStr] = None
@@ -48,7 +49,8 @@ class Role(BaseModel):
     type: Optional[RoleType] = None
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["assignmentType", "created", "description", "id", "label", "lastUpdated", "status", "type", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["assignmentType", "created", "description",
+                                         "id", "label", "lastUpdated", "status", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,4 +131,3 @@ class Role(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

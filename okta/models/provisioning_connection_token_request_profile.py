@@ -30,10 +30,11 @@ from okta.models.provisioning_connection_token_auth_scheme import ProvisioningCo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningConnectionTokenRequestProfile(BaseModel):
     """
     ProvisioningConnectionTokenRequestProfile
-    """ # noqa: E501
+    """  # noqa: E501
     auth_scheme: ProvisioningConnectionTokenAuthScheme = Field(alias="authScheme")
     token: Optional[StrictStr] = Field(default=None, description="Token used to authenticate with the app")
     __properties: ClassVar[List[str]] = ["authScheme", "token"]
@@ -92,4 +93,3 @@ class ProvisioningConnectionTokenRequestProfile(BaseModel):
             "token": obj.get("token")
         })
         return _obj
-

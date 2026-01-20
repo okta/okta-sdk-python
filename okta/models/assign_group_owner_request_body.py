@@ -30,10 +30,11 @@ from okta.models.group_owner_type import GroupOwnerType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AssignGroupOwnerRequestBody(BaseModel):
     """
     AssignGroupOwnerRequestBody
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The `id` of the group owner")
     type: Optional[GroupOwnerType] = None
     __properties: ClassVar[List[str]] = ["id", "type"]
@@ -92,4 +93,3 @@ class AssignGroupOwnerRequestBody(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

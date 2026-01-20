@@ -30,10 +30,11 @@ from okta.models.href_object import HrefObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomAuthorizationServerLinks(BaseModel):
     """
     CustomAuthorizationServerLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: HrefObject = Field(alias="self")
     web: Optional[HrefObject] = None
     __properties: ClassVar[List[str]] = ["self", "web"]
@@ -106,4 +107,3 @@ class CustomAuthorizationServerLinks(BaseModel):
             "web": HrefObject.from_dict(obj["web"]) if obj.get("web") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.realm_assignment_operation_response_all_of_assignment_operation
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RealmAssignmentOperationResponseAllOfAssignmentOperation(BaseModel):
     """
     Definition of the realm assignment operation
-    """ # noqa: E501
+    """  # noqa: E501
     configuration: Optional[RealmAssignmentOperationResponseAllOfAssignmentOperationConfiguration] = None
     __properties: ClassVar[List[str]] = ["configuration"]
 
@@ -97,4 +98,3 @@ class RealmAssignmentOperationResponseAllOfAssignmentOperation(BaseModel):
             "configuration": RealmAssignmentOperationResponseAllOfAssignmentOperationConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None
         })
         return _obj
-

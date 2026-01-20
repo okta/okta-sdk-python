@@ -32,22 +32,32 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2Token(BaseModel):
     """
     OAuth2Token
-    """ # noqa: E501
+    """  # noqa: E501
     client_id: Optional[StrictStr] = Field(default=None, description="Client ID", alias="clientId")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the object was created")
-    expires_at: Optional[datetime] = Field(default=None, description="Expiration time of the OAuth 2.0 Token", alias="expiresAt")
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Expiration time of the OAuth 2.0 Token",
+        alias="expiresAt")
     id: Optional[StrictStr] = Field(default=None, description="ID of the Token object")
-    issuer: Optional[StrictStr] = Field(default=None, description="The complete URL of the authorization server that issued the Token")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
+    issuer: Optional[StrictStr] = Field(default=None,
+                                        description="The complete URL of the authorization server that issued the Token")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
     scopes: Optional[List[StrictStr]] = Field(default=None, description="Name of scopes attached to the Token")
     status: Optional[GrantOrTokenStatus] = None
     user_id: Optional[StrictStr] = Field(default=None, alias="userId")
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Embedded resources related to the object if the `expand` query parameter is specified", alias="_embedded")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None, description="Embedded resources related to the object if the `expand` query parameter is specified", alias="_embedded")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["clientId", "created", "expiresAt", "id", "issuer", "lastUpdated", "scopes", "status", "userId", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["clientId", "created", "expiresAt", "id",
+                                         "issuer", "lastUpdated", "scopes", "status", "userId", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -131,4 +141,3 @@ class OAuth2Token(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

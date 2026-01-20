@@ -32,10 +32,11 @@ from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorMethodTac(BaseModel):
     """
     AuthenticatorMethodTac
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[LifecycleStatus] = None
     type: Optional[AuthenticatorMethodType] = None
     links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
@@ -103,4 +104,3 @@ class AuthenticatorMethodTac(BaseModel):
             "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

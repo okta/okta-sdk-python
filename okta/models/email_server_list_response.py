@@ -30,10 +30,11 @@ from okta.models.email_server_response import EmailServerResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailServerListResponse(BaseModel):
     """
     EmailServerListResponse
-    """ # noqa: E501
+    """  # noqa: E501
     email_servers: Optional[List[EmailServerResponse]] = Field(default=None, alias="email-servers")
     __properties: ClassVar[List[str]] = ["email-servers"]
 
@@ -97,4 +98,3 @@ class EmailServerListResponse(BaseModel):
             "email-servers": [EmailServerResponse.from_dict(_item) for _item in obj["email-servers"]] if obj.get("email-servers") is not None else None
         })
         return _obj
-

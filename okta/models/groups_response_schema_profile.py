@@ -30,10 +30,11 @@ from okta.models.identity_source_group_profile_for_upsert import IdentitySourceG
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupsResponseSchemaProfile(BaseModel):
     """
     The profile information of the group
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[IdentitySourceGroupProfileForUpsert] = None
     __properties: ClassVar[List[str]] = ["profile"]
 
@@ -97,4 +98,3 @@ class GroupsResponseSchemaProfile(BaseModel):
             "profile": IdentitySourceGroupProfileForUpsert.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

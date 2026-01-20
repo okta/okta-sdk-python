@@ -30,10 +30,11 @@ from okta.models.links_self_and_roles import LinksSelfAndRoles
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RoleAssignedUser(BaseModel):
     """
     RoleAssignedUser
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The ID of the user")
     orn: Optional[StrictStr] = Field(default=None, description="ORN representing the assignee")
     links: Optional[LinksSelfAndRoles] = Field(default=None, alias="_links")
@@ -105,4 +106,3 @@ class RoleAssignedUser(BaseModel):
             "_links": LinksSelfAndRoles.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

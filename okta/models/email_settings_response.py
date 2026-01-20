@@ -30,10 +30,11 @@ from okta.models.email_settings_response_links import EmailSettingsResponseLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailSettingsResponse(BaseModel):
     """
     EmailSettingsResponse
-    """ # noqa: E501
+    """  # noqa: E501
     recipients: Optional[StrictStr] = None
     links: Optional[EmailSettingsResponseLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["recipients", "_links"]
@@ -109,4 +110,3 @@ class EmailSettingsResponse(BaseModel):
             "_links": EmailSettingsResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

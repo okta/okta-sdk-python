@@ -30,10 +30,11 @@ from okta.models.provisioning_connection_oauth_auth_scheme import ProvisioningCo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningConnectionProfileOauth(BaseModel):
     """
     The app provisioning connection profile used to configure the method of authentication and the credentials. Currently, token-based and OAuth 2.0-based authentication are supported. 
-    """ # noqa: E501
+    """  # noqa: E501
     auth_scheme: ProvisioningConnectionOauthAuthScheme = Field(alias="authScheme")
     client_id: Optional[StrictStr] = Field(default=None, alias="clientId")
     __properties: ClassVar[List[str]] = ["authScheme", "clientId"]
@@ -92,4 +93,3 @@ class ProvisioningConnectionProfileOauth(BaseModel):
             "clientId": obj.get("clientId")
         })
         return _obj
-

@@ -33,10 +33,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorLinks(BaseModel):
     """
     AuthenticatorLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     activate: Optional[HrefObjectActivateLink] = None
     deactivate: Optional[HrefObjectDeactivateLink] = None
@@ -127,4 +128,3 @@ class AuthenticatorLinks(BaseModel):
             "methods": HrefObject.from_dict(obj["methods"]) if obj.get("methods") is not None else None
         })
         return _obj
-

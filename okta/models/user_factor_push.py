@@ -29,17 +29,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.user_factor import UserFactor
 from okta.models.user_factor_links import UserFactorLinks
 from okta.models.user_factor_push_profile import UserFactorPushProfile
-from okta.models.user_factor_status import UserFactorStatus
-from okta.models.user_factor_type import UserFactorType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class UserFactorPush(UserFactor):
     """
     UserFactorPush
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[UserFactorPushProfile] = None
-    __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated", "profile", "provider", "status", "vendorName", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated",
+                                         "profile", "provider", "status", "vendorName", "_embedded", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -117,4 +117,3 @@ class UserFactorPush(UserFactor):
             "_links": UserFactorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

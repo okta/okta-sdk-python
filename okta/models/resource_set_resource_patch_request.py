@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetResourcePatchRequest(BaseModel):
     """
     ResourceSetResourcePatchRequest
-    """ # noqa: E501
+    """  # noqa: E501
     additions: Optional[List[StrictStr]] = Field(default=None, description="A list of resources to add to the resource set")
     __properties: ClassVar[List[str]] = ["additions"]
 
@@ -89,4 +90,3 @@ class ResourceSetResourcePatchRequest(BaseModel):
             "additions": obj.get("additions")
         })
         return _obj
-

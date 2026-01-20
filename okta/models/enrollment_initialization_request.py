@@ -30,12 +30,17 @@ from okta.models.ec_key_jwk import ECKeyJWK
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EnrollmentInitializationRequest(BaseModel):
     """
     Enrollment initialization request
-    """ # noqa: E501
-    enrollment_rp_ids: Optional[List[StrictStr]] = Field(default=None, description="List of relying party hostnames to register on the YubiKey", alias="enrollmentRpIds")
-    fulfillment_provider: Optional[StrictStr] = Field(default=None, description="Name of the fulfillment provider for the WebAuthn preregistration factor", alias="fulfillmentProvider")
+    """  # noqa: E501
+    enrollment_rp_ids: Optional[List[StrictStr]] = Field(
+        default=None, description="List of relying party hostnames to register on the YubiKey", alias="enrollmentRpIds")
+    fulfillment_provider: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the fulfillment provider for the WebAuthn preregistration factor",
+        alias="fulfillmentProvider")
     user_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Okta user", alias="userId")
     yubico_transport_key_jwk: Optional[ECKeyJWK] = Field(default=None, alias="yubicoTransportKeyJWK")
     __properties: ClassVar[List[str]] = ["enrollmentRpIds", "fulfillmentProvider", "userId", "yubicoTransportKeyJWK"]
@@ -113,4 +118,3 @@ class EnrollmentInitializationRequest(BaseModel):
             "yubicoTransportKeyJWK": ECKeyJWK.from_dict(obj["yubicoTransportKeyJWK"]) if obj.get("yubicoTransportKeyJWK") is not None else None
         })
         return _obj
-

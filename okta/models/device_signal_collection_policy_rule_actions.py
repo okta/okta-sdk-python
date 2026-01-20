@@ -30,11 +30,13 @@ from okta.models.device_signal_collection_policy_rule_device_signal_collection i
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceSignalCollectionPolicyRuleActions(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Specifies actions to be taken, or operations that may be allowed, if the rule conditions are satisfied
-    """ # noqa: E501
-    device_signal_collection: Optional[DeviceSignalCollectionPolicyRuleDeviceSignalCollection] = Field(default=None, alias="deviceSignalCollection")
+    """  # noqa: E501
+    device_signal_collection: Optional[DeviceSignalCollectionPolicyRuleDeviceSignalCollection] = Field(
+        default=None, alias="deviceSignalCollection")
     __properties: ClassVar[List[str]] = ["deviceSignalCollection"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class DeviceSignalCollectionPolicyRuleActions(BaseModel):
             "deviceSignalCollection": DeviceSignalCollectionPolicyRuleDeviceSignalCollection.from_dict(obj["deviceSignalCollection"]) if obj.get("deviceSignalCollection") is not None else None
         })
         return _obj
-

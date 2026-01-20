@@ -28,20 +28,20 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.authenticator_enrollment_policy_rule_actions import AuthenticatorEnrollmentPolicyRuleActions
 from okta.models.authenticator_enrollment_policy_rule_conditions import AuthenticatorEnrollmentPolicyRuleConditions
-from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.policy_links import PolicyLinks
 from okta.models.policy_rule import PolicyRule
-from okta.models.policy_rule_type import PolicyRuleType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class AuthenticatorEnrollmentPolicyRule(PolicyRule):
     """
     AuthenticatorEnrollmentPolicyRule
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[AuthenticatorEnrollmentPolicyRuleActions] = None
     conditions: Optional[AuthenticatorEnrollmentPolicyRuleConditions] = None
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_links", "actions", "conditions"]
+    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name",
+                                         "priority", "status", "system", "type", "_links", "actions", "conditions"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -142,4 +142,3 @@ class AuthenticatorEnrollmentPolicyRule(PolicyRule):
             "conditions": AuthenticatorEnrollmentPolicyRuleConditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None
         })
         return _obj
-

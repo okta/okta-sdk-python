@@ -31,10 +31,11 @@ from okta.models.mtls_endpoints import MtlsEndpoints
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProtocolMtls(BaseModel):
     """
     Protocol settings for the [MTLS Protocol](https://tools.ietf.org/html/rfc5246#section-7.4.4)
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[MtlsCredentials] = None
     endpoints: Optional[MtlsEndpoints] = None
     type: Optional[StrictStr] = Field(default=None, description="Mutual TLS")
@@ -119,4 +120,3 @@ class ProtocolMtls(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

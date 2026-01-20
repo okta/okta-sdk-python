@@ -29,17 +29,37 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CapabilitiesImportRulesUserCreateAndMatchObject(BaseModel):
     """
     Rules for matching and creating users
-    """ # noqa: E501
-    allow_partial_match: Optional[StrictBool] = Field(default=None, description="Allows user import upon partial matching. Partial matching occurs when the first and last names of an imported user match those of an existing Okta user, even if the username or email attributes don't match.", alias="allowPartialMatch")
-    auto_activate_new_users: Optional[StrictBool] = Field(default=None, description="If set to `true`, imported new users are automatically activated.", alias="autoActivateNewUsers")
-    auto_confirm_exact_match: Optional[StrictBool] = Field(default=None, description="If set to `true`, exact-matched users are automatically confirmed on activation. If set to `false`, exact-matched users need to be confirmed manually.", alias="autoConfirmExactMatch")
-    auto_confirm_new_users: Optional[StrictBool] = Field(default=None, description="If set to `true`, imported new users are automatically confirmed on activation. This doesn't apply to imported users that already exist in Okta.", alias="autoConfirmNewUsers")
-    auto_confirm_partial_match: Optional[StrictBool] = Field(default=None, description="If set to `true`, partially matched users are automatically confirmed on activation. If set to `false`, partially matched users need to be confirmed manually.", alias="autoConfirmPartialMatch")
-    exact_match_criteria: Optional[StrictStr] = Field(default=None, description="Determines the attribute to match users", alias="exactMatchCriteria")
-    __properties: ClassVar[List[str]] = ["allowPartialMatch", "autoActivateNewUsers", "autoConfirmExactMatch", "autoConfirmNewUsers", "autoConfirmPartialMatch", "exactMatchCriteria"]
+    """  # noqa: E501
+    allow_partial_match: Optional[StrictBool] = Field(
+        default=None,
+        description="Allows user import upon partial matching. Partial matching occurs when the first and last names of an imported user match those of an existing Okta user, even if the username or email attributes don't match.",
+        alias="allowPartialMatch")
+    auto_activate_new_users: Optional[StrictBool] = Field(
+        default=None,
+        description="If set to `true`, imported new users are automatically activated.",
+        alias="autoActivateNewUsers")
+    auto_confirm_exact_match: Optional[StrictBool] = Field(
+        default=None,
+        description="If set to `true`, exact-matched users are automatically confirmed on activation. If set to `false`, exact-matched users need to be confirmed manually.",
+        alias="autoConfirmExactMatch")
+    auto_confirm_new_users: Optional[StrictBool] = Field(
+        default=None,
+        description="If set to `true`, imported new users are automatically confirmed on activation. This doesn't apply to imported users that already exist in Okta.",
+        alias="autoConfirmNewUsers")
+    auto_confirm_partial_match: Optional[StrictBool] = Field(
+        default=None,
+        description="If set to `true`, partially matched users are automatically confirmed on activation. If set to `false`, partially matched users need to be confirmed manually.",
+        alias="autoConfirmPartialMatch")
+    exact_match_criteria: Optional[StrictStr] = Field(
+        default=None,
+        description="Determines the attribute to match users",
+        alias="exactMatchCriteria")
+    __properties: ClassVar[List[str]] = ["allowPartialMatch", "autoActivateNewUsers",
+                                         "autoConfirmExactMatch", "autoConfirmNewUsers", "autoConfirmPartialMatch", "exactMatchCriteria"]
 
     @field_validator('exact_match_criteria')
     def exact_match_criteria_validate_enum(cls, value):
@@ -109,4 +129,3 @@ class CapabilitiesImportRulesUserCreateAndMatchObject(BaseModel):
             "exactMatchCriteria": obj.get("exactMatchCriteria")
         })
         return _obj
-

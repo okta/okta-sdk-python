@@ -38,27 +38,60 @@ from okta.models.submission_response_global_token_revocation import SubmissionRe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SubmissionRequest(BaseModel):
     """
     SubmissionRequest
-    """ # noqa: E501
-    actions: Optional[List[SubmissionAction]] = Field(default=None, description="List of actions supported by this integration")
-    app_contact_details: Optional[List[SubmissionResponseAppContactDetailsInner]] = Field(default=None, description="List of contact details for the app integration", alias="appContactDetails")
+    """  # noqa: E501
+    actions: Optional[List[SubmissionAction]] = Field(default=None,
+                                                      description="List of actions supported by this integration")
+    app_contact_details: Optional[List[SubmissionResponseAppContactDetailsInner]] = Field(
+        default=None, description="List of contact details for the app integration", alias="appContactDetails")
     var_auth_settings: Optional[AuthSettings] = Field(default=None, alias="authSettings")
-    capabilities: Optional[List[SubmissionCapability]] = Field(default=None, description="List of capabilities supported by this integration")
-    config: Optional[List[SubmissionResponseConfigInner]] = Field(default=None, description="List of org-level variables for the customer per-tenant configuration. For example, a `subdomain` variable can be used in the ACS URL: `https://${org.subdomain}.example.com/saml/login`")
-    description: Annotated[str, Field(min_length=1, strict=True, max_length=1024)] = Field(description="A general description of your application and the benefits provided to your customers")
-    global_token_revocation: Optional[SubmissionResponseGlobalTokenRevocation] = Field(default=None, alias="globalTokenRevocation")
+    capabilities: Optional[List[SubmissionCapability]] = Field(
+        default=None, description="List of capabilities supported by this integration")
+    config: Optional[List[SubmissionResponseConfigInner]] = Field(
+        default=None, description="List of org-level variables for the customer per-tenant configuration. For example, a `subdomain` variable can be used in the ACS URL: `https://${org.subdomain}.example.com/saml/login`")
+    description: Annotated[str, Field(min_length=1, strict=True, max_length=1024)] = Field(
+        description="A general description of your application and the benefits provided to your customers")
+    global_token_revocation: Optional[SubmissionResponseGlobalTokenRevocation] = Field(
+        default=None, alias="globalTokenRevocation")
     id: Optional[StrictStr] = Field(default=None, description="OIN Integration ID")
-    last_published: Optional[StrictStr] = Field(default=None, description="Timestamp when the OIN Integration was last published", alias="lastPublished")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp when the OIN Integration instance was last updated", alias="lastUpdated")
-    last_updated_by: Optional[StrictStr] = Field(default=None, description="ID of the user who made the last update", alias="lastUpdatedBy")
-    logo: StrictStr = Field(description="URL to an uploaded application logo. This logo appears next to your app integration name in the OIN catalog. You must first [Upload an OIN Integration logo](/openapi/okta-management/management/tag/YourOinIntegrations/#tag/YourOinIntegrations/operation/uploadSubmissionLogo) to obtain the logo URL before you can specify this value.")
-    name: Annotated[str, Field(min_length=1, strict=True, max_length=64)] = Field(description="The app integration name. This is the main title used for your integration in the OIN catalog.")
+    last_published: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the OIN Integration was last published",
+        alias="lastPublished")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the OIN Integration instance was last updated",
+        alias="lastUpdated")
+    last_updated_by: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the user who made the last update",
+        alias="lastUpdatedBy")
+    logo: StrictStr = Field(
+        description="URL to an uploaded application logo. This logo appears next to your app integration name in the OIN catalog. You must first [Upload an OIN Integration logo](/openapi/okta-management/management/tag/YourOinIntegrations/#tag/YourOinIntegrations/operation/uploadSubmissionLogo) to obtain the logo URL before you can specify this value.")
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=64)] = Field(
+        description="The app integration name. This is the main title used for your integration in the OIN catalog.")
     provisioning: Optional[ProvisioningDetails] = None
     sso: Optional[Sso] = None
     status: Optional[StrictStr] = Field(default=None, description="Status of the OIN Integration submission")
-    __properties: ClassVar[List[str]] = ["actions", "appContactDetails", "authSettings", "capabilities", "config", "description", "globalTokenRevocation", "id", "lastPublished", "lastUpdated", "lastUpdatedBy", "logo", "name", "provisioning", "sso", "status"]
+    __properties: ClassVar[List[str]] = ["actions",
+                                         "appContactDetails",
+                                         "authSettings",
+                                         "capabilities",
+                                         "config",
+                                         "description",
+                                         "globalTokenRevocation",
+                                         "id",
+                                         "lastPublished",
+                                         "lastUpdated",
+                                         "lastUpdatedBy",
+                                         "logo",
+                                         "name",
+                                         "provisioning",
+                                         "sso",
+                                         "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -194,4 +227,3 @@ class SubmissionRequest(BaseModel):
             "status": obj.get("status")
         })
         return _obj
-

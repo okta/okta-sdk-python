@@ -30,10 +30,11 @@ from okta.models.group_schema_attribute import GroupSchemaAttribute
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupSchemaBaseProperties(BaseModel):
     """
     All Okta-defined profile properties are defined in a profile subschema with the resolution scope `#base`. These properties can't be removed or edited, regardless of any attempt to do so.
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[GroupSchemaAttribute] = Field(default=None, description="Human readable description of the group")
     name: Optional[GroupSchemaAttribute] = Field(default=None, description="Unique identifier for the group")
     __properties: ClassVar[List[str]] = ["description", "name"]
@@ -106,4 +107,3 @@ class GroupSchemaBaseProperties(BaseModel):
             "name": GroupSchemaAttribute.from_dict(obj["name"]) if obj.get("name") is not None else None
         })
         return _obj
-

@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordImportResponseCommandsInnerValue(BaseModel):
     """
     The parameter value of the command. * To indicate that the supplied credentials are valid, supply a type property set to `com.okta.action.update` together with a value property set to `{\"credential\": \"VERIFIED\"}`. * To indicate that the supplied credentials are invalid, supply a type property set to `com.okta.action.update` together with a value property set to `{\"credential\": \"UNVERIFIED\"}`. Alternatively, you can send an empty response (`204`). By default, the `data.action.credential` is always set to `UNVERIFIED`.
-    """ # noqa: E501
+    """  # noqa: E501
     credential: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["credential"]
 
@@ -99,4 +100,3 @@ class PasswordImportResponseCommandsInnerValue(BaseModel):
             "credential": obj.get("credential")
         })
         return _obj
-

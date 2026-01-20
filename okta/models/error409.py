@@ -29,15 +29,20 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Error409(BaseModel):
     """
     Conflict error object
-    """ # noqa: E501
-    error_causes: Optional[List[StrictStr]] = Field(default=None, description="Another request has already been received for the settings for this email template", alias="errorCauses")
+    """  # noqa: E501
+    error_causes: Optional[List[StrictStr]] = Field(
+        default=None, description="Another request has already been received for the settings for this email template", alias="errorCauses")
     error_code: Optional[StrictStr] = Field(default=None, description="E0000254", alias="errorCode")
     error_id: Optional[StrictStr] = Field(default=None, description="sampleH3iLB6bpBcbnV9E09Fy", alias="errorId")
     error_link: Optional[StrictStr] = Field(default=None, description="E0000254", alias="errorLink")
-    error_summary: Optional[StrictStr] = Field(default=None, description="Another request has already been received for the settings for this email template", alias="errorSummary")
+    error_summary: Optional[StrictStr] = Field(
+        default=None,
+        description="Another request has already been received for the settings for this email template",
+        alias="errorSummary")
     __properties: ClassVar[List[str]] = ["errorCauses", "errorCode", "errorId", "errorLink", "errorSummary"]
 
     model_config = ConfigDict(
@@ -107,4 +112,3 @@ class Error409(BaseModel):
             "errorSummary": obj.get("errorSummary")
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.password_policy_authentication_provider_condition import Passwo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyConditions(BaseModel):
     """
     PasswordPolicyConditions
-    """ # noqa: E501
+    """  # noqa: E501
     auth_provider: Optional[PasswordPolicyAuthenticationProviderCondition] = Field(default=None, alias="authProvider")
     people: Optional[AuthenticatorEnrollmentPolicyConditionsAllOfPeople] = None
     __properties: ClassVar[List[str]] = ["authProvider", "people"]
@@ -107,4 +108,3 @@ class PasswordPolicyConditions(BaseModel):
             "people": AuthenticatorEnrollmentPolicyConditionsAllOfPeople.from_dict(obj["people"]) if obj.get("people") is not None else None
         })
         return _obj
-

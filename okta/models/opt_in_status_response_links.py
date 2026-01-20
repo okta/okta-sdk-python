@@ -30,10 +30,11 @@ from okta.models.opt_in_status_response_links_opt_in_status import OptInStatusRe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OptInStatusResponseLinks(BaseModel):
     """
     Link relations available
-    """ # noqa: E501
+    """  # noqa: E501
     opt_in_status: Optional[OptInStatusResponseLinksOptInStatus] = Field(default=None, alias="optInStatus")
     __properties: ClassVar[List[str]] = ["optInStatus"]
 
@@ -97,4 +98,3 @@ class OptInStatusResponseLinks(BaseModel):
             "optInStatus": OptInStatusResponseLinksOptInStatus.from_dict(obj["optInStatus"]) if obj.get("optInStatus") is not None else None
         })
         return _obj
-

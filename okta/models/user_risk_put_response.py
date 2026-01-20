@@ -31,10 +31,11 @@ from okta.models.user_risk_level_put import UserRiskLevelPut
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserRiskPutResponse(BaseModel):
     """
     UserRiskPutResponse
-    """ # noqa: E501
+    """  # noqa: E501
     reason: Optional[StrictStr] = Field(default=None, description="Describes the risk level for the user")
     risk_level: Optional[UserRiskLevelPut] = Field(default=None, alias="riskLevel")
     links: Optional[UserRiskGetResponseLinks] = Field(default=None, alias="_links")
@@ -102,4 +103,3 @@ class UserRiskPutResponse(BaseModel):
             "_links": UserRiskGetResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

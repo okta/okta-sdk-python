@@ -29,18 +29,22 @@ from typing import Any, ClassVar, Dict, List
 from okta.models.active_directory_group_scope import ActiveDirectoryGroupScope
 from okta.models.active_directory_group_type import ActiveDirectoryGroupType
 from okta.models.app_config import AppConfig
-from okta.models.app_config_type import AppConfigType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class AppConfigActiveDirectory(AppConfig):
     """
     AppConfigActiveDirectory
-    """ # noqa: E501
-    distinguished_name: StrictStr = Field(description="The distinguished name of the group in Active Directory", alias="distinguishedName")
+    """  # noqa: E501
+    distinguished_name: StrictStr = Field(
+        description="The distinguished name of the group in Active Directory",
+        alias="distinguishedName")
     group_scope: ActiveDirectoryGroupScope = Field(alias="groupScope")
     group_type: ActiveDirectoryGroupType = Field(alias="groupType")
-    sam_account_name: StrictStr = Field(description="The SAM account name of the group in Active Directory", alias="samAccountName")
+    sam_account_name: StrictStr = Field(
+        description="The SAM account name of the group in Active Directory",
+        alias="samAccountName")
     __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
@@ -96,4 +100,3 @@ class AppConfigActiveDirectory(AppConfig):
             "type": obj.get("type")
         })
         return _obj
-

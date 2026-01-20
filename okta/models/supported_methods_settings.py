@@ -32,13 +32,16 @@ from okta.models.push_method_key_protection import PushMethodKeyProtection
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SupportedMethodsSettings(BaseModel):
     """
     SupportedMethodsSettings
-    """ # noqa: E501
+    """  # noqa: E501
     key_protection: Optional[PushMethodKeyProtection] = Field(default=None, alias="keyProtection")
-    algorithms: Optional[List[AuthenticatorMethodAlgorithm]] = Field(default=None, description="The encryption algorithm for this authenticator method")
-    transaction_types: Optional[List[AuthenticatorMethodTransactionType]] = Field(default=None, description="The transaction type for this authenticator method", alias="transactionTypes")
+    algorithms: Optional[List[AuthenticatorMethodAlgorithm]] = Field(
+        default=None, description="The encryption algorithm for this authenticator method")
+    transaction_types: Optional[List[AuthenticatorMethodTransactionType]] = Field(
+        default=None, description="The transaction type for this authenticator method", alias="transactionTypes")
     __properties: ClassVar[List[str]] = ["keyProtection", "algorithms", "transactionTypes"]
 
     model_config = ConfigDict(
@@ -96,4 +99,3 @@ class SupportedMethodsSettings(BaseModel):
             "transactionTypes": obj.get("transactionTypes")
         })
         return _obj
-

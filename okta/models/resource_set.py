@@ -31,15 +31,19 @@ from okta.models.resource_set_links import ResourceSetLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSet(BaseModel):
     """
     ResourceSet
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the role was created")
     description: Optional[StrictStr] = Field(default=None, description="Description of the resource set")
     id: Optional[StrictStr] = Field(default=None, description="Unique ID for the resource set object")
     label: Optional[StrictStr] = Field(default=None, description="Unique label for the resource set")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the role was last updated", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the role was last updated",
+        alias="lastUpdated")
     links: Optional[ResourceSetLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "description", "id", "label", "lastUpdated", "_links"]
 
@@ -114,4 +118,3 @@ class ResourceSet(BaseModel):
             "_links": ResourceSetLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

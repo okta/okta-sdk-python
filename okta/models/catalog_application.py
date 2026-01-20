@@ -32,23 +32,37 @@ from okta.models.catalog_application_status import CatalogApplicationStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CatalogApplication(BaseModel):
     """
     An app in the OIN catalog
-    """ # noqa: E501
+    """  # noqa: E501
     category: Optional[StrictStr] = Field(default=None, description="Category for the app in the OIN catalog")
     description: Optional[StrictStr] = Field(default=None, description="Description of the app in the OIN catalog")
     display_name: Optional[StrictStr] = Field(default=None, description="OIN catalog app display name", alias="displayName")
-    features: Optional[List[StrictStr]] = Field(default=None, description="Features supported by the app. See app [features](/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications!c=200&path=0/features&t=response).")
-    id: Optional[StrictStr] = Field(default=None, description="ID of the app instance. Okta returns this property only for apps not in the OIN catalog.")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated", alias="lastUpdated")
-    name: Optional[StrictStr] = Field(default=None, description="App key name. For OIN catalog apps, this is a unique key for the app definition.")
-    sign_on_modes: Optional[List[StrictStr]] = Field(default=None, description="Authentication mode for the app. See app [signOnMode](/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications!c=200&path=0/signOnMode&t=response).", alias="signOnModes")
+    features: Optional[List[StrictStr]] = Field(
+        default=None, description="Features supported by the app. See app [features](/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications!c=200&path=0/features&t=response).")
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the app instance. Okta returns this property only for apps not in the OIN catalog.")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated")
+    name: Optional[StrictStr] = Field(
+        default=None,
+        description="App key name. For OIN catalog apps, this is a unique key for the app definition.")
+    sign_on_modes: Optional[List[StrictStr]] = Field(
+        default=None, description="Authentication mode for the app. See app [signOnMode](/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications!c=200&path=0/signOnMode&t=response).", alias="signOnModes")
     status: Optional[CatalogApplicationStatus] = None
-    verification_status: Optional[StrictStr] = Field(default=None, description="OIN verification status of the catalog app", alias="verificationStatus")
+    verification_status: Optional[StrictStr] = Field(
+        default=None,
+        description="OIN verification status of the catalog app",
+        alias="verificationStatus")
     website: Optional[StrictStr] = Field(default=None, description="Website of the OIN catalog app")
     links: Optional[CatalogApplicationLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["category", "description", "displayName", "features", "id", "lastUpdated", "name", "signOnModes", "status", "verificationStatus", "website", "_links"]
+    __properties: ClassVar[List[str]] = ["category", "description", "displayName", "features", "id",
+                                         "lastUpdated", "name", "signOnModes", "status", "verificationStatus", "website", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -133,4 +147,3 @@ class CatalogApplication(BaseModel):
             "_links": CatalogApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

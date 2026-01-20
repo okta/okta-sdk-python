@@ -29,11 +29,7 @@ from pydantic import ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from okta.models.authenticator_method_base import AuthenticatorMethodBase
 from okta.models.authenticator_method_property import AuthenticatorMethodProperty
-from okta.models.authenticator_method_type import AuthenticatorMethodType
-from okta.models.lifecycle_status import LifecycleStatus
-from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -52,10 +48,11 @@ if TYPE_CHECKING:
     from okta.models.authenticator_method_simple import AuthenticatorMethodSimple
     from okta.models.authenticator_method_web_authn import AuthenticatorMethodWebAuthn
 
+
 class AuthenticatorMethodWithVerifiableProperties(AuthenticatorMethodBase):
     """
     AuthenticatorMethodWithVerifiableProperties
-    """ # noqa: E501
+    """  # noqa: E501
     verifiable_properties: Optional[List[AuthenticatorMethodProperty]] = Field(default=None, alias="verifiableProperties")
     __properties: ClassVar[List[str]] = ["status", "type", "_links", "verifiableProperties"]
 
@@ -70,7 +67,7 @@ class AuthenticatorMethodWithVerifiableProperties(AuthenticatorMethodBase):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'cert': 'AuthenticatorMethodWithVerifiableProperties','duo': 'AuthenticatorMethodWithVerifiableProperties','email': 'AuthenticatorMethodSimple','idp': 'AuthenticatorMethodWithVerifiableProperties','otp': 'AuthenticatorMethodOtp','password': 'AuthenticatorMethodSimple','push': 'AuthenticatorMethodPush','security_question': 'AuthenticatorMethodSimple','signed_nonce': 'AuthenticatorMethodSignedNonce','sms': 'AuthenticatorMethodSimple','tac': 'AuthenticatorMethodTac','totp': 'AuthenticatorMethodTotp','voice': 'AuthenticatorMethodSimple','webauthn': 'AuthenticatorMethodWebAuthn'
+        'cert': 'AuthenticatorMethodWithVerifiableProperties', 'duo': 'AuthenticatorMethodWithVerifiableProperties', 'email': 'AuthenticatorMethodSimple', 'idp': 'AuthenticatorMethodWithVerifiableProperties', 'otp': 'AuthenticatorMethodOtp', 'password': 'AuthenticatorMethodSimple', 'push': 'AuthenticatorMethodPush', 'security_question': 'AuthenticatorMethodSimple', 'signed_nonce': 'AuthenticatorMethodSignedNonce', 'sms': 'AuthenticatorMethodSimple', 'tac': 'AuthenticatorMethodTac', 'totp': 'AuthenticatorMethodTotp', 'voice': 'AuthenticatorMethodSimple', 'webauthn': 'AuthenticatorMethodWebAuthn'
     }
 
     @classmethod
@@ -92,7 +89,8 @@ class AuthenticatorMethodWithVerifiableProperties(AuthenticatorMethodBase):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodSimple, AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodOtp, AuthenticatorMethodSimple, AuthenticatorMethodPush, AuthenticatorMethodSimple, AuthenticatorMethodSignedNonce, AuthenticatorMethodSimple, AuthenticatorMethodTac, AuthenticatorMethodTotp, AuthenticatorMethodSimple, AuthenticatorMethodWebAuthn]]:
+    def from_json(cls, json_str: str) -> Optional[Union[AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodSimple, AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodOtp,
+                                                        AuthenticatorMethodSimple, AuthenticatorMethodPush, AuthenticatorMethodSimple, AuthenticatorMethodSignedNonce, AuthenticatorMethodSimple, AuthenticatorMethodTac, AuthenticatorMethodTotp, AuthenticatorMethodSimple, AuthenticatorMethodWebAuthn]]:
         """Create an instance of AuthenticatorMethodWithVerifiableProperties from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -124,18 +122,22 @@ class AuthenticatorMethodWithVerifiableProperties(AuthenticatorMethodBase):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodSimple, AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodOtp, AuthenticatorMethodSimple, AuthenticatorMethodPush, AuthenticatorMethodSimple, AuthenticatorMethodSignedNonce, AuthenticatorMethodSimple, AuthenticatorMethodTac, AuthenticatorMethodTotp, AuthenticatorMethodSimple, AuthenticatorMethodWebAuthn]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodSimple, AuthenticatorMethodWithVerifiableProperties, AuthenticatorMethodOtp,
+                                                              AuthenticatorMethodSimple, AuthenticatorMethodPush, AuthenticatorMethodSimple, AuthenticatorMethodSignedNonce, AuthenticatorMethodSimple, AuthenticatorMethodTac, AuthenticatorMethodTotp, AuthenticatorMethodSimple, AuthenticatorMethodWebAuthn]]:
         """Create an instance of AuthenticatorMethodWithVerifiableProperties from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'AuthenticatorMethodWithVerifiableProperties':
-            return import_module("okta.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
+            return import_module(
+                "okta.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == 'AuthenticatorMethodWithVerifiableProperties':
-            return import_module("okta.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
+            return import_module(
+                "okta.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == 'AuthenticatorMethodSimple':
             return import_module("okta.models.authenticator_method_simple").AuthenticatorMethodSimple.from_dict(obj)
         if object_type == 'AuthenticatorMethodWithVerifiableProperties':
-            return import_module("okta.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
+            return import_module(
+                "okta.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == 'AuthenticatorMethodOtp':
             return import_module("okta.models.authenticator_method_otp").AuthenticatorMethodOtp.from_dict(obj)
         if object_type == 'AuthenticatorMethodSimple':
@@ -158,7 +160,5 @@ class AuthenticatorMethodWithVerifiableProperties(AuthenticatorMethodBase):
             return import_module("okta.models.authenticator_method_web_authn").AuthenticatorMethodWebAuthn.from_dict(obj)
 
         raise ValueError("AuthenticatorMethodWithVerifiableProperties failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

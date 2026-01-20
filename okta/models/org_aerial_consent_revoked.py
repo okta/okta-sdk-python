@@ -30,10 +30,11 @@ from okta.models.links_aerial_consent_revoked import LinksAerialConsentRevoked
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgAerialConsentRevoked(BaseModel):
     """
     OrgAerialConsentRevoked
-    """ # noqa: E501
+    """  # noqa: E501
     links: Optional[LinksAerialConsentRevoked] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["_links"]
 
@@ -97,4 +98,3 @@ class OrgAerialConsentRevoked(BaseModel):
             "_links": LinksAerialConsentRevoked.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

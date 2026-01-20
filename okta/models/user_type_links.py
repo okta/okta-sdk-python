@@ -31,10 +31,11 @@ from okta.models.user_type_links_all_of_schema import UserTypeLinksAllOfSchema
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserTypeLinks(BaseModel):
     """
     UserTypeLinks
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     var_schema: Optional[UserTypeLinksAllOfSchema] = Field(default=None, alias="schema")
     __properties: ClassVar[List[str]] = ["self", "schema"]
@@ -107,4 +108,3 @@ class UserTypeLinks(BaseModel):
             "schema": UserTypeLinksAllOfSchema.from_dict(obj["schema"]) if obj.get("schema") is not None else None
         })
         return _obj
-

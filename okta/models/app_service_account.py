@@ -33,25 +33,55 @@ from okta.models.service_account_status_detail import ServiceAccountStatusDetail
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppServiceAccount(BaseModel):
     """
     AppServiceAccount
-    """ # noqa: E501
-    container_global_name: Optional[StrictStr] = Field(default=None, description="The key name of the app in the Okta Integration Network (OIN)", alias="containerGlobalName")
-    container_instance_name: Optional[StrictStr] = Field(default=None, description="The app instance label", alias="containerInstanceName")
-    container_orn: StrictStr = Field(description="The [ORN](/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the relevant resource.  Use the specific app ORN format (`orn:{partition}:idp:{yourOrgId}:apps:{appType}:{appId}`) to identify an Okta app instance in your org.", alias="containerOrn")
+    """  # noqa: E501
+    container_global_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The key name of the app in the Okta Integration Network (OIN)",
+        alias="containerGlobalName")
+    container_instance_name: Optional[StrictStr] = Field(
+        default=None, description="The app instance label", alias="containerInstanceName")
+    container_orn: StrictStr = Field(
+        description="The [ORN](/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the relevant resource.  Use the specific app ORN format (`orn:{partition}:idp:{yourOrgId}:apps:{appType}:{appId}`) to identify an Okta app instance in your org.",
+        alias="containerOrn")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the app service account was created")
-    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(default=None, description="The description of the app service account")
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(
+        default=None, description="The description of the app service account")
     id: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The UUID of the app service account")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the app service account was last updated", alias="lastUpdated")
-    name: Annotated[str, Field(min_length=1, strict=True, max_length=50)] = Field(description="The user-defined name for the app service account")
-    owner_group_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(default=None, description="A list of IDs of the Okta groups who own the app service account", alias="ownerGroupIds")
-    owner_user_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(default=None, description="A list of IDs of the Okta users who own the app service account", alias="ownerUserIds")
-    password: Optional[SecretStr] = Field(default=None, description="The app service account password. Required for apps that don't have provisioning enabled or don't support password synchronization.")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the app service account was last updated",
+        alias="lastUpdated")
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=50)] = Field(
+        description="The user-defined name for the app service account")
+    owner_group_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(
+        default=None, description="A list of IDs of the Okta groups who own the app service account", alias="ownerGroupIds")
+    owner_user_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(
+        default=None, description="A list of IDs of the Okta users who own the app service account", alias="ownerUserIds")
+    password: Optional[SecretStr] = Field(
+        default=None,
+        description="The app service account password. Required for apps that don't have provisioning enabled or don't support password synchronization.")
     status: Optional[ServiceAccountStatus] = None
     status_detail: Optional[ServiceAccountStatusDetail] = Field(default=None, alias="statusDetail")
-    username: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The username that serves as the direct link to your managed app account. Ensure that this value precisely matches the identifier of the target app account.")
-    __properties: ClassVar[List[str]] = ["containerGlobalName", "containerInstanceName", "containerOrn", "created", "description", "id", "lastUpdated", "name", "ownerGroupIds", "ownerUserIds", "password", "status", "statusDetail", "username"]
+    username: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(
+        description="The username that serves as the direct link to your managed app account. Ensure that this value precisely matches the identifier of the target app account.")
+    __properties: ClassVar[List[str]] = ["containerGlobalName",
+                                         "containerInstanceName",
+                                         "containerOrn",
+                                         "created",
+                                         "description",
+                                         "id",
+                                         "lastUpdated",
+                                         "name",
+                                         "ownerGroupIds",
+                                         "ownerUserIds",
+                                         "password",
+                                         "status",
+                                         "statusDetail",
+                                         "username"]
 
     @field_validator('id')
     def id_validate_regular_expression(cls, value):
@@ -60,7 +90,8 @@ class AppServiceAccount(BaseModel):
             return value
 
         if not re.match(r"(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", value):
-            raise ValueError(r"must validate the regular expression /(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/")
+            raise ValueError(
+                r"must validate the regular expression /(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/")
         return value
 
     @field_validator('name')
@@ -146,4 +177,3 @@ class AppServiceAccount(BaseModel):
             "username": obj.get("username")
         })
         return _obj
-

@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordImportRequestDataAction(BaseModel):
     """
     This object specifies the default action Okta is set to take. Okta takes this action if your external service sends an empty HTTP 204 response. You can override the default action by returning a commands object in your response specifying the action to take.
-    """ # noqa: E501
-    credential: Optional[StrictStr] = Field(default='UNVERIFIED', description="The status of the user credential, either `UNVERIFIED` or `VERIFIED`")
+    """  # noqa: E501
+    credential: Optional[StrictStr] = Field(default='UNVERIFIED',
+                                            description="The status of the user credential, either `UNVERIFIED` or `VERIFIED`")
     __properties: ClassVar[List[str]] = ["credential"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class PasswordImportRequestDataAction(BaseModel):
             "credential": obj.get("credential") if obj.get("credential") is not None else 'UNVERIFIED'
         })
         return _obj
-

@@ -31,10 +31,11 @@ from okta.models.supported_methods_settings import SupportedMethodsSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SupportedMethods(BaseModel):
     """
     The supported methods of an authenticator
-    """ # noqa: E501
+    """  # noqa: E501
     settings: Optional[SupportedMethodsSettings] = None
     status: Optional[LifecycleStatus] = None
     type: Optional[StrictStr] = Field(default=None, description="The type of authenticator method")
@@ -112,4 +113,3 @@ class SupportedMethods(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

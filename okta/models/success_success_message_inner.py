@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SuccessSuccessMessageInner(BaseModel):
     """
     SuccessSuccessMessageInner
-    """ # noqa: E501
+    """  # noqa: E501
     success_summary: Optional[StrictStr] = Field(default=None, alias="successSummary")
     __properties: ClassVar[List[str]] = ["successSummary"]
 
@@ -89,4 +90,3 @@ class SuccessSuccessMessageInner(BaseModel):
             "successSummary": obj.get("successSummary")
         })
         return _obj
-

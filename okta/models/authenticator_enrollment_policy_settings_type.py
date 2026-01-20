@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class AuthenticatorEnrollmentPolicySettingsType(str, Enum):
     """
-    Type of policy configuration object  <x-lifecycle class=\"oie\"></x-lifecycle> The `type` property in the policy `settings` is only applicable to the authenticator enrollment policy available in Identity Engine. 
+    Type of policy configuration object  <x-lifecycle class=\"oie\"></x-lifecycle> The `type` property in the policy `settings` is only applicable to the authenticator enrollment policy available in Identity Engine.
     """
 
     """
@@ -40,5 +40,3 @@ class AuthenticatorEnrollmentPolicySettingsType(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of AuthenticatorEnrollmentPolicySettingsType from a JSON string"""
         return cls(json.loads(json_str))
-
-

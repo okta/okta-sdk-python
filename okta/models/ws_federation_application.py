@@ -32,23 +32,41 @@ from okta.models.application_credentials import ApplicationCredentials
 from okta.models.application_embedded import ApplicationEmbedded
 from okta.models.application_express_configuration import ApplicationExpressConfiguration
 from okta.models.application_licensing import ApplicationLicensing
-from okta.models.application_lifecycle_status import ApplicationLifecycleStatus
 from okta.models.application_links import ApplicationLinks
-from okta.models.application_sign_on_mode import ApplicationSignOnMode
 from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.ws_federation_application_settings import WsFederationApplicationSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WsFederationApplication(Application):
     """
     WsFederationApplication
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[ApplicationCredentials] = None
-    name: StrictStr = Field(description="`template_wsfed` is the key name for a WS-Federated app instance with a SAML 2.0 token")
+    name: StrictStr = Field(
+        description="`template_wsfed` is the key name for a WS-Federated app instance with a SAML 2.0 token")
     settings: WsFederationApplicationSettings
-    __properties: ClassVar[List[str]] = ["accessibility", "created", "expressConfiguration", "features", "id", "label", "lastUpdated", "licensing", "orn", "profile", "signOnMode", "status", "universalLogout", "visibility", "_embedded", "_links", "credentials", "name", "settings"]
+    __properties: ClassVar[List[str]] = ["accessibility",
+                                         "created",
+                                         "expressConfiguration",
+                                         "features",
+                                         "id",
+                                         "label",
+                                         "lastUpdated",
+                                         "licensing",
+                                         "orn",
+                                         "profile",
+                                         "signOnMode",
+                                         "status",
+                                         "universalLogout",
+                                         "visibility",
+                                         "_embedded",
+                                         "_links",
+                                         "credentials",
+                                         "name",
+                                         "settings"]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -191,4 +209,3 @@ class WsFederationApplication(Application):
             "settings": WsFederationApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

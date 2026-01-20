@@ -30,10 +30,11 @@ from okta.models.simulate_result_policies_items import SimulateResultPoliciesIte
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SimulatePolicyResult(BaseModel):
     """
     The result of the policy evaluation
-    """ # noqa: E501
+    """  # noqa: E501
     policies: Optional[List[SimulateResultPoliciesItems]] = None
     __properties: ClassVar[List[str]] = ["policies"]
 
@@ -97,4 +98,3 @@ class SimulatePolicyResult(BaseModel):
             "policies": [SimulateResultPoliciesItems.from_dict(_item) for _item in obj["policies"]] if obj.get("policies") is not None else None
         })
         return _obj
-

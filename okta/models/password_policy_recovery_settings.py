@@ -30,10 +30,11 @@ from okta.models.password_policy_recovery_factors import PasswordPolicyRecoveryF
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRecoverySettings(BaseModel):
     """
     Specifies the password recovery settings for the policy > **Note:** With Identity Engine, you can specify recovery factors inside the password policy rule instead of in the policy settings object. Recovery factors for the rule are defined inside the [`selfServicePasswordReset` action](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/createPolicyRule!path=1/actions/selfServicePasswordReset&t=request).
-    """ # noqa: E501
+    """  # noqa: E501
     factors: Optional[PasswordPolicyRecoveryFactors] = None
     __properties: ClassVar[List[str]] = ["factors"]
 
@@ -97,4 +98,3 @@ class PasswordPolicyRecoverySettings(BaseModel):
             "factors": PasswordPolicyRecoveryFactors.from_dict(obj["factors"]) if obj.get("factors") is not None else None
         })
         return _obj
-

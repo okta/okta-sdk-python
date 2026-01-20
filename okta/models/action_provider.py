@@ -29,17 +29,19 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Union
 from okta.models.action_provider_payload_type import ActionProviderPayloadType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.workflow_action_provider import WorkflowActionProvider
 
+
 class ActionProvider(BaseModel):
     """
     ActionProvider
-    """ # noqa: E501
-    external_id: StrictStr = Field(description="The unique identifier of the action flow in the provider system", alias="externalId")
+    """  # noqa: E501
+    external_id: StrictStr = Field(
+        description="The unique identifier of the action flow in the provider system",
+        alias="externalId")
     type: ActionProviderPayloadType
     url: StrictStr = Field(description="The URL to the action flow")
     __properties: ClassVar[List[str]] = ["externalId", "type", "url"]
@@ -110,7 +112,5 @@ class ActionProvider(BaseModel):
             return import_module("okta.models.workflow_action_provider").WorkflowActionProvider.from_dict(obj)
 
         raise ValueError("ActionProvider failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

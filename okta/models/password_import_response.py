@@ -30,11 +30,13 @@ from okta.models.password_import_response_commands_inner import PasswordImportRe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordImportResponse(BaseModel):
     """
     Password import inline hook response
-    """ # noqa: E501
-    commands: Optional[List[PasswordImportResponseCommandsInner]] = Field(default=None, description="The `commands` object specifies whether Okta accepts the end user's sign-in credentials as valid or not. For the password import inline hook, you typically only return one `commands` object with one array element in it.")
+    """  # noqa: E501
+    commands: Optional[List[PasswordImportResponseCommandsInner]] = Field(
+        default=None, description="The `commands` object specifies whether Okta accepts the end user's sign-in credentials as valid or not. For the password import inline hook, you typically only return one `commands` object with one array element in it.")
     __properties: ClassVar[List[str]] = ["commands"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class PasswordImportResponse(BaseModel):
             "commands": [PasswordImportResponseCommandsInner.from_dict(_item) for _item in obj["commands"]] if obj.get("commands") is not None else None
         })
         return _obj
-

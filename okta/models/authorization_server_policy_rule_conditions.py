@@ -32,10 +32,11 @@ from okta.models.o_auth2_scopes_mediation_policy_rule_condition import OAuth2Sco
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerPolicyRuleConditions(BaseModel):
     """
     AuthorizationServerPolicyRuleConditions
-    """ # noqa: E501
+    """  # noqa: E501
     grant_types: Optional[GrantTypePolicyRuleCondition] = Field(default=None, alias="grantTypes")
     people: Optional[AuthorizationServerPolicyPeopleCondition] = None
     scopes: Optional[OAuth2ScopesMediationPolicyRuleCondition] = None
@@ -117,4 +118,3 @@ class AuthorizationServerPolicyRuleConditions(BaseModel):
             "scopes": OAuth2ScopesMediationPolicyRuleCondition.from_dict(obj["scopes"]) if obj.get("scopes") is not None else None
         })
         return _obj
-

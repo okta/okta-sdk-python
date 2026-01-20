@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AttackProtectionAuthenticatorSettings(BaseModel):
     """
     AttackProtectionAuthenticatorSettings
-    """ # noqa: E501
-    verify_knowledge_second_when2fa_required: Optional[StrictBool] = Field(default=False, description="If true, requires users to verify a possession factor before verifying a knowledge factor when the assurance requires two-factor authentication (2FA).", alias="verifyKnowledgeSecondWhen2faRequired")
+    """  # noqa: E501
+    verify_knowledge_second_when2fa_required: Optional[StrictBool] = Field(
+        default=False,
+        description="If true, requires users to verify a possession factor before verifying a knowledge factor when the assurance requires two-factor authentication (2FA).",
+        alias="verifyKnowledgeSecondWhen2faRequired")
     __properties: ClassVar[List[str]] = ["verifyKnowledgeSecondWhen2faRequired"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class AttackProtectionAuthenticatorSettings(BaseModel):
             "verifyKnowledgeSecondWhen2faRequired": obj.get("verifyKnowledgeSecondWhen2faRequired") if obj.get("verifyKnowledgeSecondWhen2faRequired") is not None else False
         })
         return _obj
-

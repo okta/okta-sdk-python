@@ -30,10 +30,11 @@ from okta.models.allowed_for_enum import AllowedForEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyPhoneAllOfSettings(BaseModel):
     """
     AuthenticatorKeyPhoneAllOfSettings
-    """ # noqa: E501
+    """  # noqa: E501
     allowed_for: Optional[AllowedForEnum] = Field(default=None, alias="allowedFor")
     __properties: ClassVar[List[str]] = ["allowedFor"]
 
@@ -90,4 +91,3 @@ class AuthenticatorKeyPhoneAllOfSettings(BaseModel):
             "allowedFor": obj.get("allowedFor")
         })
         return _obj
-

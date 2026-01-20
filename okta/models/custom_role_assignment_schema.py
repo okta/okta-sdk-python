@@ -29,13 +29,15 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomRoleAssignmentSchema(BaseModel):
     """
     CustomRoleAssignmentSchema
-    """ # noqa: E501
+    """  # noqa: E501
     resource_set: StrictStr = Field(description="Resource set ID", alias="resource-set")
     role: StrictStr = Field(description="Custom role ID")
-    type: StrictStr = Field(description="Specify a [standard admin role](/openapi/okta-management/guides/roles/#standard-roles), an [IAM-based standard role](/openapi/okta-management/guides/roles/#iam-based-standard-roles), or `CUSTOM` for a custom role type:")
+    type: StrictStr = Field(
+        description="Specify a [standard admin role](/openapi/okta-management/guides/roles/#standard-roles), an [IAM-based standard role](/openapi/okta-management/guides/roles/#iam-based-standard-roles), or `CUSTOM` for a custom role type:")
     __properties: ClassVar[List[str]] = ["resource-set", "role", "type"]
 
     @field_validator('type')
@@ -100,4 +102,3 @@ class CustomRoleAssignmentSchema(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

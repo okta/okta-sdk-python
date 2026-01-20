@@ -31,11 +31,13 @@ from okta.models.identity_source_group_profile_for_upsert import IdentitySourceG
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupsRequestSchema(BaseModel):
     """
     GroupsRequestSchema
-    """ # noqa: E501
-    external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The external ID of the identity source group to be created", alias="externalId")
+    """  # noqa: E501
+    external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(
+        default=None, description="The external ID of the identity source group to be created", alias="externalId")
     profile: Optional[IdentitySourceGroupProfileForUpsert] = None
     __properties: ClassVar[List[str]] = ["externalId", "profile"]
 
@@ -100,4 +102,3 @@ class GroupsRequestSchema(BaseModel):
             "profile": IdentitySourceGroupProfileForUpsert.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

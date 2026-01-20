@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntityRiskPolicyRuleActionRunWorkflowWorkflow(BaseModel):
     """
     This action runs a workflow
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The `id` of the workflow that runs.")
     __properties: ClassVar[List[str]] = ["id"]
 
@@ -89,4 +90,3 @@ class EntityRiskPolicyRuleActionRunWorkflowWorkflow(BaseModel):
             "id": obj.get("id")
         })
         return _obj
-

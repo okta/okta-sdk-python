@@ -30,12 +30,14 @@ from okta.models.allowed_for_enum import AllowedForEnum
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyEmailAllOfSettings(BaseModel):
     """
     AuthenticatorKeyEmailAllOfSettings
-    """ # noqa: E501
+    """  # noqa: E501
     allowed_for: Optional[AllowedForEnum] = Field(default=None, alias="allowedFor")
-    token_lifetime_in_minutes: Optional[Union[StrictFloat, StrictInt]] = Field(default=5, description="Specifies the lifetime of an email token. Default value is 5 minutes.", alias="tokenLifetimeInMinutes")
+    token_lifetime_in_minutes: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=5, description="Specifies the lifetime of an email token. Default value is 5 minutes.", alias="tokenLifetimeInMinutes")
     __properties: ClassVar[List[str]] = ["allowedFor", "tokenLifetimeInMinutes"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class AuthenticatorKeyEmailAllOfSettings(BaseModel):
             "tokenLifetimeInMinutes": obj.get("tokenLifetimeInMinutes") if obj.get("tokenLifetimeInMinutes") is not None else 5
         })
         return _obj
-

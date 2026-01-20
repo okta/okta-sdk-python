@@ -30,10 +30,11 @@ from okta.models.user_schema_base_properties import UserSchemaBaseProperties
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaBase(BaseModel):
     """
     All Okta-defined profile properties are defined in a profile subschema with the resolution scope `#base`. You can't modify these properties, except to update permissions, to change the nullability of `firstName` and `lastName`, or to specify a pattern for `login`. They can't be removed.  The base user profile is based on the [System for Cross-domain Identity Management: Core Schema](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#section-4.1.1) and has the standard properties detailed below.
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The subschema name")
     properties: Optional[UserSchemaBaseProperties] = Field(default=None, description="The `#base` object properties")
     required: Optional[List[StrictStr]] = Field(default=None, description="A collection indicating required property names")
@@ -109,4 +110,3 @@ class UserSchemaBase(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

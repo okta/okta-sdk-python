@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResendUserFactor(BaseModel):
     """
     ResendUserFactor
-    """ # noqa: E501
+    """  # noqa: E501
     factor_type: Optional[StrictStr] = Field(default=None, description="Type of the factor", alias="factorType")
     __properties: ClassVar[List[str]] = ["factorType"]
 
@@ -99,4 +100,3 @@ class ResendUserFactor(BaseModel):
             "factorType": obj.get("factorType")
         })
         return _obj
-

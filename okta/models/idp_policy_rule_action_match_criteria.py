@@ -29,12 +29,19 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdpPolicyRuleActionMatchCriteria(BaseModel):
     """
     IdpPolicyRuleActionMatchCriteria
-    """ # noqa: E501
-    property_name: Optional[StrictStr] = Field(default=None, description="The IdP property that the evaluated string should match to", alias="propertyName")
-    provider_expression: Optional[StrictStr] = Field(default=None, description="You can provide an Okta Expression Language expression with the Login Context that's evaluated with the IdP. For example, the value `login.identifier` refers to the user's username. If the user is signing in with the username `john.doe@mycompany.com`, the expression `login.identifier.substringAfter(@))` is evaluated to the domain name of the user, for example: `mycompany.com`. ", alias="providerExpression")
+    """  # noqa: E501
+    property_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The IdP property that the evaluated string should match to",
+        alias="propertyName")
+    provider_expression: Optional[StrictStr] = Field(
+        default=None,
+        description="You can provide an Okta Expression Language expression with the Login Context that's evaluated with the IdP. For example, the value `login.identifier` refers to the user's username. If the user is signing in with the username `john.doe@mycompany.com`, the expression `login.identifier.substringAfter(@))` is evaluated to the domain name of the user, for example: `mycompany.com`. ",
+        alias="providerExpression")
     __properties: ClassVar[List[str]] = ["propertyName", "providerExpression"]
 
     model_config = ConfigDict(
@@ -91,4 +98,3 @@ class IdpPolicyRuleActionMatchCriteria(BaseModel):
             "providerExpression": obj.get("providerExpression")
         })
         return _obj
-

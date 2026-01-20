@@ -32,23 +32,41 @@ from okta.models.application_credentials import ApplicationCredentials
 from okta.models.application_embedded import ApplicationEmbedded
 from okta.models.application_express_configuration import ApplicationExpressConfiguration
 from okta.models.application_licensing import ApplicationLicensing
-from okta.models.application_lifecycle_status import ApplicationLifecycleStatus
 from okta.models.application_links import ApplicationLinks
-from okta.models.application_sign_on_mode import ApplicationSignOnMode
 from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.saml11_application_settings import Saml11ApplicationSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Saml11Application(Application):
     """
     Saml11Application
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[ApplicationCredentials] = None
-    name: StrictStr = Field(description="The key name for the SAML 1.1 app definition. You can't create a custom SAML 1.1 app integration instance. Only existing OIN SAML 1.1 app integrations are supported.")
+    name: StrictStr = Field(
+        description="The key name for the SAML 1.1 app definition. You can't create a custom SAML 1.1 app integration instance. Only existing OIN SAML 1.1 app integrations are supported.")
     settings: Optional[Saml11ApplicationSettings] = None
-    __properties: ClassVar[List[str]] = ["accessibility", "created", "expressConfiguration", "features", "id", "label", "lastUpdated", "licensing", "orn", "profile", "signOnMode", "status", "universalLogout", "visibility", "_embedded", "_links", "credentials", "name", "settings"]
+    __properties: ClassVar[List[str]] = ["accessibility",
+                                         "created",
+                                         "expressConfiguration",
+                                         "features",
+                                         "id",
+                                         "label",
+                                         "lastUpdated",
+                                         "licensing",
+                                         "orn",
+                                         "profile",
+                                         "signOnMode",
+                                         "status",
+                                         "universalLogout",
+                                         "visibility",
+                                         "_embedded",
+                                         "_links",
+                                         "credentials",
+                                         "name",
+                                         "settings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -184,4 +202,3 @@ class Saml11Application(Application):
             "settings": Saml11ApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

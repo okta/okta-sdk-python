@@ -30,10 +30,11 @@ from okta.models.links_verify_verify import LinksVerifyVerify
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksVerify(BaseModel):
     """
     LinksVerify
-    """ # noqa: E501
+    """  # noqa: E501
     verify: Optional[LinksVerifyVerify] = None
     __properties: ClassVar[List[str]] = ["verify"]
 
@@ -97,4 +98,3 @@ class LinksVerify(BaseModel):
             "verify": LinksVerifyVerify.from_dict(obj["verify"]) if obj.get("verify") is not None else None
         })
         return _obj
-

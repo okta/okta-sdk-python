@@ -31,10 +31,11 @@ from okta.models.scheduled_user_lifecycle_action import ScheduledUserLifecycleAc
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BeforeScheduledActionPolicyRuleCondition(BaseModel):
     """
     BeforeScheduledActionPolicyRuleCondition
-    """ # noqa: E501
+    """  # noqa: E501
     duration: Optional[Duration] = None
     lifecycle_action: Optional[ScheduledUserLifecycleAction] = Field(default=None, alias="lifecycleAction")
     __properties: ClassVar[List[str]] = ["duration", "lifecycleAction"]
@@ -107,4 +108,3 @@ class BeforeScheduledActionPolicyRuleCondition(BaseModel):
             "lifecycleAction": ScheduledUserLifecycleAction.from_dict(obj["lifecycleAction"]) if obj.get("lifecycleAction") is not None else None
         })
         return _obj
-

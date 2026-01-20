@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntityRiskScorePolicyRuleCondition(BaseModel):
     """
     <x-lifecycle class=\"oie\"></x-lifecycle> The risk score level of the entity risk policy rule
-    """ # noqa: E501
+    """  # noqa: E501
     level: StrictStr
     __properties: ClassVar[List[str]] = ["level"]
 
@@ -96,4 +97,3 @@ class EntityRiskScorePolicyRuleCondition(BaseModel):
             "level": obj.get("level")
         })
         return _obj
-

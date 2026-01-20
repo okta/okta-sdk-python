@@ -30,13 +30,18 @@ from okta.models.authentication_method import AuthenticationMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticationMethodChain(BaseModel):
     """
     AuthenticationMethodChain
-    """ # noqa: E501
+    """  # noqa: E501
     authentication_methods: Optional[List[AuthenticationMethod]] = Field(default=None, alias="authenticationMethods")
-    next: Optional[List[Dict[str, Any]]] = Field(default=None, description="The next steps of the authentication method chain. This is an array of `AuthenticationMethodChain`. Only supports one item in the array.")
-    reauthenticate_in: Optional[StrictStr] = Field(default=None, description="Specifies how often the user is prompted for authentication using duration format for the time period. For example, `PT2H30M` for two and a half hours. This parameter can't be set at the same time as the `reauthenticateIn` property on the `verificationMethod`.", alias="reauthenticateIn")
+    next: Optional[List[Dict[str, Any]]] = Field(
+        default=None, description="The next steps of the authentication method chain. This is an array of `AuthenticationMethodChain`. Only supports one item in the array.")
+    reauthenticate_in: Optional[StrictStr] = Field(
+        default=None,
+        description="Specifies how often the user is prompted for authentication using duration format for the time period. For example, `PT2H30M` for two and a half hours. This parameter can't be set at the same time as the `reauthenticateIn` property on the `verificationMethod`.",
+        alias="reauthenticateIn")
     __properties: ClassVar[List[str]] = ["authenticationMethods", "next", "reauthenticateIn"]
 
     model_config = ConfigDict(
@@ -101,4 +106,3 @@ class AuthenticationMethodChain(BaseModel):
             "reauthenticateIn": obj.get("reauthenticateIn")
         })
         return _obj
-

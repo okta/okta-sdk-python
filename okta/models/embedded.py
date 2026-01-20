@@ -30,13 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Embedded(BaseModel):
     """
     The Public Key Details are defined in the `_embedded` property of the Key object.
-    """ # noqa: E501
+    """  # noqa: E501
     alg: Optional[StrictStr] = Field(default=None, description="Algorithm used in the key")
     e: Optional[StrictStr] = Field(default=None, description="RSA key value (exponent) for key binding")
-    kid: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Unique identifier for the certificate")
+    kid: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="Unique identifier for the certificate")
     kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's keypair")
     n: Optional[StrictStr] = Field(default=None, description="RSA key value (modulus) for key binding")
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the certificate")
@@ -117,4 +119,3 @@ class Embedded(BaseModel):
             "use": obj.get("use")
         })
         return _obj
-

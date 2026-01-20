@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PostAuthSessionPolicyRuleTerminateSession(BaseModel):
     """
     PostAuthSessionPolicyRuleTerminateSession
-    """ # noqa: E501
-    action: Optional[StrictStr] = Field(default=None, description="The action to take when the session protection policy detects a failure.")
+    """  # noqa: E501
+    action: Optional[StrictStr] = Field(default=None,
+                                        description="The action to take when the session protection policy detects a failure.")
     __properties: ClassVar[List[str]] = ["action"]
 
     @field_validator('action')
@@ -99,4 +101,3 @@ class PostAuthSessionPolicyRuleTerminateSession(BaseModel):
             "action": obj.get("action")
         })
         return _obj
-

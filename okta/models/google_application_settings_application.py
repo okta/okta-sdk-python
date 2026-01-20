@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GoogleApplicationSettingsApplication(BaseModel):
     """
     Google app instance properties
-    """ # noqa: E501
+    """  # noqa: E501
     domain: StrictStr = Field(description="Your Google company domain")
     rp_id: Optional[StrictStr] = Field(default=None, description="RPID", alias="rpId")
     __properties: ClassVar[List[str]] = ["domain", "rpId"]
@@ -91,4 +92,3 @@ class GoogleApplicationSettingsApplication(BaseModel):
             "rpId": obj.get("rpId")
         })
         return _obj
-

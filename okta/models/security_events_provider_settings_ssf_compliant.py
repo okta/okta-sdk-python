@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventsProviderSettingsSSFCompliant(BaseModel):
     """
     Security Events Provider with well-known URL setting
-    """ # noqa: E501
-    well_known_url: Annotated[str, Field(strict=True, max_length=1000)] = Field(description="The published well-known URL of the Security Events Provider (the SSF transmitter)")
+    """  # noqa: E501
+    well_known_url: Annotated[str, Field(strict=True, max_length=1000)] = Field(
+        description="The published well-known URL of the Security Events Provider (the SSF transmitter)")
     __properties: ClassVar[List[str]] = ["well_known_url"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class SecurityEventsProviderSettingsSSFCompliant(BaseModel):
             "well_known_url": obj.get("well_known_url")
         })
         return _obj
-

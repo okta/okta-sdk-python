@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ContentSecurityPolicySetting(BaseModel):
     """
     ContentSecurityPolicySetting
-    """ # noqa: E501
+    """  # noqa: E501
     mode: Optional[StrictStr] = None
     report_uri: Optional[StrictStr] = Field(default=None, alias="reportUri")
     src_list: Optional[List[StrictStr]] = Field(default=None, alias="srcList")
@@ -103,4 +104,3 @@ class ContentSecurityPolicySetting(BaseModel):
             "srcList": obj.get("srcList")
         })
         return _obj
-

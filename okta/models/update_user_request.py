@@ -32,13 +32,17 @@ from okta.models.user_profile import UserProfile
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UpdateUserRequest(BaseModel):
     """
     UpdateUserRequest
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[UserCredentials] = None
     profile: Optional[UserProfile] = None
-    realm_id: Optional[StrictStr] = Field(default=None, description="The ID of the realm in which the user is residing. See [Realms](/openapi/okta-management/management/tag/Realm/).", alias="realmId")
+    realm_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the realm in which the user is residing. See [Realms](/openapi/okta-management/management/tag/Realm/).",
+        alias="realmId")
     type: Optional[UpdateUserRequestType] = None
     __properties: ClassVar[List[str]] = ["credentials", "profile", "realmId", "type"]
 
@@ -119,4 +123,3 @@ class UpdateUserRequest(BaseModel):
             "type": UpdateUserRequestType.from_dict(obj["type"]) if obj.get("type") is not None else None
         })
         return _obj
-

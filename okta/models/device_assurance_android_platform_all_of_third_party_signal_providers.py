@@ -31,10 +31,11 @@ from okta.models.device_posture_id_p import DevicePostureIdP
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders(BaseModel):
     """
     Settings for third-party signal providers (based on the `ANDROID` platform)
-    """ # noqa: E501
+    """  # noqa: E501
     android_device_trust: Optional[AndroidDeviceTrust] = Field(default=None, alias="androidDeviceTrust")
     device_posture_id_p: Optional[DevicePostureIdP] = Field(default=None, alias="devicePostureIdP")
     __properties: ClassVar[List[str]] = ["androidDeviceTrust", "devicePostureIdP"]
@@ -107,4 +108,3 @@ class DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders(BaseModel):
             "devicePostureIdP": DevicePostureIdP.from_dict(obj["devicePostureIdP"]) if obj.get("devicePostureIdP") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.entity_risk_policy_rule_all_of_actions_entity_risk import Entit
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntityRiskPolicyRuleAllOfActions(BaseModel):
     """
     The action to take based on the risk event
-    """ # noqa: E501
+    """  # noqa: E501
     entity_risk: Optional[EntityRiskPolicyRuleAllOfActionsEntityRisk] = Field(default=None, alias="entityRisk")
     __properties: ClassVar[List[str]] = ["entityRisk"]
 
@@ -97,4 +98,3 @@ class EntityRiskPolicyRuleAllOfActions(BaseModel):
             "entityRisk": EntityRiskPolicyRuleAllOfActionsEntityRisk.from_dict(obj["entityRisk"]) if obj.get("entityRisk") is not None else None
         })
         return _obj
-

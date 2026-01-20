@@ -30,12 +30,16 @@ from okta.models.token_hook_response_commands_inner_value_inner import TokenHook
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenHookResponseCommandsInner(BaseModel):
     """
     TokenHookResponseCommandsInner
-    """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="One of the supported commands:   `com.okta.identity.patch`: Modify an ID token   `com.okta.access.patch`: Modify an access token > **Note:** The `commands` array should only contain commands that can be applied to the requested tokens. For example, if only an ID token is requested, the `commands` array shouldn't contain commands of the type `com.okta.access.patch`.")
-    value: Optional[List[TokenHookResponseCommandsInnerValueInner]] = Field(default=None, description="The `value` object is where you specify the operation to perform. It's an array, which allows you to request more than one operation.")
+    """  # noqa: E501
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="One of the supported commands:   `com.okta.identity.patch`: Modify an ID token   `com.okta.access.patch`: Modify an access token > **Note:** The `commands` array should only contain commands that can be applied to the requested tokens. For example, if only an ID token is requested, the `commands` array shouldn't contain commands of the type `com.okta.access.patch`.")
+    value: Optional[List[TokenHookResponseCommandsInnerValueInner]] = Field(
+        default=None, description="The `value` object is where you specify the operation to perform. It's an array, which allows you to request more than one operation.")
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     model_config = ConfigDict(
@@ -99,4 +103,3 @@ class TokenHookResponseCommandsInner(BaseModel):
             "value": [TokenHookResponseCommandsInnerValueInner.from_dict(_item) for _item in obj["value"]] if obj.get("value") is not None else None
         })
         return _obj
-

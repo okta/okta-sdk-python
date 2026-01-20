@@ -31,12 +31,18 @@ from okta.models.app_user_password_credential import AppUserPasswordCredential
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppUserCredentials(BaseModel):
     """
     Specifies a user's credentials for the app. This parameter can be omitted for apps with [sign-on mode](/openapi/okta-management/management/tag/Application/#tag/Application/operation/getApplication!c=200&path=0/signOnMode&t=response) (`signOnMode`) or [authentication schemes](/openapi/okta-management/management/tag/Application/#tag/Application/operation/getApplication!c=200&path=0/credentials/scheme&t=response) (`credentials.scheme`) that don't require credentials. 
-    """ # noqa: E501
+    """  # noqa: E501
     password: Optional[AppUserPasswordCredential] = None
-    user_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, description="The user's username in the app  > **Note:** The [userNameTemplate](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication!path=0/credentials/userNameTemplate&t=request) in the application object defines the default username generated when a user is assigned to that app. > If you attempt to assign a username or password to an app with an incompatible [authentication scheme](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication!path=0/credentials/scheme&t=request), the following error is returned: > \"Credentials should not be set on this resource based on the scheme.\"", alias="userName")
+    user_name: Optional[Annotated[str,
+                                  Field(min_length=1,
+                                        strict=True,
+                                        max_length=100)]] = Field(default=None,
+                                                                  description="The user's username in the app  > **Note:** The [userNameTemplate](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication!path=0/credentials/userNameTemplate&t=request) in the application object defines the default username generated when a user is assigned to that app. > If you attempt to assign a username or password to an app with an incompatible [authentication scheme](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication!path=0/credentials/scheme&t=request), the following error is returned: > \"Credentials should not be set on this resource based on the scheme.\"",
+                                                                  alias="userName")
     __properties: ClassVar[List[str]] = ["password", "userName"]
 
     model_config = ConfigDict(
@@ -100,4 +106,3 @@ class AppUserCredentials(BaseModel):
             "userName": obj.get("userName")
         })
         return _obj
-

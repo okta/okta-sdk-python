@@ -31,10 +31,11 @@ from okta.models.user_condition import UserCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyPeopleCondition(BaseModel):
     """
     Identifies users and groups that are used together
-    """ # noqa: E501
+    """  # noqa: E501
     groups: Optional[GroupCondition] = None
     users: Optional[UserCondition] = None
     __properties: ClassVar[List[str]] = ["groups", "users"]
@@ -107,4 +108,3 @@ class PolicyPeopleCondition(BaseModel):
             "users": UserCondition.from_dict(obj["users"]) if obj.get("users") is not None else None
         })
         return _obj
-

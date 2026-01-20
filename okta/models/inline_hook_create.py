@@ -32,14 +32,17 @@ from okta.models.inline_hook_type import InlineHookType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookCreate(BaseModel):
     """
     An inline hook object that specifies the details of the inline hook
-    """ # noqa: E501
+    """  # noqa: E501
     channel: Optional[InlineHookChannelCreate] = None
     name: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The display name of the inline hook")
     type: Optional[InlineHookType] = None
-    version: Optional[StrictStr] = Field(default=None, description="Version of the inline hook type. The currently supported version is `1.0.0`.")
+    version: Optional[StrictStr] = Field(
+        default=None,
+        description="Version of the inline hook type. The currently supported version is `1.0.0`.")
     __properties: ClassVar[List[str]] = ["channel", "name", "type", "version"]
 
     model_config = ConfigDict(
@@ -105,4 +108,3 @@ class InlineHookCreate(BaseModel):
             "version": obj.get("version")
         })
         return _obj
-

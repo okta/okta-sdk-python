@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RefreshToken(BaseModel):
     """
     The refresh token
-    """ # noqa: E501
+    """  # noqa: E501
     jti: Optional[StrictStr] = Field(default=None, description="The refresh token ID")
     __properties: ClassVar[List[str]] = ["jti"]
 
@@ -89,4 +90,3 @@ class RefreshToken(BaseModel):
             "jti": obj.get("jti")
         })
         return _obj
-

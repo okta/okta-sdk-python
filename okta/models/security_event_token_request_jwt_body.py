@@ -30,10 +30,11 @@ from okta.models.security_event_token_request_jwt_events import SecurityEventTok
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventTokenRequestJwtBody(BaseModel):
     """
     JSON Web Token body payload for a Security Event Token
-    """ # noqa: E501
+    """  # noqa: E501
     aud: StrictStr = Field(description="Audience")
     events: SecurityEventTokenRequestJwtEvents
     iat: StrictInt = Field(description="Token issue time (UNIX timestamp)")
@@ -105,4 +106,3 @@ class SecurityEventTokenRequestJwtBody(BaseModel):
             "jti": obj.get("jti")
         })
         return _obj
-

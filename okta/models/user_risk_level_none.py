@@ -28,14 +28,14 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List
 from okta.models.user_risk_get_response import UserRiskGetResponse
 from okta.models.user_risk_get_response_links import UserRiskGetResponseLinks
-from okta.models.user_risk_level_all import UserRiskLevelAll
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class UserRiskLevelNone(UserRiskGetResponse):
     """
     UserRiskLevelNone
-    """ # noqa: E501
+    """  # noqa: E501
     __properties: ClassVar[List[str]] = ["riskLevel", "_links"]
 
     model_config = ConfigDict(
@@ -99,4 +99,3 @@ class UserRiskLevelNone(UserRiskGetResponse):
             "_links": UserRiskGetResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

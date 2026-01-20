@@ -33,22 +33,28 @@ from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthorizationServerPolicyRuleRequest(BaseModel):
     """
     AuthorizationServerPolicyRuleRequest
-    """ # noqa: E501
+    """  # noqa: E501
     actions: Optional[AuthorizationServerPolicyRuleActions] = None
     conditions: AuthorizationServerPolicyRuleConditions
     created: Optional[datetime] = Field(default=None, description="Timestamp when the rule was created")
     id: Optional[StrictStr] = Field(default=None, description="Identifier of the rule")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the rule was last modified", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the rule was last modified",
+        alias="lastUpdated")
     name: StrictStr = Field(description="Name of the rule")
     priority: Optional[StrictInt] = Field(default=None, description="Priority of the rule")
     status: Optional[StrictStr] = Field(default=None, description="Status of the rule")
-    system: Optional[StrictBool] = Field(default=None, description="Set to `true` for system rules. You can't delete system rules.")
+    system: Optional[StrictBool] = Field(default=None,
+                                         description="Set to `true` for system rules. You can't delete system rules.")
     type: StrictStr = Field(description="Rule type")
     links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["actions", "conditions", "created", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_links"]
+    __properties: ClassVar[List[str]] = ["actions", "conditions", "created", "id",
+                                         "lastUpdated", "name", "priority", "status", "system", "type", "_links"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -157,4 +163,3 @@ class AuthorizationServerPolicyRuleRequest(BaseModel):
             "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

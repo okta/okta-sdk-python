@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionSubjectConfirmationData(BaseModel):
     """
     SAMLPayLoadDataAssertionSubjectConfirmationData
-    """ # noqa: E501
+    """  # noqa: E501
     recipient: Optional[StrictStr] = Field(default=None, description="The token endpoint URL of the authorization server")
     __properties: ClassVar[List[str]] = ["recipient"]
 
@@ -89,4 +90,3 @@ class SAMLPayLoadDataAssertionSubjectConfirmationData(BaseModel):
             "recipient": obj.get("recipient")
         })
         return _obj
-

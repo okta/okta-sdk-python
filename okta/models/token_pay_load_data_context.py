@@ -34,10 +34,11 @@ from okta.models.token_pay_load_data_context_all_of_protocol import TokenPayLoad
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataContext(BaseModel):
     """
     TokenPayLoadDataContext
-    """ # noqa: E501
+    """  # noqa: E501
     request: Optional[InlineHookRequestObject] = None
     session: Optional[BaseContextSession] = None
     user: Optional[BaseContextUser] = None
@@ -137,4 +138,3 @@ class TokenPayLoadDataContext(BaseModel):
             "policy": TokenPayLoadDataContextAllOfPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None
         })
         return _obj
-

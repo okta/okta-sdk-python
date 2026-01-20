@@ -30,10 +30,11 @@ from okta.models.base_token_token_lifetime import BaseTokenTokenLifetime
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BaseTokenToken(BaseModel):
     """
     The token
-    """ # noqa: E501
+    """  # noqa: E501
     lifetime: Optional[BaseTokenTokenLifetime] = None
     __properties: ClassVar[List[str]] = ["lifetime"]
 
@@ -97,4 +98,3 @@ class BaseTokenToken(BaseModel):
             "lifetime": BaseTokenTokenLifetime.from_dict(obj["lifetime"]) if obj.get("lifetime") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.user_schema_attribute import UserSchemaAttribute
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaPublic(BaseModel):
     """
     All custom profile properties are defined in a profile subschema with the resolution scope `#custom`.  > **Notes:** > * When you refer to custom profile attributes that differ only by case, name collisions occur. This includes naming custom profile attributes the same as base profile attributes, for example, `firstName` and `FirstName`. > * Certain attributes are reserved and can't be used for custom user profiles. See [Review reserved attributes](https://help.okta.com/okta_help.htm?type=oie&id=reserved-attributes).
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The subschema name")
     properties: Optional[Dict[str, UserSchemaAttribute]] = Field(default=None, description="The `#custom` object properties")
     required: Optional[List[StrictStr]] = Field(default=None, description="A collection indicating required property names")
@@ -114,4 +115,3 @@ class UserSchemaPublic(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

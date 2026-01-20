@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserRiskRequest(BaseModel):
     """
     UserRiskRequest
-    """ # noqa: E501
-    risk_level: Optional[StrictStr] = Field(default=None, description="The risk level associated with the user", alias="riskLevel")
+    """  # noqa: E501
+    risk_level: Optional[StrictStr] = Field(
+        default=None,
+        description="The risk level associated with the user",
+        alias="riskLevel")
     __properties: ClassVar[List[str]] = ["riskLevel"]
 
     @field_validator('risk_level')
@@ -99,4 +103,3 @@ class UserRiskRequest(BaseModel):
             "riskLevel": obj.get("riskLevel")
         })
         return _obj
-

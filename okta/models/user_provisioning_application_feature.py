@@ -28,16 +28,15 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.application_feature import ApplicationFeature
 from okta.models.application_feature_links import ApplicationFeatureLinks
-from okta.models.application_feature_type import ApplicationFeatureType
 from okta.models.capabilities_object import CapabilitiesObject
-from okta.models.enabled_status import EnabledStatus
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class UserProvisioningApplicationFeature(ApplicationFeature):
     """
     UserProvisioningApplicationFeature
-    """ # noqa: E501
+    """  # noqa: E501
     capabilities: Optional[CapabilitiesObject] = None
     __properties: ClassVar[List[str]] = ["description", "name", "status", "_links", "capabilities"]
 
@@ -112,4 +111,3 @@ class UserProvisioningApplicationFeature(ApplicationFeature):
             "capabilities": CapabilitiesObject.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None
         })
         return _obj
-

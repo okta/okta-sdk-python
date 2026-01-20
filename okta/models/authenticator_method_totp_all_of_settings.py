@@ -32,14 +32,19 @@ from okta.models.otp_totp_encoding import OtpTotpEncoding
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorMethodTotpAllOfSettings(BaseModel):
     """
     AuthenticatorMethodTotpAllOfSettings
-    """ # noqa: E501
-    time_interval_in_seconds: Optional[StrictInt] = Field(default=None, description="Time interval for TOTP in seconds", alias="timeIntervalInSeconds")
+    """  # noqa: E501
+    time_interval_in_seconds: Optional[StrictInt] = Field(
+        default=None,
+        description="Time interval for TOTP in seconds",
+        alias="timeIntervalInSeconds")
     encoding: Optional[OtpTotpEncoding] = None
     algorithm: Optional[OtpTotpAlgorithm] = None
-    pass_code_length: Optional[Annotated[int, Field(multiple_of=2, le=10, strict=True, ge=6)]] = Field(default=None, description="Number of digits in an OTP value", alias="passCodeLength")
+    pass_code_length: Optional[Annotated[int, Field(multiple_of=2, le=10, strict=True, ge=6)]] = Field(
+        default=None, description="Number of digits in an OTP value", alias="passCodeLength")
     __properties: ClassVar[List[str]] = ["timeIntervalInSeconds", "encoding", "algorithm", "passCodeLength"]
 
     model_config = ConfigDict(
@@ -98,4 +103,3 @@ class AuthenticatorMethodTotpAllOfSettings(BaseModel):
             "passCodeLength": obj.get("passCodeLength")
         })
         return _obj
-

@@ -29,13 +29,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RealmProfile(BaseModel):
     """
     RealmProfile
-    """ # noqa: E501
-    domains: Optional[List[StrictStr]] = Field(default=None, description="Array of allowed domains. No user in this realm can be created or updated unless they have a username and email from one of these domains.  The following characters aren't allowed in the domain name: `!$%^&()=*+,:;<>'[]|/?\\`")
+    """  # noqa: E501
+    domains: Optional[List[StrictStr]] = Field(
+        default=None, description="Array of allowed domains. No user in this realm can be created or updated unless they have a username and email from one of these domains.  The following characters aren't allowed in the domain name: `!$%^&()=*+,:;<>'[]|/?\\`")
     name: StrictStr = Field(description="Name of a realm")
-    realm_type: Optional[StrictStr] = Field(default=None, description="Used to store partner users. This property must be set to `PARTNER` to access Okta's external partner portal.", alias="realmType")
+    realm_type: Optional[StrictStr] = Field(
+        default=None,
+        description="Used to store partner users. This property must be set to `PARTNER` to access Okta's external partner portal.",
+        alias="realmType")
     __properties: ClassVar[List[str]] = ["domains", "name", "realmType"]
 
     @field_validator('realm_type')
@@ -103,4 +108,3 @@ class RealmProfile(BaseModel):
             "realmType": obj.get("realmType")
         })
         return _obj
-

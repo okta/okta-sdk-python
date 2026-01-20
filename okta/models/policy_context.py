@@ -34,10 +34,11 @@ from okta.models.policy_context_zones import PolicyContextZones
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PolicyContext(BaseModel):
     """
     PolicyContext
-    """ # noqa: E501
+    """  # noqa: E501
     device: Optional[PolicyContextDevice] = None
     groups: PolicyContextGroups
     ip: Optional[StrictStr] = Field(default=None, description="The network rule condition, zone, or IP address")
@@ -139,4 +140,3 @@ class PolicyContext(BaseModel):
             "zones": PolicyContextZones.from_dict(obj["zones"]) if obj.get("zones") is not None else None
         })
         return _obj
-

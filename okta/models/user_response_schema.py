@@ -32,14 +32,20 @@ from okta.models.identity_source_user_profile_for_upsert import IdentitySourceUs
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserResponseSchema(BaseModel):
     """
     UserResponseSchema
-    """ # noqa: E501
-    created: Optional[datetime] = Field(default=None, description="The timestamp when the user was created in the identity source")
-    external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="The external ID of the user in the identity source", alias="externalId")
+    """  # noqa: E501
+    created: Optional[datetime] = Field(default=None,
+                                        description="The timestamp when the user was created in the identity source")
+    external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(
+        default=None, description="The external ID of the user in the identity source", alias="externalId")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the user in the identity source")
-    last_updated: Optional[datetime] = Field(default=None, description="The timestamp when the user was last updated in the identity source", alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user was last updated in the identity source",
+        alias="lastUpdated")
     profile: Optional[IdentitySourceUserProfileForUpsert] = None
     __properties: ClassVar[List[str]] = ["created", "externalId", "id", "lastUpdated", "profile"]
 
@@ -115,4 +121,3 @@ class UserResponseSchema(BaseModel):
             "profile": IdentitySourceUserProfileForUpsert.from_dict(obj["profile"]) if obj.get("profile") is not None else None
         })
         return _obj
-

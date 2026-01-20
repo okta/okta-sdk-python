@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BulkGroupDeleteRequestBody(BaseModel):
     """
     BulkGroupDeleteRequestBody
-    """ # noqa: E501
-    external_ids: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=255)]], Field(min_length=1, max_length=200)]] = Field(default=None, description="Array of external IDs of groups that need to be deleted in Okta", alias="externalIds")
+    """  # noqa: E501
+    external_ids: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=255)]], Field(min_length=1, max_length=200)]] = Field(
+        default=None, description="Array of external IDs of groups that need to be deleted in Okta", alias="externalIds")
     __properties: ClassVar[List[str]] = ["externalIds"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class BulkGroupDeleteRequestBody(BaseModel):
             "externalIds": obj.get("externalIds")
         })
         return _obj
-

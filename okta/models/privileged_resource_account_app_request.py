@@ -30,18 +30,18 @@ from okta.models.app_account_container_details import AppAccountContainerDetails
 from okta.models.credential_sync_info import CredentialSyncInfo
 from okta.models.privileged_resource import PrivilegedResource
 from okta.models.privileged_resource_credentials import PrivilegedResourceCredentials
-from okta.models.privileged_resource_status import PrivilegedResourceStatus
-from okta.models.privileged_resource_type import PrivilegedResourceType
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class PrivilegedResourceAccountAppRequest(PrivilegedResource):
     """
     PrivilegedResourceAccountAppRequest
-    """ # noqa: E501
+    """  # noqa: E501
     container_details: Optional[AppAccountContainerDetails] = Field(default=None, alias="containerDetails")
     credentials: Optional[PrivilegedResourceCredentials] = None
-    __properties: ClassVar[List[str]] = ["created", "credentialSyncInfo", "id", "lastUpdated", "resourceType", "status", "containerDetails", "credentials"]
+    __properties: ClassVar[List[str]] = ["created", "credentialSyncInfo", "id",
+                                         "lastUpdated", "resourceType", "status", "containerDetails", "credentials"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -124,4 +124,3 @@ class PrivilegedResourceAccountAppRequest(PrivilegedResource):
             "credentials": PrivilegedResourceCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None
         })
         return _obj
-

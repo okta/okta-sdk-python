@@ -22,17 +22,21 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.identity_assertion_app_instance_connection import IdentityAssertionAppInstanceConnection
 from okta.models.identity_assertion_custom_as_connection import IdentityAssertionCustomASConnection
 from okta.models.sts_service_account_connection import STSServiceAccountConnection
 from okta.models.sts_vault_secret_connection import STSVaultSecretConnection
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
-MANAGEDCONNECTION_ONE_OF_SCHEMAS = ["IdentityAssertionAppInstanceConnection", "IdentityAssertionCustomASConnection", "STSServiceAccountConnection", "STSVaultSecretConnection"]
+MANAGEDCONNECTION_ONE_OF_SCHEMAS = [
+    "IdentityAssertionAppInstanceConnection",
+    "IdentityAssertionCustomASConnection",
+    "STSServiceAccountConnection",
+    "STSVaultSecretConnection"]
+
 
 class ManagedConnection(BaseModel):
     """
@@ -46,14 +50,20 @@ class ManagedConnection(BaseModel):
     oneof_schema_3_validator: Optional[STSVaultSecretConnection] = None
     # data type: STSServiceAccountConnection
     oneof_schema_4_validator: Optional[STSServiceAccountConnection] = None
-    actual_instance: Optional[Union[IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection]] = None
-    one_of_schemas: Set[str] = { "IdentityAssertionAppInstanceConnection", "IdentityAssertionCustomASConnection", "STSServiceAccountConnection", "STSVaultSecretConnection" }
+    actual_instance: Optional[Union[IdentityAssertionAppInstanceConnection,
+                                    IdentityAssertionCustomASConnection,
+                                    STSServiceAccountConnection,
+                                    STSVaultSecretConnection]] = None
+    one_of_schemas: Set[str] = {
+        "IdentityAssertionAppInstanceConnection",
+        "IdentityAssertionCustomASConnection",
+        "STSServiceAccountConnection",
+        "STSVaultSecretConnection"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     discriminator_value_class_map: Dict[str, str] = {
     }
@@ -95,10 +105,14 @@ class ManagedConnection(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ManagedConnection with oneOf schemas: IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in ManagedConnection with oneOf schemas: IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ManagedConnection with oneOf schemas: IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in ManagedConnection with oneOf schemas: IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -185,10 +199,14 @@ class ManagedConnection(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ManagedConnection with oneOf schemas: IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into ManagedConnection with oneOf schemas: IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ManagedConnection with oneOf schemas: IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into ManagedConnection with oneOf schemas: IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -202,7 +220,8 @@ class ManagedConnection(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], IdentityAssertionAppInstanceConnection, IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], IdentityAssertionAppInstanceConnection,
+                                        IdentityAssertionCustomASConnection, STSServiceAccountConnection, STSVaultSecretConnection]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
@@ -216,5 +235,3 @@ class ManagedConnection(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

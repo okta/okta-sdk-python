@@ -31,10 +31,11 @@ from okta.models.policy_network_condition import PolicyNetworkCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicyRuleConditions(BaseModel):
     """
     Specifies conditions that must be met during policy evaluation to apply the rule. All policy conditions and conditions for at least one rule must be met to apply the settings specified in the policy and the associated rule.
-    """ # noqa: E501
+    """  # noqa: E501
     network: Optional[PolicyNetworkCondition] = None
     people: Optional[AuthenticatorEnrollmentPolicyRuleConditionsPeople] = None
     __properties: ClassVar[List[str]] = ["network", "people"]
@@ -107,4 +108,3 @@ class AuthenticatorEnrollmentPolicyRuleConditions(BaseModel):
             "people": AuthenticatorEnrollmentPolicyRuleConditionsPeople.from_dict(obj["people"]) if obj.get("people") is not None else None
         })
         return _obj
-

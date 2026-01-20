@@ -34,12 +34,14 @@ from okta.models.simulate_result_status import SimulateResultStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SimulatePolicyEvaluations(BaseModel):
     """
     SimulatePolicyEvaluations
-    """ # noqa: E501
+    """  # noqa: E501
     evaluated: Optional[SimulatePolicyEvaluationsEvaluated] = None
-    policy_type: Optional[List[PolicyTypeSimulation]] = Field(default=None, description="The policy type of the simulate operation", alias="policyType")
+    policy_type: Optional[List[PolicyTypeSimulation]] = Field(
+        default=None, description="The policy type of the simulate operation", alias="policyType")
     result: Optional[SimulatePolicyResult] = None
     status: Optional[SimulateResultStatus] = None
     undefined: Optional[SimulatePolicyEvaluationsUndefined] = None
@@ -123,4 +125,3 @@ class SimulatePolicyEvaluations(BaseModel):
             "undefined": SimulatePolicyEvaluationsUndefined.from_dict(obj["undefined"]) if obj.get("undefined") is not None else None
         })
         return _obj
-

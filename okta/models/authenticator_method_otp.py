@@ -27,10 +27,7 @@ import json
 from pydantic import ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from okta.models.authenticator_method_property import AuthenticatorMethodProperty
-from okta.models.authenticator_method_type import AuthenticatorMethodType
 from okta.models.authenticator_method_with_verifiable_properties import AuthenticatorMethodWithVerifiableProperties
-from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.otp_protocol import OtpProtocol
 from okta.models.otp_totp_algorithm import OtpTotpAlgorithm
@@ -38,18 +35,41 @@ from okta.models.otp_totp_encoding import OtpTotpEncoding
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorMethodOtp(AuthenticatorMethodWithVerifiableProperties):
     """
     AuthenticatorMethodOtp
-    """ # noqa: E501
-    acceptable_adjacent_intervals: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, description="The number of acceptable adjacent intervals, also known as the clock drift interval. This setting allows you to build in tolerance for any time difference between the token and the server. For example, with a `timeIntervalInSeconds` of 60 seconds and an `acceptableAdjacentIntervals` value of 5, Okta accepts passcodes within 300 seconds (60 * 5) before or after the end user enters their code.", alias="acceptableAdjacentIntervals")
+    """  # noqa: E501
+    acceptable_adjacent_intervals: Optional[Annotated[int,
+                                                      Field(le=10,
+                                                            strict=True,
+                                                            ge=0)]] = Field(default=None,
+                                                                            description="The number of acceptable adjacent intervals, also known as the clock drift interval. This setting allows you to build in tolerance for any time difference between the token and the server. For example, with a `timeIntervalInSeconds` of 60 seconds and an `acceptableAdjacentIntervals` value of 5, Okta accepts passcodes within 300 seconds (60 * 5) before or after the end user enters their code.",
+                                                                            alias="acceptableAdjacentIntervals")
     algorithm: Optional[OtpTotpAlgorithm] = None
     encoding: Optional[OtpTotpEncoding] = None
-    factor_profile_id: Optional[StrictStr] = Field(default=None, description="The `id` value of the factor profile", alias="factorProfileId")
-    pass_code_length: Optional[Annotated[int, Field(multiple_of=2, le=10, strict=True, ge=6)]] = Field(default=None, description="Number of digits in an OTP value", alias="passCodeLength")
+    factor_profile_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The `id` value of the factor profile",
+        alias="factorProfileId")
+    pass_code_length: Optional[Annotated[int, Field(multiple_of=2, le=10, strict=True, ge=6)]] = Field(
+        default=None, description="Number of digits in an OTP value", alias="passCodeLength")
     protocol: Optional[OtpProtocol] = None
-    time_interval_in_seconds: Optional[StrictInt] = Field(default=None, description="Time interval for TOTP in seconds", alias="timeIntervalInSeconds")
-    __properties: ClassVar[List[str]] = ["status", "type", "_links", "verifiableProperties", "acceptableAdjacentIntervals", "algorithm", "encoding", "factorProfileId", "passCodeLength", "protocol", "timeIntervalInSeconds"]
+    time_interval_in_seconds: Optional[StrictInt] = Field(
+        default=None,
+        description="Time interval for TOTP in seconds",
+        alias="timeIntervalInSeconds")
+    __properties: ClassVar[List[str]] = ["status",
+                                         "type",
+                                         "_links",
+                                         "verifiableProperties",
+                                         "acceptableAdjacentIntervals",
+                                         "algorithm",
+                                         "encoding",
+                                         "factorProfileId",
+                                         "passCodeLength",
+                                         "protocol",
+                                         "timeIntervalInSeconds"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,4 +141,3 @@ class AuthenticatorMethodOtp(AuthenticatorMethodWithVerifiableProperties):
             "timeIntervalInSeconds": obj.get("timeIntervalInSeconds")
         })
         return _obj
-

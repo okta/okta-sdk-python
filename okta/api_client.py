@@ -40,17 +40,13 @@ import okta.models
 from okta import rest
 from okta.exceptions.exceptions import (
     ApiValueError,
-    ApiException,
-    BadRequestException,
-    UnauthorizedException,
-    ForbiddenException,
-    NotFoundException,
-    ServiceException
+    ApiException
 )
 
 from okta.call_info import CallInfo
 
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
+
 
 class ApiClient:
     """Generic API client for OpenAPI client library builds.
@@ -71,7 +67,7 @@ class ApiClient:
     PRIMITIVE_TYPES = (float, bool, bytes, str, int)
     NATIVE_TYPES_MAPPING = {
         'int': int,
-        'long': int, # TODO remove as only py3 is supported?
+        'long': int,  # TODO remove as only py3 is supported?
         'float': float,
         'str': str,
         'bool': bool,
@@ -136,7 +132,6 @@ class ApiClient:
     def set_default_header(self, header_name, header_value):
         self.default_headers[header_name] = header_value
 
-
     _default = None
 
     @classmethod
@@ -177,7 +172,6 @@ class ApiClient:
         _host=None,
         _request_auth=None
     ) -> RequestSerialized:
-
         """Builds the HTTP request params needed by the request.
         :param method: Method to call.
         :param resource_path: Path to method endpoint.
@@ -210,7 +204,7 @@ class ApiClient:
         if header_params:
             header_params = self.sanitize_for_serialization(header_params)
             header_params = dict(
-                self.parameters_to_tuples(header_params,collection_formats)
+                self.parameters_to_tuples(header_params, collection_formats)
             )
 
         # path parameters
@@ -271,7 +265,6 @@ class ApiClient:
 
         return method, url, header_params, body, post_params
 
-
     def call_api(
         self,
         method,
@@ -320,7 +313,7 @@ class ApiClient:
     def response_deserialize(
         self,
         response_data: rest.RESTResponse,
-        response_types_map: Optional[Dict[str, ApiResponseT]]=None
+        response_types_map: Optional[Dict[str, ApiResponseT]] = None
     ) -> ApiResponse[ApiResponseT]:
         """Deserializes response into an object.
         :param response_data: RESTResponse object to be deserialized.
@@ -364,10 +357,10 @@ class ApiClient:
                 )
 
         return ApiResponse(
-            status_code = response_data.status,
-            data = return_data,
-            headers = response_data.getheaders(),
-            raw_data = response_data.data
+            status_code=response_data.status,
+            data=return_data,
+            headers=response_data.getheaders(),
+            raw_data=response_data.data
         )
 
     def sanitize_for_serialization(self, obj):

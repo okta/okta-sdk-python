@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UpdateIamRoleRequest(BaseModel):
     """
     UpdateIamRoleRequest
-    """ # noqa: E501
+    """  # noqa: E501
     description: StrictStr = Field(description="Description of the role")
     label: StrictStr = Field(description="Unique label for the role")
     __properties: ClassVar[List[str]] = ["description", "label"]
@@ -91,4 +92,3 @@ class UpdateIamRoleRequest(BaseModel):
             "label": obj.get("label")
         })
         return _obj
-

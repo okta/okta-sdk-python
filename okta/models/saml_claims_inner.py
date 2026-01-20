@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlClaimsInner(BaseModel):
     """
     SamlClaimsInner
-    """ # noqa: E501
+    """  # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The attribute name")
     values: Optional[List[StrictStr]] = Field(default=None, description="The Okta values inserted in the attribute statement")
     __properties: ClassVar[List[str]] = ["name", "values"]
@@ -91,4 +92,3 @@ class SamlClaimsInner(BaseModel):
             "values": obj.get("values")
         })
         return _obj
-

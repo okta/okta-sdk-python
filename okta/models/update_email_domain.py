@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UpdateEmailDomain(BaseModel):
     """
     UpdateEmailDomain
-    """ # noqa: E501
+    """  # noqa: E501
     display_name: StrictStr = Field(alias="displayName")
     user_name: StrictStr = Field(alias="userName")
     __properties: ClassVar[List[str]] = ["displayName", "userName"]
@@ -91,4 +92,3 @@ class UpdateEmailDomain(BaseModel):
             "userName": obj.get("userName")
         })
         return _obj
-

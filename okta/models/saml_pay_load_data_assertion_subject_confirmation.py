@@ -30,11 +30,14 @@ from okta.models.saml_pay_load_data_assertion_subject_confirmation_data import S
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionSubjectConfirmation(BaseModel):
     """
     SAMLPayLoadDataAssertionSubjectConfirmation
-    """ # noqa: E501
-    method: Optional[StrictStr] = Field(default=None, description="Used to indicate how the authorization server confirmed the SAML assertion")
+    """  # noqa: E501
+    method: Optional[StrictStr] = Field(
+        default=None,
+        description="Used to indicate how the authorization server confirmed the SAML assertion")
     data: Optional[SAMLPayLoadDataAssertionSubjectConfirmationData] = None
     __properties: ClassVar[List[str]] = ["method", "data"]
 
@@ -99,4 +102,3 @@ class SAMLPayLoadDataAssertionSubjectConfirmation(BaseModel):
             "data": SAMLPayLoadDataAssertionSubjectConfirmationData.from_dict(obj["data"]) if obj.get("data") is not None else None
         })
         return _obj
-

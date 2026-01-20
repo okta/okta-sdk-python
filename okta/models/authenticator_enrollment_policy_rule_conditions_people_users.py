@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorEnrollmentPolicyRuleConditionsPeopleUsers(BaseModel):
     """
     Specifies a set of users to be included or excluded
-    """ # noqa: E501
+    """  # noqa: E501
     exclude: Optional[List[StrictStr]] = Field(default=None, description="Users to be excluded")
     __properties: ClassVar[List[str]] = ["exclude"]
 
@@ -89,4 +90,3 @@ class AuthenticatorEnrollmentPolicyRuleConditionsPeopleUsers(BaseModel):
             "exclude": obj.get("exclude")
         })
         return _obj
-

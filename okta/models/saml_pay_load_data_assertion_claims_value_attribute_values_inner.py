@@ -30,10 +30,11 @@ from okta.models.saml_pay_load_data_assertion_claims_value_attribute_values_inne
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SAMLPayLoadDataAssertionClaimsValueAttributeValuesInner(BaseModel):
     """
     SAMLPayLoadDataAssertionClaimsValueAttributeValuesInner
-    """ # noqa: E501
+    """  # noqa: E501
     attributes: Optional[SAMLPayLoadDataAssertionClaimsValueAttributeValuesInnerAttributes] = None
     value: Optional[StrictStr] = Field(default=None, description="The actual value of the attribute")
     __properties: ClassVar[List[str]] = ["attributes", "value"]
@@ -99,4 +100,3 @@ class SAMLPayLoadDataAssertionClaimsValueAttributeValuesInner(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

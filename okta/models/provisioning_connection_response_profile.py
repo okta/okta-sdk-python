@@ -31,10 +31,11 @@ from okta.models.provisioning_connection_auth_scheme import ProvisioningConnecti
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProvisioningConnectionResponseProfile(BaseModel):
     """
     ProvisioningConnectionResponseProfile
-    """ # noqa: E501
+    """  # noqa: E501
     auth_scheme: ProvisioningConnectionAuthScheme = Field(alias="authScheme")
     signing: Optional[Org2OrgProvisioningOAuthSigningSettings] = None
     __properties: ClassVar[List[str]] = ["authScheme", "signing"]
@@ -100,4 +101,3 @@ class ProvisioningConnectionResponseProfile(BaseModel):
             "signing": Org2OrgProvisioningOAuthSigningSettings.from_dict(obj["signing"]) if obj.get("signing") is not None else None
         })
         return _obj
-

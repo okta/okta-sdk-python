@@ -29,12 +29,16 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DRStatusItem(BaseModel):
     """
     Status whether a domain has been failed over or not
-    """ # noqa: E501
+    """  # noqa: E501
     domain: Optional[StrictStr] = Field(default=None, description="Domain for your org")
-    is_failed_over: Optional[StrictBool] = Field(default=None, description="Indicates if the domain has been failed over", alias="isFailedOver")
+    is_failed_over: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the domain has been failed over",
+        alias="isFailedOver")
     __properties: ClassVar[List[str]] = ["domain", "isFailedOver"]
 
     model_config = ConfigDict(
@@ -91,4 +95,3 @@ class DRStatusItem(BaseModel):
             "isFailedOver": obj.get("isFailedOver")
         })
         return _obj
-

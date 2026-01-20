@@ -30,10 +30,11 @@ from okta.models.workflow_available_action_provider import WorkflowAvailableActi
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AvailableAction(BaseModel):
     """
     AvailableAction
-    """ # noqa: E501
+    """  # noqa: E501
     id: StrictStr = Field(description="Action identifier")
     provider: WorkflowAvailableActionProvider
     __properties: ClassVar[List[str]] = ["id", "provider"]
@@ -99,4 +100,3 @@ class AvailableAction(BaseModel):
             "provider": WorkflowAvailableActionProvider.from_dict(obj["provider"]) if obj.get("provider") is not None else None
         })
         return _obj
-

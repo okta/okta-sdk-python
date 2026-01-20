@@ -30,11 +30,13 @@ from okta.models.capabilities_import_rules_user_create_and_match_object import C
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CapabilitiesImportRulesObject(BaseModel):
     """
     Defines user import rules
-    """ # noqa: E501
-    user_create_and_match: Optional[CapabilitiesImportRulesUserCreateAndMatchObject] = Field(default=None, alias="userCreateAndMatch")
+    """  # noqa: E501
+    user_create_and_match: Optional[CapabilitiesImportRulesUserCreateAndMatchObject] = Field(
+        default=None, alias="userCreateAndMatch")
     __properties: ClassVar[List[str]] = ["userCreateAndMatch"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class CapabilitiesImportRulesObject(BaseModel):
             "userCreateAndMatch": CapabilitiesImportRulesUserCreateAndMatchObject.from_dict(obj["userCreateAndMatch"]) if obj.get("userCreateAndMatch") is not None else None
         })
         return _obj
-

@@ -31,11 +31,13 @@ from okta.models.resource_set_binding_members_links import ResourceSetBindingMem
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceSetBindingMembers(BaseModel):
     """
     ResourceSetBindingMembers
-    """ # noqa: E501
-    members: Optional[List[ResourceSetBindingMember]] = Field(default=None, description="The members of the role resource set binding. If there are more than 100 members for the binding, then the `_links.next` resource is returned with the next list of members.")
+    """  # noqa: E501
+    members: Optional[List[ResourceSetBindingMember]] = Field(
+        default=None, description="The members of the role resource set binding. If there are more than 100 members for the binding, then the `_links.next` resource is returned with the next list of members.")
     links: Optional[ResourceSetBindingMembersLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["members", "_links"]
 
@@ -107,4 +109,3 @@ class ResourceSetBindingMembers(BaseModel):
             "_links": ResourceSetBindingMembersLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

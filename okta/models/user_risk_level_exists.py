@@ -28,14 +28,14 @@ from pydantic import ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.user_risk_get_response import UserRiskGetResponse
 from okta.models.user_risk_get_response_links import UserRiskGetResponseLinks
-from okta.models.user_risk_level_all import UserRiskLevelAll
 from typing import Optional, Set
 from typing_extensions import Self
+
 
 class UserRiskLevelExists(UserRiskGetResponse):
     """
     UserRiskLevelExists
-    """ # noqa: E501
+    """  # noqa: E501
     reason: Optional[StrictStr] = Field(default=None, description="Describes the risk level for the user")
     __properties: ClassVar[List[str]] = ["riskLevel", "_links", "reason"]
 
@@ -101,4 +101,3 @@ class UserRiskLevelExists(UserRiskGetResponse):
             "reason": obj.get("reason")
         })
         return _obj
-

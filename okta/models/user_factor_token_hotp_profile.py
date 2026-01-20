@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorTokenHOTPProfile(BaseModel):
     """
     UserFactorTokenHOTPProfile
-    """ # noqa: E501
-    shared_secret: Optional[StrictStr] = Field(default=None, description="Unique secret key used to generate the OTP", alias="sharedSecret")
+    """  # noqa: E501
+    shared_secret: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique secret key used to generate the OTP",
+        alias="sharedSecret")
     __properties: ClassVar[List[str]] = ["sharedSecret"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class UserFactorTokenHOTPProfile(BaseModel):
             "sharedSecret": obj.get("sharedSecret")
         })
         return _obj
-

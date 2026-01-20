@@ -29,12 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogActor(BaseModel):
     """
     Describes the user, app, client, or other entity (actor) who performs an action on a target. The actor is dependent on the action that is performed. All events have actors.
-    """ # noqa: E501
+    """  # noqa: E501
     alternate_id: Optional[StrictStr] = Field(default=None, description="Alternative ID of the actor", alias="alternateId")
-    detail_entry: Optional[Dict[str, Any]] = Field(default=None, description="Further details about the actor", alias="detailEntry")
+    detail_entry: Optional[Dict[str, Any]] = Field(
+        default=None, description="Further details about the actor", alias="detailEntry")
     display_name: Optional[StrictStr] = Field(default=None, description="Display name of the actor", alias="displayName")
     id: Optional[StrictStr] = Field(default=None, description="ID of the actor")
     type: Optional[StrictStr] = Field(default=None, description="Type of actor")
@@ -107,4 +109,3 @@ class LogActor(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaAttributePermission(BaseModel):
     """
     UserSchemaAttributePermission
-    """ # noqa: E501
-    action: Optional[StrictStr] = Field(default=None, description="Determines whether the principal can view or modify the property")
+    """  # noqa: E501
+    action: Optional[StrictStr] = Field(default=None,
+                                        description="Determines whether the principal can view or modify the property")
     principal: Optional[StrictStr] = Field(default=None, description="Security principal")
     __properties: ClassVar[List[str]] = ["action", "principal"]
 
@@ -91,4 +93,3 @@ class UserSchemaAttributePermission(BaseModel):
             "principal": obj.get("principal")
         })
         return _obj
-

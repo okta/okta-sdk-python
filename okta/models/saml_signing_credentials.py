@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlSigningCredentials(BaseModel):
     """
     Key used for signing requests to the IdP
-    """ # noqa: E501
-    kid: Optional[StrictStr] = Field(default=None, description="IdP key credential reference to the Okta X.509 signature certificate")
+    """  # noqa: E501
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="IdP key credential reference to the Okta X.509 signature certificate")
     __properties: ClassVar[List[str]] = ["kid"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class SamlSigningCredentials(BaseModel):
             "kid": obj.get("kid")
         })
         return _obj
-

@@ -30,12 +30,16 @@ from okta.models.links_aerial_consent_granted import LinksAerialConsentGranted
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgAerialGrantNotFound(BaseModel):
     """
     OrgAerialGrantNotFound
-    """ # noqa: E501
+    """  # noqa: E501
     account_id: Optional[StrictStr] = Field(default=None, description="The unique ID of the Aerial account", alias="accountId")
-    granted_by: Optional[StrictStr] = Field(default=None, description="Principal ID of the user who granted the permission", alias="grantedBy")
+    granted_by: Optional[StrictStr] = Field(
+        default=None,
+        description="Principal ID of the user who granted the permission",
+        alias="grantedBy")
     granted_date: Optional[StrictStr] = Field(default=None, description="Date when grant was created", alias="grantedDate")
     links: Optional[LinksAerialConsentGranted] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["accountId", "grantedBy", "grantedDate", "_links"]
@@ -103,4 +107,3 @@ class OrgAerialGrantNotFound(BaseModel):
             "_links": LinksAerialConsentGranted.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

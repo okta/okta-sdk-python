@@ -30,10 +30,11 @@ from okta.models.custom_app_user_verification_enum import CustomAppUserVerificat
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownAppAuthenticatorConfigurationSettings(BaseModel):
     """
     WellKnownAppAuthenticatorConfigurationSettings
-    """ # noqa: E501
+    """  # noqa: E501
     user_verification: Optional[CustomAppUserVerificationEnum] = Field(default=None, alias="userVerification")
     __properties: ClassVar[List[str]] = ["userVerification"]
 
@@ -90,4 +91,3 @@ class WellKnownAppAuthenticatorConfigurationSettings(BaseModel):
             "userVerification": obj.get("userVerification")
         })
         return _obj
-

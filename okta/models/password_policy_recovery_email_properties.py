@@ -30,10 +30,11 @@ from okta.models.password_policy_recovery_email_recovery_token import PasswordPo
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRecoveryEmailProperties(BaseModel):
     """
     PasswordPolicyRecoveryEmailProperties
-    """ # noqa: E501
+    """  # noqa: E501
     recovery_token: Optional[PasswordPolicyRecoveryEmailRecoveryToken] = Field(default=None, alias="recoveryToken")
     __properties: ClassVar[List[str]] = ["recoveryToken"]
 
@@ -97,4 +98,3 @@ class PasswordPolicyRecoveryEmailProperties(BaseModel):
             "recoveryToken": PasswordPolicyRecoveryEmailRecoveryToken.from_dict(obj["recoveryToken"]) if obj.get("recoveryToken") is not None else None
         })
         return _obj
-

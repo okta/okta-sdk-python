@@ -30,15 +30,19 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TestInfoSamlTestConfiguration(BaseModel):
     """
     SAML test details
-    """ # noqa: E501
+    """  # noqa: E501
     idp: Optional[StrictBool] = Field(default=None, description="Indicates if your integration supports IdP-initiated sign-in")
     sp: Optional[StrictBool] = Field(default=None, description="Indicates if your integration supports SP-initiated sign-in")
-    jit: Optional[StrictBool] = Field(default=None, description="Indicates if your integration supports Just-In-Time (JIT) provisioning")
-    sp_initiate_url: Annotated[str, Field(strict=True, max_length=512)] = Field(description="URL for SP-initiated sign-in flows (required if `sp = true`)", alias="spInitiateUrl")
-    sp_initiate_description: Optional[Annotated[str, Field(strict=True, max_length=2048)]] = Field(default=None, description="Instructions on how to sign in to your app using the SP-initiated flow (required if `sp = true`)", alias="spInitiateDescription")
+    jit: Optional[StrictBool] = Field(default=None,
+                                      description="Indicates if your integration supports Just-In-Time (JIT) provisioning")
+    sp_initiate_url: Annotated[str, Field(strict=True, max_length=512)] = Field(
+        description="URL for SP-initiated sign-in flows (required if `sp = true`)", alias="spInitiateUrl")
+    sp_initiate_description: Optional[Annotated[str, Field(strict=True, max_length=2048)]] = Field(
+        default=None, description="Instructions on how to sign in to your app using the SP-initiated flow (required if `sp = true`)", alias="spInitiateDescription")
     __properties: ClassVar[List[str]] = ["idp", "sp", "jit", "spInitiateUrl", "spInitiateDescription"]
 
     model_config = ConfigDict(
@@ -98,4 +102,3 @@ class TestInfoSamlTestConfiguration(BaseModel):
             "spInitiateDescription": obj.get("spInitiateDescription")
         })
         return _obj
-

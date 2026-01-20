@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenPayLoadDataContextAllOfPolicyRule(BaseModel):
     """
     The authorization server policy rule used to mint the token
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the policy rule")
     __properties: ClassVar[List[str]] = ["id"]
 
@@ -89,4 +90,3 @@ class TokenPayLoadDataContextAllOfPolicyRule(BaseModel):
             "id": obj.get("id")
         })
         return _obj
-

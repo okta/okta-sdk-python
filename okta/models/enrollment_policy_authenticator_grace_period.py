@@ -28,16 +28,16 @@ from importlib import import_module
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.by_date_time_authenticator_grace_period_expiry import ByDateTimeAuthenticatorGracePeriodExpiry
 
+
 class EnrollmentPolicyAuthenticatorGracePeriod(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Specifies the time period required to complete an authenticator enrollment or setup
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = Field(default=None, description="Grace period type")
     __properties: ClassVar[List[str]] = ["type"]
 
@@ -114,10 +114,9 @@ class EnrollmentPolicyAuthenticatorGracePeriod(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'ByDateTimeAuthenticatorGracePeriodExpiry':
-            return import_module("okta.models.by_date_time_authenticator_grace_period_expiry").ByDateTimeAuthenticatorGracePeriodExpiry.from_dict(obj)
+            return import_module(
+                "okta.models.by_date_time_authenticator_grace_period_expiry").ByDateTimeAuthenticatorGracePeriodExpiry.from_dict(obj)
 
         raise ValueError("EnrollmentPolicyAuthenticatorGracePeriod failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

@@ -30,13 +30,17 @@ from okta.models.registration_inline_hook_pp_data_all_of_data_context import Reg
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationInlineHookPPDataAllOfData(BaseModel):
     """
     RegistrationInlineHookPPDataAllOfData
-    """ # noqa: E501
+    """  # noqa: E501
     context: Optional[RegistrationInlineHookPPDataAllOfDataContext] = None
-    action: Optional[StrictStr] = Field(default=None, description="The default action the system takes. Set to `ALLOW`. `DENY` is never sent to your external service")
-    user_profile_update: Optional[Dict[str, Any]] = Field(default=None, description="Name-value pairs for each new attribute supplied by the user in the Progressive Profile form", alias="userProfileUpdate")
+    action: Optional[StrictStr] = Field(
+        default=None,
+        description="The default action the system takes. Set to `ALLOW`. `DENY` is never sent to your external service")
+    user_profile_update: Optional[Dict[str, Any]] = Field(
+        default=None, description="Name-value pairs for each new attribute supplied by the user in the Progressive Profile form", alias="userProfileUpdate")
     __properties: ClassVar[List[str]] = ["context", "action", "userProfileUpdate"]
 
     model_config = ConfigDict(
@@ -101,4 +105,3 @@ class RegistrationInlineHookPPDataAllOfData(BaseModel):
             "userProfileUpdate": obj.get("userProfileUpdate")
         })
         return _obj
-

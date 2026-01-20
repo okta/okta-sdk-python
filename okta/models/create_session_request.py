@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateSessionRequest(BaseModel):
     """
     CreateSessionRequest
-    """ # noqa: E501
-    session_token: Optional[StrictStr] = Field(default=None, description="The session token obtained during authentication", alias="sessionToken")
+    """  # noqa: E501
+    session_token: Optional[StrictStr] = Field(
+        default=None,
+        description="The session token obtained during authentication",
+        alias="sessionToken")
     __properties: ClassVar[List[str]] = ["sessionToken"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class CreateSessionRequest(BaseModel):
             "sessionToken": obj.get("sessionToken")
         })
         return _obj
-

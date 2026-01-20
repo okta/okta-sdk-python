@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FederatedClaimRequestBody(BaseModel):
     """
     FederatedClaimRequestBody
-    """ # noqa: E501
-    expression: Optional[StrictStr] = Field(default=None, description="The Okta Expression Language expression to be evaluated at runtime")
+    """  # noqa: E501
+    expression: Optional[StrictStr] = Field(default=None,
+                                            description="The Okta Expression Language expression to be evaluated at runtime")
     name: Optional[StrictStr] = Field(default=None, description="The name of the claim to be used in the produced token")
     __properties: ClassVar[List[str]] = ["expression", "name"]
 
@@ -91,4 +93,3 @@ class FederatedClaimRequestBody(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

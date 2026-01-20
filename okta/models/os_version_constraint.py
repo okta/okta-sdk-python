@@ -30,13 +30,19 @@ from okta.models.os_version_constraint_dynamic_version_requirement import OSVers
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OSVersionConstraint(BaseModel):
     """
     OSVersionConstraint
-    """ # noqa: E501
-    dynamic_version_requirement: Optional[OSVersionConstraintDynamicVersionRequirement] = Field(default=None, alias="dynamicVersionRequirement")
-    major_version_constraint: StrictStr = Field(description="Indicates the Windows major version", alias="majorVersionConstraint")
-    minimum: Optional[StrictStr] = Field(default=None, description="The Windows device version must be equal to or newer than the specified version")
+    """  # noqa: E501
+    dynamic_version_requirement: Optional[OSVersionConstraintDynamicVersionRequirement] = Field(
+        default=None, alias="dynamicVersionRequirement")
+    major_version_constraint: StrictStr = Field(
+        description="Indicates the Windows major version",
+        alias="majorVersionConstraint")
+    minimum: Optional[StrictStr] = Field(
+        default=None,
+        description="The Windows device version must be equal to or newer than the specified version")
     __properties: ClassVar[List[str]] = ["dynamicVersionRequirement", "majorVersionConstraint", "minimum"]
 
     @field_validator('major_version_constraint')
@@ -108,4 +114,3 @@ class OSVersionConstraint(BaseModel):
             "minimum": obj.get("minimum")
         })
         return _obj
-

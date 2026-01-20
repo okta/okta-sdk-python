@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FailoverRequestSchema(BaseModel):
     """
     FailoverRequestSchema
-    """ # noqa: E501
+    """  # noqa: E501
     domains: Optional[List[StrictStr]] = Field(default=None, description="List of Okta domains to failover")
     __properties: ClassVar[List[str]] = ["domains"]
 
@@ -89,4 +90,3 @@ class FailoverRequestSchema(BaseModel):
             "domains": obj.get("domains")
         })
         return _obj
-

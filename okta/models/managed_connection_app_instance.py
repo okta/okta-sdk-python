@@ -30,13 +30,15 @@ from okta.models.custom_authorization_server_links import CustomAuthorizationSer
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ManagedConnectionAppInstance(BaseModel):
     """
     App instance for the managed connection
-    """ # noqa: E501
+    """  # noqa: E501
     logo: Optional[StrictStr] = Field(default=None, description="Image URL for the app logo")
     name: StrictStr = Field(description="Display name of the app")
-    orn: StrictStr = Field(description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the app instance")
+    orn: StrictStr = Field(
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the app instance")
     links: CustomAuthorizationServerLinks = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["logo", "name", "orn", "_links"]
 
@@ -103,4 +105,3 @@ class ManagedConnectionAppInstance(BaseModel):
             "_links": CustomAuthorizationServerLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

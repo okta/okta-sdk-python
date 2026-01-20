@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityAssertionAppInstanceConnectionCreatableApp(BaseModel):
     """
     Reference to an app instance in [ORN](/openapi/okta-management/guides/roles/#okta-resource-name-orn) format
-    """ # noqa: E501
-    orn: StrictStr = Field(description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the app instance")
+    """  # noqa: E501
+    orn: StrictStr = Field(
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the app instance")
     __properties: ClassVar[List[str]] = ["orn"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class IdentityAssertionAppInstanceConnectionCreatableApp(BaseModel):
             "orn": obj.get("orn")
         })
         return _obj
-

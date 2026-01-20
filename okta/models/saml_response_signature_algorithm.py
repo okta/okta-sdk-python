@@ -31,10 +31,11 @@ from okta.models.saml_signing_algorithm import SamlSigningAlgorithm
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlResponseSignatureAlgorithm(BaseModel):
     """
     XML digital Signature Algorithm settings for verifying `<SAMLResponse>` messages and `<Assertion>` elements from the IdP
-    """ # noqa: E501
+    """  # noqa: E501
     algorithm: Optional[SamlSigningAlgorithm] = None
     scope: Optional[ProtocolAlgorithmResponseScope] = None
     __properties: ClassVar[List[str]] = ["algorithm", "scope"]
@@ -93,4 +94,3 @@ class SamlResponseSignatureAlgorithm(BaseModel):
             "scope": obj.get("scope")
         })
         return _obj
-

@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookOAuthChannelConfigCreate(BaseModel):
     """
     InlineHookOAuthChannelConfigCreate
-    """ # noqa: E501
-    auth_type: Optional[StrictStr] = Field(default=None, description="The authentication method for the token endpoint", alias="authType")
+    """  # noqa: E501
+    auth_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The authentication method for the token endpoint",
+        alias="authType")
     __properties: ClassVar[List[str]] = ["authType"]
 
     model_config = ConfigDict(
@@ -89,4 +93,3 @@ class InlineHookOAuthChannelConfigCreate(BaseModel):
             "authType": obj.get("authType")
         })
         return _obj
-

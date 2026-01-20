@@ -30,11 +30,13 @@ from okta.models.post_auth_session_failure_actions_object import PostAuthSession
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PostAuthSessionPolicyRuleAllOfActionsPostAuthSession(BaseModel):
     """
     This object contains a `failureActions` array that defines the specific action to take when the session protection policy detects a failure
-    """ # noqa: E501
-    failure_actions: Optional[List[PostAuthSessionFailureActionsObject]] = Field(default=None, description="An array of objects that define the action. It can be empty or contain two `action` value pairs.", alias="failureActions")
+    """  # noqa: E501
+    failure_actions: Optional[List[PostAuthSessionFailureActionsObject]] = Field(
+        default=None, description="An array of objects that define the action. It can be empty or contain two `action` value pairs.", alias="failureActions")
     __properties: ClassVar[List[str]] = ["failureActions"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class PostAuthSessionPolicyRuleAllOfActionsPostAuthSession(BaseModel):
             "failureActions": [PostAuthSessionFailureActionsObject.from_dict(_item) for _item in obj["failureActions"]] if obj.get("failureActions") is not None else None
         })
         return _obj
-

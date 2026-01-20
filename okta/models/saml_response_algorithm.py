@@ -30,10 +30,11 @@ from okta.models.saml_response_signature_algorithm import SamlResponseSignatureA
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlResponseAlgorithm(BaseModel):
     """
     Algorithm settings for verifying `<SAMLResponse>` messages and `<Assertion>` elements from the IdP
-    """ # noqa: E501
+    """  # noqa: E501
     signature: Optional[SamlResponseSignatureAlgorithm] = None
     __properties: ClassVar[List[str]] = ["signature"]
 
@@ -97,4 +98,3 @@ class SamlResponseAlgorithm(BaseModel):
             "signature": SamlResponseSignatureAlgorithm.from_dict(obj["signature"]) if obj.get("signature") is not None else None
         })
         return _obj
-

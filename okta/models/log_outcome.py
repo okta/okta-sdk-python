@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogOutcome(BaseModel):
     """
     LogOutcome
-    """ # noqa: E501
-    reason: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(default=None, description="Reason for the result, for example, `INVALID_CREDENTIALS`")
+    """  # noqa: E501
+    reason: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(
+        default=None, description="Reason for the result, for example, `INVALID_CREDENTIALS`")
     result: Optional[StrictStr] = Field(default=None, description="Result of the action")
     __properties: ClassVar[List[str]] = ["reason", "result"]
 
@@ -44,8 +46,10 @@ class LogOutcome(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['SUCCESS', 'FAILURE', 'SKIPPED', 'ALLOW', 'DENY', 'CHALLENGE', 'UNKNOWN', 'RATE_LIMIT', 'DEFERRED', 'SCHEDULED', 'ABANDONED', 'UNANSWERED']):
-            raise ValueError("must be one of enum values ('SUCCESS', 'FAILURE', 'SKIPPED', 'ALLOW', 'DENY', 'CHALLENGE', 'UNKNOWN', 'RATE_LIMIT', 'DEFERRED', 'SCHEDULED', 'ABANDONED', 'UNANSWERED')")
+        if value not in set(['SUCCESS', 'FAILURE', 'SKIPPED', 'ALLOW', 'DENY', 'CHALLENGE', 'UNKNOWN',
+                            'RATE_LIMIT', 'DEFERRED', 'SCHEDULED', 'ABANDONED', 'UNANSWERED']):
+            raise ValueError(
+                "must be one of enum values ('SUCCESS', 'FAILURE', 'SKIPPED', 'ALLOW', 'DENY', 'CHALLENGE', 'UNKNOWN', 'RATE_LIMIT', 'DEFERRED', 'SCHEDULED', 'ABANDONED', 'UNANSWERED')")
         return value
 
     model_config = ConfigDict(
@@ -106,4 +110,3 @@ class LogOutcome(BaseModel):
             "result": obj.get("result")
         })
         return _obj
-

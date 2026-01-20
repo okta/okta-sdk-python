@@ -22,19 +22,25 @@
 from __future__ import annotations
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from typing import Any, Optional
 from okta.models.password_import_request_execute import PasswordImportRequestExecute
 from okta.models.registration_inline_hook_request import RegistrationInlineHookRequest
 from okta.models.saml_payload_execute import SAMLPayloadExecute
 from okta.models.telephony_request_execute import TelephonyRequestExecute
 from okta.models.token_request import TokenRequest
 from okta.models.user_import_request_execute import UserImportRequestExecute
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
-from typing_extensions import Literal, Self
+from typing import Union, Set, Optional, Dict
+from typing_extensions import Self
 
-EXECUTEINLINEHOOKREQUEST_ONE_OF_SCHEMAS = ["PasswordImportRequestExecute", "RegistrationInlineHookRequest", "SAMLPayloadExecute", "TelephonyRequestExecute", "TokenRequest", "UserImportRequestExecute"]
+EXECUTEINLINEHOOKREQUEST_ONE_OF_SCHEMAS = [
+    "PasswordImportRequestExecute",
+    "RegistrationInlineHookRequest",
+    "SAMLPayloadExecute",
+    "TelephonyRequestExecute",
+    "TokenRequest",
+    "UserImportRequestExecute"]
+
 
 class ExecuteInlineHookRequest(BaseModel):
     """
@@ -52,14 +58,20 @@ class ExecuteInlineHookRequest(BaseModel):
     oneof_schema_5_validator: Optional[SAMLPayloadExecute] = None
     # data type: UserImportRequestExecute
     oneof_schema_6_validator: Optional[UserImportRequestExecute] = None
-    actual_instance: Optional[Union[PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute]] = None
-    one_of_schemas: Set[str] = { "PasswordImportRequestExecute", "RegistrationInlineHookRequest", "SAMLPayloadExecute", "TelephonyRequestExecute", "TokenRequest", "UserImportRequestExecute" }
+    actual_instance: Optional[Union[PasswordImportRequestExecute, RegistrationInlineHookRequest,
+                                    SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute]] = None
+    one_of_schemas: Set[str] = {
+        "PasswordImportRequestExecute",
+        "RegistrationInlineHookRequest",
+        "SAMLPayloadExecute",
+        "TelephonyRequestExecute",
+        "TokenRequest",
+        "UserImportRequestExecute"}
 
     model_config = ConfigDict(
         validate_assignment=True,
         protected_namespaces=(),
     )
-
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -108,10 +120,14 @@ class ExecuteInlineHookRequest(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ExecuteInlineHookRequest with oneOf schemas: PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in ExecuteInlineHookRequest with oneOf schemas: PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ExecuteInlineHookRequest with oneOf schemas: PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in ExecuteInlineHookRequest with oneOf schemas: PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -165,10 +181,14 @@ class ExecuteInlineHookRequest(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ExecuteInlineHookRequest with oneOf schemas: PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into ExecuteInlineHookRequest with oneOf schemas: PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute. Details: " +
+                ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ExecuteInlineHookRequest with oneOf schemas: PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into ExecuteInlineHookRequest with oneOf schemas: PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -182,7 +202,8 @@ class ExecuteInlineHookRequest(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], PasswordImportRequestExecute, RegistrationInlineHookRequest, SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], PasswordImportRequestExecute, RegistrationInlineHookRequest,
+                                        SAMLPayloadExecute, TelephonyRequestExecute, TokenRequest, UserImportRequestExecute]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
@@ -196,5 +217,3 @@ class ExecuteInlineHookRequest(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

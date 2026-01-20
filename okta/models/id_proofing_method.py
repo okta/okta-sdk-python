@@ -26,15 +26,15 @@ import json
 
 from pydantic import ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.policy_rule_verification_method_type import PolicyRuleVerificationMethodType
 from okta.models.verification_method import VerificationMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdProofingMethod(VerificationMethod):
     """
     IdProofingMethod
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="ID for ID proofing entity")
     __properties: ClassVar[List[str]] = ["type", "id"]
 
@@ -92,4 +92,3 @@ class IdProofingMethod(VerificationMethod):
             "id": obj.get("id")
         })
         return _obj
-

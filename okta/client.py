@@ -268,7 +268,7 @@ class Client(
     UserSessionsApi,
     UserTypeApi,
     WebAuthnPreregistrationApi,
-    
+
 ):
 
     """An Okta client object, serving as an entry point to various Okta APIs."""
@@ -292,12 +292,12 @@ class Client(
 
         # Set client instance variables from the validated configuration
         self._authorization_mode = self._config["client"]["authorizationMode"]
-        self._base_url = self._config["client"]["orgUrl"] # Base URL for the Okta organization
-        self._api_token = self._config["client"].get("token", None) # For SSWS token authentication
-        self._client_id = None # For OAuth 2.0 / OpenID Connect
-        self._scopes = None # For OAuth 2.0 / OpenID Connect
-        self._private_key = None # For OAuth 2.0 Private Key JWT
-        self._oauth_token_renewal_offset = None # Offset for proactive OAuth token renewal
+        self._base_url = self._config["client"]["orgUrl"]  # Base URL for the Okta organization
+        self._api_token = self._config["client"].get("token", None)  # For SSWS token authentication
+        self._client_id = None  # For OAuth 2.0 / OpenID Connect
+        self._scopes = None  # For OAuth 2.0 / OpenID Connect
+        self._private_key = None  # For OAuth 2.0 Private Key JWT
+        self._oauth_token_renewal_offset = None  # Offset for proactive OAuth token renewal
 
         # Determine which cache to use (NoOpCache or OktaCache)
         cache = NoOpCache()
@@ -366,6 +366,7 @@ class Client(
     """
     Custom Header Management
     """
+
     def set_custom_headers(self, headers: dict):
         """Sets custom headers to be sent with every request."""
         self._request_executor.set_custom_headers(headers)

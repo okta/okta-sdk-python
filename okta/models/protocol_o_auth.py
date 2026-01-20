@@ -31,13 +31,15 @@ from okta.models.o_auth_endpoints import OAuthEndpoints
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ProtocolOAuth(BaseModel):
     """
     Protocol settings for authentication using the [OAuth 2.0 Authorization Code flow](https://tools.ietf.org/html/rfc6749#section-4.1)
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[OAuthCredentials] = None
     endpoints: Optional[OAuthEndpoints] = None
-    scopes: Optional[List[StrictStr]] = Field(default=None, description="IdP-defined permission bundles to request delegated access from the user. > **Note:** The [identity provider type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request) table lists the scopes that are supported for each IdP.")
+    scopes: Optional[List[StrictStr]] = Field(
+        default=None, description="IdP-defined permission bundles to request delegated access from the user. > **Note:** The [identity provider type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request) table lists the scopes that are supported for each IdP.")
     type: Optional[StrictStr] = Field(default=None, description="OAuth 2.0 Authorization Code flow")
     __properties: ClassVar[List[str]] = ["credentials", "endpoints", "scopes", "type"]
 
@@ -121,4 +123,3 @@ class ProtocolOAuth(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

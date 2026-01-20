@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookChannelConfigHeaders(BaseModel):
     """
     InlineHookChannelConfigHeaders
-    """ # noqa: E501
+    """  # noqa: E501
     key: Optional[StrictStr] = Field(default=None, description="The optional field or header name")
     value: Optional[StrictStr] = Field(default=None, description="The value for the key")
     __properties: ClassVar[List[str]] = ["key", "value"]
@@ -91,4 +92,3 @@ class InlineHookChannelConfigHeaders(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

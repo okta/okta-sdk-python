@@ -30,13 +30,19 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OSVersionConstraintDynamicVersionRequirement(BaseModel):
     """
     Contains the necessary properties for a dynamic Windows version requirement
-    """ # noqa: E501
-    type: Optional[StrictStr] = Field(default=None, description="Indicates the type of the dynamic Windows version requirement")
-    distance_from_latest_major: Optional[Annotated[int, Field(le=1, strict=True, ge=0)]] = Field(default=None, description="Indicates the distance from the latest Windows major version", alias="distanceFromLatestMajor")
-    latest_security_patch: Optional[StrictBool] = Field(default=None, description="Indicates whether the policy requires Windows devices to be on the latest security patch", alias="latestSecurityPatch")
+    """  # noqa: E501
+    type: Optional[StrictStr] = Field(default=None,
+                                      description="Indicates the type of the dynamic Windows version requirement")
+    distance_from_latest_major: Optional[Annotated[int, Field(le=1, strict=True, ge=0)]] = Field(
+        default=None, description="Indicates the distance from the latest Windows major version", alias="distanceFromLatestMajor")
+    latest_security_patch: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the policy requires Windows devices to be on the latest security patch",
+        alias="latestSecurityPatch")
     __properties: ClassVar[List[str]] = ["type", "distanceFromLatestMajor", "latestSecurityPatch"]
 
     @field_validator('type')
@@ -104,4 +110,3 @@ class OSVersionConstraintDynamicVersionRequirement(BaseModel):
             "latestSecurityPatch": obj.get("latestSecurityPatch")
         })
         return _obj
-

@@ -30,10 +30,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ByDateTimeExpiry(BaseModel):
     """
     An ISO 8601 formatted date and time for BY_DATE_TIME grace period type.
-    """ # noqa: E501
+    """  # noqa: E501
     value: Optional[datetime] = Field(default=None, description="The expiry date and time in ISO 8601 format.")
     __properties: ClassVar[List[str]] = ["value"]
 
@@ -90,4 +91,3 @@ class ByDateTimeExpiry(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

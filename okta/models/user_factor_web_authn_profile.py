@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorWebAuthnProfile(BaseModel):
     """
     UserFactorWebAuthnProfile
-    """ # noqa: E501
-    authenticator_name: Optional[StrictStr] = Field(default=None, description="Human-readable name of the authenticator  > **Note:** This name is set from the AAGUID metadata during enrollment. It can't be changed in the Admin Console or by using any Okta APIs.", alias="authenticatorName")
+    """  # noqa: E501
+    authenticator_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Human-readable name of the authenticator  > **Note:** This name is set from the AAGUID metadata during enrollment. It can't be changed in the Admin Console or by using any Okta APIs.",
+        alias="authenticatorName")
     credential_id: Optional[StrictStr] = Field(default=None, description="ID for the factor credential", alias="credentialId")
     __properties: ClassVar[List[str]] = ["authenticatorName", "credentialId"]
 
@@ -91,4 +95,3 @@ class UserFactorWebAuthnProfile(BaseModel):
             "credentialId": obj.get("credentialId")
         })
         return _obj
-

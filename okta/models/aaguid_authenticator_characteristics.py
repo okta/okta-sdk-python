@@ -29,13 +29,23 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AAGUIDAuthenticatorCharacteristics(BaseModel):
     """
     Contains additional properties about custom AAGUID.
-    """ # noqa: E501
-    fips_compliant: Optional[StrictBool] = Field(default=None, description="Indicates whether the authenticator meets Federal Information Processing Standards (FIPS) compliance requirements", alias="fipsCompliant")
-    hardware_protected: Optional[StrictBool] = Field(default=None, description="Indicates whether the authenticator stores the private key on a hardware component", alias="hardwareProtected")
-    platform_attached: Optional[StrictBool] = Field(default=None, description="Indicates whether the custom AAGUID is built into the authenticator (`true`) or if it's a separate, external authenticator", alias="platformAttached")
+    """  # noqa: E501
+    fips_compliant: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the authenticator meets Federal Information Processing Standards (FIPS) compliance requirements",
+        alias="fipsCompliant")
+    hardware_protected: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the authenticator stores the private key on a hardware component",
+        alias="hardwareProtected")
+    platform_attached: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the custom AAGUID is built into the authenticator (`true`) or if it's a separate, external authenticator",
+        alias="platformAttached")
     __properties: ClassVar[List[str]] = ["fipsCompliant", "hardwareProtected", "platformAttached"]
 
     model_config = ConfigDict(
@@ -93,4 +103,3 @@ class AAGUIDAuthenticatorCharacteristics(BaseModel):
             "platformAttached": obj.get("platformAttached")
         })
         return _obj
-

@@ -30,12 +30,16 @@ from okta.models.o_auth2_refresh_token_scope_links import OAuth2RefreshTokenScop
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuth2RefreshTokenScope(BaseModel):
     """
     OAuth2RefreshTokenScope
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the Scope")
-    display_name: Optional[StrictStr] = Field(default=None, description="Name of the end user displayed in a consent dialog", alias="displayName")
+    display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the end user displayed in a consent dialog",
+        alias="displayName")
     id: Optional[StrictStr] = Field(default=None, description="Scope object ID")
     name: Optional[StrictStr] = Field(default=None, description="Scope name")
     links: Optional[OAuth2RefreshTokenScopeLinks] = Field(default=None, alias="_links")
@@ -107,4 +111,3 @@ class OAuth2RefreshTokenScope(BaseModel):
             "_links": OAuth2RefreshTokenScopeLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

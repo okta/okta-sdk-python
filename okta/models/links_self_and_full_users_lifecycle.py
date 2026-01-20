@@ -35,10 +35,11 @@ from okta.models.href_object_unsuspend_link import HrefObjectUnsuspendLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksSelfAndFullUsersLifecycle(BaseModel):
     """
     LinksSelfAndFullUsersLifecycle
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     activate: Optional[HrefObjectActivateLink] = None
     deactivate: Optional[HrefObjectDeactivateLink] = None
@@ -147,4 +148,3 @@ class LinksSelfAndFullUsersLifecycle(BaseModel):
             "users": HrefObject.from_dict(obj["users"]) if obj.get("users") is not None else None
         })
         return _obj
-

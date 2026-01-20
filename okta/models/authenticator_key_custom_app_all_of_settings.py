@@ -30,12 +30,16 @@ from okta.models.custom_app_user_verification_enum import CustomAppUserVerificat
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyCustomAppAllOfSettings(BaseModel):
     """
     AuthenticatorKeyCustomAppAllOfSettings
-    """ # noqa: E501
+    """  # noqa: E501
     user_verification: Optional[CustomAppUserVerificationEnum] = Field(default=None, alias="userVerification")
-    app_instance_id: Optional[StrictStr] = Field(default=None, description="The application instance ID. For custom_app, you need to create an OIDC native app using the [Apps API](https://developer.okta.com/docs/reference/api/apps/) with `Authorization Code` and `Refresh Token` grant types. You can leave both `Sign-in redirect URIs` and `Sign-out redirect URIs` as the default values.", alias="appInstanceId")
+    app_instance_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The application instance ID. For custom_app, you need to create an OIDC native app using the [Apps API](https://developer.okta.com/docs/reference/api/apps/) with `Authorization Code` and `Refresh Token` grant types. You can leave both `Sign-in redirect URIs` and `Sign-out redirect URIs` as the default values.",
+        alias="appInstanceId")
     __properties: ClassVar[List[str]] = ["userVerification", "appInstanceId"]
 
     model_config = ConfigDict(
@@ -92,4 +96,3 @@ class AuthenticatorKeyCustomAppAllOfSettings(BaseModel):
             "appInstanceId": obj.get("appInstanceId")
         })
         return _obj
-

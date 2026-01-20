@@ -31,10 +31,11 @@ from okta.models.protocol_algorithm_request_scope import ProtocolAlgorithmReques
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OidcRequestSignatureAlgorithm(BaseModel):
     """
     Signature Algorithm settings for signing authorization requests sent to the IdP > **Note:**  The `algorithm` property is ignored when you disable request signatures (`scope` set as `NONE`).
-    """ # noqa: E501
+    """  # noqa: E501
     algorithm: Optional[OidcSigningAlgorithm] = None
     scope: Optional[ProtocolAlgorithmRequestScope] = None
     __properties: ClassVar[List[str]] = ["algorithm", "scope"]
@@ -93,4 +94,3 @@ class OidcRequestSignatureAlgorithm(BaseModel):
             "scope": obj.get("scope")
         })
         return _obj
-

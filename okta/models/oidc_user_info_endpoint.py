@@ -30,10 +30,11 @@ from okta.models.protocol_endpoint_binding import ProtocolEndpointBinding
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OidcUserInfoEndpoint(BaseModel):
     """
     Endpoint for getting identity information about the user. For more information on the `/userinfo` endpoint, see [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
-    """ # noqa: E501
+    """  # noqa: E501
     binding: Optional[ProtocolEndpointBinding] = None
     url: Optional[StrictStr] = Field(default=None, description="URL of the resource server's `/userinfo` endpoint")
     __properties: ClassVar[List[str]] = ["binding", "url"]
@@ -92,4 +93,3 @@ class OidcUserInfoEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

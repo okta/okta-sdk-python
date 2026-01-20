@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserSchemaPropertiesProfileItem(BaseModel):
     """
     UserSchemaPropertiesProfileItem
-    """ # noqa: E501
+    """  # noqa: E501
     ref: Optional[StrictStr] = Field(default=None, alias="$ref")
     __properties: ClassVar[List[str]] = ["$ref"]
 
@@ -89,4 +90,3 @@ class UserSchemaPropertiesProfileItem(BaseModel):
             "$ref": obj.get("$ref")
         })
         return _obj
-

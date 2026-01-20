@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CreateUserRequestType(BaseModel):
     """
     The ID of the user type. Add this value if you want to create a user with a non-default [User Type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/). The user type determines which [schema](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/) applies to that user. After a user has been created, the user can only be assigned a different user type by an administrator through a full replacement (`PUT`) operation.
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The ID of the user type")
     __properties: ClassVar[List[str]] = ["id"]
 
@@ -89,4 +90,3 @@ class CreateUserRequestType(BaseModel):
             "id": obj.get("id")
         })
         return _obj
-

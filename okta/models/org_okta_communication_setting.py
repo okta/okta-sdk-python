@@ -30,11 +30,15 @@ from okta.models.org_okta_communication_setting_links import OrgOktaCommunicatio
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgOktaCommunicationSetting(BaseModel):
     """
     OrgOktaCommunicationSetting
-    """ # noqa: E501
-    opt_out_email_users: Optional[StrictBool] = Field(default=None, description="Indicates whether org users receive Okta communication emails", alias="optOutEmailUsers")
+    """  # noqa: E501
+    opt_out_email_users: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether org users receive Okta communication emails",
+        alias="optOutEmailUsers")
     links: Optional[OrgOktaCommunicationSettingLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["optOutEmailUsers", "_links"]
 
@@ -101,4 +105,3 @@ class OrgOktaCommunicationSetting(BaseModel):
             "_links": OrgOktaCommunicationSettingLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -29,13 +29,20 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogUserAgent(BaseModel):
     """
     \"A user agent is software (a software agent) that is acting on behalf of a user.\" ([Definition of User Agent](https://developer.mozilla.org/en-US/docs/Glossary/User_agent))  In the Okta event data object, the `UserAgent` object provides specifications about the client software that makes event-triggering HTTP requests. User agent identification is often useful for identifying interoperability problems between servers and clients, and also for browser and operating system usage analytics. 
-    """ # noqa: E501
-    browser: Optional[StrictStr] = Field(default=None, description="If the client is a web browser, this field identifies the type of web browser (for example, CHROME, FIREFOX)")
-    os: Optional[StrictStr] = Field(default=None, description="The operating system that the client runs on (for example, Windows 10)")
-    raw_user_agent: Optional[StrictStr] = Field(default=None, description="A raw string representation of the user agent that is formatted according to [section 5.5.3 of HTTP/1.1 Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-5.5.3). Both the `browser` and the `OS` fields can be derived from this field.", alias="rawUserAgent")
+    """  # noqa: E501
+    browser: Optional[StrictStr] = Field(
+        default=None,
+        description="If the client is a web browser, this field identifies the type of web browser (for example, CHROME, FIREFOX)")
+    os: Optional[StrictStr] = Field(default=None,
+                                    description="The operating system that the client runs on (for example, Windows 10)")
+    raw_user_agent: Optional[StrictStr] = Field(
+        default=None,
+        description="A raw string representation of the user agent that is formatted according to [section 5.5.3 of HTTP/1.1 Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-5.5.3). Both the `browser` and the `OS` fields can be derived from this field.",
+        alias="rawUserAgent")
     __properties: ClassVar[List[str]] = ["browser", "os", "rawUserAgent"]
 
     model_config = ConfigDict(
@@ -99,4 +106,3 @@ class LogUserAgent(BaseModel):
             "rawUserAgent": obj.get("rawUserAgent")
         })
         return _obj
-

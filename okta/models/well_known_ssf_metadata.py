@@ -30,19 +30,38 @@ from okta.models.well_known_ssf_metadata_spec_urn import WellKnownSSFMetadataSpe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownSSFMetadata(BaseModel):
     """
     Metadata about Okta as a transmitter and relevant information for configuration.
-    """ # noqa: E501
-    authorization_schemes: Optional[List[WellKnownSSFMetadataSpecUrn]] = Field(default=None, description="An array of JSON objects that specify the authorization scheme properties supported by the transmitter")
-    configuration_endpoint: Optional[StrictStr] = Field(default=None, description="The URL of the SSF Stream configuration endpoint")
-    default_subjects: Optional[StrictStr] = Field(default=None, description="A string that indicates the default behavior of newly created streams")
-    delivery_methods_supported: Optional[List[StrictStr]] = Field(default=None, description="An array of supported SET delivery methods")
-    issuer: Optional[StrictStr] = Field(default=None, description="The issuer used in Security Event Tokens. This value is set as `iss` in the claim.")
-    jwks_uri: Optional[StrictStr] = Field(default=None, description="The URL of the JSON Web Key Set (JWKS) that contains the signing keys for validating the signatures of Security Event Tokens (SETs)")
-    spec_version: Optional[StrictStr] = Field(default=None, description="The version identifying the implementer's draft or final specification implemented by the transmitter")
-    verification_endpoint: Optional[StrictStr] = Field(default=None, description="The URL of the SSF Stream verification endpoint")
-    __properties: ClassVar[List[str]] = ["authorization_schemes", "configuration_endpoint", "default_subjects", "delivery_methods_supported", "issuer", "jwks_uri", "spec_version", "verification_endpoint"]
+    """  # noqa: E501
+    authorization_schemes: Optional[List[WellKnownSSFMetadataSpecUrn]] = Field(
+        default=None, description="An array of JSON objects that specify the authorization scheme properties supported by the transmitter")
+    configuration_endpoint: Optional[StrictStr] = Field(default=None,
+                                                        description="The URL of the SSF Stream configuration endpoint")
+    default_subjects: Optional[StrictStr] = Field(
+        default=None, description="A string that indicates the default behavior of newly created streams")
+    delivery_methods_supported: Optional[List[StrictStr]] = Field(
+        default=None, description="An array of supported SET delivery methods")
+    issuer: Optional[StrictStr] = Field(
+        default=None,
+        description="The issuer used in Security Event Tokens. This value is set as `iss` in the claim.")
+    jwks_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL of the JSON Web Key Set (JWKS) that contains the signing keys for validating the signatures of Security Event Tokens (SETs)")
+    spec_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The version identifying the implementer's draft or final specification implemented by the transmitter")
+    verification_endpoint: Optional[StrictStr] = Field(default=None,
+                                                       description="The URL of the SSF Stream verification endpoint")
+    __properties: ClassVar[List[str]] = ["authorization_schemes",
+                                         "configuration_endpoint",
+                                         "default_subjects",
+                                         "delivery_methods_supported",
+                                         "issuer",
+                                         "jwks_uri",
+                                         "spec_version",
+                                         "verification_endpoint"]
 
     @field_validator('default_subjects')
     def default_subjects_validate_enum(cls, value):
@@ -121,4 +140,3 @@ class WellKnownSSFMetadata(BaseModel):
             "verification_endpoint": obj.get("verification_endpoint")
         })
         return _obj
-

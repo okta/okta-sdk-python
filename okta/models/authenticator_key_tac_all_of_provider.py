@@ -30,10 +30,11 @@ from okta.models.authenticator_key_tac_all_of_provider_configuration import Auth
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyTacAllOfProvider(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Settings for the TAC authenticator
-    """ # noqa: E501
+    """  # noqa: E501
     type: Optional[StrictStr] = Field(default=None, description="Provider type")
     configuration: Optional[AuthenticatorKeyTacAllOfProviderConfiguration] = None
     __properties: ClassVar[List[str]] = ["type", "configuration"]
@@ -109,4 +110,3 @@ class AuthenticatorKeyTacAllOfProvider(BaseModel):
             "configuration": AuthenticatorKeyTacAllOfProviderConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None
         })
         return _obj
-

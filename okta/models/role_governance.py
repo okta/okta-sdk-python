@@ -31,10 +31,11 @@ from okta.models.role_governance_source import RoleGovernanceSource
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RoleGovernance(BaseModel):
     """
     List of all user role governance sources
-    """ # noqa: E501
+    """  # noqa: E501
     grants: Optional[List[RoleGovernanceSource]] = None
     links: Optional[LinksGovernanceSources] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["grants", "_links"]
@@ -107,4 +108,3 @@ class RoleGovernance(BaseModel):
             "_links": LinksGovernanceSources.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

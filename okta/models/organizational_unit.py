@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrganizationalUnit(BaseModel):
     """
     OrganizationalUnit
-    """ # noqa: E501
-    name: Annotated[str, Field(strict=True, max_length=1024)] = Field(description="The name of the organizational unit where privileged app users are present")
+    """  # noqa: E501
+    name: Annotated[str, Field(strict=True, max_length=1024)] = Field(
+        description="The name of the organizational unit where privileged app users are present")
     __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class OrganizationalUnit(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

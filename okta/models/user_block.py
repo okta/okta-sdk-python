@@ -29,11 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserBlock(BaseModel):
     """
     Describes how the account is blocked from access. If `appliesTo` is `ANY_DEVICES`, then the account is blocked for all devices. If `appliesTo` is `UNKNOWN_DEVICES`, then the account is only blocked for unknown devices.
-    """ # noqa: E501
-    applies_to: Optional[StrictStr] = Field(default=None, description="The devices that the block applies to", alias="appliesTo")
+    """  # noqa: E501
+    applies_to: Optional[StrictStr] = Field(
+        default=None,
+        description="The devices that the block applies to",
+        alias="appliesTo")
     type: Optional[StrictStr] = Field(default=None, description="Type of access block")
     __properties: ClassVar[List[str]] = ["appliesTo", "type"]
 
@@ -115,4 +119,3 @@ class UserBlock(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

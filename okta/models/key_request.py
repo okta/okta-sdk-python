@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class KeyRequest(BaseModel):
     """
     KeyRequest
-    """ # noqa: E501
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(default=None, description="Display name for the key")
+    """  # noqa: E501
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(
+        default=None, description="Display name for the key")
     __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class KeyRequest(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

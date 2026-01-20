@@ -32,10 +32,11 @@ from okta.models.application_credentials_username_template import ApplicationCre
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuthApplicationCredentials(BaseModel):
     """
     OAuthApplicationCredentials
-    """ # noqa: E501
+    """  # noqa: E501
     signing: Optional[ApplicationCredentialsSigning] = None
     user_name_template: Optional[ApplicationCredentialsUsernameTemplate] = Field(default=None, alias="userNameTemplate")
     oauth_client: Optional[ApplicationCredentialsOAuthClient] = Field(default=None, alias="oauthClient")
@@ -117,4 +118,3 @@ class OAuthApplicationCredentials(BaseModel):
             "oauthClient": ApplicationCredentialsOAuthClient.from_dict(obj["oauthClient"]) if obj.get("oauthClient") is not None else None
         })
         return _obj
-

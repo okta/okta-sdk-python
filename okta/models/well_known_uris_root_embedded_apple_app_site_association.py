@@ -30,10 +30,11 @@ from okta.models.well_known_uri_object_response import WellKnownURIObjectRespons
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WellKnownURIsRootEmbeddedAppleAppSiteAssociation(BaseModel):
     """
     Contains the customized well-known URI content and links
-    """ # noqa: E501
+    """  # noqa: E501
     customized: Optional[WellKnownURIObjectResponse] = None
     __properties: ClassVar[List[str]] = ["customized"]
 
@@ -97,4 +98,3 @@ class WellKnownURIsRootEmbeddedAppleAppSiteAssociation(BaseModel):
             "customized": WellKnownURIObjectResponse.from_dict(obj["customized"]) if obj.get("customized") is not None else None
         })
         return _obj
-

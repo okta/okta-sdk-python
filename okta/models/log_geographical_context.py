@@ -30,15 +30,25 @@ from okta.models.log_geolocation import LogGeolocation
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LogGeographicalContext(BaseModel):
     """
     Geographical context describes a set of geographic coordinates. In addition to containing latitude and longitude data, the `GeographicalContext` object also contains address data of postal code-level granularity. Within the `Client` object, the geographical context refers to the physical location of the client when it sends the request that triggers this event. All `Transaction` events with `type` equal to `WEB` have a geographical context set. `Transaction` events with `type` equal to `JOB` don't have a geographical context set. The geographical context data can be missing if the geographical data for a request can't be resolved.
-    """ # noqa: E501
-    city: Optional[StrictStr] = Field(default=None, description="The city that encompasses the area that contains the geolocation coordinates, if available (for example, Seattle, San Francisco)")
-    country: Optional[StrictStr] = Field(default=None, description="Full name of the country that encompasses the area that contains the geolocation coordinates (for example, France, Uganda)")
+    """  # noqa: E501
+    city: Optional[StrictStr] = Field(
+        default=None,
+        description="The city that encompasses the area that contains the geolocation coordinates, if available (for example, Seattle, San Francisco)")
+    country: Optional[StrictStr] = Field(
+        default=None,
+        description="Full name of the country that encompasses the area that contains the geolocation coordinates (for example, France, Uganda)")
     geolocation: Optional[LogGeolocation] = None
-    postal_code: Optional[StrictStr] = Field(default=None, description="Postal code of the area that encompasses the geolocation coordinates", alias="postalCode")
-    state: Optional[StrictStr] = Field(default=None, description="Full name of the state or province that encompasses the area that contains the geolocation coordinates (for example, Montana, Ontario)")
+    postal_code: Optional[StrictStr] = Field(
+        default=None,
+        description="Postal code of the area that encompasses the geolocation coordinates",
+        alias="postalCode")
+    state: Optional[StrictStr] = Field(
+        default=None,
+        description="Full name of the state or province that encompasses the area that contains the geolocation coordinates (for example, Montana, Ontario)")
     __properties: ClassVar[List[str]] = ["city", "country", "geolocation", "postalCode", "state"]
 
     model_config = ConfigDict(
@@ -113,4 +123,3 @@ class LogGeographicalContext(BaseModel):
             "state": obj.get("state")
         })
         return _obj
-

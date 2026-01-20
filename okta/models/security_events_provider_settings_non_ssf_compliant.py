@@ -30,12 +30,14 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventsProviderSettingsNonSSFCompliant(BaseModel):
     """
     Security Events Provider with issuer and JWKS settings for signal ingestion
-    """ # noqa: E501
+    """  # noqa: E501
     issuer: Annotated[str, Field(strict=True, max_length=700)] = Field(description="Issuer URL")
-    jwks_url: Annotated[str, Field(strict=True, max_length=1000)] = Field(description="The public URL where the JWKS public key is uploaded")
+    jwks_url: Annotated[str, Field(strict=True, max_length=1000)] = Field(
+        description="The public URL where the JWKS public key is uploaded")
     __properties: ClassVar[List[str]] = ["issuer", "jwks_url"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class SecurityEventsProviderSettingsNonSSFCompliant(BaseModel):
             "jwks_url": obj.get("jwks_url")
         })
         return _obj
-

@@ -32,22 +32,26 @@ from okta.models.realm_assignment_operation_response_all_of_assignment_operation
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RealmAssignmentOperationResponse(BaseModel):
     """
     RealmAssignmentOperationResponse
-    """ # noqa: E501
+    """  # noqa: E501
     completed: Optional[datetime] = Field(default=None, description="Timestamp of when the operation completed")
     created: datetime = Field(description="Timestamp of when the operation was created")
     id: StrictStr = Field(description="ID of the asynchronous operation")
     started: Optional[datetime] = Field(default=None, description="Timestamp of when the operation started")
     status: StrictStr = Field(description="The status of the asynchronous operation")
     type: StrictStr = Field(description="The operation type")
-    assignment_operation: Optional[RealmAssignmentOperationResponseAllOfAssignmentOperation] = Field(default=None, alias="assignmentOperation")
-    num_user_moved: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Number of users moved", alias="numUserMoved")
+    assignment_operation: Optional[RealmAssignmentOperationResponseAllOfAssignmentOperation] = Field(
+        default=None, alias="assignmentOperation")
+    num_user_moved: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Number of users moved", alias="numUserMoved")
     realm_id: Optional[StrictStr] = Field(default=None, description="ID of the realm", alias="realmId")
     realm_name: Optional[StrictStr] = Field(default=None, description="Name of the realm", alias="realmName")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["completed", "created", "id", "started", "status", "type", "assignmentOperation", "numUserMoved", "realmId", "realmName", "_links"]
+    __properties: ClassVar[List[str]] = ["completed", "created", "id", "started", "status",
+                                         "type", "assignmentOperation", "numUserMoved", "realmId", "realmName", "_links"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -139,4 +143,3 @@ class RealmAssignmentOperationResponse(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

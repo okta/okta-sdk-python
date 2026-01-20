@@ -30,12 +30,14 @@ from okta.models.iam_bundle_entitlement import IAMBundleEntitlement
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GovernanceBundleCreateRequest(BaseModel):
     """
     Request to create a governance bundle
-    """ # noqa: E501
+    """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the governance bundle")
-    entitlements: Optional[List[IAMBundleEntitlement]] = Field(default=None, description="List of entitlements to include in the governance bundle")
+    entitlements: Optional[List[IAMBundleEntitlement]] = Field(
+        default=None, description="List of entitlements to include in the governance bundle")
     name: Optional[StrictStr] = Field(default=None, description="Name of the governance bundle")
     __properties: ClassVar[List[str]] = ["description", "entitlements", "name"]
 
@@ -101,4 +103,3 @@ class GovernanceBundleCreateRequest(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

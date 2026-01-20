@@ -34,16 +34,21 @@ from okta.models.password_credential import PasswordCredential
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SchemeApplicationCredentials(BaseModel):
     """
     SchemeApplicationCredentials
-    """ # noqa: E501
+    """  # noqa: E501
     signing: Optional[ApplicationCredentialsSigning] = None
     user_name_template: Optional[ApplicationCredentialsUsernameTemplate] = Field(default=None, alias="userNameTemplate")
     password: Optional[PasswordCredential] = None
-    reveal_password: Optional[StrictBool] = Field(default=None, description="Allow users to securely see their password", alias="revealPassword")
+    reveal_password: Optional[StrictBool] = Field(
+        default=None,
+        description="Allow users to securely see their password",
+        alias="revealPassword")
     scheme: Optional[ApplicationCredentialsScheme] = None
-    user_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, description="Shared username for the app", alias="userName")
+    user_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(
+        default=None, description="Shared username for the app", alias="userName")
     __properties: ClassVar[List[str]] = ["signing", "userNameTemplate", "password", "revealPassword", "scheme", "userName"]
 
     model_config = ConfigDict(
@@ -125,4 +130,3 @@ class SchemeApplicationCredentials(BaseModel):
             "userName": obj.get("userName")
         })
         return _obj
-

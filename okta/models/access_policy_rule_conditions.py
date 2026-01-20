@@ -36,10 +36,11 @@ from okta.models.user_type_condition import UserTypeCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AccessPolicyRuleConditions(BaseModel):
     """
     AccessPolicyRuleConditions
-    """ # noqa: E501
+    """  # noqa: E501
     device: Optional[DeviceAccessPolicyRuleCondition] = None
     el_condition: Optional[AccessPolicyRuleCustomCondition] = Field(default=None, alias="elCondition")
     network: Optional[PolicyNetworkCondition] = None
@@ -157,4 +158,3 @@ class AccessPolicyRuleConditions(BaseModel):
             "userType": UserTypeCondition.from_dict(obj["userType"]) if obj.get("userType") is not None else None
         })
         return _obj
-

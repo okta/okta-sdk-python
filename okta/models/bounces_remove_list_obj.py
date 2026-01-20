@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BouncesRemoveListObj(BaseModel):
     """
     BouncesRemoveListObj
-    """ # noqa: E501
-    email_addresses: Optional[List[StrictStr]] = Field(default=None, description="A list of email addresses to remove from the email-service bounce list", alias="emailAddresses")
+    """  # noqa: E501
+    email_addresses: Optional[List[StrictStr]] = Field(
+        default=None, description="A list of email addresses to remove from the email-service bounce list", alias="emailAddresses")
     __properties: ClassVar[List[str]] = ["emailAddresses"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class BouncesRemoveListObj(BaseModel):
             "emailAddresses": obj.get("emailAddresses")
         })
         return _obj
-

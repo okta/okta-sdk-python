@@ -31,9 +31,7 @@ from okta.models.application_accessibility import ApplicationAccessibility
 from okta.models.application_embedded import ApplicationEmbedded
 from okta.models.application_express_configuration import ApplicationExpressConfiguration
 from okta.models.application_licensing import ApplicationLicensing
-from okta.models.application_lifecycle_status import ApplicationLifecycleStatus
 from okta.models.application_links import ApplicationLinks
-from okta.models.application_sign_on_mode import ApplicationSignOnMode
 from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.scheme_application_credentials import SchemeApplicationCredentials
@@ -41,14 +39,33 @@ from okta.models.swa_application_settings import SwaApplicationSettings
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BrowserPluginApplication(Application):
     """
     BrowserPluginApplication
-    """ # noqa: E501
+    """  # noqa: E501
     credentials: Optional[SchemeApplicationCredentials] = None
     name: StrictStr = Field(description="The key name for the app definition")
     settings: SwaApplicationSettings
-    __properties: ClassVar[List[str]] = ["accessibility", "created", "expressConfiguration", "features", "id", "label", "lastUpdated", "licensing", "orn", "profile", "signOnMode", "status", "universalLogout", "visibility", "_embedded", "_links", "credentials", "name", "settings"]
+    __properties: ClassVar[List[str]] = ["accessibility",
+                                         "created",
+                                         "expressConfiguration",
+                                         "features",
+                                         "id",
+                                         "label",
+                                         "lastUpdated",
+                                         "licensing",
+                                         "orn",
+                                         "profile",
+                                         "signOnMode",
+                                         "status",
+                                         "universalLogout",
+                                         "visibility",
+                                         "_embedded",
+                                         "_links",
+                                         "credentials",
+                                         "name",
+                                         "settings"]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -191,4 +208,3 @@ class BrowserPluginApplication(Application):
             "settings": SwaApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

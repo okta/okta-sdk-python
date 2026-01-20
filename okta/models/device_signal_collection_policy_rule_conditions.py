@@ -31,10 +31,11 @@ from okta.models.policy_network_condition import PolicyNetworkCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceSignalCollectionPolicyRuleConditions(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Specifies conditions that must be met during policy evaluation to apply the rule. All policy conditions, as well as conditions for at least one rule must be met to apply the settings specified in the policy and the associated rule.
-    """ # noqa: E501
+    """  # noqa: E501
     network: Optional[PolicyNetworkCondition] = None
     platform: Optional[PlatformPolicyRuleCondition] = None
     __properties: ClassVar[List[str]] = ["network", "platform"]
@@ -107,4 +108,3 @@ class DeviceSignalCollectionPolicyRuleConditions(BaseModel):
             "platform": PlatformPolicyRuleCondition.from_dict(obj["platform"]) if obj.get("platform") is not None else None
         })
         return _obj
-

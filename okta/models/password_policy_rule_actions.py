@@ -31,12 +31,14 @@ from okta.models.self_service_password_reset_action import SelfServicePasswordRe
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyRuleActions(BaseModel):
     """
     PasswordPolicyRuleActions
-    """ # noqa: E501
+    """  # noqa: E501
     password_change: Optional[PasswordPolicyRuleAction] = Field(default=None, alias="passwordChange")
-    self_service_password_reset: Optional[SelfServicePasswordResetAction] = Field(default=None, alias="selfServicePasswordReset")
+    self_service_password_reset: Optional[SelfServicePasswordResetAction] = Field(
+        default=None, alias="selfServicePasswordReset")
     self_service_unlock: Optional[PasswordPolicyRuleAction] = Field(default=None, alias="selfServiceUnlock")
     __properties: ClassVar[List[str]] = ["passwordChange", "selfServicePasswordReset", "selfServiceUnlock"]
 
@@ -116,4 +118,3 @@ class PasswordPolicyRuleActions(BaseModel):
             "selfServiceUnlock": PasswordPolicyRuleAction.from_dict(obj["selfServiceUnlock"]) if obj.get("selfServiceUnlock") is not None else None
         })
         return _obj
-

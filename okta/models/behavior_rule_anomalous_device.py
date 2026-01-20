@@ -28,16 +28,15 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.behavior_rule import BehaviorRule
 from okta.models.behavior_rule_settings_anomalous_device import BehaviorRuleSettingsAnomalousDevice
-from okta.models.behavior_rule_type import BehaviorRuleType
-from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BehaviorRuleAnomalousDevice(BehaviorRule):
     """
     BehaviorRuleAnomalousDevice
-    """ # noqa: E501
+    """  # noqa: E501
     settings: Optional[BehaviorRuleSettingsAnomalousDevice] = None
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "type", "_link", "settings"]
 
@@ -115,4 +114,3 @@ class BehaviorRuleAnomalousDevice(BehaviorRule):
             "settings": BehaviorRuleSettingsAnomalousDevice.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-

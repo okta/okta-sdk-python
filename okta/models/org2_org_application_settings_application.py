@@ -29,18 +29,39 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Org2OrgApplicationSettingsApplication(BaseModel):
     """
     Org2Org app instance properties
-    """ # noqa: E501
-    acs_url: Optional[StrictStr] = Field(default=None, description="The Assertion Consumer Service (ACS) URL of the source org (for `SAML_2_0` sign-on mode)", alias="acsUrl")
-    aud_restriction: Optional[StrictStr] = Field(default=None, description="The entity ID of the SP (for `SAML_2_0` sign-on mode)", alias="audRestriction")
-    base_url: StrictStr = Field(description="The base URL of the target Okta org (for `SAML_2_0` sign-on mode)", alias="baseUrl")
-    creation_state: Optional[StrictStr] = Field(default=None, description="Used to track and manage the state of the app's creation or the provisioning process between two Okta orgs", alias="creationState")
-    prefer_username_over_email: Optional[StrictBool] = Field(default=None, description="Indicates that you don't want to use an email address as the username", alias="preferUsernameOverEmail")
-    token: Optional[StrictStr] = Field(default=None, description="An API token from the target org that's used to secure the connection between the orgs")
-    token_encrypted: Optional[StrictStr] = Field(default=None, description="Encrypted token to enhance security", alias="tokenEncrypted")
-    __properties: ClassVar[List[str]] = ["acsUrl", "audRestriction", "baseUrl", "creationState", "preferUsernameOverEmail", "token", "tokenEncrypted"]
+    """  # noqa: E501
+    acs_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The Assertion Consumer Service (ACS) URL of the source org (for `SAML_2_0` sign-on mode)",
+        alias="acsUrl")
+    aud_restriction: Optional[StrictStr] = Field(
+        default=None,
+        description="The entity ID of the SP (for `SAML_2_0` sign-on mode)",
+        alias="audRestriction")
+    base_url: StrictStr = Field(
+        description="The base URL of the target Okta org (for `SAML_2_0` sign-on mode)",
+        alias="baseUrl")
+    creation_state: Optional[StrictStr] = Field(
+        default=None,
+        description="Used to track and manage the state of the app's creation or the provisioning process between two Okta orgs",
+        alias="creationState")
+    prefer_username_over_email: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates that you don't want to use an email address as the username",
+        alias="preferUsernameOverEmail")
+    token: Optional[StrictStr] = Field(
+        default=None,
+        description="An API token from the target org that's used to secure the connection between the orgs")
+    token_encrypted: Optional[StrictStr] = Field(
+        default=None,
+        description="Encrypted token to enhance security",
+        alias="tokenEncrypted")
+    __properties: ClassVar[List[str]] = ["acsUrl", "audRestriction", "baseUrl",
+                                         "creationState", "preferUsernameOverEmail", "token", "tokenEncrypted"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,4 +122,3 @@ class Org2OrgApplicationSettingsApplication(BaseModel):
             "tokenEncrypted": obj.get("tokenEncrypted")
         })
         return _obj
-

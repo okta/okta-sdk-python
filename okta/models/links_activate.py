@@ -30,10 +30,11 @@ from okta.models.links_activate_activate import LinksActivateActivate
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksActivate(BaseModel):
     """
     LinksActivate
-    """ # noqa: E501
+    """  # noqa: E501
     activate: Optional[LinksActivateActivate] = None
     __properties: ClassVar[List[str]] = ["activate"]
 
@@ -97,4 +98,3 @@ class LinksActivate(BaseModel):
             "activate": LinksActivateActivate.from_dict(obj["activate"]) if obj.get("activate") is not None else None
         })
         return _obj
-

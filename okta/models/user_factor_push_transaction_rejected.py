@@ -32,10 +32,11 @@ from okta.models.user_factor_push_transaction_rejected_all_of_profile import Use
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserFactorPushTransactionRejected(UserFactorPushTransaction):
     """
     UserFactorPushTransactionRejected
-    """ # noqa: E501
+    """  # noqa: E501
     profile: Optional[UserFactorPushTransactionRejectedAllOfProfile] = None
     links: Optional[UserFactorPushTransactionRejectedAllOfLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["factorResult", "profile", "_links"]
@@ -109,4 +110,3 @@ class UserFactorPushTransactionRejected(UserFactorPushTransaction):
             "_links": UserFactorPushTransactionRejectedAllOfLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

@@ -30,13 +30,19 @@ from okta.models.registration_inline_hook_ssr_data_all_of_data_context import Re
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RegistrationInlineHookSSRDataAllOfData(BaseModel):
     """
     RegistrationInlineHookSSRDataAllOfData
-    """ # noqa: E501
+    """  # noqa: E501
     context: Optional[RegistrationInlineHookSSRDataAllOfDataContext] = None
-    action: Optional[StrictStr] = Field(default=None, description="The default action the system will take. Will be `ALLOW`. `DENY` will never be sent to your external service.")
-    user_profile: Optional[Dict[str, Any]] = Field(default=None, description="The name-value pairs for each registration-related attribute supplied by the user in the Profile Enrollment form.", alias="userProfile")
+    action: Optional[StrictStr] = Field(
+        default=None,
+        description="The default action the system will take. Will be `ALLOW`. `DENY` will never be sent to your external service.")
+    user_profile: Optional[Dict[str,
+                                Any]] = Field(default=None,
+                                              description="The name-value pairs for each registration-related attribute supplied by the user in the Profile Enrollment form.",
+                                              alias="userProfile")
     __properties: ClassVar[List[str]] = ["context", "action", "userProfile"]
 
     model_config = ConfigDict(
@@ -101,4 +107,3 @@ class RegistrationInlineHookSSRDataAllOfData(BaseModel):
             "userProfile": obj.get("userProfile")
         })
         return _obj
-

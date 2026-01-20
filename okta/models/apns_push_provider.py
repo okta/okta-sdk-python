@@ -28,15 +28,15 @@ from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.apns_configuration import APNSConfiguration
 from okta.models.links_self import LinksSelf
-from okta.models.provider_type import ProviderType
 from okta.models.push_provider import PushProvider
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class APNSPushProvider(PushProvider):
     """
     APNSPushProvider
-    """ # noqa: E501
+    """  # noqa: E501
     configuration: Optional[APNSConfiguration] = None
     __properties: ClassVar[List[str]] = ["id", "lastUpdatedDate", "name", "providerType", "_links", "configuration"]
 
@@ -112,4 +112,3 @@ class APNSPushProvider(PushProvider):
             "configuration": APNSConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None
         })
         return _obj
-

@@ -31,17 +31,17 @@ from typing import Any, ClassVar, Dict, List, Union
 from okta.models.log_stream_links_self_and_lifecycle import LogStreamLinksSelfAndLifecycle
 from okta.models.log_stream_type import LogStreamType
 from typing import Optional, Set
-from typing_extensions import Self
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.log_stream_aws import LogStreamAws
     from okta.models.log_stream_splunk import LogStreamSplunk
 
+
 class LogStream(BaseModel):
     """
     LogStream
-    """ # noqa: E501
+    """  # noqa: E501
     created: datetime = Field(description="Timestamp when the log stream object was created")
     id: StrictStr = Field(description="Unique identifier for the log stream")
     last_updated: datetime = Field(description="Timestamp when the log stream object was last updated", alias="lastUpdated")
@@ -69,7 +69,7 @@ class LogStream(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'aws_eventbridge': 'LogStreamAws','splunk_cloud_logstreaming': 'LogStreamSplunk'
+        'aws_eventbridge': 'LogStreamAws', 'splunk_cloud_logstreaming': 'LogStreamSplunk'
     }
 
     @classmethod
@@ -141,7 +141,5 @@ class LogStream(BaseModel):
             return import_module("okta.models.log_stream_splunk").LogStreamSplunk.from_dict(obj)
 
         raise ValueError("LogStream failed to lookup discriminator value from " +
-                            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                            ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
-
-
+                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))

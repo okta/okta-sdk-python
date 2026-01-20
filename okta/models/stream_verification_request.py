@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StreamVerificationRequest(BaseModel):
     """
     StreamVerificationRequest
-    """ # noqa: E501
-    state: Optional[StrictStr] = Field(default=None, description="An arbitrary string that Okta as a transmitter must echo back to the Event Receiver in the Verification Event's payload")
+    """  # noqa: E501
+    state: Optional[StrictStr] = Field(
+        default=None,
+        description="An arbitrary string that Okta as a transmitter must echo back to the Event Receiver in the Verification Event's payload")
     stream_id: StrictStr = Field(description="The ID of the SSF Stream Configuration")
     __properties: ClassVar[List[str]] = ["state", "stream_id"]
 
@@ -91,4 +94,3 @@ class StreamVerificationRequest(BaseModel):
             "stream_id": obj.get("stream_id")
         })
         return _obj
-

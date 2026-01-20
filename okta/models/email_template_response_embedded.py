@@ -30,10 +30,11 @@ from okta.models.email_settings_response import EmailSettingsResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmailTemplateResponseEmbedded(BaseModel):
     """
     EmailTemplateResponseEmbedded
-    """ # noqa: E501
+    """  # noqa: E501
     settings: Optional[EmailSettingsResponse] = None
     customization_count: Optional[StrictInt] = Field(default=None, alias="customizationCount")
     __properties: ClassVar[List[str]] = ["settings", "customizationCount"]
@@ -99,4 +100,3 @@ class EmailTemplateResponseEmbedded(BaseModel):
             "customizationCount": obj.get("customizationCount")
         })
         return _obj
-

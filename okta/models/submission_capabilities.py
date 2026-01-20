@@ -30,10 +30,11 @@ from okta.models.submission_capability import SubmissionCapability
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SubmissionCapabilities(BaseModel):
     """
     SubmissionCapabilities
-    """ # noqa: E501
+    """  # noqa: E501
     capabilities: List[SubmissionCapability]
     __properties: ClassVar[List[str]] = ["capabilities"]
 
@@ -97,4 +98,3 @@ class SubmissionCapabilities(BaseModel):
             "capabilities": [SubmissionCapability.from_dict(_item) for _item in obj["capabilities"]] if obj.get("capabilities") is not None else None
         })
         return _obj
-

@@ -30,10 +30,11 @@ from okta.models.application_layout_rule_condition import ApplicationLayoutRuleC
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationLayoutRule(BaseModel):
     """
     ApplicationLayoutRule
-    """ # noqa: E501
+    """  # noqa: E501
     effect: Optional[StrictStr] = None
     condition: Optional[ApplicationLayoutRuleCondition] = None
     __properties: ClassVar[List[str]] = ["effect", "condition"]
@@ -99,4 +100,3 @@ class ApplicationLayoutRule(BaseModel):
             "condition": ApplicationLayoutRuleCondition.from_dict(obj["condition"]) if obj.get("condition") is not None else None
         })
         return _obj
-

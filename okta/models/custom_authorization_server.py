@@ -30,14 +30,16 @@ from okta.models.custom_authorization_server_links import CustomAuthorizationSer
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomAuthorizationServer(BaseModel):
     """
     Custom authorization server for the managed connection
-    """ # noqa: E501
+    """  # noqa: E501
     issuer_url: StrictStr = Field(description="Issuer URL for the authorization server", alias="issuerUrl")
     logo: Optional[StrictStr] = Field(default=None, description="Image URL for the authorization server")
     name: StrictStr = Field(description="Display name of the authorization server")
-    orn: StrictStr = Field(description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the authorization server")
+    orn: StrictStr = Field(
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the authorization server")
     links: CustomAuthorizationServerLinks = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["issuerUrl", "logo", "name", "orn", "_links"]
 
@@ -105,4 +107,3 @@ class CustomAuthorizationServer(BaseModel):
             "_links": CustomAuthorizationServerLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

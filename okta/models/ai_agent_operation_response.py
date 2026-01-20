@@ -32,10 +32,11 @@ from okta.models.error_details import ErrorDetails
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AIAgentOperationResponse(BaseModel):
     """
     AIAgentOperationResponse
-    """ # noqa: E501
+    """  # noqa: E501
     completed: Optional[datetime] = Field(default=None, description="Timestamp of when the AI agent operation completed")
     created: datetime = Field(description="Timestamp of when the AI agent operation was created")
     error_details: Optional[ErrorDetails] = Field(default=None, alias="errorDetails")
@@ -56,8 +57,10 @@ class AIAgentOperationResponse(BaseModel):
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['ai-agent:Register', 'ai-agent:Replace', 'ai-agent:Delete', 'ai-agent:Activate', 'ai-agent:Deactivate', 'ai-agent:Patch']):
-            raise ValueError("must be one of enum values ('ai-agent:Register', 'ai-agent:Replace', 'ai-agent:Delete', 'ai-agent:Activate', 'ai-agent:Deactivate', 'ai-agent:Patch')")
+        if value not in set(['ai-agent:Register', 'ai-agent:Replace', 'ai-agent:Delete',
+                            'ai-agent:Activate', 'ai-agent:Deactivate', 'ai-agent:Patch']):
+            raise ValueError(
+                "must be one of enum values ('ai-agent:Register', 'ai-agent:Replace', 'ai-agent:Delete', 'ai-agent:Activate', 'ai-agent:Deactivate', 'ai-agent:Patch')")
         return value
 
     model_config = ConfigDict(
@@ -134,4 +137,3 @@ class AIAgentOperationResponse(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-

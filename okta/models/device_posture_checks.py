@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DevicePostureChecks(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Represents the Device Posture Checks configuration for the device assurance policy
-    """ # noqa: E501
-    include: Optional[List[StrictStr]] = Field(default=None, description="An array of key value pairs including Device Posture Check `variableNames`")
+    """  # noqa: E501
+    include: Optional[List[StrictStr]] = Field(
+        default=None, description="An array of key value pairs including Device Posture Check `variableNames`")
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class DevicePostureChecks(BaseModel):
             "include": obj.get("include")
         })
         return _obj
-

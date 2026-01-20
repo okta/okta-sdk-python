@@ -31,13 +31,17 @@ from okta.models.device import Device
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserDevice(BaseModel):
     """
     UserDevice
-    """ # noqa: E501
+    """  # noqa: E501
     created: Optional[datetime] = Field(default=None, description="Timestamp when the device was created")
     device: Optional[Device] = None
-    device_user_id: Optional[StrictStr] = Field(default=None, description="Unique key for the user device link", alias="deviceUserId")
+    device_user_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique key for the user device link",
+        alias="deviceUserId")
     __properties: ClassVar[List[str]] = ["created", "device", "deviceUserId"]
 
     model_config = ConfigDict(
@@ -104,4 +108,3 @@ class UserDevice(BaseModel):
             "deviceUserId": obj.get("deviceUserId")
         })
         return _obj
-

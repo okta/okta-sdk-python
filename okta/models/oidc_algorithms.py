@@ -30,10 +30,11 @@ from okta.models.oidc_request_algorithm import OidcRequestAlgorithm
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OidcAlgorithms(BaseModel):
     """
     OidcAlgorithms
-    """ # noqa: E501
+    """  # noqa: E501
     request: Optional[OidcRequestAlgorithm] = None
     __properties: ClassVar[List[str]] = ["request"]
 
@@ -97,4 +98,3 @@ class OidcAlgorithms(BaseModel):
             "request": OidcRequestAlgorithm.from_dict(obj["request"]) if obj.get("request") is not None else None
         })
         return _obj
-

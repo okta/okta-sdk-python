@@ -30,12 +30,16 @@ from okta.models.password_import_request_data import PasswordImportRequestData
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordImportRequest(BaseModel):
     """
     PasswordImportRequest
-    """ # noqa: E501
+    """  # noqa: E501
     data: Optional[PasswordImportRequestData] = None
-    event_type: Optional[StrictStr] = Field(default=None, description="The type of inline hook. The password import inline hook type is `com.okta.user.credential.password.import`.", alias="eventType")
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of inline hook. The password import inline hook type is `com.okta.user.credential.password.import`.",
+        alias="eventType")
     source: Optional[StrictStr] = Field(default=None, description="The ID and URL of the password import inline hook")
     __properties: ClassVar[List[str]] = ["data", "eventType", "source"]
 
@@ -101,4 +105,3 @@ class PasswordImportRequest(BaseModel):
             "source": obj.get("source")
         })
         return _obj
-

@@ -30,12 +30,14 @@ from okta.models.protocol_endpoint_binding import ProtocolEndpointBinding
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OAuthAuthorizationEndpoint(BaseModel):
     """
     Endpoint for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#page-18)
-    """ # noqa: E501
+    """  # noqa: E501
     binding: Optional[ProtocolEndpointBinding] = None
-    url: Optional[StrictStr] = Field(default=None, description="URL of the IdP Authorization Server (AS) authorization endpoint")
+    url: Optional[StrictStr] = Field(default=None,
+                                     description="URL of the IdP Authorization Server (AS) authorization endpoint")
     __properties: ClassVar[List[str]] = ["binding", "url"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class OAuthAuthorizationEndpoint(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

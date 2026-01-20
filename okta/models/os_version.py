@@ -30,12 +30,16 @@ from okta.models.os_version_dynamic_version_requirement import OSVersionDynamicV
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OSVersion(BaseModel):
     """
     Specifies the OS requirement for the policy.  There are two types of OS requirements:  * **Static**: A specific OS version requirement that doesn't change until you update the policy. A static OS requirement is specified with the `osVersion.minimum` property. * **Dynamic**: An OS version requirement that is relative to the latest major OS release and security patch. A dynamic OS requirement is specified with the `osVersion.dynamicVersionRequirement` property. > **Note:** Dynamic OS requirements are available only if the **Dynamic OS version compliance** [self-service EA](/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature is enabled. You can't specify both `osVersion.minimum` and `osVersion.dynamicVersionRequirement` properties at the same time. 
-    """ # noqa: E501
-    dynamic_version_requirement: Optional[OSVersionDynamicVersionRequirement] = Field(default=None, alias="dynamicVersionRequirement")
-    minimum: Optional[StrictStr] = Field(default=None, description="The device version must be equal to or newer than the specified version string (maximum of three components for iOS and macOS, and maximum of four components for Android)")
+    """  # noqa: E501
+    dynamic_version_requirement: Optional[OSVersionDynamicVersionRequirement] = Field(
+        default=None, alias="dynamicVersionRequirement")
+    minimum: Optional[StrictStr] = Field(
+        default=None,
+        description="The device version must be equal to or newer than the specified version string (maximum of three components for iOS and macOS, and maximum of four components for Android)")
     __properties: ClassVar[List[str]] = ["dynamicVersionRequirement", "minimum"]
 
     model_config = ConfigDict(
@@ -99,4 +103,3 @@ class OSVersion(BaseModel):
             "minimum": obj.get("minimum")
         })
         return _obj
-

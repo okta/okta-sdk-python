@@ -30,10 +30,11 @@ from okta.models.password_policy_authentication_provider_type import PasswordPol
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PasswordPolicyAuthenticationProviderCondition(BaseModel):
     """
     Specifies an authentication provider that's the source of some or all users
-    """ # noqa: E501
+    """  # noqa: E501
     include: Optional[List[StrictStr]] = None
     provider: Optional[PasswordPolicyAuthenticationProviderType] = None
     __properties: ClassVar[List[str]] = ["include", "provider"]
@@ -92,4 +93,3 @@ class PasswordPolicyAuthenticationProviderCondition(BaseModel):
             "provider": obj.get("provider")
         })
         return _obj
-

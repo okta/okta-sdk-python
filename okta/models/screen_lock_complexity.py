@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class ScreenLockComplexity(str, Enum):
     """
-    Indicates whether a device has a screen lock set, and the type or complexity of the screen lock  **Note:** This option requires a `screenLockType.include` value. 
+    Indicates whether a device has a screen lock set, and the type or complexity of the screen lock  **Note:** This option requires a `screenLockType.include` value.
     """
 
     """
@@ -41,5 +41,3 @@ class ScreenLockComplexity(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ScreenLockComplexity from a JSON string"""
         return cls(json.loads(json_str))
-
-

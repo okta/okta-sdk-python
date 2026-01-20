@@ -30,11 +30,13 @@ from okta.models.entity_risk_policy_rule_actions_object import EntityRiskPolicyR
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EntityRiskPolicyRuleAllOfActionsEntityRisk(BaseModel):
     """
     The object that contains the `actions` array
-    """ # noqa: E501
-    actions: Optional[List[EntityRiskPolicyRuleActionsObject]] = Field(default=None, description="The `entityRisk` object's `actions` array can be empty or contain one of two `action` object value pairs. This object determines the specific response to a risk event.")
+    """  # noqa: E501
+    actions: Optional[List[EntityRiskPolicyRuleActionsObject]] = Field(
+        default=None, description="The `entityRisk` object's `actions` array can be empty or contain one of two `action` object value pairs. This object determines the specific response to a risk event.")
     __properties: ClassVar[List[str]] = ["actions"]
 
     model_config = ConfigDict(
@@ -97,4 +99,3 @@ class EntityRiskPolicyRuleAllOfActionsEntityRisk(BaseModel):
             "actions": [EntityRiskPolicyRuleActionsObject.from_dict(_item) for _item in obj["actions"]] if obj.get("actions") is not None else None
         })
         return _obj
-

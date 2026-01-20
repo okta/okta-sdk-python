@@ -31,14 +31,21 @@ from okta.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ThreatInsightConfiguration(BaseModel):
     """
     ThreatInsightConfiguration
-    """ # noqa: E501
-    action: StrictStr = Field(description="Specifies how Okta responds to authentication requests from suspicious IP addresses")
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the ThreatInsight Configuration object was created")
-    exclude_zones: Optional[List[StrictStr]] = Field(default=None, description="Accepts a list of [Network Zone](/openapi/okta-management/management/tag/NetworkZone/) IDs. IPs in the excluded network zones aren't logged or blocked. This ensures that traffic from known, trusted IPs isn't accidentally logged or blocked.", alias="excludeZones")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the ThreatInsight Configuration object was last updated", alias="lastUpdated")
+    """  # noqa: E501
+    action: StrictStr = Field(
+        description="Specifies how Okta responds to authentication requests from suspicious IP addresses")
+    created: Optional[datetime] = Field(default=None,
+                                        description="Timestamp when the ThreatInsight Configuration object was created")
+    exclude_zones: Optional[List[StrictStr]] = Field(
+        default=None, description="Accepts a list of [Network Zone](/openapi/okta-management/management/tag/NetworkZone/) IDs. IPs in the excluded network zones aren't logged or blocked. This ensures that traffic from known, trusted IPs isn't accidentally logged or blocked.", alias="excludeZones")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the ThreatInsight Configuration object was last updated",
+        alias="lastUpdated")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["action", "created", "excludeZones", "lastUpdated", "_links"]
 
@@ -117,4 +124,3 @@ class ThreatInsightConfiguration(BaseModel):
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

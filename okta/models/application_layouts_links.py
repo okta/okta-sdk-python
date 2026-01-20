@@ -30,10 +30,11 @@ from okta.models.href_object import HrefObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ApplicationLayoutsLinks(BaseModel):
     """
     ApplicationLayoutsLinks
-    """ # noqa: E501
+    """  # noqa: E501
     general: Optional[List[HrefObject]] = None
     sign_on: Optional[List[HrefObject]] = Field(default=None, alias="signOn")
     provisioning: Optional[List[HrefObject]] = None
@@ -115,4 +116,3 @@ class ApplicationLayoutsLinks(BaseModel):
             "provisioning": [HrefObject.from_dict(_item) for _item in obj["provisioning"]] if obj.get("provisioning") is not None else None
         })
         return _obj
-

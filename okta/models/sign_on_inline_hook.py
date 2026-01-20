@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SignOnInlineHook(BaseModel):
     """
     SignOnInlineHook
-    """ # noqa: E501
+    """  # noqa: E501
     id: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["id"]
 
@@ -89,4 +90,3 @@ class SignOnInlineHook(BaseModel):
             "id": obj.get("id")
         })
         return _obj
-

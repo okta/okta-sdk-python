@@ -31,10 +31,11 @@ from okta.models.group_embedded_stats import GroupEmbeddedStats
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupEmbedded(BaseModel):
     """
     Embedded resources related to the group
-    """ # noqa: E501
+    """  # noqa: E501
     stats: Optional[GroupEmbeddedStats] = None
     app: Optional[GroupEmbeddedApp] = None
     __properties: ClassVar[List[str]] = ["stats", "app"]
@@ -107,4 +108,3 @@ class GroupEmbedded(BaseModel):
             "app": GroupEmbeddedApp.from_dict(obj["app"]) if obj.get("app") is not None else None
         })
         return _obj
-

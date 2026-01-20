@@ -30,14 +30,19 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlTrustCredentials(BaseModel):
     """
     Federation Trust Credentials for verifying assertions from the IdP
-    """ # noqa: E501
-    additional_kids: Optional[Annotated[List[StrictStr], Field(max_length=1)]] = Field(default=None, description="Additional IdP key credential reference to the Okta X.509 signature certificate", alias="additionalKids")
-    audience: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="URI that identifies the target Okta IdP instance (SP) for an `<Assertion>`")
-    issuer: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="URI that identifies the issuer (IdP) of a `<SAMLResponse>` message `<Assertion>` element")
-    kid: Optional[StrictStr] = Field(default=None, description="IdP key credential reference to the Okta X.509 signature certificate")
+    """  # noqa: E501
+    additional_kids: Optional[Annotated[List[StrictStr], Field(max_length=1)]] = Field(
+        default=None, description="Additional IdP key credential reference to the Okta X.509 signature certificate", alias="additionalKids")
+    audience: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="URI that identifies the target Okta IdP instance (SP) for an `<Assertion>`")
+    issuer: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="URI that identifies the issuer (IdP) of a `<SAMLResponse>` message `<Assertion>` element")
+    kid: Optional[StrictStr] = Field(default=None,
+                                     description="IdP key credential reference to the Okta X.509 signature certificate")
     __properties: ClassVar[List[str]] = ["additionalKids", "audience", "issuer", "kid"]
 
     model_config = ConfigDict(
@@ -96,4 +101,3 @@ class SamlTrustCredentials(BaseModel):
             "kid": obj.get("kid")
         })
         return _obj
-

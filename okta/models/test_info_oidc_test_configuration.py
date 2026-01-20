@@ -30,14 +30,19 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TestInfoOidcTestConfiguration(BaseModel):
     """
     OIDC test details
-    """ # noqa: E501
+    """  # noqa: E501
     idp: Optional[StrictBool] = Field(default=None, description="Read only.<br>Indicates if your integration supports IdP-initiated sign-in flows. If [`sso.oidc.initiateLoginUri`](/openapi/okta-management/management/tag/YourOinIntegrations/#tag/YourOinIntegrations/operation/createSubmission!path=sso/oidc/initiateLoginUri&t=request) is specified, this property is set to `true`. If [`sso.oidc.initiateLoginUri`](/openapi/okta-management/management/tag/YourOinIntegrations/#tag/YourOinIntegrations/operation/createSubmission!path=sso/oidc/initiateLoginUri&t=request) isn't set for the integration submission, this property is set to `false`")
-    sp: Optional[StrictBool] = Field(default=None, description="Read only.<br>Indicates if your integration supports SP-initiated sign-in flows and is always set to `true` for OIDC SSO")
-    jit: Optional[StrictBool] = Field(default=None, description="Indicates if your integration supports Just-In-Time (JIT) provisioning")
-    sp_initiate_url: Annotated[str, Field(strict=True, max_length=512)] = Field(description="URL for SP-initiated sign-in flows (required if `sp = true`)", alias="spInitiateUrl")
+    sp: Optional[StrictBool] = Field(
+        default=None,
+        description="Read only.<br>Indicates if your integration supports SP-initiated sign-in flows and is always set to `true` for OIDC SSO")
+    jit: Optional[StrictBool] = Field(default=None,
+                                      description="Indicates if your integration supports Just-In-Time (JIT) provisioning")
+    sp_initiate_url: Annotated[str, Field(strict=True, max_length=512)] = Field(
+        description="URL for SP-initiated sign-in flows (required if `sp = true`)", alias="spInitiateUrl")
     __properties: ClassVar[List[str]] = ["idp", "sp", "jit", "spInitiateUrl"]
 
     model_config = ConfigDict(
@@ -100,4 +105,3 @@ class TestInfoOidcTestConfiguration(BaseModel):
             "spInitiateUrl": obj.get("spInitiateUrl")
         })
         return _obj
-

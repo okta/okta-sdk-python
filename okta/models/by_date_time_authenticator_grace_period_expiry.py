@@ -30,11 +30,14 @@ from okta.models.enrollment_policy_authenticator_grace_period import EnrollmentP
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ByDateTimeAuthenticatorGracePeriodExpiry(EnrollmentPolicyAuthenticatorGracePeriod):
     """
     ByDateTimeAuthenticatorGracePeriodExpiry
-    """ # noqa: E501
-    expiry: Optional[StrictStr] = Field(default=None, description="The expiry date for a `BY_DATE_TIME` grace period type. Valid format: `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`  For example, `2025-01-01T18:30:45.000Z` ")
+    """  # noqa: E501
+    expiry: Optional[StrictStr] = Field(
+        default=None,
+        description="The expiry date for a `BY_DATE_TIME` grace period type. Valid format: `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`  For example, `2025-01-01T18:30:45.000Z` ")
     __properties: ClassVar[List[str]] = ["type", "expiry"]
 
     model_config = ConfigDict(
@@ -91,4 +94,3 @@ class ByDateTimeAuthenticatorGracePeriodExpiry(EnrollmentPolicyAuthenticatorGrac
             "expiry": obj.get("expiry")
         })
         return _obj
-

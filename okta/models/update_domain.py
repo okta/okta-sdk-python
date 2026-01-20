@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UpdateDomain(BaseModel):
     """
     UpdateDomain
-    """ # noqa: E501
+    """  # noqa: E501
     brand_id: StrictStr = Field(description="The `id` of the brand used to replace the existing brand.", alias="brandId")
     __properties: ClassVar[List[str]] = ["brandId"]
 
@@ -89,4 +90,3 @@ class UpdateDomain(BaseModel):
             "brandId": obj.get("brandId")
         })
         return _obj
-

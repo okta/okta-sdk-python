@@ -27,7 +27,7 @@ from typing_extensions import Self
 
 class ApplicationCredentialsScheme(str, Enum):
     """
-    Apps with `BASIC_AUTH`, `BROWSER_PLUGIN`, or `SECURE_PASSWORD_STORE` sign-on modes have credentials vaulted by Okta and can be configured with the following schemes. 
+    Apps with `BASIC_AUTH`, `BROWSER_PLUGIN`, or `SECURE_PASSWORD_STORE` sign-on modes have credentials vaulted by Okta and can be configured with the following schemes.
     """
 
     """
@@ -43,5 +43,3 @@ class ApplicationCredentialsScheme(str, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ApplicationCredentialsScheme from a JSON string"""
         return cls(json.loads(json_str))
-
-

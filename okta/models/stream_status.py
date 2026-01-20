@@ -29,12 +29,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StreamStatus(BaseModel):
     """
     Status corresponding to the `stream_id` of the SSF Stream
-    """ # noqa: E501
+    """  # noqa: E501
     status: Optional[StrictStr] = Field(default=None, description="The status of the SSF Stream configuration")
-    stream_id: Optional[StrictStr] = Field(default=None, description="The ID of the SSF Stream configuration. This corresponds to the value in the query parameter of the request.")
+    stream_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the SSF Stream configuration. This corresponds to the value in the query parameter of the request.")
     __properties: ClassVar[List[str]] = ["status", "stream_id"]
 
     @field_validator('status')
@@ -101,4 +104,3 @@ class StreamStatus(BaseModel):
             "stream_id": obj.get("stream_id")
         })
         return _obj
-

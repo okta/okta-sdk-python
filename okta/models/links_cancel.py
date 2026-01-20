@@ -30,10 +30,11 @@ from okta.models.links_cancel_cancel import LinksCancelCancel
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class LinksCancel(BaseModel):
     """
     LinksCancel
-    """ # noqa: E501
+    """  # noqa: E501
     cancel: Optional[LinksCancelCancel] = None
     __properties: ClassVar[List[str]] = ["cancel"]
 
@@ -97,4 +98,3 @@ class LinksCancel(BaseModel):
             "cancel": LinksCancelCancel.from_dict(obj["cancel"]) if obj.get("cancel") is not None else None
         })
         return _obj
-

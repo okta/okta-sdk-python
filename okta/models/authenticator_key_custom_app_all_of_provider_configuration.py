@@ -31,10 +31,11 @@ from okta.models.authenticator_key_custom_app_all_of_provider_configuration_fcm 
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyCustomAppAllOfProviderConfiguration(BaseModel):
     """
     The configuration of the provider
-    """ # noqa: E501
+    """  # noqa: E501
     apns: Optional[AuthenticatorKeyCustomAppAllOfProviderConfigurationApns] = None
     fcm: Optional[AuthenticatorKeyCustomAppAllOfProviderConfigurationFcm] = None
     __properties: ClassVar[List[str]] = ["apns", "fcm"]
@@ -107,4 +108,3 @@ class AuthenticatorKeyCustomAppAllOfProviderConfiguration(BaseModel):
             "fcm": AuthenticatorKeyCustomAppAllOfProviderConfigurationFcm.from_dict(obj["fcm"]) if obj.get("fcm") is not None else None
         })
         return _obj
-

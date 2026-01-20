@@ -32,10 +32,11 @@ from okta.models.show_sign_in_with_ov import ShowSignInWithOV
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorMethodSignedNonceAllOfSettings(BaseModel):
     """
     AuthenticatorMethodSignedNonceAllOfSettings
-    """ # noqa: E501
+    """  # noqa: E501
     algorithms: Optional[List[AuthenticatorMethodAlgorithm]] = None
     key_protection: Optional[PushMethodKeyProtection] = Field(default=None, alias="keyProtection")
     show_sign_in_with_ov: Optional[ShowSignInWithOV] = Field(default=None, alias="showSignInWithOV")
@@ -96,4 +97,3 @@ class AuthenticatorMethodSignedNonceAllOfSettings(BaseModel):
             "showSignInWithOV": obj.get("showSignInWithOV")
         })
         return _obj
-

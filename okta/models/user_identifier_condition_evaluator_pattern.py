@@ -30,10 +30,11 @@ from okta.models.user_identifier_match_type import UserIdentifierMatchType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class UserIdentifierConditionEvaluatorPattern(BaseModel):
     """
     Specifies the details of the patterns to match against
-    """ # noqa: E501
+    """  # noqa: E501
     match_type: UserIdentifierMatchType = Field(alias="matchType")
     value: StrictStr = Field(description="The regular expression or simple match string")
     __properties: ClassVar[List[str]] = ["matchType", "value"]
@@ -92,4 +93,3 @@ class UserIdentifierConditionEvaluatorPattern(BaseModel):
             "value": obj.get("value")
         })
         return _obj
-

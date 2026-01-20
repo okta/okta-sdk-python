@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ResourceConditionsExclude(BaseModel):
     """
     Specific resources to exclude
-    """ # noqa: E501
-    okta_orn: Optional[List[StrictStr]] = Field(default=None, description="List of specific resources to exclude in ORN format", alias="okta:ORN")
+    """  # noqa: E501
+    okta_orn: Optional[List[StrictStr]] = Field(
+        default=None, description="List of specific resources to exclude in ORN format", alias="okta:ORN")
     __properties: ClassVar[List[str]] = ["okta:ORN"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class ResourceConditionsExclude(BaseModel):
             "okta:ORN": obj.get("okta:ORN")
         })
         return _obj
-

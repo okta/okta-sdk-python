@@ -29,17 +29,26 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CsrMetadataSubject(BaseModel):
     """
     CsrMetadataSubject
-    """ # noqa: E501
+    """  # noqa: E501
     common_name: Optional[StrictStr] = Field(default=None, description="Common name of the subject", alias="commonName")
     country_name: Optional[StrictStr] = Field(default=None, description="Country name or code", alias="countryName")
     locality_name: Optional[StrictStr] = Field(default=None, description="Locality (city) name", alias="localityName")
-    organizational_unit_name: Optional[StrictStr] = Field(default=None, description="Name of the smaller organization, for example, the department or the division", alias="organizationalUnitName")
-    organization_name: Optional[StrictStr] = Field(default=None, description="Large organization name", alias="organizationName")
-    state_or_province_name: Optional[StrictStr] = Field(default=None, description="State or province name", alias="stateOrProvinceName")
-    __properties: ClassVar[List[str]] = ["commonName", "countryName", "localityName", "organizationalUnitName", "organizationName", "stateOrProvinceName"]
+    organizational_unit_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the smaller organization, for example, the department or the division",
+        alias="organizationalUnitName")
+    organization_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Large organization name",
+        alias="organizationName")
+    state_or_province_name: Optional[StrictStr] = Field(
+        default=None, description="State or province name", alias="stateOrProvinceName")
+    __properties: ClassVar[List[str]] = ["commonName", "countryName", "localityName",
+                                         "organizationalUnitName", "organizationName", "stateOrProvinceName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,4 +108,3 @@ class CsrMetadataSubject(BaseModel):
             "stateOrProvinceName": obj.get("stateOrProvinceName")
         })
         return _obj
-

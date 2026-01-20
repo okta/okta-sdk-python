@@ -31,10 +31,11 @@ from okta.models.bundle_entitlements_response_links import BundleEntitlementsRes
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BundleEntitlementsResponse(BaseModel):
     """
     Entitlement list for a governance bundle
-    """ # noqa: E501
+    """  # noqa: E501
     entitlements: Optional[List[BundleEntitlement]] = Field(default=None, description="List of bundle entitlements")
     links: Optional[BundleEntitlementsResponseLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["entitlements", "_links"]
@@ -107,4 +108,3 @@ class BundleEntitlementsResponse(BaseModel):
             "_links": BundleEntitlementsResponseLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

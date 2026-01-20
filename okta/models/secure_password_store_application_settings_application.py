@@ -29,20 +29,44 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurePasswordStoreApplicationSettingsApplication(BaseModel):
     """
     SecurePasswordStoreApplicationSettingsApplication
-    """ # noqa: E501
-    optional_field1: Optional[StrictStr] = Field(default=None, description="Name of the optional parameter in the sign-in form", alias="optionalField1")
-    optional_field1_value: Optional[StrictStr] = Field(default=None, description="Name of the optional value in the sign-in form", alias="optionalField1Value")
-    optional_field2: Optional[StrictStr] = Field(default=None, description="Name of the optional parameter in the sign-in form", alias="optionalField2")
-    optional_field2_value: Optional[StrictStr] = Field(default=None, description="Name of the optional value in the sign-in form", alias="optionalField2Value")
-    optional_field3: Optional[StrictStr] = Field(default=None, description="Name of the optional parameter in the sign-in form", alias="optionalField3")
-    optional_field3_value: Optional[StrictStr] = Field(default=None, description="Name of the optional value in the sign-in form", alias="optionalField3Value")
-    password_field: StrictStr = Field(description="CSS selector for the **Password** field in the sign-in form", alias="passwordField")
+    """  # noqa: E501
+    optional_field1: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional parameter in the sign-in form",
+        alias="optionalField1")
+    optional_field1_value: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional value in the sign-in form",
+        alias="optionalField1Value")
+    optional_field2: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional parameter in the sign-in form",
+        alias="optionalField2")
+    optional_field2_value: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional value in the sign-in form",
+        alias="optionalField2Value")
+    optional_field3: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional parameter in the sign-in form",
+        alias="optionalField3")
+    optional_field3_value: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional value in the sign-in form",
+        alias="optionalField3Value")
+    password_field: StrictStr = Field(
+        description="CSS selector for the **Password** field in the sign-in form",
+        alias="passwordField")
     url: StrictStr = Field(description="The URL of the sign-in page for this app")
-    username_field: StrictStr = Field(description="CSS selector for the **Username** field in the sign-in form", alias="usernameField")
-    __properties: ClassVar[List[str]] = ["optionalField1", "optionalField1Value", "optionalField2", "optionalField2Value", "optionalField3", "optionalField3Value", "passwordField", "url", "usernameField"]
+    username_field: StrictStr = Field(
+        description="CSS selector for the **Username** field in the sign-in form",
+        alias="usernameField")
+    __properties: ClassVar[List[str]] = ["optionalField1", "optionalField1Value", "optionalField2",
+                                         "optionalField2Value", "optionalField3", "optionalField3Value", "passwordField", "url", "usernameField"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,4 +129,3 @@ class SecurePasswordStoreApplicationSettingsApplication(BaseModel):
             "usernameField": obj.get("usernameField")
         })
         return _obj
-

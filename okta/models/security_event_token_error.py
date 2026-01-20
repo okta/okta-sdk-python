@@ -29,11 +29,14 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SecurityEventTokenError(BaseModel):
     """
     Error object thrown when parsing the Security Event Token
-    """ # noqa: E501
-    description: Optional[StrictStr] = Field(default=None, description="Describes the error > **Note:** SET claim fields with underscores (snake case) are presented in camelcase. For example, `previous_status` appears as `previousStatus`. ")
+    """  # noqa: E501
+    description: Optional[StrictStr] = Field(
+        default=None,
+        description="Describes the error > **Note:** SET claim fields with underscores (snake case) are presented in camelcase. For example, `previous_status` appears as `previousStatus`. ")
     err: Optional[StrictStr] = Field(default=None, description="A code that describes the category of the error")
     __properties: ClassVar[List[str]] = ["description", "err"]
 
@@ -44,7 +47,8 @@ class SecurityEventTokenError(BaseModel):
             return value
 
         if value not in set(['authentication_failed', 'invalid_audience', 'invalid_issuer', 'invalid_key', 'invalid_request']):
-            raise ValueError("must be one of enum values ('authentication_failed', 'invalid_audience', 'invalid_issuer', 'invalid_key', 'invalid_request')")
+            raise ValueError(
+                "must be one of enum values ('authentication_failed', 'invalid_audience', 'invalid_issuer', 'invalid_key', 'invalid_request')")
         return value
 
     model_config = ConfigDict(
@@ -101,4 +105,3 @@ class SecurityEventTokenError(BaseModel):
             "err": obj.get("err")
         })
         return _obj
-

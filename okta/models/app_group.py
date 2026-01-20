@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppGroup(BaseModel):
     """
     AppGroup
-    """ # noqa: E501
-    external_id: Annotated[str, Field(strict=True, max_length=255)] = Field(description="The external ID of the app group whose members might be privileged app users", alias="externalId")
-    name: Annotated[str, Field(strict=True, max_length=255)] = Field(description="The name of the app group whose members might be privileged app users")
+    """  # noqa: E501
+    external_id: Annotated[str, Field(strict=True, max_length=255)] = Field(
+        description="The external ID of the app group whose members might be privileged app users", alias="externalId")
+    name: Annotated[str, Field(strict=True, max_length=255)] = Field(
+        description="The name of the app group whose members might be privileged app users")
     __properties: ClassVar[List[str]] = ["externalId", "name"]
 
     model_config = ConfigDict(
@@ -92,4 +95,3 @@ class AppGroup(BaseModel):
             "name": obj.get("name")
         })
         return _obj
-

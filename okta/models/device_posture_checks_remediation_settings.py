@@ -31,10 +31,11 @@ from okta.models.device_posture_checks_remediation_settings_message import Devic
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DevicePostureChecksRemediationSettings(BaseModel):
     """
     Represents the remediation instructions shown to the end user when the device posture check fails
-    """ # noqa: E501
+    """  # noqa: E501
     link: Optional[DevicePostureChecksRemediationSettingsLink] = None
     message: Optional[DevicePostureChecksRemediationSettingsMessage] = None
     __properties: ClassVar[List[str]] = ["link", "message"]
@@ -107,4 +108,3 @@ class DevicePostureChecksRemediationSettings(BaseModel):
             "message": DevicePostureChecksRemediationSettingsMessage.from_dict(obj["message"]) if obj.get("message") is not None else None
         })
         return _obj
-

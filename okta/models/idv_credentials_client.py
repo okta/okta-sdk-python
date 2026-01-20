@@ -29,10 +29,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IDVCredentialsClient(BaseModel):
     """
     <x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Client credentials for `IDV_CLEAR` and `IDV_INCODE` IdP types
-    """ # noqa: E501
+    """  # noqa: E501
     client_id: StrictStr = Field(description="The client ID that you generate in your IDV vendor")
     client_secret: StrictStr = Field(description="The client secret that you generate in your IDV vendor")
     __properties: ClassVar[List[str]] = ["client_id", "client_secret"]
@@ -91,4 +92,3 @@ class IDVCredentialsClient(BaseModel):
             "client_secret": obj.get("client_secret")
         })
         return _obj
-

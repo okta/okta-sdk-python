@@ -30,12 +30,16 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class NetworkZoneLocation(BaseModel):
     """
     NetworkZoneLocation
-    """ # noqa: E501
-    country: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(default=None, description="The two-character ISO 3166-1 country code. Don't use continent codes since they are treated as generic codes for undesignated countries. <br>For example: `US`")
-    region: Optional[StrictStr] = Field(default=None, description="(Optional) The ISO 3166-2 region code appended to the country code (`countryCode-regionCode`), or `null` if empty. Don't use continent codes since they are treated as generic codes for undesignated regions. <br>For example: `CA` (for `US-CA` country and region code)")
+    """  # noqa: E501
+    country: Optional[Annotated[str, Field(min_length=2, strict=True, max_length=2)]] = Field(
+        default=None, description="The two-character ISO 3166-1 country code. Don't use continent codes since they are treated as generic codes for undesignated countries. <br>For example: `US`")
+    region: Optional[StrictStr] = Field(
+        default=None,
+        description="(Optional) The ISO 3166-2 region code appended to the country code (`countryCode-regionCode`), or `null` if empty. Don't use continent codes since they are treated as generic codes for undesignated regions. <br>For example: `CA` (for `US-CA` country and region code)")
     __properties: ClassVar[List[str]] = ["country", "region"]
 
     model_config = ConfigDict(
@@ -92,4 +96,3 @@ class NetworkZoneLocation(BaseModel):
             "region": obj.get("region")
         })
         return _obj
-

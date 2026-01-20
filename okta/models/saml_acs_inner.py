@@ -30,12 +30,15 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class SamlAcsInner(BaseModel):
     """
     SamlAcsInner
-    """ # noqa: E501
-    index: Optional[Union[Annotated[float, Field(le=65535, strict=True, ge=0)], Annotated[int, Field(le=65535, strict=True, ge=0)]]] = Field(default=None, description="Index of ACS URL. You can't reuse the same index in the ACS URL array.")
-    url: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, description="Assertion Consumer Service (ACS) URL")
+    """  # noqa: E501
+    index: Optional[Union[Annotated[float, Field(le=65535, strict=True, ge=0)], Annotated[int, Field(le=65535, strict=True, ge=0)]]] = Field(
+        default=None, description="Index of ACS URL. You can't reuse the same index in the ACS URL array.")
+    url: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None, description="Assertion Consumer Service (ACS) URL")
     __properties: ClassVar[List[str]] = ["index", "url"]
 
     model_config = ConfigDict(
@@ -92,4 +95,3 @@ class SamlAcsInner(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-

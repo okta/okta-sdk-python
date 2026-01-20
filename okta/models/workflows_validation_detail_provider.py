@@ -26,16 +26,16 @@ import json
 
 from pydantic import ConfigDict
 from typing import Any, ClassVar, Dict, List
-from okta.models.action_provider_payload_type import ActionProviderPayloadType
 from okta.models.validation_detail_provider import ValidationDetailProvider
 from okta.models.workflows_validation_error_type import WorkflowsValidationErrorType
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class WorkflowsValidationDetailProvider(ValidationDetailProvider):
     """
     WorkflowsValidationDetailProvider
-    """ # noqa: E501
+    """  # noqa: E501
     result: WorkflowsValidationErrorType
     __properties: ClassVar[List[str]] = ["externalId", "type"]
 
@@ -93,4 +93,3 @@ class WorkflowsValidationDetailProvider(ValidationDetailProvider):
             "type": obj.get("type")
         })
         return _obj
-

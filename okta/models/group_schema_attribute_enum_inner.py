@@ -20,17 +20,16 @@
 
 
 from __future__ import annotations
-from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, ValidationError, field_validator
+from pydantic import BaseModel, StrictInt, StrictStr, ValidationError, field_validator
 from typing import Optional
-from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
-from typing_extensions import Literal, Self
-from pydantic import Field
+from typing import Union, Any, Set, TYPE_CHECKING, Optional, Dict
+from typing_extensions import Self
 
 GROUPSCHEMAATTRIBUTEENUMINNER_ANY_OF_SCHEMAS = ["int", "str"]
+
 
 class GroupSchemaAttributeEnumInner(BaseModel):
     """
@@ -45,7 +44,7 @@ class GroupSchemaAttributeEnumInner(BaseModel):
         actual_instance: Optional[Union[int, str]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "int", "str" }
+    any_of_schemas: Set[str] = {"int", "str"}
 
     model_config = {
         "validate_assignment": True,
@@ -80,7 +79,9 @@ class GroupSchemaAttributeEnumInner(BaseModel):
             error_messages.append(str(e))
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in GroupSchemaAttributeEnumInner with anyOf schemas: int, str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting the actual_instance in GroupSchemaAttributeEnumInner with anyOf schemas: int, str. Details: " +
+                ", ".join(error_messages))
         else:
             return v
 
@@ -114,7 +115,9 @@ class GroupSchemaAttributeEnumInner(BaseModel):
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into GroupSchemaAttributeEnumInner with anyOf schemas: int, str. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into GroupSchemaAttributeEnumInner with anyOf schemas: int, str. Details: " +
+                ", ".join(error_messages))
         else:
             return instance
 
@@ -141,5 +144,3 @@ class GroupSchemaAttributeEnumInner(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

@@ -30,11 +30,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class RateLimitWarningThresholdRequest(BaseModel):
     """
-    
-    """ # noqa: E501
-    warning_threshold: Annotated[int, Field(le=90, strict=True, ge=30)] = Field(description="The threshold value (percentage) of a rate limit that, when exceeded, triggers a warning notification. By default, this value is 90 for Workforce orgs and 60 for CIAM orgs.", alias="warningThreshold")
+
+    """  # noqa: E501
+    warning_threshold: Annotated[int, Field(le=90, strict=True, ge=30)] = Field(
+        description="The threshold value (percentage) of a rate limit that, when exceeded, triggers a warning notification. By default, this value is 90 for Workforce orgs and 60 for CIAM orgs.", alias="warningThreshold")
     __properties: ClassVar[List[str]] = ["warningThreshold"]
 
     model_config = ConfigDict(
@@ -90,4 +92,3 @@ class RateLimitWarningThresholdRequest(BaseModel):
             "warningThreshold": obj.get("warningThreshold")
         })
         return _obj
-

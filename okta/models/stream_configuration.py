@@ -32,20 +32,30 @@ from okta.models.stream_configuration_delivery import StreamConfigurationDeliver
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StreamConfiguration(BaseModel):
     """
     StreamConfiguration
-    """ # noqa: E501
+    """  # noqa: E501
     aud: Optional[StreamConfigurationAud] = None
     delivery: StreamConfigurationDelivery
-    events_delivered: Optional[List[StrictStr]] = Field(default=None, description="The events (mapped by the array of event type URIs) that the transmitter actually delivers to the SSF Stream.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
-    events_requested: Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=50)] = Field(description="The events (mapped by the array of event type URIs) that the receiver wants to receive")
-    events_supported: Optional[List[StrictStr]] = Field(default=None, description="An array of event type URIs that the transmitter supports.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
-    format: Optional[StrictStr] = Field(default=None, description="The Subject Identifier format expected for any SET transmitted.")
-    iss: Optional[StrictStr] = Field(default=None, description="The issuer used in Security Event Tokens (SETs). This value is set as `iss` in the claim.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
-    min_verification_interval: Optional[StrictInt] = Field(default=None, description="The minimum amount of time, in seconds, between two verification requests.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
+    events_delivered: Optional[List[StrictStr]] = Field(
+        default=None, description="The events (mapped by the array of event type URIs) that the transmitter actually delivers to the SSF Stream.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
+    events_requested: Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=50)] = Field(
+        description="The events (mapped by the array of event type URIs) that the receiver wants to receive")
+    events_supported: Optional[List[StrictStr]] = Field(
+        default=None, description="An array of event type URIs that the transmitter supports.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
+    format: Optional[StrictStr] = Field(default=None,
+                                        description="The Subject Identifier format expected for any SET transmitted.")
+    iss: Optional[StrictStr] = Field(
+        default=None,
+        description="The issuer used in Security Event Tokens (SETs). This value is set as `iss` in the claim.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
+    min_verification_interval: Optional[StrictInt] = Field(
+        default=None,
+        description="The minimum amount of time, in seconds, between two verification requests.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
     stream_id: Optional[StrictStr] = Field(default=None, description="The ID of the SSF Stream configuration")
-    __properties: ClassVar[List[str]] = ["aud", "delivery", "events_delivered", "events_requested", "events_supported", "format", "iss", "min_verification_interval", "stream_id"]
+    __properties: ClassVar[List[str]] = ["aud", "delivery", "events_delivered", "events_requested",
+                                         "events_supported", "format", "iss", "min_verification_interval", "stream_id"]
 
     @field_validator('format')
     def format_validate_enum(cls, value):
@@ -137,4 +147,3 @@ class StreamConfiguration(BaseModel):
             "stream_id": obj.get("stream_id")
         })
         return _obj
-

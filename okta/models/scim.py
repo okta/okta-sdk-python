@@ -31,15 +31,23 @@ from okta.models.scim_scim_server_config import ScimScimServerConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Scim(BaseModel):
     """
     SCIM configuration details
-    """ # noqa: E501
-    auth_mode: StrictStr = Field(description="The authentication mode for requests to your SCIM server  | authMode | Description | | -------- | ----------- | | `header` | Uses authorization header with a customer-provided token value in the following format: `Authorization: {API token}` | | `bearer` | Uses authorization header with a customer-provided bearer token in the following format: `Authorization: Bearer {API token}` | | {authModeId} | The ID of the auth mode object that contains OAuth 2.0 credentials. <br> **Note:** Use the `/integrations/api/v1/internal/authModes` endpoint to create the auth mode object. |", alias="authMode")
-    base_uri: StrictStr = Field(description="The base URL that Okta uses to send outbound calls to your SCIM server. Only the HTTPS protocol is supported. You can use the app-level variables defined in the `config` array for the base URL. For example, if you have a `subdomain` variable defined in the `config` array and the URL to retrieve SCIM users for your integration is `https://${subdomain}.example.com/scim/v2/Users`, then specify the following base URL: `'https://' + app.subdomain + '.example.com/scim/v2'`.", alias="baseUri")
-    entitlement_types: Optional[List[EntitlementTypesInner]] = Field(default=None, description="List of supported entitlement types", alias="entitlementTypes")
+    """  # noqa: E501
+    auth_mode: StrictStr = Field(
+        description="The authentication mode for requests to your SCIM server  | authMode | Description | | -------- | ----------- | | `header` | Uses authorization header with a customer-provided token value in the following format: `Authorization: {API token}` | | `bearer` | Uses authorization header with a customer-provided bearer token in the following format: `Authorization: Bearer {API token}` | | {authModeId} | The ID of the auth mode object that contains OAuth 2.0 credentials. <br> **Note:** Use the `/integrations/api/v1/internal/authModes` endpoint to create the auth mode object. |",
+        alias="authMode")
+    base_uri: StrictStr = Field(
+        description="The base URL that Okta uses to send outbound calls to your SCIM server. Only the HTTPS protocol is supported. You can use the app-level variables defined in the `config` array for the base URL. For example, if you have a `subdomain` variable defined in the `config` array and the URL to retrieve SCIM users for your integration is `https://${subdomain}.example.com/scim/v2/Users`, then specify the following base URL: `'https://' + app.subdomain + '.example.com/scim/v2'`.",
+        alias="baseUri")
+    entitlement_types: Optional[List[EntitlementTypesInner]] = Field(
+        default=None, description="List of supported entitlement types", alias="entitlementTypes")
     scim_server_config: ScimScimServerConfig = Field(alias="scimServerConfig")
-    setup_instructions_uri: StrictStr = Field(description="The URL to your customer-facing instructions for configuring your SCIM integration. See [Customer configuration document guidelines](https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document-guidelines).", alias="setupInstructionsUri")
+    setup_instructions_uri: StrictStr = Field(
+        description="The URL to your customer-facing instructions for configuring your SCIM integration. See [Customer configuration document guidelines](https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document-guidelines).",
+        alias="setupInstructionsUri")
     __properties: ClassVar[List[str]] = ["authMode", "baseUri", "entitlementTypes", "scimServerConfig", "setupInstructionsUri"]
 
     model_config = ConfigDict(
@@ -113,4 +121,3 @@ class Scim(BaseModel):
             "setupInstructionsUri": obj.get("setupInstructionsUri")
         })
         return _obj
-

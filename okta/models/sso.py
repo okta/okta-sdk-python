@@ -31,10 +31,11 @@ from okta.models.saml import Saml
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Sso(BaseModel):
     """
     Supported SSO protocol configurations. You must configure at least one protocol: `oidc` or `saml`
-    """ # noqa: E501
+    """  # noqa: E501
     oidc: Optional[Oidc] = None
     saml: Optional[Saml] = None
     __properties: ClassVar[List[str]] = ["oidc", "saml"]
@@ -107,4 +108,3 @@ class Sso(BaseModel):
             "saml": Saml.from_dict(obj["saml"]) if obj.get("saml") is not None else None
         })
         return _obj
-

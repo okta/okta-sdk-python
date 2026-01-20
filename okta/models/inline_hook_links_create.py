@@ -31,10 +31,11 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class InlineHookLinksCreate(BaseModel):
     """
     InlineHookLinksCreate
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     deactivate: Optional[HrefObject] = Field(default=None, description="URL to deactivate the inline hook")
     execute: Optional[HrefObject] = Field(default=None, description="URL to test the inline hook")
@@ -116,4 +117,3 @@ class InlineHookLinksCreate(BaseModel):
             "execute": HrefObject.from_dict(obj["execute"]) if obj.get("execute") is not None else None
         })
         return _obj
-

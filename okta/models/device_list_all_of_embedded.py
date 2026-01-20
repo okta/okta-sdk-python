@@ -30,10 +30,11 @@ from okta.models.device_user import DeviceUser
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class DeviceListAllOfEmbedded(BaseModel):
     """
     List of associated users for the device if the `expand=user` query parameter is specified in the request. Use `expand=userSummary` to get only a summary of each associated user for the device.
-    """ # noqa: E501
+    """  # noqa: E501
     users: Optional[List[DeviceUser]] = Field(default=None, description="Users for the device")
     __properties: ClassVar[List[str]] = ["users"]
 
@@ -97,4 +98,3 @@ class DeviceListAllOfEmbedded(BaseModel):
             "users": [DeviceUser.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None
         })
         return _obj
-

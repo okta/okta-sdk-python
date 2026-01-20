@@ -30,12 +30,14 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppServiceAccountCredentials(BaseModel):
     """
     Credentials for a SaaS app account
-    """ # noqa: E501
+    """  # noqa: E501
     password: Optional[SecretStr] = Field(default=None, description="The password associated with the service account")
-    username: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="The username associated with the service account")
+    username: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(
+        description="The username associated with the service account")
     __properties: ClassVar[List[str]] = ["password", "username"]
 
     model_config = ConfigDict(
@@ -92,4 +94,3 @@ class AppServiceAccountCredentials(BaseModel):
             "username": obj.get("username")
         })
         return _obj
-

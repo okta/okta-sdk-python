@@ -31,16 +31,24 @@ from okta.models.authenticator_key_tac_all_of_provider_configuration_complexity 
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuthenticatorKeyTacAllOfProviderConfiguration(BaseModel):
     """
     Define the configuration settings of the TAC
-    """ # noqa: E501
-    min_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(description="Minimum time-to-live (TTL) of the TAC in minutes. The `minTtl` indicates the minimum amount of time that a TAC is valid. The `minTtl` must be less than the `maxTtl`.", alias="minTtl")
-    max_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(description="Maximum TTL of the TAC in minutes. The `maxTtl` indicates the maximum amount of time that a TAC is valid. The `maxTtl` must be greater than the `minTtl`.", alias="maxTtl")
-    default_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(description="The default TTL in minutes when you create a TAC. The `defaultTtl` indicates the actual amount of time that a TAC is valid before it expires. The `defaultTtl` must be greater than the `minTtl` and less than the `maxTtl`.", alias="defaultTtl")
-    length: Union[Annotated[float, Field(le=64, strict=True, ge=8)], Annotated[int, Field(le=64, strict=True, ge=8)]] = Field(description="Defines the number of characters in a TAC. For example, a `length` of `16` means that the TAC is 16 characters.")
+    """  # noqa: E501
+    min_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
+        description="Minimum time-to-live (TTL) of the TAC in minutes. The `minTtl` indicates the minimum amount of time that a TAC is valid. The `minTtl` must be less than the `maxTtl`.", alias="minTtl")
+    max_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
+        description="Maximum TTL of the TAC in minutes. The `maxTtl` indicates the maximum amount of time that a TAC is valid. The `maxTtl` must be greater than the `minTtl`.", alias="maxTtl")
+    default_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
+        description="The default TTL in minutes when you create a TAC. The `defaultTtl` indicates the actual amount of time that a TAC is valid before it expires. The `defaultTtl` must be greater than the `minTtl` and less than the `maxTtl`.", alias="defaultTtl")
+    length: Union[Annotated[float, Field(le=64, strict=True, ge=8)], Annotated[int, Field(le=64, strict=True, ge=8)]] = Field(
+        description="Defines the number of characters in a TAC. For example, a `length` of `16` means that the TAC is 16 characters.")
     complexity: AuthenticatorKeyTacAllOfProviderConfigurationComplexity
-    multi_use_allowed: Optional[StrictBool] = Field(default=None, description="Indicates whether a TAC can be used multiple times. If set to `true`, the TAC can be used multiple times until it expires.", alias="multiUseAllowed")
+    multi_use_allowed: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether a TAC can be used multiple times. If set to `true`, the TAC can be used multiple times until it expires.",
+        alias="multiUseAllowed")
     __properties: ClassVar[List[str]] = ["minTtl", "maxTtl", "defaultTtl", "length", "complexity", "multiUseAllowed"]
 
     model_config = ConfigDict(
@@ -108,4 +116,3 @@ class AuthenticatorKeyTacAllOfProviderConfiguration(BaseModel):
             "multiUseAllowed": obj.get("multiUseAllowed")
         })
         return _obj
-

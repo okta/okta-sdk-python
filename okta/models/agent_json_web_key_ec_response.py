@@ -30,21 +30,29 @@ from okta.models.agent_secret_links import AgentSecretLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AgentJsonWebKeyECResponse(BaseModel):
     """
     An EC signing key
-    """ # noqa: E501
+    """  # noqa: E501
     crv: Optional[StrictStr] = Field(default=None, description="The cryptographic curve that's used for the key pair")
     kty: StrictStr = Field(description="Cryptographic algorithm family for the certificate's key pair")
     x: Optional[StrictStr] = Field(default=None, description="The public x coordinate for the elliptic curve point")
     y: Optional[StrictStr] = Field(default=None, description="The public y coordinate for the elliptic curve point")
-    kid: Optional[StrictStr] = Field(default=None, description="Unique identifier of the JSON Web Key in the AI agent's JSON Web Key Set (JWKS)")
+    kid: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier of the JSON Web Key in the AI agent's JSON Web Key Set (JWKS)")
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the AI agent JSON Web Key")
     alg: Optional[StrictStr] = Field(default=None, description="Algorithm that's used in the JSON Web Key")
-    use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key  You can only use signing keys for AI agents, so the value of `use` is always `sig`.")
+    use: Optional[StrictStr] = Field(
+        default=None,
+        description="Acceptable use of the JSON Web Key  You can only use signing keys for AI agents, so the value of `use` is always `sig`.")
     created: Optional[StrictStr] = Field(default=None, description="Timestamp of when the AI agent JSON Web Key was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the AI agent JSON Web Key")
-    last_updated: Optional[StrictStr] = Field(default=None, description="Timestamp of when the AI agent JSON Web Key was last updated", alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp of when the AI agent JSON Web Key was last updated",
+        alias="lastUpdated")
     links: Optional[AgentSecretLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["kid", "status", "alg", "use", "created", "id", "lastUpdated", "_links"]
 
@@ -158,4 +166,3 @@ class AgentJsonWebKeyECResponse(BaseModel):
             "_links": AgentSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
         })
         return _obj
-

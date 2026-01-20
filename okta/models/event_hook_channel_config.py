@@ -31,12 +31,14 @@ from okta.models.event_hook_channel_config_header import EventHookChannelConfigH
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EventHookChannelConfig(BaseModel):
     """
     EventHookChannelConfig
-    """ # noqa: E501
+    """  # noqa: E501
     auth_scheme: Optional[EventHookChannelConfigAuthScheme] = Field(default=None, alias="authScheme")
-    headers: Optional[List[Optional[EventHookChannelConfigHeader]]] = Field(default=None, description="Optional list of key/value pairs for headers that can be sent with the request to the external service. For example, `X-Other-Header` is an example of an optional header, with a value of `my-header-value`, that you want Okta to pass to your external service.")
+    headers: Optional[List[Optional[EventHookChannelConfigHeader]]] = Field(
+        default=None, description="Optional list of key/value pairs for headers that can be sent with the request to the external service. For example, `X-Other-Header` is an example of an optional header, with a value of `my-header-value`, that you want Okta to pass to your external service.")
     method: Optional[StrictStr] = Field(default=None, description="The method of the Okta event hook request")
     uri: StrictStr = Field(description="The external service endpoint called to execute the event hook handler")
     __properties: ClassVar[List[str]] = ["authScheme", "headers", "method", "uri"]
@@ -113,4 +115,3 @@ class EventHookChannelConfig(BaseModel):
             "uri": obj.get("uri")
         })
         return _obj
-

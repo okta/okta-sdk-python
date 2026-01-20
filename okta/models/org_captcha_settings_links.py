@@ -30,10 +30,11 @@ from okta.models.href_object import HrefObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrgCAPTCHASettingsLinks(BaseModel):
     """
     Link relations for the CAPTCHA settings object
-    """ # noqa: E501
+    """  # noqa: E501
     var_self: Optional[HrefObject] = Field(default=None, alias="self")
     __properties: ClassVar[List[str]] = ["self"]
 
@@ -97,4 +98,3 @@ class OrgCAPTCHASettingsLinks(BaseModel):
             "self": HrefObject.from_dict(obj["self"]) if obj.get("self") is not None else None
         })
         return _obj
-

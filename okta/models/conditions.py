@@ -30,12 +30,16 @@ from okta.models.expression import Expression
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Conditions(BaseModel):
     """
     Conditions of applying realm assignment
-    """ # noqa: E501
+    """  # noqa: E501
     expression: Optional[Expression] = None
-    profile_source_id: Optional[StrictStr] = Field(default=None, description="ID of the profile source", alias="profileSourceId")
+    profile_source_id: Optional[StrictStr] = Field(
+        default=None,
+        description="ID of the profile source",
+        alias="profileSourceId")
     __properties: ClassVar[List[str]] = ["expression", "profileSourceId"]
 
     model_config = ConfigDict(
@@ -99,4 +103,3 @@ class Conditions(BaseModel):
             "profileSourceId": obj.get("profileSourceId")
         })
         return _obj
-

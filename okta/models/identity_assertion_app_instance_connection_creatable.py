@@ -32,18 +32,27 @@ from okta.models.scope_condition import ScopeCondition
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class IdentityAssertionAppInstanceConnectionCreatable(BaseModel):
     """
     Create an identity assertion connection for an app instance
-    """ # noqa: E501
+    """  # noqa: E501
     app: IdentityAssertionAppInstanceConnectionCreatableApp
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
     issuer_url: StrictStr = Field(description="Issuer URL for the app instance's authorization server", alias="issuerUrl")
-    protocol_type: Optional[StrictStr] = Field(default=None, description="The authentication protocol type used for the connection", alias="protocolType")
-    resource_indicator: Optional[StrictStr] = Field(default=None, description="Resource indicator used when requesting tokens. Defaults to the app instance's ORN if not specified.", alias="resourceIndicator")
+    protocol_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The authentication protocol type used for the connection",
+        alias="protocolType")
+    resource_indicator: Optional[StrictStr] = Field(
+        default=None,
+        description="Resource indicator used when requesting tokens. Defaults to the app instance's ORN if not specified.",
+        alias="resourceIndicator")
     scope_condition: ScopeCondition = Field(alias="scopeCondition")
-    scopes: Annotated[List[StrictStr], Field(min_length=1)] = Field(description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
-    __properties: ClassVar[List[str]] = ["app", "connectionType", "issuerUrl", "protocolType", "resourceIndicator", "scopeCondition", "scopes"]
+    scopes: Annotated[List[StrictStr], Field(min_length=1)] = Field(
+        description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
+    __properties: ClassVar[List[str]] = ["app", "connectionType", "issuerUrl",
+                                         "protocolType", "resourceIndicator", "scopeCondition", "scopes"]
 
     @field_validator('connection_type')
     def connection_type_validate_enum(cls, value):
@@ -128,4 +137,3 @@ class IdentityAssertionAppInstanceConnectionCreatable(BaseModel):
             "scopes": obj.get("scopes")
         })
         return _obj
-

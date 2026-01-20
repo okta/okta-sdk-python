@@ -30,10 +30,11 @@ from okta.models.authenticator_enrollment_policy_conditions_all_of_people import
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OktaSignOnPolicyConditions(BaseModel):
     """
     OktaSignOnPolicyConditions
-    """ # noqa: E501
+    """  # noqa: E501
     people: Optional[AuthenticatorEnrollmentPolicyConditionsAllOfPeople] = None
     __properties: ClassVar[List[str]] = ["people"]
 
@@ -97,4 +98,3 @@ class OktaSignOnPolicyConditions(BaseModel):
             "people": AuthenticatorEnrollmentPolicyConditionsAllOfPeople.from_dict(obj["people"]) if obj.get("people") is not None else None
         })
         return _obj
-

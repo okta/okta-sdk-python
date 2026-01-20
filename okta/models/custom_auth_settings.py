@@ -30,10 +30,11 @@ from okta.models.app_instance_property import AppInstanceProperty
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomAuthSettings(BaseModel):
     """
     Set of AIPs used for authType `CUSTOM`
-    """ # noqa: E501
+    """  # noqa: E501
     app_instance_properties: Optional[List[AppInstanceProperty]] = Field(default=None, alias="appInstanceProperties")
     __properties: ClassVar[List[str]] = ["appInstanceProperties"]
 
@@ -97,4 +98,3 @@ class CustomAuthSettings(BaseModel):
             "appInstanceProperties": [AppInstanceProperty.from_dict(_item) for _item in obj["appInstanceProperties"]] if obj.get("appInstanceProperties") is not None else None
         })
         return _obj
-

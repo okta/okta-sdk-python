@@ -29,11 +29,13 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class GroupRuleGroupAssignment(BaseModel):
     """
     Contains the `groupIds` array
-    """ # noqa: E501
-    group_ids: Optional[List[StrictStr]] = Field(default=None, description="Array of `groupIds` to which users are added", alias="groupIds")
+    """  # noqa: E501
+    group_ids: Optional[List[StrictStr]] = Field(
+        default=None, description="Array of `groupIds` to which users are added", alias="groupIds")
     __properties: ClassVar[List[str]] = ["groupIds"]
 
     model_config = ConfigDict(
@@ -89,4 +91,3 @@ class GroupRuleGroupAssignment(BaseModel):
             "groupIds": obj.get("groupIds")
         })
         return _obj
-
