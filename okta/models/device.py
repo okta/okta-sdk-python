@@ -197,6 +197,7 @@ class Device(BaseModel):
                     else "UDDevice"
                 ),
                 "status": obj.get("status"),
+                "_embedded": obj.get("_embedded"),
                 "_links": (
                     LinksSelfAndFullUsersLifecycle.from_dict(obj["_links"])
                     if obj.get("_links") is not None
