@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,26 +20,28 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.saml_algorithms import SamlAlgorithms
 from okta.models.saml_credentials import SamlCredentials
 from okta.models.saml_endpoints import SamlEndpoints
 from okta.models.saml_relay_state import SamlRelayState
 from okta.models.saml_settings import SamlSettings
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class ProtocolSaml(BaseModel):
     """
-    Protocol settings for the [SAML 2.0 Authentication Request Protocol](http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
+    Protocol settings for the [SAML 2.0 Authentication Request Protocol](
+    http://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf)
     """  # noqa: E501
     algorithms: Optional[SamlAlgorithms] = None
     credentials: Optional[SamlCredentials] = None
@@ -87,8 +91,10 @@ class ProtocolSaml(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -141,12 +147,14 @@ class ProtocolSaml(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "algorithms": SamlAlgorithms.from_dict(obj["algorithms"]) if obj.get("algorithms") is not None else None,
-            "credentials": SamlCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None,
-            "endpoints": SamlEndpoints.from_dict(obj["endpoints"]) if obj.get("endpoints") is not None else None,
-            "relayState": SamlRelayState.from_dict(obj["relayState"]) if obj.get("relayState") is not None else None,
-            "settings": SamlSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "algorithms": SamlAlgorithms.from_dict(obj["algorithms"]) if obj.get("algorithms") is not None else None,
+                "credentials": SamlCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None,
+                "endpoints": SamlEndpoints.from_dict(obj["endpoints"]) if obj.get("endpoints") is not None else None,
+                "relayState": SamlRelayState.from_dict(obj["relayState"]) if obj.get("relayState") is not None else None,
+                "settings": SamlSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
+                "type": obj.get("type")
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
-
 from typing import TYPE_CHECKING
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+
 if TYPE_CHECKING:
     from okta.models.user_factor_push_transaction_rejected import UserFactorPushTransactionRejected
     from okta.models.user_factor_push_transaction import UserFactorPushTransaction
@@ -45,7 +47,8 @@ class UserFactorPushTransaction(BaseModel):
     factor_result: Optional[StrictStr] = Field(
         default=None,
         description="Result of the verification transaction",
-        alias="factorResult")
+        alias="factorResult"
+    )
     __properties: ClassVar[List[str]] = ["factorResult"]
 
     @field_validator('factor_result')
@@ -56,7 +59,9 @@ class UserFactorPushTransaction(BaseModel):
 
         if value not in set(['WAITING (with number matching challenge)', 'WAITING', 'SUCCESS', 'REJECTED', 'TIMEOUT']):
             raise ValueError(
-                "must be one of enum values ('WAITING (with number matching challenge)', 'WAITING', 'SUCCESS', 'REJECTED', 'TIMEOUT')")
+                "must be one of enum values ('WAITING (with number matching challenge)', 'WAITING', 'SUCCESS', 'REJECTED', "
+                "'TIMEOUT')"
+            )
         return value
 
     model_config = ConfigDict(
@@ -70,7 +75,9 @@ class UserFactorPushTransaction(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'REJECTED': 'UserFactorPushTransactionRejected', 'SUCCESS': 'UserFactorPushTransaction', 'TIMEOUT': 'UserFactorPushTransactionTimeout', 'WAITING': 'UserFactorPushTransactionWaitingNoNMC', 'WAITING (with number matching challenge)': 'UserFactorPushTransactionWaitingNMC'
+        'REJECTED': 'UserFactorPushTransactionRejected', 'SUCCESS': 'UserFactorPushTransaction',
+        'TIMEOUT': 'UserFactorPushTransactionTimeout', 'WAITING': 'UserFactorPushTransactionWaitingNoNMC',
+        'WAITING (with number matching challenge)': 'UserFactorPushTransactionWaitingNMC'
     }
 
     @classmethod
@@ -93,7 +100,7 @@ class UserFactorPushTransaction(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Union[UserFactorPushTransactionRejected, UserFactorPushTransaction,
-                                                        UserFactorPushTransactionTimeout, UserFactorPushTransactionWaitingNoNMC, UserFactorPushTransactionWaitingNMC]]:
+    UserFactorPushTransactionTimeout, UserFactorPushTransactionWaitingNoNMC, UserFactorPushTransactionWaitingNMC]]:
         """Create an instance of UserFactorPushTransaction from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -107,8 +114,10 @@ class UserFactorPushTransaction(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -119,25 +128,31 @@ class UserFactorPushTransaction(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[UserFactorPushTransactionRejected, UserFactorPushTransaction,
-                                                              UserFactorPushTransactionTimeout, UserFactorPushTransactionWaitingNoNMC, UserFactorPushTransactionWaitingNMC]]:
+    UserFactorPushTransactionTimeout, UserFactorPushTransactionWaitingNoNMC, UserFactorPushTransactionWaitingNMC]]:
         """Create an instance of UserFactorPushTransaction from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'UserFactorPushTransactionRejected':
             return import_module(
-                "okta.models.user_factor_push_transaction_rejected").UserFactorPushTransactionRejected.from_dict(obj)
+                "okta.models.user_factor_push_transaction_rejected"
+            ).UserFactorPushTransactionRejected.from_dict(obj)
         if object_type == 'UserFactorPushTransaction':
             return import_module("okta.models.user_factor_push_transaction").UserFactorPushTransaction.from_dict(obj)
         if object_type == 'UserFactorPushTransactionTimeout':
             return import_module(
-                "okta.models.user_factor_push_transaction_timeout").UserFactorPushTransactionTimeout.from_dict(obj)
+                "okta.models.user_factor_push_transaction_timeout"
+            ).UserFactorPushTransactionTimeout.from_dict(obj)
         if object_type == 'UserFactorPushTransactionWaitingNoNMC':
             return import_module(
-                "okta.models.user_factor_push_transaction_waiting_no_nmc").UserFactorPushTransactionWaitingNoNMC.from_dict(obj)
+                "okta.models.user_factor_push_transaction_waiting_no_nmc"
+            ).UserFactorPushTransactionWaitingNoNMC.from_dict(obj)
         if object_type == 'UserFactorPushTransactionWaitingNMC':
             return import_module(
-                "okta.models.user_factor_push_transaction_waiting_nmc").UserFactorPushTransactionWaitingNMC.from_dict(obj)
+                "okta.models.user_factor_push_transaction_waiting_nmc"
+            ).UserFactorPushTransactionWaitingNMC.from_dict(obj)
 
-        raise ValueError("UserFactorPushTransaction failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "UserFactorPushTransaction failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

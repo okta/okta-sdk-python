@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.o_auth_resource_server_key_links import OAuthResourceServerKeyLinks
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.o_auth_resource_server_key_links import OAuthResourceServerKeyLinks
 
 
 class OAuth2ResourceServerJsonWebKey(BaseModel):
@@ -40,16 +43,22 @@ class OAuth2ResourceServerJsonWebKey(BaseModel):
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the JSON Web Key")
     kid: Optional[StrictStr] = Field(
         default=None,
-        description="Unique identifier of the JSON Web Key in the Custom Authorization Server's Public JWKS")
-    kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's key pair")
+        description="Unique identifier of the JSON Web Key in the Custom Authorization Server's Public JWKS"
+    )
+    kty: Optional[StrictStr] = Field(
+        default=None, description="Cryptographic algorithm family for the certificate's key pair"
+    )
     last_updated: Optional[StrictStr] = Field(
         default=None,
         description="Timestamp when the JSON Web Key was updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     n: Optional[StrictStr] = Field(default=None, description="RSA key value (modulus) for key binding")
     status: Optional[StrictStr] = Field(
         default='ACTIVE',
-        description="The status of the encryption key. You can use only an `ACTIVE` key to encrypt tokens issued by the authorization server.")
+        description="The status of the encryption key. You can use only an `ACTIVE` key to encrypt tokens issued by the "
+                    "authorization server."
+    )
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key")
     links: Optional[OAuthResourceServerKeyLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "e", "id", "kid", "kty", "lastUpdated", "n", "status", "use", "_links"]
@@ -97,11 +106,13 @@ class OAuth2ResourceServerJsonWebKey(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -131,16 +142,18 @@ class OAuth2ResourceServerJsonWebKey(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "e": obj.get("e"),
-            "id": obj.get("id"),
-            "kid": obj.get("kid"),
-            "kty": obj.get("kty"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "n": obj.get("n"),
-            "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE',
-            "use": obj.get("use"),
-            "_links": OAuthResourceServerKeyLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "e": obj.get("e"),
+                "id": obj.get("id"),
+                "kid": obj.get("kid"),
+                "kty": obj.get("kty"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "n": obj.get("n"),
+                "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE',
+                "use": obj.get("use"),
+                "_links": OAuthResourceServerKeyLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

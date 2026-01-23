@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,25 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.policy_network_condition import PolicyNetworkCondition
 from okta.models.policy_people_condition import PolicyPeopleCondition
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class PasswordPolicyRuleConditions(BaseModel):
     """
-    Specifies conditions that must be met during policy evaluation to apply the rule. All policy conditions and conditions for at least one rule must be met to apply the settings specified in the policy and the associated rule.
+    Specifies conditions that must be met during policy evaluation to apply the rule. All policy conditions and conditions
+    for at least one rule must be met to apply the settings specified in the policy and the associated rule.
     """  # noqa: E501
     network: Optional[PolicyNetworkCondition] = None
     people: Optional[PolicyPeopleCondition] = None
@@ -70,8 +74,10 @@ class PasswordPolicyRuleConditions(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -103,8 +109,10 @@ class PasswordPolicyRuleConditions(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "network": PolicyNetworkCondition.from_dict(obj["network"]) if obj.get("network") is not None else None,
-            "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "network": PolicyNetworkCondition.from_dict(obj["network"]) if obj.get("network") is not None else None,
+                "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,9 +38,11 @@ class PrivilegedResourceUpdateRequest(BaseModel):
     Update request for a privileged resource
     """  # noqa: E501
     profile: Optional[Dict[str, Any]] = Field(
-        default=None, description="Specific profile properties for the privileged resource")
+        default=None, description="Specific profile properties for the privileged resource"
+    )
     user_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(
-        default=None, description="The username associated with the privileged resource", alias="userName")
+        default=None, description="The username associated with the privileged resource", alias="userName"
+    )
     __properties: ClassVar[List[str]] = ["profile", "userName"]
 
     model_config = ConfigDict(
@@ -72,9 +76,11 @@ class PrivilegedResourceUpdateRequest(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "profile",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "profile",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -92,8 +98,10 @@ class PrivilegedResourceUpdateRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "profile": obj.get("profile"),
-            "userName": obj.get("userName")
-        })
+        _obj = cls.model_validate(
+            {
+                "profile": obj.get("profile"),
+                "userName": obj.get("userName")
+            }
+        )
         return _obj

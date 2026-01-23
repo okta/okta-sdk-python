@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.dynamic_network_zone_all_of_asns import DynamicNetworkZoneAllOfAsns
 from okta.models.dynamic_network_zone_all_of_locations import DynamicNetworkZoneAllOfLocations
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.network_zone import NetworkZone
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class DynamicNetworkZone(NetworkZone):
@@ -42,10 +45,13 @@ class DynamicNetworkZone(NetworkZone):
     proxy_type: Optional[StrictStr] = Field(
         default=None,
         description="The proxy type used for a Dynamic Network Zone",
-        alias="proxyType")
+        alias="proxyType"
+    )
     locations: Optional[DynamicNetworkZoneAllOfLocations] = None
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name",
-                                         "status", "system", "type", "usage", "_links", "asns", "proxyType", "locations"]
+    __properties: ClassVar[List[str]] = [
+        "created", "id", "lastUpdated", "name",
+        "status", "system", "type", "usage", "_links", "asns", "proxyType", "locations"
+    ]
 
     @field_validator('proxy_type')
     def proxy_type_validate_enum(cls, value):
@@ -87,8 +93,10 @@ class DynamicNetworkZone(NetworkZone):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -127,18 +135,22 @@ class DynamicNetworkZone(NetworkZone):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "status": obj.get("status"),
-            "system": obj.get("system"),
-            "type": obj.get("type"),
-            "usage": obj.get("usage"),
-            "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
-            "asns": DynamicNetworkZoneAllOfAsns.from_dict(obj["asns"]) if obj.get("asns") is not None else None,
-            "proxyType": obj.get("proxyType"),
-            "locations": DynamicNetworkZoneAllOfLocations.from_dict(obj["locations"]) if obj.get("locations") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "status": obj.get("status"),
+                "system": obj.get("system"),
+                "type": obj.get("type"),
+                "usage": obj.get("usage"),
+                "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
+                "asns": DynamicNetworkZoneAllOfAsns.from_dict(obj["asns"]) if obj.get("asns") is not None else None,
+                "proxyType": obj.get("proxyType"),
+                "locations": DynamicNetworkZoneAllOfLocations.from_dict(obj["locations"]) if obj.get(
+                    "locations"
+                ) is not None else None
+            }
+        )
         return _obj

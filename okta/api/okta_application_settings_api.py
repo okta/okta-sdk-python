@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.admin_console_settings import AdminConsoleSettings
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.admin_console_settings import AdminConsoleSettings
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -44,26 +45,29 @@ class OktaApplicationSettingsApi(ApiClient):
 
     @validate_call
     async def get_first_party_app_settings(
-        self,
-        app_name: Annotated[StrictStr, Field(description="The key name for the Okta app.<br> Supported apps:   * Okta Admin Console (`admin-console`) ")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_name: Annotated[StrictStr, Field(
+                description="The key name for the Okta app.<br> Supported apps:   * Okta Admin Console (`admin-console`) "
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AdminConsoleSettings:
         """Retrieve the Okta application settings
 
         Retrieves the settings for an Okta app (also known as an Okta first-party app)
 
-        :param app_name: The key name for the Okta app.<br> Supported apps:   * Okta Admin Console (`admin-console`)  (required)
+        :param app_name: The key name for the Okta app.<br> Supported apps:   * Okta Admin Console (`admin-console`)  (
+        required)
         :type app_name: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -146,12 +150,12 @@ class OktaApplicationSettingsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_first_party_app_settings_serialize(
-        self,
-        app_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -204,27 +208,30 @@ class OktaApplicationSettingsApi(ApiClient):
 
     @validate_call
     async def replace_first_party_app_settings(
-        self,
-        app_name: Annotated[StrictStr, Field(description="The key name for the Okta app.<br> Supported apps:   * Okta Admin Console (`admin-console`) ")],
-        admin_console_settings: AdminConsoleSettings,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_name: Annotated[StrictStr, Field(
+                description="The key name for the Okta app.<br> Supported apps:   * Okta Admin Console (`admin-console`) "
+            )],
+            admin_console_settings: AdminConsoleSettings,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AdminConsoleSettings:
         """Replace the Okta application settings
 
         Replaces the settings for an Okta app (also known as an Okta first-party app)
 
-        :param app_name: The key name for the Okta app.<br> Supported apps:   * Okta Admin Console (`admin-console`)  (required)
+        :param app_name: The key name for the Okta app.<br> Supported apps:   * Okta Admin Console (`admin-console`)  (
+        required)
         :type app_name: str
         :param admin_console_settings: (required)
         :type admin_console_settings: AdminConsoleSettings
@@ -311,13 +318,13 @@ class OktaApplicationSettingsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_first_party_app_settings_serialize(
-        self,
-        app_name,
-        admin_console_settings,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_name,
+            admin_console_settings,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

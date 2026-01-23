@@ -145,10 +145,12 @@ class PaginationHelper:
 
                     cursor = None
                     if 'after' in query_params:
-                        cursor = query_params['after'][0] if isinstance(query_params['after'], list) else query_params['after']
+                        cursor = query_params['after'][0] if isinstance(query_params['after'], list) else query_params[
+                            'after']
                     elif 'before' in query_params:
                         cursor = query_params['before'][0] if isinstance(
-                            query_params['before'], list) else query_params['before']
+                            query_params['before'], list
+                        ) else query_params['before']
 
                     info[rel_type] = cursor
 
@@ -159,10 +161,10 @@ class PaginationHelper:
 
 
 async def paginate_all(
-    api_method,
-    limit: int = 200,
-    max_pages: Optional[int] = None,
-    **kwargs
+        api_method,
+        limit: int = 200,
+        max_pages: Optional[int] = None,
+        **kwargs
 ):
     """
     Automatically paginate through all results from an Okta API list method.
@@ -221,10 +223,10 @@ async def paginate_all(
 
 
 async def paginate_pages(
-    api_method,
-    limit: int = 200,
-    max_pages: Optional[int] = None,
-    **kwargs
+        api_method,
+        limit: int = 200,
+        max_pages: Optional[int] = None,
+        **kwargs
 ):
     """
     Paginate through results, yielding complete pages.

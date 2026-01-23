@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.caep_credential_change_event_reason_admin import CaepCredentialChangeEventReasonAdmin
 from okta.models.caep_credential_change_event_reason_user import CaepCredentialChangeEventReasonUser
 from okta.models.ssf_transmitter_security_event_subject import SsfTransmitterSecurityEventSubject
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class CaepCredentialChangeEvent(BaseModel):
@@ -39,7 +42,9 @@ class CaepCredentialChangeEvent(BaseModel):
     """  # noqa: E501
     change_type: StrictStr = Field(description="The type of action done towards the credential")
     credential_type: StrictStr = Field(
-        description="The credential type of the changed credential. It will one of the supported enum values or any other credential type supported mutually by the Transmitter and the Receiver.")
+        description="The credential type of the changed credential. It will one of the supported enum values or any other "
+                    "credential type supported mutually by the Transmitter and the Receiver."
+    )
     event_timestamp: Optional[StrictInt] = Field(default=None, description="The time of the event (UNIX timestamp)")
     fido2_aaguid: Optional[StrictStr] = Field(default=None, description="FIDO2 Authenticator Attestation GUID")
     friendly_name: Optional[StrictStr] = Field(default=None, description="Credential friendly name")
@@ -47,8 +52,10 @@ class CaepCredentialChangeEvent(BaseModel):
     reason_admin: Optional[CaepCredentialChangeEventReasonAdmin] = None
     reason_user: Optional[CaepCredentialChangeEventReasonUser] = None
     subject: Optional[SsfTransmitterSecurityEventSubject] = None
-    __properties: ClassVar[List[str]] = ["change_type", "credential_type", "event_timestamp",
-                                         "fido2_aaguid", "friendly_name", "initiating_entity", "reason_admin", "reason_user", "subject"]
+    __properties: ClassVar[List[str]] = [
+        "change_type", "credential_type", "event_timestamp",
+        "fido2_aaguid", "friendly_name", "initiating_entity", "reason_admin", "reason_user", "subject"
+    ]
 
     @field_validator('change_type')
     def change_type_validate_enum(cls, value):
@@ -60,9 +67,22 @@ class CaepCredentialChangeEvent(BaseModel):
     @field_validator('credential_type')
     def credential_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['password', 'pin', 'x509', 'fido2-platform', 'fido2-roaming', 'fido-u2f', 'verifiable-credential', 'phone-voice', 'phone-sms', 'app', 'SECURITY_QUESTION', 'SOFT_TOKEN', 'OKTA_SOFT_TOKEN', 'VIP_FACTOR',
-                            'EMAIL_FACTOR', 'SECUREID_FACTOR', 'DUO_SECURITY', 'OKTA_VERIFY_PUSH', 'YUBIKEY_OTP_FACTOR', 'FIDO_WEBAUTHN', 'CUSTOM_APP_PUSH', 'CLAIMS_AS_FACTOR', 'HOTP_FACTOR', 'SIGNED_NONCE', 'ALL_FACTORS', 'TOTP']):
-            raise ValueError("must be one of enum values ('password', 'pin', 'x509', 'fido2-platform', 'fido2-roaming', 'fido-u2f', 'verifiable-credential', 'phone-voice', 'phone-sms', 'app', 'SECURITY_QUESTION', 'SOFT_TOKEN', 'OKTA_SOFT_TOKEN', 'VIP_FACTOR', 'EMAIL_FACTOR', 'SECUREID_FACTOR', 'DUO_SECURITY', 'OKTA_VERIFY_PUSH', 'YUBIKEY_OTP_FACTOR', 'FIDO_WEBAUTHN', 'CUSTOM_APP_PUSH', 'CLAIMS_AS_FACTOR', 'HOTP_FACTOR', 'SIGNED_NONCE', 'ALL_FACTORS', 'TOTP')")
+        if value not in set(
+                [
+                    'password', 'pin', 'x509', 'fido2-platform', 'fido2-roaming', 'fido-u2f', 'verifiable-credential',
+                    'phone-voice', 'phone-sms', 'app', 'SECURITY_QUESTION', 'SOFT_TOKEN', 'OKTA_SOFT_TOKEN', 'VIP_FACTOR',
+                    'EMAIL_FACTOR', 'SECUREID_FACTOR', 'DUO_SECURITY', 'OKTA_VERIFY_PUSH', 'YUBIKEY_OTP_FACTOR',
+                    'FIDO_WEBAUTHN', 'CUSTOM_APP_PUSH', 'CLAIMS_AS_FACTOR', 'HOTP_FACTOR', 'SIGNED_NONCE', 'ALL_FACTORS',
+                    'TOTP'
+                ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('password', 'pin', 'x509', 'fido2-platform', 'fido2-roaming', 'fido-u2f', "
+                "'verifiable-credential', 'phone-voice', 'phone-sms', 'app', 'SECURITY_QUESTION', 'SOFT_TOKEN', "
+                "'OKTA_SOFT_TOKEN', 'VIP_FACTOR', 'EMAIL_FACTOR', 'SECUREID_FACTOR', 'DUO_SECURITY', 'OKTA_VERIFY_PUSH', "
+                "'YUBIKEY_OTP_FACTOR', 'FIDO_WEBAUTHN', 'CUSTOM_APP_PUSH', 'CLAIMS_AS_FACTOR', 'HOTP_FACTOR', "
+                "'SIGNED_NONCE', 'ALL_FACTORS', 'TOTP')"
+            )
         return value
 
     @field_validator('initiating_entity')
@@ -105,8 +125,10 @@ class CaepCredentialChangeEvent(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -145,15 +167,23 @@ class CaepCredentialChangeEvent(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "change_type": obj.get("change_type"),
-            "credential_type": obj.get("credential_type"),
-            "event_timestamp": obj.get("event_timestamp"),
-            "fido2_aaguid": obj.get("fido2_aaguid"),
-            "friendly_name": obj.get("friendly_name"),
-            "initiating_entity": obj.get("initiating_entity"),
-            "reason_admin": CaepCredentialChangeEventReasonAdmin.from_dict(obj["reason_admin"]) if obj.get("reason_admin") is not None else None,
-            "reason_user": CaepCredentialChangeEventReasonUser.from_dict(obj["reason_user"]) if obj.get("reason_user") is not None else None,
-            "subject": SsfTransmitterSecurityEventSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "change_type": obj.get("change_type"),
+                "credential_type": obj.get("credential_type"),
+                "event_timestamp": obj.get("event_timestamp"),
+                "fido2_aaguid": obj.get("fido2_aaguid"),
+                "friendly_name": obj.get("friendly_name"),
+                "initiating_entity": obj.get("initiating_entity"),
+                "reason_admin": CaepCredentialChangeEventReasonAdmin.from_dict(obj["reason_admin"]) if obj.get(
+                    "reason_admin"
+                ) is not None else None,
+                "reason_user": CaepCredentialChangeEventReasonUser.from_dict(obj["reason_user"]) if obj.get(
+                    "reason_user"
+                ) is not None else None,
+                "subject": SsfTransmitterSecurityEventSubject.from_dict(obj["subject"]) if obj.get(
+                    "subject"
+                ) is not None else None
+            }
+        )
         return _obj

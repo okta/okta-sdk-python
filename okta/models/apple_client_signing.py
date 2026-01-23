@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,29 +20,36 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class AppleClientSigning(BaseModel):
     """
-    Information used to generate the secret JSON Web Token for the token requests to Apple IdP > **Note:** The `privateKey` property is required for a CREATE request. For an UPDATE request, it can be null and keeps the existing value if it's null. The `privateKey` property isn't returned for LIST and GET requests or UPDATE requests if it's null.
+    Information used to generate the secret JSON Web Token for the token requests to Apple IdP > **Note:** The
+    `privateKey` property is required for a CREATE request. For an UPDATE request, it can be null and keeps the existing
+    value if it's null. The `privateKey` property isn't returned for LIST and GET requests or UPDATE requests if it's null.
     """  # noqa: E501
     kid: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
-        default=None, description="The key ID that you obtained from Apple when you created the private key for the client")
+        default=None, description="The key ID that you obtained from Apple when you created the private key for the client"
+    )
     private_key: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
-        default=None, description="The PKCS \\#8 encoded private key that you created for the client and downloaded from Apple", alias="privateKey")
+        default=None,
+        description="The PKCS \\#8 encoded private key that you created for the client and downloaded from Apple",
+        alias="privateKey"
+    )
     team_id: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
-        default=None, description="The Team ID associated with your Apple developer account", alias="teamId")
+        default=None, description="The Team ID associated with your Apple developer account", alias="teamId"
+    )
     __properties: ClassVar[List[str]] = ["kid", "privateKey", "teamId"]
 
     model_config = ConfigDict(
@@ -73,8 +82,10 @@ class AppleClientSigning(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -92,9 +103,11 @@ class AppleClientSigning(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "kid": obj.get("kid"),
-            "privateKey": obj.get("privateKey"),
-            "teamId": obj.get("teamId")
-        })
+        _obj = cls.model_validate(
+            {
+                "kid": obj.get("kid"),
+                "privateKey": obj.get("privateKey"),
+                "teamId": obj.get("teamId")
+            }
+        )
         return _obj

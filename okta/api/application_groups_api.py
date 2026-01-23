@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.application_group_assignment import ApplicationGroupAssignment
-from okta.models.json_patch_operation import JsonPatchOperation
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.application_group_assignment import ApplicationGroupAssignment
+from okta.models.json_patch_operation import JsonPatchOperation
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,26 +47,31 @@ class ApplicationGroupsApi(ApiClient):
 
     @validate_call
     async def assign_group_to_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        application_group_assignment: Optional[ApplicationGroupAssignment] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            application_group_assignment: Optional[ApplicationGroupAssignment] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApplicationGroupAssignment:
         """Assign an application group
 
-        Assigns a [Group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) to an app, which in turn assigns the app to each [User](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/) that belongs to the group. The resulting application user [scope](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/ApplicationUsers/#tag/ApplicationUsers/operation/listApplicationUsers!c=200&path=scope&t=response) is `GROUP` since the assignment was from the group membership.
+        Assigns a [Group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) to an app,
+        which in turn assigns the app to each [User](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/) that belongs to the group. The
+        resulting application user [scope](https://developer.okta.com/docs/api/openapi/okta-management/management/tag
+        /ApplicationUsers/#tag/ApplicationUsers/operation/listApplicationUsers!c=200&path=scope&t=response) is `GROUP`
+        since the assignment was from the group membership.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -158,14 +164,14 @@ class ApplicationGroupsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_group_to_application_serialize(
-        self,
-        app_id,
-        group_id,
-        application_group_assignment,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            group_id,
+            application_group_assignment,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -236,23 +242,26 @@ class ApplicationGroupsApi(ApiClient):
 
     @validate_call
     async def get_application_group_assignment(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional query parameter to return the corresponding assigned [group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) or the group assignment metadata details in the `_embedded` property.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional query parameter to return the corresponding assigned [group]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) or the "
+                            "group assignment metadata details in the `_embedded` property."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApplicationGroupAssignment:
         """Retrieve an application group
 
@@ -262,7 +271,9 @@ class ApplicationGroupsApi(ApiClient):
         :type app_id: str
         :param group_id: The `id` of the group (required)
         :type group_id: str
-        :param expand: An optional query parameter to return the corresponding assigned [group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) or the group assignment metadata details in the `_embedded` property.
+        :param expand: An optional query parameter to return the corresponding assigned [group](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) or the group assignment
+        metadata details in the `_embedded` property.
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -348,14 +359,14 @@ class ApplicationGroupsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_application_group_assignment_serialize(
-        self,
-        app_id,
-        group_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            group_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -377,7 +388,6 @@ class ApplicationGroupsApi(ApiClient):
             _path_params['groupId'] = group_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -414,27 +424,42 @@ class ApplicationGroupsApi(ApiClient):
 
     @validate_call
     async def list_application_group_assignments(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        q: Annotated[Optional[StrictStr], Field(description="Specifies a filter for a list of assigned groups returned based on their names. The value of `q` is matched against the group `name`. This filter only supports the `startsWith` operation that matches the `q` string against the beginning of the [group name](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=profile/name&t=response).")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the `next` page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](https://developer.okta.com/docs/api/#pagination).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=20)]], Field(
-            description="Specifies the number of objects to return per page. If there are multiple pages of results, the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). See [Pagination](/#pagination).")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional query parameter to return the corresponding assigned [group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) or the group assignment metadata details in the `_embedded` property.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            q: Annotated[Optional[StrictStr], Field(
+                description="Specifies a filter for a list of assigned groups returned based on their names. The value of "
+                            "`q` is matched against the group `name`. This filter only supports the `startsWith` operation "
+                            "that matches the `q` string against the beginning of the [group name]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group"
+                            "/operation/listGroups!c=200&path=profile/name&t=response)."
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the `next` page of results. Treat this as an opaque value "
+                            "obtained through the next link relationship. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=20)]], Field(
+                description="Specifies the number of objects to return per page. If there are multiple pages of results, "
+                            "the Link header contains a `next` link that you need to use as an opaque value (follow it, "
+                            "don't parse it). See [Pagination](/#pagination)."
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional query parameter to return the corresponding assigned [group]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) or the "
+                            "group assignment metadata details in the `_embedded` property."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ApplicationGroupAssignment]:
         """List all application groups
 
@@ -442,13 +467,22 @@ class ApplicationGroupsApi(ApiClient):
 
         :param app_id: Application ID (required)
         :type app_id: str
-        :param q: Specifies a filter for a list of assigned groups returned based on their names. The value of `q` is matched against the group `name`. This filter only supports the `startsWith` operation that matches the `q` string against the beginning of the [group name](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=profile/name&t=response).
+        :param q: Specifies a filter for a list of assigned groups returned based on their names. The value of `q` is
+        matched against the group `name`. This filter only supports the `startsWith` operation that matches the `q` string
+        against the beginning of the [group name](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c
+        =200&path=profile/name&t=response).
         :type q: str
-        :param after: Specifies the pagination cursor for the `next` page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](https://developer.okta.com/docs/api/#pagination).
+        :param after: Specifies the pagination cursor for the `next` page of results. Treat this as an opaque value
+        obtained through the next link relationship. See [Pagination](https://developer.okta.com/docs/api/#pagination).
         :type after: str
-        :param limit: Specifies the number of objects to return per page. If there are multiple pages of results, the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). See [Pagination](/#pagination).
+        :param limit: Specifies the number of objects to return per page. If there are multiple pages of results,
+        the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). See [
+        Pagination](/#pagination).
         :type limit: int
-        :param expand: An optional query parameter to return the corresponding assigned [group](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) or the group assignment metadata details in the `_embedded` property.
+        :param expand: An optional query parameter to return the corresponding assigned [group](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/) or the group assignment
+        metadata details in the `_embedded` property.
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -536,16 +570,16 @@ class ApplicationGroupsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_application_group_assignments_serialize(
-        self,
-        app_id,
-        q,
-        after,
-        limit,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            q,
+            after,
+            limit,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -565,19 +599,15 @@ class ApplicationGroupsApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if q is not None:
-
             _query_params.append(('q', q))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -614,21 +644,21 @@ class ApplicationGroupsApi(ApiClient):
 
     @validate_call
     async def unassign_application_from_group(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign an application group
 
@@ -712,13 +742,13 @@ class ApplicationGroupsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_application_from_group_serialize(
-        self,
-        app_id,
-        group_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            group_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -773,22 +803,22 @@ class ApplicationGroupsApi(ApiClient):
 
     @validate_call
     async def update_group_assignment_to_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        json_patch_operation: Optional[List[JsonPatchOperation]] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            json_patch_operation: Optional[List[JsonPatchOperation]] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApplicationGroupAssignment:
         """Update an application group
 
@@ -885,14 +915,14 @@ class ApplicationGroupsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_group_assignment_to_application_serialize(
-        self,
-        app_id,
-        group_id,
-        json_patch_operation,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            group_id,
+            json_patch_operation,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

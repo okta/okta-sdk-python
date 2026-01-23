@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.group_schema_attribute_enum_inner import GroupSchemaAttributeEnumInner
 from okta.models.user_schema_attribute_enum import UserSchemaAttributeEnum
 from okta.models.user_schema_attribute_format import UserSchemaAttributeFormat
@@ -36,8 +41,6 @@ from okta.models.user_schema_attribute_mutability_string import UserSchemaAttrib
 from okta.models.user_schema_attribute_permission import UserSchemaAttributePermission
 from okta.models.user_schema_attribute_scope import UserSchemaAttributeScope
 from okta.models.user_schema_attribute_type import UserSchemaAttributeType
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class GroupSchemaAttribute(BaseModel):
@@ -46,57 +49,83 @@ class GroupSchemaAttribute(BaseModel):
     """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the property")
     enum: Optional[List[GroupSchemaAttributeEnumInner]] = Field(
-        default=None, description="Enumerated value of the property.  The value of the property is limited to one of the values specified in the enum definition. The list of values for the enum must consist of unique elements.")
+        default=None,
+        description="Enumerated value of the property.  The value of the property is limited to one of the values "
+                    "specified in the enum definition. The list of values for the enum must consist of unique elements."
+    )
     external_name: Optional[StrictStr] = Field(
         default=None,
         description="Name of the property as it exists in an external application",
-        alias="externalName")
+        alias="externalName"
+    )
     external_namespace: Optional[StrictStr] = Field(
         default=None,
         description="Namespace from the external application",
-        alias="externalNamespace")
-    format: Optional[UserSchemaAttributeFormat] = Field(default=None,
-                                                        description="Identifies the type of data represented by the string")
+        alias="externalNamespace"
+    )
+    format: Optional[UserSchemaAttributeFormat] = Field(
+        default=None,
+        description="Identifies the type of data represented by the string"
+    )
     items: Optional[UserSchemaAttributeItems] = None
-    master: Optional[UserSchemaAttributeMaster] = Field(default=None, description="Identifies where the property is mastered")
+    master: Optional[UserSchemaAttributeMaster] = Field(
+        default=None, description="Identifies where the property is mastered"
+    )
     max_length: Optional[StrictInt] = Field(
         default=None,
         description="Maximum character length of a string property",
-        alias="maxLength")
+        alias="maxLength"
+    )
     min_length: Optional[StrictInt] = Field(
         default=None,
         description="Minimum character length of a string property",
-        alias="minLength")
+        alias="minLength"
+    )
     mutability: Optional[UserSchemaAttributeMutabilityString] = Field(
-        default=None, description="Defines the mutability of the property")
+        default=None, description="Defines the mutability of the property"
+    )
     one_of: Optional[List[UserSchemaAttributeEnum]] = Field(
-        default=None, description="Non-empty array of valid JSON schemas.  The `oneOf` key is only supported in conjunction with `enum` and provides a mechanism to return a display name for the `enum` value.<br> Each schema has the following format:  ``` {   \"const\": \"enumValue\",   \"title\": \"display name\" } ```  When `enum` is used in conjunction with `oneOf`, you must keep the set of enumerated values and their order.<br> For example:  ``` \"enum\": [\"S\",\"M\",\"L\",\"XL\"], \"oneOf\": [     {\"const\": \"S\", \"title\": \"Small\"},     {\"const\": \"M\", \"title\": \"Medium\"},     {\"const\": \"L\", \"title\": \"Large\"},     {\"const\": \"XL\", \"title\": \"Extra Large\"}   ] ```", alias="oneOf")
+        default=None,
+        description="Non-empty array of valid JSON schemas.  The `oneOf` key is only supported in conjunction with `enum` "
+                    "and provides a mechanism to return a display name for the `enum` value.<br> Each schema has the "
+                    "following format:  ``` {   \"const\": \"enumValue\",   \"title\": \"display name\" } ```  When `enum` "
+                    "is used in conjunction with `oneOf`, you must keep the set of enumerated values and their order.<br> "
+                    "For example:  ``` \"enum\": [\"S\",\"M\",\"L\",\"XL\"], \"oneOf\": [     {\"const\": \"S\", "
+                    "\"title\": \"Small\"},     {\"const\": \"M\", \"title\": \"Medium\"},     {\"const\": \"L\", "
+                    "\"title\": \"Large\"},     {\"const\": \"XL\", \"title\": \"Extra Large\"}   ] ```",
+        alias="oneOf"
+    )
     permissions: Optional[List[UserSchemaAttributePermission]] = Field(
-        default=None, description="Access control permissions for the property")
+        default=None, description="Access control permissions for the property"
+    )
     required: Optional[StrictBool] = Field(default=None, description="Determines whether the property is required")
     scope: Optional[UserSchemaAttributeScope] = Field(
-        default=None, description="Determines whether a group attribute can be set at the individual or group level")
+        default=None, description="Determines whether a group attribute can be set at the individual or group level"
+    )
     title: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(
-        default=None, description="User-defined display name for the property")
+        default=None, description="User-defined display name for the property"
+    )
     type: Optional[UserSchemaAttributeType] = Field(default=None, description="Type of property")
     unique: Optional[StrictBool] = Field(default=None, description="Determines whether property values must be unique")
-    __properties: ClassVar[List[str]] = ["description",
-                                         "enum",
-                                         "externalName",
-                                         "externalNamespace",
-                                         "format",
-                                         "items",
-                                         "master",
-                                         "maxLength",
-                                         "minLength",
-                                         "mutability",
-                                         "oneOf",
-                                         "permissions",
-                                         "required",
-                                         "scope",
-                                         "title",
-                                         "type",
-                                         "unique"]
+    __properties: ClassVar[List[str]] = [
+        "description",
+        "enum",
+        "externalName",
+        "externalNamespace",
+        "format",
+        "items",
+        "master",
+        "maxLength",
+        "minLength",
+        "mutability",
+        "oneOf",
+        "permissions",
+        "required",
+        "scope",
+        "title",
+        "type",
+        "unique"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -128,8 +157,10 @@ class GroupSchemaAttribute(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -222,23 +253,31 @@ class GroupSchemaAttribute(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "enum": [GroupSchemaAttributeEnumInner.from_dict(_item) for _item in obj["enum"]] if obj.get("enum") is not None else None,
-            "externalName": obj.get("externalName"),
-            "externalNamespace": obj.get("externalNamespace"),
-            "format": obj.get("format"),
-            "items": UserSchemaAttributeItems.from_dict(obj["items"]) if obj.get("items") is not None else None,
-            "master": UserSchemaAttributeMaster.from_dict(obj["master"]) if obj.get("master") is not None else None,
-            "maxLength": obj.get("maxLength"),
-            "minLength": obj.get("minLength"),
-            "mutability": obj.get("mutability"),
-            "oneOf": [UserSchemaAttributeEnum.from_dict(_item) for _item in obj["oneOf"]] if obj.get("oneOf") is not None else None,
-            "permissions": [UserSchemaAttributePermission.from_dict(_item) for _item in obj["permissions"]] if obj.get("permissions") is not None else None,
-            "required": obj.get("required"),
-            "scope": obj.get("scope"),
-            "title": obj.get("title"),
-            "type": obj.get("type"),
-            "unique": obj.get("unique")
-        })
+        _obj = cls.model_validate(
+            {
+                "description": obj.get("description"),
+                "enum": [GroupSchemaAttributeEnumInner.from_dict(_item) for _item in obj["enum"]] if obj.get(
+                    "enum"
+                ) is not None else None,
+                "externalName": obj.get("externalName"),
+                "externalNamespace": obj.get("externalNamespace"),
+                "format": obj.get("format"),
+                "items": UserSchemaAttributeItems.from_dict(obj["items"]) if obj.get("items") is not None else None,
+                "master": UserSchemaAttributeMaster.from_dict(obj["master"]) if obj.get("master") is not None else None,
+                "maxLength": obj.get("maxLength"),
+                "minLength": obj.get("minLength"),
+                "mutability": obj.get("mutability"),
+                "oneOf": [UserSchemaAttributeEnum.from_dict(_item) for _item in obj["oneOf"]] if obj.get(
+                    "oneOf"
+                ) is not None else None,
+                "permissions": [UserSchemaAttributePermission.from_dict(_item) for _item in obj["permissions"]] if obj.get(
+                    "permissions"
+                ) is not None else None,
+                "required": obj.get("required"),
+                "scope": obj.get("scope"),
+                "title": obj.get("title"),
+                "type": obj.get("type"),
+                "unique": obj.get("unique")
+            }
+        )
         return _obj

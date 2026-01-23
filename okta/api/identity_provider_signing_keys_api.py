@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple
+from typing import List, Union
 
 from pydantic import Field, StrictBytes, StrictStr
-from typing import List, Union
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.csr_metadata import CsrMetadata
 from okta.models.id_p_csr import IdPCsr
 from okta.models.id_p_key_credential import IdPKeyCredential
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,26 +48,28 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def clone_identity_provider_key(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
-        target_idp_id: Annotated[StrictStr, Field(description="`id` of the target IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
+            target_idp_id: Annotated[StrictStr, Field(description="`id` of the target IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPKeyCredential:
         """Clone a signing key credential for IdP
 
-        Clones an X.509 certificate for an identity provider (IdP) signing key credential from a source IdP to target IdP > **Caution:** Sharing certificates isn't a recommended security practice.  > **Note:** If the key is already present in the list of key credentials for the target IdP, you receive a 400 error response.
+        Clones an X.509 certificate for an identity provider (IdP) signing key credential from a source IdP to target IdP
+        > **Caution:** Sharing certificates isn't a recommended security practice.  > **Note:** If the key is already
+        present in the list of key credentials for the target IdP, you receive a 400 error response.
 
         :param idp_id: `id` of IdP (required)
         :type idp_id: str
@@ -158,14 +161,14 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _clone_identity_provider_key_serialize(
-        self,
-        idp_id,
-        kid,
-        target_idp_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            kid,
+            target_idp_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -187,7 +190,6 @@ class IdentityProviderSigningKeysApi(ApiClient):
             _path_params['kid'] = kid
         # process the query parameters
         if target_idp_id is not None:
-
             _query_params.append(('targetIdpId', target_idp_id))
 
         # process the header parameters
@@ -224,25 +226,28 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def generate_csr_for_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        metadata: CsrMetadata,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            metadata: CsrMetadata,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPCsr:
         """Generate a certificate signing request
 
-        Generates a new key pair and returns a certificate signing request (CSR) for it > **Note:** The private key isn't listed in the [signing key credentials for the identity provider (IdP)](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProviderSigningKeys/#tag/IdentityProviderSigningKeys/operation/listIdentityProviderSigningKeys) until it's published.
+        Generates a new key pair and returns a certificate signing request (CSR) for it > **Note:** The private key isn't
+        listed in the [signing key credentials for the identity provider (IdP)](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProviderSigningKeys/#tag
+        /IdentityProviderSigningKeys/operation/listIdentityProviderSigningKeys) until it's published.
 
         :param idp_id: `id` of IdP (required)
         :type idp_id: str
@@ -332,13 +337,13 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _generate_csr_for_identity_provider_serialize(
-        self,
-        idp_id,
-        metadata,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            metadata,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -408,25 +413,30 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def generate_identity_provider_signing_key(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        validity_years: Annotated[int, Field(le=10, strict=True, ge=2, description="expiry of the IdP key credential")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            validity_years: Annotated[int, Field(le=10, strict=True, ge=2, description="expiry of the IdP key credential")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPKeyCredential:
         """Generate a new signing key credential for IdP
 
-        Generates a new X.509 certificate for an identity provider (IdP) signing key credential to be used for signing assertions sent to the IdP. IdP signing keys are read-only. > **Note:** To update an IdP with the newly generated key credential, [update your IdP](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/replaceIdentityProvider) using the returned key's `kid` in the [signing credential](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/replaceIdentityProvider!path=protocol/0/credentials/signing/kid&t=request).
+        Generates a new X.509 certificate for an identity provider (IdP) signing key credential to be used for signing
+        assertions sent to the IdP. IdP signing keys are read-only. > **Note:** To update an IdP with the newly generated
+        key credential, [update your IdP](https://developer.okta.com/docs/api/openapi/okta-management/management/tag
+        /IdentityProvider/#tag/IdentityProvider/operation/replaceIdentityProvider) using the returned key's `kid` in the [
+        signing credential](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider
+        /#tag/IdentityProvider/operation/replaceIdentityProvider!path=protocol/0/credentials/signing/kid&t=request).
 
         :param idp_id: `id` of IdP (required)
         :type idp_id: str
@@ -515,13 +525,13 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _generate_identity_provider_signing_key_serialize(
-        self,
-        idp_id,
-        validity_years,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            validity_years,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -541,7 +551,6 @@ class IdentityProviderSigningKeysApi(ApiClient):
             _path_params['idpId'] = idp_id
         # process the query parameters
         if validity_years is not None:
-
             _query_params.append(('validityYears', validity_years))
 
         # process the header parameters
@@ -578,21 +587,21 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def get_csr_for_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPCsr:
         """Retrieve a certificate signing request
 
@@ -685,13 +694,13 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_csr_for_identity_provider_serialize(
-        self,
-        idp_id,
-        idp_csr_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            idp_csr_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -747,21 +756,21 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def get_identity_provider_signing_key(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPKeyCredential:
         """Retrieve a signing key credential for IdP
 
@@ -854,13 +863,13 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_identity_provider_signing_key_serialize(
-        self,
-        idp_id,
-        kid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            kid,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -915,20 +924,20 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def list_active_identity_provider_signing_key(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdPKeyCredential]:
         """List the active signing key credential for IdP
 
@@ -1017,12 +1026,12 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_active_identity_provider_signing_key_serialize(
-        self,
-        idp_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1075,20 +1084,20 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def list_csrs_for_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdPCsr]:
         """List all certificate signing requests
 
@@ -1178,12 +1187,12 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_csrs_for_identity_provider_serialize(
-        self,
-        idp_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1236,20 +1245,20 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def list_identity_provider_signing_keys(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdPKeyCredential]:
         """List all signing key credentials for IdP
 
@@ -1339,12 +1348,12 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_identity_provider_signing_keys_serialize(
-        self,
-        idp_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1397,26 +1406,29 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def publish_csr_for_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
-        body: Union[StrictBytes, StrictStr],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+            body: Union[StrictBytes, StrictStr],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPKeyCredential:
         """Publish a certificate signing request
 
-        Publishes the certificate signing request (CSR) with a signed X.509 certificate and adds it into the signing key credentials for the identity provider (IdP) > **Notes:** > * Publishing a certificate completes the lifecycle of the CSR, and it's no longer accessible. > * If the validity period of the certificate is less than 90 days, a 400 error response is returned.
+        Publishes the certificate signing request (CSR) with a signed X.509 certificate and adds it into the signing key
+        credentials for the identity provider (IdP) > **Notes:** > * Publishing a certificate completes the lifecycle of
+        the CSR, and it's no longer accessible. > * If the validity period of the certificate is less than 90 days,
+        a 400 error response is returned.
 
         :param idp_id: `id` of IdP (required)
         :type idp_id: str
@@ -1509,14 +1521,14 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _publish_csr_for_identity_provider_serialize(
-        self,
-        idp_id,
-        idp_csr_id,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            idp_csr_id,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1594,21 +1606,21 @@ class IdentityProviderSigningKeysApi(ApiClient):
 
     @validate_call
     async def revoke_csr_for_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke a certificate signing request
 
@@ -1692,13 +1704,13 @@ class IdentityProviderSigningKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_csr_for_identity_provider_serialize(
-        self,
-        idp_id,
-        idp_csr_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            idp_csr_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

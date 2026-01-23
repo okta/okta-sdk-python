@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,30 +20,36 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.o_auth2_client_links import OAuth2ClientLinks
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.o_auth2_client_links import OAuth2ClientLinks
 
 
 class OAuth2Client(BaseModel):
     """
     OAuth2Client
     """  # noqa: E501
-    client_id: Optional[StrictStr] = Field(default=None,
-                                           description="Unique key for the client application. The `client_id` is immutable.")
-    client_name: Optional[StrictStr] = Field(default=None, description="Human-readable string name of the client application")
+    client_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique key for the client application. The `client_id` is immutable."
+    )
+    client_name: Optional[StrictStr] = Field(
+        default=None, description="Human-readable string name of the client application"
+    )
     client_uri: Optional[StrictStr] = None
     logo_uri: Optional[StrictStr] = Field(
         default=None,
-        description="URL string that references a logo for the client consent dialog (not the sign-in dialog)")
+        description="URL string that references a logo for the client consent dialog (not the sign-in dialog)"
+    )
     links: Optional[OAuth2ClientLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["client_id", "client_name", "client_uri", "logo_uri", "_links"]
 
@@ -79,12 +87,14 @@ class OAuth2Client(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "client_id",
-            "client_name",
-            "client_uri",
-            "logo_uri",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "client_id",
+                "client_name",
+                "client_uri",
+                "logo_uri",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -109,11 +119,13 @@ class OAuth2Client(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "client_id": obj.get("client_id"),
-            "client_name": obj.get("client_name"),
-            "client_uri": obj.get("client_uri"),
-            "logo_uri": obj.get("logo_uri"),
-            "_links": OAuth2ClientLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "client_id": obj.get("client_id"),
+                "client_name": obj.get("client_name"),
+                "client_uri": obj.get("client_uri"),
+                "logo_uri": obj.get("logo_uri"),
+                "_links": OAuth2ClientLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

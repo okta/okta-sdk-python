@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.default_app import DefaultApp
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.default_app import DefaultApp
 
 
 class BrandWithEmbedded(BaseModel):
@@ -40,26 +43,36 @@ class BrandWithEmbedded(BaseModel):
     agree_to_custom_privacy_policy: Optional[StrictBool] = Field(
         default=None,
         description="Consent for updating the custom privacy URL. Not required when resetting the URL.",
-        alias="agreeToCustomPrivacyPolicy")
+        alias="agreeToCustomPrivacyPolicy"
+    )
     custom_privacy_policy_url: Optional[StrictStr] = Field(
-        default=None, description="Custom privacy policy URL", alias="customPrivacyPolicyUrl")
+        default=None, description="Custom privacy policy URL", alias="customPrivacyPolicyUrl"
+    )
     default_app: Optional[DefaultApp] = Field(default=None, alias="defaultApp")
-    email_domain_id: Optional[StrictStr] = Field(default=None, description="The ID of the email domain", alias="emailDomainId")
+    email_domain_id: Optional[StrictStr] = Field(
+        default=None, description="The ID of the email domain", alias="emailDomainId"
+    )
     id: Optional[StrictStr] = Field(default=None, description="The Brand ID")
     is_default: Optional[StrictBool] = Field(
         default=None,
         description="If `true`, the Brand is used for the Okta subdomain",
-        alias="isDefault")
+        alias="isDefault"
+    )
     locale: Optional[StrictStr] = Field(
         default=None,
-        description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
+        description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)"
+    )
     name: Optional[StrictStr] = Field(default=None, description="The name of the Brand")
     remove_powered_by_okta: Optional[StrictBool] = Field(
         default=False,
-        description="Removes \"Powered by Okta\" from the sign-in page in redirect authentication deployments, and \"© [current year] Okta, Inc.\" from the Okta End-User Dashboard",
-        alias="removePoweredByOkta")
-    __properties: ClassVar[List[str]] = ["agreeToCustomPrivacyPolicy", "customPrivacyPolicyUrl",
-                                         "defaultApp", "emailDomainId", "id", "isDefault", "locale", "name", "removePoweredByOkta"]
+        description="Removes \"Powered by Okta\" from the sign-in page in redirect authentication deployments, "
+                    "and \"© [current year] Okta, Inc.\" from the Okta End-User Dashboard",
+        alias="removePoweredByOkta"
+    )
+    __properties: ClassVar[List[str]] = [
+        "agreeToCustomPrivacyPolicy", "customPrivacyPolicyUrl",
+        "defaultApp", "emailDomainId", "id", "isDefault", "locale", "name", "removePoweredByOkta"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,11 +107,13 @@ class BrandWithEmbedded(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "embedded",
-            "id",
-            "is_default",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "embedded",
+                "id",
+                "is_default",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -123,15 +138,19 @@ class BrandWithEmbedded(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "agreeToCustomPrivacyPolicy": obj.get("agreeToCustomPrivacyPolicy"),
-            "customPrivacyPolicyUrl": obj.get("customPrivacyPolicyUrl"),
-            "defaultApp": DefaultApp.from_dict(obj["defaultApp"]) if obj.get("defaultApp") is not None else None,
-            "emailDomainId": obj.get("emailDomainId"),
-            "id": obj.get("id"),
-            "isDefault": obj.get("isDefault"),
-            "locale": obj.get("locale"),
-            "name": obj.get("name"),
-            "removePoweredByOkta": obj.get("removePoweredByOkta") if obj.get("removePoweredByOkta") is not None else False
-        })
+        _obj = cls.model_validate(
+            {
+                "agreeToCustomPrivacyPolicy": obj.get("agreeToCustomPrivacyPolicy"),
+                "customPrivacyPolicyUrl": obj.get("customPrivacyPolicyUrl"),
+                "defaultApp": DefaultApp.from_dict(obj["defaultApp"]) if obj.get("defaultApp") is not None else None,
+                "emailDomainId": obj.get("emailDomainId"),
+                "id": obj.get("id"),
+                "isDefault": obj.get("isDefault"),
+                "locale": obj.get("locale"),
+                "name": obj.get("name"),
+                "removePoweredByOkta": obj.get("removePoweredByOkta") if obj.get(
+                    "removePoweredByOkta"
+                ) is not None else False
+            }
+        )
         return _obj

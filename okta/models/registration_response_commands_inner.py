@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,8 +38,36 @@ class RegistrationResponseCommandsInner(BaseModel):
     """  # noqa: E501
     type: Optional[StrictStr] = Field(
         default=None,
-        description="The location where you specify the command. To set attributes in the user's Okta profile, supply a `type` property set to `com.okta.user.profile.update`, together with a `value` property set to a list of key-value pairs corresponding to the Okta user profile attributes you want to set. The attributes must already exist in your user profile schema.  To explicitly allow or deny registration to the user, supply a type property set to `com.okta.action.update`, together with a value property set to `{\"registration\": \"ALLOW\"}` or `{\"registration\": \"DENY\"}`. The default is to allow registration.  In Okta Identity Engine, to set attributes in the user's profile, supply a `type` property set to `com.okta.user.progressive.profile.update`, together with a `value` property set to a list of key-value pairs corresponding to the Progressive Enrollment attributes that you want to set. See [Registration inline hook - Send response](https://developer.okta.com/docs/guides/registration-inline-hook/nodejs/main/#send-response).  Commands are applied in the order that they appear in the array. Within a single `com.okta.user.profile.update` or `com.okta.user.progressive.profile.update command`, attributes are updated in the order that they appear in the `value` object.  You can never use a command to update the user's password, but you are allowed to set the values of attributes other than password that are designated sensitive in your Okta user schema. However, the values of those sensitive attributes, if included as fields in the Profile Enrollment form, aren't included in the `data.userProfile` object sent to your external service by Okta. See [data.userProfile](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/create-registration-hook!path=0/data/userProfile&t=request).")
-    value: Optional[Dict[str, Any]] = Field(default=None, description="The `value` object is the parameter to pass to the command.  For `com.okta.user.profile.update` commands, `value` should be an object containing one or more name-value pairs for the attributes you wish to update.  For `com.okta.action.update` commands, the value should be an object containing the attribute `action` set to a value of either `ALLOW` or `DENY`, indicating whether the registration should be permitted or not.  Registrations are allowed by default, so setting a value of `ALLOW` for the action field is valid but superfluous.")
+        description="The location where you specify the command. To set attributes in the user's Okta profile, "
+                    "supply a `type` property set to `com.okta.user.profile.update`, together with a `value` property set "
+                    "to a list of key-value pairs corresponding to the Okta user profile attributes you want to set. The "
+                    "attributes must already exist in your user profile schema.  To explicitly allow or deny registration "
+                    "to the user, supply a type property set to `com.okta.action.update`, together with a value property "
+                    "set to `{\"registration\": \"ALLOW\"}` or `{\"registration\": \"DENY\"}`. The default is to allow "
+                    "registration.  In Okta Identity Engine, to set attributes in the user's profile, supply a `type` "
+                    "property set to `com.okta.user.progressive.profile.update`, together with a `value` property set to a "
+                    "list of key-value pairs corresponding to the Progressive Enrollment attributes that you want to set. "
+                    "See [Registration inline hook - Send response]("
+                    "https://developer.okta.com/docs/guides/registration-inline-hook/nodejs/main/#send-response).  "
+                    "Commands are applied in the order that they appear in the array. Within a single "
+                    "`com.okta.user.profile.update` or `com.okta.user.progressive.profile.update command`, attributes are "
+                    "updated in the order that they appear in the `value` object.  You can never use a command to update "
+                    "the user's password, but you are allowed to set the values of attributes other than password that are "
+                    "designated sensitive in your Okta user schema. However, the values of those sensitive attributes, "
+                    "if included as fields in the Profile Enrollment form, aren't included in the `data.userProfile` "
+                    "object sent to your external service by Okta. See [data.userProfile]("
+                    "/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/create-registration-hook"
+                    "!path=0/data/userProfile&t=request)."
+    )
+    value: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="The `value` object is the parameter to pass to the command.  For `com.okta.user.profile.update` "
+                    "commands, `value` should be an object containing one or more name-value pairs for the attributes you "
+                    "wish to update.  For `com.okta.action.update` commands, the value should be an object containing the "
+                    "attribute `action` set to a value of either `ALLOW` or `DENY`, indicating whether the registration "
+                    "should be permitted or not.  Registrations are allowed by default, so setting a value of `ALLOW` for "
+                    "the action field is valid but superfluous."
+    )
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     model_config = ConfigDict(
@@ -70,8 +100,10 @@ class RegistrationResponseCommandsInner(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,8 +121,10 @@ class RegistrationResponseCommandsInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "value": obj.get("value")
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type"),
+                "value": obj.get("value")
+            }
+        )
         return _obj

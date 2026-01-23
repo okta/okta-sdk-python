@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,8 +38,18 @@ class UserImportResponseCommandsInner(BaseModel):
     """  # noqa: E501
     type: Optional[StrictStr] = Field(
         default=None,
-        description="The command types supported for the import inline hook. When using the `com.okta.action.update` command to specify that the user should be treated as a match, you need to also provide a `com.okta.user.update` command that sets the ID of the Okta user.")
-    value: Optional[Dict[str, StrictStr]] = Field(default=None, description="The `value` object is the parameter to pass to the command. In the case of the `com.okta.appUser.profile.update` and `com.okta.user.profile.update` commands, the parameter should be a list of one or more profile attributes and the values you wish to set them to. In the case of the `com.okta.action.update` command, the parameter should be a `result` property set to either `CREATE_USER` or `LINK_USER`.")
+        description="The command types supported for the import inline hook. When using the `com.okta.action.update` "
+                    "command to specify that the user should be treated as a match, you need to also provide a "
+                    "`com.okta.user.update` command that sets the ID of the Okta user."
+    )
+    value: Optional[Dict[str, StrictStr]] = Field(
+        default=None,
+        description="The `value` object is the parameter to pass to the command. In the case of the "
+                    "`com.okta.appUser.profile.update` and `com.okta.user.profile.update` commands, the parameter should "
+                    "be a list of one or more profile attributes and the values you wish to set them to. In the case of "
+                    "the `com.okta.action.update` command, the parameter should be a `result` property set to either "
+                    "`CREATE_USER` or `LINK_USER`."
+    )
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     @field_validator('type')
@@ -46,10 +58,16 @@ class UserImportResponseCommandsInner(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['com.okta.appUser.profile.update', 'com.okta.user.profile.update',
-                            'com.okta.action.update', 'com.okta.user.update']):
+        if value not in set(
+                [
+                    'com.okta.appUser.profile.update', 'com.okta.user.profile.update',
+                    'com.okta.action.update', 'com.okta.user.update'
+                ]
+        ):
             raise ValueError(
-                "must be one of enum values ('com.okta.appUser.profile.update', 'com.okta.user.profile.update', 'com.okta.action.update', 'com.okta.user.update')")
+                "must be one of enum values ('com.okta.appUser.profile.update', 'com.okta.user.profile.update', "
+                "'com.okta.action.update', 'com.okta.user.update')"
+            )
         return value
 
     model_config = ConfigDict(
@@ -82,8 +100,10 @@ class UserImportResponseCommandsInner(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -101,8 +121,10 @@ class UserImportResponseCommandsInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "value": obj.get("value")
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type"),
+                "value": obj.get("value")
+            }
+        )
         return _obj

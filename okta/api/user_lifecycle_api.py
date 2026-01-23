@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.success import Success
-from okta.models.user_activation_token import UserActivationToken
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.success import Success
+from okta.models.user_activation_token import UserActivationToken
 from okta.rest import RESTResponse
 
 
@@ -46,28 +46,48 @@ class UserLifecycleApi(ApiClient):
 
     @validate_call
     async def activate_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        send_email: Annotated[Optional[StrictBool], Field(
-            description="Sends an activation email to the user if `true`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            send_email: Annotated[Optional[StrictBool], Field(
+                description="Sends an activation email to the user if `true`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserActivationToken:
         """Activate a user
 
-        Activates a user.  Perform this operation only on users with a `STAGED` or `DEPROVISIONED` status. Activation of a user is an asynchronous operation. * The user has the `transitioningToStatus` property with an `ACTIVE` value during activation. This indicates that the user hasn't completed the asynchronous operation. * The user has an `ACTIVE` status when the activation process completes.  Users who don't have a password must complete the welcome flow by visiting the activation link to complete the transition to `ACTIVE` status.  > **Note:** If you want to send a branded user activation email, change the subdomain of your request to the custom domain that's associated with the brand. > For example, change `subdomain.okta.com` to `custom.domain.one`. See [Multibrand and custom domains](https://developer.okta.com/docs/concepts/brands/#multibrand-and-custom-domains).  > **Note:** If you have optional password enabled, visiting the activation link is optional for users who aren't required to enroll a password. > See [Create user with optional password](/openapi/okta-management/management/tag/User/#create-user-with-optional-password).  > **Legal disclaimer** > After a user is added to the Okta directory, they receive an activation email. As part of signing up for this service, > you agreed not to use Okta's service/product to spam and/or send unsolicited messages. > Please refrain from adding unrelated accounts to the directory as Okta is not responsible for, and disclaims any and all > liability associated with, the activation email's content. You, and you alone, bear responsibility for the emails sent to any recipients.
+        Activates a user.  Perform this operation only on users with a `STAGED` or `DEPROVISIONED` status. Activation of a
+        user is an asynchronous operation. * The user has the `transitioningToStatus` property with an `ACTIVE` value
+        during activation. This indicates that the user hasn't completed the asynchronous operation. * The user has an
+        `ACTIVE` status when the activation process completes.  Users who don't have a password must complete the welcome
+        flow by visiting the activation link to complete the transition to `ACTIVE` status.  > **Note:** If you want to
+        send a branded user activation email, change the subdomain of your request to the custom domain that's associated
+        with the brand. > For example, change `subdomain.okta.com` to `custom.domain.one`. See [Multibrand and custom
+        domains](https://developer.okta.com/docs/concepts/brands/#multibrand-and-custom-domains).  > **Note:** If you have
+        optional password enabled, visiting the activation link is optional for users who aren't required to enroll a
+        password. > See [Create user with optional password](
+        /openapi/okta-management/management/tag/User/#create-user-with-optional-password).  > **Legal disclaimer** > After
+        a user is added to the Okta directory, they receive an activation email. As part of signing up for this service,
+        > you agreed not to use Okta's service/product to spam and/or send unsolicited messages. > Please refrain from
+        adding unrelated accounts to the directory as Okta is not responsible for, and disclaims any and all > liability
+        associated with, the activation email's content. You, and you alone, bear responsibility for the emails sent to
+        any recipients.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param send_email: Sends an activation email to the user if `true`
         :type send_email: bool
@@ -154,13 +174,13 @@ class UserLifecycleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_user_serialize(
-        self,
-        id,
-        send_email,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            send_email,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -180,7 +200,6 @@ class UserLifecycleApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if send_email is not None:
-
             _query_params.append(('sendEmail', send_email))
 
         # process the header parameters
@@ -217,29 +236,40 @@ class UserLifecycleApi(ApiClient):
 
     @validate_call
     async def deactivate_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        send_email: Annotated[Optional[StrictBool], Field(
-            description="Sends a deactivation email to the admin if `true`")] = None,
-        prefer: Annotated[Optional[StrictStr], Field(description="Request asynchronous processing")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            send_email: Annotated[Optional[StrictBool], Field(
+                description="Sends a deactivation email to the admin if `true`"
+            )] = None,
+            prefer: Annotated[Optional[StrictStr], Field(description="Request asynchronous processing")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Deactivate a user
 
-        Deactivates a user.  Perform this operation only on users that do not have a `DEPROVISIONED` status. * The user's `transitioningToStatus` property is `DEPROVISIONED` during deactivation to indicate that the user hasn't completed the asynchronous operation. * The user's status is `DEPROVISIONED` when the deactivation process is complete.  > **Important:** Deactivating a user is a **destructive** operation. The user is deprovisioned from all assigned apps, which might destroy their data such as email or files. **This action cannot be recovered!**  You can also perform user deactivation asynchronously. To invoke asynchronous user deactivation, pass an HTTP header `Prefer: respond-async` with the request.
+        Deactivates a user.  Perform this operation only on users that do not have a `DEPROVISIONED` status. * The user's
+        `transitioningToStatus` property is `DEPROVISIONED` during deactivation to indicate that the user hasn't completed
+        the asynchronous operation. * The user's status is `DEPROVISIONED` when the deactivation process is complete.  >
+        **Important:** Deactivating a user is a **destructive** operation. The user is deprovisioned from all assigned
+        apps, which might destroy their data such as email or files. **This action cannot be recovered!**  You can also
+        perform user deactivation asynchronously. To invoke asynchronous user deactivation, pass an HTTP header `Prefer:
+        respond-async` with the request.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param send_email: Sends a deactivation email to the admin if `true`
         :type send_email: bool
@@ -329,14 +359,14 @@ class UserLifecycleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_user_serialize(
-        self,
-        id,
-        send_email,
-        prefer,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            send_email,
+            prefer,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -356,7 +386,6 @@ class UserLifecycleApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if send_email is not None:
-
             _query_params.append(('sendEmail', send_email))
 
         # process the header parameters
@@ -395,28 +424,40 @@ class UserLifecycleApi(ApiClient):
 
     @validate_call
     async def reactivate_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        send_email: Annotated[Optional[StrictBool], Field(
-            description="Sends an activation email to the user if `true`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            send_email: Annotated[Optional[StrictBool], Field(
+                description="Sends an activation email to the user if `true`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserActivationToken:
         """Reactivate a user
 
-        Reactivates a user.  Perform this operation only on users with a `PROVISIONED` or `RECOVERY` [status](/openapi/okta-management/management/tag/User/#tag/User/operation/listUsers!c=200&path=status&t=response). This operation restarts the activation workflow if for some reason the user activation wasn't completed when using the `activationToken` from [Activate User](/openapi/okta-management/management/tag/UserLifecycle/#tag/UserLifecycle/operation/activateUser).  Users that don't have a password must complete the flow by completing the [Reset password](/openapi/okta-management/management/tag/UserCred/#tag/UserCred/operation/resetPassword) flow and MFA enrollment steps to transition the user to `ACTIVE` status.  If `sendEmail` is `false`, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.
+        Reactivates a user.  Perform this operation only on users with a `PROVISIONED` or `RECOVERY` [status](
+        /openapi/okta-management/management/tag/User/#tag/User/operation/listUsers!c=200&path=status&t=response). This
+        operation restarts the activation workflow if for some reason the user activation wasn't completed when using the
+        `activationToken` from [Activate User](/openapi/okta-management/management/tag/UserLifecycle/#tag/UserLifecycle
+        /operation/activateUser).  Users that don't have a password must complete the flow by completing the [Reset
+        password](/openapi/okta-management/management/tag/UserCred/#tag/UserCred/operation/resetPassword) flow and MFA
+        enrollment steps to transition the user to `ACTIVE` status.  If `sendEmail` is `false`, returns an activation link
+        for the user to set up their account. The activation token can be used to create a custom activation link.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param send_email: Sends an activation email to the user if `true`
         :type send_email: bool
@@ -503,13 +544,13 @@ class UserLifecycleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _reactivate_user_serialize(
-        self,
-        id,
-        send_email,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            send_email,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -529,7 +570,6 @@ class UserLifecycleApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if send_email is not None:
-
             _query_params.append(('sendEmail', send_email))
 
         # process the header parameters
@@ -566,26 +606,31 @@ class UserLifecycleApi(ApiClient):
 
     @validate_call
     async def reset_factors(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Reset the factors
 
-        Resets all factors for the specified user. All MFA factor enrollments return to the unenrolled state. The user's status remains `ACTIVE`. This link is present only if the user is currently enrolled in one or more MFA factors.
+        Resets all factors for the specified user. All MFA factor enrollments return to the unenrolled state. The user's
+        status remains `ACTIVE`. This link is present only if the user is currently enrolled in one or more MFA factors.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -669,12 +714,12 @@ class UserLifecycleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _reset_factors_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -727,26 +772,32 @@ class UserLifecycleApi(ApiClient):
 
     @validate_call
     async def suspend_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Suspend a user
 
-        Suspends a user. Perform this operation only on users with an `ACTIVE` status. The user has a `SUSPENDED` status when the process completes.  Suspended users can't sign in to Okta. They can only be unsuspended or deactivated. Their group and app assignments are retained.
+        Suspends a user. Perform this operation only on users with an `ACTIVE` status. The user has a `SUSPENDED` status
+        when the process completes.  Suspended users can't sign in to Okta. They can only be unsuspended or deactivated.
+        Their group and app assignments are retained.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -831,12 +882,12 @@ class UserLifecycleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _suspend_user_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -889,26 +940,32 @@ class UserLifecycleApi(ApiClient):
 
     @validate_call
     async def unlock_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Unlock a user
 
-        Unlocks a user with a `LOCKED_OUT` status or unlocks a user with an `ACTIVE` status that's blocked from unknown devices. Unlocked users have an `ACTIVE` status and can sign in with their current password. > **Note:** This operation works with Okta-sourced users. It doesn't support directory-sourced accounts such as Active Directory.
+        Unlocks a user with a `LOCKED_OUT` status or unlocks a user with an `ACTIVE` status that's blocked from unknown
+        devices. Unlocked users have an `ACTIVE` status and can sign in with their current password. > **Note:** This
+        operation works with Okta-sourced users. It doesn't support directory-sourced accounts such as Active Directory.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -992,12 +1049,12 @@ class UserLifecycleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unlock_user_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1050,26 +1107,31 @@ class UserLifecycleApi(ApiClient):
 
     @validate_call
     async def unsuspend_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Unsuspend a user
 
-        Unsuspends a user and returns them to the `ACTIVE` state. This operation can only be performed on users that have a `SUSPENDED` status.
+        Unsuspends a user and returns them to the `ACTIVE` state. This operation can only be performed on users that have
+        a `SUSPENDED` status.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1154,12 +1216,12 @@ class UserLifecycleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unsuspend_user_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

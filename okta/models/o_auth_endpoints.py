@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,26 +20,30 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.o_auth_authorization_endpoint import OAuthAuthorizationEndpoint
 from okta.models.o_auth_token_endpoint import OAuthTokenEndpoint
 from okta.models.oidc_jwks_endpoint import OidcJwksEndpoint
 from okta.models.oidc_slo_endpoint import OidcSloEndpoint
 from okta.models.oidc_user_info_endpoint import OidcUserInfoEndpoint
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OAuthEndpoints(BaseModel):
     """
-    The `OAUTH2` and `OIDC` protocols support the `authorization` and `token` endpoints. Also, the `OIDC` protocol supports the `userInfo` and `jwks` endpoints.  The IdP Authorization Server (AS) endpoints are currently defined as part of the [IdP provider]((https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request)) and are read-only.
+    The `OAUTH2` and `OIDC` protocols support the `authorization` and `token` endpoints. Also, the `OIDC` protocol
+    supports the `userInfo` and `jwks` endpoints.  The IdP Authorization Server (AS) endpoints are currently defined as
+    part of the [IdP provider]((https://developer.okta.com/docs/api/openapi/okta-management/management/tag
+    /IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request)) and are read-only.
     """  # noqa: E501
     authorization: Optional[OAuthAuthorizationEndpoint] = None
     jwks: Optional[OidcJwksEndpoint] = None
@@ -76,8 +82,10 @@ class OAuthEndpoints(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -130,11 +138,15 @@ class OAuthEndpoints(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "authorization": OAuthAuthorizationEndpoint.from_dict(obj["authorization"]) if obj.get("authorization") is not None else None,
-            "jwks": OidcJwksEndpoint.from_dict(obj["jwks"]) if obj.get("jwks") is not None else None,
-            "slo": OidcSloEndpoint.from_dict(obj["slo"]) if obj.get("slo") is not None else None,
-            "token": OAuthTokenEndpoint.from_dict(obj["token"]) if obj.get("token") is not None else None,
-            "userInfo": OidcUserInfoEndpoint.from_dict(obj["userInfo"]) if obj.get("userInfo") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "authorization": OAuthAuthorizationEndpoint.from_dict(obj["authorization"]) if obj.get(
+                    "authorization"
+                ) is not None else None,
+                "jwks": OidcJwksEndpoint.from_dict(obj["jwks"]) if obj.get("jwks") is not None else None,
+                "slo": OidcSloEndpoint.from_dict(obj["slo"]) if obj.get("slo") is not None else None,
+                "token": OAuthTokenEndpoint.from_dict(obj["token"]) if obj.get("token") is not None else None,
+                "userInfo": OidcUserInfoEndpoint.from_dict(obj["userInfo"]) if obj.get("userInfo") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.principal_rate_limit_entity import PrincipalRateLimitEntity
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.principal_rate_limit_entity import PrincipalRateLimitEntity
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,20 +46,20 @@ class PrincipalRateLimitApi(ApiClient):
 
     @validate_call
     async def create_principal_rate_limit_entity(
-        self,
-        entity: PrincipalRateLimitEntity,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            entity: PrincipalRateLimitEntity,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PrincipalRateLimitEntity:
         """Create a principal rate limit
 
@@ -149,12 +150,12 @@ class PrincipalRateLimitApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_principal_rate_limit_entity_serialize(
-        self,
-        entity,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            entity,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -221,20 +222,20 @@ class PrincipalRateLimitApi(ApiClient):
 
     @validate_call
     async def get_principal_rate_limit_entity(
-        self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(description="ID of the principal rate limit")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            principal_rate_limit_id: Annotated[StrictStr, Field(description="ID of the principal rate limit")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PrincipalRateLimitEntity:
         """Retrieve a principal rate limit
 
@@ -324,12 +325,12 @@ class PrincipalRateLimitApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_principal_rate_limit_entity_serialize(
-        self,
-        principal_rate_limit_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            principal_rate_limit_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -382,32 +383,43 @@ class PrincipalRateLimitApi(ApiClient):
 
     @validate_call
     async def list_principal_rate_limit_entities(
-        self,
-        filter: Annotated[StrictStr, Field(description="Filters the list of principal rate limit entities by the provided principal type (`principalType`). For example, `filter=principalType eq \"SSWS_TOKEN\"` or `filter=principalType eq \"OAUTH_CLIENT\"`.")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It's an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=50, strict=True)]], Field(
-            description="Specifies the number of items to return in a single response page.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            filter: Annotated[StrictStr, Field(
+                description="Filters the list of principal rate limit entities by the provided principal type ("
+                            "`principalType`). For example, `filter=principalType eq \"SSWS_TOKEN\"` or "
+                            "`filter=principalType eq \"OAUTH_CLIENT\"`."
+            )],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It's an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=50, strict=True)]], Field(
+                description="Specifies the number of items to return in a single response page."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[PrincipalRateLimitEntity]:
         """List all principal rate limits
 
         Lists all Principal Rate Limit entities considering the provided parameters
 
-        :param filter: Filters the list of principal rate limit entities by the provided principal type (`principalType`). For example, `filter=principalType eq \"SSWS_TOKEN\"` or `filter=principalType eq \"OAUTH_CLIENT\"`. (required)
+        :param filter: Filters the list of principal rate limit entities by the provided principal type (`principalType`).
+        For example, `filter=principalType eq \"SSWS_TOKEN\"` or `filter=principalType eq \"OAUTH_CLIENT\"`. (required)
         :type filter: str
-        :param after: The cursor to use for pagination. It's an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination).
+        :param after: The cursor to use for pagination. It's an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination).
         :type after: str
         :param limit: Specifies the number of items to return in a single response page.
         :type limit: int
@@ -495,14 +507,14 @@ class PrincipalRateLimitApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_principal_rate_limit_entities_serialize(
-        self,
-        filter,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            filter,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -520,15 +532,12 @@ class PrincipalRateLimitApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -565,21 +574,21 @@ class PrincipalRateLimitApi(ApiClient):
 
     @validate_call
     async def replace_principal_rate_limit_entity(
-        self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(description="ID of the principal rate limit")],
-        entity: PrincipalRateLimitEntity,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            principal_rate_limit_id: Annotated[StrictStr, Field(description="ID of the principal rate limit")],
+            entity: PrincipalRateLimitEntity,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PrincipalRateLimitEntity:
         """Replace a principal rate limit
 
@@ -673,13 +682,13 @@ class PrincipalRateLimitApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_principal_rate_limit_entity_serialize(
-        self,
-        principal_rate_limit_id,
-        entity,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            principal_rate_limit_id,
+            entity,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

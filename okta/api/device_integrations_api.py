@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
 
 from pydantic import Field, StrictStr
-from typing import List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.device_integrations import DeviceIntegrations
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.device_integrations import DeviceIntegrations
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,20 +46,20 @@ class DeviceIntegrationsApi(ApiClient):
 
     @validate_call
     async def activate_device_integration(
-        self,
-        device_integration_id: Annotated[StrictStr, Field(description="The ID of the device integration")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_integration_id: Annotated[StrictStr, Field(description="The ID of the device integration")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeviceIntegrations:
         """Activate a device integration
 
@@ -149,12 +150,12 @@ class DeviceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_device_integration_serialize(
-        self,
-        device_integration_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_integration_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -207,20 +208,20 @@ class DeviceIntegrationsApi(ApiClient):
 
     @validate_call
     async def deactivate_device_integration(
-        self,
-        device_integration_id: Annotated[StrictStr, Field(description="The ID of the device integration")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_integration_id: Annotated[StrictStr, Field(description="The ID of the device integration")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeviceIntegrations:
         """Deactivate a device integration
 
@@ -311,12 +312,12 @@ class DeviceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_device_integration_serialize(
-        self,
-        device_integration_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_integration_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -369,20 +370,20 @@ class DeviceIntegrationsApi(ApiClient):
 
     @validate_call
     async def get_device_integration(
-        self,
-        device_integration_id: Annotated[StrictStr, Field(description="The ID of the device integration")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_integration_id: Annotated[StrictStr, Field(description="The ID of the device integration")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DeviceIntegrations:
         """Retrieve a device integration
 
@@ -472,12 +473,12 @@ class DeviceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_device_integration_serialize(
-        self,
-        device_integration_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_integration_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -530,23 +531,24 @@ class DeviceIntegrationsApi(ApiClient):
 
     @validate_call
     async def list_device_integrations(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[DeviceIntegrations]:
         """List all device integrations
 
-        Lists all device integrations for your org. Examples include Device Posture Provider, Windows Security Center, Chrome Device Trust, OSQuery, and Android Device Trust.
+        Lists all device integrations for your org. Examples include Device Posture Provider, Windows Security Center,
+        Chrome Device Trust, OSQuery, and Android Device Trust.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -629,11 +631,11 @@ class DeviceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_device_integrations_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.saml_pay_load_data_assertion_authentication import SAMLPayLoadDataAssertionAuthentication
 from okta.models.saml_pay_load_data_assertion_claims_value import SAMLPayLoadDataAssertionClaimsValue
 from okta.models.saml_pay_load_data_assertion_conditions import SAMLPayLoadDataAssertionConditions
 from okta.models.saml_pay_load_data_assertion_lifetime import SAMLPayLoadDataAssertionLifetime
 from okta.models.saml_pay_load_data_assertion_subject import SAMLPayLoadDataAssertionSubject
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SAMLPayLoadDataAssertion(BaseModel):
@@ -43,7 +46,11 @@ class SAMLPayLoadDataAssertion(BaseModel):
     authentication: Optional[SAMLPayLoadDataAssertionAuthentication] = None
     conditions: Optional[SAMLPayLoadDataAssertionConditions] = None
     claims: Optional[Dict[str, SAMLPayLoadDataAssertionClaimsValue]] = Field(
-        default=None, description="Provides a JSON representation of the `<saml:AttributeStatement>` element contained in the generated SAML assertion. Contains any optional SAML attribute statements that you have defined for the app using the Admin Console's **SAML Settings**.")
+        default=None,
+        description="Provides a JSON representation of the `<saml:AttributeStatement>` element contained in the generated "
+                    "SAML assertion. Contains any optional SAML attribute statements that you have defined for the app "
+                    "using the Admin Console's **SAML Settings**."
+    )
     lifetime: Optional[SAMLPayLoadDataAssertionLifetime] = None
     __properties: ClassVar[List[str]] = ["subject", "authentication", "conditions", "claims", "lifetime"]
 
@@ -77,8 +84,10 @@ class SAMLPayLoadDataAssertion(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -131,16 +140,26 @@ class SAMLPayLoadDataAssertion(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "subject": SAMLPayLoadDataAssertionSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None,
-            "authentication": SAMLPayLoadDataAssertionAuthentication.from_dict(obj["authentication"]) if obj.get("authentication") is not None else None,
-            "conditions": SAMLPayLoadDataAssertionConditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None,
-            "claims": dict(
-                (_k, SAMLPayLoadDataAssertionClaimsValue.from_dict(_v))
-                for _k, _v in obj["claims"].items()
-            )
-            if obj.get("claims") is not None
-            else None,
-            "lifetime": SAMLPayLoadDataAssertionLifetime.from_dict(obj["lifetime"]) if obj.get("lifetime") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "subject": SAMLPayLoadDataAssertionSubject.from_dict(obj["subject"]) if obj.get(
+                    "subject"
+                ) is not None else None,
+                "authentication": SAMLPayLoadDataAssertionAuthentication.from_dict(obj["authentication"]) if obj.get(
+                    "authentication"
+                ) is not None else None,
+                "conditions": SAMLPayLoadDataAssertionConditions.from_dict(obj["conditions"]) if obj.get(
+                    "conditions"
+                ) is not None else None,
+                "claims": dict(
+                    (_k, SAMLPayLoadDataAssertionClaimsValue.from_dict(_v))
+                    for _k, _v in obj["claims"].items()
+                )
+                if obj.get("claims") is not None
+                else None,
+                "lifetime": SAMLPayLoadDataAssertionLifetime.from_dict(obj["lifetime"]) if obj.get(
+                    "lifetime"
+                ) is not None else None
+            }
+        )
         return _obj

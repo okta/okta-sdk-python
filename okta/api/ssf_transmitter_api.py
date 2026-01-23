@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
 
 from pydantic import Field, StrictStr
-from typing import Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.get_ssf_streams200_response import GetSsfStreams200Response
 from okta.models.stream_configuration import StreamConfiguration
 from okta.models.stream_configuration_create_request import StreamConfigurationCreateRequest
 from okta.models.stream_status import StreamStatus
 from okta.models.stream_verification_request import StreamVerificationRequest
-from okta.models.well_known_ssf_metadata import WellKnownSSFMetadata
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.well_known_ssf_metadata import WellKnownSSFMetadata
 from okta.rest import RESTResponse
 
 
@@ -50,24 +51,29 @@ class SSFTransmitterApi(ApiClient):
 
     @validate_call
     async def create_ssf_stream(
-        self,
-        instance: StreamConfigurationCreateRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            instance: StreamConfigurationCreateRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StreamConfiguration:
         """Create an SSF stream
 
-        Creates an SSF Stream for an event receiver to start receiving security events in the form of Security Event Tokens (SETs) from Okta.  An SSF Stream is associated with the Client ID of the OAuth 2.0 access token used to create the stream. The Client ID is provided by Okta for an [OAuth 2.0 app integration](https://help.okta.com/okta_help.htm?id=ext_Apps_App_Integration_Wizard-oidc). One SSF Stream is allowed for each Client ID, hence, one SSF Stream is allowed for each app integration in Okta.  A maximum of 10 SSF Stream configurations can be created for one org.
+        Creates an SSF Stream for an event receiver to start receiving security events in the form of Security Event
+        Tokens (SETs) from Okta.  An SSF Stream is associated with the Client ID of the OAuth 2.0 access token used to
+        create the stream. The Client ID is provided by Okta for an [OAuth 2.0 app integration](
+        https://help.okta.com/okta_help.htm?id=ext_Apps_App_Integration_Wizard-oidc). One SSF Stream is allowed for each
+        Client ID, hence, one SSF Stream is allowed for each app integration in Okta.  A maximum of 10 SSF Stream
+        configurations can be created for one org.
 
         :param instance: (required)
         :type instance: StreamConfigurationCreateRequest
@@ -155,12 +161,12 @@ class SSFTransmitterApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_ssf_stream_serialize(
-        self,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -226,25 +232,28 @@ class SSFTransmitterApi(ApiClient):
 
     @validate_call
     async def delete_ssf_stream(
-        self,
-        stream_id: Annotated[Optional[StrictStr], Field(
-            description="The ID of the specified SSF Stream configuration")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            stream_id: Annotated[Optional[StrictStr], Field(
+                description="The ID of the specified SSF Stream configuration"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an SSF stream
 
-        Deletes the specified SSF Stream.  If the `stream_id` is not provided in the query string, the associated stream with the Client ID (through the request OAuth 2.0 access token) is deleted. Otherwise, the SSF Stream with the `stream_id` is deleted, if found.
+        Deletes the specified SSF Stream.  If the `stream_id` is not provided in the query string, the associated stream
+        with the Client ID (through the request OAuth 2.0 access token) is deleted. Otherwise, the SSF Stream with the
+        `stream_id` is deleted, if found.
 
         :param stream_id: The ID of the specified SSF Stream configuration
         :type stream_id: str
@@ -323,12 +332,12 @@ class SSFTransmitterApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_ssf_stream_serialize(
-        self,
-        stream_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            stream_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -346,7 +355,6 @@ class SSFTransmitterApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if stream_id is not None:
-
             _query_params.append(('stream_id', stream_id))
 
         # process the header parameters
@@ -382,24 +390,25 @@ class SSFTransmitterApi(ApiClient):
 
     @validate_call
     async def get_ssf_stream_status(
-        self,
-        stream_id: Annotated[StrictStr, Field(description="The ID of the specified SSF Stream configuration")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            stream_id: Annotated[StrictStr, Field(description="The ID of the specified SSF Stream configuration")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StreamStatus:
         """Retrieve the SSF Stream status
 
-        Retrieves the status of an SSF Stream. The status indicates whether the transmitter is able to transmit events over the stream.
+        Retrieves the status of an SSF Stream. The status indicates whether the transmitter is able to transmit events
+        over the stream.
 
         :param stream_id: The ID of the specified SSF Stream configuration (required)
         :type stream_id: str
@@ -487,12 +496,12 @@ class SSFTransmitterApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_ssf_stream_status_serialize(
-        self,
-        stream_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            stream_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -510,7 +519,6 @@ class SSFTransmitterApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if stream_id is not None:
-
             _query_params.append(('stream_id', stream_id))
 
         # process the header parameters
@@ -546,25 +554,28 @@ class SSFTransmitterApi(ApiClient):
 
     @validate_call
     async def get_ssf_streams(
-        self,
-        stream_id: Annotated[Optional[StrictStr], Field(
-            description="The ID of the specified SSF Stream configuration")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            stream_id: Annotated[Optional[StrictStr], Field(
+                description="The ID of the specified SSF Stream configuration"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetSsfStreams200Response:
         """Retrieve the SSF stream configuration(s)
 
-        Retrieves either a list of all known SSF Stream configurations or the individual configuration if specified by ID.  As Stream configurations are tied to a Client ID, only the Stream associated with the Client ID of the request OAuth 2.0 access token can be viewed.
+        Retrieves either a list of all known SSF Stream configurations or the individual configuration if specified by ID.
+         As Stream configurations are tied to a Client ID, only the Stream associated with the Client ID of the request
+         OAuth 2.0 access token can be viewed.
 
         :param stream_id: The ID of the specified SSF Stream configuration
         :type stream_id: str
@@ -651,12 +662,12 @@ class SSFTransmitterApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_ssf_streams_serialize(
-        self,
-        stream_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            stream_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -674,7 +685,6 @@ class SSFTransmitterApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if stream_id is not None:
-
             _query_params.append(('stream_id', stream_id))
 
         # process the header parameters
@@ -710,23 +720,25 @@ class SSFTransmitterApi(ApiClient):
 
     @validate_call
     async def get_wellknown_ssf_metadata(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WellKnownSSFMetadata:
         """Retrieve the SSF transmitter metadata
 
-        Retrieves SSF Transmitter configuration metadata. This includes all supported endpoints and key information about certain properties of the Okta org as the transmitter, such as `delivery_methods_supported`, `issuer`, and `jwks_uri`.
+        Retrieves SSF Transmitter configuration metadata. This includes all supported endpoints and key information about
+        certain properties of the Okta org as the transmitter, such as `delivery_methods_supported`, `issuer`,
+        and `jwks_uri`.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -810,11 +822,11 @@ class SSFTransmitterApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_wellknown_ssf_metadata_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -863,24 +875,25 @@ class SSFTransmitterApi(ApiClient):
 
     @validate_call
     async def replace_ssf_stream(
-        self,
-        instance: StreamConfiguration,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            instance: StreamConfiguration,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StreamConfiguration:
         """Replace an SSF stream
 
-        Replaces all properties for an existing SSF Stream configuration.  If the `stream_id` isn't provided in the request body, the associated stream with the Client ID (through the request OAuth 2.0 access token) is replaced.
+        Replaces all properties for an existing SSF Stream configuration.  If the `stream_id` isn't provided in the
+        request body, the associated stream with the Client ID (through the request OAuth 2.0 access token) is replaced.
 
         :param instance: (required)
         :type instance: StreamConfiguration
@@ -968,12 +981,12 @@ class SSFTransmitterApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_ssf_stream_serialize(
-        self,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1039,24 +1052,25 @@ class SSFTransmitterApi(ApiClient):
 
     @validate_call
     async def update_ssf_stream(
-        self,
-        instance: StreamConfiguration,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            instance: StreamConfiguration,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> StreamConfiguration:
         """Update an SSF stream
 
-        Updates properties for an existing SSF Stream configuration.  If the `stream_id` isn't provided in the request body, the associated stream with the Client ID (through the request OAuth 2.0 access token) is updated.
+        Updates properties for an existing SSF Stream configuration.  If the `stream_id` isn't provided in the request
+        body, the associated stream with the Client ID (through the request OAuth 2.0 access token) is updated.
 
         :param instance: (required)
         :type instance: StreamConfiguration
@@ -1144,12 +1158,12 @@ class SSFTransmitterApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_ssf_stream_serialize(
-        self,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1215,24 +1229,27 @@ class SSFTransmitterApi(ApiClient):
 
     @validate_call
     async def verify_ssf_stream(
-        self,
-        instance: StreamVerificationRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            instance: StreamVerificationRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Verify an SSF stream
 
-        Verifies an SSF Stream by publishing a Verification Event requested by a Security Events Provider.  > **Note:** A successful response doesn't indicate that the Verification Event     was transmitted successfully, only that Okta has transmitted the event or will     at some point in the future. The SSF Receiver is responsible for validating and acknowledging     successful transmission of the request by responding with HTTP Response Status Code 202.
+        Verifies an SSF Stream by publishing a Verification Event requested by a Security Events Provider.  > **Note:** A
+        successful response doesn't indicate that the Verification Event     was transmitted successfully, only that Okta
+        has transmitted the event or will     at some point in the future. The SSF Receiver is responsible for validating
+        and acknowledging     successful transmission of the request by responding with HTTP Response Status Code 202.
 
         :param instance: (required)
         :type instance: StreamVerificationRequest
@@ -1311,12 +1328,12 @@ class SSFTransmitterApi(ApiClient):
             return (resp.data, resp, None)
 
     def _verify_ssf_stream_serialize(
-        self,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

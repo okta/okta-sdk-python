@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.links_self import LinksSelf
 from okta.models.risk_provider_action import RiskProviderAction
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class RiskProvider(BaseModel):
@@ -40,14 +43,18 @@ class RiskProvider(BaseModel):
     """  # noqa: E501
     action: RiskProviderAction
     client_id: StrictStr = Field(
-        description="The ID of the [OAuth 2.0 service app](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app-and-grant-scopes) that's used to send risk events to Okta",
-        alias="clientId")
+        description="The ID of the [OAuth 2.0 service app]("
+                    "https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app"
+                    "-and-grant-scopes) that's used to send risk events to Okta",
+        alias="clientId"
+    )
     created: Optional[datetime] = Field(default=None, description="Timestamp when the risk provider object was created")
     id: StrictStr = Field(description="The ID of the risk provider object")
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the risk provider object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Annotated[str, Field(strict=True, max_length=50)] = Field(description="Name of the risk provider")
     links: LinksSelf = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["action", "clientId", "created", "id", "lastUpdated", "name", "_links"]
@@ -85,11 +92,13 @@ class RiskProvider(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -114,13 +123,15 @@ class RiskProvider(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "action": obj.get("action"),
-            "clientId": obj.get("clientId"),
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "action": obj.get("action"),
+                "clientId": obj.get("clientId"),
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

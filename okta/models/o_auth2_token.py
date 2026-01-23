@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.grant_or_token_status import GrantOrTokenStatus
 from okta.models.links_self import LinksSelf
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OAuth2Token(BaseModel):
@@ -42,22 +45,30 @@ class OAuth2Token(BaseModel):
     expires_at: Optional[datetime] = Field(
         default=None,
         description="Expiration time of the OAuth 2.0 Token",
-        alias="expiresAt")
+        alias="expiresAt"
+    )
     id: Optional[StrictStr] = Field(default=None, description="ID of the Token object")
-    issuer: Optional[StrictStr] = Field(default=None,
-                                        description="The complete URL of the authorization server that issued the Token")
+    issuer: Optional[StrictStr] = Field(
+        default=None,
+        description="The complete URL of the authorization server that issued the Token"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     scopes: Optional[List[StrictStr]] = Field(default=None, description="Name of scopes attached to the Token")
     status: Optional[GrantOrTokenStatus] = None
     user_id: Optional[StrictStr] = Field(default=None, alias="userId")
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, description="Embedded resources related to the object if the `expand` query parameter is specified", alias="_embedded")
+        default=None, description="Embedded resources related to the object if the `expand` query parameter is specified",
+        alias="_embedded"
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["clientId", "created", "expiresAt", "id",
-                                         "issuer", "lastUpdated", "scopes", "status", "userId", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "clientId", "created", "expiresAt", "id",
+        "issuer", "lastUpdated", "scopes", "status", "userId", "_embedded", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,14 +106,16 @@ class OAuth2Token(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "client_id",
-            "created",
-            "expires_at",
-            "id",
-            "last_updated",
-            "embedded",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "client_id",
+                "created",
+                "expires_at",
+                "id",
+                "last_updated",
+                "embedded",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -127,17 +140,19 @@ class OAuth2Token(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "clientId": obj.get("clientId"),
-            "created": obj.get("created"),
-            "expiresAt": obj.get("expiresAt"),
-            "id": obj.get("id"),
-            "issuer": obj.get("issuer"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "scopes": obj.get("scopes"),
-            "status": obj.get("status"),
-            "userId": obj.get("userId"),
-            "_embedded": obj.get("_embedded"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "clientId": obj.get("clientId"),
+                "created": obj.get("created"),
+                "expiresAt": obj.get("expiresAt"),
+                "id": obj.get("id"),
+                "issuer": obj.get("issuer"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "scopes": obj.get("scopes"),
+                "status": obj.get("status"),
+                "userId": obj.get("userId"),
+                "_embedded": obj.get("_embedded"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.create_user_request import CreateUserRequest
+from okta.models.success import Success
 from okta.models.update_user_request import UpdateUserRequest
 from okta.models.user import User
 from okta.models.user_block import UserBlock
 from okta.models.user_next_login import UserNextLogin
-
-from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -49,38 +50,62 @@ class UserApi(ApiClient):
 
     @validate_call
     async def create_user(
-        self,
-        body: CreateUserRequest,
-        activate: Annotated[Optional[StrictBool], Field(
-            description="Executes an [activation lifecycle](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserLifecycle/#tag/UserLifecycle/operation/activateUser) operation when creating the user")] = None,
-        provider: Annotated[Optional[StrictBool], Field(
-            description="Indicates whether to create a user with a specified authentication provider")] = None,
-        next_login: Annotated[Optional[UserNextLogin], Field(
-            description="With `activate=true`, if `nextLogin=changePassword`, a user is created, activated, and the password is set to `EXPIRED`. The user must change it the next time they sign in.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            body: CreateUserRequest,
+            activate: Annotated[Optional[StrictBool], Field(
+                description="Executes an [activation lifecycle]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserLifecycle/#tag"
+                            "/UserLifecycle/operation/activateUser) operation when creating the user"
+            )] = None,
+            provider: Annotated[Optional[StrictBool], Field(
+                description="Indicates whether to create a user with a specified authentication provider"
+            )] = None,
+            next_login: Annotated[Optional[UserNextLogin], Field(
+                description="With `activate=true`, if `nextLogin=changePassword`, a user is created, activated, "
+                            "and the password is set to `EXPIRED`. The user must change it the next time they sign in."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> User:
         """Create a user
 
-        Creates a new user in your Okta org with or without credentials.<br> > **Legal Disclaimer** > > After a user is added to the Okta directory, they receive an activation email. As part of signing up for this service, > you agreed not to use Okta's service/product to spam and/or send unsolicited messages. > Please refrain from adding unrelated accounts to the directory as Okta is not responsible for, and disclaims any and all > liability associated with, the activation email's content. You, and you alone, bear responsibility for the emails sent to any recipients.  All responses return the created user. Activation of a user is an asynchronous operation. The system performs group reconciliation during activation and assigns the user to all apps via direct or indirect relationships (group memberships). * The user's `transitioningToStatus` property is `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation. * The user's `status` is `ACTIVE` when the activation process is complete.  The user is emailed a one-time activation token if activated without a password.  > **Note:** If the user is assigned to an app that is configured for provisioning, the activation process triggers downstream provisioning to the app.  It is possible for a user to sign in before these apps have been successfully provisioned for the user.  > **Important:** Do not generate or send a one-time activation token when activating users with an assigned password. Users should sign in with their assigned password.  For more information about the various scenarios of creating a user listed in the examples, see the [User creation scenarios](/openapi/okta-management/management/tag/User/#user-creation-scenarios) section.
+        Creates a new user in your Okta org with or without credentials.<br> > **Legal Disclaimer** > > After a user is
+        added to the Okta directory, they receive an activation email. As part of signing up for this service,
+        > you agreed not to use Okta's service/product to spam and/or send unsolicited messages. > Please refrain from
+        adding unrelated accounts to the directory as Okta is not responsible for, and disclaims any and all > liability
+        associated with, the activation email's content. You, and you alone, bear responsibility for the emails sent to
+        any recipients.  All responses return the created user. Activation of a user is an asynchronous operation. The
+        system performs group reconciliation during activation and assigns the user to all apps via direct or indirect
+        relationships (group memberships). * The user's `transitioningToStatus` property is `ACTIVE` during activation to
+        indicate that the user hasn't completed the asynchronous operation. * The user's `status` is `ACTIVE` when the
+        activation process is complete.  The user is emailed a one-time activation token if activated without a password.
+        > **Note:** If the user is assigned to an app that is configured for provisioning, the activation process triggers
+        downstream provisioning to the app.  It is possible for a user to sign in before these apps have been successfully
+        provisioned for the user.  > **Important:** Do not generate or send a one-time activation token when activating
+        users with an assigned password. Users should sign in with their assigned password.  For more information about
+        the various scenarios of creating a user listed in the examples, see the [User creation scenarios](
+        /openapi/okta-management/management/tag/User/#user-creation-scenarios) section.
 
         :param body: (required)
         :type body: CreateUserRequest
-        :param activate: Executes an [activation lifecycle](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserLifecycle/#tag/UserLifecycle/operation/activateUser) operation when creating the user
+        :param activate: Executes an [activation lifecycle](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserLifecycle/#tag/UserLifecycle
+        /operation/activateUser) operation when creating the user
         :type activate: bool
         :param provider: Indicates whether to create a user with a specified authentication provider
         :type provider: bool
-        :param next_login: With `activate=true`, if `nextLogin=changePassword`, a user is created, activated, and the password is set to `EXPIRED`. The user must change it the next time they sign in.
+        :param next_login: With `activate=true`, if `nextLogin=changePassword`, a user is created, activated,
+        and the password is set to `EXPIRED`. The user must change it the next time they sign in.
         :type next_login: UserNextLogin
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -167,15 +192,15 @@ class UserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_user_serialize(
-        self,
-        body,
-        activate,
-        provider,
-        next_login,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            body,
+            activate,
+            provider,
+            next_login,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -193,15 +218,12 @@ class UserApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if activate is not None:
-
             _query_params.append(('activate', activate))
 
         if provider is not None:
-
             _query_params.append(('provider', provider))
 
         if next_login is not None:
-
             _query_params.append(('nextLogin', next_login.value))
 
         # process the header parameters
@@ -254,29 +276,39 @@ class UserApi(ApiClient):
 
     @validate_call
     async def delete_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        send_email: Annotated[Optional[StrictBool], Field(
-            description="Sends a deactivation email to the admin if `true`")] = None,
-        prefer: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            send_email: Annotated[Optional[StrictBool], Field(
+                description="Sends a deactivation email to the admin if `true`"
+            )] = None,
+            prefer: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a user
 
-        Deletes a user permanently. This operation can only be performed on users that have a `DEPROVISIONED` status.  > **Warning:** This action can't be recovered!  This operation on a user that hasn't been deactivated causes that user to be deactivated. A second delete operation is required to delete the user.  > **Note:** You can also perform user deletion asynchronously. To invoke asynchronous user deletion, pass an HTTP header `Prefer: respond-async` with the request.  This header is also supported by user deactivation, which is performed if the delete endpoint is invoked on a user that hasn't been deactivated.
+        Deletes a user permanently. This operation can only be performed on users that have a `DEPROVISIONED` status.  >
+        **Warning:** This action can't be recovered!  This operation on a user that hasn't been deactivated causes that
+        user to be deactivated. A second delete operation is required to delete the user.  > **Note:** You can also
+        perform user deletion asynchronously. To invoke asynchronous user deletion, pass an HTTP header `Prefer:
+        respond-async` with the request.  This header is also supported by user deactivation, which is performed if the
+        delete endpoint is invoked on a user that hasn't been deactivated.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param send_email: Sends a deactivation email to the admin if `true`
         :type send_email: bool
@@ -358,14 +390,14 @@ class UserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_user_serialize(
-        self,
-        id,
-        send_email,
-        prefer,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            send_email,
+            prefer,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -385,7 +417,6 @@ class UserApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if send_email is not None:
-
             _query_params.append(('sendEmail', send_email))
 
         # process the header parameters
@@ -424,33 +455,67 @@ class UserApi(ApiClient):
 
     @validate_call
     async def get_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        content_type: Annotated[Optional[StrictStr], Field(description="Specifies the media type of the resource. Optional `okta-response` value can be included for performance optimization.  Complex DelAuth configurations may degrade performance when fetching specific parts of the response, and passing this parameter can omit these parts, bypassing the bottleneck.  Enum values for `okta-response`:   * `omitCredentials`: Omits the credentials subobject from the response.   * `omitCredentialsLinks`: Omits the following HAL links from the response: Update password, Change recovery question, Start forgot password flow, Reset password, Reset factors, Unlock.   * `omitTransitioningToStatus`: Omits the `transitioningToStatus` field from the response.")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional parameter to include metadata in the `_embedded` attribute. Valid values: `blocks` or <x-lifecycle class=\"ea\"></x-lifecycle> `classification`.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            content_type: Annotated[Optional[StrictStr], Field(
+                description="Specifies the media type of the resource. Optional `okta-response` value can be included for "
+                            "performance optimization.  Complex DelAuth configurations may degrade performance when "
+                            "fetching specific parts of the response, and passing this parameter can omit these parts, "
+                            "bypassing the bottleneck.  Enum values for `okta-response`:   * `omitCredentials`: Omits the "
+                            "credentials subobject from the response.   * `omitCredentialsLinks`: Omits the following HAL "
+                            "links from the response: Update password, Change recovery question, Start forgot password "
+                            "flow, Reset password, Reset factors, Unlock.   * `omitTransitioningToStatus`: Omits the "
+                            "`transitioningToStatus` field from the response."
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional parameter to include metadata in the `_embedded` attribute. Valid values: "
+                            "`blocks` or <x-lifecycle class=\"ea\"></x-lifecycle> `classification`."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> User:
         """Retrieve a user
 
-        Retrieves a user from your Okta org.  You can substitute `me` for the `id` to fetch the current user linked to an API token or session cookie.  * The request returns the user linked to the API token that is specified in the Authorization header, not the user linked to the active session. Details of the admin user who granted the API token is returned.  * When the end user has an active Okta session, it is typically a CORS request from the browser. Therefore, it's possible to retrieve the current user without the Authorization header.  When fetching a user by `login` or `login shortname`, [URL encode](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding) the request parameter to ensure that special characters are escaped properly. Logins with a `/` character can only be fetched by `id` due to URL issues with escaping the `/` character. If you don't know a user's ID, you can use the [List all users](/openapi/okta-management/management/tag/User/#tag/User/operation/listUsers) endpoint to find it.  > **Note:** Some browsers block third-party cookies by default, which disrupts Okta functionality in certain flows. See [Mitigate the impact of third-party cookie deprecation](https://help.okta.com/okta_help.htm?type=oie&id=ext-third-party-cookies).
+        Retrieves a user from your Okta org.  You can substitute `me` for the `id` to fetch the current user linked to an
+        API token or session cookie.  * The request returns the user linked to the API token that is specified in the
+        Authorization header, not the user linked to the active session. Details of the admin user who granted the API
+        token is returned.  * When the end user has an active Okta session, it is typically a CORS request from the
+        browser. Therefore, it's possible to retrieve the current user without the Authorization header.  When fetching a
+        user by `login` or `login shortname`, [URL encode](
+        https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding) the request parameter to ensure that special
+        characters are escaped properly. Logins with a `/` character can only be fetched by `id` due to URL issues with
+        escaping the `/` character. If you don't know a user's ID, you can use the [List all users](
+        /openapi/okta-management/management/tag/User/#tag/User/operation/listUsers) endpoint to find it.  > **Note:** Some
+        browsers block third-party cookies by default, which disrupts Okta functionality in certain flows. See [Mitigate
+        the impact of third-party cookie deprecation](
+        https://help.okta.com/okta_help.htm?type=oie&id=ext-third-party-cookies).
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
-        :param content_type: Specifies the media type of the resource. Optional `okta-response` value can be included for performance optimization.  Complex DelAuth configurations may degrade performance when fetching specific parts of the response, and passing this parameter can omit these parts, bypassing the bottleneck.  Enum values for `okta-response`:   * `omitCredentials`: Omits the credentials subobject from the response.   * `omitCredentialsLinks`: Omits the following HAL links from the response: Update password, Change recovery question, Start forgot password flow, Reset password, Reset factors, Unlock.   * `omitTransitioningToStatus`: Omits the `transitioningToStatus` field from the response.
+        :param content_type: Specifies the media type of the resource. Optional `okta-response` value can be included for
+        performance optimization.  Complex DelAuth configurations may degrade performance when fetching specific parts of
+        the response, and passing this parameter can omit these parts, bypassing the bottleneck.  Enum values for
+        `okta-response`:   * `omitCredentials`: Omits the credentials subobject from the response.   *
+        `omitCredentialsLinks`: Omits the following HAL links from the response: Update password, Change recovery
+        question, Start forgot password flow, Reset password, Reset factors, Unlock.   * `omitTransitioningToStatus`:
+        Omits the `transitioningToStatus` field from the response.
         :type content_type: str
-        :param expand: An optional parameter to include metadata in the `_embedded` attribute. Valid values: `blocks` or <x-lifecycle class=\"ea\"></x-lifecycle> `classification`.
+        :param expand: An optional parameter to include metadata in the `_embedded` attribute. Valid values: `blocks` or
+        <x-lifecycle class=\"ea\"></x-lifecycle> `classification`.
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -536,14 +601,14 @@ class UserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_user_serialize(
-        self,
-        id,
-        content_type,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            content_type,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -563,7 +628,6 @@ class UserApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -602,26 +666,30 @@ class UserApi(ApiClient):
 
     @validate_call
     async def list_user_blocks(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserBlock]:
         """List all user blocks
 
         Lists information about how the user is blocked from accessing their account
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -705,12 +773,12 @@ class UserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_user_blocks_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -763,58 +831,215 @@ class UserApi(ApiClient):
 
     @validate_call
     async def list_users(
-        self,
-        content_type: Annotated[Optional[StrictStr], Field(description="Specifies the media type of the resource. Optional `okta-response` value can be included for performance optimization.  Complex DelAuth configurations may degrade performance when fetching specific parts of the response, and passing this parameter can omit these parts, bypassing the bottleneck.  Enum values for `okta-response`:   * `omitCredentials`: Omits the credentials subobject from the response.   * `omitCredentialsLinks`: Omits the following HAL links from the response: Update password, Change recovery question, Start forgot password flow, Reset password, Reset factors, Unlock.   * `omitTransitioningToStatus`: Omits the `transitioningToStatus` field from the response.")] = None,
-        search: Annotated[Optional[StrictStr], Field(description="Searches for users with a supported filtering expression for most properties. Okta recommends this query parameter because it provides the largest range of search options and optimal performance.  > **Note:** Using an overly complex or long search query can result in an error.  This operation supports [pagination](https://developer.okta.com/docs/api/#pagination). Use an ID lookup for records that you update to ensure your results contain the latest data. Returned users include those with the `DEPROVISIONED` status.  Property names in the search parameter are case sensitive, whereas operators (`eq`, `sw`, and so on) and string values are case insensitive. Unlike with user logins, diacritical marks are significant in search string values: a search for `isaac.brock` finds `Isaac.Brock`, but doesn't find a property whose value is `isáàc.bröck`.  This operation requires [URL encoding](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). See [Special characters](https://developer.okta.com/docs/api/#special-characters).  This operation searches many properties:   * Any user profile attribute, including custom-defined attributes   * The top-level properties: `id`, `status`, `created`, `activated`, `statusChanged`, and `lastUpdated`   * The [user type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/#tag/UserType/operation/updateUserType) accessed as `type.id`   * Properties that have array values  > **Note:** <x-lifecycle class=\"ea\"></x-lifecycle> The ability to search by user classification is available as an [Early Access](https://developer.okta.com/docs/api/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature. The `classification.type` property cannot be used in conjunction with other search terms. You can search using `classification.type eq \"LITE\"` or `classification.type eq \"STANDARD\"`.  You can also use `sortBy` and `sortOrder` parameters. The `ne` (not equal) operator isn't supported, but you can obtain the same result by using `lt ... or ... gt`. For example, to see all users except those that have a status of `STAGED`, use `(status lt \"STAGED\" or status gt \"STAGED\")`.  You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. Okta follows the [SCIM Protocol Specification](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) for searching arrays. You can search multiple arrays, multiple values in an array, as well as using the standard logical and filtering operators. See [Filter](https://developer.okta.com/docs/reference/core-okta-api/#filter).  Searches for users can be filtered by the following operators: `sw`, `eq`, and `co`. You can only use `co` with these select user profile attributes: `profile.firstName`, `profile.lastName`, `profile.email`, and `profile.login`. See [Operators](https://developer.okta.com/docs/api/#operators).")] = None,
-        filter: Annotated[Optional[StrictStr], Field(description="Filters users with a supported expression for a subset of properties.  > **Note:** Returned users include those with the `DEPROVISIONED` status.  This requires [URL encoding](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, `filter=lastUpdated gt \"2013-06-01T00:00:00.000Z\"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`. Filtering is case-sensitive for property names and query values, while operators are case-insensitive.  Filtering supports the following limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, `profile.email`, `profile.firstName`, and `profile.lastName`.  Additionally, filtering supports only the equal `eq` operator from the standard Okta API filtering semantics, except in the case of the `lastUpdated` property. This property can also use the inequality operators (`gt`, `ge`, `lt`, and `le`). For logical operators, only the logical operators `and` and `or` are supported. The `not` operator isn't supported. See [Filter](https://developer.okta.com/docs/api/#filter) and [Operators](https://developer.okta.com/docs/api/#operators).")] = None,
-        q: Annotated[Optional[StrictStr], Field(description="Finds users who match the specified query. Use the `q` parameter for simple queries, such as a lookup of users by name when creating a people picker.  The value of `q` is matched against `firstName`, `lastName`, or `email`. This performs a `startsWith` match, but this is an implementation detail and can change without notice. You don't need to specify `firstName`, `lastName`, or `email`.  > **Notes:** > * Using the `q` parameter in a request omits users that have a status of `DEPROVISIONED`. To return all users, use a `filter` or `search` query instead. > * This doesn't support pagination, but you can use `limit`. > * This isn't designed for large data sets. For optimal performance, use the `search` parameter instead.")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[StrictInt], Field(
-            description="Specifies the number of results returned. Defaults to 10 if `q` is provided.  You can use `limit` with `after` to define the cursor location in the data set and manage the user records per page.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(
-            description="Specifies the field to sort by (for search queries only). This can be any single property, for example `sortBy=profile.lastName`. Users with the same value for the `sortBy` property are ordered by `id`. Use with `sortOrder` to control the order of results.")] = None,
-        sort_order: Annotated[Optional[StrictStr], Field(
-            description="Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if `sortBy` isn't present.")] = None,
-        fields: Annotated[Optional[StrictStr], Field(description="Specifies a select set of user properties to query. Any other properties will be filtered out of the returned users. This is often called field projections in APIs, which can reduce payload size, improve performance, and limit unneccessary data exposure.  Requested fields should be comma-separated. Comma-separate the fields and place sub-fields in the profile object inside a `profile:()` directive, for example `profile:(firstName, city)`. The `id` field is always included, regardless of whether it's specified in the `fields` parameter.")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A parameter to include metadata in the `_embedded` property. Supported value: `classification`.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            content_type: Annotated[Optional[StrictStr], Field(
+                description="Specifies the media type of the resource. Optional `okta-response` value can be included for "
+                            "performance optimization.  Complex DelAuth configurations may degrade performance when "
+                            "fetching specific parts of the response, and passing this parameter can omit these parts, "
+                            "bypassing the bottleneck.  Enum values for `okta-response`:   * `omitCredentials`: Omits the "
+                            "credentials subobject from the response.   * `omitCredentialsLinks`: Omits the following HAL "
+                            "links from the response: Update password, Change recovery question, Start forgot password "
+                            "flow, Reset password, Reset factors, Unlock.   * `omitTransitioningToStatus`: Omits the "
+                            "`transitioningToStatus` field from the response."
+            )] = None,
+            search: Annotated[Optional[StrictStr], Field(
+                description="Searches for users with a supported filtering expression for most properties. Okta recommends "
+                            "this query parameter because it provides the largest range of search options and optimal "
+                            "performance.  > **Note:** Using an overly complex or long search query can result in an "
+                            "error.  This operation supports [pagination]("
+                            "https://developer.okta.com/docs/api/#pagination). Use an ID lookup for records that you "
+                            "update to ensure your results contain the latest data. Returned users include those with the "
+                            "`DEPROVISIONED` status.  Property names in the search parameter are case sensitive, "
+                            "whereas operators (`eq`, `sw`, and so on) and string values are case insensitive. Unlike with "
+                            "user logins, diacritical marks are significant in search string values: a search for "
+                            "`isaac.brock` finds `Isaac.Brock`, but doesn't find a property whose value is `isáàc.bröck`.  "
+                            "This operation requires [URL encoding]("
+                            "https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). See [Special "
+                            "characters](https://developer.okta.com/docs/api/#special-characters).  This operation "
+                            "searches many properties:   * Any user profile attribute, including custom-defined attributes "
+                            "  * The top-level properties: `id`, `status`, `created`, `activated`, `statusChanged`, "
+                            "and `lastUpdated`   * The [user type]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/#tag"
+                            "/UserType/operation/updateUserType) accessed as `type.id`   * Properties that have array "
+                            "values  > **Note:** <x-lifecycle class=\"ea\"></x-lifecycle> The ability to search by user "
+                            "classification is available as an [Early Access]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/guides/release-lifecycle/#early"
+                            "-access-ea) feature. The `classification.type` property cannot be used in conjunction with "
+                            "other search terms. You can search using `classification.type eq \"LITE\"` or "
+                            "`classification.type eq \"STANDARD\"`.  You can also use `sortBy` and `sortOrder` parameters. "
+                            "The `ne` (not equal) operator isn't supported, but you can obtain the same result by using "
+                            "`lt ... or ... gt`. For example, to see all users except those that have a status of "
+                            "`STAGED`, use `(status lt \"STAGED\" or status gt \"STAGED\")`.  You can search properties "
+                            "that are arrays. If any element matches the search term, the entire array (object) is "
+                            "returned. Okta follows the [SCIM Protocol Specification]("
+                            "https://tools.ietf.org/html/rfc7644#section-3.4.2.2) for searching arrays. You can search "
+                            "multiple arrays, multiple values in an array, as well as using the standard logical and "
+                            "filtering operators. See [Filter]("
+                            "https://developer.okta.com/docs/reference/core-okta-api/#filter).  Searches for users can be "
+                            "filtered by the following operators: `sw`, `eq`, and `co`. You can only use `co` with these "
+                            "select user profile attributes: `profile.firstName`, `profile.lastName`, `profile.email`, "
+                            "and `profile.login`. See [Operators](https://developer.okta.com/docs/api/#operators)."
+            )] = None,
+            filter: Annotated[Optional[StrictStr], Field(
+                description="Filters users with a supported expression for a subset of properties.  > **Note:** Returned "
+                            "users include those with the `DEPROVISIONED` status.  This requires [URL encoding]("
+                            "https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, "
+                            "`filter=lastUpdated gt \"2013-06-01T00:00:00.000Z\"` is encoded as "
+                            "`filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`. Filtering is case-sensitive for "
+                            "property names and query values, while operators are case-insensitive.  Filtering supports "
+                            "the following limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, "
+                            "`profile.email`, `profile.firstName`, and `profile.lastName`.  Additionally, "
+                            "filtering supports only the equal `eq` operator from the standard Okta API filtering "
+                            "semantics, except in the case of the `lastUpdated` property. This property can also use the "
+                            "inequality operators (`gt`, `ge`, `lt`, and `le`). For logical operators, only the logical "
+                            "operators `and` and `or` are supported. The `not` operator isn't supported. See [Filter]("
+                            "https://developer.okta.com/docs/api/#filter) and [Operators]("
+                            "https://developer.okta.com/docs/api/#operators)."
+            )] = None,
+            q: Annotated[Optional[StrictStr], Field(
+                description="Finds users who match the specified query. Use the `q` parameter for simple queries, "
+                            "such as a lookup of users by name when creating a people picker.  The value of `q` is matched "
+                            "against `firstName`, `lastName`, or `email`. This performs a `startsWith` match, but this is "
+                            "an implementation detail and can change without notice. You don't need to specify "
+                            "`firstName`, `lastName`, or `email`.  > **Notes:** > * Using the `q` parameter in a request "
+                            "omits users that have a status of `DEPROVISIONED`. To return all users, use a `filter` or "
+                            "`search` query instead. > * This doesn't support pagination, but you can use `limit`. > * "
+                            "This isn't designed for large data sets. For optimal performance, use the `search` parameter "
+                            "instead."
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[StrictInt], Field(
+                description="Specifies the number of results returned. Defaults to 10 if `q` is provided.  You can use "
+                            "`limit` with `after` to define the cursor location in the data set and manage the user "
+                            "records per page."
+            )] = None,
+            sort_by: Annotated[Optional[StrictStr], Field(
+                description="Specifies the field to sort by (for search queries only). This can be any single property, "
+                            "for example `sortBy=profile.lastName`. Users with the same value for the `sortBy` property "
+                            "are ordered by `id`. Use with `sortOrder` to control the order of results."
+            )] = None,
+            sort_order: Annotated[Optional[StrictStr], Field(
+                description="Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if "
+                            "`sortBy` isn't present."
+            )] = None,
+            fields: Annotated[Optional[StrictStr], Field(
+                description="Specifies a select set of user properties to query. Any other properties will be filtered out "
+                            "of the returned users. This is often called field projections in APIs, which can reduce "
+                            "payload size, improve performance, and limit unneccessary data exposure.  Requested fields "
+                            "should be comma-separated. Comma-separate the fields and place sub-fields in the profile "
+                            "object inside a `profile:()` directive, for example `profile:(firstName, city)`. The `id` "
+                            "field is always included, regardless of whether it's specified in the `fields` parameter."
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A "
+                            "parameter to include metadata in the `_embedded` property. Supported value: `classification`."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[User]:
         """List all users
 
-        Lists users in your org, with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria. Different results are returned depending on specified queries in the request.  > **Notes:** >  * This operation omits users that have a status of `DEPROVISIONED` in the response. To return all users, use a filter or search query instead. >  * The `search` parameter results are sourced from an eventually consistent datasource and may not reflect the latest information.
+        Lists users in your org, with pagination in most cases.  A subset of users can be returned that match a supported
+        filter expression or search criteria. Different results are returned depending on specified queries in the
+        request.  > **Notes:** >  * This operation omits users that have a status of `DEPROVISIONED` in the response. To
+        return all users, use a filter or search query instead. >  * The `search` parameter results are sourced from an
+        eventually consistent datasource and may not reflect the latest information.
 
-        :param content_type: Specifies the media type of the resource. Optional `okta-response` value can be included for performance optimization.  Complex DelAuth configurations may degrade performance when fetching specific parts of the response, and passing this parameter can omit these parts, bypassing the bottleneck.  Enum values for `okta-response`:   * `omitCredentials`: Omits the credentials subobject from the response.   * `omitCredentialsLinks`: Omits the following HAL links from the response: Update password, Change recovery question, Start forgot password flow, Reset password, Reset factors, Unlock.   * `omitTransitioningToStatus`: Omits the `transitioningToStatus` field from the response.
+        :param content_type: Specifies the media type of the resource. Optional `okta-response` value can be included for
+        performance optimization.  Complex DelAuth configurations may degrade performance when fetching specific parts of
+        the response, and passing this parameter can omit these parts, bypassing the bottleneck.  Enum values for
+        `okta-response`:   * `omitCredentials`: Omits the credentials subobject from the response.   *
+        `omitCredentialsLinks`: Omits the following HAL links from the response: Update password, Change recovery
+        question, Start forgot password flow, Reset password, Reset factors, Unlock.   * `omitTransitioningToStatus`:
+        Omits the `transitioningToStatus` field from the response.
         :type content_type: str
-        :param search: Searches for users with a supported filtering expression for most properties. Okta recommends this query parameter because it provides the largest range of search options and optimal performance.  > **Note:** Using an overly complex or long search query can result in an error.  This operation supports [pagination](https://developer.okta.com/docs/api/#pagination). Use an ID lookup for records that you update to ensure your results contain the latest data. Returned users include those with the `DEPROVISIONED` status.  Property names in the search parameter are case sensitive, whereas operators (`eq`, `sw`, and so on) and string values are case insensitive. Unlike with user logins, diacritical marks are significant in search string values: a search for `isaac.brock` finds `Isaac.Brock`, but doesn't find a property whose value is `isáàc.bröck`.  This operation requires [URL encoding](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). See [Special characters](https://developer.okta.com/docs/api/#special-characters).  This operation searches many properties:   * Any user profile attribute, including custom-defined attributes   * The top-level properties: `id`, `status`, `created`, `activated`, `statusChanged`, and `lastUpdated`   * The [user type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/#tag/UserType/operation/updateUserType) accessed as `type.id`   * Properties that have array values  > **Note:** <x-lifecycle class=\"ea\"></x-lifecycle> The ability to search by user classification is available as an [Early Access](https://developer.okta.com/docs/api/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature. The `classification.type` property cannot be used in conjunction with other search terms. You can search using `classification.type eq \"LITE\"` or `classification.type eq \"STANDARD\"`.  You can also use `sortBy` and `sortOrder` parameters. The `ne` (not equal) operator isn't supported, but you can obtain the same result by using `lt ... or ... gt`. For example, to see all users except those that have a status of `STAGED`, use `(status lt \"STAGED\" or status gt \"STAGED\")`.  You can search properties that are arrays. If any element matches the search term, the entire array (object) is returned. Okta follows the [SCIM Protocol Specification](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) for searching arrays. You can search multiple arrays, multiple values in an array, as well as using the standard logical and filtering operators. See [Filter](https://developer.okta.com/docs/reference/core-okta-api/#filter).  Searches for users can be filtered by the following operators: `sw`, `eq`, and `co`. You can only use `co` with these select user profile attributes: `profile.firstName`, `profile.lastName`, `profile.email`, and `profile.login`. See [Operators](https://developer.okta.com/docs/api/#operators).
+        :param search: Searches for users with a supported filtering expression for most properties. Okta recommends this
+        query parameter because it provides the largest range of search options and optimal performance.  > **Note:**
+        Using an overly complex or long search query can result in an error.  This operation supports [pagination](
+        https://developer.okta.com/docs/api/#pagination). Use an ID lookup for records that you update to ensure your
+        results contain the latest data. Returned users include those with the `DEPROVISIONED` status.  Property names in
+        the search parameter are case sensitive, whereas operators (`eq`, `sw`, and so on) and string values are case
+        insensitive. Unlike with user logins, diacritical marks are significant in search string values: a search for
+        `isaac.brock` finds `Isaac.Brock`, but doesn't find a property whose value is `isáàc.bröck`.  This operation
+        requires [URL encoding](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). See [Special
+        characters](https://developer.okta.com/docs/api/#special-characters).  This operation searches many properties:
+        * Any user profile attribute, including custom-defined attributes   * The top-level properties: `id`, `status`,
+        `created`, `activated`, `statusChanged`, and `lastUpdated`   * The [user type](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/#tag/UserType/operation
+        /updateUserType) accessed as `type.id`   * Properties that have array values  > **Note:** <x-lifecycle
+        class=\"ea\"></x-lifecycle> The ability to search by user classification is available as an [Early Access](
+        https://developer.okta.com/docs/api/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature.
+        The `classification.type` property cannot be used in conjunction with other search terms. You can search using
+        `classification.type eq \"LITE\"` or `classification.type eq \"STANDARD\"`.  You can also use `sortBy` and
+        `sortOrder` parameters. The `ne` (not equal) operator isn't supported, but you can obtain the same result by using
+        `lt ... or ... gt`. For example, to see all users except those that have a status of `STAGED`, use `(status lt
+        \"STAGED\" or status gt \"STAGED\")`.  You can search properties that are arrays. If any element matches the
+        search term, the entire array (object) is returned. Okta follows the [SCIM Protocol Specification](
+        https://tools.ietf.org/html/rfc7644#section-3.4.2.2) for searching arrays. You can search multiple arrays,
+        multiple values in an array, as well as using the standard logical and filtering operators. See [Filter](
+        https://developer.okta.com/docs/reference/core-okta-api/#filter).  Searches for users can be filtered by the
+        following operators: `sw`, `eq`, and `co`. You can only use `co` with these select user profile attributes:
+        `profile.firstName`, `profile.lastName`, `profile.email`, and `profile.login`. See [Operators](
+        https://developer.okta.com/docs/api/#operators).
         :type search: str
-        :param filter: Filters users with a supported expression for a subset of properties.  > **Note:** Returned users include those with the `DEPROVISIONED` status.  This requires [URL encoding](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, `filter=lastUpdated gt \"2013-06-01T00:00:00.000Z\"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`. Filtering is case-sensitive for property names and query values, while operators are case-insensitive.  Filtering supports the following limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, `profile.email`, `profile.firstName`, and `profile.lastName`.  Additionally, filtering supports only the equal `eq` operator from the standard Okta API filtering semantics, except in the case of the `lastUpdated` property. This property can also use the inequality operators (`gt`, `ge`, `lt`, and `le`). For logical operators, only the logical operators `and` and `or` are supported. The `not` operator isn't supported. See [Filter](https://developer.okta.com/docs/api/#filter) and [Operators](https://developer.okta.com/docs/api/#operators).
+        :param filter: Filters users with a supported expression for a subset of properties.  > **Note:** Returned users
+        include those with the `DEPROVISIONED` status.  This requires [URL encoding](
+        https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, `filter=lastUpdated gt
+        \"2013-06-01T00:00:00.000Z\"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`. Filtering
+        is case-sensitive for property names and query values, while operators are case-insensitive.  Filtering supports
+        the following limited number of properties: `status`, `lastUpdated`, `id`, `profile.login`, `profile.email`,
+        `profile.firstName`, and `profile.lastName`.  Additionally, filtering supports only the equal `eq` operator from
+        the standard Okta API filtering semantics, except in the case of the `lastUpdated` property. This property can
+        also use the inequality operators (`gt`, `ge`, `lt`, and `le`). For logical operators, only the logical operators
+        `and` and `or` are supported. The `not` operator isn't supported. See [Filter](
+        https://developer.okta.com/docs/api/#filter) and [Operators](https://developer.okta.com/docs/api/#operators).
         :type filter: str
-        :param q: Finds users who match the specified query. Use the `q` parameter for simple queries, such as a lookup of users by name when creating a people picker.  The value of `q` is matched against `firstName`, `lastName`, or `email`. This performs a `startsWith` match, but this is an implementation detail and can change without notice. You don't need to specify `firstName`, `lastName`, or `email`.  > **Notes:** > * Using the `q` parameter in a request omits users that have a status of `DEPROVISIONED`. To return all users, use a `filter` or `search` query instead. > * This doesn't support pagination, but you can use `limit`. > * This isn't designed for large data sets. For optimal performance, use the `search` parameter instead.
+        :param q: Finds users who match the specified query. Use the `q` parameter for simple queries, such as a lookup of
+        users by name when creating a people picker.  The value of `q` is matched against `firstName`, `lastName`,
+        or `email`. This performs a `startsWith` match, but this is an implementation detail and can change without
+        notice. You don't need to specify `firstName`, `lastName`, or `email`.  > **Notes:** > * Using the `q` parameter
+        in a request omits users that have a status of `DEPROVISIONED`. To return all users, use a `filter` or `search`
+        query instead. > * This doesn't support pagination, but you can use `limit`. > * This isn't designed for large
+        data sets. For optimal performance, use the `search` parameter instead.
         :type q: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
-        :param limit: Specifies the number of results returned. Defaults to 10 if `q` is provided.  You can use `limit` with `after` to define the cursor location in the data set and manage the user records per page.
+        :param limit: Specifies the number of results returned. Defaults to 10 if `q` is provided.  You can use `limit`
+        with `after` to define the cursor location in the data set and manage the user records per page.
         :type limit: int
-        :param sort_by: Specifies the field to sort by (for search queries only). This can be any single property, for example `sortBy=profile.lastName`. Users with the same value for the `sortBy` property are ordered by `id`. Use with `sortOrder` to control the order of results.
+        :param sort_by: Specifies the field to sort by (for search queries only). This can be any single property,
+        for example `sortBy=profile.lastName`. Users with the same value for the `sortBy` property are ordered by `id`.
+        Use with `sortOrder` to control the order of results.
         :type sort_by: str
-        :param sort_order: Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if `sortBy` isn't present.
+        :param sort_order: Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if
+        `sortBy` isn't present.
         :type sort_order: str
-        :param fields: Specifies a select set of user properties to query. Any other properties will be filtered out of the returned users. This is often called field projections in APIs, which can reduce payload size, improve performance, and limit unneccessary data exposure.  Requested fields should be comma-separated. Comma-separate the fields and place sub-fields in the profile object inside a `profile:()` directive, for example `profile:(firstName, city)`. The `id` field is always included, regardless of whether it's specified in the `fields` parameter.
+        :param fields: Specifies a select set of user properties to query. Any other properties will be filtered out of
+        the returned users. This is often called field projections in APIs, which can reduce payload size,
+        improve performance, and limit unneccessary data exposure.  Requested fields should be comma-separated.
+        Comma-separate the fields and place sub-fields in the profile object inside a `profile:()` directive, for example
+        `profile:(firstName, city)`. The `id` field is always included, regardless of whether it's specified in the
+        `fields` parameter.
         :type fields: str
-        :param expand: <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A parameter to include metadata in the `_embedded` property. Supported value: `classification`.
+        :param expand: <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A parameter
+        to include metadata in the `_embedded` property. Supported value: `classification`.
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -906,21 +1131,21 @@ class UserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_users_serialize(
-        self,
-        content_type,
-        search,
-        filter,
-        q,
-        after,
-        limit,
-        sort_by,
-        sort_order,
-        fields,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            content_type,
+            search,
+            filter,
+            q,
+            after,
+            limit,
+            sort_by,
+            sort_order,
+            fields,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -938,39 +1163,30 @@ class UserApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if search is not None:
-
             _query_params.append(('search', search))
 
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         if q is not None:
-
             _query_params.append(('q', q))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if sort_by is not None:
-
             _query_params.append(('sortBy', sort_by))
 
         if sort_order is not None:
-
             _query_params.append(('sortOrder', sort_order))
 
         if fields is not None:
-
             _query_params.append(('fields', fields))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -1009,37 +1225,48 @@ class UserApi(ApiClient):
 
     @validate_call
     async def replace_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        user: UpdateUserRequest,
-        strict: Annotated[Optional[StrictBool], Field(
-            description="If `true`, validates against minimum age and history password policy")] = None,
-        if_match: Annotated[Optional[StrictStr], Field(
-            description="The ETag value of the user's expected current state. This becomes a conditional request used for concurrency control. See [Conditional Requests and Entity Tags](/#conditional-requests-and-entity-tags).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            user: UpdateUserRequest,
+            strict: Annotated[Optional[StrictBool], Field(
+                description="If `true`, validates against minimum age and history password policy"
+            )] = None,
+            if_match: Annotated[Optional[StrictStr], Field(
+                description="The ETag value of the user's expected current state. This becomes a conditional request used "
+                            "for concurrency control. See [Conditional Requests and Entity Tags]("
+                            "/#conditional-requests-and-entity-tags)."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> User:
         """Replace a user
 
-        Replaces a user's profile, credentials, or both using strict-update semantics.  All profile properties must be specified when updating a user's profile with a `PUT` method. Any property not specified in the request is deleted. > **Important:** Don't use a `PUT` method for partial updates.
+        Replaces a user's profile, credentials, or both using strict-update semantics.  All profile properties must be
+        specified when updating a user's profile with a `PUT` method. Any property not specified in the request is
+        deleted. > **Important:** Don't use a `PUT` method for partial updates.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param user: (required)
         :type user: UpdateUserRequest
         :param strict: If `true`, validates against minimum age and history password policy
         :type strict: bool
-        :param if_match: The ETag value of the user's expected current state. This becomes a conditional request used for concurrency control. See [Conditional Requests and Entity Tags](/#conditional-requests-and-entity-tags).
+        :param if_match: The ETag value of the user's expected current state. This becomes a conditional request used for
+        concurrency control. See [Conditional Requests and Entity Tags](/#conditional-requests-and-entity-tags).
         :type if_match: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1127,15 +1354,15 @@ class UserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_user_serialize(
-        self,
-        id,
-        user,
-        strict,
-        if_match,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            user,
+            strict,
+            if_match,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1155,7 +1382,6 @@ class UserApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if strict is not None:
-
             _query_params.append(('strict', strict))
 
         # process the header parameters
@@ -1210,37 +1436,61 @@ class UserApi(ApiClient):
 
     @validate_call
     async def update_user(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        user: UpdateUserRequest,
-        strict: Annotated[Optional[StrictBool], Field(
-            description="If true, validates against minimum age and history password policy")] = None,
-        if_match: Annotated[Optional[StrictStr], Field(
-            description="The ETag value of the user's expected current state. This becomes a conditional request used for concurrency control. See [Conditional Requests and Entity Tags](/#conditional-requests-and-entity-tags).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            user: UpdateUserRequest,
+            strict: Annotated[Optional[StrictBool], Field(
+                description="If true, validates against minimum age and history password policy"
+            )] = None,
+            if_match: Annotated[Optional[StrictStr], Field(
+                description="The ETag value of the user's expected current state. This becomes a conditional request used "
+                            "for concurrency control. See [Conditional Requests and Entity Tags]("
+                            "/#conditional-requests-and-entity-tags)."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> User:
         """Update a user
 
-        Updates a user's profile or credentials with partial update semantics.  > **Important:** Use the `POST` method for partial updates. Unspecified properties are set to null with `PUT`.  `profile` and `credentials` can be updated independently or together with a single request. > **Note**: Currently, the user type of a user can only be changed via a full replacement PUT operation. If the request parameters of a partial update include the type element from the user object, the value must match the existing type of the user. Only admins are permitted to change the user type of a user; end users are not allowed to change their own user type.  > **Note**: To update a current user's profile with partial semantics, the `/api/v1/users/me` endpoint can be invoked. > > A user can only update profile properties for which the user has write access. Within the profile, if the user tries to update the primary or the secondary email IDs, verification emails are sent to those email IDs, and the fields are updated only upon verification.  If you are using this endpoint to set a password, it sets a password without validating existing user credentials. This is an administrative operation. For operations that validate credentials, refer to the [Reset password](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserCred/#tag/UserCred/operation/resetPassword), [Start forgot password flow](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserCred/#tag/UserCred/operation/forgotPassword), and [Update password](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserCred/#tag/UserCred/operation/changePassword) endpoints.
+        Updates a user's profile or credentials with partial update semantics.  > **Important:** Use the `POST` method for
+        partial updates. Unspecified properties are set to null with `PUT`.  `profile` and `credentials` can be updated
+        independently or together with a single request. > **Note**: Currently, the user type of a user can only be
+        changed via a full replacement PUT operation. If the request parameters of a partial update include the type
+        element from the user object, the value must match the existing type of the user. Only admins are permitted to
+        change the user type of a user; end users are not allowed to change their own user type.  > **Note**: To update a
+        current user's profile with partial semantics, the `/api/v1/users/me` endpoint can be invoked. > > A user can only
+        update profile properties for which the user has write access. Within the profile, if the user tries to update the
+        primary or the secondary email IDs, verification emails are sent to those email IDs, and the fields are updated
+        only upon verification.  If you are using this endpoint to set a password, it sets a password without validating
+        existing user credentials. This is an administrative operation. For operations that validate credentials,
+        refer to the [Reset password](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserCred
+        /#tag/UserCred/operation/resetPassword), [Start forgot password flow](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserCred/#tag/UserCred/operation
+        /forgotPassword), and [Update password](https://developer.okta.com/docs/api/openapi/okta-management/management/tag
+        /UserCred/#tag/UserCred/operation/changePassword) endpoints.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param user: (required)
         :type user: UpdateUserRequest
         :param strict: If true, validates against minimum age and history password policy
         :type strict: bool
-        :param if_match: The ETag value of the user's expected current state. This becomes a conditional request used for concurrency control. See [Conditional Requests and Entity Tags](/#conditional-requests-and-entity-tags).
+        :param if_match: The ETag value of the user's expected current state. This becomes a conditional request used for
+        concurrency control. See [Conditional Requests and Entity Tags](/#conditional-requests-and-entity-tags).
         :type if_match: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1328,15 +1578,15 @@ class UserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_user_serialize(
-        self,
-        id,
-        user,
-        strict,
-        if_match,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            user,
+            strict,
+            if_match,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1356,7 +1606,6 @@ class UserApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if strict is not None:
-
             _query_params.append(('strict', strict))
 
         # process the header parameters

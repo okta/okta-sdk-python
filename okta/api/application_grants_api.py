@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,23 +46,24 @@ class ApplicationGrantsApi(ApiClient):
 
     @validate_call
     async def get_scope_consent_grant(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        grant_id: Annotated[StrictStr, Field(description="Grant ID")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            grant_id: Annotated[StrictStr, Field(description="Grant ID")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ScopeConsentGrant:
         """Retrieve an app grant
 
@@ -157,14 +159,14 @@ class ApplicationGrantsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_scope_consent_grant_serialize(
-        self,
-        app_id,
-        grant_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            grant_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -186,7 +188,6 @@ class ApplicationGrantsApi(ApiClient):
             _path_params['grantId'] = grant_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -223,21 +224,21 @@ class ApplicationGrantsApi(ApiClient):
 
     @validate_call
     async def grant_consent_to_scope(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        o_auth2_scope_consent_grant: OAuth2ScopeConsentGrant,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            o_auth2_scope_consent_grant: OAuth2ScopeConsentGrant,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ScopeConsentGrant:
         """Grant consent to scope
 
@@ -331,13 +332,13 @@ class ApplicationGrantsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _grant_consent_to_scope_serialize(
-        self,
-        app_id,
-        o_auth2_scope_consent_grant,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            o_auth2_scope_consent_grant,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -406,22 +407,23 @@ class ApplicationGrantsApi(ApiClient):
 
     @validate_call
     async def list_scope_consent_grants(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2ScopeConsentGrant]:
         """List all app grants
 
@@ -514,13 +516,13 @@ class ApplicationGrantsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_scope_consent_grants_serialize(
-        self,
-        app_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -540,7 +542,6 @@ class ApplicationGrantsApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -577,21 +578,21 @@ class ApplicationGrantsApi(ApiClient):
 
     @validate_call
     async def revoke_scope_consent_grant(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        grant_id: Annotated[StrictStr, Field(description="Grant ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            grant_id: Annotated[StrictStr, Field(description="Grant ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke an app grant
 
@@ -675,13 +676,13 @@ class ApplicationGrantsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_scope_consent_grant_serialize(
-        self,
-        app_id,
-        grant_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            grant_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

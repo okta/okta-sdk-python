@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,13 +39,16 @@ class UploadYubikeyOtpTokenSeedRequest(BaseModel):
     serial_number: Optional[StrictStr] = Field(
         default=None,
         description="The unique identifier assigned to each YubiKey device",
-        alias="serialNumber")
+        alias="serialNumber"
+    )
     public_id: Optional[StrictStr] = Field(default=None, description="The YubiKey's public ID", alias="publicId")
     private_id: Optional[StrictStr] = Field(default=None, description="The YubiKey's private ID", alias="privateId")
     aes_key: Optional[StrictStr] = Field(
         default=None,
-        description="The cryptographic key used in the AES (Advanced Encryption Standard) algorithm to encrypt and decrypt the YubiKey OTP",
-        alias="aesKey")
+        description="The cryptographic key used in the AES (Advanced Encryption Standard) algorithm to encrypt and decrypt "
+                    "the YubiKey OTP",
+        alias="aesKey"
+    )
     __properties: ClassVar[List[str]] = ["serialNumber", "publicId", "privateId", "aesKey"]
 
     model_config = ConfigDict(
@@ -76,8 +81,10 @@ class UploadYubikeyOtpTokenSeedRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -95,10 +102,12 @@ class UploadYubikeyOtpTokenSeedRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "serialNumber": obj.get("serialNumber"),
-            "publicId": obj.get("publicId"),
-            "privateId": obj.get("privateId"),
-            "aesKey": obj.get("aesKey")
-        })
+        _obj = cls.model_validate(
+            {
+                "serialNumber": obj.get("serialNumber"),
+                "publicId": obj.get("publicId"),
+                "privateId": obj.get("privateId"),
+                "aesKey": obj.get("aesKey")
+            }
+        )
         return _obj

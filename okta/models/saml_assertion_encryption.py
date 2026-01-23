@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,17 +38,23 @@ class SamlAssertionEncryption(BaseModel):
     """  # noqa: E501
     enabled: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates whether Okta encrypts the assertions that it sends to the Service Provider")
+        description="Indicates whether Okta encrypts the assertions that it sends to the Service Provider"
+    )
     encryption_algorithm: Optional[StrictStr] = Field(
         default=None,
         description="The encryption algorithm used to encrypt the SAML assertion",
-        alias="encryptionAlgorithm")
+        alias="encryptionAlgorithm"
+    )
     key_transport_algorithm: Optional[StrictStr] = Field(
         default=None,
         description="The key transport algorithm used to encrypt the SAML assertion",
-        alias="keyTransportAlgorithm")
+        alias="keyTransportAlgorithm"
+    )
     x5c: Optional[List[StrictStr]] = Field(
-        default=None, description="A list that contains exactly one x509 encoded certificate which Okta uses to encrypt the SAML assertion with")
+        default=None,
+        description="A list that contains exactly one x509 encoded certificate which Okta uses to encrypt the SAML "
+                    "assertion with"
+    )
     __properties: ClassVar[List[str]] = ["enabled", "encryptionAlgorithm", "keyTransportAlgorithm", "x5c"]
 
     @field_validator('encryption_algorithm')
@@ -99,8 +107,10 @@ class SamlAssertionEncryption(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -118,10 +128,12 @@ class SamlAssertionEncryption(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "enabled": obj.get("enabled"),
-            "encryptionAlgorithm": obj.get("encryptionAlgorithm"),
-            "keyTransportAlgorithm": obj.get("keyTransportAlgorithm"),
-            "x5c": obj.get("x5c")
-        })
+        _obj = cls.model_validate(
+            {
+                "enabled": obj.get("enabled"),
+                "encryptionAlgorithm": obj.get("encryptionAlgorithm"),
+                "keyTransportAlgorithm": obj.get("keyTransportAlgorithm"),
+                "x5c": obj.get("x5c")
+            }
+        )
         return _obj

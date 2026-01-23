@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.application import Application
 from okta.models.application_accessibility import ApplicationAccessibility
 from okta.models.application_embedded import ApplicationEmbedded
@@ -36,8 +41,6 @@ from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.scheme_application_credentials import SchemeApplicationCredentials
 from okta.models.secure_password_store_application_settings import SecurePasswordStoreApplicationSettings
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SecurePasswordStoreApplication(Application):
@@ -46,27 +49,31 @@ class SecurePasswordStoreApplication(Application):
     """  # noqa: E501
     credentials: Optional[SchemeApplicationCredentials] = None
     name: StrictStr = Field(
-        description="`template_sps` is the key name for a SWA app instance that uses HTTP POST and doesn't require a browser plugin")
+        description="`template_sps` is the key name for a SWA app instance that uses HTTP POST and doesn't require a "
+                    "browser plugin"
+    )
     settings: SecurePasswordStoreApplicationSettings
-    __properties: ClassVar[List[str]] = ["accessibility",
-                                         "created",
-                                         "expressConfiguration",
-                                         "features",
-                                         "id",
-                                         "label",
-                                         "lastUpdated",
-                                         "licensing",
-                                         "orn",
-                                         "profile",
-                                         "signOnMode",
-                                         "status",
-                                         "universalLogout",
-                                         "visibility",
-                                         "_embedded",
-                                         "_links",
-                                         "credentials",
-                                         "name",
-                                         "settings"]
+    __properties: ClassVar[List[str]] = [
+        "accessibility",
+        "created",
+        "expressConfiguration",
+        "features",
+        "id",
+        "label",
+        "lastUpdated",
+        "licensing",
+        "orn",
+        "profile",
+        "signOnMode",
+        "status",
+        "universalLogout",
+        "visibility",
+        "_embedded",
+        "_links",
+        "credentials",
+        "name",
+        "settings"
+    ]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -105,8 +112,10 @@ class SecurePasswordStoreApplication(Application):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -187,25 +196,39 @@ class SecurePasswordStoreApplication(Application):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "accessibility": ApplicationAccessibility.from_dict(obj["accessibility"]) if obj.get("accessibility") is not None else None,
-            "created": obj.get("created"),
-            "expressConfiguration": ApplicationExpressConfiguration.from_dict(obj["expressConfiguration"]) if obj.get("expressConfiguration") is not None else None,
-            "features": obj.get("features"),
-            "id": obj.get("id"),
-            "label": obj.get("label"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "licensing": ApplicationLicensing.from_dict(obj["licensing"]) if obj.get("licensing") is not None else None,
-            "orn": obj.get("orn"),
-            "profile": obj.get("profile"),
-            "signOnMode": obj.get("signOnMode"),
-            "status": obj.get("status"),
-            "universalLogout": ApplicationUniversalLogout.from_dict(obj["universalLogout"]) if obj.get("universalLogout") is not None else None,
-            "visibility": ApplicationVisibility.from_dict(obj["visibility"]) if obj.get("visibility") is not None else None,
-            "_embedded": ApplicationEmbedded.from_dict(obj["_embedded"]) if obj.get("_embedded") is not None else None,
-            "_links": ApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
-            "credentials": SchemeApplicationCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None,
-            "name": obj.get("name"),
-            "settings": SecurePasswordStoreApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "accessibility": ApplicationAccessibility.from_dict(obj["accessibility"]) if obj.get(
+                    "accessibility"
+                ) is not None else None,
+                "created": obj.get("created"),
+                "expressConfiguration": ApplicationExpressConfiguration.from_dict(obj["expressConfiguration"]) if obj.get(
+                    "expressConfiguration"
+                ) is not None else None,
+                "features": obj.get("features"),
+                "id": obj.get("id"),
+                "label": obj.get("label"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "licensing": ApplicationLicensing.from_dict(obj["licensing"]) if obj.get("licensing") is not None else None,
+                "orn": obj.get("orn"),
+                "profile": obj.get("profile"),
+                "signOnMode": obj.get("signOnMode"),
+                "status": obj.get("status"),
+                "universalLogout": ApplicationUniversalLogout.from_dict(obj["universalLogout"]) if obj.get(
+                    "universalLogout"
+                ) is not None else None,
+                "visibility": ApplicationVisibility.from_dict(obj["visibility"]) if obj.get(
+                    "visibility"
+                ) is not None else None,
+                "_embedded": ApplicationEmbedded.from_dict(obj["_embedded"]) if obj.get("_embedded") is not None else None,
+                "_links": ApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
+                "credentials": SchemeApplicationCredentials.from_dict(obj["credentials"]) if obj.get(
+                    "credentials"
+                ) is not None else None,
+                "name": obj.get("name"),
+                "settings": SecurePasswordStoreApplicationSettings.from_dict(obj["settings"]) if obj.get(
+                    "settings"
+                ) is not None else None
+            }
+        )
         return _obj

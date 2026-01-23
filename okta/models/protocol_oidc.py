@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,36 +20,45 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.o_auth_credentials import OAuthCredentials
 from okta.models.o_auth_endpoints import OAuthEndpoints
 from okta.models.oidc_algorithms import OidcAlgorithms
 from okta.models.oidc_settings import OidcSettings
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class ProtocolOidc(BaseModel):
     """
-    Protocol settings for authentication using the [OpenID Connect Protocol](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth)
+    Protocol settings for authentication using the [OpenID Connect Protocol](
+    http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth)
     """  # noqa: E501
     algorithms: Optional[OidcAlgorithms] = None
     credentials: Optional[OAuthCredentials] = None
     endpoints: Optional[OAuthEndpoints] = None
     okta_idp_org_url: Optional[StrictStr] = Field(default=None, description="URL of the IdP org", alias="oktaIdpOrgUrl")
     scopes: Optional[List[StrictStr]] = Field(
-        default=None, description="OpenID Connect and IdP-defined permission bundles to request delegated access from the user > **Note:** The [IdP type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request) table lists the scopes that are supported for each IdP.")
+        default=None,
+        description="OpenID Connect and IdP-defined permission bundles to request delegated access from the user > "
+                    "**Note:** The [IdP type](https://developer.okta.com/docs/api/openapi/okta-management/management/tag"
+                    "/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=type&t=request) table "
+                    "lists the scopes that are supported for each IdP."
+    )
     settings: Optional[OidcSettings] = None
     type: Optional[StrictStr] = Field(default=None, description="OpenID Connect Authorization Code flow")
-    __properties: ClassVar[List[str]] = ["algorithms", "credentials",
-                                         "endpoints", "oktaIdpOrgUrl", "scopes", "settings", "type"]
+    __properties: ClassVar[List[str]] = [
+        "algorithms", "credentials",
+        "endpoints", "oktaIdpOrgUrl", "scopes", "settings", "type"
+    ]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -89,8 +100,10 @@ class ProtocolOidc(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -136,13 +149,17 @@ class ProtocolOidc(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "algorithms": OidcAlgorithms.from_dict(obj["algorithms"]) if obj.get("algorithms") is not None else None,
-            "credentials": OAuthCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None,
-            "endpoints": OAuthEndpoints.from_dict(obj["endpoints"]) if obj.get("endpoints") is not None else None,
-            "oktaIdpOrgUrl": obj.get("oktaIdpOrgUrl"),
-            "scopes": obj.get("scopes"),
-            "settings": OidcSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "algorithms": OidcAlgorithms.from_dict(obj["algorithms"]) if obj.get("algorithms") is not None else None,
+                "credentials": OAuthCredentials.from_dict(obj["credentials"]) if obj.get(
+                    "credentials"
+                ) is not None else None,
+                "endpoints": OAuthEndpoints.from_dict(obj["endpoints"]) if obj.get("endpoints") is not None else None,
+                "oktaIdpOrgUrl": obj.get("oktaIdpOrgUrl"),
+                "scopes": obj.get("scopes"),
+                "settings": OidcSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
+                "type": obj.get("type")
+            }
+        )
         return _obj

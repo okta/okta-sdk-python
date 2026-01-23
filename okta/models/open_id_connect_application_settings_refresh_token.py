@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,26 +20,36 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from okta.models.open_id_connect_refresh_token_rotation_type import OpenIdConnectRefreshTokenRotationType
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.open_id_connect_refresh_token_rotation_type import OpenIdConnectRefreshTokenRotationType
 
 
 class OpenIdConnectApplicationSettingsRefreshToken(BaseModel):
     """
-    Refresh token configuration for an OAuth 2.0 client  When you create or update an OAuth 2.0 client, you can configure refresh token rotation by setting the `rotation_type` and `leeway` properties. If you don't set these properties when you create an app integration, the default values are used. When you update an app integration, your previously configured values are used. 
+    Refresh token configuration for an OAuth 2.0 client  When you create or update an OAuth 2.0 client, you can configure
+    refresh token rotation by setting the `rotation_type` and `leeway` properties. If you don't set these properties when
+    you create an app integration, the default values are used. When you update an app integration, your previously
+    configured values are used.
     """  # noqa: E501
     leeway: Optional[Annotated[int, Field(le=60, strict=True, ge=0)]] = Field(
-        default=30, description="The leeway, in seconds, allowed for the OAuth 2.0 client. After the refresh token is rotated, the previous token remains valid for the specified period of time so clients can get the new token.  > **Note:** A leeway of 0 doesn't necessarily mean that the previous token is immediately invalidated. The previous token is invalidated after the new token is generated and returned in the response. ")
+        default=30,
+        description="The leeway, in seconds, allowed for the OAuth 2.0 client. After the refresh token is rotated, "
+                    "the previous token remains valid for the specified period of time so clients can get the new token.  "
+                    "> **Note:** A leeway of 0 doesn't necessarily mean that the previous token is immediately "
+                    "invalidated. The previous token is invalidated after the new token is generated and returned in the "
+                    "response. "
+    )
     rotation_type: OpenIdConnectRefreshTokenRotationType
     __properties: ClassVar[List[str]] = ["leeway", "rotation_type"]
 
@@ -71,8 +83,10 @@ class OpenIdConnectApplicationSettingsRefreshToken(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -90,8 +104,10 @@ class OpenIdConnectApplicationSettingsRefreshToken(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "leeway": obj.get("leeway") if obj.get("leeway") is not None else 30,
-            "rotation_type": obj.get("rotation_type")
-        })
+        _obj = cls.model_validate(
+            {
+                "leeway": obj.get("leeway") if obj.get("leeway") is not None else 30,
+                "rotation_type": obj.get("rotation_type")
+            }
+        )
         return _obj

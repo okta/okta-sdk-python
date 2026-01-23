@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.actions import Actions
 from okta.models.conditions import Conditions
 from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self import LinksSelf
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class RealmAssignment(BaseModel):
@@ -43,24 +46,36 @@ class RealmAssignment(BaseModel):
     conditions: Optional[Conditions] = None
     created: Optional[datetime] = Field(default=None, description="Timestamp when the realm assignment was created")
     domains: Optional[List[StrictStr]] = Field(
-        default=None, description="Array of allowed domains. No user in this realm can be created or updated unless they have a username and email from one of these domains.  The following characters aren't allowed in the domain name: `!$%^&()=*+,:;<>'[]|/?\\`")
+        default=None,
+        description="Array of allowed domains. No user in this realm can be created or updated unless they have a username "
+                    "and email from one of these domains.  The following characters aren't allowed in the domain name: "
+                    "`!$%^&()=*+,:;<>'[]|/?\\`"
+    )
     id: Optional[StrictStr] = Field(default=None, description="Unique ID of the realm assignment")
     is_default: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates the default realm. Existing users will start out in the default realm and can be moved individually to other realms.",
-        alias="isDefault")
+        description="Indicates the default realm. Existing users will start out in the default realm and can be moved "
+                    "individually to other realms.",
+        alias="isDefault"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp of when the realm assignment was updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Optional[StrictStr] = Field(default=None, description="Name of the realm")
     priority: Optional[StrictInt] = Field(
         default=None,
-        description="The priority of the realm assignment. The lower the number, the higher the priority. This helps resolve conflicts between realm assignments. > **Note:** When you create realm assignments in bulk, realm assignment priorities must be unique.")
+        description="The priority of the realm assignment. The lower the number, the higher the priority. This helps "
+                    "resolve conflicts between realm assignments. > **Note:** When you create realm assignments in bulk, "
+                    "realm assignment priorities must be unique."
+    )
     status: Optional[LifecycleStatus] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["actions", "conditions", "created", "domains",
-                                         "id", "isDefault", "lastUpdated", "name", "priority", "status", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "actions", "conditions", "created", "domains",
+        "id", "isDefault", "lastUpdated", "name", "priority", "status", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,12 +111,14 @@ class RealmAssignment(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "is_default",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "is_default",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -140,17 +157,19 @@ class RealmAssignment(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "actions": Actions.from_dict(obj["actions"]) if obj.get("actions") is not None else None,
-            "conditions": Conditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None,
-            "created": obj.get("created"),
-            "domains": obj.get("domains"),
-            "id": obj.get("id"),
-            "isDefault": obj.get("isDefault"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "priority": obj.get("priority"),
-            "status": obj.get("status"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "actions": Actions.from_dict(obj["actions"]) if obj.get("actions") is not None else None,
+                "conditions": Conditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None,
+                "created": obj.get("created"),
+                "domains": obj.get("domains"),
+                "id": obj.get("id"),
+                "isDefault": obj.get("isDefault"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "priority": obj.get("priority"),
+                "status": obj.get("status"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

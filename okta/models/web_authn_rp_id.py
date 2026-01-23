@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.web_authn_rp_id_domain import WebAuthnRpIdDomain
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.web_authn_rp_id_domain import WebAuthnRpIdDomain
 
 
 class WebAuthnRpId(BaseModel):
@@ -38,7 +41,10 @@ class WebAuthnRpId(BaseModel):
     domain: Optional[WebAuthnRpIdDomain] = None
     enabled: Optional[StrictBool] = Field(
         default=False,
-        description="Indicates whether the RP ID is active and is used for WebAuthn operations. It can only be set to `true` once the `validationStatus` of the `domain` object is `VERIFIED`. `enabled` can only be `true` for this same `domain`. Its value must be `false` to be able to configure the `domain`.")
+        description="Indicates whether the RP ID is active and is used for WebAuthn operations. It can only be set to "
+                    "`true` once the `validationStatus` of the `domain` object is `VERIFIED`. `enabled` can only be `true` "
+                    "for this same `domain`. Its value must be `false` to be able to configure the `domain`."
+    )
     __properties: ClassVar[List[str]] = ["domain", "enabled"]
 
     model_config = ConfigDict(
@@ -71,8 +77,10 @@ class WebAuthnRpId(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,8 +105,10 @@ class WebAuthnRpId(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "domain": WebAuthnRpIdDomain.from_dict(obj["domain"]) if obj.get("domain") is not None else None,
-            "enabled": obj.get("enabled") if obj.get("enabled") is not None else False
-        })
+        _obj = cls.model_validate(
+            {
+                "domain": WebAuthnRpIdDomain.from_dict(obj["domain"]) if obj.get("domain") is not None else None,
+                "enabled": obj.get("enabled") if obj.get("enabled") is not None else False
+            }
+        )
         return _obj

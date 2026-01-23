@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,39 +20,52 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class IdentitySourceUserProfileForUpsert(BaseModel):
     """
-    Contains a set of external user attributes and their values that are mapped to Okta standard and custom profile properties. See the [`profile` object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response) and Declaration of a Custom Identity Source Schema in [Using anything as a source](https://help.okta.com/okta_help.htm?type=oie&id=ext-anything-as-a-source). > **Note:** Profile attributes can only be of the string type.
+    Contains a set of external user attributes and their values that are mapped to Okta standard and custom profile
+    properties. See the [`profile` object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User
+    /#tag/User/operation/getUser!c=200&path=profile&t=response) and Declaration of a Custom Identity Source Schema in [
+    Using anything as a source](https://help.okta.com/okta_help.htm?type=oie&id=ext-anything-as-a-source). > **Note:**
+    Profile attributes can only be of the string type.
     """  # noqa: E501
     email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(
-        default=None, description="Email address of the user")
+        default=None, description="Email address of the user"
+    )
     first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
-        default=None, description="First name of the user", alias="firstName")
+        default=None, description="First name of the user", alias="firstName"
+    )
     home_address: Optional[Annotated[str, Field(strict=True, max_length=4096)]] = Field(
-        default=None, description="Home address of the user", alias="homeAddress")
+        default=None, description="Home address of the user", alias="homeAddress"
+    )
     last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
-        default=None, description="Last name of the user", alias="lastName")
+        default=None, description="Last name of the user", alias="lastName"
+    )
     mobile_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
-        default=None, description="Mobile phone number of the user", alias="mobilePhone")
+        default=None, description="Mobile phone number of the user", alias="mobilePhone"
+    )
     second_email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(
-        default=None, description="Alternative email address of the user", alias="secondEmail")
+        default=None, description="Alternative email address of the user", alias="secondEmail"
+    )
     user_name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
-        default=None, description="Username of the user", alias="userName")
-    __properties: ClassVar[List[str]] = ["email", "firstName",
-                                         "homeAddress", "lastName", "mobilePhone", "secondEmail", "userName"]
+        default=None, description="Username of the user", alias="userName"
+    )
+    __properties: ClassVar[List[str]] = [
+        "email", "firstName",
+        "homeAddress", "lastName", "mobilePhone", "secondEmail", "userName"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,8 +97,10 @@ class IdentitySourceUserProfileForUpsert(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -121,13 +138,15 @@ class IdentitySourceUserProfileForUpsert(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "email": obj.get("email"),
-            "firstName": obj.get("firstName"),
-            "homeAddress": obj.get("homeAddress"),
-            "lastName": obj.get("lastName"),
-            "mobilePhone": obj.get("mobilePhone"),
-            "secondEmail": obj.get("secondEmail"),
-            "userName": obj.get("userName")
-        })
+        _obj = cls.model_validate(
+            {
+                "email": obj.get("email"),
+                "firstName": obj.get("firstName"),
+                "homeAddress": obj.get("homeAddress"),
+                "lastName": obj.get("lastName"),
+                "mobilePhone": obj.get("mobilePhone"),
+                "secondEmail": obj.get("secondEmail"),
+                "userName": obj.get("userName")
+            }
+        )
         return _obj

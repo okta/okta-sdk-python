@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,13 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.bulk_delete_request_body import BulkDeleteRequestBody
 from okta.models.bulk_group_delete_request_body import BulkGroupDeleteRequestBody
 from okta.models.bulk_group_memberships_delete_request_body import BulkGroupMembershipsDeleteRequestBody
@@ -32,13 +36,10 @@ from okta.models.bulk_group_memberships_upsert_request_body import BulkGroupMemb
 from okta.models.bulk_group_upsert_request_body import BulkGroupUpsertRequestBody
 from okta.models.bulk_upsert_request_body import BulkUpsertRequestBody
 from okta.models.identity_source_session import IdentitySourceSession
+from okta.models.success import Success
 from okta.models.user_request_schema import UserRequestSchema
 from okta.models.user_response_schema import UserResponseSchema
 from okta.models.users_update_request_schema import UsersUpdateRequestSchema
-
-from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -54,20 +55,21 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def create_identity_source_session(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentitySourceSession:
         """Create an identity source session
 
@@ -157,12 +159,12 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_identity_source_session_serialize(
-        self,
-        identity_source_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -215,21 +217,22 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def create_identity_source_user(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        user_request_schema: Optional[UserRequestSchema] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            user_request_schema: Optional[UserRequestSchema] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Create an identity source user
 
@@ -313,13 +316,13 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_identity_source_user_serialize(
-        self,
-        identity_source_id,
-        user_request_schema,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            user_request_schema,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -388,21 +391,22 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def delete_identity_source_session(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an identity source session
 
@@ -486,13 +490,13 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_identity_source_session_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -547,21 +551,22 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def delete_identity_source_user(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        external_id: Annotated[StrictStr, Field(description="The external ID of the user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            external_id: Annotated[StrictStr, Field(description="The external ID of the user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an identity source user
 
@@ -645,13 +650,13 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_identity_source_user_serialize(
-        self,
-        identity_source_id,
-        external_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            external_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -706,21 +711,22 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def get_identity_source_session(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentitySourceSession:
         """Retrieve an identity source session
 
@@ -813,13 +819,13 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_identity_source_session_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -874,21 +880,22 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def get_identity_source_user(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        external_id: Annotated[StrictStr, Field(description="The external ID of the user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            external_id: Annotated[StrictStr, Field(description="The external ID of the user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserResponseSchema:
         """Retrieve an identity source user
 
@@ -981,13 +988,13 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_identity_source_user_serialize(
-        self,
-        identity_source_id,
-        external_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            external_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1042,20 +1049,21 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def list_identity_source_sessions(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdentitySourceSession]:
         """List all identity source sessions
 
@@ -1145,12 +1153,12 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_identity_source_sessions_serialize(
-        self,
-        identity_source_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1203,22 +1211,23 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def replace_existing_identity_source_user(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        external_id: Annotated[StrictStr, Field(description="The external ID of the user")],
-        user_request_schema: Optional[UserRequestSchema] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            external_id: Annotated[StrictStr, Field(description="The external ID of the user")],
+            user_request_schema: Optional[UserRequestSchema] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserResponseSchema:
         """Replace an existing identity source user
 
@@ -1314,14 +1323,14 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_existing_identity_source_user_serialize(
-        self,
-        identity_source_id,
-        external_id,
-        user_request_schema,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            external_id,
+            user_request_schema,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1392,21 +1401,22 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def start_import_from_identity_source(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentitySourceSession:
         """Start the import from the identity source
 
@@ -1499,13 +1509,13 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _start_import_from_identity_source_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1560,22 +1570,23 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def update_identity_source_users(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        external_id: Annotated[StrictStr, Field(description="The external ID of the user")],
-        users_update_request_schema: Optional[UsersUpdateRequestSchema] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            external_id: Annotated[StrictStr, Field(description="The external ID of the user")],
+            users_update_request_schema: Optional[UsersUpdateRequestSchema] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserResponseSchema:
         """Update an identity source user
 
@@ -1671,14 +1682,14 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_identity_source_users_serialize(
-        self,
-        identity_source_id,
-        external_id,
-        users_update_request_schema,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            external_id,
+            users_update_request_schema,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1749,22 +1760,23 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def upload_identity_source_data_for_delete(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        bulk_delete_request_body: Optional[BulkDeleteRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            bulk_delete_request_body: Optional[BulkDeleteRequestBody] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Upload the data to be deleted in Okta
 
@@ -1852,14 +1864,14 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_identity_source_data_for_delete_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        bulk_delete_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            bulk_delete_request_body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1930,22 +1942,23 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def upload_identity_source_data_for_upsert(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        bulk_upsert_request_body: Optional[BulkUpsertRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            bulk_upsert_request_body: Optional[BulkUpsertRequestBody] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Upload the data to be upserted in Okta
 
@@ -2033,14 +2046,14 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_identity_source_data_for_upsert_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        bulk_upsert_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            bulk_upsert_request_body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2111,22 +2124,23 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def upload_identity_source_group_memberships_for_delete(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        bulk_group_memberships_delete_request_body: Optional[BulkGroupMembershipsDeleteRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            bulk_group_memberships_delete_request_body: Optional[BulkGroupMembershipsDeleteRequestBody] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Upload the group memberships to be deleted in Okta
 
@@ -2214,14 +2228,14 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_identity_source_group_memberships_for_delete_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        bulk_group_memberships_delete_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            bulk_group_memberships_delete_request_body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2292,26 +2306,28 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def upload_identity_source_group_memberships_for_upsert(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        bulk_group_memberships_upsert_request_body: Optional[BulkGroupMembershipsUpsertRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            bulk_group_memberships_upsert_request_body: Optional[BulkGroupMembershipsUpsertRequestBody] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Upload the group memberships to be upserted in Okta
 
-        Uploads the group memberships that need to be inserted or updated in Okta from the identity source for the given session
+        Uploads the group memberships that need to be inserted or updated in Okta from the identity source for the given
+        session
 
         :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
@@ -2395,14 +2411,14 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_identity_source_group_memberships_for_upsert_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        bulk_group_memberships_upsert_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            bulk_group_memberships_upsert_request_body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2473,22 +2489,23 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def upload_identity_source_groups_data_for_delete(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        bulk_group_delete_request_body: Optional[BulkGroupDeleteRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            bulk_group_delete_request_body: Optional[BulkGroupDeleteRequestBody] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Upload the group external IDs to be deleted in Okta
 
@@ -2576,14 +2593,14 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_identity_source_groups_data_for_delete_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        bulk_group_delete_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            bulk_group_delete_request_body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2654,26 +2671,28 @@ class IdentitySourceApi(ApiClient):
 
     @validate_call
     async def upload_identity_source_groups_for_upsert(
-        self,
-        identity_source_id: Annotated[StrictStr, Field(description="The ID of the identity source for which the session is created")],
-        session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
-        bulk_group_upsert_request_body: Optional[BulkGroupUpsertRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_source_id: Annotated[
+                StrictStr, Field(description="The ID of the identity source for which the session is created")],
+            session_id: Annotated[StrictStr, Field(description="The ID of the identity source session")],
+            bulk_group_upsert_request_body: Optional[BulkGroupUpsertRequestBody] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Upload the group profiles without memberships to be upserted in Okta
 
-        Uploads the group profiles without memberships that need to be inserted or updated in Okta from the identity source for the given session
+        Uploads the group profiles without memberships that need to be inserted or updated in Okta from the identity
+        source for the given session
 
         :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
@@ -2757,14 +2776,14 @@ class IdentitySourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_identity_source_groups_for_upsert_serialize(
-        self,
-        identity_source_id,
-        session_id,
-        bulk_group_upsert_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_source_id,
+            session_id,
+            bulk_group_upsert_request_body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.password_import_response_commands_inner_value import PasswordImportResponseCommandsInnerValue
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.password_import_response_commands_inner_value import PasswordImportResponseCommandsInnerValue
 
 
 class PasswordImportResponseCommandsInner(BaseModel):
@@ -37,7 +40,9 @@ class PasswordImportResponseCommandsInner(BaseModel):
     """  # noqa: E501
     type: Optional[Any] = Field(
         default=None,
-        description="The location where you specify the command. For the password import inline hook, there's only one command, `com.okta.action.update`.")
+        description="The location where you specify the command. For the password import inline hook, there's only one "
+                    "command, `com.okta.action.update`."
+    )
     value: Optional[PasswordImportResponseCommandsInnerValue] = None
     __properties: ClassVar[List[str]] = ["type", "value"]
 
@@ -71,8 +76,10 @@ class PasswordImportResponseCommandsInner(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -102,8 +109,12 @@ class PasswordImportResponseCommandsInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "value": PasswordImportResponseCommandsInnerValue.from_dict(obj["value"]) if obj.get("value") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type"),
+                "value": PasswordImportResponseCommandsInnerValue.from_dict(obj["value"]) if obj.get(
+                    "value"
+                ) is not None else None
+            }
+        )
         return _obj

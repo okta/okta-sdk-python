@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.identity_provider_policy_rule_condition import IdentityProviderPolicyRuleCondition
 from okta.models.policy_network_condition import PolicyNetworkCondition
 from okta.models.policy_people_condition import PolicyPeopleCondition
 from okta.models.policy_rule_auth_context_condition import PolicyRuleAuthContextCondition
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OktaSignOnPolicyRuleConditions(BaseModel):
@@ -74,8 +77,10 @@ class OktaSignOnPolicyRuleConditions(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -121,10 +126,16 @@ class OktaSignOnPolicyRuleConditions(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "authContext": PolicyRuleAuthContextCondition.from_dict(obj["authContext"]) if obj.get("authContext") is not None else None,
-            "identityProvider": IdentityProviderPolicyRuleCondition.from_dict(obj["identityProvider"]) if obj.get("identityProvider") is not None else None,
-            "network": PolicyNetworkCondition.from_dict(obj["network"]) if obj.get("network") is not None else None,
-            "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "authContext": PolicyRuleAuthContextCondition.from_dict(obj["authContext"]) if obj.get(
+                    "authContext"
+                ) is not None else None,
+                "identityProvider": IdentityProviderPolicyRuleCondition.from_dict(obj["identityProvider"]) if obj.get(
+                    "identityProvider"
+                ) is not None else None,
+                "network": PolicyNetworkCondition.from_dict(obj["network"]) if obj.get("network") is not None else None,
+                "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None
+            }
+        )
         return _obj

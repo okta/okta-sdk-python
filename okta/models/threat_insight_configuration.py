@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.links_self import LinksSelf
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
+
+from okta.models.links_self import LinksSelf
 
 
 class ThreatInsightConfiguration(BaseModel):
@@ -37,15 +40,24 @@ class ThreatInsightConfiguration(BaseModel):
     ThreatInsightConfiguration
     """  # noqa: E501
     action: StrictStr = Field(
-        description="Specifies how Okta responds to authentication requests from suspicious IP addresses")
-    created: Optional[datetime] = Field(default=None,
-                                        description="Timestamp when the ThreatInsight Configuration object was created")
+        description="Specifies how Okta responds to authentication requests from suspicious IP addresses"
+    )
+    created: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the ThreatInsight Configuration object was created"
+    )
     exclude_zones: Optional[List[StrictStr]] = Field(
-        default=None, description="Accepts a list of [Network Zone](/openapi/okta-management/management/tag/NetworkZone/) IDs. IPs in the excluded network zones aren't logged or blocked. This ensures that traffic from known, trusted IPs isn't accidentally logged or blocked.", alias="excludeZones")
+        default=None,
+        description="Accepts a list of [Network Zone](/openapi/okta-management/management/tag/NetworkZone/) IDs. IPs in "
+                    "the excluded network zones aren't logged or blocked. This ensures that traffic from known, "
+                    "trusted IPs isn't accidentally logged or blocked.",
+        alias="excludeZones"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the ThreatInsight Configuration object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["action", "created", "excludeZones", "lastUpdated", "_links"]
 
@@ -88,10 +100,12 @@ class ThreatInsightConfiguration(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -116,11 +130,13 @@ class ThreatInsightConfiguration(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "action": obj.get("action"),
-            "created": obj.get("created"),
-            "excludeZones": obj.get("excludeZones"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "action": obj.get("action"),
+                "created": obj.get("created"),
+                "excludeZones": obj.get("excludeZones"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

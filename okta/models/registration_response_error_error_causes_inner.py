@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,20 +39,28 @@ class RegistrationResponseErrorErrorCausesInner(BaseModel):
     error_summary: Optional[StrictStr] = Field(
         default=None,
         description="Human-readable summary of the error.",
-        alias="errorSummary")
+        alias="errorSummary"
+    )
     reason: Optional[StrictStr] = Field(
         default=None,
-        description="A brief, enum-like string that indicates the nature of the error. For example, `UNIQUE_CONSTRAINT` for a property uniqueness violation.")
+        description="A brief, enum-like string that indicates the nature of the error. For example, `UNIQUE_CONSTRAINT` "
+                    "for a property uniqueness violation."
+    )
     location_type: Optional[StrictStr] = Field(
         default=None,
         description="Where in the request the error was found (`body`, `header`, `url`, or `query`).",
-        alias="locationType")
+        alias="locationType"
+    )
     location: Optional[StrictStr] = Field(
         default=None,
-        description="The valid JSON path to the location of the error. For example, if there was an error in the user's `login` field, the `location` might be `data.userProfile.login`.")
+        description="The valid JSON path to the location of the error. For example, if there was an error in the user's "
+                    "`login` field, the `location` might be `data.userProfile.login`."
+    )
     domain: Optional[StrictStr] = Field(
         default=None,
-        description="Indicates the source of the error. If the error was in the user's profile, for example, you might use `end-user`. If the error occurred in the external service, you might use `external-service`.")
+        description="Indicates the source of the error. If the error was in the user's profile, for example, you might use "
+                    "`end-user`. If the error occurred in the external service, you might use `external-service`."
+    )
     __properties: ClassVar[List[str]] = ["errorSummary", "reason", "locationType", "location", "domain"]
 
     model_config = ConfigDict(
@@ -83,8 +93,10 @@ class RegistrationResponseErrorErrorCausesInner(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -102,11 +114,13 @@ class RegistrationResponseErrorErrorCausesInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "errorSummary": obj.get("errorSummary"),
-            "reason": obj.get("reason"),
-            "locationType": obj.get("locationType"),
-            "location": obj.get("location"),
-            "domain": obj.get("domain")
-        })
+        _obj = cls.model_validate(
+            {
+                "errorSummary": obj.get("errorSummary"),
+                "reason": obj.get("reason"),
+                "locationType": obj.get("locationType"),
+                "location": obj.get("location"),
+                "domain": obj.get("domain")
+            }
+        )
         return _obj

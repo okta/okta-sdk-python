@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,27 +20,33 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.event_hook_filter_map_object import EventHookFilterMapObject
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.event_hook_filter_map_object import EventHookFilterMapObject
 
 
 class EventHookFilters(BaseModel):
     """
-    The optional filter defined on a specific event type  > **Note:** Event hook filters is a [self-service Early Access (EA)](/openapi/okta-management/guides/release-lifecycle/#early-access-ea) to enable. If you want to disable this feature, it's recommended to first remove all event filters.
+    The optional filter defined on a specific event type  > **Note:** Event hook filters is a [self-service Early Access (
+    EA)](/openapi/okta-management/guides/release-lifecycle/#early-access-ea) to enable. If you want to disable this
+    feature, it's recommended to first remove all event filters.
     """  # noqa: E501
     event_filter_map: Optional[List[EventHookFilterMapObject]] = Field(
-        default=None, description="The object that maps the filter to the event type", alias="eventFilterMap")
-    type: Optional[StrictStr] = Field(default=None,
-                                      description="The type of filter. Currently only supports `EXPRESSION_LANGUAGE`")
+        default=None, description="The object that maps the filter to the event type", alias="eventFilterMap"
+    )
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of filter. Currently only supports `EXPRESSION_LANGUAGE`"
+    )
     __properties: ClassVar[List[str]] = ["eventFilterMap", "type"]
 
     model_config = ConfigDict(
@@ -72,9 +80,11 @@ class EventHookFilters(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "type",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -99,8 +109,12 @@ class EventHookFilters(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "eventFilterMap": [EventHookFilterMapObject.from_dict(_item) for _item in obj["eventFilterMap"]] if obj.get("eventFilterMap") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "eventFilterMap": [EventHookFilterMapObject.from_dict(_item) for _item in obj["eventFilterMap"]] if obj.get(
+                    "eventFilterMap"
+                ) is not None else None,
+                "type": obj.get("type")
+            }
+        )
         return _obj

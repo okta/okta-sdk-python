@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.aaguid_group_object import AAGUIDGroupObject
 from okta.models.user_verification_enum import UserVerificationEnum
 from okta.models.web_authn_attachment_enum import WebAuthnAttachmentEnum
 from okta.models.web_authn_rp_id import WebAuthnRpId
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
@@ -39,14 +42,21 @@ class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
     The settings for the WebAuthn authenticator method
     """  # noqa: E501
     aaguid_groups: Optional[List[AAGUIDGroupObject]] = Field(
-        default=None, description="The FIDO2 Authenticator Attestation Global Unique Identifiers (AAGUID) groups available to the WebAuthn authenticator", alias="aaguidGroups")
+        default=None,
+        description="The FIDO2 Authenticator Attestation Global Unique Identifiers (AAGUID) groups available to the "
+                    "WebAuthn authenticator",
+        alias="aaguidGroups"
+    )
     user_verification: Optional[UserVerificationEnum] = Field(default=None, alias="userVerification")
     attachment: Optional[WebAuthnAttachmentEnum] = None
     rp_id: Optional[WebAuthnRpId] = Field(default=None, alias="rpId")
     enable_autofill_ui: Optional[StrictBool] = Field(
         default=False,
-        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Enables the passkeys autofill UI to display available WebAuthn discoverable credentials (\"resident key\") from the Sign-In Widget username field",
-        alias="enableAutofillUI")
+        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Enables the "
+                    "passkeys autofill UI to display available WebAuthn discoverable credentials (\"resident key\") from "
+                    "the Sign-In Widget username field",
+        alias="enableAutofillUI"
+    )
     __properties: ClassVar[List[str]] = ["aaguidGroups", "userVerification", "attachment", "rpId", "enableAutofillUI"]
 
     model_config = ConfigDict(
@@ -79,8 +89,10 @@ class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -112,11 +124,15 @@ class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "aaguidGroups": [AAGUIDGroupObject.from_dict(_item) for _item in obj["aaguidGroups"]] if obj.get("aaguidGroups") is not None else None,
-            "userVerification": obj.get("userVerification"),
-            "attachment": obj.get("attachment"),
-            "rpId": WebAuthnRpId.from_dict(obj["rpId"]) if obj.get("rpId") is not None else None,
-            "enableAutofillUI": obj.get("enableAutofillUI") if obj.get("enableAutofillUI") is not None else False
-        })
+        _obj = cls.model_validate(
+            {
+                "aaguidGroups": [AAGUIDGroupObject.from_dict(_item) for _item in obj["aaguidGroups"]] if obj.get(
+                    "aaguidGroups"
+                ) is not None else None,
+                "userVerification": obj.get("userVerification"),
+                "attachment": obj.get("attachment"),
+                "rpId": WebAuthnRpId.from_dict(obj["rpId"]) if obj.get("rpId") is not None else None,
+                "enableAutofillUI": obj.get("enableAutofillUI") if obj.get("enableAutofillUI") is not None else False
+            }
+        )
         return _obj

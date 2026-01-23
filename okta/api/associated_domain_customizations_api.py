@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Optional
+from typing import Tuple, Union
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
+from okta.models.success import Success
 from okta.models.well_known_uri_object_response import WellKnownURIObjectResponse
 from okta.models.well_known_uri_request import WellKnownURIRequest
 from okta.models.well_known_uris_root import WellKnownURIsRoot
-
-from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,22 +48,23 @@ class AssociatedDomainCustomizationsApi(ApiClient):
 
     @validate_call
     async def get_all_well_known_uris(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to include in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to include in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WellKnownURIsRoot:
         """Retrieve all the well-known URIs
 
@@ -155,13 +157,13 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_all_well_known_uris_serialize(
-        self,
-        brand_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -182,7 +184,6 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             _path_params['brandId'] = brand_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -219,23 +220,25 @@ class AssociatedDomainCustomizationsApi(ApiClient):
 
     @validate_call
     async def get_apple_app_site_association_well_known_uri(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> object:
         """Retrieve the customized apple-app-site-association URI content
 
-        Retrieves the content of the `apple-app-site-assocation` well-known URI  > **Note:**  When serving this URI, Okta adds `authsrv` content to provide a seamless experience for Okta Verify. You can't modify the content in the `authsrv` object.
+        Retrieves the content of the `apple-app-site-assocation` well-known URI  > **Note:**  When serving this URI,
+        Okta adds `authsrv` content to provide a seamless experience for Okta Verify. You can't modify the content in the
+        `authsrv` object.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -316,11 +319,11 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_apple_app_site_association_well_known_uri_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -369,19 +372,19 @@ class AssociatedDomainCustomizationsApi(ApiClient):
 
     @validate_call
     async def get_asset_links_well_known_uri(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[object]:
         """Retrieve the customized assetlinks.json URI content
 
@@ -467,11 +470,11 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_asset_links_well_known_uri_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -520,21 +523,21 @@ class AssociatedDomainCustomizationsApi(ApiClient):
 
     @validate_call
     async def get_brand_well_known_uri(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        path: Annotated[StrictStr, Field(description="The path of the well-known URI")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            path: Annotated[StrictStr, Field(description="The path of the well-known URI")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WellKnownURIObjectResponse:
         """Retrieve the customized content of the specified well-known URI
 
@@ -628,13 +631,13 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_brand_well_known_uri_serialize(
-        self,
-        brand_id,
-        path,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            path,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -689,23 +692,24 @@ class AssociatedDomainCustomizationsApi(ApiClient):
 
     @validate_call
     async def get_root_brand_well_known_uri(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        path: Annotated[StrictStr, Field(description="The path of the well-known URI")],
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to include in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            path: Annotated[StrictStr, Field(description="The path of the well-known URI")],
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to include in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WellKnownURIObjectResponse:
         """Retrieve the well-known URI of a specific brand
 
@@ -802,14 +806,14 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_root_brand_well_known_uri_serialize(
-        self,
-        brand_id,
-        path,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            path,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -832,7 +836,6 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             _path_params['path'] = path
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -869,19 +872,19 @@ class AssociatedDomainCustomizationsApi(ApiClient):
 
     @validate_call
     async def get_web_authn_well_known_uri(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> object:
         """Retrieve the customized webauthn URI content
 
@@ -967,11 +970,11 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_web_authn_well_known_uri_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1020,26 +1023,28 @@ class AssociatedDomainCustomizationsApi(ApiClient):
 
     @validate_call
     async def replace_brand_well_known_uri(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        path: Annotated[StrictStr, Field(description="The path of the well-known URI")],
-        well_known_uri_request: Optional[WellKnownURIRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            path: Annotated[StrictStr, Field(description="The path of the well-known URI")],
+            well_known_uri_request: Optional[WellKnownURIRequest] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> WellKnownURIObjectResponse:
         """Replace the customized well-known URI of the specific path
 
-        Replaces the content of a customized well-known URI that you specify.  There are endpoint-specific format requirements when you update the content of a customized well-known URI. See [Customize associated domains](https://developer.okta.com/docs/guides/custom-well-known-uri/main/).
+        Replaces the content of a customized well-known URI that you specify.  There are endpoint-specific format
+        requirements when you update the content of a customized well-known URI. See [Customize associated domains](
+        https://developer.okta.com/docs/guides/custom-well-known-uri/main/).
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1132,14 +1137,14 @@ class AssociatedDomainCustomizationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_brand_well_known_uri_serialize(
-        self,
-        brand_id,
-        path,
-        well_known_uri_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            path,
+            well_known_uri_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

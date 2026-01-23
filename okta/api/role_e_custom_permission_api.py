@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
 
 from pydantic import Field, StrictStr
-from typing import Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.create_update_iam_role_permission_request import CreateUpdateIamRolePermissionRequest
 from okta.models.permission import Permission
 from okta.models.permissions import Permissions
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,22 +48,23 @@ class RoleECustomPermissionApi(ApiClient):
 
     @validate_call
     async def create_role_permission(
-        self,
-        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(description="An Okta [permission](/openapi/okta-management/guides/permissions)")],
-        instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+            permission_type: Annotated[
+                StrictStr, Field(description="An Okta [permission](/openapi/okta-management/guides/permissions)")],
+            instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Create a custom role permission
 
@@ -150,14 +152,14 @@ class RoleECustomPermissionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_role_permission_serialize(
-        self,
-        role_id_or_label,
-        permission_type,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            role_id_or_label,
+            permission_type,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -228,21 +230,22 @@ class RoleECustomPermissionApi(ApiClient):
 
     @validate_call
     async def delete_role_permission(
-        self,
-        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(description="An Okta [permission](/openapi/okta-management/guides/permissions)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+            permission_type: Annotated[
+                StrictStr, Field(description="An Okta [permission](/openapi/okta-management/guides/permissions)")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a custom role permission
 
@@ -326,13 +329,13 @@ class RoleECustomPermissionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_role_permission_serialize(
-        self,
-        role_id_or_label,
-        permission_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            role_id_or_label,
+            permission_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -387,21 +390,22 @@ class RoleECustomPermissionApi(ApiClient):
 
     @validate_call
     async def get_role_permission(
-        self,
-        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(description="An Okta [permission](/openapi/okta-management/guides/permissions)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+            permission_type: Annotated[
+                StrictStr, Field(description="An Okta [permission](/openapi/okta-management/guides/permissions)")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Permission:
         """Retrieve a custom role permission
 
@@ -494,13 +498,13 @@ class RoleECustomPermissionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_role_permission_serialize(
-        self,
-        role_id_or_label,
-        permission_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            role_id_or_label,
+            permission_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -555,20 +559,20 @@ class RoleECustomPermissionApi(ApiClient):
 
     @validate_call
     async def list_role_permissions(
-        self,
-        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Permissions:
         """List all custom role permissions
 
@@ -658,12 +662,12 @@ class RoleECustomPermissionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_role_permissions_serialize(
-        self,
-        role_id_or_label,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            role_id_or_label,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -716,22 +720,23 @@ class RoleECustomPermissionApi(ApiClient):
 
     @validate_call
     async def replace_role_permission(
-        self,
-        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(description="An Okta [permission](/openapi/okta-management/guides/permissions)")],
-        instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+            permission_type: Annotated[
+                StrictStr, Field(description="An Okta [permission](/openapi/okta-management/guides/permissions)")],
+            instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Permission:
         """Replace a custom role permission
 
@@ -828,14 +833,14 @@ class RoleECustomPermissionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_role_permission_serialize(
-        self,
-        role_id_or_label,
-        permission_type,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            role_id_or_label,
+            permission_type,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

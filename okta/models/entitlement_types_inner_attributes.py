@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,9 +38,11 @@ class EntitlementTypesInnerAttributes(BaseModel):
     """  # noqa: E501
     required: Optional[StrictBool] = Field(
         default=False,
-        description="A boolean value to indicate if this entitlement type is required for the user")
+        description="A boolean value to indicate if this entitlement type is required for the user"
+    )
     multivalued: Optional[StrictBool] = Field(
-        default=False, description="A boolean value to indicate if a user can have multiple entitlements of this type")
+        default=False, description="A boolean value to indicate if a user can have multiple entitlements of this type"
+    )
     __properties: ClassVar[List[str]] = ["required", "multivalued"]
 
     model_config = ConfigDict(
@@ -71,8 +75,10 @@ class EntitlementTypesInnerAttributes(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -90,8 +96,10 @@ class EntitlementTypesInnerAttributes(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "required": obj.get("required") if obj.get("required") is not None else False,
-            "multivalued": obj.get("multivalued") if obj.get("multivalued") is not None else False
-        })
+        _obj = cls.model_validate(
+            {
+                "required": obj.get("required") if obj.get("required") is not None else False,
+                "multivalued": obj.get("multivalued") if obj.get("multivalued") is not None else False
+            }
+        )
         return _obj

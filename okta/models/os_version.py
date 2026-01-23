@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,28 +20,38 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.os_version_dynamic_version_requirement import OSVersionDynamicVersionRequirement
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.os_version_dynamic_version_requirement import OSVersionDynamicVersionRequirement
 
 
 class OSVersion(BaseModel):
     """
-    Specifies the OS requirement for the policy.  There are two types of OS requirements:  * **Static**: A specific OS version requirement that doesn't change until you update the policy. A static OS requirement is specified with the `osVersion.minimum` property. * **Dynamic**: An OS version requirement that is relative to the latest major OS release and security patch. A dynamic OS requirement is specified with the `osVersion.dynamicVersionRequirement` property. > **Note:** Dynamic OS requirements are available only if the **Dynamic OS version compliance** [self-service EA](/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature is enabled. You can't specify both `osVersion.minimum` and `osVersion.dynamicVersionRequirement` properties at the same time. 
+    Specifies the OS requirement for the policy.  There are two types of OS requirements:  * **Static**: A specific OS
+    version requirement that doesn't change until you update the policy. A static OS requirement is specified with the
+    `osVersion.minimum` property. * **Dynamic**: An OS version requirement that is relative to the latest major OS release
+    and security patch. A dynamic OS requirement is specified with the `osVersion.dynamicVersionRequirement` property. >
+    **Note:** Dynamic OS requirements are available only if the **Dynamic OS version compliance** [self-service EA](
+    /openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature is enabled. You can't specify both
+    `osVersion.minimum` and `osVersion.dynamicVersionRequirement` properties at the same time.
     """  # noqa: E501
     dynamic_version_requirement: Optional[OSVersionDynamicVersionRequirement] = Field(
-        default=None, alias="dynamicVersionRequirement")
+        default=None, alias="dynamicVersionRequirement"
+    )
     minimum: Optional[StrictStr] = Field(
         default=None,
-        description="The device version must be equal to or newer than the specified version string (maximum of three components for iOS and macOS, and maximum of four components for Android)")
+        description="The device version must be equal to or newer than the specified version string (maximum of three "
+                    "components for iOS and macOS, and maximum of four components for Android)"
+    )
     __properties: ClassVar[List[str]] = ["dynamicVersionRequirement", "minimum"]
 
     model_config = ConfigDict(
@@ -72,8 +84,10 @@ class OSVersion(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -98,8 +112,12 @@ class OSVersion(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "dynamicVersionRequirement": OSVersionDynamicVersionRequirement.from_dict(obj["dynamicVersionRequirement"]) if obj.get("dynamicVersionRequirement") is not None else None,
-            "minimum": obj.get("minimum")
-        })
+        _obj = cls.model_validate(
+            {
+                "dynamicVersionRequirement": OSVersionDynamicVersionRequirement.from_dict(
+                    obj["dynamicVersionRequirement"]
+                ) if obj.get("dynamicVersionRequirement") is not None else None,
+                "minimum": obj.get("minimum")
+            }
+        )
         return _obj

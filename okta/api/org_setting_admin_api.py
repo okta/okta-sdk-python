@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
+
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing import Optional
-from okta.models.auto_assign_admin_app_setting import AutoAssignAdminAppSetting
-from okta.models.client_privileges_setting import ClientPrivilegesSetting
-from okta.models.third_party_admin_setting import ThirdPartyAdminSetting
-
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.auto_assign_admin_app_setting import AutoAssignAdminAppSetting
+from okta.models.client_privileges_setting import ClientPrivilegesSetting
+from okta.models.success import Success
+from okta.models.third_party_admin_setting import ThirdPartyAdminSetting
 from okta.rest import RESTResponse
 
 
@@ -45,24 +47,25 @@ class OrgSettingAdminApi(ApiClient):
 
     @validate_call
     async def assign_client_privileges_setting(
-        self,
-        client_privileges_setting: Optional[ClientPrivilegesSetting] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            client_privileges_setting: Optional[ClientPrivilegesSetting] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ClientPrivilegesSetting:
         """Assign the default public client app role setting
 
-        Assigns the [Super Admin role](https://help.okta.com/okta_help.htm?type=oie&id=ext_superadmin) as the default role for new public client apps
+        Assigns the [Super Admin role](https://help.okta.com/okta_help.htm?type=oie&id=ext_superadmin) as the default role
+        for new public client apps
 
         :param client_privileges_setting:
         :type client_privileges_setting: ClientPrivilegesSetting
@@ -147,12 +150,12 @@ class OrgSettingAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_client_privileges_setting_serialize(
-        self,
-        client_privileges_setting,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            client_privileges_setting,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -219,19 +222,19 @@ class OrgSettingAdminApi(ApiClient):
 
     @validate_call
     async def get_auto_assign_admin_app_setting(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AutoAssignAdminAppSetting:
         """Retrieve the Okta Admin Console assignment setting
 
@@ -317,11 +320,11 @@ class OrgSettingAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_auto_assign_admin_app_setting_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -372,23 +375,24 @@ class OrgSettingAdminApi(ApiClient):
 
     @validate_call
     async def get_client_privileges_setting(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ClientPrivilegesSetting:
         """Retrieve the default public client app role setting
 
-        Retrieves the org setting to assign the [Super Admin role](https://help.okta.com/okta_help.htm?type=oie&id=ext_superadmin) to new public client apps
+        Retrieves the org setting to assign the [Super Admin role](
+        https://help.okta.com/okta_help.htm?type=oie&id=ext_superadmin) to new public client apps
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -470,11 +474,11 @@ class OrgSettingAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_client_privileges_setting_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -525,23 +529,24 @@ class OrgSettingAdminApi(ApiClient):
 
     @validate_call
     async def get_third_party_admin_setting(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ThirdPartyAdminSetting:
         """Retrieve the org third-party admin setting
 
-        Retrieves the third-party admin setting. See [Configure third-party administrators](https://help.okta.com/okta_help.htm?type=oie&id=csh_admin-third) in the Okta product documentation.
+        Retrieves the third-party admin setting. See [Configure third-party administrators](
+        https://help.okta.com/okta_help.htm?type=oie&id=csh_admin-third) in the Okta product documentation.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -623,11 +628,11 @@ class OrgSettingAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_third_party_admin_setting_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -678,24 +683,26 @@ class OrgSettingAdminApi(ApiClient):
 
     @validate_call
     async def update_auto_assign_admin_app_setting(
-        self,
-        auto_assign_admin_app_setting: Optional[AutoAssignAdminAppSetting] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auto_assign_admin_app_setting: Optional[AutoAssignAdminAppSetting] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AutoAssignAdminAppSetting:
         """Update the Okta Admin Console assignment setting
 
-        Updates the org setting to automatically assign the Okta Admin Console when an admin role is assigned  > **Note:** This setting doesn't apply to the `SUPER_ADMIN` role. > When you assign the `SUPER_ADMIN` role to a user, the Admin Console is always assigned to the user regardless of the `autoAssignAdminAppSetting` setting.
+        Updates the org setting to automatically assign the Okta Admin Console when an admin role is assigned  > **Note:**
+        This setting doesn't apply to the `SUPER_ADMIN` role. > When you assign the `SUPER_ADMIN` role to a user,
+        the Admin Console is always assigned to the user regardless of the `autoAssignAdminAppSetting` setting.
 
         :param auto_assign_admin_app_setting:
         :type auto_assign_admin_app_setting: AutoAssignAdminAppSetting
@@ -780,12 +787,12 @@ class OrgSettingAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_auto_assign_admin_app_setting_serialize(
-        self,
-        auto_assign_admin_app_setting,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auto_assign_admin_app_setting,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -852,24 +859,27 @@ class OrgSettingAdminApi(ApiClient):
 
     @validate_call
     async def update_third_party_admin_setting(
-        self,
-        third_party_admin_setting: ThirdPartyAdminSetting,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            third_party_admin_setting: ThirdPartyAdminSetting,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ThirdPartyAdminSetting:
         """Update the org third-party admin setting
 
-        Updates the third-party admin setting. This setting allows third-party admins to perform administrative actions in the Admin Console, but they can't do any of the following:   * Receive Okta admin email notifications   * Contact Okta support   * Sign in to the Okta Help Center  See [Configure third-party administrators](https://help.okta.com/okta_help.htm?type=oie&id=csh_admin-third) in the Okta product documentation. 
+        Updates the third-party admin setting. This setting allows third-party admins to perform administrative actions in
+        the Admin Console, but they can't do any of the following:   * Receive Okta admin email notifications   * Contact
+        Okta support   * Sign in to the Okta Help Center  See [Configure third-party administrators](
+        https://help.okta.com/okta_help.htm?type=oie&id=csh_admin-third) in the Okta product documentation.
 
         :param third_party_admin_setting: (required)
         :type third_party_admin_setting: ThirdPartyAdminSetting
@@ -954,12 +964,12 @@ class OrgSettingAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_third_party_admin_setting_serialize(
-        self,
-        third_party_admin_setting,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            third_party_admin_setting,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

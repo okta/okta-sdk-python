@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.well_known_ssf_metadata_spec_urn import WellKnownSSFMetadataSpecUrn
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.well_known_ssf_metadata_spec_urn import WellKnownSSFMetadataSpecUrn
 
 
 class WellKnownSSFMetadata(BaseModel):
@@ -36,32 +39,46 @@ class WellKnownSSFMetadata(BaseModel):
     Metadata about Okta as a transmitter and relevant information for configuration.
     """  # noqa: E501
     authorization_schemes: Optional[List[WellKnownSSFMetadataSpecUrn]] = Field(
-        default=None, description="An array of JSON objects that specify the authorization scheme properties supported by the transmitter")
-    configuration_endpoint: Optional[StrictStr] = Field(default=None,
-                                                        description="The URL of the SSF Stream configuration endpoint")
+        default=None,
+        description="An array of JSON objects that specify the authorization scheme properties supported by the transmitter"
+    )
+    configuration_endpoint: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL of the SSF Stream configuration endpoint"
+    )
     default_subjects: Optional[StrictStr] = Field(
-        default=None, description="A string that indicates the default behavior of newly created streams")
+        default=None, description="A string that indicates the default behavior of newly created streams"
+    )
     delivery_methods_supported: Optional[List[StrictStr]] = Field(
-        default=None, description="An array of supported SET delivery methods")
+        default=None, description="An array of supported SET delivery methods"
+    )
     issuer: Optional[StrictStr] = Field(
         default=None,
-        description="The issuer used in Security Event Tokens. This value is set as `iss` in the claim.")
+        description="The issuer used in Security Event Tokens. This value is set as `iss` in the claim."
+    )
     jwks_uri: Optional[StrictStr] = Field(
         default=None,
-        description="The URL of the JSON Web Key Set (JWKS) that contains the signing keys for validating the signatures of Security Event Tokens (SETs)")
+        description="The URL of the JSON Web Key Set (JWKS) that contains the signing keys for validating the signatures "
+                    "of Security Event Tokens (SETs)"
+    )
     spec_version: Optional[StrictStr] = Field(
         default=None,
-        description="The version identifying the implementer's draft or final specification implemented by the transmitter")
-    verification_endpoint: Optional[StrictStr] = Field(default=None,
-                                                       description="The URL of the SSF Stream verification endpoint")
-    __properties: ClassVar[List[str]] = ["authorization_schemes",
-                                         "configuration_endpoint",
-                                         "default_subjects",
-                                         "delivery_methods_supported",
-                                         "issuer",
-                                         "jwks_uri",
-                                         "spec_version",
-                                         "verification_endpoint"]
+        description="The version identifying the implementer's draft or final specification implemented by the transmitter"
+    )
+    verification_endpoint: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL of the SSF Stream verification endpoint"
+    )
+    __properties: ClassVar[List[str]] = [
+        "authorization_schemes",
+        "configuration_endpoint",
+        "default_subjects",
+        "delivery_methods_supported",
+        "issuer",
+        "jwks_uri",
+        "spec_version",
+        "verification_endpoint"
+    ]
 
     @field_validator('default_subjects')
     def default_subjects_validate_enum(cls, value):
@@ -103,8 +120,10 @@ class WellKnownSSFMetadata(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -129,14 +148,19 @@ class WellKnownSSFMetadata(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "authorization_schemes": [WellKnownSSFMetadataSpecUrn.from_dict(_item) for _item in obj["authorization_schemes"]] if obj.get("authorization_schemes") is not None else None,
-            "configuration_endpoint": obj.get("configuration_endpoint"),
-            "default_subjects": obj.get("default_subjects"),
-            "delivery_methods_supported": obj.get("delivery_methods_supported"),
-            "issuer": obj.get("issuer"),
-            "jwks_uri": obj.get("jwks_uri"),
-            "spec_version": obj.get("spec_version"),
-            "verification_endpoint": obj.get("verification_endpoint")
-        })
+        _obj = cls.model_validate(
+            {
+                "authorization_schemes": [WellKnownSSFMetadataSpecUrn.from_dict(_item) for _item in
+                                          obj["authorization_schemes"]] if obj.get(
+                    "authorization_schemes"
+                ) is not None else None,
+                "configuration_endpoint": obj.get("configuration_endpoint"),
+                "default_subjects": obj.get("default_subjects"),
+                "delivery_methods_supported": obj.get("delivery_methods_supported"),
+                "issuer": obj.get("issuer"),
+                "jwks_uri": obj.get("jwks_uri"),
+                "spec_version": obj.get("spec_version"),
+                "verification_endpoint": obj.get("verification_endpoint")
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
 
 from pydantic import Field, StrictStr
-from typing import List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.assign_role_to_client200_response import AssignRoleToClient200Response
 from okta.models.assign_role_to_client_request import AssignRoleToClientRequest
 from okta.models.list_roles_for_client200_response_inner import ListRolesForClient200ResponseInner
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,25 +48,31 @@ class RoleAssignmentClientApi(ApiClient):
 
     @validate_call
     async def assign_role_to_client(
-        self,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        assign_role_to_client_request: AssignRoleToClientRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            assign_role_to_client_request: AssignRoleToClientRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AssignRoleToClient200Response:
         """Assign a client role
 
-        Assigns a [standard role](/openapi/okta-management/guides/roles/#standard-roles) to a client app.  You can also assign a custom role to a client app, but the preferred method to assign a custom role to a client is to create a binding between the custom role, the resource set, and the client app. See [Create a role resource set binding](/openapi/okta-management/management/tag/RoleDResourceSetBinding/#tag/RoleDResourceSetBinding/operation/createResourceSetBinding).  > **Notes:** > * The request payload is different for standard and custom role assignments. > * For IAM-based standard role assignments, use the request payload for standard roles. However, the response payload for IAM-based role assignments is similar to the custom role's assignment response.
+        Assigns a [standard role](/openapi/okta-management/guides/roles/#standard-roles) to a client app.  You can also
+        assign a custom role to a client app, but the preferred method to assign a custom role to a client is to create a
+        binding between the custom role, the resource set, and the client app. See [Create a role resource set binding](
+        /openapi/okta-management/management/tag/RoleDResourceSetBinding/#tag/RoleDResourceSetBinding/operation
+        /createResourceSetBinding).  > **Notes:** > * The request payload is different for standard and custom role
+        assignments. > * For IAM-based standard role assignments, use the request payload for standard roles. However,
+        the response payload for IAM-based role assignments is similar to the custom role's assignment response.
 
         :param client_id: `client_id` of the app (required)
         :type client_id: str
@@ -154,13 +161,13 @@ class RoleAssignmentClientApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_role_to_client_serialize(
-        self,
-        client_id,
-        assign_role_to_client_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            client_id,
+            assign_role_to_client_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -229,21 +236,21 @@ class RoleAssignmentClientApi(ApiClient):
 
     @validate_call
     async def delete_role_from_client(
-        self,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign a client role
 
@@ -327,13 +334,13 @@ class RoleAssignmentClientApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_role_from_client_serialize(
-        self,
-        client_id,
-        role_assignment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            client_id,
+            role_assignment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -388,20 +395,20 @@ class RoleAssignmentClientApi(ApiClient):
 
     @validate_call
     async def list_roles_for_client(
-        self,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ListRolesForClient200ResponseInner]:
         """List all client role assignments
 
@@ -462,7 +469,9 @@ class RoleAssignmentClientApi(ApiClient):
         if List[ListRolesForClient200ResponseInner] is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, ListRolesForClient200ResponseInner)
+            response, response_body, error = await self._request_executor.execute(
+                request, ListRolesForClient200ResponseInner
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -491,12 +500,12 @@ class RoleAssignmentClientApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_roles_for_client_serialize(
-        self,
-        client_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            client_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -549,21 +558,21 @@ class RoleAssignmentClientApi(ApiClient):
 
     @validate_call
     async def retrieve_client_role(
-        self,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AssignRoleToClient200Response:
         """Retrieve a client role
 
@@ -656,13 +665,13 @@ class RoleAssignmentClientApi(ApiClient):
             return (resp.data, resp, None)
 
     def _retrieve_client_role_serialize(
-        self,
-        client_id,
-        role_assignment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            client_id,
+            role_assignment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

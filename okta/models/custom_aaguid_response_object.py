@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.aaguid_authenticator_characteristics import AAGUIDAuthenticatorCharacteristics
 from okta.models.attestation_root_certificates_response_inner import AttestationRootCertificatesResponseInner
 from okta.models.links_self import LinksSelf
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class CustomAAGUIDResponseObject(BaseModel):
@@ -39,15 +42,20 @@ class CustomAAGUIDResponseObject(BaseModel):
     """  # noqa: E501
     aaguid: Optional[StrictStr] = Field(
         default=None,
-        description="A unique 128-bit identifier that's assigned to a specific model of security key or authenticator")
+        description="A unique 128-bit identifier that's assigned to a specific model of security key or authenticator"
+    )
     attestation_root_certificates: Optional[List[AttestationRootCertificatesResponseInner]] = Field(
-        default=None, alias="attestationRootCertificates")
+        default=None, alias="attestationRootCertificates"
+    )
     authenticator_characteristics: Optional[AAGUIDAuthenticatorCharacteristics] = Field(
-        default=None, alias="authenticatorCharacteristics")
+        default=None, alias="authenticatorCharacteristics"
+    )
     name: Optional[StrictStr] = Field(default=None, description="The product name associated with the AAGUID")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["aaguid", "attestationRootCertificates",
-                                         "authenticatorCharacteristics", "name", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "aaguid", "attestationRootCertificates",
+        "authenticatorCharacteristics", "name", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,15 +87,18 @@ class CustomAAGUIDResponseObject(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in attestation_root_certificates (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in attestation_root_certificates (
+        # list)
         _items = []
         if self.attestation_root_certificates:
             for _item in self.attestation_root_certificates:
@@ -119,11 +130,18 @@ class CustomAAGUIDResponseObject(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "aaguid": obj.get("aaguid"),
-            "attestationRootCertificates": [AttestationRootCertificatesResponseInner.from_dict(_item) for _item in obj["attestationRootCertificates"]] if obj.get("attestationRootCertificates") is not None else None,
-            "authenticatorCharacteristics": AAGUIDAuthenticatorCharacteristics.from_dict(obj["authenticatorCharacteristics"]) if obj.get("authenticatorCharacteristics") is not None else None,
-            "name": obj.get("name"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "aaguid": obj.get("aaguid"),
+                "attestationRootCertificates": [AttestationRootCertificatesResponseInner.from_dict(_item) for _item in
+                                                obj["attestationRootCertificates"]] if obj.get(
+                    "attestationRootCertificates"
+                ) is not None else None,
+                "authenticatorCharacteristics": AAGUIDAuthenticatorCharacteristics.from_dict(
+                    obj["authenticatorCharacteristics"]
+                ) if obj.get("authenticatorCharacteristics") is not None else None,
+                "name": obj.get("name"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

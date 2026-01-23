@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,28 +20,34 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.sspr_primary_requirement import SsprPrimaryRequirement
 from okta.models.sspr_step_up_requirement import SsprStepUpRequirement
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SsprRequirement(BaseModel):
     """
-    <x-lifecycle class=\"oie\"></x-lifecycle> Describes the initial and secondary authenticator requirements a user needs to reset their password
+    <x-lifecycle class=\"oie\"></x-lifecycle> Describes the initial and secondary authenticator requirements a user needs
+    to reset their password
     """  # noqa: E501
     access_control: Optional[StrictStr] = Field(
         default=None,
-        description="Determines which authentication requirements a user needs to perform self-service operations. `AUTH_POLICY` defers conditions and authentication requirements to the [Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/). `LEGACY` refers to the requirements described by this rule.",
-        alias="accessControl")
+        description="Determines which authentication requirements a user needs to perform self-service operations. "
+                    "`AUTH_POLICY` defers conditions and authentication requirements to the [Okta account management "
+                    "policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/). `LEGACY` refers "
+                    "to the requirements described by this rule.",
+        alias="accessControl"
+    )
     primary: Optional[SsprPrimaryRequirement] = None
     step_up: Optional[SsprStepUpRequirement] = Field(default=None, alias="stepUp")
     __properties: ClassVar[List[str]] = ["accessControl", "primary", "stepUp"]
@@ -84,8 +92,10 @@ class SsprRequirement(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -117,9 +127,11 @@ class SsprRequirement(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "accessControl": obj.get("accessControl"),
-            "primary": SsprPrimaryRequirement.from_dict(obj["primary"]) if obj.get("primary") is not None else None,
-            "stepUp": SsprStepUpRequirement.from_dict(obj["stepUp"]) if obj.get("stepUp") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "accessControl": obj.get("accessControl"),
+                "primary": SsprPrimaryRequirement.from_dict(obj["primary"]) if obj.get("primary") is not None else None,
+                "stepUp": SsprStepUpRequirement.from_dict(obj["stepUp"]) if obj.get("stepUp") is not None else None
+            }
+        )
         return _obj

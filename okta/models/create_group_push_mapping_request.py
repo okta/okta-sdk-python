@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.app_config import AppConfig
 from okta.models.group_push_mapping_status_upsert import GroupPushMappingStatusUpsert
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class CreateGroupPushMappingRequest(BaseModel):
@@ -39,16 +42,22 @@ class CreateGroupPushMappingRequest(BaseModel):
     app_config: Optional[AppConfig] = Field(default=None, alias="appConfig")
     source_group_id: StrictStr = Field(
         description="The ID of the source group for the group push mapping",
-        alias="sourceGroupId")
+        alias="sourceGroupId"
+    )
     status: Optional[GroupPushMappingStatusUpsert] = GroupPushMappingStatusUpsert.ACTIVE
     target_group_id: Optional[StrictStr] = Field(
         default=None,
-        description="The ID of the existing target group for the group push mapping. This is used to link to an existing group. Required if `targetGroupName` is not provided.",
-        alias="targetGroupId")
+        description="The ID of the existing target group for the group push mapping. This is used to link to an existing "
+                    "group. Required if `targetGroupName` is not provided.",
+        alias="targetGroupId"
+    )
     target_group_name: Optional[StrictStr] = Field(
         default=None,
-        description="The name of the target group for the group push mapping. This is used when creating a new downstream group. If the group already exists, it links to the existing group. Required if `targetGroupId` is not provided.",
-        alias="targetGroupName")
+        description="The name of the target group for the group push mapping. This is used when creating a new downstream "
+                    "group. If the group already exists, it links to the existing group. Required if `targetGroupId` is "
+                    "not provided.",
+        alias="targetGroupName"
+    )
     __properties: ClassVar[List[str]] = ["appConfig", "sourceGroupId", "status", "targetGroupId", "targetGroupName"]
 
     model_config = ConfigDict(
@@ -81,8 +90,10 @@ class CreateGroupPushMappingRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -107,11 +118,13 @@ class CreateGroupPushMappingRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "appConfig": AppConfig.from_dict(obj["appConfig"]) if obj.get("appConfig") is not None else None,
-            "sourceGroupId": obj.get("sourceGroupId"),
-            "status": obj.get("status"),
-            "targetGroupId": obj.get("targetGroupId"),
-            "targetGroupName": obj.get("targetGroupName")
-        })
+        _obj = cls.model_validate(
+            {
+                "appConfig": AppConfig.from_dict(obj["appConfig"]) if obj.get("appConfig") is not None else None,
+                "sourceGroupId": obj.get("sourceGroupId"),
+                "status": obj.get("status"),
+                "targetGroupId": obj.get("targetGroupId"),
+                "targetGroupName": obj.get("targetGroupName")
+            }
+        )
         return _obj

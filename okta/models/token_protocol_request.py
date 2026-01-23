@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.grant_type import GrantType
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.grant_type import GrantType
 
 
 class TokenProtocolRequest(BaseModel):
@@ -37,14 +40,18 @@ class TokenProtocolRequest(BaseModel):
     """  # noqa: E501
     client_id: Optional[StrictStr] = Field(default=None, description="The ID of the client associated with the token")
     grant_type: Optional[GrantType] = None
-    redirect_uri: Optional[StrictStr] = Field(default=None,
-                                              description="Specifies the callback location where the authorization was sent")
+    redirect_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="Specifies the callback location where the authorization was sent"
+    )
     response_mode: Optional[StrictStr] = Field(default=None, description="The authorization response mode")
     response_type: Optional[StrictStr] = Field(default=None, description="The authorization response type")
     scope: Optional[StrictStr] = Field(default=None, description="The scopes requested")
     state: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["client_id", "grant_type",
-                                         "redirect_uri", "response_mode", "response_type", "scope", "state"]
+    __properties: ClassVar[List[str]] = [
+        "client_id", "grant_type",
+        "redirect_uri", "response_mode", "response_type", "scope", "state"
+    ]
 
     @field_validator('response_mode')
     def response_mode_validate_enum(cls, value):
@@ -96,8 +103,10 @@ class TokenProtocolRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -115,13 +124,15 @@ class TokenProtocolRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "client_id": obj.get("client_id"),
-            "grant_type": obj.get("grant_type"),
-            "redirect_uri": obj.get("redirect_uri"),
-            "response_mode": obj.get("response_mode"),
-            "response_type": obj.get("response_type"),
-            "scope": obj.get("scope"),
-            "state": obj.get("state")
-        })
+        _obj = cls.model_validate(
+            {
+                "client_id": obj.get("client_id"),
+                "grant_type": obj.get("grant_type"),
+                "redirect_uri": obj.get("redirect_uri"),
+                "response_mode": obj.get("response_mode"),
+                "response_type": obj.get("response_type"),
+                "scope": obj.get("scope"),
+                "state": obj.get("state")
+            }
+        )
         return _obj

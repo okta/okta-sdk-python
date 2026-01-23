@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.application import Application
 from okta.models.application_accessibility import ApplicationAccessibility
 from okta.models.application_credentials import ApplicationCredentials
@@ -36,8 +41,6 @@ from okta.models.application_links import ApplicationLinks
 from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.saml11_application_settings import Saml11ApplicationSettings
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class Saml11Application(Application):
@@ -46,27 +49,31 @@ class Saml11Application(Application):
     """  # noqa: E501
     credentials: Optional[ApplicationCredentials] = None
     name: StrictStr = Field(
-        description="The key name for the SAML 1.1 app definition. You can't create a custom SAML 1.1 app integration instance. Only existing OIN SAML 1.1 app integrations are supported.")
+        description="The key name for the SAML 1.1 app definition. You can't create a custom SAML 1.1 app integration "
+                    "instance. Only existing OIN SAML 1.1 app integrations are supported."
+    )
     settings: Optional[Saml11ApplicationSettings] = None
-    __properties: ClassVar[List[str]] = ["accessibility",
-                                         "created",
-                                         "expressConfiguration",
-                                         "features",
-                                         "id",
-                                         "label",
-                                         "lastUpdated",
-                                         "licensing",
-                                         "orn",
-                                         "profile",
-                                         "signOnMode",
-                                         "status",
-                                         "universalLogout",
-                                         "visibility",
-                                         "_embedded",
-                                         "_links",
-                                         "credentials",
-                                         "name",
-                                         "settings"]
+    __properties: ClassVar[List[str]] = [
+        "accessibility",
+        "created",
+        "expressConfiguration",
+        "features",
+        "id",
+        "label",
+        "lastUpdated",
+        "licensing",
+        "orn",
+        "profile",
+        "signOnMode",
+        "status",
+        "universalLogout",
+        "visibility",
+        "_embedded",
+        "_links",
+        "credentials",
+        "name",
+        "settings"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,8 +105,10 @@ class Saml11Application(Application):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -180,25 +189,37 @@ class Saml11Application(Application):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "accessibility": ApplicationAccessibility.from_dict(obj["accessibility"]) if obj.get("accessibility") is not None else None,
-            "created": obj.get("created"),
-            "expressConfiguration": ApplicationExpressConfiguration.from_dict(obj["expressConfiguration"]) if obj.get("expressConfiguration") is not None else None,
-            "features": obj.get("features"),
-            "id": obj.get("id"),
-            "label": obj.get("label"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "licensing": ApplicationLicensing.from_dict(obj["licensing"]) if obj.get("licensing") is not None else None,
-            "orn": obj.get("orn"),
-            "profile": obj.get("profile"),
-            "signOnMode": obj.get("signOnMode"),
-            "status": obj.get("status"),
-            "universalLogout": ApplicationUniversalLogout.from_dict(obj["universalLogout"]) if obj.get("universalLogout") is not None else None,
-            "visibility": ApplicationVisibility.from_dict(obj["visibility"]) if obj.get("visibility") is not None else None,
-            "_embedded": ApplicationEmbedded.from_dict(obj["_embedded"]) if obj.get("_embedded") is not None else None,
-            "_links": ApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
-            "credentials": ApplicationCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None,
-            "name": obj.get("name"),
-            "settings": Saml11ApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "accessibility": ApplicationAccessibility.from_dict(obj["accessibility"]) if obj.get(
+                    "accessibility"
+                ) is not None else None,
+                "created": obj.get("created"),
+                "expressConfiguration": ApplicationExpressConfiguration.from_dict(obj["expressConfiguration"]) if obj.get(
+                    "expressConfiguration"
+                ) is not None else None,
+                "features": obj.get("features"),
+                "id": obj.get("id"),
+                "label": obj.get("label"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "licensing": ApplicationLicensing.from_dict(obj["licensing"]) if obj.get("licensing") is not None else None,
+                "orn": obj.get("orn"),
+                "profile": obj.get("profile"),
+                "signOnMode": obj.get("signOnMode"),
+                "status": obj.get("status"),
+                "universalLogout": ApplicationUniversalLogout.from_dict(obj["universalLogout"]) if obj.get(
+                    "universalLogout"
+                ) is not None else None,
+                "visibility": ApplicationVisibility.from_dict(obj["visibility"]) if obj.get(
+                    "visibility"
+                ) is not None else None,
+                "_embedded": ApplicationEmbedded.from_dict(obj["_embedded"]) if obj.get("_embedded") is not None else None,
+                "_links": ApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
+                "credentials": ApplicationCredentials.from_dict(obj["credentials"]) if obj.get(
+                    "credentials"
+                ) is not None else None,
+                "name": obj.get("name"),
+                "settings": Saml11ApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
+            }
+        )
         return _obj

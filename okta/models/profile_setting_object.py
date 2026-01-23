@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,25 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.enabled_status import EnabledStatus
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.enabled_status import EnabledStatus
 
 
 class ProfileSettingObject(BaseModel):
     """
-    This setting determines whether a user in the app gets updated when they're updated in Okta.  If enabled, Okta updates a user's attributes in the app when the app is assigned. Future changes made to the Okta user's profile automatically overwrite the corresponding attribute value in the app. 
+    This setting determines whether a user in the app gets updated when they're updated in Okta.  If enabled, Okta updates
+    a user's attributes in the app when the app is assigned. Future changes made to the Okta user's profile automatically
+    overwrite the corresponding attribute value in the app.
     """  # noqa: E501
     status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
@@ -68,8 +73,10 @@ class ProfileSettingObject(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -87,7 +94,9 @@ class ProfileSettingObject(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "status": obj.get("status")
-        })
+        _obj = cls.model_validate(
+            {
+                "status": obj.get("status")
+            }
+        )
         return _obj

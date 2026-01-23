@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
 
 from pydantic import Field, StrictStr
-from typing import Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.resource_set_binding_create_request import ResourceSetBindingCreateRequest
 from okta.models.resource_set_binding_edit_response import ResourceSetBindingEditResponse
 from okta.models.resource_set_binding_response import ResourceSetBindingResponse
 from okta.models.resource_set_bindings import ResourceSetBindings
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -48,25 +49,30 @@ class RoleDResourceSetBindingApi(ApiClient):
 
     @validate_call
     async def create_resource_set_binding(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        instance: ResourceSetBindingCreateRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            instance: ResourceSetBindingCreateRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSetBindingEditResponse:
         """Create a role resource set binding
 
-        Creates a binding for the resource set, custom role, and members (users or groups)  > **Note:** If you use a custom role with permissions that don't apply to the resources in the resource set, it doesn't affect the admin role. For example,  the `okta.users.userprofile.manage` permission gives the admin no privileges if it's granted to a resource set that only includes `https://{yourOktaDomain}/api/v1/groups/{targetGroupId}`  resources. If you want the admin to be able to manage the users within the group, the resource set must include the corresponding `https://{yourOktaDomain}/api/v1/groups/{targetGroupId}/users` resource.
+        Creates a binding for the resource set, custom role, and members (users or groups)  > **Note:** If you use a
+        custom role with permissions that don't apply to the resources in the resource set, it doesn't affect the admin
+        role. For example,  the `okta.users.userprofile.manage` permission gives the admin no privileges if it's granted
+        to a resource set that only includes `https://{yourOktaDomain}/api/v1/groups/{targetGroupId}`  resources. If you
+        want the admin to be able to manage the users within the group, the resource set must include the corresponding
+        `https://{yourOktaDomain}/api/v1/groups/{targetGroupId}/users` resource.
 
         :param resource_set_id_or_label: `id` or `label` of the resource set (required)
         :type resource_set_id_or_label: str
@@ -156,13 +162,13 @@ class RoleDResourceSetBindingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_resource_set_binding_serialize(
-        self,
-        resource_set_id_or_label,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -231,21 +237,21 @@ class RoleDResourceSetBindingApi(ApiClient):
 
     @validate_call
     async def delete_binding(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a role resource set binding
 
@@ -329,13 +335,13 @@ class RoleDResourceSetBindingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_binding_serialize(
-        self,
-        resource_set_id_or_label,
-        role_id_or_label,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            role_id_or_label,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -390,25 +396,26 @@ class RoleDResourceSetBindingApi(ApiClient):
 
     @validate_call
     async def get_binding(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSetBindingResponse:
         """Retrieve a role resource set binding
 
-        Retrieves the binding of a role (identified by `roleIdOrLabel`) for a resource set (identified by `resourceSetIdOrLabel`)
+        Retrieves the binding of a role (identified by `roleIdOrLabel`) for a resource set (identified by
+        `resourceSetIdOrLabel`)
 
         :param resource_set_id_or_label: `id` or `label` of the resource set (required)
         :type resource_set_id_or_label: str
@@ -497,13 +504,13 @@ class RoleDResourceSetBindingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_binding_serialize(
-        self,
-        resource_set_id_or_label,
-        role_id_or_label,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            role_id_or_label,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -558,30 +565,38 @@ class RoleDResourceSetBindingApi(ApiClient):
 
     @validate_call
     async def list_bindings(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSetBindings:
         """List all role resource set bindings
 
-        Lists all bindings for a resource set with pagination support.  The returned `roles` array contains the roles for each binding associated with the specified resource set. If there are more than 100 bindings for the specified resource set, `links.next` provides the resource with pagination for the next list of bindings.
+        Lists all bindings for a resource set with pagination support.  The returned `roles` array contains the roles for
+        each binding associated with the specified resource set. If there are more than 100 bindings for the specified
+        resource set, `links.next` provides the resource with pagination for the next list of bindings.
 
         :param resource_set_id_or_label: `id` or `label` of the resource set (required)
         :type resource_set_id_or_label: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -666,13 +681,13 @@ class RoleDResourceSetBindingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_bindings_serialize(
-        self,
-        resource_set_id_or_label,
-        after,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            after,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -692,7 +707,6 @@ class RoleDResourceSetBindingApi(ApiClient):
             _path_params['resourceSetIdOrLabel'] = resource_set_id_or_label
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         # process the header parameters

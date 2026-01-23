@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
+
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing import Optional
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.per_client_rate_limit_settings import PerClientRateLimitSettings
 from okta.models.rate_limit_admin_notifications import RateLimitAdminNotifications
 from okta.models.rate_limit_warning_threshold_request import RateLimitWarningThresholdRequest
 from okta.models.rate_limit_warning_threshold_response import RateLimitWarningThresholdResponse
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -46,19 +48,19 @@ class RateLimitSettingsApi(ApiClient):
 
     @validate_call
     async def get_rate_limit_settings_admin_notifications(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RateLimitAdminNotifications:
         """Retrieve the rate limit admin notification settings
 
@@ -144,11 +146,11 @@ class RateLimitSettingsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_rate_limit_settings_admin_notifications_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -199,19 +201,19 @@ class RateLimitSettingsApi(ApiClient):
 
     @validate_call
     async def get_rate_limit_settings_per_client(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PerClientRateLimitSettings:
         """Retrieve the per-client rate limit settings
 
@@ -297,11 +299,11 @@ class RateLimitSettingsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_rate_limit_settings_per_client_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -352,19 +354,19 @@ class RateLimitSettingsApi(ApiClient):
 
     @validate_call
     async def get_rate_limit_settings_warning_threshold(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RateLimitWarningThresholdResponse:
         """Retrieve the rate limit warning threshold percentage
 
@@ -450,11 +452,11 @@ class RateLimitSettingsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_rate_limit_settings_warning_threshold_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -505,20 +507,20 @@ class RateLimitSettingsApi(ApiClient):
 
     @validate_call
     async def replace_rate_limit_settings_admin_notifications(
-        self,
-        rate_limit_admin_notifications: RateLimitAdminNotifications,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            rate_limit_admin_notifications: RateLimitAdminNotifications,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RateLimitAdminNotifications:
         """Replace the rate limit admin notification settings
 
@@ -608,12 +610,12 @@ class RateLimitSettingsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_rate_limit_settings_admin_notifications_serialize(
-        self,
-        rate_limit_admin_notifications,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            rate_limit_admin_notifications,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -680,20 +682,20 @@ class RateLimitSettingsApi(ApiClient):
 
     @validate_call
     async def replace_rate_limit_settings_per_client(
-        self,
-        per_client_rate_limit_settings: PerClientRateLimitSettings,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            per_client_rate_limit_settings: PerClientRateLimitSettings,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PerClientRateLimitSettings:
         """Replace the per-client rate limit settings
 
@@ -783,12 +785,12 @@ class RateLimitSettingsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_rate_limit_settings_per_client_serialize(
-        self,
-        per_client_rate_limit_settings,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            per_client_rate_limit_settings,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -855,20 +857,20 @@ class RateLimitSettingsApi(ApiClient):
 
     @validate_call
     async def replace_rate_limit_settings_warning_threshold(
-        self,
-        rate_limit_warning_threshold: Optional[RateLimitWarningThresholdRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            rate_limit_warning_threshold: Optional[RateLimitWarningThresholdRequest] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RateLimitWarningThresholdResponse:
         """Replace the rate limit warning threshold percentage
 
@@ -958,12 +960,12 @@ class RateLimitSettingsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_rate_limit_settings_warning_threshold_serialize(
-        self,
-        rate_limit_warning_threshold,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            rate_limit_warning_threshold,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

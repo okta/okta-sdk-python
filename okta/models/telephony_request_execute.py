@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.telephony_request_data import TelephonyRequestData
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.telephony_request_data import TelephonyRequestData
 
 
 class TelephonyRequestExecute(BaseModel):
@@ -38,32 +41,40 @@ class TelephonyRequestExecute(BaseModel):
     cloud_event_version: Optional[StrictStr] = Field(
         default=None,
         description="The inline hook cloud version",
-        alias="cloudEventVersion")
+        alias="cloudEventVersion"
+    )
     content_type: Optional[StrictStr] = Field(
         default=None,
         description="The inline hook request header content",
-        alias="contentType")
+        alias="contentType"
+    )
     event_id: Optional[StrictStr] = Field(default=None, description="The individual inline hook request ID", alias="eventId")
     event_time: Optional[StrictStr] = Field(
         default=None,
         description="The time the inline hook request was sent",
-        alias="eventTime")
+        alias="eventTime"
+    )
     event_type_version: Optional[StrictStr] = Field(
         default=None,
         description="The inline hook version",
-        alias="eventTypeVersion")
+        alias="eventTypeVersion"
+    )
     data: Optional[TelephonyRequestData] = None
     event_type: Optional[StrictStr] = Field(
         default=None,
         description="The type of inline hook. The telephony inline hook type is `com.okta.telephony.provider`.",
-        alias="eventType")
+        alias="eventType"
+    )
     request_type: Optional[StrictStr] = Field(
         default=None,
         description="The type of inline hook request. For example, `com.okta.user.telephony.pre-enrollment`.",
-        alias="requestType")
+        alias="requestType"
+    )
     source: Optional[StrictStr] = Field(default=None, description="The ID and URL of the telephony inline hook")
-    __properties: ClassVar[List[str]] = ["cloudEventVersion", "contentType", "eventId",
-                                         "eventTime", "eventTypeVersion", "data", "eventType", "requestType", "source"]
+    __properties: ClassVar[List[str]] = [
+        "cloudEventVersion", "contentType", "eventId",
+        "eventTime", "eventTypeVersion", "data", "eventType", "requestType", "source"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,8 +106,10 @@ class TelephonyRequestExecute(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -121,15 +134,17 @@ class TelephonyRequestExecute(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "cloudEventVersion": obj.get("cloudEventVersion"),
-            "contentType": obj.get("contentType"),
-            "eventId": obj.get("eventId"),
-            "eventTime": obj.get("eventTime"),
-            "eventTypeVersion": obj.get("eventTypeVersion"),
-            "data": TelephonyRequestData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "eventType": obj.get("eventType"),
-            "requestType": obj.get("requestType"),
-            "source": obj.get("source")
-        })
+        _obj = cls.model_validate(
+            {
+                "cloudEventVersion": obj.get("cloudEventVersion"),
+                "contentType": obj.get("contentType"),
+                "eventId": obj.get("eventId"),
+                "eventTime": obj.get("eventTime"),
+                "eventTypeVersion": obj.get("eventTypeVersion"),
+                "data": TelephonyRequestData.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "eventType": obj.get("eventType"),
+                "requestType": obj.get("requestType"),
+                "source": obj.get("source")
+            }
+        )
         return _obj

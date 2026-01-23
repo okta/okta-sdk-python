@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from okta.models.inline_hook_channel_type import InlineHookChannelType
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
-
 from typing import TYPE_CHECKING
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+
+from okta.models.inline_hook_channel_type import InlineHookChannelType
+
 if TYPE_CHECKING:
     from okta.models.inline_hook_channel_http_create import InlineHookChannelHttpCreate
     from okta.models.inline_hook_channel_o_auth_create import InlineHookChannelOAuthCreate
@@ -43,7 +46,8 @@ class InlineHookChannelCreate(BaseModel):
     type: Optional[InlineHookChannelType] = None
     version: Optional[StrictStr] = Field(
         default=None,
-        description="Version of the inline hook type. The currently supported version is `1.0.0`.")
+        description="Version of the inline hook type. The currently supported version is `1.0.0`."
+    )
     __properties: ClassVar[List[str]] = ["type", "version"]
 
     model_config = ConfigDict(
@@ -93,8 +97,10 @@ class InlineHookChannelCreate(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -113,6 +119,8 @@ class InlineHookChannelCreate(BaseModel):
         if object_type == 'InlineHookChannelOAuthCreate':
             return import_module("okta.models.inline_hook_channel_o_auth_create").InlineHookChannelOAuthCreate.from_dict(obj)
 
-        raise ValueError("InlineHookChannelCreate failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "InlineHookChannelCreate failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

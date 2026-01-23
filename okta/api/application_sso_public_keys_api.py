@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Optional
+from typing import Tuple, Union
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.add_jwk_request import AddJwkRequest
 from okta.models.get_jwk200_response import GetJwk200Response
 from okta.models.list_jwk200_response_inner import ListJwk200ResponseInner
 from okta.models.o_auth2_client_json_signing_key_response import OAuth2ClientJsonSigningKeyResponse
 from okta.models.o_auth2_client_secret import OAuth2ClientSecret
 from okta.models.o_auth2_client_secret_request_body import OAuth2ClientSecretRequestBody
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -50,25 +51,26 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def activate_o_auth2_client_json_web_key(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        key_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client JSON Web Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            key_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client JSON Web Key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ListJwk200ResponseInner:
         """Activate an OAuth 2.0 client JSON Web Key
 
-        Activates an OAuth 2.0 Client JSON Web Key by `keyId` > **Note:** You can have only one active encryption key at any given time for app. When you activate an inactive key, the current active key is automatically deactivated.
+        Activates an OAuth 2.0 Client JSON Web Key by `keyId` > **Note:** You can have only one active encryption key at
+        any given time for app. When you activate an inactive key, the current active key is automatically deactivated.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -158,13 +160,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_o_auth2_client_json_web_key_serialize(
-        self,
-        app_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -219,21 +221,21 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def activate_o_auth2_client_secret(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        secret_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client Secret")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            secret_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client Secret")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ClientSecret:
         """Activate an OAuth 2.0 client secret
 
@@ -327,13 +329,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_o_auth2_client_secret_serialize(
-        self,
-        app_id,
-        secret_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            secret_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -388,25 +390,33 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def add_jwk(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        add_jwk_request: AddJwkRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            add_jwk_request: AddJwkRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ListJwk200ResponseInner:
         """Add a JSON Web Key
 
-        Adds a new JSON Web Key to the client`s JSON Web Keys. > **Note:** This API doesn't allow you to add a key if the existing key doesn't have a `kid`. This is also consistent with how the [Dynamic Client Registration](/openapi/okta-oauth/oauth/tag/Client/) or [Applications](/openapi/okta-management/management/tag/Application/) APIs behave, as they don't allow the creation of multiple keys without `kids`. Use the [Replace an Application](/openapi/okta-management/management/tag/Application/#tag/Application/operation/replaceApplication) or the [Replace a Client Application](/openapi/okta-oauth/oauth/tag/Client/#tag/Client/operation/replaceClient) operation to update the JWKS or [Delete an OAuth 2.0 Client JSON Web Key](/openapi/okta-management/management/tag/ApplicationSSOPublicKeys/#tag/ApplicationSSOPublicKeys/operation/deletejwk) and re-add the key with a `kid`.
+        Adds a new JSON Web Key to the client`s JSON Web Keys. > **Note:** This API doesn't allow you to add a key if the
+        existing key doesn't have a `kid`. This is also consistent with how the [Dynamic Client Registration](
+        /openapi/okta-oauth/oauth/tag/Client/) or [Applications](/openapi/okta-management/management/tag/Application/)
+        APIs behave, as they don't allow the creation of multiple keys without `kids`. Use the [Replace an Application](
+        /openapi/okta-management/management/tag/Application/#tag/Application/operation/replaceApplication) or the [Replace
+        a Client Application](/openapi/okta-oauth/oauth/tag/Client/#tag/Client/operation/replaceClient) operation to
+        update the JWKS or [Delete an OAuth 2.0 Client JSON Web Key](
+        /openapi/okta-management/management/tag/ApplicationSSOPublicKeys/#tag/ApplicationSSOPublicKeys/operation/deletejwk
+        ) and re-add the key with a `kid`.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -496,13 +506,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _add_jwk_serialize(
-        self,
-        app_id,
-        add_jwk_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            add_jwk_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -571,25 +581,31 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def create_o_auth2_client_secret(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        o_auth2_client_secret_request_body: Optional[OAuth2ClientSecretRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            o_auth2_client_secret_request_body: Optional[OAuth2ClientSecretRequestBody] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ClientSecret:
         """Create an OAuth 2.0 client secret
 
-        Creates an OAuth 2.0 Client Secret object with a new active client secret. You can create up to two Secret objects. An error is returned if you attempt to create more than two Secret objects. > **Note:** This API lets you bring your own secret. If [token_endpoint_auth_method](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication!path=4/credentials/oauthClient/token_endpoint_auth_method&t=request) of the app is `client_secret_jwt`, then the minimum length of `client_secret` is 32 characters. If no secret is specified in the request, Okta adds a new system-generated secret.
+        Creates an OAuth 2.0 Client Secret object with a new active client secret. You can create up to two Secret
+        objects. An error is returned if you attempt to create more than two Secret objects. > **Note:** This API lets you
+        bring your own secret. If [token_endpoint_auth_method](
+        /openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication!path=4
+        /credentials/oauthClient/token_endpoint_auth_method&t=request) of the app is `client_secret_jwt`, then the minimum
+        length of `client_secret` is 32 characters. If no secret is specified in the request, Okta adds a new
+        system-generated secret.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -679,13 +695,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_o_auth2_client_secret_serialize(
-        self,
-        app_id,
-        o_auth2_client_secret_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            o_auth2_client_secret_request_body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -754,25 +770,27 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def deactivate_o_auth2_client_json_web_key(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        key_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client JSON Web Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            key_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client JSON Web Key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ClientJsonSigningKeyResponse:
         """Deactivate an OAuth 2.0 client JSON Web Key
 
-        Deactivates an OAuth 2.0 Client JSON Web Key by `keyId`. > **Note:** You can only deactivate signing keys. Deactivating the active encryption key isn't allowed if the client has ID token encryption enabled. You can activate another encryption key, which makes the current key inactive.
+        Deactivates an OAuth 2.0 Client JSON Web Key by `keyId`. > **Note:** You can only deactivate signing keys.
+        Deactivating the active encryption key isn't allowed if the client has ID token encryption enabled. You can
+        activate another encryption key, which makes the current key inactive.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -834,7 +852,9 @@ class ApplicationSSOPublicKeysApi(ApiClient):
         if OAuth2ClientJsonSigningKeyResponse is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, OAuth2ClientJsonSigningKeyResponse)
+            response, response_body, error = await self._request_executor.execute(
+                request, OAuth2ClientJsonSigningKeyResponse
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -863,13 +883,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_o_auth2_client_json_web_key_serialize(
-        self,
-        app_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -924,25 +944,26 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def deactivate_o_auth2_client_secret(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        secret_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client Secret")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            secret_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client Secret")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ClientSecret:
         """Deactivate an OAuth 2.0 client secret
 
-        Deactivates an OAuth 2.0 Client Secret by `secretId`. You can't deactivate a secret if it's the only secret of the client.
+        Deactivates an OAuth 2.0 Client Secret by `secretId`. You can't deactivate a secret if it's the only secret of the
+        client.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -1033,13 +1054,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_o_auth2_client_secret_serialize(
-        self,
-        app_id,
-        secret_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            secret_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1094,21 +1115,21 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def delete_o_auth2_client_secret(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        secret_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client Secret")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            secret_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client Secret")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an OAuth 2.0 client secret
 
@@ -1194,13 +1215,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_o_auth2_client_secret_serialize(
-        self,
-        app_id,
-        secret_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            secret_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1255,21 +1276,21 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def deletejwk(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        key_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client JSON Web Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            key_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client JSON Web Key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an OAuth 2.0 client JSON Web Key
 
@@ -1355,13 +1376,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deletejwk_serialize(
-        self,
-        app_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1416,21 +1437,21 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def get_jwk(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        key_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client JSON Web Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            key_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client JSON Web Key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GetJwk200Response:
         """Retrieve an OAuth 2.0 client JSON Web Key
 
@@ -1524,13 +1545,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_jwk_serialize(
-        self,
-        app_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1585,21 +1606,21 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def get_o_auth2_client_secret(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        secret_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client Secret")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            secret_id: Annotated[StrictStr, Field(description="Unique `id` of the OAuth 2.0 Client Secret")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ClientSecret:
         """Retrieve an OAuth 2.0 client secret
 
@@ -1693,13 +1714,13 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_o_auth2_client_secret_serialize(
-        self,
-        app_id,
-        secret_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            secret_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1754,20 +1775,20 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def list_jwk(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ListJwk200ResponseInner]:
         """List all the OAuth 2.0 client JSON Web Keys
 
@@ -1858,12 +1879,12 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_jwk_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1916,20 +1937,20 @@ class ApplicationSSOPublicKeysApi(ApiClient):
 
     @validate_call
     async def list_o_auth2_client_secrets(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2ClientSecret]:
         """List all OAuth 2.0 client secrets
 
@@ -2020,12 +2041,12 @@ class ApplicationSSOPublicKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_o_auth2_client_secrets_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

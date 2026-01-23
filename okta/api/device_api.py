@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.device import Device
 from okta.models.device_list import DeviceList
 from okta.models.device_user import DeviceUser
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,24 +48,25 @@ class DeviceApi(ApiClient):
 
     @validate_call
     async def activate_device(
-        self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Activate a device
 
-        Activates a device by setting its status to `ACTIVE` by `deviceId`. Activated devices are used to create and delete device user links.
+        Activates a device by setting its status to `ACTIVE` by `deviceId`. Activated devices are used to create and
+        delete device user links.
 
         :param device_id: `id` of the device (required)
         :type device_id: str
@@ -141,12 +143,12 @@ class DeviceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_device_serialize(
-        self,
-        device_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -199,24 +201,28 @@ class DeviceApi(ApiClient):
 
     @validate_call
     async def deactivate_device(
-        self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Deactivate a device
 
-        Deactivates a device by setting its status to `DEACTIVATED` by `deviceId`. Deactivation causes a device to lose all device user links. Set the device status to `DEACTIVATED` before deleting it. > **Note:** When deactivating a Device, keep in mind the following:   - Device deactivation is a destructive operation for device factors and client certificates. Device reenrollment using Okta Verify allows end users to set up new factors on the device.   - Device deletion removes the device record from Okta. Reenrollment creates a new device record.
+        Deactivates a device by setting its status to `DEACTIVATED` by `deviceId`. Deactivation causes a device to lose
+        all device user links. Set the device status to `DEACTIVATED` before deleting it. > **Note:** When deactivating a
+        Device, keep in mind the following:   - Device deactivation is a destructive operation for device factors and
+        client certificates. Device reenrollment using Okta Verify allows end users to set up new factors on the device.
+        - Device deletion removes the device record from Okta. Reenrollment creates a new device record.
 
         :param device_id: `id` of the device (required)
         :type device_id: str
@@ -293,12 +299,12 @@ class DeviceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_device_serialize(
-        self,
-        device_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -351,24 +357,29 @@ class DeviceApi(ApiClient):
 
     @validate_call
     async def delete_device(
-        self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a device
 
-        Deletes (permanently) a device by `deviceId` if it has a status of `DEACTIVATED`. You can transition the device to `DEACTIVATED` status using the [Deactivate a Device](/openapi/okta-management/management/tag/Device/#tag/Device/operation/deactivateDevice) endpoint. This request is destructive and deletes all of the profile data related to the device. Once deleted, device data can't be recovered. However, reenrollment creates a new device record. > **Note:** Attempts to delete a device that isn't in a `DEACTIVATED` state raise an error.
+        Deletes (permanently) a device by `deviceId` if it has a status of `DEACTIVATED`. You can transition the device to
+        `DEACTIVATED` status using the [Deactivate a Device](
+        /openapi/okta-management/management/tag/Device/#tag/Device/operation/deactivateDevice) endpoint. This request is
+        destructive and deletes all of the profile data related to the device. Once deleted, device data can't be
+        recovered. However, reenrollment creates a new device record. > **Note:** Attempts to delete a device that isn't
+        in a `DEACTIVATED` state raise an error.
 
         :param device_id: `id` of the device (required)
         :type device_id: str
@@ -445,12 +456,12 @@ class DeviceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_device_serialize(
-        self,
-        device_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -503,20 +514,20 @@ class DeviceApi(ApiClient):
 
     @validate_call
     async def get_device(
-        self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Device:
         """Retrieve a device
 
@@ -606,12 +617,12 @@ class DeviceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_device_serialize(
-        self,
-        device_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -664,20 +675,20 @@ class DeviceApi(ApiClient):
 
     @validate_call
     async def list_device_users(
-        self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[DeviceUser]:
         """List all users for a device
 
@@ -767,12 +778,12 @@ class DeviceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_device_users_serialize(
-        self,
-        device_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -825,35 +836,61 @@ class DeviceApi(ApiClient):
 
     @validate_call
     async def list_devices(
-        self,
-        after: Optional[StrictStr] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return (recommend `20`)")] = None,
-        search: Annotated[Optional[StrictStr], Field(description="A SCIM filter expression that filters the results. Searches include all device `profile` properties and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices can be filtered by the contains (`co`) operator. You can only use `co` with these select device profile attributes: `profile.displayName`, `profile.serialNumber`, `profile.imei`, `profile.meid`, `profile.udid`, and `profile.sid`. See [Operators](https://developer.okta.com/docs/api/#operators).")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Includes associated user details and management status for the device in the `_embedded` attribute")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            after: Optional[StrictStr] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return (recommend `20`)"
+            )] = None,
+            search: Annotated[Optional[StrictStr], Field(
+                description="A SCIM filter expression that filters the results. Searches include all device `profile` "
+                            "properties and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices "
+                            "can be filtered by the contains (`co`) operator. You can only use `co` with these select "
+                            "device profile attributes: `profile.displayName`, `profile.serialNumber`, `profile.imei`, "
+                            "`profile.meid`, `profile.udid`, and `profile.sid`. See [Operators]("
+                            "https://developer.okta.com/docs/api/#operators)."
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Includes associated user details and management status for the device in the `_embedded` "
+                            "attribute"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[DeviceList]:
         """List all devices
 
-        Lists all devices with pagination support.  >**Note:** To list all devices enrolled by a user, use the [List all devices endpoint in the User Resources API](/openapi/okta-management/management/tag/UserResources/#tag/UserResources/operation/listUserDevices).  You can return a subset of devices that match a supported search criteria using the `search` query parameter. Searches for devices based on the properties specified in the `search` parameter conforming SCIM filter specifications (case-insensitive). This data is eventually consistent. The API returns different results depending on specified queries in the request. Empty list is returned if no objects match `search` request.  > **Note:** The `search` parameter results are sourced from an eventually consistent datasource and may not reflect the latest information.  Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer data, resulting in data loss.  Use an `id` lookup for records that you update to ensure your results contain the latest data.  This operation requires [URL encoding](https://www.w3.org/TR/html4/interact/forms.html#h-17.13.4.1). For example, `search=profile.displayName eq \"Bob\"` is encoded as `search=profile.displayName%20eq%20%22Bob%22`.
+        Lists all devices with pagination support.  >**Note:** To list all devices enrolled by a user, use the [List all
+        devices endpoint in the User Resources API](
+        /openapi/okta-management/management/tag/UserResources/#tag/UserResources/operation/listUserDevices).  You can
+        return a subset of devices that match a supported search criteria using the `search` query parameter. Searches for
+        devices based on the properties specified in the `search` parameter conforming SCIM filter specifications (
+        case-insensitive). This data is eventually consistent. The API returns different results depending on specified
+        queries in the request. Empty list is returned if no objects match `search` request.  > **Note:** The `search`
+        parameter results are sourced from an eventually consistent datasource and may not reflect the latest information.
+         Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer
+         data, resulting in data loss.  Use an `id` lookup for records that you update to ensure your results contain the
+         latest data.  This operation requires [URL encoding](
+         https://www.w3.org/TR/html4/interact/forms.html#h-17.13.4.1). For example, `search=profile.displayName eq
+         \"Bob\"` is encoded as `search=profile.displayName%20eq%20%22Bob%22`.
 
         :param after:
         :type after: str
         :param limit: A limit on the number of objects to return (recommend `20`)
         :type limit: int
-        :param search: A SCIM filter expression that filters the results. Searches include all device `profile` properties and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices can be filtered by the contains (`co`) operator. You can only use `co` with these select device profile attributes: `profile.displayName`, `profile.serialNumber`, `profile.imei`, `profile.meid`, `profile.udid`, and `profile.sid`. See [Operators](https://developer.okta.com/docs/api/#operators).
+        :param search: A SCIM filter expression that filters the results. Searches include all device `profile` properties
+        and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices can be filtered by the contains
+        (`co`) operator. You can only use `co` with these select device profile attributes: `profile.displayName`,
+        `profile.serialNumber`, `profile.imei`, `profile.meid`, `profile.udid`, and `profile.sid`. See [Operators](
+        https://developer.okta.com/docs/api/#operators).
         :type search: str
         :param expand: Includes associated user details and management status for the device in the `_embedded` attribute
         :type expand: str
@@ -941,15 +978,15 @@ class DeviceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_devices_serialize(
-        self,
-        after,
-        limit,
-        search,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            after,
+            limit,
+            search,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -967,19 +1004,15 @@ class DeviceApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if search is not None:
-
             _query_params.append(('search', search))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -1016,24 +1049,26 @@ class DeviceApi(ApiClient):
 
     @validate_call
     async def suspend_device(
-        self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Suspend a Device
 
-        Suspends a device by setting its status to `SUSPENDED`. Use suspended devices to create and delete device user links. You can only unsuspend or deactivate suspended devices. > **Note:** `SUSPENDED` status is meant to be temporary, so it isn't destructive.
+        Suspends a device by setting its status to `SUSPENDED`. Use suspended devices to create and delete device user
+        links. You can only unsuspend or deactivate suspended devices. > **Note:** `SUSPENDED` status is meant to be
+        temporary, so it isn't destructive.
 
         :param device_id: `id` of the device (required)
         :type device_id: str
@@ -1110,12 +1145,12 @@ class DeviceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _suspend_device_serialize(
-        self,
-        device_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1168,24 +1203,25 @@ class DeviceApi(ApiClient):
 
     @validate_call
     async def unsuspend_device(
-        self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unsuspend a Device
 
-        Unsuspends a device by returning its `status` to `ACTIVE`. >**Note:** Only devices with a `SUSPENDED` status can be unsuspended.
+        Unsuspends a device by returning its `status` to `ACTIVE`. >**Note:** Only devices with a `SUSPENDED` status can
+        be unsuspended.
 
         :param device_id: `id` of the device (required)
         :type device_id: str
@@ -1262,12 +1298,12 @@ class DeviceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unsuspend_device_serialize(
-        self,
-        device_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            device_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

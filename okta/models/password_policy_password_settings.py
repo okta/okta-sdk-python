@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.password_policy_password_settings_age import PasswordPolicyPasswordSettingsAge
-from okta.models.password_policy_password_settings_breached_protection import PasswordPolicyPasswordSettingsBreachedProtection
+from okta.models.password_policy_password_settings_breached_protection import \
+    PasswordPolicyPasswordSettingsBreachedProtection
 from okta.models.password_policy_password_settings_complexity import PasswordPolicyPasswordSettingsComplexity
 from okta.models.password_policy_password_settings_lockout import PasswordPolicyPasswordSettingsLockout
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class PasswordPolicyPasswordSettings(BaseModel):
@@ -42,7 +46,8 @@ class PasswordPolicyPasswordSettings(BaseModel):
     complexity: Optional[PasswordPolicyPasswordSettingsComplexity] = None
     lockout: Optional[PasswordPolicyPasswordSettingsLockout] = None
     breached_protection: Optional[PasswordPolicyPasswordSettingsBreachedProtection] = Field(
-        default=None, alias="breachedProtection")
+        default=None, alias="breachedProtection"
+    )
     __properties: ClassVar[List[str]] = ["age", "complexity", "lockout", "breachedProtection"]
 
     model_config = ConfigDict(
@@ -75,8 +80,10 @@ class PasswordPolicyPasswordSettings(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -122,10 +129,18 @@ class PasswordPolicyPasswordSettings(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "age": PasswordPolicyPasswordSettingsAge.from_dict(obj["age"]) if obj.get("age") is not None else None,
-            "complexity": PasswordPolicyPasswordSettingsComplexity.from_dict(obj["complexity"]) if obj.get("complexity") is not None else None,
-            "lockout": PasswordPolicyPasswordSettingsLockout.from_dict(obj["lockout"]) if obj.get("lockout") is not None else None,
-            "breachedProtection": PasswordPolicyPasswordSettingsBreachedProtection.from_dict(obj["breachedProtection"]) if obj.get("breachedProtection") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "age": PasswordPolicyPasswordSettingsAge.from_dict(obj["age"]) if obj.get("age") is not None else None,
+                "complexity": PasswordPolicyPasswordSettingsComplexity.from_dict(obj["complexity"]) if obj.get(
+                    "complexity"
+                ) is not None else None,
+                "lockout": PasswordPolicyPasswordSettingsLockout.from_dict(obj["lockout"]) if obj.get(
+                    "lockout"
+                ) is not None else None,
+                "breachedProtection": PasswordPolicyPasswordSettingsBreachedProtection.from_dict(
+                    obj["breachedProtection"]
+                ) if obj.get("breachedProtection") is not None else None
+            }
+        )
         return _obj

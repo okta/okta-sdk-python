@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.ec_key_jwk import ECKeyJWK
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.ec_key_jwk import ECKeyJWK
 
 
 class EnrollmentInitializationRequest(BaseModel):
@@ -36,11 +39,13 @@ class EnrollmentInitializationRequest(BaseModel):
     Enrollment initialization request
     """  # noqa: E501
     enrollment_rp_ids: Optional[List[StrictStr]] = Field(
-        default=None, description="List of relying party hostnames to register on the YubiKey", alias="enrollmentRpIds")
+        default=None, description="List of relying party hostnames to register on the YubiKey", alias="enrollmentRpIds"
+    )
     fulfillment_provider: Optional[StrictStr] = Field(
         default=None,
         description="Name of the fulfillment provider for the WebAuthn preregistration factor",
-        alias="fulfillmentProvider")
+        alias="fulfillmentProvider"
+    )
     user_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Okta user", alias="userId")
     yubico_transport_key_jwk: Optional[ECKeyJWK] = Field(default=None, alias="yubicoTransportKeyJWK")
     __properties: ClassVar[List[str]] = ["enrollmentRpIds", "fulfillmentProvider", "userId", "yubicoTransportKeyJWK"]
@@ -85,8 +90,10 @@ class EnrollmentInitializationRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -111,10 +118,14 @@ class EnrollmentInitializationRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "enrollmentRpIds": obj.get("enrollmentRpIds"),
-            "fulfillmentProvider": obj.get("fulfillmentProvider"),
-            "userId": obj.get("userId"),
-            "yubicoTransportKeyJWK": ECKeyJWK.from_dict(obj["yubicoTransportKeyJWK"]) if obj.get("yubicoTransportKeyJWK") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "enrollmentRpIds": obj.get("enrollmentRpIds"),
+                "fulfillmentProvider": obj.get("fulfillmentProvider"),
+                "userId": obj.get("userId"),
+                "yubicoTransportKeyJWK": ECKeyJWK.from_dict(obj["yubicoTransportKeyJWK"]) if obj.get(
+                    "yubicoTransportKeyJWK"
+                ) is not None else None
+            }
+        )
         return _obj

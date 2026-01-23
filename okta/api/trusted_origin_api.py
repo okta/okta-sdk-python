@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.trusted_origin import TrustedOrigin
-from okta.models.trusted_origin_write import TrustedOriginWrite
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.success import Success
+from okta.models.trusted_origin import TrustedOrigin
+from okta.models.trusted_origin_write import TrustedOriginWrite
 from okta.rest import RESTResponse
 
 
@@ -46,20 +47,20 @@ class TrustedOriginApi(ApiClient):
 
     @validate_call
     async def activate_trusted_origin(
-        self,
-        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TrustedOrigin:
         """Activate a trusted origin
 
@@ -149,12 +150,12 @@ class TrustedOriginApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_trusted_origin_serialize(
-        self,
-        trusted_origin_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            trusted_origin_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -207,20 +208,20 @@ class TrustedOriginApi(ApiClient):
 
     @validate_call
     async def create_trusted_origin(
-        self,
-        trusted_origin: TrustedOriginWrite,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            trusted_origin: TrustedOriginWrite,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TrustedOrigin:
         """Create a trusted origin
 
@@ -310,12 +311,12 @@ class TrustedOriginApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_trusted_origin_serialize(
-        self,
-        trusted_origin,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            trusted_origin,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -382,20 +383,20 @@ class TrustedOriginApi(ApiClient):
 
     @validate_call
     async def deactivate_trusted_origin(
-        self,
-        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TrustedOrigin:
         """Deactivate a trusted origin
 
@@ -485,12 +486,12 @@ class TrustedOriginApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_trusted_origin_serialize(
-        self,
-        trusted_origin_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            trusted_origin_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -543,20 +544,20 @@ class TrustedOriginApi(ApiClient):
 
     @validate_call
     async def delete_trusted_origin(
-        self,
-        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a trusted origin
 
@@ -637,12 +638,12 @@ class TrustedOriginApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_trusted_origin_serialize(
-        self,
-        trusted_origin_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            trusted_origin_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -695,20 +696,20 @@ class TrustedOriginApi(ApiClient):
 
     @validate_call
     async def get_trusted_origin(
-        self,
-        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TrustedOrigin:
         """Retrieve a trusted origin
 
@@ -798,12 +799,12 @@ class TrustedOriginApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_trusted_origin_serialize(
-        self,
-        trusted_origin_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            trusted_origin_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -856,26 +857,31 @@ class TrustedOriginApi(ApiClient):
 
     @validate_call
     async def list_trusted_origins(
-        self,
-        q: Annotated[Optional[StrictStr], Field(
-            description="A search string that prefix matches against the `name` and `origin`")] = None,
-        filter: Annotated[Optional[StrictStr], Field(
-            description="[Filter](https://developer.okta.com/docs/api/#filter) trusted origins with a supported expression for a subset of properties. You can filter on the following properties: `name`, `origin`, `status`, and `type` (type of scopes). ")] = None,
-        after: Annotated[Optional[StrictStr], Field(description="After cursor provided by a prior request")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
-            description="Specifies the number of results")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            q: Annotated[Optional[StrictStr], Field(
+                description="A search string that prefix matches against the `name` and `origin`"
+            )] = None,
+            filter: Annotated[Optional[StrictStr], Field(
+                description="[Filter](https://developer.okta.com/docs/api/#filter) trusted origins with a supported "
+                            "expression for a subset of properties. You can filter on the following properties: `name`, "
+                            "`origin`, `status`, and `type` (type of scopes). "
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(description="After cursor provided by a prior request")] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
+                description="Specifies the number of results"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[TrustedOrigin]:
         """List all trusted origins
 
@@ -883,7 +889,9 @@ class TrustedOriginApi(ApiClient):
 
         :param q: A search string that prefix matches against the `name` and `origin`
         :type q: str
-        :param filter: [Filter](https://developer.okta.com/docs/api/#filter) trusted origins with a supported expression for a subset of properties. You can filter on the following properties: `name`, `origin`, `status`, and `type` (type of scopes). 
+        :param filter: [Filter](https://developer.okta.com/docs/api/#filter) trusted origins with a supported expression
+        for a subset of properties. You can filter on the following properties: `name`, `origin`, `status`, and `type` (
+        type of scopes).
         :type filter: str
         :param after: After cursor provided by a prior request
         :type after: str
@@ -973,15 +981,15 @@ class TrustedOriginApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_trusted_origins_serialize(
-        self,
-        q,
-        filter,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            q,
+            filter,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -999,19 +1007,15 @@ class TrustedOriginApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if q is not None:
-
             _query_params.append(('q', q))
 
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -1048,21 +1052,21 @@ class TrustedOriginApi(ApiClient):
 
     @validate_call
     async def replace_trusted_origin(
-        self,
-        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
-        trusted_origin: TrustedOrigin,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the trusted origin")],
+            trusted_origin: TrustedOrigin,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> TrustedOrigin:
         """Replace a trusted origin
 
@@ -1156,13 +1160,13 @@ class TrustedOriginApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_trusted_origin_serialize(
-        self,
-        trusted_origin_id,
-        trusted_origin,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            trusted_origin_id,
+            trusted_origin,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

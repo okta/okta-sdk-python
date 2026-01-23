@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -19,8 +21,9 @@
 """  # noqa: E501
 import time
 from urllib.parse import urlencode, quote
-from okta.jwt import JWT
+
 from okta.http_client import HTTPClient
+from okta.jwt import JWT
 
 
 class OAuth:
@@ -82,14 +85,15 @@ class OAuth:
         encoded_parameters = urlencode(parameters, quote_via=quote)
         org_url = self._config["client"]["orgUrl"]
         url = f"{org_url}{OAuth.OAUTH_ENDPOINT}?" + \
-            encoded_parameters
+              encoded_parameters
 
         # Craft request
         oauth_req, err = await self._request_executor.create_request(
             "POST", url, form={'client_assertion': jwt}, headers={
                 'Accept': "application/json",
                 'Content-Type': 'application/x-www-form-urlencoded'
-            }, oauth=True)
+            }, oauth=True
+        )
 
         # TODO Make max 1 retry
         # Shoot request
@@ -103,7 +107,8 @@ class OAuth:
 
         # Check response body for error message
         parsed_response, err = HTTPClient.check_response_for_error(
-            url, res_details, res_json)
+            url, res_details, res_json
+        )
         # Return specific error if found in response
         if err:
             return (None, err)

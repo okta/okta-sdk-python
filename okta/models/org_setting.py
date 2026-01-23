@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,72 +20,83 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.org_general_setting_links import OrgGeneralSettingLinks
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
+
+from okta.models.org_general_setting_links import OrgGeneralSettingLinks
 
 
 class OrgSetting(BaseModel):
     """
     OrgSetting
     """  # noqa: E501
-    address1: Optional[StrictStr] = Field(default=None,
-                                          description="Primary address of the organization associated with the org")
-    address2: Optional[StrictStr] = Field(default=None,
-                                          description="Secondary address of the organization associated with the org")
+    address1: Optional[StrictStr] = Field(
+        default=None,
+        description="Primary address of the organization associated with the org"
+    )
+    address2: Optional[StrictStr] = Field(
+        default=None,
+        description="Secondary address of the organization associated with the org"
+    )
     city: Optional[StrictStr] = Field(default=None, description="City of the organization associated with the org")
     company_name: Optional[StrictStr] = Field(default=None, description="Name of org", alias="companyName")
     country: Optional[StrictStr] = Field(default=None, description="County of the organization associated with the org")
     created: Optional[datetime] = Field(default=None, description="When org was created")
     end_user_support_help_url: Optional[StrictStr] = Field(
-        default=None, description="Support link of org", alias="endUserSupportHelpURL")
+        default=None, description="Support link of org", alias="endUserSupportHelpURL"
+    )
     expires_at: Optional[datetime] = Field(default=None, description="Expiration of org", alias="expiresAt")
     id: Optional[StrictStr] = Field(default=None, description="Org ID")
     last_updated: Optional[datetime] = Field(default=None, description="When org was last updated", alias="lastUpdated")
     phone_number: Optional[StrictStr] = Field(
         default=None,
         description="Phone number of the organization associated with the org",
-        alias="phoneNumber")
+        alias="phoneNumber"
+    )
     postal_code: Optional[StrictStr] = Field(
         default=None,
         description="Postal code of the organization associated with the org",
-        alias="postalCode")
+        alias="postalCode"
+    )
     state: Optional[StrictStr] = Field(default=None, description="State of the organization associated with the org")
     status: Optional[StrictStr] = Field(default=None, description="Status of org")
     subdomain: Optional[StrictStr] = Field(default=None, description="Subdomain of org")
     support_phone_number: Optional[StrictStr] = Field(
         default=None,
         description="Support help phone of the organization associated with the org",
-        alias="supportPhoneNumber")
+        alias="supportPhoneNumber"
+    )
     website: Optional[StrictStr] = Field(default=None, description="Website of the organization associated with the org")
     links: Optional[OrgGeneralSettingLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["address1",
-                                         "address2",
-                                         "city",
-                                         "companyName",
-                                         "country",
-                                         "created",
-                                         "endUserSupportHelpURL",
-                                         "expiresAt",
-                                         "id",
-                                         "lastUpdated",
-                                         "phoneNumber",
-                                         "postalCode",
-                                         "state",
-                                         "status",
-                                         "subdomain",
-                                         "supportPhoneNumber",
-                                         "website",
-                                         "_links"]
+    __properties: ClassVar[List[str]] = [
+        "address1",
+        "address2",
+        "city",
+        "companyName",
+        "country",
+        "created",
+        "endUserSupportHelpURL",
+        "expiresAt",
+        "id",
+        "lastUpdated",
+        "phoneNumber",
+        "postalCode",
+        "state",
+        "status",
+        "subdomain",
+        "supportPhoneNumber",
+        "website",
+        "_links"
+    ]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -131,14 +144,16 @@ class OrgSetting(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "expires_at",
-            "id",
-            "last_updated",
-            "status",
-            "subdomain",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "expires_at",
+                "id",
+                "last_updated",
+                "status",
+                "subdomain",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -163,24 +178,26 @@ class OrgSetting(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "address1": obj.get("address1"),
-            "address2": obj.get("address2"),
-            "city": obj.get("city"),
-            "companyName": obj.get("companyName"),
-            "country": obj.get("country"),
-            "created": obj.get("created"),
-            "endUserSupportHelpURL": obj.get("endUserSupportHelpURL"),
-            "expiresAt": obj.get("expiresAt"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "phoneNumber": obj.get("phoneNumber"),
-            "postalCode": obj.get("postalCode"),
-            "state": obj.get("state"),
-            "status": obj.get("status"),
-            "subdomain": obj.get("subdomain"),
-            "supportPhoneNumber": obj.get("supportPhoneNumber"),
-            "website": obj.get("website"),
-            "_links": OrgGeneralSettingLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "address1": obj.get("address1"),
+                "address2": obj.get("address2"),
+                "city": obj.get("city"),
+                "companyName": obj.get("companyName"),
+                "country": obj.get("country"),
+                "created": obj.get("created"),
+                "endUserSupportHelpURL": obj.get("endUserSupportHelpURL"),
+                "expiresAt": obj.get("expiresAt"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "phoneNumber": obj.get("phoneNumber"),
+                "postalCode": obj.get("postalCode"),
+                "state": obj.get("state"),
+                "status": obj.get("status"),
+                "subdomain": obj.get("subdomain"),
+                "supportPhoneNumber": obj.get("supportPhoneNumber"),
+                "website": obj.get("website"),
+                "_links": OrgGeneralSettingLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

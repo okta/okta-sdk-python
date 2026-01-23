@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.assign_role_to_group200_response import AssignRoleToGroup200Response
 from okta.models.assign_role_to_group_request import AssignRoleToGroupRequest
 from okta.models.list_group_assigned_roles200_response_inner import ListGroupAssignedRoles200ResponseInner
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,27 +48,34 @@ class RoleAssignmentBGroupApi(ApiClient):
 
     @validate_call
     async def assign_role_to_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        assign_role_request: AssignRoleToGroupRequest,
-        disable_notifications: Annotated[Optional[StrictBool], Field(
-            description="Grants the group third-party admin status when set to `true`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            assign_role_request: AssignRoleToGroupRequest,
+            disable_notifications: Annotated[Optional[StrictBool], Field(
+                description="Grants the group third-party admin status when set to `true`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AssignRoleToGroup200Response:
         """Assign a role to a group
 
-        Assigns a [standard role](/openapi/okta-management/guides/roles/#standard-roles) to a group.  You can also assign a custom role to a group, but the preferred method to assign a custom role to a group is to create a binding between the custom role, the resource set, and the group. See [Create a role resource set binding](/openapi/okta-management/management/tag/RoleDResourceSetBinding/#tag/RoleDResourceSetBinding/operation/createResourceSetBinding).  > **Notes:** > * The request payload is different for standard and custom role assignments. > * For IAM-based standard role assignments, use the request payload for standard roles. However, the response payload for IAM-based role assignments is similar to the custom role's assignment response.
+        Assigns a [standard role](/openapi/okta-management/guides/roles/#standard-roles) to a group.  You can also assign
+        a custom role to a group, but the preferred method to assign a custom role to a group is to create a binding
+        between the custom role, the resource set, and the group. See [Create a role resource set binding](
+        /openapi/okta-management/management/tag/RoleDResourceSetBinding/#tag/RoleDResourceSetBinding/operation
+        /createResourceSetBinding).  > **Notes:** > * The request payload is different for standard and custom role
+        assignments. > * For IAM-based standard role assignments, use the request payload for standard roles. However,
+        the response payload for IAM-based role assignments is similar to the custom role's assignment response.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -161,14 +169,14 @@ class RoleAssignmentBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_role_to_group_serialize(
-        self,
-        group_id,
-        assign_role_request,
-        disable_notifications,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            assign_role_request,
+            disable_notifications,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -188,7 +196,6 @@ class RoleAssignmentBGroupApi(ApiClient):
             _path_params['groupId'] = group_id
         # process the query parameters
         if disable_notifications is not None:
-
             _query_params.append(('disableNotifications', disable_notifications))
 
         # process the header parameters
@@ -241,25 +248,26 @@ class RoleAssignmentBGroupApi(ApiClient):
 
     @validate_call
     async def get_group_assigned_role(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AssignRoleToGroup200Response:
         """Retrieve a group role assignment
 
-        Retrieves a role assigned to a group (identified by the `groupId`). The `roleAssignmentId` is the unique identifier for either a standard role group assignment object or a custom role resource set binding object.
+        Retrieves a role assigned to a group (identified by the `groupId`). The `roleAssignmentId` is the unique
+        identifier for either a standard role group assignment object or a custom role resource set binding object.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -348,13 +356,13 @@ class RoleAssignmentBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_group_assigned_role_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -409,22 +417,24 @@ class RoleAssignmentBGroupApi(ApiClient):
 
     @validate_call
     async def list_group_assigned_roles(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional parameter used to return targets configured for the standard role assignment in the `embedded` property. Supported values: `targets/groups` or `targets/catalog/apps`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional parameter used to return targets configured for the standard role assignment in "
+                            "the `embedded` property. Supported values: `targets/groups` or `targets/catalog/apps`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ListGroupAssignedRoles200ResponseInner]:
         """List all group role assignments
 
@@ -432,7 +442,8 @@ class RoleAssignmentBGroupApi(ApiClient):
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
-        :param expand: An optional parameter used to return targets configured for the standard role assignment in the `embedded` property. Supported values: `targets/groups` or `targets/catalog/apps`
+        :param expand: An optional parameter used to return targets configured for the standard role assignment in the
+        `embedded` property. Supported values: `targets/groups` or `targets/catalog/apps`
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -488,7 +499,9 @@ class RoleAssignmentBGroupApi(ApiClient):
         if List[ListGroupAssignedRoles200ResponseInner] is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, ListGroupAssignedRoles200ResponseInner)
+            response, response_body, error = await self._request_executor.execute(
+                request, ListGroupAssignedRoles200ResponseInner
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -517,13 +530,13 @@ class RoleAssignmentBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_group_assigned_roles_serialize(
-        self,
-        group_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -543,7 +556,6 @@ class RoleAssignmentBGroupApi(ApiClient):
             _path_params['groupId'] = group_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -580,21 +592,21 @@ class RoleAssignmentBGroupApi(ApiClient):
 
     @validate_call
     async def unassign_role_from_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign a group role
 
@@ -678,13 +690,13 @@ class RoleAssignmentBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_role_from_group_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

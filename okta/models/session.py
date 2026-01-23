@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.links_self import LinksSelf
 from okta.models.session_authentication_method import SessionAuthenticationMethod
 from okta.models.session_identity_provider import SessionIdentityProvider
 from okta.models.session_status import SessionStatus
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class Session(BaseModel):
@@ -41,23 +44,29 @@ class Session(BaseModel):
     """  # noqa: E501
     amr: Optional[List[SessionAuthenticationMethod]] = Field(default=None, description="Authentication method reference")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
-    expires_at: Optional[datetime] = Field(default=None, description="A timestamp when the Session expires", alias="expiresAt")
+    expires_at: Optional[datetime] = Field(
+        default=None, description="A timestamp when the Session expires", alias="expiresAt"
+    )
     id: Optional[StrictStr] = Field(default=None, description="A unique key for the Session")
     idp: Optional[SessionIdentityProvider] = None
     last_factor_verification: Optional[datetime] = Field(
         default=None,
         description="A timestamp when the user last performed multifactor authentication",
-        alias="lastFactorVerification")
+        alias="lastFactorVerification"
+    )
     last_password_verification: Optional[datetime] = Field(
         default=None,
         description="A timestamp when the user last performed the primary or step-up authentication with a password",
-        alias="lastPasswordVerification")
+        alias="lastPasswordVerification"
+    )
     login: Optional[StrictStr] = Field(default=None, description="A unique identifier for the user (username)")
     status: Optional[SessionStatus] = None
     user_id: Optional[StrictStr] = Field(default=None, description="A unique key for the user", alias="userId")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["amr", "createdAt", "expiresAt", "id", "idp",
-                                         "lastFactorVerification", "lastPasswordVerification", "login", "status", "userId", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "amr", "createdAt", "expiresAt", "id", "idp",
+        "lastFactorVerification", "lastPasswordVerification", "login", "status", "userId", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,16 +106,18 @@ class Session(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "amr",
-            "created_at",
-            "expires_at",
-            "id",
-            "last_factor_verification",
-            "last_password_verification",
-            "login",
-            "user_id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "amr",
+                "created_at",
+                "expires_at",
+                "id",
+                "last_factor_verification",
+                "last_password_verification",
+                "login",
+                "user_id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -138,17 +149,19 @@ class Session(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "amr": obj.get("amr"),
-            "createdAt": obj.get("createdAt"),
-            "expiresAt": obj.get("expiresAt"),
-            "id": obj.get("id"),
-            "idp": SessionIdentityProvider.from_dict(obj["idp"]) if obj.get("idp") is not None else None,
-            "lastFactorVerification": obj.get("lastFactorVerification"),
-            "lastPasswordVerification": obj.get("lastPasswordVerification"),
-            "login": obj.get("login"),
-            "status": obj.get("status"),
-            "userId": obj.get("userId"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "amr": obj.get("amr"),
+                "createdAt": obj.get("createdAt"),
+                "expiresAt": obj.get("expiresAt"),
+                "id": obj.get("id"),
+                "idp": SessionIdentityProvider.from_dict(obj["idp"]) if obj.get("idp") is not None else None,
+                "lastFactorVerification": obj.get("lastFactorVerification"),
+                "lastPasswordVerification": obj.get("lastPasswordVerification"),
+                "login": obj.get("login"),
+                "status": obj.get("status"),
+                "userId": obj.get("userId"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

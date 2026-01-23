@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.ec_key_jwk import ECKeyJWK
 from okta.models.web_authn_cred_response import WebAuthnCredResponse
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class EnrollmentActivationRequest(BaseModel):
@@ -37,22 +40,31 @@ class EnrollmentActivationRequest(BaseModel):
     Enrollment Initialization Request
     """  # noqa: E501
     cred_responses: Optional[List[WebAuthnCredResponse]] = Field(
-        default=None, description="List of credential responses from the fulfillment provider", alias="credResponses")
+        default=None, description="List of credential responses from the fulfillment provider", alias="credResponses"
+    )
     fulfillment_provider: Optional[StrictStr] = Field(
         default=None,
         description="Name of the fulfillment provider for the WebAuthn preregistration factor",
-        alias="fulfillmentProvider")
+        alias="fulfillmentProvider"
+    )
     pin_response_jwe: Optional[StrictStr] = Field(
         default=None,
         description="Encrypted JWE of the PIN response from the fulfillment provider",
-        alias="pinResponseJwe")
+        alias="pinResponseJwe"
+    )
     serial: Optional[StrictStr] = Field(default=None, description="Serial number of the YubiKey")
     user_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Okta user", alias="userId")
     version: Optional[StrictStr] = Field(default=None, description="Firmware version of the YubiKey")
     yubico_signing_jwks: Optional[List[ECKeyJWK]] = Field(
-        default=None, description="List of usable signing keys from Yubico (in JSON Web Key Sets (JWKS) format). The signing keys are used to verify the JSON Web Signature (JWS) inside the JWE.", alias="yubicoSigningJwks")
-    __properties: ClassVar[List[str]] = ["credResponses", "fulfillmentProvider",
-                                         "pinResponseJwe", "serial", "userId", "version", "yubicoSigningJwks"]
+        default=None,
+        description="List of usable signing keys from Yubico (in JSON Web Key Sets (JWKS) format). The signing keys are "
+                    "used to verify the JSON Web Signature (JWS) inside the JWE.",
+        alias="yubicoSigningJwks"
+    )
+    __properties: ClassVar[List[str]] = [
+        "credResponses", "fulfillmentProvider",
+        "pinResponseJwe", "serial", "userId", "version", "yubicoSigningJwks"
+    ]
 
     @field_validator('fulfillment_provider')
     def fulfillment_provider_validate_enum(cls, value):
@@ -94,8 +106,10 @@ class EnrollmentActivationRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -127,13 +141,19 @@ class EnrollmentActivationRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "credResponses": [WebAuthnCredResponse.from_dict(_item) for _item in obj["credResponses"]] if obj.get("credResponses") is not None else None,
-            "fulfillmentProvider": obj.get("fulfillmentProvider"),
-            "pinResponseJwe": obj.get("pinResponseJwe"),
-            "serial": obj.get("serial"),
-            "userId": obj.get("userId"),
-            "version": obj.get("version"),
-            "yubicoSigningJwks": [ECKeyJWK.from_dict(_item) for _item in obj["yubicoSigningJwks"]] if obj.get("yubicoSigningJwks") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "credResponses": [WebAuthnCredResponse.from_dict(_item) for _item in obj["credResponses"]] if obj.get(
+                    "credResponses"
+                ) is not None else None,
+                "fulfillmentProvider": obj.get("fulfillmentProvider"),
+                "pinResponseJwe": obj.get("pinResponseJwe"),
+                "serial": obj.get("serial"),
+                "userId": obj.get("userId"),
+                "version": obj.get("version"),
+                "yubicoSigningJwks": [ECKeyJWK.from_dict(_item) for _item in obj["yubicoSigningJwks"]] if obj.get(
+                    "yubicoSigningJwks"
+                ) is not None else None
+            }
+        )
         return _obj

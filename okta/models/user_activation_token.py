@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,12 +38,19 @@ class UserActivationToken(BaseModel):
     """  # noqa: E501
     activation_token: Optional[StrictStr] = Field(
         default=None,
-        description="Token received as part of an activation user request. If a password was set before the user was activated, then user must sign in with their password or the `activationToken` and not the activation link. More information about using the `activationToken` to login can be found in the [Authentication API](https://developer.okta.com/docs/reference/api/authn/#primary-authentication-with-activation-token).",
-        alias="activationToken")
+        description="Token received as part of an activation user request. If a password was set before the user was "
+                    "activated, then user must sign in with their password or the `activationToken` and not the activation "
+                    "link. More information about using the `activationToken` to login can be found in the [Authentication "
+                    "API](https://developer.okta.com/docs/reference/api/authn/#primary-authentication-with-activation"
+                    "-token).",
+        alias="activationToken"
+    )
     activation_url: Optional[StrictStr] = Field(
         default=None,
-        description="If `sendEmail` is `false`, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.",
-        alias="activationUrl")
+        description="If `sendEmail` is `false`, returns an activation link for the user to set up their account. The "
+                    "activation token can be used to create a custom activation link.",
+        alias="activationUrl"
+    )
     __properties: ClassVar[List[str]] = ["activationToken", "activationUrl"]
 
     model_config = ConfigDict(
@@ -76,10 +85,12 @@ class UserActivationToken(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "activation_token",
-            "activation_url",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "activation_token",
+                "activation_url",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,8 +108,10 @@ class UserActivationToken(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "activationToken": obj.get("activationToken"),
-            "activationUrl": obj.get("activationUrl")
-        })
+        _obj = cls.model_validate(
+            {
+                "activationToken": obj.get("activationToken"),
+                "activationUrl": obj.get("activationUrl")
+            }
+        )
         return _obj

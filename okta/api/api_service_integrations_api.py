@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.api_service_integration_instance import APIServiceIntegrationInstance
 from okta.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
 from okta.models.post_api_service_integration_instance import PostAPIServiceIntegrationInstance
 from okta.models.post_api_service_integration_instance_request import PostAPIServiceIntegrationInstanceRequest
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -48,21 +49,21 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def activate_api_service_integration_instance_secret(
-        self,
-        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+            secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> APIServiceIntegrationInstanceSecret:
         """Activate an API service integration instance secret
 
@@ -127,7 +128,9 @@ class ApiServiceIntegrationsApi(ApiClient):
         if APIServiceIntegrationInstanceSecret is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, APIServiceIntegrationInstanceSecret)
+            response, response_body, error = await self._request_executor.execute(
+                request, APIServiceIntegrationInstanceSecret
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -156,13 +159,13 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_api_service_integration_instance_secret_serialize(
-        self,
-        api_service_id,
-        secret_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            api_service_id,
+            secret_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -202,7 +205,8 @@ class ApiServiceIntegrationsApi(ApiClient):
 
         return self.param_serialize(
             method='POST',
-            resource_path='/integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{secretId}/lifecycle/activate',
+            resource_path='/integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{'
+                          'secretId}/lifecycle/activate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -217,20 +221,20 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def create_api_service_integration_instance(
-        self,
-        post_api_service_integration_instance_request: PostAPIServiceIntegrationInstanceRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            post_api_service_integration_instance_request: PostAPIServiceIntegrationInstanceRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PostAPIServiceIntegrationInstance:
         """Create an API service integration instance
 
@@ -321,12 +325,12 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_api_service_integration_instance_serialize(
-        self,
-        post_api_service_integration_instance_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            post_api_service_integration_instance_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -393,24 +397,25 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def create_api_service_integration_instance_secret(
-        self,
-        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> APIServiceIntegrationInstanceSecret:
         """Create an API service integration instance secret
 
-        Creates an API Service Integration instance Secret object with a new active client secret. You can create up to two Secret objects. An error is returned if you attempt to create more than two Secret objects.
+        Creates an API Service Integration instance Secret object with a new active client secret. You can create up to
+        two Secret objects. An error is returned if you attempt to create more than two Secret objects.
 
         :param api_service_id: `id` of the API Service Integration instance (required)
         :type api_service_id: str
@@ -468,7 +473,9 @@ class ApiServiceIntegrationsApi(ApiClient):
         if APIServiceIntegrationInstanceSecret is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, APIServiceIntegrationInstanceSecret)
+            response, response_body, error = await self._request_executor.execute(
+                request, APIServiceIntegrationInstanceSecret
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -497,12 +504,12 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_api_service_integration_instance_secret_serialize(
-        self,
-        api_service_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            api_service_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -555,21 +562,21 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def deactivate_api_service_integration_instance_secret(
-        self,
-        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+            secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> APIServiceIntegrationInstanceSecret:
         """Deactivate an API service integration instance secret
 
@@ -634,7 +641,9 @@ class ApiServiceIntegrationsApi(ApiClient):
         if APIServiceIntegrationInstanceSecret is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, APIServiceIntegrationInstanceSecret)
+            response, response_body, error = await self._request_executor.execute(
+                request, APIServiceIntegrationInstanceSecret
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -663,13 +672,13 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_api_service_integration_instance_secret_serialize(
-        self,
-        api_service_id,
-        secret_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            api_service_id,
+            secret_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -709,7 +718,8 @@ class ApiServiceIntegrationsApi(ApiClient):
 
         return self.param_serialize(
             method='POST',
-            resource_path='/integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{secretId}/lifecycle/deactivate',
+            resource_path='/integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{'
+                          'secretId}/lifecycle/deactivate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -724,24 +734,25 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def delete_api_service_integration_instance(
-        self,
-        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an API service integration instance
 
-        Deletes an API Service Integration instance by `id`. This operation also revokes access to scopes that were previously granted to this API Service Integration instance.
+        Deletes an API Service Integration instance by `id`. This operation also revokes access to scopes that were
+        previously granted to this API Service Integration instance.
 
         :param api_service_id: `id` of the API Service Integration instance (required)
         :type api_service_id: str
@@ -819,12 +830,12 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_api_service_integration_instance_serialize(
-        self,
-        api_service_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            api_service_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -877,21 +888,21 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def delete_api_service_integration_instance_secret(
-        self,
-        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+            secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an API service integration instance secret
 
@@ -976,13 +987,13 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_api_service_integration_instance_secret_serialize(
-        self,
-        api_service_id,
-        secret_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            api_service_id,
+            secret_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1037,20 +1048,20 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def get_api_service_integration_instance(
-        self,
-        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> APIServiceIntegrationInstance:
         """Retrieve an API service integration instance
 
@@ -1141,12 +1152,12 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_api_service_integration_instance_serialize(
-        self,
-        api_service_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            api_service_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1199,20 +1210,20 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def list_api_service_integration_instance_secrets(
-        self,
-        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[APIServiceIntegrationInstanceSecret]:
         """List all API service integration instance secrets
 
@@ -1274,7 +1285,9 @@ class ApiServiceIntegrationsApi(ApiClient):
         if List[APIServiceIntegrationInstanceSecret] is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, APIServiceIntegrationInstanceSecret)
+            response, response_body, error = await self._request_executor.execute(
+                request, APIServiceIntegrationInstanceSecret
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -1303,12 +1316,12 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_api_service_integration_instance_secrets_serialize(
-        self,
-        api_service_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            api_service_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1361,27 +1374,33 @@ class ApiServiceIntegrationsApi(ApiClient):
 
     @validate_call
     async def list_api_service_integration_instances(
-        self,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[APIServiceIntegrationInstance]:
         """List all API service integration instances
 
         Lists all API Service Integration instances with a pagination option
 
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1465,12 +1484,12 @@ class ApiServiceIntegrationsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_api_service_integration_instances_serialize(
-        self,
-        after,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            after,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1488,7 +1507,6 @@ class ApiServiceIntegrationsApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         # process the header parameters

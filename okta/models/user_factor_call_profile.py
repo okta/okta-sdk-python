@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,9 +38,14 @@ class UserFactorCallProfile(BaseModel):
     UserFactorCallProfile
     """  # noqa: E501
     phone_extension: Optional[Annotated[str, Field(strict=True, max_length=15)]] = Field(
-        default=None, description="Extension of the associated `phoneNumber`", alias="phoneExtension")
+        default=None, description="Extension of the associated `phoneNumber`", alias="phoneExtension"
+    )
     phone_number: Optional[Annotated[str, Field(strict=True, max_length=15)]] = Field(
-        default=None, description="Phone number of the factor. Format phone numbers to use the [E.164 standard](https://www.itu.int/rec/T-REC-E.164/).", alias="phoneNumber")
+        default=None,
+        description="Phone number of the factor. Format phone numbers to use the [E.164 standard]("
+                    "https://www.itu.int/rec/T-REC-E.164/).",
+        alias="phoneNumber"
+    )
     __properties: ClassVar[List[str]] = ["phoneExtension", "phoneNumber"]
 
     @field_validator('phone_number')
@@ -81,8 +88,10 @@ class UserFactorCallProfile(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -105,8 +114,10 @@ class UserFactorCallProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "phoneExtension": obj.get("phoneExtension"),
-            "phoneNumber": obj.get("phoneNumber")
-        })
+        _obj = cls.model_validate(
+            {
+                "phoneExtension": obj.get("phoneExtension"),
+                "phoneNumber": obj.get("phoneNumber")
+            }
+        )
         return _obj

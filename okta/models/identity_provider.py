@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.identity_provider_issuer_mode import IdentityProviderIssuerMode
 from okta.models.identity_provider_links import IdentityProviderLinks
 from okta.models.identity_provider_policy import IdentityProviderPolicy
@@ -35,8 +40,6 @@ from okta.models.identity_provider_properties import IdentityProviderProperties
 from okta.models.identity_provider_protocol import IdentityProviderProtocol
 from okta.models.identity_provider_type import IdentityProviderType
 from okta.models.lifecycle_status import LifecycleStatus
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class IdentityProvider(BaseModel):
@@ -49,17 +52,21 @@ class IdentityProvider(BaseModel):
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
-        default=None, description="Unique name for the IdP")
+        default=None, description="Unique name for the IdP"
+    )
     policy: Optional[IdentityProviderPolicy] = None
     properties: Optional[IdentityProviderProperties] = None
     protocol: Optional[IdentityProviderProtocol] = None
     status: Optional[LifecycleStatus] = None
     type: Optional[IdentityProviderType] = None
     links: Optional[IdentityProviderLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "id", "issuerMode", "lastUpdated",
-                                         "name", "policy", "properties", "protocol", "status", "type", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "created", "id", "issuerMode", "lastUpdated",
+        "name", "policy", "properties", "protocol", "status", "type", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,11 +101,13 @@ class IdentityProvider(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -149,17 +158,21 @@ class IdentityProvider(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "issuerMode": obj.get("issuerMode"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "policy": IdentityProviderPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
-            "properties": IdentityProviderProperties.from_dict(obj["properties"]) if obj.get("properties") is not None else None,
-            "protocol": IdentityProviderProtocol.from_dict(obj["protocol"]) if obj.get("protocol") is not None else None,
-            "status": obj.get("status"),
-            "type": obj.get("type"),
-            "_links": IdentityProviderLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "issuerMode": obj.get("issuerMode"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "policy": IdentityProviderPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
+                "properties": IdentityProviderProperties.from_dict(obj["properties"]) if obj.get(
+                    "properties"
+                ) is not None else None,
+                "protocol": IdentityProviderProtocol.from_dict(obj["protocol"]) if obj.get("protocol") is not None else None,
+                "status": obj.get("status"),
+                "type": obj.get("type"),
+                "_links": IdentityProviderLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

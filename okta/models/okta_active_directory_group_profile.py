@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,57 +20,67 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class OktaActiveDirectoryGroupProfile(BaseModel):
     """
-    Profile for a group that is imported from Active Directory.  The `objectClass` for such groups is `okta:windows_security_principal`.
+    Profile for a group that is imported from Active Directory.  The `objectClass` for such groups is
+    `okta:windows_security_principal`.
     """  # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the Windows group")
     dn: Optional[StrictStr] = Field(default=None, description="The distinguished name of the Windows group")
     external_id: Optional[StrictStr] = Field(
         default=None,
         description="Base-64 encoded GUID (`objectGUID`) of the Windows group",
-        alias="externalId")
+        alias="externalId"
+    )
     group_scope: Optional[StrictStr] = Field(
         default=None,
         description="The scope of the Windows group (DomainLocal, Global, or Universal)",
-        alias="groupScope")
+        alias="groupScope"
+    )
     group_type: Optional[StrictStr] = Field(
         default=None,
         description="The type of the Windows group (Security or Distribution)",
-        alias="groupType")
+        alias="groupType"
+    )
     managed_by: Optional[StrictStr] = Field(
         default=None,
         description="Distinguished name of the group that manages this group",
-        alias="managedBy")
+        alias="managedBy"
+    )
     name: Optional[StrictStr] = Field(default=None, description="Name of the Windows group")
     object_class: Optional[StrictStr] = Field(default=None, description="The object class type", alias="objectClass")
     object_sid: Optional[StrictStr] = Field(
         default=None,
         description="The Windows Security Identifier (SID) for the group",
-        alias="objectSid")
+        alias="objectSid"
+    )
     sam_account_name: Optional[StrictStr] = Field(
         default=None,
         description="Pre-Windows 2000 name of the Windows group",
-        alias="samAccountName")
+        alias="samAccountName"
+    )
     windows_domain_qualified_name: Optional[StrictStr] = Field(
         default=None,
         description="Fully qualified name of the Windows group",
-        alias="windowsDomainQualifiedName")
+        alias="windowsDomainQualifiedName"
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["description", "dn", "externalId", "groupScope", "groupType",
-                                         "managedBy", "name", "objectClass", "objectSid", "samAccountName", "windowsDomainQualifiedName"]
+    __properties: ClassVar[List[str]] = [
+        "description", "dn", "externalId", "groupScope", "groupType",
+        "managedBy", "name", "objectClass", "objectSid", "samAccountName", "windowsDomainQualifiedName"
+    ]
 
     @field_validator('object_class')
     def object_class_validate_enum(cls, value):
@@ -112,10 +124,12 @@ class OktaActiveDirectoryGroupProfile(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "object_class",
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "object_class",
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -143,19 +157,21 @@ class OktaActiveDirectoryGroupProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "dn": obj.get("dn"),
-            "externalId": obj.get("externalId"),
-            "groupScope": obj.get("groupScope"),
-            "groupType": obj.get("groupType"),
-            "managedBy": obj.get("managedBy"),
-            "name": obj.get("name"),
-            "objectClass": obj.get("objectClass"),
-            "objectSid": obj.get("objectSid"),
-            "samAccountName": obj.get("samAccountName"),
-            "windowsDomainQualifiedName": obj.get("windowsDomainQualifiedName")
-        })
+        _obj = cls.model_validate(
+            {
+                "description": obj.get("description"),
+                "dn": obj.get("dn"),
+                "externalId": obj.get("externalId"),
+                "groupScope": obj.get("groupScope"),
+                "groupType": obj.get("groupType"),
+                "managedBy": obj.get("managedBy"),
+                "name": obj.get("name"),
+                "objectClass": obj.get("objectClass"),
+                "objectSid": obj.get("objectSid"),
+                "samAccountName": obj.get("samAccountName"),
+                "windowsDomainQualifiedName": obj.get("windowsDomainQualifiedName")
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

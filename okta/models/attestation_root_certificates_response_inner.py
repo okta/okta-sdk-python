@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -38,7 +40,8 @@ class AttestationRootCertificatesResponseInner(BaseModel):
     x5t_s256: Optional[StrictStr] = Field(
         default=None,
         description="SHA-256 hash (thumbprint) of the X.509 certificate",
-        alias="x5t#S256")
+        alias="x5t#S256"
+    )
     iss: Optional[StrictStr] = Field(default=None, description="Issuer of certificate")
     exp: Optional[StrictStr] = Field(default=None, description="Expiry date of certificate")
     __properties: ClassVar[List[str]] = ["x5c", "x5t#S256", "iss", "exp"]
@@ -73,8 +76,10 @@ class AttestationRootCertificatesResponseInner(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -92,10 +97,12 @@ class AttestationRootCertificatesResponseInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "x5c": obj.get("x5c"),
-            "x5t#S256": obj.get("x5t#S256"),
-            "iss": obj.get("iss"),
-            "exp": obj.get("exp")
-        })
+        _obj = cls.model_validate(
+            {
+                "x5c": obj.get("x5c"),
+                "x5t#S256": obj.get("x5t#S256"),
+                "iss": obj.get("iss"),
+                "exp": obj.get("exp")
+            }
+        )
         return _obj

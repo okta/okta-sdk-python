@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.stream_configuration_aud import StreamConfigurationAud
 from okta.models.stream_configuration_delivery import StreamConfigurationDelivery
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class StreamConfiguration(BaseModel):
@@ -40,22 +43,41 @@ class StreamConfiguration(BaseModel):
     aud: Optional[StreamConfigurationAud] = None
     delivery: StreamConfigurationDelivery
     events_delivered: Optional[List[StrictStr]] = Field(
-        default=None, description="The events (mapped by the array of event type URIs) that the transmitter actually delivers to the SSF Stream.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
+        default=None,
+        description="The events (mapped by the array of event type URIs) that the transmitter actually delivers to the SSF "
+                    "Stream.  A read-only parameter that is set by the transmitter. If this parameter is included in the "
+                    "request, the value must match the expected value from the transmitter."
+    )
     events_requested: Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=50)] = Field(
-        description="The events (mapped by the array of event type URIs) that the receiver wants to receive")
+        description="The events (mapped by the array of event type URIs) that the receiver wants to receive"
+    )
     events_supported: Optional[List[StrictStr]] = Field(
-        default=None, description="An array of event type URIs that the transmitter supports.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
-    format: Optional[StrictStr] = Field(default=None,
-                                        description="The Subject Identifier format expected for any SET transmitted.")
+        default=None,
+        description="An array of event type URIs that the transmitter supports.  A read-only parameter that is set by the "
+                    "transmitter. If this parameter is included in the request, the value must match the expected value "
+                    "from the transmitter."
+    )
+    format: Optional[StrictStr] = Field(
+        default=None,
+        description="The Subject Identifier format expected for any SET transmitted."
+    )
     iss: Optional[StrictStr] = Field(
         default=None,
-        description="The issuer used in Security Event Tokens (SETs). This value is set as `iss` in the claim.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
+        description="The issuer used in Security Event Tokens (SETs). This value is set as `iss` in the claim.  A "
+                    "read-only parameter that is set by the transmitter. If this parameter is included in the request, "
+                    "the value must match the expected value from the transmitter."
+    )
     min_verification_interval: Optional[StrictInt] = Field(
         default=None,
-        description="The minimum amount of time, in seconds, between two verification requests.  A read-only parameter that is set by the transmitter. If this parameter is included in the request, the value must match the expected value from the transmitter.")
+        description="The minimum amount of time, in seconds, between two verification requests.  A read-only parameter "
+                    "that is set by the transmitter. If this parameter is included in the request, the value must match "
+                    "the expected value from the transmitter."
+    )
     stream_id: Optional[StrictStr] = Field(default=None, description="The ID of the SSF Stream configuration")
-    __properties: ClassVar[List[str]] = ["aud", "delivery", "events_delivered", "events_requested",
-                                         "events_supported", "format", "iss", "min_verification_interval", "stream_id"]
+    __properties: ClassVar[List[str]] = [
+        "aud", "delivery", "events_delivered", "events_requested",
+        "events_supported", "format", "iss", "min_verification_interval", "stream_id"
+    ]
 
     @field_validator('format')
     def format_validate_enum(cls, value):
@@ -97,8 +119,10 @@ class StreamConfiguration(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -135,15 +159,19 @@ class StreamConfiguration(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "aud": StreamConfigurationAud.from_dict(obj["aud"]) if obj.get("aud") is not None else None,
-            "delivery": StreamConfigurationDelivery.from_dict(obj["delivery"]) if obj.get("delivery") is not None else None,
-            "events_delivered": obj.get("events_delivered"),
-            "events_requested": obj.get("events_requested"),
-            "events_supported": obj.get("events_supported"),
-            "format": obj.get("format"),
-            "iss": obj.get("iss"),
-            "min_verification_interval": obj.get("min_verification_interval"),
-            "stream_id": obj.get("stream_id")
-        })
+        _obj = cls.model_validate(
+            {
+                "aud": StreamConfigurationAud.from_dict(obj["aud"]) if obj.get("aud") is not None else None,
+                "delivery": StreamConfigurationDelivery.from_dict(obj["delivery"]) if obj.get(
+                    "delivery"
+                ) is not None else None,
+                "events_delivered": obj.get("events_delivered"),
+                "events_requested": obj.get("events_requested"),
+                "events_supported": obj.get("events_supported"),
+                "format": obj.get("format"),
+                "iss": obj.get("iss"),
+                "min_verification_interval": obj.get("min_verification_interval"),
+                "stream_id": obj.get("stream_id")
+            }
+        )
         return _obj

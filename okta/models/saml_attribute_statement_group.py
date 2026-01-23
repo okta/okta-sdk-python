@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,16 +39,22 @@ class SamlAttributeStatementGroup(BaseModel):
     filter_type: Optional[StrictStr] = Field(
         default=None,
         description="The operation to filter groups based on `filterValue`",
-        alias="filterType")
+        alias="filterType"
+    )
     filter_value: Optional[StrictStr] = Field(
         default=None,
         description="Filter the groups based on a specific value.",
-        alias="filterValue")
+        alias="filterValue"
+    )
     name: Optional[StrictStr] = Field(
         default=None,
-        description="The name of the group attribute in your app. The attribute name must be unique across all user and group attribute statements.")
-    namespace: Optional[StrictStr] = Field(default=None,
-                                           description="The name format of the group attribute. Supported values:")
+        description="The name of the group attribute in your app. The attribute name must be unique across all user and "
+                    "group attribute statements."
+    )
+    namespace: Optional[StrictStr] = Field(
+        default=None,
+        description="The name format of the group attribute. Supported values:"
+    )
     type: Optional[StrictStr] = Field(default=None, description="The type of attribute statements object")
     __properties: ClassVar[List[str]] = ["filterType", "filterValue", "name", "namespace", "type"]
 
@@ -66,10 +74,18 @@ class SamlAttributeStatementGroup(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
-                            'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified']):
+        if value not in set(
+                [
+                    'urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+                    'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+                    'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified'
+                ]
+        ):
             raise ValueError(
-                "must be one of enum values ('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified')")
+                "must be one of enum values ('urn:oasis:names:tc:SAML:2.0:attrname-format:basic', "
+                "'urn:oasis:names:tc:SAML:2.0:attrname-format:uri', "
+                "'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified')"
+            )
         return value
 
     @field_validator('type')
@@ -112,8 +128,10 @@ class SamlAttributeStatementGroup(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -131,11 +149,13 @@ class SamlAttributeStatementGroup(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "filterType": obj.get("filterType"),
-            "filterValue": obj.get("filterValue"),
-            "name": obj.get("name"),
-            "namespace": obj.get("namespace"),
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "filterType": obj.get("filterType"),
+                "filterValue": obj.get("filterValue"),
+                "name": obj.get("name"),
+                "namespace": obj.get("namespace"),
+                "type": obj.get("type")
+            }
+        )
         return _obj

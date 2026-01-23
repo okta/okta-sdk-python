@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.idp_policy_rule_action_match_criteria import IdpPolicyRuleActionMatchCriteria
 from okta.models.idp_policy_rule_action_provider import IdpPolicyRuleActionProvider
 from okta.models.idp_selection_type import IdpSelectionType
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class IdpPolicyRuleActionIdp(BaseModel):
@@ -38,10 +41,15 @@ class IdpPolicyRuleActionIdp(BaseModel):
     Specifies IdP settings
     """  # noqa: E501
     providers: Optional[List[IdpPolicyRuleActionProvider]] = Field(
-        default=None, description="List of configured identity providers that a given rule can route to. Ability to define multiple providers is a part of the Identity Engine. This allows users to choose a provider when they sign in. Contact support for information on the Identity Engine.")
+        default=None,
+        description="List of configured identity providers that a given rule can route to. Ability to define multiple "
+                    "providers is a part of the Identity Engine. This allows users to choose a provider when they sign in. "
+                    "Contact support for information on the Identity Engine."
+    )
     idp_selection_type: Optional[IdpSelectionType] = Field(default=None, alias="idpSelectionType")
     match_criteria: Optional[List[IdpPolicyRuleActionMatchCriteria]] = Field(
-        default=None, description="Required if `idpSelectionType` is set to `DYNAMIC`", alias="matchCriteria")
+        default=None, description="Required if `idpSelectionType` is set to `DYNAMIC`", alias="matchCriteria"
+    )
     __properties: ClassVar[List[str]] = ["providers", "idpSelectionType", "matchCriteria"]
 
     model_config = ConfigDict(
@@ -74,8 +82,10 @@ class IdpPolicyRuleActionIdp(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -107,9 +117,14 @@ class IdpPolicyRuleActionIdp(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "providers": [IdpPolicyRuleActionProvider.from_dict(_item) for _item in obj["providers"]] if obj.get("providers") is not None else None,
-            "idpSelectionType": obj.get("idpSelectionType"),
-            "matchCriteria": [IdpPolicyRuleActionMatchCriteria.from_dict(_item) for _item in obj["matchCriteria"]] if obj.get("matchCriteria") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "providers": [IdpPolicyRuleActionProvider.from_dict(_item) for _item in obj["providers"]] if obj.get(
+                    "providers"
+                ) is not None else None,
+                "idpSelectionType": obj.get("idpSelectionType"),
+                "matchCriteria": [IdpPolicyRuleActionMatchCriteria.from_dict(_item) for _item in
+                                  obj["matchCriteria"]] if obj.get("matchCriteria") is not None else None
+            }
+        )
         return _obj

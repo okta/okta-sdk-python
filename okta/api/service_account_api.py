@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.app_service_account import AppServiceAccount
-from okta.models.app_service_account_for_update import AppServiceAccountForUpdate
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.app_service_account import AppServiceAccount
+from okta.models.app_service_account_for_update import AppServiceAccountForUpdate
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,20 +47,20 @@ class ServiceAccountApi(ApiClient):
 
     @validate_call
     async def create_app_service_account(
-        self,
-        body: AppServiceAccount,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            body: AppServiceAccount,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppServiceAccount:
         """Create an app service account
 
@@ -150,12 +151,12 @@ class ServiceAccountApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_app_service_account_serialize(
-        self,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -222,20 +223,20 @@ class ServiceAccountApi(ApiClient):
 
     @validate_call
     async def delete_app_service_account(
-        self,
-        id: Annotated[StrictStr, Field(description="ID of an existing service account")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(description="ID of an existing service account")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an app service account
 
@@ -317,12 +318,12 @@ class ServiceAccountApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_app_service_account_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -375,20 +376,20 @@ class ServiceAccountApi(ApiClient):
 
     @validate_call
     async def get_app_service_account(
-        self,
-        id: Annotated[StrictStr, Field(description="ID of an existing service account")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(description="ID of an existing service account")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppServiceAccount:
         """Retrieve an app service account
 
@@ -479,12 +480,12 @@ class ServiceAccountApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_app_service_account_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -537,25 +538,33 @@ class ServiceAccountApi(ApiClient):
 
     @validate_call
     async def list_app_service_accounts(
-        self,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        match: Annotated[Optional[Annotated[str, Field(min_length=3, strict=True, max_length=255)]], Field(
-            description="Searches for app service accounts where the account name (`name`), username (`username`), app instance label (`containerInstanceName`), or OIN app key name (`containerGlobalName`) contains the given value")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            match: Annotated[Optional[Annotated[str, Field(min_length=3, strict=True, max_length=255)]], Field(
+                description="Searches for app service accounts where the account name (`name`), username (`username`), "
+                            "app instance label (`containerInstanceName`), or OIN app key name (`containerGlobalName`) "
+                            "contains the given value"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AppServiceAccount]:
         """List all app service accounts
 
@@ -563,9 +572,12 @@ class ServiceAccountApi(ApiClient):
 
         :param limit: A limit on the number of objects to return
         :type limit: int
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
-        :param match: Searches for app service accounts where the account name (`name`), username (`username`), app instance label (`containerInstanceName`), or OIN app key name (`containerGlobalName`) contains the given value
+        :param match: Searches for app service accounts where the account name (`name`), username (`username`),
+        app instance label (`containerInstanceName`), or OIN app key name (`containerGlobalName`) contains the given value
         :type match: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -652,14 +664,14 @@ class ServiceAccountApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_app_service_accounts_serialize(
-        self,
-        limit,
-        after,
-        match,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            limit,
+            after,
+            match,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -677,15 +689,12 @@ class ServiceAccountApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if match is not None:
-
             _query_params.append(('match', match))
 
         # process the header parameters
@@ -722,21 +731,21 @@ class ServiceAccountApi(ApiClient):
 
     @validate_call
     async def update_app_service_account(
-        self,
-        id: Annotated[StrictStr, Field(description="ID of an existing service account")],
-        body: Optional[AppServiceAccountForUpdate] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(description="ID of an existing service account")],
+            body: Optional[AppServiceAccountForUpdate] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppServiceAccount:
         """Update an existing app service account
 
@@ -830,13 +839,13 @@ class ServiceAccountApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_app_service_account_serialize(
-        self,
-        id,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

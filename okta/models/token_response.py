@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.token_response_token_type import TokenResponseTokenType
 from okta.models.token_type import TokenType
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class TokenResponse(BaseModel):
@@ -38,17 +41,23 @@ class TokenResponse(BaseModel):
     """  # noqa: E501
     access_token: Optional[StrictStr] = Field(default=None, description="An access token.")
     device_secret: Optional[StrictStr] = Field(
-        default=None, description="An opaque device secret. This is returned if the `device_sso` scope is granted.")
+        default=None, description="An opaque device secret. This is returned if the `device_sso` scope is granted."
+    )
     expires_in: Optional[StrictInt] = Field(default=None, description="The expiration time of the access token in seconds.")
-    id_token: Optional[StrictStr] = Field(default=None,
-                                          description="An ID token. This is returned if the `openid` scope is granted.")
+    id_token: Optional[StrictStr] = Field(
+        default=None,
+        description="An ID token. This is returned if the `openid` scope is granted."
+    )
     issued_token_type: Optional[TokenType] = None
     refresh_token: Optional[StrictStr] = Field(
-        default=None, description="An opaque refresh token. This is returned if the `offline_access` scope is granted.")
+        default=None, description="An opaque refresh token. This is returned if the `offline_access` scope is granted."
+    )
     scope: Optional[StrictStr] = Field(default=None, description="The scopes contained in the access token.")
     token_type: Optional[TokenResponseTokenType] = None
-    __properties: ClassVar[List[str]] = ["access_token", "device_secret", "expires_in",
-                                         "id_token", "issued_token_type", "refresh_token", "scope", "token_type"]
+    __properties: ClassVar[List[str]] = [
+        "access_token", "device_secret", "expires_in",
+        "id_token", "issued_token_type", "refresh_token", "scope", "token_type"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,8 +89,10 @@ class TokenResponse(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -99,14 +110,16 @@ class TokenResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "access_token": obj.get("access_token"),
-            "device_secret": obj.get("device_secret"),
-            "expires_in": obj.get("expires_in"),
-            "id_token": obj.get("id_token"),
-            "issued_token_type": obj.get("issued_token_type"),
-            "refresh_token": obj.get("refresh_token"),
-            "scope": obj.get("scope"),
-            "token_type": obj.get("token_type")
-        })
+        _obj = cls.model_validate(
+            {
+                "access_token": obj.get("access_token"),
+                "device_secret": obj.get("device_secret"),
+                "expires_in": obj.get("expires_in"),
+                "id_token": obj.get("id_token"),
+                "issued_token_type": obj.get("issued_token_type"),
+                "refresh_token": obj.get("refresh_token"),
+                "scope": obj.get("scope"),
+                "token_type": obj.get("token_type")
+            }
+        )
         return _obj

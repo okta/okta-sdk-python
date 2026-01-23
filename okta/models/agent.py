@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,50 +20,60 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.agent_type import AgentType
 from okta.models.agent_update_instance_status import AgentUpdateInstanceStatus
 from okta.models.links_self import LinksSelf
 from okta.models.operational_status import OperationalStatus
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class Agent(BaseModel):
     """
     Agent details
     """  # noqa: E501
-    id: Optional[StrictStr] = Field(default=None,
-                                    description="Unique identifier for the agent that's generated during installation")
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier for the agent that's generated during installation"
+    )
     is_hidden: Optional[StrictBool] = Field(
         default=None,
         description="Determines if an agent is hidden from the Admin Console",
-        alias="isHidden")
+        alias="isHidden"
+    )
     is_latest_g_aed_version: Optional[StrictBool] = Field(
         default=None,
         description="Determines if the agent is on the latest generally available version",
-        alias="isLatestGAedVersion")
+        alias="isLatestGAedVersion"
+    )
     last_connection: Optional[StrictInt] = Field(
         default=None,
         description="Unix timestamp in milliseconds when the agent last connected to Okta",
-        alias="lastConnection")
+        alias="lastConnection"
+    )
     name: Optional[StrictStr] = Field(default=None, description="Agent name")
     operational_status: Optional[OperationalStatus] = Field(default=None, alias="operationalStatus")
     pool_id: Optional[StrictStr] = Field(default=None, description="Pool ID", alias="poolId")
     type: Optional[AgentType] = None
-    update_message: Optional[StrictStr] = Field(default=None, description="Status message of the agent", alias="updateMessage")
+    update_message: Optional[StrictStr] = Field(
+        default=None, description="Status message of the agent", alias="updateMessage"
+    )
     update_status: Optional[AgentUpdateInstanceStatus] = Field(default=None, alias="updateStatus")
     version: Optional[StrictStr] = Field(default=None, description="Agent version number")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["id", "isHidden", "isLatestGAedVersion", "lastConnection",
-                                         "name", "operationalStatus", "poolId", "type", "updateMessage", "updateStatus", "version", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "id", "isHidden", "isLatestGAedVersion", "lastConnection",
+        "name", "operationalStatus", "poolId", "type", "updateMessage", "updateStatus", "version", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,9 +106,11 @@ class Agent(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -121,18 +135,20 @@ class Agent(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "isHidden": obj.get("isHidden"),
-            "isLatestGAedVersion": obj.get("isLatestGAedVersion"),
-            "lastConnection": obj.get("lastConnection"),
-            "name": obj.get("name"),
-            "operationalStatus": obj.get("operationalStatus"),
-            "poolId": obj.get("poolId"),
-            "type": obj.get("type"),
-            "updateMessage": obj.get("updateMessage"),
-            "updateStatus": obj.get("updateStatus"),
-            "version": obj.get("version"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "isHidden": obj.get("isHidden"),
+                "isLatestGAedVersion": obj.get("isLatestGAedVersion"),
+                "lastConnection": obj.get("lastConnection"),
+                "name": obj.get("name"),
+                "operationalStatus": obj.get("operationalStatus"),
+                "poolId": obj.get("poolId"),
+                "type": obj.get("type"),
+                "updateMessage": obj.get("updateMessage"),
+                "updateStatus": obj.get("updateStatus"),
+                "version": obj.get("version"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

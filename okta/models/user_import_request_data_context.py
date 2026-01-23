@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.user_import_request_data_context_application import UserImportRequestDataContextApplication
 from okta.models.user_import_request_data_context_job import UserImportRequestDataContextJob
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class UserImportRequestDataContext(BaseModel):
@@ -37,13 +40,18 @@ class UserImportRequestDataContext(BaseModel):
     UserImportRequestDataContext
     """  # noqa: E501
     conflicts: Optional[List[Dict[str, Any]]] = Field(
-        default=None, description="An array of user profile attributes that are in conflict")
+        default=None, description="An array of user profile attributes that are in conflict"
+    )
     application: Optional[UserImportRequestDataContextApplication] = None
     job: Optional[UserImportRequestDataContextJob] = None
     matches: Optional[List[Dict[str, Any]]] = Field(
-        default=None, description="The list of Okta users currently matched to the app user based on import matching. There can be more than one match.")
+        default=None,
+        description="The list of Okta users currently matched to the app user based on import matching. There can be more "
+                    "than one match."
+    )
     policy: Optional[List[Dict[str, Any]]] = Field(
-        default=None, description="The list of any policies that apply to the import matching")
+        default=None, description="The list of any policies that apply to the import matching"
+    )
     __properties: ClassVar[List[str]] = ["conflicts", "application", "job", "matches", "policy"]
 
     model_config = ConfigDict(
@@ -76,8 +84,10 @@ class UserImportRequestDataContext(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -109,11 +119,15 @@ class UserImportRequestDataContext(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "conflicts": obj.get("conflicts"),
-            "application": UserImportRequestDataContextApplication.from_dict(obj["application"]) if obj.get("application") is not None else None,
-            "job": UserImportRequestDataContextJob.from_dict(obj["job"]) if obj.get("job") is not None else None,
-            "matches": obj.get("matches"),
-            "policy": obj.get("policy")
-        })
+        _obj = cls.model_validate(
+            {
+                "conflicts": obj.get("conflicts"),
+                "application": UserImportRequestDataContextApplication.from_dict(obj["application"]) if obj.get(
+                    "application"
+                ) is not None else None,
+                "job": UserImportRequestDataContextJob.from_dict(obj["job"]) if obj.get("job") is not None else None,
+                "matches": obj.get("matches"),
+                "policy": obj.get("policy")
+            }
+        )
         return _obj

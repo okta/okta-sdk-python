@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.application_settings_notifications_vpn_network import ApplicationSettingsNotificationsVpnNetwork
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.application_settings_notifications_vpn_network import ApplicationSettingsNotificationsVpnNetwork
 
 
 class ApplicationSettingsNotificationsVpn(BaseModel):
@@ -38,7 +41,8 @@ class ApplicationSettingsNotificationsVpn(BaseModel):
     help_url: Optional[StrictStr] = Field(
         default=None,
         description="An optional URL to a help page to assist your end users in signing in to your company VPN",
-        alias="helpUrl")
+        alias="helpUrl"
+    )
     message: Optional[StrictStr] = Field(default=None, description="A VPN requirement message that's displayed to users")
     network: ApplicationSettingsNotificationsVpnNetwork
     __properties: ClassVar[List[str]] = ["helpUrl", "message", "network"]
@@ -73,8 +77,10 @@ class ApplicationSettingsNotificationsVpn(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -99,9 +105,13 @@ class ApplicationSettingsNotificationsVpn(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "helpUrl": obj.get("helpUrl"),
-            "message": obj.get("message"),
-            "network": ApplicationSettingsNotificationsVpnNetwork.from_dict(obj["network"]) if obj.get("network") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "helpUrl": obj.get("helpUrl"),
+                "message": obj.get("message"),
+                "network": ApplicationSettingsNotificationsVpnNetwork.from_dict(obj["network"]) if obj.get(
+                    "network"
+                ) is not None else None
+            }
+        )
         return _obj

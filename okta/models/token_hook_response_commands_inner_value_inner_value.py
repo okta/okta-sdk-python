@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr, ValidationError, field_validator
-from typing import Any, Dict, Optional
-from pydantic import StrictStr
+from typing import Any
 from typing import Union, Set, Optional, Dict
+
+from pydantic import BaseModel, ConfigDict, StrictInt, ValidationError, field_validator
+from pydantic import StrictStr
 from typing_extensions import Self
 
 TOKENHOOKRESPONSECOMMANDSINNERVALUEINNERVALUE_ONE_OF_SCHEMAS = ["int", "object", "str"]
@@ -85,13 +88,17 @@ class TokenHookResponseCommandsInnerValueInnerValue(BaseModel):
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when setting `actual_instance` in TokenHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
-                ", ".join(error_messages))
+                "Multiple matches found when setting `actual_instance` in TokenHookResponseCommandsInnerValueInnerValue "
+                "with oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when setting `actual_instance` in TokenHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
-                ", ".join(error_messages))
+                "No match found when setting `actual_instance` in TokenHookResponseCommandsInnerValueInnerValue with oneOf "
+                "schemas: int, object, str. Details: " +
+                ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -137,13 +144,17 @@ class TokenHookResponseCommandsInnerValueInnerValue(BaseModel):
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when deserializing the JSON string into TokenHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
-                ", ".join(error_messages))
+                "Multiple matches found when deserializing the JSON string into "
+                "TokenHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into TokenHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
-                ", ".join(error_messages))
+                "No match found when deserializing the JSON string into TokenHookResponseCommandsInnerValueInnerValue with "
+                "oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages)
+            )
         else:
             return instance
 

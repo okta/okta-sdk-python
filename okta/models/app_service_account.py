@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.service_account_status import ServiceAccountStatus
 from okta.models.service_account_status_detail import ServiceAccountStatusDetail
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AppServiceAccount(BaseModel):
@@ -41,47 +44,63 @@ class AppServiceAccount(BaseModel):
     container_global_name: Optional[StrictStr] = Field(
         default=None,
         description="The key name of the app in the Okta Integration Network (OIN)",
-        alias="containerGlobalName")
+        alias="containerGlobalName"
+    )
     container_instance_name: Optional[StrictStr] = Field(
-        default=None, description="The app instance label", alias="containerInstanceName")
+        default=None, description="The app instance label", alias="containerInstanceName"
+    )
     container_orn: StrictStr = Field(
-        description="The [ORN](/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the relevant resource.  Use the specific app ORN format (`orn:{partition}:idp:{yourOrgId}:apps:{appType}:{appId}`) to identify an Okta app instance in your org.",
-        alias="containerOrn")
+        description="The [ORN](/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the relevant resource.  "
+                    "Use the specific app ORN format (`orn:{partition}:idp:{yourOrgId}:apps:{appType}:{appId}`) to "
+                    "identify an Okta app instance in your org.",
+        alias="containerOrn"
+    )
     created: Optional[datetime] = Field(default=None, description="Timestamp when the app service account was created")
     description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(
-        default=None, description="The description of the app service account")
+        default=None, description="The description of the app service account"
+    )
     id: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The UUID of the app service account")
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the app service account was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Annotated[str, Field(min_length=1, strict=True, max_length=50)] = Field(
-        description="The user-defined name for the app service account")
+        description="The user-defined name for the app service account"
+    )
     owner_group_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(
-        default=None, description="A list of IDs of the Okta groups who own the app service account", alias="ownerGroupIds")
+        default=None, description="A list of IDs of the Okta groups who own the app service account", alias="ownerGroupIds"
+    )
     owner_user_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(
-        default=None, description="A list of IDs of the Okta users who own the app service account", alias="ownerUserIds")
+        default=None, description="A list of IDs of the Okta users who own the app service account", alias="ownerUserIds"
+    )
     password: Optional[SecretStr] = Field(
         default=None,
-        description="The app service account password. Required for apps that don't have provisioning enabled or don't support password synchronization.")
+        description="The app service account password. Required for apps that don't have provisioning enabled or don't "
+                    "support password synchronization."
+    )
     status: Optional[ServiceAccountStatus] = None
     status_detail: Optional[ServiceAccountStatusDetail] = Field(default=None, alias="statusDetail")
     username: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(
-        description="The username that serves as the direct link to your managed app account. Ensure that this value precisely matches the identifier of the target app account.")
-    __properties: ClassVar[List[str]] = ["containerGlobalName",
-                                         "containerInstanceName",
-                                         "containerOrn",
-                                         "created",
-                                         "description",
-                                         "id",
-                                         "lastUpdated",
-                                         "name",
-                                         "ownerGroupIds",
-                                         "ownerUserIds",
-                                         "password",
-                                         "status",
-                                         "statusDetail",
-                                         "username"]
+        description="The username that serves as the direct link to your managed app account. Ensure that this value "
+                    "precisely matches the identifier of the target app account."
+    )
+    __properties: ClassVar[List[str]] = [
+        "containerGlobalName",
+        "containerInstanceName",
+        "containerOrn",
+        "created",
+        "description",
+        "id",
+        "lastUpdated",
+        "name",
+        "ownerGroupIds",
+        "ownerUserIds",
+        "password",
+        "status",
+        "statusDetail",
+        "username"
+    ]
 
     @field_validator('id')
     def id_validate_regular_expression(cls, value):
@@ -91,7 +110,9 @@ class AppServiceAccount(BaseModel):
 
         if not re.match(r"(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", value):
             raise ValueError(
-                r"must validate the regular expression /(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/")
+                r"must validate the regular expression /(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-["
+                r"0-9a-f]{12}$/"
+            )
         return value
 
     @field_validator('name')
@@ -136,13 +157,15 @@ class AppServiceAccount(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "container_global_name",
-            "container_instance_name",
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "container_global_name",
+                "container_instance_name",
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -160,20 +183,22 @@ class AppServiceAccount(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "containerGlobalName": obj.get("containerGlobalName"),
-            "containerInstanceName": obj.get("containerInstanceName"),
-            "containerOrn": obj.get("containerOrn"),
-            "created": obj.get("created"),
-            "description": obj.get("description"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "ownerGroupIds": obj.get("ownerGroupIds"),
-            "ownerUserIds": obj.get("ownerUserIds"),
-            "password": obj.get("password"),
-            "status": obj.get("status"),
-            "statusDetail": obj.get("statusDetail"),
-            "username": obj.get("username")
-        })
+        _obj = cls.model_validate(
+            {
+                "containerGlobalName": obj.get("containerGlobalName"),
+                "containerInstanceName": obj.get("containerInstanceName"),
+                "containerOrn": obj.get("containerOrn"),
+                "created": obj.get("created"),
+                "description": obj.get("description"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "ownerGroupIds": obj.get("ownerGroupIds"),
+                "ownerUserIds": obj.get("ownerUserIds"),
+                "password": obj.get("password"),
+                "status": obj.get("status"),
+                "statusDetail": obj.get("statusDetail"),
+                "username": obj.get("username")
+            }
+        )
         return _obj

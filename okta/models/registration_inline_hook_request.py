@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from okta.models.registration_inline_hook_request_type import RegistrationInlineHookRequestType
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
-
 from typing import TYPE_CHECKING
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+
+from okta.models.registration_inline_hook_request_type import RegistrationInlineHookRequestType
+
 if TYPE_CHECKING:
     from okta.models.registration_inline_hook_pp_data import RegistrationInlineHookPPData
     from okta.models.registration_inline_hook_ssr_data import RegistrationInlineHookSSRData
@@ -43,7 +46,8 @@ class RegistrationInlineHookRequest(BaseModel):
     event_type: Optional[StrictStr] = Field(
         default=None,
         description="The type of inline hook. The registration inline hook type is `com.okta.user.pre-registration`.",
-        alias="eventType")
+        alias="eventType"
+    )
     request_type: Optional[RegistrationInlineHookRequestType] = Field(default=None, alias="requestType")
     source: Optional[StrictStr] = Field(default=None, description="The ID of the registration inline hook")
     __properties: ClassVar[List[str]] = ["eventType", "requestType", "source"]
@@ -95,8 +99,10 @@ class RegistrationInlineHookRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -113,8 +119,12 @@ class RegistrationInlineHookRequest(BaseModel):
         if object_type == 'RegistrationInlineHookPPData':
             return import_module("okta.models.registration_inline_hook_pp_data").RegistrationInlineHookPPData.from_dict(obj)
         if object_type == 'RegistrationInlineHookSSRData':
-            return import_module("okta.models.registration_inline_hook_ssr_data").RegistrationInlineHookSSRData.from_dict(obj)
+            return import_module("okta.models.registration_inline_hook_ssr_data").RegistrationInlineHookSSRData.from_dict(
+                obj
+            )
 
-        raise ValueError("RegistrationInlineHookRequest failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "RegistrationInlineHookRequest failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

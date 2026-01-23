@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.identity_assertion_app_instance_connection_creatable_app import IdentityAssertionAppInstanceConnectionCreatableApp
-from okta.models.sts_service_account_connection_creatable_service_account import STSServiceAccountConnectionCreatableServiceAccount
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.identity_assertion_app_instance_connection_creatable_app import \
+    IdentityAssertionAppInstanceConnectionCreatableApp
+from okta.models.sts_service_account_connection_creatable_service_account import \
+    STSServiceAccountConnectionCreatableServiceAccount
 
 
 class STSServiceAccountConnectionCreatable(BaseModel):
@@ -41,11 +46,14 @@ class STSServiceAccountConnectionCreatable(BaseModel):
     protocol_type: Optional[StrictStr] = Field(
         default=None,
         description="The authentication protocol type used for the connection",
-        alias="protocolType")
+        alias="protocolType"
+    )
     resource_indicator: Optional[StrictStr] = Field(
         default=None,
-        description="Resource indicator used when requesting tokens. Defaults to the service account's ORN if not specified.",
-        alias="resourceIndicator")
+        description="Resource indicator used when requesting tokens. Defaults to the service account's ORN if not "
+                    "specified.",
+        alias="resourceIndicator"
+    )
     service_account: STSServiceAccountConnectionCreatableServiceAccount = Field(alias="serviceAccount")
     __properties: ClassVar[List[str]] = ["app", "connectionType", "protocolType", "resourceIndicator", "serviceAccount"]
 
@@ -96,8 +104,10 @@ class STSServiceAccountConnectionCreatable(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -129,11 +139,17 @@ class STSServiceAccountConnectionCreatable(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "app": IdentityAssertionAppInstanceConnectionCreatableApp.from_dict(obj["app"]) if obj.get("app") is not None else None,
-            "connectionType": obj.get("connectionType"),
-            "protocolType": obj.get("protocolType"),
-            "resourceIndicator": obj.get("resourceIndicator"),
-            "serviceAccount": STSServiceAccountConnectionCreatableServiceAccount.from_dict(obj["serviceAccount"]) if obj.get("serviceAccount") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "app": IdentityAssertionAppInstanceConnectionCreatableApp.from_dict(obj["app"]) if obj.get(
+                    "app"
+                ) is not None else None,
+                "connectionType": obj.get("connectionType"),
+                "protocolType": obj.get("protocolType"),
+                "resourceIndicator": obj.get("resourceIndicator"),
+                "serviceAccount": STSServiceAccountConnectionCreatableServiceAccount.from_dict(
+                    obj["serviceAccount"]
+                ) if obj.get("serviceAccount") is not None else None
+            }
+        )
         return _obj

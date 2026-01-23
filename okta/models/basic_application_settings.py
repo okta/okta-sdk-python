@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.application_settings_notes import ApplicationSettingsNotes
 from okta.models.application_settings_notifications import ApplicationSettingsNotifications
 from okta.models.basic_application_settings_application import BasicApplicationSettingsApplication
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class BasicApplicationSettings(BaseModel):
@@ -40,24 +43,35 @@ class BasicApplicationSettings(BaseModel):
     em_opt_in_status: Optional[StrictStr] = Field(
         default=None,
         description="The entitlement management opt-in status for the app",
-        alias="emOptInStatus")
+        alias="emOptInStatus"
+    )
     identity_store_id: Optional[StrictStr] = Field(
         default=None,
-        description="Identifies an additional identity store app, if your app supports it. The `identityStoreId` value must be a valid identity store app ID. This identity store app must be created in the same org as your app.",
-        alias="identityStoreId")
+        description="Identifies an additional identity store app, if your app supports it. The `identityStoreId` value "
+                    "must be a valid identity store app ID. This identity store app must be created in the same org as "
+                    "your app.",
+        alias="identityStoreId"
+    )
     implicit_assignment: Optional[StrictBool] = Field(
         default=None,
-        description="Controls whether Okta automatically assigns users to the app based on the user's role or group membership.",
-        alias="implicitAssignment")
+        description="Controls whether Okta automatically assigns users to the app based on the user's role or group "
+                    "membership.",
+        alias="implicitAssignment"
+    )
     inline_hook_id: Optional[StrictStr] = Field(
         default=None,
-        description="Identifier of an inline hook. Inline hooks are outbound calls from Okta to your own custom code, triggered at specific points in Okta process flows. They allow you to integrate custom functionality into those flows. See [Inline hooks](/openapi/okta-management/management/tag/InlineHook/).",
-        alias="inlineHookId")
+        description="Identifier of an inline hook. Inline hooks are outbound calls from Okta to your own custom code, "
+                    "triggered at specific points in Okta process flows. They allow you to integrate custom functionality "
+                    "into those flows. See [Inline hooks](/openapi/okta-management/management/tag/InlineHook/).",
+        alias="inlineHookId"
+    )
     notes: Optional[ApplicationSettingsNotes] = None
     notifications: Optional[ApplicationSettingsNotifications] = None
     app: Optional[BasicApplicationSettingsApplication] = None
-    __properties: ClassVar[List[str]] = ["emOptInStatus", "identityStoreId",
-                                         "implicitAssignment", "inlineHookId", "notes", "notifications", "app"]
+    __properties: ClassVar[List[str]] = [
+        "emOptInStatus", "identityStoreId",
+        "implicitAssignment", "inlineHookId", "notes", "notifications", "app"
+    ]
 
     @field_validator('em_opt_in_status')
     def em_opt_in_status_validate_enum(cls, value):
@@ -100,9 +114,11 @@ class BasicApplicationSettings(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "em_opt_in_status",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "em_opt_in_status",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -141,13 +157,17 @@ class BasicApplicationSettings(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "emOptInStatus": obj.get("emOptInStatus"),
-            "identityStoreId": obj.get("identityStoreId"),
-            "implicitAssignment": obj.get("implicitAssignment"),
-            "inlineHookId": obj.get("inlineHookId"),
-            "notes": ApplicationSettingsNotes.from_dict(obj["notes"]) if obj.get("notes") is not None else None,
-            "notifications": ApplicationSettingsNotifications.from_dict(obj["notifications"]) if obj.get("notifications") is not None else None,
-            "app": BasicApplicationSettingsApplication.from_dict(obj["app"]) if obj.get("app") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "emOptInStatus": obj.get("emOptInStatus"),
+                "identityStoreId": obj.get("identityStoreId"),
+                "implicitAssignment": obj.get("implicitAssignment"),
+                "inlineHookId": obj.get("inlineHookId"),
+                "notes": ApplicationSettingsNotes.from_dict(obj["notes"]) if obj.get("notes") is not None else None,
+                "notifications": ApplicationSettingsNotifications.from_dict(obj["notifications"]) if obj.get(
+                    "notifications"
+                ) is not None else None,
+                "app": BasicApplicationSettingsApplication.from_dict(obj["app"]) if obj.get("app") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.grant_or_token_status import GrantOrTokenStatus
 from okta.models.o_auth2_actor import OAuth2Actor
 from okta.models.o_auth2_scope_consent_grant_embedded import OAuth2ScopeConsentGrantEmbedded
 from okta.models.o_auth2_scope_consent_grant_links import OAuth2ScopeConsentGrantLinks
 from okta.models.o_auth2_scope_consent_grant_source import OAuth2ScopeConsentGrantSource
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OAuth2ScopeConsentGrant(BaseModel):
@@ -48,20 +51,26 @@ class OAuth2ScopeConsentGrant(BaseModel):
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     scope_id: StrictStr = Field(
-        description="The name of the [Okta scope](https://developer.okta.com/docs/api/oauth2/#oauth-20-scopes) for which consent is granted",
-        alias="scopeId")
+        description="The name of the [Okta scope](https://developer.okta.com/docs/api/oauth2/#oauth-20-scopes) for which "
+                    "consent is granted",
+        alias="scopeId"
+    )
     source: Optional[OAuth2ScopeConsentGrantSource] = None
     status: Optional[GrantOrTokenStatus] = None
     user_id: Optional[StrictStr] = Field(
         default=None,
         description="User ID that granted consent (if `source` is `END_USER`)",
-        alias="userId")
+        alias="userId"
+    )
     embedded: Optional[OAuth2ScopeConsentGrantEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[OAuth2ScopeConsentGrantLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["clientId", "created", "createdBy", "id", "issuer",
-                                         "lastUpdated", "scopeId", "source", "status", "userId", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "clientId", "created", "createdBy", "id", "issuer",
+        "lastUpdated", "scopeId", "source", "status", "userId", "_embedded", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,13 +107,15 @@ class OAuth2ScopeConsentGrant(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "client_id",
-            "created",
-            "id",
-            "last_updated",
-            "user_id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "client_id",
+                "created",
+                "id",
+                "last_updated",
+                "user_id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -143,18 +154,22 @@ class OAuth2ScopeConsentGrant(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "clientId": obj.get("clientId"),
-            "created": obj.get("created"),
-            "createdBy": OAuth2Actor.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "id": obj.get("id"),
-            "issuer": obj.get("issuer"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "scopeId": obj.get("scopeId"),
-            "source": obj.get("source"),
-            "status": obj.get("status"),
-            "userId": obj.get("userId"),
-            "_embedded": OAuth2ScopeConsentGrantEmbedded.from_dict(obj["_embedded"]) if obj.get("_embedded") is not None else None,
-            "_links": OAuth2ScopeConsentGrantLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "clientId": obj.get("clientId"),
+                "created": obj.get("created"),
+                "createdBy": OAuth2Actor.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
+                "id": obj.get("id"),
+                "issuer": obj.get("issuer"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "scopeId": obj.get("scopeId"),
+                "source": obj.get("source"),
+                "status": obj.get("status"),
+                "userId": obj.get("userId"),
+                "_embedded": OAuth2ScopeConsentGrantEmbedded.from_dict(obj["_embedded"]) if obj.get(
+                    "_embedded"
+                ) is not None else None,
+                "_links": OAuth2ScopeConsentGrantLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

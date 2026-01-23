@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.okta_sign_on_policy_factor_prompt_mode import OktaSignOnPolicyFactorPromptMode
 from okta.models.okta_sign_on_policy_rule_signon_primary_factor import OktaSignOnPolicyRuleSignonPrimaryFactor
 from okta.models.okta_sign_on_policy_rule_signon_session_actions import OktaSignOnPolicyRuleSignonSessionActions
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OktaSignOnPolicyRuleSignonActions(BaseModel):
@@ -40,21 +43,27 @@ class OktaSignOnPolicyRuleSignonActions(BaseModel):
     access: Optional[StrictStr] = Field(default=None, description="Indicates if a user is allowed to sign in")
     factor_lifetime: Optional[StrictInt] = Field(
         default=None,
-        description="Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is set to `SESSION`  > **Note:** Required only if `requireFactor` is `true`. ",
-        alias="factorLifetime")
+        description="Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is "
+                    "set to `SESSION`  > **Note:** Required only if `requireFactor` is `true`. ",
+        alias="factorLifetime"
+    )
     factor_prompt_mode: Optional[OktaSignOnPolicyFactorPromptMode] = Field(default=None, alias="factorPromptMode")
     primary_factor: Optional[OktaSignOnPolicyRuleSignonPrimaryFactor] = Field(default=None, alias="primaryFactor")
     remember_device_by_default: Optional[StrictBool] = Field(
         default=False,
         description="Indicates if Okta should automatically remember the device",
-        alias="rememberDeviceByDefault")
+        alias="rememberDeviceByDefault"
+    )
     require_factor: Optional[StrictBool] = Field(
         default=False,
         description="Indicates if multifactor authentication is required",
-        alias="requireFactor")
+        alias="requireFactor"
+    )
     session: Optional[OktaSignOnPolicyRuleSignonSessionActions] = None
-    __properties: ClassVar[List[str]] = ["access", "factorLifetime", "factorPromptMode",
-                                         "primaryFactor", "rememberDeviceByDefault", "requireFactor", "session"]
+    __properties: ClassVar[List[str]] = [
+        "access", "factorLifetime", "factorPromptMode",
+        "primaryFactor", "rememberDeviceByDefault", "requireFactor", "session"
+    ]
 
     @field_validator('access')
     def access_validate_enum(cls, value):
@@ -96,8 +105,10 @@ class OktaSignOnPolicyRuleSignonActions(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -122,13 +133,19 @@ class OktaSignOnPolicyRuleSignonActions(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "access": obj.get("access"),
-            "factorLifetime": obj.get("factorLifetime"),
-            "factorPromptMode": obj.get("factorPromptMode"),
-            "primaryFactor": obj.get("primaryFactor"),
-            "rememberDeviceByDefault": obj.get("rememberDeviceByDefault") if obj.get("rememberDeviceByDefault") is not None else False,
-            "requireFactor": obj.get("requireFactor") if obj.get("requireFactor") is not None else False,
-            "session": OktaSignOnPolicyRuleSignonSessionActions.from_dict(obj["session"]) if obj.get("session") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "access": obj.get("access"),
+                "factorLifetime": obj.get("factorLifetime"),
+                "factorPromptMode": obj.get("factorPromptMode"),
+                "primaryFactor": obj.get("primaryFactor"),
+                "rememberDeviceByDefault": obj.get("rememberDeviceByDefault") if obj.get(
+                    "rememberDeviceByDefault"
+                ) is not None else False,
+                "requireFactor": obj.get("requireFactor") if obj.get("requireFactor") is not None else False,
+                "session": OktaSignOnPolicyRuleSignonSessionActions.from_dict(obj["session"]) if obj.get(
+                    "session"
+                ) is not None else None
+            }
+        )
         return _obj

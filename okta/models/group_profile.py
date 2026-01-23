@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,24 +20,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
 import json
 import pprint
 import re  # noqa: F401
+from typing import Union, Any, Set, TYPE_CHECKING, Optional, Dict
+
 from pydantic import BaseModel, ValidationError, field_validator
-from typing import Optional
+from typing_extensions import Self
+
 from okta.models.okta_active_directory_group_profile import OktaActiveDirectoryGroupProfile
 from okta.models.okta_user_group_profile import OktaUserGroupProfile
-from typing import Union, Any, Set, TYPE_CHECKING, Optional, Dict
-from typing_extensions import Self
 
 GROUPPROFILE_ANY_OF_SCHEMAS = ["OktaActiveDirectoryGroupProfile", "OktaUserGroupProfile"]
 
 
 class GroupProfile(BaseModel):
     """
-    Specifies required and optional properties for a group. The `objectClass` of a group determines which additional properties are available.  You can extend group profiles with custom properties, but you must first add the properties to the group profile schema before you can reference them. Use the Profile Editor in the Admin Console or the [Schemas API](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/) to manage schema extensions.  Custom properties can contain HTML tags. It is the client's responsibility to escape or encode this data before displaying it. Use [best-practices](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) to prevent cross-site scripting.
+    Specifies required and optional properties for a group. The `objectClass` of a group determines which additional
+    properties are available.  You can extend group profiles with custom properties, but you must first add the properties
+    to the group profile schema before you can reference them. Use the Profile Editor in the Admin Console or the [Schemas
+    API](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/) to manage schema extensions.
+    Custom properties can contain HTML tags. It is the client's responsibility to escape or encode this data before
+    displaying it. Use [best-practices](
+    https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) to prevent cross-site
+    scripting.
     """
 
     # data type: OktaUserGroupProfile
@@ -82,8 +92,10 @@ class GroupProfile(BaseModel):
         if error_messages:
             # no match
             raise ValueError(
-                "No match found when setting the actual_instance in GroupProfile with anyOf schemas: OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: " +
-                ", ".join(error_messages))
+                "No match found when setting the actual_instance in GroupProfile with anyOf schemas: "
+                "OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: " +
+                ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -112,8 +124,10 @@ class GroupProfile(BaseModel):
         if error_messages:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into GroupProfile with anyOf schemas: OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: " +
-                ", ".join(error_messages))
+                "No match found when deserializing the JSON string into GroupProfile with anyOf schemas: "
+                "OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: " +
+                ", ".join(error_messages)
+            )
         else:
             return instance
 

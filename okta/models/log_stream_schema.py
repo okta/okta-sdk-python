@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.links_self import LinksSelf
 from okta.models.user_schema_attribute_enum import UserSchemaAttributeEnum
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class LogStreamSchema(BaseModel):
@@ -38,23 +41,37 @@ class LogStreamSchema(BaseModel):
     """  # noqa: E501
     var_schema: Optional[StrictStr] = Field(default=None, description="JSON schema version identifier", alias="$schema")
     error_message: Optional[Dict[str,
-                                 Any]] = Field(default=None,
-                                               description="A collection of error messages for individual properties in the schema. Okta implements a subset of [ajv-errors](https://github.com/ajv-validator/ajv-errors).",
-                                               alias="errorMessage")
+    Any]] = Field(
+        default=None,
+        description="A collection of error messages for individual properties in the schema. Okta implements a subset of ["
+                    "ajv-errors](https://github.com/ajv-validator/ajv-errors).",
+        alias="errorMessage"
+    )
     id: Optional[StrictStr] = Field(default=None, description="URI of log stream schema")
     one_of: Optional[List[UserSchemaAttributeEnum]] = Field(
-        default=None, description="Non-empty array of valid JSON schemas.  Okta only supports `oneOf` for specifying display names for an `enum`. Each schema has the following format:  ``` {   \"const\": \"enumValue\",   \"title\": \"display name\" } ```", alias="oneOf")
+        default=None,
+        description="Non-empty array of valid JSON schemas.  Okta only supports `oneOf` for specifying display names for "
+                    "an `enum`. Each schema has the following format:  ``` {   \"const\": \"enumValue\",   \"title\": "
+                    "\"display name\" } ```",
+        alias="oneOf"
+    )
     pattern: Optional[StrictStr] = Field(
         default=None,
-        description="For `string` log stream schema property type, specifies the regular expression used to validate the property")
+        description="For `string` log stream schema property type, specifies the regular expression used to validate the "
+                    "property"
+    )
     properties: Optional[Dict[str, Any]] = Field(default=None, description="log stream schema properties object")
-    required: Optional[List[StrictStr]] = Field(default=None,
-                                                description="Required properties for this log stream schema object")
+    required: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Required properties for this log stream schema object"
+    )
     title: Optional[StrictStr] = Field(default=None, description="Name of the log streaming integration")
     type: Optional[StrictStr] = Field(default=None, description="Type of log stream schema property")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["$schema", "errorMessage", "id",
-                                         "oneOf", "pattern", "properties", "required", "title", "type", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "$schema", "errorMessage", "id",
+        "oneOf", "pattern", "properties", "required", "title", "type", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,11 +106,13 @@ class LogStreamSchema(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "var_schema",
-            "id",
-            "type",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "var_schema",
+                "id",
+                "type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -130,16 +149,20 @@ class LogStreamSchema(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "$schema": obj.get("$schema"),
-            "errorMessage": obj.get("errorMessage"),
-            "id": obj.get("id"),
-            "oneOf": [UserSchemaAttributeEnum.from_dict(_item) for _item in obj["oneOf"]] if obj.get("oneOf") is not None else None,
-            "pattern": obj.get("pattern"),
-            "properties": obj.get("properties"),
-            "required": obj.get("required"),
-            "title": obj.get("title"),
-            "type": obj.get("type"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "$schema": obj.get("$schema"),
+                "errorMessage": obj.get("errorMessage"),
+                "id": obj.get("id"),
+                "oneOf": [UserSchemaAttributeEnum.from_dict(_item) for _item in obj["oneOf"]] if obj.get(
+                    "oneOf"
+                ) is not None else None,
+                "pattern": obj.get("pattern"),
+                "properties": obj.get("properties"),
+                "required": obj.get("required"),
+                "title": obj.get("title"),
+                "type": obj.get("type"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

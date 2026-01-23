@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
+
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing import Optional
-from okta.models.bounces_remove_list_obj import BouncesRemoveListObj
-from okta.models.bounces_remove_list_result import BouncesRemoveListResult
-
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.bounces_remove_list_obj import BouncesRemoveListObj
+from okta.models.bounces_remove_list_result import BouncesRemoveListResult
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -44,24 +46,27 @@ class EmailCustomizationApi(ApiClient):
 
     @validate_call
     async def bulk_remove_email_address_bounces(
-        self,
-        bounces_remove_list_obj: Optional[BouncesRemoveListObj] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            bounces_remove_list_obj: Optional[BouncesRemoveListObj] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BouncesRemoveListResult:
         """Remove bounced emails
 
-        Removes emails from an email service bounce list.  The emails submitted in this operation are removed from the bounce list by an asynchronous job. Any email address that passes validation is accepted for the removal process, even if there are other email addresses in the request that failed validation.  > **Note:** If there are validation errors for all email addresses, a `200 OK` HTTP status is still returned. 
+        Removes emails from an email service bounce list.  The emails submitted in this operation are removed from the
+        bounce list by an asynchronous job. Any email address that passes validation is accepted for the removal process,
+        even if there are other email addresses in the request that failed validation.  > **Note:** If there are
+        validation errors for all email addresses, a `200 OK` HTTP status is still returned.
 
         :param bounces_remove_list_obj:
         :type bounces_remove_list_obj: BouncesRemoveListObj
@@ -147,12 +152,12 @@ class EmailCustomizationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _bulk_remove_email_address_bounces_serialize(
-        self,
-        bounces_remove_list_obj,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            bounces_remove_list_obj,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.entitlement_types_inner import EntitlementTypesInner
 from okta.models.scim_scim_server_config import ScimScimServerConfig
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class Scim(BaseModel):
@@ -37,18 +40,36 @@ class Scim(BaseModel):
     SCIM configuration details
     """  # noqa: E501
     auth_mode: StrictStr = Field(
-        description="The authentication mode for requests to your SCIM server  | authMode | Description | | -------- | ----------- | | `header` | Uses authorization header with a customer-provided token value in the following format: `Authorization: {API token}` | | `bearer` | Uses authorization header with a customer-provided bearer token in the following format: `Authorization: Bearer {API token}` | | {authModeId} | The ID of the auth mode object that contains OAuth 2.0 credentials. <br> **Note:** Use the `/integrations/api/v1/internal/authModes` endpoint to create the auth mode object. |",
-        alias="authMode")
+        description="The authentication mode for requests to your SCIM server  | authMode | Description | | -------- | "
+                    "----------- | | `header` | Uses authorization header with a customer-provided token value in the "
+                    "following format: `Authorization: {API token}` | | `bearer` | Uses authorization header with a "
+                    "customer-provided bearer token in the following format: `Authorization: Bearer {API token}` | | {"
+                    "authModeId} | The ID of the auth mode object that contains OAuth 2.0 credentials. <br> **Note:** Use "
+                    "the `/integrations/api/v1/internal/authModes` endpoint to create the auth mode object. |",
+        alias="authMode"
+    )
     base_uri: StrictStr = Field(
-        description="The base URL that Okta uses to send outbound calls to your SCIM server. Only the HTTPS protocol is supported. You can use the app-level variables defined in the `config` array for the base URL. For example, if you have a `subdomain` variable defined in the `config` array and the URL to retrieve SCIM users for your integration is `https://${subdomain}.example.com/scim/v2/Users`, then specify the following base URL: `'https://' + app.subdomain + '.example.com/scim/v2'`.",
-        alias="baseUri")
+        description="The base URL that Okta uses to send outbound calls to your SCIM server. Only the HTTPS protocol is "
+                    "supported. You can use the app-level variables defined in the `config` array for the base URL. For "
+                    "example, if you have a `subdomain` variable defined in the `config` array and the URL to retrieve "
+                    "SCIM users for your integration is `https://${subdomain}.example.com/scim/v2/Users`, then specify the "
+                    "following base URL: `'https://' + app.subdomain + '.example.com/scim/v2'`.",
+        alias="baseUri"
+    )
     entitlement_types: Optional[List[EntitlementTypesInner]] = Field(
-        default=None, description="List of supported entitlement types", alias="entitlementTypes")
+        default=None, description="List of supported entitlement types", alias="entitlementTypes"
+    )
     scim_server_config: ScimScimServerConfig = Field(alias="scimServerConfig")
     setup_instructions_uri: StrictStr = Field(
-        description="The URL to your customer-facing instructions for configuring your SCIM integration. See [Customer configuration document guidelines](https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document-guidelines).",
-        alias="setupInstructionsUri")
-    __properties: ClassVar[List[str]] = ["authMode", "baseUri", "entitlementTypes", "scimServerConfig", "setupInstructionsUri"]
+        description="The URL to your customer-facing instructions for configuring your SCIM integration. See [Customer "
+                    "configuration document guidelines]("
+                    "https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document"
+                    "-guidelines).",
+        alias="setupInstructionsUri"
+    )
+    __properties: ClassVar[List[str]] = [
+        "authMode", "baseUri", "entitlementTypes", "scimServerConfig", "setupInstructionsUri"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,8 +101,10 @@ class Scim(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -113,11 +136,17 @@ class Scim(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "authMode": obj.get("authMode"),
-            "baseUri": obj.get("baseUri"),
-            "entitlementTypes": [EntitlementTypesInner.from_dict(_item) for _item in obj["entitlementTypes"]] if obj.get("entitlementTypes") is not None else None,
-            "scimServerConfig": ScimScimServerConfig.from_dict(obj["scimServerConfig"]) if obj.get("scimServerConfig") is not None else None,
-            "setupInstructionsUri": obj.get("setupInstructionsUri")
-        })
+        _obj = cls.model_validate(
+            {
+                "authMode": obj.get("authMode"),
+                "baseUri": obj.get("baseUri"),
+                "entitlementTypes": [EntitlementTypesInner.from_dict(_item) for _item in obj["entitlementTypes"]] if obj.get(
+                    "entitlementTypes"
+                ) is not None else None,
+                "scimServerConfig": ScimScimServerConfig.from_dict(obj["scimServerConfig"]) if obj.get(
+                    "scimServerConfig"
+                ) is not None else None,
+                "setupInstructionsUri": obj.get("setupInstructionsUri")
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.saml_name_id_format import SamlNameIdFormat
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.saml_name_id_format import SamlNameIdFormat
 
 
 class SamlSettings(BaseModel):
@@ -37,19 +40,27 @@ class SamlSettings(BaseModel):
     """  # noqa: E501
     honor_persistent_name_id: Optional[StrictBool] = Field(
         default=True,
-        description="Determines if the IdP should persist account linking when the incoming assertion NameID format is `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`",
-        alias="honorPersistentNameId")
+        description="Determines if the IdP should persist account linking when the incoming assertion NameID format is "
+                    "`urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`",
+        alias="honorPersistentNameId"
+    )
     name_format: Optional[SamlNameIdFormat] = Field(
-        default=SamlNameIdFormat.URN_COLON_OASIS_COLON_NAMES_COLON_TC_COLON_SAML_COLON_1_DOT_1_COLON_NAMEID_MINUS_FORMAT_COLON_UNSPECIFIED,
-        alias="nameFormat")
+        default=SamlNameIdFormat
+        .URN_COLON_OASIS_COLON_NAMES_COLON_TC_COLON_SAML_COLON_1_DOT_1_COLON_NAMEID_MINUS_FORMAT_COLON_UNSPECIFIED,
+        alias="nameFormat"
+    )
     participate_slo: Optional[StrictBool] = Field(
         default=None,
-        description="Set to `true` to have Okta send a logout request to the upstream IdP when a user signs out of Okta or a downstream app.",
-        alias="participateSlo")
+        description="Set to `true` to have Okta send a logout request to the upstream IdP when a user signs out of Okta or "
+                    "a downstream app.",
+        alias="participateSlo"
+    )
     send_application_context: Optional[StrictBool] = Field(
         default=False,
-        description="Determines if the IdP should send the application context as `<OktaAppInstanceId>` and `<OktaAppName>` in the `<saml2p:Extensions>` element of the `<AuthnRequest>` message",
-        alias="sendApplicationContext")
+        description="Determines if the IdP should send the application context as `<OktaAppInstanceId>` and "
+                    "`<OktaAppName>` in the `<saml2p:Extensions>` element of the `<AuthnRequest>` message",
+        alias="sendApplicationContext"
+    )
     __properties: ClassVar[List[str]] = ["honorPersistentNameId", "nameFormat", "participateSlo", "sendApplicationContext"]
 
     model_config = ConfigDict(
@@ -82,8 +93,10 @@ class SamlSettings(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -101,10 +114,16 @@ class SamlSettings(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "honorPersistentNameId": obj.get("honorPersistentNameId") if obj.get("honorPersistentNameId") is not None else True,
-            "nameFormat": obj.get("nameFormat"),
-            "participateSlo": obj.get("participateSlo"),
-            "sendApplicationContext": obj.get("sendApplicationContext") if obj.get("sendApplicationContext") is not None else False
-        })
+        _obj = cls.model_validate(
+            {
+                "honorPersistentNameId": obj.get("honorPersistentNameId") if obj.get(
+                    "honorPersistentNameId"
+                ) is not None else True,
+                "nameFormat": obj.get("nameFormat"),
+                "participateSlo": obj.get("participateSlo"),
+                "sendApplicationContext": obj.get("sendApplicationContext") if obj.get(
+                    "sendApplicationContext"
+                ) is not None else False
+            }
+        )
         return _obj

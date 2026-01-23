@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.policy_mapping_resource_type import PolicyMappingResourceType
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.policy_mapping_resource_type import PolicyMappingResourceType
 
 
 class PolicyMappingRequest(BaseModel):
@@ -37,8 +40,11 @@ class PolicyMappingRequest(BaseModel):
     """  # noqa: E501
     resource_id: Optional[StrictStr] = Field(
         default=None,
-        description="[Policy ID](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/listPolicies!c=200&path=0/id&t=response) of the app sign-in policy that you want to map",
-        alias="resourceId")
+        description="[Policy ID](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag"
+                    "/Policy/operation/listPolicies!c=200&path=0/id&t=response) of the app sign-in policy that you want to"
+                    " map",
+        alias="resourceId"
+    )
     resource_type: Optional[PolicyMappingResourceType] = Field(default=None, alias="resourceType")
     __properties: ClassVar[List[str]] = ["resourceId", "resourceType"]
 
@@ -72,8 +78,10 @@ class PolicyMappingRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -91,8 +99,10 @@ class PolicyMappingRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "resourceId": obj.get("resourceId"),
-            "resourceType": obj.get("resourceType")
-        })
+        _obj = cls.model_validate(
+            {
+                "resourceId": obj.get("resourceId"),
+                "resourceType": obj.get("resourceType")
+            }
+        )
         return _obj

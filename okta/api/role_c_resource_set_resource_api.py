@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.resource_set import ResourceSet
 from okta.models.resource_set_resource import ResourceSetResource
 from okta.models.resource_set_resource_patch_request import ResourceSetResourcePatchRequest
 from okta.models.resource_set_resource_post_request import ResourceSetResourcePostRequest
 from okta.models.resource_set_resource_put_request import ResourceSetResourcePutRequest
 from okta.models.resource_set_resources import ResourceSetResources
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -50,21 +51,21 @@ class RoleCResourceSetResourceApi(ApiClient):
 
     @validate_call
     async def add_resource_set_resource(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        instance: ResourceSetResourcePostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            instance: ResourceSetResourcePostRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSetResource:
         """Add a resource set resource with conditions
 
@@ -158,13 +159,13 @@ class RoleCResourceSetResourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _add_resource_set_resource_serialize(
-        self,
-        resource_set_id_or_label,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -233,21 +234,21 @@ class RoleCResourceSetResourceApi(ApiClient):
 
     @validate_call
     async def add_resource_set_resources(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        instance: ResourceSetResourcePatchRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            instance: ResourceSetResourcePatchRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSet:
         """Add more resources to a resource set
 
@@ -341,13 +342,13 @@ class RoleCResourceSetResourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _add_resource_set_resources_serialize(
-        self,
-        resource_set_id_or_label,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -416,21 +417,21 @@ class RoleCResourceSetResourceApi(ApiClient):
 
     @validate_call
     async def delete_resource_set_resource(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        resource_id: Annotated[StrictStr, Field(description="`id` of the resource")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            resource_id: Annotated[StrictStr, Field(description="`id` of the resource")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a resource set resource
 
@@ -514,13 +515,13 @@ class RoleCResourceSetResourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_resource_set_resource_serialize(
-        self,
-        resource_set_id_or_label,
-        resource_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            resource_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -575,21 +576,21 @@ class RoleCResourceSetResourceApi(ApiClient):
 
     @validate_call
     async def get_resource_set_resource(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        resource_id: Annotated[StrictStr, Field(description="`id` of the resource")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            resource_id: Annotated[StrictStr, Field(description="`id` of the resource")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSetResource:
         """Retrieve a resource set resource
 
@@ -683,13 +684,13 @@ class RoleCResourceSetResourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_resource_set_resource_serialize(
-        self,
-        resource_set_id_or_label,
-        resource_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            resource_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -744,24 +745,26 @@ class RoleCResourceSetResourceApi(ApiClient):
 
     @validate_call
     async def list_resource_set_resources(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of targets")] = None,
-        limit: Annotated[Optional[StrictInt], Field(
-            description="Specifies the number of results returned. Defaults to `100`.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of targets"
+            )] = None,
+            limit: Annotated[Optional[StrictInt], Field(
+                description="Specifies the number of results returned. Defaults to `100`."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSetResources:
         """List all resource set resources
 
@@ -857,14 +860,14 @@ class RoleCResourceSetResourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_resource_set_resources_serialize(
-        self,
-        resource_set_id_or_label,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -884,11 +887,9 @@ class RoleCResourceSetResourceApi(ApiClient):
             _path_params['resourceSetIdOrLabel'] = resource_set_id_or_label
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -925,22 +926,22 @@ class RoleCResourceSetResourceApi(ApiClient):
 
     @validate_call
     async def replace_resource_set_resource(
-        self,
-        resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
-        resource_id: Annotated[StrictStr, Field(description="`id` of the resource")],
-        resource_set_resource_put_request: ResourceSetResourcePutRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            resource_set_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the resource set")],
+            resource_id: Annotated[StrictStr, Field(description="`id` of the resource")],
+            resource_set_resource_put_request: ResourceSetResourcePutRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResourceSetResource:
         """Replace the resource set resource conditions
 
@@ -1037,14 +1038,14 @@ class RoleCResourceSetResourceApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_resource_set_resource_serialize(
-        self,
-        resource_set_id_or_label,
-        resource_id,
-        resource_set_resource_put_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            resource_set_id_or_label,
+            resource_id,
+            resource_set_resource_put_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

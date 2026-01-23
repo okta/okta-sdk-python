@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.risk_event_subject import RiskEventSubject
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
+
+from okta.models.risk_event_subject import RiskEventSubject
 
 
 class RiskEvent(BaseModel):
@@ -38,12 +41,17 @@ class RiskEvent(BaseModel):
     """  # noqa: E501
     expires_at: Optional[datetime] = Field(
         default=None,
-        description="Timestamp at which the event expires (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`). If this optional field isn't included, Okta automatically expires the event 24 hours after the event is consumed.",
-        alias="expiresAt")
+        description="Timestamp at which the event expires (expressed as a UTC time zone using ISO 8601 format: "
+                    "yyyy-MM-dd`T`HH:mm:ss.SSS`Z`). If this optional field isn't included, Okta automatically expires the "
+                    "event 24 hours after the event is consumed.",
+        alias="expiresAt"
+    )
     subjects: List[RiskEventSubject] = Field(description="List of risk event subjects")
     timestamp: Optional[datetime] = Field(
         default=None,
-        description="Timestamp of when the event is produced (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`)")
+        description="Timestamp of when the event is produced (expressed as a UTC time zone using ISO 8601 format: "
+                    "yyyy-MM-dd`T`HH:mm:ss.SSS`Z`)"
+    )
     __properties: ClassVar[List[str]] = ["expiresAt", "subjects", "timestamp"]
 
     model_config = ConfigDict(
@@ -76,8 +84,10 @@ class RiskEvent(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -102,9 +112,13 @@ class RiskEvent(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "expiresAt": obj.get("expiresAt"),
-            "subjects": [RiskEventSubject.from_dict(_item) for _item in obj["subjects"]] if obj.get("subjects") is not None else None,
-            "timestamp": obj.get("timestamp")
-        })
+        _obj = cls.model_validate(
+            {
+                "expiresAt": obj.get("expiresAt"),
+                "subjects": [RiskEventSubject.from_dict(_item) for _item in obj["subjects"]] if obj.get(
+                    "subjects"
+                ) is not None else None,
+                "timestamp": obj.get("timestamp")
+            }
+        )
         return _obj

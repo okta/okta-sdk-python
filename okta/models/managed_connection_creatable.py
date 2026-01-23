@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,24 +20,27 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
 import json
 import pprint
+from typing import Any
+from typing import Union, Set, Optional, Dict
+
 from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
-from typing import Any, Optional
+from typing_extensions import Self
+
 from okta.models.identity_assertion_app_instance_connection_creatable import IdentityAssertionAppInstanceConnectionCreatable
 from okta.models.identity_assertion_custom_as_connection_creatable import IdentityAssertionCustomASConnectionCreatable
 from okta.models.sts_service_account_connection_creatable import STSServiceAccountConnectionCreatable
 from okta.models.sts_vault_secret_connection_creatable import STSVaultSecretConnectionCreatable
-from typing import Union, Set, Optional, Dict
-from typing_extensions import Self
 
 MANAGEDCONNECTIONCREATABLE_ONE_OF_SCHEMAS = [
     "IdentityAssertionAppInstanceConnectionCreatable",
     "IdentityAssertionCustomASConnectionCreatable",
     "STSServiceAccountConnectionCreatable",
-    "STSVaultSecretConnectionCreatable"]
+    "STSVaultSecretConnectionCreatable"
+]
 
 
 class ManagedConnectionCreatable(BaseModel):
@@ -51,14 +56,15 @@ class ManagedConnectionCreatable(BaseModel):
     # data type: STSServiceAccountConnectionCreatable
     oneof_schema_4_validator: Optional[STSServiceAccountConnectionCreatable] = None
     actual_instance: Optional[Union[IdentityAssertionAppInstanceConnectionCreatable,
-                                    IdentityAssertionCustomASConnectionCreatable,
-                                    STSServiceAccountConnectionCreatable,
-                                    STSVaultSecretConnectionCreatable]] = None
+    IdentityAssertionCustomASConnectionCreatable,
+    STSServiceAccountConnectionCreatable,
+    STSVaultSecretConnectionCreatable]] = None
     one_of_schemas: Set[str] = {
         "IdentityAssertionAppInstanceConnectionCreatable",
         "IdentityAssertionCustomASConnectionCreatable",
         "STSServiceAccountConnectionCreatable",
-        "STSVaultSecretConnectionCreatable"}
+        "STSVaultSecretConnectionCreatable"
+    }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -106,13 +112,19 @@ class ManagedConnectionCreatable(BaseModel):
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when setting `actual_instance` in ManagedConnectionCreatable with oneOf schemas: IdentityAssertionAppInstanceConnectionCreatable, IdentityAssertionCustomASConnectionCreatable, STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable. Details: " +
-                ", ".join(error_messages))
+                "Multiple matches found when setting `actual_instance` in ManagedConnectionCreatable with oneOf schemas: "
+                "IdentityAssertionAppInstanceConnectionCreatable, IdentityAssertionCustomASConnectionCreatable, "
+                "STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable. Details: " +
+                ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when setting `actual_instance` in ManagedConnectionCreatable with oneOf schemas: IdentityAssertionAppInstanceConnectionCreatable, IdentityAssertionCustomASConnectionCreatable, STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable. Details: " +
-                ", ".join(error_messages))
+                "No match found when setting `actual_instance` in ManagedConnectionCreatable with oneOf schemas: "
+                "IdentityAssertionAppInstanceConnectionCreatable, IdentityAssertionCustomASConnectionCreatable, "
+                "STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable. Details: " +
+                ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -200,13 +212,19 @@ class ManagedConnectionCreatable(BaseModel):
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when deserializing the JSON string into ManagedConnectionCreatable with oneOf schemas: IdentityAssertionAppInstanceConnectionCreatable, IdentityAssertionCustomASConnectionCreatable, STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable. Details: " +
-                ", ".join(error_messages))
+                "Multiple matches found when deserializing the JSON string into ManagedConnectionCreatable with oneOf "
+                "schemas: IdentityAssertionAppInstanceConnectionCreatable, IdentityAssertionCustomASConnectionCreatable, "
+                "STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable. Details: " +
+                ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into ManagedConnectionCreatable with oneOf schemas: IdentityAssertionAppInstanceConnectionCreatable, IdentityAssertionCustomASConnectionCreatable, STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable. Details: " +
-                ", ".join(error_messages))
+                "No match found when deserializing the JSON string into ManagedConnectionCreatable with oneOf schemas: "
+                "IdentityAssertionAppInstanceConnectionCreatable, IdentityAssertionCustomASConnectionCreatable, "
+                "STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable. Details: " +
+                ", ".join(error_messages)
+            )
         else:
             return instance
 
@@ -221,7 +239,7 @@ class ManagedConnectionCreatable(BaseModel):
             return json.dumps(self.actual_instance)
 
     def to_dict(self) -> Optional[Union[Dict[str, Any], IdentityAssertionAppInstanceConnectionCreatable,
-                                        IdentityAssertionCustomASConnectionCreatable, STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable]]:
+    IdentityAssertionCustomASConnectionCreatable, STSServiceAccountConnectionCreatable, STSVaultSecretConnectionCreatable]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

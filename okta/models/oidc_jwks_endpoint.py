@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,24 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.protocol_endpoint_binding import ProtocolEndpointBinding
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.protocol_endpoint_binding import ProtocolEndpointBinding
 
 
 class OidcJwksEndpoint(BaseModel):
     """
-    Endpoint for the JSON Web Key Set (JWKS) document. This document contains signing keys that are used to validate the signatures from the provider. For more information on JWKS, see [JSON Web Key](https://tools.ietf.org/html/rfc7517).
+    Endpoint for the JSON Web Key Set (JWKS) document. This document contains signing keys that are used to validate the
+    signatures from the provider. For more information on JWKS, see [JSON Web Key](https://tools.ietf.org/html/rfc7517).
     """  # noqa: E501
     binding: Optional[ProtocolEndpointBinding] = None
     url: Optional[StrictStr] = Field(default=None, description="URL of the endpoint to the JWK Set")
@@ -69,8 +73,10 @@ class OidcJwksEndpoint(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -88,8 +94,10 @@ class OidcJwksEndpoint(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "binding": obj.get("binding"),
-            "url": obj.get("url")
-        })
+        _obj = cls.model_validate(
+            {
+                "binding": obj.get("binding"),
+                "url": obj.get("url")
+            }
+        )
         return _obj

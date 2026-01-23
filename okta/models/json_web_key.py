@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
@@ -40,27 +42,36 @@ class JsonWebKey(BaseModel):
     expires_at: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the certificate expires",
-        alias="expiresAt")
+        alias="expiresAt"
+    )
     kid: Optional[StrictStr] = Field(default=None, description="Unique identifier for the certificate")
     kty: Optional[StrictStr] = Field(
         default=None,
-        description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`")
+        description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     n: Optional[StrictStr] = Field(
         default=None,
-        description="RSA modulus value that is used by both the public and private keys and provides a link between them")
+        description="RSA modulus value that is used by both the public and private keys and provides a link between them"
+    )
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the certificate. Valid value: `sig`")
     x5c: Optional[List[StrictStr]] = Field(
-        default=None, description="X.509 certificate chain that contains a chain of one or more certificates")
+        default=None, description="X.509 certificate chain that contains a chain of one or more certificates"
+    )
     x5t_s256: Optional[StrictStr] = Field(
         default=None,
-        description="X.509 certificate SHA-256 thumbprint, which is the base64url-encoded SHA-256 thumbprint (digest) of the DER encoding of an X.509 certificate",
-        alias="x5t#S256")
-    __properties: ClassVar[List[str]] = ["created", "e", "expiresAt",
-                                         "kid", "kty", "lastUpdated", "n", "use", "x5c", "x5t#S256"]
+        description="X.509 certificate SHA-256 thumbprint, which is the base64url-encoded SHA-256 thumbprint (digest) of "
+                    "the DER encoding of an X.509 certificate",
+        alias="x5t#S256"
+    )
+    __properties: ClassVar[List[str]] = [
+        "created", "e", "expiresAt",
+        "kid", "kty", "lastUpdated", "n", "use", "x5c", "x5t#S256"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,17 +112,19 @@ class JsonWebKey(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "e",
-            "expires_at",
-            "kid",
-            "kty",
-            "last_updated",
-            "use",
-            "x5c",
-            "x5t_s256",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "e",
+                "expires_at",
+                "kid",
+                "kty",
+                "last_updated",
+                "use",
+                "x5c",
+                "x5t_s256",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -129,16 +142,18 @@ class JsonWebKey(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "e": obj.get("e"),
-            "expiresAt": obj.get("expiresAt"),
-            "kid": obj.get("kid"),
-            "kty": obj.get("kty"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "n": obj.get("n"),
-            "use": obj.get("use"),
-            "x5c": obj.get("x5c"),
-            "x5t#S256": obj.get("x5t#S256")
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "e": obj.get("e"),
+                "expiresAt": obj.get("expiresAt"),
+                "kid": obj.get("kid"),
+                "kty": obj.get("kty"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "n": obj.get("n"),
+                "use": obj.get("use"),
+                "x5c": obj.get("x5c"),
+                "x5t#S256": obj.get("x5t#S256")
+            }
+        )
         return _obj

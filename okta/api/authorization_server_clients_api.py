@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
-from okta.models.o_auth2_client import OAuth2Client
-from okta.models.o_auth2_refresh_token import OAuth2RefreshToken
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.o_auth2_client import OAuth2Client
+from okta.models.o_auth2_refresh_token import OAuth2RefreshToken
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,24 +47,25 @@ class AuthorizationServerClientsApi(ApiClient):
 
     @validate_call
     async def get_refresh_token_for_authorization_server_and_client(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2RefreshToken:
         """Retrieve a refresh token for a client
 
@@ -106,16 +108,17 @@ class AuthorizationServerClientsApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._get_refresh_token_for_authorization_server_and_client_serialize(
-            auth_server_id=auth_server_id,
-            client_id=client_id,
-            token_id=token_id,
-            expand=expand,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._get_refresh_token_for_authorization_server_and_client_serialize(
+                auth_server_id=auth_server_id,
+                client_id=client_id,
+                token_id=token_id,
+                expand=expand,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -162,15 +165,15 @@ class AuthorizationServerClientsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_refresh_token_for_authorization_server_and_client_serialize(
-        self,
-        auth_server_id,
-        client_id,
-        token_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            client_id,
+            token_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -194,7 +197,6 @@ class AuthorizationServerClientsApi(ApiClient):
             _path_params['tokenId'] = token_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -231,24 +233,27 @@ class AuthorizationServerClientsApi(ApiClient):
 
     @validate_call
     async def list_o_auth2_clients_for_authorization_server(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2Client]:
         """List all client resources for an authorization server
 
-        Lists all client resources for which the specified authorization server has tokens.  > **Note:** To list a specific user's client resources for which they have tokens or grants, use the [List all clients endpoint in the User Resources API](/openapi/okta-management/management/tag/UserResources/#tag/UserResources/operation/listUserClients).
+        Lists all client resources for which the specified authorization server has tokens.  > **Note:** To list a
+        specific user's client resources for which they have tokens or grants, use the [List all clients endpoint in the
+        User Resources API](/openapi/okta-management/management/tag/UserResources/#tag/UserResources/operation
+        /listUserClients).
 
         :param auth_server_id: `id` of the Authorization Server (required)
         :type auth_server_id: str
@@ -334,12 +339,12 @@ class AuthorizationServerClientsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_o_auth2_clients_for_authorization_server_serialize(
-        self,
-        auth_server_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -392,27 +397,30 @@ class AuthorizationServerClientsApi(ApiClient):
 
     @validate_call
     async def list_refresh_tokens_for_authorization_server_and_client(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute.")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of tokens")] = None,
-        limit: Annotated[Optional[StrictInt], Field(
-            description="The maximum number of tokens to return (maximum 200)")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute."
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of tokens"
+            )] = None,
+            limit: Annotated[Optional[StrictInt], Field(
+                description="The maximum number of tokens to return (maximum 200)"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2RefreshToken]:
         """List all refresh tokens for a client
 
@@ -457,17 +465,18 @@ class AuthorizationServerClientsApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._list_refresh_tokens_for_authorization_server_and_client_serialize(
-            auth_server_id=auth_server_id,
-            client_id=client_id,
-            expand=expand,
-            after=after,
-            limit=limit,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._list_refresh_tokens_for_authorization_server_and_client_serialize(
+                auth_server_id=auth_server_id,
+                client_id=client_id,
+                expand=expand,
+                after=after,
+                limit=limit,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -514,16 +523,16 @@ class AuthorizationServerClientsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_refresh_tokens_for_authorization_server_and_client_serialize(
-        self,
-        auth_server_id,
-        client_id,
-        expand,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            client_id,
+            expand,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -545,15 +554,12 @@ class AuthorizationServerClientsApi(ApiClient):
             _path_params['clientId'] = client_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -590,22 +596,22 @@ class AuthorizationServerClientsApi(ApiClient):
 
     @validate_call
     async def revoke_refresh_token_for_authorization_server_and_client(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke a refresh token for a client
 
@@ -646,15 +652,16 @@ class AuthorizationServerClientsApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._revoke_refresh_token_for_authorization_server_and_client_serialize(
-            auth_server_id=auth_server_id,
-            client_id=client_id,
-            token_id=token_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._revoke_refresh_token_for_authorization_server_and_client_serialize(
+                auth_server_id=auth_server_id,
+                client_id=client_id,
+                token_id=token_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -692,14 +699,14 @@ class AuthorizationServerClientsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_refresh_token_for_authorization_server_and_client_serialize(
-        self,
-        auth_server_id,
-        client_id,
-        token_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            client_id,
+            token_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -756,21 +763,21 @@ class AuthorizationServerClientsApi(ApiClient):
 
     @validate_call
     async def revoke_refresh_tokens_for_authorization_server_and_client(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke all refresh tokens for a client
 
@@ -809,14 +816,15 @@ class AuthorizationServerClientsApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._revoke_refresh_tokens_for_authorization_server_and_client_serialize(
-            auth_server_id=auth_server_id,
-            client_id=client_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._revoke_refresh_tokens_for_authorization_server_and_client_serialize(
+                auth_server_id=auth_server_id,
+                client_id=client_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -854,13 +862,13 @@ class AuthorizationServerClientsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_refresh_tokens_for_authorization_server_and_client_serialize(
-        self,
-        auth_server_id,
-        client_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            client_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

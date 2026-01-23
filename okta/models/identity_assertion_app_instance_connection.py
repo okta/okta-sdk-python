@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.app_instance_authorization_server import AppInstanceAuthorizationServer
 from okta.models.links_self import LinksSelf
 from okta.models.managed_connection_app_instance import ManagedConnectionAppInstance
 from okta.models.managed_connection_status import ManagedConnectionStatus
 from okta.models.scope_condition import ScopeCondition
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class IdentityAssertionAppInstanceConnection(BaseModel):
@@ -45,24 +48,35 @@ class IdentityAssertionAppInstanceConnection(BaseModel):
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
     id: Optional[StrictStr] = Field(
         default=None,
-        description="Unique identifier for the managed connection. Only present for managed connections.")
+        description="Unique identifier for the managed connection. Only present for managed connections."
+    )
     orn: Optional[StrictStr] = Field(
         default=None,
-        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the managed connection")
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource"
+                    "-name-orn) of the managed connection"
+    )
     protocol_type: Optional[StrictStr] = Field(
         default=None,
         description="The authentication protocol type used for the connection",
-        alias="protocolType")
+        alias="protocolType"
+    )
     resource_indicator: StrictStr = Field(
         description="Resource indicator used when requesting tokens.",
-        alias="resourceIndicator")
+        alias="resourceIndicator"
+    )
     scope_condition: Optional[ScopeCondition] = Field(default=None, alias="scopeCondition")
     scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(
-        default=None, description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
+        default=None,
+        description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required "
+                    "with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, "
+                    "all scopes except these are allowed."
+    )
     status: Optional[ManagedConnectionStatus] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["app", "authorizationServer", "connectionType", "id",
-                                         "orn", "protocolType", "resourceIndicator", "scopeCondition", "scopes", "status", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "app", "authorizationServer", "connectionType", "id",
+        "orn", "protocolType", "resourceIndicator", "scopeCondition", "scopes", "status", "_links"
+    ]
 
     @field_validator('connection_type')
     def connection_type_validate_enum(cls, value):
@@ -111,8 +125,10 @@ class IdentityAssertionAppInstanceConnection(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -151,17 +167,21 @@ class IdentityAssertionAppInstanceConnection(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "app": ManagedConnectionAppInstance.from_dict(obj["app"]) if obj.get("app") is not None else None,
-            "authorizationServer": AppInstanceAuthorizationServer.from_dict(obj["authorizationServer"]) if obj.get("authorizationServer") is not None else None,
-            "connectionType": obj.get("connectionType"),
-            "id": obj.get("id"),
-            "orn": obj.get("orn"),
-            "protocolType": obj.get("protocolType"),
-            "resourceIndicator": obj.get("resourceIndicator"),
-            "scopeCondition": obj.get("scopeCondition"),
-            "scopes": obj.get("scopes"),
-            "status": obj.get("status"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "app": ManagedConnectionAppInstance.from_dict(obj["app"]) if obj.get("app") is not None else None,
+                "authorizationServer": AppInstanceAuthorizationServer.from_dict(obj["authorizationServer"]) if obj.get(
+                    "authorizationServer"
+                ) is not None else None,
+                "connectionType": obj.get("connectionType"),
+                "id": obj.get("id"),
+                "orn": obj.get("orn"),
+                "protocolType": obj.get("protocolType"),
+                "resourceIndicator": obj.get("resourceIndicator"),
+                "scopeCondition": obj.get("scopeCondition"),
+                "scopes": obj.get("scopes"),
+                "status": obj.get("status"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

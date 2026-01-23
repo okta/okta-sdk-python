@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.links_self import LinksSelf
 from okta.models.managed_connection_app_instance import ManagedConnectionAppInstance
 from okta.models.managed_connection_service_account import ManagedConnectionServiceAccount
 from okta.models.managed_connection_status import ManagedConnectionStatus
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class STSServiceAccountConnection(BaseModel):
@@ -42,22 +45,29 @@ class STSServiceAccountConnection(BaseModel):
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
     id: Optional[StrictStr] = Field(
         default=None,
-        description="Unique identifier for the managed connection. Only present for managed connections.")
+        description="Unique identifier for the managed connection. Only present for managed connections."
+    )
     orn: Optional[StrictStr] = Field(
         default=None,
-        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the managed connection")
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource"
+                    "-name-orn) of the managed connection"
+    )
     protocol_type: Optional[StrictStr] = Field(
         default=None,
         description="The authentication protocol type used for the connection",
-        alias="protocolType")
+        alias="protocolType"
+    )
     resource_indicator: StrictStr = Field(
         description="Resource indicator used when requesting tokens.",
-        alias="resourceIndicator")
+        alias="resourceIndicator"
+    )
     service_account: ManagedConnectionServiceAccount = Field(alias="serviceAccount")
     status: Optional[ManagedConnectionStatus] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["app", "connectionType", "id", "orn",
-                                         "protocolType", "resourceIndicator", "serviceAccount", "status", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "app", "connectionType", "id", "orn",
+        "protocolType", "resourceIndicator", "serviceAccount", "status", "_links"
+    ]
 
     @field_validator('connection_type')
     def connection_type_validate_enum(cls, value):
@@ -106,8 +116,10 @@ class STSServiceAccountConnection(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -146,15 +158,19 @@ class STSServiceAccountConnection(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "app": ManagedConnectionAppInstance.from_dict(obj["app"]) if obj.get("app") is not None else None,
-            "connectionType": obj.get("connectionType"),
-            "id": obj.get("id"),
-            "orn": obj.get("orn"),
-            "protocolType": obj.get("protocolType"),
-            "resourceIndicator": obj.get("resourceIndicator"),
-            "serviceAccount": ManagedConnectionServiceAccount.from_dict(obj["serviceAccount"]) if obj.get("serviceAccount") is not None else None,
-            "status": obj.get("status"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "app": ManagedConnectionAppInstance.from_dict(obj["app"]) if obj.get("app") is not None else None,
+                "connectionType": obj.get("connectionType"),
+                "id": obj.get("id"),
+                "orn": obj.get("orn"),
+                "protocolType": obj.get("protocolType"),
+                "resourceIndicator": obj.get("resourceIndicator"),
+                "serviceAccount": ManagedConnectionServiceAccount.from_dict(obj["serviceAccount"]) if obj.get(
+                    "serviceAccount"
+                ) is not None else None,
+                "status": obj.get("status"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

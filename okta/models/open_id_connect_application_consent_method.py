@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
 import json
 from enum import Enum
+
 from typing_extensions import Self
 
 
 class OpenIdConnectApplicationConsentMethod(str, Enum):
     """
-    Indicates whether user consent is required or implicit. A consent dialog appears for the end user depending on the values of three elements:  * [prompt](/openapi/okta-oauth/oauth/tag/OrgAS/#tag/OrgAS/operation/authorize!in=query&path=prompt&t=request): A query parameter that is used in requests to `/authorize` * `consent_method` (this property) * [consent](/openapi/okta-management/management/tag/AuthorizationServerScopes/#tag/AuthorizationServerScopes/operation/createOAuth2Scope!path=consent&t=request): A [Scope](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/AuthorizationServerScopes/) property that allows you to enable or disable user consent for an individual scope  | `prompt` | `consent_method` | `consent` | Result | ---------- | ----------- | ---------- | ----------- | | CONSENT | TRUSTED or REQUIRED | REQUIRED | Prompted | | CONSENT | TRUSTED or REQUIRED | FLEXIBLE | Prompted | | CONSENT | TRUSTED | IMPLICIT | Not prompted | | NONE | TRUSTED | FLEXIBLE, IMPLICIT, or REQUIRED | Not prompted | | NONE | REQUIRED | FLEXIBLE or REQUIRED | Prompted | | NONE | REQUIRED | IMPLICIT | Not prompted |  > **Notes:** > * If you request a scope that requires consent while using the `client_credentials` flow, an error is returned because the flow doesn't support user consent. > * If the `prompt` value is set to `NONE`, but the `consent_method` and the consent values are set to `REQUIRED`, then an error occurs. > * When a scope is requested during a Client Credentials grant flow and `consent` is set to `FLEXIBLE`, the scope is granted in the access token with no consent prompt. This occurs because there is no user involved in a two-legged OAuth 2.0 [Client Credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/) grant flow.
+    Indicates whether user consent is required or implicit. A consent dialog appears for the end user depending on the
+    values of three elements:  * [prompt](/openapi/okta-oauth/oauth/tag/OrgAS/#tag/OrgAS/operation/authorize!in=query&path
+    =prompt&t=request): A query parameter that is used in requests to `/authorize` * `consent_method` (this property) * [
+    consent](/openapi/okta-management/management/tag/AuthorizationServerScopes/#tag/AuthorizationServerScopes/operation
+    /createOAuth2Scope!path=consent&t=request): A [Scope](
+    https://developer.okta.com/docs/api/openapi/okta-management/management/tag/AuthorizationServerScopes/) property that
+    allows you to enable or disable user consent for an individual scope  | `prompt` | `consent_method` | `consent` |
+    Result | ---------- | ----------- | ---------- | ----------- | | CONSENT | TRUSTED or REQUIRED | REQUIRED | Prompted |
+    | CONSENT | TRUSTED or REQUIRED | FLEXIBLE | Prompted | | CONSENT | TRUSTED | IMPLICIT | Not prompted | | NONE |
+    TRUSTED | FLEXIBLE, IMPLICIT, or REQUIRED | Not prompted | | NONE | REQUIRED | FLEXIBLE or REQUIRED | Prompted | |
+    NONE | REQUIRED | IMPLICIT | Not prompted |  > **Notes:** > * If you request a scope that requires consent while using
+    the `client_credentials` flow, an error is returned because the flow doesn't support user consent. > * If the `prompt`
+    value is set to `NONE`, but the `consent_method` and the consent values are set to `REQUIRED`, then an error occurs. >
+    * When a scope is requested during a Client Credentials grant flow and `consent` is set to `FLEXIBLE`, the scope is
+    granted in the access token with no consent prompt. This occurs because there is no user involved in a two-legged
+    OAuth 2.0 [Client Credentials](https://developer.okta.com/docs/guides/implement-grant-type/clientcreds/main/) grant flow.
     """
 
     """

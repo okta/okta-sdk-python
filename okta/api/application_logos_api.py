@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,12 +20,11 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Optional, Tuple
+from typing import Union
 
 from pydantic import Field, StrictBytes, StrictStr
-from typing import Union
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
 
 from okta.api_client import ApiClient, RequestSerialized
@@ -43,29 +44,46 @@ class ApplicationLogosApi(ApiClient):
 
     @validate_call
     async def upload_application_logo(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling.  > **Notes:** > * Only SVG files encoded in UTF-8 are supported. For example, `<xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\">` is a valid SVG file declaration. > * `multipart/form-data` isn't supported for Python. Remove the `\\\"Content-Type\\\": \\\"multipart/form-data\\\"` line if you use the Python request sample code. ")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            file: Annotated[Union[StrictBytes, StrictStr], Field(
+                description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, "
+                            "and less than one MB in size. For best results, use an image with a transparent background "
+                            "and a square dimension of 200 x 200 pixels to prevent upscaling.  > **Notes:** > * Only SVG "
+                            "files encoded in UTF-8 are supported. For example, `<xml version=\\\"1.0\\\" "
+                            "encoding=\\\"UTF-8\\\">` is a valid SVG file declaration. > * `multipart/form-data` isn't "
+                            "supported for Python. Remove the `\\\"Content-Type\\\": \\\"multipart/form-data\\\"` line if "
+                            "you use the Python request sample code. "
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Upload an application logo
 
-        Uploads a logo for the app instance. If the app already has a logo, this operation replaces the previous logo.  The logo is visible in the Admin Console as an icon for your app instance. If you have one `appLink` object configured, this logo also appears in the End-User Dashboard as an icon for your app. > **Note:** If you have multiple `appLink` objects, use the Admin Console to add logos for each app link. > You can't use the API to add logos for multiple app links. 
+        Uploads a logo for the app instance. If the app already has a logo, this operation replaces the previous logo.
+        The logo is visible in the Admin Console as an icon for your app instance. If you have one `appLink` object
+        configured, this logo also appears in the End-User Dashboard as an icon for your app. > **Note:** If you have
+        multiple `appLink` objects, use the Admin Console to add logos for each app link. > You can't use the API to add
+        logos for multiple app links.
 
         :param app_id: Application ID (required)
         :type app_id: str
-        :param file: The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling.  > **Notes:** > * Only SVG files encoded in UTF-8 are supported. For example, `<xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\">` is a valid SVG file declaration. > * `multipart/form-data` isn't supported for Python. Remove the `\\\"Content-Type\\\": \\\"multipart/form-data\\\"` line if you use the Python request sample code.  (required)
+        :param file: The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than
+        one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200
+        pixels to prevent upscaling.  > **Notes:** > * Only SVG files encoded in UTF-8 are supported. For example,
+        `<xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\">` is a valid SVG file declaration. > * `multipart/form-data`
+        isn't supported for Python. Remove the `\\\"Content-Type\\\": \\\"multipart/form-data\\\"` line if you use the
+        Python request sample code.  (required)
         :type file: bytearray
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -142,13 +160,13 @@ class ApplicationLogosApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_application_logo_serialize(
-        self,
-        app_id,
-        file,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            file,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

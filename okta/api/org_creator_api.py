@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
+
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing import Optional
-from okta.models.child_org import ChildOrg
-
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.child_org import ChildOrg
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -43,24 +45,29 @@ class OrgCreatorApi(ApiClient):
 
     @validate_call
     async def create_child_org(
-        self,
-        child_org: Optional[ChildOrg] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            child_org: Optional[ChildOrg] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ChildOrg:
         """Create an org
 
-        Creates an org (child org) that has the same features as the current requesting org (parent org). A child org inherits any new features added to the parent org, but new features added to the child org aren't propagated back to the parent org. > **Notes:** > * Some features associated with products, such as Atspoke, Workflows, and Okta Identity Governance, aren't propagated to the child org. > * Wait at least 30 seconds after a 201-Created response before you make API requests to the new child org. > * For rate limits, see [Org creation rate limits](https://developer.okta.com/docs/reference/rl-additional-limits/#org-creation-rate-limits).
+        Creates an org (child org) that has the same features as the current requesting org (parent org). A child org
+        inherits any new features added to the parent org, but new features added to the child org aren't propagated back
+        to the parent org. > **Notes:** > * Some features associated with products, such as Atspoke, Workflows,
+        and Okta Identity Governance, aren't propagated to the child org. > * Wait at least 30 seconds after a 201-Created
+        response before you make API requests to the new child org. > * For rate limits, see [Org creation rate limits](
+        https://developer.okta.com/docs/reference/rl-additional-limits/#org-creation-rate-limits).
 
         :param child_org:
         :type child_org: ChildOrg
@@ -148,12 +155,12 @@ class OrgCreatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_child_org_serialize(
-        self,
-        child_org,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            child_org,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

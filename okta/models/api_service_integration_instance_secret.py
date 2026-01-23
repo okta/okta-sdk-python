@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
-from okta.models.api_service_integration_secret_links import APIServiceIntegrationSecretLinks
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.api_service_integration_secret_links import APIServiceIntegrationSecretLinks
 
 
 class APIServiceIntegrationInstanceSecret(BaseModel):
@@ -36,12 +39,16 @@ class APIServiceIntegrationInstanceSecret(BaseModel):
     APIServiceIntegrationInstanceSecret
     """  # noqa: E501
     client_secret: StrictStr = Field(
-        description="The OAuth 2.0 client secret string. The client secret string is returned in the response of a Secret creation request. In other responses (such as list, activate, or deactivate requests), the client secret is returned as an undisclosed hashed value.")
+        description="The OAuth 2.0 client secret string. The client secret string is returned in the response of a Secret "
+                    "creation request. In other responses (such as list, activate, or deactivate requests), the client "
+                    "secret is returned as an undisclosed hashed value."
+    )
     created: StrictStr = Field(description="Timestamp when the API Service Integration instance Secret was created")
     id: StrictStr = Field(description="The ID of the API Service Integration instance Secret")
     last_updated: StrictStr = Field(
         description="Timestamp when the API Service Integration instance Secret was updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     secret_hash: StrictStr = Field(description="OAuth 2.0 client secret string hash")
     status: StrictStr = Field(description="Status of the API Service Integration instance Secret")
     links: APIServiceIntegrationSecretLinks = Field(alias="_links")
@@ -89,13 +96,15 @@ class APIServiceIntegrationInstanceSecret(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "client_secret",
-            "created",
-            "id",
-            "last_updated",
-            "secret_hash",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "client_secret",
+                "created",
+                "id",
+                "last_updated",
+                "secret_hash",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -120,13 +129,17 @@ class APIServiceIntegrationInstanceSecret(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "client_secret": obj.get("client_secret"),
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "secret_hash": obj.get("secret_hash"),
-            "status": obj.get("status"),
-            "_links": APIServiceIntegrationSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "client_secret": obj.get("client_secret"),
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "secret_hash": obj.get("secret_hash"),
+                "status": obj.get("status"),
+                "_links": APIServiceIntegrationSecretLinks.from_dict(obj["_links"]) if obj.get(
+                    "_links"
+                ) is not None else None
+            }
+        )
         return _obj

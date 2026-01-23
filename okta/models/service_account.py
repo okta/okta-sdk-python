@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,24 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
 from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
+
 from okta.models.service_account_status import ServiceAccountStatus
 from okta.models.service_account_status_detail import ServiceAccountStatusDetail
 from okta.models.service_account_type import ServiceAccountType
-from typing import Optional, Set
 
-from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.service_account_details_app_account import ServiceAccountDetailsAppAccount
     from okta.models.service_account_details_okta_user_account import ServiceAccountDetailsOktaUserAccount
@@ -47,22 +50,29 @@ class ServiceAccount(BaseModel):
     account_type: ServiceAccountType = Field(alias="accountType")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the service account was created")
     description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=255)]] = Field(
-        default=None, description="The description of the service account")
+        default=None, description="The description of the service account"
+    )
     id: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The UUID of the service account")
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the service account was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Annotated[str, Field(min_length=1, strict=True, max_length=50)] = Field(
-        description="The user-defined name for the service account")
+        description="The user-defined name for the service account"
+    )
     owner_group_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(
-        default=None, description="A list of IDs of the Okta groups that own the service account", alias="ownerGroupIds")
+        default=None, description="A list of IDs of the Okta groups that own the service account", alias="ownerGroupIds"
+    )
     owner_user_ids: Optional[Annotated[List[StrictStr], Field(min_length=0, max_length=10)]] = Field(
-        default=None, description="A list of IDs of the Okta users that own the service account", alias="ownerUserIds")
+        default=None, description="A list of IDs of the Okta users that own the service account", alias="ownerUserIds"
+    )
     status: Optional[ServiceAccountStatus] = None
     status_detail: Optional[ServiceAccountStatusDetail] = Field(default=None, alias="statusDetail")
-    __properties: ClassVar[List[str]] = ["accountType", "created", "description", "id",
-                                         "lastUpdated", "name", "ownerGroupIds", "ownerUserIds", "status", "statusDetail"]
+    __properties: ClassVar[List[str]] = [
+        "accountType", "created", "description", "id",
+        "lastUpdated", "name", "ownerGroupIds", "ownerUserIds", "status", "statusDetail"
+    ]
 
     @field_validator('id')
     def id_validate_regular_expression(cls, value):
@@ -72,7 +82,9 @@ class ServiceAccount(BaseModel):
 
         if not re.match(r"(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", value):
             raise ValueError(
-                r"must validate the regular expression /(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/")
+                r"must validate the regular expression /(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-["
+                r"0-9a-f]{12}$/"
+            )
         return value
 
     @field_validator('name')
@@ -116,7 +128,7 @@ class ServiceAccount(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Union[ServiceAccountDetailsAppAccount,
-                                                        ServiceAccountDetailsOktaUserAccount]]:
+    ServiceAccountDetailsOktaUserAccount]]:
         """Create an instance of ServiceAccount from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -133,11 +145,13 @@ class ServiceAccount(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -148,17 +162,21 @@ class ServiceAccount(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[ServiceAccountDetailsAppAccount,
-                                                              ServiceAccountDetailsOktaUserAccount]]:
+    ServiceAccountDetailsOktaUserAccount]]:
         """Create an instance of ServiceAccount from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'ServiceAccountDetailsAppAccount':
             return import_module(
-                "okta.models.service_account_details_app_account").ServiceAccountDetailsAppAccount.from_dict(obj)
+                "okta.models.service_account_details_app_account"
+            ).ServiceAccountDetailsAppAccount.from_dict(obj)
         if object_type == 'ServiceAccountDetailsOktaUserAccount':
             return import_module(
-                "okta.models.service_account_details_okta_user_account").ServiceAccountDetailsOktaUserAccount.from_dict(obj)
+                "okta.models.service_account_details_okta_user_account"
+            ).ServiceAccountDetailsOktaUserAccount.from_dict(obj)
 
-        raise ValueError("ServiceAccount failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "ServiceAccount failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

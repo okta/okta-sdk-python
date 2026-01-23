@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.change_password_request import ChangePasswordRequest
 from okta.models.forgot_password_response import ForgotPasswordResponse
 from okta.models.reset_password_token import ResetPasswordToken
+from okta.models.success import Success
 from okta.models.user import User
 from okta.models.user_credentials import UserCredentials
-
-from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -49,27 +50,36 @@ class UserCredApi(ApiClient):
 
     @validate_call
     async def change_password(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        change_password_request: ChangePasswordRequest,
-        strict: Annotated[Optional[StrictBool], Field(
-            description="If true, validates against the password minimum age policy")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            change_password_request: ChangePasswordRequest,
+            strict: Annotated[Optional[StrictBool], Field(
+                description="If true, validates against the password minimum age policy"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserCredentials:
         """Update password
 
-        Updates a user's password by validating the user's current password.  This operation provides an option to delete all the sessions of the specified user. However, if the request is made in the context of a session owned by the specified user, that session isn't cleared.  You can only perform this operation on users in `STAGED`, `ACTIVE`, `PASSWORD_EXPIRED`, or `RECOVERY` status that have a valid [password credential](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/createUser!path=credentials/password&t=request).  The user transitions to `ACTIVE` status when successfully invoked in `RECOVERY` status.  > **Note:** The Okta account management policy doesn't support the `/users/{userId}/credentials/change_password` endpoint. See [Configure an Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/).
+        Updates a user's password by validating the user's current password.  This operation provides an option to delete
+        all the sessions of the specified user. However, if the request is made in the context of a session owned by the
+        specified user, that session isn't cleared.  You can only perform this operation on users in `STAGED`, `ACTIVE`,
+        `PASSWORD_EXPIRED`, or `RECOVERY` status that have a valid [password credential](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/createUser
+        !path=credentials/password&t=request).  The user transitions to `ACTIVE` status when successfully invoked in
+        `RECOVERY` status.  > **Note:** The Okta account management policy doesn't support the `/users/{
+        userId}/credentials/change_password` endpoint. See [Configure an Okta account management policy](
+        https://developer.okta.com/docs/guides/okta-account-management-policy/main/).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -162,14 +172,14 @@ class UserCredApi(ApiClient):
             return (resp.data, resp, None)
 
     def _change_password_serialize(
-        self,
-        user_id,
-        change_password_request,
-        strict,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            change_password_request,
+            strict,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -189,7 +199,6 @@ class UserCredApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if strict is not None:
-
             _query_params.append(('strict', strict))
 
         # process the header parameters
@@ -242,25 +251,28 @@ class UserCredApi(ApiClient):
 
     @validate_call
     async def change_recovery_question(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        user_credentials: UserCredentials,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            user_credentials: UserCredentials,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserCredentials:
         """Update recovery question
 
-        Updates a user's recovery question and answer credential by validating the user's current password. You can only perform this operation on users in `STAGED`, `ACTIVE`, or `RECOVERY` status that have a valid [password credential](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/createUser!path=credentials/password&t=request).
+        Updates a user's recovery question and answer credential by validating the user's current password. You can only
+        perform this operation on users in `STAGED`, `ACTIVE`, or `RECOVERY` status that have a valid [password
+        credential](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation
+        /createUser!path=credentials/password&t=request).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -350,13 +362,13 @@ class UserCredApi(ApiClient):
             return (resp.data, resp, None)
 
     def _change_recovery_question_serialize(
-        self,
-        user_id,
-        user_credentials,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            user_credentials,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -425,26 +437,36 @@ class UserCredApi(ApiClient):
 
     @validate_call
     async def expire_password(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> User:
         """Expire the password
 
-        Expires the password. This operation transitions the user status to `PASSWORD_EXPIRED` so that the user must change their password the next time that they sign in. <br> If you have integrated Okta with your on-premises Active Directory (AD), then setting a user's password as expired in Okta also expires the password in AD. When the user tries to sign in to Okta, delegated authentication finds the password-expired status in AD, and the user is presented with the password-expired page where they can change their password.  > **Note:** The Okta account management policy doesn't support the `/users/{id}/lifecycle/expire_password` endpoint. See [Configure an Okta account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/).
+        Expires the password. This operation transitions the user status to `PASSWORD_EXPIRED` so that the user must
+        change their password the next time that they sign in. <br> If you have integrated Okta with your on-premises
+        Active Directory (AD), then setting a user's password as expired in Okta also expires the password in AD. When the
+        user tries to sign in to Okta, delegated authentication finds the password-expired status in AD, and the user is
+        presented with the password-expired page where they can change their password.  > **Note:** The Okta account
+        management policy doesn't support the `/users/{id}/lifecycle/expire_password` endpoint. See [Configure an Okta
+        account management policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/).
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -528,12 +550,12 @@ class UserCredApi(ApiClient):
             return (resp.data, resp, None)
 
     def _expire_password_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -586,28 +608,40 @@ class UserCredApi(ApiClient):
 
     @validate_call
     async def expire_password_with_temp_password(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        revoke_sessions: Annotated[Optional[StrictBool], Field(
-            description="Revokes the user's existing sessions if `true`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            revoke_sessions: Annotated[Optional[StrictBool], Field(
+                description="Revokes the user's existing sessions if `true`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> User:
         """Expire the password with a temporary password
 
-        Expires the password and resets the user's password to a temporary password. This operation transitions the user status to `PASSWORD_EXPIRED` so that the user must change their password the next time that they sign in. The user's password is reset to a temporary password that's returned, and then the user's password is expired. If `revokeSessions` is included in the request with a value of `true`, the user's current outstanding sessions are revoked and require re-authentication. <br> If you have integrated Okta with your on-premises Active Directory (AD), then setting a user's password as expired in Okta also expires the password in AD. When the user tries to sign in to Okta, delegated authentication finds the password-expired status in AD, and the user is presented with the password-expired page where they can change their password.
+        Expires the password and resets the user's password to a temporary password. This operation transitions the user
+        status to `PASSWORD_EXPIRED` so that the user must change their password the next time that they sign in. The
+        user's password is reset to a temporary password that's returned, and then the user's password is expired. If
+        `revokeSessions` is included in the request with a value of `true`, the user's current outstanding sessions are
+        revoked and require re-authentication. <br> If you have integrated Okta with your on-premises Active Directory (
+        AD), then setting a user's password as expired in Okta also expires the password in AD. When the user tries to
+        sign in to Okta, delegated authentication finds the password-expired status in AD, and the user is presented with
+        the password-expired page where they can change their password.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param revoke_sessions: Revokes the user's existing sessions if `true`
         :type revoke_sessions: bool
@@ -694,13 +728,13 @@ class UserCredApi(ApiClient):
             return (resp.data, resp, None)
 
     def _expire_password_with_temp_password_serialize(
-        self,
-        id,
-        revoke_sessions,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            revoke_sessions,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -720,7 +754,6 @@ class UserCredApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if revoke_sessions is not None:
-
             _query_params.append(('revokeSessions', revoke_sessions))
 
         # process the header parameters
@@ -757,26 +790,37 @@ class UserCredApi(ApiClient):
 
     @validate_call
     async def forgot_password(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        send_email: Annotated[Optional[StrictBool], Field(
-            description="Sends a forgot password email to the user if `true`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            send_email: Annotated[Optional[StrictBool], Field(
+                description="Sends a forgot password email to the user if `true`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ForgotPasswordResponse:
         """Start forgot password flow
 
-        Starts the forgot password flow.  Generates a one-time token (OTT) that you can use to reset a user's password.  The user must validate their security question's answer when visiting the reset link. Perform this operation only on users with an `ACTIVE` status and a valid [recovery question credential](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/createUser!path=credentials/recovery_question&t=request).  > **Note:** If you have migrated to Identity Engine, you can allow users to recover passwords with any enrolled MFA authenticator. See [Self-service account recovery](https://help.okta.com/oie/en-us/content/topics/identity-engine/authenticators/configure-sspr.htm?cshid=ext-config-sspr).  If an email address is associated with multiple users, keep in mind the following to ensure a successful password recovery lookup:   * Okta no longer includes deactivated users in the lookup.   * The lookup searches sign-in IDs first, then primary email addresses, and then secondary email addresses.  If `sendEmail` is `false`, returns a link for the user to reset their password. This operation doesn't affect the status of the user.
+        Starts the forgot password flow.  Generates a one-time token (OTT) that you can use to reset a user's password.
+        The user must validate their security question's answer when visiting the reset link. Perform this operation only
+        on users with an `ACTIVE` status and a valid [recovery question credential](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/createUser
+        !path=credentials/recovery_question&t=request).  > **Note:** If you have migrated to Identity Engine,
+        you can allow users to recover passwords with any enrolled MFA authenticator. See [Self-service account recovery](
+        https://help.okta.com/oie/en-us/content/topics/identity-engine/authenticators/configure-sspr.htm?cshid=ext-config
+        -sspr).  If an email address is associated with multiple users, keep in mind the following to ensure a successful
+        password recovery lookup:   * Okta no longer includes deactivated users in the lookup.   * The lookup searches
+        sign-in IDs first, then primary email addresses, and then secondary email addresses.  If `sendEmail` is `false`,
+        returns a link for the user to reset their password. This operation doesn't affect the status of the user.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -865,13 +909,13 @@ class UserCredApi(ApiClient):
             return (resp.data, resp, None)
 
     def _forgot_password_serialize(
-        self,
-        user_id,
-        send_email,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            send_email,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -891,7 +935,6 @@ class UserCredApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if send_email is not None:
-
             _query_params.append(('sendEmail', send_email))
 
         # process the header parameters
@@ -928,26 +971,27 @@ class UserCredApi(ApiClient):
 
     @validate_call
     async def forgot_password_set_new_password(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        user_credentials: UserCredentials,
-        send_email: Optional[StrictBool] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            user_credentials: UserCredentials,
+            send_email: Optional[StrictBool] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserCredentials:
         """Reset password with recovery question
 
-        Resets the user's password to the specified password if the provided answer to the recovery question is correct. You must include the recovery question answer with the submission.
+        Resets the user's password to the specified password if the provided answer to the recovery question is correct.
+        You must include the recovery question answer with the submission.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -1040,14 +1084,14 @@ class UserCredApi(ApiClient):
             return (resp.data, resp, None)
 
     def _forgot_password_set_new_password_serialize(
-        self,
-        user_id,
-        user_credentials,
-        send_email,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            user_credentials,
+            send_email,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1067,7 +1111,6 @@ class UserCredApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if send_email is not None:
-
             _query_params.append(('sendEmail', send_email))
 
         # process the header parameters
@@ -1120,29 +1163,44 @@ class UserCredApi(ApiClient):
 
     @validate_call
     async def reset_password(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        send_email: StrictBool,
-        revoke_sessions: Annotated[Optional[StrictBool], Field(
-            description="Revokes all user sessions, except for the current session, if set to `true`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            send_email: StrictBool,
+            revoke_sessions: Annotated[Optional[StrictBool], Field(
+                description="Revokes all user sessions, except for the current session, if set to `true`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResetPasswordToken:
         """Reset a password
 
-        Resets a password. Generates a one-time token (OTT) that you can use to reset a user's password. You can automatically email the OTT link to the user or return the OTT to the API caller and distribute using a custom flow.  This operation transitions the user to the `RECOVERY` status. The user is then not able to sign in or initiate a forgot password flow until they complete the reset flow.  This operation provides an option to delete all the user's sessions. However, if the request is made in the context of a session owned by the specified user, that session isn't cleared. > **Note:** You can also use this API to convert a user with the Okta credential provider to use a federated provider. After this conversion, the user can't directly sign in with a password. > To convert a federated user back to an Okta user, use the default API call.  If an email address is associated with multiple users, keep in mind the following to ensure a successful password recovery lookup:   * Okta no longer includes deactivated users in the lookup.   * The lookup searches sign-in IDs first, then primary email addresses, and then secondary email addresses.   If `sendEmail` is `false`, returns a link for the user to reset their password.
+        Resets a password. Generates a one-time token (OTT) that you can use to reset a user's password. You can
+        automatically email the OTT link to the user or return the OTT to the API caller and distribute using a custom
+        flow.  This operation transitions the user to the `RECOVERY` status. The user is then not able to sign in or
+        initiate a forgot password flow until they complete the reset flow.  This operation provides an option to delete
+        all the user's sessions. However, if the request is made in the context of a session owned by the specified user,
+        that session isn't cleared. > **Note:** You can also use this API to convert a user with the Okta credential
+        provider to use a federated provider. After this conversion, the user can't directly sign in with a password. > To
+        convert a federated user back to an Okta user, use the default API call.  If an email address is associated with
+        multiple users, keep in mind the following to ensure a successful password recovery lookup:   * Okta no longer
+        includes deactivated users in the lookup.   * The lookup searches sign-in IDs first, then primary email addresses,
+        and then secondary email addresses.   If `sendEmail` is `false`, returns a link for the user to reset their password.
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param send_email: (required)
         :type send_email: bool
@@ -1232,14 +1290,14 @@ class UserCredApi(ApiClient):
             return (resp.data, resp, None)
 
     def _reset_password_serialize(
-        self,
-        id,
-        send_email,
-        revoke_sessions,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            send_email,
+            revoke_sessions,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1259,11 +1317,9 @@ class UserCredApi(ApiClient):
             _path_params['id'] = id
         # process the query parameters
         if send_email is not None:
-
             _query_params.append(('sendEmail', send_email))
 
         if revoke_sessions is not None:
-
             _query_params.append(('revokeSessions', revoke_sessions))
 
         # process the header parameters

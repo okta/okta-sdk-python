@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,31 +20,42 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class LogUserAgent(BaseModel):
     """
-    \"A user agent is software (a software agent) that is acting on behalf of a user.\" ([Definition of User Agent](https://developer.mozilla.org/en-US/docs/Glossary/User_agent))  In the Okta event data object, the `UserAgent` object provides specifications about the client software that makes event-triggering HTTP requests. User agent identification is often useful for identifying interoperability problems between servers and clients, and also for browser and operating system usage analytics. 
+    \"A user agent is software (a software agent) that is acting on behalf of a user.\" ([Definition of User Agent](
+    https://developer.mozilla.org/en-US/docs/Glossary/User_agent))  In the Okta event data object, the `UserAgent` object
+    provides specifications about the client software that makes event-triggering HTTP requests. User agent identification
+    is often useful for identifying interoperability problems between servers and clients, and also for browser and
+    operating system usage analytics.
     """  # noqa: E501
     browser: Optional[StrictStr] = Field(
         default=None,
-        description="If the client is a web browser, this field identifies the type of web browser (for example, CHROME, FIREFOX)")
-    os: Optional[StrictStr] = Field(default=None,
-                                    description="The operating system that the client runs on (for example, Windows 10)")
+        description="If the client is a web browser, this field identifies the type of web browser (for example, CHROME, "
+                    "FIREFOX)"
+    )
+    os: Optional[StrictStr] = Field(
+        default=None,
+        description="The operating system that the client runs on (for example, Windows 10)"
+    )
     raw_user_agent: Optional[StrictStr] = Field(
         default=None,
-        description="A raw string representation of the user agent that is formatted according to [section 5.5.3 of HTTP/1.1 Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-5.5.3). Both the `browser` and the `OS` fields can be derived from this field.",
-        alias="rawUserAgent")
+        description="A raw string representation of the user agent that is formatted according to [section 5.5.3 of "
+                    "HTTP/1.1 Semantics and Content](https://datatracker.ietf.org/doc/html/rfc7231#section-5.5.3). Both "
+                    "the `browser` and the `OS` fields can be derived from this field.",
+        alias="rawUserAgent"
+    )
     __properties: ClassVar[List[str]] = ["browser", "os", "rawUserAgent"]
 
     model_config = ConfigDict(
@@ -78,11 +91,13 @@ class LogUserAgent(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "browser",
-            "os",
-            "raw_user_agent",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "browser",
+                "os",
+                "raw_user_agent",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -100,9 +115,11 @@ class LogUserAgent(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "browser": obj.get("browser"),
-            "os": obj.get("os"),
-            "rawUserAgent": obj.get("rawUserAgent")
-        })
+        _obj = cls.model_validate(
+            {
+                "browser": obj.get("browser"),
+                "os": obj.get("os"),
+                "rawUserAgent": obj.get("rawUserAgent")
+            }
+        )
         return _obj

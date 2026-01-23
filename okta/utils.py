@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -10,8 +12,8 @@
 Class of utility functions.
 """
 
-from enum import Enum
 from datetime import datetime as dt
+from enum import Enum
 from urllib.parse import urlsplit, urlunsplit
 
 from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH, \
@@ -59,11 +61,15 @@ def convert_date_time_to_seconds(date_time):
     Returns:
         float: Number of seconds since the epoch
     """
-    dt_obj = dt.strptime(date_time,
-                         DATETIME_FORMAT)
-    return float((dt_obj
-                  - dt(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY))
-                 .total_seconds())
+    dt_obj = dt.strptime(
+        date_time,
+        DATETIME_FORMAT
+    )
+    return float(
+        (dt_obj
+         - dt(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY))
+        .total_seconds()
+    )
 
 
 def convert_absolute_url_into_relative_url(absolute_url):

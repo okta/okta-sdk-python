@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,36 +39,46 @@ class SecurePasswordStoreApplicationSettingsApplication(BaseModel):
     optional_field1: Optional[StrictStr] = Field(
         default=None,
         description="Name of the optional parameter in the sign-in form",
-        alias="optionalField1")
+        alias="optionalField1"
+    )
     optional_field1_value: Optional[StrictStr] = Field(
         default=None,
         description="Name of the optional value in the sign-in form",
-        alias="optionalField1Value")
+        alias="optionalField1Value"
+    )
     optional_field2: Optional[StrictStr] = Field(
         default=None,
         description="Name of the optional parameter in the sign-in form",
-        alias="optionalField2")
+        alias="optionalField2"
+    )
     optional_field2_value: Optional[StrictStr] = Field(
         default=None,
         description="Name of the optional value in the sign-in form",
-        alias="optionalField2Value")
+        alias="optionalField2Value"
+    )
     optional_field3: Optional[StrictStr] = Field(
         default=None,
         description="Name of the optional parameter in the sign-in form",
-        alias="optionalField3")
+        alias="optionalField3"
+    )
     optional_field3_value: Optional[StrictStr] = Field(
         default=None,
         description="Name of the optional value in the sign-in form",
-        alias="optionalField3Value")
+        alias="optionalField3Value"
+    )
     password_field: StrictStr = Field(
         description="CSS selector for the **Password** field in the sign-in form",
-        alias="passwordField")
+        alias="passwordField"
+    )
     url: StrictStr = Field(description="The URL of the sign-in page for this app")
     username_field: StrictStr = Field(
         description="CSS selector for the **Username** field in the sign-in form",
-        alias="usernameField")
-    __properties: ClassVar[List[str]] = ["optionalField1", "optionalField1Value", "optionalField2",
-                                         "optionalField2Value", "optionalField3", "optionalField3Value", "passwordField", "url", "usernameField"]
+        alias="usernameField"
+    )
+    __properties: ClassVar[List[str]] = [
+        "optionalField1", "optionalField1Value", "optionalField2",
+        "optionalField2Value", "optionalField3", "optionalField3Value", "passwordField", "url", "usernameField"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -98,8 +110,10 @@ class SecurePasswordStoreApplicationSettingsApplication(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -117,15 +131,17 @@ class SecurePasswordStoreApplicationSettingsApplication(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "optionalField1": obj.get("optionalField1"),
-            "optionalField1Value": obj.get("optionalField1Value"),
-            "optionalField2": obj.get("optionalField2"),
-            "optionalField2Value": obj.get("optionalField2Value"),
-            "optionalField3": obj.get("optionalField3"),
-            "optionalField3Value": obj.get("optionalField3Value"),
-            "passwordField": obj.get("passwordField"),
-            "url": obj.get("url"),
-            "usernameField": obj.get("usernameField")
-        })
+        _obj = cls.model_validate(
+            {
+                "optionalField1": obj.get("optionalField1"),
+                "optionalField1Value": obj.get("optionalField1Value"),
+                "optionalField2": obj.get("optionalField2"),
+                "optionalField2Value": obj.get("optionalField2Value"),
+                "optionalField3": obj.get("optionalField3"),
+                "optionalField3Value": obj.get("optionalField3Value"),
+                "passwordField": obj.get("passwordField"),
+                "url": obj.get("url"),
+                "usernameField": obj.get("usernameField")
+            }
+        )
         return _obj

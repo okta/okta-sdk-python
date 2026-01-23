@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,35 +20,41 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.application_credentials_signing_use import ApplicationCredentialsSigningUse
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
+
+from okta.models.application_credentials_signing_use import ApplicationCredentialsSigningUse
 
 
 class ApplicationCredentialsSigning(BaseModel):
     """
-    App signing key properties > **Note:** Only apps with SAML_2_0, SAML_1_1, WS_FEDERATION, or OPENID_CONNECT `signOnMode` support the key rotation feature. 
+    App signing key properties > **Note:** Only apps with SAML_2_0, SAML_1_1, WS_FEDERATION, or OPENID_CONNECT
+    `signOnMode` support the key rotation feature.
     """  # noqa: E501
     kid: Optional[StrictStr] = Field(
         default=None,
-        description="Key identifier used for signing assertions > **Note:** Currently, only the X.509 JWK format is supported for apps with SAML_2_0 `signOnMode`.")
+        description="Key identifier used for signing assertions > **Note:** Currently, only the X.509 JWK format is "
+                    "supported for apps with SAML_2_0 `signOnMode`."
+    )
     last_rotated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the signing key was last rotated",
-        alias="lastRotated")
+        alias="lastRotated"
+    )
     next_rotation: Optional[datetime] = Field(
         default=None,
         description="The scheduled time for the next signing key rotation",
-        alias="nextRotation")
+        alias="nextRotation"
+    )
     rotation_mode: Optional[StrictStr] = Field(default=None, description="The mode of key rotation", alias="rotationMode")
     use: Optional[ApplicationCredentialsSigningUse] = None
     __properties: ClassVar[List[str]] = ["kid", "lastRotated", "nextRotation", "rotationMode", "use"]
@@ -83,10 +91,12 @@ class ApplicationCredentialsSigning(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "last_rotated",
-            "next_rotation",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "last_rotated",
+                "next_rotation",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -104,11 +114,13 @@ class ApplicationCredentialsSigning(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "kid": obj.get("kid"),
-            "lastRotated": obj.get("lastRotated"),
-            "nextRotation": obj.get("nextRotation"),
-            "rotationMode": obj.get("rotationMode"),
-            "use": obj.get("use")
-        })
+        _obj = cls.model_validate(
+            {
+                "kid": obj.get("kid"),
+                "lastRotated": obj.get("lastRotated"),
+                "nextRotation": obj.get("nextRotation"),
+                "rotationMode": obj.get("rotationMode"),
+                "use": obj.get("use")
+            }
+        )
         return _obj

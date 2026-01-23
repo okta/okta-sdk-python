@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.auth_type import AuthType
 from okta.models.custom_auth_settings import CustomAuthSettings
 from okta.models.o_auth2_settings import OAuth2Settings
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AuthSettings(BaseModel):
@@ -72,8 +75,10 @@ class AuthSettings(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -105,9 +110,15 @@ class AuthSettings(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "authType": obj.get("authType"),
-            "customSettings": CustomAuthSettings.from_dict(obj["customSettings"]) if obj.get("customSettings") is not None else None,
-            "oAuth2Settings": OAuth2Settings.from_dict(obj["oAuth2Settings"]) if obj.get("oAuth2Settings") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "authType": obj.get("authType"),
+                "customSettings": CustomAuthSettings.from_dict(obj["customSettings"]) if obj.get(
+                    "customSettings"
+                ) is not None else None,
+                "oAuth2Settings": OAuth2Settings.from_dict(obj["oAuth2Settings"]) if obj.get(
+                    "oAuth2Settings"
+                ) is not None else None
+            }
+        )
         return _obj

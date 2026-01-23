@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,27 +20,29 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.org_general_setting_links_contacts import OrgGeneralSettingLinksContacts
 from okta.models.org_general_setting_links_logo import OrgGeneralSettingLinksLogo
 from okta.models.org_general_setting_links_okta_communication import OrgGeneralSettingLinksOktaCommunication
 from okta.models.org_general_setting_links_okta_support import OrgGeneralSettingLinksOktaSupport
 from okta.models.org_general_setting_links_preferences import OrgGeneralSettingLinksPreferences
 from okta.models.org_general_setting_links_upload_logo import OrgGeneralSettingLinksUploadLogo
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OrgGeneralSettingLinks(BaseModel):
     """
-    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the org using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
+    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the org using the [
+    JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
     """  # noqa: E501
     contacts: Optional[OrgGeneralSettingLinksContacts] = None
     logo: Optional[OrgGeneralSettingLinksLogo] = None
@@ -78,8 +82,10 @@ class OrgGeneralSettingLinks(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -139,12 +145,24 @@ class OrgGeneralSettingLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "contacts": OrgGeneralSettingLinksContacts.from_dict(obj["contacts"]) if obj.get("contacts") is not None else None,
-            "logo": OrgGeneralSettingLinksLogo.from_dict(obj["logo"]) if obj.get("logo") is not None else None,
-            "oktaCommunication": OrgGeneralSettingLinksOktaCommunication.from_dict(obj["oktaCommunication"]) if obj.get("oktaCommunication") is not None else None,
-            "oktaSupport": OrgGeneralSettingLinksOktaSupport.from_dict(obj["oktaSupport"]) if obj.get("oktaSupport") is not None else None,
-            "preferences": OrgGeneralSettingLinksPreferences.from_dict(obj["preferences"]) if obj.get("preferences") is not None else None,
-            "uploadLogo": OrgGeneralSettingLinksUploadLogo.from_dict(obj["uploadLogo"]) if obj.get("uploadLogo") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "contacts": OrgGeneralSettingLinksContacts.from_dict(obj["contacts"]) if obj.get(
+                    "contacts"
+                ) is not None else None,
+                "logo": OrgGeneralSettingLinksLogo.from_dict(obj["logo"]) if obj.get("logo") is not None else None,
+                "oktaCommunication": OrgGeneralSettingLinksOktaCommunication.from_dict(obj["oktaCommunication"]) if obj.get(
+                    "oktaCommunication"
+                ) is not None else None,
+                "oktaSupport": OrgGeneralSettingLinksOktaSupport.from_dict(obj["oktaSupport"]) if obj.get(
+                    "oktaSupport"
+                ) is not None else None,
+                "preferences": OrgGeneralSettingLinksPreferences.from_dict(obj["preferences"]) if obj.get(
+                    "preferences"
+                ) is not None else None,
+                "uploadLogo": OrgGeneralSettingLinksUploadLogo.from_dict(obj["uploadLogo"]) if obj.get(
+                    "uploadLogo"
+                ) is not None else None
+            }
+        )
         return _obj

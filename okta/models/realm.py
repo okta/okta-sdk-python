@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.links_self import LinksSelf
 from okta.models.realm_profile import RealmProfile
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class Realm(BaseModel):
@@ -41,12 +44,16 @@ class Realm(BaseModel):
     id: Optional[StrictStr] = Field(default=None, description="Unique ID for the realm")
     is_default: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates the default realm. Existing users will start out in the default realm and can be moved to other realms individually or through realm assignments. See [Realms Assignments API](/openapi/okta-management/management/tag/RealmAssignment/).",
-        alias="isDefault")
+        description="Indicates the default realm. Existing users will start out in the default realm and can be moved to "
+                    "other realms individually or through realm assignments. See [Realms Assignments API]("
+                    "/openapi/okta-management/management/tag/RealmAssignment/).",
+        alias="isDefault"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the realm was updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     profile: Optional[RealmProfile] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "isDefault", "lastUpdated", "profile", "_links"]
@@ -85,12 +92,14 @@ class Realm(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "is_default",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "is_default",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -122,12 +131,14 @@ class Realm(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "isDefault": obj.get("isDefault"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "profile": RealmProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None,
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "isDefault": obj.get("isDefault"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "profile": RealmProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None,
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

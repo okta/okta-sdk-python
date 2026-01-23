@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
-from okta.models.associated_server_mediated import AssociatedServerMediated
-from okta.models.authorization_server import AuthorizationServer
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.associated_server_mediated import AssociatedServerMediated
+from okta.models.authorization_server import AuthorizationServer
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,21 +47,21 @@ class AuthorizationServerAssocApi(ApiClient):
 
     @validate_call
     async def create_associated_servers(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        associated_server_mediated: AssociatedServerMediated,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            associated_server_mediated: AssociatedServerMediated,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AuthorizationServer]:
         """Create an associated authorization server
 
@@ -154,13 +155,13 @@ class AuthorizationServerAssocApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_associated_servers_serialize(
-        self,
-        auth_server_id,
-        associated_server_mediated,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            associated_server_mediated,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -229,21 +230,21 @@ class AuthorizationServerAssocApi(ApiClient):
 
     @validate_call
     async def delete_associated_server(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        associated_server_id: Annotated[StrictStr, Field(description="`id` of the associated Authorization Server")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            associated_server_id: Annotated[StrictStr, Field(description="`id` of the associated Authorization Server")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an associated authorization server
 
@@ -327,13 +328,13 @@ class AuthorizationServerAssocApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_associated_server_serialize(
-        self,
-        auth_server_id,
-        associated_server_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            associated_server_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -388,27 +389,31 @@ class AuthorizationServerAssocApi(ApiClient):
 
     @validate_call
     async def list_associated_servers_by_trusted_type(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        trusted: Annotated[Optional[StrictBool], Field(
-            description="Searches trusted authorization servers when `true` or searches untrusted authorization servers when `false`")] = None,
-        q: Annotated[Optional[StrictStr], Field(
-            description="Searches for the name or audience of the associated authorization servers")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of the associated authorization servers")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            trusted: Annotated[Optional[StrictBool], Field(
+                description="Searches trusted authorization servers when `true` or searches untrusted authorization "
+                            "servers when `false`"
+            )] = None,
+            q: Annotated[Optional[StrictStr], Field(
+                description="Searches for the name or audience of the associated authorization servers"
+            )] = None,
+            limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of the associated authorization servers"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AuthorizationServer]:
         """List all associated authorization servers
 
@@ -416,7 +421,8 @@ class AuthorizationServerAssocApi(ApiClient):
 
         :param auth_server_id: `id` of the Authorization Server (required)
         :type auth_server_id: str
-        :param trusted: Searches trusted authorization servers when `true` or searches untrusted authorization servers when `false`
+        :param trusted: Searches trusted authorization servers when `true` or searches untrusted authorization servers
+        when `false`
         :type trusted: bool
         :param q: Searches for the name or audience of the associated authorization servers
         :type q: str
@@ -510,16 +516,16 @@ class AuthorizationServerAssocApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_associated_servers_by_trusted_type_serialize(
-        self,
-        auth_server_id,
-        trusted,
-        q,
-        limit,
-        after,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            trusted,
+            q,
+            limit,
+            after,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -539,19 +545,15 @@ class AuthorizationServerAssocApi(ApiClient):
             _path_params['authServerId'] = auth_server_id
         # process the query parameters
         if trusted is not None:
-
             _query_params.append(('trusted', trusted))
 
         if q is not None:
-
             _query_params.append(('q', q))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         # process the header parameters

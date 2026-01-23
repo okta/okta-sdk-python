@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.catalog_application_links import CatalogApplicationLinks
 from okta.models.catalog_application_status import CatalogApplicationStatus
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class CatalogApplication(BaseModel):
@@ -41,28 +44,43 @@ class CatalogApplication(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="Description of the app in the OIN catalog")
     display_name: Optional[StrictStr] = Field(default=None, description="OIN catalog app display name", alias="displayName")
     features: Optional[List[StrictStr]] = Field(
-        default=None, description="Features supported by the app. See app [features](/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications!c=200&path=0/features&t=response).")
+        default=None,
+        description="Features supported by the app. See app [features]("
+                    "/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications!c=200"
+                    "&path=0/features&t=response)."
+    )
     id: Optional[StrictStr] = Field(
         default=None,
-        description="ID of the app instance. Okta returns this property only for apps not in the OIN catalog.")
+        description="ID of the app instance. Okta returns this property only for apps not in the OIN catalog."
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Optional[StrictStr] = Field(
         default=None,
-        description="App key name. For OIN catalog apps, this is a unique key for the app definition.")
+        description="App key name. For OIN catalog apps, this is a unique key for the app definition."
+    )
     sign_on_modes: Optional[List[StrictStr]] = Field(
-        default=None, description="Authentication mode for the app. See app [signOnMode](/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications!c=200&path=0/signOnMode&t=response).", alias="signOnModes")
+        default=None,
+        description="Authentication mode for the app. See app [signOnMode]("
+                    "/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications!c=200"
+                    "&path=0/signOnMode&t=response).",
+        alias="signOnModes"
+    )
     status: Optional[CatalogApplicationStatus] = None
     verification_status: Optional[StrictStr] = Field(
         default=None,
         description="OIN verification status of the catalog app",
-        alias="verificationStatus")
+        alias="verificationStatus"
+    )
     website: Optional[StrictStr] = Field(default=None, description="Website of the OIN catalog app")
     links: Optional[CatalogApplicationLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["category", "description", "displayName", "features", "id",
-                                         "lastUpdated", "name", "signOnModes", "status", "verificationStatus", "website", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "category", "description", "displayName", "features", "id",
+        "lastUpdated", "name", "signOnModes", "status", "verificationStatus", "website", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,14 +118,16 @@ class CatalogApplication(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "category",
-            "description",
-            "display_name",
-            "features",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "category",
+                "description",
+                "display_name",
+                "features",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -132,18 +152,20 @@ class CatalogApplication(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "category": obj.get("category"),
-            "description": obj.get("description"),
-            "displayName": obj.get("displayName"),
-            "features": obj.get("features"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "signOnModes": obj.get("signOnModes"),
-            "status": obj.get("status"),
-            "verificationStatus": obj.get("verificationStatus"),
-            "website": obj.get("website"),
-            "_links": CatalogApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "category": obj.get("category"),
+                "description": obj.get("description"),
+                "displayName": obj.get("displayName"),
+                "features": obj.get("features"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "signOnModes": obj.get("signOnModes"),
+                "status": obj.get("status"),
+                "verificationStatus": obj.get("verificationStatus"),
+                "website": obj.get("website"),
+                "_links": CatalogApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

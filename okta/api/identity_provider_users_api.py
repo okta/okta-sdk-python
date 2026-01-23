@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.identity_provider import IdentityProvider
 from okta.models.identity_provider_application_user import IdentityProviderApplicationUser
 from okta.models.social_auth_token import SocialAuthToken
-from okta.models.user_identity_provider_link_request import UserIdentityProviderLinkRequest
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.user_identity_provider_link_request import UserIdentityProviderLinkRequest
 from okta.rest import RESTResponse
 
 
@@ -48,21 +49,21 @@ class IdentityProviderUsersApi(ApiClient):
 
     @validate_call
     async def get_identity_provider_application_user(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentityProviderApplicationUser:
         """Retrieve a user for IdP
 
@@ -155,13 +156,13 @@ class IdentityProviderUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_identity_provider_application_user_serialize(
-        self,
-        idp_id,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -216,26 +217,30 @@ class IdentityProviderUsersApi(ApiClient):
 
     @validate_call
     async def link_user_to_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        user_identity_provider_link_request: UserIdentityProviderLinkRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            user_identity_provider_link_request: UserIdentityProviderLinkRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentityProviderApplicationUser:
         """Link a user to IdP
 
-        Links an Okta user to an existing SAML or social identity provider (IdP).  The SAML IdP must have `honorPersistentNameId` set to `true` to use this API. The [Name Identifier Format](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/replaceIdentityProvider!path=protocol/0/settings&t=request) of the incoming assertion must be `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
+        Links an Okta user to an existing SAML or social identity provider (IdP).  The SAML IdP must have
+        `honorPersistentNameId` set to `true` to use this API. The [Name Identifier Format](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider
+        /operation/replaceIdentityProvider!path=protocol/0/settings&t=request) of the incoming assertion must be
+        `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`.
 
         :param idp_id: `id` of IdP (required)
         :type idp_id: str
@@ -328,14 +333,14 @@ class IdentityProviderUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _link_user_to_identity_provider_serialize(
-        self,
-        idp_id,
-        user_id,
-        user_identity_provider_link_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            user_id,
+            user_identity_provider_link_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -406,26 +411,31 @@ class IdentityProviderUsersApi(ApiClient):
 
     @validate_call
     async def list_identity_provider_application_users(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        expand: Annotated[Optional[StrictStr], Field(description="Expand user data")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(description="Expand user data")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdentityProviderApplicationUser]:
         """List all users for IdP
 
@@ -435,7 +445,9 @@ class IdentityProviderUsersApi(ApiClient):
         :type idp_id: str
         :param q: Searches the records for matching value
         :type q: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -527,16 +539,16 @@ class IdentityProviderUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_identity_provider_application_users_serialize(
-        self,
-        idp_id,
-        q,
-        after,
-        limit,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            q,
+            after,
+            limit,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -556,19 +568,15 @@ class IdentityProviderUsersApi(ApiClient):
             _path_params['idpId'] = idp_id
         # process the query parameters
         if q is not None:
-
             _query_params.append(('q', q))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -605,25 +613,28 @@ class IdentityProviderUsersApi(ApiClient):
 
     @validate_call
     async def list_social_auth_tokens(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[SocialAuthToken]:
         """List all tokens from OIDC IdP
 
-        Lists the tokens minted by the social authentication provider when the user authenticates with Okta via Social Auth.  Okta doesn't import all the user information from a social provider. If the app needs information that isn't imported, it can get the user token from this endpoint. Then the app can make an API call to the social provider with the token to request the additional information.
+        Lists the tokens minted by the social authentication provider when the user authenticates with Okta via Social
+        Auth.  Okta doesn't import all the user information from a social provider. If the app needs information that
+        isn't imported, it can get the user token from this endpoint. Then the app can make an API call to the social
+        provider with the token to request the additional information.
 
         :param idp_id: `id` of IdP (required)
         :type idp_id: str
@@ -712,13 +723,13 @@ class IdentityProviderUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_social_auth_tokens_serialize(
-        self,
-        idp_id,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -773,26 +784,30 @@ class IdentityProviderUsersApi(ApiClient):
 
     @validate_call
     async def list_user_identity_providers(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdentityProvider]:
         """List all IdPs for user
 
         Lists the identity providers (IdPs) associated with the user
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -876,12 +891,12 @@ class IdentityProviderUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_user_identity_providers_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -934,25 +949,26 @@ class IdentityProviderUsersApi(ApiClient):
 
     @validate_call
     async def unlink_user_from_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unlink a user from IdP
 
-        Unlinks the Okta user and the identity provider (IdP) user. The next time the user federates into Okta through this IdP, they have to re-link their account according to the account link policy.
+        Unlinks the Okta user and the identity provider (IdP) user. The next time the user federates into Okta through
+        this IdP, they have to re-link their account according to the account link policy.
 
         :param idp_id: `id` of IdP (required)
         :type idp_id: str
@@ -1032,13 +1048,13 @@ class IdentityProviderUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unlink_user_from_identity_provider_serialize(
-        self,
-        idp_id,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

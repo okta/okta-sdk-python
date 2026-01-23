@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.agent_pool import AgentPool
 from okta.models.agent_pool_update import AgentPoolUpdate
 from okta.models.agent_pool_update_setting import AgentPoolUpdateSetting
 from okta.models.agent_type import AgentType
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -48,21 +49,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def activate_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Activate an agent pool update
 
@@ -155,13 +156,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_agent_pools_update_serialize(
-        self,
-        pool_id,
-        update_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -216,21 +217,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def create_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        agent_pool_update: AgentPoolUpdate,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            agent_pool_update: AgentPoolUpdate,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Create an agent pool update
 
@@ -324,13 +325,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_agent_pools_update_serialize(
-        self,
-        pool_id,
-        agent_pool_update,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            agent_pool_update,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -399,21 +400,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def deactivate_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Deactivate an agent pool update
 
@@ -506,13 +507,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_agent_pools_update_serialize(
-        self,
-        pool_id,
-        update_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -567,21 +568,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def delete_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an agent pool update
 
@@ -665,13 +666,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_agent_pools_update_serialize(
-        self,
-        pool_id,
-        update_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -726,21 +727,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def get_agent_pools_update_instance(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Retrieve an agent pool update by ID
 
@@ -833,13 +834,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_agent_pools_update_instance_serialize(
-        self,
-        pool_id,
-        update_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -894,20 +895,20 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def get_agent_pools_update_settings(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdateSetting:
         """Retrieve an agent pool update's settings
 
@@ -997,12 +998,12 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_agent_pools_update_settings_serialize(
-        self,
-        pool_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1055,24 +1056,29 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def list_agent_pools(
-        self,
-        limit_per_pool_type: Annotated[Optional[StrictInt], Field(
-            description="Maximum number of agent pools returned")] = None,
-        pool_type: Annotated[Optional[AgentType], Field(description="Agent type to search for")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            limit_per_pool_type: Annotated[Optional[StrictInt], Field(
+                description="Maximum number of agent pools returned"
+            )] = None,
+            pool_type: Annotated[Optional[AgentType], Field(description="Agent type to search for")] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AgentPool]:
         """List all agent pools
 
@@ -1082,7 +1088,9 @@ class AgentPoolsApi(ApiClient):
         :type limit_per_pool_type: int
         :param pool_type: Agent type to search for
         :type pool_type: AgentType
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1167,14 +1175,14 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_agent_pools_serialize(
-        self,
-        limit_per_pool_type,
-        pool_type,
-        after,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            limit_per_pool_type,
+            pool_type,
+            after,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1192,15 +1200,12 @@ class AgentPoolsApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if limit_per_pool_type is not None:
-
             _query_params.append(('limitPerPoolType', limit_per_pool_type))
 
         if pool_type is not None:
-
             _query_params.append(('poolType', pool_type.value))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         # process the header parameters
@@ -1237,22 +1242,24 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def list_agent_pools_updates(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        scheduled: Annotated[Optional[StrictBool], Field(
-            description="Return only scheduled or ad-hoc updates. If this parameter isn't provided, Okta returns the entire list of updates.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            scheduled: Annotated[Optional[StrictBool], Field(
+                description="Return only scheduled or ad-hoc updates. If this parameter isn't provided, Okta returns the "
+                            "entire list of updates."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AgentPoolUpdate]:
         """List all agent pool updates
 
@@ -1260,7 +1267,8 @@ class AgentPoolsApi(ApiClient):
 
         :param pool_id: ID of the agent pool for which the settings apply to (required)
         :type pool_id: str
-        :param scheduled: Return only scheduled or ad-hoc updates. If this parameter isn't provided, Okta returns the entire list of updates.
+        :param scheduled: Return only scheduled or ad-hoc updates. If this parameter isn't provided, Okta returns the
+        entire list of updates.
         :type scheduled: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1345,13 +1353,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_agent_pools_updates_serialize(
-        self,
-        pool_id,
-        scheduled,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            scheduled,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1371,7 +1379,6 @@ class AgentPoolsApi(ApiClient):
             _path_params['poolId'] = pool_id
         # process the query parameters
         if scheduled is not None:
-
             _query_params.append(('scheduled', scheduled))
 
         # process the header parameters
@@ -1408,21 +1415,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def pause_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Pause an agent pool update
 
@@ -1515,13 +1522,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _pause_agent_pools_update_serialize(
-        self,
-        pool_id,
-        update_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1576,21 +1583,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def resume_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Resume an agent pool update
 
@@ -1683,13 +1690,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _resume_agent_pools_update_serialize(
-        self,
-        pool_id,
-        update_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1744,25 +1751,26 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def retry_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Retry an agent pool update
 
-        Retries an agent pool update if the update is unsuccessful or communication with Okta was interrupted during an agent auto-update
+        Retries an agent pool update if the update is unsuccessful or communication with Okta was interrupted during an
+        agent auto-update
 
         :param pool_id: ID of the agent pool for which the settings apply to (required)
         :type pool_id: str
@@ -1851,13 +1859,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _retry_agent_pools_update_serialize(
-        self,
-        pool_id,
-        update_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1912,21 +1920,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def stop_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Stop an agent pool update
 
@@ -2019,13 +2027,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _stop_agent_pools_update_serialize(
-        self,
-        pool_id,
-        update_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2080,22 +2088,22 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def update_agent_pools_update(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        update_id: Annotated[StrictStr, Field(description="ID of the update")],
-        agent_pool_update: AgentPoolUpdate,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            update_id: Annotated[StrictStr, Field(description="ID of the update")],
+            agent_pool_update: AgentPoolUpdate,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdate:
         """Update an agent pool update by ID
 
@@ -2192,14 +2200,14 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_agent_pools_update_serialize(
-        self,
-        pool_id,
-        update_id,
-        agent_pool_update,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            update_id,
+            agent_pool_update,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2270,21 +2278,21 @@ class AgentPoolsApi(ApiClient):
 
     @validate_call
     async def update_agent_pools_update_settings(
-        self,
-        pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
-        agent_pool_update_setting: AgentPoolUpdateSetting,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            pool_id: Annotated[StrictStr, Field(description="ID of the agent pool for which the settings apply to")],
+            agent_pool_update_setting: AgentPoolUpdateSetting,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AgentPoolUpdateSetting:
         """Update an agent pool update settings
 
@@ -2378,13 +2386,13 @@ class AgentPoolsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_agent_pools_update_settings_serialize(
-        self,
-        pool_id,
-        agent_pool_update_setting,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            pool_id,
+            agent_pool_update_setting,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

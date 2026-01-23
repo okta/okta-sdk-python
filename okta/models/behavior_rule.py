@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
+
 from okta.models.behavior_rule_type import BehaviorRuleType
 from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self import LinksSelf
-from typing import Optional, Set
 
-from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.behavior_rule_asn import BehaviorRuleASN
     from okta.models.behavior_rule_anomalous_device import BehaviorRuleAnomalousDevice
@@ -51,7 +54,8 @@ class BehaviorRule(BaseModel):
     last_updated: Optional[StrictStr] = Field(
         default=None,
         description="Timestamp when the Behavior Detection Rule was last modified",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Annotated[str, Field(strict=True, max_length=128)] = Field(description="Name of the Behavior Detection Rule")
     status: Optional[LifecycleStatus] = None
     type: BehaviorRuleType
@@ -69,7 +73,9 @@ class BehaviorRule(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'ANOMALOUS_ASN': 'BehaviorRuleASN', 'ANOMALOUS_DEVICE': 'BehaviorRuleAnomalousDevice', 'ANOMALOUS_IP': 'BehaviorRuleAnomalousIP', 'ANOMALOUS_LOCATION': 'BehaviorRuleAnomalousLocation', 'VELOCITY': 'BehaviorRuleVelocity'
+        'ANOMALOUS_ASN': 'BehaviorRuleASN', 'ANOMALOUS_DEVICE': 'BehaviorRuleAnomalousDevice',
+        'ANOMALOUS_IP': 'BehaviorRuleAnomalousIP', 'ANOMALOUS_LOCATION': 'BehaviorRuleAnomalousLocation',
+        'VELOCITY': 'BehaviorRuleVelocity'
     }
 
     @classmethod
@@ -92,7 +98,7 @@ class BehaviorRule(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Union[BehaviorRuleASN, BehaviorRuleAnomalousDevice,
-                                                        BehaviorRuleAnomalousIP, BehaviorRuleAnomalousLocation, BehaviorRuleVelocity]]:
+    BehaviorRuleAnomalousIP, BehaviorRuleAnomalousLocation, BehaviorRuleVelocity]]:
         """Create an instance of BehaviorRule from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -109,11 +115,13 @@ class BehaviorRule(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -131,7 +139,7 @@ class BehaviorRule(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[BehaviorRuleASN, BehaviorRuleAnomalousDevice,
-                                                              BehaviorRuleAnomalousIP, BehaviorRuleAnomalousLocation, BehaviorRuleVelocity]]:
+    BehaviorRuleAnomalousIP, BehaviorRuleAnomalousLocation, BehaviorRuleVelocity]]:
         """Create an instance of BehaviorRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -146,6 +154,8 @@ class BehaviorRule(BaseModel):
         if object_type == 'BehaviorRuleVelocity':
             return import_module("okta.models.behavior_rule_velocity").BehaviorRuleVelocity.from_dict(obj)
 
-        raise ValueError("BehaviorRule failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "BehaviorRule failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

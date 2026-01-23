@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from okta.models.org_creation_admin import OrgCreationAdmin
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing_extensions import Annotated
 from typing_extensions import Self
+
+from okta.models.org_creation_admin import OrgCreationAdmin
 
 
 class ChildOrg(BaseModel):
@@ -44,26 +47,47 @@ class ChildOrg(BaseModel):
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the org was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Annotated[str, Field(strict=True)] = Field(
-        description="Unique name of the org. This name appears in the HTML `<title>` tag of the new org sign-in page. Only less than 4-width UTF-8 encoded characters are allowed.")
+        description="Unique name of the org. This name appears in the HTML `<title>` tag of the new org sign-in page. Only "
+                    "less than 4-width UTF-8 encoded characters are allowed."
+    )
     settings: Optional[Dict[str, Any]] = Field(default=None, description="Settings associated with the created org")
-    status: Optional[StrictStr] = Field(default=None,
-                                        description="Status of the org. `ACTIVE` is returned after the org is created.")
+    status: Optional[StrictStr] = Field(
+        default=None,
+        description="Status of the org. `ACTIVE` is returned after the org is created."
+    )
     subdomain: Annotated[str, Field(strict=True)] = Field(
-        description="Subdomain of the org. Must be unique and include no spaces.")
-    token: Optional[StrictStr] = Field(default=None, description="API token associated with the child org super admin account. Use this API token to provision resources (such as policies, apps, and groups) on the newly created child org. This token is revoked if the super admin account is deactivated. > **Note:** If this API token expires, sign in to the Admin Console as the super admin user and create a new API token. See [Create an API token](https://developer.okta.com/docs/guides/create-an-api-token/).")
+        description="Subdomain of the org. Must be unique and include no spaces."
+    )
+    token: Optional[StrictStr] = Field(
+        default=None,
+        description="API token associated with the child org super admin account. Use this API token to provision "
+                    "resources (such as policies, apps, and groups) on the newly created child org. This token is revoked "
+                    "if the super admin account is deactivated. > **Note:** If this API token expires, sign in to the "
+                    "Admin Console as the super admin user and create a new API token. See [Create an API token]("
+                    "https://developer.okta.com/docs/guides/create-an-api-token/)."
+    )
     token_type: Optional[StrictStr] = Field(
         default=None,
-        description="Type of returned `token`. See [Okta API tokens](https://developer.okta.com/docs/guides/create-an-api-token/main/#okta-api-tokens).",
-        alias="tokenType")
+        description="Type of returned `token`. See [Okta API tokens]("
+                    "https://developer.okta.com/docs/guides/create-an-api-token/main/#okta-api-tokens).",
+        alias="tokenType"
+    )
     website: Optional[StrictStr] = Field(default=None, description="Default website for the org")
     links: Optional[Dict[str,
-                         Any]] = Field(default=None,
-                                       description="Specifies available link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification",
-                                       alias="_links")
-    __properties: ClassVar[List[str]] = ["admin", "created", "edition", "id", "lastUpdated",
-                                         "name", "settings", "status", "subdomain", "token", "tokenType", "website", "_links"]
+    Any]] = Field(
+        default=None,
+        description="Specifies available link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) using "
+                    "the [JSON Hypertext Application Language]("
+                    "https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification",
+        alias="_links"
+    )
+    __properties: ClassVar[List[str]] = [
+        "admin", "created", "edition", "id", "lastUpdated",
+        "name", "settings", "status", "subdomain", "token", "tokenType", "website", "_links"
+    ]
 
     @field_validator('edition')
     def edition_validate_enum(cls, value):
@@ -130,16 +154,18 @@ class ChildOrg(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-            "settings",
-            "status",
-            "token",
-            "token_type",
-            "links",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+                "settings",
+                "status",
+                "token",
+                "token_type",
+                "links",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -164,19 +190,21 @@ class ChildOrg(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "admin": OrgCreationAdmin.from_dict(obj["admin"]) if obj.get("admin") is not None else None,
-            "created": obj.get("created"),
-            "edition": obj.get("edition"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "settings": obj.get("settings"),
-            "status": obj.get("status"),
-            "subdomain": obj.get("subdomain"),
-            "token": obj.get("token"),
-            "tokenType": obj.get("tokenType"),
-            "website": obj.get("website"),
-            "_links": obj.get("_links")
-        })
+        _obj = cls.model_validate(
+            {
+                "admin": OrgCreationAdmin.from_dict(obj["admin"]) if obj.get("admin") is not None else None,
+                "created": obj.get("created"),
+                "edition": obj.get("edition"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "settings": obj.get("settings"),
+                "status": obj.get("status"),
+                "subdomain": obj.get("subdomain"),
+                "token": obj.get("token"),
+                "tokenType": obj.get("tokenType"),
+                "website": obj.get("website"),
+                "_links": obj.get("_links")
+            }
+        )
         return _obj

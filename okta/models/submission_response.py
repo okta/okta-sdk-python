@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.auth_settings import AuthSettings
 from okta.models.provisioning_details import ProvisioningDetails
 from okta.models.sso import Sso
@@ -35,64 +40,82 @@ from okta.models.submission_capability import SubmissionCapability
 from okta.models.submission_response_app_contact_details_inner import SubmissionResponseAppContactDetailsInner
 from okta.models.submission_response_config_inner import SubmissionResponseConfigInner
 from okta.models.submission_response_global_token_revocation import SubmissionResponseGlobalTokenRevocation
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SubmissionResponse(BaseModel):
     """
     SubmissionResponse
     """  # noqa: E501
-    actions: Optional[List[SubmissionAction]] = Field(default=None,
-                                                      description="List of actions supported by this integration")
+    actions: Optional[List[SubmissionAction]] = Field(
+        default=None,
+        description="List of actions supported by this integration"
+    )
     app_contact_details: Optional[List[SubmissionResponseAppContactDetailsInner]] = Field(
-        default=None, description="List of contact details for the app integration", alias="appContactDetails")
+        default=None, description="List of contact details for the app integration", alias="appContactDetails"
+    )
     var_auth_settings: Optional[AuthSettings] = Field(default=None, alias="authSettings")
     capabilities: Optional[List[SubmissionCapability]] = Field(
-        default=None, description="List of capabilities supported by this integration")
+        default=None, description="List of capabilities supported by this integration"
+    )
     config: Optional[List[SubmissionResponseConfigInner]] = Field(
-        default=None, description="List of org-level variables for the customer per-tenant configuration. For example, a `subdomain` variable can be used in the ACS URL: `https://${org.subdomain}.example.com/saml/login`")
+        default=None,
+        description="List of org-level variables for the customer per-tenant configuration. For example, a `subdomain` "
+                    "variable can be used in the ACS URL: `https://${org.subdomain}.example.com/saml/login`"
+    )
     description: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=1024)]] = Field(
-        default=None, description="A general description of your application and the benefits provided to your customers")
+        default=None, description="A general description of your application and the benefits provided to your customers"
+    )
     global_token_revocation: Optional[SubmissionResponseGlobalTokenRevocation] = Field(
-        default=None, alias="globalTokenRevocation")
+        default=None, alias="globalTokenRevocation"
+    )
     id: Optional[StrictStr] = Field(default=None, description="OIN Integration ID")
     last_published: Optional[StrictStr] = Field(
         default=None,
         description="Timestamp when the OIN Integration was last published",
-        alias="lastPublished")
+        alias="lastPublished"
+    )
     last_updated: Optional[StrictStr] = Field(
         default=None,
         description="Timestamp when the OIN Integration instance was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     last_updated_by: Optional[StrictStr] = Field(
         default=None,
         description="ID of the user who made the last update",
-        alias="lastUpdatedBy")
+        alias="lastUpdatedBy"
+    )
     logo: Optional[StrictStr] = Field(
         default=None,
-        description="URL to an uploaded application logo. This logo appears next to your app integration name in the OIN catalog. You must first [Upload an OIN Integration logo](/openapi/okta-management/management/tag/YourOinIntegrations/#tag/YourOinIntegrations/operation/uploadSubmissionLogo) to obtain the logo URL before you can specify this value.")
+        description="URL to an uploaded application logo. This logo appears next to your app integration name in the OIN "
+                    "catalog. You must first [Upload an OIN Integration logo]("
+                    "/openapi/okta-management/management/tag/YourOinIntegrations/#tag/YourOinIntegrations/operation"
+                    "/uploadSubmissionLogo) to obtain the logo URL before you can specify this value."
+    )
     name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=64)]] = Field(
-        default=None, description="The app integration name. This is the main title used for your integration in the OIN catalog.")
+        default=None,
+        description="The app integration name. This is the main title used for your integration in the OIN catalog."
+    )
     provisioning: Optional[ProvisioningDetails] = None
     sso: Optional[Sso] = None
     status: Optional[StrictStr] = Field(default=None, description="Status of the OIN Integration submission")
-    __properties: ClassVar[List[str]] = ["actions",
-                                         "appContactDetails",
-                                         "authSettings",
-                                         "capabilities",
-                                         "config",
-                                         "description",
-                                         "globalTokenRevocation",
-                                         "id",
-                                         "lastPublished",
-                                         "lastUpdated",
-                                         "lastUpdatedBy",
-                                         "logo",
-                                         "name",
-                                         "provisioning",
-                                         "sso",
-                                         "status"]
+    __properties: ClassVar[List[str]] = [
+        "actions",
+        "appContactDetails",
+        "authSettings",
+        "capabilities",
+        "config",
+        "description",
+        "globalTokenRevocation",
+        "id",
+        "lastPublished",
+        "lastUpdated",
+        "lastUpdatedBy",
+        "logo",
+        "name",
+        "provisioning",
+        "sso",
+        "status"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,13 +152,15 @@ class SubmissionResponse(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-            "last_published",
-            "last_updated",
-            "last_updated_by",
-            "status",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+                "last_published",
+                "last_updated",
+                "last_updated_by",
+                "status",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -209,22 +234,35 @@ class SubmissionResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "actions": [SubmissionAction.from_dict(_item) for _item in obj["actions"]] if obj.get("actions") is not None else None,
-            "appContactDetails": [SubmissionResponseAppContactDetailsInner.from_dict(_item) for _item in obj["appContactDetails"]] if obj.get("appContactDetails") is not None else None,
-            "authSettings": AuthSettings.from_dict(obj["authSettings"]) if obj.get("authSettings") is not None else None,
-            "capabilities": [SubmissionCapability.from_dict(_item) for _item in obj["capabilities"]] if obj.get("capabilities") is not None else None,
-            "config": [SubmissionResponseConfigInner.from_dict(_item) for _item in obj["config"]] if obj.get("config") is not None else None,
-            "description": obj.get("description"),
-            "globalTokenRevocation": SubmissionResponseGlobalTokenRevocation.from_dict(obj["globalTokenRevocation"]) if obj.get("globalTokenRevocation") is not None else None,
-            "id": obj.get("id"),
-            "lastPublished": obj.get("lastPublished"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "lastUpdatedBy": obj.get("lastUpdatedBy"),
-            "logo": obj.get("logo"),
-            "name": obj.get("name"),
-            "provisioning": ProvisioningDetails.from_dict(obj["provisioning"]) if obj.get("provisioning") is not None else None,
-            "sso": Sso.from_dict(obj["sso"]) if obj.get("sso") is not None else None,
-            "status": obj.get("status")
-        })
+        _obj = cls.model_validate(
+            {
+                "actions": [SubmissionAction.from_dict(_item) for _item in obj["actions"]] if obj.get(
+                    "actions"
+                ) is not None else None,
+                "appContactDetails": [SubmissionResponseAppContactDetailsInner.from_dict(_item) for _item in
+                                      obj["appContactDetails"]] if obj.get("appContactDetails") is not None else None,
+                "authSettings": AuthSettings.from_dict(obj["authSettings"]) if obj.get("authSettings") is not None else None,
+                "capabilities": [SubmissionCapability.from_dict(_item) for _item in obj["capabilities"]] if obj.get(
+                    "capabilities"
+                ) is not None else None,
+                "config": [SubmissionResponseConfigInner.from_dict(_item) for _item in obj["config"]] if obj.get(
+                    "config"
+                ) is not None else None,
+                "description": obj.get("description"),
+                "globalTokenRevocation": SubmissionResponseGlobalTokenRevocation.from_dict(
+                    obj["globalTokenRevocation"]
+                ) if obj.get("globalTokenRevocation") is not None else None,
+                "id": obj.get("id"),
+                "lastPublished": obj.get("lastPublished"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "lastUpdatedBy": obj.get("lastUpdatedBy"),
+                "logo": obj.get("logo"),
+                "name": obj.get("name"),
+                "provisioning": ProvisioningDetails.from_dict(obj["provisioning"]) if obj.get(
+                    "provisioning"
+                ) is not None else None,
+                "sso": Sso.from_dict(obj["sso"]) if obj.get("sso") is not None else None,
+                "status": obj.get("status")
+            }
+        )
         return _obj

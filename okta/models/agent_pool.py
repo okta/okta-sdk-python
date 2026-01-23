@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,42 +20,48 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.agent import Agent
 from okta.models.agent_type import AgentType
 from okta.models.links_self import LinksSelf
 from okta.models.operational_status import OperationalStatus
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AgentPool(BaseModel):
     """
-    An agent pool is a collection of agents that serve a common purpose. An agent pool has a unique ID within an org, and contains a collection of agents disjoint to every other agent pool, meaning that no two agent pools share an agent.
+    An agent pool is a collection of agents that serve a common purpose. An agent pool has a unique ID within an org,
+    and contains a collection of agents disjoint to every other agent pool, meaning that no two agent pools share an agent.
     """  # noqa: E501
     agents: Optional[List[Agent]] = None
     disrupted_agents: Optional[StrictInt] = Field(
         default=None,
         description="Number of agents in the pool that are in a disrupted state",
-        alias="disruptedAgents")
+        alias="disruptedAgents"
+    )
     id: Optional[StrictStr] = Field(default=None, description="Agent pool ID")
     inactive_agents: Optional[StrictInt] = Field(
         default=None,
         description="Number of agents in the pool that are in an inactive state",
-        alias="inactiveAgents")
+        alias="inactiveAgents"
+    )
     name: Optional[StrictStr] = Field(default=None, description="Agent pool name")
     operational_status: Optional[OperationalStatus] = Field(default=None, alias="operationalStatus")
     type: Optional[AgentType] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["agents", "disruptedAgents", "id",
-                                         "inactiveAgents", "name", "operationalStatus", "type", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "agents", "disruptedAgents", "id",
+        "inactiveAgents", "name", "operationalStatus", "type", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,9 +94,11 @@ class AgentPool(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -120,14 +130,16 @@ class AgentPool(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "agents": [Agent.from_dict(_item) for _item in obj["agents"]] if obj.get("agents") is not None else None,
-            "disruptedAgents": obj.get("disruptedAgents"),
-            "id": obj.get("id"),
-            "inactiveAgents": obj.get("inactiveAgents"),
-            "name": obj.get("name"),
-            "operationalStatus": obj.get("operationalStatus"),
-            "type": obj.get("type"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "agents": [Agent.from_dict(_item) for _item in obj["agents"]] if obj.get("agents") is not None else None,
+                "disruptedAgents": obj.get("disruptedAgents"),
+                "id": obj.get("id"),
+                "inactiveAgents": obj.get("inactiveAgents"),
+                "name": obj.get("name"),
+                "operationalStatus": obj.get("operationalStatus"),
+                "type": obj.get("type"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

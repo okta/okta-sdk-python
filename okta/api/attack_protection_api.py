@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
+
 from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing import List
-from okta.models.attack_protection_authenticator_settings import AttackProtectionAuthenticatorSettings
-from okta.models.user_lockout_settings import UserLockoutSettings
-
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.attack_protection_authenticator_settings import AttackProtectionAuthenticatorSettings
+from okta.models.success import Success
+from okta.models.user_lockout_settings import UserLockoutSettings
 from okta.rest import RESTResponse
 
 
@@ -44,19 +46,19 @@ class AttackProtectionApi(ApiClient):
 
     @validate_call
     async def get_authenticator_settings(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AttackProtectionAuthenticatorSettings]:
         """Retrieve the authenticator settings
 
@@ -113,7 +115,9 @@ class AttackProtectionApi(ApiClient):
         if List[AttackProtectionAuthenticatorSettings] is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, AttackProtectionAuthenticatorSettings)
+            response, response_body, error = await self._request_executor.execute(
+                request, AttackProtectionAuthenticatorSettings
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -142,11 +146,11 @@ class AttackProtectionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_authenticator_settings_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -197,19 +201,19 @@ class AttackProtectionApi(ApiClient):
 
     @validate_call
     async def get_user_lockout_settings(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserLockoutSettings]:
         """Retrieve the user lockout settings
 
@@ -295,11 +299,11 @@ class AttackProtectionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_user_lockout_settings_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -350,20 +354,20 @@ class AttackProtectionApi(ApiClient):
 
     @validate_call
     async def replace_authenticator_settings(
-        self,
-        authenticator_settings: AttackProtectionAuthenticatorSettings,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_settings: AttackProtectionAuthenticatorSettings,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AttackProtectionAuthenticatorSettings:
         """Replace the authenticator settings
 
@@ -424,7 +428,9 @@ class AttackProtectionApi(ApiClient):
         if AttackProtectionAuthenticatorSettings is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, AttackProtectionAuthenticatorSettings)
+            response, response_body, error = await self._request_executor.execute(
+                request, AttackProtectionAuthenticatorSettings
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -453,12 +459,12 @@ class AttackProtectionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_authenticator_settings_serialize(
-        self,
-        authenticator_settings,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_settings,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -525,20 +531,20 @@ class AttackProtectionApi(ApiClient):
 
     @validate_call
     async def replace_user_lockout_settings(
-        self,
-        lockout_settings: UserLockoutSettings,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            lockout_settings: UserLockoutSettings,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserLockoutSettings:
         """Replace the user lockout settings
 
@@ -628,12 +634,12 @@ class AttackProtectionApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_user_lockout_settings_serialize(
-        self,
-        lockout_settings,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            lockout_settings,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

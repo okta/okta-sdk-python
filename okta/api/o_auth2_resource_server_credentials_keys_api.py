@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List
+from typing import Optional, Tuple, Union
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.o_auth2_resource_server_json_web_key import OAuth2ResourceServerJsonWebKey
-from okta.models.o_auth2_resource_server_json_web_key_request_body import OAuth2ResourceServerJsonWebKeyRequestBody
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.o_auth2_resource_server_json_web_key import OAuth2ResourceServerJsonWebKey
+from okta.models.o_auth2_resource_server_json_web_key_request_body import OAuth2ResourceServerJsonWebKeyRequestBody
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,25 +47,27 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
 
     @validate_call
     async def activate_o_auth2_resource_server_json_web_key(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        key_id: Annotated[StrictStr, Field(description="Unique `id` of the Custom Authorization Server JSON Web Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            key_id: Annotated[StrictStr, Field(description="Unique `id` of the Custom Authorization Server JSON Web Key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ResourceServerJsonWebKey:
         """Activate a Custom Authorization Server Public JSON Web Key
 
-        Activates a custom authorization server public JSON web key by key `id`. > **Note:** You can have only one active key at any given time for the authorization server. When you activate an inactive key, Okta automatically deactivates the current active key.
+        Activates a custom authorization server public JSON web key by key `id`. > **Note:** You can have only one active
+        key at any given time for the authorization server. When you activate an inactive key, Okta automatically
+        deactivates the current active key.
 
         :param auth_server_id: `id` of the Authorization Server (required)
         :type auth_server_id: str
@@ -154,13 +157,13 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_o_auth2_resource_server_json_web_key_serialize(
-        self,
-        auth_server_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -200,7 +203,8 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
 
         return self.param_serialize(
             method='POST',
-            resource_path='/api/v1/authorizationServers/{authServerId}/resourceservercredentials/keys/{keyId}/lifecycle/activate',
+            resource_path='/api/v1/authorizationServers/{authServerId}/resourceservercredentials/keys/{'
+                          'keyId}/lifecycle/activate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -215,25 +219,32 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
 
     @validate_call
     async def add_o_auth2_resource_server_json_web_key(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        o_auth2_resource_server_json_web_key_request_body: OAuth2ResourceServerJsonWebKeyRequestBody,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            o_auth2_resource_server_json_web_key_request_body: OAuth2ResourceServerJsonWebKeyRequestBody,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ResourceServerJsonWebKey:
         """Add a JSON Web Key
 
-        Adds a new JSON Web Key to the custom authorization server`s JSON web keys. > **Note:** This API doesn't allow you to add a key if the existing key doesn't have a `kid`. Use the [Replace an Authorization Server](/openapi/okta-management/management/tag/AuthorizationServer/#tag/AuthorizationServer/operation/replaceAuthorizationServer) operation to update the JWKS or [Delete a Custom Authorization Server Public JSON Web Key](/openapi/okta-management/management/tag/OAuth2ResourceServerCredentialsKeys/#tag/OAuth2ResourceServerCredentialsKeys/operation/deleteOAuth2ResourceServerJsonWebKey) and re-add the key with a `kid`. > **Note:** This API doesn't allow you to add a key with an ACTIVE status. You need to add an INACTIVE key first, and then ACTIVATE the key.
+        Adds a new JSON Web Key to the custom authorization server`s JSON web keys. > **Note:** This API doesn't allow you
+        to add a key if the existing key doesn't have a `kid`. Use the [Replace an Authorization Server](
+        /openapi/okta-management/management/tag/AuthorizationServer/#tag/AuthorizationServer/operation
+        /replaceAuthorizationServer) operation to update the JWKS or [Delete a Custom Authorization Server Public JSON Web
+        Key](/openapi/okta-management/management/tag/OAuth2ResourceServerCredentialsKeys/#tag
+        /OAuth2ResourceServerCredentialsKeys/operation/deleteOAuth2ResourceServerJsonWebKey) and re-add the key with a
+        `kid`. > **Note:** This API doesn't allow you to add a key with an ACTIVE status. You need to add an INACTIVE key
+        first, and then ACTIVATE the key.
 
         :param auth_server_id: `id` of the Authorization Server (required)
         :type auth_server_id: str
@@ -323,13 +334,13 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _add_o_auth2_resource_server_json_web_key_serialize(
-        self,
-        auth_server_id,
-        o_auth2_resource_server_json_web_key_request_body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            o_auth2_resource_server_json_web_key_request_body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -398,25 +409,27 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
 
     @validate_call
     async def deactivate_o_auth2_resource_server_json_web_key(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        key_id: Annotated[StrictStr, Field(description="Unique `id` of the Custom Authorization Server JSON Web Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            key_id: Annotated[StrictStr, Field(description="Unique `id` of the Custom Authorization Server JSON Web Key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ResourceServerJsonWebKey:
         """Deactivate a Custom Authorization Server Public JSON Web Key
 
-        Deactivates a custom authorization server public JSON web key by key `id`. > **Note:** Deactivating the active key isn't allowed if the authorization server has access token encryption enabled. You can activate another key, which makes the current key inactive.
+        Deactivates a custom authorization server public JSON web key by key `id`. > **Note:** Deactivating the active key
+        isn't allowed if the authorization server has access token encryption enabled. You can activate another key,
+        which makes the current key inactive.
 
         :param auth_server_id: `id` of the Authorization Server (required)
         :type auth_server_id: str
@@ -507,13 +520,13 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_o_auth2_resource_server_json_web_key_serialize(
-        self,
-        auth_server_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -553,7 +566,8 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
 
         return self.param_serialize(
             method='POST',
-            resource_path='/api/v1/authorizationServers/{authServerId}/resourceservercredentials/keys/{keyId}/lifecycle/deactivate',
+            resource_path='/api/v1/authorizationServers/{authServerId}/resourceservercredentials/keys/{'
+                          'keyId}/lifecycle/deactivate',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -568,21 +582,21 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
 
     @validate_call
     async def delete_o_auth2_resource_server_json_web_key(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        key_id: Annotated[StrictStr, Field(description="Unique `id` of the Custom Authorization Server JSON Web Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            key_id: Annotated[StrictStr, Field(description="Unique `id` of the Custom Authorization Server JSON Web Key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a Custom Authorization Server Public JSON Web Key
 
@@ -668,13 +682,13 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_o_auth2_resource_server_json_web_key_serialize(
-        self,
-        auth_server_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -729,21 +743,21 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
 
     @validate_call
     async def get_o_auth2_resource_server_json_web_key(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        key_id: Annotated[StrictStr, Field(description="Unique `id` of the Custom Authorization Server JSON Web Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            key_id: Annotated[StrictStr, Field(description="Unique `id` of the Custom Authorization Server JSON Web Key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ResourceServerJsonWebKey:
         """Retrieve a Custom Authorization Server Public JSON Web Key
 
@@ -837,13 +851,13 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_o_auth2_resource_server_json_web_key_serialize(
-        self,
-        auth_server_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -898,20 +912,20 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
 
     @validate_call
     async def list_o_auth2_resource_server_json_web_keys(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2ResourceServerJsonWebKey]:
         """List all Custom Authorization Server Public JSON Web Keys
 
@@ -1002,12 +1016,12 @@ class OAuth2ResourceServerCredentialsKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_o_auth2_resource_server_json_web_keys_serialize(
-        self,
-        auth_server_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

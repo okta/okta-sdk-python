@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple
+from typing import List, Union
 
 from pydantic import Field, StrictBytes, StrictStr
-from typing import List, Union
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.image_upload_response import ImageUploadResponse
-from okta.models.theme_response import ThemeResponse
-from okta.models.update_theme_request import UpdateThemeRequest
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.image_upload_response import ImageUploadResponse
+from okta.models.success import Success
+from okta.models.theme_response import ThemeResponse
+from okta.models.update_theme_request import UpdateThemeRequest
 from okta.rest import RESTResponse
 
 
@@ -47,21 +48,21 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def delete_brand_theme_background_image(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete the background image
 
@@ -145,13 +146,13 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_brand_theme_background_image_serialize(
-        self,
-        brand_id,
-        theme_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            theme_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -206,21 +207,21 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def delete_brand_theme_favicon(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete the favicon
 
@@ -304,13 +305,13 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_brand_theme_favicon_serialize(
-        self,
-        brand_id,
-        theme_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            theme_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -365,21 +366,21 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def delete_brand_theme_logo(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete the logo
 
@@ -463,13 +464,13 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_brand_theme_logo_serialize(
-        self,
-        brand_id,
-        theme_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            theme_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -524,21 +525,21 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def get_brand_theme(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ThemeResponse:
         """Retrieve a theme
 
@@ -631,13 +632,13 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_brand_theme_serialize(
-        self,
-        brand_id,
-        theme_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            theme_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -692,24 +693,25 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def list_brand_themes(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ThemeResponse]:
         """List all themes
 
-        Lists all the themes in your brand.  > **Important:** Currently each org supports only one theme, therefore this contains a single object only.
+        Lists all the themes in your brand.  > **Important:** Currently each org supports only one theme, therefore this
+        contains a single object only.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -795,12 +797,12 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_brand_themes_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -853,22 +855,22 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def replace_brand_theme(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
-        theme: UpdateThemeRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
+            theme: UpdateThemeRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ThemeResponse:
         """Replace a theme
 
@@ -965,14 +967,14 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_brand_theme_serialize(
-        self,
-        brand_id,
-        theme_id,
-        theme,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            theme_id,
+            theme,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1043,26 +1045,27 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def upload_brand_theme_background_image(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
-        file: Union[StrictBytes, StrictStr],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
+            file: Union[StrictBytes, StrictStr],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ImageUploadResponse:
         """Upload the background image
 
-        Uploads and replaces the background image for the theme. The file must be in PNG, JPG, or GIF format and less than 2 MB in size.
+        Uploads and replaces the background image for the theme. The file must be in PNG, JPG, or GIF format and less than
+        2 MB in size.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1155,14 +1158,14 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_brand_theme_background_image_serialize(
-        self,
-        brand_id,
-        theme_id,
-        file,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            theme_id,
+            file,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1233,22 +1236,22 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def upload_brand_theme_favicon(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
-        file: Union[StrictBytes, StrictStr],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
+            file: Union[StrictBytes, StrictStr],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ImageUploadResponse:
         """Upload the favicon
 
@@ -1345,14 +1348,14 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_brand_theme_favicon_serialize(
-        self,
-        brand_id,
-        theme_id,
-        file,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            theme_id,
+            file,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1423,26 +1426,28 @@ class ThemesApi(ApiClient):
 
     @validate_call
     async def upload_brand_theme_logo(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
-        file: Union[StrictBytes, StrictStr],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
+            file: Union[StrictBytes, StrictStr],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ImageUploadResponse:
         """Upload the logo
 
-        Uploads and replaces the logo for the theme. The file must be in PNG, JPG, or GIF format and less than 100kB in size. For best results use landscape orientation, a transparent background, and a minimum size of 300px by 50px to prevent upscaling.
+        Uploads and replaces the logo for the theme. The file must be in PNG, JPG, or GIF format and less than 100kB in
+        size. For best results use landscape orientation, a transparent background, and a minimum size of 300px by 50px to
+        prevent upscaling.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1535,14 +1540,14 @@ class ThemesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_brand_theme_logo_serialize(
-        self,
-        brand_id,
-        theme_id,
-        file,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            theme_id,
+            file,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

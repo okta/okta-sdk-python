@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.inline_hook_channel_config_auth_scheme_response import InlineHookChannelConfigAuthSchemeResponse
 from okta.models.inline_hook_channel_config_headers import InlineHookChannelConfigHeaders
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class InlineHookHttpConfig(BaseModel):
@@ -39,10 +42,16 @@ class InlineHookHttpConfig(BaseModel):
     """  # noqa: E501
     auth_scheme: Optional[InlineHookChannelConfigAuthSchemeResponse] = Field(default=None, alias="authScheme")
     headers: Optional[List[InlineHookChannelConfigHeaders]] = Field(
-        default=None, description="An optional list of key/value pairs for headers that you can send with the request to the external service")
+        default=None,
+        description="An optional list of key/value pairs for headers that you can send with the request to the external "
+                    "service"
+    )
     method: Optional[StrictStr] = Field(default=None, description="The method of the Okta inline hook request")
     uri: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None, description="The external service endpoint that executes the inline hook handler. It must begin with `https://` and be reachable by Okta. No white space is allowed in the URI.")
+        default=None,
+        description="The external service endpoint that executes the inline hook handler. It must begin with `https://` "
+                    "and be reachable by Okta. No white space is allowed in the URI."
+    )
     __properties: ClassVar[List[str]] = ["headers", "method", "uri"]
 
     model_config = ConfigDict(
@@ -75,8 +84,10 @@ class InlineHookHttpConfig(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -101,9 +112,13 @@ class InlineHookHttpConfig(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "headers": [InlineHookChannelConfigHeaders.from_dict(_item) for _item in obj["headers"]] if obj.get("headers") is not None else None,
-            "method": obj.get("method"),
-            "uri": obj.get("uri")
-        })
+        _obj = cls.model_validate(
+            {
+                "headers": [InlineHookChannelConfigHeaders.from_dict(_item) for _item in obj["headers"]] if obj.get(
+                    "headers"
+                ) is not None else None,
+                "method": obj.get("method"),
+                "uri": obj.get("uri")
+            }
+        )
         return _obj

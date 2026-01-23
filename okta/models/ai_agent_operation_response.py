@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.ai_agent_resource import AIAgentResource
 from okta.models.error_details import ErrorDetails
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AIAgentOperationResponse(BaseModel):
@@ -45,7 +48,9 @@ class AIAgentOperationResponse(BaseModel):
     started: Optional[datetime] = Field(default=None, description="Timestamp of when the AI agent operation started")
     status: StrictStr = Field(description="The status of the AI agent operation")
     type: StrictStr = Field(description="The AI agent operation type")
-    __properties: ClassVar[List[str]] = ["completed", "created", "errorDetails", "id", "resource", "started", "status", "type"]
+    __properties: ClassVar[List[str]] = [
+        "completed", "created", "errorDetails", "id", "resource", "started", "status", "type"
+    ]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -57,10 +62,16 @@ class AIAgentOperationResponse(BaseModel):
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['ai-agent:Register', 'ai-agent:Replace', 'ai-agent:Delete',
-                            'ai-agent:Activate', 'ai-agent:Deactivate', 'ai-agent:Patch']):
+        if value not in set(
+                [
+                    'ai-agent:Register', 'ai-agent:Replace', 'ai-agent:Delete',
+                    'ai-agent:Activate', 'ai-agent:Deactivate', 'ai-agent:Patch'
+                ]
+        ):
             raise ValueError(
-                "must be one of enum values ('ai-agent:Register', 'ai-agent:Replace', 'ai-agent:Delete', 'ai-agent:Activate', 'ai-agent:Deactivate', 'ai-agent:Patch')")
+                "must be one of enum values ('ai-agent:Register', 'ai-agent:Replace', 'ai-agent:Delete', "
+                "'ai-agent:Activate', 'ai-agent:Deactivate', 'ai-agent:Patch')"
+            )
         return value
 
     model_config = ConfigDict(
@@ -93,8 +104,10 @@ class AIAgentOperationResponse(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -126,14 +139,16 @@ class AIAgentOperationResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "completed": obj.get("completed"),
-            "created": obj.get("created"),
-            "errorDetails": ErrorDetails.from_dict(obj["errorDetails"]) if obj.get("errorDetails") is not None else None,
-            "id": obj.get("id"),
-            "resource": AIAgentResource.from_dict(obj["resource"]) if obj.get("resource") is not None else None,
-            "started": obj.get("started"),
-            "status": obj.get("status"),
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "completed": obj.get("completed"),
+                "created": obj.get("created"),
+                "errorDetails": ErrorDetails.from_dict(obj["errorDetails"]) if obj.get("errorDetails") is not None else None,
+                "id": obj.get("id"),
+                "resource": AIAgentResource.from_dict(obj["resource"]) if obj.get("resource") is not None else None,
+                "started": obj.get("started"),
+                "status": obj.get("status"),
+                "type": obj.get("type")
+            }
+        )
         return _obj

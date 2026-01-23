@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.brand import Brand
 from okta.models.brand_domains import BrandDomains
 from okta.models.brand_request import BrandRequest
 from okta.models.brand_with_embedded import BrandWithEmbedded
 from okta.models.create_brand_request import CreateBrandRequest
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -49,20 +50,20 @@ class BrandsApi(ApiClient):
 
     @validate_call
     async def create_brand(
-        self,
-        create_brand_request: Optional[CreateBrandRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            create_brand_request: Optional[CreateBrandRequest] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Brand:
         """Create a brand
 
@@ -153,12 +154,12 @@ class BrandsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_brand_serialize(
-        self,
-        create_brand_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            create_brand_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -225,20 +226,20 @@ class BrandsApi(ApiClient):
 
     @validate_call
     async def delete_brand(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a brand
 
@@ -320,12 +321,12 @@ class BrandsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_brand_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -378,22 +379,23 @@ class BrandsApi(ApiClient):
 
     @validate_call
     async def get_brand(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BrandWithEmbedded:
         """Retrieve a brand
 
@@ -486,13 +488,13 @@ class BrandsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_brand_serialize(
-        self,
-        brand_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -513,7 +515,6 @@ class BrandsApi(ApiClient):
             _path_params['brandId'] = brand_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -550,20 +551,20 @@ class BrandsApi(ApiClient):
 
     @validate_call
     async def list_brand_domains(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> BrandDomains:
         """List all domains associated with a brand
 
@@ -653,12 +654,12 @@ class BrandsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_brand_domains_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -711,26 +712,32 @@ class BrandsApi(ApiClient):
 
     @validate_call
     async def list_brands(
-        self,
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[BrandWithEmbedded]:
         """List all brands
 
@@ -738,7 +745,9 @@ class BrandsApi(ApiClient):
 
         :param expand: Specifies additional metadata to be included in the response
         :type expand: List[str]
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -828,15 +837,15 @@ class BrandsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_brands_serialize(
-        self,
-        expand,
-        after,
-        limit,
-        q,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            expand,
+            after,
+            limit,
+            q,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -855,19 +864,15 @@ class BrandsApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if q is not None:
-
             _query_params.append(('q', q))
 
         # process the header parameters
@@ -904,25 +909,27 @@ class BrandsApi(ApiClient):
 
     @validate_call
     async def replace_brand(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        brand: BrandRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            brand: BrandRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Brand:
         """Replace a brand
 
-        Replaces a brand by `brandId`  Passing an invalid `brandId` returns a `404 Not Found` status code with the error code `E0000007`.  Not providing `agreeToCustomPrivacyPolicy` with `customPrivacyPolicyUrl` returns a `400 Bad Request` status code with the error code `E0000001`.  
+        Replaces a brand by `brandId`  Passing an invalid `brandId` returns a `404 Not Found` status code with the error
+        code `E0000007`.  Not providing `agreeToCustomPrivacyPolicy` with `customPrivacyPolicyUrl` returns a `400 Bad
+        Request` status code with the error code `E0000001`.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1012,13 +1019,13 @@ class BrandsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_brand_serialize(
-        self,
-        brand_id,
-        brand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            brand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

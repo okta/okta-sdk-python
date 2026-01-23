@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,24 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.enrollment_activation_request import EnrollmentActivationRequest
 from okta.models.enrollment_activation_response import EnrollmentActivationResponse
 from okta.models.enrollment_initialization_request import EnrollmentInitializationRequest
 from okta.models.enrollment_initialization_response import EnrollmentInitializationResponse
 from okta.models.fulfillment_request import FulfillmentRequest
 from okta.models.pin_request import PinRequest
-from okta.models.web_authn_preregistration_factor import WebAuthnPreregistrationFactor
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.web_authn_preregistration_factor import WebAuthnPreregistrationFactor
 from okta.rest import RESTResponse
 
 
@@ -51,24 +52,26 @@ class WebAuthnPreregistrationApi(ApiClient):
 
     @validate_call
     async def activate_preregistration_enrollment(
-        self,
-        body: Annotated[Optional[EnrollmentActivationRequest], Field(description="Enrollment activation request")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            body: Annotated[
+                Optional[EnrollmentActivationRequest], Field(description="Enrollment activation request")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnrollmentActivationResponse:
         """Activate a preregistered WebAuthn factor
 
-        Activates a preregistered WebAuthn factor. As part of this operation, Okta first decrypts and verifies the factor PIN and enrollment data sent by the fulfillment provider.
+        Activates a preregistered WebAuthn factor. As part of this operation, Okta first decrypts and verifies the factor
+        PIN and enrollment data sent by the fulfillment provider.
 
         :param body: Enrollment activation request
         :type body: EnrollmentActivationRequest
@@ -155,12 +158,12 @@ class WebAuthnPreregistrationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_preregistration_enrollment_serialize(
-        self,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -227,25 +230,27 @@ class WebAuthnPreregistrationApi(ApiClient):
 
     @validate_call
     async def assign_fulfillment_error_web_authn_preregistration_factor(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        authenticator_enrollment_id: Annotated[StrictStr, Field(description="ID for a WebAuthn preregistration factor in Okta")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            authenticator_enrollment_id: Annotated[
+                StrictStr, Field(description="ID for a WebAuthn preregistration factor in Okta")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Assign the fulfillment error status to a WebAuthn preregistration factor
 
-        Assigns the fulfillment error status to a WebAuthn preregistration factor for a user. The `/mark-error` path indicates that the specific `FULFILLMENT_ERRORED` AuthFactor status is set on the enrollment.
+        Assigns the fulfillment error status to a WebAuthn preregistration factor for a user. The `/mark-error` path
+        indicates that the specific `FULFILLMENT_ERRORED` AuthFactor status is set on the enrollment.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -280,14 +285,15 @@ class WebAuthnPreregistrationApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._assign_fulfillment_error_web_authn_preregistration_factor_serialize(
-            user_id=user_id,
-            authenticator_enrollment_id=authenticator_enrollment_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._assign_fulfillment_error_web_authn_preregistration_factor_serialize(
+                user_id=user_id,
+                authenticator_enrollment_id=authenticator_enrollment_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -325,13 +331,13 @@ class WebAuthnPreregistrationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_fulfillment_error_web_authn_preregistration_factor_serialize(
-        self,
-        user_id,
-        authenticator_enrollment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            authenticator_enrollment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -386,21 +392,22 @@ class WebAuthnPreregistrationApi(ApiClient):
 
     @validate_call
     async def delete_web_authn_preregistration_factor(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        authenticator_enrollment_id: Annotated[StrictStr, Field(description="ID for a WebAuthn preregistration factor in Okta")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            authenticator_enrollment_id: Annotated[
+                StrictStr, Field(description="ID for a WebAuthn preregistration factor in Okta")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a WebAuthn preregistration factor
 
@@ -484,13 +491,13 @@ class WebAuthnPreregistrationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_web_authn_preregistration_factor_serialize(
-        self,
-        user_id,
-        authenticator_enrollment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            authenticator_enrollment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -545,25 +552,27 @@ class WebAuthnPreregistrationApi(ApiClient):
 
     @validate_call
     async def enroll_preregistration_enrollment(
-        self,
-        body: Annotated[Optional[EnrollmentInitializationRequest],
-                        Field(description="Enrollment initialization request")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            body: Annotated[
+                Optional[EnrollmentInitializationRequest], Field(description="Enrollment initialization request")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EnrollmentInitializationResponse:
         """Enroll a preregistered WebAuthn factor
 
-        Enrolls a preregistered WebAuthn factor. This WebAuthn factor has a longer challenge timeout period to accommodate the fulfillment request process. As part of this operation, Okta generates elliptic curve (EC) key-pairs used to encrypt the factor PIN and enrollment data sent by the fulfillment provider.
+        Enrolls a preregistered WebAuthn factor. This WebAuthn factor has a longer challenge timeout period to accommodate
+        the fulfillment request process. As part of this operation, Okta generates elliptic curve (EC) key-pairs used to
+        encrypt the factor PIN and enrollment data sent by the fulfillment provider.
 
         :param body: Enrollment initialization request
         :type body: EnrollmentInitializationRequest
@@ -650,12 +659,12 @@ class WebAuthnPreregistrationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _enroll_preregistration_enrollment_serialize(
-        self,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -722,24 +731,25 @@ class WebAuthnPreregistrationApi(ApiClient):
 
     @validate_call
     async def generate_fulfillment_request(
-        self,
-        body: Annotated[Optional[FulfillmentRequest], Field(description="Fulfillment request")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            body: Annotated[Optional[FulfillmentRequest], Field(description="Fulfillment request")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Generate a fulfillment request
 
-        Generates a fulfillment request by sending a WebAuthn preregistration event to start the flow. The WebAuthn preregistration integration for Okta Workflows uses a preregistration event to populate the fulfillment request.
+        Generates a fulfillment request by sending a WebAuthn preregistration event to start the flow. The WebAuthn
+        preregistration integration for Okta Workflows uses a preregistration event to populate the fulfillment request.
 
         :param body: Fulfillment request
         :type body: FulfillmentRequest
@@ -816,12 +826,12 @@ class WebAuthnPreregistrationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _generate_fulfillment_request_serialize(
-        self,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -888,20 +898,20 @@ class WebAuthnPreregistrationApi(ApiClient):
 
     @validate_call
     async def list_web_authn_preregistration_factors(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[WebAuthnPreregistrationFactor]:
         """List all WebAuthn preregistration factors
 
@@ -991,12 +1001,12 @@ class WebAuthnPreregistrationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_web_authn_preregistration_factors_serialize(
-        self,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1049,24 +1059,25 @@ class WebAuthnPreregistrationApi(ApiClient):
 
     @validate_call
     async def send_pin(
-        self,
-        body: Annotated[Optional[PinRequest], Field(description="Send PIN request")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            body: Annotated[Optional[PinRequest], Field(description="Send PIN request")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Send a PIN to user
 
-        Sends the decoded PIN for the specified WebAuthn preregistration enrollment. PINs are sent to the user's email. To resend the PIN, call this operation again.
+        Sends the decoded PIN for the specified WebAuthn preregistration enrollment. PINs are sent to the user's email. To
+        resend the PIN, call this operation again.
 
         :param body: Send PIN request
         :type body: PinRequest
@@ -1143,12 +1154,12 @@ class WebAuthnPreregistrationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _send_pin_serialize(
-        self,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

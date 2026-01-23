@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
 
 from pydantic import Field, StrictStr
-from typing import List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.application_feature import ApplicationFeature
-from okta.models.application_feature_type import ApplicationFeatureType
-from okta.models.update_feature_for_application_request import UpdateFeatureForApplicationRequest
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.application_feature import ApplicationFeature
+from okta.models.application_feature_type import ApplicationFeatureType
+from okta.models.success import Success
+from okta.models.update_feature_for_application_request import UpdateFeatureForApplicationRequest
 from okta.rest import RESTResponse
 
 
@@ -47,21 +48,21 @@ class ApplicationFeaturesApi(ApiClient):
 
     @validate_call
     async def get_feature_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        feature_name: Annotated[ApplicationFeatureType, Field(description="Name of the Feature")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            feature_name: Annotated[ApplicationFeatureType, Field(description="Name of the Feature")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApplicationFeature:
         """Retrieve a feature
 
@@ -154,13 +155,13 @@ class ApplicationFeaturesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_feature_for_application_serialize(
-        self,
-        app_id,
-        feature_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            feature_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -215,24 +216,27 @@ class ApplicationFeaturesApi(ApiClient):
 
     @validate_call
     async def list_features_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ApplicationFeature]:
         """List all features
 
-        Lists all features for an app > **Note:** This request returns an error if provisioning isn't enabled for the app. > To set up provisioning, see [Update the default provisioning connection](/openapi/okta-management/management/tag/ApplicationConnections/#tag/ApplicationConnections/operation/updateDefaultProvisioningConnectionForApplication). 
+        Lists all features for an app > **Note:** This request returns an error if provisioning isn't enabled for the app.
+        > To set up provisioning, see [Update the default provisioning connection](
+        /openapi/okta-management/management/tag/ApplicationConnections/#tag/ApplicationConnections/operation
+        /updateDefaultProvisioningConnectionForApplication).
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -319,12 +323,12 @@ class ApplicationFeaturesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_features_for_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -377,26 +381,26 @@ class ApplicationFeaturesApi(ApiClient):
 
     @validate_call
     async def update_feature_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        feature_name: Annotated[ApplicationFeatureType, Field(description="Name of the Feature")],
-        update_feature_for_application_request: UpdateFeatureForApplicationRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            feature_name: Annotated[ApplicationFeatureType, Field(description="Name of the Feature")],
+            update_feature_for_application_request: UpdateFeatureForApplicationRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApplicationFeature:
         """Update a feature
 
-        Updates a Feature object for an app > **Note:** This endpoint supports partial updates. 
+        Updates a Feature object for an app > **Note:** This endpoint supports partial updates.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -489,14 +493,14 @@ class ApplicationFeaturesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_feature_for_application_serialize(
-        self,
-        app_id,
-        feature_name,
-        update_feature_for_application_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            feature_name,
+            update_feature_for_application_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

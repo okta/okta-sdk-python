@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.access_policy_link import AccessPolicyLink
 from okta.models.groups_link import GroupsLink
 from okta.models.help_link import HelpLink
@@ -35,8 +40,6 @@ from okta.models.href_object_deactivate_link import HrefObjectDeactivateLink
 from okta.models.href_object_self_link import HrefObjectSelfLink
 from okta.models.metadata_link import MetadataLink
 from okta.models.users_link import UsersLink
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class ApplicationLinks(BaseModel):
@@ -53,8 +56,10 @@ class ApplicationLinks(BaseModel):
     metadata: Optional[MetadataLink] = None
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     users: Optional[UsersLink] = None
-    __properties: ClassVar[List[str]] = ["accessPolicy", "activate", "appLinks",
-                                         "deactivate", "groups", "help", "logo", "metadata", "self", "users"]
+    __properties: ClassVar[List[str]] = [
+        "accessPolicy", "activate", "appLinks",
+        "deactivate", "groups", "help", "logo", "metadata", "self", "users"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,8 +91,10 @@ class ApplicationLinks(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -175,16 +182,24 @@ class ApplicationLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "accessPolicy": AccessPolicyLink.from_dict(obj["accessPolicy"]) if obj.get("accessPolicy") is not None else None,
-            "activate": HrefObjectActivateLink.from_dict(obj["activate"]) if obj.get("activate") is not None else None,
-            "appLinks": [HrefObject.from_dict(_item) for _item in obj["appLinks"]] if obj.get("appLinks") is not None else None,
-            "deactivate": HrefObjectDeactivateLink.from_dict(obj["deactivate"]) if obj.get("deactivate") is not None else None,
-            "groups": GroupsLink.from_dict(obj["groups"]) if obj.get("groups") is not None else None,
-            "help": HelpLink.from_dict(obj["help"]) if obj.get("help") is not None else None,
-            "logo": [HrefObject.from_dict(_item) for _item in obj["logo"]] if obj.get("logo") is not None else None,
-            "metadata": MetadataLink.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
-            "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
-            "users": UsersLink.from_dict(obj["users"]) if obj.get("users") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "accessPolicy": AccessPolicyLink.from_dict(obj["accessPolicy"]) if obj.get(
+                    "accessPolicy"
+                ) is not None else None,
+                "activate": HrefObjectActivateLink.from_dict(obj["activate"]) if obj.get("activate") is not None else None,
+                "appLinks": [HrefObject.from_dict(_item) for _item in obj["appLinks"]] if obj.get(
+                    "appLinks"
+                ) is not None else None,
+                "deactivate": HrefObjectDeactivateLink.from_dict(obj["deactivate"]) if obj.get(
+                    "deactivate"
+                ) is not None else None,
+                "groups": GroupsLink.from_dict(obj["groups"]) if obj.get("groups") is not None else None,
+                "help": HelpLink.from_dict(obj["help"]) if obj.get("help") is not None else None,
+                "logo": [HrefObject.from_dict(_item) for _item in obj["logo"]] if obj.get("logo") is not None else None,
+                "metadata": MetadataLink.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
+                "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
+                "users": UsersLink.from_dict(obj["users"]) if obj.get("users") is not None else None
+            }
+        )
         return _obj

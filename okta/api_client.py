@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,32 +20,30 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 import datetime
-from dateutil.parser import parse
-from enum import Enum
 import json
 import mimetypes
 import os
 import re
 import tempfile
+from enum import Enum
+from typing import Tuple, Optional, List, Dict, Union
+from urllib.parse import quote
 
 from blinker import signal
-from urllib.parse import quote
-from typing import Tuple, Optional, List, Dict, Union
+from dateutil.parser import parse
 from pydantic import SecretStr
 from pydash.strings import camel_case
 
-from okta.configuration import Configuration
-from okta.api_response import ApiResponse, T as ApiResponseT
 import okta.models
 from okta import rest
+from okta.api_response import ApiResponse, T as ApiResponseT
+from okta.call_info import CallInfo
+from okta.configuration import Configuration
 from okta.exceptions.exceptions import (
     ApiValueError,
     ApiException
 )
-
-from okta.call_info import CallInfo
 
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
 
@@ -78,11 +78,11 @@ class ApiClient:
     _pool = None
 
     def __init__(
-        self,
-        configuration=None,
-        header_name=None,
-        header_value=None,
-        cookie=None
+            self,
+            configuration=None,
+            header_name=None,
+            header_value=None,
+            cookie=None
     ) -> None:
         self.call_api_started = signal('call_api_started')
         self.call_api_complete = signal('call_api_complete')
@@ -159,18 +159,18 @@ class ApiClient:
         cls._default = default
 
     def param_serialize(
-        self,
-        method,
-        resource_path,
-        path_params=None,
-        query_params=None,
-        header_params=None,
-        body=None,
-        post_params=None,
-        files=None, auth_settings=None,
-        collection_formats=None,
-        _host=None,
-        _request_auth=None
+            self,
+            method,
+            resource_path,
+            path_params=None,
+            query_params=None,
+            header_params=None,
+            body=None,
+            post_params=None,
+            files=None, auth_settings=None,
+            collection_formats=None,
+            _host=None,
+            _request_auth=None
     ) -> RequestSerialized:
         """Builds the HTTP request params needed by the request.
         :param method: Method to call.
@@ -266,13 +266,13 @@ class ApiClient:
         return method, url, header_params, body, post_params
 
     def call_api(
-        self,
-        method,
-        url,
-        header_params=None,
-        body=None,
-        post_params=None,
-        _request_timeout=None
+            self,
+            method,
+            url,
+            header_params=None,
+            body=None,
+            post_params=None,
+            _request_timeout=None
     ) -> rest.RESTResponse:
         """Makes the HTTP request (synchronous)
         :param method: Method to call.
@@ -287,13 +287,15 @@ class ApiClient:
         """
 
         try:
-            call_info = CallInfo({
-                'method': method,
-                'url': url,
-                'headers': header_params,
-                'body': body,
-                'post_params': post_params
-            })
+            call_info = CallInfo(
+                {
+                    'method': method,
+                    'url': url,
+                    'headers': header_params,
+                    'body': body,
+                    'post_params': post_params
+                }
+            )
             self.call_api_started.send(call_info)
             # perform request and return response
             response_data = self.rest_client.request(
@@ -311,9 +313,9 @@ class ApiClient:
         return response_data
 
     def response_deserialize(
-        self,
-        response_data: rest.RESTResponse,
-        response_types_map: Optional[Dict[str, ApiResponseT]] = None
+            self,
+            response_data: rest.RESTResponse,
+            response_types_map: Optional[Dict[str, ApiResponseT]] = None
     ) -> ApiResponse[ApiResponseT]:
         """Deserializes response into an object.
         :param response_data: RESTResponse object to be deserialized.
@@ -503,7 +505,8 @@ class ApiClient:
                     else:  # csv is the default
                         delimiter = ','
                     new_params.append(
-                        (k, delimiter.join(str(value) for value in v)))
+                        (k, delimiter.join(str(value) for value in v))
+                    )
             else:
                 new_params.append((k, v))
         return new_params
@@ -604,14 +607,14 @@ class ApiClient:
         return content_types[0]
 
     def update_params_for_auth(
-        self,
-        headers,
-        queries,
-        auth_settings,
-        resource_path,
-        method,
-        body,
-        request_auth=None
+            self,
+            headers,
+            queries,
+            auth_settings,
+            resource_path,
+            method,
+            body,
+            request_auth=None
     ) -> None:
         """Updates header and query params based on authentication setting.
 
@@ -651,13 +654,13 @@ class ApiClient:
                     )
 
     def _apply_auth_params(
-        self,
-        headers,
-        queries,
-        resource_path,
-        method,
-        body,
-        auth_setting
+            self,
+            headers,
+            queries,
+            resource_path,
+            method,
+            body,
+            auth_setting
     ) -> None:
         """Updates the request parameters based on a single auth_setting
 

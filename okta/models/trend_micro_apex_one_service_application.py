@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,27 +20,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.application_accessibility import ApplicationAccessibility
 from okta.models.application_licensing import ApplicationLicensing
 from okta.models.application_lifecycle_status import ApplicationLifecycleStatus
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.scheme_application_credentials import SchemeApplicationCredentials
 from okta.models.trend_micro_apex_one_service_application_settings import TrendMicroApexOneServiceApplicationSettings
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class TrendMicroApexOneServiceApplication(BaseModel):
     """
-    Schema for Trend Micro Apex One as a Service app (key name: `trendmicroapexoneservice`)  To create a Trend Micro Apex One as a Service app, use the [Create an Application](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication) request with the following parameters in the request body. > **Note:** The Trend Micro Apex One as a Service app only supports `SAML_2_0` sign-on mode. 
+    Schema for Trend Micro Apex One as a Service app (key name: `trendmicroapexoneservice`)  To create a Trend Micro Apex
+    One as a Service app, use the [Create an Application](
+    /openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication) request with the
+    following parameters in the request body. > **Note:** The Trend Micro Apex One as a Service app only supports
+    `SAML_2_0` sign-on mode.
     """  # noqa: E501
     accessibility: Optional[ApplicationAccessibility] = None
     credentials: Optional[SchemeApplicationCredentials] = None
@@ -46,13 +53,18 @@ class TrendMicroApexOneServiceApplication(BaseModel):
     licensing: Optional[ApplicationLicensing] = None
     name: StrictStr
     profile: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps)")
+        default=None,
+        description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only "
+                    "available to OAuth 2.0 client apps)"
+    )
     sign_on_mode: Optional[StrictStr] = Field(default=None, alias="signOnMode")
     status: Optional[ApplicationLifecycleStatus] = None
     visibility: Optional[ApplicationVisibility] = None
     settings: TrendMicroApexOneServiceApplicationSettings
-    __properties: ClassVar[List[str]] = ["accessibility", "credentials", "label",
-                                         "licensing", "name", "profile", "signOnMode", "status", "visibility", "settings"]
+    __properties: ClassVar[List[str]] = [
+        "accessibility", "credentials", "label",
+        "licensing", "name", "profile", "signOnMode", "status", "visibility", "settings"
+    ]
 
     @field_validator('name')
     def name_validate_enum(cls, value):
@@ -101,8 +113,10 @@ class TrendMicroApexOneServiceApplication(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -155,16 +169,26 @@ class TrendMicroApexOneServiceApplication(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "accessibility": ApplicationAccessibility.from_dict(obj["accessibility"]) if obj.get("accessibility") is not None else None,
-            "credentials": SchemeApplicationCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None,
-            "label": obj.get("label"),
-            "licensing": ApplicationLicensing.from_dict(obj["licensing"]) if obj.get("licensing") is not None else None,
-            "name": obj.get("name"),
-            "profile": obj.get("profile"),
-            "signOnMode": obj.get("signOnMode"),
-            "status": obj.get("status"),
-            "visibility": ApplicationVisibility.from_dict(obj["visibility"]) if obj.get("visibility") is not None else None,
-            "settings": TrendMicroApexOneServiceApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "accessibility": ApplicationAccessibility.from_dict(obj["accessibility"]) if obj.get(
+                    "accessibility"
+                ) is not None else None,
+                "credentials": SchemeApplicationCredentials.from_dict(obj["credentials"]) if obj.get(
+                    "credentials"
+                ) is not None else None,
+                "label": obj.get("label"),
+                "licensing": ApplicationLicensing.from_dict(obj["licensing"]) if obj.get("licensing") is not None else None,
+                "name": obj.get("name"),
+                "profile": obj.get("profile"),
+                "signOnMode": obj.get("signOnMode"),
+                "status": obj.get("status"),
+                "visibility": ApplicationVisibility.from_dict(obj["visibility"]) if obj.get(
+                    "visibility"
+                ) is not None else None,
+                "settings": TrendMicroApexOneServiceApplicationSettings.from_dict(obj["settings"]) if obj.get(
+                    "settings"
+                ) is not None else None
+            }
+        )
         return _obj

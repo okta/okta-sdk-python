@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,127 +20,197 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class UserProfile(BaseModel):
     """
-    Specifies the default and custom profile properties for a user.  The default user profile is based on the [System for Cross-domain Identity Management: Core Schema](https://datatracker.ietf.org/doc/html/rfc7643).  The only permitted customizations of the default profile are to update permissions, change whether the `firstName` and `lastName` properties are nullable, and specify a [pattern](https://developer.okta.com/docs/reference/api/schemas/#login-pattern-validation) for `login`. You can use the Profile Editor in the Admin Console or the [Schemas API](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UISchema/#tag/UISchema) to make schema modifications.  You can extend user profiles with custom properties. You must first add the custom property to the user profile schema before you reference it. You can use the Profile Editor in the Admin Console or the [Schemas API](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UISchema/#tag/UISchema) to manage schema extensions.  Custom attributes can contain HTML tags. It's the client's responsibility to escape or encode this data before displaying it. Use [best-practices](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) to prevent cross-site scripting.
+    Specifies the default and custom profile properties for a user.  The default user profile is based on the [System for
+    Cross-domain Identity Management: Core Schema](https://datatracker.ietf.org/doc/html/rfc7643).  The only permitted
+    customizations of the default profile are to update permissions, change whether the `firstName` and `lastName`
+    properties are nullable, and specify a [pattern](
+    https://developer.okta.com/docs/reference/api/schemas/#login-pattern-validation) for `login`. You can use the Profile
+    Editor in the Admin Console or the [Schemas API](
+    https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UISchema/#tag/UISchema) to make schema
+    modifications.  You can extend user profiles with custom properties. You must first add the custom property to the
+    user profile schema before you reference it. You can use the Profile Editor in the Admin Console or the [Schemas API](
+    https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UISchema/#tag/UISchema) to manage schema
+    extensions.  Custom attributes can contain HTML tags. It's the client's responsibility to escape or encode this data
+    before displaying it. Use [best-practices](
+    https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) to prevent cross-site
+    scripting.
     """  # noqa: E501
     city: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(
-        default=None, description="The city or locality of the user's address (`locality`)")
+        default=None, description="The city or locality of the user's address (`locality`)"
+    )
     cost_center: Optional[StrictStr] = Field(
         default=None,
         description="Name of the cost center assigned to a user",
-        alias="costCenter")
+        alias="costCenter"
+    )
     country_code: Optional[Annotated[str, Field(strict=True, max_length=2)]] = Field(
-        default=None, description="The country name component of the user's address (`country`). For validation, see [ISO 3166-1 alpha 2 \"short\" code format](https://datatracker.ietf.org/doc/html/draft-ietf-scim-core-schema-22#ref-ISO3166).", alias="countryCode")
+        default=None,
+        description="The country name component of the user's address (`country`). For validation, see [ISO 3166-1 alpha 2 "
+                    "\"short\" code format](https://datatracker.ietf.org/doc/html/draft-ietf-scim-core-schema-22#ref"
+                    "-ISO3166).",
+        alias="countryCode"
+    )
     department: Optional[StrictStr] = Field(default=None, description="Name of the user's department")
     display_name: Optional[StrictStr] = Field(
         default=None,
         description="Name of the user suitable for display to end users",
-        alias="displayName")
+        alias="displayName"
+    )
     division: Optional[StrictStr] = Field(default=None, description="Name of the user's division")
     email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(
-        default=None, description="The primary email address of the user. For validation, see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).")
+        default=None,
+        description="The primary email address of the user. For validation, see [RFC 5322 Section 3.2.3]("
+                    "https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3)."
+    )
     employee_number: Optional[StrictStr] = Field(
         default=None,
         description="The organization or company assigned unique identifier for the user",
-        alias="employeeNumber")
+        alias="employeeNumber"
+    )
     first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
-        default=None, description="Given name of the user (`givenName`)", alias="firstName")
+        default=None, description="Given name of the user (`givenName`)", alias="firstName"
+    )
     honorific_prefix: Optional[StrictStr] = Field(
         default=None,
         description="Honorific prefix(es) of the user, or title in most Western languages",
-        alias="honorificPrefix")
+        alias="honorificPrefix"
+    )
     honorific_suffix: Optional[StrictStr] = Field(
         default=None,
         description="Honorific suffix(es) of the user",
-        alias="honorificSuffix")
+        alias="honorificSuffix"
+    )
     last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
-        default=None, description="The family name of the user (`familyName`)", alias="lastName")
+        default=None, description="The family name of the user (`familyName`)", alias="lastName"
+    )
     locale: Optional[StrictStr] = Field(
         default=None,
-        description="The user's default location for purposes of localizing items such as currency, date time format, numerical representations, and so on. A locale value is a concatenation of the ISO 639-1 two-letter language code, an underscore, and the ISO 3166-1 two-letter country code. For example, en_US specifies the language English and country US. This value is `en_US` by default.")
-    login: Optional[Annotated[str, Field(min_length=5, strict=True)]] = Field(default=None, description="The unique identifier for the user (`username`). For validation, see [Login pattern validation](https://developer.okta.com/docs/reference/api/schemas/#login-pattern-validation).  Every user within your Okta org must have a unique identifier for a login. This constraint applies to all users you import from other systems or applications such as Active Directory. Your organization is the top-level namespace to mix and match logins from all your connected applications or directories. Careful consideration of naming conventions for your login identifier will make it easier to onboard new applications in the future.  Logins are not considered unique if they differ only in case and/or diacritical marks. If one of your users has a login of Isaac.Brock@example.com, there cannot be another user whose login is isaac.brock@example.com, nor isáàc.bröck@example.com.  Okta has a default ambiguous name resolution policy for usernames that include @-signs. (By default, usernames must be formatted as email addresses and thus always include @-signs. You can remove that restriction using either the Admin Console or the [Schemas API](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/). Users can sign in with their non-qualified short name (for example: isaac.brock with username isaac.brock@example.com) as long as the short name is still unique within the organization. maxLength: 100")
+        description="The user's default location for purposes of localizing items such as currency, date time format, "
+                    "numerical representations, and so on. A locale value is a concatenation of the ISO 639-1 two-letter "
+                    "language code, an underscore, and the ISO 3166-1 two-letter country code. For example, "
+                    "en_US specifies the language English and country US. This value is `en_US` by default."
+    )
+    login: Optional[Annotated[str, Field(min_length=5, strict=True)]] = Field(
+        default=None,
+        description="The unique identifier for the user (`username`). For validation, see [Login pattern validation]("
+                    "https://developer.okta.com/docs/reference/api/schemas/#login-pattern-validation).  Every user within "
+                    "your Okta org must have a unique identifier for a login. This constraint applies to all users you "
+                    "import from other systems or applications such as Active Directory. Your organization is the "
+                    "top-level namespace to mix and match logins from all your connected applications or directories. "
+                    "Careful consideration of naming conventions for your login identifier will make it easier to onboard "
+                    "new applications in the future.  Logins are not considered unique if they differ only in case and/or "
+                    "diacritical marks. If one of your users has a login of Isaac.Brock@example.com, there cannot be "
+                    "another user whose login is isaac.brock@example.com, nor isáàc.bröck@example.com.  Okta has a default "
+                    "ambiguous name resolution policy for usernames that include @-signs. (By default, usernames must be "
+                    "formatted as email addresses and thus always include @-signs. You can remove that restriction using "
+                    "either the Admin Console or the [Schemas API]("
+                    "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/). Users can sign "
+                    "in with their non-qualified short name (for example: isaac.brock with username "
+                    "isaac.brock@example.com) as long as the short name is still unique within the organization. "
+                    "maxLength: 100"
+    )
     manager: Optional[StrictStr] = Field(default=None, description="The `displayName` of the user's manager")
     manager_id: Optional[StrictStr] = Field(default=None, description="The `id` of the user's manager", alias="managerId")
     middle_name: Optional[StrictStr] = Field(default=None, description="The middle name of the user", alias="middleName")
     mobile_phone: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=100)]] = Field(
-        default=None, description="The mobile phone number of the user", alias="mobilePhone")
+        default=None, description="The mobile phone number of the user", alias="mobilePhone"
+    )
     nick_name: Optional[StrictStr] = Field(
         default=None,
         description="The casual way to address the user in real life",
-        alias="nickName")
+        alias="nickName"
+    )
     organization: Optional[StrictStr] = Field(default=None, description="Name of the the user's organization")
     postal_address: Optional[Annotated[str, Field(strict=True, max_length=4096)]] = Field(
-        default=None, description="Mailing address component of the user's address", alias="postalAddress")
+        default=None, description="Mailing address component of the user's address", alias="postalAddress"
+    )
     preferred_language: Optional[StrictStr] = Field(
         default=None,
-        description="The user's preferred written or spoken language. For validation, see [RFC 7231 Section 5.3.5](https://datatracker.ietf.org/doc/html/rfc7231#section-5.3.5).",
-        alias="preferredLanguage")
+        description="The user's preferred written or spoken language. For validation, see [RFC 7231 Section 5.3.5]("
+                    "https://datatracker.ietf.org/doc/html/rfc7231#section-5.3.5).",
+        alias="preferredLanguage"
+    )
     primary_phone: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=100)]] = Field(
-        default=None, description="The primary phone number of the user such as a home number", alias="primaryPhone")
+        default=None, description="The primary phone number of the user such as a home number", alias="primaryPhone"
+    )
     profile_url: Optional[StrictStr] = Field(
         default=None,
-        description="The URL of the user's online profile. For example, a web page. See [URL](https://datatracker.ietf.org/doc/html/rfc1808).",
-        alias="profileUrl")
+        description="The URL of the user's online profile. For example, a web page. See [URL]("
+                    "https://datatracker.ietf.org/doc/html/rfc1808).",
+        alias="profileUrl"
+    )
     second_email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(
-        default=None, description="The secondary email address of the user typically used for account recovery. For validation, see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).", alias="secondEmail")
+        default=None,
+        description="The secondary email address of the user typically used for account recovery. For validation, "
+                    "see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).",
+        alias="secondEmail"
+    )
     state: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(
-        default=None, description="The state or region component of the user's address (`region`)")
+        default=None, description="The state or region component of the user's address (`region`)"
+    )
     street_address: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
-        default=None, description="The full street address component of the user's address", alias="streetAddress")
+        default=None, description="The full street address component of the user's address", alias="streetAddress"
+    )
     timezone: Optional[StrictStr] = Field(default=None, description="The user's time zone")
     title: Optional[StrictStr] = Field(default=None, description="The user's title, such as Vice President")
     user_type: Optional[StrictStr] = Field(
         default=None,
         description="The property used to describe the organization-to-user relationship, such as employee or contractor",
-        alias="userType")
+        alias="userType"
+    )
     zip_code: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(
-        default=None, description="The ZIP code or postal code component of the user's address (`postalCode`)", alias="zipCode")
+        default=None, description="The ZIP code or postal code component of the user's address (`postalCode`)",
+        alias="zipCode"
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["city",
-                                         "costCenter",
-                                         "countryCode",
-                                         "department",
-                                         "displayName",
-                                         "division",
-                                         "email",
-                                         "employeeNumber",
-                                         "firstName",
-                                         "honorificPrefix",
-                                         "honorificSuffix",
-                                         "lastName",
-                                         "locale",
-                                         "login",
-                                         "manager",
-                                         "managerId",
-                                         "middleName",
-                                         "mobilePhone",
-                                         "nickName",
-                                         "organization",
-                                         "postalAddress",
-                                         "preferredLanguage",
-                                         "primaryPhone",
-                                         "profileUrl",
-                                         "secondEmail",
-                                         "state",
-                                         "streetAddress",
-                                         "timezone",
-                                         "title",
-                                         "userType",
-                                         "zipCode"]
+    __properties: ClassVar[List[str]] = [
+        "city",
+        "costCenter",
+        "countryCode",
+        "department",
+        "displayName",
+        "division",
+        "email",
+        "employeeNumber",
+        "firstName",
+        "honorificPrefix",
+        "honorificSuffix",
+        "lastName",
+        "locale",
+        "login",
+        "manager",
+        "managerId",
+        "middleName",
+        "mobilePhone",
+        "nickName",
+        "organization",
+        "postalAddress",
+        "preferredLanguage",
+        "primaryPhone",
+        "profileUrl",
+        "secondEmail",
+        "state",
+        "streetAddress",
+        "timezone",
+        "title",
+        "userType",
+        "zipCode"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -171,9 +243,11 @@ class UserProfile(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -326,39 +400,41 @@ class UserProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "city": obj.get("city"),
-            "costCenter": obj.get("costCenter"),
-            "countryCode": obj.get("countryCode"),
-            "department": obj.get("department"),
-            "displayName": obj.get("displayName"),
-            "division": obj.get("division"),
-            "email": obj.get("email"),
-            "employeeNumber": obj.get("employeeNumber"),
-            "firstName": obj.get("firstName"),
-            "honorificPrefix": obj.get("honorificPrefix"),
-            "honorificSuffix": obj.get("honorificSuffix"),
-            "lastName": obj.get("lastName"),
-            "locale": obj.get("locale"),
-            "login": obj.get("login"),
-            "manager": obj.get("manager"),
-            "managerId": obj.get("managerId"),
-            "middleName": obj.get("middleName"),
-            "mobilePhone": obj.get("mobilePhone"),
-            "nickName": obj.get("nickName"),
-            "organization": obj.get("organization"),
-            "postalAddress": obj.get("postalAddress"),
-            "preferredLanguage": obj.get("preferredLanguage"),
-            "primaryPhone": obj.get("primaryPhone"),
-            "profileUrl": obj.get("profileUrl"),
-            "secondEmail": obj.get("secondEmail"),
-            "state": obj.get("state"),
-            "streetAddress": obj.get("streetAddress"),
-            "timezone": obj.get("timezone"),
-            "title": obj.get("title"),
-            "userType": obj.get("userType"),
-            "zipCode": obj.get("zipCode")
-        })
+        _obj = cls.model_validate(
+            {
+                "city": obj.get("city"),
+                "costCenter": obj.get("costCenter"),
+                "countryCode": obj.get("countryCode"),
+                "department": obj.get("department"),
+                "displayName": obj.get("displayName"),
+                "division": obj.get("division"),
+                "email": obj.get("email"),
+                "employeeNumber": obj.get("employeeNumber"),
+                "firstName": obj.get("firstName"),
+                "honorificPrefix": obj.get("honorificPrefix"),
+                "honorificSuffix": obj.get("honorificSuffix"),
+                "lastName": obj.get("lastName"),
+                "locale": obj.get("locale"),
+                "login": obj.get("login"),
+                "manager": obj.get("manager"),
+                "managerId": obj.get("managerId"),
+                "middleName": obj.get("middleName"),
+                "mobilePhone": obj.get("mobilePhone"),
+                "nickName": obj.get("nickName"),
+                "organization": obj.get("organization"),
+                "postalAddress": obj.get("postalAddress"),
+                "preferredLanguage": obj.get("preferredLanguage"),
+                "primaryPhone": obj.get("primaryPhone"),
+                "profileUrl": obj.get("profileUrl"),
+                "secondEmail": obj.get("secondEmail"),
+                "state": obj.get("state"),
+                "streetAddress": obj.get("streetAddress"),
+                "timezone": obj.get("timezone"),
+                "title": obj.get("title"),
+                "userType": obj.get("userType"),
+                "zipCode": obj.get("zipCode")
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

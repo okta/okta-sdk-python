@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -35,14 +37,22 @@ class TestInfoSamlTestConfiguration(BaseModel):
     """
     SAML test details
     """  # noqa: E501
-    idp: Optional[StrictBool] = Field(default=None, description="Indicates if your integration supports IdP-initiated sign-in")
+    idp: Optional[StrictBool] = Field(
+        default=None, description="Indicates if your integration supports IdP-initiated sign-in"
+    )
     sp: Optional[StrictBool] = Field(default=None, description="Indicates if your integration supports SP-initiated sign-in")
-    jit: Optional[StrictBool] = Field(default=None,
-                                      description="Indicates if your integration supports Just-In-Time (JIT) provisioning")
+    jit: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if your integration supports Just-In-Time (JIT) provisioning"
+    )
     sp_initiate_url: Annotated[str, Field(strict=True, max_length=512)] = Field(
-        description="URL for SP-initiated sign-in flows (required if `sp = true`)", alias="spInitiateUrl")
+        description="URL for SP-initiated sign-in flows (required if `sp = true`)", alias="spInitiateUrl"
+    )
     sp_initiate_description: Optional[Annotated[str, Field(strict=True, max_length=2048)]] = Field(
-        default=None, description="Instructions on how to sign in to your app using the SP-initiated flow (required if `sp = true`)", alias="spInitiateDescription")
+        default=None,
+        description="Instructions on how to sign in to your app using the SP-initiated flow (required if `sp = true`)",
+        alias="spInitiateDescription"
+    )
     __properties: ClassVar[List[str]] = ["idp", "sp", "jit", "spInitiateUrl", "spInitiateDescription"]
 
     model_config = ConfigDict(
@@ -75,8 +85,10 @@ class TestInfoSamlTestConfiguration(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -94,11 +106,13 @@ class TestInfoSamlTestConfiguration(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "idp": obj.get("idp"),
-            "sp": obj.get("sp"),
-            "jit": obj.get("jit"),
-            "spInitiateUrl": obj.get("spInitiateUrl"),
-            "spInitiateDescription": obj.get("spInitiateDescription")
-        })
+        _obj = cls.model_validate(
+            {
+                "idp": obj.get("idp"),
+                "sp": obj.get("sp"),
+                "jit": obj.get("jit"),
+                "spInitiateUrl": obj.get("spInitiateUrl"),
+                "spInitiateDescription": obj.get("spInitiateDescription")
+            }
+        )
         return _obj

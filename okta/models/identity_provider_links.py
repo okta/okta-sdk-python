@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.href_object import HrefObject
 from okta.models.href_object_self_link import HrefObjectSelfLink
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class IdentityProviderLinks(BaseModel):
@@ -39,20 +42,25 @@ class IdentityProviderLinks(BaseModel):
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     acs: Optional[HrefObject] = Field(default=None, description="SAML 2.0 Assertion Consumer Service URL for the Okta SP")
     authorize: Optional[HrefObject] = Field(
-        default=None, description="OAuth 2.0 authorization endpoint for the IdP OAuth 2.0 Authorization Code flow")
+        default=None, description="OAuth 2.0 authorization endpoint for the IdP OAuth 2.0 Authorization Code flow"
+    )
     client_redirect_uri: Optional[HrefObject] = Field(
         default=None,
         description="Redirect URI for the OAuth 2.0 Authorization Code flow",
-        alias="clientRedirectUri")
+        alias="clientRedirectUri"
+    )
     metadata: Optional[HrefObject] = Field(
-        default=None, description="Federation metadata document for the IdP (for example: SAML 2.0 Metadata)")
+        default=None, description="Federation metadata document for the IdP (for example: SAML 2.0 Metadata)"
+    )
     users: Optional[HrefObject] = Field(default=None, description="IdP users")
     deactivate: Optional[HrefObject] = Field(default=None, description="Deactivate IdP")
     activate: Optional[HrefObject] = Field(default=None, description="Activate IdP")
     keys: Optional[HrefObject] = Field(default=None, description="IdP keys")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["self", "acs", "authorize",
-                                         "clientRedirectUri", "metadata", "users", "deactivate", "activate", "keys"]
+    __properties: ClassVar[List[str]] = [
+        "self", "acs", "authorize",
+        "clientRedirectUri", "metadata", "users", "deactivate", "activate", "keys"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,9 +93,11 @@ class IdentityProviderLinks(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -173,17 +183,21 @@ class IdentityProviderLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
-            "acs": HrefObject.from_dict(obj["acs"]) if obj.get("acs") is not None else None,
-            "authorize": HrefObject.from_dict(obj["authorize"]) if obj.get("authorize") is not None else None,
-            "clientRedirectUri": HrefObject.from_dict(obj["clientRedirectUri"]) if obj.get("clientRedirectUri") is not None else None,
-            "metadata": HrefObject.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
-            "users": HrefObject.from_dict(obj["users"]) if obj.get("users") is not None else None,
-            "deactivate": HrefObject.from_dict(obj["deactivate"]) if obj.get("deactivate") is not None else None,
-            "activate": HrefObject.from_dict(obj["activate"]) if obj.get("activate") is not None else None,
-            "keys": HrefObject.from_dict(obj["keys"]) if obj.get("keys") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
+                "acs": HrefObject.from_dict(obj["acs"]) if obj.get("acs") is not None else None,
+                "authorize": HrefObject.from_dict(obj["authorize"]) if obj.get("authorize") is not None else None,
+                "clientRedirectUri": HrefObject.from_dict(obj["clientRedirectUri"]) if obj.get(
+                    "clientRedirectUri"
+                ) is not None else None,
+                "metadata": HrefObject.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
+                "users": HrefObject.from_dict(obj["users"]) if obj.get("users") is not None else None,
+                "deactivate": HrefObject.from_dict(obj["deactivate"]) if obj.get("deactivate") is not None else None,
+                "activate": HrefObject.from_dict(obj["activate"]) if obj.get("activate") is not None else None,
+                "keys": HrefObject.from_dict(obj["keys"]) if obj.get("keys") is not None else None
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

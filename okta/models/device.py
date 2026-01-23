@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.device_display_name import DeviceDisplayName
 from okta.models.device_profile import DeviceProfile
 from okta.models.device_status import DeviceStatus
 from okta.models.links_self_and_full_users_lifecycle import LinksSelfAndFullUsersLifecycle
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class Device(BaseModel):
@@ -43,8 +46,10 @@ class Device(BaseModel):
     id: Optional[StrictStr] = Field(default=None, description="Unique key for the device")
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the device record was last updated. Updates occur when Okta collects and saves device signals during authentication, and when the lifecycle state of the device changes.",
-        alias="lastUpdated")
+        description="Timestamp when the device record was last updated. Updates occur when Okta collects and saves device "
+                    "signals during authentication, and when the lifecycle state of the device changes.",
+        alias="lastUpdated"
+    )
     profile: Optional[DeviceProfile] = None
     resource_alternate_id: Optional[StrictStr] = Field(default=None, alias="resourceAlternateId")
     resource_display_name: Optional[DeviceDisplayName] = Field(default=None, alias="resourceDisplayName")
@@ -52,8 +57,10 @@ class Device(BaseModel):
     resource_type: Optional[StrictStr] = Field(default='UDDevice', alias="resourceType")
     status: Optional[DeviceStatus] = None
     links: Optional[LinksSelfAndFullUsersLifecycle] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "profile",
-                                         "resourceAlternateId", "resourceDisplayName", "resourceId", "resourceType", "status", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "created", "id", "lastUpdated", "profile",
+        "resourceAlternateId", "resourceDisplayName", "resourceId", "resourceType", "status", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,14 +98,16 @@ class Device(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-            "resource_alternate_id",
-            "resource_id",
-            "resource_type",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+                "resource_alternate_id",
+                "resource_id",
+                "resource_type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -137,16 +146,20 @@ class Device(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "profile": DeviceProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None,
-            "resourceAlternateId": obj.get("resourceAlternateId"),
-            "resourceDisplayName": DeviceDisplayName.from_dict(obj["resourceDisplayName"]) if obj.get("resourceDisplayName") is not None else None,
-            "resourceId": obj.get("resourceId"),
-            "resourceType": obj.get("resourceType") if obj.get("resourceType") is not None else 'UDDevice',
-            "status": obj.get("status"),
-            "_links": LinksSelfAndFullUsersLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "profile": DeviceProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None,
+                "resourceAlternateId": obj.get("resourceAlternateId"),
+                "resourceDisplayName": DeviceDisplayName.from_dict(obj["resourceDisplayName"]) if obj.get(
+                    "resourceDisplayName"
+                ) is not None else None,
+                "resourceId": obj.get("resourceId"),
+                "resourceType": obj.get("resourceType") if obj.get("resourceType") is not None else 'UDDevice',
+                "status": obj.get("status"),
+                "_links": LinksSelfAndFullUsersLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

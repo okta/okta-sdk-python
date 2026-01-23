@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.application import Application
-from okta.models.success import Success
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.application import Application
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,20 +46,20 @@ class ApplicationApi(ApiClient):
 
     @validate_call
     async def activate_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Activate an application
 
@@ -149,12 +149,12 @@ class ApplicationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -207,27 +207,33 @@ class ApplicationApi(ApiClient):
 
     @validate_call
     async def create_application(
-        self,
-        application: Application,
-        activate: Annotated[Optional[StrictBool], Field(
-            description="Executes activation lifecycle operation when creating the app")] = None,
-        okta_access_gateway_agent: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            application: Application,
+            activate: Annotated[Optional[StrictBool], Field(
+                description="Executes activation lifecycle operation when creating the app"
+            )] = None,
+            okta_access_gateway_agent: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Application:
         """Create an application
 
-        Creates an app instance in your Okta org.  You can either create an OIN app instance or a custom app instance: * OIN app instances have prescribed `name` (key app definition) and `signOnMode` options. See the [OIN schemas](/openapi/okta-management/management/tag/Application/#tag/Application/schema/GoogleApplication) for the request body. * For custom app instances, select the [signOnMode](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication!path=0/signOnMode&t=request) that pertains to your app and specify the required parameters in the request body. 
+        Creates an app instance in your Okta org.  You can either create an OIN app instance or a custom app instance: *
+        OIN app instances have prescribed `name` (key app definition) and `signOnMode` options. See the [OIN schemas](
+        /openapi/okta-management/management/tag/Application/#tag/Application/schema/GoogleApplication) for the request
+        body. * For custom app instances, select the [signOnMode](
+        /openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication!path=0/signOnMode
+        &t=request) that pertains to your app and specify the required parameters in the request body.
 
         :param application: (required)
         :type application: Application
@@ -319,14 +325,14 @@ class ApplicationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_application_serialize(
-        self,
-        application,
-        activate,
-        okta_access_gateway_agent,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            application,
+            activate,
+            okta_access_gateway_agent,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -344,7 +350,6 @@ class ApplicationApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if activate is not None:
-
             _query_params.append(('activate', activate))
 
         # process the header parameters
@@ -399,24 +404,26 @@ class ApplicationApi(ApiClient):
 
     @validate_call
     async def deactivate_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Deactivate an application
 
-        Deactivates an active application  > **Note:** Deactivating an app triggers a full reconciliation of all users assigned to the app by groups. This reconcile process removes the app assignment for the deactivated app, and might also correct assignments that were supposed to be removed but failed previously.
+        Deactivates an active application  > **Note:** Deactivating an app triggers a full reconciliation of all users
+        assigned to the app by groups. This reconcile process removes the app assignment for the deactivated app,
+        and might also correct assignments that were supposed to be removed but failed previously.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -502,12 +509,12 @@ class ApplicationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -560,20 +567,20 @@ class ApplicationApi(ApiClient):
 
     @validate_call
     async def delete_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an application
 
@@ -654,12 +661,12 @@ class ApplicationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -712,22 +719,25 @@ class ApplicationApi(ApiClient):
 
     @validate_call
     async def get_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional query parameter to return the specified [Application User](/openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property. Valid value: `expand=user/{userId}`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional query parameter to return the specified [Application User]("
+                            "/openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property. Valid "
+                            "value: `expand=user/{userId}`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Application:
         """Retrieve an application
 
@@ -735,7 +745,9 @@ class ApplicationApi(ApiClient):
 
         :param app_id: Application ID (required)
         :type app_id: str
-        :param expand: An optional query parameter to return the specified [Application User](/openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property. Valid value: `expand=user/{userId}`
+        :param expand: An optional query parameter to return the specified [Application User](
+        /openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property. Valid value:
+        `expand=user/{userId}`
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -820,13 +832,13 @@ class ApplicationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_application_serialize(
-        self,
-        app_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -846,7 +858,6 @@ class ApplicationApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -883,53 +894,84 @@ class ApplicationApi(ApiClient):
 
     @validate_call
     async def list_applications(
-        self,
-        q: Annotated[Optional[StrictStr], Field(
-            description="Searches for apps with `name` or `label` properties that starts with the `q` value using the `startsWith` operation")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the [pagination](/#pagination) cursor for the next page of results. Treat this as an opaque value obtained through the `next` link relationship.")] = None,
-        use_optimization: Annotated[Optional[StrictBool], Field(
-            description="Specifies whether to use query optimization. If you specify `useOptimization=true` in the request query, the response contains a subset of app instance properties.")] = None,
-        always_include_vpn_settings: Annotated[Optional[StrictBool], Field(
-            description="Specifies whether to include the VPN configuration for existing notifications in the result, regardless of whether VPN notifications are configured")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
-            description="Specifies the number of results per page")] = None,
-        filter: Annotated[Optional[StrictStr], Field(
-            description="Filters apps with a supported expression for a subset of properties. Filtering supports the following limited number of properties: `id`, `status`, `credentials.signing.kid`, `settings.slo.enabled`, or `name`. See [Filter](https://developer.okta.com/docs/api/#filter).")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional parameter used for link expansion to embed more resources in the response. Only supports `expand=user/{userId}` and must be used with the `user.id eq \"{userId}\"` filter query for the same user. Returns the assigned [application user](/openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property.")] = None,
-        include_non_deleted: Annotated[Optional[StrictBool], Field(
-            description="Specifies whether to include non-active, but not deleted apps in the results")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            q: Annotated[Optional[StrictStr], Field(
+                description="Searches for apps with `name` or `label` properties that starts with the `q` value using the "
+                            "`startsWith` operation"
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the [pagination](/#pagination) cursor for the next page of results. Treat this as "
+                            "an opaque value obtained through the `next` link relationship."
+            )] = None,
+            use_optimization: Annotated[Optional[StrictBool], Field(
+                description="Specifies whether to use query optimization. If you specify `useOptimization=true` in the "
+                            "request query, the response contains a subset of app instance properties."
+            )] = None,
+            always_include_vpn_settings: Annotated[Optional[StrictBool], Field(
+                description="Specifies whether to include the VPN configuration for existing notifications in the result, "
+                            "regardless of whether VPN notifications are configured"
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
+                description="Specifies the number of results per page"
+            )] = None,
+            filter: Annotated[Optional[StrictStr], Field(
+                description="Filters apps with a supported expression for a subset of properties. Filtering supports the "
+                            "following limited number of properties: `id`, `status`, `credentials.signing.kid`, "
+                            "`settings.slo.enabled`, or `name`. See [Filter](https://developer.okta.com/docs/api/#filter)."
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional parameter used for link expansion to embed more resources in the response. Only "
+                            "supports `expand=user/{userId}` and must be used with the `user.id eq \"{userId}\"` filter "
+                            "query for the same user. Returns the assigned [application user]("
+                            "/openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property."
+            )] = None,
+            include_non_deleted: Annotated[Optional[StrictBool], Field(
+                description="Specifies whether to include non-active, but not deleted apps in the results"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Application]:
         """List all applications
 
-        Lists all apps in the org with pagination. A subset of apps can be returned that match a supported filter expression or query. The results are [paginated](/#pagination) according to the `limit` parameter. If there are multiple pages of results, the header contains a `next` link. Treat the link as an opaque value (follow it, don't parse it).  > **Note:** To list all of a member's assigned app links, use the [List all assigned app links endpoint in the User Resources API](/openapi/okta-management/management/tag/UserResources/#tag/UserResources/operation/listAppLinks).
+        Lists all apps in the org with pagination. A subset of apps can be returned that match a supported filter
+        expression or query. The results are [paginated](/#pagination) according to the `limit` parameter. If there are
+        multiple pages of results, the header contains a `next` link. Treat the link as an opaque value (follow it,
+        don't parse it).  > **Note:** To list all of a member's assigned app links, use the [List all assigned app links
+        endpoint in the User Resources API](/openapi/okta-management/management/tag/UserResources/#tag/UserResources
+        /operation/listAppLinks).
 
-        :param q: Searches for apps with `name` or `label` properties that starts with the `q` value using the `startsWith` operation
+        :param q: Searches for apps with `name` or `label` properties that starts with the `q` value using the
+        `startsWith` operation
         :type q: str
-        :param after: Specifies the [pagination](/#pagination) cursor for the next page of results. Treat this as an opaque value obtained through the `next` link relationship.
+        :param after: Specifies the [pagination](/#pagination) cursor for the next page of results. Treat this as an
+        opaque value obtained through the `next` link relationship.
         :type after: str
-        :param use_optimization: Specifies whether to use query optimization. If you specify `useOptimization=true` in the request query, the response contains a subset of app instance properties.
+        :param use_optimization: Specifies whether to use query optimization. If you specify `useOptimization=true` in the
+        request query, the response contains a subset of app instance properties.
         :type use_optimization: bool
-        :param always_include_vpn_settings: Specifies whether to include the VPN configuration for existing notifications in the result, regardless of whether VPN notifications are configured
+        :param always_include_vpn_settings: Specifies whether to include the VPN configuration for existing notifications
+        in the result, regardless of whether VPN notifications are configured
         :type always_include_vpn_settings: bool
         :param limit: Specifies the number of results per page
         :type limit: int
-        :param filter: Filters apps with a supported expression for a subset of properties. Filtering supports the following limited number of properties: `id`, `status`, `credentials.signing.kid`, `settings.slo.enabled`, or `name`. See [Filter](https://developer.okta.com/docs/api/#filter).
+        :param filter: Filters apps with a supported expression for a subset of properties. Filtering supports the
+        following limited number of properties: `id`, `status`, `credentials.signing.kid`, `settings.slo.enabled`,
+        or `name`. See [Filter](https://developer.okta.com/docs/api/#filter).
         :type filter: str
-        :param expand: An optional parameter used for link expansion to embed more resources in the response. Only supports `expand=user/{userId}` and must be used with the `user.id eq \"{userId}\"` filter query for the same user. Returns the assigned [application user](/openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property.
+        :param expand: An optional parameter used for link expansion to embed more resources in the response. Only
+        supports `expand=user/{userId}` and must be used with the `user.id eq \"{userId}\"` filter query for the same
+        user. Returns the assigned [application user](/openapi/okta-management/management/tag/ApplicationUsers/) in the
+        `_embedded` property.
         :type expand: str
         :param include_non_deleted: Specifies whether to include non-active, but not deleted apps in the results
         :type include_non_deleted: bool
@@ -1021,19 +1063,19 @@ class ApplicationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_applications_serialize(
-        self,
-        q,
-        after,
-        use_optimization,
-        always_include_vpn_settings,
-        limit,
-        filter,
-        expand,
-        include_non_deleted,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            q,
+            after,
+            use_optimization,
+            always_include_vpn_settings,
+            limit,
+            filter,
+            expand,
+            include_non_deleted,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1051,35 +1093,27 @@ class ApplicationApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if q is not None:
-
             _query_params.append(('q', q))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if use_optimization is not None:
-
             _query_params.append(('useOptimization', use_optimization))
 
         if always_include_vpn_settings is not None:
-
             _query_params.append(('alwaysIncludeVpnSettings', always_include_vpn_settings))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if include_non_deleted is not None:
-
             _query_params.append(('includeNonDeleted', include_non_deleted))
 
         # process the header parameters
@@ -1116,25 +1150,27 @@ class ApplicationApi(ApiClient):
 
     @validate_call
     async def replace_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        application: Application,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            application: Application,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Application:
         """Replace an application
 
-        Replaces properties for an application > **Notes:** > * All required properties must be specified in the request body > * You can't modify system-assigned properties, such as `id`, `name`, `status`, `created`, and `lastUpdated`. The values for these properties in the PUT request body are ignored. 
+        Replaces properties for an application > **Notes:** > * All required properties must be specified in the request
+        body > * You can't modify system-assigned properties, such as `id`, `name`, `status`, `created`,
+        and `lastUpdated`. The values for these properties in the PUT request body are ignored.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -1224,13 +1260,13 @@ class ApplicationApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_application_serialize(
-        self,
-        app_id,
-        application,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            application,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,24 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
 from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+
 from okta.models.authenticator_key_enum import AuthenticatorKeyEnum
 from okta.models.authenticator_links import AuthenticatorLinks
 from okta.models.authenticator_type import AuthenticatorType
 from okta.models.lifecycle_status import LifecycleStatus
-from typing import Optional, Set
 
-from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.authenticator_key_custom_app import AuthenticatorKeyCustomApp
     from okta.models.authenticator_key_duo import AuthenticatorKeyDuo
@@ -65,7 +68,8 @@ class AuthenticatorBase(BaseModel):
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the authenticator was last modified",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Optional[StrictStr] = Field(default=None, description="Display name of the authenticator")
     status: Optional[LifecycleStatus] = None
     type: Optional[AuthenticatorType] = None
@@ -83,7 +87,14 @@ class AuthenticatorBase(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'custom_app': 'AuthenticatorKeyCustomApp', 'duo': 'AuthenticatorKeyDuo', 'external_idp': 'AuthenticatorKeyExternalIdp', 'google_otp': 'AuthenticatorKeyGoogleOtp', 'okta_email': 'AuthenticatorKeyEmail', 'okta_password': 'AuthenticatorKeyPassword', 'okta_verify': 'AuthenticatorKeyOktaVerify', 'onprem_mfa': 'AuthenticatorKeyOnprem', 'phone_number': 'AuthenticatorKeyPhone', 'security_key': 'AuthenticatorKeySecurityKey', 'security_question': 'AuthenticatorKeySecurityQuestion', 'smart_card_idp': 'AuthenticatorKeySmartCard', 'symantec_vip': 'AuthenticatorKeySymantecVip', 'tac': 'AuthenticatorKeyTac', 'webauthn': 'AuthenticatorKeyWebauthn', 'yubikey_token': 'AuthenticatorKeyYubikey', 'AuthenticatorSimple': 'AuthenticatorSimple'
+        'custom_app': 'AuthenticatorKeyCustomApp', 'duo': 'AuthenticatorKeyDuo',
+        'external_idp': 'AuthenticatorKeyExternalIdp', 'google_otp': 'AuthenticatorKeyGoogleOtp',
+        'okta_email': 'AuthenticatorKeyEmail', 'okta_password': 'AuthenticatorKeyPassword',
+        'okta_verify': 'AuthenticatorKeyOktaVerify', 'onprem_mfa': 'AuthenticatorKeyOnprem',
+        'phone_number': 'AuthenticatorKeyPhone', 'security_key': 'AuthenticatorKeySecurityKey',
+        'security_question': 'AuthenticatorKeySecurityQuestion', 'smart_card_idp': 'AuthenticatorKeySmartCard',
+        'symantec_vip': 'AuthenticatorKeySymantecVip', 'tac': 'AuthenticatorKeyTac', 'webauthn': 'AuthenticatorKeyWebauthn',
+        'yubikey_token': 'AuthenticatorKeyYubikey', 'AuthenticatorSimple': 'AuthenticatorSimple'
     }
 
     @classmethod
@@ -105,8 +116,12 @@ class AuthenticatorBase(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[AuthenticatorKeyCustomApp, AuthenticatorKeyDuo, AuthenticatorKeyExternalIdp, AuthenticatorKeyGoogleOtp, AuthenticatorKeyEmail, AuthenticatorKeyPassword, AuthenticatorKeyOktaVerify, AuthenticatorKeyOnprem,
-                                                        AuthenticatorKeyPhone, AuthenticatorKeySecurityKey, AuthenticatorKeySecurityQuestion, AuthenticatorKeySmartCard, AuthenticatorKeySymantecVip, AuthenticatorKeyTac, AuthenticatorKeyWebauthn, AuthenticatorKeyYubikey, AuthenticatorSimple]]:
+    def from_json(cls, json_str: str) -> Optional[Union[
+        AuthenticatorKeyCustomApp, AuthenticatorKeyDuo, AuthenticatorKeyExternalIdp, AuthenticatorKeyGoogleOtp,
+        AuthenticatorKeyEmail, AuthenticatorKeyPassword, AuthenticatorKeyOktaVerify, AuthenticatorKeyOnprem,
+        AuthenticatorKeyPhone, AuthenticatorKeySecurityKey, AuthenticatorKeySecurityQuestion, AuthenticatorKeySmartCard,
+        AuthenticatorKeySymantecVip, AuthenticatorKeyTac, AuthenticatorKeyWebauthn, AuthenticatorKeyYubikey,
+        AuthenticatorSimple]]:
         """Create an instance of AuthenticatorBase from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -123,11 +138,13 @@ class AuthenticatorBase(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -144,8 +161,12 @@ class AuthenticatorBase(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[AuthenticatorKeyCustomApp, AuthenticatorKeyDuo, AuthenticatorKeyExternalIdp, AuthenticatorKeyGoogleOtp, AuthenticatorKeyEmail, AuthenticatorKeyPassword, AuthenticatorKeyOktaVerify, AuthenticatorKeyOnprem,
-                                                              AuthenticatorKeyPhone, AuthenticatorKeySecurityKey, AuthenticatorKeySecurityQuestion, AuthenticatorKeySmartCard, AuthenticatorKeySymantecVip, AuthenticatorKeyTac, AuthenticatorKeyWebauthn, AuthenticatorKeyYubikey, AuthenticatorSimple]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[
+        AuthenticatorKeyCustomApp, AuthenticatorKeyDuo, AuthenticatorKeyExternalIdp, AuthenticatorKeyGoogleOtp,
+        AuthenticatorKeyEmail, AuthenticatorKeyPassword, AuthenticatorKeyOktaVerify, AuthenticatorKeyOnprem,
+        AuthenticatorKeyPhone, AuthenticatorKeySecurityKey, AuthenticatorKeySecurityQuestion, AuthenticatorKeySmartCard,
+        AuthenticatorKeySymantecVip, AuthenticatorKeyTac, AuthenticatorKeyWebauthn, AuthenticatorKeyYubikey,
+        AuthenticatorSimple]]:
         """Create an instance of AuthenticatorBase from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -171,7 +192,8 @@ class AuthenticatorBase(BaseModel):
             return import_module("okta.models.authenticator_key_security_key").AuthenticatorKeySecurityKey.from_dict(obj)
         if object_type == 'AuthenticatorKeySecurityQuestion':
             return import_module(
-                "okta.models.authenticator_key_security_question").AuthenticatorKeySecurityQuestion.from_dict(obj)
+                "okta.models.authenticator_key_security_question"
+            ).AuthenticatorKeySecurityQuestion.from_dict(obj)
         if object_type == 'AuthenticatorKeySmartCard':
             return import_module("okta.models.authenticator_key_smart_card").AuthenticatorKeySmartCard.from_dict(obj)
         if object_type == 'AuthenticatorKeySymantecVip':
@@ -185,6 +207,8 @@ class AuthenticatorBase(BaseModel):
         if object_type == 'AuthenticatorSimple':
             return import_module("okta.models.authenticator_simple").AuthenticatorSimple.from_dict(obj)
 
-        raise ValueError("AuthenticatorBase failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "AuthenticatorBase failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

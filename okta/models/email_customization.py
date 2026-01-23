@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,41 +20,67 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.email_customization_all_of_links import EmailCustomizationAllOfLinks
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing_extensions import Self
+
+from okta.models.email_customization_all_of_links import EmailCustomizationAllOfLinks
 
 
 class EmailCustomization(BaseModel):
     """
     EmailCustomization
     """  # noqa: E501
-    body: StrictStr = Field(description="The HTML body of the email. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).  <x-lifecycle class=\"ea\"></x-lifecycle> Not required if Custom languages for Okta Email Templates is enabled. A `null` body is replaced with a default value from one of the following in priority order:  1. An existing default email customization, if one exists 2. Okta-provided translated content for the specified language, if one exists 3. Okta-provided translated content for the brand locale, if it's set 4. Okta-provided content in English ")
-    subject: StrictStr = Field(description="The email subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).  <x-lifecycle class=\"ea\"></x-lifecycle> Not required if Custom languages for Okta Email Templates is enabled. A `null` subject is replaced with a default value from one of the following in priority order:  1. An existing default email customization, if one exists 2. Okta-provided translated content for the specified language, if one exists 3. Okta-provided translated content for the brand locale, if it's set 4. Okta-provided content in English ")
-    created: Optional[datetime] = Field(default=None,
-                                        description="The UTC time at which this email customization was created.")
+    body: StrictStr = Field(
+        description="The HTML body of the email. May contain [variable references]("
+                    "https://velocity.apache.org/engine/1.7/user-guide.html#references).  <x-lifecycle "
+                    "class=\"ea\"></x-lifecycle> Not required if Custom languages for Okta Email Templates is enabled. A "
+                    "`null` body is replaced with a default value from one of the following in priority order:  1. An "
+                    "existing default email customization, if one exists 2. Okta-provided translated content for the "
+                    "specified language, if one exists 3. Okta-provided translated content for the brand locale, "
+                    "if it's set 4. Okta-provided content in English "
+    )
+    subject: StrictStr = Field(
+        description="The email subject. May contain [variable references]("
+                    "https://velocity.apache.org/engine/1.7/user-guide.html#references).  <x-lifecycle "
+                    "class=\"ea\"></x-lifecycle> Not required if Custom languages for Okta Email Templates is enabled. A "
+                    "`null` subject is replaced with a default value from one of the following in priority order:  1. An "
+                    "existing default email customization, if one exists 2. Okta-provided translated content for the "
+                    "specified language, if one exists 3. Okta-provided translated content for the brand locale, "
+                    "if it's set 4. Okta-provided content in English "
+    )
+    created: Optional[datetime] = Field(
+        default=None,
+        description="The UTC time at which this email customization was created."
+    )
     id: Optional[StrictStr] = Field(default=None, description="A unique identifier for this email customization")
     is_default: Optional[StrictBool] = Field(
         default=None,
-        description="Whether this is the default customization for the email template. Each customized email template must have exactly one default customization. Defaults to `true` for the first customization and `false` thereafter.",
-        alias="isDefault")
+        description="Whether this is the default customization for the email template. Each customized email template must "
+                    "have exactly one default customization. Defaults to `true` for the first customization and `false` "
+                    "thereafter.",
+        alias="isDefault"
+    )
     language: StrictStr = Field(
-        description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
+        description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="The UTC time at which this email customization was last updated.",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     links: Optional[EmailCustomizationAllOfLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["body", "subject", "created", "id", "isDefault", "language", "lastUpdated", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "body", "subject", "created", "id", "isDefault", "language", "lastUpdated", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,11 +115,13 @@ class EmailCustomization(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -116,14 +146,16 @@ class EmailCustomization(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "body": obj.get("body"),
-            "subject": obj.get("subject"),
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "isDefault": obj.get("isDefault"),
-            "language": obj.get("language"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "_links": EmailCustomizationAllOfLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "body": obj.get("body"),
+                "subject": obj.get("subject"),
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "isDefault": obj.get("isDefault"),
+                "language": obj.get("language"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "_links": EmailCustomizationAllOfLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

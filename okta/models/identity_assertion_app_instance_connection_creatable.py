@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from okta.models.identity_assertion_app_instance_connection_creatable_app import IdentityAssertionAppInstanceConnectionCreatableApp
-from okta.models.scope_condition import ScopeCondition
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.identity_assertion_app_instance_connection_creatable_app import \
+    IdentityAssertionAppInstanceConnectionCreatableApp
+from okta.models.scope_condition import ScopeCondition
 
 
 class IdentityAssertionAppInstanceConnectionCreatable(BaseModel):
@@ -43,16 +47,23 @@ class IdentityAssertionAppInstanceConnectionCreatable(BaseModel):
     protocol_type: Optional[StrictStr] = Field(
         default=None,
         description="The authentication protocol type used for the connection",
-        alias="protocolType")
+        alias="protocolType"
+    )
     resource_indicator: Optional[StrictStr] = Field(
         default=None,
         description="Resource indicator used when requesting tokens. Defaults to the app instance's ORN if not specified.",
-        alias="resourceIndicator")
+        alias="resourceIndicator"
+    )
     scope_condition: ScopeCondition = Field(alias="scopeCondition")
     scopes: Annotated[List[StrictStr], Field(min_length=1)] = Field(
-        description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
-    __properties: ClassVar[List[str]] = ["app", "connectionType", "issuerUrl",
-                                         "protocolType", "resourceIndicator", "scopeCondition", "scopes"]
+        description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required "
+                    "with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, "
+                    "all scopes except these are allowed."
+    )
+    __properties: ClassVar[List[str]] = [
+        "app", "connectionType", "issuerUrl",
+        "protocolType", "resourceIndicator", "scopeCondition", "scopes"
+    ]
 
     @field_validator('connection_type')
     def connection_type_validate_enum(cls, value):
@@ -101,8 +112,10 @@ class IdentityAssertionAppInstanceConnectionCreatable(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -127,13 +140,17 @@ class IdentityAssertionAppInstanceConnectionCreatable(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "app": IdentityAssertionAppInstanceConnectionCreatableApp.from_dict(obj["app"]) if obj.get("app") is not None else None,
-            "connectionType": obj.get("connectionType"),
-            "issuerUrl": obj.get("issuerUrl"),
-            "protocolType": obj.get("protocolType"),
-            "resourceIndicator": obj.get("resourceIndicator"),
-            "scopeCondition": obj.get("scopeCondition"),
-            "scopes": obj.get("scopes")
-        })
+        _obj = cls.model_validate(
+            {
+                "app": IdentityAssertionAppInstanceConnectionCreatableApp.from_dict(obj["app"]) if obj.get(
+                    "app"
+                ) is not None else None,
+                "connectionType": obj.get("connectionType"),
+                "issuerUrl": obj.get("issuerUrl"),
+                "protocolType": obj.get("protocolType"),
+                "resourceIndicator": obj.get("resourceIndicator"),
+                "scopeCondition": obj.get("scopeCondition"),
+                "scopes": obj.get("scopes")
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,25 +20,27 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.api_token_network import ApiTokenNetwork
 from okta.models.links_self import LinksSelf
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class ApiToken(BaseModel):
     """
-    An API token for an Okta User. This token is NOT scoped any further and can be used for any API the user has permissions to call.
+    An API token for an Okta User. This token is NOT scoped any further and can be used for any API the user has
+    permissions to call.
     """  # noqa: E501
     client_name: Optional[StrictStr] = Field(default=None, alias="clientName")
     created: Optional[datetime] = None
@@ -46,11 +50,16 @@ class ApiToken(BaseModel):
     name: StrictStr
     network: Optional[ApiTokenNetwork] = None
     token_window: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None, description="A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).", alias="tokenWindow")
+        default=None,
+        description="A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).",
+        alias="tokenWindow"
+    )
     user_id: Optional[StrictStr] = Field(default=None, alias="userId")
     link: Optional[LinksSelf] = Field(default=None, alias="_link")
-    __properties: ClassVar[List[str]] = ["clientName", "created", "expiresAt",
-                                         "id", "lastUpdated", "name", "network", "tokenWindow", "userId", "_link"]
+    __properties: ClassVar[List[str]] = [
+        "clientName", "created", "expiresAt",
+        "id", "lastUpdated", "name", "network", "tokenWindow", "userId", "_link"
+    ]
 
     @field_validator('token_window')
     def token_window_validate_regular_expression(cls, value):
@@ -102,13 +111,15 @@ class ApiToken(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "client_name",
-            "created",
-            "expires_at",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "client_name",
+                "created",
+                "expires_at",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -140,16 +151,18 @@ class ApiToken(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "clientName": obj.get("clientName"),
-            "created": obj.get("created"),
-            "expiresAt": obj.get("expiresAt"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "network": ApiTokenNetwork.from_dict(obj["network"]) if obj.get("network") is not None else None,
-            "tokenWindow": obj.get("tokenWindow"),
-            "userId": obj.get("userId"),
-            "_link": LinksSelf.from_dict(obj["_link"]) if obj.get("_link") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "clientName": obj.get("clientName"),
+                "created": obj.get("created"),
+                "expiresAt": obj.get("expiresAt"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "network": ApiTokenNetwork.from_dict(obj["network"]) if obj.get("network") is not None else None,
+                "tokenWindow": obj.get("tokenWindow"),
+                "userId": obj.get("userId"),
+                "_link": LinksSelf.from_dict(obj["_link"]) if obj.get("_link") is not None else None
+            }
+        )
         return _obj

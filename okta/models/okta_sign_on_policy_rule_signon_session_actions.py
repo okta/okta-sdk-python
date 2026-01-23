@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,15 +39,22 @@ class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
     max_session_idle_minutes: Optional[StrictInt] = Field(
         default=120,
         description="Maximum number of minutes that a user session can be idle before the session is ended",
-        alias="maxSessionIdleMinutes")
+        alias="maxSessionIdleMinutes"
+    )
     max_session_lifetime_minutes: Optional[StrictInt] = Field(
         default=0,
-        description="Maximum number of minutes (from when the user signs in) that a user's session is active. Set this to force users to sign in again after the number of specified minutes. Disable by setting to `0`.",
-        alias="maxSessionLifetimeMinutes")
+        description="Maximum number of minutes (from when the user signs in) that a user's session is active. Set this to "
+                    "force users to sign in again after the number of specified minutes. Disable by setting to `0`.",
+        alias="maxSessionLifetimeMinutes"
+    )
     use_persistent_cookie: Optional[StrictBool] = Field(
         default=False,
-        description="If set to `false`, user session cookies only last the length of a browser session. If set to `true`, user session cookies last across browser sessions. This setting doesn't impact administrators who can never have persistent session cookies. This property is read-only for the default rule of the default global session policy.",
-        alias="usePersistentCookie")
+        description="If set to `false`, user session cookies only last the length of a browser session. If set to `true`, "
+                    "user session cookies last across browser sessions. This setting doesn't impact administrators who can "
+                    "never have persistent session cookies. This property is read-only for the default rule of the default "
+                    "global session policy.",
+        alias="usePersistentCookie"
+    )
     __properties: ClassVar[List[str]] = ["maxSessionIdleMinutes", "maxSessionLifetimeMinutes", "usePersistentCookie"]
 
     model_config = ConfigDict(
@@ -78,8 +87,10 @@ class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,9 +108,17 @@ class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "maxSessionIdleMinutes": obj.get("maxSessionIdleMinutes") if obj.get("maxSessionIdleMinutes") is not None else 120,
-            "maxSessionLifetimeMinutes": obj.get("maxSessionLifetimeMinutes") if obj.get("maxSessionLifetimeMinutes") is not None else 0,
-            "usePersistentCookie": obj.get("usePersistentCookie") if obj.get("usePersistentCookie") is not None else False
-        })
+        _obj = cls.model_validate(
+            {
+                "maxSessionIdleMinutes": obj.get("maxSessionIdleMinutes") if obj.get(
+                    "maxSessionIdleMinutes"
+                ) is not None else 120,
+                "maxSessionLifetimeMinutes": obj.get("maxSessionLifetimeMinutes") if obj.get(
+                    "maxSessionLifetimeMinutes"
+                ) is not None else 0,
+                "usePersistentCookie": obj.get("usePersistentCookie") if obj.get(
+                    "usePersistentCookie"
+                ) is not None else False
+            }
+        )
         return _obj

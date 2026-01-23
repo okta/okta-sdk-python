@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
-from okta.models.authorization_server import AuthorizationServer
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.authorization_server import AuthorizationServer
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,20 +46,20 @@ class AuthorizationServerApi(ApiClient):
 
     @validate_call
     async def activate_authorization_server(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Activate an authorization server
 
@@ -139,12 +140,12 @@ class AuthorizationServerApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_authorization_server_serialize(
-        self,
-        auth_server_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -197,20 +198,20 @@ class AuthorizationServerApi(ApiClient):
 
     @validate_call
     async def create_authorization_server(
-        self,
-        authorization_server: AuthorizationServer,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authorization_server: AuthorizationServer,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthorizationServer:
         """Create an authorization server
 
@@ -300,12 +301,12 @@ class AuthorizationServerApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_authorization_server_serialize(
-        self,
-        authorization_server,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authorization_server,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -372,20 +373,20 @@ class AuthorizationServerApi(ApiClient):
 
     @validate_call
     async def deactivate_authorization_server(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Deactivate an authorization server
 
@@ -466,12 +467,12 @@ class AuthorizationServerApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_authorization_server_serialize(
-        self,
-        auth_server_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -524,20 +525,20 @@ class AuthorizationServerApi(ApiClient):
 
     @validate_call
     async def delete_authorization_server(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an authorization server
 
@@ -618,12 +619,12 @@ class AuthorizationServerApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_authorization_server_serialize(
-        self,
-        auth_server_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -676,20 +677,20 @@ class AuthorizationServerApi(ApiClient):
 
     @validate_call
     async def get_authorization_server(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthorizationServer:
         """Retrieve an authorization server
 
@@ -779,12 +780,12 @@ class AuthorizationServerApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_authorization_server_serialize(
-        self,
-        auth_server_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -837,25 +838,29 @@ class AuthorizationServerApi(ApiClient):
 
     @validate_call
     async def list_authorization_servers(
-        self,
-        q: Annotated[Optional[StrictStr], Field(
-            description="Searches the `name` and `audiences` of authorization servers for matching values")] = None,
-        limit: Annotated[Optional[StrictInt], Field(
-            description="Specifies the number of authorization server results on a page. Maximum value: 200")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of authorization servers. Treat as an opaque value and obtain through the next link relationship.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            q: Annotated[Optional[StrictStr], Field(
+                description="Searches the `name` and `audiences` of authorization servers for matching values"
+            )] = None,
+            limit: Annotated[Optional[StrictInt], Field(
+                description="Specifies the number of authorization server results on a page. Maximum value: 200"
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of authorization servers. Treat as an "
+                            "opaque value and obtain through the next link relationship."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AuthorizationServer]:
         """List all authorization servers
 
@@ -865,7 +870,8 @@ class AuthorizationServerApi(ApiClient):
         :type q: str
         :param limit: Specifies the number of authorization server results on a page. Maximum value: 200
         :type limit: int
-        :param after: Specifies the pagination cursor for the next page of authorization servers. Treat as an opaque value and obtain through the next link relationship.
+        :param after: Specifies the pagination cursor for the next page of authorization servers. Treat as an opaque value
+        and obtain through the next link relationship.
         :type after: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -950,14 +956,14 @@ class AuthorizationServerApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_authorization_servers_serialize(
-        self,
-        q,
-        limit,
-        after,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            q,
+            limit,
+            after,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -975,15 +981,12 @@ class AuthorizationServerApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if q is not None:
-
             _query_params.append(('q', q))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         # process the header parameters
@@ -1020,21 +1023,21 @@ class AuthorizationServerApi(ApiClient):
 
     @validate_call
     async def replace_authorization_server(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        authorization_server: AuthorizationServer,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            authorization_server: AuthorizationServer,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthorizationServer:
         """Replace an authorization server
 
@@ -1128,13 +1131,13 @@ class AuthorizationServerApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_authorization_server_serialize(
-        self,
-        auth_server_id,
-        authorization_server,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            authorization_server,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

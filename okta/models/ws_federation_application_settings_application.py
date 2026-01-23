@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,52 +38,74 @@ class WsFederationApplicationSettingsApplication(BaseModel):
     """  # noqa: E501
     attribute_statements: Optional[StrictStr] = Field(
         default=None,
-        description="You can federate user attributes such as Okta profile fields, LDAP, Active Directory, and Workday values. The SP uses the federated WS-Fed attribute values accordingly.",
-        alias="attributeStatements")
+        description="You can federate user attributes such as Okta profile fields, LDAP, Active Directory, and Workday "
+                    "values. The SP uses the federated WS-Fed attribute values accordingly.",
+        alias="attributeStatements"
+    )
     audience_restriction: StrictStr = Field(
         description="The entity ID of the SP. Use the entity ID value exactly as provided by the SP.",
-        alias="audienceRestriction")
+        alias="audienceRestriction"
+    )
     authn_context_class_ref: StrictStr = Field(
         description="Identifies the SAML authentication context class for the assertion's authentication statement",
-        alias="authnContextClassRef")
+        alias="authnContextClassRef"
+    )
     group_filter: Optional[StrictStr] = Field(
         default=None,
-        description="A regular expression that filters for the User Groups you want included with the `groupName` attribute. If the matching User Group has a corresponding AD group, then the attribute statement includes the value of the attribute specified by `groupValueFormat`. If the matching User Group doesn't contain a corresponding AD group, then the `groupName` is used in the attribute statement.",
-        alias="groupFilter")
+        description="A regular expression that filters for the User Groups you want included with the `groupName` "
+                    "attribute. If the matching User Group has a corresponding AD group, then the attribute statement "
+                    "includes the value of the attribute specified by `groupValueFormat`. If the matching User Group "
+                    "doesn't contain a corresponding AD group, then the `groupName` is used in the attribute statement.",
+        alias="groupFilter"
+    )
     group_name: Optional[StrictStr] = Field(
         default=None,
-        description="The group name to include in the WS-Fed response attribute statement. This property is used in conjunction with the `groupFilter` property.  Groups that are filtered through the `groupFilter` expression are included with the `groupName` in the attribute statement. Any users that belong to the group you've filtered are included in the WS-Fed response attribute statement.",
-        alias="groupName")
+        description="The group name to include in the WS-Fed response attribute statement. This property is used in "
+                    "conjunction with the `groupFilter` property.  Groups that are filtered through the `groupFilter` "
+                    "expression are included with the `groupName` in the attribute statement. Any users that belong to the "
+                    "group you've filtered are included in the WS-Fed response attribute statement.",
+        alias="groupName"
+    )
     group_value_format: StrictStr = Field(
-        description="Specifies the WS-Fed assertion attribute value for filtered groups. This attribute is only applied to Active Directory groups.",
-        alias="groupValueFormat")
+        description="Specifies the WS-Fed assertion attribute value for filtered groups. This attribute is only applied to "
+                    "Active Directory groups.",
+        alias="groupValueFormat"
+    )
     name_id_format: StrictStr = Field(
         description="The username format that you send in the WS-Fed response",
-        alias="nameIDFormat")
+        alias="nameIDFormat"
+    )
     realm: Optional[StrictStr] = Field(
         default=None,
-        description="The uniform resource identifier (URI) of the WS-Fed app that's used to share resources securely within a domain. It's the identity that's sent to the Okta IdP when signing in. See [Realm name](https://help.okta.com/okta_help.htm?type=oie&id=ext_Apps_Configure_Okta_Template_WS_Federation#Realm).")
+        description="The uniform resource identifier (URI) of the WS-Fed app that's used to share resources securely "
+                    "within a domain. It's the identity that's sent to the Okta IdP when signing in. See [Realm name]("
+                    "https://help.okta.com/okta_help.htm?type=oie&id=ext_Apps_Configure_Okta_Template_WS_Federation#Realm)."
+    )
     site_url: StrictStr = Field(description="Launch URL for the web app", alias="siteURL")
     username_attribute: StrictStr = Field(
         description="Specifies additional username attribute statements to include in the WS-Fed assertion",
-        alias="usernameAttribute")
+        alias="usernameAttribute"
+    )
     w_reply_override: Optional[StrictBool] = Field(
         default=None,
         description="Enables a web app to override the `wReplyURL` URL with a reply parameter.",
-        alias="wReplyOverride")
+        alias="wReplyOverride"
+    )
     w_reply_url: StrictStr = Field(description="The WS-Fed SP endpoint where your users sign in", alias="wReplyURL")
-    __properties: ClassVar[List[str]] = ["attributeStatements",
-                                         "audienceRestriction",
-                                         "authnContextClassRef",
-                                         "groupFilter",
-                                         "groupName",
-                                         "groupValueFormat",
-                                         "nameIDFormat",
-                                         "realm",
-                                         "siteURL",
-                                         "usernameAttribute",
-                                         "wReplyOverride",
-                                         "wReplyURL"]
+    __properties: ClassVar[List[str]] = [
+        "attributeStatements",
+        "audienceRestriction",
+        "authnContextClassRef",
+        "groupFilter",
+        "groupName",
+        "groupValueFormat",
+        "nameIDFormat",
+        "realm",
+        "siteURL",
+        "usernameAttribute",
+        "wReplyOverride",
+        "wReplyURL"
+    ]
 
     @field_validator('group_value_format')
     def group_value_format_validate_enum(cls, value):
@@ -127,8 +151,10 @@ class WsFederationApplicationSettingsApplication(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -146,18 +172,20 @@ class WsFederationApplicationSettingsApplication(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "attributeStatements": obj.get("attributeStatements"),
-            "audienceRestriction": obj.get("audienceRestriction"),
-            "authnContextClassRef": obj.get("authnContextClassRef"),
-            "groupFilter": obj.get("groupFilter"),
-            "groupName": obj.get("groupName"),
-            "groupValueFormat": obj.get("groupValueFormat"),
-            "nameIDFormat": obj.get("nameIDFormat"),
-            "realm": obj.get("realm"),
-            "siteURL": obj.get("siteURL"),
-            "usernameAttribute": obj.get("usernameAttribute"),
-            "wReplyOverride": obj.get("wReplyOverride"),
-            "wReplyURL": obj.get("wReplyURL")
-        })
+        _obj = cls.model_validate(
+            {
+                "attributeStatements": obj.get("attributeStatements"),
+                "audienceRestriction": obj.get("audienceRestriction"),
+                "authnContextClassRef": obj.get("authnContextClassRef"),
+                "groupFilter": obj.get("groupFilter"),
+                "groupName": obj.get("groupName"),
+                "groupValueFormat": obj.get("groupValueFormat"),
+                "nameIDFormat": obj.get("nameIDFormat"),
+                "realm": obj.get("realm"),
+                "siteURL": obj.get("siteURL"),
+                "usernameAttribute": obj.get("usernameAttribute"),
+                "wReplyOverride": obj.get("wReplyOverride"),
+                "wReplyURL": obj.get("wReplyURL")
+            }
+        )
         return _obj

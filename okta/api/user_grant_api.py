@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,23 +46,24 @@ class UserGrantApi(ApiClient):
 
     @validate_call
     async def get_user_grant(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        grant_id: Annotated[StrictStr, Field(description="Grant ID")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            grant_id: Annotated[StrictStr, Field(description="Grant ID")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2ScopeConsentGrant:
         """Retrieve a user grant
 
@@ -157,14 +159,14 @@ class UserGrantApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_user_grant_serialize(
-        self,
-        user_id,
-        grant_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            grant_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -186,7 +188,6 @@ class UserGrantApi(ApiClient):
             _path_params['grantId'] = grant_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -223,27 +224,32 @@ class UserGrantApi(ApiClient):
 
     @validate_call
     async def list_grants_for_user_and_client(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute.")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="Specifies the number of tokens to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute."
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="Specifies the number of tokens to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2ScopeConsentGrant]:
         """List all grants for a client
 
@@ -255,7 +261,9 @@ class UserGrantApi(ApiClient):
         :type client_id: str
         :param expand: Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute.
         :type expand: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination).
         :type after: str
         :param limit: Specifies the number of tokens to return
         :type limit: int
@@ -345,16 +353,16 @@ class UserGrantApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_grants_for_user_and_client_serialize(
-        self,
-        user_id,
-        client_id,
-        expand,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            client_id,
+            expand,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -376,15 +384,12 @@ class UserGrantApi(ApiClient):
             _path_params['clientId'] = client_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -421,27 +426,32 @@ class UserGrantApi(ApiClient):
 
     @validate_call
     async def list_user_grants(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        scope_id: Annotated[Optional[StrictStr], Field(description="The scope ID to filter on")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute.")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="Specifies the number of grants to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            scope_id: Annotated[Optional[StrictStr], Field(description="The scope ID to filter on")] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute."
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="Specifies the number of grants to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2ScopeConsentGrant]:
         """List all user grants
 
@@ -453,7 +463,9 @@ class UserGrantApi(ApiClient):
         :type scope_id: str
         :param expand: Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute.
         :type expand: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination).
         :type after: str
         :param limit: Specifies the number of grants to return
         :type limit: int
@@ -543,16 +555,16 @@ class UserGrantApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_user_grants_serialize(
-        self,
-        user_id,
-        scope_id,
-        expand,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            scope_id,
+            expand,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -572,19 +584,15 @@ class UserGrantApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if scope_id is not None:
-
             _query_params.append(('scopeId', scope_id))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -621,21 +629,21 @@ class UserGrantApi(ApiClient):
 
     @validate_call
     async def revoke_grants_for_user_and_client(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke all grants for a client
 
@@ -719,13 +727,13 @@ class UserGrantApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_grants_for_user_and_client_serialize(
-        self,
-        user_id,
-        client_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            client_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -780,21 +788,21 @@ class UserGrantApi(ApiClient):
 
     @validate_call
     async def revoke_user_grant(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        grant_id: Annotated[StrictStr, Field(description="Grant ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            grant_id: Annotated[StrictStr, Field(description="Grant ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke a user grant
 
@@ -878,13 +886,13 @@ class UserGrantApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_user_grant_serialize(
-        self,
-        user_id,
-        grant_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            grant_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -939,20 +947,20 @@ class UserGrantApi(ApiClient):
 
     @validate_call
     async def revoke_user_grants(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke all user grants
 
@@ -1033,12 +1041,12 @@ class UserGrantApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_user_grants_serialize(
-        self,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.token_hook_response_commands_inner_value_inner import TokenHookResponseCommandsInnerValueInner
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.token_hook_response_commands_inner_value_inner import TokenHookResponseCommandsInnerValueInner
 
 
 class TokenHookResponseCommandsInner(BaseModel):
@@ -37,9 +40,16 @@ class TokenHookResponseCommandsInner(BaseModel):
     """  # noqa: E501
     type: Optional[StrictStr] = Field(
         default=None,
-        description="One of the supported commands:   `com.okta.identity.patch`: Modify an ID token   `com.okta.access.patch`: Modify an access token > **Note:** The `commands` array should only contain commands that can be applied to the requested tokens. For example, if only an ID token is requested, the `commands` array shouldn't contain commands of the type `com.okta.access.patch`.")
+        description="One of the supported commands:   `com.okta.identity.patch`: Modify an ID token   "
+                    "`com.okta.access.patch`: Modify an access token > **Note:** The `commands` array should only contain "
+                    "commands that can be applied to the requested tokens. For example, if only an ID token is requested, "
+                    "the `commands` array shouldn't contain commands of the type `com.okta.access.patch`."
+    )
     value: Optional[List[TokenHookResponseCommandsInnerValueInner]] = Field(
-        default=None, description="The `value` object is where you specify the operation to perform. It's an array, which allows you to request more than one operation.")
+        default=None,
+        description="The `value` object is where you specify the operation to perform. It's an array, which allows you to "
+                    "request more than one operation."
+    )
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     model_config = ConfigDict(
@@ -72,8 +82,10 @@ class TokenHookResponseCommandsInner(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -98,8 +110,12 @@ class TokenHookResponseCommandsInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "value": [TokenHookResponseCommandsInnerValueInner.from_dict(_item) for _item in obj["value"]] if obj.get("value") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type"),
+                "value": [TokenHookResponseCommandsInnerValueInner.from_dict(_item) for _item in obj["value"]] if obj.get(
+                    "value"
+                ) is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.execute_inline_hook200_response import ExecuteInlineHook200Response
 from okta.models.execute_inline_hook_request import ExecuteInlineHookRequest
 from okta.models.inline_hook import InlineHook
 from okta.models.inline_hook_create import InlineHookCreate
 from okta.models.inline_hook_create_response import InlineHookCreateResponse
 from okta.models.inline_hook_replace import InlineHookReplace
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -50,20 +51,20 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def activate_inline_hook(
-        self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> InlineHook:
         """Activate an inline hook
 
@@ -153,12 +154,12 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_inline_hook_serialize(
-        self,
-        inline_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            inline_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -211,24 +212,37 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def create_inline_hook(
-        self,
-        inline_hook_create: InlineHookCreate,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            inline_hook_create: InlineHookCreate,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> InlineHookCreateResponse:
         """Create an inline hook
 
-        Creates an inline hook  This endpoint creates an inline hook for your org in an `ACTIVE` status. You need to pass an inline hooks object in the JSON payload of your request. That object represents the set of required information about the inline hook that you're registering, including:  * The URI of your external service endpoint * The type of inline hook you're registering * The type of authentication you're registering  There are two authentication options that you can configure for your inline hook: HTTP headers and OAuth 2.0 tokens.  HTTP headers let you specify a secret API key that you want Okta to pass to your external service endpoint (so that your external service can check for its presence as a security measure).  >**Note:** The API key that you set here is unrelated to the Okta API token you must supply when making calls to Okta APIs.  You can also optionally specify extra headers that you want Okta to pass to your external service with each call.  To configure HTTP header authentication, see parameters for the `config` object.  OAuth 2.0 tokens provide enhanced security between Okta and your external service. You can configure these tokens for the following types&mdash;client secret and private key.  >**Note:** Your external service's endpoint needs to be a valid HTTPS endpoint. The URI you specify should always begin with `https://`.  The total number of inline hooks that you can create in an Okta org is limited to 50, which is a combined total for any combination of inline hook types.
+        Creates an inline hook  This endpoint creates an inline hook for your org in an `ACTIVE` status. You need to pass
+        an inline hooks object in the JSON payload of your request. That object represents the set of required information
+        about the inline hook that you're registering, including:  * The URI of your external service endpoint * The type
+        of inline hook you're registering * The type of authentication you're registering  There are two authentication
+        options that you can configure for your inline hook: HTTP headers and OAuth 2.0 tokens.  HTTP headers let you
+        specify a secret API key that you want Okta to pass to your external service endpoint (so that your external
+        service can check for its presence as a security measure).  >**Note:** The API key that you set here is unrelated
+        to the Okta API token you must supply when making calls to Okta APIs.  You can also optionally specify extra
+        headers that you want Okta to pass to your external service with each call.  To configure HTTP header
+        authentication, see parameters for the `config` object.  OAuth 2.0 tokens provide enhanced security between Okta
+        and your external service. You can configure these tokens for the following types&mdash;client secret and private
+        key.  >**Note:** Your external service's endpoint needs to be a valid HTTPS endpoint. The URI you specify should
+        always begin with `https://`.  The total number of inline hooks that you can create in an Okta org is limited to
+        50, which is a combined total for any combination of inline hook types.
 
         :param inline_hook_create: (required)
         :type inline_hook_create: InlineHookCreate
@@ -314,12 +328,12 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_inline_hook_serialize(
-        self,
-        inline_hook_create,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            inline_hook_create,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -386,20 +400,20 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def deactivate_inline_hook(
-        self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> InlineHook:
         """Deactivate an inline hook
 
@@ -489,12 +503,12 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_inline_hook_serialize(
-        self,
-        inline_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            inline_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -547,24 +561,25 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def delete_inline_hook(
-        self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an inline hook
 
-        Deletes an inline hook by `inlineHookId`. After it's deleted, the inline hook is unrecoverable. As a safety precaution, only inline hooks with a status of `INACTIVE` are eligible for deletion.
+        Deletes an inline hook by `inlineHookId`. After it's deleted, the inline hook is unrecoverable. As a safety
+        precaution, only inline hooks with a status of `INACTIVE` are eligible for deletion.
 
         :param inline_hook_id: `id` of the inline hook (required)
         :type inline_hook_id: str
@@ -641,12 +656,12 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_inline_hook_serialize(
-        self,
-        inline_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            inline_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -699,25 +714,32 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def execute_inline_hook(
-        self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
-        payload_data: ExecuteInlineHookRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
+            payload_data: ExecuteInlineHookRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ExecuteInlineHook200Response:
         """Execute an inline hook
 
-        Executes the inline hook that matches the provided `inlineHookId` by using the request body as the input. This inline hook sends the provided data through the `channel` object and returns a response if it matches the correct data contract. Otherwise it returns an error. You need to construct a JSON payload that matches the payloads that Okta would send to your external service for this inline hook type.  A timeout of three seconds is enforced on all outbound requests, with one retry in the event of a timeout or an error response from the remote system. If a successful response isn't received after the request, a 400 error is returned with more information about what failed.  >**Note:** This execution endpoint isn't tied to any other functionality in Okta, and you should only use it for testing purposes.
+        Executes the inline hook that matches the provided `inlineHookId` by using the request body as the input. This
+        inline hook sends the provided data through the `channel` object and returns a response if it matches the correct
+        data contract. Otherwise it returns an error. You need to construct a JSON payload that matches the payloads that
+        Okta would send to your external service for this inline hook type.  A timeout of three seconds is enforced on all
+        outbound requests, with one retry in the event of a timeout or an error response from the remote system. If a
+        successful response isn't received after the request, a 400 error is returned with more information about what
+        failed.  >**Note:** This execution endpoint isn't tied to any other functionality in Okta, and you should only use
+        it for testing purposes.
 
         :param inline_hook_id: `id` of the inline hook (required)
         :type inline_hook_id: str
@@ -807,13 +829,13 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _execute_inline_hook_serialize(
-        self,
-        inline_hook_id,
-        payload_data,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            inline_hook_id,
+            payload_data,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -882,20 +904,20 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def get_inline_hook(
-        self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> InlineHook:
         """Retrieve an inline hook
 
@@ -985,12 +1007,12 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_inline_hook_serialize(
-        self,
-        inline_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            inline_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1043,24 +1065,27 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def list_inline_hooks(
-        self,
-        type: Annotated[Optional[StrictStr], Field(description="One of the supported inline hook types")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            type: Annotated[Optional[StrictStr], Field(description="One of the supported inline hook types")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[InlineHook]:
         """List all inline hooks
 
-        Lists all inline hooks or all inline hooks of a specific type.  When listing a specific inline hook, you need to specify its type. The following types are currently supported:   | Type Value                         | Name                                                           |   |------------------------------------|----------------------------------------------------------------|   | `com.okta.import.transform`        | [User import inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createUserImportInlineHook)       |   | `com.okta.oauth2.tokens.transform` | [Token inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createTokenInlineHook)               |   | `com.okta.saml.tokens.transform`   | [SAML assertion inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createSAMLAssertionInlineHook)       |   | `com.okta.telephony.provider`      | [Telephony inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createTelephonyInlineHook) |   | `com.okta.user.credential.password.import` | [Password import inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createPasswordImportInlineHook)|   | `com.okta.user.pre-registration`   | [Registration inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/create-registration-hook) |
+        Lists all inline hooks or all inline hooks of a specific type.  When listing a specific inline hook, you need to
+        specify its type. The following types are currently supported:   | Type Value                         | Name
+                                                            |
+                                                            |------------------------------------|----------------------------------------------------------------|   | `com.okta.import.transform`        | [User import inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createUserImportInlineHook)       |   | `com.okta.oauth2.tokens.transform` | [Token inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createTokenInlineHook)               |   | `com.okta.saml.tokens.transform`   | [SAML assertion inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createSAMLAssertionInlineHook)       |   | `com.okta.telephony.provider`      | [Telephony inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createTelephonyInlineHook) |   | `com.okta.user.credential.password.import` | [Password import inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/createPasswordImportInlineHook)|   | `com.okta.user.pre-registration`   | [Registration inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation/create-registration-hook) |
 
         :param type: One of the supported inline hook types
         :type type: str
@@ -1145,12 +1170,12 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_inline_hooks_serialize(
-        self,
-        type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1168,7 +1193,6 @@ class InlineHookApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if type is not None:
-
             _query_params.append(('type', type))
 
         # process the header parameters
@@ -1205,25 +1229,26 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def replace_inline_hook(
-        self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
-        inline_hook: InlineHookReplace,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
+            inline_hook: InlineHookReplace,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> InlineHook:
         """Replace an inline hook
 
-        Replaces an inline hook by `inlineHookId`. The submitted inline hook properties replace the existing properties after passing validation.  >**Note:** Some properties are immutable and can't be updated.
+        Replaces an inline hook by `inlineHookId`. The submitted inline hook properties replace the existing properties
+        after passing validation.  >**Note:** Some properties are immutable and can't be updated.
 
         :param inline_hook_id: `id` of the inline hook (required)
         :type inline_hook_id: str
@@ -1313,13 +1338,13 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_inline_hook_serialize(
-        self,
-        inline_hook_id,
-        inline_hook,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            inline_hook_id,
+            inline_hook,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1388,21 +1413,21 @@ class InlineHookApi(ApiClient):
 
     @validate_call
     async def update_inline_hook(
-        self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
-        inline_hook: InlineHookReplace,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            inline_hook_id: Annotated[StrictStr, Field(description="`id` of the inline hook")],
+            inline_hook: InlineHookReplace,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> InlineHook:
         """Update an inline hook
 
@@ -1496,13 +1521,13 @@ class InlineHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_inline_hook_serialize(
-        self,
-        inline_hook_id,
-        inline_hook,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            inline_hook_id,
+            inline_hook,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

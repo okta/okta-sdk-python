@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.group_schema import GroupSchema
 from okta.models.log_stream_schema import LogStreamSchema
 from okta.models.log_stream_type import LogStreamType
-from okta.models.user_schema import UserSchema
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.user_schema import UserSchema
 from okta.rest import RESTResponse
 
 
@@ -48,24 +49,27 @@ class SchemaApi(ApiClient):
 
     @validate_call
     async def get_application_user_schema(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserSchema:
         """Retrieve the default app user schema for an app
 
-        Retrieves the default schema for an app user.  The [User Types](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/) feature does not extend to apps. All users assigned to a given app use the same app user schema. Therefore, unlike the user schema operations, the app user schema operations all specify `default` and don't accept a schema ID.
+        Retrieves the default schema for an app user.  The [User Types](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/) feature does not extend to
+        apps. All users assigned to a given app use the same app user schema. Therefore, unlike the user schema
+        operations, the app user schema operations all specify `default` and don't accept a schema ID.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -151,12 +155,12 @@ class SchemaApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_application_user_schema_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -209,23 +213,26 @@ class SchemaApi(ApiClient):
 
     @validate_call
     async def get_group_schema(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupSchema:
         """Retrieve the default group schema
 
-        Retrieves the group schema  The [User Types](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/) feature does not extend to groups. All groups use the same group schema. Unlike user schema operations, group schema operations all specify `default` and don't accept a schema ID.
+        Retrieves the group schema  The [User Types](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/) feature does not extend to
+        groups. All groups use the same group schema. Unlike user schema operations, group schema operations all specify
+        `default` and don't accept a schema ID.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -307,11 +314,11 @@ class SchemaApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_group_schema_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -362,24 +369,27 @@ class SchemaApi(ApiClient):
 
     @validate_call
     async def get_log_stream_schema(
-        self,
-        log_stream_type: LogStreamType,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            log_stream_type: LogStreamType,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> LogStreamSchema:
         """Retrieve the log stream schema for the schema type
 
-        Retrieves the schema for a log stream type. The `logStreamType` element in the URL specifies the log stream type, which is either `aws_eventbridge` or `splunk_cloud_logstreaming`. Use the `aws_eventbridge` literal to retrieve the AWS EventBridge type schema, and use the `splunk_cloud_logstreaming` literal retrieve the Splunk Cloud type schema.
+        Retrieves the schema for a log stream type. The `logStreamType` element in the URL specifies the log stream type,
+        which is either `aws_eventbridge` or `splunk_cloud_logstreaming`. Use the `aws_eventbridge` literal to retrieve
+        the AWS EventBridge type schema, and use the `splunk_cloud_logstreaming` literal retrieve the Splunk Cloud type
+        schema.
 
         :param log_stream_type: (required)
         :type log_stream_type: LogStreamType
@@ -465,12 +475,12 @@ class SchemaApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_log_stream_schema_serialize(
-        self,
-        log_stream_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            log_stream_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -523,20 +533,22 @@ class SchemaApi(ApiClient):
 
     @validate_call
     async def get_user_schema(
-        self,
-        schema_id: Annotated[StrictStr, Field(description="Schema ID. You can also use `default` to refer to the default user type schema.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            schema_id: Annotated[StrictStr, Field(
+                description="Schema ID. You can also use `default` to refer to the default user type schema."
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserSchema:
         """Retrieve a user schema
 
@@ -626,12 +638,12 @@ class SchemaApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_user_schema_serialize(
-        self,
-        schema_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            schema_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -684,19 +696,19 @@ class SchemaApi(ApiClient):
 
     @validate_call
     async def list_log_stream_schemas(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[LogStreamSchema]:
         """List the log stream schemas
 
@@ -782,11 +794,11 @@ class SchemaApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_log_stream_schemas_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -837,25 +849,32 @@ class SchemaApi(ApiClient):
 
     @validate_call
     async def update_application_user_profile(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        body: Optional[UserSchema] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            body: Optional[UserSchema] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserSchema:
         """Update the app user profile schema for an app
 
-        Updates the app user schema. This updates, adds, or removes one or more custom profile properties or the nullability of a base property in the app user schema for an app. Changing a base property's nullability (for example, the value of its `required` field) is allowed only if it is nullable in the default predefined schema for the app.  > **Note:** You must set properties explicitly to `null` to remove them from the schema; otherwise, `POST` is interpreted as a partial update.  The [User Types](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/) feature does not extend to apps. All users assigned to a given app use the same app user schema. Therefore, unlike the user schema operations, the app user schema operations all specify `default` and don't accept a schema ID.
+        Updates the app user schema. This updates, adds, or removes one or more custom profile properties or the
+        nullability of a base property in the app user schema for an app. Changing a base property's nullability (for
+        example, the value of its `required` field) is allowed only if it is nullable in the default predefined schema for
+        the app.  > **Note:** You must set properties explicitly to `null` to remove them from the schema; otherwise,
+        `POST` is interpreted as a partial update.  The [User Types](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/) feature does not extend to
+        apps. All users assigned to a given app use the same app user schema. Therefore, unlike the user schema
+        operations, the app user schema operations all specify `default` and don't accept a schema ID.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -945,13 +964,13 @@ class SchemaApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_application_user_profile_serialize(
-        self,
-        app_id,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1020,24 +1039,29 @@ class SchemaApi(ApiClient):
 
     @validate_call
     async def update_group_schema(
-        self,
-        group_schema: Optional[GroupSchema] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_schema: Optional[GroupSchema] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupSchema:
         """Update the group profile schema
 
-        Updates the group profile schema. This updates, adds, or removes one or more custom profile properties in a group schema. Currently Okta does not support changing base group profile properties.  > **Note:** You must set properties explicitly to `null` to remove them from the schema; otherwise, `POST` is interpreted as a partial update.  The [User Types](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/) feature does not extend to groups. All groups use the same group schema. Unlike user schema operations, group schema operations all specify `default` and don't accept a schema ID.
+        Updates the group profile schema. This updates, adds, or removes one or more custom profile properties in a group
+        schema. Currently Okta does not support changing base group profile properties.  > **Note:** You must set
+        properties explicitly to `null` to remove them from the schema; otherwise, `POST` is interpreted as a partial
+        update.  The [User Types](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/)
+        feature does not extend to groups. All groups use the same group schema. Unlike user schema operations,
+        group schema operations all specify `default` and don't accept a schema ID.
 
         :param group_schema:
         :type group_schema: GroupSchema
@@ -1123,12 +1147,12 @@ class SchemaApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_group_schema_serialize(
-        self,
-        group_schema,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_schema,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1195,25 +1219,35 @@ class SchemaApi(ApiClient):
 
     @validate_call
     async def update_user_profile(
-        self,
-        schema_id: Annotated[StrictStr, Field(description="Schema ID. You can also use `default` to refer to the default user type schema.")],
-        user_schema: UserSchema,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            schema_id: Annotated[StrictStr, Field(
+                description="Schema ID. You can also use `default` to refer to the default user type schema."
+            )],
+            user_schema: UserSchema,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserSchema:
         """Update a user schema
 
-        Updates a user schema. Use this request to update, add, or remove one or more profile properties in a user schema. If you specify `default` for the `schemaId`, updates will apply to the default user type.  Unlike custom user profile properties, limited changes are allowed to base user profile properties (permissions, nullability of the `firstName` and `lastName` properties, or pattern for `login`). You can't remove a property from the default schema if it's being referenced as a [`matchAttribute`](/openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider!path=policy/subject/matchAttribute&t=request) in `SAML2` IdPs. Currently, all validation of SAML assertions are only performed against the default user type.  > **Note:** You must set properties explicitly to `null` to remove them from the schema; otherwise, `POST` is interpreted as a partial update.
+        Updates a user schema. Use this request to update, add, or remove one or more profile properties in a user schema.
+        If you specify `default` for the `schemaId`, updates will apply to the default user type.  Unlike custom user
+        profile properties, limited changes are allowed to base user profile properties (permissions, nullability of the
+        `firstName` and `lastName` properties, or pattern for `login`). You can't remove a property from the default
+        schema if it's being referenced as a [`matchAttribute`](
+        /openapi/okta-management/management/tag/IdentityProvider/#tag/IdentityProvider/operation/createIdentityProvider
+        !path=policy/subject/matchAttribute&t=request) in `SAML2` IdPs. Currently, all validation of SAML assertions are
+        only performed against the default user type.  > **Note:** You must set properties explicitly to `null` to remove
+        them from the schema; otherwise, `POST` is interpreted as a partial update.
 
         :param schema_id: Schema ID. You can also use `default` to refer to the default user type schema. (required)
         :type schema_id: str
@@ -1303,13 +1337,13 @@ class SchemaApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_user_profile_serialize(
-        self,
-        schema_id,
-        user_schema,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            schema_id,
+            user_schema,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

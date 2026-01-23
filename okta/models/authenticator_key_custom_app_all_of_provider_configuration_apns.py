@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,15 +38,21 @@ class AuthenticatorKeyCustomAppAllOfProviderConfigurationApns(BaseModel):
     """  # noqa: E501
     id: Optional[StrictStr] = Field(
         default=None,
-        description="ID of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)")
+        description="ID of the APNs (Apple Push Notification Service) [configurations]("
+                    "https://developer.okta.com/docs/reference/api/push-providers/)"
+    )
     app_bundle_id: Optional[StrictStr] = Field(
         default=None,
-        description="AppBundleId of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)",
-        alias="appBundleId")
+        description="AppBundleId of the APNs (Apple Push Notification Service) [configurations]("
+                    "https://developer.okta.com/docs/reference/api/push-providers/)",
+        alias="appBundleId"
+    )
     debug_app_bundle_id: Optional[StrictStr] = Field(
         default=None,
-        description="DebugAppBundleId of the APNs (Apple Push Notification Service) [configurations](https://developer.okta.com/docs/reference/api/push-providers/)",
-        alias="debugAppBundleId")
+        description="DebugAppBundleId of the APNs (Apple Push Notification Service) [configurations]("
+                    "https://developer.okta.com/docs/reference/api/push-providers/)",
+        alias="debugAppBundleId"
+    )
     __properties: ClassVar[List[str]] = ["id", "appBundleId", "debugAppBundleId"]
 
     model_config = ConfigDict(
@@ -77,8 +85,10 @@ class AuthenticatorKeyCustomAppAllOfProviderConfigurationApns(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,9 +106,11 @@ class AuthenticatorKeyCustomAppAllOfProviderConfigurationApns(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "appBundleId": obj.get("appBundleId"),
-            "debugAppBundleId": obj.get("debugAppBundleId")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "appBundleId": obj.get("appBundleId"),
+                "debugAppBundleId": obj.get("debugAppBundleId")
+            }
+        )
         return _obj

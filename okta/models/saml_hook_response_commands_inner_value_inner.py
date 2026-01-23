@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,24 +20,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.saml_hook_response_commands_inner_value_inner_value import SAMLHookResponseCommandsInnerValueInnerValue
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.saml_hook_response_commands_inner_value_inner_value import SAMLHookResponseCommandsInnerValueInnerValue
 
 
 class SAMLHookResponseCommandsInnerValueInner(BaseModel):
     """
     SAMLHookResponseCommandsInnerValueInner
     """  # noqa: E501
-    op: Optional[StrictStr] = Field(default=None, description="The name of one of the supported ops: `add`:  Add a new claim to the assertion `replace`: Modify any element of the assertion  > **Note:** If a response to the SAML assertion inline hook request isn't received from your external service within three seconds, a timeout occurs. In this scenario, the Okta process flow continues with the original SAML assertion returned.")
+    op: Optional[StrictStr] = Field(
+        default=None,
+        description="The name of one of the supported ops: `add`:  Add a new claim to the assertion `replace`: Modify any "
+                    "element of the assertion  > **Note:** If a response to the SAML assertion inline hook request isn't "
+                    "received from your external service within three seconds, a timeout occurs. In this scenario, "
+                    "the Okta process flow continues with the original SAML assertion returned."
+    )
     path: Optional[StrictStr] = Field(default=None, description="Location, within the assertion, to apply the operation")
     value: Optional[SAMLHookResponseCommandsInnerValueInnerValue] = None
     __properties: ClassVar[List[str]] = ["op", "path", "value"]
@@ -70,8 +79,10 @@ class SAMLHookResponseCommandsInnerValueInner(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,9 +107,13 @@ class SAMLHookResponseCommandsInnerValueInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "op": obj.get("op"),
-            "path": obj.get("path"),
-            "value": SAMLHookResponseCommandsInnerValueInnerValue.from_dict(obj["value"]) if obj.get("value") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "op": obj.get("op"),
+                "path": obj.get("path"),
+                "value": SAMLHookResponseCommandsInnerValueInnerValue.from_dict(obj["value"]) if obj.get(
+                    "value"
+                ) is not None else None
+            }
+        )
         return _obj

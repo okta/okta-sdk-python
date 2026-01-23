@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,12 +38,14 @@ class UserFactorSecurityQuestionProfile(BaseModel):
     UserFactorSecurityQuestionProfile
     """  # noqa: E501
     answer: Optional[Annotated[str, Field(min_length=4, strict=True)]] = Field(
-        default=None, description="Answer to the question")
+        default=None, description="Answer to the question"
+    )
     question: Optional[StrictStr] = Field(default=None, description="Unique key for the question")
     question_text: Optional[StrictStr] = Field(
         default=None,
         description="Human-readable text that's displayed to the user",
-        alias="questionText")
+        alias="questionText"
+    )
     __properties: ClassVar[List[str]] = ["answer", "question", "questionText"]
 
     @field_validator('question')
@@ -50,9 +54,24 @@ class UserFactorSecurityQuestionProfile(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['disliked_food', 'name_of_first_plush_toy', 'first_award', 'favorite_security_question', 'favorite_toy', 'first_computer_game', 'favorite_movie_quote', 'first_sports_team_mascot', 'first_music_purchase', 'favorite_art_piece', 'grandmother_favorite_desert',
-                            'first_thing_cooked', 'childhood_dream_job', 'first_kiss_location', 'place_where_significant_other_was_met', 'favorite_vacation_location', 'new_years_two_thousand', 'favorite_speaker_actor', 'favorite_book_movie_character', 'favorite_sports_player']):
-            raise ValueError("must be one of enum values ('disliked_food', 'name_of_first_plush_toy', 'first_award', 'favorite_security_question', 'favorite_toy', 'first_computer_game', 'favorite_movie_quote', 'first_sports_team_mascot', 'first_music_purchase', 'favorite_art_piece', 'grandmother_favorite_desert', 'first_thing_cooked', 'childhood_dream_job', 'first_kiss_location', 'place_where_significant_other_was_met', 'favorite_vacation_location', 'new_years_two_thousand', 'favorite_speaker_actor', 'favorite_book_movie_character', 'favorite_sports_player')")
+        if value not in set(
+                [
+                    'disliked_food', 'name_of_first_plush_toy', 'first_award', 'favorite_security_question', 'favorite_toy',
+                    'first_computer_game', 'favorite_movie_quote', 'first_sports_team_mascot', 'first_music_purchase',
+                    'favorite_art_piece', 'grandmother_favorite_desert',
+                    'first_thing_cooked', 'childhood_dream_job', 'first_kiss_location',
+                    'place_where_significant_other_was_met', 'favorite_vacation_location', 'new_years_two_thousand',
+                    'favorite_speaker_actor', 'favorite_book_movie_character', 'favorite_sports_player'
+                ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('disliked_food', 'name_of_first_plush_toy', 'first_award', "
+                "'favorite_security_question', 'favorite_toy', 'first_computer_game', 'favorite_movie_quote', "
+                "'first_sports_team_mascot', 'first_music_purchase', 'favorite_art_piece', 'grandmother_favorite_desert', "
+                "'first_thing_cooked', 'childhood_dream_job', 'first_kiss_location', "
+                "'place_where_significant_other_was_met', 'favorite_vacation_location', 'new_years_two_thousand', "
+                "'favorite_speaker_actor', 'favorite_book_movie_character', 'favorite_sports_player')"
+            )
         return value
 
     model_config = ConfigDict(
@@ -86,9 +105,11 @@ class UserFactorSecurityQuestionProfile(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "question_text",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "question_text",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -106,9 +127,11 @@ class UserFactorSecurityQuestionProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "answer": obj.get("answer"),
-            "question": obj.get("question"),
-            "questionText": obj.get("questionText")
-        })
+        _obj = cls.model_validate(
+            {
+                "answer": obj.get("answer"),
+                "question": obj.get("question"),
+                "questionText": obj.get("questionText")
+            }
+        )
         return _obj

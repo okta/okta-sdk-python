@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
 
 from pydantic import Field, StrictStr
-from typing import List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.event_hook import EventHook
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.event_hook import EventHook
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,20 +46,20 @@ class EventHookApi(ApiClient):
 
     @validate_call
     async def activate_event_hook(
-        self,
-        event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EventHook:
         """Activate an event hook
 
@@ -148,12 +149,12 @@ class EventHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_event_hook_serialize(
-        self,
-        event_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            event_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -206,24 +207,33 @@ class EventHookApi(ApiClient):
 
     @validate_call
     async def create_event_hook(
-        self,
-        event_hook: EventHook,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            event_hook: EventHook,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EventHook:
         """Create an event hook
 
-        Creates a new event hook for your organization in `ACTIVE` status. You pass an event hook object in the JSON payload of your request. That object represents the set of required information about the event hook you're registering, including:   * The URI of your external service   * The [events](https://developer.okta.com/docs/reference/api/event-types/) in Okta you want to subscribe to   * An optional event hook filter that can reduce the number of event hook calls. This is a self-service Early Access (EA) feature.     See [Create an event hook filter](https://developer.okta.com/docs/concepts/event-hooks/#create-an-event-hook-filter).      Additionally, you can specify a secret API key for Okta to pass to your external service endpoint for security verification. Note that the API key you set here is unrelated to the Okta API token you must supply when making calls to Okta APIs. Optionally, you can specify extra headers that Okta passes to your external service with each call. Your external service must use a valid HTTPS endpoint.
+        Creates a new event hook for your organization in `ACTIVE` status. You pass an event hook object in the JSON
+        payload of your request. That object represents the set of required information about the event hook you're
+        registering, including:   * The URI of your external service   * The [events](
+        https://developer.okta.com/docs/reference/api/event-types/) in Okta you want to subscribe to   * An optional event
+        hook filter that can reduce the number of event hook calls. This is a self-service Early Access (EA) feature.
+        See [Create an event hook filter](https://developer.okta.com/docs/concepts/event-hooks/#create-an-event-hook
+        -filter).      Additionally, you can specify a secret API key for Okta to pass to your external service endpoint
+        for security verification. Note that the API key you set here is unrelated to the Okta API token you must supply
+        when making calls to Okta APIs. Optionally, you can specify extra headers that Okta passes to your external
+        service with each call. Your external service must use a valid HTTPS endpoint.
 
         :param event_hook: (required)
         :type event_hook: EventHook
@@ -309,12 +319,12 @@ class EventHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_event_hook_serialize(
-        self,
-        event_hook,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            event_hook,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -381,20 +391,20 @@ class EventHookApi(ApiClient):
 
     @validate_call
     async def deactivate_event_hook(
-        self,
-        event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EventHook:
         """Deactivate an event hook
 
@@ -484,12 +494,12 @@ class EventHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_event_hook_serialize(
-        self,
-        event_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            event_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -542,24 +552,25 @@ class EventHookApi(ApiClient):
 
     @validate_call
     async def delete_event_hook(
-        self,
-        event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an event hook
 
-        Deletes the event hook that matches the provided `id`. After deletion, the event hook is unrecoverable. As a safety precaution, you can only delete event hooks with a status of `INACTIVE`.
+        Deletes the event hook that matches the provided `id`. After deletion, the event hook is unrecoverable. As a
+        safety precaution, you can only delete event hooks with a status of `INACTIVE`.
 
         :param event_hook_id: `id` of the Event Hook (required)
         :type event_hook_id: str
@@ -636,12 +647,12 @@ class EventHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_event_hook_serialize(
-        self,
-        event_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            event_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -694,20 +705,20 @@ class EventHookApi(ApiClient):
 
     @validate_call
     async def get_event_hook(
-        self,
-        event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EventHook:
         """Retrieve an event hook
 
@@ -797,12 +808,12 @@ class EventHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_event_hook_serialize(
-        self,
-        event_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            event_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -855,19 +866,19 @@ class EventHookApi(ApiClient):
 
     @validate_call
     async def list_event_hooks(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[EventHook]:
         """List all event hooks
 
@@ -953,11 +964,11 @@ class EventHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_event_hooks_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1008,25 +1019,27 @@ class EventHookApi(ApiClient):
 
     @validate_call
     async def replace_event_hook(
-        self,
-        event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
-        event_hook: EventHook,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
+            event_hook: EventHook,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EventHook:
         """Replace an event hook
 
-        Replaces an event hook. Okta validates the new properties before replacing the existing values. Some event hook properties are immutable and can't be updated. Refer to the parameter description in the request body schema.  >**Note:** Updating the `channel` property requires you to verify the hook again.
+        Replaces an event hook. Okta validates the new properties before replacing the existing values. Some event hook
+        properties are immutable and can't be updated. Refer to the parameter description in the request body schema.
+        >**Note:** Updating the `channel` property requires you to verify the hook again.
 
         :param event_hook_id: `id` of the Event Hook (required)
         :type event_hook_id: str
@@ -1116,13 +1129,13 @@ class EventHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_event_hook_serialize(
-        self,
-        event_hook_id,
-        event_hook,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            event_hook_id,
+            event_hook,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1191,24 +1204,29 @@ class EventHookApi(ApiClient):
 
     @validate_call
     async def verify_event_hook(
-        self,
-        event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            event_hook_id: Annotated[StrictStr, Field(description="`id` of the Event Hook")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EventHook:
         """Verify an event hook
 
-        Verifies that the event hook matches the provided `eventHookId`. To verify ownership, your endpoint must send information back to Okta in JSON format. See [Event hooks](https://developer.okta.com/docs/concepts/event-hooks/#one-time-verification-request).  Only `ACTIVE` and `VERIFIED` event hooks can receive events from Okta.  If a response is not received within 3 seconds, the outbound request times out. One retry is attempted after a timeout or error response. If a successful response still isn't received, this operation returns a 400 error with more information about the failure.
+        Verifies that the event hook matches the provided `eventHookId`. To verify ownership, your endpoint must send
+        information back to Okta in JSON format. See [Event hooks](
+        https://developer.okta.com/docs/concepts/event-hooks/#one-time-verification-request).  Only `ACTIVE` and
+        `VERIFIED` event hooks can receive events from Okta.  If a response is not received within 3 seconds, the outbound
+        request times out. One retry is attempted after a timeout or error response. If a successful response still isn't
+        received, this operation returns a 400 error with more information about the failure.
 
         :param event_hook_id: `id` of the Event Hook (required)
         :type event_hook_id: str
@@ -1295,12 +1313,12 @@ class EventHookApi(ApiClient):
             return (resp.data, resp, None)
 
     def _verify_event_hook_serialize(
-        self,
-        event_hook_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            event_hook_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

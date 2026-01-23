@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -19,22 +21,22 @@
 """  # noqa: E501
 
 import warnings
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
 
 from pydantic import StrictStr
-from typing import Optional
+from pydantic import validate_call, Field, StrictFloat, StrictInt
+from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.okta_support_case import OktaSupportCase
 from okta.models.okta_support_cases import OktaSupportCases
 from okta.models.org_aerial_consent import OrgAerialConsent
 from okta.models.org_aerial_consent_details import OrgAerialConsentDetails
 from okta.models.org_aerial_consent_revoked import OrgAerialConsentRevoked
 from okta.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -50,23 +52,27 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def extend_okta_support(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """(Deprecated) Extend Okta Support access
 
-        Extends the length of time that Okta Support can access your org by 24 hours. This means that 24 hours are added to the remaining access time.  > **Note:** This resource is deprecated. Use the [Update an Okta Support case](/openapi/okta-management/management/tag/OrgSettingSupport/#tag/OrgSettingSupport/operation/updateOktaSupportCase) resource to extend Okta Support access for a support case. > For the corresponding Okta Admin Console feature, see [Give access to Okta Support](https://help.okta.com/okta_help.htm?type=oie&id=settings-support-access).
+        Extends the length of time that Okta Support can access your org by 24 hours. This means that 24 hours are added
+        to the remaining access time.  > **Note:** This resource is deprecated. Use the [Update an Okta Support case](
+        /openapi/okta-management/management/tag/OrgSettingSupport/#tag/OrgSettingSupport/operation/updateOktaSupportCase)
+        resource to extend Okta Support access for a support case. > For the corresponding Okta Admin Console feature,
+        see [Give access to Okta Support](https://help.okta.com/okta_help.htm?type=oie&id=settings-support-access).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -138,11 +144,11 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _extend_okta_support_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -186,23 +192,24 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def get_aerial_consent(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OrgAerialConsentDetails:
         """Retrieve Okta Aerial consent for your org
 
-        Retrieves the Okta Aerial consent grant details for your Org. Returns a 404 Not Found error if no consent has been granted.
+        Retrieves the Okta Aerial consent grant details for your Org. Returns a 404 Not Found error if no consent has been
+        granted.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -286,11 +293,11 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_aerial_consent_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -341,19 +348,19 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def get_org_okta_support_settings(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OrgOktaSupportSettingsObj:
         """Retrieve the Okta Support settings
 
@@ -439,11 +446,11 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_org_okta_support_settings_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -494,24 +501,25 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def grant_aerial_consent(
-        self,
-        org_aerial_consent: Optional[OrgAerialConsent] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            org_aerial_consent: Optional[OrgAerialConsent] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OrgAerialConsentDetails:
         """Grant Okta Aerial access to your org
 
-        Grants an Okta Aerial account consent to manage your org. If the org is a child org, consent is taken from the parent org. Grant calls directly to the child are not allowed.
+        Grants an Okta Aerial account consent to manage your org. If the org is a child org, consent is taken from the
+        parent org. Grant calls directly to the child are not allowed.
 
         :param org_aerial_consent:
         :type org_aerial_consent: OrgAerialConsent
@@ -597,12 +605,12 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _grant_aerial_consent_serialize(
-        self,
-        org_aerial_consent,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            org_aerial_consent,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -669,23 +677,27 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def grant_okta_support(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """(Deprecated) Grant Okta Support access
 
-        Grants Okta Support temporary access to your org as an administrator for eight hours  > **Note:** This resource is deprecated. Use the [Update an Okta Support case](/openapi/okta-management/management/tag/OrgSettingSupport/#tag/OrgSettingSupport/operation/updateOktaSupportCase) resource to grant Okta Support access for a support case. > For the corresponding Okta Admin Console feature, see [Give access to Okta Support](https://help.okta.com/okta_help.htm?type=oie&id=settings-support-access).
+        Grants Okta Support temporary access to your org as an administrator for eight hours  > **Note:** This resource is
+        deprecated. Use the [Update an Okta Support case](
+        /openapi/okta-management/management/tag/OrgSettingSupport/#tag/OrgSettingSupport/operation/updateOktaSupportCase)
+        resource to grant Okta Support access for a support case. > For the corresponding Okta Admin Console feature,
+        see [Give access to Okta Support](https://help.okta.com/okta_help.htm?type=oie&id=settings-support-access).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -757,11 +769,11 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _grant_okta_support_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -805,19 +817,19 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def list_okta_support_cases(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OktaSupportCases:
         """List all Okta Support cases
 
@@ -903,11 +915,11 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_okta_support_cases_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -958,24 +970,25 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def revoke_aerial_consent(
-        self,
-        org_aerial_consent: Optional[OrgAerialConsent] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            org_aerial_consent: Optional[OrgAerialConsent] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OrgAerialConsentRevoked:
         """Revoke Okta Aerial access to your org
 
-        Revokes access of an Okta Aerial account to your Org. The revoke operation will fail if the org has already been added to an Aerial account.
+        Revokes access of an Okta Aerial account to your Org. The revoke operation will fail if the org has already been
+        added to an Aerial account.
 
         :param org_aerial_consent:
         :type org_aerial_consent: OrgAerialConsent
@@ -1061,12 +1074,12 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_aerial_consent_serialize(
-        self,
-        org_aerial_consent,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            org_aerial_consent,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1133,23 +1146,27 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def revoke_okta_support(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """(Deprecated) Revoke Okta Support access
 
-        Revokes Okta Support access to your org  > **Note:** This resource is deprecated. Use the [Update an Okta Support case](/openapi/okta-management/management/tag/OrgSettingSupport/#tag/OrgSettingSupport/operation/updateOktaSupportCase) resource to revoke Okta Support access for a support case. > For the corresponding Okta Admin Console feature, see [Give access to Okta Support](https://help.okta.com/okta_help.htm?type=oie&id=settings-support-access).
+        Revokes Okta Support access to your org  > **Note:** This resource is deprecated. Use the [Update an Okta Support
+        case](/openapi/okta-management/management/tag/OrgSettingSupport/#tag/OrgSettingSupport/operation
+        /updateOktaSupportCase) resource to revoke Okta Support access for a support case. > For the corresponding Okta
+        Admin Console feature, see [Give access to Okta Support](
+        https://help.okta.com/okta_help.htm?type=oie&id=settings-support-access).
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1221,11 +1238,11 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_okta_support_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1269,25 +1286,27 @@ class OrgSettingSupportApi(ApiClient):
 
     @validate_call
     async def update_okta_support_case(
-        self,
-        case_number: StrictStr,
-        okta_support_case: Optional[OktaSupportCase] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            case_number: StrictStr,
+            okta_support_case: Optional[OktaSupportCase] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OktaSupportCase:
         """Update an Okta Support case
 
-        Updates access to the org for an Okta Support case:  * You can enable, disable, or extend access to your org for an Okta Support case.  * You can approve Okta Support access to your org for self-assigned cases. A self-assigned case is created and assigned by the same Okta Support user.
+        Updates access to the org for an Okta Support case:  * You can enable, disable, or extend access to your org for
+        an Okta Support case.  * You can approve Okta Support access to your org for self-assigned cases. A self-assigned
+        case is created and assigned by the same Okta Support user.
 
         :param case_number: (required)
         :type case_number: str
@@ -1375,13 +1394,13 @@ class OrgSettingSupportApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_okta_support_case_serialize(
-        self,
-        case_number,
-        okta_support_case,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            case_number,
+            okta_support_case,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

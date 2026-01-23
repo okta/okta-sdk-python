@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,23 +38,34 @@ class AuthenticationMethod(BaseModel):
     """  # noqa: E501
     hardware_protection: Optional[StrictStr] = Field(
         default='OPTIONAL',
-        description="Indicates if any secrets or private keys used during authentication must be hardware protected and not exportable. This property is only set for `POSSESSION` constraints.",
-        alias="hardwareProtection")
+        description="Indicates if any secrets or private keys used during authentication must be hardware protected and "
+                    "not exportable. This property is only set for `POSSESSION` constraints.",
+        alias="hardwareProtection"
+    )
     id: Optional[StrictStr] = Field(default=None, description="An ID that identifies the authenticator")
     key: StrictStr = Field(description="A label that identifies the authenticator")
     method: StrictStr = Field(description="Specifies the method used for the authenticator")
     phishing_resistant: Optional[StrictStr] = Field(
         default='OPTIONAL',
-        description="Indicates if phishing-resistant Factors are required. This property is only set for `POSSESSION` constraints",
-        alias="phishingResistant")
+        description="Indicates if phishing-resistant Factors are required. This property is only set for `POSSESSION` "
+                    "constraints",
+        alias="phishingResistant"
+    )
     user_verification: Optional[StrictStr] = Field(
         default='OPTIONAL',
         description="Indicates if a user is required to be verified with a verification method.",
-        alias="userVerification")
+        alias="userVerification"
+    )
     user_verification_methods: Optional[List[StrictStr]] = Field(
-        default=None, description="Indicates which methods can be used for user verification. `userVerificationMethods` can only be used when `userVerification` is `REQUIRED`. `BIOMETRICS` is currently the only supported method.", alias="userVerificationMethods")
-    __properties: ClassVar[List[str]] = ["hardwareProtection", "id", "key",
-                                         "method", "phishingResistant", "userVerification", "userVerificationMethods"]
+        default=None,
+        description="Indicates which methods can be used for user verification. `userVerificationMethods` can only be used "
+                    "when `userVerification` is `REQUIRED`. `BIOMETRICS` is currently the only supported method.",
+        alias="userVerificationMethods"
+    )
+    __properties: ClassVar[List[str]] = [
+        "hardwareProtection", "id", "key",
+        "method", "phishingResistant", "userVerification", "userVerificationMethods"
+    ]
 
     @field_validator('hardware_protection')
     def hardware_protection_validate_enum(cls, value):
@@ -125,8 +138,10 @@ class AuthenticationMethod(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -144,13 +159,19 @@ class AuthenticationMethod(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "hardwareProtection": obj.get("hardwareProtection") if obj.get("hardwareProtection") is not None else 'OPTIONAL',
-            "id": obj.get("id"),
-            "key": obj.get("key"),
-            "method": obj.get("method"),
-            "phishingResistant": obj.get("phishingResistant") if obj.get("phishingResistant") is not None else 'OPTIONAL',
-            "userVerification": obj.get("userVerification") if obj.get("userVerification") is not None else 'OPTIONAL',
-            "userVerificationMethods": obj.get("userVerificationMethods")
-        })
+        _obj = cls.model_validate(
+            {
+                "hardwareProtection": obj.get("hardwareProtection") if obj.get(
+                    "hardwareProtection"
+                ) is not None else 'OPTIONAL',
+                "id": obj.get("id"),
+                "key": obj.get("key"),
+                "method": obj.get("method"),
+                "phishingResistant": obj.get("phishingResistant") if obj.get(
+                    "phishingResistant"
+                ) is not None else 'OPTIONAL',
+                "userVerification": obj.get("userVerification") if obj.get("userVerification") is not None else 'OPTIONAL',
+                "userVerificationMethods": obj.get("userVerificationMethods")
+            }
+        )
         return _obj

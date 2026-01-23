@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple
+from typing import List, Union
 
 from pydantic import Field, StrictBytes, StrictInt, StrictStr
-from typing import List, Union
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.csr import Csr
 from okta.models.csr_metadata import CsrMetadata
 from okta.models.json_web_key import JsonWebKey
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,26 +48,29 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def clone_application_key(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
-        target_aid: Annotated[StrictStr, Field(description="Unique key of the target Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
+            target_aid: Annotated[StrictStr, Field(description="Unique key of the target Application")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> JsonWebKey:
         """Clone a key credential
 
-        Clones an X.509 certificate for an Application Key Credential from a source app to a target app.  For step-by-step instructions to clone a credential, see [Share application key credentials for IdPs across apps](https://developer.okta.com/docs/guides/sharing-cert/main/). > **Note:** Sharing certificates isn't a recommended security practice.
+        Clones an X.509 certificate for an Application Key Credential from a source app to a target app.  For step-by-step
+        instructions to clone a credential, see [Share application key credentials for IdPs across apps](
+        https://developer.okta.com/docs/guides/sharing-cert/main/). > **Note:** Sharing certificates isn't a recommended
+        security practice.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -159,14 +163,14 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _clone_application_key_serialize(
-        self,
-        app_id,
-        key_id,
-        target_aid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            key_id,
+            target_aid,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -188,7 +192,6 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             _path_params['keyId'] = key_id
         # process the query parameters
         if target_aid is not None:
-
             _query_params.append(('targetAid', target_aid))
 
         # process the header parameters
@@ -225,25 +228,33 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def generate_application_key(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        validity_years: Annotated[StrictInt, Field(description="Expiry years of the Application Key Credential")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            validity_years: Annotated[StrictInt, Field(description="Expiry years of the Application Key Credential")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> JsonWebKey:
         """Generate a key credential
 
-        Generates a new X.509 certificate for an app key credential > **Note:** To update an Application with the newly generated key credential, use the [Replace an Application](/openapi/okta-management/management/tag/Application/#tag/Application/operation/replaceApplication) request with the new [credentials.signing.kid](/openapi/okta-management/management/tag/Application/#tag/Application/operation/replaceApplication!path=4/credentials/signing/kid&t=request) value in the request body. You can provide just the [Signing Credential object](/openapi/okta-management/management/tag/Application/#tag/Application/operation/replaceApplication!path=4/credentials/signing&t=request) instead of the entire [Application Credential object](/openapi/okta-management/management/tag/Application/#tag/Application/operation/replaceApplication!path=4/credentials&t=request).
+        Generates a new X.509 certificate for an app key credential > **Note:** To update an Application with the newly
+        generated key credential, use the [Replace an Application](
+        /openapi/okta-management/management/tag/Application/#tag/Application/operation/replaceApplication) request with
+        the new [credentials.signing.kid](/openapi/okta-management/management/tag/Application/#tag/Application/operation
+        /replaceApplication!path=4/credentials/signing/kid&t=request) value in the request body. You can provide just the
+        [Signing Credential object](/openapi/okta-management/management/tag/Application/#tag/Application/operation
+        /replaceApplication!path=4/credentials/signing&t=request) instead of the entire [Application Credential object](
+        /openapi/okta-management/management/tag/Application/#tag/Application/operation/replaceApplication!path=4
+        /credentials&t=request).
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -333,13 +344,13 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _generate_application_key_serialize(
-        self,
-        app_id,
-        validity_years,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            validity_years,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -359,7 +370,6 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if validity_years is not None:
-
             _query_params.append(('validityYears', validity_years))
 
         # process the header parameters
@@ -396,25 +406,29 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def generate_csr_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        metadata: CsrMetadata,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            metadata: CsrMetadata,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> str:
         """Generate a certificate signing request
 
-        Generates a new key pair and returns the Certificate Signing Request(CSR) for it. The information in a CSR is used by the Certificate Authority (CA) to verify and create your certificate. It also contains the public key that is included in your certificate.  Returns CSR in `pkcs#10` format if the `Accept` media type is `application/pkcs10` or a CSR object if the `Accept` media type is `application/json`. > **Note:** The key pair isn't listed in the Key Credentials for the app until it's published.
+        Generates a new key pair and returns the Certificate Signing Request(CSR) for it. The information in a CSR is used
+        by the Certificate Authority (CA) to verify and create your certificate. It also contains the public key that is
+        included in your certificate.  Returns CSR in `pkcs#10` format if the `Accept` media type is `application/pkcs10`
+        or a CSR object if the `Accept` media type is `application/json`. > **Note:** The key pair isn't listed in the Key
+        Credentials for the app until it's published.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -504,13 +518,13 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _generate_csr_for_application_serialize(
-        self,
-        app_id,
-        metadata,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            metadata,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -580,21 +594,21 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def get_application_key(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> JsonWebKey:
         """Retrieve a key credential
 
@@ -687,13 +701,13 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_application_key_serialize(
-        self,
-        app_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -748,25 +762,26 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def get_csr_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Csr:
         """Retrieve a certificate signing request
 
-        Retrieves a Certificate Signing Request (CSR) for the app by `csrId`.  Returns a Base64-encoded CSR in DER format if the `Accept` media type is `application/pkcs10` or a CSR object if the `Accept` media type is `application/json`.
+        Retrieves a Certificate Signing Request (CSR) for the app by `csrId`.  Returns a Base64-encoded CSR in DER format
+        if the `Accept` media type is `application/pkcs10` or a CSR object if the `Accept` media type is `application/json`.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -855,13 +870,13 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_csr_for_application_serialize(
-        self,
-        app_id,
-        csr_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            csr_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -917,20 +932,20 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def list_application_keys(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[JsonWebKey]:
         """List all key credentials
 
@@ -1020,12 +1035,12 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_application_keys_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1078,20 +1093,20 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def list_csrs_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Csr]:
         """List all certificate signing requests
 
@@ -1181,12 +1196,12 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_csrs_for_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1239,26 +1254,28 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def publish_csr_from_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
-        body: Union[StrictBytes, StrictStr],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
+            body: Union[StrictBytes, StrictStr],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> JsonWebKey:
         """Publish a certificate signing request
 
-        Publishes a Certificate Signing Request (CSR) for the app with a signed X.509 certificate and adds it into the Application Key Credentials. > **Note:** Publishing a certificate completes the lifecycle of the CSR and it's no longer accessible.
+        Publishes a Certificate Signing Request (CSR) for the app with a signed X.509 certificate and adds it into the
+        Application Key Credentials. > **Note:** Publishing a certificate completes the lifecycle of the CSR and it's no
+        longer accessible.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -1351,14 +1368,14 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _publish_csr_from_application_serialize(
-        self,
-        app_id,
-        csr_id,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            csr_id,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1436,21 +1453,21 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
 
     @validate_call
     async def revoke_csr_from_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke a certificate signing request
 
@@ -1534,13 +1551,13 @@ class ApplicationSSOCredentialKeyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_csr_from_application_serialize(
-        self,
-        app_id,
-        csr_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            csr_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

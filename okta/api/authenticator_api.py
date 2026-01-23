@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,13 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.authenticator_base import AuthenticatorBase
 from okta.models.authenticator_method_base import AuthenticatorMethodBase
 from okta.models.authenticator_method_type import AuthenticatorMethodType
@@ -32,11 +36,8 @@ from okta.models.authenticator_method_type_web_authn import AuthenticatorMethodT
 from okta.models.custom_aaguid_create_request_object import CustomAAGUIDCreateRequestObject
 from okta.models.custom_aaguid_response_object import CustomAAGUIDResponseObject
 from okta.models.custom_aaguid_update_request_object import CustomAAGUIDUpdateRequestObject
-from okta.models.well_known_app_authenticator_configuration import WellKnownAppAuthenticatorConfiguration
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.well_known_app_authenticator_configuration import WellKnownAppAuthenticatorConfiguration
 from okta.rest import RESTResponse
 
 
@@ -52,20 +53,20 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def activate_authenticator(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorBase:
         """Activate an authenticator
 
@@ -155,12 +156,12 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_authenticator_serialize(
-        self,
-        authenticator_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -213,21 +214,21 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def activate_authenticator_method(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of authenticator method")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            method_type: Annotated[AuthenticatorMethodType, Field(description="Type of authenticator method")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorMethodBase:
         """Activate an authenticator method
 
@@ -320,13 +321,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_authenticator_method_serialize(
-        self,
-        authenticator_id,
-        method_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            method_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -381,22 +382,23 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def create_authenticator(
-        self,
-        authenticator: AuthenticatorBase,
-        activate: Annotated[Optional[StrictBool], Field(
-            description="Whether to execute the activation lifecycle operation when Okta creates the authenticator")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator: AuthenticatorBase,
+            activate: Annotated[Optional[StrictBool], Field(
+                description="Whether to execute the activation lifecycle operation when Okta creates the authenticator"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorBase:
         """Create an authenticator
 
@@ -489,13 +491,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_authenticator_serialize(
-        self,
-        authenticator,
-        activate,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator,
+            activate,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -513,7 +515,6 @@ class AuthenticatorApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if activate is not None:
-
             _query_params.append(('activate', activate))
 
         # process the header parameters
@@ -566,21 +567,21 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def create_custom_aaguid(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        custom_aaguid_create_request_object: Optional[CustomAAGUIDCreateRequestObject] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            custom_aaguid_create_request_object: Optional[CustomAAGUIDCreateRequestObject] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CustomAAGUIDResponseObject:
         """Create a custom AAGUID
 
@@ -673,13 +674,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_custom_aaguid_serialize(
-        self,
-        authenticator_id,
-        custom_aaguid_create_request_object,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            custom_aaguid_create_request_object,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -748,20 +749,20 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def deactivate_authenticator(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorBase:
         """Deactivate an authenticator
 
@@ -851,12 +852,12 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_authenticator_serialize(
-        self,
-        authenticator_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -909,21 +910,21 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def deactivate_authenticator_method(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of authenticator method")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            method_type: Annotated[AuthenticatorMethodType, Field(description="Type of authenticator method")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorMethodBase:
         """Deactivate an authenticator method
 
@@ -1016,13 +1017,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_authenticator_method_serialize(
-        self,
-        authenticator_id,
-        method_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            method_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1077,21 +1078,21 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def delete_custom_aaguid(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a custom AAGUID
 
@@ -1175,13 +1176,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_custom_aaguid_serialize(
-        self,
-        authenticator_id,
-        aaguid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            aaguid,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1236,20 +1237,20 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def get_authenticator(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorBase:
         """Retrieve an authenticator
 
@@ -1339,12 +1340,12 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_authenticator_serialize(
-        self,
-        authenticator_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1397,21 +1398,21 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def get_authenticator_method(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of authenticator method")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            method_type: Annotated[AuthenticatorMethodType, Field(description="Type of authenticator method")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorMethodBase:
         """Retrieve an authenticator method
 
@@ -1504,13 +1505,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_authenticator_method_serialize(
-        self,
-        authenticator_id,
-        method_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            method_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1565,21 +1566,21 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def get_custom_aaguid(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CustomAAGUIDResponseObject:
         """Retrieve a custom AAGUID
 
@@ -1672,13 +1673,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_custom_aaguid_serialize(
-        self,
-        authenticator_id,
-        aaguid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            aaguid,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1733,24 +1734,26 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def get_well_known_app_authenticator_configuration(
-        self,
-        oauth_client_id: Annotated[StrictStr, Field(description="Filters app authenticator configurations by `oauthClientId`")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            oauth_client_id: Annotated[
+                StrictStr, Field(description="Filters app authenticator configurations by `oauthClientId`")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[WellKnownAppAuthenticatorConfiguration]:
         """Retrieve the well-known app authenticator configuration
 
-        Retrieves the well-known app authenticator configuration. Includes an app authenticator's settings, supported methods, and other details.
+        Retrieves the well-known app authenticator configuration. Includes an app authenticator's settings,
+        supported methods, and other details.
 
         :param oauth_client_id: Filters app authenticator configurations by `oauthClientId` (required)
         :type oauth_client_id: str
@@ -1806,7 +1809,9 @@ class AuthenticatorApi(ApiClient):
         if List[WellKnownAppAuthenticatorConfiguration] is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, WellKnownAppAuthenticatorConfiguration)
+            response, response_body, error = await self._request_executor.execute(
+                request, WellKnownAppAuthenticatorConfiguration
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -1835,12 +1840,12 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_well_known_app_authenticator_configuration_serialize(
-        self,
-        oauth_client_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            oauth_client_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1858,7 +1863,6 @@ class AuthenticatorApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if oauth_client_id is not None:
-
             _query_params.append(('oauthClientId', oauth_client_id))
 
         # process the header parameters
@@ -1893,24 +1897,25 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def list_all_custom_aaguids(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[CustomAAGUIDResponseObject]:
         """List all custom AAGUIDs
 
-        Lists all custom Authenticator Attestation Global Unique Identifiers (AAGUIDs) in the org  Only custom AAGUIDs that an admin has created are returned.
+        Lists all custom Authenticator Attestation Global Unique Identifiers (AAGUIDs) in the org  Only custom AAGUIDs
+        that an admin has created are returned.
 
         :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
@@ -1996,12 +2001,12 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_all_custom_aaguids_serialize(
-        self,
-        authenticator_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2054,20 +2059,20 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def list_authenticator_methods(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AuthenticatorMethodBase]:
         """List all methods of an authenticator
 
@@ -2157,12 +2162,12 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_authenticator_methods_serialize(
-        self,
-        authenticator_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2215,19 +2220,19 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def list_authenticators(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AuthenticatorBase]:
         """List all authenticators
 
@@ -2313,11 +2318,11 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_authenticators_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2368,21 +2373,21 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def replace_authenticator(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        authenticator: AuthenticatorBase,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            authenticator: AuthenticatorBase,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorBase:
         """Replace an authenticator
 
@@ -2476,13 +2481,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_authenticator_serialize(
-        self,
-        authenticator_id,
-        authenticator,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            authenticator,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2551,22 +2556,22 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def replace_authenticator_method(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of authenticator method")],
-        authenticator_method_base: Optional[AuthenticatorMethodBase] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            method_type: Annotated[AuthenticatorMethodType, Field(description="Type of authenticator method")],
+            authenticator_method_base: Optional[AuthenticatorMethodBase] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorMethodBase:
         """Replace an authenticator method
 
@@ -2663,14 +2668,14 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_authenticator_method_serialize(
-        self,
-        authenticator_id,
-        method_type,
-        authenticator_method_base,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            method_type,
+            authenticator_method_base,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2741,22 +2746,22 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def replace_custom_aaguid(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
-        custom_aaguid_update_request_object: Optional[CustomAAGUIDUpdateRequestObject] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
+            custom_aaguid_update_request_object: Optional[CustomAAGUIDUpdateRequestObject] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CustomAAGUIDResponseObject:
         """Replace a custom AAGUID
 
@@ -2852,14 +2857,14 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_custom_aaguid_serialize(
-        self,
-        authenticator_id,
-        aaguid,
-        custom_aaguid_update_request_object,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            aaguid,
+            custom_aaguid_update_request_object,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2930,22 +2935,22 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def update_custom_aaguid(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
-        custom_aaguid_update_request_object: Optional[CustomAAGUIDUpdateRequestObject] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
+            custom_aaguid_update_request_object: Optional[CustomAAGUIDUpdateRequestObject] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CustomAAGUIDResponseObject:
         """Update a custom AAGUID
 
@@ -3041,14 +3046,14 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_custom_aaguid_serialize(
-        self,
-        authenticator_id,
-        aaguid,
-        custom_aaguid_update_request_object,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            aaguid,
+            custom_aaguid_update_request_object,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -3119,25 +3124,27 @@ class AuthenticatorApi(ApiClient):
 
     @validate_call
     async def verify_rp_id_domain(
-        self,
-        authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
-        web_authn_method_type: Annotated[AuthenticatorMethodTypeWebAuthn, Field(description="Type of authenticator method")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            authenticator_id: Annotated[StrictStr, Field(description="`id` of the authenticator")],
+            web_authn_method_type: Annotated[
+                AuthenticatorMethodTypeWebAuthn, Field(description="Type of authenticator method")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Verify a Relying Party ID domain
 
-        Verifies the [Relying Party identifier (RP ID)](https://www.w3.org/TR/webauthn/#relying-party-identifier) domain for the specified WebAuthn authenticator and the specific `webauthn` authenticator method
+        Verifies the [Relying Party identifier (RP ID)](https://www.w3.org/TR/webauthn/#relying-party-identifier) domain
+        for the specified WebAuthn authenticator and the specific `webauthn` authenticator method
 
         :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
@@ -3218,13 +3225,13 @@ class AuthenticatorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _verify_rp_id_domain_serialize(
-        self,
-        authenticator_id,
-        web_authn_method_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            authenticator_id,
+            web_authn_method_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,33 +20,38 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.web_authn_cred_request import WebAuthnCredRequest
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.web_authn_cred_request import WebAuthnCredRequest
 
 
 class EnrollmentInitializationResponse(BaseModel):
     """
-    Yubico transport key in the form of a JSON Web Token (JWK), used to encrypt our fulfillment request to Yubico. The currently agreed protocol uses P-384.
+    Yubico transport key in the form of a JSON Web Token (JWK), used to encrypt our fulfillment request to Yubico. The
+    currently agreed protocol uses P-384.
     """  # noqa: E501
     cred_requests: Optional[List[WebAuthnCredRequest]] = Field(
-        default=None, description="List of credential requests for the fulfillment provider", alias="credRequests")
+        default=None, description="List of credential requests for the fulfillment provider", alias="credRequests"
+    )
     fulfillment_provider: Optional[StrictStr] = Field(
         default=None,
         description="Name of the fulfillment provider for the WebAuthn preregistration factor",
-        alias="fulfillmentProvider")
+        alias="fulfillmentProvider"
+    )
     pin_request_jwe: Optional[StrictStr] = Field(
         default=None,
         description="Encrypted JWE of PIN request for the fulfillment provider",
-        alias="pinRequestJwe")
+        alias="pinRequestJwe"
+    )
     user_id: Optional[StrictStr] = Field(default=None, description="ID of an existing Okta user", alias="userId")
     __properties: ClassVar[List[str]] = ["credRequests", "fulfillmentProvider", "pinRequestJwe", "userId"]
 
@@ -88,8 +95,10 @@ class EnrollmentInitializationResponse(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -114,10 +123,14 @@ class EnrollmentInitializationResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "credRequests": [WebAuthnCredRequest.from_dict(_item) for _item in obj["credRequests"]] if obj.get("credRequests") is not None else None,
-            "fulfillmentProvider": obj.get("fulfillmentProvider"),
-            "pinRequestJwe": obj.get("pinRequestJwe"),
-            "userId": obj.get("userId")
-        })
+        _obj = cls.model_validate(
+            {
+                "credRequests": [WebAuthnCredRequest.from_dict(_item) for _item in obj["credRequests"]] if obj.get(
+                    "credRequests"
+                ) is not None else None,
+                "fulfillmentProvider": obj.get("fulfillmentProvider"),
+                "pinRequestJwe": obj.get("pinRequestJwe"),
+                "userId": obj.get("userId")
+            }
+        )
         return _obj

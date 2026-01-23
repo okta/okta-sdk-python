@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.error_page import ErrorPage
 from okta.models.hosted_page import HostedPage
 from okta.models.page_root import PageRoot
 from okta.models.sign_in_page import SignInPage
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -48,20 +49,20 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def delete_customized_error_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete the customized error page
 
@@ -142,12 +143,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_customized_error_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -200,20 +201,20 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def delete_customized_sign_in_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete the customized sign-in page
 
@@ -294,12 +295,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_customized_sign_in_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -352,24 +353,25 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def delete_preview_error_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete the preview error page
 
-        Deletes the preview error page. The preview error page contains unpublished changes and isn't shown in your live environment. Preview it at `${yourOktaDomain}/error/preview`.
+        Deletes the preview error page. The preview error page contains unpublished changes and isn't shown in your live
+        environment. Preview it at `${yourOktaDomain}/error/preview`.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -446,12 +448,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_preview_error_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -504,24 +506,25 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def delete_preview_sign_in_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete the preview sign-in page
 
-        Deletes the preview sign-in page. The preview sign-in page contains unpublished changes and isn't shown in your live environment. Preview it at `${yourOktaDomain}/login/preview`.
+        Deletes the preview sign-in page. The preview sign-in page contains unpublished changes and isn't shown in your
+        live environment. Preview it at `${yourOktaDomain}/login/preview`.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -598,12 +601,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_preview_sign_in_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -656,20 +659,20 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_customized_error_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ErrorPage:
         """Retrieve the customized error page
 
@@ -759,12 +762,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_customized_error_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -817,20 +820,20 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_customized_sign_in_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SignInPage:
         """Retrieve the customized sign-in page
 
@@ -920,12 +923,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_customized_sign_in_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -978,20 +981,20 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_default_error_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ErrorPage:
         """Retrieve the default error page
 
@@ -1081,12 +1084,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_default_error_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1139,20 +1142,20 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_default_sign_in_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SignInPage:
         """Retrieve the default sign-in page
 
@@ -1242,12 +1245,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_default_sign_in_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1300,26 +1303,28 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_error_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PageRoot:
         """Retrieve the error page sub-resources
 
-        Retrieves the error page sub-resources. The `expand` query parameter specifies which sub-resources to include in the response.
+        Retrieves the error page sub-resources. The `expand` query parameter specifies which sub-resources to include in
+        the response.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1408,13 +1413,13 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_error_page_serialize(
-        self,
-        brand_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1435,7 +1440,6 @@ class CustomPagesApi(ApiClient):
             _path_params['brandId'] = brand_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -1472,24 +1476,25 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_preview_error_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ErrorPage:
         """Retrieve the preview error page preview
 
-        Retrieves the preview error page. The preview error page contains unpublished changes and isn't shown in your live environment. Preview it at `${yourOktaDomain}/error/preview`.
+        Retrieves the preview error page. The preview error page contains unpublished changes and isn't shown in your live
+        environment. Preview it at `${yourOktaDomain}/error/preview`.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1575,12 +1580,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_preview_error_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1633,24 +1638,25 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_preview_sign_in_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SignInPage:
         """Retrieve the preview sign-in page preview
 
-        Retrieves the preview sign-in page. The preview sign-in page contains unpublished changes and isn't shown in your live environment. Preview it at `${yourOktaDomain}/login/preview`.
+        Retrieves the preview sign-in page. The preview sign-in page contains unpublished changes and isn't shown in your
+        live environment. Preview it at `${yourOktaDomain}/login/preview`.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1736,12 +1742,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_preview_sign_in_page_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1794,26 +1800,28 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_sign_in_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PageRoot:
         """Retrieve the sign-in page sub-resources
 
-        Retrieves the sign-in page sub-resources. The `expand` query parameter specifies which sub-resources to include in the response.
+        Retrieves the sign-in page sub-resources. The `expand` query parameter specifies which sub-resources to include in
+        the response.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1902,13 +1910,13 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_sign_in_page_serialize(
-        self,
-        brand_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1929,7 +1937,6 @@ class CustomPagesApi(ApiClient):
             _path_params['brandId'] = brand_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -1966,20 +1973,20 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def get_sign_out_page_settings(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> HostedPage:
         """Retrieve the sign-out page settings
 
@@ -2069,12 +2076,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_sign_out_page_settings_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2127,20 +2134,20 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def list_all_sign_in_widget_versions(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[str]:
         """List all Sign-In Widget versions
 
@@ -2230,12 +2237,12 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_all_sign_in_widget_versions_serialize(
-        self,
-        brand_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2288,21 +2295,21 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def replace_customized_error_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        error_page: ErrorPage,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            error_page: ErrorPage,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ErrorPage:
         """Replace the customized error page
 
@@ -2396,13 +2403,13 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_customized_error_page_serialize(
-        self,
-        brand_id,
-        error_page,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            error_page,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2471,21 +2478,21 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def replace_customized_sign_in_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        sign_in_page: SignInPage,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            sign_in_page: SignInPage,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SignInPage:
         """Replace the customized sign-in page
 
@@ -2579,13 +2586,13 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_customized_sign_in_page_serialize(
-        self,
-        brand_id,
-        sign_in_page,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            sign_in_page,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2654,25 +2661,26 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def replace_preview_error_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        error_page: ErrorPage,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            error_page: ErrorPage,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ErrorPage:
         """Replace the preview error page
 
-        Replaces the preview error page. The preview error page contains unpublished changes and isn't shown in your live environment. Preview it at `${yourOktaDomain}/error/preview`.
+        Replaces the preview error page. The preview error page contains unpublished changes and isn't shown in your live
+        environment. Preview it at `${yourOktaDomain}/error/preview`.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -2762,13 +2770,13 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_preview_error_page_serialize(
-        self,
-        brand_id,
-        error_page,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            error_page,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2837,25 +2845,26 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def replace_preview_sign_in_page(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        sign_in_page: SignInPage,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            sign_in_page: SignInPage,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SignInPage:
         """Replace the preview sign-in page
 
-        Replaces the preview sign-in page. The preview sign-in page contains unpublished changes and isn't shown in your live environment. Preview it at `${yourOktaDomain}/login/preview`.
+        Replaces the preview sign-in page. The preview sign-in page contains unpublished changes and isn't shown in your
+        live environment. Preview it at `${yourOktaDomain}/login/preview`.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -2945,13 +2954,13 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_preview_sign_in_page_serialize(
-        self,
-        brand_id,
-        sign_in_page,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            sign_in_page,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -3020,21 +3029,21 @@ class CustomPagesApi(ApiClient):
 
     @validate_call
     async def replace_sign_out_page_settings(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        hosted_page: HostedPage,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            hosted_page: HostedPage,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> HostedPage:
         """Replace the sign-out page settings
 
@@ -3128,13 +3137,13 @@ class CustomPagesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_sign_out_page_settings_serialize(
-        self,
-        brand_id,
-        hosted_page,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            hosted_page,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

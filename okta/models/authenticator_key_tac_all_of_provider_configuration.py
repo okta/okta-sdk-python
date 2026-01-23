@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,37 +20,57 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
-from okta.models.authenticator_key_tac_all_of_provider_configuration_complexity import AuthenticatorKeyTacAllOfProviderConfigurationComplexity
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.authenticator_key_tac_all_of_provider_configuration_complexity import \
+    AuthenticatorKeyTacAllOfProviderConfigurationComplexity
 
 
 class AuthenticatorKeyTacAllOfProviderConfiguration(BaseModel):
     """
     Define the configuration settings of the TAC
     """  # noqa: E501
-    min_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
-        description="Minimum time-to-live (TTL) of the TAC in minutes. The `minTtl` indicates the minimum amount of time that a TAC is valid. The `minTtl` must be less than the `maxTtl`.", alias="minTtl")
-    max_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
-        description="Maximum TTL of the TAC in minutes. The `maxTtl` indicates the maximum amount of time that a TAC is valid. The `maxTtl` must be greater than the `minTtl`.", alias="maxTtl")
-    default_ttl: Union[Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
-        description="The default TTL in minutes when you create a TAC. The `defaultTtl` indicates the actual amount of time that a TAC is valid before it expires. The `defaultTtl` must be greater than the `minTtl` and less than the `maxTtl`.", alias="defaultTtl")
-    length: Union[Annotated[float, Field(le=64, strict=True, ge=8)], Annotated[int, Field(le=64, strict=True, ge=8)]] = Field(
-        description="Defines the number of characters in a TAC. For example, a `length` of `16` means that the TAC is 16 characters.")
+    min_ttl: Union[
+        Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
+        description="Minimum time-to-live (TTL) of the TAC in minutes. The `minTtl` indicates the minimum amount of time "
+                    "that a TAC is valid. The `minTtl` must be less than the `maxTtl`.",
+        alias="minTtl"
+    )
+    max_ttl: Union[
+        Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
+        description="Maximum TTL of the TAC in minutes. The `maxTtl` indicates the maximum amount of time that a TAC is "
+                    "valid. The `maxTtl` must be greater than the `minTtl`.",
+        alias="maxTtl"
+    )
+    default_ttl: Union[
+        Annotated[float, Field(le=14400, strict=True, ge=10)], Annotated[int, Field(le=14400, strict=True, ge=10)]] = Field(
+        description="The default TTL in minutes when you create a TAC. The `defaultTtl` indicates the actual amount of "
+                    "time that a TAC is valid before it expires. The `defaultTtl` must be greater than the `minTtl` and "
+                    "less than the `maxTtl`.",
+        alias="defaultTtl"
+    )
+    length: Union[
+        Annotated[float, Field(le=64, strict=True, ge=8)], Annotated[int, Field(le=64, strict=True, ge=8)]] = Field(
+        description="Defines the number of characters in a TAC. For example, a `length` of `16` means that the TAC is 16 "
+                    "characters."
+    )
     complexity: AuthenticatorKeyTacAllOfProviderConfigurationComplexity
     multi_use_allowed: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates whether a TAC can be used multiple times. If set to `true`, the TAC can be used multiple times until it expires.",
-        alias="multiUseAllowed")
+        description="Indicates whether a TAC can be used multiple times. If set to `true`, the TAC can be used multiple "
+                    "times until it expires.",
+        alias="multiUseAllowed"
+    )
     __properties: ClassVar[List[str]] = ["minTtl", "maxTtl", "defaultTtl", "length", "complexity", "multiUseAllowed"]
 
     model_config = ConfigDict(
@@ -81,8 +103,10 @@ class AuthenticatorKeyTacAllOfProviderConfiguration(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -107,12 +131,16 @@ class AuthenticatorKeyTacAllOfProviderConfiguration(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "minTtl": obj.get("minTtl"),
-            "maxTtl": obj.get("maxTtl"),
-            "defaultTtl": obj.get("defaultTtl") if obj.get("defaultTtl") is not None else 120,
-            "length": obj.get("length"),
-            "complexity": AuthenticatorKeyTacAllOfProviderConfigurationComplexity.from_dict(obj["complexity"]) if obj.get("complexity") is not None else None,
-            "multiUseAllowed": obj.get("multiUseAllowed")
-        })
+        _obj = cls.model_validate(
+            {
+                "minTtl": obj.get("minTtl"),
+                "maxTtl": obj.get("maxTtl"),
+                "defaultTtl": obj.get("defaultTtl") if obj.get("defaultTtl") is not None else 120,
+                "length": obj.get("length"),
+                "complexity": AuthenticatorKeyTacAllOfProviderConfigurationComplexity.from_dict(
+                    obj["complexity"]
+                ) if obj.get("complexity") is not None else None,
+                "multiUseAllowed": obj.get("multiUseAllowed")
+            }
+        )
         return _obj

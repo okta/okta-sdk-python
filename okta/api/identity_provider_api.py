@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.identity_provider import IdentityProvider
-from okta.models.identity_provider_type import IdentityProviderType
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.identity_provider import IdentityProvider
+from okta.models.identity_provider_type import IdentityProviderType
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,20 +47,20 @@ class IdentityProviderApi(ApiClient):
 
     @validate_call
     async def activate_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentityProvider:
         """Activate an IdP
 
@@ -149,12 +150,12 @@ class IdentityProviderApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_identity_provider_serialize(
-        self,
-        idp_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -207,24 +208,55 @@ class IdentityProviderApi(ApiClient):
 
     @validate_call
     async def create_identity_provider(
-        self,
-        identity_provider: Annotated[IdentityProvider, Field(description="IdP settings")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            identity_provider: Annotated[IdentityProvider, Field(description="IdP settings")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentityProvider:
         """Create an IdP
 
-        Creates a new identity provider (IdP) integration.  #### SAML 2.0 IdP  You must first add the IdP's signature certificate to the IdP key store before you can add a SAML 2.0 IdP with a `kid` credential reference.  Don't use `fromURI` to automatically redirect a user to a particular app after successfully authenticating with a third-party IdP. Instead, use SAML deep links. Using `fromURI` isn't tested or supported. For more information about using deep links when signing users in using an SP-initiated flow, see [Understanding SP-Initiated Login flow](https://developer.okta.com/docs/concepts/saml/#understanding-sp-initiated-login-flow).  Use SAML deep links to automatically redirect the user to an app after successfully authenticating with a third-party IdP. To use deep links, assemble these three parts into a URL:  * SP ACS URL<br> For example: `https://${yourOktaDomain}/sso/saml2/:idpId` * The app to which the user is automatically redirected after successfully authenticating with the IdP <br> For example: `/app/:app-location/:appId/sso/saml` * Optionally, if the app is an outbound SAML app, you can specify the `relayState` passed to it.<br> For example: `?RelayState=:anyUrlEncodedValue`  The deep link for the above three parts is:<br> `https://${yourOktaDomain}/sso/saml2/:idpId/app/:app-location/:appId/sso/saml?RelayState=:anyUrlEncodedValue`  #### Smart Card X509 IdP  You must first add the IdP's server certificate to the IdP key store before you can add a Smart Card `X509` IdP with a `kid` credential reference. You need to upload the whole trust chain as a single key using the [Key Store API](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/IdentityProviderKeys/#tag/IdentityProviderKeys/operation/createIdentityProviderKey). Depending on the information stored in the smart card, select the proper [template](https://developer.okta.com/docs/reference/okta-expression-language/#idp-user-profile) `idpuser.subjectAltNameEmail` or `idpuser.subjectAltNameUpn`.  #### Identity verification vendors as identity providers  Identity verification (IDV) vendors work like IdPs, with a few key differences. IDV vendors verify your user's identities by requiring them to submit a proof of identity. There are many ways to verify user identities. For example, a proof of identity can be a selfie to determine liveliness or it can be requiring users to submit a photo of their driver's license and matching that information with a database.  There are three IDV vendors (Persona, CLEAR Verified, and Incode) with specific configuration settings and another IDV vendor type (Custom IDV) that lets you create a custom IDV vendor, using a [standardized IDV process](https://developer.okta.com/docs/guides/idv-integration/main/). You can configure each of the IDV vendors as IdPs in your org by creating an account with the vendor, and then creating an IdP integration. Control how the IDVs verify your users by using [Okta account management policy rules](https://developer.okta.com/docs/guides/okta-account-management-policy/main/).  * [Persona](https://withpersona.com/)  * [CLEAR Verified](https://www.clearme.com/)  * [Incode](https://incode.com/)  * [Custom IDV](https://help.okta.com/okta_help.htm?type=oie&id=idp-add-custom-idv-vendor)
+        Creates a new identity provider (IdP) integration.  #### SAML 2.0 IdP  You must first add the IdP's signature
+        certificate to the IdP key store before you can add a SAML 2.0 IdP with a `kid` credential reference.  Don't use
+        `fromURI` to automatically redirect a user to a particular app after successfully authenticating with a
+        third-party IdP. Instead, use SAML deep links. Using `fromURI` isn't tested or supported. For more information
+        about using deep links when signing users in using an SP-initiated flow, see [Understanding SP-Initiated Login
+        flow](https://developer.okta.com/docs/concepts/saml/#understanding-sp-initiated-login-flow).  Use SAML deep links
+        to automatically redirect the user to an app after successfully authenticating with a third-party IdP. To use deep
+        links, assemble these three parts into a URL:  * SP ACS URL<br> For example: `https://${
+        yourOktaDomain}/sso/saml2/:idpId` * The app to which the user is automatically redirected after successfully
+        authenticating with the IdP <br> For example: `/app/:app-location/:appId/sso/saml` * Optionally, if the app is an
+        outbound SAML app, you can specify the `relayState` passed to it.<br> For example:
+        `?RelayState=:anyUrlEncodedValue`  The deep link for the above three parts is:<br> `https://${
+        yourOktaDomain}/sso/saml2/:idpId/app/:app-location/:appId/sso/saml?RelayState=:anyUrlEncodedValue`  #### Smart
+        Card X509 IdP  You must first add the IdP's server certificate to the IdP key store before you can add a Smart
+        Card `X509` IdP with a `kid` credential reference. You need to upload the whole trust chain as a single key using
+        the [Key Store API](https://developer.okta.com/docs/api/openapi/okta-management/management/tag
+        /IdentityProviderKeys/#tag/IdentityProviderKeys/operation/createIdentityProviderKey). Depending on the information
+        stored in the smart card, select the proper [template](
+        https://developer.okta.com/docs/reference/okta-expression-language/#idp-user-profile)
+        `idpuser.subjectAltNameEmail` or `idpuser.subjectAltNameUpn`.  #### Identity verification vendors as identity
+        providers  Identity verification (IDV) vendors work like IdPs, with a few key differences. IDV vendors verify your
+        user's identities by requiring them to submit a proof of identity. There are many ways to verify user identities.
+        For example, a proof of identity can be a selfie to determine liveliness or it can be requiring users to submit a
+        photo of their driver's license and matching that information with a database.  There are three IDV vendors (
+        Persona, CLEAR Verified, and Incode) with specific configuration settings and another IDV vendor type (Custom IDV)
+        that lets you create a custom IDV vendor, using a [standardized IDV process](
+        https://developer.okta.com/docs/guides/idv-integration/main/). You can configure each of the IDV vendors as IdPs
+        in your org by creating an account with the vendor, and then creating an IdP integration. Control how the IDVs
+        verify your users by using [Okta account management policy rules](
+        https://developer.okta.com/docs/guides/okta-account-management-policy/main/).  * [Persona](
+        https://withpersona.com/)  * [CLEAR Verified](https://www.clearme.com/)  * [Incode](https://incode.com/)  * [
+        Custom IDV](https://help.okta.com/okta_help.htm?type=oie&id=idp-add-custom-idv-vendor)
 
         :param identity_provider: IdP settings (required)
         :type identity_provider: IdentityProvider
@@ -310,12 +342,12 @@ class IdentityProviderApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_identity_provider_serialize(
-        self,
-        identity_provider,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            identity_provider,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -382,20 +414,20 @@ class IdentityProviderApi(ApiClient):
 
     @validate_call
     async def deactivate_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentityProvider:
         """Deactivate an IdP
 
@@ -485,12 +517,12 @@ class IdentityProviderApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_identity_provider_serialize(
-        self,
-        idp_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -543,24 +575,26 @@ class IdentityProviderApi(ApiClient):
 
     @validate_call
     async def delete_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an IdP
 
-        Deletes an identity provider (IdP) integration by `idpId` * All existing IdP users are unlinked with the highest order profile source taking precedence for each IdP user. * Unlinked users keep their existing authentication provider such as `FEDERATION` or `SOCIAL`.
+        Deletes an identity provider (IdP) integration by `idpId` * All existing IdP users are unlinked with the highest
+        order profile source taking precedence for each IdP user. * Unlinked users keep their existing authentication
+        provider such as `FEDERATION` or `SOCIAL`.
 
         :param idp_id: `id` of IdP (required)
         :type idp_id: str
@@ -637,12 +671,12 @@ class IdentityProviderApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_identity_provider_serialize(
-        self,
-        idp_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -695,20 +729,20 @@ class IdentityProviderApi(ApiClient):
 
     @validate_call
     async def get_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentityProvider:
         """Retrieve an IdP
 
@@ -798,12 +832,12 @@ class IdentityProviderApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_identity_provider_serialize(
-        self,
-        idp_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -856,33 +890,42 @@ class IdentityProviderApi(ApiClient):
 
     @validate_call
     async def list_identity_providers(
-        self,
-        q: Annotated[Optional[StrictStr], Field(description="Searches the `name` property of IdPs for matching value")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        type: Annotated[Optional[IdentityProviderType], Field(description="Filters IdPs by `type`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            q: Annotated[
+                Optional[StrictStr], Field(description="Searches the `name` property of IdPs for matching value")] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            type: Annotated[Optional[IdentityProviderType], Field(description="Filters IdPs by `type`")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdentityProvider]:
         """List all IdPs
 
-        Lists all identity provider (IdP) integrations with pagination. A subset of IdPs can be returned that match a supported filter expression or query.
+        Lists all identity provider (IdP) integrations with pagination. A subset of IdPs can be returned that match a
+        supported filter expression or query.
 
         :param q: Searches the `name` property of IdPs for matching value
         :type q: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -972,15 +1015,15 @@ class IdentityProviderApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_identity_providers_serialize(
-        self,
-        q,
-        after,
-        limit,
-        type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            q,
+            after,
+            limit,
+            type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -998,19 +1041,15 @@ class IdentityProviderApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if q is not None:
-
             _query_params.append(('q', q))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if type is not None:
-
             _query_params.append(('type', type.value))
 
         # process the header parameters
@@ -1047,21 +1086,21 @@ class IdentityProviderApi(ApiClient):
 
     @validate_call
     async def replace_identity_provider(
-        self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        identity_provider: Annotated[IdentityProvider, Field(description="Updated configuration for the IdP")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+            identity_provider: Annotated[IdentityProvider, Field(description="Updated configuration for the IdP")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentityProvider:
         """Replace an IdP
 
@@ -1155,13 +1194,13 @@ class IdentityProviderApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_identity_provider_serialize(
-        self,
-        idp_id,
-        identity_provider,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            idp_id,
+            identity_provider,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

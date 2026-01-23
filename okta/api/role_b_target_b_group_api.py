@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.catalog_application import CatalogApplication
 from okta.models.group import Group
 from okta.models.success import Success
-
-from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,27 +47,32 @@ class RoleBTargetBGroupApi(ApiClient):
 
     @validate_call
     async def assign_app_instance_target_to_app_admin_role_for_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Assign a group role app instance target
 
-        Assigns an app instance target to an `APP_ADMIN` role assignment to a group. When you assign the first OIN app or app instance target, you reduce the scope of the role assignment. The role no longer applies to all app targets, but applies only to the specified target.  > **Note:** You can target a mixture of both OIN app and app instance targets, but you can't assign permissions to manage all instances of an OIN app and then assign a subset of permissions to the same app. > For example, you can't specify that an admin has access to manage all instances of the Salesforce app and then also manage specific configurations of the Salesforce app.
+        Assigns an app instance target to an `APP_ADMIN` role assignment to a group. When you assign the first OIN app or
+        app instance target, you reduce the scope of the role assignment. The role no longer applies to all app targets,
+        but applies only to the specified target.  > **Note:** You can target a mixture of both OIN app and app instance
+        targets, but you can't assign permissions to manage all instances of an OIN app and then assign a subset of
+        permissions to the same app. > For example, you can't specify that an admin has access to manage all instances of
+        the Salesforce app and then also manage specific configurations of the Salesforce app.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -106,16 +111,17 @@ class RoleBTargetBGroupApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._assign_app_instance_target_to_app_admin_role_for_group_serialize(
-            group_id=group_id,
-            role_assignment_id=role_assignment_id,
-            app_name=app_name,
-            app_id=app_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._assign_app_instance_target_to_app_admin_role_for_group_serialize(
+                group_id=group_id,
+                role_assignment_id=role_assignment_id,
+                app_name=app_name,
+                app_id=app_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -153,15 +159,15 @@ class RoleBTargetBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_app_instance_target_to_app_admin_role_for_group_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        app_name,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            app_name,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -220,26 +226,30 @@ class RoleBTargetBGroupApi(ApiClient):
 
     @validate_call
     async def assign_app_target_to_admin_role_for_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Assign a group role app target
 
-        Assigns an OIN app target to an `APP_ADMIN` role assignment to a group. When you assign the first OIN app target, you reduce the scope of the role assignment. The role no longer applies to all app targets, but applies only to the specified target. An OIN app target that's assigned to the role overrides any existing instance targets of the OIN app. For example, if a user is assigned to administer a specific Facebook instance, a successful request to add an OIN app with `facebook` for `appName` makes that user the administrator for all Facebook instances.
+        Assigns an OIN app target to an `APP_ADMIN` role assignment to a group. When you assign the first OIN app target,
+        you reduce the scope of the role assignment. The role no longer applies to all app targets, but applies only to
+        the specified target. An OIN app target that's assigned to the role overrides any existing instance targets of the
+        OIN app. For example, if a user is assigned to administer a specific Facebook instance, a successful request to
+        add an OIN app with `facebook` for `appName` makes that user the administrator for all Facebook instances.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -331,14 +341,14 @@ class RoleBTargetBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_app_target_to_admin_role_for_group_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        app_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            app_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -395,26 +405,29 @@ class RoleBTargetBGroupApi(ApiClient):
 
     @validate_call
     async def assign_group_target_to_group_admin_role(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        target_group_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            target_group_id: StrictStr,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Assign a group role group target
 
-        Assigns a group target to a [`USER_ADMIN`](/openapi/okta-management/guides/roles/#standard-roles), `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to a group. When you assign the first group target, you reduce the scope of the role assignment. The role no longer applies to all targets but applies only to the specified target.
+        Assigns a group target to a [`USER_ADMIN`](/openapi/okta-management/guides/roles/#standard-roles),
+        `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to a group. When you assign the first group target,
+        you reduce the scope of the role assignment. The role no longer applies to all targets but applies only to the
+        specified target.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -497,14 +510,14 @@ class RoleBTargetBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_group_target_to_group_admin_role_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        target_group_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            target_group_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -561,35 +574,44 @@ class RoleBTargetBGroupApi(ApiClient):
 
     @validate_call
     async def list_application_targets_for_application_administrator_role_for_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[CatalogApplication]:
         """List all group role app targets
 
-        Lists all app targets for an `APP_ADMIN` role assignment to a group. The response includes a list of OIN-cataloged apps or app instances. The response payload for an app instance contains the `id` property, but an OIN-cataloged app doesn't.
+        Lists all app targets for an `APP_ADMIN` role assignment to a group. The response includes a list of OIN-cataloged
+        apps or app instances. The response payload for an app instance contains the `id` property, but an OIN-cataloged
+        app doesn't.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
         :param role_assignment_id: The `id` of the role assignment (required)
         :type role_assignment_id: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -622,16 +644,17 @@ class RoleBTargetBGroupApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._list_application_targets_for_application_administrator_role_for_group_serialize(
-            group_id=group_id,
-            role_assignment_id=role_assignment_id,
-            after=after,
-            limit=limit,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._list_application_targets_for_application_administrator_role_for_group_serialize(
+                group_id=group_id,
+                role_assignment_id=role_assignment_id,
+                after=after,
+                limit=limit,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -678,15 +701,15 @@ class RoleBTargetBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_application_targets_for_application_administrator_role_for_group_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -708,11 +731,9 @@ class RoleBTargetBGroupApi(ApiClient):
             _path_params['roleAssignmentId'] = role_assignment_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -749,35 +770,44 @@ class RoleBTargetBGroupApi(ApiClient):
 
     @validate_call
     async def list_group_targets_for_group_role(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Group]:
         """List all group role group targets
 
-        Lists all group targets for a [`USER_ADMIN`](/openapi/okta-management/guides/roles/#standard-roles), `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to a group. If the role isn't scoped to specific group targets, Okta returns an empty array `[]`.
+        Lists all group targets for a [`USER_ADMIN`](/openapi/okta-management/guides/roles/#standard-roles),
+        `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to a group. If the role isn't scoped to specific
+        group targets, Okta returns an empty array `[]`.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
         :param role_assignment_id: The `id` of the role assignment (required)
         :type role_assignment_id: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -866,15 +896,15 @@ class RoleBTargetBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_group_targets_for_group_role_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -896,11 +926,9 @@ class RoleBTargetBGroupApi(ApiClient):
             _path_params['roleAssignmentId'] = role_assignment_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -937,27 +965,31 @@ class RoleBTargetBGroupApi(ApiClient):
 
     @validate_call
     async def unassign_app_instance_target_to_app_admin_role_for_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign a group role app instance target
 
-        Unassigns an app instance target from an `APP_ADMIN` role assignment to a group  > **Note:** You can't remove the last app instance target from a role assignment. > If you need a role assignment that applies to all apps, delete the `APP_ADMIN` role assignment with the target and create another one. See [Unassign a group role](/openapi/okta-management/management/tag/RoleAssignmentBGroup/#tag/RoleAssignmentBGroup/operation/unassignRoleFromGroup).
+        Unassigns an app instance target from an `APP_ADMIN` role assignment to a group  > **Note:** You can't remove the
+        last app instance target from a role assignment. > If you need a role assignment that applies to all apps,
+        delete the `APP_ADMIN` role assignment with the target and create another one. See [Unassign a group role](
+        /openapi/okta-management/management/tag/RoleAssignmentBGroup/#tag/RoleAssignmentBGroup/operation
+        /unassignRoleFromGroup).
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -996,16 +1028,17 @@ class RoleBTargetBGroupApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._unassign_app_instance_target_to_app_admin_role_for_group_serialize(
-            group_id=group_id,
-            role_assignment_id=role_assignment_id,
-            app_name=app_name,
-            app_id=app_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._unassign_app_instance_target_to_app_admin_role_for_group_serialize(
+                group_id=group_id,
+                role_assignment_id=role_assignment_id,
+                app_name=app_name,
+                app_id=app_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -1043,15 +1076,15 @@ class RoleBTargetBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_app_instance_target_to_app_admin_role_for_group_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        app_name,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            app_name,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1110,26 +1143,30 @@ class RoleBTargetBGroupApi(ApiClient):
 
     @validate_call
     async def unassign_app_target_to_admin_role_for_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign a group role app target
 
-        Unassigns an OIN app target from an `APP_ADMIN` role assignment to a group  > **Note:** You can't remove the last app target from a role assignment. > If you need a role assignment that applies to all apps, delete the `APP_ADMIN` role assignment with the target and create another one. See [Unassign a group role](/openapi/okta-management/management/tag/RoleAssignmentBGroup/#tag/RoleAssignmentBGroup/operation/unassignRoleFromGroup). 
+        Unassigns an OIN app target from an `APP_ADMIN` role assignment to a group  > **Note:** You can't remove the last
+        app target from a role assignment. > If you need a role assignment that applies to all apps, delete the
+        `APP_ADMIN` role assignment with the target and create another one. See [Unassign a group role](
+        /openapi/okta-management/management/tag/RoleAssignmentBGroup/#tag/RoleAssignmentBGroup/operation
+        /unassignRoleFromGroup).
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -1212,14 +1249,14 @@ class RoleBTargetBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_app_target_to_admin_role_for_group_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        app_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            app_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1276,26 +1313,27 @@ class RoleBTargetBGroupApi(ApiClient):
 
     @validate_call
     async def unassign_group_target_from_group_admin_role(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        target_group_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            target_group_id: StrictStr,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign a group role group target
 
-        Unassigns a group target from a [`USER_ADMIN`](/openapi/okta-management/guides/roles/#standard-roles), `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to a group.
+        Unassigns a group target from a [`USER_ADMIN`](/openapi/okta-management/guides/roles/#standard-roles),
+        `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to a group.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -1378,14 +1416,14 @@ class RoleBTargetBGroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_group_target_from_group_admin_role_serialize(
-        self,
-        group_id,
-        role_assignment_id,
-        target_group_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            role_assignment_id,
+            target_group_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

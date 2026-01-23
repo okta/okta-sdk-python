@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.simulate_result_conditions import SimulateResultConditions
 from okta.models.simulate_result_rules import SimulateResultRules
 from okta.models.simulate_result_status import SimulateResultStatus
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SimulateResultPoliciesItems(BaseModel):
@@ -38,7 +41,8 @@ class SimulateResultPoliciesItems(BaseModel):
     SimulateResultPoliciesItems
     """  # noqa: E501
     conditions: Optional[List[SimulateResultConditions]] = Field(
-        default=None, description="List of all conditions involved for this policy evaluation")
+        default=None, description="List of all conditions involved for this policy evaluation"
+    )
     id: Optional[StrictStr] = Field(default=None, description="ID of the specified policy type")
     name: Optional[StrictStr] = Field(default=None, description="Policy name")
     rules: Optional[List[SimulateResultRules]] = None
@@ -75,8 +79,10 @@ class SimulateResultPoliciesItems(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -108,11 +114,17 @@ class SimulateResultPoliciesItems(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "conditions": [SimulateResultConditions.from_dict(_item) for _item in obj["conditions"]] if obj.get("conditions") is not None else None,
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "rules": [SimulateResultRules.from_dict(_item) for _item in obj["rules"]] if obj.get("rules") is not None else None,
-            "status": obj.get("status")
-        })
+        _obj = cls.model_validate(
+            {
+                "conditions": [SimulateResultConditions.from_dict(_item) for _item in obj["conditions"]] if obj.get(
+                    "conditions"
+                ) is not None else None,
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "rules": [SimulateResultRules.from_dict(_item) for _item in obj["rules"]] if obj.get(
+                    "rules"
+                ) is not None else None,
+                "status": obj.get("status")
+            }
+        )
         return _obj

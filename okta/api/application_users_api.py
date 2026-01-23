@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.app_user import AppUser
 from okta.models.app_user_assign_request import AppUserAssignRequest
 from okta.models.app_user_update_request import AppUserUpdateRequest
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,25 +48,31 @@ class ApplicationUsersApi(ApiClient):
 
     @validate_call
     async def assign_user_to_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        app_user: AppUserAssignRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            app_user: AppUserAssignRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppUser:
         """Assign an application user
 
-        Assigns a user to an app for:    * SSO only<br>     Assignments to SSO apps typically don't include a user profile.     However, if your SSO app requires a profile but doesn't have provisioning enabled, you can add profile attributes in the request body.    * SSO and provisioning<br>     Assignments to SSO and provisioning apps typically include credentials and an app-specific profile.     Profile mappings defined for the app are applied first before applying any profile properties that are specified in the request body.     > **Notes:**     > * When Universal Directory is enabled, you can only specify profile properties that aren't defined in profile mappings.     > * Omit mapped properties during assignment to minimize assignment errors.
+        Assigns a user to an app for:    * SSO only<br>     Assignments to SSO apps typically don't include a user
+        profile.     However, if your SSO app requires a profile but doesn't have provisioning enabled, you can add
+        profile attributes in the request body.    * SSO and provisioning<br>     Assignments to SSO and provisioning apps
+        typically include credentials and an app-specific profile.     Profile mappings defined for the app are applied
+        first before applying any profile properties that are specified in the request body.     > **Notes:**     > * When
+        Universal Directory is enabled, you can only specify profile properties that aren't defined in profile mappings.
+          > * Omit mapped properties during assignment to minimize assignment errors.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -155,13 +162,13 @@ class ApplicationUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_user_to_application_serialize(
-        self,
-        app_id,
-        app_user,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            app_user,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -230,23 +237,26 @@ class ApplicationUsersApi(ApiClient):
 
     @validate_call
     async def get_application_user(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional query parameter to return the corresponding [User](/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional query parameter to return the corresponding [User]("
+                            "/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid "
+                            "value: `user`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppUser:
         """Retrieve an application user
 
@@ -256,7 +266,8 @@ class ApplicationUsersApi(ApiClient):
         :type app_id: str
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param expand: An optional query parameter to return the corresponding [User](/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user`
+        :param expand: An optional query parameter to return the corresponding [User](
+        /openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user`
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -342,14 +353,14 @@ class ApplicationUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_application_user_serialize(
-        self,
-        app_id,
-        user_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            user_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -371,7 +382,6 @@ class ApplicationUsersApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -408,27 +418,42 @@ class ApplicationUsersApi(ApiClient):
 
     @validate_call
     async def list_application_users(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](/#pagination).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=500, strict=True, ge=1)]], Field(
-            description="Specifies the number of objects to return per page. If there are multiple pages of results, the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). See [Pagination](/#pagination). ")] = None,
-        q: Annotated[Optional[StrictStr], Field(description="Specifies a filter for the list of application users returned based on their profile attributes. The value of `q` is matched against the beginning of the following profile attributes: `userName`, `firstName`, `lastName`, and `email`. This filter only supports the `startsWith` operation that matches the `q` string against the beginning of the attribute values. > **Note:** For OIDC apps, user profiles don't contain the `firstName` or `lastName` attributes. Therefore, the query only matches against the `userName` or `email` attributes. ")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional query parameter to return the corresponding [User](/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of results. Treat this as an opaque value "
+                            "obtained through the next link relationship. See [Pagination](/#pagination)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=500, strict=True, ge=1)]], Field(
+                description="Specifies the number of objects to return per page. If there are multiple pages of results, "
+                            "the Link header contains a `next` link that you need to use as an opaque value (follow it, "
+                            "don't parse it). See [Pagination](/#pagination). "
+            )] = None,
+            q: Annotated[Optional[StrictStr], Field(
+                description="Specifies a filter for the list of application users returned based on their profile "
+                            "attributes. The value of `q` is matched against the beginning of the following profile "
+                            "attributes: `userName`, `firstName`, `lastName`, and `email`. This filter only supports the "
+                            "`startsWith` operation that matches the `q` string against the beginning of the attribute "
+                            "values. > **Note:** For OIDC apps, user profiles don't contain the `firstName` or `lastName` "
+                            "attributes. Therefore, the query only matches against the `userName` or `email` attributes. "
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional query parameter to return the corresponding [User]("
+                            "/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid "
+                            "value: `user`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AppUser]:
         """List all application users
 
@@ -436,13 +461,21 @@ class ApplicationUsersApi(ApiClient):
 
         :param app_id: Application ID (required)
         :type app_id: str
-        :param after: Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](/#pagination).
+        :param after: Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained
+        through the next link relationship. See [Pagination](/#pagination).
         :type after: str
-        :param limit: Specifies the number of objects to return per page. If there are multiple pages of results, the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). See [Pagination](/#pagination). 
+        :param limit: Specifies the number of objects to return per page. If there are multiple pages of results,
+        the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). See [
+        Pagination](/#pagination).
         :type limit: int
-        :param q: Specifies a filter for the list of application users returned based on their profile attributes. The value of `q` is matched against the beginning of the following profile attributes: `userName`, `firstName`, `lastName`, and `email`. This filter only supports the `startsWith` operation that matches the `q` string against the beginning of the attribute values. > **Note:** For OIDC apps, user profiles don't contain the `firstName` or `lastName` attributes. Therefore, the query only matches against the `userName` or `email` attributes. 
+        :param q: Specifies a filter for the list of application users returned based on their profile attributes. The
+        value of `q` is matched against the beginning of the following profile attributes: `userName`, `firstName`,
+        `lastName`, and `email`. This filter only supports the `startsWith` operation that matches the `q` string against
+        the beginning of the attribute values. > **Note:** For OIDC apps, user profiles don't contain the `firstName` or
+        `lastName` attributes. Therefore, the query only matches against the `userName` or `email` attributes.
         :type q: str
-        :param expand: An optional query parameter to return the corresponding [User](/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user`
+        :param expand: An optional query parameter to return the corresponding [User](
+        /openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user`
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -530,16 +563,16 @@ class ApplicationUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_application_users_serialize(
-        self,
-        app_id,
-        after,
-        limit,
-        q,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            after,
+            limit,
+            q,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -559,19 +592,15 @@ class ApplicationUsersApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if q is not None:
-
             _query_params.append(('q', q))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -608,27 +637,32 @@ class ApplicationUsersApi(ApiClient):
 
     @validate_call
     async def unassign_user_from_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        send_email: Annotated[Optional[StrictBool], Field(
-            description="Sends a deactivation email to the administrator if `true`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            send_email: Annotated[Optional[StrictBool], Field(
+                description="Sends a deactivation email to the administrator if `true`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign an application user
 
-        Unassigns a user from an app  For directories like Active Directory and LDAP, they act as the owner of the user's credential with Okta delegating authentication (DelAuth) to that directory. If this request is successful for a user when DelAuth is enabled, then the user is in a state with no password. You can then reset the user's password.  > **Important:** This is a destructive operation. You can't recover the user's app profile. If the app is enabled for provisioning and configured to deactivate users, the user is also deactivated in the target app.
+        Unassigns a user from an app  For directories like Active Directory and LDAP, they act as the owner of the user's
+        credential with Okta delegating authentication (DelAuth) to that directory. If this request is successful for a
+        user when DelAuth is enabled, then the user is in a state with no password. You can then reset the user's
+        password.  > **Important:** This is a destructive operation. You can't recover the user's app profile. If the app
+        is enabled for provisioning and configured to deactivate users, the user is also deactivated in the target app.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -711,14 +745,14 @@ class ApplicationUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_user_from_application_serialize(
-        self,
-        app_id,
-        user_id,
-        send_email,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            user_id,
+            send_email,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -740,7 +774,6 @@ class ApplicationUsersApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if send_email is not None:
-
             _query_params.append(('sendEmail', send_email))
 
         # process the header parameters
@@ -777,22 +810,22 @@ class ApplicationUsersApi(ApiClient):
 
     @validate_call
     async def update_application_user(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        app_user: AppUserUpdateRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            app_user: AppUserUpdateRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppUser:
         """Update an application user
 
@@ -889,14 +922,14 @@ class ApplicationUsersApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_application_user_serialize(
-        self,
-        app_id,
-        user_id,
-        app_user,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            user_id,
+            app_user,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

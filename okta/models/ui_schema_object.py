@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.ui_element import UIElement
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.ui_element import UIElement
 
 
 class UISchemaObject(BaseModel):
@@ -38,10 +41,13 @@ class UISchemaObject(BaseModel):
     button_label: Optional[StrictStr] = Field(
         default='Submit',
         description="Specifies the button label for the `Submit` button at the bottom of the enrollment form",
-        alias="buttonLabel")
+        alias="buttonLabel"
+    )
     elements: Optional[List[UIElement]] = None
-    label: Optional[StrictStr] = Field(default='Sign in',
-                                       description="Specifies the label at the top of the enrollment form under the logo")
+    label: Optional[StrictStr] = Field(
+        default='Sign in',
+        description="Specifies the label at the top of the enrollment form under the logo"
+    )
     type: Optional[StrictStr] = Field(default=None, description="Specifies the type of layout")
     __properties: ClassVar[List[str]] = ["buttonLabel", "elements", "label", "type"]
 
@@ -75,8 +81,10 @@ class UISchemaObject(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -101,10 +109,14 @@ class UISchemaObject(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "buttonLabel": obj.get("buttonLabel") if obj.get("buttonLabel") is not None else 'Submit',
-            "elements": [UIElement.from_dict(_item) for _item in obj["elements"]] if obj.get("elements") is not None else None,
-            "label": obj.get("label") if obj.get("label") is not None else 'Sign in',
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "buttonLabel": obj.get("buttonLabel") if obj.get("buttonLabel") is not None else 'Submit',
+                "elements": [UIElement.from_dict(_item) for _item in obj["elements"]] if obj.get(
+                    "elements"
+                ) is not None else None,
+                "label": obj.get("label") if obj.get("label") is not None else 'Sign in',
+                "type": obj.get("type")
+            }
+        )
         return _obj

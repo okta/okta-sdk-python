@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.access_policy_constraints import AccessPolicyConstraints
 from okta.models.assurance_method_factor_mode import AssuranceMethodFactorMode
 from okta.models.verification_method import VerificationMethod
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AssuranceMethod(VerificationMethod):
@@ -38,16 +41,25 @@ class AssuranceMethod(VerificationMethod):
     AssuranceMethod
     """  # noqa: E501
     constraints: Optional[List[AccessPolicyConstraints]] = Field(
-        default=None, description="Specifies constraints for the authenticator. Constraints are logically evaluated such that only one constraint object needs to be satisfied. But, within a constraint object, each constraint property must be satisfied.")
+        default=None,
+        description="Specifies constraints for the authenticator. Constraints are logically evaluated such that only one "
+                    "constraint object needs to be satisfied. But, within a constraint object, each constraint property "
+                    "must be satisfied."
+    )
     factor_mode: Optional[AssuranceMethodFactorMode] = Field(default=None, alias="factorMode")
     inactivity_period: Optional[StrictStr] = Field(
         default=None,
-        description="The inactivity duration after which the user must re-authenticate. Use the ISO 8601 period format (for example, PT2H).",
-        alias="inactivityPeriod")
+        description="The inactivity duration after which the user must re-authenticate. Use the ISO 8601 period format ("
+                    "for example, PT2H).",
+        alias="inactivityPeriod"
+    )
     reauthenticate_in: Optional[StrictStr] = Field(
         default=None,
-        description="The duration after which the user must re-authenticate, regardless of user activity. Keep in mind that the re-authentication intervals for constraints take precedent over this value. Use the ISO 8601 period format for recurring time intervals (for example, PT2H, PT0S, PT43800H, and so on).",
-        alias="reauthenticateIn")
+        description="The duration after which the user must re-authenticate, regardless of user activity. Keep in mind "
+                    "that the re-authentication intervals for constraints take precedent over this value. Use the ISO 8601 "
+                    "period format for recurring time intervals (for example, PT2H, PT0S, PT43800H, and so on).",
+        alias="reauthenticateIn"
+    )
     __properties: ClassVar[List[str]] = ["type", "constraints", "factorMode", "inactivityPeriod", "reauthenticateIn"]
 
     model_config = ConfigDict(
@@ -80,8 +92,10 @@ class AssuranceMethod(VerificationMethod):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -106,11 +120,15 @@ class AssuranceMethod(VerificationMethod):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "constraints": [AccessPolicyConstraints.from_dict(_item) for _item in obj["constraints"]] if obj.get("constraints") is not None else None,
-            "factorMode": obj.get("factorMode"),
-            "inactivityPeriod": obj.get("inactivityPeriod"),
-            "reauthenticateIn": obj.get("reauthenticateIn")
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type"),
+                "constraints": [AccessPolicyConstraints.from_dict(_item) for _item in obj["constraints"]] if obj.get(
+                    "constraints"
+                ) is not None else None,
+                "factorMode": obj.get("factorMode"),
+                "inactivityPeriod": obj.get("inactivityPeriod"),
+                "reauthenticateIn": obj.get("reauthenticateIn")
+            }
+        )
         return _obj

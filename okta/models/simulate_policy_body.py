@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.policy_context import PolicyContext
 from okta.models.policy_type_simulation import PolicyTypeSimulation
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SimulatePolicyBody(BaseModel):
@@ -39,7 +42,10 @@ class SimulatePolicyBody(BaseModel):
     app_instance: StrictStr = Field(description="The application instance ID for a simulate operation", alias="appInstance")
     policy_context: Optional[PolicyContext] = Field(default=None, alias="policyContext")
     policy_types: Optional[List[PolicyTypeSimulation]] = Field(
-        default=None, description="Supported policy types for a simulate operation. The default value, `null`, returns all types.", alias="policyTypes")
+        default=None,
+        description="Supported policy types for a simulate operation. The default value, `null`, returns all types.",
+        alias="policyTypes"
+    )
     __properties: ClassVar[List[str]] = ["appInstance", "policyContext", "policyTypes"]
 
     model_config = ConfigDict(
@@ -72,8 +78,10 @@ class SimulatePolicyBody(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -98,9 +106,13 @@ class SimulatePolicyBody(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "appInstance": obj.get("appInstance"),
-            "policyContext": PolicyContext.from_dict(obj["policyContext"]) if obj.get("policyContext") is not None else None,
-            "policyTypes": obj.get("policyTypes")
-        })
+        _obj = cls.model_validate(
+            {
+                "appInstance": obj.get("appInstance"),
+                "policyContext": PolicyContext.from_dict(obj["policyContext"]) if obj.get(
+                    "policyContext"
+                ) is not None else None,
+                "policyTypes": obj.get("policyTypes")
+            }
+        )
         return _obj

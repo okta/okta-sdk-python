@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.authorization_server_credentials_rotation_mode import AuthorizationServerCredentialsRotationMode
 from okta.models.authorization_server_credentials_use import AuthorizationServerCredentialsUse
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AuthorizationServerCredentialsSigningConfig(BaseModel):
@@ -39,15 +42,19 @@ class AuthorizationServerCredentialsSigningConfig(BaseModel):
     """  # noqa: E501
     kid: Optional[StrictStr] = Field(
         default=None,
-        description="The ID of the JSON Web Key used for signing tokens issued by the authorization server")
+        description="The ID of the JSON Web Key used for signing tokens issued by the authorization server"
+    )
     last_rotated: Optional[datetime] = Field(
         default=None,
         description="The timestamp when the authorization server started using the `kid` for signing tokens",
-        alias="lastRotated")
+        alias="lastRotated"
+    )
     next_rotation: Optional[datetime] = Field(
         default=None,
-        description="The timestamp when the authorization server changes the Key for signing tokens. This is only returned when `rotationMode` is set to `AUTO`.",
-        alias="nextRotation")
+        description="The timestamp when the authorization server changes the Key for signing tokens. This is only returned "
+                    "when `rotationMode` is set to `AUTO`.",
+        alias="nextRotation"
+    )
     rotation_mode: Optional[AuthorizationServerCredentialsRotationMode] = Field(default=None, alias="rotationMode")
     use: Optional[AuthorizationServerCredentialsUse] = None
     __properties: ClassVar[List[str]] = ["kid", "lastRotated", "nextRotation", "rotationMode", "use"]
@@ -85,11 +92,13 @@ class AuthorizationServerCredentialsSigningConfig(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "kid",
-            "last_rotated",
-            "next_rotation",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "kid",
+                "last_rotated",
+                "next_rotation",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -107,11 +116,13 @@ class AuthorizationServerCredentialsSigningConfig(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "kid": obj.get("kid"),
-            "lastRotated": obj.get("lastRotated"),
-            "nextRotation": obj.get("nextRotation"),
-            "rotationMode": obj.get("rotationMode"),
-            "use": obj.get("use")
-        })
+        _obj = cls.model_validate(
+            {
+                "kid": obj.get("kid"),
+                "lastRotated": obj.get("lastRotated"),
+                "nextRotation": obj.get("nextRotation"),
+                "rotationMode": obj.get("rotationMode"),
+                "use": obj.get("use")
+            }
+        )
         return _obj

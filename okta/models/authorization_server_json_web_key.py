@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.links_self import LinksSelf
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.links_self import LinksSelf
 
 
 class AuthorizationServerJsonWebKey(BaseModel):
@@ -40,11 +43,20 @@ class AuthorizationServerJsonWebKey(BaseModel):
     kid: Optional[StrictStr] = Field(default=None, description="Unique identifier for the key")
     kty: Optional[StrictStr] = Field(
         default=None,
-        description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`")
+        description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`"
+    )
     n: Optional[StrictStr] = Field(
         default=None,
-        description="RSA modulus value that is used by both the public and private keys and provides a link between them")
-    status: Optional[StrictStr] = Field(default=None, description="An `ACTIVE` Key is used to sign tokens issued by the authorization server. Supported values: `ACTIVE`, `NEXT`, or `EXPIRED`<br> A `NEXT` Key is the next Key that the authorization server uses to sign tokens when Keys are rotated. The `NEXT` Key might not be listed if it hasn't been generated. An `EXPIRED` Key is the previous Key that the authorization server used to sign tokens. The `EXPIRED` Key might not be listed if no Key has expired or the expired Key was deleted.")
+        description="RSA modulus value that is used by both the public and private keys and provides a link between them"
+    )
+    status: Optional[StrictStr] = Field(
+        default=None,
+        description="An `ACTIVE` Key is used to sign tokens issued by the authorization server. Supported values: "
+                    "`ACTIVE`, `NEXT`, or `EXPIRED`<br> A `NEXT` Key is the next Key that the authorization server uses to "
+                    "sign tokens when Keys are rotated. The `NEXT` Key might not be listed if it hasn't been generated. An "
+                    "`EXPIRED` Key is the previous Key that the authorization server used to sign tokens. The `EXPIRED` "
+                    "Key might not be listed if no Key has expired or the expired Key was deleted."
+    )
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the key. Valid value: `sig`")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["alg", "e", "kid", "kty", "n", "status", "use", "_links"]
@@ -83,12 +95,14 @@ class AuthorizationServerJsonWebKey(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "e",
-            "kid",
-            "kty",
-            "use",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "e",
+                "kid",
+                "kty",
+                "use",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -113,14 +127,16 @@ class AuthorizationServerJsonWebKey(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "alg": obj.get("alg"),
-            "e": obj.get("e"),
-            "kid": obj.get("kid"),
-            "kty": obj.get("kty"),
-            "n": obj.get("n"),
-            "status": obj.get("status"),
-            "use": obj.get("use"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "alg": obj.get("alg"),
+                "e": obj.get("e"),
+                "kid": obj.get("kid"),
+                "kty": obj.get("kty"),
+                "n": obj.get("n"),
+                "status": obj.get("status"),
+                "use": obj.get("use"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
 
 from pydantic import Field, StrictStr
-from typing import List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.assigned_app_link import AssignedAppLink
 from okta.models.group import Group
 from okta.models.o_auth2_client import OAuth2Client
-from okta.models.user_device import UserDevice
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.user_device import UserDevice
 from okta.rest import RESTResponse
 
 
@@ -48,26 +49,32 @@ class UserResourcesApi(ApiClient):
 
     @validate_call
     async def list_app_links(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AssignedAppLink]:
         """List all assigned app links
 
-        Lists all app links for all direct or indirect (through group membership) assigned apps.  > **Note:** To list all apps in an org, use the [List all applications endpoint in the Applications API](/openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications).
+        Lists all app links for all direct or indirect (through group membership) assigned apps.  > **Note:** To list all
+        apps in an org, use the [List all applications endpoint in the Applications API](
+        /openapi/okta-management/management/tag/Application/#tag/Application/operation/listApplications).
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -151,12 +158,12 @@ class UserResourcesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_app_links_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -209,24 +216,28 @@ class UserResourcesApi(ApiClient):
 
     @validate_call
     async def list_user_clients(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2Client]:
         """List all clients
 
-        Lists all client resources for which the specified user has grants or tokens.  > **Note:** To list all client resources for which a specified authorization server has tokens, use the [List all client resources for an authorization server in the Authorization Servers API](/openapi/okta-management/management/tag/AuthorizationServerClients/#tag/AuthorizationServerClients/operation/listOAuth2ClientsForAuthorizationServer).
+        Lists all client resources for which the specified user has grants or tokens.  > **Note:** To list all client
+        resources for which a specified authorization server has tokens, use the [List all client resources for an
+        authorization server in the Authorization Servers API](
+        /openapi/okta-management/management/tag/AuthorizationServerClients/#tag/AuthorizationServerClients/operation
+        /listOAuth2ClientsForAuthorizationServer).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -312,12 +323,12 @@ class UserResourcesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_user_clients_serialize(
-        self,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -370,24 +381,26 @@ class UserResourcesApi(ApiClient):
 
     @validate_call
     async def list_user_devices(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserDevice]:
         """List all devices
 
-        Lists all devices enrolled by a user.  > **Note:** To list all devices registered to an org, use the [List all devices endpoint in the Devices API](/openapi/okta-management/management/tag/Device/#tag/Device/operation/listDevices).
+        Lists all devices enrolled by a user.  > **Note:** To list all devices registered to an org, use the [List all
+        devices endpoint in the Devices API](/openapi/okta-management/management/tag/Device/#tag/Device/operation
+        /listDevices).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -473,12 +486,12 @@ class UserResourcesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_user_devices_serialize(
-        self,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -531,26 +544,31 @@ class UserResourcesApi(ApiClient):
 
     @validate_call
     async def list_user_groups(
-        self,
-        id: Annotated[StrictStr, Field(description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            id: Annotated[StrictStr, Field(
+                description="An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing "
+                            "Okta user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Group]:
         """List all groups
 
-        Lists all groups of which the user is a member. > **Note:** To list all groups in your org, use the [List all groups endpoints in the Groups API](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups).
+        Lists all groups of which the user is a member. > **Note:** To list all groups in your org, use the [List all
+        groups endpoints in the Groups API](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups).
 
-        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (required)
+        :param id: An ID, login, or login shortname (as long as the shortname is unambiguous) of an existing Okta user (
+        required)
         :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -634,12 +652,12 @@ class UserResourcesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_user_groups_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

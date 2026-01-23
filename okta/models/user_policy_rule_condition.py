@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.inactivity_policy_rule_condition import InactivityPolicyRuleCondition
 from okta.models.lifecycle_expiration_policy_rule_condition import LifecycleExpirationPolicyRuleCondition
 from okta.models.password_expiration_policy_rule_condition import PasswordExpirationPolicyRuleCondition
 from okta.models.user_lifecycle_attribute_policy_rule_condition import UserLifecycleAttributePolicyRuleCondition
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class UserPolicyRuleCondition(BaseModel):
@@ -44,9 +47,12 @@ class UserPolicyRuleCondition(BaseModel):
     lifecycle_expiration: Optional[LifecycleExpirationPolicyRuleCondition] = Field(default=None, alias="lifecycleExpiration")
     password_expiration: Optional[PasswordExpirationPolicyRuleCondition] = Field(default=None, alias="passwordExpiration")
     user_lifecycle_attribute: Optional[UserLifecycleAttributePolicyRuleCondition] = Field(
-        default=None, alias="userLifecycleAttribute")
-    __properties: ClassVar[List[str]] = ["exclude", "inactivity", "include",
-                                         "lifecycleExpiration", "passwordExpiration", "userLifecycleAttribute"]
+        default=None, alias="userLifecycleAttribute"
+    )
+    __properties: ClassVar[List[str]] = [
+        "exclude", "inactivity", "include",
+        "lifecycleExpiration", "passwordExpiration", "userLifecycleAttribute"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,8 +84,10 @@ class UserPolicyRuleCondition(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -125,12 +133,22 @@ class UserPolicyRuleCondition(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "exclude": obj.get("exclude"),
-            "inactivity": InactivityPolicyRuleCondition.from_dict(obj["inactivity"]) if obj.get("inactivity") is not None else None,
-            "include": obj.get("include"),
-            "lifecycleExpiration": LifecycleExpirationPolicyRuleCondition.from_dict(obj["lifecycleExpiration"]) if obj.get("lifecycleExpiration") is not None else None,
-            "passwordExpiration": PasswordExpirationPolicyRuleCondition.from_dict(obj["passwordExpiration"]) if obj.get("passwordExpiration") is not None else None,
-            "userLifecycleAttribute": UserLifecycleAttributePolicyRuleCondition.from_dict(obj["userLifecycleAttribute"]) if obj.get("userLifecycleAttribute") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "exclude": obj.get("exclude"),
+                "inactivity": InactivityPolicyRuleCondition.from_dict(obj["inactivity"]) if obj.get(
+                    "inactivity"
+                ) is not None else None,
+                "include": obj.get("include"),
+                "lifecycleExpiration": LifecycleExpirationPolicyRuleCondition.from_dict(
+                    obj["lifecycleExpiration"]
+                ) if obj.get("lifecycleExpiration") is not None else None,
+                "passwordExpiration": PasswordExpirationPolicyRuleCondition.from_dict(obj["passwordExpiration"]) if obj.get(
+                    "passwordExpiration"
+                ) is not None else None,
+                "userLifecycleAttribute": UserLifecycleAttributePolicyRuleCondition.from_dict(
+                    obj["userLifecycleAttribute"]
+                ) if obj.get("userLifecycleAttribute") is not None else None
+            }
+        )
         return _obj

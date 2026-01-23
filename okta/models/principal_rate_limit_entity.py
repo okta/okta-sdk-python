@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.principal_type import PrincipalType
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing_extensions import Self
+
+from okta.models.principal_type import PrincipalType
 
 
 class PrincipalRateLimitEntity(BaseModel):
@@ -39,35 +42,44 @@ class PrincipalRateLimitEntity(BaseModel):
     created_by: Optional[StrictStr] = Field(
         default=None,
         description="The Okta user ID of the user who created the principle rate limit entity",
-        alias="createdBy")
+        alias="createdBy"
+    )
     created_date: Optional[datetime] = Field(
         default=None,
         description="The date and time the principle rate limit entity was created",
-        alias="createdDate")
+        alias="createdDate"
+    )
     default_concurrency_percentage: Optional[StrictInt] = Field(
         default=None,
         description="The default percentage of a given concurrency limit threshold that the owning principal can consume",
-        alias="defaultConcurrencyPercentage")
+        alias="defaultConcurrencyPercentage"
+    )
     default_percentage: Optional[StrictInt] = Field(
         default=None,
         description="The default percentage of a given rate limit threshold that the owning principal can consume",
-        alias="defaultPercentage")
+        alias="defaultPercentage"
+    )
     id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the principle rate limit entity")
     last_update: Optional[datetime] = Field(
         default=None,
         description="The date and time the principle rate limit entity was last updated",
-        alias="lastUpdate")
+        alias="lastUpdate"
+    )
     last_updated_by: Optional[StrictStr] = Field(
         default=None,
         description="The Okta user ID of the user who last updated the principle rate limit entity",
-        alias="lastUpdatedBy")
+        alias="lastUpdatedBy"
+    )
     org_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Okta org", alias="orgId")
     principal_id: StrictStr = Field(
         description="The unique identifier of the principal. This is the ID of the API token or OAuth 2.0 app.",
-        alias="principalId")
+        alias="principalId"
+    )
     principal_type: PrincipalType = Field(alias="principalType")
-    __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "defaultConcurrencyPercentage",
-                                         "defaultPercentage", "id", "lastUpdate", "lastUpdatedBy", "orgId", "principalId", "principalType"]
+    __properties: ClassVar[List[str]] = [
+        "createdBy", "createdDate", "defaultConcurrencyPercentage",
+        "defaultPercentage", "id", "lastUpdate", "lastUpdatedBy", "orgId", "principalId", "principalType"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,14 +117,16 @@ class PrincipalRateLimitEntity(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created_by",
-            "created_date",
-            "id",
-            "last_update",
-            "last_updated_by",
-            "org_id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created_by",
+                "created_date",
+                "id",
+                "last_update",
+                "last_updated_by",
+                "org_id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -130,16 +144,18 @@ class PrincipalRateLimitEntity(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "createdBy": obj.get("createdBy"),
-            "createdDate": obj.get("createdDate"),
-            "defaultConcurrencyPercentage": obj.get("defaultConcurrencyPercentage"),
-            "defaultPercentage": obj.get("defaultPercentage"),
-            "id": obj.get("id"),
-            "lastUpdate": obj.get("lastUpdate"),
-            "lastUpdatedBy": obj.get("lastUpdatedBy"),
-            "orgId": obj.get("orgId"),
-            "principalId": obj.get("principalId"),
-            "principalType": obj.get("principalType")
-        })
+        _obj = cls.model_validate(
+            {
+                "createdBy": obj.get("createdBy"),
+                "createdDate": obj.get("createdDate"),
+                "defaultConcurrencyPercentage": obj.get("defaultConcurrencyPercentage"),
+                "defaultPercentage": obj.get("defaultPercentage"),
+                "id": obj.get("id"),
+                "lastUpdate": obj.get("lastUpdate"),
+                "lastUpdatedBy": obj.get("lastUpdatedBy"),
+                "orgId": obj.get("orgId"),
+                "principalId": obj.get("principalId"),
+                "principalType": obj.get("principalType")
+            }
+        )
         return _obj

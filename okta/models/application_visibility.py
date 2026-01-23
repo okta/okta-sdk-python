@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.application_visibility_hide import ApplicationVisibilityHide
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.application_visibility_hide import ApplicationVisibilityHide
 
 
 class ApplicationVisibility(BaseModel):
@@ -36,15 +39,19 @@ class ApplicationVisibility(BaseModel):
     Specifies visibility settings for the app
     """  # noqa: E501
     app_links: Optional[Dict[str, StrictBool]] = Field(
-        default=None, description="Links or icons that appear on the End-User Dashboard if they're set to `true`.", alias="appLinks")
+        default=None, description="Links or icons that appear on the End-User Dashboard if they're set to `true`.",
+        alias="appLinks"
+    )
     auto_launch: Optional[StrictBool] = Field(
         default=None,
         description="Automatically signs in to the app when user signs into Okta",
-        alias="autoLaunch")
+        alias="autoLaunch"
+    )
     auto_submit_toolbar: Optional[StrictBool] = Field(
         default=None,
         description="Automatically sign in when user lands on the sign-in page",
-        alias="autoSubmitToolbar")
+        alias="autoSubmitToolbar"
+    )
     hide: Optional[ApplicationVisibilityHide] = None
     __properties: ClassVar[List[str]] = ["appLinks", "autoLaunch", "autoSubmitToolbar", "hide"]
 
@@ -78,8 +85,10 @@ class ApplicationVisibility(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -104,10 +113,12 @@ class ApplicationVisibility(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "appLinks": obj.get("appLinks"),
-            "autoLaunch": obj.get("autoLaunch"),
-            "autoSubmitToolbar": obj.get("autoSubmitToolbar"),
-            "hide": ApplicationVisibilityHide.from_dict(obj["hide"]) if obj.get("hide") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "appLinks": obj.get("appLinks"),
+                "autoLaunch": obj.get("autoLaunch"),
+                "autoSubmitToolbar": obj.get("autoSubmitToolbar"),
+                "hide": ApplicationVisibilityHide.from_dict(obj["hide"]) if obj.get("hide") is not None else None
+            }
+        )
         return _obj

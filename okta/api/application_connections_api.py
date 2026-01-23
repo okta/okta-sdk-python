@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, List, Tuple, Union
+from typing import Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.app_connection_user_provision_jwk_response import AppConnectionUserProvisionJWKResponse
 from okta.models.o_auth_provisioning_enabled_app import OAuthProvisioningEnabledApp
 from okta.models.provisioning_connection_response import ProvisioningConnectionResponse
-from okta.models.update_default_provisioning_connection_for_application_request import UpdateDefaultProvisioningConnectionForApplicationRequest
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.update_default_provisioning_connection_for_application_request import \
+    UpdateDefaultProvisioningConnectionForApplicationRequest
 from okta.rest import RESTResponse
 
 
@@ -48,20 +50,20 @@ class ApplicationConnectionsApi(ApiClient):
 
     @validate_call
     async def activate_default_provisioning_connection_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Activate the default provisioning connection
 
@@ -98,13 +100,14 @@ class ApplicationConnectionsApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._activate_default_provisioning_connection_for_application_serialize(
-            app_id=app_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._activate_default_provisioning_connection_for_application_serialize(
+                app_id=app_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -142,12 +145,12 @@ class ApplicationConnectionsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_default_provisioning_connection_for_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -200,20 +203,20 @@ class ApplicationConnectionsApi(ApiClient):
 
     @validate_call
     async def deactivate_default_provisioning_connection_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Deactivate the default provisioning connection
 
@@ -250,13 +253,14 @@ class ApplicationConnectionsApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._deactivate_default_provisioning_connection_for_application_serialize(
-            app_id=app_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._deactivate_default_provisioning_connection_for_application_serialize(
+                app_id=app_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -294,12 +298,12 @@ class ApplicationConnectionsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_default_provisioning_connection_for_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -352,20 +356,20 @@ class ApplicationConnectionsApi(ApiClient):
 
     @validate_call
     async def get_default_provisioning_connection_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ProvisioningConnectionResponse:
         """Retrieve the default provisioning connection
 
@@ -455,12 +459,12 @@ class ApplicationConnectionsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_default_provisioning_connection_for_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -513,24 +517,25 @@ class ApplicationConnectionsApi(ApiClient):
 
     @validate_call
     async def get_user_provisioning_connection_jwks(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppConnectionUserProvisionJWKResponse:
         """Retrieve a JSON Web Key Set (JWKS) for the default provisioning connection
 
-        Retrieves a JWKS for the default provisioning connection.  This can be used by the OAuth 2.0 app's `jwk_uri` property in the target org.
+        Retrieves a JWKS for the default provisioning connection.  This can be used by the OAuth 2.0 app's `jwk_uri`
+        property in the target org.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -587,7 +592,9 @@ class ApplicationConnectionsApi(ApiClient):
         if AppConnectionUserProvisionJWKResponse is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, AppConnectionUserProvisionJWKResponse)
+            response, response_body, error = await self._request_executor.execute(
+                request, AppConnectionUserProvisionJWKResponse
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -616,12 +623,12 @@ class ApplicationConnectionsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_user_provisioning_connection_jwks_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -674,22 +681,23 @@ class ApplicationConnectionsApi(ApiClient):
 
     @validate_call
     async def update_default_provisioning_connection_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        update_default_provisioning_connection_for_application_request: UpdateDefaultProvisioningConnectionForApplicationRequest,
-        activate: Annotated[Optional[StrictBool], Field(description="Activates the provisioning connection")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            update_default_provisioning_connection_for_application_request:
+            UpdateDefaultProvisioningConnectionForApplicationRequest,
+            activate: Annotated[Optional[StrictBool], Field(description="Activates the provisioning connection")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ProvisioningConnectionResponse:
         """Update the default provisioning connection
 
@@ -698,7 +706,8 @@ class ApplicationConnectionsApi(ApiClient):
         :param app_id: Application ID (required)
         :type app_id: str
         :param update_default_provisioning_connection_for_application_request: (required)
-        :type update_default_provisioning_connection_for_application_request: UpdateDefaultProvisioningConnectionForApplicationRequest
+        :type update_default_provisioning_connection_for_application_request:
+        UpdateDefaultProvisioningConnectionForApplicationRequest
         :param activate: Activates the provisioning connection
         :type activate: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -731,15 +740,16 @@ class ApplicationConnectionsApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._update_default_provisioning_connection_for_application_serialize(
-            app_id=app_id,
-            update_default_provisioning_connection_for_application_request=update_default_provisioning_connection_for_application_request,
-            activate=activate,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._update_default_provisioning_connection_for_application_serialize(
+                app_id=app_id,
+                update_default_provisioning_connection_for_application_request=update_default_provisioning_connection_for_application_request, # noqa: E251
+                activate=activate,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -786,14 +796,14 @@ class ApplicationConnectionsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_default_provisioning_connection_for_application_serialize(
-        self,
-        app_id,
-        update_default_provisioning_connection_for_application_request,
-        activate,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            update_default_provisioning_connection_for_application_request,
+            activate,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -813,7 +823,6 @@ class ApplicationConnectionsApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if activate is not None:
-
             _query_params.append(('activate', activate))
 
         # process the header parameters
@@ -866,27 +875,29 @@ class ApplicationConnectionsApi(ApiClient):
 
     @validate_call
     async def verify_provisioning_connection_for_application(
-        self,
-        app_name: OAuthProvisioningEnabledApp,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        code: Optional[StrictStr] = None,
-        state: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_name: OAuthProvisioningEnabledApp,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            code: Optional[StrictStr] = None,
+            state: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Verify the provisioning connection
 
-        Verifies the OAuth 2.0-based connection as part of the OAuth 2.0 consent flow. The validation of the consent flow is the last step of the provisioning setup for an OAuth 2.0-based connection. Currently, this operation only supports `office365`,`google`, `zoomus`, and `slack` apps. 
+        Verifies the OAuth 2.0-based connection as part of the OAuth 2.0 consent flow. The validation of the consent flow
+        is the last step of the provisioning setup for an OAuth 2.0-based connection. Currently, this operation only
+        supports `office365`,`google`, `zoomus`, and `slack` apps.
 
         :param app_name: (required)
         :type app_name: OAuthProvisioningEnabledApp
@@ -972,15 +983,15 @@ class ApplicationConnectionsApi(ApiClient):
             return (resp.data, resp, None)
 
     def _verify_provisioning_connection_for_application_serialize(
-        self,
-        app_name,
-        app_id,
-        code,
-        state,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_name,
+            app_id,
+            code,
+            state,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1002,11 +1013,9 @@ class ApplicationConnectionsApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if code is not None:
-
             _query_params.append(('code', code))
 
         if state is not None:
-
             _query_params.append(('state', state))
 
         # process the header parameters

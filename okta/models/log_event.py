@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.log_actor import LogActor
 from okta.models.log_authentication_context import LogAuthenticationContext
 from okta.models.log_client import LogClient
@@ -37,8 +42,6 @@ from okta.models.log_security_context import LogSecurityContext
 from okta.models.log_severity import LogSeverity
 from okta.models.log_target import LogTarget
 from okta.models.log_transaction import LogTransaction
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class LogEvent(BaseModel):
@@ -52,41 +55,54 @@ class LogEvent(BaseModel):
     display_message: Optional[StrictStr] = Field(
         default=None,
         description="The display message for an event",
-        alias="displayMessage")
+        alias="displayMessage"
+    )
     event_type: Optional[StrictStr] = Field(
         default=None,
-        description="The published event type. Event instances are categorized by action in the event type attribute. This attribute is key to navigating the System Log through expression filters. See [Event Types catalog](https://developer.okta.com/docs/reference/api/event-types/#catalog) for a complete list of System Log event types.",
-        alias="eventType")
+        description="The published event type. Event instances are categorized by action in the event type attribute. This "
+                    "attribute is key to navigating the System Log through expression filters. See [Event Types catalog]("
+                    "https://developer.okta.com/docs/reference/api/event-types/#catalog) for a complete list of System Log "
+                    "event types.",
+        alias="eventType"
+    )
     legacy_event_type: Optional[StrictStr] = Field(
         default=None,
         description="Associated Events API Action `objectType` attribute value",
-        alias="legacyEventType")
+        alias="legacyEventType"
+    )
     outcome: Optional[LogOutcome] = None
     published: Optional[datetime] = Field(default=None, description="Timestamp when the event is published")
     request: Optional[LogRequest] = None
     security_context: Optional[LogSecurityContext] = Field(default=None, alias="securityContext")
     severity: Optional[LogSeverity] = None
     target: Optional[List[LogTarget]] = Field(
-        default=None, description="The entity that an actor performs an action on. Targets can be anything, such as an app user, a sign-in token, or anything else.  > **Note:** When searching the target array, search for a given `type` rather than the array location. Target types, such as `User` and `AppInstance`, for a given `eventType` are not always in the same array location.")
+        default=None,
+        description="The entity that an actor performs an action on. Targets can be anything, such as an app user, "
+                    "a sign-in token, or anything else.  > **Note:** When searching the target array, search for a given "
+                    "`type` rather than the array location. Target types, such as `User` and `AppInstance`, for a given "
+                    "`eventType` are not always in the same array location."
+    )
     transaction: Optional[LogTransaction] = None
     uuid: Optional[StrictStr] = Field(default=None, description="Unique identifier for an individual event")
     version: Optional[StrictStr] = Field(default=None, description="Versioning indicator")
-    __properties: ClassVar[List[str]] = ["actor",
-                                         "authenticationContext",
-                                         "client",
-                                         "debugContext",
-                                         "displayMessage",
-                                         "eventType",
-                                         "legacyEventType",
-                                         "outcome",
-                                         "published",
-                                         "request",
-                                         "securityContext",
-                                         "severity",
-                                         "target",
-                                         "transaction",
-                                         "uuid",
-                                         "version"]
+    __properties: ClassVar[List[str]] = [
+        "actor",
+        "authenticationContext",
+        "client",
+        "debugContext",
+        "displayMessage",
+        "eventType",
+        "legacyEventType",
+        "outcome",
+        "published",
+        "request",
+        "securityContext",
+        "severity",
+        "target",
+        "transaction",
+        "uuid",
+        "version"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -125,15 +141,17 @@ class LogEvent(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "display_message",
-            "event_type",
-            "legacy_event_type",
-            "published",
-            "target",
-            "uuid",
-            "version",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "display_message",
+                "event_type",
+                "legacy_event_type",
+                "published",
+                "target",
+                "uuid",
+                "version",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -214,22 +232,30 @@ class LogEvent(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "actor": LogActor.from_dict(obj["actor"]) if obj.get("actor") is not None else None,
-            "authenticationContext": LogAuthenticationContext.from_dict(obj["authenticationContext"]) if obj.get("authenticationContext") is not None else None,
-            "client": LogClient.from_dict(obj["client"]) if obj.get("client") is not None else None,
-            "debugContext": LogDebugContext.from_dict(obj["debugContext"]) if obj.get("debugContext") is not None else None,
-            "displayMessage": obj.get("displayMessage"),
-            "eventType": obj.get("eventType"),
-            "legacyEventType": obj.get("legacyEventType"),
-            "outcome": LogOutcome.from_dict(obj["outcome"]) if obj.get("outcome") is not None else None,
-            "published": obj.get("published"),
-            "request": LogRequest.from_dict(obj["request"]) if obj.get("request") is not None else None,
-            "securityContext": LogSecurityContext.from_dict(obj["securityContext"]) if obj.get("securityContext") is not None else None,
-            "severity": obj.get("severity"),
-            "target": [LogTarget.from_dict(_item) for _item in obj["target"]] if obj.get("target") is not None else None,
-            "transaction": LogTransaction.from_dict(obj["transaction"]) if obj.get("transaction") is not None else None,
-            "uuid": obj.get("uuid"),
-            "version": obj.get("version")
-        })
+        _obj = cls.model_validate(
+            {
+                "actor": LogActor.from_dict(obj["actor"]) if obj.get("actor") is not None else None,
+                "authenticationContext": LogAuthenticationContext.from_dict(obj["authenticationContext"]) if obj.get(
+                    "authenticationContext"
+                ) is not None else None,
+                "client": LogClient.from_dict(obj["client"]) if obj.get("client") is not None else None,
+                "debugContext": LogDebugContext.from_dict(obj["debugContext"]) if obj.get(
+                    "debugContext"
+                ) is not None else None,
+                "displayMessage": obj.get("displayMessage"),
+                "eventType": obj.get("eventType"),
+                "legacyEventType": obj.get("legacyEventType"),
+                "outcome": LogOutcome.from_dict(obj["outcome"]) if obj.get("outcome") is not None else None,
+                "published": obj.get("published"),
+                "request": LogRequest.from_dict(obj["request"]) if obj.get("request") is not None else None,
+                "securityContext": LogSecurityContext.from_dict(obj["securityContext"]) if obj.get(
+                    "securityContext"
+                ) is not None else None,
+                "severity": obj.get("severity"),
+                "target": [LogTarget.from_dict(_item) for _item in obj["target"]] if obj.get("target") is not None else None,
+                "transaction": LogTransaction.from_dict(obj["transaction"]) if obj.get("transaction") is not None else None,
+                "uuid": obj.get("uuid"),
+                "version": obj.get("version")
+            }
+        )
         return _obj

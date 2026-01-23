@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.success_success_message_inner import SuccessSuccessMessageInner
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.success_success_message_inner import SuccessSuccessMessageInner
 
 
 class Success(BaseModel):
@@ -39,11 +42,14 @@ class Success(BaseModel):
     success_code: Optional[StrictStr] = Field(
         default=None,
         description="An Okta code for this type of success",
-        alias="successCode")
+        alias="successCode"
+    )
     success_summary: Optional[StrictStr] = Field(
         default=None,
-        description="A short description of success message. Sometimes this contains dynamically-generated information about your specific response.",
-        alias="successSummary")
+        description="A short description of success message. Sometimes this contains dynamically-generated information "
+                    "about your specific response.",
+        alias="successSummary"
+    )
     __properties: ClassVar[List[str]] = ["successMessage", "successCode", "successSummary"]
 
     model_config = ConfigDict(
@@ -76,8 +82,10 @@ class Success(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -102,9 +110,12 @@ class Success(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "successMessage": [SuccessSuccessMessageInner.from_dict(_item) for _item in obj["successMessage"]] if obj.get("successMessage") is not None else None,
-            "successCode": obj.get("successCode"),
-            "successSummary": obj.get("successSummary")
-        })
+        _obj = cls.model_validate(
+            {
+                "successMessage": [SuccessSuccessMessageInner.from_dict(_item) for _item in
+                                   obj["successMessage"]] if obj.get("successMessage") is not None else None,
+                "successCode": obj.get("successCode"),
+                "successSummary": obj.get("successSummary")
+            }
+        )
         return _obj

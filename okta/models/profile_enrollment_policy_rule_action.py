@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.pre_registration_inline_hook import PreRegistrationInlineHook
-from okta.models.profile_enrollment_policy_rule_activation_requirement import ProfileEnrollmentPolicyRuleActivationRequirement
-from okta.models.profile_enrollment_policy_rule_profile_attribute import ProfileEnrollmentPolicyRuleProfileAttribute
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.pre_registration_inline_hook import PreRegistrationInlineHook
+from okta.models.profile_enrollment_policy_rule_activation_requirement import \
+    ProfileEnrollmentPolicyRuleActivationRequirement
+from okta.models.profile_enrollment_policy_rule_profile_attribute import ProfileEnrollmentPolicyRuleProfileAttribute
 
 
 class ProfileEnrollmentPolicyRuleAction(BaseModel):
@@ -39,41 +43,68 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
     """  # noqa: E501
     access: Optional[StrictStr] = Field(
         default=None,
-        description="Indicates if the user profile is granted access  > **Note:** You can't set the `access` property to `DENY` after you create the policy")
+        description="Indicates if the user profile is granted access  > **Note:** You can't set the `access` property to "
+                    "`DENY` after you create the policy"
+    )
     activation_requirements: Optional[ProfileEnrollmentPolicyRuleActivationRequirement] = Field(
-        default=None, alias="activationRequirements")
+        default=None, alias="activationRequirements"
+    )
     allowed_identifiers: Optional[List[StrictStr]] = Field(
-        default=None, description="A list of attributes to identify an end user. Can be used across Okta sign-in, unlock, and recovery flows.", alias="allowedIdentifiers")
+        default=None,
+        description="A list of attributes to identify an end user. Can be used across Okta sign-in, unlock, and recovery "
+                    "flows.",
+        alias="allowedIdentifiers"
+    )
     enroll_authenticator_types: Optional[List[StrictStr]] = Field(
-        default=None, description="Additional authenticator fields that can be used on the first page of user registration. Valid values only includes `'password'`.", alias="enrollAuthenticatorTypes")
+        default=None,
+        description="Additional authenticator fields that can be used on the first page of user registration. Valid values "
+                    "only includes `'password'`.",
+        alias="enrollAuthenticatorTypes"
+    )
     pre_registration_inline_hooks: Optional[List[PreRegistrationInlineHook]] = Field(
-        default=None, description="(Optional) The `id` of at most one registration inline hook", alias="preRegistrationInlineHooks")
+        default=None, description="(Optional) The `id` of at most one registration inline hook",
+        alias="preRegistrationInlineHooks"
+    )
     profile_attributes: Optional[List[ProfileEnrollmentPolicyRuleProfileAttribute]] = Field(
-        default=None, description="A list of attributes to prompt the user for during registration or progressive profiling. Where defined on the user schema, these attributes are persisted in the user profile. You can also add non-schema attributes, which aren't persisted to the user's profile, but are included in requests to the registration inline hook. A maximum of 10 profile properties is supported.", alias="profileAttributes")
+        default=None,
+        description="A list of attributes to prompt the user for during registration or progressive profiling. Where "
+                    "defined on the user schema, these attributes are persisted in the user profile. You can also add "
+                    "non-schema attributes, which aren't persisted to the user's profile, but are included in requests to "
+                    "the registration inline hook. A maximum of 10 profile properties is supported.",
+        alias="profileAttributes"
+    )
     progressive_profiling_action: Optional[StrictStr] = Field(
         default=None,
-        description="Progressive profile enrollment helps evaluate the user profile policy at every user login. Users can be prompted to provide input for newly required attributes.",
-        alias="progressiveProfilingAction")
+        description="Progressive profile enrollment helps evaluate the user profile policy at every user login. Users can "
+                    "be prompted to provide input for newly required attributes.",
+        alias="progressiveProfilingAction"
+    )
     target_group_ids: Optional[List[StrictStr]] = Field(
-        default=None, description="(Optional, max 1 entry) The `id` of a group that this user should be added to", alias="targetGroupIds")
+        default=None, description="(Optional, max 1 entry) The `id` of a group that this user should be added to",
+        alias="targetGroupIds"
+    )
     ui_schema_id: Optional[StrictStr] = Field(
         default=None,
         description="Value created by the backend. If present, all policy updates must include this attribute/value.",
-        alias="uiSchemaId")
+        alias="uiSchemaId"
+    )
     unknown_user_action: Optional[StrictStr] = Field(
         default=None,
         description="Which action should be taken if this user is new",
-        alias="unknownUserAction")
-    __properties: ClassVar[List[str]] = ["access",
-                                         "activationRequirements",
-                                         "allowedIdentifiers",
-                                         "enrollAuthenticatorTypes",
-                                         "preRegistrationInlineHooks",
-                                         "profileAttributes",
-                                         "progressiveProfilingAction",
-                                         "targetGroupIds",
-                                         "uiSchemaId",
-                                         "unknownUserAction"]
+        alias="unknownUserAction"
+    )
+    __properties: ClassVar[List[str]] = [
+        "access",
+        "activationRequirements",
+        "allowedIdentifiers",
+        "enrollAuthenticatorTypes",
+        "preRegistrationInlineHooks",
+        "profileAttributes",
+        "progressiveProfilingAction",
+        "targetGroupIds",
+        "uiSchemaId",
+        "unknownUserAction"
+    ]
 
     @field_validator('access')
     def access_validate_enum(cls, value):
@@ -135,8 +166,10 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -150,7 +183,8 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
             else:
                 _dict['activationRequirements'] = self.activation_requirements
 
-        # override the default output from pydantic by calling `to_dict()` of each item in pre_registration_inline_hooks (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in pre_registration_inline_hooks (
+        # list)
         _items = []
         if self.pre_registration_inline_hooks:
             for _item in self.pre_registration_inline_hooks:
@@ -175,16 +209,24 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "access": obj.get("access"),
-            "activationRequirements": ProfileEnrollmentPolicyRuleActivationRequirement.from_dict(obj["activationRequirements"]) if obj.get("activationRequirements") is not None else None,
-            "allowedIdentifiers": obj.get("allowedIdentifiers"),
-            "enrollAuthenticatorTypes": obj.get("enrollAuthenticatorTypes"),
-            "preRegistrationInlineHooks": [PreRegistrationInlineHook.from_dict(_item) for _item in obj["preRegistrationInlineHooks"]] if obj.get("preRegistrationInlineHooks") is not None else None,
-            "profileAttributes": [ProfileEnrollmentPolicyRuleProfileAttribute.from_dict(_item) for _item in obj["profileAttributes"]] if obj.get("profileAttributes") is not None else None,
-            "progressiveProfilingAction": obj.get("progressiveProfilingAction"),
-            "targetGroupIds": obj.get("targetGroupIds"),
-            "uiSchemaId": obj.get("uiSchemaId"),
-            "unknownUserAction": obj.get("unknownUserAction")
-        })
+        _obj = cls.model_validate(
+            {
+                "access": obj.get("access"),
+                "activationRequirements": ProfileEnrollmentPolicyRuleActivationRequirement.from_dict(
+                    obj["activationRequirements"]
+                ) if obj.get("activationRequirements") is not None else None,
+                "allowedIdentifiers": obj.get("allowedIdentifiers"),
+                "enrollAuthenticatorTypes": obj.get("enrollAuthenticatorTypes"),
+                "preRegistrationInlineHooks": [PreRegistrationInlineHook.from_dict(_item) for _item in
+                                               obj["preRegistrationInlineHooks"]] if obj.get(
+                    "preRegistrationInlineHooks"
+                ) is not None else None,
+                "profileAttributes": [ProfileEnrollmentPolicyRuleProfileAttribute.from_dict(_item) for _item in
+                                      obj["profileAttributes"]] if obj.get("profileAttributes") is not None else None,
+                "progressiveProfilingAction": obj.get("progressiveProfilingAction"),
+                "targetGroupIds": obj.get("targetGroupIds"),
+                "uiSchemaId": obj.get("uiSchemaId"),
+                "unknownUserAction": obj.get("unknownUserAction")
+            }
+        )
         return _obj

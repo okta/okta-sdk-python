@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing_extensions import Self
+
 from okta.models.o_auth2_client_json_signing_key_response import OAuth2ClientJsonSigningKeyResponse
 from okta.models.o_auth_client_secret_links import OAuthClientSecretLinks
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
@@ -70,8 +73,10 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -101,15 +106,17 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "created": obj.get("created"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "_links": OAuthClientSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
-            "kid": obj.get("kid"),
-            "status": obj.get("status"),
-            "kty": obj.get("kty"),
-            "alg": obj.get("alg"),
-            "use": obj.get("use")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "created": obj.get("created"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "_links": OAuthClientSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
+                "kid": obj.get("kid"),
+                "status": obj.get("status"),
+                "kty": obj.get("kty"),
+                "alg": obj.get("alg"),
+                "use": obj.get("use")
+            }
+        )
         return _obj

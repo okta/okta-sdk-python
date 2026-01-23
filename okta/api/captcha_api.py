@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
 
 from pydantic import Field, StrictStr
-from typing import List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.captcha_instance import CAPTCHAInstance
-from okta.models.org_captcha_settings import OrgCAPTCHASettings
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.captcha_instance import CAPTCHAInstance
+from okta.models.org_captcha_settings import OrgCAPTCHASettings
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,20 +47,20 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def create_captcha_instance(
-        self,
-        instance: CAPTCHAInstance,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            instance: CAPTCHAInstance,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CAPTCHAInstance:
         """Create a CAPTCHA instance
 
@@ -149,12 +150,12 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_captcha_instance_serialize(
-        self,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -221,24 +222,25 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def delete_captcha_instance(
-        self,
-        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a CAPTCHA instance
 
-        Deletes a specified CAPTCHA instance > **Note:** If your CAPTCHA instance is still associated with your org, the request fails. You must first update your Org-wide CAPTCHA settings to remove the CAPTCHA instance.
+        Deletes a specified CAPTCHA instance > **Note:** If your CAPTCHA instance is still associated with your org,
+        the request fails. You must first update your Org-wide CAPTCHA settings to remove the CAPTCHA instance.
 
         :param captcha_id: The unique key used to identify your CAPTCHA instance (required)
         :type captcha_id: str
@@ -315,12 +317,12 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_captcha_instance_serialize(
-        self,
-        captcha_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            captcha_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -373,19 +375,19 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def delete_org_captcha_settings(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete the org-wide CAPTCHA settings
 
@@ -463,11 +465,11 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_org_captcha_settings_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -518,20 +520,20 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def get_captcha_instance(
-        self,
-        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CAPTCHAInstance:
         """Retrieve a CAPTCHA instance
 
@@ -621,12 +623,12 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_captcha_instance_serialize(
-        self,
-        captcha_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            captcha_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -679,23 +681,24 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def get_org_captcha_settings(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OrgCAPTCHASettings:
         """Retrieve the org-wide CAPTCHA settings
 
-        Retrieves the CAPTCHA settings object for your organization > **Note**: If the current organization hasn't configured CAPTCHA Settings, the request returns an empty object.
+        Retrieves the CAPTCHA settings object for your organization > **Note**: If the current organization hasn't
+        configured CAPTCHA Settings, the request returns an empty object.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -777,11 +780,11 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_org_captcha_settings_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -832,23 +835,24 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def list_captcha_instances(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[CAPTCHAInstance]:
         """List all CAPTCHA instances
 
-        Lists all CAPTCHA instances with pagination support. A subset of CAPTCHA instances can be returned that match a supported filter expression or query.
+        Lists all CAPTCHA instances with pagination support. A subset of CAPTCHA instances can be returned that match a
+        supported filter expression or query.
 
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -930,11 +934,11 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_captcha_instances_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -985,21 +989,21 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def replace_captcha_instance(
-        self,
-        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
-        instance: CAPTCHAInstance,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
+            instance: CAPTCHAInstance,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CAPTCHAInstance:
         """Replace a CAPTCHA instance
 
@@ -1093,13 +1097,13 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_captcha_instance_serialize(
-        self,
-        captcha_id,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            captcha_id,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1168,24 +1172,25 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def replaces_org_captcha_settings(
-        self,
-        org_captcha_settings: OrgCAPTCHASettings,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            org_captcha_settings: OrgCAPTCHASettings,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OrgCAPTCHASettings:
         """Replace the org-wide CAPTCHA settings
 
-        Replaces the CAPTCHA settings object for your organization > **Note**: You can disable CAPTCHA for your organization by setting `captchaId` and `enabledPages` to `null`.
+        Replaces the CAPTCHA settings object for your organization > **Note**: You can disable CAPTCHA for your
+        organization by setting `captchaId` and `enabledPages` to `null`.
 
         :param org_captcha_settings: (required)
         :type org_captcha_settings: OrgCAPTCHASettings
@@ -1271,12 +1276,12 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replaces_org_captcha_settings_serialize(
-        self,
-        org_captcha_settings,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            org_captcha_settings,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1343,21 +1348,21 @@ class CAPTCHAApi(ApiClient):
 
     @validate_call
     async def update_captcha_instance(
-        self,
-        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
-        instance: CAPTCHAInstance,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
+            instance: CAPTCHAInstance,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CAPTCHAInstance:
         """Update a CAPTCHA instance
 
@@ -1451,13 +1456,13 @@ class CAPTCHAApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_captcha_instance_serialize(
-        self,
-        captcha_id,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            captcha_id,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

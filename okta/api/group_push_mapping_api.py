@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.create_group_push_mapping_request import CreateGroupPushMappingRequest
 from okta.models.group_push_mapping import GroupPushMapping
 from okta.models.group_push_mapping_status import GroupPushMappingStatus
-from okta.models.update_group_push_mapping_request import UpdateGroupPushMappingRequest
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.update_group_push_mapping_request import UpdateGroupPushMappingRequest
 from okta.rest import RESTResponse
 
 
@@ -48,25 +49,27 @@ class GroupPushMappingApi(ApiClient):
 
     @validate_call
     async def create_group_push_mapping(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        body: CreateGroupPushMappingRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            body: CreateGroupPushMappingRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupPushMapping:
         """Create a group push mapping
 
-        Creates or links a group push mapping.  **Note:** Either `targetGroupId` or `targetGroupName` must be provided, but not both. If `targetGroupId` is provided, it links to an existing group. If `targetGroupName` is provided, it creates a new group.
+        Creates or links a group push mapping.  **Note:** Either `targetGroupId` or `targetGroupName` must be provided,
+        but not both. If `targetGroupId` is provided, it links to an existing group. If `targetGroupName` is provided,
+        it creates a new group.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -156,13 +159,13 @@ class GroupPushMappingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_group_push_mapping_serialize(
-        self,
-        app_id,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -231,22 +234,25 @@ class GroupPushMappingApi(ApiClient):
 
     @validate_call
     async def delete_group_push_mapping(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        mapping_id: Annotated[StrictStr, Field(description="Group push mapping ID")],
-        delete_target_group: Annotated[StrictBool, Field(description="If set to `true`, the target group is also deleted. If set to `false`, the target group isn't deleted.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            mapping_id: Annotated[StrictStr, Field(description="Group push mapping ID")],
+            delete_target_group: Annotated[StrictBool, Field(
+                description="If set to `true`, the target group is also deleted. If set to `false`, the target group isn't "
+                            "deleted."
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a group push mapping
 
@@ -256,7 +262,8 @@ class GroupPushMappingApi(ApiClient):
         :type app_id: str
         :param mapping_id: Group push mapping ID (required)
         :type mapping_id: str
-        :param delete_target_group: If set to `true`, the target group is also deleted. If set to `false`, the target group isn't deleted. (required)
+        :param delete_target_group: If set to `true`, the target group is also deleted. If set to `false`, the target
+        group isn't deleted. (required)
         :type delete_target_group: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -334,14 +341,14 @@ class GroupPushMappingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_group_push_mapping_serialize(
-        self,
-        app_id,
-        mapping_id,
-        delete_target_group,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            mapping_id,
+            delete_target_group,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -363,7 +370,6 @@ class GroupPushMappingApi(ApiClient):
             _path_params['mappingId'] = mapping_id
         # process the query parameters
         if delete_target_group is not None:
-
             _query_params.append(('deleteTargetGroup', delete_target_group))
 
         # process the header parameters
@@ -400,21 +406,21 @@ class GroupPushMappingApi(ApiClient):
 
     @validate_call
     async def get_group_push_mapping(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        mapping_id: Annotated[StrictStr, Field(description="Group push mapping ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            mapping_id: Annotated[StrictStr, Field(description="Group push mapping ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupPushMapping:
         """Retrieve a group push mapping
 
@@ -508,13 +514,13 @@ class GroupPushMappingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_group_push_mapping_serialize(
-        self,
-        app_id,
-        mapping_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            mapping_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -569,30 +575,40 @@ class GroupPushMappingApi(ApiClient):
 
     @validate_call
     async def list_group_push_mappings(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of mappings")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(
-            description="Specifies the number of results returned")] = None,
-        last_updated: Annotated[Optional[StrictStr], Field(
-            description="Filters group push mappings by last updated date. The `lastUpdated` parameter supports the following format: `YYYY-MM-DDTHH:mm:ssZ`. This filters mappings updated on or after the specified date and time in UTC.  If you don't specify a value, all group push mappings are returned.")] = None,
-        source_group_id: Annotated[Optional[StrictStr], Field(
-            description="Filters group push mappings by source group ID. If you don't specify a value, all group push mappings are returned.")] = None,
-        status: Annotated[Optional[GroupPushMappingStatus], Field(
-            description="Filters group push mappings by status. If you don't specify a value, all group push mappings are returned.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of mappings"
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(
+                description="Specifies the number of results returned"
+            )] = None,
+            last_updated: Annotated[Optional[StrictStr], Field(
+                description="Filters group push mappings by last updated date. The `lastUpdated` parameter supports the "
+                            "following format: `YYYY-MM-DDTHH:mm:ssZ`. This filters mappings updated on or after the "
+                            "specified date and time in UTC.  If you don't specify a value, all group push mappings are "
+                            "returned."
+            )] = None,
+            source_group_id: Annotated[Optional[StrictStr], Field(
+                description="Filters group push mappings by source group ID. If you don't specify a value, all group push "
+                            "mappings are returned."
+            )] = None,
+            status: Annotated[Optional[GroupPushMappingStatus], Field(
+                description="Filters group push mappings by status. If you don't specify a value, all group push mappings "
+                            "are returned."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[GroupPushMapping]:
         """List all group push mappings
 
@@ -604,11 +620,15 @@ class GroupPushMappingApi(ApiClient):
         :type after: str
         :param limit: Specifies the number of results returned
         :type limit: int
-        :param last_updated: Filters group push mappings by last updated date. The `lastUpdated` parameter supports the following format: `YYYY-MM-DDTHH:mm:ssZ`. This filters mappings updated on or after the specified date and time in UTC.  If you don't specify a value, all group push mappings are returned.
+        :param last_updated: Filters group push mappings by last updated date. The `lastUpdated` parameter supports the
+        following format: `YYYY-MM-DDTHH:mm:ssZ`. This filters mappings updated on or after the specified date and time in
+        UTC.  If you don't specify a value, all group push mappings are returned.
         :type last_updated: str
-        :param source_group_id: Filters group push mappings by source group ID. If you don't specify a value, all group push mappings are returned.
+        :param source_group_id: Filters group push mappings by source group ID. If you don't specify a value,
+        all group push mappings are returned.
         :type source_group_id: str
-        :param status: Filters group push mappings by status. If you don't specify a value, all group push mappings are returned.
+        :param status: Filters group push mappings by status. If you don't specify a value, all group push mappings are
+        returned.
         :type status: GroupPushMappingStatus
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -697,17 +717,17 @@ class GroupPushMappingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_group_push_mappings_serialize(
-        self,
-        app_id,
-        after,
-        limit,
-        last_updated,
-        source_group_id,
-        status,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            after,
+            limit,
+            last_updated,
+            source_group_id,
+            status,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -727,23 +747,18 @@ class GroupPushMappingApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if last_updated is not None:
-
             _query_params.append(('lastUpdated', last_updated))
 
         if source_group_id is not None:
-
             _query_params.append(('sourceGroupId', source_group_id))
 
         if status is not None:
-
             _query_params.append(('status', status.value))
 
         # process the header parameters
@@ -780,22 +795,22 @@ class GroupPushMappingApi(ApiClient):
 
     @validate_call
     async def update_group_push_mapping(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        mapping_id: Annotated[StrictStr, Field(description="Group push mapping ID")],
-        body: UpdateGroupPushMappingRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            mapping_id: Annotated[StrictStr, Field(description="Group push mapping ID")],
+            body: UpdateGroupPushMappingRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupPushMapping:
         """Update a group push mapping
 
@@ -893,14 +908,14 @@ class GroupPushMappingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_group_push_mapping_serialize(
-        self,
-        app_id,
-        mapping_id,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            mapping_id,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

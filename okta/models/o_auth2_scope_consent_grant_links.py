@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.app_resource_href_object import AppResourceHrefObject
 from okta.models.authorization_server_resource_href_object import AuthorizationServerResourceHrefObject
 from okta.models.href_object_self_link import HrefObjectSelfLink
 from okta.models.scope_resource_href_object import ScopeResourceHrefObject
 from okta.models.user_resource_href_object import UserResourceHrefObject
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OAuth2ScopeConsentGrantLinks(BaseModel):
@@ -45,7 +48,8 @@ class OAuth2ScopeConsentGrantLinks(BaseModel):
     scope: Optional[ScopeResourceHrefObject] = Field(default=None, description="Link to the scope resource")
     user: Optional[UserResourceHrefObject] = Field(default=None, description="Link to the user resource")
     authorization_server: Optional[AuthorizationServerResourceHrefObject] = Field(
-        default=None, description="Link to the authorization server resource", alias="authorizationServer")
+        default=None, description="Link to the authorization server resource", alias="authorizationServer"
+    )
     __properties: ClassVar[List[str]] = ["self", "app", "client", "scope", "user", "authorizationServer"]
 
     model_config = ConfigDict(
@@ -78,8 +82,10 @@ class OAuth2ScopeConsentGrantLinks(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -139,12 +145,16 @@ class OAuth2ScopeConsentGrantLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
-            "app": AppResourceHrefObject.from_dict(obj["app"]) if obj.get("app") is not None else None,
-            "client": AppResourceHrefObject.from_dict(obj["client"]) if obj.get("client") is not None else None,
-            "scope": ScopeResourceHrefObject.from_dict(obj["scope"]) if obj.get("scope") is not None else None,
-            "user": UserResourceHrefObject.from_dict(obj["user"]) if obj.get("user") is not None else None,
-            "authorizationServer": AuthorizationServerResourceHrefObject.from_dict(obj["authorizationServer"]) if obj.get("authorizationServer") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
+                "app": AppResourceHrefObject.from_dict(obj["app"]) if obj.get("app") is not None else None,
+                "client": AppResourceHrefObject.from_dict(obj["client"]) if obj.get("client") is not None else None,
+                "scope": ScopeResourceHrefObject.from_dict(obj["scope"]) if obj.get("scope") is not None else None,
+                "user": UserResourceHrefObject.from_dict(obj["user"]) if obj.get("user") is not None else None,
+                "authorizationServer": AuthorizationServerResourceHrefObject.from_dict(
+                    obj["authorizationServer"]
+                ) if obj.get("authorizationServer") is not None else None
+            }
+        )
         return _obj

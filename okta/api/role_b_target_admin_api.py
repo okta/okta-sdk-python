@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.catalog_application import CatalogApplication
 from okta.models.group import Group
 from okta.models.role_target import RoleTarget
 from okta.models.success import Success
-
-from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -48,21 +48,21 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def assign_all_apps_as_target_to_role_for_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Assign all apps as target to admin role
 
@@ -155,13 +155,13 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_all_apps_as_target_to_role_for_user_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -216,27 +216,32 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def assign_app_instance_target_to_app_admin_role_for_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Assign an admin role app instance target
 
-        Assigns an app instance target to an `APP_ADMIN` role assignment to an admin user. When you assign the first OIN app or app instance target, you reduce the scope of the role assignment. The role no longer applies to all app targets, but applies only to the specified target.  > **Note:** You can target a mixture of both OIN app and app instance targets, but can't assign permissions to manage all instances of an OIN app and then assign a subset of permission to the same OIN app. > For example, you can't specify that an admin has access to manage all instances of the Salesforce app and then also manage specific configurations of the Salesforce app. 
+        Assigns an app instance target to an `APP_ADMIN` role assignment to an admin user. When you assign the first OIN
+        app or app instance target, you reduce the scope of the role assignment. The role no longer applies to all app
+        targets, but applies only to the specified target.  > **Note:** You can target a mixture of both OIN app and app
+        instance targets, but can't assign permissions to manage all instances of an OIN app and then assign a subset of
+        permission to the same OIN app. > For example, you can't specify that an admin has access to manage all instances
+        of the Salesforce app and then also manage specific configurations of the Salesforce app.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -275,16 +280,17 @@ class RoleBTargetAdminApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._assign_app_instance_target_to_app_admin_role_for_user_serialize(
-            user_id=user_id,
-            role_assignment_id=role_assignment_id,
-            app_name=app_name,
-            app_id=app_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._assign_app_instance_target_to_app_admin_role_for_user_serialize(
+                user_id=user_id,
+                role_assignment_id=role_assignment_id,
+                app_name=app_name,
+                app_id=app_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -322,15 +328,15 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_app_instance_target_to_app_admin_role_for_user_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        app_name,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            app_name,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -389,26 +395,30 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def assign_app_target_to_admin_role_for_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Success:
         """Assign an admin role app target
 
-        Assigns an OIN app target for an `APP_ADMIN` role assignment to an admin user. When you assign the first app target, you reduce the scope of the role assignment. The role no longer applies to all app targets, but applies only to the specified target.  Assigning an OIN app target overrides any existing app instance targets of the OIN app. For example, if a user was assigned to administer a specific Facebook instance, a successful request to add an OIN app target with `facebook` for `appName` makes that user the admin for all Facebook instances. 
+        Assigns an OIN app target for an `APP_ADMIN` role assignment to an admin user. When you assign the first app
+        target, you reduce the scope of the role assignment. The role no longer applies to all app targets, but applies
+        only to the specified target.  Assigning an OIN app target overrides any existing app instance targets of the OIN
+        app. For example, if a user was assigned to administer a specific Facebook instance, a successful request to add
+        an OIN app target with `facebook` for `appName` makes that user the admin for all Facebook instances.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -500,14 +510,14 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_app_target_to_admin_role_for_user_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        app_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            app_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -564,26 +574,28 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def assign_group_target_to_user_role(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Assign an admin role group target
 
-        Assigns a group target for a `USER_ADMIN`, `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to an admin user. When you assign the first group target, you reduce the scope of the role assignment. The role no longer applies to all targets but applies only to the specified target. 
+        Assigns a group target for a `USER_ADMIN`, `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to an
+        admin user. When you assign the first group target, you reduce the scope of the role assignment. The role no
+        longer applies to all targets but applies only to the specified target.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -666,14 +678,14 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_group_target_to_user_role_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        group_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            group_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -730,30 +742,39 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def get_role_targets_by_user_id_and_role_id(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_id_or_encoded_role_id: Annotated[StrictStr, Field(description="The `id` of the role or Base32 encoded `id` of the role name")],
-        assignment_type: Annotated[Optional[StrictStr], Field(description="Specifies the assignment type of the user")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_id_or_encoded_role_id: Annotated[
+                StrictStr, Field(description="The `id` of the role or Base32 encoded `id` of the role name")],
+            assignment_type: Annotated[
+                Optional[StrictStr], Field(description="Specifies the assignment type of the user")] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[RoleTarget]:
         """Retrieve a role target by assignment type
 
-        Retrieves all role targets for an `APP_ADMIN`, `USER_ADMIN`, `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to an admin user by user or group assignment type. If the role isn't scoped to specific group targets or any app targets, an empty array `[]` is returned. 
+        Retrieves all role targets for an `APP_ADMIN`, `USER_ADMIN`, `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role
+        assignment to an admin user by user or group assignment type. If the role isn't scoped to specific group targets
+        or any app targets, an empty array `[]` is returned.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -761,7 +782,9 @@ class RoleBTargetAdminApi(ApiClient):
         :type role_id_or_encoded_role_id: str
         :param assignment_type: Specifies the assignment type of the user
         :type assignment_type: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -851,16 +874,16 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_role_targets_by_user_id_and_role_id_serialize(
-        self,
-        user_id,
-        role_id_or_encoded_role_id,
-        assignment_type,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_id_or_encoded_role_id,
+            assignment_type,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -882,15 +905,12 @@ class RoleBTargetAdminApi(ApiClient):
             _path_params['roleIdOrEncodedRoleId'] = role_id_or_encoded_role_id
         # process the query parameters
         if assignment_type is not None:
-
             _query_params.append(('assignmentType', assignment_type))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -927,35 +947,44 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def list_application_targets_for_application_administrator_role_for_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[CatalogApplication]:
         """List all admin role app targets
 
-        Lists all app targets for an `APP_ADMIN` role assigned to a user. The response is a list that includes OIN-cataloged apps or app instances. The response payload for an app instance contains the `id` property, but an OIN-cataloged app payload doesn't.
+        Lists all app targets for an `APP_ADMIN` role assigned to a user. The response is a list that includes
+        OIN-cataloged apps or app instances. The response payload for an app instance contains the `id` property,
+        but an OIN-cataloged app payload doesn't.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param role_assignment_id: The `id` of the role assignment (required)
         :type role_assignment_id: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -988,16 +1017,17 @@ class RoleBTargetAdminApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._list_application_targets_for_application_administrator_role_for_user_serialize(
-            user_id=user_id,
-            role_assignment_id=role_assignment_id,
-            after=after,
-            limit=limit,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._list_application_targets_for_application_administrator_role_for_user_serialize(
+                user_id=user_id,
+                role_assignment_id=role_assignment_id,
+                after=after,
+                limit=limit,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -1044,15 +1074,15 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_application_targets_for_application_administrator_role_for_user_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1074,11 +1104,9 @@ class RoleBTargetAdminApi(ApiClient):
             _path_params['roleAssignmentId'] = role_assignment_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -1115,35 +1143,43 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def list_group_targets_for_role(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Group]:
         """List all admin role group targets
 
-        Lists all group targets for a `USER_ADMIN`, `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to an admin user. If the role isn't scoped to specific group targets, an empty array `[]` is returned. 
+        Lists all group targets for a `USER_ADMIN`, `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to an
+        admin user. If the role isn't scoped to specific group targets, an empty array `[]` is returned.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param role_assignment_id: The `id` of the role assignment (required)
         :type role_assignment_id: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -1232,15 +1268,15 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_group_targets_for_role_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1262,11 +1298,9 @@ class RoleBTargetAdminApi(ApiClient):
             _path_params['roleAssignmentId'] = role_assignment_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -1303,27 +1337,29 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def unassign_app_instance_target_from_admin_role_for_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign an admin role app instance target
 
-        Unassigns an app instance target from an `APP_ADMIN` role assignment to an admin user.  > **Note:** You can't remove the last app instance target from a role assignment since this causes an exception. > If you need a role assignment that applies to all apps, delete the `APP_ADMIN` role assignment and recreate a new one.
+        Unassigns an app instance target from an `APP_ADMIN` role assignment to an admin user.  > **Note:** You can't
+        remove the last app instance target from a role assignment since this causes an exception. > If you need a role
+        assignment that applies to all apps, delete the `APP_ADMIN` role assignment and recreate a new one.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -1362,16 +1398,17 @@ class RoleBTargetAdminApi(ApiClient):
             '429': "Error",
         }
 
-        method, url, header_params, body, post_params = self._unassign_app_instance_target_from_admin_role_for_user_serialize(
-            user_id=user_id,
-            role_assignment_id=role_assignment_id,
-            app_name=app_name,
-            app_id=app_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
+        method, url, header_params, body, post_params = (
+            self._unassign_app_instance_target_from_admin_role_for_user_serialize(
+                user_id=user_id,
+                role_assignment_id=role_assignment_id,
+                app_name=app_name,
+                app_id=app_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index
+            ))
 
         form = {}
         keep_empty_params = False
@@ -1409,15 +1446,15 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_app_instance_target_from_admin_role_for_user_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        app_name,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            app_name,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1476,26 +1513,28 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def unassign_app_target_from_app_admin_role_for_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            app_name: Annotated[StrictStr, Field(description="Name of the app definition (the OIN catalog app key name)")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign an admin role app target
 
-        Unassigns an OIN app target from an `APP_ADMIN` role assignment to an admin user.  > **Note:** You can't remove the last OIN app target from a role assignment since this causes an exception. > If you need a role assignment that applies to all apps, delete the `APP_ADMIN` role assignment to the user and recreate a new one. 
+        Unassigns an OIN app target from an `APP_ADMIN` role assignment to an admin user.  > **Note:** You can't remove
+        the last OIN app target from a role assignment since this causes an exception. > If you need a role assignment
+        that applies to all apps, delete the `APP_ADMIN` role assignment to the user and recreate a new one.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -1578,14 +1617,14 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_app_target_from_app_admin_role_for_user_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        app_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            app_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1642,26 +1681,29 @@ class RoleBTargetAdminApi(ApiClient):
 
     @validate_call
     async def unassign_group_target_from_user_admin_role(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign an admin role group target
 
-        Unassigns a group target from a `USER_ADMIN`, `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to an admin user.  > **Note:** You can't remove the last group target from a role assignment since this causes an exception. > If you need a role assignment that applies to all groups, delete the role assignment to the user and recreate a new one. 
+        Unassigns a group target from a `USER_ADMIN`, `HELP_DESK_ADMIN`, or `GROUP_MEMBERSHIP_ADMIN` role assignment to an
+        admin user.  > **Note:** You can't remove the last group target from a role assignment since this causes an
+        exception. > If you need a role assignment that applies to all groups, delete the role assignment to the user and
+        recreate a new one.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -1744,14 +1786,14 @@ class RoleBTargetAdminApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_group_target_from_user_admin_role_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        group_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            group_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

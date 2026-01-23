@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.device_posture_checks_mapping_type import DevicePostureChecksMappingType
 from okta.models.device_posture_checks_platform import DevicePostureChecksPlatform
 from okta.models.device_posture_checks_remediation_settings import DevicePostureChecksRemediationSettings
 from okta.models.device_posture_checks_type import DevicePostureChecksType
 from okta.models.links_self import LinksSelf
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class DevicePostureCheck(BaseModel):
@@ -42,21 +45,25 @@ class DevicePostureCheck(BaseModel):
     created_by: Optional[StrictStr] = Field(
         default=None,
         description="User who created the device posture check",
-        alias="createdBy")
+        alias="createdBy"
+    )
     created_date: Optional[StrictStr] = Field(
         default=None,
         description="Time the device posture check was created",
-        alias="createdDate")
+        alias="createdDate"
+    )
     description: Optional[StrictStr] = Field(default=None, description="Description of the device posture check")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the device posture check")
     last_update: Optional[StrictStr] = Field(
         default=None,
         description="Time the device posture check was updated",
-        alias="lastUpdate")
+        alias="lastUpdate"
+    )
     last_updated_by: Optional[StrictStr] = Field(
         default=None,
         description="User who updated the device posture check",
-        alias="lastUpdatedBy")
+        alias="lastUpdatedBy"
+    )
     mapping_type: Optional[DevicePostureChecksMappingType] = Field(default=None, alias="mappingType")
     name: Optional[StrictStr] = Field(default=None, description="Display name of the device posture check")
     platform: Optional[DevicePostureChecksPlatform] = None
@@ -66,22 +73,25 @@ class DevicePostureCheck(BaseModel):
     variable_name: Optional[StrictStr] = Field(
         default=None,
         description="Unique name of the device posture check",
-        alias="variableName")
+        alias="variableName"
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["createdBy",
-                                         "createdDate",
-                                         "description",
-                                         "id",
-                                         "lastUpdate",
-                                         "lastUpdatedBy",
-                                         "mappingType",
-                                         "name",
-                                         "platform",
-                                         "query",
-                                         "remediationSettings",
-                                         "type",
-                                         "variableName",
-                                         "_links"]
+    __properties: ClassVar[List[str]] = [
+        "createdBy",
+        "createdDate",
+        "description",
+        "id",
+        "lastUpdate",
+        "lastUpdatedBy",
+        "mappingType",
+        "name",
+        "platform",
+        "query",
+        "remediationSettings",
+        "type",
+        "variableName",
+        "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -118,13 +128,15 @@ class DevicePostureCheck(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created_by",
-            "created_date",
-            "id",
-            "last_update",
-            "last_updated_by",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created_by",
+                "created_date",
+                "id",
+                "last_update",
+                "last_updated_by",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -156,20 +168,24 @@ class DevicePostureCheck(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "createdBy": obj.get("createdBy"),
-            "createdDate": obj.get("createdDate"),
-            "description": obj.get("description"),
-            "id": obj.get("id"),
-            "lastUpdate": obj.get("lastUpdate"),
-            "lastUpdatedBy": obj.get("lastUpdatedBy"),
-            "mappingType": obj.get("mappingType"),
-            "name": obj.get("name"),
-            "platform": obj.get("platform"),
-            "query": obj.get("query"),
-            "remediationSettings": DevicePostureChecksRemediationSettings.from_dict(obj["remediationSettings"]) if obj.get("remediationSettings") is not None else None,
-            "type": obj.get("type"),
-            "variableName": obj.get("variableName"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "createdBy": obj.get("createdBy"),
+                "createdDate": obj.get("createdDate"),
+                "description": obj.get("description"),
+                "id": obj.get("id"),
+                "lastUpdate": obj.get("lastUpdate"),
+                "lastUpdatedBy": obj.get("lastUpdatedBy"),
+                "mappingType": obj.get("mappingType"),
+                "name": obj.get("name"),
+                "platform": obj.get("platform"),
+                "query": obj.get("query"),
+                "remediationSettings": DevicePostureChecksRemediationSettings.from_dict(
+                    obj["remediationSettings"]
+                ) if obj.get("remediationSettings") is not None else None,
+                "type": obj.get("type"),
+                "variableName": obj.get("variableName"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

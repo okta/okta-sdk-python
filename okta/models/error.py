@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.error_cause import ErrorCause
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.error_cause import ErrorCause
 
 
 class Error(BaseModel):
@@ -36,16 +39,23 @@ class Error(BaseModel):
     Error
     """  # noqa: E501
     error_causes: Optional[List[ErrorCause]] = Field(default=None, alias="errorCauses")
-    error_code: Optional[StrictStr] = Field(default=None, description="An Okta code for this type of error", alias="errorCode")
+    error_code: Optional[StrictStr] = Field(
+        default=None, description="An Okta code for this type of error", alias="errorCode"
+    )
     error_id: Optional[StrictStr] = Field(
         default=None,
         description="A unique identifier for this error. This can be used by Okta Support to help with troubleshooting.",
-        alias="errorId")
-    error_link: Optional[StrictStr] = Field(default=None, description="An Okta code for this type of error", alias="errorLink")
+        alias="errorId"
+    )
+    error_link: Optional[StrictStr] = Field(
+        default=None, description="An Okta code for this type of error", alias="errorLink"
+    )
     error_summary: Optional[StrictStr] = Field(
         default=None,
-        description="A short description of what caused this error. Sometimes this contains dynamically-generated information about your specific error.",
-        alias="errorSummary")
+        description="A short description of what caused this error. Sometimes this contains dynamically-generated "
+                    "information about your specific error.",
+        alias="errorSummary"
+    )
     __properties: ClassVar[List[str]] = ["errorCauses", "errorCode", "errorId", "errorLink", "errorSummary"]
 
     model_config = ConfigDict(
@@ -78,8 +88,10 @@ class Error(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -104,11 +116,15 @@ class Error(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "errorCauses": [ErrorCause.from_dict(_item) for _item in obj["errorCauses"]] if obj.get("errorCauses") is not None else None,
-            "errorCode": obj.get("errorCode"),
-            "errorId": obj.get("errorId"),
-            "errorLink": obj.get("errorLink"),
-            "errorSummary": obj.get("errorSummary")
-        })
+        _obj = cls.model_validate(
+            {
+                "errorCauses": [ErrorCause.from_dict(_item) for _item in obj["errorCauses"]] if obj.get(
+                    "errorCauses"
+                ) is not None else None,
+                "errorCode": obj.get("errorCode"),
+                "errorId": obj.get("errorId"),
+                "errorLink": obj.get("errorLink"),
+                "errorSummary": obj.get("errorSummary")
+            }
+        )
         return _obj

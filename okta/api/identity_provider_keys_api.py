@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.id_p_certificate_credential import IdPCertificateCredential
-from okta.models.id_p_key_credential import IdPKeyCredential
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.id_p_certificate_credential import IdPCertificateCredential
+from okta.models.id_p_key_credential import IdPKeyCredential
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,24 +47,26 @@ class IdentityProviderKeysApi(ApiClient):
 
     @validate_call
     async def create_identity_provider_key(
-        self,
-        json_web_key: IdPCertificateCredential,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            json_web_key: IdPCertificateCredential,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPKeyCredential:
         """Create an IdP key credential
 
-        Creates a new X.509 certificate credential in the identity provider (IdP) key store > **Note:** RSA-based certificates are supported for all IdP types. Okta currently supports EC-based certificates only for the `X509` IdP type. For EC-based certificates we support only P-256, P-384, and P-521 curves.
+        Creates a new X.509 certificate credential in the identity provider (IdP) key store > **Note:** RSA-based
+        certificates are supported for all IdP types. Okta currently supports EC-based certificates only for the `X509`
+        IdP type. For EC-based certificates we support only P-256, P-384, and P-521 curves.
 
         :param json_web_key: (required)
         :type json_web_key: IdPCertificateCredential
@@ -149,12 +152,12 @@ class IdentityProviderKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_identity_provider_key_serialize(
-        self,
-        json_web_key,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            json_web_key,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -221,24 +224,25 @@ class IdentityProviderKeysApi(ApiClient):
 
     @validate_call
     async def delete_identity_provider_key(
-        self,
-        kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an IdP key credential
 
-        Deletes a specific identity provider (IdP) key credential by `kid` if it isn't currently being used by an active or inactive IdP
+        Deletes a specific identity provider (IdP) key credential by `kid` if it isn't currently being used by an active
+        or inactive IdP
 
         :param kid: Unique `id` of the IdP key credential (required)
         :type kid: str
@@ -315,12 +319,12 @@ class IdentityProviderKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_identity_provider_key_serialize(
-        self,
-        kid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            kid,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -373,20 +377,20 @@ class IdentityProviderKeysApi(ApiClient):
 
     @validate_call
     async def get_identity_provider_key(
-        self,
-        kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPKeyCredential:
         """Retrieve an IdP key credential
 
@@ -476,12 +480,12 @@ class IdentityProviderKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_identity_provider_key_serialize(
-        self,
-        kid,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            kid,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -534,29 +538,36 @@ class IdentityProviderKeysApi(ApiClient):
 
     @validate_call
     async def list_identity_provider_keys(
-        self,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdPKeyCredential]:
         """List all IdP key credentials
 
         Lists all identity provider (IdP) key credentials
 
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -642,13 +653,13 @@ class IdentityProviderKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_identity_provider_keys_serialize(
-        self,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -666,11 +677,9 @@ class IdentityProviderKeysApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -707,21 +716,21 @@ class IdentityProviderKeysApi(ApiClient):
 
     @validate_call
     async def replace_identity_provider_key(
-        self,
-        kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
-        id_p_key_credential: Annotated[IdPKeyCredential, Field(description="Updated IdP key credential")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            kid: Annotated[StrictStr, Field(description="Unique `id` of the IdP key credential")],
+            id_p_key_credential: Annotated[IdPKeyCredential, Field(description="Updated IdP key credential")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdPKeyCredential:
         """Replace an IdP key credential
 
@@ -815,13 +824,13 @@ class IdentityProviderKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_identity_provider_key_serialize(
-        self,
-        kid,
-        id_p_key_credential,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            kid,
+            id_p_key_credential,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

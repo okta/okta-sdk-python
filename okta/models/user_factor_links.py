@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.href_object_self_link import HrefObjectSelfLink
 from okta.models.links_activate_activate import LinksActivateActivate
 from okta.models.links_cancel_cancel import LinksCancelCancel
@@ -39,8 +44,6 @@ from okta.models.links_resend_resend import LinksResendResend
 from okta.models.links_send_send import LinksSendSend
 from okta.models.links_user_factors_user import LinksUserFactorsUser
 from okta.models.links_verify_verify import LinksVerifyVerify
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class UserFactorLinks(BaseModel):
@@ -60,8 +63,10 @@ class UserFactorLinks(BaseModel):
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     user: Optional[LinksUserFactorsUser] = None
     verify: Optional[LinksVerifyVerify] = None
-    __properties: ClassVar[List[str]] = ["activate", "cancel", "deactivate", "enroll",
-                                         "factor", "poll", "qrcode", "question", "resend", "send", "self", "user", "verify"]
+    __properties: ClassVar[List[str]] = [
+        "activate", "cancel", "deactivate", "enroll",
+        "factor", "poll", "qrcode", "question", "resend", "send", "self", "user", "verify"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,8 +98,10 @@ class UserFactorLinks(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -203,19 +210,23 @@ class UserFactorLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "activate": LinksActivateActivate.from_dict(obj["activate"]) if obj.get("activate") is not None else None,
-            "cancel": LinksCancelCancel.from_dict(obj["cancel"]) if obj.get("cancel") is not None else None,
-            "deactivate": LinksDeactivateDeactivate.from_dict(obj["deactivate"]) if obj.get("deactivate") is not None else None,
-            "enroll": LinksEnrollEnroll.from_dict(obj["enroll"]) if obj.get("enroll") is not None else None,
-            "factor": LinksFactorFactor.from_dict(obj["factor"]) if obj.get("factor") is not None else None,
-            "poll": LinksPollPoll.from_dict(obj["poll"]) if obj.get("poll") is not None else None,
-            "qrcode": LinksQrcodeQrcode.from_dict(obj["qrcode"]) if obj.get("qrcode") is not None else None,
-            "question": LinksQuestionsQuestion.from_dict(obj["question"]) if obj.get("question") is not None else None,
-            "resend": LinksResendResend.from_dict(obj["resend"]) if obj.get("resend") is not None else None,
-            "send": LinksSendSend.from_dict(obj["send"]) if obj.get("send") is not None else None,
-            "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
-            "user": LinksUserFactorsUser.from_dict(obj["user"]) if obj.get("user") is not None else None,
-            "verify": LinksVerifyVerify.from_dict(obj["verify"]) if obj.get("verify") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "activate": LinksActivateActivate.from_dict(obj["activate"]) if obj.get("activate") is not None else None,
+                "cancel": LinksCancelCancel.from_dict(obj["cancel"]) if obj.get("cancel") is not None else None,
+                "deactivate": LinksDeactivateDeactivate.from_dict(obj["deactivate"]) if obj.get(
+                    "deactivate"
+                ) is not None else None,
+                "enroll": LinksEnrollEnroll.from_dict(obj["enroll"]) if obj.get("enroll") is not None else None,
+                "factor": LinksFactorFactor.from_dict(obj["factor"]) if obj.get("factor") is not None else None,
+                "poll": LinksPollPoll.from_dict(obj["poll"]) if obj.get("poll") is not None else None,
+                "qrcode": LinksQrcodeQrcode.from_dict(obj["qrcode"]) if obj.get("qrcode") is not None else None,
+                "question": LinksQuestionsQuestion.from_dict(obj["question"]) if obj.get("question") is not None else None,
+                "resend": LinksResendResend.from_dict(obj["resend"]) if obj.get("resend") is not None else None,
+                "send": LinksSendSend.from_dict(obj["send"]) if obj.get("send") is not None else None,
+                "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
+                "user": LinksUserFactorsUser.from_dict(obj["user"]) if obj.get("user") is not None else None,
+                "verify": LinksVerifyVerify.from_dict(obj["verify"]) if obj.get("verify") is not None else None
+            }
+        )
         return _obj

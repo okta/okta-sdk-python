@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.list_profile_mappings import ListProfileMappings
 from okta.models.profile_mapping import ProfileMapping
 from okta.models.profile_mapping_request import ProfileMappingRequest
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -47,20 +48,20 @@ class ProfileMappingApi(ApiClient):
 
     @validate_call
     async def get_profile_mapping(
-        self,
-        mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ProfileMapping:
         """Retrieve a profile mapping
 
@@ -150,12 +151,12 @@ class ProfileMappingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_profile_mapping_serialize(
-        self,
-        mapping_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            mapping_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -208,39 +209,54 @@ class ProfileMappingApi(ApiClient):
 
     @validate_call
     async def list_profile_mappings(
-        self,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Mapping `id` that specifies the pagination cursor for the next page of mappings")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
-            description="Specifies the number of results per page")] = None,
-        source_id: Annotated[Optional[StrictStr], Field(
-            description="The user type or app instance ID that acts as the source of expressions in a mapping. If this parameter is included, all returned mappings have this as their `source.id`.")] = None,
-        target_id: Annotated[Optional[StrictStr], Field(
-            description="The user type or app instance ID that acts as the target of expressions in a mapping. If this parameter is included, all returned mappings have this as their `target.id`.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Mapping `id` that specifies the pagination cursor for the next page of mappings"
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
+                description="Specifies the number of results per page"
+            )] = None,
+            source_id: Annotated[Optional[StrictStr], Field(
+                description="The user type or app instance ID that acts as the source of expressions in a mapping. If this "
+                            "parameter is included, all returned mappings have this as their `source.id`."
+            )] = None,
+            target_id: Annotated[Optional[StrictStr], Field(
+                description="The user type or app instance ID that acts as the target of expressions in a mapping. If this "
+                            "parameter is included, all returned mappings have this as their `target.id`."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ListProfileMappings]:
         """List all profile mappings
 
-        Lists all profile mappings in your org with [pagination](https://developer.okta.com/docs/api/#pagination). You can return a subset of profile mappings that match a supported `sourceId` and/or `targetId`.  The results are [paginated](/#pagination) according to the `limit` parameter. If there are multiple pages of results, the Link header contains a `next` link that you should treat as an opaque value (follow it, don't parse it). See [Link Header](https://developer.okta.com/docs/api/#link-header).  The response is a collection of profile mappings that include a subset of the profile mapping object's parameters. The profile mapping object describes the properties mapping between an Okta user and an app user profile using [JSON Schema Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).
+        Lists all profile mappings in your org with [pagination](https://developer.okta.com/docs/api/#pagination). You can
+        return a subset of profile mappings that match a supported `sourceId` and/or `targetId`.  The results are [
+        paginated](/#pagination) according to the `limit` parameter. If there are multiple pages of results,
+        the Link header contains a `next` link that you should treat as an opaque value (follow it, don't parse it). See [
+        Link Header](https://developer.okta.com/docs/api/#link-header).  The response is a collection of profile mappings
+        that include a subset of the profile mapping object's parameters. The profile mapping object describes the
+        properties mapping between an Okta user and an app user profile using [JSON Schema Draft 4](
+        https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).
 
         :param after: Mapping `id` that specifies the pagination cursor for the next page of mappings
         :type after: str
         :param limit: Specifies the number of results per page
         :type limit: int
-        :param source_id: The user type or app instance ID that acts as the source of expressions in a mapping. If this parameter is included, all returned mappings have this as their `source.id`.
+        :param source_id: The user type or app instance ID that acts as the source of expressions in a mapping. If this
+        parameter is included, all returned mappings have this as their `source.id`.
         :type source_id: str
-        :param target_id: The user type or app instance ID that acts as the target of expressions in a mapping. If this parameter is included, all returned mappings have this as their `target.id`.
+        :param target_id: The user type or app instance ID that acts as the target of expressions in a mapping. If this
+        parameter is included, all returned mappings have this as their `target.id`.
         :type target_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -326,15 +342,15 @@ class ProfileMappingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_profile_mappings_serialize(
-        self,
-        after,
-        limit,
-        source_id,
-        target_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            after,
+            limit,
+            source_id,
+            target_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -352,19 +368,15 @@ class ProfileMappingApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if source_id is not None:
-
             _query_params.append(('sourceId', source_id))
 
         if target_id is not None:
-
             _query_params.append(('targetId', target_id))
 
         # process the header parameters
@@ -401,21 +413,21 @@ class ProfileMappingApi(ApiClient):
 
     @validate_call
     async def update_profile_mapping(
-        self,
-        mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
-        profile_mapping: ProfileMappingRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
+            profile_mapping: ProfileMappingRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ProfileMapping:
         """Update a profile mapping
 
@@ -509,13 +521,13 @@ class ProfileMappingApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_profile_mapping_serialize(
-        self,
-        mapping_id,
-        profile_mapping,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            mapping_id,
+            profile_mapping,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

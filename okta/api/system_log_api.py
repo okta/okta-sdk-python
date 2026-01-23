@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
-from okta.models.log_event import LogEvent
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.log_event import LogEvent
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,45 +46,67 @@ class SystemLogApi(ApiClient):
 
     @validate_call
     async def list_log_events(
-        self,
-        since: Annotated[Optional[StrictStr], Field(
-            description="Filters the lower time bound of the log events `published` property for bounded queries or persistence time for polling queries")] = None,
-        until: Annotated[Optional[StrictStr], Field(
-            description="Filters the upper time bound of the log events `published` property for bounded queries or persistence time for polling queries.")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Retrieves the next page of results. Okta returns a link in the HTTP Header (`rel=next`) that includes the after query parameter")] = None,
-        filter: Annotated[Optional[StrictStr], Field(
-            description="Filter expression that filters the results. All operators except [ ] are supported. See [Filter](https://developer.okta.com/docs/api/#filter) and [Operators](https://developer.okta.com/docs/api/#operators).")] = None,
-        q: Annotated[Optional[StrictStr], Field(
-            description="Filters log events results by one or more case insensitive keywords.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(
-            description="Sets the number of results that are returned in the response")] = None,
-        sort_order: Annotated[Optional[StrictStr], Field(
-            description="The order of the returned events that are sorted by the `published` property")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            since: Annotated[Optional[StrictStr], Field(
+                description="Filters the lower time bound of the log events `published` property for bounded queries or "
+                            "persistence time for polling queries"
+            )] = None,
+            until: Annotated[Optional[StrictStr], Field(
+                description="Filters the upper time bound of the log events `published` property for bounded queries or "
+                            "persistence time for polling queries."
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Retrieves the next page of results. Okta returns a link in the HTTP Header (`rel=next`) that "
+                            "includes the after query parameter"
+            )] = None,
+            filter: Annotated[Optional[StrictStr], Field(
+                description="Filter expression that filters the results. All operators except [ ] are supported. See ["
+                            "Filter](https://developer.okta.com/docs/api/#filter) and [Operators]("
+                            "https://developer.okta.com/docs/api/#operators)."
+            )] = None,
+            q: Annotated[Optional[StrictStr], Field(
+                description="Filters log events results by one or more case insensitive keywords."
+            )] = None,
+            limit: Annotated[Optional[StrictInt], Field(
+                description="Sets the number of results that are returned in the response"
+            )] = None,
+            sort_order: Annotated[Optional[StrictStr], Field(
+                description="The order of the returned events that are sorted by the `published` property"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[LogEvent]:
         """List all System Log events
 
-        Lists all System Log events  See [System Log query](https://developer.okta.com/docs/reference/system-log-query/) for further details and examples, and [System Log filters and search](https://help.okta.com/okta_help.htm?type=oie&id=csh-syslog-filters) for common use cases.  By default, 100 System Log events are returned. If there are more events, see the [header link](https://developer.okta.com/docs/api/#link-header) for the `next` link, or increase the number of returned objects using the `limit` parameter.  >**Note:** The value of the `clientSecret` property in the System Log is secured by a hashing function, and isn't the value used during authentication.
+        Lists all System Log events  See [System Log query](https://developer.okta.com/docs/reference/system-log-query/)
+        for further details and examples, and [System Log filters and search](
+        https://help.okta.com/okta_help.htm?type=oie&id=csh-syslog-filters) for common use cases.  By default,
+        100 System Log events are returned. If there are more events, see the [header link](
+        https://developer.okta.com/docs/api/#link-header) for the `next` link, or increase the number of returned objects
+        using the `limit` parameter.  >**Note:** The value of the `clientSecret` property in the System Log is secured by
+        a hashing function, and isn't the value used during authentication.
 
-        :param since: Filters the lower time bound of the log events `published` property for bounded queries or persistence time for polling queries
+        :param since: Filters the lower time bound of the log events `published` property for bounded queries or
+        persistence time for polling queries
         :type since: str
-        :param until: Filters the upper time bound of the log events `published` property for bounded queries or persistence time for polling queries.
+        :param until: Filters the upper time bound of the log events `published` property for bounded queries or
+        persistence time for polling queries.
         :type until: str
-        :param after: Retrieves the next page of results. Okta returns a link in the HTTP Header (`rel=next`) that includes the after query parameter
+        :param after: Retrieves the next page of results. Okta returns a link in the HTTP Header (`rel=next`) that
+        includes the after query parameter
         :type after: str
-        :param filter: Filter expression that filters the results. All operators except [ ] are supported. See [Filter](https://developer.okta.com/docs/api/#filter) and [Operators](https://developer.okta.com/docs/api/#operators).
+        :param filter: Filter expression that filters the results. All operators except [ ] are supported. See [Filter](
+        https://developer.okta.com/docs/api/#filter) and [Operators](https://developer.okta.com/docs/api/#operators).
         :type filter: str
         :param q: Filters log events results by one or more case insensitive keywords.
         :type q: str
@@ -179,18 +202,18 @@ class SystemLogApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_log_events_serialize(
-        self,
-        since,
-        until,
-        after,
-        filter,
-        q,
-        limit,
-        sort_order,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            since,
+            until,
+            after,
+            filter,
+            q,
+            limit,
+            sort_order,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -208,31 +231,24 @@ class SystemLogApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if since is not None:
-
             _query_params.append(('since', since))
 
         if until is not None:
-
             _query_params.append(('until', until))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         if q is not None:
-
             _query_params.append(('q', q))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if sort_order is not None:
-
             _query_params.append(('sortOrder', sort_order))
 
         # process the header parameters

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import StrictStr
-from typing import List, Optional
+from pydantic import validate_call, Field, StrictFloat, StrictInt
+from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
+from okta.models.success import Success
 from okta.models.user_type import UserType
 from okta.models.user_type_post_request import UserTypePostRequest
 from okta.models.user_type_put_request import UserTypePutRequest
-
-from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -46,24 +48,26 @@ class UserTypeApi(ApiClient):
 
     @validate_call
     async def create_user_type(
-        self,
-        user_type: UserType,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_type: UserType,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserType:
         """Create a user type
 
-        Creates a new user type. Okta automatically creates a `default` user type for your org. You may add up to nine additional user types. > **Note**: New user types are based on the current default schema template. Modifications to this schema do not automatically propagate to previously created user types.
+        Creates a new user type. Okta automatically creates a `default` user type for your org. You may add up to nine
+        additional user types. > **Note**: New user types are based on the current default schema template. Modifications
+        to this schema do not automatically propagate to previously created user types.
 
         :param user_type: (required)
         :type user_type: UserType
@@ -149,12 +153,12 @@ class UserTypeApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_user_type_serialize(
-        self,
-        user_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -221,24 +225,25 @@ class UserTypeApi(ApiClient):
 
     @validate_call
     async def delete_user_type(
-        self,
-        type_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            type_id: StrictStr,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a user type
 
-        Deletes a user type permanently. > **Note**: You can't delete the default user type or a user type that is currently assigned to users.
+        Deletes a user type permanently. > **Note**: You can't delete the default user type or a user type that is
+        currently assigned to users.
 
         :param type_id: (required)
         :type type_id: str
@@ -315,12 +320,12 @@ class UserTypeApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_user_type_serialize(
-        self,
-        type_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            type_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -373,20 +378,20 @@ class UserTypeApi(ApiClient):
 
     @validate_call
     async def get_user_type(
-        self,
-        type_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            type_id: StrictStr,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserType:
         """Retrieve a user type
 
@@ -476,12 +481,12 @@ class UserTypeApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_user_type_serialize(
-        self,
-        type_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            type_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -534,19 +539,19 @@ class UserTypeApi(ApiClient):
 
     @validate_call
     async def list_user_types(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserType]:
         """List all user types
 
@@ -632,11 +637,11 @@ class UserTypeApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_user_types_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -687,25 +692,27 @@ class UserTypeApi(ApiClient):
 
     @validate_call
     async def replace_user_type(
-        self,
-        type_id: StrictStr,
-        user_type: Optional[UserTypePutRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            type_id: StrictStr,
+            user_type: Optional[UserTypePutRequest] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserType:
         """Replace a user type
 
-        Replaces an existing user type. This operation is a full update. > **Note**: The `name` of an existing user type can't be changed, but must be part of the request body. You can only replace the `displayName` and `description` elements.
+        Replaces an existing user type. This operation is a full update. > **Note**: The `name` of an existing user type
+        can't be changed, but must be part of the request body. You can only replace the `displayName` and `description`
+        elements.
 
         :param type_id: (required)
         :type type_id: str
@@ -795,13 +802,13 @@ class UserTypeApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_user_type_serialize(
-        self,
-        type_id,
-        user_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            type_id,
+            user_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -870,25 +877,26 @@ class UserTypeApi(ApiClient):
 
     @validate_call
     async def update_user_type(
-        self,
-        type_id: StrictStr,
-        user_type: UserTypePostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            type_id: StrictStr,
+            user_type: UserTypePostRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserType:
         """Update a user type
 
-        Updates an existing user type. This operation is a partial update. > **Note**: You can only update the `displayName` and `description` elements. The `name` of an existing user type can't be changed.
+        Updates an existing user type. This operation is a partial update. > **Note**: You can only update the
+        `displayName` and `description` elements. The `name` of an existing user type can't be changed.
 
         :param type_id: (required)
         :type type_id: str
@@ -978,13 +986,13 @@ class UserTypeApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_user_type_serialize(
-        self,
-        type_id,
-        user_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            type_id,
+            user_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

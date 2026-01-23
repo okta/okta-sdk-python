@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.sms_template import SmsTemplate
-from okta.models.sms_template_type import SmsTemplateType
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.sms_template import SmsTemplate
+from okta.models.sms_template_type import SmsTemplateType
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,20 +47,20 @@ class TemplateApi(ApiClient):
 
     @validate_call
     async def create_sms_template(
-        self,
-        sms_template: SmsTemplate,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            sms_template: SmsTemplate,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SmsTemplate:
         """Create an SMS template
 
@@ -149,12 +150,12 @@ class TemplateApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_sms_template_serialize(
-        self,
-        sms_template,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            sms_template,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -221,20 +222,20 @@ class TemplateApi(ApiClient):
 
     @validate_call
     async def delete_sms_template(
-        self,
-        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an SMS template
 
@@ -315,12 +316,12 @@ class TemplateApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_sms_template_serialize(
-        self,
-        template_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            template_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -373,20 +374,20 @@ class TemplateApi(ApiClient):
 
     @validate_call
     async def get_sms_template(
-        self,
-        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SmsTemplate:
         """Retrieve an SMS template
 
@@ -476,12 +477,12 @@ class TemplateApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_sms_template_serialize(
-        self,
-        template_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            template_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -534,20 +535,20 @@ class TemplateApi(ApiClient):
 
     @validate_call
     async def list_sms_templates(
-        self,
-        template_type: Optional[SmsTemplateType] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            template_type: Optional[SmsTemplateType] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[SmsTemplate]:
         """List all SMS templates
 
@@ -636,12 +637,12 @@ class TemplateApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_sms_templates_serialize(
-        self,
-        template_type,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            template_type,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -659,7 +660,6 @@ class TemplateApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if template_type is not None:
-
             _query_params.append(('templateType', template_type.value))
 
         # process the header parameters
@@ -696,25 +696,25 @@ class TemplateApi(ApiClient):
 
     @validate_call
     async def replace_sms_template(
-        self,
-        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
-        sms_template: SmsTemplate,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
+            sms_template: SmsTemplate,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SmsTemplate:
         """Replace an SMS template
 
-        Replaces the SMS Template > **Notes:** You can't update the default SMS Template. 
+        Replaces the SMS Template > **Notes:** You can't update the default SMS Template.
 
         :param template_id: `id` of the Template (required)
         :type template_id: str
@@ -804,13 +804,13 @@ class TemplateApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_sms_template_serialize(
-        self,
-        template_id,
-        sms_template,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            template_id,
+            sms_template,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -879,25 +879,27 @@ class TemplateApi(ApiClient):
 
     @validate_call
     async def update_sms_template(
-        self,
-        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
-        sms_template: SmsTemplate,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
+            sms_template: SmsTemplate,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> SmsTemplate:
         """Update an SMS template
 
-        Updates only some of the SMS Template properties:   * All properties within the custom SMS Template that have values are updated.   * Any translation that doesn't exist is added.   * Any translation with a null or empty value is removed.   * Any translation with non-empty/null value is updated. 
+        Updates only some of the SMS Template properties:   * All properties within the custom SMS Template that have
+        values are updated.   * Any translation that doesn't exist is added.   * Any translation with a null or empty
+        value is removed.   * Any translation with non-empty/null value is updated.
 
         :param template_id: `id` of the Template (required)
         :type template_id: str
@@ -987,13 +989,13 @@ class TemplateApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_sms_template_serialize(
-        self,
-        template_id,
-        sms_template,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            template_id,
+            sms_template,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

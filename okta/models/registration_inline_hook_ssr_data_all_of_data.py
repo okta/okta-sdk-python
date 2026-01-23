@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.registration_inline_hook_ssr_data_all_of_data_context import RegistrationInlineHookSSRDataAllOfDataContext
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.registration_inline_hook_ssr_data_all_of_data_context import RegistrationInlineHookSSRDataAllOfDataContext
 
 
 class RegistrationInlineHookSSRDataAllOfData(BaseModel):
@@ -38,11 +41,16 @@ class RegistrationInlineHookSSRDataAllOfData(BaseModel):
     context: Optional[RegistrationInlineHookSSRDataAllOfDataContext] = None
     action: Optional[StrictStr] = Field(
         default=None,
-        description="The default action the system will take. Will be `ALLOW`. `DENY` will never be sent to your external service.")
+        description="The default action the system will take. Will be `ALLOW`. `DENY` will never be sent to your external "
+                    "service."
+    )
     user_profile: Optional[Dict[str,
-                                Any]] = Field(default=None,
-                                              description="The name-value pairs for each registration-related attribute supplied by the user in the Profile Enrollment form.",
-                                              alias="userProfile")
+    Any]] = Field(
+        default=None,
+        description="The name-value pairs for each registration-related attribute supplied by the user in the Profile "
+                    "Enrollment form.",
+        alias="userProfile"
+    )
     __properties: ClassVar[List[str]] = ["context", "action", "userProfile"]
 
     model_config = ConfigDict(
@@ -75,8 +83,10 @@ class RegistrationInlineHookSSRDataAllOfData(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -101,9 +111,13 @@ class RegistrationInlineHookSSRDataAllOfData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "context": RegistrationInlineHookSSRDataAllOfDataContext.from_dict(obj["context"]) if obj.get("context") is not None else None,
-            "action": obj.get("action"),
-            "userProfile": obj.get("userProfile")
-        })
+        _obj = cls.model_validate(
+            {
+                "context": RegistrationInlineHookSSRDataAllOfDataContext.from_dict(obj["context"]) if obj.get(
+                    "context"
+                ) is not None else None,
+                "action": obj.get("action"),
+                "userProfile": obj.get("userProfile")
+            }
+        )
         return _obj

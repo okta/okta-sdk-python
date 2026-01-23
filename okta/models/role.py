@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self import LinksSelf
 from okta.models.role_assignment_type import RoleAssignmentType
 from okta.models.role_type import RoleType
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class Role(BaseModel):
@@ -49,8 +52,10 @@ class Role(BaseModel):
     type: Optional[RoleType] = None
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["assignmentType", "created", "description",
-                                         "id", "label", "lastUpdated", "status", "type", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "assignmentType", "created", "description",
+        "id", "label", "lastUpdated", "status", "type", "_embedded", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,13 +92,15 @@ class Role(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "label",
-            "last_updated",
-            "embedded",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "label",
+                "last_updated",
+                "embedded",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -118,16 +125,18 @@ class Role(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "assignmentType": obj.get("assignmentType"),
-            "created": obj.get("created"),
-            "description": obj.get("description"),
-            "id": obj.get("id"),
-            "label": obj.get("label"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "status": obj.get("status"),
-            "type": obj.get("type"),
-            "_embedded": obj.get("_embedded"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "assignmentType": obj.get("assignmentType"),
+                "created": obj.get("created"),
+                "description": obj.get("description"),
+                "id": obj.get("id"),
+                "label": obj.get("label"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "status": obj.get("status"),
+                "type": obj.get("type"),
+                "_embedded": obj.get("_embedded"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

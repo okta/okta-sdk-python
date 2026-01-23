@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.aaguid_authenticator_characteristics import AAGUIDAuthenticatorCharacteristics
 from okta.models.attestation_root_certificates_request_inner import AttestationRootCertificatesRequestInner
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class CustomAAGUIDCreateRequestObject(BaseModel):
@@ -38,11 +41,15 @@ class CustomAAGUIDCreateRequestObject(BaseModel):
     """  # noqa: E501
     aaguid: Optional[StrictStr] = Field(
         default=None,
-        description="An Authenticator Attestation Global Unique Identifier (AAGUID) is a 128-bit identifier indicating the model.")
+        description="An Authenticator Attestation Global Unique Identifier (AAGUID) is a 128-bit identifier indicating the "
+                    "model."
+    )
     attestation_root_certificates: Optional[List[AttestationRootCertificatesRequestInner]] = Field(
-        default=None, description="Contains the certificate and information about it", alias="attestationRootCertificates")
+        default=None, description="Contains the certificate and information about it", alias="attestationRootCertificates"
+    )
     authenticator_characteristics: Optional[AAGUIDAuthenticatorCharacteristics] = Field(
-        default=None, alias="authenticatorCharacteristics")
+        default=None, alias="authenticatorCharacteristics"
+    )
     __properties: ClassVar[List[str]] = ["aaguid", "attestationRootCertificates", "authenticatorCharacteristics"]
 
     model_config = ConfigDict(
@@ -75,15 +82,18 @@ class CustomAAGUIDCreateRequestObject(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in attestation_root_certificates (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in attestation_root_certificates (
+        # list)
         _items = []
         if self.attestation_root_certificates:
             for _item in self.attestation_root_certificates:
@@ -108,9 +118,16 @@ class CustomAAGUIDCreateRequestObject(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "aaguid": obj.get("aaguid"),
-            "attestationRootCertificates": [AttestationRootCertificatesRequestInner.from_dict(_item) for _item in obj["attestationRootCertificates"]] if obj.get("attestationRootCertificates") is not None else None,
-            "authenticatorCharacteristics": AAGUIDAuthenticatorCharacteristics.from_dict(obj["authenticatorCharacteristics"]) if obj.get("authenticatorCharacteristics") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "aaguid": obj.get("aaguid"),
+                "attestationRootCertificates": [AttestationRootCertificatesRequestInner.from_dict(_item) for _item in
+                                                obj["attestationRootCertificates"]] if obj.get(
+                    "attestationRootCertificates"
+                ) is not None else None,
+                "authenticatorCharacteristics": AAGUIDAuthenticatorCharacteristics.from_dict(
+                    obj["authenticatorCharacteristics"]
+                ) if obj.get("authenticatorCharacteristics") is not None else None
+            }
+        )
         return _obj

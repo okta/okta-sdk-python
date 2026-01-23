@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.log_disk_encryption_type import LogDiskEncryptionType
 from okta.models.log_screen_lock_type import LogScreenLockType
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class LogDevice(BaseModel):
@@ -37,33 +40,41 @@ class LogDevice(BaseModel):
     The entity that describes a device enrolled with passwordless authentication using Okta Verify.
     """  # noqa: E501
     device_integrator: Optional[Dict[str, Any]] = Field(
-        default=None, description="The integration platform or software used with the device")
+        default=None, description="The integration platform or software used with the device"
+    )
     disk_encryption_type: Optional[LogDiskEncryptionType] = None
     id: Optional[StrictStr] = Field(default=None, description="ID of the device")
     jailbreak: Optional[StrictBool] = Field(default=None, description="If the device has removed software restrictions")
     managed: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if the device is configured for device management and is registered with Okta")
+        description="Indicates if the device is configured for device management and is registered with Okta"
+    )
     name: Optional[StrictStr] = None
     os_platform: Optional[StrictStr] = None
     os_version: Optional[StrictStr] = None
     registered: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if the device is registered with an Okta org and is bound to an Okta Verify instance on the device")
+        description="Indicates if the device is registered with an Okta org and is bound to an Okta Verify instance on the "
+                    "device"
+    )
     screen_lock_type: Optional[LogScreenLockType] = None
-    secure_hardware_present: Optional[StrictBool] = Field(default=None,
-                                                          description="The availability of hardware security on the device")
-    __properties: ClassVar[List[str]] = ["device_integrator",
-                                         "disk_encryption_type",
-                                         "id",
-                                         "jailbreak",
-                                         "managed",
-                                         "name",
-                                         "os_platform",
-                                         "os_version",
-                                         "registered",
-                                         "screen_lock_type",
-                                         "secure_hardware_present"]
+    secure_hardware_present: Optional[StrictBool] = Field(
+        default=None,
+        description="The availability of hardware security on the device"
+    )
+    __properties: ClassVar[List[str]] = [
+        "device_integrator",
+        "disk_encryption_type",
+        "id",
+        "jailbreak",
+        "managed",
+        "name",
+        "os_platform",
+        "os_version",
+        "registered",
+        "screen_lock_type",
+        "secure_hardware_present"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,17 +115,19 @@ class LogDevice(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "device_integrator",
-            "id",
-            "jailbreak",
-            "managed",
-            "name",
-            "os_platform",
-            "os_version",
-            "registered",
-            "secure_hardware_present",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "device_integrator",
+                "id",
+                "jailbreak",
+                "managed",
+                "name",
+                "os_platform",
+                "os_version",
+                "registered",
+                "secure_hardware_present",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -132,17 +145,19 @@ class LogDevice(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "device_integrator": obj.get("device_integrator"),
-            "disk_encryption_type": obj.get("disk_encryption_type"),
-            "id": obj.get("id"),
-            "jailbreak": obj.get("jailbreak"),
-            "managed": obj.get("managed"),
-            "name": obj.get("name"),
-            "os_platform": obj.get("os_platform"),
-            "os_version": obj.get("os_version"),
-            "registered": obj.get("registered"),
-            "screen_lock_type": obj.get("screen_lock_type"),
-            "secure_hardware_present": obj.get("secure_hardware_present")
-        })
+        _obj = cls.model_validate(
+            {
+                "device_integrator": obj.get("device_integrator"),
+                "disk_encryption_type": obj.get("disk_encryption_type"),
+                "id": obj.get("id"),
+                "jailbreak": obj.get("jailbreak"),
+                "managed": obj.get("managed"),
+                "name": obj.get("name"),
+                "os_platform": obj.get("os_platform"),
+                "os_version": obj.get("os_version"),
+                "registered": obj.get("registered"),
+                "screen_lock_type": obj.get("screen_lock_type"),
+                "secure_hardware_present": obj.get("secure_hardware_present")
+            }
+        )
         return _obj

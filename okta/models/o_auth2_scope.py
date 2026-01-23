@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.links_self import LinksSelf
 from okta.models.o_auth2_scope_consent_type import OAuth2ScopeConsentType
 from okta.models.o_auth2_scope_metadata_publish import OAuth2ScopeMetadataPublish
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OAuth2Scope(BaseModel):
@@ -43,18 +46,23 @@ class OAuth2Scope(BaseModel):
     display_name: Optional[StrictStr] = Field(
         default=None,
         description="Name of the end user displayed in a consent dialog",
-        alias="displayName")
+        alias="displayName"
+    )
     id: Optional[StrictStr] = Field(default=None, description="Scope object ID")
     metadata_publish: Optional[OAuth2ScopeMetadataPublish] = Field(
-        default=OAuth2ScopeMetadataPublish.NO_CLIENTS, alias="metadataPublish")
+        default=OAuth2ScopeMetadataPublish.NO_CLIENTS, alias="metadataPublish"
+    )
     name: StrictStr = Field(description="Scope name")
     optional: Optional[StrictBool] = Field(
         default=False,
-        description="Indicates whether the Scope is optional. When set to `true`, the user can skip consent for the scope.")
+        description="Indicates whether the Scope is optional. When set to `true`, the user can skip consent for the scope."
+    )
     system: Optional[StrictBool] = Field(default=False, description="Indicates if Okta created the Scope")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["consent", "default", "description",
-                                         "displayName", "id", "metadataPublish", "name", "optional", "system", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "consent", "default", "description",
+        "displayName", "id", "metadataPublish", "name", "optional", "system", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,9 +95,11 @@ class OAuth2Scope(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -114,16 +124,18 @@ class OAuth2Scope(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "consent": obj.get("consent"),
-            "default": obj.get("default") if obj.get("default") is not None else False,
-            "description": obj.get("description"),
-            "displayName": obj.get("displayName"),
-            "id": obj.get("id"),
-            "metadataPublish": obj.get("metadataPublish"),
-            "name": obj.get("name"),
-            "optional": obj.get("optional") if obj.get("optional") is not None else False,
-            "system": obj.get("system") if obj.get("system") is not None else False,
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "consent": obj.get("consent"),
+                "default": obj.get("default") if obj.get("default") is not None else False,
+                "description": obj.get("description"),
+                "displayName": obj.get("displayName"),
+                "id": obj.get("id"),
+                "metadataPublish": obj.get("metadataPublish"),
+                "name": obj.get("name"),
+                "optional": obj.get("optional") if obj.get("optional") is not None else False,
+                "system": obj.get("system") if obj.get("system") is not None else False,
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.email_domain import EmailDomain
 from okta.models.email_domain_response import EmailDomainResponse
 from okta.models.email_domain_response_with_embedded import EmailDomainResponseWithEmbedded
-from okta.models.update_email_domain import UpdateEmailDomain
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.update_email_domain import UpdateEmailDomain
 from okta.rest import RESTResponse
 
 
@@ -48,22 +49,23 @@ class EmailDomainApi(ApiClient):
 
     @validate_call
     async def create_email_domain(
-        self,
-        email_domain: EmailDomain,
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            email_domain: EmailDomain,
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailDomainResponse:
         """Create an email domain
 
@@ -158,13 +160,13 @@ class EmailDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_email_domain_serialize(
-        self,
-        email_domain,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            email_domain,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -183,7 +185,6 @@ class EmailDomainApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -236,22 +237,23 @@ class EmailDomainApi(ApiClient):
 
     @validate_call
     async def delete_email_domain(
-        self,
-        email_domain_id: StrictStr,
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            email_domain_id: StrictStr,
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an email domain
 
@@ -336,13 +338,13 @@ class EmailDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_email_domain_serialize(
-        self,
-        email_domain_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            email_domain_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -363,7 +365,6 @@ class EmailDomainApi(ApiClient):
             _path_params['emailDomainId'] = email_domain_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -400,22 +401,23 @@ class EmailDomainApi(ApiClient):
 
     @validate_call
     async def get_email_domain(
-        self,
-        email_domain_id: StrictStr,
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            email_domain_id: StrictStr,
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailDomainResponseWithEmbedded:
         """Retrieve an email domain
 
@@ -508,13 +510,13 @@ class EmailDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_email_domain_serialize(
-        self,
-        email_domain_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            email_domain_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -535,7 +537,6 @@ class EmailDomainApi(ApiClient):
             _path_params['emailDomainId'] = email_domain_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -572,21 +573,22 @@ class EmailDomainApi(ApiClient):
 
     @validate_call
     async def list_email_domains(
-        self,
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[EmailDomainResponseWithEmbedded]:
         """List all email domains
 
@@ -675,12 +677,12 @@ class EmailDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_email_domains_serialize(
-        self,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -699,7 +701,6 @@ class EmailDomainApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -736,23 +737,24 @@ class EmailDomainApi(ApiClient):
 
     @validate_call
     async def replace_email_domain(
-        self,
-        email_domain_id: StrictStr,
-        update_email_domain: UpdateEmailDomain,
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            email_domain_id: StrictStr,
+            update_email_domain: UpdateEmailDomain,
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailDomainResponse:
         """Replace an email domain
 
@@ -849,14 +851,14 @@ class EmailDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_email_domain_serialize(
-        self,
-        email_domain_id,
-        update_email_domain,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            email_domain_id,
+            update_email_domain,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -877,7 +879,6 @@ class EmailDomainApi(ApiClient):
             _path_params['emailDomainId'] = email_domain_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -930,20 +931,20 @@ class EmailDomainApi(ApiClient):
 
     @validate_call
     async def verify_email_domain(
-        self,
-        email_domain_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            email_domain_id: StrictStr,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailDomainResponse:
         """Verify an email domain
 
@@ -1034,12 +1035,12 @@ class EmailDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _verify_email_domain_serialize(
-        self,
-        email_domain_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            email_domain_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

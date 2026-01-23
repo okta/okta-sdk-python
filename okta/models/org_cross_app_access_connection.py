@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 
@@ -35,25 +37,34 @@ class OrgCrossAppAccessConnection(BaseModel):
     """
     Connection object for Cross App Access connections
     """  # noqa: E501
-    created: Optional[datetime] = Field(default=None,
-                                        description="The ISO 8601 formatted date and time when the connection was created")
+    created: Optional[datetime] = Field(
+        default=None,
+        description="The ISO 8601 formatted date and time when the connection was created"
+    )
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the connection")
     last_updated: Optional[datetime] = Field(
         default=None,
         description="The ISO 8601 formatted date and time when the connection was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     requesting_app_instance_id: Optional[StrictStr] = Field(
         default=None,
         description="ID of the requesting app instance",
-        alias="requestingAppInstanceId")
+        alias="requestingAppInstanceId"
+    )
     resource_app_instance_id: Optional[StrictStr] = Field(
         default=None,
         description="ID of the resource app instance",
-        alias="resourceAppInstanceId")
-    status: Optional[StrictStr] = Field(default=None,
-                                        description="Indicates if the Cross App Access connection is active or inactive")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated",
-                                         "requestingAppInstanceId", "resourceAppInstanceId", "status"]
+        alias="resourceAppInstanceId"
+    )
+    status: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates if the Cross App Access connection is active or inactive"
+    )
+    __properties: ClassVar[List[str]] = [
+        "created", "id", "lastUpdated",
+        "requestingAppInstanceId", "resourceAppInstanceId", "status"
+    ]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -98,11 +109,13 @@ class OrgCrossAppAccessConnection(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -120,12 +133,14 @@ class OrgCrossAppAccessConnection(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "requestingAppInstanceId": obj.get("requestingAppInstanceId"),
-            "resourceAppInstanceId": obj.get("resourceAppInstanceId"),
-            "status": obj.get("status")
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "requestingAppInstanceId": obj.get("requestingAppInstanceId"),
+                "resourceAppInstanceId": obj.get("resourceAppInstanceId"),
+                "status": obj.get("status")
+            }
+        )
         return _obj

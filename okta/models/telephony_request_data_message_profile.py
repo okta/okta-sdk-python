@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,14 +39,20 @@ class TelephonyRequestDataMessageProfile(BaseModel):
     msg_template: Optional[StrictStr] = Field(
         default=None,
         description="Default or Okta org configured sms or voice message template",
-        alias="msgTemplate")
-    phone_number: Optional[StrictStr] = Field(default=None, description="The Okta's user's phone number", alias="phoneNumber")
+        alias="msgTemplate"
+    )
+    phone_number: Optional[StrictStr] = Field(
+        default=None, description="The Okta's user's phone number", alias="phoneNumber"
+    )
     otp_expires: Optional[StrictStr] = Field(default=None, description="The time when OTP expires", alias="otpExpires")
     delivery_channel: Optional[StrictStr] = Field(
         default=None,
         description="The channel for OTP delivery - SMS or voice",
-        alias="deliveryChannel")
-    otp_code: Optional[StrictStr] = Field(default=None, description="The OTP code requested by the Okta user", alias="otpCode")
+        alias="deliveryChannel"
+    )
+    otp_code: Optional[StrictStr] = Field(
+        default=None, description="The OTP code requested by the Okta user", alias="otpCode"
+    )
     locale: Optional[StrictStr] = Field(default=None, description="The locale associated with the Okta user")
     __properties: ClassVar[List[str]] = ["msgTemplate", "phoneNumber", "otpExpires", "deliveryChannel", "otpCode", "locale"]
 
@@ -78,8 +86,10 @@ class TelephonyRequestDataMessageProfile(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,12 +107,14 @@ class TelephonyRequestDataMessageProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "msgTemplate": obj.get("msgTemplate"),
-            "phoneNumber": obj.get("phoneNumber"),
-            "otpExpires": obj.get("otpExpires"),
-            "deliveryChannel": obj.get("deliveryChannel"),
-            "otpCode": obj.get("otpCode"),
-            "locale": obj.get("locale")
-        })
+        _obj = cls.model_validate(
+            {
+                "msgTemplate": obj.get("msgTemplate"),
+                "phoneNumber": obj.get("phoneNumber"),
+                "otpExpires": obj.get("otpExpires"),
+                "deliveryChannel": obj.get("deliveryChannel"),
+                "otpCode": obj.get("otpCode"),
+                "locale": obj.get("locale")
+            }
+        )
         return _obj

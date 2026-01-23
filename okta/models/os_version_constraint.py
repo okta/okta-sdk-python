@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.os_version_constraint_dynamic_version_requirement import OSVersionConstraintDynamicVersionRequirement
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.os_version_constraint_dynamic_version_requirement import OSVersionConstraintDynamicVersionRequirement
 
 
 class OSVersionConstraint(BaseModel):
@@ -36,13 +39,16 @@ class OSVersionConstraint(BaseModel):
     OSVersionConstraint
     """  # noqa: E501
     dynamic_version_requirement: Optional[OSVersionConstraintDynamicVersionRequirement] = Field(
-        default=None, alias="dynamicVersionRequirement")
+        default=None, alias="dynamicVersionRequirement"
+    )
     major_version_constraint: StrictStr = Field(
         description="Indicates the Windows major version",
-        alias="majorVersionConstraint")
+        alias="majorVersionConstraint"
+    )
     minimum: Optional[StrictStr] = Field(
         default=None,
-        description="The Windows device version must be equal to or newer than the specified version")
+        description="The Windows device version must be equal to or newer than the specified version"
+    )
     __properties: ClassVar[List[str]] = ["dynamicVersionRequirement", "majorVersionConstraint", "minimum"]
 
     @field_validator('major_version_constraint')
@@ -82,8 +88,10 @@ class OSVersionConstraint(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -108,9 +116,13 @@ class OSVersionConstraint(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "dynamicVersionRequirement": OSVersionConstraintDynamicVersionRequirement.from_dict(obj["dynamicVersionRequirement"]) if obj.get("dynamicVersionRequirement") is not None else None,
-            "majorVersionConstraint": obj.get("majorVersionConstraint"),
-            "minimum": obj.get("minimum")
-        })
+        _obj = cls.model_validate(
+            {
+                "dynamicVersionRequirement": OSVersionConstraintDynamicVersionRequirement.from_dict(
+                    obj["dynamicVersionRequirement"]
+                ) if obj.get("dynamicVersionRequirement") is not None else None,
+                "majorVersionConstraint": obj.get("majorVersionConstraint"),
+                "minimum": obj.get("minimum")
+            }
+        )
         return _obj

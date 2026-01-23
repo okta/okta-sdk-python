@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,25 +20,27 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class LogActor(BaseModel):
     """
-    Describes the user, app, client, or other entity (actor) who performs an action on a target. The actor is dependent on the action that is performed. All events have actors.
+    Describes the user, app, client, or other entity (actor) who performs an action on a target. The actor is dependent on
+    the action that is performed. All events have actors.
     """  # noqa: E501
     alternate_id: Optional[StrictStr] = Field(default=None, description="Alternative ID of the actor", alias="alternateId")
     detail_entry: Optional[Dict[str, Any]] = Field(
-        default=None, description="Further details about the actor", alias="detailEntry")
+        default=None, description="Further details about the actor", alias="detailEntry"
+    )
     display_name: Optional[StrictStr] = Field(default=None, description="Display name of the actor", alias="displayName")
     id: Optional[StrictStr] = Field(default=None, description="ID of the actor")
     type: Optional[StrictStr] = Field(default=None, description="Type of actor")
@@ -77,13 +81,15 @@ class LogActor(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "alternate_id",
-            "detail_entry",
-            "display_name",
-            "id",
-            "type",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "alternate_id",
+                "detail_entry",
+                "display_name",
+                "id",
+                "type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -101,11 +107,13 @@ class LogActor(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "alternateId": obj.get("alternateId"),
-            "detailEntry": obj.get("detailEntry"),
-            "displayName": obj.get("displayName"),
-            "id": obj.get("id"),
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "alternateId": obj.get("alternateId"),
+                "detailEntry": obj.get("detailEntry"),
+                "displayName": obj.get("displayName"),
+                "id": obj.get("id"),
+                "type": obj.get("type")
+            }
+        )
         return _obj

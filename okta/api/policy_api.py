@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -19,13 +21,15 @@
 """  # noqa: E501
 
 import warnings
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.application import Application
 from okta.models.policy import Policy
 from okta.models.policy_mapping import PolicyMapping
@@ -33,10 +37,7 @@ from okta.models.policy_mapping_request import PolicyMappingRequest
 from okta.models.policy_rule import PolicyRule
 from okta.models.simulate_policy_body import SimulatePolicyBody
 from okta.models.simulate_policy_evaluations import SimulatePolicyEvaluations
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -52,20 +53,20 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def activate_policy(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Activate a policy
 
@@ -146,12 +147,12 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_policy_serialize(
-        self,
-        policy_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -204,21 +205,21 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def activate_policy_rule(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Activate a policy rule
 
@@ -302,13 +303,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_policy_rule_serialize(
-        self,
-        policy_id,
-        rule_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            rule_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -363,20 +364,20 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def clone_policy(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Policy:
         """Clone an existing policy
 
@@ -467,12 +468,12 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _clone_policy_serialize(
-        self,
-        policy_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -525,26 +526,29 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def create_policy(
-        self,
-        policy: Policy,
-        activate: Annotated[Optional[StrictBool], Field(
-            description="This query parameter is only valid for Classic Engine orgs.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy: Policy,
+            activate: Annotated[Optional[StrictBool], Field(
+                description="This query parameter is only valid for Classic Engine orgs."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Policy:
         """Create a policy
 
-        Creates a policy. There are many types of policies that you can create. See [Policies](https://developer.okta.com/docs/concepts/policies/) for an overview of the types of policies available and links to more indepth information.
+        Creates a policy. There are many types of policies that you can create. See [Policies](
+        https://developer.okta.com/docs/concepts/policies/) for an overview of the types of policies available and links
+        to more indepth information.
 
         :param policy: (required)
         :type policy: Policy
@@ -633,13 +637,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_policy_serialize(
-        self,
-        policy,
-        activate,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy,
+            activate,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -657,7 +661,6 @@ class PolicyApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if activate is not None:
-
             _query_params.append(('activate', activate))
 
         # process the header parameters
@@ -710,35 +713,40 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def create_policy_rule(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        policy_rule: PolicyRule,
-        limit: Annotated[Optional[StrictStr], Field(
-            description="Defines the number of policy rules returned. See [Pagination](https://developer.okta.com/docs/api/#pagination).")] = None,
-        activate: Annotated[Optional[StrictBool], Field(
-            description="Set this parameter to `false` to create an `INACTIVE` rule.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            policy_rule: PolicyRule,
+            limit: Annotated[Optional[StrictStr], Field(
+                description="Defines the number of policy rules returned. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)."
+            )] = None,
+            activate: Annotated[Optional[StrictBool], Field(
+                description="Set this parameter to `false` to create an `INACTIVE` rule."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PolicyRule:
         """Create a policy rule
 
-        Creates a policy rule  > **Note:** You can't create additional rules for the `PROFILE_ENROLLMENT` or `POST_AUTH_SESSION` policies.
+        Creates a policy rule  > **Note:** You can't create additional rules for the `PROFILE_ENROLLMENT` or
+        `POST_AUTH_SESSION` policies.
 
         :param policy_id: `id` of the Policy (required)
         :type policy_id: str
         :param policy_rule: (required)
         :type policy_rule: PolicyRule
-        :param limit: Defines the number of policy rules returned. See [Pagination](https://developer.okta.com/docs/api/#pagination).
+        :param limit: Defines the number of policy rules returned. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination).
         :type limit: str
         :param activate: Set this parameter to `false` to create an `INACTIVE` rule.
         :type activate: bool
@@ -828,15 +836,15 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_policy_rule_serialize(
-        self,
-        policy_id,
-        policy_rule,
-        limit,
-        activate,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            policy_rule,
+            limit,
+            activate,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -856,11 +864,9 @@ class PolicyApi(ApiClient):
             _path_params['policyId'] = policy_id
         # process the query parameters
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if activate is not None:
-
             _query_params.append(('activate', activate))
 
         # process the header parameters
@@ -913,30 +919,35 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def create_policy_simulation(
-        self,
-        simulate_policy: List[SimulatePolicyBody],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy rules. Use `expand=RULE` to include details about why a rule condition wasn't matched.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            simulate_policy: List[SimulatePolicyBody],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy "
+                            "rules. Use `expand=RULE` to include details about why a rule condition wasn't matched."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[SimulatePolicyEvaluations]:
         """Create a policy simulation
 
-        Creates a policy or policy rule simulation. The access simulation evaluates policy and policy rules based on the existing policy rule configuration. The evaluation result simulates what the real-world authentication flow is and what policy rules have been applied or matched to the authentication flow.
+        Creates a policy or policy rule simulation. The access simulation evaluates policy and policy rules based on the
+        existing policy rule configuration. The evaluation result simulates what the real-world authentication flow is and
+        what policy rules have been applied or matched to the authentication flow.
 
         :param simulate_policy: (required)
         :type simulate_policy: List[SimulatePolicyBody]
-        :param expand: Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy rules. Use `expand=RULE` to include details about why a rule condition wasn't matched.
+        :param expand: Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy rules.
+        Use `expand=RULE` to include details about why a rule condition wasn't matched.
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1021,13 +1032,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_policy_simulation_serialize(
-        self,
-        simulate_policy,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            simulate_policy,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1046,7 +1057,6 @@ class PolicyApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -1099,20 +1109,20 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def deactivate_policy(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Deactivate a policy
 
@@ -1193,12 +1203,12 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_policy_serialize(
-        self,
-        policy_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1251,21 +1261,21 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def deactivate_policy_rule(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Deactivate a policy rule
 
@@ -1349,13 +1359,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_policy_rule_serialize(
-        self,
-        policy_id,
-        rule_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            rule_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1410,20 +1420,20 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def delete_policy(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a policy
 
@@ -1504,12 +1514,12 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_policy_serialize(
-        self,
-        policy_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1562,21 +1572,21 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def delete_policy_resource_mapping(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a policy resource mapping
 
@@ -1660,13 +1670,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_policy_resource_mapping_serialize(
-        self,
-        policy_id,
-        mapping_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            mapping_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1721,21 +1731,21 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def delete_policy_rule(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a policy rule
 
@@ -1819,13 +1829,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_policy_rule_serialize(
-        self,
-        policy_id,
-        rule_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            rule_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1880,21 +1890,21 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def get_policy(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        expand: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            expand: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Policy:
         """Retrieve a policy
 
@@ -1987,13 +1997,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_policy_serialize(
-        self,
-        policy_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2013,7 +2023,6 @@ class PolicyApi(ApiClient):
             _path_params['policyId'] = policy_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -2050,21 +2059,21 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def get_policy_mapping(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PolicyMapping:
         """Retrieve a policy resource mapping
 
@@ -2157,13 +2166,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_policy_mapping_serialize(
-        self,
-        policy_id,
-        mapping_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            mapping_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2218,21 +2227,21 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def get_policy_rule(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PolicyRule:
         """Retrieve a policy rule
 
@@ -2325,13 +2334,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_policy_rule_serialize(
-        self,
-        policy_id,
-        rule_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            rule_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2386,39 +2395,53 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def list_policies(
-        self,
-        type: Annotated[StrictStr, Field(description="Specifies the type of policy to return. The following policy types are available only with the Okta Identity Engine - `ACCESS_POLICY`, <x-lifecycle class=\"ea\"></x-lifecycle> `DEVICE_SIGNAL_COLLECTION`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION` and `ENTITY_RISK`.")],
-        status: Annotated[Optional[StrictStr], Field(
-            description="Refines the query by the `status` of the policy - `ACTIVE` or `INACTIVE`")] = None,
-        q: Annotated[Optional[StrictStr], Field(
-            description="Refines the query by policy name prefix (startWith method) passed in as `q=string`")] = None,
-        expand: Optional[StrictStr] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(
-            description="Refines the query by sorting on the policy `name` in ascending order")] = None,
-        limit: Annotated[Optional[StrictStr], Field(
-            description="Defines the number of policies returned, see [Pagination](https://developer.okta.com/docs/api/#pagination)")] = None,
-        resource_id: Annotated[Optional[StrictStr], Field(
-            description="Reference to the associated authorization server")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="End page cursor for pagination, see [Pagination](https://developer.okta.com/docs/api/#pagination)")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            type: Annotated[StrictStr, Field(
+                description="Specifies the type of policy to return. The following policy types are available only with "
+                            "the Okta Identity Engine - `ACCESS_POLICY`, <x-lifecycle class=\"ea\"></x-lifecycle> "
+                            "`DEVICE_SIGNAL_COLLECTION`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION` and `ENTITY_RISK`."
+            )],
+            status: Annotated[Optional[StrictStr], Field(
+                description="Refines the query by the `status` of the policy - `ACTIVE` or `INACTIVE`"
+            )] = None,
+            q: Annotated[Optional[StrictStr], Field(
+                description="Refines the query by policy name prefix (startWith method) passed in as `q=string`"
+            )] = None,
+            expand: Optional[StrictStr] = None,
+            sort_by: Annotated[Optional[StrictStr], Field(
+                description="Refines the query by sorting on the policy `name` in ascending order"
+            )] = None,
+            limit: Annotated[Optional[StrictStr], Field(
+                description="Defines the number of policies returned, see [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)"
+            )] = None,
+            resource_id: Annotated[Optional[StrictStr], Field(
+                description="Reference to the associated authorization server"
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="End page cursor for pagination, see [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Policy]:
         """List all policies
 
         Lists all policies with the specified type
 
-        :param type: Specifies the type of policy to return. The following policy types are available only with the Okta Identity Engine - `ACCESS_POLICY`, <x-lifecycle class=\"ea\"></x-lifecycle> `DEVICE_SIGNAL_COLLECTION`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION` and `ENTITY_RISK`. (required)
+        :param type: Specifies the type of policy to return. The following policy types are available only with the Okta
+        Identity Engine - `ACCESS_POLICY`, <x-lifecycle class=\"ea\"></x-lifecycle> `DEVICE_SIGNAL_COLLECTION`,
+        `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION` and `ENTITY_RISK`. (required)
         :type type: str
         :param status: Refines the query by the `status` of the policy - `ACTIVE` or `INACTIVE`
         :type status: str
@@ -2428,7 +2451,8 @@ class PolicyApi(ApiClient):
         :type expand: str
         :param sort_by: Refines the query by sorting on the policy `name` in ascending order
         :type sort_by: str
-        :param limit: Defines the number of policies returned, see [Pagination](https://developer.okta.com/docs/api/#pagination)
+        :param limit: Defines the number of policies returned, see [Pagination](
+        https://developer.okta.com/docs/api/#pagination)
         :type limit: str
         :param resource_id: Reference to the associated authorization server
         :type resource_id: str
@@ -2522,19 +2546,19 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_policies_serialize(
-        self,
-        type,
-        status,
-        q,
-        expand,
-        sort_by,
-        limit,
-        resource_id,
-        after,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            type,
+            status,
+            q,
+            expand,
+            sort_by,
+            limit,
+            resource_id,
+            after,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2552,35 +2576,27 @@ class PolicyApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if type is not None:
-
             _query_params.append(('type', type))
 
         if status is not None:
-
             _query_params.append(('status', status))
 
         if q is not None:
-
             _query_params.append(('q', q))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if sort_by is not None:
-
             _query_params.append(('sortBy', sort_by))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if resource_id is not None:
-
             _query_params.append(('resourceId', resource_id))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         # process the header parameters
@@ -2617,24 +2633,26 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def list_policy_apps(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Application]:
         """(Deprecated) List all apps mapped to a policy
 
-        Lists all applications mapped to a policy identified by `policyId`  > **Note:** Use [List all resources mapped to a Policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/listPolicyMappings) to list all applications mapped to a policy.
+        Lists all applications mapped to a policy identified by `policyId`  > **Note:** Use [List all resources mapped to
+        a Policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation
+        /listPolicyMappings) to list all applications mapped to a policy.
 
         :param policy_id: `id` of the Policy (required)
         :type policy_id: str
@@ -2721,12 +2739,12 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_policy_apps_serialize(
-        self,
-        policy_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2779,20 +2797,20 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def list_policy_mappings(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[PolicyMapping]:
         """List all resources mapped to a policy
 
@@ -2882,12 +2900,12 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_policy_mappings_serialize(
-        self,
-        policy_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2940,22 +2958,24 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def list_policy_rules(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        limit: Annotated[Optional[StrictStr], Field(
-            description="Defines the number of policy rules returned. See [Pagination](https://developer.okta.com/docs/api/#pagination).")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            limit: Annotated[Optional[StrictStr], Field(
+                description="Defines the number of policy rules returned. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[PolicyRule]:
         """List all policy rules
 
@@ -2963,7 +2983,8 @@ class PolicyApi(ApiClient):
 
         :param policy_id: `id` of the Policy (required)
         :type policy_id: str
-        :param limit: Defines the number of policy rules returned. See [Pagination](https://developer.okta.com/docs/api/#pagination).
+        :param limit: Defines the number of policy rules returned. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination).
         :type limit: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3048,13 +3069,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_policy_rules_serialize(
-        self,
-        policy_id,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -3074,7 +3095,6 @@ class PolicyApi(ApiClient):
             _path_params['policyId'] = policy_id
         # process the query parameters
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -3111,25 +3131,27 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def map_resource_to_policy(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        policy_mapping_request: PolicyMappingRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            policy_mapping_request: PolicyMappingRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PolicyMapping:
         """Map a resource to a policy
 
-        Maps a resource to a policy identified by `policyId`  > **Note:** Use the [Assign an app sign-in policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/ApplicationPolicies/#tag/ApplicationPolicies/operation/assignApplicationPolicy) endpoint to assign an app sign-in policy to an app.
+        Maps a resource to a policy identified by `policyId`  > **Note:** Use the [Assign an app sign-in policy](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/ApplicationPolicies/#tag
+        /ApplicationPolicies/operation/assignApplicationPolicy) endpoint to assign an app sign-in policy to an app.
 
         :param policy_id: `id` of the Policy (required)
         :type policy_id: str
@@ -3219,13 +3241,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _map_resource_to_policy_serialize(
-        self,
-        policy_id,
-        policy_mapping_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            policy_mapping_request,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -3294,21 +3316,21 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def replace_policy(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        policy: Policy,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            policy: Policy,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Policy:
         """Replace a policy
 
@@ -3402,13 +3424,13 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_policy_serialize(
-        self,
-        policy_id,
-        policy,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            policy,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -3477,22 +3499,22 @@ class PolicyApi(ApiClient):
 
     @validate_call
     async def replace_policy_rule(
-        self,
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
-        policy_rule: PolicyRule,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+            rule_id: Annotated[StrictStr, Field(description="`id` of the policy rule")],
+            policy_rule: PolicyRule,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PolicyRule:
         """Replace a policy rule
 
@@ -3589,14 +3611,14 @@ class PolicyApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_policy_rule_serialize(
-        self,
-        policy_id,
-        rule_id,
-        policy_rule,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            policy_id,
+            rule_id,
+            policy_rule,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,31 +20,46 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from okta.models.managed_connection_patchable_scope_condition import ManagedConnectionPatchableScopeCondition
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.managed_connection_patchable_scope_condition import ManagedConnectionPatchableScopeCondition
 
 
 class ManagedConnectionPatchable(BaseModel):
     """
-    Update an existing managed connection. All fields are optional for partial updates.  **Field Applicability by Connection Type:** - `resourceIndicator`: Valid for IDENTITY_ASSERTION_APP_INSTANCE, IDENTITY_ASSERTION_CUSTOM_AS, STS_SERVICE_ACCOUNT, and STS_VAULT_SECRET. Set to `null` to reset to the default value (the resource's ORN). - `scopeCondition` and `scopes`: Only valid for IDENTITY_ASSERTION_APP_INSTANCE and IDENTITY_ASSERTION_CUSTOM_AS connections. The server returns a validation error if these fields are sent for STS connection types.  **Validation:** - If `scopeCondition` is provided, `scopes` must also be provided, and vice versa. - For STS_VAULT_SECRET and STS_SERVICE_ACCOUNT connection types, only `resourceIndicator` can be updated.
+    Update an existing managed connection. All fields are optional for partial updates.  **Field Applicability by
+    Connection Type:** - `resourceIndicator`: Valid for IDENTITY_ASSERTION_APP_INSTANCE, IDENTITY_ASSERTION_CUSTOM_AS,
+    STS_SERVICE_ACCOUNT, and STS_VAULT_SECRET. Set to `null` to reset to the default value (the resource's ORN). -
+    `scopeCondition` and `scopes`: Only valid for IDENTITY_ASSERTION_APP_INSTANCE and IDENTITY_ASSERTION_CUSTOM_AS
+    connections. The server returns a validation error if these fields are sent for STS connection types.  **Validation:**
+    - If `scopeCondition` is provided, `scopes` must also be provided, and vice versa. - For STS_VAULT_SECRET and
+    STS_SERVICE_ACCOUNT connection types, only `resourceIndicator` can be updated.
     """  # noqa: E501
     resource_indicator: Optional[StrictStr] = Field(
         default=None,
-        description="Resource indicator used when requesting tokens. Set to `null` to reset to the default value based on the connection type (app instance ORN, authorization server ORN, secret ORN, or service account ORN).",
-        alias="resourceIndicator")
+        description="Resource indicator used when requesting tokens. Set to `null` to reset to the default value based on "
+                    "the connection type (app instance ORN, authorization server ORN, secret ORN, or service account ORN).",
+        alias="resourceIndicator"
+    )
     scope_condition: Optional[ManagedConnectionPatchableScopeCondition] = Field(default=None, alias="scopeCondition")
     scopes: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(
-        default=None, description="Array of scopes for the connection. For `ALL_SCOPES`, this array must contain a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.  **Restrictions:** - Only valid for IDENTITY_ASSERTION_APP_INSTANCE and IDENTITY_ASSERTION_CUSTOM_AS connection types - Must be provided together with `scopeCondition` - Returns a 400 error if sent for STS_VAULT_SECRET or STS_SERVICE_ACCOUNT connection types")
+        default=None,
+        description="Array of scopes for the connection. For `ALL_SCOPES`, this array must contain a single value of `*`. "
+                    "For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are "
+                    "allowed.  **Restrictions:** - Only valid for IDENTITY_ASSERTION_APP_INSTANCE and "
+                    "IDENTITY_ASSERTION_CUSTOM_AS connection types - Must be provided together with `scopeCondition` - "
+                    "Returns a 400 error if sent for STS_VAULT_SECRET or STS_SERVICE_ACCOUNT connection types"
+    )
     __properties: ClassVar[List[str]] = ["resourceIndicator", "scopeCondition", "scopes"]
 
     model_config = ConfigDict(
@@ -75,8 +92,10 @@ class ManagedConnectionPatchable(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -109,9 +128,11 @@ class ManagedConnectionPatchable(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "resourceIndicator": obj.get("resourceIndicator"),
-            "scopeCondition": obj.get("scopeCondition"),
-            "scopes": obj.get("scopes")
-        })
+        _obj = cls.model_validate(
+            {
+                "resourceIndicator": obj.get("resourceIndicator"),
+                "scopeCondition": obj.get("scopeCondition"),
+                "scopes": obj.get("scopes")
+            }
+        )
         return _obj

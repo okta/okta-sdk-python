@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.caep_device_compliance_change_event import CaepDeviceComplianceChangeEvent
 from okta.models.caep_session_revoked_event import CaepSessionRevokedEvent
 from okta.models.okta_device_risk_change_event import OktaDeviceRiskChangeEvent
 from okta.models.okta_ip_change_event import OktaIpChangeEvent
 from okta.models.okta_user_risk_change_event import OktaUserRiskChangeEvent
 from okta.models.risc_identifier_changed_event import RiscIdentifierChangedEvent
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SecurityEventTokenRequestJwtEvents(BaseModel):
@@ -41,23 +44,32 @@ class SecurityEventTokenRequestJwtEvents(BaseModel):
     A non-empty collection of events
     """  # noqa: E501
     https__schemas_okta_com_secevent_okta_event_type_device_risk_change: Optional[OktaDeviceRiskChangeEvent] = Field(
-        default=None, alias="https://schemas.okta.com/secevent/okta/event-type/device-risk-change")
+        default=None, alias="https://schemas.okta.com/secevent/okta/event-type/device-risk-change"
+    )
     https__schemas_okta_com_secevent_okta_event_type_ip_change: Optional[OktaIpChangeEvent] = Field(
-        default=None, alias="https://schemas.okta.com/secevent/okta/event-type/ip-change")
+        default=None, alias="https://schemas.okta.com/secevent/okta/event-type/ip-change"
+    )
     https__schemas_okta_com_secevent_okta_event_type_user_risk_change: Optional[OktaUserRiskChangeEvent] = Field(
-        default=None, alias="https://schemas.okta.com/secevent/okta/event-type/user-risk-change")
-    https__schemas_openid_net_secevent_caep_event_type_device_compliance_change: Optional[CaepDeviceComplianceChangeEvent] = Field(
-        default=None, alias="https://schemas.openid.net/secevent/caep/event-type/device-compliance-change")
+        default=None, alias="https://schemas.okta.com/secevent/okta/event-type/user-risk-change"
+    )
+    https__schemas_openid_net_secevent_caep_event_type_device_compliance_change: Optional[
+        CaepDeviceComplianceChangeEvent] = Field(
+        default=None, alias="https://schemas.openid.net/secevent/caep/event-type/device-compliance-change"
+    )
     https__schemas_openid_net_secevent_caep_event_type_session_revoked: Optional[CaepSessionRevokedEvent] = Field(
-        default=None, alias="https://schemas.openid.net/secevent/caep/event-type/session-revoked")
+        default=None, alias="https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+    )
     https__schemas_openid_net_secevent_risc_event_type_identifier_changed: Optional[RiscIdentifierChangedEvent] = Field(
-        default=None, alias="https://schemas.openid.net/secevent/risc/event-type/identifier-changed")
-    __properties: ClassVar[List[str]] = ["https://schemas.okta.com/secevent/okta/event-type/device-risk-change",
-                                         "https://schemas.okta.com/secevent/okta/event-type/ip-change",
-                                         "https://schemas.okta.com/secevent/okta/event-type/user-risk-change",
-                                         "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change",
-                                         "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
-                                         "https://schemas.openid.net/secevent/risc/event-type/identifier-changed"]
+        default=None, alias="https://schemas.openid.net/secevent/risc/event-type/identifier-changed"
+    )
+    __properties: ClassVar[List[str]] = [
+        "https://schemas.okta.com/secevent/okta/event-type/device-risk-change",
+        "https://schemas.okta.com/secevent/okta/event-type/ip-change",
+        "https://schemas.okta.com/secevent/okta/event-type/user-risk-change",
+        "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change",
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+        "https://schemas.openid.net/secevent/risc/event-type/identifier-changed"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,8 +101,10 @@ class SecurityEventTokenRequestJwtEvents(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -101,49 +115,73 @@ class SecurityEventTokenRequestJwtEvents(BaseModel):
         # https__schemas_okta_com_secevent_okta_event_type_device_risk_change
         if self.https__schemas_okta_com_secevent_okta_event_type_device_risk_change:
             if not isinstance(self.https__schemas_okta_com_secevent_okta_event_type_device_risk_change, dict):
-                _dict['https://schemas.okta.com/secevent/okta/event-type/device-risk-change'] = self.https__schemas_okta_com_secevent_okta_event_type_device_risk_change.to_dict()
+                _dict[
+                    'https://schemas.okta.com/secevent/okta/event-type/device-risk-change'] = (
+                    self.https__schemas_okta_com_secevent_okta_event_type_device_risk_change.to_dict())
             else:
-                _dict['https://schemas.okta.com/secevent/okta/event-type/device-risk-change'] = self.https__schemas_okta_com_secevent_okta_event_type_device_risk_change
+                _dict[
+                    'https://schemas.okta.com/secevent/okta/event-type/device-risk-change'] = (
+                    self.https__schemas_okta_com_secevent_okta_event_type_device_risk_change)
 
         # override the default output from pydantic by calling `to_dict()` of
         # https__schemas_okta_com_secevent_okta_event_type_ip_change
         if self.https__schemas_okta_com_secevent_okta_event_type_ip_change:
             if not isinstance(self.https__schemas_okta_com_secevent_okta_event_type_ip_change, dict):
-                _dict['https://schemas.okta.com/secevent/okta/event-type/ip-change'] = self.https__schemas_okta_com_secevent_okta_event_type_ip_change.to_dict()
+                _dict[
+                    'https://schemas.okta.com/secevent/okta/event-type/ip-change'] = (
+                    self.https__schemas_okta_com_secevent_okta_event_type_ip_change.to_dict())
             else:
-                _dict['https://schemas.okta.com/secevent/okta/event-type/ip-change'] = self.https__schemas_okta_com_secevent_okta_event_type_ip_change
+                _dict[
+                    'https://schemas.okta.com/secevent/okta/event-type/ip-change'] = (
+                    self.https__schemas_okta_com_secevent_okta_event_type_ip_change)
 
         # override the default output from pydantic by calling `to_dict()` of
         # https__schemas_okta_com_secevent_okta_event_type_user_risk_change
         if self.https__schemas_okta_com_secevent_okta_event_type_user_risk_change:
             if not isinstance(self.https__schemas_okta_com_secevent_okta_event_type_user_risk_change, dict):
-                _dict['https://schemas.okta.com/secevent/okta/event-type/user-risk-change'] = self.https__schemas_okta_com_secevent_okta_event_type_user_risk_change.to_dict()
+                _dict[
+                    'https://schemas.okta.com/secevent/okta/event-type/user-risk-change'] = (
+                    self.https__schemas_okta_com_secevent_okta_event_type_user_risk_change.to_dict())
             else:
-                _dict['https://schemas.okta.com/secevent/okta/event-type/user-risk-change'] = self.https__schemas_okta_com_secevent_okta_event_type_user_risk_change
+                _dict[
+                    'https://schemas.okta.com/secevent/okta/event-type/user-risk-change'] = (
+                    self.https__schemas_okta_com_secevent_okta_event_type_user_risk_change)
 
         # override the default output from pydantic by calling `to_dict()` of
         # https__schemas_openid_net_secevent_caep_event_type_device_compliance_change
         if self.https__schemas_openid_net_secevent_caep_event_type_device_compliance_change:
             if not isinstance(self.https__schemas_openid_net_secevent_caep_event_type_device_compliance_change, dict):
-                _dict['https://schemas.openid.net/secevent/caep/event-type/device-compliance-change'] = self.https__schemas_openid_net_secevent_caep_event_type_device_compliance_change.to_dict()
+                _dict[
+                    'https://schemas.openid.net/secevent/caep/event-type/device-compliance-change'] = (
+                    self.https__schemas_openid_net_secevent_caep_event_type_device_compliance_change.to_dict())
             else:
-                _dict['https://schemas.openid.net/secevent/caep/event-type/device-compliance-change'] = self.https__schemas_openid_net_secevent_caep_event_type_device_compliance_change
+                _dict[
+                    'https://schemas.openid.net/secevent/caep/event-type/device-compliance-change'] = (
+                    self.https__schemas_openid_net_secevent_caep_event_type_device_compliance_change)
 
         # override the default output from pydantic by calling `to_dict()` of
         # https__schemas_openid_net_secevent_caep_event_type_session_revoked
         if self.https__schemas_openid_net_secevent_caep_event_type_session_revoked:
             if not isinstance(self.https__schemas_openid_net_secevent_caep_event_type_session_revoked, dict):
-                _dict['https://schemas.openid.net/secevent/caep/event-type/session-revoked'] = self.https__schemas_openid_net_secevent_caep_event_type_session_revoked.to_dict()
+                _dict[
+                    'https://schemas.openid.net/secevent/caep/event-type/session-revoked'] = (
+                    self.https__schemas_openid_net_secevent_caep_event_type_session_revoked.to_dict())
             else:
-                _dict['https://schemas.openid.net/secevent/caep/event-type/session-revoked'] = self.https__schemas_openid_net_secevent_caep_event_type_session_revoked
+                _dict[
+                    'https://schemas.openid.net/secevent/caep/event-type/session-revoked'] = (
+                    self.https__schemas_openid_net_secevent_caep_event_type_session_revoked)
 
         # override the default output from pydantic by calling `to_dict()` of
         # https__schemas_openid_net_secevent_risc_event_type_identifier_changed
         if self.https__schemas_openid_net_secevent_risc_event_type_identifier_changed:
             if not isinstance(self.https__schemas_openid_net_secevent_risc_event_type_identifier_changed, dict):
-                _dict['https://schemas.openid.net/secevent/risc/event-type/identifier-changed'] = self.https__schemas_openid_net_secevent_risc_event_type_identifier_changed.to_dict()
+                _dict[
+                    'https://schemas.openid.net/secevent/risc/event-type/identifier-changed'] = (
+                    self.https__schemas_openid_net_secevent_risc_event_type_identifier_changed.to_dict())
             else:
-                _dict['https://schemas.openid.net/secevent/risc/event-type/identifier-changed'] = self.https__schemas_openid_net_secevent_risc_event_type_identifier_changed
+                _dict[
+                    'https://schemas.openid.net/secevent/risc/event-type/identifier-changed'] = (
+                    self.https__schemas_openid_net_secevent_risc_event_type_identifier_changed)
 
         return _dict
 
@@ -156,12 +194,36 @@ class SecurityEventTokenRequestJwtEvents(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "https://schemas.okta.com/secevent/okta/event-type/device-risk-change": OktaDeviceRiskChangeEvent.from_dict(obj["https://schemas.okta.com/secevent/okta/event-type/device-risk-change"]) if obj.get("https://schemas.okta.com/secevent/okta/event-type/device-risk-change") is not None else None,
-            "https://schemas.okta.com/secevent/okta/event-type/ip-change": OktaIpChangeEvent.from_dict(obj["https://schemas.okta.com/secevent/okta/event-type/ip-change"]) if obj.get("https://schemas.okta.com/secevent/okta/event-type/ip-change") is not None else None,
-            "https://schemas.okta.com/secevent/okta/event-type/user-risk-change": OktaUserRiskChangeEvent.from_dict(obj["https://schemas.okta.com/secevent/okta/event-type/user-risk-change"]) if obj.get("https://schemas.okta.com/secevent/okta/event-type/user-risk-change") is not None else None,
-            "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change": CaepDeviceComplianceChangeEvent.from_dict(obj["https://schemas.openid.net/secevent/caep/event-type/device-compliance-change"]) if obj.get("https://schemas.openid.net/secevent/caep/event-type/device-compliance-change") is not None else None,
-            "https://schemas.openid.net/secevent/caep/event-type/session-revoked": CaepSessionRevokedEvent.from_dict(obj["https://schemas.openid.net/secevent/caep/event-type/session-revoked"]) if obj.get("https://schemas.openid.net/secevent/caep/event-type/session-revoked") is not None else None,
-            "https://schemas.openid.net/secevent/risc/event-type/identifier-changed": RiscIdentifierChangedEvent.from_dict(obj["https://schemas.openid.net/secevent/risc/event-type/identifier-changed"]) if obj.get("https://schemas.openid.net/secevent/risc/event-type/identifier-changed") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "https://schemas.okta.com/secevent/okta/event-type/device-risk-change": OktaDeviceRiskChangeEvent.from_dict(
+                    obj["https://schemas.okta.com/secevent/okta/event-type/device-risk-change"]
+                ) if obj.get(
+                    "https://schemas.okta.com/secevent/okta/event-type/device-risk-change"
+                ) is not None else None,
+                "https://schemas.okta.com/secevent/okta/event-type/ip-change": OktaIpChangeEvent.from_dict(
+                    obj["https://schemas.okta.com/secevent/okta/event-type/ip-change"]
+                ) if obj.get("https://schemas.okta.com/secevent/okta/event-type/ip-change") is not None else None,
+                "https://schemas.okta.com/secevent/okta/event-type/user-risk-change": OktaUserRiskChangeEvent.from_dict(
+                    obj["https://schemas.okta.com/secevent/okta/event-type/user-risk-change"]
+                ) if obj.get("https://schemas.okta.com/secevent/okta/event-type/user-risk-change") is not None else None,
+                "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change":
+                    CaepDeviceComplianceChangeEvent.from_dict(
+                        obj["https://schemas.openid.net/secevent/caep/event-type/device-compliance-change"]
+                    ) if obj.get(
+                        "https://schemas.openid.net/secevent/caep/event-type/device-compliance-change"
+                    ) is not None else None,
+                "https://schemas.openid.net/secevent/caep/event-type/session-revoked": CaepSessionRevokedEvent.from_dict(
+                    obj["https://schemas.openid.net/secevent/caep/event-type/session-revoked"]
+                ) if obj.get(
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+                ) is not None else None,
+                "https://schemas.openid.net/secevent/risc/event-type/identifier-changed":
+                    RiscIdentifierChangedEvent.from_dict(
+                        obj["https://schemas.openid.net/secevent/risc/event-type/identifier-changed"]
+                    ) if obj.get(
+                        "https://schemas.openid.net/secevent/risc/event-type/identifier-changed"
+                    ) is not None else None
+            }
+        )
         return _obj

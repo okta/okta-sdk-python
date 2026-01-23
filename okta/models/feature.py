@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,27 +20,30 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.enabled_status import EnabledStatus
 from okta.models.feature_links import FeatureLinks
 from okta.models.feature_stage import FeatureStage
 from okta.models.feature_type import FeatureType
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class Feature(BaseModel):
     """
     Specifies feature release cycle information
     """  # noqa: E501
-    description: Optional[StrictStr] = Field(default=None, description="Brief description of the feature and what it provides")
+    description: Optional[StrictStr] = Field(
+        default=None, description="Brief description of the feature and what it provides"
+    )
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for this feature")
     name: Optional[StrictStr] = Field(default=None, description="Name of the feature")
     stage: Optional[FeatureStage] = None
@@ -78,9 +83,11 @@ class Feature(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -112,13 +119,15 @@ class Feature(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "stage": FeatureStage.from_dict(obj["stage"]) if obj.get("stage") is not None else None,
-            "status": obj.get("status"),
-            "type": obj.get("type"),
-            "_links": FeatureLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "description": obj.get("description"),
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "stage": FeatureStage.from_dict(obj["stage"]) if obj.get("stage") is not None else None,
+                "status": obj.get("status"),
+                "type": obj.get("type"),
+                "_links": FeatureLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

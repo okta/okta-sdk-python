@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,34 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class AppUserProfileRequestPayload(BaseModel):
     """
-    Updates the assigned user profile > **Note:** The Okta API currently doesn't support entity tags for conditional updates. As long as you're the only user updating the the user profile, Okta recommends you fetch the most recent profile with [Retrieve an Application User](/openapi/okta-management/management/tag/ApplicationUsers/#tag/ApplicationUsers/operation/getApplicationUser), apply your profile update, and then `POST` back the updated profile.
+    Updates the assigned user profile > **Note:** The Okta API currently doesn't support entity tags for conditional
+    updates. As long as you're the only user updating the the user profile, Okta recommends you fetch the most recent
+    profile with [Retrieve an Application User](
+    /openapi/okta-management/management/tag/ApplicationUsers/#tag/ApplicationUsers/operation/getApplicationUser),
+    apply your profile update, and then `POST` back the updated profile.
     """  # noqa: E501
-    profile: Optional[Dict[str, Any]] = Field(default=None, description="Specifies the default and custom profile properties for a user. Properties that are visible in the Admin Console for an app assignment can also be assigned through the API. Some properties are reference properties that are imported from the target app and can't be configured. See [profile](/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response). ")
+    profile: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Specifies the default and custom profile properties for a user. Properties that are visible in the "
+                    "Admin Console for an app assignment can also be assigned through the API. Some properties are "
+                    "reference properties that are imported from the target app and can't be configured. See [profile]("
+                    "/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t"
+                    "=response). "
+    )
     __properties: ClassVar[List[str]] = ["profile"]
 
     model_config = ConfigDict(
@@ -67,8 +80,10 @@ class AppUserProfileRequestPayload(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -86,7 +101,9 @@ class AppUserProfileRequestPayload(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "profile": obj.get("profile")
-        })
+        _obj = cls.model_validate(
+            {
+                "profile": obj.get("profile")
+            }
+        )
         return _obj

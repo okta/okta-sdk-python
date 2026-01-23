@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
-from okta.models.create_realm_request import CreateRealmRequest
-from okta.models.realm import Realm
-from okta.models.update_realm_request import UpdateRealmRequest
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.create_realm_request import CreateRealmRequest
+from okta.models.realm import Realm
+from okta.models.success import Success
+from okta.models.update_realm_request import UpdateRealmRequest
 from okta.rest import RESTResponse
 
 
@@ -47,20 +48,20 @@ class RealmApi(ApiClient):
 
     @validate_call
     async def create_realm(
-        self,
-        body: CreateRealmRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            body: CreateRealmRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Realm:
         """Create a realm
 
@@ -150,12 +151,12 @@ class RealmApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_realm_serialize(
-        self,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -222,24 +223,25 @@ class RealmApi(ApiClient):
 
     @validate_call
     async def delete_realm(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a realm
 
-        Deletes a realm permanently. This operation can only be performed after disassociating other entities like users and identity providers from a realm.
+        Deletes a realm permanently. This operation can only be performed after disassociating other entities like users
+        and identity providers from a realm.
 
         :param realm_id: ID of the realm (required)
         :type realm_id: str
@@ -317,12 +319,12 @@ class RealmApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_realm_serialize(
-        self,
-        realm_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            realm_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -375,20 +377,20 @@ class RealmApi(ApiClient):
 
     @validate_call
     async def get_realm(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Realm:
         """Retrieve a realm
 
@@ -479,12 +481,12 @@ class RealmApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_realm_serialize(
-        self,
-        realm_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            realm_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -537,43 +539,60 @@ class RealmApi(ApiClient):
 
     @validate_call
     async def list_realms(
-        self,
-        limit: Annotated[Optional[StrictInt], Field(
-            description="Specifies the number of results returned. Defaults to 10 if `search` is provided.")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        search: Annotated[Optional[StrictStr], Field(
-            description="Searches for realms with a supported filtering expression for most properties.  Searches for realms can be filtered by the contains (`co`) operator. You can only use `co` with the `profile.name` property. See [Operators](https://developer.okta.com/docs/api/#operators).")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(
-            description="Specifies the field to sort by and can be any single property (for search queries only)")] = None,
-        sort_order: Annotated[Optional[StrictStr], Field(
-            description="Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if `sortBy` isn't present.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            limit: Annotated[Optional[StrictInt], Field(
+                description="Specifies the number of results returned. Defaults to 10 if `search` is provided."
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            search: Annotated[Optional[StrictStr], Field(
+                description="Searches for realms with a supported filtering expression for most properties.  Searches for "
+                            "realms can be filtered by the contains (`co`) operator. You can only use `co` with the "
+                            "`profile.name` property. See [Operators](https://developer.okta.com/docs/api/#operators)."
+            )] = None,
+            sort_by: Annotated[Optional[StrictStr], Field(
+                description="Specifies the field to sort by and can be any single property (for search queries only)"
+            )] = None,
+            sort_order: Annotated[Optional[StrictStr], Field(
+                description="Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if "
+                            "`sortBy` isn't present."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Realm]:
         """List all realms
 
-        Lists all realms.  > **Note:** The `search` parameter results are sourced from an eventually consistent datasource and may not reflect the latest information.
+        Lists all realms.  > **Note:** The `search` parameter results are sourced from an eventually consistent datasource
+        and may not reflect the latest information.
 
         :param limit: Specifies the number of results returned. Defaults to 10 if `search` is provided.
         :type limit: int
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
-        :param search: Searches for realms with a supported filtering expression for most properties.  Searches for realms can be filtered by the contains (`co`) operator. You can only use `co` with the `profile.name` property. See [Operators](https://developer.okta.com/docs/api/#operators).
+        :param search: Searches for realms with a supported filtering expression for most properties.  Searches for realms
+        can be filtered by the contains (`co`) operator. You can only use `co` with the `profile.name` property. See [
+        Operators](https://developer.okta.com/docs/api/#operators).
         :type search: str
         :param sort_by: Specifies the field to sort by and can be any single property (for search queries only)
         :type sort_by: str
-        :param sort_order: Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if `sortBy` isn't present.
+        :param sort_order: Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if
+        `sortBy` isn't present.
         :type sort_order: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -660,16 +679,16 @@ class RealmApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_realms_serialize(
-        self,
-        limit,
-        after,
-        search,
-        sort_by,
-        sort_order,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            limit,
+            after,
+            search,
+            sort_by,
+            sort_order,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -687,23 +706,18 @@ class RealmApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if search is not None:
-
             _query_params.append(('search', search))
 
         if sort_by is not None:
-
             _query_params.append(('sortBy', sort_by))
 
         if sort_order is not None:
-
             _query_params.append(('sortOrder', sort_order))
 
         # process the header parameters
@@ -740,21 +754,21 @@ class RealmApi(ApiClient):
 
     @validate_call
     async def replace_realm(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
-        body: UpdateRealmRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
+            body: UpdateRealmRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Realm:
         """Replace the realm profile
 
@@ -848,13 +862,13 @@ class RealmApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_realm_serialize(
-        self,
-        realm_id,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            realm_id,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

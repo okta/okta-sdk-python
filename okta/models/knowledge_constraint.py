@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.authentication_method_object import AuthenticationMethodObject
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.authentication_method_object import AuthenticationMethodObject
 
 
 class KnowledgeConstraint(BaseModel):
@@ -36,20 +39,37 @@ class KnowledgeConstraint(BaseModel):
     KnowledgeConstraint
     """  # noqa: E501
     authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(
-        default=None, description="This property specifies the precise authenticator and method for authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="authenticationMethods")
+        default=None,
+        description="This property specifies the precise authenticator and method for authentication. <x-lifecycle "
+                    "class=\"oie\"></x-lifecycle>",
+        alias="authenticationMethods"
+    )
     excluded_authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(
-        default=None, description="This property specifies the precise authenticator and method to exclude from authentication. <x-lifecycle class=\"oie\"></x-lifecycle>", alias="excludedAuthenticationMethods")
+        default=None,
+        description="This property specifies the precise authenticator and method to exclude from authentication. "
+                    "<x-lifecycle class=\"oie\"></x-lifecycle>",
+        alias="excludedAuthenticationMethods"
+    )
     methods: Optional[List[StrictStr]] = Field(default=None, description="The authenticator methods that are permitted")
     reauthenticate_in: Optional[StrictStr] = Field(
         default=None,
-        description="The duration after which the user must re-authenticate regardless of user activity. This re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).",
-        alias="reauthenticateIn")
+        description="The duration after which the user must re-authenticate regardless of user activity. This "
+                    "re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. "
+                    "The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).",
+        alias="reauthenticateIn"
+    )
     required: Optional[StrictBool] = Field(
         default=None,
-        description="This property indicates whether the knowledge or possession factor is required by the assurance. It's optional in the request, but is always returned in the response. By default, this field is `true`. If the knowledge or possession constraint has values for `excludedAuthenticationMethods` the `required` value is false. <x-lifecycle class=\"oie\"></x-lifecycle>")
+        description="This property indicates whether the knowledge or possession factor is required by the assurance. It's "
+                    "optional in the request, but is always returned in the response. By default, this field is `true`. If "
+                    "the knowledge or possession constraint has values for `excludedAuthenticationMethods` the `required` "
+                    "value is false. <x-lifecycle class=\"oie\"></x-lifecycle>"
+    )
     types: Optional[List[StrictStr]] = Field(default=None, description="The authenticator types that are permitted")
-    __properties: ClassVar[List[str]] = ["authenticationMethods",
-                                         "excludedAuthenticationMethods", "methods", "reauthenticateIn", "required", "types"]
+    __properties: ClassVar[List[str]] = [
+        "authenticationMethods",
+        "excludedAuthenticationMethods", "methods", "reauthenticateIn", "required", "types"
+    ]
 
     @field_validator('methods')
     def methods_validate_enum(cls, value):
@@ -58,10 +78,16 @@ class KnowledgeConstraint(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH',
-                            'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT']):
+            if i not in set(
+                    [
+                        'PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH',
+                        'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT'
+                    ]
+            ):
                 raise ValueError(
-                    "each list item must be one of ('PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', 'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT')")
+                    "each list item must be one of ('PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', "
+                    "'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT')"
+                )
         return value
 
     @field_validator('types')
@@ -73,7 +99,9 @@ class KnowledgeConstraint(BaseModel):
         for i in value:
             if i not in set(['SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', 'APP', 'FEDERATED']):
                 raise ValueError(
-                    "each list item must be one of ('SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', 'APP', 'FEDERATED')")
+                    "each list item must be one of ('SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', "
+                    "'APP', 'FEDERATED')"
+                )
         return value
 
     model_config = ConfigDict(
@@ -106,8 +134,10 @@ class KnowledgeConstraint(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -140,12 +170,20 @@ class KnowledgeConstraint(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "authenticationMethods": [AuthenticationMethodObject.from_dict(_item) for _item in obj["authenticationMethods"]] if obj.get("authenticationMethods") is not None else None,
-            "excludedAuthenticationMethods": [AuthenticationMethodObject.from_dict(_item) for _item in obj["excludedAuthenticationMethods"]] if obj.get("excludedAuthenticationMethods") is not None else None,
-            "methods": obj.get("methods"),
-            "reauthenticateIn": obj.get("reauthenticateIn"),
-            "required": obj.get("required"),
-            "types": obj.get("types")
-        })
+        _obj = cls.model_validate(
+            {
+                "authenticationMethods": [AuthenticationMethodObject.from_dict(_item) for _item in
+                                          obj["authenticationMethods"]] if obj.get(
+                    "authenticationMethods"
+                ) is not None else None,
+                "excludedAuthenticationMethods": [AuthenticationMethodObject.from_dict(_item) for _item in
+                                                  obj["excludedAuthenticationMethods"]] if obj.get(
+                    "excludedAuthenticationMethods"
+                ) is not None else None,
+                "methods": obj.get("methods"),
+                "reauthenticateIn": obj.get("reauthenticateIn"),
+                "required": obj.get("required"),
+                "types": obj.get("types")
+            }
+        )
         return _obj

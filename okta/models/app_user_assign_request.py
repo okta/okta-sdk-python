@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.app_user_credentials import AppUserCredentials
 from okta.models.app_user_status import AppUserStatus
 from okta.models.app_user_sync_state import AppUserSyncState
 from okta.models.links_app_and_user import LinksAppAndUser
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AppUserAssignRequest(BaseModel):
@@ -43,48 +46,72 @@ class AppUserAssignRequest(BaseModel):
     credentials: Optional[AppUserCredentials] = None
     external_id: Optional[StrictStr] = Field(
         default=None,
-        description="The ID of the user in the target app that's linked to the Okta application user object. This value is the native app-specific identifier or primary key for the user in the target app.  The `externalId` is set during import when the user is confirmed (reconciled) or during provisioning when the user is created in the target app. This value isn't populated for SSO app assignments (for example, SAML or SWA) because it isn't synchronized with a target app.",
-        alias="externalId")
+        description="The ID of the user in the target app that's linked to the Okta application user object. This value is "
+                    "the native app-specific identifier or primary key for the user in the target app.  The `externalId` "
+                    "is set during import when the user is confirmed (reconciled) or during provisioning when the user is "
+                    "created in the target app. This value isn't populated for SSO app assignments (for example, "
+                    "SAML or SWA) because it isn't synchronized with a target app.",
+        alias="externalId"
+    )
     id: StrictStr = Field(description="Unique identifier for the Okta user")
     last_sync: Optional[datetime] = Field(
         default=None,
-        description="Timestamp of the last synchronization operation. This value is only updated for apps with the `IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature.",
-        alias="lastSync")
+        description="Timestamp of the last synchronization operation. This value is only updated for apps with the "
+                    "`IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature.",
+        alias="lastSync"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     password_changed: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the application user password was last changed",
-        alias="passwordChanged")
-    profile: Optional[Dict[str, Any]] = Field(default=None, description="Specifies the default and custom profile properties for a user. Properties that are visible in the Admin Console for an app assignment can also be assigned through the API. Some properties are reference properties that are imported from the target app and can't be configured. See [profile](/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response). ")
+        alias="passwordChanged"
+    )
+    profile: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Specifies the default and custom profile properties for a user. Properties that are visible in the "
+                    "Admin Console for an app assignment can also be assigned through the API. Some properties are "
+                    "reference properties that are imported from the target app and can't be configured. See [profile]("
+                    "/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t"
+                    "=response). "
+    )
     scope: Optional[StrictStr] = Field(
         default=None,
-        description="Indicates if the assignment is direct (`USER`) or by group membership (`GROUP`).")
+        description="Indicates if the assignment is direct (`USER`) or by group membership (`GROUP`)."
+    )
     status: Optional[AppUserStatus] = None
     status_changed: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the application user status was last changed",
-        alias="statusChanged")
+        alias="statusChanged"
+    )
     sync_state: Optional[AppUserSyncState] = Field(default=None, alias="syncState")
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, description="Embedded resources related to the application user using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification", alias="_embedded")
+        default=None,
+        description="Embedded resources related to the application user using the [JSON Hypertext Application Language]("
+                    "https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification",
+        alias="_embedded"
+    )
     links: Optional[LinksAppAndUser] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created",
-                                         "credentials",
-                                         "externalId",
-                                         "id",
-                                         "lastSync",
-                                         "lastUpdated",
-                                         "passwordChanged",
-                                         "profile",
-                                         "scope",
-                                         "status",
-                                         "statusChanged",
-                                         "syncState",
-                                         "_embedded",
-                                         "_links"]
+    __properties: ClassVar[List[str]] = [
+        "created",
+        "credentials",
+        "externalId",
+        "id",
+        "lastSync",
+        "lastUpdated",
+        "passwordChanged",
+        "profile",
+        "scope",
+        "status",
+        "statusChanged",
+        "syncState",
+        "_embedded",
+        "_links"
+    ]
 
     @field_validator('scope')
     def scope_validate_enum(cls, value):
@@ -133,15 +160,17 @@ class AppUserAssignRequest(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "external_id",
-            "last_sync",
-            "last_updated",
-            "password_changed",
-            "status_changed",
-            "embedded",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "external_id",
+                "last_sync",
+                "last_updated",
+                "password_changed",
+                "status_changed",
+                "embedded",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -178,20 +207,24 @@ class AppUserAssignRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "credentials": AppUserCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None,
-            "externalId": obj.get("externalId"),
-            "id": obj.get("id"),
-            "lastSync": obj.get("lastSync"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "passwordChanged": obj.get("passwordChanged"),
-            "profile": obj.get("profile"),
-            "scope": obj.get("scope"),
-            "status": obj.get("status"),
-            "statusChanged": obj.get("statusChanged"),
-            "syncState": obj.get("syncState"),
-            "_embedded": obj.get("_embedded"),
-            "_links": LinksAppAndUser.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "credentials": AppUserCredentials.from_dict(obj["credentials"]) if obj.get(
+                    "credentials"
+                ) is not None else None,
+                "externalId": obj.get("externalId"),
+                "id": obj.get("id"),
+                "lastSync": obj.get("lastSync"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "passwordChanged": obj.get("passwordChanged"),
+                "profile": obj.get("profile"),
+                "scope": obj.get("scope"),
+                "status": obj.get("status"),
+                "statusChanged": obj.get("statusChanged"),
+                "syncState": obj.get("syncState"),
+                "_embedded": obj.get("_embedded"),
+                "_links": LinksAppAndUser.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

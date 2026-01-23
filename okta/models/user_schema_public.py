@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,27 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.user_schema_attribute import UserSchemaAttribute
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.user_schema_attribute import UserSchemaAttribute
 
 
 class UserSchemaPublic(BaseModel):
     """
-    All custom profile properties are defined in a profile subschema with the resolution scope `#custom`.  > **Notes:** > * When you refer to custom profile attributes that differ only by case, name collisions occur. This includes naming custom profile attributes the same as base profile attributes, for example, `firstName` and `FirstName`. > * Certain attributes are reserved and can't be used for custom user profiles. See [Review reserved attributes](https://help.okta.com/okta_help.htm?type=oie&id=reserved-attributes).
+    All custom profile properties are defined in a profile subschema with the resolution scope `#custom`.  > **Notes:** >
+    * When you refer to custom profile attributes that differ only by case, name collisions occur. This includes naming
+    custom profile attributes the same as base profile attributes, for example, `firstName` and `FirstName`. > * Certain
+    attributes are reserved and can't be used for custom user profiles. See [Review reserved attributes](
+    https://help.okta.com/okta_help.htm?type=oie&id=reserved-attributes).
     """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="The subschema name")
     properties: Optional[Dict[str, UserSchemaAttribute]] = Field(default=None, description="The `#custom` object properties")
@@ -74,11 +81,13 @@ class UserSchemaPublic(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-            "required",
-            "type",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+                "required",
+                "type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -103,15 +112,17 @@ class UserSchemaPublic(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "properties": dict(
-                (_k, UserSchemaAttribute.from_dict(_v))
-                for _k, _v in obj["properties"].items()
-            )
-            if obj.get("properties") is not None
-            else None,
-            "required": obj.get("required"),
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "properties": dict(
+                    (_k, UserSchemaAttribute.from_dict(_v))
+                    for _k, _v in obj["properties"].items()
+                )
+                if obj.get("properties") is not None
+                else None,
+                "required": obj.get("required"),
+                "type": obj.get("type")
+            }
+        )
         return _obj

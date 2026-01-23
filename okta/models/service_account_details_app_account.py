@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import ConfigDict
-from typing import Any, ClassVar, Dict, List
+from typing_extensions import Self
+
 from okta.models.service_account import ServiceAccount
 from okta.models.service_account_details_app_account_sub import ServiceAccountDetailsAppAccountSub
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class ServiceAccountDetailsAppAccount(ServiceAccount):
@@ -37,8 +40,10 @@ class ServiceAccountDetailsAppAccount(ServiceAccount):
     Details for a SaaS app account, which will be managed as a service account
     """  # noqa: E501
     details: ServiceAccountDetailsAppAccountSub
-    __properties: ClassVar[List[str]] = ["accountType", "created", "description", "id",
-                                         "lastUpdated", "name", "ownerGroupIds", "ownerUserIds", "status", "statusDetail", "details"]
+    __properties: ClassVar[List[str]] = [
+        "accountType", "created", "description", "id",
+        "lastUpdated", "name", "ownerGroupIds", "ownerUserIds", "status", "statusDetail", "details"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -70,8 +75,10 @@ class ServiceAccountDetailsAppAccount(ServiceAccount):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,17 +103,21 @@ class ServiceAccountDetailsAppAccount(ServiceAccount):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "accountType": obj.get("accountType"),
-            "created": obj.get("created"),
-            "description": obj.get("description"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "ownerGroupIds": obj.get("ownerGroupIds"),
-            "ownerUserIds": obj.get("ownerUserIds"),
-            "status": obj.get("status"),
-            "statusDetail": obj.get("statusDetail"),
-            "details": ServiceAccountDetailsAppAccountSub.from_dict(obj["details"]) if obj.get("details") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "accountType": obj.get("accountType"),
+                "created": obj.get("created"),
+                "description": obj.get("description"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "ownerGroupIds": obj.get("ownerGroupIds"),
+                "ownerUserIds": obj.get("ownerUserIds"),
+                "status": obj.get("status"),
+                "statusDetail": obj.get("statusDetail"),
+                "details": ServiceAccountDetailsAppAccountSub.from_dict(obj["details"]) if obj.get(
+                    "details"
+                ) is not None else None
+            }
+        )
         return _obj

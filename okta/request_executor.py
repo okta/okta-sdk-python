@@ -1,22 +1,24 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import asyncio
-from okta.http_client import HTTPClient
-from okta.user_agent import UserAgent
-from okta.oauth import OAuth
-from okta.error_messages import ERROR_MESSAGE_429_MISSING_DATE_X_RESET
-from okta.utils import convert_date_time_to_seconds
-import time
-from http import HTTPStatus
 import json
 import logging
+import time
+from http import HTTPStatus
 
+from okta.error_messages import ERROR_MESSAGE_429_MISSING_DATE_X_RESET
+from okta.http_client import HTTPClient
+from okta.oauth import OAuth
+from okta.user_agent import UserAgent
+from okta.utils import convert_date_time_to_seconds
 
 logger = logging.getLogger('okta-sdk-python')
 
@@ -43,13 +45,15 @@ class RequestExecutor:
             raise ValueError(
                 ("okta.client.requestTimeout provided as "
                  f"{self._request_timeout} but must be 0 (disabled) or "
-                 "greater than zero"))
+                 "greater than zero")
+            )
         self._max_retries = config["client"]["rateLimit"].get('maxRetries', 2)
         if self._max_retries < 0:
             raise ValueError(
                 ("okta.client.rateLimit.maxRetries provided as "
                  f"{self._max_retries} but must be 0 (disabled) or "
-                 "greater than zero"))
+                 "greater than zero")
+            )
         # Setup other fields
         self._authorization_mode = config["client"]["authorizationMode"]
         self._base_url = config["client"]["orgUrl"]
@@ -72,12 +76,14 @@ class RequestExecutor:
             self._oauth = OAuth(self, self._config)
 
         http_client_impl = http_client or HTTPClient
-        self._http_client = http_client_impl({
-            'requestTimeout': self._request_timeout,
-            'headers': self._default_headers,
-            'proxy': self._config["client"].get("proxy"),
-            'sslContext': self._config["client"].get("sslContext"),
-        })
+        self._http_client = http_client_impl(
+            {
+                'requestTimeout': self._request_timeout,
+                'headers': self._default_headers,
+                'proxy': self._config["client"].get("proxy"),
+                'sslContext': self._config["client"].get("sslContext"),
+            }
+        )
         HTTPClient.raise_exception = \
             self._config['client'].get("raiseException", False)
         self._custom_headers = {}
@@ -102,8 +108,10 @@ class RequestExecutor:
             return [v for v in map(self.clear_empty_params, body) if v or v == 0 or v is False]
         return body
 
-    async def create_request(self, method: str, url: str, body: dict = None,
-                             headers: dict = {}, form: dict = {}, oauth=False, keep_empty_params=False):
+    async def create_request(
+            self, method: str, url: str, body: dict = None,
+            headers: dict = {}, form: dict = {}, oauth=False, keep_empty_params=False
+    ):
         """
         Creates request for request executor's HTTP client.
 
@@ -179,7 +187,8 @@ class RequestExecutor:
             return (None, error)
 
         _, error = self._http_client.check_response_for_error(
-            request["url"], response, response_body)
+            request["url"], response, response_body
+        )
 
         return response, response_body, error
 
@@ -206,7 +215,7 @@ class RequestExecutor:
         # check if in cache
         if not self._cache.contains(url_cache_key):
             # shoot request and return
-            _, res_details, resp_body, error = await\
+            _, res_details, resp_body, error = await \
                 self.fire_request_helper(request, 0, time.time())
             if error is not None:
                 return (None, res_details, resp_body, error)
@@ -217,7 +226,8 @@ class RequestExecutor:
                     json_object = json.loads(resp_body)
                     if not isinstance(json_object, list):
                         self._cache.add(
-                            url_cache_key, (res_details, resp_body))
+                            url_cache_key, (res_details, resp_body)
+                        )
                 except Exception:
                     pass
 
@@ -265,31 +275,70 @@ class RequestExecutor:
                 date_time = convert_date_time_to_seconds(date_time)
 
             # Get X-Rate-Limit-Reset header
-            retry_limit_reset_headers = list(map(float, headers.getall(
-                "X-Rate-Limit-Reset", [])))
+            retry_limit_reset_headers = list(
+                map(
+                    float, headers.getall(
+                        "X-Rate-Limit-Reset", []
+                    )
+                )
+            )
             # header might be in lowercase, so check this too
-            retry_limit_reset_headers.extend(list(map(float, headers.getall(
-                "x-rate-limit-reset", []))))
+            retry_limit_reset_headers.extend(
+                list(
+                    map(
+                        float, headers.getall(
+                            "x-rate-limit-reset", []
+                        )
+                    )
+                )
+            )
             retry_limit_reset = min(retry_limit_reset_headers) if len(
-                retry_limit_reset_headers) > 0 else None
+                retry_limit_reset_headers
+            ) > 0 else None
 
             # Get X-Rate-Limit-Limit Header
-            retry_limit_limit_headers = list(map(float, headers.getall(
-                "X-Rate-Limit-Limit", [])))
+            retry_limit_limit_headers = list(
+                map(
+                    float, headers.getall(
+                        "X-Rate-Limit-Limit", []
+                    )
+                )
+            )
             # header might be in lowercase, so check this too
-            retry_limit_limit_headers.extend(list(map(float, headers.getall(
-                "x-rate-limit-limit", []))))
+            retry_limit_limit_headers.extend(
+                list(
+                    map(
+                        float, headers.getall(
+                            "x-rate-limit-limit", []
+                        )
+                    )
+                )
+            )
             retry_limit_limit = min(retry_limit_limit_headers) if len(
-                retry_limit_limit_headers) > 0 else None
+                retry_limit_limit_headers
+            ) > 0 else None
 
             # Get X-Rate-Limit-Remaining Header
-            retry_limit_remaining_headers = list(map(float, headers.getall(
-                "X-Rate-Limit-Remaining", [])))
+            retry_limit_remaining_headers = list(
+                map(
+                    float, headers.getall(
+                        "X-Rate-Limit-Remaining", []
+                    )
+                )
+            )
             # header might be in lowercase, so check this too
-            retry_limit_remaining_headers.extend(list(map(float, headers.getall(
-                "x-rate-limit-remaining", []))))
+            retry_limit_remaining_headers.extend(
+                list(
+                    map(
+                        float, headers.getall(
+                            "x-rate-limit-remaining", []
+                        )
+                    )
+                )
+            )
             retry_limit_remaining = min(retry_limit_remaining_headers) if len(
-                retry_limit_remaining_headers) > 0 else None
+                retry_limit_remaining_headers
+            ) > 0 else None
 
             # both X-Rate-Limit-Limit and X-Rate-Limit-Remaining being 0 indicates concurrent rate limit error
             if retry_limit_limit is not None and retry_limit_remaining is not None:
@@ -297,21 +346,24 @@ class RequestExecutor:
                     logger.warning('Concurrent limit rate exceeded')
 
             if not date_time or not retry_limit_reset:
-                return (None, res_details, resp_body,
-                        Exception(
-                            ERROR_MESSAGE_429_MISSING_DATE_X_RESET
-                        ))
+                return (
+                    None, res_details, resp_body,
+                    Exception(
+                        ERROR_MESSAGE_429_MISSING_DATE_X_RESET
+                    )
+                )
 
             check_429 = self.is_too_many_requests(res_details.status, resp_body)
             if check_429:
                 # backoff
                 backoff_seconds = self.calculate_backoff(
-                    retry_limit_reset, date_time)
+                    retry_limit_reset, date_time
+                )
                 logger.info(f'Hit rate limit. Retry request in {backoff_seconds} seconds.')
                 logger.debug(f'Value of retry_limit_reset: {retry_limit_reset}')
                 logger.debug(f'Value of date_time: {date_time}')
                 await self.pause_for_backoff(backoff_seconds)
-                if (current_req_start_time + backoff_seconds)\
+                if (current_req_start_time + backoff_seconds) \
                         - request_start_time > req_timeout and req_timeout > 0:
                     return (None, res_details, resp_body, resp_body)
 
@@ -320,7 +372,8 @@ class RequestExecutor:
             request['headers'].update(
                 {
                     RequestExecutor.RETRY_FOR_HEADER: headers.get(
-                        "X-Okta-Request-Id", ""),
+                        "X-Okta-Request-Id", ""
+                    ),
                     RequestExecutor.RETRY_COUNT_HEADER: str(attempts)
                 }
             )
@@ -339,9 +392,11 @@ class RequestExecutor:
 
         Retryable statuses: 429, 503, 504
         """
-        return status is not None and status in (HTTPStatus.TOO_MANY_REQUESTS,
-                                                 HTTPStatus.SERVICE_UNAVAILABLE,
-                                                 HTTPStatus.GATEWAY_TIMEOUT)
+        return status is not None and status in (
+            HTTPStatus.TOO_MANY_REQUESTS,
+            HTTPStatus.SERVICE_UNAVAILABLE,
+            HTTPStatus.GATEWAY_TIMEOUT
+        )
 
     def is_too_many_requests(self, status, response):
         """
@@ -354,7 +409,7 @@ class RequestExecutor:
         Returns:
             bool: Returns True if this request has been called too many times
         """
-        return response is not None and status is not None\
+        return response is not None and status is not None \
             and status == HTTPStatus.TOO_MANY_REQUESTS
 
     def parse_response(self, request, response):

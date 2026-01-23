@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.authorization_server_policy_all_of_links import AuthorizationServerPolicyAllOfLinks
 from okta.models.authorization_server_policy_conditions import AuthorizationServerPolicyConditions
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AuthorizationServerPolicy(BaseModel):
@@ -39,25 +42,33 @@ class AuthorizationServerPolicy(BaseModel):
     AuthorizationServerPolicy
     """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="ID of the Policy")
-    type: Optional[StrictStr] = Field(default=None, description="Indicates that the Policy is an authorization server Policy")
+    type: Optional[StrictStr] = Field(
+        default=None, description="Indicates that the Policy is an authorization server Policy"
+    )
     name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]
-                   ] = Field(default=None, description="Name of the Policy")
+    ] = Field(default=None, description="Name of the Policy")
     conditions: Optional[AuthorizationServerPolicyConditions] = None
     description: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(
-        default=None, description="Description of the Policy")
+        default=None, description="Description of the Policy"
+    )
     priority: Optional[StrictInt] = Field(
         default=None,
-        description="Specifies the order in which this Policy is evaluated in relation to the other Policies in a custom authorization server")
+        description="Specifies the order in which this Policy is evaluated in relation to the other Policies in a custom "
+                    "authorization server"
+    )
     status: Optional[StrictStr] = Field(default=None, description="Specifies whether requests have access to this Policy")
     system: Optional[StrictBool] = Field(default=None, description="Specifies whether Okta created this Policy")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the Policy was created")
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the Policy was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     links: Optional[AuthorizationServerPolicyAllOfLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["id", "type", "name", "conditions",
-                                         "description", "priority", "status", "system", "created", "lastUpdated", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "id", "type", "name", "conditions",
+        "description", "priority", "status", "system", "created", "lastUpdated", "_links"
+    ]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -111,10 +122,12 @@ class AuthorizationServerPolicy(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -146,17 +159,23 @@ class AuthorizationServerPolicy(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "type": obj.get("type"),
-            "name": obj.get("name"),
-            "conditions": AuthorizationServerPolicyConditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None,
-            "description": obj.get("description"),
-            "priority": obj.get("priority"),
-            "status": obj.get("status"),
-            "system": obj.get("system"),
-            "created": obj.get("created"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "_links": AuthorizationServerPolicyAllOfLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "type": obj.get("type"),
+                "name": obj.get("name"),
+                "conditions": AuthorizationServerPolicyConditions.from_dict(obj["conditions"]) if obj.get(
+                    "conditions"
+                ) is not None else None,
+                "description": obj.get("description"),
+                "priority": obj.get("priority"),
+                "status": obj.get("status"),
+                "system": obj.get("system"),
+                "created": obj.get("created"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "_links": AuthorizationServerPolicyAllOfLinks.from_dict(obj["_links"]) if obj.get(
+                    "_links"
+                ) is not None else None
+            }
+        )
         return _obj

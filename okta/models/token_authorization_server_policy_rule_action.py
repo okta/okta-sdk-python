@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.token_authorization_server_policy_rule_action_inline_hook import TokenAuthorizationServerPolicyRuleActionInlineHook
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.token_authorization_server_policy_rule_action_inline_hook import \
+    TokenAuthorizationServerPolicyRuleActionInlineHook
 
 
 class TokenAuthorizationServerPolicyRuleAction(BaseModel):
@@ -38,18 +42,24 @@ class TokenAuthorizationServerPolicyRuleAction(BaseModel):
     access_token_lifetime_minutes: Optional[StrictInt] = Field(
         default=None,
         description="Lifetime of the access token in minutes. The minimum is five minutes. The maximum is one day.",
-        alias="accessTokenLifetimeMinutes")
+        alias="accessTokenLifetimeMinutes"
+    )
     inline_hook: Optional[TokenAuthorizationServerPolicyRuleActionInlineHook] = Field(default=None, alias="inlineHook")
     refresh_token_lifetime_minutes: Optional[StrictInt] = Field(
         default=None,
         description="Lifetime of the refresh token is the minimum access token lifetime.",
-        alias="refreshTokenLifetimeMinutes")
+        alias="refreshTokenLifetimeMinutes"
+    )
     refresh_token_window_minutes: Optional[StrictInt] = Field(
         default=None,
-        description="Timeframe when the refresh token is valid. The minimum is 10 minutes. The maximum is five years (2,628,000 minutes).",
-        alias="refreshTokenWindowMinutes")
-    __properties: ClassVar[List[str]] = ["accessTokenLifetimeMinutes",
-                                         "inlineHook", "refreshTokenLifetimeMinutes", "refreshTokenWindowMinutes"]
+        description="Timeframe when the refresh token is valid. The minimum is 10 minutes. The maximum is five years (2,"
+                    "628,000 minutes).",
+        alias="refreshTokenWindowMinutes"
+    )
+    __properties: ClassVar[List[str]] = [
+        "accessTokenLifetimeMinutes",
+        "inlineHook", "refreshTokenLifetimeMinutes", "refreshTokenWindowMinutes"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,8 +91,10 @@ class TokenAuthorizationServerPolicyRuleAction(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -107,10 +119,14 @@ class TokenAuthorizationServerPolicyRuleAction(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "accessTokenLifetimeMinutes": obj.get("accessTokenLifetimeMinutes"),
-            "inlineHook": TokenAuthorizationServerPolicyRuleActionInlineHook.from_dict(obj["inlineHook"]) if obj.get("inlineHook") is not None else None,
-            "refreshTokenLifetimeMinutes": obj.get("refreshTokenLifetimeMinutes"),
-            "refreshTokenWindowMinutes": obj.get("refreshTokenWindowMinutes")
-        })
+        _obj = cls.model_validate(
+            {
+                "accessTokenLifetimeMinutes": obj.get("accessTokenLifetimeMinutes"),
+                "inlineHook": TokenAuthorizationServerPolicyRuleActionInlineHook.from_dict(obj["inlineHook"]) if obj.get(
+                    "inlineHook"
+                ) is not None else None,
+                "refreshTokenLifetimeMinutes": obj.get("refreshTokenLifetimeMinutes"),
+                "refreshTokenWindowMinutes": obj.get("refreshTokenWindowMinutes")
+            }
+        )
         return _obj

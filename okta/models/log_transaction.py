@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,27 +20,37 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class LogTransaction(BaseModel):
     """
-    A `transaction` object comprises contextual information associated with its respective event. This information is useful for understanding sequences of correlated events. For example, a `transaction` object such as the following: ``` {   \"id\": \"Wn4f-0RQ8D8lTSLkAmkKdQAADqo\",   \"type\": \"WEB\",   \"detail\": null } ``` indicates that a `WEB` request with `id` `Wn4f-0RQ8D8lTSLkAmkKdQAADqo` has created this event.  A `transaction` object with a `requestApiTokenId` in the `detail` object, for example : ``` {   \"id\": \"YjSlblAAqnKY7CdyCkXNBgAAAIU\",   \"type\": \"WEB\",   \"detail\": {     \"requestApiTokenId\": \"00T94e3cn9kSEO3c51s5\"   } } ``` indicates that this event was the result of an action performed through an API using the token identified by 00T94e3cn9kSEO3c51s5. The token ID is visible in the Admin Console, **Security** > **API**. See [API token management](https://help.okta.com/okta_help.htm?id=Security_API). For more information on API tokens, see [Create an API token](https://developer.okta.com/docs/guides/create-an-api-token/).
+    A `transaction` object comprises contextual information associated with its respective event. This information is
+    useful for understanding sequences of correlated events. For example, a `transaction` object such as the following:
+    ``` {   \"id\": \"Wn4f-0RQ8D8lTSLkAmkKdQAADqo\",   \"type\": \"WEB\",   \"detail\": null } ``` indicates that a `WEB`
+    request with `id` `Wn4f-0RQ8D8lTSLkAmkKdQAADqo` has created this event.  A `transaction` object with a
+    `requestApiTokenId` in the `detail` object, for example : ``` {   \"id\": \"YjSlblAAqnKY7CdyCkXNBgAAAIU\",
+    \"type\": \"WEB\",   \"detail\": {     \"requestApiTokenId\": \"00T94e3cn9kSEO3c51s5\"   } } ``` indicates that this
+    event was the result of an action performed through an API using the token identified by 00T94e3cn9kSEO3c51s5. The
+    token ID is visible in the Admin Console, **Security** > **API**. See [API token management](
+    https://help.okta.com/okta_help.htm?id=Security_API). For more information on API tokens, see [Create an API token](
+    https://developer.okta.com/docs/guides/create-an-api-token/).
     """  # noqa: E501
     detail: Optional[Dict[str, Any]] = Field(default=None, description="Details for this transaction.")
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for this transaction.")
     type: Optional[StrictStr] = Field(
         default=None,
-        description="Describes the kind of transaction. `WEB` indicates a web request. `JOB` indicates an asynchronous task.")
+        description="Describes the kind of transaction. `WEB` indicates a web request. `JOB` indicates an asynchronous task."
+    )
     __properties: ClassVar[List[str]] = ["detail", "id", "type"]
 
     model_config = ConfigDict(
@@ -74,11 +86,13 @@ class LogTransaction(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "detail",
-            "id",
-            "type",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "detail",
+                "id",
+                "type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,9 +110,11 @@ class LogTransaction(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "detail": obj.get("detail"),
-            "id": obj.get("id"),
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "detail": obj.get("detail"),
+                "id": obj.get("id"),
+                "type": obj.get("type")
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.well_known_uris_root_embedded_apple_app_site_association import WellKnownURIsRootEmbeddedAppleAppSiteAssociation
-from okta.models.well_known_uris_root_embedded_assetlinks_json import WellKnownURIsRootEmbeddedAssetlinksJson
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.well_known_uris_root_embedded_apple_app_site_association import \
+    WellKnownURIsRootEmbeddedAppleAppSiteAssociation
+from okta.models.well_known_uris_root_embedded_assetlinks_json import WellKnownURIsRootEmbeddedAssetlinksJson
 
 
 class WellKnownURIsRootEmbedded(BaseModel):
@@ -37,7 +41,8 @@ class WellKnownURIsRootEmbedded(BaseModel):
     WellKnownURIsRootEmbedded
     """  # noqa: E501
     apple_app_site_association: Optional[WellKnownURIsRootEmbeddedAppleAppSiteAssociation] = Field(
-        default=None, alias="apple-app-site-association")
+        default=None, alias="apple-app-site-association"
+    )
     assetlinks_json: Optional[WellKnownURIsRootEmbeddedAssetlinksJson] = Field(default=None, alias="assetlinks.json")
     webauthn: Optional[WellKnownURIsRootEmbeddedAppleAppSiteAssociation] = None
     __properties: ClassVar[List[str]] = ["apple-app-site-association", "assetlinks.json", "webauthn"]
@@ -72,8 +77,10 @@ class WellKnownURIsRootEmbedded(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -112,9 +119,17 @@ class WellKnownURIsRootEmbedded(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "apple-app-site-association": WellKnownURIsRootEmbeddedAppleAppSiteAssociation.from_dict(obj["apple-app-site-association"]) if obj.get("apple-app-site-association") is not None else None,
-            "assetlinks.json": WellKnownURIsRootEmbeddedAssetlinksJson.from_dict(obj["assetlinks.json"]) if obj.get("assetlinks.json") is not None else None,
-            "webauthn": WellKnownURIsRootEmbeddedAppleAppSiteAssociation.from_dict(obj["webauthn"]) if obj.get("webauthn") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "apple-app-site-association": WellKnownURIsRootEmbeddedAppleAppSiteAssociation.from_dict(
+                    obj["apple-app-site-association"]
+                ) if obj.get("apple-app-site-association") is not None else None,
+                "assetlinks.json": WellKnownURIsRootEmbeddedAssetlinksJson.from_dict(obj["assetlinks.json"]) if obj.get(
+                    "assetlinks.json"
+                ) is not None else None,
+                "webauthn": WellKnownURIsRootEmbeddedAppleAppSiteAssociation.from_dict(obj["webauthn"]) if obj.get(
+                    "webauthn"
+                ) is not None else None
+            }
+        )
         return _obj

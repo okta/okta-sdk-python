@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,25 +20,28 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.links_self import LinksSelf
 from okta.models.profile_mapping_property import ProfileMappingProperty
 from okta.models.profile_mapping_source import ProfileMappingSource
 from okta.models.profile_mapping_target import ProfileMappingTarget
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class ProfileMapping(BaseModel):
     """
-    The profile mapping object describes a mapping between an Okta user's and an app user's properties using [JSON Schema Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).  > **Note:** Same type source/target mappings aren't supported by this API. Profile mappings must be between Okta and an app.
+    The profile mapping object describes a mapping between an Okta user's and an app user's properties using [JSON Schema
+    Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).  > **Note:** Same type source/target
+    mappings aren't supported by this API. Profile mappings must be between Okta and an app.
     """  # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for a profile mapping")
     properties: Optional[Dict[str, ProfileMappingProperty]] = None
@@ -76,9 +81,11 @@ class ProfileMapping(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -124,16 +131,18 @@ class ProfileMapping(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "properties": dict(
-                (_k, ProfileMappingProperty.from_dict(_v))
-                for _k, _v in obj["properties"].items()
-            )
-            if obj.get("properties") is not None
-            else None,
-            "source": ProfileMappingSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
-            "target": ProfileMappingTarget.from_dict(obj["target"]) if obj.get("target") is not None else None,
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "properties": dict(
+                    (_k, ProfileMappingProperty.from_dict(_v))
+                    for _k, _v in obj["properties"].items()
+                )
+                if obj.get("properties") is not None
+                else None,
+                "source": ProfileMappingSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
+                "target": ProfileMappingTarget.from_dict(obj["target"]) if obj.get("target") is not None else None,
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,27 +20,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class LogIssuer(BaseModel):
     """
-    Describes the issuer of the authorization server when the authentication is performed through OAuth. This is the location where well-known resources regarding the details of the authorization servers are published.
+    Describes the issuer of the authorization server when the authentication is performed through OAuth. This is the
+    location where well-known resources regarding the details of the authorization servers are published.
     """  # noqa: E501
     id: Optional[StrictStr] = Field(
         default=None,
-        description="Varies depending on the type of authentication. If authentication is SAML 2.0, `id` is the issuer in the SAML assertion. For social login, `id` is the issuer of the token.")
-    type: Optional[StrictStr] = Field(default=None,
-                                      description="Information on the `issuer` and source of the SAML assertion or token")
+        description="Varies depending on the type of authentication. If authentication is SAML 2.0, `id` is the issuer in "
+                    "the SAML assertion. For social login, `id` is the issuer of the token."
+    )
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="Information on the `issuer` and source of the SAML assertion or token"
+    )
     __properties: ClassVar[List[str]] = ["id", "type"]
 
     model_config = ConfigDict(
@@ -73,10 +80,12 @@ class LogIssuer(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-            "type",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+                "type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -94,8 +103,10 @@ class LogIssuer(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "type": obj.get("type")
+            }
+        )
         return _obj

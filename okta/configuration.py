@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 import copy
+import http.client as httplib
 import logging
-from logging import FileHandler
 import multiprocessing
 import sys
+from logging import FileHandler
 from typing import Optional
-import urllib3
 
-import http.client as httplib
+import urllib3
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
     'multipleOf', 'maximum', 'exclusiveMaximum',
@@ -87,14 +88,15 @@ conf = okta.Configuration(
 
     _default = None
 
-    def __init__(self, host=None,
-                 api_key=None, api_key_prefix=None,
-                 username=None, password=None,
-                 access_token=None,
-                 server_index=None, server_variables=None,
-                 server_operation_index=None, server_operation_variables=None,
-                 ssl_ca_cert=None, authorization_mode=None,
-                 ) -> None:
+    def __init__(
+            self, host=None,
+            api_key=None, api_key_prefix=None,
+            username=None, password=None,
+            access_token=None,
+            server_index=None, server_variables=None,
+            server_operation_index=None, server_operation_variables=None,
+            ssl_ca_cert=None, authorization_mode=None,
+    ) -> None:
         """Constructor
         """
         self._base_path = "https://subdomain.okta.com" if host is None else host
@@ -417,12 +419,12 @@ conf = okta.Configuration(
 
         :return: The report for debugging.
         """
-        return "Python SDK Debug Report:\n"\
-               "OS: {env}\n"\
-               "Python Version: {pyversion}\n"\
-               "Version of the API: 5.1.0\n"\
-               "SDK Package Version: 1.0.0".\
-               format(env=sys.platform, pyversion=sys.version)
+        return "Python SDK Debug Report:\n" \
+               "OS: {env}\n" \
+               "Python Version: {pyversion}\n" \
+               "Version of the API: 5.1.0\n" \
+               "SDK Package Version: 1.0.0". \
+            format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):
         """Gets an array of host settings
@@ -435,7 +437,9 @@ conf = okta.Configuration(
                 'description': "No description provided",
                 'variables': {
                     'yourOktaDomain': {
-                        'description': "The domain of your organization. This can be a provided subdomain of an official okta domain (okta.com, oktapreview.com, etc) or one of your configured custom domains.",
+                        'description': "The domain of your organization. This can be a provided subdomain of an official "
+                                       "okta domain (okta.com, oktapreview.com, etc) or one of your configured custom "
+                                       "domains.",
                         'default_value': "subdomain.okta.com",
                     }
                 }
@@ -460,14 +464,16 @@ conf = okta.Configuration(
         except IndexError:
             raise ValueError(
                 "Invalid index {0} when selecting the host settings. "
-                "Must be less than {1}".format(index, len(servers)))
+                "Must be less than {1}".format(index, len(servers))
+            )
 
         url = server['url']
 
         # go through variables and replace placeholders
         for variable_name, variable in server.get('variables', {}).items():
             used_value = variables.get(
-                variable_name, variable['default_value'])
+                variable_name, variable['default_value']
+            )
 
             if 'enum_values' in variable \
                     and used_value not in variable['enum_values']:
@@ -475,7 +481,9 @@ conf = okta.Configuration(
                     "The variable `{0}` in the host URL has invalid value "
                     "{1}. Must be {2}.".format(
                         variable_name, variables[variable_name],
-                        variable['enum_values']))
+                        variable['enum_values']
+                    )
+                )
 
             url = url.replace("{" + variable_name + "}", used_value)
 

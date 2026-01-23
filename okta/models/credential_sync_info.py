@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from okta.models.credential_sync_state import CredentialSyncState
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
+
+from okta.models.credential_sync_state import CredentialSyncState
 
 
 class CredentialSyncInfo(BaseModel):
@@ -40,18 +43,22 @@ class CredentialSyncInfo(BaseModel):
     error_code: Optional[StrictStr] = Field(
         default=None,
         description="The error code for the type of error",
-        alias="errorCode")
+        alias="errorCode"
+    )
     error_reason: Optional[StrictStr] = Field(
         default=None,
         description="A short description of the error",
-        alias="errorReason")
+        alias="errorReason"
+    )
     secret_version_id: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=36)]] = Field(
-        default=None, description="The version ID of the password secret from the OPA vault.", alias="secretVersionId")
+        default=None, description="The version ID of the password secret from the OPA vault.", alias="secretVersionId"
+    )
     sync_state: Optional[CredentialSyncState] = Field(default=None, alias="syncState")
     sync_time: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the credential was changed",
-        alias="syncTime")
+        alias="syncTime"
+    )
     __properties: ClassVar[List[str]] = ["errorCode", "errorReason", "secretVersionId", "syncState", "syncTime"]
 
     model_config = ConfigDict(
@@ -87,11 +94,13 @@ class CredentialSyncInfo(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "error_code",
-            "error_reason",
-            "sync_time",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "error_code",
+                "error_reason",
+                "sync_time",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -109,11 +118,13 @@ class CredentialSyncInfo(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "errorCode": obj.get("errorCode"),
-            "errorReason": obj.get("errorReason"),
-            "secretVersionId": obj.get("secretVersionId"),
-            "syncState": obj.get("syncState"),
-            "syncTime": obj.get("syncTime")
-        })
+        _obj = cls.model_validate(
+            {
+                "errorCode": obj.get("errorCode"),
+                "errorReason": obj.get("errorReason"),
+                "secretVersionId": obj.get("secretVersionId"),
+                "syncState": obj.get("syncState"),
+                "syncTime": obj.get("syncTime")
+            }
+        )
         return _obj

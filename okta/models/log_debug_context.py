@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,24 +20,41 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class LogDebugContext(BaseModel):
     """
-    For some kinds of events (for example, OLM provisioning, sign-in request, second factor SMS, and so on), the fields that are provided in other response objects aren't sufficient to adequately describe the operations that the event has performed. In such cases, the `debugContext` object provides a way to store additional information.  For example, an event where a second factor SMS token is sent to a user may have a `debugContext` that looks like the following: ``` {     \"debugData\": {         \"requestUri\": \"/api/v1/users/00u3gjksoiRGRAZHLSYV/factors/smsf8luacpZJAva10x45/verify\",         \"smsProvider\": \"TELESIGN\",         \"transactionId\": \"268632458E3C100F5F5F594C6DC689D4\"     } } ``` By inspecting the debugData field, you can find the URI that is used to trigger the second factor SMS (`/api/v1/users/00u3gjksoiRGRAZHLSYV/factors/smsf8luacpZJAva10x45/verify`), the SMS provider (`TELESIGN`), and the ID used by Telesign to identify this transaction (`268632458E3C100F5F5F594C6DC689D4`).  If for some reason the information that is needed to implement a feature isn't provided in other response objects, you should scan the `debugContext.debugData` field for potentially useful fields. > **Important:** The information contained in `debugContext.debugData` is intended to add context when troubleshooting customer platform issues. Both key names and values may change from release to release and aren't guaranteed to be stable. Therefore, they shouldn't be viewed as a data contract but as a debugging aid instead.
+    For some kinds of events (for example, OLM provisioning, sign-in request, second factor SMS, and so on), the fields
+    that are provided in other response objects aren't sufficient to adequately describe the operations that the event has
+    performed. In such cases, the `debugContext` object provides a way to store additional information.  For example,
+    an event where a second factor SMS token is sent to a user may have a `debugContext` that looks like the following:
+    ``` {     \"debugData\": {         \"requestUri\":
+    \"/api/v1/users/00u3gjksoiRGRAZHLSYV/factors/smsf8luacpZJAva10x45/verify\",         \"smsProvider\": \"TELESIGN\",
+        \"transactionId\": \"268632458E3C100F5F5F594C6DC689D4\"     } } ``` By inspecting the debugData field,
+        you can find the URI that is used to trigger the second factor SMS (
+        `/api/v1/users/00u3gjksoiRGRAZHLSYV/factors/smsf8luacpZJAva10x45/verify`), the SMS provider (`TELESIGN`),
+        and the ID used by Telesign to identify this transaction (`268632458E3C100F5F5F594C6DC689D4`).  If for some reason
+        the information that is needed to implement a feature isn't provided in other response objects, you should scan
+        the `debugContext.debugData` field for potentially useful fields. > **Important:** The information contained in
+        `debugContext.debugData` is intended to add context when troubleshooting customer platform issues. Both key names
+        and values may change from release to release and aren't guaranteed to be stable. Therefore, they shouldn't be
+        viewed as a data contract but as a debugging aid instead.
     """  # noqa: E501
     debug_data: Optional[Dict[str, Any]] = Field(
-        default=None, description="A dynamic field that contains miscellaneous information that is dependent on the event type.", alias="debugData")
+        default=None,
+        description="A dynamic field that contains miscellaneous information that is dependent on the event type.",
+        alias="debugData"
+    )
     __properties: ClassVar[List[str]] = ["debugData"]
 
     model_config = ConfigDict(
@@ -69,9 +88,11 @@ class LogDebugContext(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "debug_data",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "debug_data",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,7 +110,9 @@ class LogDebugContext(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "debugData": obj.get("debugData")
-        })
+        _obj = cls.model_validate(
+            {
+                "debugData": obj.get("debugData")
+            }
+        )
         return _obj

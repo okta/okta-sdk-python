@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -35,12 +37,18 @@ class RealmProfile(BaseModel):
     RealmProfile
     """  # noqa: E501
     domains: Optional[List[StrictStr]] = Field(
-        default=None, description="Array of allowed domains. No user in this realm can be created or updated unless they have a username and email from one of these domains.  The following characters aren't allowed in the domain name: `!$%^&()=*+,:;<>'[]|/?\\`")
+        default=None,
+        description="Array of allowed domains. No user in this realm can be created or updated unless they have a username "
+                    "and email from one of these domains.  The following characters aren't allowed in the domain name: "
+                    "`!$%^&()=*+,:;<>'[]|/?\\`"
+    )
     name: StrictStr = Field(description="Name of a realm")
     realm_type: Optional[StrictStr] = Field(
         default=None,
-        description="Used to store partner users. This property must be set to `PARTNER` to access Okta's external partner portal.",
-        alias="realmType")
+        description="Used to store partner users. This property must be set to `PARTNER` to access Okta's external partner "
+                    "portal.",
+        alias="realmType"
+    )
     __properties: ClassVar[List[str]] = ["domains", "name", "realmType"]
 
     @field_validator('realm_type')
@@ -83,8 +91,10 @@ class RealmProfile(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -102,9 +112,11 @@ class RealmProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "domains": obj.get("domains"),
-            "name": obj.get("name"),
-            "realmType": obj.get("realmType")
-        })
+        _obj = cls.model_validate(
+            {
+                "domains": obj.get("domains"),
+                "name": obj.get("name"),
+                "realmType": obj.get("realmType")
+            }
+        )
         return _obj

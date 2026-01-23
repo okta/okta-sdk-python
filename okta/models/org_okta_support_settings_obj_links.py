@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,26 +20,29 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.org_okta_support_settings_obj_links_case import OrgOktaSupportSettingsObjLinksCase
 from okta.models.org_okta_support_settings_obj_links_cases import OrgOktaSupportSettingsObjLinksCases
 from okta.models.org_okta_support_settings_obj_links_extend import OrgOktaSupportSettingsObjLinksExtend
 from okta.models.org_okta_support_settings_obj_links_grant import OrgOktaSupportSettingsObjLinksGrant
 from okta.models.org_okta_support_settings_obj_links_revoke import OrgOktaSupportSettingsObjLinksRevoke
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OrgOktaSupportSettingsObjLinks(BaseModel):
     """
-    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the Okta Support Settings object using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
+    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the Okta Support
+    Settings object using the [JSON Hypertext Application Language](
+    https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
     """  # noqa: E501
     extend: Optional[OrgOktaSupportSettingsObjLinksExtend] = None
     revoke: Optional[OrgOktaSupportSettingsObjLinksRevoke] = None
@@ -76,8 +81,10 @@ class OrgOktaSupportSettingsObjLinks(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -130,11 +137,21 @@ class OrgOktaSupportSettingsObjLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "extend": OrgOktaSupportSettingsObjLinksExtend.from_dict(obj["extend"]) if obj.get("extend") is not None else None,
-            "revoke": OrgOktaSupportSettingsObjLinksRevoke.from_dict(obj["revoke"]) if obj.get("revoke") is not None else None,
-            "grant": OrgOktaSupportSettingsObjLinksGrant.from_dict(obj["grant"]) if obj.get("grant") is not None else None,
-            "case": OrgOktaSupportSettingsObjLinksCase.from_dict(obj["case"]) if obj.get("case") is not None else None,
-            "cases": OrgOktaSupportSettingsObjLinksCases.from_dict(obj["cases"]) if obj.get("cases") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "extend": OrgOktaSupportSettingsObjLinksExtend.from_dict(obj["extend"]) if obj.get(
+                    "extend"
+                ) is not None else None,
+                "revoke": OrgOktaSupportSettingsObjLinksRevoke.from_dict(obj["revoke"]) if obj.get(
+                    "revoke"
+                ) is not None else None,
+                "grant": OrgOktaSupportSettingsObjLinksGrant.from_dict(obj["grant"]) if obj.get(
+                    "grant"
+                ) is not None else None,
+                "case": OrgOktaSupportSettingsObjLinksCase.from_dict(obj["case"]) if obj.get("case") is not None else None,
+                "cases": OrgOktaSupportSettingsObjLinksCases.from_dict(obj["cases"]) if obj.get(
+                    "cases"
+                ) is not None else None
+            }
+        )
         return _obj

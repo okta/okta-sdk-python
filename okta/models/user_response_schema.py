@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,34 +20,39 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from okta.models.identity_source_user_profile_for_upsert import IdentitySourceUserProfileForUpsert
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
+
+from okta.models.identity_source_user_profile_for_upsert import IdentitySourceUserProfileForUpsert
 
 
 class UserResponseSchema(BaseModel):
     """
     UserResponseSchema
     """  # noqa: E501
-    created: Optional[datetime] = Field(default=None,
-                                        description="The timestamp when the user was created in the identity source")
+    created: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user was created in the identity source"
+    )
     external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(
-        default=None, description="The external ID of the user in the identity source", alias="externalId")
+        default=None, description="The external ID of the user in the identity source", alias="externalId"
+    )
     id: Optional[StrictStr] = Field(default=None, description="The ID of the user in the identity source")
     last_updated: Optional[datetime] = Field(
         default=None,
         description="The timestamp when the user was last updated in the identity source",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     profile: Optional[IdentitySourceUserProfileForUpsert] = None
     __properties: ClassVar[List[str]] = ["created", "externalId", "id", "lastUpdated", "profile"]
 
@@ -83,12 +90,14 @@ class UserResponseSchema(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "external_id",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "external_id",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -113,11 +122,15 @@ class UserResponseSchema(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "externalId": obj.get("externalId"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "profile": IdentitySourceUserProfileForUpsert.from_dict(obj["profile"]) if obj.get("profile") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "externalId": obj.get("externalId"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "profile": IdentitySourceUserProfileForUpsert.from_dict(obj["profile"]) if obj.get(
+                    "profile"
+                ) is not None else None
+            }
+        )
         return _obj

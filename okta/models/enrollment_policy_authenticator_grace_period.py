@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,25 +20,26 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
-
 from typing import TYPE_CHECKING
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+
 if TYPE_CHECKING:
     from okta.models.by_date_time_authenticator_grace_period_expiry import ByDateTimeAuthenticatorGracePeriodExpiry
 
 
 class EnrollmentPolicyAuthenticatorGracePeriod(BaseModel):
     """
-    <x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Specifies the time period required to complete an authenticator enrollment or setup
+    <x-lifecycle-container><x-lifecycle class=\"oie\"></x-lifecycle></x-lifecycle-container>Specifies the time period
+    required to complete an authenticator enrollment or setup
     """  # noqa: E501
     type: Optional[StrictStr] = Field(default=None, description="Grace period type")
     __properties: ClassVar[List[str]] = ["type"]
@@ -98,8 +101,10 @@ class EnrollmentPolicyAuthenticatorGracePeriod(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -115,8 +120,11 @@ class EnrollmentPolicyAuthenticatorGracePeriod(BaseModel):
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'ByDateTimeAuthenticatorGracePeriodExpiry':
             return import_module(
-                "okta.models.by_date_time_authenticator_grace_period_expiry").ByDateTimeAuthenticatorGracePeriodExpiry.from_dict(obj)
+                "okta.models.by_date_time_authenticator_grace_period_expiry"
+            ).ByDateTimeAuthenticatorGracePeriodExpiry.from_dict(obj)
 
-        raise ValueError("EnrollmentPolicyAuthenticatorGracePeriod failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "EnrollmentPolicyAuthenticatorGracePeriod failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

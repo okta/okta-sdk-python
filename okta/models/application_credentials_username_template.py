@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,13 +39,31 @@ class ApplicationCredentialsUsernameTemplate(BaseModel):
     push_status: Optional[StrictStr] = Field(
         default=None,
         description="Determines if the username is pushed to the app on updates for CUSTOM `type`",
-        alias="pushStatus")
-    template: Optional[StrictStr] = Field(default='${source.login}', description="Mapping expression used to generate usernames.  The following are supported mapping expressions that are used with the `BUILT_IN` template type:  | Name                            | Template Expression                            | | ------------------------------- | ---------------------------------------------- | | AD Employee ID                  | `${source.employeeID}`                         | | AD SAM Account Name             | `${source.samAccountName}`                     | | AD SAM Account Name (lowercase) | `${fn:toLowerCase(source.samAccountName)}`     | | AD User Principal Name          | `${source.userName}`                           | | AD User Principal Name prefix   | `${fn:substringBefore(source.userName, \"@\")}`  | | Email                           | `${source.email}`                              | | Email (lowercase)               | `${fn:toLowerCase(source.email)}`              | | Email prefix                    | `${fn:substringBefore(source.email, \"@\")}`     | | LDAP UID + custom suffix        | `${source.userName}${instance.userSuffix}`     | | Okta username                   | `${source.login}`                              | | Okta username prefix            | `${fn:substringBefore(source.login, \"@\")}`     |")
+        alias="pushStatus"
+    )
+    template: Optional[StrictStr] = Field(
+        default='${source.login}',
+        description="Mapping expression used to generate usernames.  The following are supported mapping expressions that "
+                    "are used with the `BUILT_IN` template type:  | Name                            | Template Expression  "
+                    "                          | | ------------------------------- | "
+                    "---------------------------------------------- | | AD Employee ID                  | `${"
+                    "source.employeeID}`                         | | AD SAM Account Name             | `${"
+                    "source.samAccountName}`                     | | AD SAM Account Name (lowercase) | `${fn:toLowerCase("
+                    "source.samAccountName)}`     | | AD User Principal Name          | `${source.userName}`               "
+                    "            | | AD User Principal Name prefix   | `${fn:substringBefore(source.userName, \"@\")}`  | "
+                    "| Email                           | `${source.email}`                              | | Email ("
+                    "lowercase)               | `${fn:toLowerCase(source.email)}`              | | Email prefix            "
+                    "        | `${fn:substringBefore(source.email, \"@\")}`     | | LDAP UID + custom suffix        | `${"
+                    "source.userName}${instance.userSuffix}`     | | Okta username                   | `${source.login}`   "
+                    "                           | | Okta username prefix            | `${fn:substringBefore(source.login, "
+                    "\"@\")}`     |"
+    )
     type: Optional[StrictStr] = Field(default='BUILT_IN', description="Type of mapping expression. Empty string is allowed.")
     user_suffix: Optional[StrictStr] = Field(
         default=None,
         description="An optional suffix appended to usernames for `BUILT_IN` mapping expressions",
-        alias="userSuffix")
+        alias="userSuffix"
+    )
     __properties: ClassVar[List[str]] = ["pushStatus", "template", "type", "userSuffix"]
 
     @field_validator('push_status')
@@ -96,8 +116,10 @@ class ApplicationCredentialsUsernameTemplate(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -115,10 +137,12 @@ class ApplicationCredentialsUsernameTemplate(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "pushStatus": obj.get("pushStatus"),
-            "template": obj.get("template") if obj.get("template") is not None else '${source.login}',
-            "type": obj.get("type") if obj.get("type") is not None else 'BUILT_IN',
-            "userSuffix": obj.get("userSuffix")
-        })
+        _obj = cls.model_validate(
+            {
+                "pushStatus": obj.get("pushStatus"),
+                "template": obj.get("template") if obj.get("template") is not None else '${source.login}',
+                "type": obj.get("type") if obj.get("type") is not None else 'BUILT_IN',
+                "userSuffix": obj.get("userSuffix")
+            }
+        )
         return _obj

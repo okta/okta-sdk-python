@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,25 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.href_object import HrefObject
 from okta.models.href_object_self_link import HrefObjectSelfLink
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class GroupLinks(BaseModel):
     """
-    [Discoverable resources](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=_links&t=response) related to the group
+    [Discoverable resources](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path
+    =_links&t=response) related to the group
     """  # noqa: E501
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     apps: Optional[HrefObject] = None
@@ -73,8 +77,10 @@ class GroupLinks(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -127,11 +133,13 @@ class GroupLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
-            "apps": HrefObject.from_dict(obj["apps"]) if obj.get("apps") is not None else None,
-            "logo": [HrefObject.from_dict(_item) for _item in obj["logo"]] if obj.get("logo") is not None else None,
-            "source": HrefObject.from_dict(obj["source"]) if obj.get("source") is not None else None,
-            "users": HrefObject.from_dict(obj["users"]) if obj.get("users") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "self": HrefObjectSelfLink.from_dict(obj["self"]) if obj.get("self") is not None else None,
+                "apps": HrefObject.from_dict(obj["apps"]) if obj.get("apps") is not None else None,
+                "logo": [HrefObject.from_dict(_item) for _item in obj["logo"]] if obj.get("logo") is not None else None,
+                "source": HrefObject.from_dict(obj["source"]) if obj.get("source") is not None else None,
+                "users": HrefObject.from_dict(obj["users"]) if obj.get("users") is not None else None
+            }
+        )
         return _obj

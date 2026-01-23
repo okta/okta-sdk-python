@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.session_identity_provider import SessionIdentityProvider
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing_extensions import Self
+
+from okta.models.session_identity_provider import SessionIdentityProvider
 
 
 class BaseContextSession(BaseModel):
@@ -40,28 +43,35 @@ class BaseContextSession(BaseModel):
     user_id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the user", alias="userId")
     login: Optional[StrictStr] = Field(
         default=None,
-        description="The username used to identify the user. This is often the user's email address.")
+        description="The username used to identify the user. This is often the user's email address."
+    )
     created_at: Optional[datetime] = Field(
         default=None,
         description="Timestamp of when the session was created",
-        alias="createdAt")
+        alias="createdAt"
+    )
     expires_at: Optional[datetime] = Field(
         default=None,
         description="Timestamp of when the session expires",
-        alias="expiresAt")
+        alias="expiresAt"
+    )
     status: Optional[StrictStr] = Field(default=None, description="Represents the current status of the user's session")
     last_password_verification: Optional[datetime] = Field(
         default=None,
         description="Timestamp of when the user was last authenticated",
-        alias="lastPasswordVerification")
+        alias="lastPasswordVerification"
+    )
     amr: Optional[List[StrictStr]] = Field(default=None, description="The authentication method reference")
     idp: Optional[SessionIdentityProvider] = None
     mfa_active: Optional[StrictBool] = Field(
         default=None,
         description="Describes whether multifactor authentication was enabled",
-        alias="mfaActive")
-    __properties: ClassVar[List[str]] = ["id", "userId", "login", "createdAt",
-                                         "expiresAt", "status", "lastPasswordVerification", "amr", "idp", "mfaActive"]
+        alias="mfaActive"
+    )
+    __properties: ClassVar[List[str]] = [
+        "id", "userId", "login", "createdAt",
+        "expiresAt", "status", "lastPasswordVerification", "amr", "idp", "mfaActive"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,8 +103,10 @@ class BaseContextSession(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -119,16 +131,18 @@ class BaseContextSession(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "userId": obj.get("userId"),
-            "login": obj.get("login"),
-            "createdAt": obj.get("createdAt"),
-            "expiresAt": obj.get("expiresAt"),
-            "status": obj.get("status"),
-            "lastPasswordVerification": obj.get("lastPasswordVerification"),
-            "amr": obj.get("amr"),
-            "idp": SessionIdentityProvider.from_dict(obj["idp"]) if obj.get("idp") is not None else None,
-            "mfaActive": obj.get("mfaActive")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "userId": obj.get("userId"),
+                "login": obj.get("login"),
+                "createdAt": obj.get("createdAt"),
+                "expiresAt": obj.get("expiresAt"),
+                "status": obj.get("status"),
+                "lastPasswordVerification": obj.get("lastPasswordVerification"),
+                "amr": obj.get("amr"),
+                "idp": SessionIdentityProvider.from_dict(obj["idp"]) if obj.get("idp") is not None else None,
+                "mfaActive": obj.get("mfaActive")
+            }
+        )
         return _obj

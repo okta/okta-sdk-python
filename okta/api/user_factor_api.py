@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.resend_user_factor import ResendUserFactor
+from okta.models.success import Success
 from okta.models.upload_yubikey_otp_token_seed_request import UploadYubikeyOtpTokenSeedRequest
 from okta.models.user_factor import UserFactor
 from okta.models.user_factor_activate_request import UserFactorActivateRequest
@@ -36,10 +41,6 @@ from okta.models.user_factor_supported import UserFactorSupported
 from okta.models.user_factor_verify_request import UserFactorVerifyRequest
 from okta.models.user_factor_verify_response import UserFactorVerifyResponse
 from okta.models.user_factor_yubikey_otp_token import UserFactorYubikeyOtpToken
-
-from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -55,26 +56,32 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def activate_factor(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
-        body: Optional[UserFactorActivateRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
+            body: Optional[UserFactorActivateRequest] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactorActivateResponse:
         """Activate a factor
 
-        Activates a factor. Some factors (`call`, `email`, `push`, `sms`, `token:software:totp`, `u2f`, and `webauthn`) require activation to complete the enrollment process.  Okta enforces a rate limit of five activation attempts within five minutes. After a user exceeds the rate limit, Okta returns an error message.  > **Notes:** > * If the user exceeds their SMS, call, or email factor activation rate limit, then an [OTP resend request](./#tag/UserFactor/operation/resendEnrollFactor) isn't allowed for the same factor. > * You can't use the Factors API to activate Okta Fastpass (`signed_nonce`) for a user. See [Configure Okta Fastpass](https://help.okta.com/okta_help.htm?type=oie&id=ext-fp-configure).
+        Activates a factor. Some factors (`call`, `email`, `push`, `sms`, `token:software:totp`, `u2f`, and `webauthn`)
+        require activation to complete the enrollment process.  Okta enforces a rate limit of five activation attempts
+        within five minutes. After a user exceeds the rate limit, Okta returns an error message.  > **Notes:** > * If the
+        user exceeds their SMS, call, or email factor activation rate limit, then an [OTP resend request](
+        ./#tag/UserFactor/operation/resendEnrollFactor) isn't allowed for the same factor. > * You can't use the Factors
+        API to activate Okta Fastpass (`signed_nonce`) for a user. See [Configure Okta Fastpass](
+        https://help.okta.com/okta_help.htm?type=oie&id=ext-fp-configure).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -167,14 +174,14 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_factor_serialize(
-        self,
-        user_id,
-        factor_id,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            factor_id,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -245,49 +252,92 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def enroll_factor(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        body: Annotated[UserFactor, Field(description="Factor")],
-        update_phone: Annotated[Optional[StrictBool], Field(
-            description="If `true`, indicates that you are replacing the currently registered phone number for the specified user. This parameter is ignored if the existing phone number is used by an activated factor.")] = None,
-        template_id: Annotated[Optional[StrictStr], Field(
-            description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter is only used by `sms` factors. If the provided ID doesn't exist, the default template is used instead.")] = None,
-        token_lifetime_seconds: Annotated[Optional[Annotated[int, Field(le=86400, strict=True, ge=1)]], Field(
-            description="Defines how long the token remains valid")] = None,
-        activate: Annotated[Optional[StrictBool], Field(
-            description="If `true`, the factor is immediately activated as part of the enrollment. An activation process isn't required. Currently auto-activation is supported by `sms`, `call`, `email` and `token:hotp` (Custom TOTP) factors.")] = None,
-        accept_language: Annotated[Optional[StrictStr], Field(
-            description="An ISO 639-1 two-letter language code that defines a localized message to send. This parameter is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is incorrect, the default template is used instead.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            body: Annotated[UserFactor, Field(description="Factor")],
+            update_phone: Annotated[Optional[StrictBool], Field(
+                description="If `true`, indicates that you are replacing the currently registered phone number for the "
+                            "specified user. This parameter is ignored if the existing phone number is used by an "
+                            "activated factor."
+            )] = None,
+            template_id: Annotated[Optional[StrictStr], Field(
+                description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This "
+                            "parameter is only used by `sms` factors. If the provided ID doesn't exist, the default "
+                            "template is used instead."
+            )] = None,
+            token_lifetime_seconds: Annotated[Optional[Annotated[int, Field(le=86400, strict=True, ge=1)]], Field(
+                description="Defines how long the token remains valid"
+            )] = None,
+            activate: Annotated[Optional[StrictBool], Field(
+                description="If `true`, the factor is immediately activated as part of the enrollment. An activation "
+                            "process isn't required. Currently auto-activation is supported by `sms`, `call`, `email` and "
+                            "`token:hotp` (Custom TOTP) factors."
+            )] = None,
+            accept_language: Annotated[Optional[StrictStr], Field(
+                description="An ISO 639-1 two-letter language code that defines a localized message to send. This "
+                            "parameter is only used by `sms` factors. If a localized message doesn't exist or the "
+                            "`templateId` is incorrect, the default template is used instead."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactor:
         """Enroll a factor
 
-        Enrolls a supported factor for the specified user  > **Notes:** >   * All responses return the enrolled factor with a status of either `PENDING_ACTIVATION` or `ACTIVE`. >   * You can't use the Factors API to enroll Okta Fastpass (`signed_nonce`) for a user. See [Configure Okta Fastpass](https://help.okta.com/okta_help.htm?type=oie&id=ext-fp-configure).  #### Additional SMS/Call factor information  * **Rate limits**: Okta may return a `429 Too Many Requests` status code if you attempt to resend an SMS or a voice call challenge (OTP) within the same time window. The current [rate limit](https://developer.okta.com/docs/reference/rate-limits/) is one SMS/CALL challenge per phone number every 30 seconds.  * **Existing phone numbers**: Okta may return a `400 Bad Request` status code if a user attempts to enroll with a different phone number when the user has an existing mobile phone or has an existing phone with voice call capability. A user can enroll only one mobile phone for `sms` and enroll only one voice call capable phone for `call` factor.  #### Additional WebAuthn factor information  * For detailed information on the WebAuthn standard, including an up-to-date list of supported browsers, see [webauthn.me](https://a0.to/webauthnme-okta-docs).  * When you enroll a WebAuthn factor, the `activation` object in `_embedded` contains properties used to help the client to create a new WebAuthn credential for use with Okta. See the [WebAuthn spec for PublicKeyCredentialCreationOptions](https://www.w3.org/TR/webauthn/#dictionary-makecredentialoptions).  #### Additional Custom TOTP factor information  * The enrollment process involves passing both the `factorProfileId` and `sharedSecret` properties for a token.  * A factor profile represents a particular configuration of the Custom TOTP factor. It includes certain properties that match the hardware token that end users possess, such as the HMAC algorithm, passcode length, and time interval. There can be multiple Custom TOTP factor profiles per org, but users can only enroll in one Custom TOTP factor. Admins can [create Custom TOTP factor profiles](https://help.okta.com/okta_help.htm?id=ext-mfa-totp) in the Admin Console. Then, copy the `factorProfileId` from the Admin Console into the API request.  * <x-lifecycle class=\"oie\"></x-lifecycle> For Custom TOTP enrollment, Okta automaticaly enrolls a user with a `token:software:totp` factor and the `push` factor if the user isn't currently enrolled with these factors.
+        Enrolls a supported factor for the specified user  > **Notes:** >   * All responses return the enrolled factor
+        with a status of either `PENDING_ACTIVATION` or `ACTIVE`. >   * You can't use the Factors API to enroll Okta
+        Fastpass (`signed_nonce`) for a user. See [Configure Okta Fastpass](
+        https://help.okta.com/okta_help.htm?type=oie&id=ext-fp-configure).  #### Additional SMS/Call factor information  *
+        **Rate limits**: Okta may return a `429 Too Many Requests` status code if you attempt to resend an SMS or a voice
+        call challenge (OTP) within the same time window. The current [rate limit](
+        https://developer.okta.com/docs/reference/rate-limits/) is one SMS/CALL challenge per phone number every 30
+        seconds.  * **Existing phone numbers**: Okta may return a `400 Bad Request` status code if a user attempts to
+        enroll with a different phone number when the user has an existing mobile phone or has an existing phone with
+        voice call capability. A user can enroll only one mobile phone for `sms` and enroll only one voice call capable
+        phone for `call` factor.  #### Additional WebAuthn factor information  * For detailed information on the WebAuthn
+        standard, including an up-to-date list of supported browsers, see [webauthn.me](
+        https://a0.to/webauthnme-okta-docs).  * When you enroll a WebAuthn factor, the `activation` object in `_embedded`
+        contains properties used to help the client to create a new WebAuthn credential for use with Okta. See the [
+        WebAuthn spec for PublicKeyCredentialCreationOptions](
+        https://www.w3.org/TR/webauthn/#dictionary-makecredentialoptions).  #### Additional Custom TOTP factor information
+         * The enrollment process involves passing both the `factorProfileId` and `sharedSecret` properties for a token.
+         * A factor profile represents a particular configuration of the Custom TOTP factor. It includes certain
+         properties that match the hardware token that end users possess, such as the HMAC algorithm, passcode length,
+         and time interval. There can be multiple Custom TOTP factor profiles per org, but users can only enroll in one
+         Custom TOTP factor. Admins can [create Custom TOTP factor profiles](
+         https://help.okta.com/okta_help.htm?id=ext-mfa-totp) in the Admin Console. Then, copy the `factorProfileId` from
+         the Admin Console into the API request.  * <x-lifecycle class=\"oie\"></x-lifecycle> For Custom TOTP enrollment,
+         Okta automaticaly enrolls a user with a `token:software:totp` factor and the `push` factor if the user isn't
+         currently enrolled with these factors.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param body: Factor (required)
         :type body: UserFactor
-        :param update_phone: If `true`, indicates that you are replacing the currently registered phone number for the specified user. This parameter is ignored if the existing phone number is used by an activated factor.
+        :param update_phone: If `true`, indicates that you are replacing the currently registered phone number for the
+        specified user. This parameter is ignored if the existing phone number is used by an activated factor.
         :type update_phone: bool
-        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter is only used by `sms` factors. If the provided ID doesn't exist, the default template is used instead.
+        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This
+        parameter is only used by `sms` factors. If the provided ID doesn't exist, the default template is used instead.
         :type template_id: str
         :param token_lifetime_seconds: Defines how long the token remains valid
         :type token_lifetime_seconds: int
-        :param activate: If `true`, the factor is immediately activated as part of the enrollment. An activation process isn't required. Currently auto-activation is supported by `sms`, `call`, `email` and `token:hotp` (Custom TOTP) factors.
+        :param activate: If `true`, the factor is immediately activated as part of the enrollment. An activation process
+        isn't required. Currently auto-activation is supported by `sms`, `call`, `email` and `token:hotp` (Custom TOTP)
+        factors.
         :type activate: bool
-        :param accept_language: An ISO 639-1 two-letter language code that defines a localized message to send. This parameter is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is incorrect, the default template is used instead.
+        :param accept_language: An ISO 639-1 two-letter language code that defines a localized message to send. This
+        parameter is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is incorrect,
+        the default template is used instead.
         :type accept_language: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -378,18 +428,18 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _enroll_factor_serialize(
-        self,
-        user_id,
-        body,
-        update_phone,
-        template_id,
-        token_lifetime_seconds,
-        activate,
-        accept_language,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            body,
+            update_phone,
+            template_id,
+            token_lifetime_seconds,
+            activate,
+            accept_language,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -409,19 +459,15 @@ class UserFactorApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if update_phone is not None:
-
             _query_params.append(('updatePhone', update_phone))
 
         if template_id is not None:
-
             _query_params.append(('templateId', template_id))
 
         if token_lifetime_seconds is not None:
-
             _query_params.append(('tokenLifetimeSeconds', token_lifetime_seconds))
 
         if activate is not None:
-
             _query_params.append(('activate', activate))
 
         # process the header parameters
@@ -476,21 +522,21 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def get_factor(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactor:
         """Retrieve a factor
 
@@ -583,13 +629,13 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_factor_serialize(
-        self,
-        user_id,
-        factor_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            factor_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -644,26 +690,32 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def get_factor_transaction_status(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
-        transaction_id: Annotated[StrictStr, Field(description="ID of an existing factor verification transaction")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
+            transaction_id: Annotated[StrictStr, Field(description="ID of an existing factor verification transaction")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactorPushTransaction:
         """Retrieve a factor transaction status
 
-        Retrieves the status of a `push` factor verification transaction   > **Note:**  > The response body for a number matching push challenge to an Okta Verify `push` factor enrollment is different from the response body of a standard push challenge.  > The number matching push challenge [response body](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/getFactorTransactionStatus!c=200&path=1/_embedded&t=response) contains the correct answer for the challenge.  > Use [Verify a factor](/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/verifyFactor) to configure which challenge is sent.
+        Retrieves the status of a `push` factor verification transaction   > **Note:**  > The response body for a number
+        matching push challenge to an Okta Verify `push` factor enrollment is different from the response body of a
+        standard push challenge.  > The number matching push challenge [response body](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation
+        /getFactorTransactionStatus!c=200&path=1/_embedded&t=response) contains the correct answer for the challenge.  >
+        Use [Verify a factor](/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/verifyFactor)
+        to configure which challenge is sent.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -755,14 +807,14 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_factor_transaction_status_serialize(
-        self,
-        user_id,
-        factor_id,
-        transaction_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            factor_id,
+            transaction_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -819,20 +871,20 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def get_yubikey_otp_token_by_id(
-        self,
-        token_id: Annotated[StrictStr, Field(description="ID of a YubiKey token")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            token_id: Annotated[StrictStr, Field(description="ID of a YubiKey token")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactorYubikeyOtpToken:
         """Retrieve a YubiKey OTP token
 
@@ -922,12 +974,12 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_yubikey_otp_token_by_id_serialize(
-        self,
-        token_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            token_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -980,24 +1032,33 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def list_factors(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserFactor]:
         """List all enrolled factors
 
-        Lists all enrolled factors for the specified user that are included in the highest priority [authenticator enrollment policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) that applies to the user.  Only enrolled factors that are `REQUIRED` or `OPTIONAL` in the highest priority authenticator enrollment policy can be returned.  > **Note:** When admins use this endpoint for other users, the authenticator enrollment policy that's evaluated can vary depending on how client-specific conditions are configured in the rules of an authenticator enrollment policy. The client-specific conditions of the admin's client are used during policy evaluation instead of the client-specific conditions of the user. This can affect which authenticator enrollment policy is evaluated and which factors are returned. > > For example, an admin in Europe lists all enrolled factors for a user in North America. The network zone of the admin's client (in Europe) is used during policy evaluation instead of the network zone of the user (in North America).
+        Lists all enrolled factors for the specified user that are included in the highest priority [authenticator
+        enrollment policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) that
+        applies to the user.  Only enrolled factors that are `REQUIRED` or `OPTIONAL` in the highest priority
+        authenticator enrollment policy can be returned.  > **Note:** When admins use this endpoint for other users,
+        the authenticator enrollment policy that's evaluated can vary depending on how client-specific conditions are
+        configured in the rules of an authenticator enrollment policy. The client-specific conditions of the admin's
+        client are used during policy evaluation instead of the client-specific conditions of the user. This can affect
+        which authenticator enrollment policy is evaluated and which factors are returned. > > For example, an admin in
+        Europe lists all enrolled factors for a user in North America. The network zone of the admin's client (in Europe)
+        is used during policy evaluation instead of the network zone of the user (in North America).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -1083,12 +1144,12 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_factors_serialize(
-        self,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1141,24 +1202,34 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def list_supported_factors(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserFactorSupported]:
         """List all supported factors
 
-        Lists all the supported factors that can be enrolled for the specified user that are included in the highest priority [authenticator enrollment policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) that applies to the user.  Only factors that are `REQUIRED` or `OPTIONAL` in the highest priority authenticator enrollment policy can be returned.  > **Note:** When admins use this endpoint for other users, the authenticator enrollment policy that's evaluated can vary depending on how client-specific conditions are configured in the rules of an authenticator enrollment policy. The client-specific conditions of the admin's client are used during policy evaluation instead of the client-specific conditions of the user. This can affect which authenticator enrollment policy is evaluated and which factors are returned. > > For example, an admin in Europe lists all supported factors for a user in North America. The network zone of the admin's client (in Europe) is used during policy evaluation instead of the network zone of the user (in North America).
+        Lists all the supported factors that can be enrolled for the specified user that are included in the highest
+        priority [authenticator enrollment policy](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) that applies to the user.
+        Only factors that are `REQUIRED` or `OPTIONAL` in the highest priority authenticator enrollment policy can be
+        returned.  > **Note:** When admins use this endpoint for other users, the authenticator enrollment policy that's
+        evaluated can vary depending on how client-specific conditions are configured in the rules of an authenticator
+        enrollment policy. The client-specific conditions of the admin's client are used during policy evaluation instead
+        of the client-specific conditions of the user. This can affect which authenticator enrollment policy is evaluated
+        and which factors are returned. > > For example, an admin in Europe lists all supported factors for a user in
+        North America. The network zone of the admin's client (in Europe) is used during policy evaluation instead of the
+        network zone of the user (in North America).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -1244,12 +1315,12 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_supported_factors_serialize(
-        self,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1302,20 +1373,20 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def list_supported_security_questions(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserFactorSecurityQuestionProfile]:
         """List all supported security questions
 
@@ -1405,12 +1476,12 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_supported_security_questions_serialize(
-        self,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1462,31 +1533,38 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def list_yubikey_otp_tokens(
-        self,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of tokens")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token is assigned to a user and `expand` is set to `user`")] = None,
-        filter: Annotated[Optional[StrictStr], Field(description="The expression used to filter tokens")] = None,
-        for_download: Annotated[Optional[StrictBool], Field(
-            description="Returns tokens in a CSV to download instead of in the response. When you use this query parameter, the `limit` default changes to 1000.")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
-            description="Specifies the number of results per page")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The value of how the tokens are sorted")] = None,
-        sort_order: Annotated[Optional[StrictStr], Field(
-            description="Specifies the sort order, either `ASC` or `DESC`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of tokens"
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey "
+                            "token is assigned to a user and `expand` is set to `user`"
+            )] = None,
+            filter: Annotated[Optional[StrictStr], Field(description="The expression used to filter tokens")] = None,
+            for_download: Annotated[Optional[StrictBool], Field(
+                description="Returns tokens in a CSV to download instead of in the response. When you use this query "
+                            "parameter, the `limit` default changes to 1000."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
+                description="Specifies the number of results per page"
+            )] = None,
+            sort_by: Annotated[Optional[StrictStr], Field(description="The value of how the tokens are sorted")] = None,
+            sort_order: Annotated[Optional[StrictStr], Field(
+                description="Specifies the sort order, either `ASC` or `DESC`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserFactorYubikeyOtpToken]:
         """List all YubiKey OTP tokens
 
@@ -1494,11 +1572,13 @@ class UserFactorApi(ApiClient):
 
         :param after: Specifies the pagination cursor for the next page of tokens
         :type after: str
-        :param expand: Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token is assigned to a user and `expand` is set to `user`
+        :param expand: Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token is
+        assigned to a user and `expand` is set to `user`
         :type expand: str
         :param filter: The expression used to filter tokens
         :type filter: str
-        :param for_download: Returns tokens in a CSV to download instead of in the response. When you use this query parameter, the `limit` default changes to 1000.
+        :param for_download: Returns tokens in a CSV to download instead of in the response. When you use this query
+        parameter, the `limit` default changes to 1000.
         :type for_download: bool
         :param limit: Specifies the number of results per page
         :type limit: int
@@ -1594,18 +1674,18 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_yubikey_otp_tokens_serialize(
-        self,
-        after,
-        expand,
-        filter,
-        for_download,
-        limit,
-        sort_by,
-        sort_order,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            after,
+            expand,
+            filter,
+            for_download,
+            limit,
+            sort_by,
+            sort_order,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1623,31 +1703,24 @@ class UserFactorApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         if for_download is not None:
-
             _query_params.append(('forDownload', for_download))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if sort_by is not None:
-
             _query_params.append(('sortBy', sort_by))
 
         if sort_order is not None:
-
             _query_params.append(('sortOrder', sort_order))
 
         # process the header parameters
@@ -1684,28 +1757,36 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def resend_enroll_factor(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
-        resend_user_factor: ResendUserFactor,
-        template_id: Annotated[Optional[StrictStr], Field(
-            description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter is only used by `sms` factors.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
+            resend_user_factor: ResendUserFactor,
+            template_id: Annotated[Optional[StrictStr], Field(
+                description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This "
+                            "parameter is only used by `sms` factors."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ResendUserFactor:
         """Resend a factor enrollment
 
-        Resends an `sms`, `call`, or `email` factor challenge as part of an enrollment flow.  For `call` and `sms` factors, Okta enforces a rate limit of one OTP challenge per device every 30 seconds. You can configure your `sms` and `call` factors to use a third-party telephony provider. See the [Telephony inline hook reference](https://developer.okta.com/docs/reference/telephony-hook/). Okta alternates between SMS providers with every resend request to ensure delivery of SMS and Call OTPs across different carriers.  > **Note:** Resend operations aren't allowed after a factor exceeds the activation rate limit. See [Activate a factor](./#tag/UserFactor/operation/activateFactor).
+        Resends an `sms`, `call`, or `email` factor challenge as part of an enrollment flow.  For `call` and `sms`
+        factors, Okta enforces a rate limit of one OTP challenge per device every 30 seconds. You can configure your `sms`
+        and `call` factors to use a third-party telephony provider. See the [Telephony inline hook reference](
+        https://developer.okta.com/docs/reference/telephony-hook/). Okta alternates between SMS providers with every
+        resend request to ensure delivery of SMS and Call OTPs across different carriers.  > **Note:** Resend operations
+        aren't allowed after a factor exceeds the activation rate limit. See [Activate a factor](
+        ./#tag/UserFactor/operation/activateFactor).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -1713,7 +1794,8 @@ class UserFactorApi(ApiClient):
         :type factor_id: str
         :param resend_user_factor: (required)
         :type resend_user_factor: ResendUserFactor
-        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter is only used by `sms` factors.
+        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This
+        parameter is only used by `sms` factors.
         :type template_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1801,15 +1883,15 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _resend_enroll_factor_serialize(
-        self,
-        user_id,
-        factor_id,
-        resend_user_factor,
-        template_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            factor_id,
+            resend_user_factor,
+            template_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1831,7 +1913,6 @@ class UserFactorApi(ApiClient):
             _path_params['factorId'] = factor_id
         # process the query parameters
         if template_id is not None:
-
             _query_params.append(('templateId', template_id))
 
         # process the header parameters
@@ -1884,33 +1965,39 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def unenroll_factor(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
-        remove_recovery_enrollment: Annotated[Optional[StrictBool], Field(
-            description="If `true`, removes the phone number as both a recovery method and a factor. This parameter is only used for the `sms` and `call` factors.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
+            remove_recovery_enrollment: Annotated[Optional[StrictBool], Field(
+                description="If `true`, removes the phone number as both a recovery method and a factor. This parameter is "
+                            "only used for the `sms` and `call` factors."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unenroll a factor
 
-        Unenrolls an existing factor for the specified user. You can't unenroll a factor from a deactivated user. Unenrolling a factor allows the user to enroll a new factor.  > **Note:** If you unenroll the `push` or the `signed_nonce` factors, Okta also unenrolls any other `totp`, `signed_nonce`, or Okta Verify `push` factors associated with the user.
+        Unenrolls an existing factor for the specified user. You can't unenroll a factor from a deactivated user.
+        Unenrolling a factor allows the user to enroll a new factor.  > **Note:** If you unenroll the `push` or the
+        `signed_nonce` factors, Okta also unenrolls any other `totp`, `signed_nonce`, or Okta Verify `push` factors
+        associated with the user.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param factor_id: ID of an existing user factor (required)
         :type factor_id: str
-        :param remove_recovery_enrollment: If `true`, removes the phone number as both a recovery method and a factor. This parameter is only used for the `sms` and `call` factors.
+        :param remove_recovery_enrollment: If `true`, removes the phone number as both a recovery method and a factor.
+        This parameter is only used for the `sms` and `call` factors.
         :type remove_recovery_enrollment: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1987,14 +2074,14 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unenroll_factor_serialize(
-        self,
-        user_id,
-        factor_id,
-        remove_recovery_enrollment,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            factor_id,
+            remove_recovery_enrollment,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2016,7 +2103,6 @@ class UserFactorApi(ApiClient):
             _path_params['factorId'] = factor_id
         # process the query parameters
         if remove_recovery_enrollment is not None:
-
             _query_params.append(('removeRecoveryEnrollment', remove_recovery_enrollment))
 
         # process the header parameters
@@ -2053,32 +2139,39 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def upload_yubikey_otp_token_seed(
-        self,
-        upload_yubikey_otp_token_seed_request: UploadYubikeyOtpTokenSeedRequest,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of tokens")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token is assigned to a user and `expand` is set to `user`")] = None,
-        filter: Annotated[Optional[StrictStr], Field(description="The expression used to filter tokens")] = None,
-        for_download: Annotated[Optional[StrictBool], Field(
-            description="Returns tokens in a CSV to download instead of in the response. When you use this query parameter, the `limit` default changes to 1000.")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
-            description="Specifies the number of results per page")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(description="The value of how the tokens are sorted")] = None,
-        sort_order: Annotated[Optional[StrictStr], Field(
-            description="Specifies the sort order, either `ASC` or `DESC`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            upload_yubikey_otp_token_seed_request: UploadYubikeyOtpTokenSeedRequest,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of tokens"
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey "
+                            "token is assigned to a user and `expand` is set to `user`"
+            )] = None,
+            filter: Annotated[Optional[StrictStr], Field(description="The expression used to filter tokens")] = None,
+            for_download: Annotated[Optional[StrictBool], Field(
+                description="Returns tokens in a CSV to download instead of in the response. When you use this query "
+                            "parameter, the `limit` default changes to 1000."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True)]], Field(
+                description="Specifies the number of results per page"
+            )] = None,
+            sort_by: Annotated[Optional[StrictStr], Field(description="The value of how the tokens are sorted")] = None,
+            sort_order: Annotated[Optional[StrictStr], Field(
+                description="Specifies the sort order, either `ASC` or `DESC`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactorYubikeyOtpToken:
         """Upload a YubiKey OTP seed
 
@@ -2088,11 +2181,13 @@ class UserFactorApi(ApiClient):
         :type upload_yubikey_otp_token_seed_request: UploadYubikeyOtpTokenSeedRequest
         :param after: Specifies the pagination cursor for the next page of tokens
         :type after: str
-        :param expand: Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token is assigned to a user and `expand` is set to `user`
+        :param expand: Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token is
+        assigned to a user and `expand` is set to `user`
         :type expand: str
         :param filter: The expression used to filter tokens
         :type filter: str
-        :param for_download: Returns tokens in a CSV to download instead of in the response. When you use this query parameter, the `limit` default changes to 1000.
+        :param for_download: Returns tokens in a CSV to download instead of in the response. When you use this query
+        parameter, the `limit` default changes to 1000.
         :type for_download: bool
         :param limit: Specifies the number of results per page
         :type limit: int
@@ -2190,19 +2285,19 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upload_yubikey_otp_token_seed_serialize(
-        self,
-        upload_yubikey_otp_token_seed_request,
-        after,
-        expand,
-        filter,
-        for_download,
-        limit,
-        sort_by,
-        sort_order,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            upload_yubikey_otp_token_seed_request,
+            after,
+            expand,
+            filter,
+            for_download,
+            limit,
+            sort_by,
+            sort_order,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2220,31 +2315,24 @@ class UserFactorApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         if for_download is not None:
-
             _query_params.append(('forDownload', for_download))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if sort_by is not None:
-
             _query_params.append(('sortBy', sort_by))
 
         if sort_order is not None:
-
             _query_params.append(('sortOrder', sort_order))
 
         # process the header parameters
@@ -2297,41 +2385,70 @@ class UserFactorApi(ApiClient):
 
     @validate_call
     async def verify_factor(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
-        template_id: Annotated[Optional[StrictStr], Field(
-            description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter is only used by `sms` factors.")] = None,
-        token_lifetime_seconds: Annotated[Optional[Annotated[int, Field(le=86400, strict=True, ge=1)]], Field(
-            description="Defines how long the token remains valid")] = None,
-        x_forwarded_for: Annotated[Optional[StrictStr], Field(description="Public IP address for the user agent")] = None,
-        user_agent: Annotated[Optional[StrictStr], Field(
-            description="Type of user agent detected when the request is made. Required to verify `push` factors.")] = None,
-        accept_language: Annotated[Optional[StrictStr], Field(
-            description="An ISO 639-1 two-letter language code that defines a localized message to send. This parameter is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is incorrect, the default template is used instead.")] = None,
-        body: Annotated[Optional[UserFactorVerifyRequest], Field(description="Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, and `webauthn`) must first issue a challenge before you can verify the factor. Do this by making a request without a body. After a challenge is issued, make another request to verify the factor.  > **Note:** > Unlike standard push challenges that don't require a request body, a number matching [`push`](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/verifyFactor!path=2/useNumberMatchingChallenge&t=request) challenge requires a request body. `useNumberMatchingChallenge` must be set to `true`. > When a number matching challenge is issued for an Okta Verify `push` factor enrollment, a `correctAnswer` challenge object is returned in the [`_embedded`](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/verifyFactor!c=200&path=_embedded&t=response) object.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            factor_id: Annotated[StrictStr, Field(description="ID of an existing user factor")],
+            template_id: Annotated[Optional[StrictStr], Field(
+                description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This "
+                            "parameter is only used by `sms` factors."
+            )] = None,
+            token_lifetime_seconds: Annotated[Optional[Annotated[int, Field(le=86400, strict=True, ge=1)]], Field(
+                description="Defines how long the token remains valid"
+            )] = None,
+            x_forwarded_for: Annotated[
+                Optional[StrictStr], Field(description="Public IP address for the user agent")] = None,
+            user_agent: Annotated[Optional[StrictStr], Field(
+                description="Type of user agent detected when the request is made. Required to verify `push` factors."
+            )] = None,
+            accept_language: Annotated[Optional[StrictStr], Field(
+                description="An ISO 639-1 two-letter language code that defines a localized message to send. This "
+                            "parameter is only used by `sms` factors. If a localized message doesn't exist or the "
+                            "`templateId` is incorrect, the default template is used instead."
+            )] = None,
+            body: Annotated[Optional[UserFactorVerifyRequest], Field(
+                description="Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, "
+                            "and `webauthn`) must first issue a challenge before you can verify the factor. Do this by "
+                            "making a request without a body. After a challenge is issued, make another request to verify "
+                            "the factor.  > **Note:** > Unlike standard push challenges that don't require a request body, "
+                            "a number matching [`push`]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag"
+                            "/UserFactor/operation/verifyFactor!path=2/useNumberMatchingChallenge&t=request) challenge "
+                            "requires a request body. `useNumberMatchingChallenge` must be set to `true`. > When a number "
+                            "matching challenge is issued for an Okta Verify `push` factor enrollment, a `correctAnswer` "
+                            "challenge object is returned in the [`_embedded`]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag"
+                            "/UserFactor/operation/verifyFactor!c=200&path=_embedded&t=response) object."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactorVerifyResponse:
         """Verify a factor
 
-        Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, and `webauthn`) must first issue a challenge before you can verify the factor. Do this by making a request without a body. After a challenge is issued, make another request to verify the factor.  > **Notes:** > - You can send standard push challenges or number matching push challenges to Okta Verify `push` factor enrollments. Use a [request body](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/verifyFactor!path=2/useNumberMatchingChallenge&t=request) for number matching push challenges. > - To verify a `push` factor, use the **poll** link returned when you issue the challenge. See [Retrieve a factor transaction status](/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/getFactorTransactionStatus).
+        Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, and `webauthn`) must first
+        issue a challenge before you can verify the factor. Do this by making a request without a body. After a challenge
+        is issued, make another request to verify the factor.  > **Notes:** > - You can send standard push challenges or
+        number matching push challenges to Okta Verify `push` factor enrollments. Use a [request body](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation
+        /verifyFactor!path=2/useNumberMatchingChallenge&t=request) for number matching push challenges. > - To verify a
+        `push` factor, use the **poll** link returned when you issue the challenge. See [Retrieve a factor transaction
+        status](/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/getFactorTransactionStatus).
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param factor_id: ID of an existing user factor (required)
         :type factor_id: str
-        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter is only used by `sms` factors.
+        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This
+        parameter is only used by `sms` factors.
         :type template_id: str
         :param token_lifetime_seconds: Defines how long the token remains valid
         :type token_lifetime_seconds: int
@@ -2339,9 +2456,20 @@ class UserFactorApi(ApiClient):
         :type x_forwarded_for: str
         :param user_agent: Type of user agent detected when the request is made. Required to verify `push` factors.
         :type user_agent: str
-        :param accept_language: An ISO 639-1 two-letter language code that defines a localized message to send. This parameter is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is incorrect, the default template is used instead.
+        :param accept_language: An ISO 639-1 two-letter language code that defines a localized message to send. This
+        parameter is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is incorrect,
+        the default template is used instead.
         :type accept_language: str
-        :param body: Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, and `webauthn`) must first issue a challenge before you can verify the factor. Do this by making a request without a body. After a challenge is issued, make another request to verify the factor.  > **Note:** > Unlike standard push challenges that don't require a request body, a number matching [`push`](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/verifyFactor!path=2/useNumberMatchingChallenge&t=request) challenge requires a request body. `useNumberMatchingChallenge` must be set to `true`. > When a number matching challenge is issued for an Okta Verify `push` factor enrollment, a `correctAnswer` challenge object is returned in the [`_embedded`](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/verifyFactor!c=200&path=_embedded&t=response) object.
+        :param body: Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, and `webauthn`)
+        must first issue a challenge before you can verify the factor. Do this by making a request without a body. After a
+        challenge is issued, make another request to verify the factor.  > **Note:** > Unlike standard push challenges
+        that don't require a request body, a number matching [`push`](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation
+        /verifyFactor!path=2/useNumberMatchingChallenge&t=request) challenge requires a request body.
+        `useNumberMatchingChallenge` must be set to `true`. > When a number matching challenge is issued for an Okta
+        Verify `push` factor enrollment, a `correctAnswer` challenge object is returned in the [`_embedded`](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation
+        /verifyFactor!c=200&path=_embedded&t=response) object.
         :type body: UserFactorVerifyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2434,19 +2562,19 @@ class UserFactorApi(ApiClient):
             return (resp.data, resp, None)
 
     def _verify_factor_serialize(
-        self,
-        user_id,
-        factor_id,
-        template_id,
-        token_lifetime_seconds,
-        x_forwarded_for,
-        user_agent,
-        accept_language,
-        body,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            factor_id,
+            template_id,
+            token_lifetime_seconds,
+            x_forwarded_for,
+            user_agent,
+            accept_language,
+            body,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2468,11 +2596,9 @@ class UserFactorApi(ApiClient):
             _path_params['factorId'] = factor_id
         # process the query parameters
         if template_id is not None:
-
             _query_params.append(('templateId', template_id))
 
         if token_lifetime_seconds is not None:
-
             _query_params.append(('tokenLifetimeSeconds', token_lifetime_seconds))
 
         # process the header parameters

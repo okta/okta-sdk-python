@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,26 +20,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class SAMLHookResponseError(BaseModel):
     """
-    An object to return an error. Returning an error causes Okta to record a failure event in the Okta System Log. The string supplied in the `errorSummary` property is recorded in the System Log event. > **Note:** If the error object doesn't include the defined `errorSummary` property, the following common default message is returned to the end user: `The callback service returned an error`.  > **Note:** If a response to a SAML inline hook request isn't received from your external service within three seconds, a timeout occurs. In this scenario, the Okta SAML inline hook process continues, and the user is created.
+    An object to return an error. Returning an error causes Okta to record a failure event in the Okta System Log. The
+    string supplied in the `errorSummary` property is recorded in the System Log event. > **Note:** If the error object
+    doesn't include the defined `errorSummary` property, the following common default message is returned to the end user:
+    `The callback service returned an error`.  > **Note:** If a response to a SAML inline hook request isn't received from
+    your external service within three seconds, a timeout occurs. In this scenario, the Okta SAML inline hook process
+    continues, and the user is created.
     """  # noqa: E501
     error_summary: Optional[StrictStr] = Field(
         default=None,
         description="A human-readable summary of the error",
-        alias="errorSummary")
+        alias="errorSummary"
+    )
     __properties: ClassVar[List[str]] = ["errorSummary"]
 
     model_config = ConfigDict(
@@ -70,8 +78,10 @@ class SAMLHookResponseError(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,7 +99,9 @@ class SAMLHookResponseError(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "errorSummary": obj.get("errorSummary")
-        })
+        _obj = cls.model_validate(
+            {
+                "errorSummary": obj.get("errorSummary")
+            }
+        )
         return _obj

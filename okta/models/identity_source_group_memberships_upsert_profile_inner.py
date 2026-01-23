@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,9 +38,13 @@ class IdentitySourceGroupMembershipsUpsertProfileInner(BaseModel):
     IdentitySourceGroupMembershipsUpsertProfileInner
     """  # noqa: E501
     group_external_id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(
-        default=None, description="The external ID of the group whose memberships need to be inserted or updated in Okta", alias="groupExternalId")
+        default=None, description="The external ID of the group whose memberships need to be inserted or updated in Okta",
+        alias="groupExternalId"
+    )
     member_external_ids: Optional[List[Annotated[str, Field(strict=True, max_length=255)]]] = Field(
-        default=None, description="Array of external IDs of member profiles that need to be inserted in this group in Okta", alias="memberExternalIds")
+        default=None, description="Array of external IDs of member profiles that need to be inserted in this group in Okta",
+        alias="memberExternalIds"
+    )
     __properties: ClassVar[List[str]] = ["groupExternalId", "memberExternalIds"]
 
     model_config = ConfigDict(
@@ -71,8 +77,10 @@ class IdentitySourceGroupMembershipsUpsertProfileInner(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -90,8 +98,10 @@ class IdentitySourceGroupMembershipsUpsertProfileInner(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "groupExternalId": obj.get("groupExternalId"),
-            "memberExternalIds": obj.get("memberExternalIds")
-        })
+        _obj = cls.model_validate(
+            {
+                "groupExternalId": obj.get("groupExternalId"),
+                "memberExternalIds": obj.get("memberExternalIds")
+            }
+        )
         return _obj

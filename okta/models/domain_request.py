@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
-from okta.models.domain_certificate_source_type import DomainCertificateSourceType
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.domain_certificate_source_type import DomainCertificateSourceType
 
 
 class DomainRequest(BaseModel):
@@ -37,7 +40,8 @@ class DomainRequest(BaseModel):
     """  # noqa: E501
     certificate_source_type: DomainCertificateSourceType = Field(alias="certificateSourceType")
     domain: StrictStr = Field(
-        description="Custom domain name  > **Note:** You can't use the reserved `drapp.{yourOrgSubDomain}.okta.com` domain.")
+        description="Custom domain name  > **Note:** You can't use the reserved `drapp.{yourOrgSubDomain}.okta.com` domain."
+    )
     __properties: ClassVar[List[str]] = ["certificateSourceType", "domain"]
 
     model_config = ConfigDict(
@@ -70,8 +74,10 @@ class DomainRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,8 +95,10 @@ class DomainRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "certificateSourceType": obj.get("certificateSourceType"),
-            "domain": obj.get("domain")
-        })
+        _obj = cls.model_validate(
+            {
+                "certificateSourceType": obj.get("certificateSourceType"),
+                "domain": obj.get("domain")
+            }
+        )
         return _obj

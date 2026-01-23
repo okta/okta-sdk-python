@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.create_group_rule_request import CreateGroupRuleRequest
-from okta.models.group_rule import GroupRule
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.create_group_rule_request import CreateGroupRuleRequest
+from okta.models.group_rule import GroupRule
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,20 +47,20 @@ class GroupRuleApi(ApiClient):
 
     @validate_call
     async def activate_group_rule(
-        self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Activate a group rule
 
@@ -140,12 +141,12 @@ class GroupRuleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_group_rule_serialize(
-        self,
-        group_rule_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_rule_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -198,24 +199,25 @@ class GroupRuleApi(ApiClient):
 
     @validate_call
     async def create_group_rule(
-        self,
-        group_rule: CreateGroupRuleRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_rule: CreateGroupRuleRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupRule:
         """Create a group rule
 
-        Creates a group rule to dynamically add users to the specified group if they match the condition. > **Note:** Group rules are created with the status set to `'INACTIVE'`.
+        Creates a group rule to dynamically add users to the specified group if they match the condition. > **Note:**
+        Group rules are created with the status set to `'INACTIVE'`.
 
         :param group_rule: (required)
         :type group_rule: CreateGroupRuleRequest
@@ -301,12 +303,12 @@ class GroupRuleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_group_rule_serialize(
-        self,
-        group_rule,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_rule,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -373,20 +375,20 @@ class GroupRuleApi(ApiClient):
 
     @validate_call
     async def deactivate_group_rule(
-        self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Deactivate a group rule
 
@@ -467,12 +469,12 @@ class GroupRuleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_group_rule_serialize(
-        self,
-        group_rule_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_rule_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -525,22 +527,23 @@ class GroupRuleApi(ApiClient):
 
     @validate_call
     async def delete_group_rule(
-        self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
-        remove_users: Annotated[Optional[StrictBool], Field(
-            description="If set to `true`, removes users from groups assigned by this rule")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+            remove_users: Annotated[Optional[StrictBool], Field(
+                description="If set to `true`, removes users from groups assigned by this rule"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a group rule
 
@@ -624,13 +627,13 @@ class GroupRuleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_group_rule_serialize(
-        self,
-        group_rule_id,
-        remove_users,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_rule_id,
+            remove_users,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -650,7 +653,6 @@ class GroupRuleApi(ApiClient):
             _path_params['groupRuleId'] = group_rule_id
         # process the query parameters
         if remove_users is not None:
-
             _query_params.append(('removeUsers', remove_users))
 
         # process the header parameters
@@ -687,22 +689,23 @@ class GroupRuleApi(ApiClient):
 
     @validate_call
     async def get_group_rule(
-        self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="If specified as `groupIdToGroupNameMap`, then show group names")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="If specified as `groupIdToGroupNameMap`, then show group names"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupRule:
         """Retrieve a group rule
 
@@ -795,13 +798,13 @@ class GroupRuleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_group_rule_serialize(
-        self,
-        group_rule_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_rule_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -821,7 +824,6 @@ class GroupRuleApi(ApiClient):
             _path_params['groupRuleId'] = group_rule_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -858,26 +860,29 @@ class GroupRuleApi(ApiClient):
 
     @validate_call
     async def list_group_rules(
-        self,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="Specifies the number of rule results in a page")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of rules")] = None,
-        search: Annotated[Optional[StrictStr], Field(description="Specifies the keyword to search rules for")] = None,
-        expand: Annotated[Optional[StrictStr], Field(
-            description="If specified as `groupIdToGroupNameMap`, then displays group names")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="Specifies the number of rule results in a page"
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of rules"
+            )] = None,
+            search: Annotated[Optional[StrictStr], Field(description="Specifies the keyword to search rules for")] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="If specified as `groupIdToGroupNameMap`, then displays group names"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[GroupRule]:
         """List all group rules
 
@@ -975,15 +980,15 @@ class GroupRuleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_group_rules_serialize(
-        self,
-        limit,
-        after,
-        search,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            limit,
+            after,
+            search,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1001,19 +1006,15 @@ class GroupRuleApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if search is not None:
-
             _query_params.append(('search', search))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -1050,25 +1051,26 @@ class GroupRuleApi(ApiClient):
 
     @validate_call
     async def replace_group_rule(
-        self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
-        group_rule: GroupRule,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+            group_rule: GroupRule,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> GroupRule:
         """Replace a group rule
 
-        Replaces a group rule > **Notes:** You can only update rules with a group whose status is set to `INACTIVE`. > > You currently can't update the `actions` section.
+        Replaces a group rule > **Notes:** You can only update rules with a group whose status is set to `INACTIVE`. > >
+        You currently can't update the `actions` section.
 
         :param group_rule_id: The `id` of the group rule (required)
         :type group_rule_id: str
@@ -1158,13 +1160,13 @@ class GroupRuleApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_group_rule_serialize(
-        self,
-        group_rule_id,
-        group_rule,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_rule_id,
+            group_rule,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

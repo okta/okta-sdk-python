@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,13 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.assign_role_to_group200_response import AssignRoleToGroup200Response
 from okta.models.assign_role_to_user201_response import AssignRoleToUser201Response
 from okta.models.assign_role_to_user_request import AssignRoleToUserRequest
@@ -33,10 +37,7 @@ from okta.models.role_assigned_users import RoleAssignedUsers
 from okta.models.role_governance import RoleGovernance
 from okta.models.role_governance_resources import RoleGovernanceResources
 from okta.models.role_governance_source import RoleGovernanceSource
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -52,27 +53,34 @@ class RoleAssignmentAUserApi(ApiClient):
 
     @validate_call
     async def assign_role_to_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        assign_role_request: AssignRoleToUserRequest,
-        disable_notifications: Annotated[Optional[StrictBool], Field(
-            description="Setting this to `true` grants the user third-party admin status")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            assign_role_request: AssignRoleToUserRequest,
+            disable_notifications: Annotated[Optional[StrictBool], Field(
+                description="Setting this to `true` grants the user third-party admin status"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AssignRoleToUser201Response:
         """Assign a user role
 
-        Assigns a [standard role](/openapi/okta-management/guides/roles/#standard-roles) to a user.  You can also assign a custom role to a user, but the preferred method to assign a custom role to a user is to create a binding between the custom role, the resource set, and the user. See [Create a role resource set binding](/openapi/okta-management/management/tag/RoleDResourceSetBinding/#tag/RoleDResourceSetBinding/operation/createResourceSetBinding).  > **Notes:** > * The request payload is different for standard and custom role assignments. > * For IAM-based standard role assignments, use the request payload for standard roles. However, the response payload for IAM-based role assignments is similar to the custom role's assignment response.
+        Assigns a [standard role](/openapi/okta-management/guides/roles/#standard-roles) to a user.  You can also assign a
+        custom role to a user, but the preferred method to assign a custom role to a user is to create a binding between
+        the custom role, the resource set, and the user. See [Create a role resource set binding](
+        /openapi/okta-management/management/tag/RoleDResourceSetBinding/#tag/RoleDResourceSetBinding/operation
+        /createResourceSetBinding).  > **Notes:** > * The request payload is different for standard and custom role
+        assignments. > * For IAM-based standard role assignments, use the request payload for standard roles. However,
+        the response payload for IAM-based role assignments is similar to the custom role's assignment response.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -165,14 +173,14 @@ class RoleAssignmentAUserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_role_to_user_serialize(
-        self,
-        user_id,
-        assign_role_request,
-        disable_notifications,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            assign_role_request,
+            disable_notifications,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -192,7 +200,6 @@ class RoleAssignmentAUserApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if disable_notifications is not None:
-
             _query_params.append(('disableNotifications', disable_notifications))
 
         # process the header parameters
@@ -245,26 +252,27 @@ class RoleAssignmentAUserApi(ApiClient):
 
     @validate_call
     async def get_role_assignment_governance_grant(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        grant_id: Annotated[StrictStr, Field(description="Grant ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            grant_id: Annotated[StrictStr, Field(description="Grant ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoleGovernanceSource:
         """Retrieve a user role governance source
 
-        Retrieves a governance source (identified by `grantId`) for a role (identified by `roleAssignmentId`) that's assigned to a user (identified by `userId`)
+        Retrieves a governance source (identified by `grantId`) for a role (identified by `roleAssignmentId`) that's
+        assigned to a user (identified by `userId`)
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -356,14 +364,14 @@ class RoleAssignmentAUserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_role_assignment_governance_grant_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        grant_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            grant_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -420,26 +428,27 @@ class RoleAssignmentAUserApi(ApiClient):
 
     @validate_call
     async def get_role_assignment_governance_grant_resources(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        grant_id: Annotated[StrictStr, Field(description="Grant ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            grant_id: Annotated[StrictStr, Field(description="Grant ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoleGovernanceResources:
         """Retrieve the user role governance source resources
 
-        Retrieves the resources of a governance source (identified by `grantId`) for a role (identified by `roleAssignmentId`) that's assigned to a user (identified by `userId`)
+        Retrieves the resources of a governance source (identified by `grantId`) for a role (identified by
+        `roleAssignmentId`) that's assigned to a user (identified by `userId`)
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -531,14 +540,14 @@ class RoleAssignmentAUserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_role_assignment_governance_grant_resources_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        grant_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            grant_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -595,25 +604,26 @@ class RoleAssignmentAUserApi(ApiClient):
 
     @validate_call
     async def get_user_assigned_role(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AssignRoleToGroup200Response:
         """Retrieve a user role assignment
 
-        Retrieves a role assigned to a user (identified by `userId`). The `roleAssignmentId` parameter is the unique identifier for either a standard role assignment object or a custom role resource set binding object.
+        Retrieves a role assigned to a user (identified by `userId`). The `roleAssignmentId` parameter is the unique
+        identifier for either a standard role assignment object or a custom role resource set binding object.
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -702,13 +712,13 @@ class RoleAssignmentAUserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_user_assigned_role_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -763,25 +773,26 @@ class RoleAssignmentAUserApi(ApiClient):
 
     @validate_call
     async def get_user_assigned_role_governance(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoleGovernance:
         """Retrieve all user role governance sources
 
-        Retrieves the governance sources of a role (identified by `roleAssignmentId`) that's assigned to a user (identified by `userId`)
+        Retrieves the governance sources of a role (identified by `roleAssignmentId`) that's assigned to a user (
+        identified by `userId`)
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
@@ -870,13 +881,13 @@ class RoleAssignmentAUserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_user_assigned_role_governance_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -931,22 +942,24 @@ class RoleAssignmentAUserApi(ApiClient):
 
     @validate_call
     async def list_assigned_roles_for_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional parameter used to return targets configured for the standard role assignment in the `embedded` property. Supported values: `targets/groups` or `targets/catalog/apps`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional parameter used to return targets configured for the standard role assignment in "
+                            "the `embedded` property. Supported values: `targets/groups` or `targets/catalog/apps`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ListGroupAssignedRoles200ResponseInner]:
         """List all user role assignments
 
@@ -954,7 +967,8 @@ class RoleAssignmentAUserApi(ApiClient):
 
         :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param expand: An optional parameter used to return targets configured for the standard role assignment in the `embedded` property. Supported values: `targets/groups` or `targets/catalog/apps`
+        :param expand: An optional parameter used to return targets configured for the standard role assignment in the
+        `embedded` property. Supported values: `targets/groups` or `targets/catalog/apps`
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1010,7 +1024,9 @@ class RoleAssignmentAUserApi(ApiClient):
         if List[ListGroupAssignedRoles200ResponseInner] is Success:
             response, response_body, error = await self._request_executor.execute(request)
         else:
-            response, response_body, error = await self._request_executor.execute(request, ListGroupAssignedRoles200ResponseInner)
+            response, response_body, error = await self._request_executor.execute(
+                request, ListGroupAssignedRoles200ResponseInner
+            )
 
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
@@ -1039,13 +1055,13 @@ class RoleAssignmentAUserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_assigned_roles_for_user_serialize(
-        self,
-        user_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1065,7 +1081,6 @@ class RoleAssignmentAUserApi(ApiClient):
             _path_params['userId'] = user_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -1102,23 +1117,25 @@ class RoleAssignmentAUserApi(ApiClient):
 
     @validate_call
     async def list_users_with_role_assignments(
-        self,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of targets")] = None,
-        limit: Annotated[Optional[StrictInt], Field(
-            description="Specifies the number of results returned. Defaults to `100`.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of targets"
+            )] = None,
+            limit: Annotated[Optional[StrictInt], Field(
+                description="Specifies the number of results returned. Defaults to `100`."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RoleAssignedUsers:
         """List all users with role assignments
 
@@ -1210,13 +1227,13 @@ class RoleAssignmentAUserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_users_with_role_assignments_serialize(
-        self,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1234,11 +1251,9 @@ class RoleAssignmentAUserApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -1275,21 +1290,21 @@ class RoleAssignmentAUserApi(ApiClient):
 
     @validate_call
     async def unassign_role_from_user(
-        self,
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            role_assignment_id: Annotated[StrictStr, Field(description="The `id` of the role assignment")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign a user role
 
@@ -1373,13 +1388,13 @@ class RoleAssignmentAUserApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_role_from_user_serialize(
-        self,
-        user_id,
-        role_assignment_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id,
+            role_assignment_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

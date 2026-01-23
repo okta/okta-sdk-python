@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.add_group_request import AddGroupRequest
 from okta.models.application import Application
 from okta.models.group import Group
-from okta.models.user import User
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.user import User
 from okta.rest import RESTResponse
 
 
@@ -48,24 +49,26 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def add_group(
-        self,
-        group: AddGroupRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group: AddGroupRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Group:
         """Add a group
 
-        Adds a new group with the `OKTA_GROUP` type to your org. > **Note:** App import operations are responsible for syncing groups with `APP_GROUP` type such as Active Directory groups. See [About groups](https://help.okta.com/okta_help.htm?id=Directory_Groups) in the help documentation.
+        Adds a new group with the `OKTA_GROUP` type to your org. > **Note:** App import operations are responsible for
+        syncing groups with `APP_GROUP` type such as Active Directory groups. See [About groups](
+        https://help.okta.com/okta_help.htm?id=Directory_Groups) in the help documentation.
 
         :param group: (required)
         :type group: AddGroupRequest
@@ -151,12 +154,12 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _add_group_serialize(
-        self,
-        group,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -223,25 +226,27 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def assign_user_to_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Assign a user to a group
 
-        Assigns a user to a group with the `OKTA_GROUP` type. > **Note:** You only can modify memberships for groups of the `OKTA_GROUP` type. App imports are responsible for managing group memberships for groups of the `APP_GROUP` type, such as Active Directory groups.
+        Assigns a user to a group with the `OKTA_GROUP` type. > **Note:** You only can modify memberships for groups of
+        the `OKTA_GROUP` type. App imports are responsible for managing group memberships for groups of the `APP_GROUP`
+        type, such as Active Directory groups.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -321,13 +326,13 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_user_to_group_serialize(
-        self,
-        group_id,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -382,24 +387,25 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def delete_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a group
 
-        Deletes a group of the `OKTA_GROUP` or `APP_GROUP` type from your org. > **Note:** You can't remove groups of type `APP_GROUP` if they are used in a group push mapping.
+        Deletes a group of the `OKTA_GROUP` or `APP_GROUP` type from your org. > **Note:** You can't remove groups of type
+        `APP_GROUP` if they are used in a group push mapping.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -476,12 +482,12 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_group_serialize(
-        self,
-        group_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -534,20 +540,20 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def get_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Group:
         """Retrieve a group
 
@@ -637,12 +643,12 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_group_serialize(
-        self,
-        group_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -695,27 +701,30 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def list_assigned_applications_for_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of apps")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of app results for a page")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of apps"
+            )] = None,
+            limit: Annotated[
+                Optional[StrictInt], Field(description="Specifies the number of app results for a page")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Application]:
         """List all assigned apps
 
-        Lists all apps that are assigned to a group. See [Application Groups API](/openapi/okta-management/management/tag/ApplicationGroups/).
+        Lists all apps that are assigned to a group. See [Application Groups API](
+        /openapi/okta-management/management/tag/ApplicationGroups/).
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -807,14 +816,14 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_assigned_applications_for_group_serialize(
-        self,
-        group_id,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -834,11 +843,9 @@ class GroupApi(ApiClient):
             _path_params['groupId'] = group_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -875,31 +882,40 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def list_group_users(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of user results in a page")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[
+                Optional[StrictInt], Field(description="Specifies the number of user results in a page")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[User]:
         """List all member users
 
-        Lists all users that are a member of a group. The default user limit is set to a very high number due to historical reasons that are no longer valid for most orgs. This will change in a future version of this API. The recommended page limit is now `limit=200`.
+        Lists all users that are a member of a group. The default user limit is set to a very high number due to
+        historical reasons that are no longer valid for most orgs. This will change in a future version of this API. The
+        recommended page limit is now `limit=200`.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: Specifies the number of user results in a page
         :type limit: int
@@ -987,14 +1003,14 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_group_users_serialize(
-        self,
-        group_id,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1014,11 +1030,9 @@ class GroupApi(ApiClient):
             _path_params['groupId'] = group_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -1055,52 +1069,143 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def list_groups(
-        self,
-        search: Annotated[Optional[StrictStr], Field(description="Searches for groups with a supported [filtering](https://developer.okta.com/docs/api/#filter) expression for all properties except for `_embedded`, `_links`, and `objectClass`. Okta recommends this query parameter because it provides the largest range of search options and optimal performance.  This operation supports [pagination](https://developer.okta.com/docs/api/#pagination).  Using search requires [URL encoding](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding), for example, `search=type eq \"OKTA_GROUP\"` is encoded as `search=type+eq+%22OKTA_GROUP%22`.  This operation searches many properties:  * Any group profile attribute, including imported app group profile attributes. * The top-level properties: `id`, `created`, `lastMembershipUpdated`, `lastUpdated`, and `type`. * The [source](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=_links/source&t=response) of groups with type of `APP_GROUP`, accessed as `source.id`.  You can also use the `sortBy` and `sortOrder` parameters.  Searches for groups can be filtered by the following operators: `sw`, `eq`, and `co`. You can only use `co` with these select profile attributes: `profile.name` and `profile.description`. See [Operators](https://developer.okta.com/docs/api/#operators).")] = None,
-        filter: Annotated[Optional[StrictStr], Field(description="Filter expression for groups. See [Filter](https://developer.okta.com/docs/api/#filter).  Filtering supports the following limited number of properties: `id`, `type`, `lastUpdated`, and `lastMembershipUpdated`.  > **Note:** All filters must be [URL encoded](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, `filter=lastUpdated gt \"2013-06-01T00:00:00.000Z\"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.  See [Special characters](https://developer.okta.com/docs/api/#special-characters).")] = None,
-        q: Annotated[Optional[StrictStr], Field(
-            description="Finds a group that matches the `name` property. > **Note:** Paging and searching are currently mutually exclusive. You can't page a query. The default limit for a query is 300 results. Query is intended for an auto-complete picker use case where users refine their search string to constrain the results.")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of groups. The `after` cursor should be treated as an opaque value and obtained through the next link relation. See [Pagination](https://developer.okta.com/docs/api/#pagination).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True)]], Field(
-            description="Specifies the number of group results in a page.  Okta recommends using a specific value other than the default or maximum. If your request times out, retry your request with a smaller `limit` and [page the results](https://developer.okta.com/docs/api/#pagination).  The Okta default `Everyone` group isn't returned for users with a group admin role.")] = None,
-        expand: Annotated[Optional[StrictStr], Field(description="If specified, additional metadata is included in the response. Possible values are `stats` and `app`. This additional metadata is listed in the [`_embedded`](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/addGroup!c=200&path=_embedded&t=response) property of the response.  > **Note:** You can use the `stats` value to return the number of users within a group. This is listed as the `_embedded.stats.usersCount` value in the response. See this [Knowledge Base article](https://support.okta.com/help/s/article/Is-there-an-API-that-returns-the-number-of-users-in-a-group?language=en_US) for more information and an example.")] = None,
-        sort_by: Annotated[Optional[StrictStr], Field(
-            description="Specifies the field to sort by (for search queries only). `sortBy` can be any single property, for example `sortBy=profile.name`. Groups with the same value for the `sortBy` property are ordered by `id`'. Use with `sortOrder` to control the order of results.")] = None,
-        sort_order: Annotated[Optional[StrictStr], Field(
-            description="Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if `sortBy` isn't present.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            search: Annotated[Optional[StrictStr], Field(
+                description="Searches for groups with a supported [filtering](https://developer.okta.com/docs/api/#filter) "
+                            "expression for all properties except for `_embedded`, `_links`, and `objectClass`. Okta "
+                            "recommends this query parameter because it provides the largest range of search options and "
+                            "optimal performance.  This operation supports [pagination]("
+                            "https://developer.okta.com/docs/api/#pagination).  Using search requires [URL encoding]("
+                            "https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding), for example, "
+                            "`search=type eq \"OKTA_GROUP\"` is encoded as `search=type+eq+%22OKTA_GROUP%22`.  This "
+                            "operation searches many properties:  * Any group profile attribute, including imported app "
+                            "group profile attributes. * The top-level properties: `id`, `created`, "
+                            "`lastMembershipUpdated`, `lastUpdated`, and `type`. * The [source]("
+                            "/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path"
+                            "=_links/source&t=response) of groups with type of `APP_GROUP`, accessed as `source.id`.  You "
+                            "can also use the `sortBy` and `sortOrder` parameters.  Searches for groups can be filtered by "
+                            "the following operators: `sw`, `eq`, and `co`. You can only use `co` with these select "
+                            "profile attributes: `profile.name` and `profile.description`. See [Operators]("
+                            "https://developer.okta.com/docs/api/#operators)."
+            )] = None,
+            filter: Annotated[Optional[StrictStr], Field(
+                description="Filter expression for groups. See [Filter](https://developer.okta.com/docs/api/#filter).  "
+                            "Filtering supports the following limited number of properties: `id`, `type`, `lastUpdated`, "
+                            "and `lastMembershipUpdated`.  > **Note:** All filters must be [URL encoded]("
+                            "https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, "
+                            "`filter=lastUpdated gt \"2013-06-01T00:00:00.000Z\"` is encoded as "
+                            "`filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.  See [Special characters]("
+                            "https://developer.okta.com/docs/api/#special-characters)."
+            )] = None,
+            q: Annotated[Optional[StrictStr], Field(
+                description="Finds a group that matches the `name` property. > **Note:** Paging and searching are "
+                            "currently mutually exclusive. You can't page a query. The default limit for a query is 300 "
+                            "results. Query is intended for an auto-complete picker use case where users refine their "
+                            "search string to constrain the results."
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of groups. The `after` cursor should be "
+                            "treated as an opaque value and obtained through the next link relation. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=10000, strict=True)]], Field(
+                description="Specifies the number of group results in a page.  Okta recommends using a specific value "
+                            "other than the default or maximum. If your request times out, retry your request with a "
+                            "smaller `limit` and [page the results](https://developer.okta.com/docs/api/#pagination).  The "
+                            "Okta default `Everyone` group isn't returned for users with a group admin role."
+            )] = None,
+            expand: Annotated[Optional[StrictStr], Field(
+                description="If specified, additional metadata is included in the response. Possible values are `stats` "
+                            "and `app`. This additional metadata is listed in the [`_embedded`]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group"
+                            "/operation/addGroup!c=200&path=_embedded&t=response) property of the response.  > **Note:** "
+                            "You can use the `stats` value to return the number of users within a group. This is listed as "
+                            "the `_embedded.stats.usersCount` value in the response. See this [Knowledge Base article]("
+                            "https://support.okta.com/help/s/article/Is-there-an-API-that-returns-the-number-of-users-in-a"
+                            "-group?language=en_US) for more information and an example."
+            )] = None,
+            sort_by: Annotated[Optional[StrictStr], Field(
+                description="Specifies the field to sort by (for search queries only). `sortBy` can be any single "
+                            "property, for example `sortBy=profile.name`. Groups with the same value for the `sortBy` "
+                            "property are ordered by `id`'. Use with `sortOrder` to control the order of results."
+            )] = None,
+            sort_order: Annotated[Optional[StrictStr], Field(
+                description="Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if "
+                            "`sortBy` isn't present."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Group]:
         """List all groups
 
-        Lists all groups with pagination support.  > **Note:** To list all groups belonging to a member, use the [List all groups endpoint in the User Resources API](/openapi/okta-management/management/tag/UserResources/#tag/UserResources/operation/listUserGroups).  The number of groups returned depends on the specified [`limit`](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!in=query&path=limit&t=request), if you have a search, filter, and/or query parameter set, and if that parameter is not null. We recommend using a limit less than or equal to 200.  A subset of groups can be returned that match a supported filter expression, query, or search criteria.  > **Note:** The `search` parameter results are sourced from an eventually consistent datasource and may not reflect the latest information.
+        Lists all groups with pagination support.  > **Note:** To list all groups belonging to a member, use the [List all
+        groups endpoint in the User Resources API](
+        /openapi/okta-management/management/tag/UserResources/#tag/UserResources/operation/listUserGroups).  The number of
+        groups returned depends on the specified [`limit`](
+        /openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!in=query&path=limit&t=request),
+        if you have a search, filter, and/or query parameter set, and if that parameter is not null. We recommend using a
+        limit less than or equal to 200.  A subset of groups can be returned that match a supported filter expression,
+        query, or search criteria.  > **Note:** The `search` parameter results are sourced from an eventually consistent
+        datasource and may not reflect the latest information.
 
-        :param search: Searches for groups with a supported [filtering](https://developer.okta.com/docs/api/#filter) expression for all properties except for `_embedded`, `_links`, and `objectClass`. Okta recommends this query parameter because it provides the largest range of search options and optimal performance.  This operation supports [pagination](https://developer.okta.com/docs/api/#pagination).  Using search requires [URL encoding](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding), for example, `search=type eq \"OKTA_GROUP\"` is encoded as `search=type+eq+%22OKTA_GROUP%22`.  This operation searches many properties:  * Any group profile attribute, including imported app group profile attributes. * The top-level properties: `id`, `created`, `lastMembershipUpdated`, `lastUpdated`, and `type`. * The [source](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=_links/source&t=response) of groups with type of `APP_GROUP`, accessed as `source.id`.  You can also use the `sortBy` and `sortOrder` parameters.  Searches for groups can be filtered by the following operators: `sw`, `eq`, and `co`. You can only use `co` with these select profile attributes: `profile.name` and `profile.description`. See [Operators](https://developer.okta.com/docs/api/#operators).
+        :param search: Searches for groups with a supported [filtering](https://developer.okta.com/docs/api/#filter)
+        expression for all properties except for `_embedded`, `_links`, and `objectClass`. Okta recommends this query
+        parameter because it provides the largest range of search options and optimal performance.  This operation
+        supports [pagination](https://developer.okta.com/docs/api/#pagination).  Using search requires [URL encoding](
+        https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding), for example, `search=type eq \"OKTA_GROUP\"`
+        is encoded as `search=type+eq+%22OKTA_GROUP%22`.  This operation searches many properties:  * Any group profile
+        attribute, including imported app group profile attributes. * The top-level properties: `id`, `created`,
+        `lastMembershipUpdated`, `lastUpdated`, and `type`. * The [source](
+        /openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=_links/source&t=response)
+        of groups with type of `APP_GROUP`, accessed as `source.id`.  You can also use the `sortBy` and `sortOrder`
+        parameters.  Searches for groups can be filtered by the following operators: `sw`, `eq`, and `co`. You can only
+        use `co` with these select profile attributes: `profile.name` and `profile.description`. See [Operators](
+        https://developer.okta.com/docs/api/#operators).
         :type search: str
-        :param filter: Filter expression for groups. See [Filter](https://developer.okta.com/docs/api/#filter).  Filtering supports the following limited number of properties: `id`, `type`, `lastUpdated`, and `lastMembershipUpdated`.  > **Note:** All filters must be [URL encoded](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, `filter=lastUpdated gt \"2013-06-01T00:00:00.000Z\"` is encoded as `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.  See [Special characters](https://developer.okta.com/docs/api/#special-characters).
+        :param filter: Filter expression for groups. See [Filter](https://developer.okta.com/docs/api/#filter).  Filtering
+        supports the following limited number of properties: `id`, `type`, `lastUpdated`, and `lastMembershipUpdated`.  >
+        **Note:** All filters must be [URL encoded](https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding).
+        For example, `filter=lastUpdated gt \"2013-06-01T00:00:00.000Z\"` is encoded as
+        `filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.  See [Special characters](
+        https://developer.okta.com/docs/api/#special-characters).
         :type filter: str
-        :param q: Finds a group that matches the `name` property. > **Note:** Paging and searching are currently mutually exclusive. You can't page a query. The default limit for a query is 300 results. Query is intended for an auto-complete picker use case where users refine their search string to constrain the results.
+        :param q: Finds a group that matches the `name` property. > **Note:** Paging and searching are currently mutually
+        exclusive. You can't page a query. The default limit for a query is 300 results. Query is intended for an
+        auto-complete picker use case where users refine their search string to constrain the results.
         :type q: str
-        :param after: Specifies the pagination cursor for the next page of groups. The `after` cursor should be treated as an opaque value and obtained through the next link relation. See [Pagination](https://developer.okta.com/docs/api/#pagination).
+        :param after: Specifies the pagination cursor for the next page of groups. The `after` cursor should be treated as
+        an opaque value and obtained through the next link relation. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination).
         :type after: str
-        :param limit: Specifies the number of group results in a page.  Okta recommends using a specific value other than the default or maximum. If your request times out, retry your request with a smaller `limit` and [page the results](https://developer.okta.com/docs/api/#pagination).  The Okta default `Everyone` group isn't returned for users with a group admin role.
+        :param limit: Specifies the number of group results in a page.  Okta recommends using a specific value other than
+        the default or maximum. If your request times out, retry your request with a smaller `limit` and [page the
+        results](https://developer.okta.com/docs/api/#pagination).  The Okta default `Everyone` group isn't returned for
+        users with a group admin role.
         :type limit: int
-        :param expand: If specified, additional metadata is included in the response. Possible values are `stats` and `app`. This additional metadata is listed in the [`_embedded`](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/addGroup!c=200&path=_embedded&t=response) property of the response.  > **Note:** You can use the `stats` value to return the number of users within a group. This is listed as the `_embedded.stats.usersCount` value in the response. See this [Knowledge Base article](https://support.okta.com/help/s/article/Is-there-an-API-that-returns-the-number-of-users-in-a-group?language=en_US) for more information and an example.
+        :param expand: If specified, additional metadata is included in the response. Possible values are `stats` and
+        `app`. This additional metadata is listed in the [`_embedded`](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/addGroup!c
+        =200&path=_embedded&t=response) property of the response.  > **Note:** You can use the `stats` value to return the
+        number of users within a group. This is listed as the `_embedded.stats.usersCount` value in the response. See this
+        [Knowledge Base article](https://support.okta.com/help/s/article/Is-there-an-API-that-returns-the-number-of-users
+        -in-a-group?language=en_US) for more information and an example.
         :type expand: str
-        :param sort_by: Specifies the field to sort by (for search queries only). `sortBy` can be any single property, for example `sortBy=profile.name`. Groups with the same value for the `sortBy` property are ordered by `id`'. Use with `sortOrder` to control the order of results.
+        :param sort_by: Specifies the field to sort by (for search queries only). `sortBy` can be any single property,
+        for example `sortBy=profile.name`. Groups with the same value for the `sortBy` property are ordered by `id`'. Use
+        with `sortOrder` to control the order of results.
         :type sort_by: str
-        :param sort_order: Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if `sortBy` isn't present.
+        :param sort_order: Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if
+        `sortBy` isn't present.
         :type sort_order: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1190,19 +1295,19 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_groups_serialize(
-        self,
-        search,
-        filter,
-        q,
-        after,
-        limit,
-        expand,
-        sort_by,
-        sort_order,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            search,
+            filter,
+            q,
+            after,
+            limit,
+            expand,
+            sort_by,
+            sort_order,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1220,35 +1325,27 @@ class GroupApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if search is not None:
-
             _query_params.append(('search', search))
 
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         if q is not None:
-
             _query_params.append(('q', q))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if sort_by is not None:
-
             _query_params.append(('sortBy', sort_by))
 
         if sort_order is not None:
-
             _query_params.append(('sortOrder', sort_order))
 
         # process the header parameters
@@ -1285,25 +1382,27 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def replace_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        group: AddGroupRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            group: AddGroupRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Group:
         """Replace a group
 
-        Replaces the profile for a group of `OKTA_GROUP` type from your org. > **Note :** You only can modify profiles for groups of the `OKTA_GROUP` type. > > App imports are responsible for updating profiles for groups of the `APP_GROUP` type, such as Active Directory groups.
+        Replaces the profile for a group of `OKTA_GROUP` type from your org. > **Note :** You only can modify profiles for
+        groups of the `OKTA_GROUP` type. > > App imports are responsible for updating profiles for groups of the
+        `APP_GROUP` type, such as Active Directory groups.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -1393,13 +1492,13 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_group_serialize(
-        self,
-        group_id,
-        group,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            group,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1468,25 +1567,27 @@ class GroupApi(ApiClient):
 
     @validate_call
     async def unassign_user_from_group(
-        self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+            user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Unassign a user from a group
 
-        Unassigns a user from a group with the `OKTA_GROUP` type. > **Note:** You only can modify memberships for groups of the `OKTA_GROUP` type. > > App imports are responsible for managing group memberships for groups of the `APP_GROUP` type, such as Active Directory groups.
+        Unassigns a user from a group with the `OKTA_GROUP` type. > **Note:** You only can modify memberships for groups
+        of the `OKTA_GROUP` type. > > App imports are responsible for managing group memberships for groups of the
+        `APP_GROUP` type, such as Active Directory groups.
 
         :param group_id: The `id` of the group (required)
         :type group_id: str
@@ -1566,13 +1667,13 @@ class GroupApi(ApiClient):
             return (resp.data, resp, None)
 
     def _unassign_user_from_group_serialize(
-        self,
-        group_id,
-        user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            group_id,
+            user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

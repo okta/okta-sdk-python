@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,34 +20,42 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from okta.models.identity_assertion_custom_as_connection_creatable_authorization_server import IdentityAssertionCustomASConnectionCreatableAuthorizationServer
-from okta.models.scope_condition import ScopeCondition
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.identity_assertion_custom_as_connection_creatable_authorization_server import \
+    IdentityAssertionCustomASConnectionCreatableAuthorizationServer
+from okta.models.scope_condition import ScopeCondition
 
 
 class IdentityAssertionCustomASConnectionCreatable(BaseModel):
     """
     Create an identity assertion connection for a custom authorization server
     """  # noqa: E501
-    authorization_server: IdentityAssertionCustomASConnectionCreatableAuthorizationServer = Field(alias="authorizationServer")
+    authorization_server: IdentityAssertionCustomASConnectionCreatableAuthorizationServer = Field(
+        alias="authorizationServer"
+    )
     connection_type: StrictStr = Field(description="Type of connection authentication method", alias="connectionType")
     protocol_type: Optional[StrictStr] = Field(
         default=None,
         description="The authentication protocol type used for the connection",
-        alias="protocolType")
+        alias="protocolType"
+    )
     scope_condition: ScopeCondition = Field(alias="scopeCondition")
     scopes: Annotated[List[StrictStr], Field(min_length=1)] = Field(
-        description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, all scopes except these are allowed.")
+        description="Array of scopes. Required for all `scopeCondition` values. For `ALL_SCOPES`, this array is required "
+                    "with a single value of `*`. For `INCLUDE_ONLY`, only these scopes are allowed. For `EXCLUDE`, "
+                    "all scopes except these are allowed."
+    )
     __properties: ClassVar[List[str]] = ["authorizationServer", "connectionType", "protocolType", "scopeCondition", "scopes"]
 
     @field_validator('connection_type')
@@ -95,8 +105,10 @@ class IdentityAssertionCustomASConnectionCreatable(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -121,11 +133,15 @@ class IdentityAssertionCustomASConnectionCreatable(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "authorizationServer": IdentityAssertionCustomASConnectionCreatableAuthorizationServer.from_dict(obj["authorizationServer"]) if obj.get("authorizationServer") is not None else None,
-            "connectionType": obj.get("connectionType"),
-            "protocolType": obj.get("protocolType"),
-            "scopeCondition": obj.get("scopeCondition"),
-            "scopes": obj.get("scopes")
-        })
+        _obj = cls.model_validate(
+            {
+                "authorizationServer": IdentityAssertionCustomASConnectionCreatableAuthorizationServer.from_dict(
+                    obj["authorizationServer"]
+                ) if obj.get("authorizationServer") is not None else None,
+                "connectionType": obj.get("connectionType"),
+                "protocolType": obj.get("protocolType"),
+                "scopeCondition": obj.get("scopeCondition"),
+                "scopes": obj.get("scopes")
+            }
+        )
         return _obj

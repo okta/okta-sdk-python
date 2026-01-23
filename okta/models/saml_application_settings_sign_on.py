@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.acs_endpoint import AcsEndpoint
 from okta.models.saml_assertion_encryption import SamlAssertionEncryption
 from okta.models.saml_attribute_statement import SamlAttributeStatement
@@ -33,127 +38,186 @@ from okta.models.saml_sp_certificate import SamlSpCertificate
 from okta.models.sign_on_inline_hook import SignOnInlineHook
 from okta.models.single_logout import SingleLogout
 from okta.models.slo_participate import SloParticipate
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SamlApplicationSettingsSignOn(BaseModel):
     """
-    SAML 2.0 sign-on attributes. > **Note:** Set either `destinationOverride` or `ssoAcsUrl` to configure any other SAML 2.0 attributes in this section.
+    SAML 2.0 sign-on attributes. > **Note:** Set either `destinationOverride` or `ssoAcsUrl` to configure any other SAML
+    2.0 attributes in this section.
     """  # noqa: E501
     acs_endpoints: Optional[List[AcsEndpoint]] = Field(
-        default=None, description="An array of ACS endpoints. You can configure a maximum of 100 endpoints.", alias="acsEndpoints")
+        default=None, description="An array of ACS endpoints. You can configure a maximum of 100 endpoints.",
+        alias="acsEndpoints"
+    )
     allow_multiple_acs_endpoints: StrictBool = Field(
         description="Determines whether the app allows you to configure multiple ACS URIs",
-        alias="allowMultipleAcsEndpoints")
+        alias="allowMultipleAcsEndpoints"
+    )
     assertion_encryption: Optional[SamlAssertionEncryption] = Field(default=None, alias="assertionEncryption")
     assertion_signed: StrictBool = Field(
         description="Determines whether the SAML assertion is digitally signed",
-        alias="assertionSigned")
+        alias="assertionSigned"
+    )
     attribute_statements: Optional[List[SamlAttributeStatement]] = Field(
-        default=None, description="A list of custom attribute statements for the app's SAML assertion. See [SAML 2.0 Technical Overview](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html).  There are two types of attribute statements: | Type | Description | | ---- | ----------- | | EXPRESSION | Generic attribute statement that can be dynamic and supports [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/) | | GROUP | Group attribute statement | ", alias="attributeStatements")
-    audience: StrictStr = Field(description="The entity ID of the SP. Use the entity ID value exactly as provided by the SP.")
+        default=None,
+        description="A list of custom attribute statements for the app's SAML assertion. See [SAML 2.0 Technical "
+                    "Overview](https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html).  "
+                    "There are two types of attribute statements: | Type | Description | | ---- | ----------- | | "
+                    "EXPRESSION | Generic attribute statement that can be dynamic and supports [Okta Expression Language]("
+                    "https://developer.okta.com/docs/reference/okta-expression-language/) | | GROUP | Group attribute "
+                    "statement | ",
+        alias="attributeStatements"
+    )
+    audience: StrictStr = Field(
+        description="The entity ID of the SP. Use the entity ID value exactly as provided by the SP."
+    )
     audience_override: Optional[StrictStr] = Field(
         default=None,
-        description="Audience override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
-        alias="audienceOverride")
+        description="Audience override for CASB configuration. See [CASB config guide]("
+                    "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="audienceOverride"
+    )
     authn_context_class_ref: StrictStr = Field(
         description="Identifies the SAML authentication context class for the assertion's authentication statement",
-        alias="authnContextClassRef")
+        alias="authnContextClassRef"
+    )
     configured_attribute_statements: Optional[List[SamlAttributeStatement]] = Field(
-        default=None, description="The list of dynamic attribute statements for the SAML assertion inherited from app metadata (apps from the OIN) during app creation.  There are two types of attribute statements: `EXPRESSION` and `GROUP`. ", alias="configuredAttributeStatements")
+        default=None,
+        description="The list of dynamic attribute statements for the SAML assertion inherited from app metadata (apps "
+                    "from the OIN) during app creation.  There are two types of attribute statements: `EXPRESSION` and "
+                    "`GROUP`. ",
+        alias="configuredAttributeStatements"
+    )
     default_relay_state: Optional[StrictStr] = Field(
         default=None,
         description="Identifies a specific application resource in an IdP-initiated SSO scenario",
-        alias="defaultRelayState")
+        alias="defaultRelayState"
+    )
     destination: StrictStr = Field(
-        description="Identifies the location inside the SAML assertion where the SAML response should be sent")
+        description="Identifies the location inside the SAML assertion where the SAML response should be sent"
+    )
     destination_override: Optional[StrictStr] = Field(
         default=None,
-        description="Destination override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
-        alias="destinationOverride")
+        description="Destination override for CASB configuration. See [CASB config guide]("
+                    "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="destinationOverride"
+    )
     digest_algorithm: StrictStr = Field(
         description="Determines the digest algorithm used to digitally sign the SAML assertion and response",
-        alias="digestAlgorithm")
+        alias="digestAlgorithm"
+    )
     honor_force_authn: StrictBool = Field(
-        description="Set to `true` to prompt users for their credentials when a SAML request has the `ForceAuthn` attribute set to `true`",
-        alias="honorForceAuthn")
+        description="Set to `true` to prompt users for their credentials when a SAML request has the `ForceAuthn` "
+                    "attribute set to `true`",
+        alias="honorForceAuthn"
+    )
     idp_issuer: StrictStr = Field(description="SAML Issuer ID", alias="idpIssuer")
     inline_hooks: Optional[List[SignOnInlineHook]] = Field(
-        default=None, description="Associates the app with SAML inline hooks. See [the SAML assertion inline hook reference](https://developer.okta.com/docs/reference/saml-hook/).", alias="inlineHooks")
+        default=None,
+        description="Associates the app with SAML inline hooks. See [the SAML assertion inline hook reference]("
+                    "https://developer.okta.com/docs/reference/saml-hook/).",
+        alias="inlineHooks"
+    )
     participate_slo: Optional[SloParticipate] = Field(default=None, alias="participateSlo")
     recipient: StrictStr = Field(description="The location where the app may present the SAML assertion")
     recipient_override: Optional[StrictStr] = Field(
         default=None,
-        description="Recipient override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
-        alias="recipientOverride")
+        description="Recipient override for CASB configuration. See [CASB config guide]("
+                    "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="recipientOverride"
+    )
     request_compressed: StrictBool = Field(
         description="Determines whether the SAML request is expected to be compressed",
-        alias="requestCompressed")
+        alias="requestCompressed"
+    )
     response_signed: StrictBool = Field(
-        description="Determines whether the SAML authentication response message is digitally signed by the IdP > **Note:** Either (or both) `responseSigned` or `assertionSigned` must be `TRUE`.",
-        alias="responseSigned")
+        description="Determines whether the SAML authentication response message is digitally signed by the IdP > "
+                    "**Note:** Either (or both) `responseSigned` or `assertionSigned` must be `TRUE`.",
+        alias="responseSigned"
+    )
     saml_assertion_lifetime_seconds: Optional[StrictInt] = Field(
         default=None,
         description="Determines the SAML app session lifetimes with Okta",
-        alias="samlAssertionLifetimeSeconds")
+        alias="samlAssertionLifetimeSeconds"
+    )
     signature_algorithm: StrictStr = Field(
         description="Determines the signing algorithm used to digitally sign the SAML assertion and response",
-        alias="signatureAlgorithm")
+        alias="signatureAlgorithm"
+    )
     slo: Optional[SingleLogout] = None
     sp_certificate: Optional[SamlSpCertificate] = Field(default=None, alias="spCertificate")
     sp_issuer: Optional[StrictStr] = Field(
         default=None,
         description="The issuer ID for the Service Provider. This property appears when SLO is enabled.",
-        alias="spIssuer")
+        alias="spIssuer"
+    )
     sso_acs_url: StrictStr = Field(description="Single Sign-On Assertion Consumer Service (ACS) URL", alias="ssoAcsUrl")
     sso_acs_url_override: Optional[StrictStr] = Field(
         default=None,
-        description="Assertion Consumer Service (ACS) URL override for CASB configuration. See [CASB config guide](https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
-        alias="ssoAcsUrlOverride")
+        description="Assertion Consumer Service (ACS) URL override for CASB configuration. See [CASB config guide]("
+                    "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="ssoAcsUrlOverride"
+    )
     subject_name_id_format: StrictStr = Field(
         description="Identifies the SAML processing rules. Supported values:",
-        alias="subjectNameIdFormat")
+        alias="subjectNameIdFormat"
+    )
     subject_name_id_template: StrictStr = Field(
         description="Template for app user's username when a user is assigned to the app",
-        alias="subjectNameIdTemplate")
-    __properties: ClassVar[List[str]] = ["acsEndpoints",
-                                         "allowMultipleAcsEndpoints",
-                                         "assertionEncryption",
-                                         "assertionSigned",
-                                         "attributeStatements",
-                                         "audience",
-                                         "audienceOverride",
-                                         "authnContextClassRef",
-                                         "configuredAttributeStatements",
-                                         "defaultRelayState",
-                                         "destination",
-                                         "destinationOverride",
-                                         "digestAlgorithm",
-                                         "honorForceAuthn",
-                                         "idpIssuer",
-                                         "inlineHooks",
-                                         "participateSlo",
-                                         "recipient",
-                                         "recipientOverride",
-                                         "requestCompressed",
-                                         "responseSigned",
-                                         "samlAssertionLifetimeSeconds",
-                                         "signatureAlgorithm",
-                                         "slo",
-                                         "spCertificate",
-                                         "spIssuer",
-                                         "ssoAcsUrl",
-                                         "ssoAcsUrlOverride",
-                                         "subjectNameIdFormat",
-                                         "subjectNameIdTemplate"]
+        alias="subjectNameIdTemplate"
+    )
+    __properties: ClassVar[List[str]] = [
+        "acsEndpoints",
+        "allowMultipleAcsEndpoints",
+        "assertionEncryption",
+        "assertionSigned",
+        "attributeStatements",
+        "audience",
+        "audienceOverride",
+        "authnContextClassRef",
+        "configuredAttributeStatements",
+        "defaultRelayState",
+        "destination",
+        "destinationOverride",
+        "digestAlgorithm",
+        "honorForceAuthn",
+        "idpIssuer",
+        "inlineHooks",
+        "participateSlo",
+        "recipient",
+        "recipientOverride",
+        "requestCompressed",
+        "responseSigned",
+        "samlAssertionLifetimeSeconds",
+        "signatureAlgorithm",
+        "slo",
+        "spCertificate",
+        "spIssuer",
+        "ssoAcsUrl",
+        "ssoAcsUrlOverride",
+        "subjectNameIdFormat",
+        "subjectNameIdTemplate"
+    ]
 
     @field_validator('authn_context_class_ref')
     def authn_context_class_ref_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['urn:federation:authentication:windows', 'oasis:names:tc:SAML:2.0:ac:classes:Kerberos', 'urn:oasis:names:tc:SAML:2.0:ac:classes:Password', 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport',
-                            'urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient', 'urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified', 'urn:oasis:names:tc:SAML:2.0:ac:classes:X509']):
-            raise ValueError("must be one of enum values ('urn:federation:authentication:windows', 'oasis:names:tc:SAML:2.0:ac:classes:Kerberos', 'urn:oasis:names:tc:SAML:2.0:ac:classes:Password', 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport', 'urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient', 'urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified', 'urn:oasis:names:tc:SAML:2.0:ac:classes:X509')")
+        if value not in set(
+                [
+                    'urn:federation:authentication:windows', 'oasis:names:tc:SAML:2.0:ac:classes:Kerberos',
+                    'urn:oasis:names:tc:SAML:2.0:ac:classes:Password',
+                    'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport',
+                    'urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient', 'urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified',
+                    'urn:oasis:names:tc:SAML:2.0:ac:classes:X509'
+                ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('urn:federation:authentication:windows', "
+                "'oasis:names:tc:SAML:2.0:ac:classes:Kerberos', 'urn:oasis:names:tc:SAML:2.0:ac:classes:Password', "
+                "'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport', "
+                "'urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient', 'urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified', "
+                "'urn:oasis:names:tc:SAML:2.0:ac:classes:X509')"
+            )
         return value
 
     @field_validator('digest_algorithm')
@@ -173,9 +237,22 @@ class SamlApplicationSettingsSignOn(BaseModel):
     @field_validator('subject_name_id_format')
     def subject_name_id_format_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress', 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
-                            'urn:oasis:names:tc:SAML:2.0:nameid-format:transient', 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified', 'urn:oasis:names:tc:SAML:1.1:nameid-format:x509SubjectName']):
-            raise ValueError("must be one of enum values ('urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress', 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent', 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient', 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified', 'urn:oasis:names:tc:SAML:1.1:nameid-format:x509SubjectName')")
+        if value not in set(
+                [
+                    'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
+                    'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
+                    'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',
+                    'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
+                    'urn:oasis:names:tc:SAML:1.1:nameid-format:x509SubjectName'
+                ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress', "
+                "'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent', "
+                "'urn:oasis:names:tc:SAML:2.0:nameid-format:transient', "
+                "'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified', "
+                "'urn:oasis:names:tc:SAML:1.1:nameid-format:x509SubjectName')"
+            )
         return value
 
     model_config = ConfigDict(
@@ -208,8 +285,10 @@ class SamlApplicationSettingsSignOn(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -284,36 +363,52 @@ class SamlApplicationSettingsSignOn(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "acsEndpoints": [AcsEndpoint.from_dict(_item) for _item in obj["acsEndpoints"]] if obj.get("acsEndpoints") is not None else None,
-            "allowMultipleAcsEndpoints": obj.get("allowMultipleAcsEndpoints"),
-            "assertionEncryption": SamlAssertionEncryption.from_dict(obj["assertionEncryption"]) if obj.get("assertionEncryption") is not None else None,
-            "assertionSigned": obj.get("assertionSigned"),
-            "attributeStatements": [SamlAttributeStatement.from_dict(_item) for _item in obj["attributeStatements"]] if obj.get("attributeStatements") is not None else None,
-            "audience": obj.get("audience"),
-            "audienceOverride": obj.get("audienceOverride"),
-            "authnContextClassRef": obj.get("authnContextClassRef"),
-            "configuredAttributeStatements": [SamlAttributeStatement.from_dict(_item) for _item in obj["configuredAttributeStatements"]] if obj.get("configuredAttributeStatements") is not None else None,
-            "defaultRelayState": obj.get("defaultRelayState"),
-            "destination": obj.get("destination"),
-            "destinationOverride": obj.get("destinationOverride"),
-            "digestAlgorithm": obj.get("digestAlgorithm"),
-            "honorForceAuthn": obj.get("honorForceAuthn"),
-            "idpIssuer": obj.get("idpIssuer"),
-            "inlineHooks": [SignOnInlineHook.from_dict(_item) for _item in obj["inlineHooks"]] if obj.get("inlineHooks") is not None else None,
-            "participateSlo": SloParticipate.from_dict(obj["participateSlo"]) if obj.get("participateSlo") is not None else None,
-            "recipient": obj.get("recipient"),
-            "recipientOverride": obj.get("recipientOverride"),
-            "requestCompressed": obj.get("requestCompressed"),
-            "responseSigned": obj.get("responseSigned"),
-            "samlAssertionLifetimeSeconds": obj.get("samlAssertionLifetimeSeconds"),
-            "signatureAlgorithm": obj.get("signatureAlgorithm"),
-            "slo": SingleLogout.from_dict(obj["slo"]) if obj.get("slo") is not None else None,
-            "spCertificate": SamlSpCertificate.from_dict(obj["spCertificate"]) if obj.get("spCertificate") is not None else None,
-            "spIssuer": obj.get("spIssuer"),
-            "ssoAcsUrl": obj.get("ssoAcsUrl"),
-            "ssoAcsUrlOverride": obj.get("ssoAcsUrlOverride"),
-            "subjectNameIdFormat": obj.get("subjectNameIdFormat"),
-            "subjectNameIdTemplate": obj.get("subjectNameIdTemplate")
-        })
+        _obj = cls.model_validate(
+            {
+                "acsEndpoints": [AcsEndpoint.from_dict(_item) for _item in obj["acsEndpoints"]] if obj.get(
+                    "acsEndpoints"
+                ) is not None else None,
+                "allowMultipleAcsEndpoints": obj.get("allowMultipleAcsEndpoints"),
+                "assertionEncryption": SamlAssertionEncryption.from_dict(obj["assertionEncryption"]) if obj.get(
+                    "assertionEncryption"
+                ) is not None else None,
+                "assertionSigned": obj.get("assertionSigned"),
+                "attributeStatements": [SamlAttributeStatement.from_dict(_item) for _item in
+                                        obj["attributeStatements"]] if obj.get("attributeStatements") is not None else None,
+                "audience": obj.get("audience"),
+                "audienceOverride": obj.get("audienceOverride"),
+                "authnContextClassRef": obj.get("authnContextClassRef"),
+                "configuredAttributeStatements": [SamlAttributeStatement.from_dict(_item) for _item in
+                                                  obj["configuredAttributeStatements"]] if obj.get(
+                    "configuredAttributeStatements"
+                ) is not None else None,
+                "defaultRelayState": obj.get("defaultRelayState"),
+                "destination": obj.get("destination"),
+                "destinationOverride": obj.get("destinationOverride"),
+                "digestAlgorithm": obj.get("digestAlgorithm"),
+                "honorForceAuthn": obj.get("honorForceAuthn"),
+                "idpIssuer": obj.get("idpIssuer"),
+                "inlineHooks": [SignOnInlineHook.from_dict(_item) for _item in obj["inlineHooks"]] if obj.get(
+                    "inlineHooks"
+                ) is not None else None,
+                "participateSlo": SloParticipate.from_dict(obj["participateSlo"]) if obj.get(
+                    "participateSlo"
+                ) is not None else None,
+                "recipient": obj.get("recipient"),
+                "recipientOverride": obj.get("recipientOverride"),
+                "requestCompressed": obj.get("requestCompressed"),
+                "responseSigned": obj.get("responseSigned"),
+                "samlAssertionLifetimeSeconds": obj.get("samlAssertionLifetimeSeconds"),
+                "signatureAlgorithm": obj.get("signatureAlgorithm"),
+                "slo": SingleLogout.from_dict(obj["slo"]) if obj.get("slo") is not None else None,
+                "spCertificate": SamlSpCertificate.from_dict(obj["spCertificate"]) if obj.get(
+                    "spCertificate"
+                ) is not None else None,
+                "spIssuer": obj.get("spIssuer"),
+                "ssoAcsUrl": obj.get("ssoAcsUrl"),
+                "ssoAcsUrlOverride": obj.get("ssoAcsUrlOverride"),
+                "subjectNameIdFormat": obj.get("subjectNameIdFormat"),
+                "subjectNameIdTemplate": obj.get("subjectNameIdTemplate")
+            }
+        )
         return _obj

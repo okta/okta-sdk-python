@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,35 +20,39 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.api_token_network import ApiTokenNetwork
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
+
+from okta.models.api_token_network import ApiTokenNetwork
 
 
 class ApiTokenUpdate(BaseModel):
     """
-    An API Token Update Object for an Okta user. This token is NOT scoped any further and can be used for any API that the user has permissions to call.
+    An API Token Update Object for an Okta user. This token is NOT scoped any further and can be used for any API that the
+    user has permissions to call.
     """  # noqa: E501
     client_name: Optional[StrictStr] = Field(
         default=None,
         description="The client name associated with the API Token",
-        alias="clientName")
+        alias="clientName"
+    )
     created: Optional[datetime] = Field(default=None, description="The creation date of the API Token")
     name: Optional[StrictStr] = Field(default=None, description="The name associated with the API Token")
     network: Optional[ApiTokenNetwork] = None
     user_id: Optional[StrictStr] = Field(
         default=None,
         description="The userId of the user who created the API Token",
-        alias="userId")
+        alias="userId"
+    )
     __properties: ClassVar[List[str]] = ["clientName", "created", "name", "network", "userId"]
 
     model_config = ConfigDict(
@@ -81,10 +87,12 @@ class ApiTokenUpdate(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "client_name",
-            "created",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "client_name",
+                "created",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -109,11 +117,13 @@ class ApiTokenUpdate(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "clientName": obj.get("clientName"),
-            "created": obj.get("created"),
-            "name": obj.get("name"),
-            "network": ApiTokenNetwork.from_dict(obj["network"]) if obj.get("network") is not None else None,
-            "userId": obj.get("userId")
-        })
+        _obj = cls.model_validate(
+            {
+                "clientName": obj.get("clientName"),
+                "created": obj.get("created"),
+                "name": obj.get("name"),
+                "network": ApiTokenNetwork.from_dict(obj["network"]) if obj.get("network") is not None else None,
+                "userId": obj.get("userId")
+            }
+        )
         return _obj

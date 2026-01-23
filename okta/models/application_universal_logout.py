@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,32 +20,36 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class ApplicationUniversalLogout(BaseModel):
     """
-    <div class=\"x-lifecycle-container\"><x-lifecycle class=\"oie\"></x-lifecycle></div> Universal Logout properties for the app. These properties are only returned and can't be updated.
+    <div class=\"x-lifecycle-container\"><x-lifecycle class=\"oie\"></x-lifecycle></div> Universal Logout properties for
+    the app. These properties are only returned and can't be updated.
     """  # noqa: E501
     identity_stack: Optional[StrictStr] = Field(
         default=None,
-        description="Indicates whether the app uses a shared identity stack that may cause the user to sign out of other apps by the same company",
-        alias="identityStack")
+        description="Indicates whether the app uses a shared identity stack that may cause the user to sign out of other "
+                    "apps by the same company",
+        alias="identityStack"
+    )
     protocol: Optional[StrictStr] = Field(default=None, description="The protocol used for Universal Logout")
     status: Optional[StrictStr] = Field(default=None, description="Universal Logout status for the app instance")
     support_type: Optional[StrictStr] = Field(
         default=None,
         description="Indicates whether the app supports full or partial Universal Logout (UL).",
-        alias="supportType")
+        alias="supportType"
+    )
     __properties: ClassVar[List[str]] = ["identityStack", "protocol", "status", "supportType"]
 
     @field_validator('identity_stack')
@@ -116,8 +122,10 @@ class ApplicationUniversalLogout(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -135,10 +143,12 @@ class ApplicationUniversalLogout(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "identityStack": obj.get("identityStack"),
-            "protocol": obj.get("protocol"),
-            "status": obj.get("status"),
-            "supportType": obj.get("supportType")
-        })
+        _obj = cls.model_validate(
+            {
+                "identityStack": obj.get("identityStack"),
+                "protocol": obj.get("protocol"),
+                "status": obj.get("status"),
+                "supportType": obj.get("supportType")
+            }
+        )
         return _obj

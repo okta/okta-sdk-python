@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional, Union
+
 from okta.models.device_posture_checks import DevicePostureChecks
 from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
 from okta.models.platform import Platform
-from typing import Optional, Set
 
-from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.device_assurance_android_platform import DeviceAssuranceAndroidPlatform
     from okta.models.device_assurance_chrome_os_platform import DeviceAssuranceChromeOSPlatform
@@ -51,8 +54,11 @@ class DeviceAssurance(BaseModel):
     device_posture_checks: Optional[DevicePostureChecks] = Field(default=None, alias="devicePostureChecks")
     display_remediation_mode: Optional[StrictStr] = Field(
         default=None,
-        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Represents the remediation mode of this device assurance policy when users are denied access due to device noncompliance",
-        alias="displayRemediationMode")
+        description="<x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>Represents the "
+                    "remediation mode of this device assurance policy when users are denied access due to device "
+                    "noncompliance",
+        alias="displayRemediationMode"
+    )
     grace_period: Optional[GracePeriod] = Field(default=None, alias="gracePeriod")
     id: Optional[StrictStr] = None
     last_update: Optional[StrictStr] = Field(default=None, alias="lastUpdate")
@@ -60,17 +66,19 @@ class DeviceAssurance(BaseModel):
     name: Optional[StrictStr] = Field(default=None, description="Display name of the device assurance policy")
     platform: Optional[Platform] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["createdBy",
-                                         "createdDate",
-                                         "devicePostureChecks",
-                                         "displayRemediationMode",
-                                         "gracePeriod",
-                                         "id",
-                                         "lastUpdate",
-                                         "lastUpdatedBy",
-                                         "name",
-                                         "platform",
-                                         "_links"]
+    __properties: ClassVar[List[str]] = [
+        "createdBy",
+        "createdDate",
+        "devicePostureChecks",
+        "displayRemediationMode",
+        "gracePeriod",
+        "id",
+        "lastUpdate",
+        "lastUpdatedBy",
+        "name",
+        "platform",
+        "_links"
+    ]
 
     @field_validator('display_remediation_mode')
     def display_remediation_mode_validate_enum(cls, value):
@@ -93,7 +101,9 @@ class DeviceAssurance(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'ANDROID': 'DeviceAssuranceAndroidPlatform', 'CHROMEOS': 'DeviceAssuranceChromeOSPlatform', 'IOS': 'DeviceAssuranceIOSPlatform', 'MACOS': 'DeviceAssuranceMacOSPlatform', 'WINDOWS': 'DeviceAssuranceWindowsPlatform'
+        'ANDROID': 'DeviceAssuranceAndroidPlatform', 'CHROMEOS': 'DeviceAssuranceChromeOSPlatform',
+        'IOS': 'DeviceAssuranceIOSPlatform', 'MACOS': 'DeviceAssuranceMacOSPlatform',
+        'WINDOWS': 'DeviceAssuranceWindowsPlatform'
     }
 
     @classmethod
@@ -116,7 +126,7 @@ class DeviceAssurance(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Union[DeviceAssuranceAndroidPlatform, DeviceAssuranceChromeOSPlatform,
-                                                        DeviceAssuranceIOSPlatform, DeviceAssuranceMacOSPlatform, DeviceAssuranceWindowsPlatform]]:
+    DeviceAssuranceIOSPlatform, DeviceAssuranceMacOSPlatform, DeviceAssuranceWindowsPlatform]]:
         """Create an instance of DeviceAssurance from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -135,13 +145,15 @@ class DeviceAssurance(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created_by",
-            "created_date",
-            "id",
-            "last_update",
-            "last_updated_by",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created_by",
+                "created_date",
+                "id",
+                "last_update",
+                "last_updated_by",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -172,23 +184,31 @@ class DeviceAssurance(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DeviceAssuranceAndroidPlatform, DeviceAssuranceChromeOSPlatform,
-                                                              DeviceAssuranceIOSPlatform, DeviceAssuranceMacOSPlatform, DeviceAssuranceWindowsPlatform]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[
+        Union[DeviceAssuranceAndroidPlatform, DeviceAssuranceChromeOSPlatform,
+        DeviceAssuranceIOSPlatform, DeviceAssuranceMacOSPlatform, DeviceAssuranceWindowsPlatform]]:
         """Create an instance of DeviceAssurance from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'DeviceAssuranceAndroidPlatform':
-            return import_module("okta.models.device_assurance_android_platform").DeviceAssuranceAndroidPlatform.from_dict(obj)
+            return import_module("okta.models.device_assurance_android_platform").DeviceAssuranceAndroidPlatform.from_dict(
+                obj
+            )
         if object_type == 'DeviceAssuranceChromeOSPlatform':
             return import_module(
-                "okta.models.device_assurance_chrome_os_platform").DeviceAssuranceChromeOSPlatform.from_dict(obj)
+                "okta.models.device_assurance_chrome_os_platform"
+            ).DeviceAssuranceChromeOSPlatform.from_dict(obj)
         if object_type == 'DeviceAssuranceIOSPlatform':
             return import_module("okta.models.device_assurance_ios_platform").DeviceAssuranceIOSPlatform.from_dict(obj)
         if object_type == 'DeviceAssuranceMacOSPlatform':
             return import_module("okta.models.device_assurance_mac_os_platform").DeviceAssuranceMacOSPlatform.from_dict(obj)
         if object_type == 'DeviceAssuranceWindowsPlatform':
-            return import_module("okta.models.device_assurance_windows_platform").DeviceAssuranceWindowsPlatform.from_dict(obj)
+            return import_module("okta.models.device_assurance_windows_platform").DeviceAssuranceWindowsPlatform.from_dict(
+                obj
+            )
 
-        raise ValueError("DeviceAssurance failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "DeviceAssurance failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.chrome_browser_version import ChromeBrowserVersion
 from okta.models.key_trust_level_browser_key import KeyTrustLevelBrowserKey
 from okta.models.os_version_three_components import OSVersionThreeComponents
 from okta.models.password_protection_warning_trigger import PasswordProtectionWarningTrigger
 from okta.models.safe_browsing_protection_level import SafeBrowsingProtectionLevel
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class DTCMacOS(BaseModel):
@@ -43,54 +46,66 @@ class DTCMacOS(BaseModel):
     built_in_dns_client_enabled: Optional[StrictBool] = Field(
         default=None,
         description="Indicates if a software stack is used to communicate with the DNS server",
-        alias="builtInDnsClientEnabled")
+        alias="builtInDnsClientEnabled"
+    )
     chrome_remote_desktop_app_blocked: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether access to the Chrome Remote Desktop application is blocked through a policy",
-        alias="chromeRemoteDesktopAppBlocked")
+        alias="chromeRemoteDesktopAppBlocked"
+    )
     device_enrollment_domain: Optional[StrictStr] = Field(
         default=None,
         description="Enrollment domain of the customer that is currently managing the device",
-        alias="deviceEnrollmentDomain")
+        alias="deviceEnrollmentDomain"
+    )
     disk_encrypted: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether the main disk is encrypted",
-        alias="diskEncrypted")
+        alias="diskEncrypted"
+    )
     key_trust_level: Optional[KeyTrustLevelBrowserKey] = Field(default=None, alias="keyTrustLevel")
     os_firewall: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether a firewall is enabled at the OS-level on the device",
-        alias="osFirewall")
+        alias="osFirewall"
+    )
     os_version: Optional[OSVersionThreeComponents] = Field(default=None, alias="osVersion")
     password_protection_warning_trigger: Optional[PasswordProtectionWarningTrigger] = Field(
-        default=None, alias="passwordProtectionWarningTrigger")
+        default=None, alias="passwordProtectionWarningTrigger"
+    )
     realtime_url_check_mode: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether enterprise-grade (custom) unsafe URL scanning is enabled",
-        alias="realtimeUrlCheckMode")
+        alias="realtimeUrlCheckMode"
+    )
     safe_browsing_protection_level: Optional[SafeBrowsingProtectionLevel] = Field(
-        default=None, alias="safeBrowsingProtectionLevel")
+        default=None, alias="safeBrowsingProtectionLevel"
+    )
     screen_lock_secured: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether the device is password-protected",
-        alias="screenLockSecured")
+        alias="screenLockSecured"
+    )
     site_isolation_enabled: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether the Site Isolation (also known as **Site Per Process**) setting is enabled",
-        alias="siteIsolationEnabled")
-    __properties: ClassVar[List[str]] = ["browserVersion",
-                                         "builtInDnsClientEnabled",
-                                         "chromeRemoteDesktopAppBlocked",
-                                         "deviceEnrollmentDomain",
-                                         "diskEncrypted",
-                                         "keyTrustLevel",
-                                         "osFirewall",
-                                         "osVersion",
-                                         "passwordProtectionWarningTrigger",
-                                         "realtimeUrlCheckMode",
-                                         "safeBrowsingProtectionLevel",
-                                         "screenLockSecured",
-                                         "siteIsolationEnabled"]
+        alias="siteIsolationEnabled"
+    )
+    __properties: ClassVar[List[str]] = [
+        "browserVersion",
+        "builtInDnsClientEnabled",
+        "chromeRemoteDesktopAppBlocked",
+        "deviceEnrollmentDomain",
+        "diskEncrypted",
+        "keyTrustLevel",
+        "osFirewall",
+        "osVersion",
+        "passwordProtectionWarningTrigger",
+        "realtimeUrlCheckMode",
+        "safeBrowsingProtectionLevel",
+        "screenLockSecured",
+        "siteIsolationEnabled"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -122,8 +137,10 @@ class DTCMacOS(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -155,19 +172,25 @@ class DTCMacOS(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "browserVersion": ChromeBrowserVersion.from_dict(obj["browserVersion"]) if obj.get("browserVersion") is not None else None,
-            "builtInDnsClientEnabled": obj.get("builtInDnsClientEnabled"),
-            "chromeRemoteDesktopAppBlocked": obj.get("chromeRemoteDesktopAppBlocked"),
-            "deviceEnrollmentDomain": obj.get("deviceEnrollmentDomain"),
-            "diskEncrypted": obj.get("diskEncrypted"),
-            "keyTrustLevel": obj.get("keyTrustLevel"),
-            "osFirewall": obj.get("osFirewall"),
-            "osVersion": OSVersionThreeComponents.from_dict(obj["osVersion"]) if obj.get("osVersion") is not None else None,
-            "passwordProtectionWarningTrigger": obj.get("passwordProtectionWarningTrigger"),
-            "realtimeUrlCheckMode": obj.get("realtimeUrlCheckMode"),
-            "safeBrowsingProtectionLevel": obj.get("safeBrowsingProtectionLevel"),
-            "screenLockSecured": obj.get("screenLockSecured"),
-            "siteIsolationEnabled": obj.get("siteIsolationEnabled")
-        })
+        _obj = cls.model_validate(
+            {
+                "browserVersion": ChromeBrowserVersion.from_dict(obj["browserVersion"]) if obj.get(
+                    "browserVersion"
+                ) is not None else None,
+                "builtInDnsClientEnabled": obj.get("builtInDnsClientEnabled"),
+                "chromeRemoteDesktopAppBlocked": obj.get("chromeRemoteDesktopAppBlocked"),
+                "deviceEnrollmentDomain": obj.get("deviceEnrollmentDomain"),
+                "diskEncrypted": obj.get("diskEncrypted"),
+                "keyTrustLevel": obj.get("keyTrustLevel"),
+                "osFirewall": obj.get("osFirewall"),
+                "osVersion": OSVersionThreeComponents.from_dict(obj["osVersion"]) if obj.get(
+                    "osVersion"
+                ) is not None else None,
+                "passwordProtectionWarningTrigger": obj.get("passwordProtectionWarningTrigger"),
+                "realtimeUrlCheckMode": obj.get("realtimeUrlCheckMode"),
+                "safeBrowsingProtectionLevel": obj.get("safeBrowsingProtectionLevel"),
+                "screenLockSecured": obj.get("screenLockSecured"),
+                "siteIsolationEnabled": obj.get("siteIsolationEnabled")
+            }
+        )
         return _obj

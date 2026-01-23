@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.test_info_oidc_test_configuration import TestInfoOidcTestConfiguration
 from okta.models.test_info_saml_test_configuration import TestInfoSamlTestConfiguration
 from okta.models.test_info_scim_test_configuration import TestInfoScimTestConfiguration
 from okta.models.test_info_test_account import TestInfoTestAccount
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class TestInfo(BaseModel):
@@ -40,13 +43,18 @@ class TestInfo(BaseModel):
     Integration Testing Information
     """  # noqa: E501
     escalation_support_contact: Annotated[str, Field(strict=True, max_length=255)] = Field(
-        description="An email for Okta to contact your company about your integration. This email isn't shared with customers.", alias="escalationSupportContact")
+        description="An email for Okta to contact your company about your integration. This email isn't shared with "
+                    "customers.",
+        alias="escalationSupportContact"
+    )
     oidc_test_configuration: Optional[TestInfoOidcTestConfiguration] = Field(default=None, alias="oidcTestConfiguration")
     saml_test_configuration: Optional[TestInfoSamlTestConfiguration] = Field(default=None, alias="samlTestConfiguration")
     scim_test_configuration: Optional[TestInfoScimTestConfiguration] = Field(default=None, alias="scimTestConfiguration")
     test_account: Optional[TestInfoTestAccount] = Field(default=None, alias="testAccount")
-    __properties: ClassVar[List[str]] = ["escalationSupportContact", "oidcTestConfiguration",
-                                         "samlTestConfiguration", "scimTestConfiguration", "testAccount"]
+    __properties: ClassVar[List[str]] = [
+        "escalationSupportContact", "oidcTestConfiguration",
+        "samlTestConfiguration", "scimTestConfiguration", "testAccount"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,8 +86,10 @@ class TestInfo(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -125,11 +135,21 @@ class TestInfo(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "escalationSupportContact": obj.get("escalationSupportContact"),
-            "oidcTestConfiguration": TestInfoOidcTestConfiguration.from_dict(obj["oidcTestConfiguration"]) if obj.get("oidcTestConfiguration") is not None else None,
-            "samlTestConfiguration": TestInfoSamlTestConfiguration.from_dict(obj["samlTestConfiguration"]) if obj.get("samlTestConfiguration") is not None else None,
-            "scimTestConfiguration": TestInfoScimTestConfiguration.from_dict(obj["scimTestConfiguration"]) if obj.get("scimTestConfiguration") is not None else None,
-            "testAccount": TestInfoTestAccount.from_dict(obj["testAccount"]) if obj.get("testAccount") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "escalationSupportContact": obj.get("escalationSupportContact"),
+                "oidcTestConfiguration": TestInfoOidcTestConfiguration.from_dict(obj["oidcTestConfiguration"]) if obj.get(
+                    "oidcTestConfiguration"
+                ) is not None else None,
+                "samlTestConfiguration": TestInfoSamlTestConfiguration.from_dict(obj["samlTestConfiguration"]) if obj.get(
+                    "samlTestConfiguration"
+                ) is not None else None,
+                "scimTestConfiguration": TestInfoScimTestConfiguration.from_dict(obj["scimTestConfiguration"]) if obj.get(
+                    "scimTestConfiguration"
+                ) is not None else None,
+                "testAccount": TestInfoTestAccount.from_dict(obj["testAccount"]) if obj.get(
+                    "testAccount"
+                ) is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.trusted_origin_scope import TrustedOriginScope
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class TrustedOrigin(BaseModel):
@@ -43,25 +46,37 @@ class TrustedOrigin(BaseModel):
     created_by: Optional[StrictStr] = Field(
         default=None,
         description="The ID of the user who created the trusted origin",
-        alias="createdBy")
+        alias="createdBy"
+    )
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the trusted origin")
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the trusted origin was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     last_updated_by: Optional[StrictStr] = Field(
         default=None,
         description="The ID of the user who last updated the trusted origin",
-        alias="lastUpdatedBy")
-    name: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Unique name for the trusted origin")
+        alias="lastUpdatedBy"
+    )
+    name: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="Unique name for the trusted origin"
+    )
     origin: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None, description="Unique origin URL for the trusted origin. The supported schemes for this attribute are HTTP, HTTPS, FTP, Ionic 2, and Capacitor.")
-    scopes: Optional[List[TrustedOriginScope]] = Field(default=None,
-                                                       description="Array of scope types that this trusted origin is used for")
+        default=None,
+        description="Unique origin URL for the trusted origin. The supported schemes for this attribute are HTTP, HTTPS, "
+                    "FTP, Ionic 2, and Capacitor."
+    )
+    scopes: Optional[List[TrustedOriginScope]] = Field(
+        default=None,
+        description="Array of scope types that this trusted origin is used for"
+    )
     status: Optional[LifecycleStatus] = None
     links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "createdBy", "id", "lastUpdated",
-                                         "lastUpdatedBy", "name", "origin", "scopes", "status", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "created", "createdBy", "id", "lastUpdated",
+        "lastUpdatedBy", "name", "origin", "scopes", "status", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,11 +111,13 @@ class TrustedOrigin(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -132,16 +149,20 @@ class TrustedOrigin(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "createdBy": obj.get("createdBy"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "lastUpdatedBy": obj.get("lastUpdatedBy"),
-            "name": obj.get("name"),
-            "origin": obj.get("origin"),
-            "scopes": [TrustedOriginScope.from_dict(_item) for _item in obj["scopes"]] if obj.get("scopes") is not None else None,
-            "status": obj.get("status"),
-            "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "createdBy": obj.get("createdBy"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "lastUpdatedBy": obj.get("lastUpdatedBy"),
+                "name": obj.get("name"),
+                "origin": obj.get("origin"),
+                "scopes": [TrustedOriginScope.from_dict(_item) for _item in obj["scopes"]] if obj.get(
+                    "scopes"
+                ) is not None else None,
+                "status": obj.get("status"),
+                "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

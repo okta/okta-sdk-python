@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
 from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+
 from okta.models.credential_sync_info import CredentialSyncInfo
 from okta.models.privileged_resource_status import PrivilegedResourceStatus
 from okta.models.privileged_resource_type import PrivilegedResourceType
-from typing import Optional, Set
 
-from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.privileged_resource_account_app_request import PrivilegedResourceAccountAppRequest
     from okta.models.privileged_resource_account_okta import PrivilegedResourceAccountOkta
@@ -50,7 +53,8 @@ class PrivilegedResource(BaseModel):
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     resource_type: PrivilegedResourceType = Field(alias="resourceType")
     status: Optional[PrivilegedResourceStatus] = None
     __properties: ClassVar[List[str]] = ["created", "credentialSyncInfo", "id", "lastUpdated", "resourceType", "status"]
@@ -66,7 +70,8 @@ class PrivilegedResource(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'APP_ACCOUNT': 'PrivilegedResourceAccountAppRequest', 'OKTA_USER_ACCOUNT': 'PrivilegedResourceAccountOkta', 'PrivilegedResourceAccountAppResponse': 'PrivilegedResourceAccountAppResponse'
+        'APP_ACCOUNT': 'PrivilegedResourceAccountAppRequest', 'OKTA_USER_ACCOUNT': 'PrivilegedResourceAccountOkta',
+        'PrivilegedResourceAccountAppResponse': 'PrivilegedResourceAccountAppResponse'
     }
 
     @classmethod
@@ -89,7 +94,7 @@ class PrivilegedResource(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Union[PrivilegedResourceAccountAppRequest,
-                                                        PrivilegedResourceAccountOkta, PrivilegedResourceAccountAppResponse]]:
+    PrivilegedResourceAccountOkta, PrivilegedResourceAccountAppResponse]]:
         """Create an instance of PrivilegedResource from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -106,11 +111,13 @@ class PrivilegedResource(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -128,19 +135,23 @@ class PrivilegedResource(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[PrivilegedResourceAccountAppRequest,
-                                                              PrivilegedResourceAccountOkta, PrivilegedResourceAccountAppResponse]]:
+    PrivilegedResourceAccountOkta, PrivilegedResourceAccountAppResponse]]:
         """Create an instance of PrivilegedResource from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == 'PrivilegedResourceAccountAppRequest':
             return import_module(
-                "okta.models.privileged_resource_account_app_request").PrivilegedResourceAccountAppRequest.from_dict(obj)
+                "okta.models.privileged_resource_account_app_request"
+            ).PrivilegedResourceAccountAppRequest.from_dict(obj)
         if object_type == 'PrivilegedResourceAccountOkta':
             return import_module("okta.models.privileged_resource_account_okta").PrivilegedResourceAccountOkta.from_dict(obj)
         if object_type == 'PrivilegedResourceAccountAppResponse':
             return import_module(
-                "okta.models.privileged_resource_account_app_response").PrivilegedResourceAccountAppResponse.from_dict(obj)
+                "okta.models.privileged_resource_account_app_response"
+            ).PrivilegedResourceAccountAppResponse.from_dict(obj)
 
-        raise ValueError("PrivilegedResource failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "PrivilegedResource failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

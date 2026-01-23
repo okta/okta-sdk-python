@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,26 +20,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 
 class ECKeyJWK(BaseModel):
     """
-    Elliptic curve key in JSON Web Key (JWK) format. It's used during enrollment to encrypt fulfillment requests to Yubico, or during activation to verify Yubico's JWS (JSON Web Signature) objects in fulfillment responses. The currently agreed protocol uses P-384.
+    Elliptic curve key in JSON Web Key (JWK) format. It's used during enrollment to encrypt fulfillment requests to
+    Yubico, or during activation to verify Yubico's JWS (JSON Web Signature) objects in fulfillment responses. The
+    currently agreed protocol uses P-384.
     """  # noqa: E501
     crv: StrictStr = Field(description="The elliptic curve protocol")
     kid: StrictStr = Field(description="The unique identifier of the key")
     kty: StrictStr = Field(description="The type of public key")
-    use: StrictStr = Field(description="The intended use for the key. This value is either `enc` (encryption) during enrollment, when Okta uses the ECKeyJWK to encrypt requests to Yubico. Or it's `sig` (signature) during activation, when Okta uses the ECKeyJWK to verify the responses from Yubico.")
+    use: StrictStr = Field(
+        description="The intended use for the key. This value is either `enc` (encryption) during enrollment, "
+                    "when Okta uses the ECKeyJWK to encrypt requests to Yubico. Or it's `sig` (signature) during "
+                    "activation, when Okta uses the ECKeyJWK to verify the responses from Yubico."
+    )
     x: StrictStr = Field(description="The public x coordinate for the elliptic curve point")
     y: StrictStr = Field(description="The public y coordinate for the elliptic curve point")
     __properties: ClassVar[List[str]] = ["crv", "kid", "kty", "use", "x", "y"]
@@ -93,8 +101,10 @@ class ECKeyJWK(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -112,12 +122,14 @@ class ECKeyJWK(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "crv": obj.get("crv"),
-            "kid": obj.get("kid"),
-            "kty": obj.get("kty"),
-            "use": obj.get("use"),
-            "x": obj.get("x"),
-            "y": obj.get("y")
-        })
+        _obj = cls.model_validate(
+            {
+                "crv": obj.get("crv"),
+                "kid": obj.get("kid"),
+                "kty": obj.get("kty"),
+                "use": obj.get("use"),
+                "x": obj.get("x"),
+                "y": obj.get("y")
+            }
+        )
         return _obj

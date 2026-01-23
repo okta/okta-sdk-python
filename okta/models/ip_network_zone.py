@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.network_zone import NetworkZone
 from okta.models.network_zone_address import NetworkZoneAddress
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class IPNetworkZone(NetworkZone):
@@ -39,14 +42,28 @@ class IPNetworkZone(NetworkZone):
     """  # noqa: E501
     use_as_exempt_list: Optional[StrictBool] = Field(
         default=None,
-        description="You can **only** use this parameter when making a request to the Replace the network zone endpoint (`/api/v1/zones/{zoneId}`). Set this parameter to `true` in your request when you update the `DefaultExemptIpZone` to allow IPs through the blocklist.",
-        alias="useAsExemptList")
+        description="You can **only** use this parameter when making a request to the Replace the network zone endpoint ("
+                    "`/api/v1/zones/{zoneId}`). Set this parameter to `true` in your request when you update the "
+                    "`DefaultExemptIpZone` to allow IPs through the blocklist.",
+        alias="useAsExemptList"
+    )
     gateways: Optional[List[NetworkZoneAddress]] = Field(
-        default=None, description="The IP addresses (range or CIDR form) for an IP Network Zone. The maximum array length is 150 entries for admin-created IP zones, 1000 entries for IP blocklist zones, and 5000 entries for the default system IP Zone.")
+        default=None,
+        description="The IP addresses (range or CIDR form) for an IP Network Zone. The maximum array length is 150 entries "
+                    "for admin-created IP zones, 1000 entries for IP blocklist zones, and 5000 entries for the default "
+                    "system IP Zone."
+    )
     proxies: Optional[List[NetworkZoneAddress]] = Field(
-        default=None, description="The IP addresses (range or CIDR form) that are allowed to forward a request from gateway addresses for an IP Network Zone. These proxies are automatically trusted by Threat Insights and used to identify the client IP of a request. The maximum array length is 150 entries for admin-created zones and 5000 entries for the default system IP Zone.")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status",
-                                         "system", "type", "usage", "_links", "useAsExemptList", "gateways", "proxies"]
+        default=None,
+        description="The IP addresses (range or CIDR form) that are allowed to forward a request from gateway addresses "
+                    "for an IP Network Zone. These proxies are automatically trusted by Threat Insights and used to "
+                    "identify the client IP of a request. The maximum array length is 150 entries for admin-created zones "
+                    "and 5000 entries for the default system IP Zone."
+    )
+    __properties: ClassVar[List[str]] = [
+        "created", "id", "lastUpdated", "name", "status",
+        "system", "type", "usage", "_links", "useAsExemptList", "gateways", "proxies"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,8 +95,10 @@ class IPNetworkZone(NetworkZone):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -123,18 +142,24 @@ class IPNetworkZone(NetworkZone):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "status": obj.get("status"),
-            "system": obj.get("system"),
-            "type": obj.get("type"),
-            "usage": obj.get("usage"),
-            "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
-            "useAsExemptList": obj.get("useAsExemptList"),
-            "gateways": [NetworkZoneAddress.from_dict(_item) for _item in obj["gateways"]] if obj.get("gateways") is not None else None,
-            "proxies": [NetworkZoneAddress.from_dict(_item) for _item in obj["proxies"]] if obj.get("proxies") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "status": obj.get("status"),
+                "system": obj.get("system"),
+                "type": obj.get("type"),
+                "usage": obj.get("usage"),
+                "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
+                "useAsExemptList": obj.get("useAsExemptList"),
+                "gateways": [NetworkZoneAddress.from_dict(_item) for _item in obj["gateways"]] if obj.get(
+                    "gateways"
+                ) is not None else None,
+                "proxies": [NetworkZoneAddress.from_dict(_item) for _item in obj["proxies"]] if obj.get(
+                    "proxies"
+                ) is not None else None
+            }
+        )
         return _obj

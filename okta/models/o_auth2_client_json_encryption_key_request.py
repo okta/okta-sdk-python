@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,28 +20,35 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class OAuth2ClientJsonEncryptionKeyRequest(BaseModel):
     """
-    <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A [JSON Web Key (JWK)](https://tools.ietf.org/html/rfc7517) is a JSON representation of a cryptographic key. Okta uses an encryption key to encrypt an ID token JWT minted by the org authorization server or custom authorization server. Okta supports only RSA keys for encrypting tokens.
+    <x-lifecycle-container><x-lifecycle class=\"ea\"></x-lifecycle></x-lifecycle-container>A [JSON Web Key (JWK)](
+    https://tools.ietf.org/html/rfc7517) is a JSON representation of a cryptographic key. Okta uses an encryption key to
+    encrypt an ID token JWT minted by the org authorization server or custom authorization server. Okta supports only RSA
+    keys for encrypting tokens.
     """  # noqa: E501
     e: Optional[StrictStr] = Field(default=None, description="RSA key value (exponent) for key binding")
-    kty: Optional[StrictStr] = Field(default=None, description="Cryptographic algorithm family for the certificate's key pair")
+    kty: Optional[StrictStr] = Field(
+        default=None, description="Cryptographic algorithm family for the certificate's key pair"
+    )
     n: Optional[StrictStr] = Field(default=None, description="RSA key value (modulus) for key binding")
     use: Optional[StrictStr] = Field(default=None, description="Acceptable use of the JSON Web Key")
-    kid: Optional[StrictStr] = Field(default=None,
-                                     description="Unique identifier of the JSON Web Key in the OAUth 2.0 client's JWKS")
+    kid: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier of the JSON Web Key in the OAUth 2.0 client's JWKS"
+    )
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the OAuth 2.0 client JSON Web Key")
     __properties: ClassVar[List[str]] = ["kid", "status"]
 
@@ -103,8 +112,10 @@ class OAuth2ClientJsonEncryptionKeyRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -127,8 +138,10 @@ class OAuth2ClientJsonEncryptionKeyRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "kid": obj.get("kid"),
-            "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE'
-        })
+        _obj = cls.model_validate(
+            {
+                "kid": obj.get("kid"),
+                "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE'
+            }
+        )
         return _obj

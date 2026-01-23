@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.device_integrations_metadata import DeviceIntegrationsMetadata
 from okta.models.device_integrations_name import DeviceIntegrationsName
 from okta.models.device_integrations_platform import DeviceIntegrationsPlatform
 from okta.models.device_integrations_status import DeviceIntegrationsStatus
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class DeviceIntegrations(BaseModel):
@@ -42,7 +45,8 @@ class DeviceIntegrations(BaseModel):
     display_name: Optional[StrictStr] = Field(
         default=None,
         description="The display name of the device integration",
-        alias="displayName")
+        alias="displayName"
+    )
     id: Optional[StrictStr] = Field(default=None, description="The ID of the device integration")
     metadata: Optional[DeviceIntegrationsMetadata] = None
     name: Optional[DeviceIntegrationsName] = None
@@ -82,9 +86,11 @@ class DeviceIntegrations(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -116,13 +122,17 @@ class DeviceIntegrations(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "displayName": obj.get("displayName"),
-            "id": obj.get("id"),
-            "metadata": DeviceIntegrationsMetadata.from_dict(obj["metadata"]) if obj.get("metadata") is not None else None,
-            "name": obj.get("name"),
-            "platform": obj.get("platform"),
-            "status": obj.get("status"),
-            "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "displayName": obj.get("displayName"),
+                "id": obj.get("id"),
+                "metadata": DeviceIntegrationsMetadata.from_dict(obj["metadata"]) if obj.get(
+                    "metadata"
+                ) is not None else None,
+                "name": obj.get("name"),
+                "platform": obj.get("platform"),
+                "status": obj.get("status"),
+                "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

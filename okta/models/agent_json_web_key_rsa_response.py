@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.agent_secret_links import AgentSecretLinks
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.agent_secret_links import AgentSecretLinks
 
 
 class AgentJsonWebKeyRsaResponse(BaseModel):
@@ -37,25 +40,34 @@ class AgentJsonWebKeyRsaResponse(BaseModel):
     """  # noqa: E501
     e: Optional[StrictStr] = Field(
         default=None,
-        description="The public exponent of the RSA key, represented as a Base64URL-encoded string.  This value is used in combination with the modulus (`n`) to verify signatures and encrypt data.")
+        description="The public exponent of the RSA key, represented as a Base64URL-encoded string.  This value is used in "
+                    "combination with the modulus (`n`) to verify signatures and encrypt data."
+    )
     kty: StrictStr = Field(description="Cryptographic algorithm family for the certificate's key pair")
     n: Optional[StrictStr] = Field(
         default=None,
-        description="The modulus of the RSA public key, represented as a Base64URL-encoded string.  This is the primary component of the RSA key and, with the exponent (`e`), is used for cryptographic signature verification and encryption.")
+        description="The modulus of the RSA public key, represented as a Base64URL-encoded string.  This is the primary "
+                    "component of the RSA key and, with the exponent (`e`), is used for cryptographic signature "
+                    "verification and encryption."
+    )
     kid: Optional[StrictStr] = Field(
         default=None,
-        description="Unique identifier of the JSON Web Key in the AI agent's JSON Web Key Set (JWKS)")
+        description="Unique identifier of the JSON Web Key in the AI agent's JSON Web Key Set (JWKS)"
+    )
     status: Optional[StrictStr] = Field(default='ACTIVE', description="Status of the AI agent JSON Web Key")
     alg: Optional[StrictStr] = Field(default=None, description="Algorithm that's used in the JSON Web Key")
     use: Optional[StrictStr] = Field(
         default=None,
-        description="Acceptable use of the JSON Web Key  You can only use signing keys for AI agents, so the value of `use` is always `sig`.")
+        description="Acceptable use of the JSON Web Key  You can only use signing keys for AI agents, so the value of "
+                    "`use` is always `sig`."
+    )
     created: Optional[StrictStr] = Field(default=None, description="Timestamp of when the AI agent JSON Web Key was created")
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the AI agent JSON Web Key")
     last_updated: Optional[StrictStr] = Field(
         default=None,
         description="Timestamp of when the AI agent JSON Web Key was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     links: Optional[AgentSecretLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["kid", "status", "alg", "use", "created", "id", "lastUpdated", "_links"]
 
@@ -119,11 +131,13 @@ class AgentJsonWebKeyRsaResponse(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -148,14 +162,16 @@ class AgentJsonWebKeyRsaResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "kid": obj.get("kid"),
-            "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE',
-            "alg": obj.get("alg"),
-            "use": obj.get("use"),
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "_links": AgentSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "kid": obj.get("kid"),
+                "status": obj.get("status") if obj.get("status") is not None else 'ACTIVE',
+                "alg": obj.get("alg"),
+                "use": obj.get("use"),
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "_links": AgentSecretLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

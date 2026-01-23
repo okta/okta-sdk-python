@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
 from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+
 from okta.models.user_factor_links import UserFactorLinks
 from okta.models.user_factor_status import UserFactorStatus
 from okta.models.user_factor_type import UserFactorType
-from typing import Optional, Set
 
-from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.user_factor_call import UserFactorCall
     from okta.models.user_factor_email import UserFactorEmail
@@ -59,20 +62,26 @@ class UserFactor(BaseModel):
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the factor was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     profile: Optional[Dict[str, Any]] = Field(default=None, description="Specific attributes related to the factor")
     provider: Optional[StrictStr] = Field(
         default=None,
-        description="Provider for the factor. Each provider can support a subset of factor types.")
+        description="Provider for the factor. Each provider can support a subset of factor types."
+    )
     status: Optional[UserFactorStatus] = None
     vendor_name: Optional[StrictStr] = Field(
         default=None,
-        description="Name of the factor vendor. This is usually the same as the provider except for On-Prem MFA, which depends on admin settings.",
-        alias="vendorName")
+        description="Name of the factor vendor. This is usually the same as the provider except for On-Prem MFA, "
+                    "which depends on admin settings.",
+        alias="vendorName"
+    )
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
     links: Optional[UserFactorLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated",
-                                         "profile", "provider", "status", "vendorName", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "created", "factorType", "id", "lastUpdated",
+        "profile", "provider", "status", "vendorName", "_embedded", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +94,11 @@ class UserFactor(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        'call': 'UserFactorCall', 'email': 'UserFactorEmail', 'push': 'UserFactorPush', 'question': 'UserFactorSecurityQuestion', 'sms': 'UserFactorSMS', 'token': 'UserFactorToken', 'token:hardware': 'UserFactorTokenHardware', 'token:hotp': 'UserFactorTokenHOTP', 'token:software:totp': 'UserFactorTokenSoftwareTOTP', 'u2f': 'UserFactorU2F', 'web': 'UserFactorWeb', 'webauthn': 'UserFactorWebAuthn'
+        'call': 'UserFactorCall', 'email': 'UserFactorEmail', 'push': 'UserFactorPush',
+        'question': 'UserFactorSecurityQuestion', 'sms': 'UserFactorSMS', 'token': 'UserFactorToken',
+        'token:hardware': 'UserFactorTokenHardware', 'token:hotp': 'UserFactorTokenHOTP',
+        'token:software:totp': 'UserFactorTokenSoftwareTOTP', 'u2f': 'UserFactorU2F', 'web': 'UserFactorWeb',
+        'webauthn': 'UserFactorWebAuthn'
     }
 
     @classmethod
@@ -107,8 +120,10 @@ class UserFactor(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Union[UserFactorCall, UserFactorEmail, UserFactorPush, UserFactorSecurityQuestion, UserFactorSMS,
-                                                        UserFactorToken, UserFactorTokenHardware, UserFactorTokenHOTP, UserFactorTokenSoftwareTOTP, UserFactorU2F, UserFactorWeb, UserFactorWebAuthn]]:
+    def from_json(cls, json_str: str) -> Optional[
+        Union[UserFactorCall, UserFactorEmail, UserFactorPush, UserFactorSecurityQuestion, UserFactorSMS,
+        UserFactorToken, UserFactorTokenHardware, UserFactorTokenHOTP, UserFactorTokenSoftwareTOTP, UserFactorU2F,
+        UserFactorWeb, UserFactorWebAuthn]]:
         """Create an instance of UserFactor from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -127,13 +142,15 @@ class UserFactor(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-            "vendor_name",
-            "embedded",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+                "vendor_name",
+                "embedded",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -150,8 +167,10 @@ class UserFactor(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[UserFactorCall, UserFactorEmail, UserFactorPush, UserFactorSecurityQuestion, UserFactorSMS,
-                                                              UserFactorToken, UserFactorTokenHardware, UserFactorTokenHOTP, UserFactorTokenSoftwareTOTP, UserFactorU2F, UserFactorWeb, UserFactorWebAuthn]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[
+        Union[UserFactorCall, UserFactorEmail, UserFactorPush, UserFactorSecurityQuestion, UserFactorSMS,
+        UserFactorToken, UserFactorTokenHardware, UserFactorTokenHOTP, UserFactorTokenSoftwareTOTP, UserFactorU2F,
+        UserFactorWeb, UserFactorWebAuthn]]:
         """Create an instance of UserFactor from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -180,6 +199,8 @@ class UserFactor(BaseModel):
         if object_type == 'UserFactorWebAuthn':
             return import_module("okta.models.user_factor_web_authn").UserFactorWebAuthn.from_dict(obj)
 
-        raise ValueError("UserFactor failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "UserFactor failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

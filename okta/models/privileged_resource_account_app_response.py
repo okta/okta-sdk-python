@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.credential_sync_info import CredentialSyncInfo
 from okta.models.privileged_resource import PrivilegedResource
 from okta.models.privileged_resource_credentials import PrivilegedResourceCredentials
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class PrivilegedResourceAccountAppResponse(PrivilegedResource):
@@ -39,9 +42,12 @@ class PrivilegedResourceAccountAppResponse(PrivilegedResource):
     """  # noqa: E501
     credentials: Optional[PrivilegedResourceCredentials] = None
     profile: Optional[Dict[str, Any]] = Field(
-        default=None, description="Specific profile properties for the privileged resource")
-    __properties: ClassVar[List[str]] = ["created", "credentialSyncInfo", "id",
-                                         "lastUpdated", "resourceType", "status", "credentials", "profile"]
+        default=None, description="Specific profile properties for the privileged resource"
+    )
+    __properties: ClassVar[List[str]] = [
+        "created", "credentialSyncInfo", "id",
+        "lastUpdated", "resourceType", "status", "credentials", "profile"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,9 +80,11 @@ class PrivilegedResourceAccountAppResponse(PrivilegedResource):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "profile",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "profile",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -108,14 +116,20 @@ class PrivilegedResourceAccountAppResponse(PrivilegedResource):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "credentialSyncInfo": CredentialSyncInfo.from_dict(obj["credentialSyncInfo"]) if obj.get("credentialSyncInfo") is not None else None,
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "resourceType": obj.get("resourceType"),
-            "status": obj.get("status"),
-            "credentials": PrivilegedResourceCredentials.from_dict(obj["credentials"]) if obj.get("credentials") is not None else None,
-            "profile": obj.get("profile")
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "credentialSyncInfo": CredentialSyncInfo.from_dict(obj["credentialSyncInfo"]) if obj.get(
+                    "credentialSyncInfo"
+                ) is not None else None,
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "resourceType": obj.get("resourceType"),
+                "status": obj.get("status"),
+                "credentials": PrivilegedResourceCredentials.from_dict(obj["credentials"]) if obj.get(
+                    "credentials"
+                ) is not None else None,
+                "profile": obj.get("profile")
+            }
+        )
         return _obj

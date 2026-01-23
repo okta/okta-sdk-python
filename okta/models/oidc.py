@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,15 +38,25 @@ class Oidc(BaseModel):
     OIDC configuration details
     """  # noqa: E501
     doc: StrictStr = Field(
-        description="The URL to your customer-facing instructions for configuring your OIDC integration. See [Customer configuration document guidelines](https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document-guidelines).")
+        description="The URL to your customer-facing instructions for configuring your OIDC integration. See [Customer "
+                    "configuration document guidelines]("
+                    "https://developer.okta.com/docs/guides/submit-app-prereq/main/#customer-configuration-document"
+                    "-guidelines)."
+    )
     initiate_login_uri: Optional[StrictStr] = Field(
         default=None,
         description="The URL to redirect users when they click on your app from their Okta End-User Dashboard",
-        alias="initiateLoginUri")
+        alias="initiateLoginUri"
+    )
     post_logout_uris: Optional[List[StrictStr]] = Field(
-        default=None, description="The sign-out redirect URIs for your app. You can send a request to `/v1/logout` to sign the user out and redirect them to one of these URIs.", alias="postLogoutUris")
+        default=None,
+        description="The sign-out redirect URIs for your app. You can send a request to `/v1/logout` to sign the user out "
+                    "and redirect them to one of these URIs.",
+        alias="postLogoutUris"
+    )
     redirect_uris: Annotated[List[StrictStr], Field(min_length=1)] = Field(
-        description="List of sign-in redirect URIs", alias="redirectUris")
+        description="List of sign-in redirect URIs", alias="redirectUris"
+    )
     __properties: ClassVar[List[str]] = ["doc", "initiateLoginUri", "postLogoutUris", "redirectUris"]
 
     model_config = ConfigDict(
@@ -77,8 +89,10 @@ class Oidc(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,10 +110,12 @@ class Oidc(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "doc": obj.get("doc"),
-            "initiateLoginUri": obj.get("initiateLoginUri"),
-            "postLogoutUris": obj.get("postLogoutUris"),
-            "redirectUris": obj.get("redirectUris")
-        })
+        _obj = cls.model_validate(
+            {
+                "doc": obj.get("doc"),
+                "initiateLoginUri": obj.get("initiateLoginUri"),
+                "postLogoutUris": obj.get("postLogoutUris"),
+                "redirectUris": obj.get("redirectUris")
+            }
+        )
         return _obj

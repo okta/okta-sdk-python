@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,24 +20,25 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
 from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
+
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.network_zone_status import NetworkZoneStatus
 from okta.models.network_zone_type import NetworkZoneType
 from okta.models.network_zone_usage import NetworkZoneUsage
-from typing import Optional, Set
 
-from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from okta.models.dynamic_network_zone import DynamicNetworkZone
     from okta.models.enhanced_dynamic_network_zone import EnhancedDynamicNetworkZone
@@ -51,16 +54,23 @@ class NetworkZone(BaseModel):
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last modified",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Annotated[str, Field(strict=True, max_length=128)] = Field(description="Unique name for this Network Zone")
     status: Optional[NetworkZoneStatus] = None
     system: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates a system Network Zone: * `true` for system Network Zones * `false` for custom Network Zones  The Okta org provides the following default system Network Zones: * `LegacyIpZone` * `BlockedIpZone` * `DefaultEnhancedDynamicZone` * `DefaultExemptIpZone`  Admins can modify the name of the default system Network Zone and add up to 5000 gateway or proxy IP entries. ")
+        description="Indicates a system Network Zone: * `true` for system Network Zones * `false` for custom Network Zones "
+                    " The Okta org provides the following default system Network Zones: * `LegacyIpZone` * `BlockedIpZone` "
+                    "* `DefaultEnhancedDynamicZone` * `DefaultExemptIpZone`  Admins can modify the name of the default "
+                    "system Network Zone and add up to 5000 gateway or proxy IP entries. "
+    )
     type: NetworkZoneType
     usage: Optional[NetworkZoneUsage] = None
     links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "system", "type", "usage", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "created", "id", "lastUpdated", "name", "status", "system", "type", "usage", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,12 +123,14 @@ class NetworkZone(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-            "system",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+                "system",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -135,7 +147,8 @@ class NetworkZone(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Optional[Union[DynamicNetworkZone, EnhancedDynamicNetworkZone, IPNetworkZone]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Optional[
+        Union[DynamicNetworkZone, EnhancedDynamicNetworkZone, IPNetworkZone]]:
         """Create an instance of NetworkZone from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -146,6 +159,8 @@ class NetworkZone(BaseModel):
         if object_type == 'IPNetworkZone':
             return import_module("okta.models.ip_network_zone").IPNetworkZone.from_dict(obj)
 
-        raise ValueError("NetworkZone failed to lookup discriminator value from " +
-                         json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                         ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+        raise ValueError(
+            "NetworkZone failed to lookup discriminator value from " +
+            json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
+            ", mapping: " + json.dumps(cls.__discriminator_value_class_map)
+        )

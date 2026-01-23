@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.device_integrity import DeviceIntegrity
 from okta.models.play_protect_verdict import PlayProtectVerdict
 from okta.models.screen_lock_complexity import ScreenLockComplexity
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AndroidDeviceTrust(BaseModel):
@@ -41,28 +44,36 @@ class AndroidDeviceTrust(BaseModel):
     network_proxy_disabled: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether a device has a network proxy disabled",
-        alias="networkProxyDisabled")
+        alias="networkProxyDisabled"
+    )
     play_protect_verdict: Optional[PlayProtectVerdict] = Field(default=None, alias="playProtectVerdict")
     require_major_version_update: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates whether the device needs to be on the latest major version available to the device  **Note:** This option requires an `osVersion.dynamicVersionRequirement` value to be supplied with the `osVersion.dynamicVersionRequirement.type` as either `MINIMUM` or `EXACT`. ",
-        alias="requireMajorVersionUpdate")
+        description="Indicates whether the device needs to be on the latest major version available to the device  "
+                    "**Note:** This option requires an `osVersion.dynamicVersionRequirement` value to be supplied with the "
+                    "`osVersion.dynamicVersionRequirement.type` as either `MINIMUM` or `EXACT`. ",
+        alias="requireMajorVersionUpdate"
+    )
     screen_lock_complexity: Optional[ScreenLockComplexity] = Field(default=None, alias="screenLockComplexity")
     usb_debugging_disabled: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether Android Debug Bridge (adb) over USB is disabled",
-        alias="usbDebuggingDisabled")
+        alias="usbDebuggingDisabled"
+    )
     wifi_secured: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether a device is on a password-protected Wi-Fi network",
-        alias="wifiSecured")
-    __properties: ClassVar[List[str]] = ["deviceIntegrityLevel",
-                                         "networkProxyDisabled",
-                                         "playProtectVerdict",
-                                         "requireMajorVersionUpdate",
-                                         "screenLockComplexity",
-                                         "usbDebuggingDisabled",
-                                         "wifiSecured"]
+        alias="wifiSecured"
+    )
+    __properties: ClassVar[List[str]] = [
+        "deviceIntegrityLevel",
+        "networkProxyDisabled",
+        "playProtectVerdict",
+        "requireMajorVersionUpdate",
+        "screenLockComplexity",
+        "usbDebuggingDisabled",
+        "wifiSecured"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,8 +105,10 @@ class AndroidDeviceTrust(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -113,13 +126,15 @@ class AndroidDeviceTrust(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "deviceIntegrityLevel": obj.get("deviceIntegrityLevel"),
-            "networkProxyDisabled": obj.get("networkProxyDisabled"),
-            "playProtectVerdict": obj.get("playProtectVerdict"),
-            "requireMajorVersionUpdate": obj.get("requireMajorVersionUpdate"),
-            "screenLockComplexity": obj.get("screenLockComplexity"),
-            "usbDebuggingDisabled": obj.get("usbDebuggingDisabled"),
-            "wifiSecured": obj.get("wifiSecured")
-        })
+        _obj = cls.model_validate(
+            {
+                "deviceIntegrityLevel": obj.get("deviceIntegrityLevel"),
+                "networkProxyDisabled": obj.get("networkProxyDisabled"),
+                "playProtectVerdict": obj.get("playProtectVerdict"),
+                "requireMajorVersionUpdate": obj.get("requireMajorVersionUpdate"),
+                "screenLockComplexity": obj.get("screenLockComplexity"),
+                "usbDebuggingDisabled": obj.get("usbDebuggingDisabled"),
+                "wifiSecured": obj.get("wifiSecured")
+            }
+        )
         return _obj

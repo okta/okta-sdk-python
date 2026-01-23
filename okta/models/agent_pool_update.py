@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.agent import Agent
 from okta.models.agent_type import AgentType
 from okta.models.agent_update_job_status import AgentUpdateJobStatus
 from okta.models.auto_update_schedule import AutoUpdateSchedule
 from okta.models.links_self import LinksSelf
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AgentPoolUpdate(BaseModel):
@@ -47,7 +50,8 @@ class AgentPoolUpdate(BaseModel):
     notify_admin: Optional[StrictBool] = Field(
         default=None,
         description="Indicates if the admin is notified about the update",
-        alias="notifyAdmin")
+        alias="notifyAdmin"
+    )
     reason: Optional[StrictStr] = Field(default=None, description="Reason for the update")
     schedule: Optional[AutoUpdateSchedule] = None
     sort_order: Optional[StrictInt] = Field(default=None, description="Specifies the sort order", alias="sortOrder")
@@ -55,10 +59,13 @@ class AgentPoolUpdate(BaseModel):
     target_version: Optional[StrictStr] = Field(
         default=None,
         description="The agent version to update to",
-        alias="targetVersion")
+        alias="targetVersion"
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["agents", "agentType", "enabled", "id", "name",
-                                         "notifyAdmin", "reason", "schedule", "sortOrder", "status", "targetVersion", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "agents", "agentType", "enabled", "id", "name",
+        "notifyAdmin", "reason", "schedule", "sortOrder", "status", "targetVersion", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,9 +98,11 @@ class AgentPoolUpdate(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -132,18 +141,20 @@ class AgentPoolUpdate(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "agents": [Agent.from_dict(_item) for _item in obj["agents"]] if obj.get("agents") is not None else None,
-            "agentType": obj.get("agentType"),
-            "enabled": obj.get("enabled"),
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "notifyAdmin": obj.get("notifyAdmin"),
-            "reason": obj.get("reason"),
-            "schedule": AutoUpdateSchedule.from_dict(obj["schedule"]) if obj.get("schedule") is not None else None,
-            "sortOrder": obj.get("sortOrder"),
-            "status": obj.get("status"),
-            "targetVersion": obj.get("targetVersion"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "agents": [Agent.from_dict(_item) for _item in obj["agents"]] if obj.get("agents") is not None else None,
+                "agentType": obj.get("agentType"),
+                "enabled": obj.get("enabled"),
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "notifyAdmin": obj.get("notifyAdmin"),
+                "reason": obj.get("reason"),
+                "schedule": AutoUpdateSchedule.from_dict(obj["schedule"]) if obj.get("schedule") is not None else None,
+                "sortOrder": obj.get("sortOrder"),
+                "status": obj.get("status"),
+                "targetVersion": obj.get("targetVersion"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.email_template_touch_point_variant import EmailTemplateTouchPointVariant
 from okta.models.end_user_dashboard_touch_point_variant import EndUserDashboardTouchPointVariant
 from okta.models.error_page_touch_point_variant import ErrorPageTouchPointVariant
 from okta.models.links_self import LinksSelf
 from okta.models.loading_page_touch_point_variant import LoadingPageTouchPointVariant
 from okta.models.sign_in_page_touch_point_variant import SignInPageTouchPointVariant
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class UpdateThemeRequest(BaseModel):
@@ -42,32 +45,38 @@ class UpdateThemeRequest(BaseModel):
     """  # noqa: E501
     email_template_touch_point_variant: EmailTemplateTouchPointVariant = Field(alias="emailTemplateTouchPointVariant")
     end_user_dashboard_touch_point_variant: EndUserDashboardTouchPointVariant = Field(
-        alias="endUserDashboardTouchPointVariant")
+        alias="endUserDashboardTouchPointVariant"
+    )
     error_page_touch_point_variant: ErrorPageTouchPointVariant = Field(alias="errorPageTouchPointVariant")
     loading_page_touch_point_variant: Optional[LoadingPageTouchPointVariant] = Field(
-        default=LoadingPageTouchPointVariant.OKTA_DEFAULT, alias="loadingPageTouchPointVariant")
+        default=LoadingPageTouchPointVariant.OKTA_DEFAULT, alias="loadingPageTouchPointVariant"
+    )
     primary_color_contrast_hex: Optional[StrictStr] = Field(
         default=None,
         description="Primary color contrast hex code",
-        alias="primaryColorContrastHex")
+        alias="primaryColorContrastHex"
+    )
     primary_color_hex: StrictStr = Field(description="Primary color hex code", alias="primaryColorHex")
     secondary_color_contrast_hex: Optional[StrictStr] = Field(
         default=None,
         description="Secondary color contrast hex code",
-        alias="secondaryColorContrastHex")
+        alias="secondaryColorContrastHex"
+    )
     secondary_color_hex: StrictStr = Field(description="Secondary color hex code", alias="secondaryColorHex")
     sign_in_page_touch_point_variant: SignInPageTouchPointVariant = Field(alias="signInPageTouchPointVariant")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["emailTemplateTouchPointVariant",
-                                         "endUserDashboardTouchPointVariant",
-                                         "errorPageTouchPointVariant",
-                                         "loadingPageTouchPointVariant",
-                                         "primaryColorContrastHex",
-                                         "primaryColorHex",
-                                         "secondaryColorContrastHex",
-                                         "secondaryColorHex",
-                                         "signInPageTouchPointVariant",
-                                         "_links"]
+    __properties: ClassVar[List[str]] = [
+        "emailTemplateTouchPointVariant",
+        "endUserDashboardTouchPointVariant",
+        "errorPageTouchPointVariant",
+        "loadingPageTouchPointVariant",
+        "primaryColorContrastHex",
+        "primaryColorHex",
+        "secondaryColorContrastHex",
+        "secondaryColorHex",
+        "signInPageTouchPointVariant",
+        "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,8 +108,10 @@ class UpdateThemeRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -125,16 +136,18 @@ class UpdateThemeRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "emailTemplateTouchPointVariant": obj.get("emailTemplateTouchPointVariant"),
-            "endUserDashboardTouchPointVariant": obj.get("endUserDashboardTouchPointVariant"),
-            "errorPageTouchPointVariant": obj.get("errorPageTouchPointVariant"),
-            "loadingPageTouchPointVariant": obj.get("loadingPageTouchPointVariant"),
-            "primaryColorContrastHex": obj.get("primaryColorContrastHex"),
-            "primaryColorHex": obj.get("primaryColorHex"),
-            "secondaryColorContrastHex": obj.get("secondaryColorContrastHex"),
-            "secondaryColorHex": obj.get("secondaryColorHex"),
-            "signInPageTouchPointVariant": obj.get("signInPageTouchPointVariant"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "emailTemplateTouchPointVariant": obj.get("emailTemplateTouchPointVariant"),
+                "endUserDashboardTouchPointVariant": obj.get("endUserDashboardTouchPointVariant"),
+                "errorPageTouchPointVariant": obj.get("errorPageTouchPointVariant"),
+                "loadingPageTouchPointVariant": obj.get("loadingPageTouchPointVariant"),
+                "primaryColorContrastHex": obj.get("primaryColorContrastHex"),
+                "primaryColorHex": obj.get("primaryColorHex"),
+                "secondaryColorContrastHex": obj.get("secondaryColorContrastHex"),
+                "secondaryColorHex": obj.get("secondaryColorHex"),
+                "signInPageTouchPointVariant": obj.get("signInPageTouchPointVariant"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

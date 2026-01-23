@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,9 +38,11 @@ class BehaviorRuleSettingsHistoryBased(BaseModel):
     BehaviorRuleSettingsHistoryBased
     """  # noqa: E501
     max_events_used_for_evaluation: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(
-        default=20, alias="maxEventsUsedForEvaluation")
+        default=20, alias="maxEventsUsedForEvaluation"
+    )
     min_events_needed_for_evaluation: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(
-        default=0, alias="minEventsNeededForEvaluation")
+        default=0, alias="minEventsNeededForEvaluation"
+    )
     __properties: ClassVar[List[str]] = ["maxEventsUsedForEvaluation", "minEventsNeededForEvaluation"]
 
     model_config = ConfigDict(
@@ -71,8 +75,10 @@ class BehaviorRuleSettingsHistoryBased(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -90,8 +96,14 @@ class BehaviorRuleSettingsHistoryBased(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "maxEventsUsedForEvaluation": obj.get("maxEventsUsedForEvaluation") if obj.get("maxEventsUsedForEvaluation") is not None else 20,
-            "minEventsNeededForEvaluation": obj.get("minEventsNeededForEvaluation") if obj.get("minEventsNeededForEvaluation") is not None else 0
-        })
+        _obj = cls.model_validate(
+            {
+                "maxEventsUsedForEvaluation": obj.get("maxEventsUsedForEvaluation") if obj.get(
+                    "maxEventsUsedForEvaluation"
+                ) is not None else 20,
+                "minEventsNeededForEvaluation": obj.get("minEventsNeededForEvaluation") if obj.get(
+                    "minEventsNeededForEvaluation"
+                ) is not None else 0
+            }
+        )
         return _obj

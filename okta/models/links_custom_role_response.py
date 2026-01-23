@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,26 +20,29 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.href_object_assignee_link import HrefObjectAssigneeLink
 from okta.models.href_object_member_link import HrefObjectMemberLink
 from okta.models.href_object_permissions_link import HrefObjectPermissionsLink
 from okta.models.href_object_resource_set_link import HrefObjectResourceSetLink
 from okta.models.href_object_role_link import HrefObjectRoleLink
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class LinksCustomRoleResponse(BaseModel):
     """
-    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This object is used for dynamic discovery of related resources.
+    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available using the [JSON
+    Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This
+    object is used for dynamic discovery of related resources.
     """  # noqa: E501
     assignee: Optional[HrefObjectAssigneeLink] = None
     member: Optional[HrefObjectMemberLink] = None
@@ -76,8 +81,10 @@ class LinksCustomRoleResponse(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -130,11 +137,17 @@ class LinksCustomRoleResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "assignee": HrefObjectAssigneeLink.from_dict(obj["assignee"]) if obj.get("assignee") is not None else None,
-            "member": HrefObjectMemberLink.from_dict(obj["member"]) if obj.get("member") is not None else None,
-            "permissions": HrefObjectPermissionsLink.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None,
-            "resource-set": HrefObjectResourceSetLink.from_dict(obj["resource-set"]) if obj.get("resource-set") is not None else None,
-            "role": HrefObjectRoleLink.from_dict(obj["role"]) if obj.get("role") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "assignee": HrefObjectAssigneeLink.from_dict(obj["assignee"]) if obj.get("assignee") is not None else None,
+                "member": HrefObjectMemberLink.from_dict(obj["member"]) if obj.get("member") is not None else None,
+                "permissions": HrefObjectPermissionsLink.from_dict(obj["permissions"]) if obj.get(
+                    "permissions"
+                ) is not None else None,
+                "resource-set": HrefObjectResourceSetLink.from_dict(obj["resource-set"]) if obj.get(
+                    "resource-set"
+                ) is not None else None,
+                "role": HrefObjectRoleLink.from_dict(obj["role"]) if obj.get("role") is not None else None
+            }
+        )
         return _obj

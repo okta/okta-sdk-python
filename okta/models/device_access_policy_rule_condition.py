@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.device_policy_rule_condition_assurance import DevicePolicyRuleConditionAssurance
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.device_policy_rule_condition_assurance import DevicePolicyRuleConditionAssurance
 
 
 class DeviceAccessPolicyRuleCondition(BaseModel):
@@ -38,10 +41,15 @@ class DeviceAccessPolicyRuleCondition(BaseModel):
     assurance: Optional[DevicePolicyRuleConditionAssurance] = None
     managed: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if the device is managed. A device is considered managed if it's part of a device management system.")
+        description="Indicates if the device is managed. A device is considered managed if it's part of a device "
+                    "management system."
+    )
     registered: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if the device is registered. A device is registered if the User enrolls with Okta Verify that's installed on the device. When the `managed` property is passed, you must also include the `registered` property and set it to `true`. ")
+        description="Indicates if the device is registered. A device is registered if the User enrolls with Okta Verify "
+                    "that's installed on the device. When the `managed` property is passed, you must also include the "
+                    "`registered` property and set it to `true`. "
+    )
     __properties: ClassVar[List[str]] = ["assurance", "managed", "registered"]
 
     model_config = ConfigDict(
@@ -74,8 +82,10 @@ class DeviceAccessPolicyRuleCondition(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -100,9 +110,13 @@ class DeviceAccessPolicyRuleCondition(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "assurance": DevicePolicyRuleConditionAssurance.from_dict(obj["assurance"]) if obj.get("assurance") is not None else None,
-            "managed": obj.get("managed"),
-            "registered": obj.get("registered")
-        })
+        _obj = cls.model_validate(
+            {
+                "assurance": DevicePolicyRuleConditionAssurance.from_dict(obj["assurance"]) if obj.get(
+                    "assurance"
+                ) is not None else None,
+                "managed": obj.get("managed"),
+                "registered": obj.get("registered")
+            }
+        )
         return _obj

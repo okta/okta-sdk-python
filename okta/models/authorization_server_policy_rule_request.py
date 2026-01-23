@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.authorization_server_policy_rule_actions import AuthorizationServerPolicyRuleActions
 from okta.models.authorization_server_policy_rule_conditions import AuthorizationServerPolicyRuleConditions
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AuthorizationServerPolicyRuleRequest(BaseModel):
@@ -45,16 +48,21 @@ class AuthorizationServerPolicyRuleRequest(BaseModel):
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the rule was last modified",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: StrictStr = Field(description="Name of the rule")
     priority: Optional[StrictInt] = Field(default=None, description="Priority of the rule")
     status: Optional[StrictStr] = Field(default=None, description="Status of the rule")
-    system: Optional[StrictBool] = Field(default=None,
-                                         description="Set to `true` for system rules. You can't delete system rules.")
+    system: Optional[StrictBool] = Field(
+        default=None,
+        description="Set to `true` for system rules. You can't delete system rules."
+    )
     type: StrictStr = Field(description="Rule type")
     links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["actions", "conditions", "created", "id",
-                                         "lastUpdated", "name", "priority", "status", "system", "type", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "actions", "conditions", "created", "id",
+        "lastUpdated", "name", "priority", "status", "system", "type", "_links"
+    ]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -106,11 +114,13 @@ class AuthorizationServerPolicyRuleRequest(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "id",
-            "last_updated",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -149,17 +159,23 @@ class AuthorizationServerPolicyRuleRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "actions": AuthorizationServerPolicyRuleActions.from_dict(obj["actions"]) if obj.get("actions") is not None else None,
-            "conditions": AuthorizationServerPolicyRuleConditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None,
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "priority": obj.get("priority"),
-            "status": obj.get("status"),
-            "system": obj.get("system"),
-            "type": obj.get("type"),
-            "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "actions": AuthorizationServerPolicyRuleActions.from_dict(obj["actions"]) if obj.get(
+                    "actions"
+                ) is not None else None,
+                "conditions": AuthorizationServerPolicyRuleConditions.from_dict(obj["conditions"]) if obj.get(
+                    "conditions"
+                ) is not None else None,
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "priority": obj.get("priority"),
+                "status": obj.get("status"),
+                "system": obj.get("system"),
+                "type": obj.get("type"),
+                "_links": LinksSelfAndLifecycle.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

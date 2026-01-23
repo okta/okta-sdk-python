@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.o_auth2_refresh_token import OAuth2RefreshToken
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.o_auth2_refresh_token import OAuth2RefreshToken
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,23 +46,24 @@ class ApplicationTokensApi(ApiClient):
 
     @validate_call
     async def get_o_auth2_token_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> OAuth2RefreshToken:
         """Retrieve an application token
 
@@ -157,14 +159,14 @@ class ApplicationTokensApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_o_auth2_token_for_application_serialize(
-        self,
-        app_id,
-        token_id,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            token_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -186,7 +188,6 @@ class ApplicationTokensApi(ApiClient):
             _path_params['tokenId'] = token_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -223,36 +224,43 @@ class ApplicationTokensApi(ApiClient):
 
     @validate_call
     async def list_o_auth2_tokens_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        expand: Annotated[Optional[StrictStr], Field(
-            description="An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`")] = None,
-        after: Annotated[Optional[StrictStr], Field(
-            description="Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](/#pagination).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            expand: Annotated[Optional[StrictStr], Field(
+                description="An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`"
+            )] = None,
+            after: Annotated[Optional[StrictStr], Field(
+                description="Specifies the pagination cursor for the next page of results. Treat this as an opaque value "
+                            "obtained through the next link relationship. See [Pagination](/#pagination)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[OAuth2RefreshToken]:
         """List all application refresh tokens
 
-        Lists all refresh tokens for an app  > **Note:** The results are [paginated](/#pagination) according to the `limit` parameter. > If there are multiple pages of results, the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). 
+        Lists all refresh tokens for an app  > **Note:** The results are [paginated](/#pagination) according to the
+        `limit` parameter. > If there are multiple pages of results, the Link header contains a `next` link that you need
+        to use as an opaque value (follow it, don't parse it).
 
         :param app_id: Application ID (required)
         :type app_id: str
         :param expand: An optional parameter to return scope details in the `_embedded` property. Valid value: `scope`
         :type expand: str
-        :param after: Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](/#pagination).
+        :param after: Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained
+        through the next link relationship. See [Pagination](/#pagination).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -341,15 +349,15 @@ class ApplicationTokensApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_o_auth2_tokens_for_application_serialize(
-        self,
-        app_id,
-        expand,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            expand,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -369,15 +377,12 @@ class ApplicationTokensApi(ApiClient):
             _path_params['appId'] = app_id
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -414,21 +419,21 @@ class ApplicationTokensApi(ApiClient):
 
     @validate_call
     async def revoke_o_auth2_token_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke an application token
 
@@ -512,13 +517,13 @@ class ApplicationTokensApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_o_auth2_token_for_application_serialize(
-        self,
-        app_id,
-        token_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            token_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -573,24 +578,25 @@ class ApplicationTokensApi(ApiClient):
 
     @validate_call
     async def revoke_o_auth2_tokens_for_application(
-        self,
-        app_id: Annotated[StrictStr, Field(description="Application ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            app_id: Annotated[StrictStr, Field(description="Application ID")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Revoke all application tokens
 
-        Revokes all OAuth 2.0 refresh tokens for the specified app. Any access tokens issued with these refresh tokens are also revoked, but access tokens issued without a refresh token aren't affected.
+        Revokes all OAuth 2.0 refresh tokens for the specified app. Any access tokens issued with these refresh tokens are
+        also revoked, but access tokens issued without a refresh token aren't affected.
 
         :param app_id: Application ID (required)
         :type app_id: str
@@ -667,12 +673,12 @@ class ApplicationTokensApi(ApiClient):
             return (resp.data, resp, None)
 
     def _revoke_o_auth2_tokens_for_application_serialize(
-        self,
-        app_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            app_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

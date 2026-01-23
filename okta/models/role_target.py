@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.links_self import LinksSelf
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
+
+from okta.models.links_self import LinksSelf
 
 
 class RoleTarget(BaseModel):
@@ -39,13 +42,19 @@ class RoleTarget(BaseModel):
     assignment_type: Optional[StrictStr] = Field(
         default=None,
         description="The assignment type of how the user receives this target",
-        alias="assignmentType")
+        alias="assignmentType"
+    )
     expiration: Optional[datetime] = Field(
         default=None,
-        description="The expiry time stamp of the associated target. It's only included in the response if the associated target will expire.")
+        description="The expiry time stamp of the associated target. It's only included in the response if the associated "
+                    "target will expire."
+    )
     orn: Optional[StrictStr] = Field(
         default=None,
-        description="The [Okta Resource Name (ORN)](https://support.okta.com/help/s/article/understanding-okta-resource-name-orn) of the app target or group target")
+        description="The [Okta Resource Name (ORN)]("
+                    "https://support.okta.com/help/s/article/understanding-okta-resource-name-orn) of the app target or "
+                    "group target"
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["assignmentType", "expiration", "orn", "_links"]
 
@@ -82,11 +91,13 @@ class RoleTarget(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "assignment_type",
-            "expiration",
-            "orn",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "assignment_type",
+                "expiration",
+                "orn",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -111,10 +122,12 @@ class RoleTarget(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "assignmentType": obj.get("assignmentType"),
-            "expiration": obj.get("expiration"),
-            "orn": obj.get("orn"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "assignmentType": obj.get("assignmentType"),
+                "expiration": obj.get("expiration"),
+                "orn": obj.get("orn"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

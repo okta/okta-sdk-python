@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.device_platform import DevicePlatform
 from okta.models.disk_encryption_type_def import DiskEncryptionTypeDef
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class DeviceProfile(BaseModel):
@@ -39,56 +42,71 @@ class DeviceProfile(BaseModel):
     """  # noqa: E501
     disk_encryption_type: Optional[DiskEncryptionTypeDef] = Field(default=None, alias="diskEncryptionType")
     display_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(
-        description="Display name of the device", alias="displayName")
+        description="Display name of the device", alias="displayName"
+    )
     imei: Optional[Annotated[str, Field(min_length=14, strict=True, max_length=17)]] = Field(
-        default=None, description="International Mobile Equipment Identity (IMEI) of the device")
+        default=None, description="International Mobile Equipment Identity (IMEI) of the device"
+    )
     integrity_jailbreak: Optional[StrictBool] = Field(
         default=None,
         description="Indicates if the device is jailbroken or rooted. Only applicable to `IOS` and `ANDROID` platforms",
-        alias="integrityJailbreak")
+        alias="integrityJailbreak"
+    )
     managed: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if the device is managed by mobile device management (MDM) software")
+        description="Indicates if the device is managed by mobile device management (MDM) software"
+    )
     manufacturer: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
-        default=None, description="Name of the manufacturer of the device")
+        default=None, description="Name of the manufacturer of the device"
+    )
     meid: Optional[Annotated[str, Field(strict=True, max_length=14)]] = Field(
-        default=None, description="Mobile equipment identifier of the device")
+        default=None, description="Mobile equipment identifier of the device"
+    )
     model: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
-        default=None, description="Model of the device")
+        default=None, description="Model of the device"
+    )
     os_version: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
-        default=None, description="Version of the device OS", alias="osVersion")
+        default=None, description="Version of the device OS", alias="osVersion"
+    )
     platform: DevicePlatform
     registered: StrictBool = Field(description="Indicates if the device is registered at Okta")
     secure_hardware_present: Optional[StrictBool] = Field(
         default=None,
         description="Indicates if the device contains a secure hardware functionality",
-        alias="secureHardwarePresent")
+        alias="secureHardwarePresent"
+    )
     serial_number: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
-        default=None, description="Serial number of the device", alias="serialNumber")
+        default=None, description="Serial number of the device", alias="serialNumber"
+    )
     sid: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(
-        default=None, description="Windows Security identifier of the device")
+        default=None, description="Windows Security identifier of the device"
+    )
     tpm_public_key_hash: Optional[StrictStr] = Field(
         default=None,
         description="Windows Trusted Platform Module hash value",
-        alias="tpmPublicKeyHash")
+        alias="tpmPublicKeyHash"
+    )
     udid: Optional[Annotated[str, Field(strict=True, max_length=47)]] = Field(
-        default=None, description="macOS Unique device identifier of the device")
-    __properties: ClassVar[List[str]] = ["diskEncryptionType",
-                                         "displayName",
-                                         "imei",
-                                         "integrityJailbreak",
-                                         "managed",
-                                         "manufacturer",
-                                         "meid",
-                                         "model",
-                                         "osVersion",
-                                         "platform",
-                                         "registered",
-                                         "secureHardwarePresent",
-                                         "serialNumber",
-                                         "sid",
-                                         "tpmPublicKeyHash",
-                                         "udid"]
+        default=None, description="macOS Unique device identifier of the device"
+    )
+    __properties: ClassVar[List[str]] = [
+        "diskEncryptionType",
+        "displayName",
+        "imei",
+        "integrityJailbreak",
+        "managed",
+        "manufacturer",
+        "meid",
+        "model",
+        "osVersion",
+        "platform",
+        "registered",
+        "secureHardwarePresent",
+        "serialNumber",
+        "sid",
+        "tpmPublicKeyHash",
+        "udid"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -120,8 +138,10 @@ class DeviceProfile(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -139,22 +159,24 @@ class DeviceProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "diskEncryptionType": obj.get("diskEncryptionType"),
-            "displayName": obj.get("displayName"),
-            "imei": obj.get("imei"),
-            "integrityJailbreak": obj.get("integrityJailbreak"),
-            "managed": obj.get("managed"),
-            "manufacturer": obj.get("manufacturer"),
-            "meid": obj.get("meid"),
-            "model": obj.get("model"),
-            "osVersion": obj.get("osVersion"),
-            "platform": obj.get("platform"),
-            "registered": obj.get("registered"),
-            "secureHardwarePresent": obj.get("secureHardwarePresent"),
-            "serialNumber": obj.get("serialNumber"),
-            "sid": obj.get("sid"),
-            "tpmPublicKeyHash": obj.get("tpmPublicKeyHash"),
-            "udid": obj.get("udid")
-        })
+        _obj = cls.model_validate(
+            {
+                "diskEncryptionType": obj.get("diskEncryptionType"),
+                "displayName": obj.get("displayName"),
+                "imei": obj.get("imei"),
+                "integrityJailbreak": obj.get("integrityJailbreak"),
+                "managed": obj.get("managed"),
+                "manufacturer": obj.get("manufacturer"),
+                "meid": obj.get("meid"),
+                "model": obj.get("model"),
+                "osVersion": obj.get("osVersion"),
+                "platform": obj.get("platform"),
+                "registered": obj.get("registered"),
+                "secureHardwarePresent": obj.get("secureHardwarePresent"),
+                "serialNumber": obj.get("serialNumber"),
+                "sid": obj.get("sid"),
+                "tpmPublicKeyHash": obj.get("tpmPublicKeyHash"),
+                "udid": obj.get("udid")
+            }
+        )
         return _obj

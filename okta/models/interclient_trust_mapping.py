@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,24 +39,32 @@ class InterclientTrustMapping(BaseModel):
     app_instance_id: Optional[StrictStr] = Field(
         default=None,
         description="The app ID of the target app",
-        alias="appInstanceId")
-    created: Optional[StrictStr] = Field(default=None, description="Timestamp when the interclient trust mapping was created")
+        alias="appInstanceId"
+    )
+    created: Optional[StrictStr] = Field(
+        default=None, description="Timestamp when the interclient trust mapping was created"
+    )
     id: Optional[StrictStr] = Field(default=None, description="The unique ID of the interclient trust mapping")
     last_updated: Optional[StrictStr] = Field(
         default=None,
         description="Timestamp when the interclient trust mapping was updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     last_updated_by: Optional[StrictStr] = Field(
         default=None,
         description="ID of the user who created the interclient trust mapping",
-        alias="lastUpdatedBy")
+        alias="lastUpdatedBy"
+    )
     org_id: Optional[StrictStr] = Field(default=None, description="ID of the org", alias="orgId")
     trusted_app_instance_id: Optional[StrictStr] = Field(
         default=None,
         description="The app ID of the allowed app",
-        alias="trustedAppInstanceId")
-    __properties: ClassVar[List[str]] = ["appInstanceId", "created", "id",
-                                         "lastUpdated", "lastUpdatedBy", "orgId", "trustedAppInstanceId"]
+        alias="trustedAppInstanceId"
+    )
+    __properties: ClassVar[List[str]] = [
+        "appInstanceId", "created", "id",
+        "lastUpdated", "lastUpdatedBy", "orgId", "trustedAppInstanceId"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,15 +103,17 @@ class InterclientTrustMapping(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "app_instance_id",
-            "created",
-            "id",
-            "last_updated",
-            "last_updated_by",
-            "org_id",
-            "trusted_app_instance_id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "app_instance_id",
+                "created",
+                "id",
+                "last_updated",
+                "last_updated_by",
+                "org_id",
+                "trusted_app_instance_id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -119,13 +131,15 @@ class InterclientTrustMapping(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "appInstanceId": obj.get("appInstanceId"),
-            "created": obj.get("created"),
-            "id": obj.get("id"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "lastUpdatedBy": obj.get("lastUpdatedBy"),
-            "orgId": obj.get("orgId"),
-            "trustedAppInstanceId": obj.get("trustedAppInstanceId")
-        })
+        _obj = cls.model_validate(
+            {
+                "appInstanceId": obj.get("appInstanceId"),
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "lastUpdatedBy": obj.get("lastUpdatedBy"),
+                "orgId": obj.get("orgId"),
+                "trustedAppInstanceId": obj.get("trustedAppInstanceId")
+            }
+        )
         return _obj

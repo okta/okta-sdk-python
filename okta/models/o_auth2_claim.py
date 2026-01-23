@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,22 +20,23 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.links_self import LinksSelf
 from okta.models.o_auth2_claim_conditions import OAuth2ClaimConditions
 from okta.models.o_auth2_claim_group_filter_type import OAuth2ClaimGroupFilterType
 from okta.models.o_auth2_claim_type import OAuth2ClaimType
 from okta.models.o_auth2_claim_value_type import OAuth2ClaimValueType
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class OAuth2Claim(BaseModel):
@@ -42,8 +45,12 @@ class OAuth2Claim(BaseModel):
     """  # noqa: E501
     always_include_in_token: Optional[StrictBool] = Field(
         default=None,
-        description="Specifies whether to include Claims in the token. The value is always `TRUE` for access token Claims. If the value is set to `FALSE` for an ID token claim, the Claim isn't included in the ID token when the token is requested with the access token or with the `authorization_code`. The client instead uses the access token to get Claims from the `/userinfo` endpoint.",
-        alias="alwaysIncludeInToken")
+        description="Specifies whether to include Claims in the token. The value is always `TRUE` for access token Claims. "
+                    "If the value is set to `FALSE` for an ID token claim, the Claim isn't included in the ID token when "
+                    "the token is requested with the access token or with the `authorization_code`. The client instead "
+                    "uses the access token to get Claims from the `/userinfo` endpoint.",
+        alias="alwaysIncludeInToken"
+    )
     claim_type: Optional[OAuth2ClaimType] = Field(default=None, alias="claimType")
     conditions: Optional[OAuth2ClaimConditions] = None
     group_filter_type: Optional[OAuth2ClaimGroupFilterType] = None
@@ -53,11 +60,16 @@ class OAuth2Claim(BaseModel):
     system: Optional[StrictBool] = Field(default=None, description="When `true`, indicates that Okta created the Claim")
     value: Optional[StrictStr] = Field(
         default=None,
-        description="Specifies the value of the Claim. This value must be a string literal if `valueType` is `GROUPS`, and the string literal is matched with the selected `group_filter_type`. The value must be an Okta EL expression if `valueType` is `EXPRESSION`.")
+        description="Specifies the value of the Claim. This value must be a string literal if `valueType` is `GROUPS`, "
+                    "and the string literal is matched with the selected `group_filter_type`. The value must be an Okta EL "
+                    "expression if `valueType` is `EXPRESSION`."
+    )
     value_type: Optional[OAuth2ClaimValueType] = Field(default=None, alias="valueType")
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["alwaysIncludeInToken", "claimType", "conditions",
-                                         "group_filter_type", "id", "name", "status", "system", "value", "valueType", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "alwaysIncludeInToken", "claimType", "conditions",
+        "group_filter_type", "id", "name", "status", "system", "value", "valueType", "_links"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,9 +102,11 @@ class OAuth2Claim(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "id",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -124,17 +138,21 @@ class OAuth2Claim(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "alwaysIncludeInToken": obj.get("alwaysIncludeInToken"),
-            "claimType": obj.get("claimType"),
-            "conditions": OAuth2ClaimConditions.from_dict(obj["conditions"]) if obj.get("conditions") is not None else None,
-            "group_filter_type": obj.get("group_filter_type"),
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "status": obj.get("status"),
-            "system": obj.get("system"),
-            "value": obj.get("value"),
-            "valueType": obj.get("valueType"),
-            "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "alwaysIncludeInToken": obj.get("alwaysIncludeInToken"),
+                "claimType": obj.get("claimType"),
+                "conditions": OAuth2ClaimConditions.from_dict(obj["conditions"]) if obj.get(
+                    "conditions"
+                ) is not None else None,
+                "group_filter_type": obj.get("group_filter_type"),
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "status": obj.get("status"),
+                "system": obj.get("system"),
+                "value": obj.get("value"),
+                "valueType": obj.get("valueType"),
+                "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

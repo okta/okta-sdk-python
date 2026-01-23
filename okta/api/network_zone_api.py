@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat
 from typing_extensions import Annotated
-from okta.models.network_zone import NetworkZone
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.network_zone import NetworkZone
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,20 +46,20 @@ class NetworkZoneApi(ApiClient):
 
     @validate_call
     async def activate_network_zone(
-        self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NetworkZone:
         """Activate a network zone
 
@@ -148,12 +149,12 @@ class NetworkZoneApi(ApiClient):
             return (resp.data, resp, None)
 
     def _activate_network_zone_serialize(
-        self,
-        zone_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            zone_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -206,24 +207,28 @@ class NetworkZoneApi(ApiClient):
 
     @validate_call
     async def create_network_zone(
-        self,
-        zone: NetworkZone,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            zone: NetworkZone,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NetworkZone:
         """Create a network zone
 
-        Creates a Network Zone * For an IP Network Zone, you must define either `gateways` or `proxies`. * For a Dynamic Network Zone, you must define at least one of the following: `asns`, `locations`, or `proxyType`. * For an Enhanced Dynamic Network Zone, you must define at least one of the following: `asns`, `locations`, or `ipServiceCategories`. > **Note:** To view all properties for an Enhanced Dynamic Network Zone, select `DYNAMIC_V2` from the `type` dropdown list.
+        Creates a Network Zone * For an IP Network Zone, you must define either `gateways` or `proxies`. * For a Dynamic
+        Network Zone, you must define at least one of the following: `asns`, `locations`, or `proxyType`. * For an
+        Enhanced Dynamic Network Zone, you must define at least one of the following: `asns`, `locations`,
+        or `ipServiceCategories`. > **Note:** To view all properties for an Enhanced Dynamic Network Zone,
+        select `DYNAMIC_V2` from the `type` dropdown list.
 
         :param zone: (required)
         :type zone: NetworkZone
@@ -309,12 +314,12 @@ class NetworkZoneApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_network_zone_serialize(
-        self,
-        zone,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            zone,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -381,20 +386,20 @@ class NetworkZoneApi(ApiClient):
 
     @validate_call
     async def deactivate_network_zone(
-        self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NetworkZone:
         """Deactivate a network zone
 
@@ -484,12 +489,12 @@ class NetworkZoneApi(ApiClient):
             return (resp.data, resp, None)
 
     def _deactivate_network_zone_serialize(
-        self,
-        zone_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            zone_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -542,24 +547,28 @@ class NetworkZoneApi(ApiClient):
 
     @validate_call
     async def delete_network_zone(
-        self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a network zone
 
-        Deletes a Network Zone by `zoneId` > **Notes:** > * You can't delete a Network Zone that's used by a [Policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) or [Rule](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/listPolicyRules). > * For Okta Identity Engine orgs, you can't delete a Network Zone with an ACTIVE `status`. <x-lifecycle class=\"oie\"></x-lifecycle>
+        Deletes a Network Zone by `zoneId` > **Notes:** > * You can't delete a Network Zone that's used by a [Policy](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) or [Rule](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation
+        /listPolicyRules). > * For Okta Identity Engine orgs, you can't delete a Network Zone with an ACTIVE `status`.
+        <x-lifecycle class=\"oie\"></x-lifecycle>
 
         :param zone_id: `id` of the Network Zone (required)
         :type zone_id: str
@@ -636,12 +645,12 @@ class NetworkZoneApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_network_zone_serialize(
-        self,
-        zone_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            zone_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -694,20 +703,20 @@ class NetworkZoneApi(ApiClient):
 
     @validate_call
     async def get_network_zone(
-        self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NetworkZone:
         """Retrieve a network zone
 
@@ -797,12 +806,12 @@ class NetworkZoneApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_network_zone_serialize(
-        self,
-        zone_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            zone_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -855,26 +864,31 @@ class NetworkZoneApi(ApiClient):
 
     @validate_call
     async def list_network_zones(
-        self,
-        after: Optional[StrictStr] = None,
-        limit: Optional[StrictInt] = None,
-        filter: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            after: Optional[StrictStr] = None,
+            limit: Optional[StrictInt] = None,
+            filter: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[NetworkZone]:
         """List all network zones
 
-        Lists all Network Zones with pagination. A subset of zones can be returned that match a supported filter expression or query.  This operation requires URL encoding. For example, `filter=(id eq \"nzoul0wf9jyb8xwZm0g3\" or id eq \"nzoul1MxmGN18NDQT0g3\")` is encoded as `filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29`.  Okta supports filtering on the `id`, `usage`, and `system` properties. See [Filter](https://developer.okta.com/docs/api/#filter) for more information on the expressions that are used in filtering.
+        Lists all Network Zones with pagination. A subset of zones can be returned that match a supported filter
+        expression or query.  This operation requires URL encoding. For example, `filter=(id eq \"nzoul0wf9jyb8xwZm0g3\"
+        or id eq \"nzoul1MxmGN18NDQT0g3\")` is encoded as
+        `filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29`.  Okta supports filtering on
+        the `id`, `usage`, and `system` properties. See [Filter](https://developer.okta.com/docs/api/#filter) for more
+        information on the expressions that are used in filtering.
 
         :param after:
         :type after: str
@@ -965,14 +979,14 @@ class NetworkZoneApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_network_zones_serialize(
-        self,
-        after,
-        limit,
-        filter,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            after,
+            limit,
+            filter,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -990,15 +1004,12 @@ class NetworkZoneApi(ApiClient):
         # process the path parameters
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if filter is not None:
-
             _query_params.append(('filter', filter))
 
         # process the header parameters
@@ -1035,25 +1046,32 @@ class NetworkZoneApi(ApiClient):
 
     @validate_call
     async def replace_network_zone(
-        self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
-        zone: NetworkZone,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+            zone: NetworkZone,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> NetworkZone:
         """Replace a network zone
 
-        Replaces a Network Zone by `zoneId`. The replaced Network Zone type must be the same as the existing type. You can replace the usage (`POLICY`, `BLOCKLIST`) of a Network Zone by updating the `usage` attribute.  **IP exempt zone**<br> If you have the IP exempt zone feature enabled, you can allow traffic from specific gateway IPs irrespective of Okta ThreatInsight configurations, blocked network zones, or IP change events within Identity Threat Protection with Okta AI.<br> <br> When you enable this feature, Okta creates a zone called `DefaultExemptIpZone`. Gateway IPs that you add to this zone always have access to Okta resources. See [IP exempt zone](https://help.okta.com/okta_help.htm?type=oie&id=csh-about-ip-exempt-zone).  > **Note:** You can't add trusted proxy IPs to this zone, delete the zone, or create additional exempt IP zones.
+        Replaces a Network Zone by `zoneId`. The replaced Network Zone type must be the same as the existing type. You can
+        replace the usage (`POLICY`, `BLOCKLIST`) of a Network Zone by updating the `usage` attribute.  **IP exempt
+        zone**<br> If you have the IP exempt zone feature enabled, you can allow traffic from specific gateway IPs
+        irrespective of Okta ThreatInsight configurations, blocked network zones, or IP change events within Identity
+        Threat Protection with Okta AI.<br> <br> When you enable this feature, Okta creates a zone called
+        `DefaultExemptIpZone`. Gateway IPs that you add to this zone always have access to Okta resources. See [IP exempt
+        zone](https://help.okta.com/okta_help.htm?type=oie&id=csh-about-ip-exempt-zone).  > **Note:** You can't add
+        trusted proxy IPs to this zone, delete the zone, or create additional exempt IP zones.
 
         :param zone_id: `id` of the Network Zone (required)
         :type zone_id: str
@@ -1143,13 +1161,13 @@ class NetworkZoneApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_network_zone_serialize(
-        self,
-        zone_id,
-        zone,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            zone_id,
+            zone,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

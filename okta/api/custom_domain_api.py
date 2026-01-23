@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,20 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.domain_certificate import DomainCertificate
 from okta.models.domain_list_response import DomainListResponse
 from okta.models.domain_request import DomainRequest
 from okta.models.domain_response import DomainResponse
-from okta.models.update_domain import UpdateDomain
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
+from okta.models.update_domain import UpdateDomain
 from okta.rest import RESTResponse
 
 
@@ -48,20 +49,20 @@ class CustomDomainApi(ApiClient):
 
     @validate_call
     async def create_custom_domain(
-        self,
-        domain: DomainRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            domain: DomainRequest,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DomainResponse:
         """Create a custom domain
 
@@ -151,12 +152,12 @@ class CustomDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_custom_domain_serialize(
-        self,
-        domain,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            domain,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -223,20 +224,20 @@ class CustomDomainApi(ApiClient):
 
     @validate_call
     async def delete_custom_domain(
-        self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a custom domain
 
@@ -317,12 +318,12 @@ class CustomDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_custom_domain_serialize(
-        self,
-        domain_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            domain_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -375,20 +376,20 @@ class CustomDomainApi(ApiClient):
 
     @validate_call
     async def get_custom_domain(
-        self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DomainResponse:
         """Retrieve a custom domain
 
@@ -478,12 +479,12 @@ class CustomDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_custom_domain_serialize(
-        self,
-        domain_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            domain_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -536,19 +537,19 @@ class CustomDomainApi(ApiClient):
 
     @validate_call
     async def list_custom_domains(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DomainListResponse:
         """List all custom domains
 
@@ -634,11 +635,11 @@ class CustomDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_custom_domains_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -689,21 +690,21 @@ class CustomDomainApi(ApiClient):
 
     @validate_call
     async def replace_custom_domain(
-        self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
-        update_domain: UpdateDomain,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+            update_domain: UpdateDomain,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DomainResponse:
         """Replace a custom domain's brand
 
@@ -797,13 +798,13 @@ class CustomDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_custom_domain_serialize(
-        self,
-        domain_id,
-        update_domain,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            domain_id,
+            update_domain,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -872,25 +873,29 @@ class CustomDomainApi(ApiClient):
 
     @validate_call
     async def upsert_certificate(
-        self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
-        certificate: DomainCertificate,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+            certificate: DomainCertificate,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Upsert the custom domain's certificate
 
-        Upserts (creates or renews) the `MANUAL` certificate for the custom domain  > **Notes:** > * If the existing `certificateSourceType` is `OKTA_MANAGED`, this operation changes the source type to `MANUAL`. Okta no longer manages and renews certificates for this domain after you provide a user-managed certificate. > * Okta supports TLS certificates and private keys that are PEM-encoded and 2048, 3072, or 4096 bits. See the [Custom domain guide](https://developer.okta.com/docs/guides/custom-url-domain/main/) for more details.
+        Upserts (creates or renews) the `MANUAL` certificate for the custom domain  > **Notes:** > * If the existing
+        `certificateSourceType` is `OKTA_MANAGED`, this operation changes the source type to `MANUAL`. Okta no longer
+        manages and renews certificates for this domain after you provide a user-managed certificate. > * Okta supports
+        TLS certificates and private keys that are PEM-encoded and 2048, 3072, or 4096 bits. See the [Custom domain
+        guide](https://developer.okta.com/docs/guides/custom-url-domain/main/) for more details.
 
         :param domain_id: `id` of the Domain (required)
         :type domain_id: str
@@ -971,13 +976,13 @@ class CustomDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _upsert_certificate_serialize(
-        self,
-        domain_id,
-        certificate,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            domain_id,
+            certificate,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1046,24 +1051,36 @@ class CustomDomainApi(ApiClient):
 
     @validate_call
     async def verify_domain(
-        self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> DomainResponse:
         """Verify a custom domain
 
-        Verifies the custom domain and validity of DNS records by `domainId`. Verify your custom domain to confirm that you own or control the domain and that you have properly configured the required DNS records. Furthermore, if the `certificateSourceType` in the domain is `OKTA_MANAGED`, then an attempt is made to obtain and install a certificate. After a certificate is obtained and installed by Okta, Okta manages the certificate including certificate renewal.  Verify your custom domain after you've [created it](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/CustomDomain/#tag/CustomDomain/operation/createCustomDomain) and after you've added your TXT and CNAME records to your domain provider. Okta doesn't verify your domain automatically. You must use the API to verify your custom domain if you change your DNS records or if you encounter issues with domain validation.  > **Note:** DNS record changes can take time to propagate. If you recently updated your DNS records, you may need to wait before verifying your custom domain. If you encounter issues with domain verification, double-check your DNS records and ensure that they're correctly configured. See [Update your DNS TXT](https://developer.okta.com/docs/guides/custom-url-domain/main/#update-your-dns-txt) for more information about verifying your custom domain.
+        Verifies the custom domain and validity of DNS records by `domainId`. Verify your custom domain to confirm that
+        you own or control the domain and that you have properly configured the required DNS records. Furthermore,
+        if the `certificateSourceType` in the domain is `OKTA_MANAGED`, then an attempt is made to obtain and install a
+        certificate. After a certificate is obtained and installed by Okta, Okta manages the certificate including
+        certificate renewal.  Verify your custom domain after you've [created it](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/CustomDomain/#tag/CustomDomain
+        /operation/createCustomDomain) and after you've added your TXT and CNAME records to your domain provider. Okta
+        doesn't verify your domain automatically. You must use the API to verify your custom domain if you change your DNS
+        records or if you encounter issues with domain validation.  > **Note:** DNS record changes can take time to
+        propagate. If you recently updated your DNS records, you may need to wait before verifying your custom domain. If
+        you encounter issues with domain verification, double-check your DNS records and ensure that they're correctly
+        configured. See [Update your DNS TXT](https://developer.okta.com/docs/guides/custom-url-domain/main/#update-your
+        -dns-txt) for more information about verifying your custom domain.
 
         :param domain_id: `id` of the Domain (required)
         :type domain_id: str
@@ -1149,12 +1166,12 @@ class CustomDomainApi(ApiClient):
             return (resp.data, resp, None)
 
     def _verify_domain_serialize(
-        self,
-        domain_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            domain_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

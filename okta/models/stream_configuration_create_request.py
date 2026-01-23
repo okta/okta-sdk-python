@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from okta.models.stream_configuration_delivery import StreamConfigurationDelivery
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.stream_configuration_delivery import StreamConfigurationDelivery
 
 
 class StreamConfigurationCreateRequest(BaseModel):
@@ -38,9 +41,12 @@ class StreamConfigurationCreateRequest(BaseModel):
     """  # noqa: E501
     delivery: StreamConfigurationDelivery
     events_requested: Annotated[List[Annotated[str, Field(strict=True, max_length=256)]], Field(max_length=50)] = Field(
-        description="The events (mapped by the array of event type URIs) that the receiver wants to receive")
-    format: Optional[StrictStr] = Field(default=None,
-                                        description="The Subject Identifier format expected for any SET transmitted.")
+        description="The events (mapped by the array of event type URIs) that the receiver wants to receive"
+    )
+    format: Optional[StrictStr] = Field(
+        default=None,
+        description="The Subject Identifier format expected for any SET transmitted."
+    )
     __properties: ClassVar[List[str]] = ["delivery", "events_requested", "format"]
 
     @field_validator('format')
@@ -83,8 +89,10 @@ class StreamConfigurationCreateRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -109,9 +117,13 @@ class StreamConfigurationCreateRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "delivery": StreamConfigurationDelivery.from_dict(obj["delivery"]) if obj.get("delivery") is not None else None,
-            "events_requested": obj.get("events_requested"),
-            "format": obj.get("format")
-        })
+        _obj = cls.model_validate(
+            {
+                "delivery": StreamConfigurationDelivery.from_dict(obj["delivery"]) if obj.get(
+                    "delivery"
+                ) is not None else None,
+                "events_requested": obj.get("events_requested"),
+                "format": obj.get("format")
+            }
+        )
         return _obj

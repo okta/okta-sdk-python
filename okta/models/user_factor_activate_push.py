@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,28 +20,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.user_factor_activate_push_result import UserFactorActivatePushResult
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
+
+from okta.models.user_factor_activate_push_result import UserFactorActivatePushResult
 
 
 class UserFactorActivatePush(BaseModel):
     """
-    Activation requests have a short lifetime and expire if the activation isn't completed before the indicated timestamp. If the activation expires, use the returned `activate` link to restart the process.
+    Activation requests have a short lifetime and expire if the activation isn't completed before the indicated timestamp.
+    If the activation expires, use the returned `activate` link to restart the process.
     """  # noqa: E501
     expires_at: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the factor verification attempt expires",
-        alias="expiresAt")
+        alias="expiresAt"
+    )
     factor_result: Optional[UserFactorActivatePushResult] = Field(default=None, alias="factorResult")
     __properties: ClassVar[List[str]] = ["expiresAt", "factorResult"]
 
@@ -74,9 +79,11 @@ class UserFactorActivatePush(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "expires_at",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "expires_at",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -94,8 +101,10 @@ class UserFactorActivatePush(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "expiresAt": obj.get("expiresAt"),
-            "factorResult": obj.get("factorResult")
-        })
+        _obj = cls.model_validate(
+            {
+                "expiresAt": obj.get("expiresAt"),
+                "factorResult": obj.get("factorResult")
+            }
+        )
         return _obj

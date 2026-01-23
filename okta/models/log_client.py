@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,38 +20,50 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.log_geographical_context import LogGeographicalContext
 from okta.models.log_user_agent import LogUserAgent
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class LogClient(BaseModel):
     """
-    When an event is triggered by an HTTP request, the `client` object describes the [client](https://datatracker.ietf.org/doc/html/rfc2616) that issues the HTTP request. For instance, the web browser is the client when a user accesses Okta. When this request is received and processed, a sign-in event is fired. When the event isn't sourced to an HTTP request, such as an automatic update, the `client` object field is blank.
+    When an event is triggered by an HTTP request, the `client` object describes the [client](
+    https://datatracker.ietf.org/doc/html/rfc2616) that issues the HTTP request. For instance, the web browser is the
+    client when a user accesses Okta. When this request is received and processed, a sign-in event is fired. When the
+    event isn't sourced to an HTTP request, such as an automatic update, the `client` object field is blank.
     """  # noqa: E501
-    device: Optional[StrictStr] = Field(default=None,
-                                        description="Type of device that the client operates from (for example, computer)")
+    device: Optional[StrictStr] = Field(
+        default=None,
+        description="Type of device that the client operates from (for example, computer)"
+    )
     geographical_context: Optional[LogGeographicalContext] = Field(default=None, alias="geographicalContext")
     id: Optional[StrictStr] = Field(
         default=None,
-        description="For OAuth requests, this is the ID of the OAuth [client](https://datatracker.ietf.org/doc/html/rfc6749#section-1.1) making the request. For SSWS token requests, this is the ID of the agent making the request.")
+        description="For OAuth requests, this is the ID of the OAuth [client]("
+                    "https://datatracker.ietf.org/doc/html/rfc6749#section-1.1) making the request. For SSWS token "
+                    "requests, this is the ID of the agent making the request."
+    )
     ip_address: Optional[StrictStr] = Field(
         default=None,
         description="IP address that the client is making its request from",
-        alias="ipAddress")
+        alias="ipAddress"
+    )
     user_agent: Optional[LogUserAgent] = Field(default=None, alias="userAgent")
     zone: Optional[StrictStr] = Field(
         default=None,
-        description="The `name` of the [Zone](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/NetworkZone/#tag/NetworkZone/operation/getNetworkZone) that the client's location is mapped to")
+        description="The `name` of the [Zone](https://developer.okta.com/docs/api/openapi/okta-management/management/tag"
+                    "/NetworkZone/#tag/NetworkZone/operation/getNetworkZone) that the client's location is mapped to"
+    )
     __properties: ClassVar[List[str]] = ["device", "geographicalContext", "id", "ipAddress", "userAgent", "zone"]
 
     model_config = ConfigDict(
@@ -86,12 +100,14 @@ class LogClient(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "device",
-            "id",
-            "ip_address",
-            "zone",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "device",
+                "id",
+                "ip_address",
+                "zone",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -123,12 +139,16 @@ class LogClient(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "device": obj.get("device"),
-            "geographicalContext": LogGeographicalContext.from_dict(obj["geographicalContext"]) if obj.get("geographicalContext") is not None else None,
-            "id": obj.get("id"),
-            "ipAddress": obj.get("ipAddress"),
-            "userAgent": LogUserAgent.from_dict(obj["userAgent"]) if obj.get("userAgent") is not None else None,
-            "zone": obj.get("zone")
-        })
+        _obj = cls.model_validate(
+            {
+                "device": obj.get("device"),
+                "geographicalContext": LogGeographicalContext.from_dict(obj["geographicalContext"]) if obj.get(
+                    "geographicalContext"
+                ) is not None else None,
+                "id": obj.get("id"),
+                "ipAddress": obj.get("ipAddress"),
+                "userAgent": LogUserAgent.from_dict(obj["userAgent"]) if obj.get("userAgent") is not None else None,
+                "zone": obj.get("zone")
+            }
+        )
         return _obj

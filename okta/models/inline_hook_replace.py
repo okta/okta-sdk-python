@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from okta.models.inline_hook_channel_create import InlineHookChannelCreate
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.inline_hook_channel_create import InlineHookChannelCreate
 
 
 class InlineHookReplace(BaseModel):
@@ -37,10 +40,13 @@ class InlineHookReplace(BaseModel):
     An inline hook object that specifies the details of the inline hook
     """  # noqa: E501
     channel: Optional[InlineHookChannelCreate] = None
-    name: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The display name of the inline hook")
+    name: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="The display name of the inline hook"
+    )
     version: Optional[StrictStr] = Field(
         default=None,
-        description="Version of the inline hook type. The currently supported version is `1.0.0`.")
+        description="Version of the inline hook type. The currently supported version is `1.0.0`."
+    )
     __properties: ClassVar[List[str]] = ["channel", "name", "version"]
 
     model_config = ConfigDict(
@@ -73,8 +79,10 @@ class InlineHookReplace(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -99,9 +107,11 @@ class InlineHookReplace(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "channel": InlineHookChannelCreate.from_dict(obj["channel"]) if obj.get("channel") is not None else None,
-            "name": obj.get("name"),
-            "version": obj.get("version")
-        })
+        _obj = cls.model_validate(
+            {
+                "channel": InlineHookChannelCreate.from_dict(obj["channel"]) if obj.get("channel") is not None else None,
+                "name": obj.get("name"),
+                "version": obj.get("version")
+            }
+        )
         return _obj

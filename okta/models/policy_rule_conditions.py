@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.app_and_instance_policy_rule_condition import AppAndInstancePolicyRuleCondition
 from okta.models.app_instance_policy_rule_condition import AppInstancePolicyRuleCondition
 from okta.models.before_scheduled_action_policy_rule_condition import BeforeScheduledActionPolicyRuleCondition
@@ -47,8 +52,6 @@ from okta.models.risk_score_policy_rule_condition import RiskScorePolicyRuleCond
 from okta.models.user_identifier_policy_rule_condition import UserIdentifierPolicyRuleCondition
 from okta.models.user_policy_rule_condition import UserPolicyRuleCondition
 from okta.models.user_status_policy_rule_condition import UserStatusPolicyRuleCondition
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class PolicyRuleConditions(BaseModel):
@@ -60,7 +63,8 @@ class PolicyRuleConditions(BaseModel):
     auth_context: Optional[PolicyRuleAuthContextCondition] = Field(default=None, alias="authContext")
     auth_provider: Optional[PasswordPolicyAuthenticationProviderCondition] = Field(default=None, alias="authProvider")
     before_scheduled_action: Optional[BeforeScheduledActionPolicyRuleCondition] = Field(
-        default=None, alias="beforeScheduledAction")
+        default=None, alias="beforeScheduledAction"
+    )
     clients: Optional[ClientPolicyCondition] = None
     context: Optional[ContextPolicyRuleCondition] = None
     device: Optional[DevicePolicyRuleCondition] = None
@@ -77,27 +81,29 @@ class PolicyRuleConditions(BaseModel):
     user_identifier: Optional[UserIdentifierPolicyRuleCondition] = Field(default=None, alias="userIdentifier")
     users: Optional[UserPolicyRuleCondition] = None
     user_status: Optional[UserStatusPolicyRuleCondition] = Field(default=None, alias="userStatus")
-    __properties: ClassVar[List[str]] = ["app",
-                                         "apps",
-                                         "authContext",
-                                         "authProvider",
-                                         "beforeScheduledAction",
-                                         "clients",
-                                         "context",
-                                         "device",
-                                         "grantTypes",
-                                         "groups",
-                                         "identityProvider",
-                                         "mdmEnrollment",
-                                         "network",
-                                         "people",
-                                         "platform",
-                                         "risk",
-                                         "riskScore",
-                                         "scopes",
-                                         "userIdentifier",
-                                         "users",
-                                         "userStatus"]
+    __properties: ClassVar[List[str]] = [
+        "app",
+        "apps",
+        "authContext",
+        "authProvider",
+        "beforeScheduledAction",
+        "clients",
+        "context",
+        "device",
+        "grantTypes",
+        "groups",
+        "identityProvider",
+        "mdmEnrollment",
+        "network",
+        "people",
+        "platform",
+        "risk",
+        "riskScore",
+        "scopes",
+        "userIdentifier",
+        "users",
+        "userStatus"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -129,8 +135,10 @@ class PolicyRuleConditions(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -295,27 +303,51 @@ class PolicyRuleConditions(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "app": AppAndInstancePolicyRuleCondition.from_dict(obj["app"]) if obj.get("app") is not None else None,
-            "apps": AppInstancePolicyRuleCondition.from_dict(obj["apps"]) if obj.get("apps") is not None else None,
-            "authContext": PolicyRuleAuthContextCondition.from_dict(obj["authContext"]) if obj.get("authContext") is not None else None,
-            "authProvider": PasswordPolicyAuthenticationProviderCondition.from_dict(obj["authProvider"]) if obj.get("authProvider") is not None else None,
-            "beforeScheduledAction": BeforeScheduledActionPolicyRuleCondition.from_dict(obj["beforeScheduledAction"]) if obj.get("beforeScheduledAction") is not None else None,
-            "clients": ClientPolicyCondition.from_dict(obj["clients"]) if obj.get("clients") is not None else None,
-            "context": ContextPolicyRuleCondition.from_dict(obj["context"]) if obj.get("context") is not None else None,
-            "device": DevicePolicyRuleCondition.from_dict(obj["device"]) if obj.get("device") is not None else None,
-            "grantTypes": GrantTypePolicyRuleCondition.from_dict(obj["grantTypes"]) if obj.get("grantTypes") is not None else None,
-            "groups": GroupPolicyRuleCondition.from_dict(obj["groups"]) if obj.get("groups") is not None else None,
-            "identityProvider": IdentityProviderPolicyRuleCondition.from_dict(obj["identityProvider"]) if obj.get("identityProvider") is not None else None,
-            "mdmEnrollment": MDMEnrollmentPolicyRuleCondition.from_dict(obj["mdmEnrollment"]) if obj.get("mdmEnrollment") is not None else None,
-            "network": PolicyNetworkCondition.from_dict(obj["network"]) if obj.get("network") is not None else None,
-            "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None,
-            "platform": PlatformPolicyRuleCondition.from_dict(obj["platform"]) if obj.get("platform") is not None else None,
-            "risk": RiskPolicyRuleCondition.from_dict(obj["risk"]) if obj.get("risk") is not None else None,
-            "riskScore": RiskScorePolicyRuleCondition.from_dict(obj["riskScore"]) if obj.get("riskScore") is not None else None,
-            "scopes": OAuth2ScopesMediationPolicyRuleCondition.from_dict(obj["scopes"]) if obj.get("scopes") is not None else None,
-            "userIdentifier": UserIdentifierPolicyRuleCondition.from_dict(obj["userIdentifier"]) if obj.get("userIdentifier") is not None else None,
-            "users": UserPolicyRuleCondition.from_dict(obj["users"]) if obj.get("users") is not None else None,
-            "userStatus": UserStatusPolicyRuleCondition.from_dict(obj["userStatus"]) if obj.get("userStatus") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "app": AppAndInstancePolicyRuleCondition.from_dict(obj["app"]) if obj.get("app") is not None else None,
+                "apps": AppInstancePolicyRuleCondition.from_dict(obj["apps"]) if obj.get("apps") is not None else None,
+                "authContext": PolicyRuleAuthContextCondition.from_dict(obj["authContext"]) if obj.get(
+                    "authContext"
+                ) is not None else None,
+                "authProvider": PasswordPolicyAuthenticationProviderCondition.from_dict(obj["authProvider"]) if obj.get(
+                    "authProvider"
+                ) is not None else None,
+                "beforeScheduledAction": BeforeScheduledActionPolicyRuleCondition.from_dict(
+                    obj["beforeScheduledAction"]
+                ) if obj.get("beforeScheduledAction") is not None else None,
+                "clients": ClientPolicyCondition.from_dict(obj["clients"]) if obj.get("clients") is not None else None,
+                "context": ContextPolicyRuleCondition.from_dict(obj["context"]) if obj.get("context") is not None else None,
+                "device": DevicePolicyRuleCondition.from_dict(obj["device"]) if obj.get("device") is not None else None,
+                "grantTypes": GrantTypePolicyRuleCondition.from_dict(obj["grantTypes"]) if obj.get(
+                    "grantTypes"
+                ) is not None else None,
+                "groups": GroupPolicyRuleCondition.from_dict(obj["groups"]) if obj.get("groups") is not None else None,
+                "identityProvider": IdentityProviderPolicyRuleCondition.from_dict(obj["identityProvider"]) if obj.get(
+                    "identityProvider"
+                ) is not None else None,
+                "mdmEnrollment": MDMEnrollmentPolicyRuleCondition.from_dict(obj["mdmEnrollment"]) if obj.get(
+                    "mdmEnrollment"
+                ) is not None else None,
+                "network": PolicyNetworkCondition.from_dict(obj["network"]) if obj.get("network") is not None else None,
+                "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None,
+                "platform": PlatformPolicyRuleCondition.from_dict(obj["platform"]) if obj.get(
+                    "platform"
+                ) is not None else None,
+                "risk": RiskPolicyRuleCondition.from_dict(obj["risk"]) if obj.get("risk") is not None else None,
+                "riskScore": RiskScorePolicyRuleCondition.from_dict(obj["riskScore"]) if obj.get(
+                    "riskScore"
+                ) is not None else None,
+                "scopes": OAuth2ScopesMediationPolicyRuleCondition.from_dict(obj["scopes"]) if obj.get(
+                    "scopes"
+                ) is not None else None,
+                "userIdentifier": UserIdentifierPolicyRuleCondition.from_dict(obj["userIdentifier"]) if obj.get(
+                    "userIdentifier"
+                ) is not None else None,
+                "users": UserPolicyRuleCondition.from_dict(obj["users"]) if obj.get("users") is not None else None,
+                "userStatus": UserStatusPolicyRuleCondition.from_dict(obj["userStatus"]) if obj.get(
+                    "userStatus"
+                ) is not None else None
+            }
+        )
         return _obj

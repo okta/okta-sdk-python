@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.feature import Feature
-from okta.models.feature_lifecycle import FeatureLifecycle
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.feature import Feature
+from okta.models.feature_lifecycle import FeatureLifecycle
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,20 +47,20 @@ class FeatureApi(ApiClient):
 
     @validate_call
     async def get_feature(
-        self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the feature")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            feature_id: Annotated[StrictStr, Field(description="`id` of the feature")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Feature:
         """Retrieve a feature
 
@@ -149,12 +150,12 @@ class FeatureApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_feature_serialize(
-        self,
-        feature_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            feature_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -207,24 +208,25 @@ class FeatureApi(ApiClient):
 
     @validate_call
     async def list_feature_dependencies(
-        self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the feature")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            feature_id: Annotated[StrictStr, Field(description="`id` of the feature")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Feature]:
         """List all dependencies
 
-        Lists all feature dependencies for a specified feature.  A feature's dependencies are the features that it requires to be enabled in order for itself to be enabled.
+        Lists all feature dependencies for a specified feature.  A feature's dependencies are the features that it
+        requires to be enabled in order for itself to be enabled.
 
         :param feature_id: `id` of the feature (required)
         :type feature_id: str
@@ -310,12 +312,12 @@ class FeatureApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_feature_dependencies_serialize(
-        self,
-        feature_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            feature_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -368,24 +370,25 @@ class FeatureApi(ApiClient):
 
     @validate_call
     async def list_feature_dependents(
-        self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the feature")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            feature_id: Annotated[StrictStr, Field(description="`id` of the feature")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Feature]:
         """List all dependents
 
-        Lists all feature dependents for the specified feature.  A feature's dependents are the features that need to be disabled in order for the feature itself to be disabled.
+        Lists all feature dependents for the specified feature.  A feature's dependents are the features that need to be
+        disabled in order for the feature itself to be disabled.
 
         :param feature_id: `id` of the feature (required)
         :type feature_id: str
@@ -471,12 +474,12 @@ class FeatureApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_feature_dependents_serialize(
-        self,
-        feature_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            feature_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -529,19 +532,19 @@ class FeatureApi(ApiClient):
 
     @validate_call
     async def list_features(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Feature]:
         """List all features
 
@@ -627,11 +630,11 @@ class FeatureApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_features_serialize(
-        self,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -682,27 +685,37 @@ class FeatureApi(ApiClient):
 
     @validate_call
     async def update_feature_lifecycle(
-        self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the feature")],
-        lifecycle: Annotated[FeatureLifecycle, Field(description="Whether to `ENABLE` or `DISABLE` the feature")],
-        mode: Annotated[Optional[StrictStr], Field(
-            description="Indicates if you want to force enable or disable a feature. Supported value is `force`.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            feature_id: Annotated[StrictStr, Field(description="`id` of the feature")],
+            lifecycle: Annotated[FeatureLifecycle, Field(description="Whether to `ENABLE` or `DISABLE` the feature")],
+            mode: Annotated[Optional[StrictStr], Field(
+                description="Indicates if you want to force enable or disable a feature. Supported value is `force`."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Feature:
         """Update a feature lifecycle
 
-        Updates a feature's lifecycle status. Use this endpoint to enable or disable a feature for your org.  Use the `mode=force` parameter to override dependency restrictions for a particular feature. Normally, you can't enable a feature if it has one or more dependencies that aren't enabled.  When you use the `mode=force` parameter while enabling a feature, Okta first tries to enable any disabled features that this feature may have as dependencies. If you don't pass the `mode=force` parameter and the feature has dependencies that need to be enabled before the feature is enabled, a 400 error is returned.  When you use the `mode=force` parameter while disabling a feature, Okta first tries to disable any enabled features that this feature may have as dependents. If you don't pass the `mode=force` parameter and the feature has dependents that need to be disabled before the feature is disabled, a 400 error is returned.  The following chart shows the different state transitions for a feature.  ![State transitions of a feature](../../../../../images/features/update-ssfeat-flowchart.png '#width=500px;')
+        Updates a feature's lifecycle status. Use this endpoint to enable or disable a feature for your org.  Use the
+        `mode=force` parameter to override dependency restrictions for a particular feature. Normally, you can't enable a
+        feature if it has one or more dependencies that aren't enabled.  When you use the `mode=force` parameter while
+        enabling a feature, Okta first tries to enable any disabled features that this feature may have as dependencies.
+        If you don't pass the `mode=force` parameter and the feature has dependencies that need to be enabled before the
+        feature is enabled, a 400 error is returned.  When you use the `mode=force` parameter while disabling a feature,
+        Okta first tries to disable any enabled features that this feature may have as dependents. If you don't pass the
+        `mode=force` parameter and the feature has dependents that need to be disabled before the feature is disabled,
+        a 400 error is returned.  The following chart shows the different state transitions for a feature.  ![State
+        transitions of a feature](../../../../../images/features/update-ssfeat-flowchart.png '#width=500px;')
 
         :param feature_id: `id` of the feature (required)
         :type feature_id: str
@@ -794,14 +807,14 @@ class FeatureApi(ApiClient):
             return (resp.data, resp, None)
 
     def _update_feature_lifecycle_serialize(
-        self,
-        feature_id,
-        lifecycle,
-        mode,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            feature_id,
+            lifecycle,
+            mode,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -823,7 +836,6 @@ class FeatureApi(ApiClient):
             _path_params['lifecycle'] = lifecycle.value
         # process the query parameters
         if mode is not None:
-
             _query_params.append(('mode', mode))
 
         # process the header parameters

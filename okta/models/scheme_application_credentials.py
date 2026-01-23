@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from typing_extensions import Self
+
 from okta.models.application_credentials_scheme import ApplicationCredentialsScheme
 from okta.models.application_credentials_signing import ApplicationCredentialsSigning
 from okta.models.application_credentials_username_template import ApplicationCredentialsUsernameTemplate
 from okta.models.password_credential import PasswordCredential
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class SchemeApplicationCredentials(BaseModel):
@@ -45,10 +48,12 @@ class SchemeApplicationCredentials(BaseModel):
     reveal_password: Optional[StrictBool] = Field(
         default=None,
         description="Allow users to securely see their password",
-        alias="revealPassword")
+        alias="revealPassword"
+    )
     scheme: Optional[ApplicationCredentialsScheme] = None
     user_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(
-        default=None, description="Shared username for the app", alias="userName")
+        default=None, description="Shared username for the app", alias="userName"
+    )
     __properties: ClassVar[List[str]] = ["signing", "userNameTemplate", "password", "revealPassword", "scheme", "userName"]
 
     model_config = ConfigDict(
@@ -81,8 +86,10 @@ class SchemeApplicationCredentials(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -121,12 +128,18 @@ class SchemeApplicationCredentials(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "signing": ApplicationCredentialsSigning.from_dict(obj["signing"]) if obj.get("signing") is not None else None,
-            "userNameTemplate": ApplicationCredentialsUsernameTemplate.from_dict(obj["userNameTemplate"]) if obj.get("userNameTemplate") is not None else None,
-            "password": PasswordCredential.from_dict(obj["password"]) if obj.get("password") is not None else None,
-            "revealPassword": obj.get("revealPassword"),
-            "scheme": obj.get("scheme"),
-            "userName": obj.get("userName")
-        })
+        _obj = cls.model_validate(
+            {
+                "signing": ApplicationCredentialsSigning.from_dict(obj["signing"]) if obj.get(
+                    "signing"
+                ) is not None else None,
+                "userNameTemplate": ApplicationCredentialsUsernameTemplate.from_dict(obj["userNameTemplate"]) if obj.get(
+                    "userNameTemplate"
+                ) is not None else None,
+                "password": PasswordCredential.from_dict(obj["password"]) if obj.get("password") is not None else None,
+                "revealPassword": obj.get("revealPassword"),
+                "scheme": obj.get("scheme"),
+                "userName": obj.get("userName")
+            }
+        )
         return _obj

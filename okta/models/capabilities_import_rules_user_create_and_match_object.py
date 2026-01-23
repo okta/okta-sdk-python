@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,30 +38,43 @@ class CapabilitiesImportRulesUserCreateAndMatchObject(BaseModel):
     """  # noqa: E501
     allow_partial_match: Optional[StrictBool] = Field(
         default=None,
-        description="Allows user import upon partial matching. Partial matching occurs when the first and last names of an imported user match those of an existing Okta user, even if the username or email attributes don't match.",
-        alias="allowPartialMatch")
+        description="Allows user import upon partial matching. Partial matching occurs when the first and last names of an "
+                    "imported user match those of an existing Okta user, even if the username or email attributes don't "
+                    "match.",
+        alias="allowPartialMatch"
+    )
     auto_activate_new_users: Optional[StrictBool] = Field(
         default=None,
         description="If set to `true`, imported new users are automatically activated.",
-        alias="autoActivateNewUsers")
+        alias="autoActivateNewUsers"
+    )
     auto_confirm_exact_match: Optional[StrictBool] = Field(
         default=None,
-        description="If set to `true`, exact-matched users are automatically confirmed on activation. If set to `false`, exact-matched users need to be confirmed manually.",
-        alias="autoConfirmExactMatch")
+        description="If set to `true`, exact-matched users are automatically confirmed on activation. If set to `false`, "
+                    "exact-matched users need to be confirmed manually.",
+        alias="autoConfirmExactMatch"
+    )
     auto_confirm_new_users: Optional[StrictBool] = Field(
         default=None,
-        description="If set to `true`, imported new users are automatically confirmed on activation. This doesn't apply to imported users that already exist in Okta.",
-        alias="autoConfirmNewUsers")
+        description="If set to `true`, imported new users are automatically confirmed on activation. This doesn't apply to "
+                    "imported users that already exist in Okta.",
+        alias="autoConfirmNewUsers"
+    )
     auto_confirm_partial_match: Optional[StrictBool] = Field(
         default=None,
-        description="If set to `true`, partially matched users are automatically confirmed on activation. If set to `false`, partially matched users need to be confirmed manually.",
-        alias="autoConfirmPartialMatch")
+        description="If set to `true`, partially matched users are automatically confirmed on activation. If set to "
+                    "`false`, partially matched users need to be confirmed manually.",
+        alias="autoConfirmPartialMatch"
+    )
     exact_match_criteria: Optional[StrictStr] = Field(
         default=None,
         description="Determines the attribute to match users",
-        alias="exactMatchCriteria")
-    __properties: ClassVar[List[str]] = ["allowPartialMatch", "autoActivateNewUsers",
-                                         "autoConfirmExactMatch", "autoConfirmNewUsers", "autoConfirmPartialMatch", "exactMatchCriteria"]
+        alias="exactMatchCriteria"
+    )
+    __properties: ClassVar[List[str]] = [
+        "allowPartialMatch", "autoActivateNewUsers",
+        "autoConfirmExactMatch", "autoConfirmNewUsers", "autoConfirmPartialMatch", "exactMatchCriteria"
+    ]
 
     @field_validator('exact_match_criteria')
     def exact_match_criteria_validate_enum(cls, value):
@@ -101,8 +116,10 @@ class CapabilitiesImportRulesUserCreateAndMatchObject(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -120,12 +137,14 @@ class CapabilitiesImportRulesUserCreateAndMatchObject(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "allowPartialMatch": obj.get("allowPartialMatch"),
-            "autoActivateNewUsers": obj.get("autoActivateNewUsers"),
-            "autoConfirmExactMatch": obj.get("autoConfirmExactMatch"),
-            "autoConfirmNewUsers": obj.get("autoConfirmNewUsers"),
-            "autoConfirmPartialMatch": obj.get("autoConfirmPartialMatch"),
-            "exactMatchCriteria": obj.get("exactMatchCriteria")
-        })
+        _obj = cls.model_validate(
+            {
+                "allowPartialMatch": obj.get("allowPartialMatch"),
+                "autoActivateNewUsers": obj.get("autoActivateNewUsers"),
+                "autoConfirmExactMatch": obj.get("autoConfirmExactMatch"),
+                "autoConfirmNewUsers": obj.get("autoConfirmNewUsers"),
+                "autoConfirmPartialMatch": obj.get("autoConfirmPartialMatch"),
+                "exactMatchCriteria": obj.get("exactMatchCriteria")
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.user_factor_links import UserFactorLinks
 from okta.models.user_factor_verify_response_waiting_embedded import UserFactorVerifyResponseWaitingEmbedded
 from okta.models.user_factor_verify_result_waiting import UserFactorVerifyResultWaiting
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class UserFactorVerifyResponseWaiting(BaseModel):
@@ -41,11 +44,13 @@ class UserFactorVerifyResponseWaiting(BaseModel):
     expires_at: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the verification expires",
-        alias="expiresAt")
+        alias="expiresAt"
+    )
     factor_message: Optional[StrictStr] = Field(
         default=None,
         description="Optional display message for factor verification",
-        alias="factorMessage")
+        alias="factorMessage"
+    )
     factor_result: Optional[UserFactorVerifyResultWaiting] = Field(default=None, alias="factorResult")
     profile: Optional[Dict[str, Dict[str, Any]]] = None
     embedded: Optional[UserFactorVerifyResponseWaitingEmbedded] = Field(default=None, alias="_embedded")
@@ -85,11 +90,13 @@ class UserFactorVerifyResponseWaiting(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "expires_at",
-            "factor_message",
-            "profile",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "expires_at",
+                "factor_message",
+                "profile",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -126,12 +133,16 @@ class UserFactorVerifyResponseWaiting(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "expiresAt": obj.get("expiresAt"),
-            "factorMessage": obj.get("factorMessage"),
-            "factorResult": obj.get("factorResult"),
-            "profile": obj.get("profile"),
-            "_embedded": UserFactorVerifyResponseWaitingEmbedded.from_dict(obj["_embedded"]) if obj.get("_embedded") is not None else None,
-            "_links": UserFactorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "expiresAt": obj.get("expiresAt"),
+                "factorMessage": obj.get("factorMessage"),
+                "factorResult": obj.get("factorResult"),
+                "profile": obj.get("profile"),
+                "_embedded": UserFactorVerifyResponseWaitingEmbedded.from_dict(obj["_embedded"]) if obj.get(
+                    "_embedded"
+                ) is not None else None,
+                "_links": UserFactorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

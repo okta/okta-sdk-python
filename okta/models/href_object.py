@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.href_hints import HrefHints
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.href_hints import HrefHints
 
 
 class HrefObject(BaseModel):
@@ -39,10 +42,12 @@ class HrefObject(BaseModel):
     href: StrictStr = Field(description="Link URI")
     name: Optional[StrictStr] = Field(default=None, description="Link name")
     templated: Optional[StrictBool] = Field(
-        default=None, description="Indicates whether the link object's `href` property is a URI template.")
+        default=None, description="Indicates whether the link object's `href` property is a URI template."
+    )
     type: Optional[StrictStr] = Field(
         default=None,
-        description="The media type of the link. If omitted, it is implicitly `application/json`.")
+        description="The media type of the link. If omitted, it is implicitly `application/json`."
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["hints", "href", "name", "templated", "type"]
 
@@ -80,12 +85,14 @@ class HrefObject(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "name",
-            "templated",
-            "type",
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "name",
+                "templated",
+                "type",
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -115,13 +122,15 @@ class HrefObject(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "hints": HrefHints.from_dict(obj["hints"]) if obj.get("hints") is not None else None,
-            "href": obj.get("href"),
-            "name": obj.get("name"),
-            "templated": obj.get("templated"),
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "hints": HrefHints.from_dict(obj["hints"]) if obj.get("hints") is not None else None,
+                "href": obj.get("href"),
+                "name": obj.get("name"),
+                "templated": obj.get("templated"),
+                "type": obj.get("type")
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

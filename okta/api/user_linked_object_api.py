@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,18 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
 
 from pydantic import Field, StrictStr
-from typing import List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.response_links import ResponseLinks
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.response_links import ResponseLinks
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -45,28 +46,39 @@ class UserLinkedObjectApi(ApiClient):
 
     @validate_call
     async def assign_linked_object_value_for_primary(
-        self,
-        user_id_or_login: Annotated[StrictStr, Field(description="If for the `self` link, this is the ID of the user for whom you want to get the primary user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated relationship.  This can be `me` to represent the current session user.")],
-        primary_relationship_name: Annotated[StrictStr, Field(description="Name of the `primary` relationship being assigned")],
-        primary_user_id: Annotated[StrictStr, Field(description="User ID to be assigned to the `primary` relationship for the `associated` user")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id_or_login: Annotated[StrictStr, Field(
+                description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
+                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
+                            "the associated relationship.  This can be `me` to represent the current session user."
+            )],
+            primary_relationship_name: Annotated[
+                StrictStr, Field(description="Name of the `primary` relationship being assigned")],
+            primary_user_id: Annotated[StrictStr, Field(
+                description="User ID to be assigned to the `primary` relationship for the `associated` user"
+            )],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Assign a linked object value for primary
 
-        Assigns the first user as the `associated` and the second user as the `primary` for the specified relationship.  If the first user is already associated with a different `primary` for this relationship, the previous link is removed. A linked object relationship can specify only one primary user for an associated user.
+        Assigns the first user as the `associated` and the second user as the `primary` for the specified relationship.
+        If the first user is already associated with a different `primary` for this relationship, the previous link is
+        removed. A linked object relationship can specify only one primary user for an associated user.
 
-        :param user_id_or_login: If for the `self` link, this is the ID of the user for whom you want to get the primary user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated relationship.  This can be `me` to represent the current session user. (required)
+        :param user_id_or_login: If for the `self` link, this is the ID of the user for whom you want to get the primary
+        user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated
+        relationship.  This can be `me` to represent the current session user. (required)
         :type user_id_or_login: str
         :param primary_relationship_name: Name of the `primary` relationship being assigned (required)
         :type primary_relationship_name: str
@@ -147,14 +159,14 @@ class UserLinkedObjectApi(ApiClient):
             return (resp.data, resp, None)
 
     def _assign_linked_object_value_for_primary_serialize(
-        self,
-        user_id_or_login,
-        primary_relationship_name,
-        primary_user_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id_or_login,
+            primary_relationship_name,
+            primary_user_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -210,27 +222,37 @@ class UserLinkedObjectApi(ApiClient):
 
     @validate_call
     async def delete_linked_object_for_user(
-        self,
-        user_id_or_login: Annotated[StrictStr, Field(description="If for the `self` link, this is the ID of the user for whom you want to get the primary user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated relationship.  This can be `me` to represent the current session user.")],
-        relationship_name: Annotated[StrictStr, Field(description="Name of the `primary` or `associated` relationship being queried")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id_or_login: Annotated[StrictStr, Field(
+                description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
+                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
+                            "the associated relationship.  This can be `me` to represent the current session user."
+            )],
+            relationship_name: Annotated[
+                StrictStr, Field(description="Name of the `primary` or `associated` relationship being queried")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete a linked object value
 
-        Deletes any existing relationship between the `associated` and `primary` user. For the `associated` user, this is specified by the ID. The `primary` name specifies the relationship.  The operation is successful if the relationship is deleted. The operation is also successful if the specified user isn't in the `associated` relationship for any instance of the specified `primary` and thus, no relationship is found.
+        Deletes any existing relationship between the `associated` and `primary` user. For the `associated` user,
+        this is specified by the ID. The `primary` name specifies the relationship.  The operation is successful if the
+        relationship is deleted. The operation is also successful if the specified user isn't in the `associated`
+        relationship for any instance of the specified `primary` and thus, no relationship is found.
 
-        :param user_id_or_login: If for the `self` link, this is the ID of the user for whom you want to get the primary user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated relationship.  This can be `me` to represent the current session user. (required)
+        :param user_id_or_login: If for the `self` link, this is the ID of the user for whom you want to get the primary
+        user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated
+        relationship.  This can be `me` to represent the current session user. (required)
         :type user_id_or_login: str
         :param relationship_name: Name of the `primary` or `associated` relationship being queried (required)
         :type relationship_name: str
@@ -308,13 +330,13 @@ class UserLinkedObjectApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_linked_object_for_user_serialize(
-        self,
-        user_id_or_login,
-        relationship_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id_or_login,
+            relationship_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -369,27 +391,36 @@ class UserLinkedObjectApi(ApiClient):
 
     @validate_call
     async def list_linked_objects_for_user(
-        self,
-        user_id_or_login: Annotated[StrictStr, Field(description="If for the `self` link, this is the ID of the user for whom you want to get the primary user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated relationship.  This can be `me` to represent the current session user.")],
-        relationship_name: Annotated[StrictStr, Field(description="Name of the `primary` or `associated` relationship being queried")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            user_id_or_login: Annotated[StrictStr, Field(
+                description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
+                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
+                            "the associated relationship.  This can be `me` to represent the current session user."
+            )],
+            relationship_name: Annotated[
+                StrictStr, Field(description="Name of the `primary` or `associated` relationship being queried")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ResponseLinks]:
         """List the primary or all of the associated linked object values
 
-        Lists either the `self` link for the primary user or all associated users in the relationship specified by `relationshipName`. If the specified user isn't associated in any relationship, an empty array is returned.  Use `me` instead of `id` to specify the current session user.
+        Lists either the `self` link for the primary user or all associated users in the relationship specified by
+        `relationshipName`. If the specified user isn't associated in any relationship, an empty array is returned.  Use
+        `me` instead of `id` to specify the current session user.
 
-        :param user_id_or_login: If for the `self` link, this is the ID of the user for whom you want to get the primary user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated relationship.  This can be `me` to represent the current session user. (required)
+        :param user_id_or_login: If for the `self` link, this is the ID of the user for whom you want to get the primary
+        user ID. If for the `associated` relation, this is the user ID or login value of the user assigned the associated
+        relationship.  This can be `me` to represent the current session user. (required)
         :type user_id_or_login: str
         :param relationship_name: Name of the `primary` or `associated` relationship being queried (required)
         :type relationship_name: str
@@ -476,13 +507,13 @@ class UserLinkedObjectApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_linked_objects_for_user_serialize(
-        self,
-        user_id_or_login,
-        relationship_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            user_id_or_login,
+            relationship_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

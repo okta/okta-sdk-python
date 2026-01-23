@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,39 +20,47 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.user_factor_links import UserFactorLinks
 from okta.models.user_factor_provider import UserFactorProvider
 from okta.models.user_factor_status import UserFactorStatus
 from okta.models.user_factor_type import UserFactorType
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class UserFactorSupported(BaseModel):
     """
     UserFactorSupported
     """  # noqa: E501
-    enrollment: Optional[StrictStr] = Field(default=None,
-                                            description="Indicates if the factor is required for the specified user")
+    enrollment: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates if the factor is required for the specified user"
+    )
     factor_type: Optional[UserFactorType] = Field(default=None, alias="factorType")
     provider: Optional[UserFactorProvider] = None
     status: Optional[UserFactorStatus] = None
     vendor_name: Optional[StrictStr] = Field(
         default=None,
-        description="Name of the factor vendor. This is usually the same as the provider except for On-Prem MFA, which depends on admin settings.",
-        alias="vendorName")
+        description="Name of the factor vendor. This is usually the same as the provider except for On-Prem MFA, "
+                    "which depends on admin settings.",
+        alias="vendorName"
+    )
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, description="Embedded resources related to the factor", alias="_embedded")
+        default=None, description="Embedded resources related to the factor", alias="_embedded"
+    )
     links: Optional[UserFactorLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["enrollment", "factorType", "provider", "status", "vendorName", "_embedded", "_links"]
+    __properties: ClassVar[List[str]] = [
+        "enrollment", "factorType", "provider", "status", "vendorName", "_embedded", "_links"
+    ]
 
     @field_validator('enrollment')
     def enrollment_validate_enum(cls, value):
@@ -94,10 +104,12 @@ class UserFactorSupported(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "vendor_name",
-            "embedded",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "vendor_name",
+                "embedded",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -122,13 +134,15 @@ class UserFactorSupported(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "enrollment": obj.get("enrollment"),
-            "factorType": obj.get("factorType"),
-            "provider": obj.get("provider"),
-            "status": obj.get("status"),
-            "vendorName": obj.get("vendorName"),
-            "_embedded": obj.get("_embedded"),
-            "_links": UserFactorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "enrollment": obj.get("enrollment"),
+                "factorType": obj.get("factorType"),
+                "provider": obj.get("provider"),
+                "status": obj.get("status"),
+                "vendorName": obj.get("vendorName"),
+                "_embedded": obj.get("_embedded"),
+                "_links": UserFactorLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

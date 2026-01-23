@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,17 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.custom_authorization_server_links import CustomAuthorizationServerLinks
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.custom_authorization_server_links import CustomAuthorizationServerLinks
 
 
 class ManagedConnectionVaultedSecret(BaseModel):
@@ -38,7 +41,9 @@ class ManagedConnectionVaultedSecret(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="Optional description of the secret")
     name: StrictStr = Field(description="Display name of the secret")
     orn: StrictStr = Field(
-        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource-name-orn) of the vaulted secret")
+        description="The [ORN](https://developer.okta.com/docs/api/openapi/okta-management/guides/roles/#okta-resource"
+                    "-name-orn) of the vaulted secret"
+    )
     path: Optional[StrictStr] = Field(default=None, description="Secret path in Okta Privileged Access (OPA)")
     links: CustomAuthorizationServerLinks = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["description", "name", "orn", "path", "_links"]
@@ -73,8 +78,10 @@ class ManagedConnectionVaultedSecret(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -99,11 +106,13 @@ class ManagedConnectionVaultedSecret(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "name": obj.get("name"),
-            "orn": obj.get("orn"),
-            "path": obj.get("path"),
-            "_links": CustomAuthorizationServerLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "description": obj.get("description"),
+                "name": obj.get("name"),
+                "orn": obj.get("orn"),
+                "path": obj.get("path"),
+                "_links": CustomAuthorizationServerLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+            }
+        )
         return _obj

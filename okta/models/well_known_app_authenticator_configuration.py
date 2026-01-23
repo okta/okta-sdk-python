@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,20 +20,21 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
+
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.authenticator_key_enum import AuthenticatorKeyEnum
 from okta.models.supported_methods import SupportedMethods
 from okta.models.well_known_app_authenticator_configuration_settings import WellKnownAppAuthenticatorConfigurationSettings
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class WellKnownAppAuthenticatorConfiguration(BaseModel):
@@ -41,27 +44,33 @@ class WellKnownAppAuthenticatorConfiguration(BaseModel):
     app_authenticator_enroll_endpoint: Optional[StrictStr] = Field(
         default=None,
         description="The authenticator enrollment endpoint",
-        alias="appAuthenticatorEnrollEndpoint")
+        alias="appAuthenticatorEnrollEndpoint"
+    )
     authenticator_id: Optional[StrictStr] = Field(
         default=None,
         description="The unique identifier of the app authenticator",
-        alias="authenticatorId")
+        alias="authenticatorId"
+    )
     created_date: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the authenticator was created",
-        alias="createdDate")
+        alias="createdDate"
+    )
     key: Optional[AuthenticatorKeyEnum] = None
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the authenticator was last modified",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     name: Optional[StrictStr] = Field(default=None, description="The authenticator display name")
     org_id: Optional[StrictStr] = Field(default=None, description="The `id` of the Okta Org", alias="orgId")
     settings: Optional[WellKnownAppAuthenticatorConfigurationSettings] = None
     supported_methods: Optional[List[SupportedMethods]] = Field(default=None, alias="supportedMethods")
     type: Optional[StrictStr] = Field(default=None, description="The type of authenticator")
-    __properties: ClassVar[List[str]] = ["appAuthenticatorEnrollEndpoint", "authenticatorId",
-                                         "createdDate", "key", "lastUpdated", "name", "orgId", "settings", "supportedMethods", "type"]
+    __properties: ClassVar[List[str]] = [
+        "appAuthenticatorEnrollEndpoint", "authenticatorId",
+        "createdDate", "key", "lastUpdated", "name", "orgId", "settings", "supportedMethods", "type"
+    ]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -103,8 +112,10 @@ class WellKnownAppAuthenticatorConfiguration(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -136,16 +147,22 @@ class WellKnownAppAuthenticatorConfiguration(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "appAuthenticatorEnrollEndpoint": obj.get("appAuthenticatorEnrollEndpoint"),
-            "authenticatorId": obj.get("authenticatorId"),
-            "createdDate": obj.get("createdDate"),
-            "key": obj.get("key"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "name": obj.get("name"),
-            "orgId": obj.get("orgId"),
-            "settings": WellKnownAppAuthenticatorConfigurationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None,
-            "supportedMethods": [SupportedMethods.from_dict(_item) for _item in obj["supportedMethods"]] if obj.get("supportedMethods") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "appAuthenticatorEnrollEndpoint": obj.get("appAuthenticatorEnrollEndpoint"),
+                "authenticatorId": obj.get("authenticatorId"),
+                "createdDate": obj.get("createdDate"),
+                "key": obj.get("key"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "orgId": obj.get("orgId"),
+                "settings": WellKnownAppAuthenticatorConfigurationSettings.from_dict(obj["settings"]) if obj.get(
+                    "settings"
+                ) is not None else None,
+                "supportedMethods": [SupportedMethods.from_dict(_item) for _item in obj["supportedMethods"]] if obj.get(
+                    "supportedMethods"
+                ) is not None else None,
+                "type": obj.get("type")
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -35,7 +37,12 @@ class UserImportRequestDataAppUser(BaseModel):
     The app user profile being imported
     """  # noqa: E501
     profile: Optional[Dict[str, StrictStr]] = Field(
-        default=None, description="Provides the name-value pairs of the attributes contained in the app user profile of the user who is being imported. You can change the values of attributes in the user's app profile by means of the `commands` object you return. If you change attributes in the app profile, they then flow through to the Okta user profile, based on matching and mapping rules.")
+        default=None,
+        description="Provides the name-value pairs of the attributes contained in the app user profile of the user who is "
+                    "being imported. You can change the values of attributes in the user's app profile by means of the "
+                    "`commands` object you return. If you change attributes in the app profile, they then flow through to "
+                    "the Okta user profile, based on matching and mapping rules."
+    )
     __properties: ClassVar[List[str]] = ["profile"]
 
     model_config = ConfigDict(
@@ -68,8 +75,10 @@ class UserImportRequestDataAppUser(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -87,7 +96,9 @@ class UserImportRequestDataAppUser(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "profile": obj.get("profile")
-        })
+        _obj = cls.model_validate(
+            {
+                "profile": obj.get("profile")
+            }
+        )
         return _obj

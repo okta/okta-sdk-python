@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -19,6 +21,7 @@
 """  # noqa: E501
 
 from typing import Any, Optional
+
 from typing_extensions import Self
 
 
@@ -27,8 +30,10 @@ class OpenApiException(Exception):
 
 
 class ApiTypeError(OpenApiException, TypeError):
-    def __init__(self, msg, path_to_item=None, valid_classes=None,
-                 key_type=None) -> None:
+    def __init__(
+            self, msg, path_to_item=None, valid_classes=None,
+            key_type=None
+    ) -> None:
         """ Raises an exception for TypeErrors
 
         Args:
@@ -112,13 +117,13 @@ class ApiKeyError(OpenApiException, KeyError):
 class ApiException(OpenApiException):
 
     def __init__(
-        self,
-        status=None,
-        reason=None,
-        http_resp=None,
-        *,
-        body: Optional[str] = None,
-        data: Optional[Any] = None,
+            self,
+            status=None,
+            reason=None,
+            http_resp=None,
+            *,
+            body: Optional[str] = None,
+            data: Optional[Any] = None,
     ) -> None:
         self.status = status
         self.reason = reason
@@ -140,11 +145,11 @@ class ApiException(OpenApiException):
 
     @classmethod
     def from_response(
-        cls,
-        *,
-        http_resp,
-        body: Optional[str],
-        data: Optional[Any],
+            cls,
+            *,
+            http_resp,
+            body: Optional[str],
+            data: Optional[Any],
     ) -> Self:
         if http_resp.status == 400:
             raise BadRequestException(http_resp=http_resp, body=body, data=data)
@@ -164,11 +169,12 @@ class ApiException(OpenApiException):
 
     def __str__(self):
         """Custom error messages for exception"""
-        error_message = "({0})\n"\
+        error_message = "({0})\n" \
                         "Reason: {1}\n".format(self.status, self.reason)
         if self.headers:
             error_message += "HTTP response headers: {0}\n".format(
-                self.headers)
+                self.headers
+            )
 
         if self.data or self.body:
             error_message += "HTTP response body: {0}\n".format(self.data or self.body)

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,19 +20,18 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Optional, Tuple, Union
+from typing import List
 
 from pydantic import Field, StrictStr
-from typing import List
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
-from okta.models.authorization_server_json_web_key import AuthorizationServerJsonWebKey
-from okta.models.jwk_use import JwkUse
 
-from okta.models.success import Success
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.authorization_server_json_web_key import AuthorizationServerJsonWebKey
+from okta.models.jwk_use import JwkUse
+from okta.models.success import Success
 from okta.rest import RESTResponse
 
 
@@ -46,21 +47,21 @@ class AuthorizationServerKeysApi(ApiClient):
 
     @validate_call
     async def get_authorization_server_key(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        key_id: Annotated[StrictStr, Field(description="`id` of the certificate key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            key_id: Annotated[StrictStr, Field(description="`id` of the certificate key")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthorizationServerJsonWebKey:
         """Retrieve an authorization server key
 
@@ -153,13 +154,13 @@ class AuthorizationServerKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_authorization_server_key_serialize(
-        self,
-        auth_server_id,
-        key_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            key_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -214,20 +215,20 @@ class AuthorizationServerKeysApi(ApiClient):
 
     @validate_call
     async def list_authorization_server_keys(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AuthorizationServerJsonWebKey]:
         """List all credential keys
 
@@ -317,12 +318,12 @@ class AuthorizationServerKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_authorization_server_keys_serialize(
-        self,
-        auth_server_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -375,25 +376,29 @@ class AuthorizationServerKeysApi(ApiClient):
 
     @validate_call
     async def rotate_authorization_server_keys(
-        self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        use: JwkUse,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+            use: JwkUse,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AuthorizationServerJsonWebKey]:
         """Rotate all credential keys
 
-        Rotates the current Keys for a Custom Authorization Server. If you rotate Keys, the `ACTIVE` Key becomes the `EXPIRED` Key, the `NEXT` Key becomes the `ACTIVE` Key, and the Custom Authorization Server immediately begins using the new active Key to sign tokens.  > **Note:** Okta rotates your Keys automatically in `AUTO` mode. You can rotate Keys yourself in either mode. If Keys are rotated manually, you should invalidate any intermediate cache. and fetch the Keys again using the Keys endpoint.
+        Rotates the current Keys for a Custom Authorization Server. If you rotate Keys, the `ACTIVE` Key becomes the
+        `EXPIRED` Key, the `NEXT` Key becomes the `ACTIVE` Key, and the Custom Authorization Server immediately begins
+        using the new active Key to sign tokens.  > **Note:** Okta rotates your Keys automatically in `AUTO` mode. You can
+        rotate Keys yourself in either mode. If Keys are rotated manually, you should invalidate any intermediate cache.
+        and fetch the Keys again using the Keys endpoint.
 
         :param auth_server_id: `id` of the Authorization Server (required)
         :type auth_server_id: str
@@ -483,13 +488,13 @@ class AuthorizationServerKeysApi(ApiClient):
             return (resp.data, resp, None)
 
     def _rotate_authorization_server_keys_serialize(
-        self,
-        auth_server_id,
-        use,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            auth_server_id,
+            use,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
 import json
 import pprint
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr, ValidationError, field_validator
-from typing import Any, Dict, Optional
-from pydantic import StrictStr
+from typing import Any
 from typing import Union, Set, Optional, Dict
+
+from pydantic import BaseModel, ConfigDict, StrictInt, ValidationError, field_validator
+from pydantic import StrictStr
 from typing_extensions import Self
 
 SAMLHOOKRESPONSECOMMANDSINNERVALUEINNERVALUE_ONE_OF_SCHEMAS = ["int", "object", "str"]
@@ -33,7 +36,13 @@ SAMLHOOKRESPONSECOMMANDSINNERVALUEINNERVALUE_ONE_OF_SCHEMAS = ["int", "object", 
 
 class SAMLHookResponseCommandsInnerValueInnerValue(BaseModel):
     """
-    The value of the claim that you add or replace, and can also include other attributes. If adding to a claim, add another `value` attribute residing within an array called `attributeValues`.  See the following examples:  #### Simple value (integer or string)  `\"value\": 300` or `\"value\": \"replacementString\"`  #### Attribute value (object)  ` \"value\": {     \"authContextClassRef\": \"replacementValue\"   }`  #### AttributeValues array value (object)  ` \"value\": {     \"attributes\": {       \"NameFormat\": \"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\"     },     \"attributeValues\": [       {\"attributes\": {         \"xsi:type\": \"xs:string\"       },       \"value\": \"4321\"}       ]     }`
+    The value of the claim that you add or replace, and can also include other attributes. If adding to a claim,
+    add another `value` attribute residing within an array called `attributeValues`.  See the following examples:  ####
+    Simple value (integer or string)  `\"value\": 300` or `\"value\": \"replacementString\"`  #### Attribute value (
+    object)  ` \"value\": {     \"authContextClassRef\": \"replacementValue\"   }`  #### AttributeValues array value (
+    object)  ` \"value\": {     \"attributes\": {       \"NameFormat\":
+    \"urn:oasis:names:tc:SAML:2.0:attrname-format:basic\"     },     \"attributeValues\": [       {\"attributes\": {
+      \"xsi:type\": \"xs:string\"       },       \"value\": \"4321\"}       ]     }`
     """
     # data type: str
     oneof_schema_1_validator: Optional[StrictStr] = None
@@ -85,13 +94,17 @@ class SAMLHookResponseCommandsInnerValueInnerValue(BaseModel):
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when setting `actual_instance` in SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
-                ", ".join(error_messages))
+                "Multiple matches found when setting `actual_instance` in SAMLHookResponseCommandsInnerValueInnerValue "
+                "with oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when setting `actual_instance` in SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
-                ", ".join(error_messages))
+                "No match found when setting `actual_instance` in SAMLHookResponseCommandsInnerValueInnerValue with oneOf "
+                "schemas: int, object, str. Details: " +
+                ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -137,13 +150,17 @@ class SAMLHookResponseCommandsInnerValueInnerValue(BaseModel):
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when deserializing the JSON string into SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
-                ", ".join(error_messages))
+                "Multiple matches found when deserializing the JSON string into "
+                "SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into SAMLHookResponseCommandsInnerValueInnerValue with oneOf schemas: int, object, str. Details: " +
-                ", ".join(error_messages))
+                "No match found when deserializing the JSON string into SAMLHookResponseCommandsInnerValueInnerValue with "
+                "oneOf schemas: int, object, str. Details: " +
+                ", ".join(error_messages)
+            )
         else:
             return instance
 

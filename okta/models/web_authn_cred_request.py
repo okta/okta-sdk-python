@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,34 +20,38 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class WebAuthnCredRequest(BaseModel):
     """
-    Credential request object for the initialized credential, along with the enrollment and key identifiers to associate with the credential
+    Credential request object for the initialized credential, along with the enrollment and key identifiers to associate
+    with the credential
     """  # noqa: E501
     authenticator_enrollment_id: Optional[StrictStr] = Field(
         default=None,
         description="ID for a WebAuthn preregistration factor in Okta",
-        alias="authenticatorEnrollmentId")
+        alias="authenticatorEnrollmentId"
+    )
     cred_request_jwe: Optional[StrictStr] = Field(
         default=None,
         description="Encrypted JWE of credential request for the fulfillment provider",
-        alias="credRequestJwe")
+        alias="credRequestJwe"
+    )
     key_id: Optional[StrictStr] = Field(
         default=None,
         description="ID for the Okta response key-pair used to encrypt and decrypt credential requests and responses",
-        alias="keyId")
+        alias="keyId"
+    )
     __properties: ClassVar[List[str]] = ["authenticatorEnrollmentId", "credRequestJwe", "keyId"]
 
     model_config = ConfigDict(
@@ -78,8 +84,10 @@ class WebAuthnCredRequest(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,9 +105,11 @@ class WebAuthnCredRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "authenticatorEnrollmentId": obj.get("authenticatorEnrollmentId"),
-            "credRequestJwe": obj.get("credRequestJwe"),
-            "keyId": obj.get("keyId")
-        })
+        _obj = cls.model_validate(
+            {
+                "authenticatorEnrollmentId": obj.get("authenticatorEnrollmentId"),
+                "credRequestJwe": obj.get("credRequestJwe"),
+                "keyId": obj.get("keyId")
+            }
+        )
         return _obj

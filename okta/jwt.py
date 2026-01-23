@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,13 +20,12 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 import json
 import os
 import time
 import uuid
-
 from ast import literal_eval
+
 from Cryptodome.PublicKey import RSA
 from jwcrypto.jwk import JWK, InvalidJWKType
 from jwt import encode as jwt_encode
@@ -96,7 +97,8 @@ class JWT():
                 my_jwk = JWK.from_json(private_key)
             except InvalidJWKType:
                 raise ValueError(
-                    "JWK given is of the wrong type")
+                    "JWK given is of the wrong type"
+                )
         else:  # it's a PEM
             # check for filepath or explicit private key
             if isinstance(private_key, (str, bytes, os.PathLike)) and os.path.exists(private_key):
@@ -111,7 +113,8 @@ class JWT():
                 my_jwk = JWK.from_pem(my_pem)
             except ValueError:
                 raise ValueError(
-                    "RSA Private Key given is of the wrong type")
+                    "RSA Private Key given is of the wrong type"
+                )
 
         my_pem = my_jwk.export_to_pem(private_key=True, password=None)
         my_pem = RSA.import_key(my_pem)

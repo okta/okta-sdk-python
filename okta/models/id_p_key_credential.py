@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
+
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
@@ -39,23 +41,31 @@ class IdPKeyCredential(BaseModel):
     e: Optional[StrictStr] = Field(default=None, description="The exponent value for the RSA public key")
     expires_at: Optional[datetime] = Field(default=None, description="Timestamp when the object expires", alias="expiresAt")
     kid: Optional[StrictStr] = Field(default=None, description="Unique identifier for the key")
-    kty: Optional[StrictStr] = Field(default=None,
-                                     description="Identifies the cryptographic algorithm family used with the key")
+    kty: Optional[StrictStr] = Field(
+        default=None,
+        description="Identifies the cryptographic algorithm family used with the key"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
         description="Timestamp when the object was last updated",
-        alias="lastUpdated")
+        alias="lastUpdated"
+    )
     n: Optional[StrictStr] = Field(default=None, description="The modulus value for the RSA public key")
     use: Optional[StrictStr] = Field(default=None, description="Intended use of the public key")
-    x5c: Optional[List[StrictStr]] = Field(default=None,
-                                           description="Base64-encoded X.509 certificate chain with DER encoding")
+    x5c: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Base64-encoded X.509 certificate chain with DER encoding"
+    )
     x5t_s256: Optional[StrictStr] = Field(
         default=None,
         description="Base64url-encoded SHA-256 thumbprint of the DER encoding of an X.509 certificate",
-        alias="x5t#S256")
+        alias="x5t#S256"
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["created", "e", "expiresAt",
-                                         "kid", "kty", "lastUpdated", "n", "use", "x5c", "x5t#S256"]
+    __properties: ClassVar[List[str]] = [
+        "created", "e", "expiresAt",
+        "kid", "kty", "lastUpdated", "n", "use", "x5c", "x5t#S256"
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,12 +101,14 @@ class IdPKeyCredential(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "created",
-            "expires_at",
-            "last_updated",
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "expires_at",
+                "last_updated",
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -119,18 +131,20 @@ class IdPKeyCredential(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "created": obj.get("created"),
-            "e": obj.get("e"),
-            "expiresAt": obj.get("expiresAt"),
-            "kid": obj.get("kid"),
-            "kty": obj.get("kty"),
-            "lastUpdated": obj.get("lastUpdated"),
-            "n": obj.get("n"),
-            "use": obj.get("use"),
-            "x5c": obj.get("x5c"),
-            "x5t#S256": obj.get("x5t#S256")
-        })
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "e": obj.get("e"),
+                "expiresAt": obj.get("expiresAt"),
+                "kid": obj.get("kid"),
+                "kty": obj.get("kty"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "n": obj.get("n"),
+                "use": obj.get("use"),
+                "x5c": obj.get("x5c"),
+                "x5t#S256": obj.get("x5t#S256")
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

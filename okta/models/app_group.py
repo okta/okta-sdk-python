@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,16 +20,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -36,9 +38,11 @@ class AppGroup(BaseModel):
     AppGroup
     """  # noqa: E501
     external_id: Annotated[str, Field(strict=True, max_length=255)] = Field(
-        description="The external ID of the app group whose members might be privileged app users", alias="externalId")
+        description="The external ID of the app group whose members might be privileged app users", alias="externalId"
+    )
     name: Annotated[str, Field(strict=True, max_length=255)] = Field(
-        description="The name of the app group whose members might be privileged app users")
+        description="The name of the app group whose members might be privileged app users"
+    )
     __properties: ClassVar[List[str]] = ["externalId", "name"]
 
     model_config = ConfigDict(
@@ -71,8 +75,10 @@ class AppGroup(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -90,8 +96,10 @@ class AppGroup(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "externalId": obj.get("externalId"),
-            "name": obj.get("name")
-        })
+        _obj = cls.model_validate(
+            {
+                "externalId": obj.get("externalId"),
+                "name": obj.get("name")
+            }
+        )
         return _obj

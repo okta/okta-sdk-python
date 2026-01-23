@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,31 +20,39 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class OrgCreationAdminProfile(BaseModel):
     """
-    Specifies the profile attributes for the first super admin user. The minimal set of required attributes are `email`, `firstName`, `lastName`, and `login`. See [profile](/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response) for additional profile attributes.
+    Specifies the profile attributes for the first super admin user. The minimal set of required attributes are `email`,
+    `firstName`, `lastName`, and `login`. See [profile](
+    /openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response) for additional
+    profile attributes.
     """  # noqa: E501
     first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
-        description="Given name of the User (`givenName`)", alias="firstName")
+        description="Given name of the User (`givenName`)", alias="firstName"
+    )
     last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(
-        description="The family name of the User (`familyName`)", alias="lastName")
+        description="The family name of the User (`familyName`)", alias="lastName"
+    )
     email: Annotated[str, Field(min_length=5, strict=True, max_length=100)] = Field(
-        description="The primary email address of the User. For validation, see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).")
+        description="The primary email address of the User. For validation, see [RFC 5322 Section 3.2.3]("
+                    "https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3)."
+    )
     login: Annotated[str, Field(strict=True, max_length=100)] = Field(
-        description="The unique identifier for the User (`username`)")
+        description="The unique identifier for the User (`username`)"
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["firstName", "lastName", "email", "login"]
 
@@ -77,9 +87,11 @@ class OrgCreationAdminProfile(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -112,12 +124,14 @@ class OrgCreationAdminProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "firstName": obj.get("firstName"),
-            "lastName": obj.get("lastName"),
-            "email": obj.get("email"),
-            "login": obj.get("login")
-        })
+        _obj = cls.model_validate(
+            {
+                "firstName": obj.get("firstName"),
+                "lastName": obj.get("lastName"),
+                "email": obj.get("email"),
+                "login": obj.get("login")
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

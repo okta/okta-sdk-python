@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,37 +20,50 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from okta.models.log_geolocation import LogGeolocation
-from typing import Optional, Set
 from typing_extensions import Self
+
+from okta.models.log_geolocation import LogGeolocation
 
 
 class LogGeographicalContext(BaseModel):
     """
-    Geographical context describes a set of geographic coordinates. In addition to containing latitude and longitude data, the `GeographicalContext` object also contains address data of postal code-level granularity. Within the `Client` object, the geographical context refers to the physical location of the client when it sends the request that triggers this event. All `Transaction` events with `type` equal to `WEB` have a geographical context set. `Transaction` events with `type` equal to `JOB` don't have a geographical context set. The geographical context data can be missing if the geographical data for a request can't be resolved.
+    Geographical context describes a set of geographic coordinates. In addition to containing latitude and longitude data,
+    the `GeographicalContext` object also contains address data of postal code-level granularity. Within the `Client`
+    object, the geographical context refers to the physical location of the client when it sends the request that triggers
+    this event. All `Transaction` events with `type` equal to `WEB` have a geographical context set. `Transaction` events
+    with `type` equal to `JOB` don't have a geographical context set. The geographical context data can be missing if the
+    geographical data for a request can't be resolved.
     """  # noqa: E501
     city: Optional[StrictStr] = Field(
         default=None,
-        description="The city that encompasses the area that contains the geolocation coordinates, if available (for example, Seattle, San Francisco)")
+        description="The city that encompasses the area that contains the geolocation coordinates, if available (for "
+                    "example, Seattle, San Francisco)"
+    )
     country: Optional[StrictStr] = Field(
         default=None,
-        description="Full name of the country that encompasses the area that contains the geolocation coordinates (for example, France, Uganda)")
+        description="Full name of the country that encompasses the area that contains the geolocation coordinates (for "
+                    "example, France, Uganda)"
+    )
     geolocation: Optional[LogGeolocation] = None
     postal_code: Optional[StrictStr] = Field(
         default=None,
         description="Postal code of the area that encompasses the geolocation coordinates",
-        alias="postalCode")
+        alias="postalCode"
+    )
     state: Optional[StrictStr] = Field(
         default=None,
-        description="Full name of the state or province that encompasses the area that contains the geolocation coordinates (for example, Montana, Ontario)")
+        description="Full name of the state or province that encompasses the area that contains the geolocation "
+                    "coordinates (for example, Montana, Ontario)"
+    )
     __properties: ClassVar[List[str]] = ["city", "country", "geolocation", "postalCode", "state"]
 
     model_config = ConfigDict(
@@ -85,12 +100,14 @@ class LogGeographicalContext(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([
-            "city",
-            "country",
-            "postal_code",
-            "state",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "city",
+                "country",
+                "postal_code",
+                "state",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -115,11 +132,13 @@ class LogGeographicalContext(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "city": obj.get("city"),
-            "country": obj.get("country"),
-            "geolocation": LogGeolocation.from_dict(obj["geolocation"]) if obj.get("geolocation") is not None else None,
-            "postalCode": obj.get("postalCode"),
-            "state": obj.get("state")
-        })
+        _obj = cls.model_validate(
+            {
+                "city": obj.get("city"),
+                "country": obj.get("country"),
+                "geolocation": LogGeolocation.from_dict(obj["geolocation"]) if obj.get("geolocation") is not None else None,
+                "postalCode": obj.get("postalCode"),
+                "state": obj.get("state")
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,23 +20,22 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
-from typing import Any, Dict, List, Optional, Tuple, Union
-from typing_extensions import Annotated
+from typing import Any, Dict, Tuple, Union
+from typing import List, Optional
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
+
+from okta.api_client import ApiClient, RequestSerialized
+from okta.api_response import ApiResponse
 from okta.models.email_customization import EmailCustomization
 from okta.models.email_default_content import EmailDefaultContent
 from okta.models.email_preview import EmailPreview
 from okta.models.email_settings import EmailSettings
 from okta.models.email_settings_response import EmailSettingsResponse
 from okta.models.email_template_response import EmailTemplateResponse
-
 from okta.models.success import Success
-from okta.api_client import ApiClient, RequestSerialized
-from okta.api_response import ApiResponse
 from okta.rest import RESTResponse
 
 
@@ -50,26 +51,28 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def create_email_customization(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        instance: Optional[EmailCustomization] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            instance: Optional[EmailCustomization] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailCustomization:
         """Create an email customization
 
-        Creates a new Email Customization  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is enabled, you can create a customization for any BCP47 language in addition to the Okta-supported languages. 
+        Creates a new Email Customization  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email
+        Templates is enabled, you can create a customization for any BCP47 language in addition to the Okta-supported
+        languages.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -163,14 +166,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _create_email_customization_serialize(
-        self,
-        brand_id,
-        template_name,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -241,25 +244,27 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def delete_all_customizations(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete all email customizations
 
-        Deletes all customizations for an email template  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is enabled, all customizations are deleted, including customizations for additional languages. If disabled, only customizations in Okta-supported languages are deleted. 
+        Deletes all customizations for an email template  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for
+        Okta Email Templates is enabled, all customizations are deleted, including customizations for additional
+        languages. If disabled, only customizations in Okta-supported languages are deleted.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -339,13 +344,13 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_all_customizations_serialize(
-        self,
-        brand_id,
-        template_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -400,26 +405,28 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def delete_email_customization(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Delete an email customization
 
-        Deletes an Email Customization by its unique identifier  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is disabled, deletion of an existing additional language customization by ID doesn't register. 
+        Deletes an Email Customization by its unique identifier  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom
+        languages for Okta Email Templates is disabled, deletion of an existing additional language customization by ID
+        doesn't register.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -503,14 +510,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _delete_email_customization_serialize(
-        self,
-        brand_id,
-        template_name,
-        customization_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            customization_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -567,26 +574,29 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def get_customization_preview(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailPreview:
         """Retrieve a preview of an email customization
 
-        Retrieves a Preview of an Email Customization. All variable references are populated from the current user's context. For example, `${user.profile.firstName}`.  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is disabled, requests for the preview of an additional language customization by ID return a `404 Not Found` error response. 
+        Retrieves a Preview of an Email Customization. All variable references are populated from the current user's
+        context. For example, `${user.profile.firstName}`.  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages
+        for Okta Email Templates is disabled, requests for the preview of an additional language customization by ID
+        return a `404 Not Found` error response.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -678,14 +688,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_customization_preview_serialize(
-        self,
-        brand_id,
-        template_name,
-        customization_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            customization_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -742,26 +752,28 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def get_email_customization(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailCustomization:
         """Retrieve an email customization
 
-        Retrieves an email customization by its unique identifier  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is disabled, requests to retrieve an additional language customization by ID result in a `404 Not Found` error response. 
+        Retrieves an email customization by its unique identifier  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom
+        languages for Okta Email Templates is disabled, requests to retrieve an additional language customization by ID
+        result in a `404 Not Found` error response.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -853,14 +865,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_email_customization_serialize(
-        self,
-        brand_id,
-        template_name,
-        customization_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            customization_id,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -917,27 +929,30 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def get_email_default_content(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        language: Annotated[Optional[StrictStr], Field(
-            description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            language: Annotated[Optional[StrictStr], Field(
+                description="The language to use for the email. Defaults to the current user's language if unspecified."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailDefaultContent:
         """Retrieve an email template default content
 
-        Retrieves an email template's default content  <x-lifecycle class=\"ea\"></x-lifecycle> Defaults to the current user's language given the following: - Custom languages for Okta Email Templates is enabled - An additional language is specified for the `language` parameter 
+        Retrieves an email template's default content  <x-lifecycle class=\"ea\"></x-lifecycle> Defaults to the current
+        user's language given the following: - Custom languages for Okta Email Templates is enabled - An additional
+        language is specified for the `language` parameter
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1029,14 +1044,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_email_default_content_serialize(
-        self,
-        brand_id,
-        template_name,
-        language,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            language,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1058,7 +1073,6 @@ class CustomTemplatesApi(ApiClient):
             _path_params['templateName'] = template_name
         # process the query parameters
         if language is not None:
-
             _query_params.append(('language', language))
 
         # process the header parameters
@@ -1095,27 +1109,31 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def get_email_default_preview(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        language: Annotated[Optional[StrictStr], Field(
-            description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            language: Annotated[Optional[StrictStr], Field(
+                description="The language to use for the email. Defaults to the current user's language if unspecified."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailPreview:
         """Retrieve a preview of the email template default content
 
-        Retrieves a preview of an Email Template's default content. All variable references are populated using the current user's context. For example, `${user.profile.firstName}`.  <x-lifecycle class=\"ea\"></x-lifecycle> Defaults to the current user's language given the following: - Custom languages for Okta Email Templates is enabled - An additional language is specified for the `language` parameter 
+        Retrieves a preview of an Email Template's default content. All variable references are populated using the
+        current user's context. For example, `${user.profile.firstName}`.  <x-lifecycle class=\"ea\"></x-lifecycle>
+        Defaults to the current user's language given the following: - Custom languages for Okta Email Templates is
+        enabled - An additional language is specified for the `language` parameter
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -1207,14 +1225,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_email_default_preview_serialize(
-        self,
-        brand_id,
-        template_name,
-        language,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            language,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1236,7 +1254,6 @@ class CustomTemplatesApi(ApiClient):
             _path_params['templateName'] = template_name
         # process the query parameters
         if language is not None:
-
             _query_params.append(('language', language))
 
         # process the header parameters
@@ -1273,21 +1290,21 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def get_email_settings(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailSettingsResponse:
         """Retrieve the email template settings
 
@@ -1380,13 +1397,13 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_email_settings_serialize(
-        self,
-        brand_id,
-        template_name,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1441,23 +1458,24 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def get_email_template(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailTemplateResponse:
         """Retrieve an email template
 
@@ -1553,14 +1571,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _get_email_template_serialize(
-        self,
-        brand_id,
-        template_name,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1583,7 +1601,6 @@ class CustomTemplatesApi(ApiClient):
             _path_params['templateName'] = template_name
         # process the query parameters
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -1620,35 +1637,44 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def list_email_customizations(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[EmailCustomization]:
         """List all email customizations
 
-        Lists all customizations of an email template  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is enabled, all existing customizations are retrieved, including customizations for additional languages. If disabled, only customizations for Okta-supported languages are returned. 
+        Lists all customizations of an email template  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for
+        Okta Email Templates is enabled, all existing customizations are retrieved, including customizations for
+        additional languages. If disabled, only customizations for Okta-supported languages are returned.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
         :param template_name: The name of the email template (required)
         :type template_name: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -1737,15 +1763,15 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_email_customizations_serialize(
-        self,
-        brand_id,
-        template_name,
-        after,
-        limit,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            after,
+            limit,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1767,11 +1793,9 @@ class CustomTemplatesApi(ApiClient):
             _path_params['templateName'] = template_name
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         # process the header parameters
@@ -1808,26 +1832,32 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def list_email_templates(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        after: Annotated[Optional[StrictStr], Field(
-            description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
-            description="A limit on the number of objects to return")] = None,
-        expand: Annotated[Optional[List[StrictStr]], Field(
-            description="Specifies additional metadata to be included in the response")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            after: Annotated[Optional[StrictStr], Field(
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
+            )] = None,
+            limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(
+                description="A limit on the number of objects to return"
+            )] = None,
+            expand: Annotated[Optional[List[StrictStr]], Field(
+                description="Specifies additional metadata to be included in the response"
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[EmailTemplateResponse]:
         """List all email templates
 
@@ -1835,7 +1865,9 @@ class CustomTemplatesApi(ApiClient):
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
+        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
         :param limit: A limit on the number of objects to return
         :type limit: int
@@ -1926,15 +1958,15 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _list_email_templates_serialize(
-        self,
-        brand_id,
-        after,
-        limit,
-        expand,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            after,
+            limit,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -1955,15 +1987,12 @@ class CustomTemplatesApi(ApiClient):
             _path_params['brandId'] = brand_id
         # process the query parameters
         if after is not None:
-
             _query_params.append(('after', after))
 
         if limit is not None:
-
             _query_params.append(('limit', limit))
 
         if expand is not None:
-
             _query_params.append(('expand', expand))
 
         # process the header parameters
@@ -2000,27 +2029,29 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def replace_email_customization(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
-        instance: Annotated[Optional[EmailCustomization], Field(description="Request")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
+            instance: Annotated[Optional[EmailCustomization], Field(description="Request")] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailCustomization:
         """Replace an email customization
 
-        Replaces an email customization using property values  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is disabled, requests to update a customization for an additional language return a `404 Not Found` error response. 
+        Replaces an email customization using property values  <x-lifecycle class=\"ea\"></x-lifecycle> If Custom
+        languages for Okta Email Templates is disabled, requests to update a customization for an additional language
+        return a `404 Not Found` error response.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -2117,15 +2148,15 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_email_customization_serialize(
-        self,
-        brand_id,
-        template_name,
-        customization_id,
-        instance,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            customization_id,
+            instance,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2198,22 +2229,22 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def replace_email_settings(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        email_settings: Optional[EmailSettings] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            email_settings: Optional[EmailSettings] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EmailSettings:
         """Replace the email template settings
 
@@ -2312,14 +2343,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _replace_email_settings_serialize(
-        self,
-        brand_id,
-        template_name,
-        email_settings,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            email_settings,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2390,27 +2421,36 @@ class CustomTemplatesApi(ApiClient):
 
     @validate_call
     async def send_test_email(
-        self,
-        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
-        language: Annotated[Optional[StrictStr], Field(
-            description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
+            self,
+            brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+            template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+            language: Annotated[Optional[StrictStr], Field(
+                description="The language to use for the email. Defaults to the current user's language if unspecified."
+            )] = None,
+            _request_timeout: Union[
+                None,
                 Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
         """Send a test email
 
-        Sends a test email to the current user's primary and secondary email addresses. The email content is selected based on the following priority: 1. The email customization for the language specified in the `language` query parameter <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is enabled and the `language` parameter is an additional language, the test email uses the customization corresponding to the language. 2. The email template's default customization 3. The email template's default content, translated to the current user's language  > **Note:** Super admins can view customized email templates with the **Send a test email** request. However, when custom email templates are sent to super admins as part of actual email notification flows, the customizations aren't applied. Instead, the default email template is used. This only applies to super admins.
+        Sends a test email to the current user's primary and secondary email addresses. The email content is selected
+        based on the following priority: 1. The email customization for the language specified in the `language` query
+        parameter <x-lifecycle class=\"ea\"></x-lifecycle> If Custom languages for Okta Email Templates is enabled and the
+        `language` parameter is an additional language, the test email uses the customization corresponding to the
+        language. 2. The email template's default customization 3. The email template's default content, translated to the
+        current user's language  > **Note:** Super admins can view customized email templates with the **Send a test
+        email** request. However, when custom email templates are sent to super admins as part of actual email
+        notification flows, the customizations aren't applied. Instead, the default email template is used. This only
+        applies to super admins.
 
         :param brand_id: The ID of the brand (required)
         :type brand_id: str
@@ -2493,14 +2533,14 @@ class CustomTemplatesApi(ApiClient):
             return (resp.data, resp, None)
 
     def _send_test_email_serialize(
-        self,
-        brand_id,
-        template_name,
-        language,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
+            self,
+            brand_id,
+            template_name,
+            language,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -2522,7 +2562,6 @@ class CustomTemplatesApi(ApiClient):
             _path_params['templateName'] = template_name
         # process the query parameters
         if language is not None:
-
             _query_params.append(('language', language))
 
         # process the header parameters

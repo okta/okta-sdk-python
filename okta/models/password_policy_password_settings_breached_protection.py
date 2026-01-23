@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,15 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Optional, Set
 from typing_extensions import Self
 
 
@@ -37,15 +39,21 @@ class PasswordPolicyPasswordSettingsBreachedProtection(BaseModel):
     delegated_workflow_id: Optional[StrictStr] = Field(
         default=None,
         description="The `id` of the workflow that runs when a breached password is found during a sign-in attempt.",
-        alias="delegatedWorkflowId")
+        alias="delegatedWorkflowId"
+    )
     expire_after_days: Optional[StrictInt] = Field(
         default=None,
-        description="Specifies the number of days after a breached password is found during a sign-in attempt that the user's password should expire. Valid values: 0 through 10. If set to 0, it happens immediately.",
-        alias="expireAfterDays")
+        description="Specifies the number of days after a breached password is found during a sign-in attempt that the "
+                    "user's password should expire. Valid values: 0 through 10. If set to 0, it happens immediately.",
+        alias="expireAfterDays"
+    )
     logout_enabled: Optional[StrictBool] = Field(
         default=False,
-        description="(Optional, default is false) If true, you must also specify a value for `expireAfterDays`. When enabled, the user's session(s) are terminated immediately the first time the user's credentials are detected as part of a breach.",
-        alias="logoutEnabled")
+        description="(Optional, default is false) If true, you must also specify a value for `expireAfterDays`. When "
+                    "enabled, the user's session(s) are terminated immediately the first time the user's credentials are "
+                    "detected as part of a breach.",
+        alias="logoutEnabled"
+    )
     __properties: ClassVar[List[str]] = ["delegatedWorkflowId", "expireAfterDays", "logoutEnabled"]
 
     model_config = ConfigDict(
@@ -78,8 +86,10 @@ class PasswordPolicyPasswordSettingsBreachedProtection(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -112,9 +122,11 @@ class PasswordPolicyPasswordSettingsBreachedProtection(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "delegatedWorkflowId": obj.get("delegatedWorkflowId"),
-            "expireAfterDays": obj.get("expireAfterDays"),
-            "logoutEnabled": obj.get("logoutEnabled") if obj.get("logoutEnabled") is not None else False
-        })
+        _obj = cls.model_validate(
+            {
+                "delegatedWorkflowId": obj.get("delegatedWorkflowId"),
+                "expireAfterDays": obj.get("expireAfterDays"),
+                "logoutEnabled": obj.get("logoutEnabled") if obj.get("logoutEnabled") is not None else False
+            }
+        )
         return _obj

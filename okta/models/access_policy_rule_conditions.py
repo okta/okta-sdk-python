@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,14 +20,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Self
+
 from okta.models.access_policy_rule_custom_condition import AccessPolicyRuleCustomCondition
 from okta.models.device_access_policy_rule_condition import DeviceAccessPolicyRuleCondition
 from okta.models.platform_policy_rule_condition import PlatformPolicyRuleCondition
@@ -33,8 +38,6 @@ from okta.models.policy_network_condition import PolicyNetworkCondition
 from okta.models.policy_people_condition import PolicyPeopleCondition
 from okta.models.risk_score_policy_rule_condition import RiskScorePolicyRuleCondition
 from okta.models.user_type_condition import UserTypeCondition
-from typing import Optional, Set
-from typing_extensions import Self
 
 
 class AccessPolicyRuleConditions(BaseModel):
@@ -80,8 +83,10 @@ class AccessPolicyRuleConditions(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -148,13 +153,23 @@ class AccessPolicyRuleConditions(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "device": DeviceAccessPolicyRuleCondition.from_dict(obj["device"]) if obj.get("device") is not None else None,
-            "elCondition": AccessPolicyRuleCustomCondition.from_dict(obj["elCondition"]) if obj.get("elCondition") is not None else None,
-            "network": PolicyNetworkCondition.from_dict(obj["network"]) if obj.get("network") is not None else None,
-            "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None,
-            "platform": PlatformPolicyRuleCondition.from_dict(obj["platform"]) if obj.get("platform") is not None else None,
-            "riskScore": RiskScorePolicyRuleCondition.from_dict(obj["riskScore"]) if obj.get("riskScore") is not None else None,
-            "userType": UserTypeCondition.from_dict(obj["userType"]) if obj.get("userType") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "device": DeviceAccessPolicyRuleCondition.from_dict(obj["device"]) if obj.get(
+                    "device"
+                ) is not None else None,
+                "elCondition": AccessPolicyRuleCustomCondition.from_dict(obj["elCondition"]) if obj.get(
+                    "elCondition"
+                ) is not None else None,
+                "network": PolicyNetworkCondition.from_dict(obj["network"]) if obj.get("network") is not None else None,
+                "people": PolicyPeopleCondition.from_dict(obj["people"]) if obj.get("people") is not None else None,
+                "platform": PlatformPolicyRuleCondition.from_dict(obj["platform"]) if obj.get(
+                    "platform"
+                ) is not None else None,
+                "riskScore": RiskScorePolicyRuleCondition.from_dict(obj["riskScore"]) if obj.get(
+                    "riskScore"
+                ) is not None else None,
+                "userType": UserTypeCondition.from_dict(obj["userType"]) if obj.get("userType") is not None else None
+            }
+        )
         return _obj

@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,27 +20,33 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
+
+import json
 import pprint
 import re  # noqa: F401
-import json
+from typing import Any, ClassVar, Dict, List
+from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from typing import Optional, Set
 from typing_extensions import Self
 
 
 class IdentitySourceGroupProfileForUpsert(BaseModel):
     """
-    Contains a set of external group attributes and their values that are mapped to Okta standard properties. See the group [`profile` object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group/operation/getGroup!c=200&path=profile&t=response) and Declaration of a Custom Identity Source Schema in [Using anything as a source](https://help.okta.com/okta_help.htm?type=oie&id=ext-anything-as-a-source). > **Note:** Profile attributes can only be of the string type.
+    Contains a set of external group attributes and their values that are mapped to Okta standard properties. See the
+    group [`profile` object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group
+    /operation/getGroup!c=200&path=profile&t=response) and Declaration of a Custom Identity Source Schema in [Using
+    anything as a source](https://help.okta.com/okta_help.htm?type=oie&id=ext-anything-as-a-source). > **Note:** Profile
+    attributes can only be of the string type.
     """  # noqa: E501
     description: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
-        default=None, description="Description of the group")
+        default=None, description="Description of the group"
+    )
     display_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(
-        default=None, description="Name of the group", alias="displayName")
+        default=None, description="Name of the group", alias="displayName"
+    )
     __properties: ClassVar[List[str]] = ["description", "displayName"]
 
     model_config = ConfigDict(
@@ -71,8 +79,10 @@ class IdentitySourceGroupProfileForUpsert(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([
-        ])
+        excluded_fields: Set[str] = set(
+            [
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -95,8 +105,10 @@ class IdentitySourceGroupProfileForUpsert(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "displayName": obj.get("displayName")
-        })
+        _obj = cls.model_validate(
+            {
+                "description": obj.get("description"),
+                "displayName": obj.get("displayName")
+            }
+        )
         return _obj
