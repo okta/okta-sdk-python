@@ -286,10 +286,6 @@ class Client(
 
     def __init__(self, user_config: dict = {}):
         # Load configuration
-        # Specific environment settings (e.g., for SSL CAs)
-        os.environ["REQUESTS_CA_BUNDLE"] = "/Users/binoy.oza/prisma_certificates.pem"
-        os.environ["SSL_CERT_FILE"] = "/Users/binoy.oza/.local/prisma_certificates.pem"
-
         client_config_setter = ConfigSetter()
         client_config_setter._apply_config({"client": user_config})
         self._config = client_config_setter.get_config()

@@ -51,13 +51,16 @@ Models and APIs are auto-generated in accordance with specific openapi spec defi
 In order to make changes in models and/or APIs you need to determine what is the root of changes:
 
 ### Prerequisites
-1. We have stopped using the npm version of the openapi-generator-cli due to issues with the restriction setting variable configuration:
-2. Hence, please use the JAR file of openapi-generator-cli to generate the SDK. You can download the latest JAR file from: https://openapi-generator.tech/docs/installation#jar
-3. Make sure you have Java installed on your machine to run the JAR file.
-4. Place the downloaded JAR file in the `openapi` directory of the project.
-5. Run the `generate.sh` script located in the `openapi` directory to generate the SDK.
-6. The `generate.sh` script is already configured to use the JAR file for generating the SDK.
+This project uses the **JAR version** of `openapi-generator-cli` to resolve specific configuration issues found in the NPM package.
 
+1.  **Install Java:** Ensure you have a Java Runtime Environment (JRE) installed.
+2.  **Download the Generator:** Download the latest JAR file from the [official documentation](https://openapi-generator.tech/docs/installation#jar).
+3.  **Setup:** Place the downloaded JAR file into the `openapi` directory.
+4.  **Generate:** Run the generation script:
+    ```bash
+    cd openapi
+    ./generate.sh
+    ```
 ### if change is needed because of new version of openapi spec that has been released, then:
 
    1. Make changes to the management.yaml file.
