@@ -1,0 +1,22 @@
+[flake8]
+max-line-length = 127
+max-complexity = 10
+ignore = C901,W503,W504
+exclude = 
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    env,
+    build,
+    dist,
+    *.egg-info,
+    .tox,
+    .pytest_cache,
+    htmlcov
+show-source = True
+show-pep8 = True
+count = True
+statistics = True
+per-file-ignores =
+    __init__.py:F401,F403
