@@ -46,7 +46,7 @@ class OpenApiException(Exception):
 
 class ApiTypeError(OpenApiException, TypeError):
     def __init__(
-            self, msg, path_to_item=None, valid_classes=None, key_type=None
+        self, msg, path_to_item=None, valid_classes=None, key_type=None
     ) -> None:
         """Raises an exception for TypeErrors
 
@@ -131,13 +131,13 @@ class ApiKeyError(OpenApiException, KeyError):
 class ApiException(OpenApiException):
 
     def __init__(
-            self,
-            status=None,
-            reason=None,
-            http_resp=None,
-            *,
-            body: Optional[str] = None,
-            data: Optional[Any] = None,
+        self,
+        status=None,
+        reason=None,
+        http_resp=None,
+        *,
+        body: Optional[str] = None,
+        data: Optional[Any] = None,
     ) -> None:
         self.status = status
         self.reason = reason
@@ -159,11 +159,11 @@ class ApiException(OpenApiException):
 
     @classmethod
     def from_response(
-            cls,
-            *,
-            http_resp,
-            body: Optional[str],
-            data: Optional[Any],
+        cls,
+        *,
+        http_resp,
+        body: Optional[str],
+        data: Optional[Any],
     ) -> Self:
         if http_resp.status == 400:
             raise BadRequestException(http_resp=http_resp, body=body, data=data)

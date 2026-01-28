@@ -83,7 +83,9 @@ class OktaCache(Cache):
             key {str} -- Key in pair
             value {tuple} -- Tuple of response and response body
         """
-        if isinstance(key, str) and (not isinstance(value, list) or not isinstance(value[1], list)):
+        if isinstance(key, str) and (
+            not isinstance(value, list) or not isinstance(value[1], list)
+        ):
             # Get current time
             now = self._get_current_time()
 

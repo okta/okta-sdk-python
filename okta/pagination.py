@@ -48,29 +48,29 @@ class PaginationHelper:
         """
         try:
             # Try both capitalized and lowercase 'link' headers
-            link_header = headers.get('Link') or headers.get('link')
+            link_header = headers.get("Link") or headers.get("link")
 
             if not link_header:
                 return None
 
             # Parse the Link header to find the 'next' link
             # Format: <URL>; rel="next", <URL>; rel="self"
-            links = link_header.split(',')
+            links = link_header.split(",")
 
             for link in links:
                 # Check if this is the 'next' link
                 if 'rel="next"' in link or "rel='next'" in link:
                     # Extract URL from <URL>
-                    url_part = link.split(';')[0].strip()
-                    url = url_part.strip('<>').strip()
+                    url_part = link.split(";")[0].strip()
+                    url = url_part.strip("<>").strip()
 
                     # Extract 'after' parameter from URL
                     parsed = urlparse(url)
                     query_params = parse_qs(parsed.query)
 
-                    if 'after' in query_params:
+                    if "after" in query_params:
                         # Return the first value if it's a list
-                        after_value = query_params['after']
+                        after_value = query_params["after"]
                         if isinstance(after_value, list) and len(after_value) > 0:
                             return after_value[0]
                         return str(after_value)
@@ -110,47 +110,48 @@ class PaginationHelper:
             >>> PaginationHelper.extract_pagination_info(headers)
             {'next': 'abc', 'prev': None, 'self': None}
         """
-        info = {
-            'next': None,
-            'prev': None,
-            'self': None
-        }
+        info = {"next": None, "prev": None, "self": None}
 
         try:
-            link_header = headers.get('Link') or headers.get('link')
+            link_header = headers.get("Link") or headers.get("link")
 
             if not link_header:
                 return info
 
-            links = link_header.split(',')
+            links = link_header.split(",")
 
             for link in links:
                 # Extract rel type
                 rel_type = None
                 if 'rel="next"' in link:
-                    rel_type = 'next'
+                    rel_type = "next"
                 elif 'rel="prev"' in link or 'rel="previous"' in link:
-                    rel_type = 'prev'
+                    rel_type = "prev"
                 elif 'rel="self"' in link:
-                    rel_type = 'self'
+                    rel_type = "self"
 
                 if rel_type:
                     # Extract URL
-                    url_part = link.split(';')[0].strip()
-                    url = url_part.strip('<>').strip()
+                    url_part = link.split(";")[0].strip()
+                    url = url_part.strip("<>").strip()
 
                     # Extract cursor parameter (usually 'after' or 'before')
                     parsed = urlparse(url)
                     query_params = parse_qs(parsed.query)
 
                     cursor = None
-                    if 'after' in query_params:
-                        cursor = query_params['after'][0] if isinstance(query_params['after'], list) else query_params[
-                            'after']
-                    elif 'before' in query_params:
-                        cursor = query_params['before'][0] if isinstance(
-                            query_params['before'], list
-                        ) else query_params['before']
+                    if "after" in query_params:
+                        cursor = (
+                            query_params["after"][0]
+                            if isinstance(query_params["after"], list)
+                            else query_params["after"]
+                        )
+                    elif "before" in query_params:
+                        cursor = (
+                            query_params["before"][0]
+                            if isinstance(query_params["before"], list)
+                            else query_params["before"]
+                        )
 
                     info[rel_type] = cursor
 
@@ -161,10 +162,7 @@ class PaginationHelper:
 
 
 async def paginate_all(
-        api_method,
-        limit: int = 200,
-        max_pages: Optional[int] = None,
-        **kwargs
+    api_method, limit: int = 200, max_pages: Optional[int] = None, **kwargs
 ):
     """
     Automatically paginate through all results from an Okta API list method.
@@ -189,7 +187,7 @@ async def paginate_all(
         >>> # Collect all users
         >>> all_users = [user async for user in paginate_all(client.list_users_with_http_info)]
     """
-    after_cursor = kwargs.pop('after', None)
+    after_cursor = kwargs.pop("after", None)
     page_count = 0
 
     while True:
@@ -201,9 +199,7 @@ async def paginate_all(
 
         # Make API call with current cursor
         data, response, error = await api_method(
-            limit=limit,
-            after=after_cursor,
-            **kwargs
+            limit=limit, after=after_cursor, **kwargs
         )
 
         # Handle errors
@@ -223,10 +219,7 @@ async def paginate_all(
 
 
 async def paginate_pages(
-        api_method,
-        limit: int = 200,
-        max_pages: Optional[int] = None,
-        **kwargs
+    api_method, limit: int = 200, max_pages: Optional[int] = None, **kwargs
 ):
     """
     Paginate through results, yielding complete pages.
@@ -250,7 +243,7 @@ async def paginate_pages(
         ...     if not has_more:
         ...         print("Last page!")
     """
-    after_cursor = kwargs.pop('after', None)
+    after_cursor = kwargs.pop("after", None)
     page_count = 0
 
     while True:
@@ -262,9 +255,7 @@ async def paginate_pages(
 
         # Make API call with current cursor
         data, response, error = await api_method(
-            limit=limit,
-            after=after_cursor,
-            **kwargs
+            limit=limit, after=after_cursor, **kwargs
         )
 
         # Handle errors
