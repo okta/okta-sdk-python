@@ -47,9 +47,7 @@ ERROR_MESSAGE_API_TOKEN_DEFAULT = (
 
 ERROR_MESSAGE_CLIENT_ID_MISSING = (
     f"Your client ID is missing. You can copy it from the Okta Developer Console in the "
-    f"details for the Application you created. Follow these instructions to find it: {
-        FINDING_OKTA_APP_CRED
-    }"
+    f"details for the Application you created. Follow these instructions to find it: {FINDING_OKTA_APP_CRED}"
 )
 
 ERROR_MESSAGE_CLIENT_ID_DEFAULT = (
