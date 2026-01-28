@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**ApplicationCredentials**](ApplicationCredentials.md) |  | [optional] 
-**name** | **str** | &#x60;template_wsfed&#x60; is the key name for a WS-Federated app instance with a SAML 2.0 token | 
+**name** | **str** | &#x60;template_wsfed&#x60; is the key name for a WS-Federated app instance with a SAML 2.0 token | [default to 'template_wsfed']
 **settings** | [**WsFederationApplicationSettings**](WsFederationApplicationSettings.md) |  | 
 
 ## Example

@@ -61559,8 +61559,7 @@ components:
             name:
               type: string
               description: '`template_basic_auth` is the key name for a Basic Authentication scheme app instance'
-              enum:
-                - template_basic_auth
+              default: template_basic_auth
             settings:
               $ref: '#/components/schemas/BasicApplicationSettings'
           required:
@@ -61735,8 +61734,7 @@ components:
             name:
               type: string
               description: '`bookmark` is the key name for a Bookmark app'
-              enum:
-                - bookmark
+              default: bookmark
             settings:
               $ref: '#/components/schemas/BookmarkApplicationSettings'
           required:
@@ -65681,8 +65679,7 @@ components:
           properties:
             name:
               type: string
-              enum:
-                - google
+              default: google
               example: google
             signOnMode:
               type: string
@@ -71414,8 +71411,7 @@ components:
           properties:
             name:
               type: string
-              enum:
-                - office365
+              default: office365
               example: office365
             signOnMode:
               type: string
@@ -72023,8 +72019,7 @@ components:
             name:
               type: string
               description: '`oidc_client` is the key name for an OAuth 2.0 client app instance'
-              enum:
-                - oidc_client
+              default: oidc_client
             settings:
               $ref: '#/components/schemas/OpenIdConnectApplicationSettings'
           required:
@@ -72467,8 +72462,7 @@ components:
           properties:
             name:
               type: string
-              enum:
-                - okta_org2org
+              default: okta_org2org
               example: okta_org2org
             signOnMode:
               type: string
@@ -76735,8 +76729,7 @@ components:
           properties:
             name:
               type: string
-              enum:
-                - salesforce
+              default: salesforce
               example: salesforce
             signOnMode:
               type: string
@@ -77498,7 +77491,7 @@ components:
             name:
               type: string
               description: '`template_sps` is the key name for a SWA app instance that uses HTTP POST and doesn''t require a browser plugin'
-              enum:
+              default:
                 - template_sps
             settings:
               $ref: '#/components/schemas/SecurePasswordStoreApplicationSettings'
@@ -78461,8 +78454,7 @@ components:
           properties:
             name:
               type: string
-              enum:
-                - slack
+              default: slack
               example: slack
             signOnMode:
               type: string
@@ -79616,7 +79608,7 @@ components:
     TimeDuration:
       description: A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
       type: string
-      pattern: ^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$
+      pattern: ^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$
     TokenAuthorizationServerPolicyRuleAction:
       type: object
       properties:
@@ -80340,8 +80332,7 @@ components:
           properties:
             name:
               type: string
-              enum:
-                - trendmicroapexoneservice
+              default: trendmicroapexoneservice
               example: trendmicroapexoneservice
             signOnMode:
               type: string
@@ -83283,8 +83274,7 @@ components:
             name:
               type: string
               description: '`template_wsfed` is the key name for a WS-Federated app instance with a SAML 2.0 token'
-              enum:
-                - template_wsfed
+              default: template_wsfed
             settings:
               $ref: '#/components/schemas/WsFederationApplicationSettings'
           required:
@@ -83388,8 +83378,7 @@ components:
           properties:
             name:
               type: string
-              enum:
-                - zoomus
+              default: zoomus
               example: zoomus
             signOnMode:
               type: string
@@ -83442,8 +83431,7 @@ components:
           properties:
             name:
               type: string
-              enum:
-                - zscalerbyz
+              default: zscalerbyz
               example: zscalerbyz
             signOnMode:
               type: string

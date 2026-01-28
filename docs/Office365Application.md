@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **credentials** | [**SchemeApplicationCredentials**](SchemeApplicationCredentials.md) |  | [optional] 
 **label** | **str** | User-defined display name for app | 
 **licensing** | [**ApplicationLicensing**](ApplicationLicensing.md) |  | [optional] 
-**name** | **str** |  | 
+**name** | **str** |  | [default to 'office365']
 **profile** | **Dict[str, object]** | Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps) | [optional] 
 **sign_on_mode** | **str** |  | [optional] 
 **status** | [**ApplicationLifecycleStatus**](ApplicationLifecycleStatus.md) |  | [optional] 

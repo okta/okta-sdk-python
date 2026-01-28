@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "okta"
-version = "3.0.1"
+version = "3.1.0"
 description = "Okta Admin Management"
 authors = ["Okta Developer Team <devex-public@okta.com>"]
 license = "Apache-2.0"

@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**OAuthApplicationCredentials**](OAuthApplicationCredentials.md) |  | 
-**name** | **str** | &#x60;oidc_client&#x60; is the key name for an OAuth 2.0 client app instance | 
+**name** | **str** | &#x60;oidc_client&#x60; is the key name for an OAuth 2.0 client app instance | [default to 'oidc_client']
 **settings** | [**OpenIdConnectApplicationSettings**](OpenIdConnectApplicationSettings.md) |  | 
 
 ## Example
