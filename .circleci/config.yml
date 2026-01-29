@@ -46,9 +46,18 @@ jobs:
       - run:
           name: Download Reverse Labs Scanner
           command: |
-            curl https://dso-resources.oktasecurity.com/scanner \
-              -H "x-api-key: $RESOURCE_TOKEN" \
+            curl --fail --show-error --location \
+              https://dso-resources.oktasecurity.com/scanner \
+              -H "x-api-key: $DSO_RLSECURE_TOKEN" \
               --output rl_wrapper-0.0.2+35ababa-py3-none-any.whl
+
+            # Verify the downloaded file is a valid wheel
+            file rl_wrapper-0.0.2+35ababa-py3-none-any.whl
+            if ! file rl_wrapper-0.0.2+35ababa-py3-none-any.whl | grep -q "Zip archive"; then
+              echo "ERROR: Downloaded file is not a valid wheel archive"
+              cat rl_wrapper-0.0.2+35ababa-py3-none-any.whl
+              exit 1
+            fi
       # Install the wrapper that was downloaded
       - run:
           name: Install RL Wrapper
@@ -88,4 +97,4 @@ workflows:
     jobs:
       - reversing-labs:
           context:
-            - okta-dcp
+            - static-analysis
