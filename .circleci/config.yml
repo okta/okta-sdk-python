@@ -87,4 +87,6 @@ workflows:
   "Malware Scanner":
     jobs:
       - reversing-labs:
+          context:
+            - static-analysis
 
