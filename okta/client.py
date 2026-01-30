@@ -26,8 +26,6 @@ import logging
 # This client class is typically generated based on an API specification (e.g., OpenAPI).
 # Changes to this file may be overwritten upon regeneration.
 # SEE CONTRIBUTOR DOCUMENTATION
-import os
-
 import aiohttp
 
 from okta.api.agent_pools_api import AgentPoolsApi
