@@ -37,13 +37,13 @@ from okta.models.splunk_edition import SplunkEdition
 
 class LogStreamSettingsSplunkPut(BaseModel):
     """
-    Specifies the configuration for the `splunk_cloud_logstreaming` Log Stream type.
+    Specifies the configuration for the `splunk_cloud_logstreaming` log stream type.
     """  # noqa: E501
 
     edition: SplunkEdition
     host: Annotated[str, Field(min_length=17, strict=True, max_length=116)] = Field(
         description="The domain name for your Splunk Cloud instance. Don't include `http` or `https` in the string. For "
-                    "example: `acme.splunkcloud.com`"
+        "example: `acme.splunkcloud.com`"
     )
     __properties: ClassVar[List[str]] = ["edition", "host"]
 

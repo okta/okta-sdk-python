@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -29,9 +29,15 @@ from typing_extensions import Annotated
 
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
-from okta.models.provisioning_connection import ProvisioningConnection
-from okta.models.provisioning_connection_request import ProvisioningConnectionRequest
+from okta.models.app_connection_user_provision_jwk_response import (
+    AppConnectionUserProvisionJWKResponse,
+)
+from okta.models.o_auth_provisioning_enabled_app import OAuthProvisioningEnabledApp
+from okta.models.provisioning_connection_response import ProvisioningConnectionResponse
 from okta.models.success import Success
+from okta.models.update_default_provisioning_connection_for_application_request import (
+    UpdateDefaultProvisioningConnectionForApplicationRequest,
+)
 from okta.rest import RESTResponse
 
 
@@ -48,7 +54,7 @@ class ApplicationConnectionsApi(ApiClient):
     @validate_call
     async def activate_default_provisioning_connection_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,203 +67,11 @@ class ApplicationConnectionsApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Activate the default Provisioning Connection
+        """Activate the default provisioning connection
 
-        Activates the default Provisioning Connection for an app
+        Activates the default provisioning connection for an app
 
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._activate_default_provisioning_connection_for_application_serialize(
-                app_id=app_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def activate_default_provisioning_connection_for_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Activate the default Provisioning Connection
-
-        Activates the default Provisioning Connection for an app
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._activate_default_provisioning_connection_for_application_serialize(
-                app_id=app_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def activate_default_provisioning_connection_for_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Activate the default Provisioning Connection
-
-        Activates the default Provisioning Connection for an app
-
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -385,7 +199,7 @@ class ApplicationConnectionsApi(ApiClient):
     @validate_call
     async def deactivate_default_provisioning_connection_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -398,203 +212,11 @@ class ApplicationConnectionsApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Deactivate the default Provisioning Connection
+        """Deactivate the default provisioning connection
 
-        Deactivates the default Provisioning Connection for an app
+        Deactivates the default provisioning connection for an app
 
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._deactivate_default_provisioning_connection_for_application_serialize(
-                app_id=app_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def deactivate_default_provisioning_connection_for_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Deactivate the default Provisioning Connection
-
-        Deactivates the default Provisioning Connection for an app
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._deactivate_default_provisioning_connection_for_application_serialize(
-                app_id=app_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def deactivate_default_provisioning_connection_for_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Deactivate the default Provisioning Connection
-
-        Deactivates the default Provisioning Connection for an app
-
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -722,7 +344,7 @@ class ApplicationConnectionsApi(ApiClient):
     @validate_call
     async def get_default_provisioning_connection_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -734,12 +356,12 @@ class ApplicationConnectionsApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ProvisioningConnection:
-        """Retrieve the default Provisioning Connection
+    ) -> ProvisioningConnectionResponse:
+        """Retrieve the default provisioning connection
 
-        Retrieves the default Provisioning Connection for an app
+        Retrieves the default provisioning connection for an app
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -764,7 +386,7 @@ class ApplicationConnectionsApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ProvisioningConnection",
+            "200": "ProvisioningConnectionResponse",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -788,18 +410,18 @@ class ApplicationConnectionsApi(ApiClient):
         )
 
         if error:
-            if ProvisioningConnection is Success:
+            if ProvisioningConnectionResponse is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if ProvisioningConnection is Success:
+        if ProvisioningConnectionResponse is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, ProvisioningConnection
+                request, ProvisioningConnectionResponse
             )
 
         if response_body == "" or response.status == 204:
@@ -815,225 +437,7 @@ class ApplicationConnectionsApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if ProvisioningConnection is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_default_provisioning_connection_for_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ProvisioningConnection:
-        """Retrieve the default Provisioning Connection
-
-        Retrieves the default Provisioning Connection for an app
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ProvisioningConnection",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_default_provisioning_connection_for_application_serialize(
-                app_id=app_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if ProvisioningConnection is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if ProvisioningConnection is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ProvisioningConnection
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if ProvisioningConnection is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_default_provisioning_connection_for_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ProvisioningConnection:
-        """Retrieve the default Provisioning Connection
-
-        Retrieves the default Provisioning Connection for an app
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ProvisioningConnection",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_default_provisioning_connection_for_application_serialize(
-                app_id=app_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if ProvisioningConnection is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if ProvisioningConnection is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ProvisioningConnection
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if ProvisioningConnection is Success:
+                if ProvisioningConnectionResponse is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -1096,13 +500,173 @@ class ApplicationConnectionsApi(ApiClient):
         )
 
     @validate_call
+    async def get_user_provisioning_connection_jwks(
+        self,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AppConnectionUserProvisionJWKResponse:
+        """Retrieve a JSON Web Key Set (JWKS) for the default provisioning connection
+
+        Retrieves a JWKS for the default provisioning connection.  This can be used by the OAuth 2.0 app's `jwk_uri`
+        property in the target org.
+
+        :param app_id: Application ID (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "AppConnectionUserProvisionJWKResponse",
+            "401": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._get_user_provisioning_connection_jwks_serialize(
+                app_id=app_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if AppConnectionUserProvisionJWKResponse is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if AppConnectionUserProvisionJWKResponse is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, AppConnectionUserProvisionJWKResponse
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if AppConnectionUserProvisionJWKResponse is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _get_user_provisioning_connection_jwks_serialize(
+        self,
+        app_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if app_id is not None:
+            _path_params["appId"] = app_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="GET",
+            resource_path="/api/v1/apps/{appId}/connections/default/jwks",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def update_default_provisioning_connection_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        provisioning_connection_request: ProvisioningConnectionRequest,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        update_default_provisioning_connection_for_application_request:
+        UpdateDefaultProvisioningConnectionForApplicationRequest,
         activate: Annotated[
             Optional[StrictBool],
-            Field(description="Activates the Provisioning Connection"),
+            Field(description="Activates the provisioning connection"),
         ] = None,
         _request_timeout: Union[
             None,
@@ -1115,16 +679,17 @@ class ApplicationConnectionsApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ProvisioningConnection:
-        """Update the default Provisioning Connection
+    ) -> ProvisioningConnectionResponse:
+        """Update the default provisioning connection
 
-        Updates the default Provisioning Connection for an app
+        Updates the default provisioning connection for an app
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
-        :param provisioning_connection_request: (required)
-        :type provisioning_connection_request: ProvisioningConnectionRequest
-        :param activate: Activates the Provisioning Connection
+        :param update_default_provisioning_connection_for_application_request: (required)
+        :type update_default_provisioning_connection_for_application_request:
+        UpdateDefaultProvisioningConnectionForApplicationRequest
+        :param activate: Activates the provisioning connection
         :type activate: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1149,7 +714,7 @@ class ApplicationConnectionsApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "201": "ProvisioningConnection",
+            "200": "ProvisioningConnectionResponse",
             "400": "Error",
             "403": "Error",
             "404": "Error",
@@ -1159,7 +724,7 @@ class ApplicationConnectionsApi(ApiClient):
         method, url, header_params, body, post_params = (
             self._update_default_provisioning_connection_for_application_serialize(
                 app_id=app_id,
-                provisioning_connection_request=provisioning_connection_request,
+                update_default_provisioning_connection_for_application_request=update_default_provisioning_connection_for_application_request,  # noqa: E501
                 activate=activate,
                 _request_auth=_request_auth,
                 _content_type=_content_type,
@@ -1176,18 +741,18 @@ class ApplicationConnectionsApi(ApiClient):
         )
 
         if error:
-            if ProvisioningConnection is Success:
+            if ProvisioningConnectionResponse is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if ProvisioningConnection is Success:
+        if ProvisioningConnectionResponse is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, ProvisioningConnection
+                request, ProvisioningConnectionResponse
             )
 
         if response_body == "" or response.status == 204:
@@ -1203,249 +768,7 @@ class ApplicationConnectionsApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if ProvisioningConnection is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def update_default_provisioning_connection_for_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        provisioning_connection_request: ProvisioningConnectionRequest,
-        activate: Annotated[
-            Optional[StrictBool],
-            Field(description="Activates the Provisioning Connection"),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ProvisioningConnection:
-        """Update the default Provisioning Connection
-
-        Updates the default Provisioning Connection for an app
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param provisioning_connection_request: (required)
-        :type provisioning_connection_request: ProvisioningConnectionRequest
-        :param activate: Activates the Provisioning Connection
-        :type activate: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "201": "ProvisioningConnection",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._update_default_provisioning_connection_for_application_serialize(
-                app_id=app_id,
-                provisioning_connection_request=provisioning_connection_request,
-                activate=activate,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if ProvisioningConnection is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if ProvisioningConnection is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ProvisioningConnection
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if ProvisioningConnection is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def update_default_provisioning_connection_for_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        provisioning_connection_request: ProvisioningConnectionRequest,
-        activate: Annotated[
-            Optional[StrictBool],
-            Field(description="Activates the Provisioning Connection"),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ProvisioningConnection:
-        """Update the default Provisioning Connection
-
-        Updates the default Provisioning Connection for an app
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param provisioning_connection_request: (required)
-        :type provisioning_connection_request: ProvisioningConnectionRequest
-        :param activate: Activates the Provisioning Connection
-        :type activate: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "201": "ProvisioningConnection",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._update_default_provisioning_connection_for_application_serialize(
-                app_id=app_id,
-                provisioning_connection_request=provisioning_connection_request,
-                activate=activate,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if ProvisioningConnection is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if ProvisioningConnection is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ProvisioningConnection
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if ProvisioningConnection is Success:
+                if ProvisioningConnectionResponse is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -1461,7 +784,7 @@ class ApplicationConnectionsApi(ApiClient):
     def _update_default_provisioning_connection_for_application_serialize(
         self,
         app_id,
-        provisioning_connection_request,
+        update_default_provisioning_connection_for_application_request,
         activate,
         _request_auth,
         _content_type,
@@ -1490,8 +813,10 @@ class ApplicationConnectionsApi(ApiClient):
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if provisioning_connection_request is not None:
-            _body_params = provisioning_connection_request
+        if update_default_provisioning_connection_for_application_request is not None:
+            _body_params = (
+                update_default_provisioning_connection_for_application_request
+            )
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
@@ -1512,6 +837,176 @@ class ApplicationConnectionsApi(ApiClient):
         return self.param_serialize(
             method="POST",
             resource_path="/api/v1/apps/{appId}/connections/default",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    async def verify_provisioning_connection_for_application(
+        self,
+        app_name: OAuthProvisioningEnabledApp,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        code: Optional[StrictStr] = None,
+        state: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Verify the provisioning connection
+
+        Verifies the OAuth 2.0-based connection as part of the OAuth 2.0 consent flow. The validation of the consent flow is
+        the last step of the provisioning setup for an OAuth 2.0-based connection. Currently, this operation only supports
+        `office365`,`google`, `zoomus`, and `slack` apps.
+
+        :param app_name: (required)
+        :type app_name: OAuthProvisioningEnabledApp
+        :param app_id: Application ID (required)
+        :type app_id: str
+        :param code:
+        :type code: str
+        :param state:
+        :type state: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "204": None,
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._verify_provisioning_connection_for_application_serialize(
+                app_name=app_name,
+                app_id=app_id,
+                code=code,
+                state=state,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _verify_provisioning_connection_for_application_serialize(
+        self,
+        app_name,
+        app_id,
+        code,
+        state,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if app_name is not None:
+            _path_params["appName"] = app_name.value
+        if app_id is not None:
+            _path_params["appId"] = app_id
+        # process the query parameters
+        if code is not None:
+            _query_params.append(("code", code))
+
+        if state is not None:
+            _query_params.append(("state", state))
+
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/apps/{appName}/{appId}/oauth2/callback",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

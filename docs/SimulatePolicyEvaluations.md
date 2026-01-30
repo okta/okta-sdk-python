@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** | The result of this entity evaluation | [optional] 
-**policy_type** | [**List[PolicyType]**](PolicyType.md) | The policy type of the simulate operation | [optional] 
-**result** | [**SimulatePolicyResult**](SimulatePolicyResult.md) |  | [optional] 
-**undefined** | [**SimulatePolicyEvaluationsUndefined**](SimulatePolicyEvaluationsUndefined.md) |  | [optional] 
 **evaluated** | [**SimulatePolicyEvaluationsEvaluated**](SimulatePolicyEvaluationsEvaluated.md) |  | [optional] 
+**policy_type** | [**List[PolicyTypeSimulation]**](PolicyTypeSimulation.md) | The policy type of the simulate operation | [optional] 
+**result** | [**SimulatePolicyResult**](SimulatePolicyResult.md) |  | [optional] 
+**status** | [**SimulateResultStatus**](SimulateResultStatus.md) |  | [optional] 
+**undefined** | [**SimulatePolicyEvaluationsUndefined**](SimulatePolicyEvaluationsUndefined.md) |  | [optional] 
 
 ## Example
 

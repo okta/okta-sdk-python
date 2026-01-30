@@ -33,7 +33,7 @@ from typing_extensions import Self
 
 from okta.models.chrome_browser_version import ChromeBrowserVersion
 from okta.models.key_trust_level_os_mode import KeyTrustLevelOSMode
-from okta.models.os_version import OSVersion
+from okta.models.os_version_four_components import OSVersionFourComponents
 from okta.models.password_protection_warning_trigger import (
     PasswordProtectionWarningTrigger,
 )
@@ -47,8 +47,7 @@ class DTCChromeOS(BaseModel):
 
     allow_screen_lock: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates whether the AllowScreenLock enterprise policy is "
-                    "enabled",
+        description="Indicates whether the AllowScreenLock enterprise policy is enabled",
         alias="allowScreenLock",
     )
     browser_version: Optional[ChromeBrowserVersion] = Field(
@@ -56,8 +55,7 @@ class DTCChromeOS(BaseModel):
     )
     built_in_dns_client_enabled: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if a software stack is used to "
-                    "communicate with the DNS server",
+        description="Indicates if a software stack is used to communicate with the DNS server",
         alias="builtInDnsClientEnabled",
     )
     chrome_remote_desktop_app_blocked: Optional[StrictBool] = Field(
@@ -70,20 +68,27 @@ class DTCChromeOS(BaseModel):
         description="Enrollment domain of the customer that is currently managing the device",
         alias="deviceEnrollmentDomain",
     )
-    disk_enrypted: Optional[StrictBool] = Field(
+    disk_encrypted: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether the main disk is encrypted",
-        alias="diskEnrypted",
+        alias="diskEncrypted",
     )
     key_trust_level: Optional[KeyTrustLevelOSMode] = Field(
         default=None, alias="keyTrustLevel"
+    )
+    managed_device: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the device is enrolled in ChromeOS device management",
+        alias="managedDevice",
     )
     os_firewall: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether a firewall is enabled at the OS-level on the device",
         alias="osFirewall",
     )
-    os_version: Optional[OSVersion] = Field(default=None, alias="osVersion")
+    os_version: Optional[OSVersionFourComponents] = Field(
+        default=None, alias="osVersion"
+    )
     password_protection_warning_trigger: Optional[PasswordProtectionWarningTrigger] = (
         Field(default=None, alias="passwordProtectionWarningTrigger")
     )
@@ -111,8 +116,9 @@ class DTCChromeOS(BaseModel):
         "builtInDnsClientEnabled",
         "chromeRemoteDesktopAppBlocked",
         "deviceEnrollmentDomain",
-        "diskEnrypted",
+        "diskEncrypted",
         "keyTrustLevel",
+        "managedDevice",
         "osFirewall",
         "osVersion",
         "passwordProtectionWarningTrigger",
@@ -197,11 +203,12 @@ class DTCChromeOS(BaseModel):
                     "chromeRemoteDesktopAppBlocked"
                 ),
                 "deviceEnrollmentDomain": obj.get("deviceEnrollmentDomain"),
-                "diskEnrypted": obj.get("diskEnrypted"),
+                "diskEncrypted": obj.get("diskEncrypted"),
                 "keyTrustLevel": obj.get("keyTrustLevel"),
+                "managedDevice": obj.get("managedDevice"),
                 "osFirewall": obj.get("osFirewall"),
                 "osVersion": (
-                    OSVersion.from_dict(obj["osVersion"])
+                    OSVersionFourComponents.from_dict(obj["osVersion"])
                     if obj.get("osVersion") is not None
                     else None
                 ),

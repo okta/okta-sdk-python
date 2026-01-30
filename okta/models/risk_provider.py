@@ -44,18 +44,18 @@ class RiskProvider(BaseModel):
 
     action: RiskProviderAction
     client_id: StrictStr = Field(
-        description="The ID of the [OAuth service app]("
-                    "https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app"
-                    "-and-grant-scopes) that is used to send risk events to Okta",
+        description="The ID of the [OAuth 2.0 service app]("
+        "https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app"
+        "-and-grant-scopes) that's used to send risk events to Okta",
         alias="clientId",
     )
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the Risk Provider object was created"
+        default=None, description="Timestamp when the risk provider object was created"
     )
-    id: StrictStr = Field(description="The ID of the Risk Provider object")
+    id: StrictStr = Field(description="The ID of the risk provider object")
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the Risk Provider object was last updated",
+        description="Timestamp when the risk provider object was last updated",
         alias="lastUpdated",
     )
     name: Annotated[str, Field(strict=True, max_length=50)] = Field(

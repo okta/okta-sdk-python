@@ -34,12 +34,21 @@ from typing_extensions import Self
 
 class SingleLogout(BaseModel):
     """
-    SingleLogout
+    Determines if the app supports Single Logout (SLO)
     """  # noqa: E501
 
-    enabled: Optional[StrictBool] = None
-    issuer: Optional[StrictStr] = None
-    logout_url: Optional[StrictStr] = Field(default=None, alias="logoutUrl")
+    enabled: Optional[StrictBool] = Field(
+        default=None, description="Whether the application supports SLO"
+    )
+    issuer: Optional[StrictStr] = Field(
+        default=None,
+        description="The issuer of the Service Provider that generates the SLO request",
+    )
+    logout_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The location where the logout response is sent",
+        alias="logoutUrl",
+    )
     __properties: ClassVar[List[str]] = ["enabled", "issuer", "logoutUrl"]
 
     model_config = ConfigDict(

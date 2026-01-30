@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class GroupType(str, Enum):
     """
-    GroupType
+    Determines how a group's profile and memberships are managed
     """
 
     """

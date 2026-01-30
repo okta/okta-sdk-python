@@ -1,11 +1,13 @@
 # PolicyAccountLinkFilter
 
+Specifies filters on which users are available for account linking by an IdP
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **groups** | [**PolicyAccountLinkFilterGroups**](PolicyAccountLinkFilterGroups.md) |  | [optional] 
+**users** | [**PolicyAccountLinkFilterUsers**](PolicyAccountLinkFilterUsers.md) |  | [optional] 
 
 ## Example
 

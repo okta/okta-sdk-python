@@ -25,13 +25,17 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
+from okta.models.identity_provider_application_user_links import (
+    IdentityProviderApplicationUserLinks,
+)
 
 
 class IdentityProviderApplicationUser(BaseModel):
@@ -39,15 +43,35 @@ class IdentityProviderApplicationUser(BaseModel):
     IdentityProviderApplicationUser
     """  # noqa: E501
 
-    created: Optional[StrictStr] = None
-    external_id: Optional[StrictStr] = Field(default=None, alias="externalId")
-    id: Optional[StrictStr] = None
-    last_updated: Optional[StrictStr] = Field(default=None, alias="lastUpdated")
-    profile: Optional[Dict[str, Dict[str, Any]]] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, alias="_embedded"
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the object was created"
     )
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
+        default=None,
+        description="Unique IdP-specific identifier for the user",
+        alias="externalId",
+    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique key of the user")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated",
+    )
+    profile: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None,
+        description="IdP-specific profile for the user.  IdP user profiles are IdP-specific but may be customized by the "
+        "Profile Editor in the Admin Console.  > **Note:** Okta variable names have reserved characters that may "
+        "conflict with the name of an IdP assertion attribute. You can use the **External name** to define the "
+        "attribute name as defined in an IdP assertion such as a SAML attribute name.",
+    )
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
+        default=None,
+        description="Embedded resources related to the IdP user",
+        alias="_embedded",
+    )
+    links: Optional[IdentityProviderApplicationUserLinks] = Field(
+        default=None, alias="_links"
+    )
     __properties: ClassVar[List[str]] = [
         "created",
         "externalId",
@@ -89,10 +113,16 @@ class IdentityProviderApplicationUser(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
+                "created",
+                "external_id",
                 "id",
+                "last_updated",
                 "embedded",
             ]
         )
@@ -129,7 +159,7 @@ class IdentityProviderApplicationUser(BaseModel):
                 "profile": obj.get("profile"),
                 "_embedded": obj.get("_embedded"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    IdentityProviderApplicationUserLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

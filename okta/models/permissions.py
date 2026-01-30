@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
 from okta.models.permission import Permission
@@ -36,10 +36,14 @@ from okta.models.permission import Permission
 
 class Permissions(BaseModel):
     """
-    Permissions
+    Permissions assigned to the role
     """  # noqa: E501
 
-    permissions: Optional[List[Permission]] = None
+    permissions: Optional[List[Permission]] = Field(
+        default=None,
+        description="Array of permissions assigned to the role. See [Permissions]("
+        "/openapi/okta-management/guides/permissions).",
+    )
     __properties: ClassVar[List[str]] = ["permissions"]
 
     model_config = ConfigDict(

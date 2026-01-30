@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class ApplicationCredentialsSigningUse(str, Enum):
     """
-    ApplicationCredentialsSigningUse
+    Specifies the intended use of the key
     """
 
     """

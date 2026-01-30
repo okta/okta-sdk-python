@@ -1,5 +1,6 @@
 # GroupType
 
+Determines how a group's profile and memberships are managed
 
 ## Properties
 

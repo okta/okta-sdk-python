@@ -123,12 +123,12 @@ class OktaSignOnPolicy(Policy):
             {
                 "created": obj.get("created"),
                 "description": obj.get("description"),
-                "id": obj.get("id"),
+                "id": obj.get("id") if obj.get("id") is not None else "Assigned",
                 "lastUpdated": obj.get("lastUpdated"),
                 "name": obj.get("name"),
                 "priority": obj.get("priority"),
                 "status": obj.get("status"),
-                "system": obj.get("system"),
+                "system": obj.get("system") if obj.get("system") is not None else False,
                 "type": obj.get("type"),
                 "_embedded": obj.get("_embedded"),
                 "_links": (

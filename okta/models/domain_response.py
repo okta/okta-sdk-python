@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.dns_record import DNSRecord
+from okta.models.dns_record_domains import DNSRecordDomains
 from okta.models.domain_certificate_metadata import DomainCertificateMetadata
 from okta.models.domain_certificate_source_type import DomainCertificateSourceType
 from okta.models.domain_links import DomainLinks
@@ -49,7 +49,9 @@ class DomainResponse(BaseModel):
     certificate_source_type: Optional[DomainCertificateSourceType] = Field(
         default=None, alias="certificateSourceType"
     )
-    dns_records: Optional[List[DNSRecord]] = Field(default=None, alias="dnsRecords")
+    dns_records: Optional[List[DNSRecordDomains]] = Field(
+        default=None, alias="dnsRecords"
+    )
     domain: Optional[StrictStr] = Field(default=None, description="Custom domain name")
     id: Optional[StrictStr] = Field(default=None, description="Unique ID of the domain")
     public_certificate: Optional[DomainCertificateMetadata] = Field(
@@ -144,7 +146,7 @@ class DomainResponse(BaseModel):
                 "brandId": obj.get("brandId"),
                 "certificateSourceType": obj.get("certificateSourceType"),
                 "dnsRecords": (
-                    [DNSRecord.from_dict(_item) for _item in obj["dnsRecords"]]
+                    [DNSRecordDomains.from_dict(_item) for _item in obj["dnsRecords"]]
                     if obj.get("dnsRecords") is not None
                     else None
                 ),

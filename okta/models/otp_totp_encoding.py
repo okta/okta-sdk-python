@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OtpTotpEncoding(str, Enum):
     """
-    OtpTotpEncoding
+    The shared secret encoding
     """
 
     """

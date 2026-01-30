@@ -37,8 +37,10 @@ class BasicApplicationSettingsApplication(BaseModel):
     BasicApplicationSettingsApplication
     """  # noqa: E501
 
-    auth_url: Optional[StrictStr] = Field(default=None, alias="authURL")
-    url: Optional[StrictStr] = None
+    auth_url: StrictStr = Field(
+        description="The URL of the authenticating site for this app", alias="authURL"
+    )
+    url: StrictStr = Field(description="The URL of the sign-in page for this app")
     __properties: ClassVar[List[str]] = ["authURL", "url"]
 
     model_config = ConfigDict(

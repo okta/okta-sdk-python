@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
+from okta.models.org_contact_user_links import OrgContactUserLinks
 
 
 class OrgContactUser(BaseModel):
@@ -39,8 +39,10 @@ class OrgContactUser(BaseModel):
     OrgContactUser
     """  # noqa: E501
 
-    user_id: Optional[StrictStr] = Field(default=None, alias="userId")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    user_id: Optional[StrictStr] = Field(
+        default=None, description="Contact user ID", alias="userId"
+    )
+    links: Optional[OrgContactUserLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["userId", "_links"]
 
     model_config = ConfigDict(
@@ -102,7 +104,7 @@ class OrgContactUser(BaseModel):
             {
                 "userId": obj.get("userId"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    OrgContactUserLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

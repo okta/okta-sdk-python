@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
@@ -37,7 +37,9 @@ class CreateBrandRequest(BaseModel):
     CreateBrandRequest
     """  # noqa: E501
 
-    name: StrictStr
+    name: StrictStr = Field(
+        description="The name of the brand  > **Note:** You can't use the reserved `DRAPP_DOMAIN_BRAND` name."
+    )
     __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(

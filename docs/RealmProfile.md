@@ -5,7 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Name of a Realm | [optional] 
+**domains** | **List[str]** | Array of allowed domains. No user in this realm can be created or updated unless they have a username and email from one of these domains.  The following characters aren&#39;t allowed in the domain name: &#x60;!$%^&amp;()&#x3D;*+,:;&lt;&gt;&#39;[]|/?\\&#x60; | [optional] 
+**name** | **str** | Name of a realm | 
+**realm_type** | **str** | Used to store partner users. This property must be set to &#x60;PARTNER&#x60; to access Okta&#39;s external partner portal. | [optional] 
 
 ## Example
 

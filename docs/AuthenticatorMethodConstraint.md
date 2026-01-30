@@ -6,8 +6,8 @@ Limits the authenticators that can be used for a given method. Currently, only t
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**method** | **str** |  | [optional] 
 **allowed_authenticators** | [**List[AuthenticatorIdentity]**](AuthenticatorIdentity.md) |  | [optional] 
+**method** | **str** |  | [optional] 
 
 ## Example
 

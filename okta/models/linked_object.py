@@ -32,7 +32,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
 from okta.models.linked_object_details import LinkedObjectDetails
-from okta.models.links_self import LinksSelf
+from okta.models.linked_object_links_self import LinkedObjectLinksSelf
 
 
 class LinkedObject(BaseModel):
@@ -42,7 +42,7 @@ class LinkedObject(BaseModel):
 
     associated: Optional[LinkedObjectDetails] = None
     primary: Optional[LinkedObjectDetails] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[LinkedObjectLinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["associated", "primary", "_links"]
 
     model_config = ConfigDict(
@@ -127,7 +127,7 @@ class LinkedObject(BaseModel):
                     else None
                 ),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    LinkedObjectLinksSelf.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

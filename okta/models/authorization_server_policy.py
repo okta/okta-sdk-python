@@ -25,37 +25,105 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import ConfigDict
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictInt,
+    StrictStr,
+    field_validator,
+)
+from typing_extensions import Annotated
 from typing_extensions import Self
 
-from okta.models.policy import Policy
-from okta.models.policy_links import PolicyLinks
-from okta.models.policy_rule_conditions import PolicyRuleConditions
+from okta.models.authorization_server_policy_all_of_links import (
+    AuthorizationServerPolicyAllOfLinks,
+)
+from okta.models.authorization_server_policy_conditions import (
+    AuthorizationServerPolicyConditions,
+)
 
 
-class AuthorizationServerPolicy(Policy):
+class AuthorizationServerPolicy(BaseModel):
     """
     AuthorizationServerPolicy
     """  # noqa: E501
 
-    conditions: Optional[PolicyRuleConditions] = None
+    id: Optional[StrictStr] = Field(default=None, description="ID of the Policy")
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates that the Policy is an authorization server Policy",
+    )
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = (
+        Field(default=None, description="Name of the Policy")
+    )
+    conditions: Optional[AuthorizationServerPolicyConditions] = None
+    description: Optional[
+        Annotated[str, Field(min_length=1, strict=True, max_length=255)]
+    ] = Field(default=None, description="Description of the Policy")
+    priority: Optional[StrictInt] = Field(
+        default=None,
+        description="Specifies the order in which this Policy is evaluated in relation to the other Policies in a custom "
+        "authorization server",
+    )
+    status: Optional[StrictStr] = Field(
+        default=None,
+        description="Specifies whether requests have access to this Policy",
+    )
+    system: Optional[StrictBool] = Field(
+        default=None, description="Specifies whether Okta created this Policy"
+    )
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the Policy was created"
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the Policy was last updated",
+        alias="lastUpdated",
+    )
+    links: Optional[AuthorizationServerPolicyAllOfLinks] = Field(
+        default=None, alias="_links"
+    )
     __properties: ClassVar[List[str]] = [
-        "created",
-        "description",
         "id",
-        "lastUpdated",
+        "type",
         "name",
+        "conditions",
+        "description",
         "priority",
         "status",
         "system",
-        "type",
-        "_embedded",
+        "created",
+        "lastUpdated",
         "_links",
-        "conditions",
     ]
+
+    @field_validator("type")
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["OAUTH_AUTHORIZATION_POLICY"]):
+            raise ValueError(
+                "must be one of enum values ('OAUTH_AUTHORIZATION_POLICY')"
+            )
+        return value
+
+    @field_validator("status")
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["ACTIVE", "INACTIVE"]):
+            raise ValueError("must be one of enum values ('ACTIVE', 'INACTIVE')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,27 +154,34 @@ class AuthorizationServerPolicy(Policy):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
-            if not isinstance(self.links, dict):
-                _dict["_links"] = self.links.to_dict()
-            else:
-                _dict["_links"] = self.links
-
         # override the default output from pydantic by calling `to_dict()` of conditions
         if self.conditions:
             if not isinstance(self.conditions, dict):
                 _dict["conditions"] = self.conditions.to_dict()
             else:
                 _dict["conditions"] = self.conditions
+
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
 
         return _dict
 
@@ -121,24 +196,23 @@ class AuthorizationServerPolicy(Policy):
 
         _obj = cls.model_validate(
             {
-                "created": obj.get("created"),
-                "description": obj.get("description"),
                 "id": obj.get("id"),
-                "lastUpdated": obj.get("lastUpdated"),
+                "type": obj.get("type"),
                 "name": obj.get("name"),
+                "conditions": (
+                    AuthorizationServerPolicyConditions.from_dict(obj["conditions"])
+                    if obj.get("conditions") is not None
+                    else None
+                ),
+                "description": obj.get("description"),
                 "priority": obj.get("priority"),
                 "status": obj.get("status"),
                 "system": obj.get("system"),
-                "type": obj.get("type"),
-                "_embedded": obj.get("_embedded"),
+                "created": obj.get("created"),
+                "lastUpdated": obj.get("lastUpdated"),
                 "_links": (
-                    PolicyLinks.from_dict(obj["_links"])
+                    AuthorizationServerPolicyAllOfLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
-                    else None
-                ),
-                "conditions": (
-                    PolicyRuleConditions.from_dict(obj["conditions"])
-                    if obj.get("conditions") is not None
                     else None
                 ),
             }

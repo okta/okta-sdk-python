@@ -28,10 +28,10 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
-from okta.models.policy_type import PolicyType
+from okta.models.policy_type_simulation import PolicyTypeSimulation
 from okta.models.simulate_policy_evaluations_evaluated import (
     SimulatePolicyEvaluationsEvaluated,
 )
@@ -39,6 +39,7 @@ from okta.models.simulate_policy_evaluations_undefined import (
     SimulatePolicyEvaluationsUndefined,
 )
 from okta.models.simulate_policy_result import SimulatePolicyResult
+from okta.models.simulate_result_status import SimulateResultStatus
 
 
 class SimulatePolicyEvaluations(BaseModel):
@@ -46,36 +47,22 @@ class SimulatePolicyEvaluations(BaseModel):
     SimulatePolicyEvaluations
     """  # noqa: E501
 
-    status: Optional[StrictStr] = Field(
-        default=None, description="The result of this entity evaluation"
-    )
-    policy_type: Optional[List[PolicyType]] = Field(
+    evaluated: Optional[SimulatePolicyEvaluationsEvaluated] = None
+    policy_type: Optional[List[PolicyTypeSimulation]] = Field(
         default=None,
         description="The policy type of the simulate operation",
         alias="policyType",
     )
     result: Optional[SimulatePolicyResult] = None
+    status: Optional[SimulateResultStatus] = None
     undefined: Optional[SimulatePolicyEvaluationsUndefined] = None
-    evaluated: Optional[SimulatePolicyEvaluationsEvaluated] = None
     __properties: ClassVar[List[str]] = [
-        "status",
+        "evaluated",
         "policyType",
         "result",
+        "status",
         "undefined",
-        "evaluated",
     ]
-
-    @field_validator("status")
-    def status_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(["MATCH", "NOT_MATCH", "UNDEFINED"]):
-            raise ValueError(
-                "must be one of enum values ('MATCH', 'NOT_MATCH', 'UNDEFINED')"
-            )
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -114,6 +101,13 @@ class SimulatePolicyEvaluations(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of evaluated
+        if self.evaluated:
+            if not isinstance(self.evaluated, dict):
+                _dict["evaluated"] = self.evaluated.to_dict()
+            else:
+                _dict["evaluated"] = self.evaluated
+
         # override the default output from pydantic by calling `to_dict()` of result
         if self.result:
             if not isinstance(self.result, dict):
@@ -128,13 +122,6 @@ class SimulatePolicyEvaluations(BaseModel):
             else:
                 _dict["undefined"] = self.undefined
 
-        # override the default output from pydantic by calling `to_dict()` of evaluated
-        if self.evaluated:
-            if not isinstance(self.evaluated, dict):
-                _dict["evaluated"] = self.evaluated.to_dict()
-            else:
-                _dict["evaluated"] = self.evaluated
-
         return _dict
 
     @classmethod
@@ -148,21 +135,21 @@ class SimulatePolicyEvaluations(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "status": obj.get("status"),
+                "evaluated": (
+                    SimulatePolicyEvaluationsEvaluated.from_dict(obj["evaluated"])
+                    if obj.get("evaluated") is not None
+                    else None
+                ),
                 "policyType": obj.get("policyType"),
                 "result": (
                     SimulatePolicyResult.from_dict(obj["result"])
                     if obj.get("result") is not None
                     else None
                 ),
+                "status": obj.get("status"),
                 "undefined": (
                     SimulatePolicyEvaluationsUndefined.from_dict(obj["undefined"])
                     if obj.get("undefined") is not None
-                    else None
-                ),
-                "evaluated": (
-                    SimulatePolicyEvaluationsEvaluated.from_dict(obj["evaluated"])
-                    if obj.get("evaluated") is not None
                     else None
                 ),
             }

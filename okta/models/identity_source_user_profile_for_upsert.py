@@ -35,31 +35,38 @@ from typing_extensions import Self
 
 class IdentitySourceUserProfileForUpsert(BaseModel):
     """
-    IdentitySourceUserProfileForUpsert
+    Contains a set of external user attributes and their values that are mapped to Okta standard and custom profile
+    properties. See the [`profile` object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User
+    /#tag/User/operation/getUser!c=200&path=profile&t=response) and Declaration of a Custom Identity Source Schema in [Using
+    anything as a source](https://help.okta.com/okta_help.htm?type=oie&id=ext-anything-as-a-source). > **Note:** Profile
+    attributes can only be of the string type.
     """  # noqa: E501
 
     email: Optional[
         Annotated[str, Field(min_length=5, strict=True, max_length=100)]
-    ] = None
+    ] = Field(default=None, description="Email address of the user")
     first_name: Optional[
         Annotated[str, Field(min_length=1, strict=True, max_length=50)]
-    ] = Field(default=None, alias="firstName")
+    ] = Field(default=None, description="First name of the user", alias="firstName")
     home_address: Optional[Annotated[str, Field(strict=True, max_length=4096)]] = Field(
-        default=None, alias="homeAddress"
+        default=None, description="Home address of the user", alias="homeAddress"
     )
     last_name: Optional[
         Annotated[str, Field(min_length=1, strict=True, max_length=50)]
-    ] = Field(default=None, alias="lastName")
+    ] = Field(default=None, description="Last name of the user", alias="lastName")
     mobile_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
-        default=None, alias="mobilePhone"
+        default=None, description="Mobile phone number of the user", alias="mobilePhone"
     )
     second_email: Optional[
         Annotated[str, Field(min_length=5, strict=True, max_length=100)]
-    ] = Field(default=None, alias="secondEmail")
-    user_name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
-        default=None, alias="userName"
+    ] = Field(
+        default=None,
+        description="Alternative email address of the user",
+        alias="secondEmail",
     )
-    additional_properties: Dict[str, Any] = {}
+    user_name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
+        default=None, description="Username of the user", alias="userName"
+    )
     __properties: ClassVar[List[str]] = [
         "email",
         "firstName",
@@ -99,24 +106,14 @@ class IdentitySourceUserProfileForUpsert(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([])
 
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
-
         # set to None if first_name (nullable) is None
         # and model_fields_set contains the field
         if self.first_name is None and "first_name" in self.model_fields_set:
@@ -159,9 +156,4 @@ class IdentitySourceUserProfileForUpsert(BaseModel):
                 "userName": obj.get("userName"),
             }
         )
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
         return _obj

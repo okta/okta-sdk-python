@@ -1,5 +1,1251 @@
 # Okta Python SDK Changelog
 
+# 3.1.0
+
+## OVERVIEW
+
+This release updates the Okta Python SDK with the 5.1.0 Okta Management API specifications, introduces pagination support for list operations, and includes important changes to the SDK generation tooling.
+
+### What's New
+
+* **Updated API Specifications**: The SDK has been regenerated using the v5.1.0 Okta Management OpenAPI specifications, bringing support for new endpoints and enhanced functionality across the API surface.
+
+* **Pagination Support**: List operations now support pagination for efficient handling of large result sets. For detailed usage instructions and examples, please refer to `README.md## Pagination`.
+
+* **OpenAPI Generator Tooling Update**: The SDK generation process has transitioned from the npm-based `openapi-generator-cli` to the JAR-based version due to configuration limitations in the npm package. Contributors and maintainers should now use the OpenAPI Generator JAR file for SDK generation. Download instructions: https://openapi-generator.tech/docs/installation#jar
+
+---
+
+## API CHANGES FROM VERSION 3.0.0 TO 3.1.0
+
+## SUMMARY
+
+* **New API Files**: 66
+* **Removed API Files**: 9
+* **Modified API Files**: 16
+* **Unchanged API Files**: 34
+* **Total New Methods in Existing APIs**: 29
+* **Total Removed Methods**: 99
+* **Total Methods in New API Files**: 368
+
+## NEW API FILES
+
+### APPLICATION_CROSS_APP_ACCESS_CONNECTIONS_API
+**API Class**: `ApplicationCrossAppAccessConnectionsApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_cross_app_access_connection` (NEW)
+* ✓ `delete_cross_app_access_connection` (NEW)
+* ✓ `get_all_cross_app_access_connections` (NEW)
+* ✓ `get_cross_app_access_connection` (NEW)
+* ✓ `update_cross_app_access_connection` (NEW)
+
+### APPLICATION_SSO_CREDENTIAL_KEY_API
+**API Class**: `ApplicationSsoCredentialKeyApi`
+**Total Methods**: 9
+
+**Methods**:
+* ✓ `clone_application_key` (NEW)
+* ✓ `generate_application_key` (NEW)
+* ✓ `generate_csr_for_application` (NEW)
+* ✓ `get_application_key` (NEW)
+* ✓ `get_csr_for_application` (NEW)
+* ✓ `list_application_keys` (NEW)
+* ✓ `list_csrs_for_application` (NEW)
+* ✓ `publish_csr_from_application` (NEW)
+* ✓ `revoke_csr_from_application` (NEW)
+
+### APPLICATION_SSO_FEDERATED_CLAIMS_API
+**API Class**: `ApplicationSsoFederatedClaimsApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_federated_claim` (NEW)
+* ✓ `delete_federated_claim` (NEW)
+* ✓ `get_federated_claim` (NEW)
+* ✓ `list_federated_claims` (NEW)
+* ✓ `replace_federated_claim` (NEW)
+
+### APPLICATION_SSO_PUBLIC_KEYS_API
+**API Class**: `ApplicationSsoPublicKeysApi`
+**Total Methods**: 12
+
+**Methods**:
+* ✓ `activate_o_auth2_client_json_web_key` (NEW)
+* ✓ `activate_o_auth2_client_secret` (NEW)
+* ✓ `add_jwk` (NEW)
+* ✓ `create_o_auth2_client_secret` (NEW)
+* ✓ `deactivate_o_auth2_client_json_web_key` (NEW)
+* ✓ `deactivate_o_auth2_client_secret` (NEW)
+* ✓ `delete_o_auth2_client_secret` (NEW)
+* ✓ `deletejwk` (NEW)
+* ✓ `get_jwk` (NEW)
+* ✓ `get_o_auth2_client_secret` (NEW)
+* ✓ `list_jwk` (NEW)
+* ✓ `list_o_auth2_client_secrets` (NEW)
+
+### ASSOCIATED_DOMAIN_CUSTOMIZATIONS_API
+**API Class**: `AssociatedDomainCustomizationsApi`
+**Total Methods**: 7
+
+**Methods**:
+* ✓ `get_all_well_known_uris` (NEW)
+* ✓ `get_apple_app_site_association_well_known_uri` (NEW)
+* ✓ `get_asset_links_well_known_uri` (NEW)
+* ✓ `get_brand_well_known_uri` (NEW)
+* ✓ `get_root_brand_well_known_uri` (NEW)
+* ✓ `get_web_authn_well_known_uri` (NEW)
+* ✓ `replace_brand_well_known_uri` (NEW)
+
+### AUTHORIZATION_SERVER_ASSOC_API
+**API Class**: `AuthorizationServerAssocApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `create_associated_servers` (NEW)
+* ✓ `delete_associated_server` (NEW)
+* ✓ `list_associated_servers_by_trusted_type` (NEW)
+
+### AUTHORIZATION_SERVER_CLAIMS_API
+**API Class**: `AuthorizationServerClaimsApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_o_auth2_claim` (NEW)
+* ✓ `delete_o_auth2_claim` (NEW)
+* ✓ `get_o_auth2_claim` (NEW)
+* ✓ `list_o_auth2_claims` (NEW)
+* ✓ `replace_o_auth2_claim` (NEW)
+
+### AUTHORIZATION_SERVER_CLIENTS_API
+**API Class**: `AuthorizationServerClientsApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `get_refresh_token_for_authorization_server_and_client` (NEW)
+* ✓ `list_o_auth2_clients_for_authorization_server` (NEW)
+* ✓ `list_refresh_tokens_for_authorization_server_and_client` (NEW)
+* ✓ `revoke_refresh_token_for_authorization_server_and_client` (NEW)
+* ✓ `revoke_refresh_tokens_for_authorization_server_and_client` (NEW)
+
+### AUTHORIZATION_SERVER_KEYS_API
+**API Class**: `AuthorizationServerKeysApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `get_authorization_server_key` (NEW)
+* ✓ `list_authorization_server_keys` (NEW)
+* ✓ `rotate_authorization_server_keys` (NEW)
+
+### AUTHORIZATION_SERVER_POLICIES_API
+**API Class**: `AuthorizationServerPoliciesApi`
+**Total Methods**: 7
+
+**Methods**:
+* ✓ `activate_authorization_server_policy` (NEW)
+* ✓ `create_authorization_server_policy` (NEW)
+* ✓ `deactivate_authorization_server_policy` (NEW)
+* ✓ `delete_authorization_server_policy` (NEW)
+* ✓ `get_authorization_server_policy` (NEW)
+* ✓ `list_authorization_server_policies` (NEW)
+* ✓ `replace_authorization_server_policy` (NEW)
+
+### AUTHORIZATION_SERVER_RULES_API
+**API Class**: `AuthorizationServerRulesApi`
+**Total Methods**: 7
+
+**Methods**:
+* ✓ `activate_authorization_server_policy_rule` (NEW)
+* ✓ `create_authorization_server_policy_rule` (NEW)
+* ✓ `deactivate_authorization_server_policy_rule` (NEW)
+* ✓ `delete_authorization_server_policy_rule` (NEW)
+* ✓ `get_authorization_server_policy_rule` (NEW)
+* ✓ `list_authorization_server_policy_rules` (NEW)
+* ✓ `replace_authorization_server_policy_rule` (NEW)
+
+### AUTHORIZATION_SERVER_SCOPES_API
+**API Class**: `AuthorizationServerScopesApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_o_auth2_scope` (NEW)
+* ✓ `delete_o_auth2_scope` (NEW)
+* ✓ `get_o_auth2_scope` (NEW)
+* ✓ `list_o_auth2_scopes` (NEW)
+* ✓ `replace_o_auth2_scope` (NEW)
+
+### BRANDS_API
+**API Class**: `BrandsApi`
+**Total Methods**: 6
+
+**Methods**:
+* ✓ `create_brand` (NEW)
+* ✓ `delete_brand` (NEW)
+* ✓ `get_brand` (NEW)
+* ✓ `list_brand_domains` (NEW)
+* ✓ `list_brands` (NEW)
+* ✓ `replace_brand` (NEW)
+
+### CUSTOM_PAGES_API
+**API Class**: `CustomPagesApi`
+**Total Methods**: 19
+
+**Methods**:
+* ✓ `delete_customized_error_page` (NEW)
+* ✓ `delete_customized_sign_in_page` (NEW)
+* ✓ `delete_preview_error_page` (NEW)
+* ✓ `delete_preview_sign_in_page` (NEW)
+* ✓ `get_customized_error_page` (NEW)
+* ✓ `get_customized_sign_in_page` (NEW)
+* ✓ `get_default_error_page` (NEW)
+* ✓ `get_default_sign_in_page` (NEW)
+* ✓ `get_error_page` (NEW)
+* ✓ `get_preview_error_page` (NEW)
+* ✓ `get_preview_sign_in_page` (NEW)
+* ✓ `get_sign_in_page` (NEW)
+* ✓ `get_sign_out_page_settings` (NEW)
+* ✓ `list_all_sign_in_widget_versions` (NEW)
+* ✓ `replace_customized_error_page` (NEW)
+* ✓ `replace_customized_sign_in_page` (NEW)
+* ✓ `replace_preview_error_page` (NEW)
+* ✓ `replace_preview_sign_in_page` (NEW)
+* ✓ `replace_sign_out_page_settings` (NEW)
+
+### CUSTOM_TEMPLATES_API
+**API Class**: `CustomTemplatesApi`
+**Total Methods**: 14
+
+**Methods**:
+* ✓ `create_email_customization` (NEW)
+* ✓ `delete_all_customizations` (NEW)
+* ✓ `delete_email_customization` (NEW)
+* ✓ `get_customization_preview` (NEW)
+* ✓ `get_email_customization` (NEW)
+* ✓ `get_email_default_content` (NEW)
+* ✓ `get_email_default_preview` (NEW)
+* ✓ `get_email_settings` (NEW)
+* ✓ `get_email_template` (NEW)
+* ✓ `list_email_customizations` (NEW)
+* ✓ `list_email_templates` (NEW)
+* ✓ `replace_email_customization` (NEW)
+* ✓ `replace_email_settings` (NEW)
+* ✓ `send_test_email` (NEW)
+
+### DEVICE_INTEGRATIONS_API
+**API Class**: `DeviceIntegrationsApi`
+**Total Methods**: 4
+
+**Methods**:
+* ✓ `activate_device_integration` (NEW)
+* ✓ `deactivate_device_integration` (NEW)
+* ✓ `get_device_integration` (NEW)
+* ✓ `list_device_integrations` (NEW)
+
+### DEVICE_POSTURE_CHECK_API
+**API Class**: `DevicePostureCheckApi`
+**Total Methods**: 6
+
+**Methods**:
+* ✓ `create_device_posture_check` (NEW)
+* ✓ `delete_device_posture_check` (NEW)
+* ✓ `get_device_posture_check` (NEW)
+* ✓ `list_default_device_posture_checks` (NEW)
+* ✓ `list_device_posture_checks` (NEW)
+* ✓ `replace_device_posture_check` (NEW)
+
+### DIRECTORIES_INTEGRATION_API
+**API Class**: `DirectoriesIntegrationApi`
+**Total Methods**: 1
+
+**Methods**:
+* ✓ `update_ad_group_membership` (NEW)
+
+### EMAIL_CUSTOMIZATION_API
+**API Class**: `EmailCustomizationApi`
+**Total Methods**: 1
+
+**Methods**:
+* ✓ `bulk_remove_email_address_bounces` (NEW)
+
+### GOVERNANCE_BUNDLE_API
+**API Class**: `GovernanceBundleApi`
+**Total Methods**: 10
+
+**Methods**:
+* ✓ `create_governance_bundle` (NEW)
+* ✓ `delete_governance_bundle` (NEW)
+* ✓ `get_governance_bundle` (NEW)
+* ✓ `get_opt_in_status` (NEW)
+* ✓ `list_bundle_entitlement_values` (NEW)
+* ✓ `list_bundle_entitlements` (NEW)
+* ✓ `list_governance_bundles` (NEW)
+* ✓ `opt_in` (NEW)
+* ✓ `opt_out` (NEW)
+* ✓ `replace_governance_bundle` (NEW)
+
+### GROUP_OWNER_API
+**API Class**: `GroupOwnerApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `assign_group_owner` (NEW)
+* ✓ `delete_group_owner` (NEW)
+* ✓ `list_group_owners` (NEW)
+
+### GROUP_PUSH_MAPPING_API
+**API Class**: `GroupPushMappingApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_group_push_mapping` (NEW)
+* ✓ `delete_group_push_mapping` (NEW)
+* ✓ `get_group_push_mapping` (NEW)
+* ✓ `list_group_push_mappings` (NEW)
+* ✓ `update_group_push_mapping` (NEW)
+
+### GROUP_RULE_API
+**API Class**: `GroupRuleApi`
+**Total Methods**: 7
+
+**Methods**:
+* ✓ `activate_group_rule` (NEW)
+* ✓ `create_group_rule` (NEW)
+* ✓ `deactivate_group_rule` (NEW)
+* ✓ `delete_group_rule` (NEW)
+* ✓ `get_group_rule` (NEW)
+* ✓ `list_group_rules` (NEW)
+* ✓ `replace_group_rule` (NEW)
+
+### IDENTITY_PROVIDER_KEYS_API
+**API Class**: `IdentityProviderKeysApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_identity_provider_key` (NEW)
+* ✓ `delete_identity_provider_key` (NEW)
+* ✓ `get_identity_provider_key` (NEW)
+* ✓ `list_identity_provider_keys` (NEW)
+* ✓ `replace_identity_provider_key` (NEW)
+
+### IDENTITY_PROVIDER_SIGNING_KEYS_API
+**API Class**: `IdentityProviderSigningKeysApi`
+**Total Methods**: 10
+
+**Methods**:
+* ✓ `clone_identity_provider_key` (NEW)
+* ✓ `generate_csr_for_identity_provider` (NEW)
+* ✓ `generate_identity_provider_signing_key` (NEW)
+* ✓ `get_csr_for_identity_provider` (NEW)
+* ✓ `get_identity_provider_signing_key` (NEW)
+* ✓ `list_active_identity_provider_signing_key` (NEW)
+* ✓ `list_csrs_for_identity_provider` (NEW)
+* ✓ `list_identity_provider_signing_keys` (NEW)
+* ✓ `publish_csr_for_identity_provider` (NEW)
+* ✓ `revoke_csr_for_identity_provider` (NEW)
+
+### IDENTITY_PROVIDER_USERS_API
+**API Class**: `IdentityProviderUsersApi`
+**Total Methods**: 6
+
+**Methods**:
+* ✓ `get_identity_provider_application_user` (NEW)
+* ✓ `link_user_to_identity_provider` (NEW)
+* ✓ `list_identity_provider_application_users` (NEW)
+* ✓ `list_social_auth_tokens` (NEW)
+* ✓ `list_user_identity_providers` (NEW)
+* ✓ `unlink_user_from_identity_provider` (NEW)
+
+### O_AUTH2_RESOURCE_SERVER_CREDENTIALS_KEYS_API
+**API Class**: `OAuth2ResourceServerCredentialsKeysApi`
+**Total Methods**: 6
+
+**Methods**:
+* ✓ `activate_o_auth2_resource_server_json_web_key` (NEW)
+* ✓ `add_o_auth2_resource_server_json_web_key` (NEW)
+* ✓ `deactivate_o_auth2_resource_server_json_web_key` (NEW)
+* ✓ `delete_o_auth2_resource_server_json_web_key` (NEW)
+* ✓ `get_o_auth2_resource_server_json_web_key` (NEW)
+* ✓ `list_o_auth2_resource_server_json_web_keys` (NEW)
+
+### OKTA_APPLICATION_SETTINGS_API
+**API Class**: `OktaApplicationSettingsApi`
+**Total Methods**: 2
+
+**Methods**:
+* ✓ `get_first_party_app_settings` (NEW)
+* ✓ `replace_first_party_app_settings` (NEW)
+
+### OKTA_PERSONAL_SETTINGS_API
+**API Class**: `OktaPersonalSettingsApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `list_personal_apps_export_block_list` (NEW)
+* ✓ `replace_blocked_email_domains` (NEW)
+* ✓ `replace_okta_personal_admin_settings` (NEW)
+
+### ORG_CREATOR_API
+**API Class**: `OrgCreatorApi`
+**Total Methods**: 1
+
+**Methods**:
+* ✓ `create_child_org` (NEW)
+
+### ORG_SETTING_ADMIN_API
+**API Class**: `OrgSettingAdminApi`
+**Total Methods**: 6
+
+**Methods**:
+* ✓ `assign_client_privileges_setting` (NEW)
+* ✓ `get_auto_assign_admin_app_setting` (NEW)
+* ✓ `get_client_privileges_setting` (NEW)
+* ✓ `get_third_party_admin_setting` (NEW)
+* ✓ `update_auto_assign_admin_app_setting` (NEW)
+* ✓ `update_third_party_admin_setting` (NEW)
+
+### ORG_SETTING_COMMUNICATION_API
+**API Class**: `OrgSettingCommunicationApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `get_okta_communication_settings` (NEW)
+* ✓ `opt_in_users_to_okta_communication_emails` (NEW)
+* ✓ `opt_out_users_from_okta_communication_emails` (NEW)
+
+### ORG_SETTING_CONTACT_API
+**API Class**: `OrgSettingContactApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `get_org_contact_user` (NEW)
+* ✓ `list_org_contact_types` (NEW)
+* ✓ `replace_org_contact_user` (NEW)
+
+### ORG_SETTING_CUSTOMIZATION_API
+**API Class**: `OrgSettingCustomizationApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `get_org_preferences` (NEW)
+* ✓ `set_org_hide_okta_ui_footer` (NEW)
+* ✓ `set_org_show_okta_ui_footer` (NEW)
+
+### ORG_SETTING_GENERAL_API
+**API Class**: `OrgSettingGeneralApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `get_org_settings` (NEW)
+* ✓ `replace_org_settings` (NEW)
+* ✓ `update_org_settings` (NEW)
+
+### ORG_SETTING_METADATA_API
+**API Class**: `OrgSettingMetadataApi`
+**Total Methods**: 1
+
+**Methods**:
+* ✓ `get_wellknown_org_metadata` (NEW)
+
+### ORG_SETTING_SUPPORT_API
+**API Class**: `OrgSettingSupportApi`
+**Total Methods**: 9
+
+**Methods**:
+* ✓ `extend_okta_support` (NEW)
+* ✓ `get_aerial_consent` (NEW)
+* ✓ `get_org_okta_support_settings` (NEW)
+* ✓ `grant_aerial_consent` (NEW)
+* ✓ `grant_okta_support` (NEW)
+* ✓ `list_okta_support_cases` (NEW)
+* ✓ `revoke_aerial_consent` (NEW)
+* ✓ `revoke_okta_support` (NEW)
+* ✓ `update_okta_support_case` (NEW)
+
+### REALM_ASSIGNMENT_API
+**API Class**: `RealmAssignmentApi`
+**Total Methods**: 9
+
+**Methods**:
+* ✓ `activate_realm_assignment` (NEW)
+* ✓ `create_realm_assignment` (NEW)
+* ✓ `deactivate_realm_assignment` (NEW)
+* ✓ `delete_realm_assignment` (NEW)
+* ✓ `execute_realm_assignment` (NEW)
+* ✓ `get_realm_assignment` (NEW)
+* ✓ `list_realm_assignment_operations` (NEW)
+* ✓ `list_realm_assignments` (NEW)
+* ✓ `replace_realm_assignment` (NEW)
+
+### ROLE_ASSIGNMENT_A_USER_API
+**API Class**: `RoleAssignmentAUserApi`
+**Total Methods**: 8
+
+**Methods**:
+* ✓ `assign_role_to_user` (NEW)
+* ✓ `get_role_assignment_governance_grant` (NEW)
+* ✓ `get_role_assignment_governance_grant_resources` (NEW)
+* ✓ `get_user_assigned_role` (NEW)
+* ✓ `get_user_assigned_role_governance` (NEW)
+* ✓ `list_assigned_roles_for_user` (NEW)
+* ✓ `list_users_with_role_assignments` (NEW)
+* ✓ `unassign_role_from_user` (NEW)
+
+### ROLE_ASSIGNMENT_B_GROUP_API
+**API Class**: `RoleAssignmentBGroupApi`
+**Total Methods**: 4
+
+**Methods**:
+* ✓ `assign_role_to_group` (NEW)
+* ✓ `get_group_assigned_role` (NEW)
+* ✓ `list_group_assigned_roles` (NEW)
+* ✓ `unassign_role_from_group` (NEW)
+
+### ROLE_ASSIGNMENT_CLIENT_API
+**API Class**: `RoleAssignmentClientApi`
+**Total Methods**: 4
+
+**Methods**:
+* ✓ `assign_role_to_client` (NEW)
+* ✓ `delete_role_from_client` (NEW)
+* ✓ `list_roles_for_client` (NEW)
+* ✓ `retrieve_client_role` (NEW)
+
+### ROLE_B_TARGET_ADMIN_API
+**API Class**: `RoleBTargetAdminApi`
+**Total Methods**: 10
+
+**Methods**:
+* ✓ `assign_all_apps_as_target_to_role_for_user` (NEW)
+* ✓ `assign_app_instance_target_to_app_admin_role_for_user` (NEW)
+* ✓ `assign_app_target_to_admin_role_for_user` (NEW)
+* ✓ `assign_group_target_to_user_role` (NEW)
+* ✓ `get_role_targets_by_user_id_and_role_id` (NEW)
+* ✓ `list_application_targets_for_application_administrator_role_for_user` (NEW)
+* ✓ `list_group_targets_for_role` (NEW)
+* ✓ `unassign_app_instance_target_from_admin_role_for_user` (NEW)
+* ✓ `unassign_app_target_from_app_admin_role_for_user` (NEW)
+* ✓ `unassign_group_target_from_user_admin_role` (NEW)
+
+### ROLE_B_TARGET_B_GROUP_API
+**API Class**: `RoleBTargetBGroupApi`
+**Total Methods**: 8
+
+**Methods**:
+* ✓ `assign_app_instance_target_to_app_admin_role_for_group` (NEW)
+* ✓ `assign_app_target_to_admin_role_for_group` (NEW)
+* ✓ `assign_group_target_to_group_admin_role` (NEW)
+* ✓ `list_application_targets_for_application_administrator_role_for_group` (NEW)
+* ✓ `list_group_targets_for_group_role` (NEW)
+* ✓ `unassign_app_instance_target_to_app_admin_role_for_group` (NEW)
+* ✓ `unassign_app_target_to_admin_role_for_group` (NEW)
+* ✓ `unassign_group_target_from_group_admin_role` (NEW)
+
+### ROLE_B_TARGET_CLIENT_API
+**API Class**: `RoleBTargetClientApi`
+**Total Methods**: 8
+
+**Methods**:
+* ✓ `assign_app_target_instance_role_for_client` (NEW)
+* ✓ `assign_app_target_role_to_client` (NEW)
+* ✓ `assign_group_target_role_for_client` (NEW)
+* ✓ `list_app_target_role_to_client` (NEW)
+* ✓ `list_group_target_role_for_client` (NEW)
+* ✓ `remove_app_target_instance_role_for_client` (NEW)
+* ✓ `remove_app_target_role_from_client` (NEW)
+* ✓ `remove_group_target_role_from_client` (NEW)
+
+### ROLE_C_RESOURCE_SET_API
+**API Class**: `RoleCResourceSetApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_resource_set` (NEW)
+* ✓ `delete_resource_set` (NEW)
+* ✓ `get_resource_set` (NEW)
+* ✓ `list_resource_sets` (NEW)
+* ✓ `replace_resource_set` (NEW)
+
+### ROLE_C_RESOURCE_SET_RESOURCE_API
+**API Class**: `RoleCResourceSetResourceApi`
+**Total Methods**: 6
+
+**Methods**:
+* ✓ `add_resource_set_resource` (NEW)
+* ✓ `add_resource_set_resources` (NEW)
+* ✓ `delete_resource_set_resource` (NEW)
+* ✓ `get_resource_set_resource` (NEW)
+* ✓ `list_resource_set_resources` (NEW)
+* ✓ `replace_resource_set_resource` (NEW)
+
+### ROLE_D_RESOURCE_SET_BINDING_API
+**API Class**: `RoleDResourceSetBindingApi`
+**Total Methods**: 4
+
+**Methods**:
+* ✓ `create_resource_set_binding` (NEW)
+* ✓ `delete_binding` (NEW)
+* ✓ `get_binding` (NEW)
+* ✓ `list_bindings` (NEW)
+
+### ROLE_D_RESOURCE_SET_BINDING_MEMBER_API
+**API Class**: `RoleDResourceSetBindingMemberApi`
+**Total Methods**: 4
+
+**Methods**:
+* ✓ `add_members_to_binding` (NEW)
+* ✓ `get_member_of_binding` (NEW)
+* ✓ `list_members_of_binding` (NEW)
+* ✓ `unassign_member_from_binding` (NEW)
+
+### ROLE_E_CUSTOM_API
+**API Class**: `RoleECustomApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_role` (NEW)
+* ✓ `delete_role` (NEW)
+* ✓ `get_role` (NEW)
+* ✓ `list_roles` (NEW)
+* ✓ `replace_role` (NEW)
+
+### ROLE_E_CUSTOM_PERMISSION_API
+**API Class**: `RoleECustomPermissionApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_role_permission` (NEW)
+* ✓ `delete_role_permission` (NEW)
+* ✓ `get_role_permission` (NEW)
+* ✓ `list_role_permissions` (NEW)
+* ✓ `replace_role_permission` (NEW)
+
+### SERVICE_ACCOUNT_API
+**API Class**: `ServiceAccountApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_app_service_account` (NEW)
+* ✓ `delete_app_service_account` (NEW)
+* ✓ `get_app_service_account` (NEW)
+* ✓ `list_app_service_accounts` (NEW)
+* ✓ `update_app_service_account` (NEW)
+
+### SSF_RECEIVER_API
+**API Class**: `SsfReceiverApi`
+**Total Methods**: 7
+
+**Methods**:
+* ✓ `activate_security_events_provider_instance` (NEW)
+* ✓ `create_security_events_provider_instance` (NEW)
+* ✓ `deactivate_security_events_provider_instance` (NEW)
+* ✓ `delete_security_events_provider_instance` (NEW)
+* ✓ `get_security_events_provider_instance` (NEW)
+* ✓ `list_security_events_provider_instances` (NEW)
+* ✓ `replace_security_events_provider_instance` (NEW)
+
+### SSF_SECURITY_EVENT_TOKEN_API
+**API Class**: `SsfSecurityEventTokenApi`
+**Total Methods**: 1
+
+**Methods**:
+* ✓ `publish_security_event_tokens` (NEW)
+
+### SSF_TRANSMITTER_API
+**API Class**: `SsfTransmitterApi`
+**Total Methods**: 8
+
+**Methods**:
+* ✓ `create_ssf_stream` (NEW)
+* ✓ `delete_ssf_stream` (NEW)
+* ✓ `get_ssf_stream_status` (NEW)
+* ✓ `get_ssf_streams` (NEW)
+* ✓ `get_wellknown_ssf_metadata` (NEW)
+* ✓ `replace_ssf_stream` (NEW)
+* ✓ `update_ssf_stream` (NEW)
+* ✓ `verify_ssf_stream` (NEW)
+
+### THEMES_API
+**API Class**: `ThemesApi`
+**Total Methods**: 9
+
+**Methods**:
+* ✓ `delete_brand_theme_background_image` (NEW)
+* ✓ `delete_brand_theme_favicon` (NEW)
+* ✓ `delete_brand_theme_logo` (NEW)
+* ✓ `get_brand_theme` (NEW)
+* ✓ `list_brand_themes` (NEW)
+* ✓ `replace_brand_theme` (NEW)
+* ✓ `upload_brand_theme_background_image` (NEW)
+* ✓ `upload_brand_theme_favicon` (NEW)
+* ✓ `upload_brand_theme_logo` (NEW)
+
+### USER_AUTHENTICATOR_ENROLLMENTS_API
+**API Class**: `UserAuthenticatorEnrollmentsApi`
+**Total Methods**: 5
+
+**Methods**:
+* ✓ `create_authenticator_enrollment` (NEW)
+* ✓ `create_tac_authenticator_enrollment` (NEW)
+* ✓ `delete_authenticator_enrollment` (NEW)
+* ✓ `get_authenticator_enrollment` (NEW)
+* ✓ `list_authenticator_enrollments` (NEW)
+
+### USER_CLASSIFICATION_API
+**API Class**: `UserClassificationApi`
+**Total Methods**: 2
+
+**Methods**:
+* ✓ `get_user_classification` (NEW)
+* ✓ `replace_user_classification` (NEW)
+
+### USER_CRED_API
+**API Class**: `UserCredApi`
+**Total Methods**: 7
+
+**Methods**:
+* ✓ `change_password` (NEW)
+* ✓ `change_recovery_question` (NEW)
+* ✓ `expire_password` (NEW)
+* ✓ `expire_password_with_temp_password` (NEW)
+* ✓ `forgot_password` (NEW)
+* ✓ `forgot_password_set_new_password` (NEW)
+* ✓ `reset_password` (NEW)
+
+### USER_GRANT_API
+**API Class**: `UserGrantApi`
+**Total Methods**: 6
+
+**Methods**:
+* ✓ `get_user_grant` (NEW)
+* ✓ `list_grants_for_user_and_client` (NEW)
+* ✓ `list_user_grants` (NEW)
+* ✓ `revoke_grants_for_user_and_client` (NEW)
+* ✓ `revoke_user_grant` (NEW)
+* ✓ `revoke_user_grants` (NEW)
+
+### USER_LIFECYCLE_API
+**API Class**: `UserLifecycleApi`
+**Total Methods**: 7
+
+**Methods**:
+* ✓ `activate_user` (NEW)
+* ✓ `deactivate_user` (NEW)
+* ✓ `reactivate_user` (NEW)
+* ✓ `reset_factors` (NEW)
+* ✓ `suspend_user` (NEW)
+* ✓ `unlock_user` (NEW)
+* ✓ `unsuspend_user` (NEW)
+
+### USER_LINKED_OBJECT_API
+**API Class**: `UserLinkedObjectApi`
+**Total Methods**: 3
+
+**Methods**:
+* ✓ `assign_linked_object_value_for_primary` (NEW)
+* ✓ `delete_linked_object_for_user` (NEW)
+* ✓ `list_linked_objects_for_user` (NEW)
+
+### USER_O_AUTH_API
+**API Class**: `UserOAuthApi`
+**Total Methods**: 4
+
+**Methods**:
+* ✓ `get_refresh_token_for_user_and_client` (NEW)
+* ✓ `list_refresh_tokens_for_user_and_client` (NEW)
+* ✓ `revoke_token_for_user_and_client` (NEW)
+* ✓ `revoke_tokens_for_user_and_client` (NEW)
+
+### USER_RESOURCES_API
+**API Class**: `UserResourcesApi`
+**Total Methods**: 4
+
+**Methods**:
+* ✓ `list_app_links` (NEW)
+* ✓ `list_user_clients` (NEW)
+* ✓ `list_user_devices` (NEW)
+* ✓ `list_user_groups` (NEW)
+
+### USER_RISK_API
+**API Class**: `UserRiskApi`
+**Total Methods**: 2
+
+**Methods**:
+* ✓ `get_user_risk` (NEW)
+* ✓ `upsert_user_risk` (NEW)
+
+### USER_SESSIONS_API
+**API Class**: `UserSessionsApi`
+**Total Methods**: 1
+
+**Methods**:
+* ✓ `revoke_user_sessions` (NEW)
+
+### WEB_AUTHN_PREREGISTRATION_API
+**API Class**: `WebAuthnPreregistrationApi`
+**Total Methods**: 7
+
+**Methods**:
+* ✓ `activate_preregistration_enrollment` (NEW)
+* ✓ `assign_fulfillment_error_web_authn_preregistration_factor` (NEW)
+* ✓ `delete_web_authn_preregistration_factor` (NEW)
+* ✓ `enroll_preregistration_enrollment` (NEW)
+* ✓ `generate_fulfillment_request` (NEW)
+* ✓ `list_web_authn_preregistration_factors` (NEW)
+* ✓ `send_pin` (NEW)
+
+## REMOVED API FILES
+
+### APPLICATION_CREDENTIALS_API
+**API Class**: `ApplicationCredentialsApi`
+**Total Methods Removed**: 9
+
+**Removed Methods**:
+* ✗ `clone_application_key` (REMOVED)
+* ✗ `generate_application_key` (REMOVED)
+* ✗ `generate_csr_for_application` (REMOVED)
+* ✗ `get_application_key` (REMOVED)
+* ✗ `get_csr_for_application` (REMOVED)
+* ✗ `list_application_keys` (REMOVED)
+* ✗ `list_csrs_for_application` (REMOVED)
+* ✗ `publish_csr_from_application` (REMOVED)
+* ✗ `revoke_csr_from_application` (REMOVED)
+
+### CUSTOMIZATION_API
+**API Class**: `CustomizationApi`
+**Total Methods Removed**: 48
+
+**Removed Methods**:
+* ✗ `create_brand` (REMOVED)
+* ✗ `create_email_customization` (REMOVED)
+* ✗ `delete_all_customizations` (REMOVED)
+* ✗ `delete_brand` (REMOVED)
+* ✗ `delete_brand_theme_background_image` (REMOVED)
+* ✗ `delete_brand_theme_favicon` (REMOVED)
+* ✗ `delete_brand_theme_logo` (REMOVED)
+* ✗ `delete_customized_error_page` (REMOVED)
+* ✗ `delete_customized_sign_in_page` (REMOVED)
+* ✗ `delete_email_customization` (REMOVED)
+* ✗ `delete_preview_error_page` (REMOVED)
+* ✗ `delete_preview_sign_in_page` (REMOVED)
+* ✗ `get_brand` (REMOVED)
+* ✗ `get_brand_theme` (REMOVED)
+* ✗ `get_customization_preview` (REMOVED)
+* ✗ `get_customized_error_page` (REMOVED)
+* ✗ `get_customized_sign_in_page` (REMOVED)
+* ✗ `get_default_error_page` (REMOVED)
+* ✗ `get_default_sign_in_page` (REMOVED)
+* ✗ `get_email_customization` (REMOVED)
+* ✗ `get_email_default_content` (REMOVED)
+* ✗ `get_email_default_preview` (REMOVED)
+* ✗ `get_email_settings` (REMOVED)
+* ✗ `get_email_template` (REMOVED)
+* ✗ `get_error_page` (REMOVED)
+* ✗ `get_preview_error_page` (REMOVED)
+* ✗ `get_preview_sign_in_page` (REMOVED)
+* ✗ `get_sign_in_page` (REMOVED)
+* ✗ `get_sign_out_page_settings` (REMOVED)
+* ✗ `list_all_sign_in_widget_versions` (REMOVED)
+* ✗ `list_brand_domains` (REMOVED)
+* ✗ `list_brand_themes` (REMOVED)
+* ✗ `list_brands` (REMOVED)
+* ✗ `list_email_customizations` (REMOVED)
+* ✗ `list_email_templates` (REMOVED)
+* ✗ `replace_brand` (REMOVED)
+* ✗ `replace_brand_theme` (REMOVED)
+* ✗ `replace_customized_error_page` (REMOVED)
+* ✗ `replace_customized_sign_in_page` (REMOVED)
+* ✗ `replace_email_customization` (REMOVED)
+* ✗ `replace_email_settings` (REMOVED)
+* ✗ `replace_preview_error_page` (REMOVED)
+* ✗ `replace_preview_sign_in_page` (REMOVED)
+* ✗ `replace_sign_out_page_settings` (REMOVED)
+* ✗ `send_test_email` (REMOVED)
+* ✗ `upload_brand_theme_background_image` (REMOVED)
+* ✗ `upload_brand_theme_favicon` (REMOVED)
+* ✗ `upload_brand_theme_logo` (REMOVED)
+
+### ORG_SETTING_API
+**API Class**: `OrgSettingApi`
+**Total Methods Removed**: 19
+
+**Removed Methods**:
+* ✗ `bulk_remove_email_address_bounces` (REMOVED)
+* ✗ `extend_okta_support` (REMOVED)
+* ✗ `get_okta_communication_settings` (REMOVED)
+* ✗ `get_org_contact_types` (REMOVED)
+* ✗ `get_org_contact_user` (REMOVED)
+* ✗ `get_org_okta_support_settings` (REMOVED)
+* ✗ `get_org_preferences` (REMOVED)
+* ✗ `get_org_settings` (REMOVED)
+* ✗ `get_wellknown_org_metadata` (REMOVED)
+* ✗ `grant_okta_support` (REMOVED)
+* ✗ `opt_in_users_to_okta_communication_emails` (REMOVED)
+* ✗ `opt_out_users_from_okta_communication_emails` (REMOVED)
+* ✗ `replace_org_contact_user` (REMOVED)
+* ✗ `replace_org_settings` (REMOVED)
+* ✗ `revoke_okta_support` (REMOVED)
+* ✗ `update_org_hide_okta_ui_footer` (REMOVED)
+* ✗ `update_org_settings` (REMOVED)
+* ✗ `update_org_show_okta_ui_footer` (REMOVED)
+* ✗ `upload_org_logo` (REMOVED)
+
+### RESOURCE_SET_API
+**API Class**: `ResourceSetApi`
+**Total Methods Removed**: 16
+
+**Removed Methods**:
+* ✗ `add_members_to_binding` (REMOVED)
+* ✗ `add_resource_set_resource` (REMOVED)
+* ✗ `create_resource_set` (REMOVED)
+* ✗ `create_resource_set_binding` (REMOVED)
+* ✗ `delete_binding` (REMOVED)
+* ✗ `delete_resource_set` (REMOVED)
+* ✗ `delete_resource_set_resource` (REMOVED)
+* ✗ `get_binding` (REMOVED)
+* ✗ `get_member_of_binding` (REMOVED)
+* ✗ `get_resource_set` (REMOVED)
+* ✗ `list_bindings` (REMOVED)
+* ✗ `list_members_of_binding` (REMOVED)
+* ✗ `list_resource_set_resources` (REMOVED)
+* ✗ `list_resource_sets` (REMOVED)
+* ✗ `replace_resource_set` (REMOVED)
+* ✗ `unassign_member_from_binding` (REMOVED)
+
+### RISK_EVENT_API
+**API Class**: `RiskEventApi`
+**Total Methods Removed**: 1
+
+**Removed Methods**:
+* ✗ `send_risk_events` (REMOVED)
+
+### RISK_PROVIDER_API
+**API Class**: `RiskProviderApi`
+**Total Methods Removed**: 5
+
+**Removed Methods**:
+* ✗ `create_risk_provider` (REMOVED)
+* ✗ `delete_risk_provider` (REMOVED)
+* ✗ `get_risk_provider` (REMOVED)
+* ✗ `list_risk_providers` (REMOVED)
+* ✗ `replace_risk_provider` (REMOVED)
+
+### ROLE_API
+**API Class**: `RoleApi`
+**Total Methods Removed**: 10
+
+**Removed Methods**:
+* ✗ `create_role` (REMOVED)
+* ✗ `create_role_permission` (REMOVED)
+* ✗ `delete_role` (REMOVED)
+* ✗ `delete_role_permission` (REMOVED)
+* ✗ `get_role` (REMOVED)
+* ✗ `get_role_permission` (REMOVED)
+* ✗ `list_role_permissions` (REMOVED)
+* ✗ `list_roles` (REMOVED)
+* ✗ `replace_role` (REMOVED)
+* ✗ `replace_role_permission` (REMOVED)
+
+### ROLE_ASSIGNMENT_API
+**API Class**: `RoleAssignmentApi`
+**Total Methods Removed**: 9
+
+**Removed Methods**:
+* ✗ `assign_role_to_group` (REMOVED)
+* ✗ `assign_role_to_user` (REMOVED)
+* ✗ `get_group_assigned_role` (REMOVED)
+* ✗ `get_user_assigned_role` (REMOVED)
+* ✗ `list_assigned_roles_for_user` (REMOVED)
+* ✗ `list_group_assigned_roles` (REMOVED)
+* ✗ `list_users_with_role_assignments` (REMOVED)
+* ✗ `unassign_role_from_group` (REMOVED)
+* ✗ `unassign_role_from_user` (REMOVED)
+
+### ROLE_TARGET_API
+**API Class**: `RoleTargetApi`
+**Total Methods Removed**: 17
+
+**Removed Methods**:
+* ✗ `assign_all_apps_as_target_to_role_for_user` (REMOVED)
+* ✗ `assign_app_instance_target_to_app_admin_role_for_group` (REMOVED)
+* ✗ `assign_app_instance_target_to_app_admin_role_for_user` (REMOVED)
+* ✗ `assign_app_target_to_admin_role_for_group` (REMOVED)
+* ✗ `assign_app_target_to_admin_role_for_user` (REMOVED)
+* ✗ `assign_group_target_to_group_admin_role` (REMOVED)
+* ✗ `assign_group_target_to_user_role` (REMOVED)
+* ✗ `list_application_targets_for_application_administrator_role_for_group` (REMOVED)
+* ✗ `list_application_targets_for_application_administrator_role_for_user` (REMOVED)
+* ✗ `list_group_targets_for_group_role` (REMOVED)
+* ✗ `list_group_targets_for_role` (REMOVED)
+* ✗ `unassign_app_instance_target_from_admin_role_for_user` (REMOVED)
+* ✗ `unassign_app_instance_target_to_app_admin_role_for_group` (REMOVED)
+* ✗ `unassign_app_target_from_app_admin_role_for_user` (REMOVED)
+* ✗ `unassign_app_target_to_admin_role_for_group` (REMOVED)
+* ✗ `unassign_group_target_from_group_admin_role` (REMOVED)
+* ✗ `unassign_group_target_from_user_admin_role` (REMOVED)
+
+## MODIFIED API FILES
+
+### API_TOKEN_API
+**API Class**: `ApiTokenApi`
+**Added Methods**: 1
+**Removed Methods**: 0
+**Unchanged Methods**: 4
+
+**New Methods**:
+* ✓ `upsert_api_token` (NEW)
+
+### APPLICATION_CONNECTIONS_API
+**API Class**: `ApplicationConnectionsApi`
+**Added Methods**: 2
+**Removed Methods**: 0
+**Unchanged Methods**: 4
+
+**New Methods**:
+* ✓ `get_user_provisioning_connection_jwks` (NEW)
+* ✓ `verify_provisioning_connection_for_application` (NEW)
+
+### APPLICATION_GROUPS_API
+**API Class**: `ApplicationGroupsApi`
+**Added Methods**: 1
+**Removed Methods**: 0
+**Unchanged Methods**: 4
+
+**New Methods**:
+* ✓ `update_group_assignment_to_application` (NEW)
+
+### ATTACK_PROTECTION_API
+**API Class**: `AttackProtectionApi`
+**Added Methods**: 2
+**Removed Methods**: 0
+**Unchanged Methods**: 2
+
+**New Methods**:
+* ✓ `get_authenticator_settings` (NEW)
+* ✓ `replace_authenticator_settings` (NEW)
+
+### AUTHENTICATOR_API
+**API Class**: `AuthenticatorApi`
+**Added Methods**: 7
+**Removed Methods**: 0
+**Unchanged Methods**: 12
+
+**New Methods**:
+* ✓ `create_custom_aaguid` (NEW)
+* ✓ `delete_custom_aaguid` (NEW)
+* ✓ `get_custom_aaguid` (NEW)
+* ✓ `list_all_custom_aaguids` (NEW)
+* ✓ `replace_custom_aaguid` (NEW)
+* ✓ `update_custom_aaguid` (NEW)
+* ✓ `verify_rp_id_domain` (NEW)
+
+### AUTHORIZATION_SERVER_API
+**API Class**: `AuthorizationServerApi`
+**Added Methods**: 0
+**Removed Methods**: 34
+**Unchanged Methods**: 7
+
+**Removed Methods**:
+* ✗ `activate_authorization_server_policy` (REMOVED)
+* ✗ `activate_authorization_server_policy_rule` (REMOVED)
+* ✗ `create_associated_servers` (REMOVED)
+* ✗ `create_authorization_server_policy` (REMOVED)
+* ✗ `create_authorization_server_policy_rule` (REMOVED)
+* ✗ `create_o_auth2_claim` (REMOVED)
+* ✗ `create_o_auth2_scope` (REMOVED)
+* ✗ `deactivate_authorization_server_policy` (REMOVED)
+* ✗ `deactivate_authorization_server_policy_rule` (REMOVED)
+* ✗ `delete_associated_server` (REMOVED)
+* ✗ `delete_authorization_server_policy` (REMOVED)
+* ✗ `delete_authorization_server_policy_rule` (REMOVED)
+* ✗ `delete_o_auth2_claim` (REMOVED)
+* ✗ `delete_o_auth2_scope` (REMOVED)
+* ✗ `get_authorization_server_policy` (REMOVED)
+* ✗ `get_authorization_server_policy_rule` (REMOVED)
+* ✗ `get_o_auth2_claim` (REMOVED)
+* ✗ `get_o_auth2_scope` (REMOVED)
+* ✗ `get_refresh_token_for_authorization_server_and_client` (REMOVED)
+* ✗ `list_associated_servers_by_trusted_type` (REMOVED)
+* ✗ `list_authorization_server_keys` (REMOVED)
+* ✗ `list_authorization_server_policies` (REMOVED)
+* ✗ `list_authorization_server_policy_rules` (REMOVED)
+* ✗ `list_o_auth2_claims` (REMOVED)
+* ✗ `list_o_auth2_clients_for_authorization_server` (REMOVED)
+* ✗ `list_o_auth2_scopes` (REMOVED)
+* ✗ `list_refresh_tokens_for_authorization_server_and_client` (REMOVED)
+* ✗ `replace_authorization_server_policy` (REMOVED)
+* ✗ `replace_authorization_server_policy_rule` (REMOVED)
+* ✗ `replace_o_auth2_claim` (REMOVED)
+* ✗ `replace_o_auth2_scope` (REMOVED)
+* ✗ `revoke_refresh_token_for_authorization_server_and_client` (REMOVED)
+* ✗ `revoke_refresh_tokens_for_authorization_server_and_client` (REMOVED)
+* ✗ `rotate_authorization_server_keys` (REMOVED)
+
+### CUSTOM_DOMAIN_API
+**API Class**: `CustomDomainApi`
+**Added Methods**: 1
+**Removed Methods**: 0
+**Unchanged Methods**: 6
+
+**New Methods**:
+* ✓ `create_custom_domain` (NEW)
+
+### GROUP_API
+**API Class**: `GroupApi`
+**Added Methods**: 1
+**Removed Methods**: 11
+**Unchanged Methods**: 8
+
+**New Methods**:
+* ✓ `add_group` (NEW)
+
+**Removed Methods**:
+* ✗ `activate_group_rule` (REMOVED)
+* ✗ `assign_group_owner` (REMOVED)
+* ✗ `create_group` (REMOVED)
+* ✗ `create_group_rule` (REMOVED)
+* ✗ `deactivate_group_rule` (REMOVED)
+* ✗ `delete_group_owner` (REMOVED)
+* ✗ `delete_group_rule` (REMOVED)
+* ✗ `get_group_rule` (REMOVED)
+* ✗ `list_group_owners` (REMOVED)
+* ✗ `list_group_rules` (REMOVED)
+* ✗ `replace_group_rule` (REMOVED)
+
+### IDENTITY_PROVIDER_API
+**API Class**: `IdentityProviderApi`
+**Added Methods**: 0
+**Removed Methods**: 18
+**Unchanged Methods**: 7
+
+**Removed Methods**:
+* ✗ `clone_identity_provider_key` (REMOVED)
+* ✗ `create_identity_provider_key` (REMOVED)
+* ✗ `delete_identity_provider_key` (REMOVED)
+* ✗ `generate_csr_for_identity_provider` (REMOVED)
+* ✗ `generate_identity_provider_signing_key` (REMOVED)
+* ✗ `get_csr_for_identity_provider` (REMOVED)
+* ✗ `get_identity_provider_application_user` (REMOVED)
+* ✗ `get_identity_provider_key` (REMOVED)
+* ✗ `get_identity_provider_signing_key` (REMOVED)
+* ✗ `link_user_to_identity_provider` (REMOVED)
+* ✗ `list_csrs_for_identity_provider` (REMOVED)
+* ✗ `list_identity_provider_application_users` (REMOVED)
+* ✗ `list_identity_provider_keys` (REMOVED)
+* ✗ `list_identity_provider_signing_keys` (REMOVED)
+* ✗ `list_social_auth_tokens` (REMOVED)
+* ✗ `publish_csr_for_identity_provider` (REMOVED)
+* ✗ `revoke_csr_for_identity_provider` (REMOVED)
+* ✗ `unlink_user_from_identity_provider` (REMOVED)
+
+### IDENTITY_SOURCE_API
+**API Class**: `IdentitySourceApi`
+**Added Methods**: 9
+**Removed Methods**: 0
+**Unchanged Methods**: 7
+
+**New Methods**:
+* ✓ `create_identity_source_user` (NEW)
+* ✓ `delete_identity_source_user` (NEW)
+* ✓ `get_identity_source_user` (NEW)
+* ✓ `replace_existing_identity_source_user` (NEW)
+* ✓ `update_identity_source_users` (NEW)
+* ✓ `upload_identity_source_group_memberships_for_delete` (NEW)
+* ✓ `upload_identity_source_group_memberships_for_upsert` (NEW)
+* ✓ `upload_identity_source_groups_data_for_delete` (NEW)
+* ✓ `upload_identity_source_groups_for_upsert` (NEW)
+
+### INLINE_HOOK_API
+**API Class**: `InlineHookApi`
+**Added Methods**: 1
+**Removed Methods**: 0
+**Unchanged Methods**: 8
+
+**New Methods**:
+* ✓ `update_inline_hook` (NEW)
+
+### REALM_API
+**API Class**: `RealmApi`
+**Added Methods**: 1
+**Removed Methods**: 1
+**Unchanged Methods**: 4
+
+**New Methods**:
+* ✓ `replace_realm` (NEW)
+
+**Removed Methods**:
+* ✗ `update_realm` (REMOVED)
+
+### SCHEMA_API
+**API Class**: `SchemaApi`
+**Added Methods**: 0
+**Removed Methods**: 2
+**Unchanged Methods**: 8
+
+**Removed Methods**:
+* ✗ `get_app_ui_schema` (REMOVED)
+* ✗ `get_app_ui_schema_links` (REMOVED)
+
+### SESSION_API
+**API Class**: `SessionApi`
+**Added Methods**: 0
+**Removed Methods**: 1
+**Unchanged Methods**: 3
+
+**Removed Methods**:
+* ✗ `create_session` (REMOVED)
+
+### USER_API
+**API Class**: `UserApi`
+**Added Methods**: 0
+**Removed Methods**: 32
+**Unchanged Methods**: 7
+
+**Removed Methods**:
+* ✗ `activate_user` (REMOVED)
+* ✗ `change_password` (REMOVED)
+* ✗ `change_recovery_question` (REMOVED)
+* ✗ `deactivate_user` (REMOVED)
+* ✗ `delete_linked_object_for_user` (REMOVED)
+* ✗ `expire_password` (REMOVED)
+* ✗ `expire_password_and_get_temporary_password` (REMOVED)
+* ✗ `forgot_password` (REMOVED)
+* ✗ `forgot_password_set_new_password` (REMOVED)
+* ✗ `generate_reset_password_token` (REMOVED)
+* ✗ `get_refresh_token_for_user_and_client` (REMOVED)
+* ✗ `get_user_grant` (REMOVED)
+* ✗ `list_app_links` (REMOVED)
+* ✗ `list_grants_for_user_and_client` (REMOVED)
+* ✗ `list_linked_objects_for_user` (REMOVED)
+* ✗ `list_refresh_tokens_for_user_and_client` (REMOVED)
+* ✗ `list_user_clients` (REMOVED)
+* ✗ `list_user_grants` (REMOVED)
+* ✗ `list_user_groups` (REMOVED)
+* ✗ `list_user_identity_providers` (REMOVED)
+* ✗ `reactivate_user` (REMOVED)
+* ✗ `reset_factors` (REMOVED)
+* ✗ `revoke_grants_for_user_and_client` (REMOVED)
+* ✗ `revoke_token_for_user_and_client` (REMOVED)
+* ✗ `revoke_tokens_for_user_and_client` (REMOVED)
+* ✗ `revoke_user_grant` (REMOVED)
+* ✗ `revoke_user_grants` (REMOVED)
+* ✗ `revoke_user_sessions` (REMOVED)
+* ✗ `set_linked_object_for_user` (REMOVED)
+* ✗ `suspend_user` (REMOVED)
+* ✗ `unlock_user` (REMOVED)
+* ✗ `unsuspend_user` (REMOVED)
+
+### USER_FACTOR_API
+**API Class**: `UserFactorApi`
+**Added Methods**: 3
+**Removed Methods**: 0
+**Unchanged Methods**: 10
+
+**New Methods**:
+* ✓ `get_yubikey_otp_token_by_id` (NEW)
+* ✓ `list_yubikey_otp_tokens` (NEW)
+* ✓ `upload_yubikey_otp_token_seed` (NEW)
+
 # 3.0.0
 
 ## OKTA SDK PYTHON COMPREHENSIVE API MIGRATION REPORT
@@ -8,7 +1254,7 @@
 
 This summary documents ALL METHOD CHANGES across the complete set of 350 operations
 between the older `resource_clients` directory and the newer `api` directory in the
-Okta Python SDK. 
+Okta Python SDK.
 
 ## COMPLETE METHOD MIGRATION MAPPING
 
@@ -671,7 +1917,7 @@ Okta Python SDK.
 - `reactivate_user`: Reactivates a user (can only be performed on users with PROVISIONED status)
 - `reset_factors`: Resets all factors for the specified user
 
-### 28. `AUTHORIZATION_SERVER_CLIENT.PY` 
+### 28. `AUTHORIZATION_SERVER_CLIENT.PY`
 **FROM**: `authorization_server_client.py` (Additional methods not previously documented)
 **TO**: `authorization_server_api.py`
 
@@ -780,7 +2026,7 @@ Okta Python SDK.
 * Clear access token from cache on call to OAuth.clear_access_token()
 
 ## 2.9.4
-* Add optional parameter to api_response.next() to include response object as a third tuple value. 
+* Add optional parameter to api_response.next() to include response object as a third tuple value.
 
 ## 2.9.3
 * Add missing properties to applicationsettingsapplication per the reference docs: https://developer.okta.com/docs/reference/api/apps/#settings-4

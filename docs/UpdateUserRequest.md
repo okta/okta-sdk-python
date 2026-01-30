@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**UserCredentials**](UserCredentials.md) |  | [optional] 
 **profile** | [**UserProfile**](UserProfile.md) |  | [optional] 
-**realm_id** | **str** | The ID of the realm in which the user is residing | [optional] 
+**realm_id** | **str** | The ID of the realm in which the user is residing. See [Realms](/openapi/okta-management/management/tag/Realm/). | [optional] 
+**type** | [**UpdateUserRequestType**](UpdateUserRequestType.md) |  | [optional] 
 
 ## Example
 

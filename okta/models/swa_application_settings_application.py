@@ -37,37 +37,73 @@ class SwaApplicationSettingsApplication(BaseModel):
     SwaApplicationSettingsApplication
     """  # noqa: E501
 
-    button_field: Optional[StrictStr] = Field(default=None, alias="buttonField")
-    button_selector: Optional[StrictStr] = Field(default=None, alias="buttonSelector")
-    checkbox: Optional[StrictStr] = None
+    button_field: StrictStr = Field(
+        description="CSS selector for the **Sign-In** button in the sign-in form (for SWA apps with the `template_swa` app "
+        "name definition)",
+        alias="buttonField",
+    )
+    button_selector: Optional[StrictStr] = Field(
+        default=None,
+        description="CSS selector for the **Sign-In**  button in the sign-in form (for three-field SWA apps with the "
+        "`template_swa3field` app name definition)",
+        alias="buttonSelector",
+    )
     extra_field_selector: Optional[StrictStr] = Field(
-        default=None, alias="extraFieldSelector"
+        default=None,
+        description="Enter the CSS selector for the extra field (for three-field SWA apps with the `template_swa3field` app "
+        "name definition).",
+        alias="extraFieldSelector",
     )
     extra_field_value: Optional[StrictStr] = Field(
-        default=None, alias="extraFieldValue"
+        default=None,
+        description="Enter the value for the extra field in the form (for three-field SWA apps with the `template_swa3field` "
+        "app name definition).",
+        alias="extraFieldValue",
     )
-    login_url_regex: Optional[StrictStr] = Field(default=None, alias="loginUrlRegex")
-    password_field: Optional[StrictStr] = Field(default=None, alias="passwordField")
+    login_url_regex: Optional[StrictStr] = Field(
+        default=None,
+        description="A regular expression that further restricts targetURL to the specified regular expression",
+        alias="loginUrlRegex",
+    )
+    password_field: StrictStr = Field(
+        description="CSS selector for the **Password** field in the sign-in form (for SWA apps with the `template_swa` app "
+        "name definition)",
+        alias="passwordField",
+    )
     password_selector: Optional[StrictStr] = Field(
-        default=None, alias="passwordSelector"
+        default=None,
+        description="CSS selector for the **Password** field in the sign-in form (for three-field SWA apps with the "
+        "`template_swa3field` app name definition)",
+        alias="passwordSelector",
     )
-    redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
-    target_url: Optional[StrictStr] = Field(default=None, alias="targetURL")
-    url: Optional[StrictStr] = None
-    username_field: Optional[StrictStr] = Field(default=None, alias="usernameField")
+    target_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL of the sign-in page for this app (for three-field SWA apps with the `template_swa3field` app "
+        "name definition)",
+        alias="targetURL",
+    )
+    url: StrictStr = Field(
+        description="The URL of the sign-in page for this app (for SWA apps with the `template_swa` app name definition)"
+    )
+    username_field: StrictStr = Field(
+        description="CSS selector for the **Username** field in the sign-in form (for SWA apps with the `template_swa` app "
+        "name definition)",
+        alias="usernameField",
+    )
     user_name_selector: Optional[StrictStr] = Field(
-        default=None, alias="userNameSelector"
+        default=None,
+        description="CSS selector for the **Username** field in the sign-in form (for three-field SWA apps with the "
+        "`template_swa3field` app name definition)",
+        alias="userNameSelector",
     )
     __properties: ClassVar[List[str]] = [
         "buttonField",
         "buttonSelector",
-        "checkbox",
         "extraFieldSelector",
         "extraFieldValue",
         "loginUrlRegex",
         "passwordField",
         "passwordSelector",
-        "redirectUrl",
         "targetURL",
         "url",
         "usernameField",
@@ -126,13 +162,11 @@ class SwaApplicationSettingsApplication(BaseModel):
             {
                 "buttonField": obj.get("buttonField"),
                 "buttonSelector": obj.get("buttonSelector"),
-                "checkbox": obj.get("checkbox"),
                 "extraFieldSelector": obj.get("extraFieldSelector"),
                 "extraFieldValue": obj.get("extraFieldValue"),
                 "loginUrlRegex": obj.get("loginUrlRegex"),
                 "passwordField": obj.get("passwordField"),
                 "passwordSelector": obj.get("passwordSelector"),
-                "redirectUrl": obj.get("redirectUrl"),
                 "targetURL": obj.get("targetURL"),
                 "url": obj.get("url"),
                 "usernameField": obj.get("usernameField"),

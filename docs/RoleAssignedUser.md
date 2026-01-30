@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] [readonly] 
-**orn** | **str** |  | [optional] [readonly] 
+**id** | **str** | The ID of the user | [optional] [readonly] 
+**orn** | **str** | ORN representing the assignee | [optional] [readonly] 
 **links** | [**LinksSelfAndRoles**](LinksSelfAndRoles.md) |  | [optional] 
 
 ## Example

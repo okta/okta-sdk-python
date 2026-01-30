@@ -34,13 +34,31 @@ from typing_extensions import Self
 
 class PasswordPolicyPasswordSettingsAge(BaseModel):
     """
-    PasswordPolicyPasswordSettingsAge
+    Age settings
     """  # noqa: E501
 
-    expire_warn_days: Optional[StrictInt] = Field(default=None, alias="expireWarnDays")
-    history_count: Optional[StrictInt] = Field(default=None, alias="historyCount")
-    max_age_days: Optional[StrictInt] = Field(default=None, alias="maxAgeDays")
-    min_age_minutes: Optional[StrictInt] = Field(default=None, alias="minAgeMinutes")
+    expire_warn_days: Optional[StrictInt] = Field(
+        default=0,
+        description="Specifies the number of days prior to password expiration when a User is warned to reset their "
+        "password: `0` indicates no warning",
+        alias="expireWarnDays",
+    )
+    history_count: Optional[StrictInt] = Field(
+        default=0,
+        description="Specifies the number of distinct passwords that a User must create before they can reuse a previous "
+        "password: `0` indicates none",
+        alias="historyCount",
+    )
+    max_age_days: Optional[StrictInt] = Field(
+        default=0,
+        description="Specifies how long (in days) a password remains valid before it expires: `0` indicates no limit",
+        alias="maxAgeDays",
+    )
+    min_age_minutes: Optional[StrictInt] = Field(
+        default=0,
+        description="Specifies the minimum time interval (in minutes) between password changes: `0` indicates no limit",
+        alias="minAgeMinutes",
+    )
     __properties: ClassVar[List[str]] = [
         "expireWarnDays",
         "historyCount",
@@ -98,10 +116,24 @@ class PasswordPolicyPasswordSettingsAge(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "expireWarnDays": obj.get("expireWarnDays"),
-                "historyCount": obj.get("historyCount"),
-                "maxAgeDays": obj.get("maxAgeDays"),
-                "minAgeMinutes": obj.get("minAgeMinutes"),
+                "expireWarnDays": (
+                    obj.get("expireWarnDays")
+                    if obj.get("expireWarnDays") is not None
+                    else 0
+                ),
+                "historyCount": (
+                    obj.get("historyCount")
+                    if obj.get("historyCount") is not None
+                    else 0
+                ),
+                "maxAgeDays": (
+                    obj.get("maxAgeDays") if obj.get("maxAgeDays") is not None else 0
+                ),
+                "minAgeMinutes": (
+                    obj.get("minAgeMinutes")
+                    if obj.get("minAgeMinutes") is not None
+                    else 0
+                ),
             }
         )
         return _obj

@@ -30,17 +30,26 @@ from typing_extensions import Self
 
 class PolicyType(str, Enum):
     """
-    PolicyType
+    All Okta orgs contain only one IdP discovery policy with an immutable default rule routing to your org's sign-in page,
+    one entity risk policy, and one session protection policy. Creating or replacing a policy with the `IDP_DISCOVERY` type,
+    the `ENTITY_RISK` type, or the `POST_AUTH_SESSION` type isn't supported. The following policy types are available with
+    Identity Engine: `ACCESS_POLICY`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION`, <x-lifecycle class=\"ea\"></x-lifecycle>
+    `DEVICE_SIGNAL_COLLECTION`, `ENTITY_RISK`.
     """
 
     """
     allowed enum values
     """
+    LESS_THAN_X_MINUS_LIFECYCLE_CLASS_EQUAL_BACK_SLASH_DOUBLE_QUOTE_EA_BACK_SLASH_DOUBLE_QUOTE_GREATER_THAN_LESS_THAN_SLASH_X_MINUS_LIFECYCLE_GREATER_THAN__DEVICE_SIGNAL_COLLECTION = (  # noqa: E501
+        '<x-lifecycle class="ea"></x-lifecycle> DEVICE_SIGNAL_COLLECTION'
+    )
     ACCESS_POLICY = "ACCESS_POLICY"
+    ENTITY_RISK = "ENTITY_RISK"
     IDP_DISCOVERY = "IDP_DISCOVERY"
     MFA_ENROLL = "MFA_ENROLL"
     OKTA_SIGN_ON = "OKTA_SIGN_ON"
     PASSWORD = "PASSWORD"
+    POST_AUTH_SESSION = "POST_AUTH_SESSION"
     PROFILE_ENROLLMENT = "PROFILE_ENROLLMENT"
 
     @classmethod

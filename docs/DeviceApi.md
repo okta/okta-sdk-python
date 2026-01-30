@@ -4,12 +4,12 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activate_device**](DeviceApi.md#activate_device) | **POST** /api/v1/devices/{deviceId}/lifecycle/activate | Activate a Device
-[**deactivate_device**](DeviceApi.md#deactivate_device) | **POST** /api/v1/devices/{deviceId}/lifecycle/deactivate | Deactivate a Device
-[**delete_device**](DeviceApi.md#delete_device) | **DELETE** /api/v1/devices/{deviceId} | Delete a Device
-[**get_device**](DeviceApi.md#get_device) | **GET** /api/v1/devices/{deviceId} | Retrieve a Device
-[**list_device_users**](DeviceApi.md#list_device_users) | **GET** /api/v1/devices/{deviceId}/users | List all Users for a Device
-[**list_devices**](DeviceApi.md#list_devices) | **GET** /api/v1/devices | List all Devices
+[**activate_device**](DeviceApi.md#activate_device) | **POST** /api/v1/devices/{deviceId}/lifecycle/activate | Activate a device
+[**deactivate_device**](DeviceApi.md#deactivate_device) | **POST** /api/v1/devices/{deviceId}/lifecycle/deactivate | Deactivate a device
+[**delete_device**](DeviceApi.md#delete_device) | **DELETE** /api/v1/devices/{deviceId} | Delete a device
+[**get_device**](DeviceApi.md#get_device) | **GET** /api/v1/devices/{deviceId} | Retrieve a device
+[**list_device_users**](DeviceApi.md#list_device_users) | **GET** /api/v1/devices/{deviceId}/users | List all users for a device
+[**list_devices**](DeviceApi.md#list_devices) | **GET** /api/v1/devices | List all devices
 [**suspend_device**](DeviceApi.md#suspend_device) | **POST** /api/v1/devices/{deviceId}/lifecycle/suspend | Suspend a Device
 [**unsuspend_device**](DeviceApi.md#unsuspend_device) | **POST** /api/v1/devices/{deviceId}/lifecycle/unsuspend | Unsuspend a Device
 
@@ -17,9 +17,9 @@ Method | HTTP request | Description
 # **activate_device**
 > activate_device(device_id)
 
-Activate a Device
+Activate a device
 
-Activates a Device by setting its status to ACTIVE by `deviceId`. Activated devices are used to create and delete Device user links.
+Activates a device by setting its status to `ACTIVE` by `deviceId`. Activated devices are used to create and delete device user links.
 
 ### Example
 
@@ -57,7 +57,7 @@ with okta.ApiClient(configuration) as api_client:
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
-        # Activate a Device
+        # Activate a device
         api_instance.activate_device(device_id)
     except Exception as e:
         print("Exception when calling DeviceApi->activate_device: %s\n" % e)
@@ -99,9 +99,9 @@ void (empty response body)
 # **deactivate_device**
 > deactivate_device(device_id)
 
-Deactivate a Device
+Deactivate a device
 
-Deactivates a Device by setting its status to DEACTIVATED by `deviceId`. Deactivation causes a Device to lose all device user links. Set the Device status to DEACTIVATED before deleting it. > **Note:** When deactivating a Device, keep in mind the following:   - Device deactivation is a destructive operation for device factors and client certificates. Device reenrollment using Okta Verify allows end users to set up new factors on the device.   - Device deletion removes the device record from Okta. Reenrollment creates a new device record.
+Deactivates a device by setting its status to `DEACTIVATED` by `deviceId`. Deactivation causes a device to lose all device user links. Set the device status to `DEACTIVATED` before deleting it. > **Note:** When deactivating a Device, keep in mind the following:   - Device deactivation is a destructive operation for device factors and client certificates. Device reenrollment using Okta Verify allows end users to set up new factors on the device.   - Device deletion removes the device record from Okta. Reenrollment creates a new device record.
 
 ### Example
 
@@ -139,7 +139,7 @@ with okta.ApiClient(configuration) as api_client:
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
-        # Deactivate a Device
+        # Deactivate a device
         api_instance.deactivate_device(device_id)
     except Exception as e:
         print("Exception when calling DeviceApi->deactivate_device: %s\n" % e)
@@ -181,9 +181,9 @@ void (empty response body)
 # **delete_device**
 > delete_device(device_id)
 
-Delete a Device
+Delete a device
 
-Deletes (permanently) a device by `deviceId` if it has a status of `DEACTIVATED`. You can transition the device to `DEACTIVATED` status using the [Deactivate a Device](#tag/Device/operation/deactivateDevice) endpoint. This request is destructive and deletes all of the profile data related to the device. Once deleted, device data can't be recovered. However, reenrollment creates a new device record. > **Note:** Attempts to delete a device that isn't in a `DEACTIVATED` state raise an error.
+Deletes (permanently) a device by `deviceId` if it has a status of `DEACTIVATED`. You can transition the device to `DEACTIVATED` status using the [Deactivate a Device](/openapi/okta-management/management/tag/Device/#tag/Device/operation/deactivateDevice) endpoint. This request is destructive and deletes all of the profile data related to the device. Once deleted, device data can't be recovered. However, reenrollment creates a new device record. > **Note:** Attempts to delete a device that isn't in a `DEACTIVATED` state raise an error.
 
 ### Example
 
@@ -221,7 +221,7 @@ with okta.ApiClient(configuration) as api_client:
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
-        # Delete a Device
+        # Delete a device
         api_instance.delete_device(device_id)
     except Exception as e:
         print("Exception when calling DeviceApi->delete_device: %s\n" % e)
@@ -263,7 +263,7 @@ void (empty response body)
 # **get_device**
 > Device get_device(device_id)
 
-Retrieve a Device
+Retrieve a device
 
 Retrieves a device by `deviceId`
 
@@ -304,7 +304,7 @@ with okta.ApiClient(configuration) as api_client:
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
-        # Retrieve a Device
+        # Retrieve a device
         api_response = api_instance.get_device(device_id)
         print("The response of DeviceApi->get_device:\n")
         pprint(api_response)
@@ -348,9 +348,9 @@ Name | Type | Description  | Notes
 # **list_device_users**
 > List[DeviceUser] list_device_users(device_id)
 
-List all Users for a Device
+List all users for a device
 
-Lists all Users for a Device by `deviceId`
+Lists all Users for a device by `deviceId`
 
 ### Example
 
@@ -389,7 +389,7 @@ with okta.ApiClient(configuration) as api_client:
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
-        # List all Users for a Device
+        # List all users for a device
         api_response = api_instance.list_device_users(device_id)
         print("The response of DeviceApi->list_device_users:\n")
         pprint(api_response)
@@ -431,11 +431,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_devices**
-> List[Device] list_devices(after=after, limit=limit, search=search, expand=expand)
+> List[DeviceList] list_devices(after=after, limit=limit, search=search, expand=expand)
 
-List all Devices
+List all devices
 
-Lists all devices with pagination support. You can return a subset of Devices that match a supported search criteria using the `search` query parameter. Searches for devices based on the properties specified in the `search` parameter conforming SCIM filter specifications (case-insensitive). This data is eventually consistent. The API returns different results depending on specified queries in the request. Empty list is returned if no objects match `search` request. > **Note:** Listing devices with `search` should not be used as a part of any critical flows—such as authentication or updates—to prevent potential data loss. `search` results may not reflect the latest information, as this endpoint uses a search index which may not be up-to-date with recent updates to the object. <br> Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer data, resulting in data loss. <br> Use an `id` lookup for records that you update to ensure your results contain the latest data. This operation requires [URL encoding](https://www.w3.org/TR/html4/interact/forms.html#h-17.13.4.1). For example, `search=profile.displayName eq \"Bob\"` is encoded as `search=profile.displayName%20eq%20%22Bob%22`.
+Lists all devices with pagination support.  >**Note:** To list all devices enrolled by a user, use the [List all devices endpoint in the User Resources API](/openapi/okta-management/management/tag/UserResources/#tag/UserResources/operation/listUserDevices).  You can return a subset of devices that match a supported search criteria using the `search` query parameter. Searches for devices based on the properties specified in the `search` parameter conforming SCIM filter specifications (case-insensitive). This data is eventually consistent. The API returns different results depending on specified queries in the request. Empty list is returned if no objects match `search` request.  > **Note:** The `search` parameter results are sourced from an eventually consistent datasource and may not reflect the latest information.  Don't use search results directly for record updates, as the data might be stale and therefore overwrite newer data, resulting in data loss.  Use an `id` lookup for records that you update to ensure your results contain the latest data.  This operation requires [URL encoding](https://www.w3.org/TR/html4/interact/forms.html#h-17.13.4.1). For example, `search=profile.displayName eq \"Bob\"` is encoded as `search=profile.displayName%20eq%20%22Bob%22`.
 
 ### Example
 
@@ -444,7 +444,7 @@ Lists all devices with pagination support. You can return a subset of Devices th
 
 ```python
 import okta
-from okta.models.device import Device
+from okta.models.device_list import DeviceList
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -471,13 +471,13 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.DeviceApi(api_client)
-    after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
+    after = '200u3des4afA47rYJu1d7' # str |  (optional)
     limit = 200 # int | A limit on the number of objects to return (recommend `20`) (optional) (default to 200)
-    search = 'status eq \"ACTIVE\"' # str | A SCIM filter expression that filters the results. Searches include all Device `profile` properties and the Device `id`, `status`, and `lastUpdated` properties. (optional)
-    expand = 'expand_example' # str | Lists associated users for the device in `_embedded` element (optional)
+    search = 'status%20eq%20%22ACTIVE%22' # str | A SCIM filter expression that filters the results. Searches include all device `profile` properties and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices can be filtered by the contains (`co`) operator. You can only use `co` with these select device profile attributes: `profile.displayName`, `profile.serialNumber`, `profile.imei`, `profile.meid`, `profile.udid`, and `profile.sid`. See [Operators](https://developer.okta.com/docs/api/#operators). (optional)
+    expand = 'user' # str | Includes associated user details and management status for the device in the `_embedded` attribute (optional)
 
     try:
-        # List all Devices
+        # List all devices
         api_response = api_instance.list_devices(after=after, limit=limit, search=search, expand=expand)
         print("The response of DeviceApi->list_devices:\n")
         pprint(api_response)
@@ -492,14 +492,14 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **after** | **str**| The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the &#x60;Link&#x60; response header. See [Pagination](/#pagination) for more information. | [optional] 
+ **after** | **str**|  | [optional] 
  **limit** | **int**| A limit on the number of objects to return (recommend &#x60;20&#x60;) | [optional] [default to 200]
- **search** | **str**| A SCIM filter expression that filters the results. Searches include all Device &#x60;profile&#x60; properties and the Device &#x60;id&#x60;, &#x60;status&#x60;, and &#x60;lastUpdated&#x60; properties. | [optional] 
- **expand** | **str**| Lists associated users for the device in &#x60;_embedded&#x60; element | [optional] 
+ **search** | **str**| A SCIM filter expression that filters the results. Searches include all device &#x60;profile&#x60; properties and the device &#x60;id&#x60;, &#x60;status&#x60;, and &#x60;lastUpdated&#x60; properties.  Searches for devices can be filtered by the contains (&#x60;co&#x60;) operator. You can only use &#x60;co&#x60; with these select device profile attributes: &#x60;profile.displayName&#x60;, &#x60;profile.serialNumber&#x60;, &#x60;profile.imei&#x60;, &#x60;profile.meid&#x60;, &#x60;profile.udid&#x60;, and &#x60;profile.sid&#x60;. See [Operators](https://developer.okta.com/docs/api/#operators). | [optional] 
+ **expand** | **str**| Includes associated user details and management status for the device in the &#x60;_embedded&#x60; attribute | [optional] 
 
 ### Return type
 
-[**List[Device]**](Device.md)
+[**List[DeviceList]**](DeviceList.md)
 
 ### Authorization
 
@@ -525,7 +525,7 @@ Name | Type | Description  | Notes
 
 Suspend a Device
 
-Suspends a Device by setting its status to SUSPENDED. Use suspended devices to create and delete device user links. You can only unsuspend or deactivate suspended devices. > **Note:** SUSPENDED status is meant to be temporary, so it isn't destructive.
+Suspends a device by setting its status to `SUSPENDED`. Use suspended devices to create and delete device user links. You can only unsuspend or deactivate suspended devices. > **Note:** `SUSPENDED` status is meant to be temporary, so it isn't destructive.
 
 ### Example
 
@@ -607,7 +607,7 @@ void (empty response body)
 
 Unsuspend a Device
 
-Unsuspends a Device by returning its `status` to ACTIVE. >**Note:** Only devices with a SUSPENDED status can be unsuspended.
+Unsuspends a device by returning its `status` to `ACTIVE`. >**Note:** Only devices with a `SUSPENDED` status can be unsuspended.
 
 ### Example
 

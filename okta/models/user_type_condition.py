@@ -28,17 +28,17 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class UserTypeCondition(BaseModel):
     """
-    UserTypeCondition
+    <x-lifecycle class=\"oie\"></x-lifecycle> Specifies which user types to include and/or exclude
     """  # noqa: E501
 
-    exclude: Optional[List[StrictStr]] = None
-    include: Optional[List[StrictStr]] = None
+    exclude: List[StrictStr] = Field(description="The user types to exclude")
+    include: List[StrictStr] = Field(description="The user types to include")
     __properties: ClassVar[List[str]] = ["exclude", "include"]
 
     model_config = ConfigDict(

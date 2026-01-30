@@ -34,7 +34,7 @@ from typing_extensions import Self
 
 class UserCondition(BaseModel):
     """
-    Specifies a set of Users to be included or excluded
+    Specifies a set of users to be included or excluded
     """  # noqa: E501
 
     exclude: Optional[List[StrictStr]] = Field(

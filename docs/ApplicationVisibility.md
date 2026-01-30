@@ -1,13 +1,14 @@
 # ApplicationVisibility
 
+Specifies visibility settings for the app
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_links** | **Dict[str, bool]** |  | [optional] 
-**auto_launch** | **bool** |  | [optional] 
-**auto_submit_toolbar** | **bool** |  | [optional] 
+**app_links** | **Dict[str, bool]** | Links or icons that appear on the End-User Dashboard if they&#39;re set to &#x60;true&#x60;. | [optional] 
+**auto_launch** | **bool** | Automatically signs in to the app when user signs into Okta | [optional] 
+**auto_submit_toolbar** | **bool** | Automatically sign in when user lands on the sign-in page | [optional] 
 **hide** | [**ApplicationVisibilityHide**](ApplicationVisibilityHide.md) |  | [optional] 
 
 ## Example

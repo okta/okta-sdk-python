@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
 from okta.models.group_schema_attribute import GroupSchemaAttribute
@@ -36,11 +36,16 @@ from okta.models.group_schema_attribute import GroupSchemaAttribute
 
 class GroupSchemaBaseProperties(BaseModel):
     """
-    GroupSchemaBaseProperties
+    All Okta-defined profile properties are defined in a profile subschema with the resolution scope `#base`. These
+    properties can't be removed or edited, regardless of any attempt to do so.
     """  # noqa: E501
 
-    description: Optional[GroupSchemaAttribute] = None
-    name: Optional[GroupSchemaAttribute] = None
+    description: Optional[GroupSchemaAttribute] = Field(
+        default=None, description="Human readable description of the group"
+    )
+    name: Optional[GroupSchemaAttribute] = Field(
+        default=None, description="Unique identifier for the group"
+    )
     __properties: ClassVar[List[str]] = ["description", "name"]
 
     model_config = ConfigDict(

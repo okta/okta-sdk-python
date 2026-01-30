@@ -6,10 +6,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action** | [**RiskProviderAction**](RiskProviderAction.md) |  | [default to RiskProviderAction.LOG_ONLY]
-**client_id** | **str** | The ID of the [OAuth service app](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app-and-grant-scopes) that is used to send risk events to Okta | 
-**created** | **datetime** | Timestamp when the Risk Provider object was created | [optional] [readonly] 
-**id** | **str** | The ID of the Risk Provider object | [readonly] 
-**last_updated** | **datetime** | Timestamp when the Risk Provider object was last updated | [optional] [readonly] 
+**client_id** | **str** | The ID of the [OAuth 2.0 service app](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app-and-grant-scopes) that&#39;s used to send risk events to Okta | 
+**created** | **datetime** | Timestamp when the risk provider object was created | [optional] [readonly] 
+**id** | **str** | The ID of the risk provider object | [readonly] 
+**last_updated** | **datetime** | Timestamp when the risk provider object was last updated | [optional] [readonly] 
 **name** | **str** | Name of the risk provider | 
 **links** | [**LinksSelf**](LinksSelf.md) |  | 
 

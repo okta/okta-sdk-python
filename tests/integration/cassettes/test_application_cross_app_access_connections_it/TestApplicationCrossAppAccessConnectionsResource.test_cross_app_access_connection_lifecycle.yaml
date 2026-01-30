@@ -1,0 +1,240 @@
+interactions:
+- request:
+    body: '{"label": "Test Requesting App for CWO", "name": "bookmark", "settings":
+      {"app": {"requestIntegration": false, "url": "https://example.com/requesting"}},
+      "signOnMode": "BOOKMARK"}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/apps
+  response:
+    body:
+      string: '{"id": "0oa1test1234567890ab", "name": "bookmark", "label": "Test
+        Requesting App for CWO", "status": "ACTIVE", "lastUpdated": "2026-01-06T10:00:00.000Z",
+        "created": "2026-01-06T10:00:00.000Z", "accessibility": {"selfService": false,
+        "errorRedirectUrl": null, "loginRedirectUrl": null}, "visibility": {"autoSubmitToolbar":
+        false, "hide": {"iOS": false, "web": false}, "appLinks": {"login": true}},
+        "features": [], "signOnMode": "BOOKMARK", "credentials": {"userNameTemplate":
+        {"template": "${source.login}", "type": "BUILT_IN"}, "revealPassword": false,
+        "scheme": "EDIT_USERNAME_AND_PASSWORD", "signing": {}}, "settings": {"app":
+        {"requestIntegration": false, "url": "https://example.com/requesting"}}, "_links":
+        {"self": {"href": "https://test.okta.com/api/v1/apps/0oa1test1234567890ab"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:00 GMT
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"resourceAppInstanceId": "0oa1test1234567890ab"}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/apps/0oa1test1234567890ab/cwo/connections
+  response:
+    body:
+      string: '{"id": "con1test1234567890xy", "requestingAppInstanceId": "0oa1test1234567890ab",
+        "resourceAppInstanceId": "0oa1test1234567890ab", "status": "ACTIVE", "created":
+        "2026-01-06T10:00:01.000Z", "lastUpdated": "2026-01-06T10:00:01.000Z"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:01 GMT
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: GET
+    uri: https://test.okta.com/api/v1/apps/0oa1test1234567890ab/cwo/connections/con1test1234567890xy
+  response:
+    body:
+      string: '{"id": "con1test1234567890xy", "requestingAppInstanceId": "0oa1test1234567890ab",
+        "resourceAppInstanceId": "0oa1test1234567890ab", "status": "ACTIVE", "created":
+        "2026-01-06T10:00:01.000Z", "lastUpdated": "2026-01-06T10:00:01.000Z"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:02 GMT
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: GET
+    uri: https://test.okta.com/api/v1/apps/0oa1test1234567890ab/cwo/connections
+  response:
+    body:
+      string: '[{"id": "con1test1234567890xy", "requestingAppInstanceId": "0oa1test1234567890ab",
+        "resourceAppInstanceId": "0oa1test1234567890ab", "status": "ACTIVE", "created":
+        "2026-01-06T10:00:01.000Z", "lastUpdated": "2026-01-06T10:00:01.000Z"}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:03 GMT
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"status": "INACTIVE"}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: PATCH
+    uri: https://test.okta.com/api/v1/apps/0oa1test1234567890ab/cwo/connections/con1test1234567890xy
+  response:
+    body:
+      string: '{"id": "con1test1234567890xy", "requestingAppInstanceId": "0oa1test1234567890ab",
+        "resourceAppInstanceId": "0oa1test1234567890ab", "status": "INACTIVE", "created":
+        "2026-01-06T10:00:01.000Z", "lastUpdated": "2026-01-06T10:00:04.000Z"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:04 GMT
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: DELETE
+    uri: https://test.okta.com/api/v1/apps/0oa1test1234567890ab/cwo/connections/con1test1234567890xy
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Date:
+      - Mon, 06 Jan 2026 10:00:05 GMT
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: GET
+    uri: https://test.okta.com/api/v1/apps/0oa1test1234567890ab/cwo/connections/con1test1234567890xy
+  response:
+    body:
+      string: '{"errorCode": "E0000007", "errorSummary": "Not found: Resource not
+        found: con1test1234567890xy (Connection)", "errorLink": "E0000007", "errorId":
+        "oaetest123456"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:06 GMT
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/apps/0oa1test1234567890ab/lifecycle/deactivate
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Date:
+      - Mon, 06 Jan 2026 10:00:07 GMT
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: DELETE
+    uri: https://test.okta.com/api/v1/apps/0oa1test1234567890ab
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Date:
+      - Mon, 06 Jan 2026 10:00:08 GMT
+    status:
+      code: 204
+      message: No Content
+version: 1
+

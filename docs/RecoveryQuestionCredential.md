@@ -1,12 +1,13 @@
 # RecoveryQuestionCredential
 
+Specifies a secret question and answer that's validated (case insensitive) when a user forgets their password or unlocks their account. The answer property is write-only.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**answer** | **str** |  | [optional] 
-**question** | **str** |  | [optional] 
+**answer** | **str** | The answer to the recovery question | [optional] 
+**question** | **str** | The recovery question | [optional] 
 
 ## Example
 

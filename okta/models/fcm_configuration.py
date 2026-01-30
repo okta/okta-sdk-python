@@ -47,10 +47,9 @@ class FCMConfiguration(BaseModel):
     )
     service_account_json: Optional[Dict[str, Any]] = Field(
         default=None,
-        description="JSON containing the private service account key and "
-                    "service account details. See [Creating and managing "
-                    "service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for "
-                    "more information on creating service account keys in JSON.",
+        description="JSON containing the private service account key and service account details. See [Creating and managing "
+        "service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for "
+        "more information on creating service account keys in JSON.",
         alias="serviceAccountJson",
     )
     __properties: ClassVar[List[str]] = ["fileName", "projectId", "serviceAccountJson"]

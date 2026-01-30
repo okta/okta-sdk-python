@@ -33,13 +33,14 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Annotated
 from typing_extensions import Self
 
+from okta.models.api_token_network import ApiTokenNetwork
 from okta.models.links_self import LinksSelf
 
 
 class ApiToken(BaseModel):
     """
-    An API token for an Okta User. This token is NOT scoped any further and can be used for any API the user has
-    permissions to call.
+    An API token for an Okta User. This token is NOT scoped any further and can be used for any API the user has permissions
+    to call.
     """  # noqa: E501
 
     client_name: Optional[StrictStr] = Field(default=None, alias="clientName")
@@ -48,10 +49,10 @@ class ApiToken(BaseModel):
     id: Optional[StrictStr] = None
     last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     name: StrictStr
+    network: Optional[ApiTokenNetwork] = None
     token_window: Optional[Annotated[str, Field(strict=True)]] = Field(
         default=None,
-        description="A time duration specified as an ["
-                    "ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).",
+        description="A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).",
         alias="tokenWindow",
     )
     user_id: Optional[StrictStr] = Field(default=None, alias="userId")
@@ -63,6 +64,7 @@ class ApiToken(BaseModel):
         "id",
         "lastUpdated",
         "name",
+        "network",
         "tokenWindow",
         "userId",
         "_link",
@@ -75,8 +77,8 @@ class ApiToken(BaseModel):
             return value
 
         if not re.match(
-                r"^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$",
-                value,
+            r"^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$",
+            value,
         ):
             raise ValueError(
                 r"must validate the regular expression /^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$/"
@@ -133,6 +135,13 @@ class ApiToken(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of network
+        if self.network:
+            if not isinstance(self.network, dict):
+                _dict["network"] = self.network.to_dict()
+            else:
+                _dict["network"] = self.network
+
         # override the default output from pydantic by calling `to_dict()` of link
         if self.link:
             if not isinstance(self.link, dict):
@@ -159,6 +168,11 @@ class ApiToken(BaseModel):
                 "id": obj.get("id"),
                 "lastUpdated": obj.get("lastUpdated"),
                 "name": obj.get("name"),
+                "network": (
+                    ApiTokenNetwork.from_dict(obj["network"])
+                    if obj.get("network") is not None
+                    else None
+                ),
                 "tokenWindow": obj.get("tokenWindow"),
                 "userId": obj.get("userId"),
                 "_link": (

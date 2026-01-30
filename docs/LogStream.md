@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** | Timestamp when the Log Stream object was created | [readonly] 
-**id** | **str** | Unique identifier for the Log Stream | [readonly] 
-**last_updated** | **datetime** | Timestamp when the Log Stream object was last updated | [readonly] 
-**name** | **str** | Unique name for the Log Stream object | 
-**status** | **str** | Lifecycle status of the Log Stream object | [readonly] 
+**created** | **datetime** | Timestamp when the log stream object was created | [readonly] 
+**id** | **str** | Unique identifier for the log stream | [readonly] 
+**last_updated** | **datetime** | Timestamp when the log stream object was last updated | [readonly] 
+**name** | **str** | Unique name for the log stream object | 
+**status** | **str** | Lifecycle status of the log stream object | [readonly] 
 **type** | [**LogStreamType**](LogStreamType.md) |  | 
 **links** | [**LogStreamLinksSelfAndLifecycle**](LogStreamLinksSelfAndLifecycle.md) |  | 
 

@@ -37,7 +37,7 @@ from okta.models.capabilities_update_object import CapabilitiesUpdateObject
 
 class CapabilitiesObject(BaseModel):
     """
-    Defines the configurations related to an application feature
+    Defines the configurations for the USER_PROVISIONING feature
     """  # noqa: E501
 
     create: Optional[CapabilitiesCreateObject] = None

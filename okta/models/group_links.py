@@ -37,7 +37,8 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 
 class GroupLinks(BaseModel):
     """
-    GroupLinks
+    [Discoverable resources](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=_links
+    &t=response) related to the group
     """  # noqa: E501
 
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")

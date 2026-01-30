@@ -1,5 +1,6 @@
 # CatalogApplicationStatus
 
+App status
 
 ## Properties
 

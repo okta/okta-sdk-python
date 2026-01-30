@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -29,8 +29,9 @@ from typing_extensions import Annotated
 
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.detailed_hook_key_instance import DetailedHookKeyInstance
+from okta.models.embedded import Embedded
 from okta.models.hook_key import HookKey
-from okta.models.json_web_key import JsonWebKey
 from okta.models.key_request import KeyRequest
 from okta.models.success import Success
 from okta.rest import RESTResponse
@@ -61,10 +62,16 @@ class HookKeyApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HookKey:
+    ) -> DetailedHookKeyInstance:
         """Create a key
 
-        Creates a key for use with other parts of the application, such as inline hooks  Use the key name to access this key for inline hook operations.  The total number of keys that you can create in an Okta org is limited to 50.
+        Creates a key for use with other parts of the application, such as inline hooks  > **Note:**  Use the key name to
+        access this key for inline hook operations.  The total number of keys that you can create in an Okta org is limited
+        to 50.   The response is a [Key object](https://developer.okta.com/docs/reference/api/hook-keys/#key-object) that
+        represents the  key that you create. The `id` property in the response serves as the unique ID for the key,
+        which you can specify when  invoking other CRUD operations. The `keyId` provided in the response is the alias of the
+        public key that you can use to get  details of the public key data in a separate call.  > **Note:** The keyId is the
+        alias of the public key that you can use to retrieve the public key.
 
         :param key_request: (required)
         :type key_request: KeyRequest
@@ -91,7 +98,7 @@ class HookKeyApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "HookKey",
+            "200": "DetailedHookKeyInstance",
             "400": "Error",
             "403": "Error",
             "429": "Error",
@@ -113,18 +120,18 @@ class HookKeyApi(ApiClient):
         )
 
         if error:
-            if HookKey is Success:
+            if DetailedHookKeyInstance is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if HookKey is Success:
+        if DetailedHookKeyInstance is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, HookKey
+                request, DetailedHookKeyInstance
             )
 
         if response_body == "" or response.status == 204:
@@ -140,221 +147,7 @@ class HookKeyApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if HookKey is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def create_hook_key_with_http_info(
-        self,
-        key_request: KeyRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HookKey:
-        """Create a key
-
-        Creates a key for use with other parts of the application, such as inline hooks  Use the key name to access this key for inline hook operations.  The total number of keys that you can create in an Okta org is limited to 50.
-
-        :param key_request: (required)
-        :type key_request: KeyRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "HookKey",
-            "400": "Error",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._create_hook_key_serialize(
-            key_request=key_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if HookKey is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if HookKey is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, HookKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if HookKey is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def create_hook_key_without_preload_content(
-        self,
-        key_request: KeyRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HookKey:
-        """Create a key
-
-        Creates a key for use with other parts of the application, such as inline hooks  Use the key name to access this key for inline hook operations.  The total number of keys that you can create in an Okta org is limited to 50.
-
-        :param key_request: (required)
-        :type key_request: KeyRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "HookKey",
-            "400": "Error",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._create_hook_key_serialize(
-            key_request=key_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if HookKey is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if HookKey is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, HookKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if HookKey is Success:
+                if DetailedHookKeyInstance is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -429,7 +222,7 @@ class HookKeyApi(ApiClient):
     @validate_call
     async def delete_hook_key(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        id: Annotated[StrictStr, Field(description="ID of the Hook Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -444,10 +237,11 @@ class HookKeyApi(ApiClient):
     ) -> None:
         """Delete a key
 
-        Deletes a key by `hookKeyId`. After being deleted, the key is unrecoverable.  As a safety precaution, only keys that aren't being used are eligible for deletion.
+        Deletes a key by `id`. After being deleted, the key is unrecoverable.  As a safety precaution, only keys that aren't
+        being used are eligible for deletion.
 
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
+        :param id: ID of the Hook Key (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -478,195 +272,7 @@ class HookKeyApi(ApiClient):
         }
 
         method, url, header_params, body, post_params = self._delete_hook_key_serialize(
-            hook_key_id=hook_key_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def delete_hook_key_with_http_info(
-        self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete a key
-
-        Deletes a key by `hookKeyId`. After being deleted, the key is unrecoverable.  As a safety precaution, only keys that aren't being used are eligible for deletion.
-
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._delete_hook_key_serialize(
-            hook_key_id=hook_key_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def delete_hook_key_without_preload_content(
-        self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete a key
-
-        Deletes a key by `hookKeyId`. After being deleted, the key is unrecoverable.  As a safety precaution, only keys that aren't being used are eligible for deletion.
-
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._delete_hook_key_serialize(
-            hook_key_id=hook_key_id,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -710,7 +316,7 @@ class HookKeyApi(ApiClient):
 
     def _delete_hook_key_serialize(
         self,
-        hook_key_id,
+        id,
         _request_auth,
         _content_type,
         _headers,
@@ -729,8 +335,8 @@ class HookKeyApi(ApiClient):
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if hook_key_id is not None:
-            _path_params["hookKeyId"] = hook_key_id
+        if id is not None:
+            _path_params["id"] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -744,7 +350,7 @@ class HookKeyApi(ApiClient):
 
         return self.param_serialize(
             method="DELETE",
-            resource_path="/api/v1/hook-keys/{hookKeyId}",
+            resource_path="/api/v1/hook-keys/{id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -760,7 +366,7 @@ class HookKeyApi(ApiClient):
     @validate_call
     async def get_hook_key(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        id: Annotated[StrictStr, Field(description="ID of the Hook Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -773,12 +379,14 @@ class HookKeyApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> HookKey:
-        """Retrieve a key
+        """Retrieve a key by ID
 
-        Retrieves a key by `hookKeyId`
+        Retrieves the public portion of the Key object using the `id` parameter  >**Note:** The `?expand=publickey` query
+        parameter optionally returns the full object including the details of the public key in the response body's
+        `_embedded` property.
 
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
+        :param id: ID of the Hook Key (required)
+        :type id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -809,221 +417,7 @@ class HookKeyApi(ApiClient):
         }
 
         method, url, header_params, body, post_params = self._get_hook_key_serialize(
-            hook_key_id=hook_key_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if HookKey is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if HookKey is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, HookKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if HookKey is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_hook_key_with_http_info(
-        self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HookKey:
-        """Retrieve a key
-
-        Retrieves a key by `hookKeyId`
-
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "HookKey",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._get_hook_key_serialize(
-            hook_key_id=hook_key_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if HookKey is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if HookKey is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, HookKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if HookKey is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_hook_key_without_preload_content(
-        self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HookKey:
-        """Retrieve a key
-
-        Retrieves a key by `hookKeyId`
-
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "HookKey",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._get_hook_key_serialize(
-            hook_key_id=hook_key_id,
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1080,7 +474,7 @@ class HookKeyApi(ApiClient):
 
     def _get_hook_key_serialize(
         self,
-        hook_key_id,
+        id,
         _request_auth,
         _content_type,
         _headers,
@@ -1099,8 +493,8 @@ class HookKeyApi(ApiClient):
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if hook_key_id is not None:
-            _path_params["hookKeyId"] = hook_key_id
+        if id is not None:
+            _path_params["id"] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1114,7 +508,7 @@ class HookKeyApi(ApiClient):
 
         return self.param_serialize(
             method="GET",
-            resource_path="/api/v1/hook-keys/{hookKeyId}",
+            resource_path="/api/v1/hook-keys/{id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1130,9 +524,7 @@ class HookKeyApi(ApiClient):
     @validate_call
     async def get_public_key(
         self,
-        public_key_id: Annotated[
-            StrictStr, Field(description="`id` of the Public Key")
-        ],
+        key_id: Annotated[StrictStr, Field(description='id" of the Public Key')],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1144,13 +536,13 @@ class HookKeyApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> JsonWebKey:
+    ) -> Embedded:
         """Retrieve a public key
 
-        Retrieves a public key by `keyId`
+        Retrieves a public key by `keyId`  >**Note:** keyId is the alias of the public key.
 
-        :param public_key_id: `id` of the Public Key (required)
-        :type public_key_id: str
+        :param key_id: id\" of the Public Key (required)
+        :type key_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1174,14 +566,14 @@ class HookKeyApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "JsonWebKey",
+            "200": "Embedded",
             "403": "Error",
             "404": "Error",
             "429": "Error",
         }
 
         method, url, header_params, body, post_params = self._get_public_key_serialize(
-            public_key_id=public_key_id,
+            key_id=key_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1196,18 +588,18 @@ class HookKeyApi(ApiClient):
         )
 
         if error:
-            if JsonWebKey is Success:
+            if Embedded is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if JsonWebKey is Success:
+        if Embedded is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, JsonWebKey
+                request, Embedded
             )
 
         if response_body == "" or response.status == 204:
@@ -1223,225 +615,7 @@ class HookKeyApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if JsonWebKey is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_public_key_with_http_info(
-        self,
-        public_key_id: Annotated[
-            StrictStr, Field(description="`id` of the Public Key")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> JsonWebKey:
-        """Retrieve a public key
-
-        Retrieves a public key by `keyId`
-
-        :param public_key_id: `id` of the Public Key (required)
-        :type public_key_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "JsonWebKey",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._get_public_key_serialize(
-            public_key_id=public_key_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if JsonWebKey is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if JsonWebKey is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, JsonWebKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if JsonWebKey is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_public_key_without_preload_content(
-        self,
-        public_key_id: Annotated[
-            StrictStr, Field(description="`id` of the Public Key")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> JsonWebKey:
-        """Retrieve a public key
-
-        Retrieves a public key by `keyId`
-
-        :param public_key_id: `id` of the Public Key (required)
-        :type public_key_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "JsonWebKey",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._get_public_key_serialize(
-            public_key_id=public_key_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if JsonWebKey is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if JsonWebKey is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, JsonWebKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if JsonWebKey is Success:
+                if Embedded is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -1456,7 +630,7 @@ class HookKeyApi(ApiClient):
 
     def _get_public_key_serialize(
         self,
-        public_key_id,
+        key_id,
         _request_auth,
         _content_type,
         _headers,
@@ -1475,8 +649,8 @@ class HookKeyApi(ApiClient):
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if public_key_id is not None:
-            _path_params["publicKeyId"] = public_key_id
+        if key_id is not None:
+            _path_params["keyId"] = key_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1490,7 +664,7 @@ class HookKeyApi(ApiClient):
 
         return self.param_serialize(
             method="GET",
-            resource_path="/api/v1/hook-keys/public/{publicKeyId}",
+            resource_path="/api/v1/hook-keys/public/{keyId}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1505,210 +679,6 @@ class HookKeyApi(ApiClient):
 
     @validate_call
     async def list_hook_keys(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[HookKey]:
-        """List all keys
-
-        Lists all keys
-
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[HookKey]",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._list_hook_keys_serialize(
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[HookKey] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[HookKey] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, HookKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[HookKey] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_hook_keys_with_http_info(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[HookKey]:
-        """List all keys
-
-        Lists all keys
-
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[HookKey]",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._list_hook_keys_serialize(
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[HookKey] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[HookKey] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, HookKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[HookKey] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_hook_keys_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -1858,7 +828,7 @@ class HookKeyApi(ApiClient):
     @validate_call
     async def replace_hook_key(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        id: Annotated[StrictStr, Field(description="ID of the Hook Key")],
         key_request: KeyRequest,
         _request_timeout: Union[
             None,
@@ -1871,13 +841,14 @@ class HookKeyApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HookKey:
+    ) -> DetailedHookKeyInstance:
         """Replace a key
 
-        Replaces a key by `hookKeyId`  This request replaces existing properties after passing validation.  Note: The only parameter that you can update is the name of the key, which must be unique at all times.
+        Replaces a key by `id`  This request replaces existing properties after passing validation.  > **Note:** The only
+        parameter that you can update is the name of the key, which must be unique at all times.
 
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
+        :param id: ID of the Hook Key (required)
+        :type id: str
         :param key_request: (required)
         :type key_request: KeyRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -1903,7 +874,7 @@ class HookKeyApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "HookKey",
+            "200": "DetailedHookKeyInstance",
             "400": "Error",
             "403": "Error",
             "404": "Error",
@@ -1912,7 +883,7 @@ class HookKeyApi(ApiClient):
 
         method, url, header_params, body, post_params = (
             self._replace_hook_key_serialize(
-                hook_key_id=hook_key_id,
+                id=id,
                 key_request=key_request,
                 _request_auth=_request_auth,
                 _content_type=_content_type,
@@ -1929,18 +900,18 @@ class HookKeyApi(ApiClient):
         )
 
         if error:
-            if HookKey is Success:
+            if DetailedHookKeyInstance is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if HookKey is Success:
+        if DetailedHookKeyInstance is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, HookKey
+                request, DetailedHookKeyInstance
             )
 
         if response_body == "" or response.status == 204:
@@ -1956,235 +927,7 @@ class HookKeyApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if HookKey is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def replace_hook_key_with_http_info(
-        self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
-        key_request: KeyRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HookKey:
-        """Replace a key
-
-        Replaces a key by `hookKeyId`  This request replaces existing properties after passing validation.  Note: The only parameter that you can update is the name of the key, which must be unique at all times.
-
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
-        :param key_request: (required)
-        :type key_request: KeyRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "HookKey",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._replace_hook_key_serialize(
-                hook_key_id=hook_key_id,
-                key_request=key_request,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if HookKey is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if HookKey is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, HookKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if HookKey is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def replace_hook_key_without_preload_content(
-        self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
-        key_request: KeyRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> HookKey:
-        """Replace a key
-
-        Replaces a key by `hookKeyId`  This request replaces existing properties after passing validation.  Note: The only parameter that you can update is the name of the key, which must be unique at all times.
-
-        :param hook_key_id: `id` of the Hook Key (required)
-        :type hook_key_id: str
-        :param key_request: (required)
-        :type key_request: KeyRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "HookKey",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._replace_hook_key_serialize(
-                hook_key_id=hook_key_id,
-                key_request=key_request,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if HookKey is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if HookKey is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, HookKey
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if HookKey is Success:
+                if DetailedHookKeyInstance is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -2199,7 +942,7 @@ class HookKeyApi(ApiClient):
 
     def _replace_hook_key_serialize(
         self,
-        hook_key_id,
+        id,
         key_request,
         _request_auth,
         _content_type,
@@ -2219,8 +962,8 @@ class HookKeyApi(ApiClient):
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if hook_key_id is not None:
-            _path_params["hookKeyId"] = hook_key_id
+        if id is not None:
+            _path_params["id"] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -2246,7 +989,7 @@ class HookKeyApi(ApiClient):
 
         return self.param_serialize(
             method="PUT",
-            resource_path="/api/v1/hook-keys/{hookKeyId}",
+            resource_path="/api/v1/hook-keys/{id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

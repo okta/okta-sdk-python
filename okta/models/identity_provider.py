@@ -30,15 +30,16 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
+from okta.models.identity_provider_issuer_mode import IdentityProviderIssuerMode
 from okta.models.identity_provider_links import IdentityProviderLinks
 from okta.models.identity_provider_policy import IdentityProviderPolicy
 from okta.models.identity_provider_properties import IdentityProviderProperties
+from okta.models.identity_provider_protocol import IdentityProviderProtocol
 from okta.models.identity_provider_type import IdentityProviderType
-from okta.models.issuer_mode import IssuerMode
 from okta.models.lifecycle_status import LifecycleStatus
-from okta.models.protocol import Protocol
 
 
 class IdentityProvider(BaseModel):
@@ -46,14 +47,24 @@ class IdentityProvider(BaseModel):
     IdentityProvider
     """  # noqa: E501
 
-    created: Optional[datetime] = None
-    id: Optional[StrictStr] = None
-    issuer_mode: Optional[IssuerMode] = Field(default=None, alias="issuerMode")
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = None
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the object was created"
+    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique key for the IdP")
+    issuer_mode: Optional[IdentityProviderIssuerMode] = Field(
+        default=IdentityProviderIssuerMode.DYNAMIC, alias="issuerMode"
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated",
+    )
+    name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
+        default=None, description="Unique name for the IdP"
+    )
     policy: Optional[IdentityProviderPolicy] = None
     properties: Optional[IdentityProviderProperties] = None
-    protocol: Optional[Protocol] = None
+    protocol: Optional[IdentityProviderProtocol] = None
     status: Optional[LifecycleStatus] = None
     type: Optional[IdentityProviderType] = None
     links: Optional[IdentityProviderLinks] = Field(default=None, alias="_links")
@@ -145,11 +156,6 @@ class IdentityProvider(BaseModel):
             else:
                 _dict["_links"] = self.links
 
-        # set to None if created (nullable) is None
-        # and model_fields_set contains the field
-        if self.created is None and "created" in self.model_fields_set:
-            _dict["created"] = None
-
         # set to None if properties (nullable) is None
         # and model_fields_set contains the field
         if self.properties is None and "properties" in self.model_fields_set:
@@ -184,7 +190,7 @@ class IdentityProvider(BaseModel):
                     else None
                 ),
                 "protocol": (
-                    Protocol.from_dict(obj["protocol"])
+                    IdentityProviderProtocol.from_dict(obj["protocol"])
                     if obj.get("protocol") is not None
                     else None
                 ),

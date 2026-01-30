@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
 from okta.models.app_and_instance_condition_evaluator_app_or_instance import (
@@ -38,11 +38,15 @@ from okta.models.app_and_instance_condition_evaluator_app_or_instance import (
 
 class AppAndInstancePolicyRuleCondition(BaseModel):
     """
-    AppAndInstancePolicyRuleCondition
+    Specifies apps to include or exclude. If `include` is empty, then the condition is met for all apps.
     """  # noqa: E501
 
-    exclude: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = None
-    include: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = None
+    exclude: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = Field(
+        default=None, description="The list of apps or app instances to exclude"
+    )
+    include: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = Field(
+        default=None, description="The list of apps or app instances to match on"
+    )
     __properties: ClassVar[List[str]] = ["exclude", "include"]
 
     model_config = ConfigDict(

@@ -37,7 +37,8 @@ from okta.models.possession_constraint import PossessionConstraint
 
 class AccessPolicyConstraints(BaseModel):
     """
-    AccessPolicyConstraints
+    Specifies constraints for the authenticator. Constraints are logically evaluated such that only one constraint object
+    needs to be satisfied. But, within a constraint object, each constraint property must be satisfied.
     """  # noqa: E501
 
     knowledge: Optional[KnowledgeConstraint] = None

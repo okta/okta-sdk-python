@@ -40,21 +40,31 @@ class BrandRequest(BaseModel):
     """  # noqa: E501
 
     agree_to_custom_privacy_policy: Optional[StrictBool] = Field(
-        default=None, alias="agreeToCustomPrivacyPolicy"
+        default=None,
+        description="Consent for updating the custom privacy URL. Not required when resetting the URL.",
+        alias="agreeToCustomPrivacyPolicy",
     )
     custom_privacy_policy_url: Optional[StrictStr] = Field(
-        default=None, alias="customPrivacyPolicyUrl"
+        default=None,
+        description="Custom privacy policy URL",
+        alias="customPrivacyPolicyUrl",
     )
     default_app: Optional[DefaultApp] = Field(default=None, alias="defaultApp")
-    email_domain_id: Optional[StrictStr] = Field(default=None, alias="emailDomainId")
+    email_domain_id: Optional[StrictStr] = Field(
+        default=None, description="The ID of the email domain", alias="emailDomainId"
+    )
     locale: Optional[StrictStr] = Field(
         default=None,
-        description="The language specified as an [IETF BCP 47 language tag]("
-                    "https://datatracker.ietf.org/doc/html/rfc5646)",
+        description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)",
     )
-    name: Optional[StrictStr] = None
+    name: StrictStr = Field(
+        description="The name of the brand  > **Note:** You can't use the reserved `DRAPP_DOMAIN_BRAND` name."
+    )
     remove_powered_by_okta: Optional[StrictBool] = Field(
-        default=None, alias="removePoweredByOkta"
+        default=False,
+        description='Removes "Powered by Okta" from the sign-in page in redirect authentication deployments, and "© [current '
+        'year] Okta, Inc." from the Okta End-User Dashboard',
+        alias="removePoweredByOkta",
     )
     __properties: ClassVar[List[str]] = [
         "agreeToCustomPrivacyPolicy",
@@ -133,7 +143,11 @@ class BrandRequest(BaseModel):
                 "emailDomainId": obj.get("emailDomainId"),
                 "locale": obj.get("locale"),
                 "name": obj.get("name"),
-                "removePoweredByOkta": obj.get("removePoweredByOkta"),
+                "removePoweredByOkta": (
+                    obj.get("removePoweredByOkta")
+                    if obj.get("removePoweredByOkta") is not None
+                    else False
+                ),
             }
         )
         return _obj

@@ -1,5 +1,6 @@
 # GroupRuleAction
 
+Defines which users and groups to assign
 
 ## Properties
 

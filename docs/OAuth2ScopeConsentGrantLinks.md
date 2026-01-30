@@ -6,8 +6,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
-**app** | [**HrefObject**](HrefObject.md) | Link to app | [optional] 
-**client** | [**HrefObject**](HrefObject.md) | Link to client | [optional] 
+**app** | [**AppResourceHrefObject**](AppResourceHrefObject.md) | Link to the app resource | [optional] 
+**client** | [**AppResourceHrefObject**](AppResourceHrefObject.md) | Link to the client resource | [optional] 
+**scope** | [**ScopeResourceHrefObject**](ScopeResourceHrefObject.md) | Link to the scope resource | [optional] 
+**user** | [**UserResourceHrefObject**](UserResourceHrefObject.md) | Link to the user resource | [optional] 
+**authorization_server** | [**AuthorizationServerResourceHrefObject**](AuthorizationServerResourceHrefObject.md) | Link to the authorization server resource | [optional] 
 
 ## Example
 

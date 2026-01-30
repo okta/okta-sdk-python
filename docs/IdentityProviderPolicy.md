@@ -1,13 +1,13 @@
 # IdentityProviderPolicy
 
+Policy settings for the IdP. The following provisioning and account linking actions are supported by each IdP provider: | IdP type                                                           | User provisioning actions | Group provisioning actions            | Account link actions | Account link filters | | -----------------------------------------------------------------  | ------------------------- | ------------------------------------- | -------------------- | -------------------- | | `SAML2`                                                            | `AUTO` or `DISABLED`      | `NONE`, `ASSIGN`, `APPEND`, or `SYNC` | `AUTO`, `DISABLED`   | `groups`, `users`    | | `X509`, `IDV_PERSONA`, `IDV_INCODE`, `IDV_CLEAR` and `IDV_STANDARD`| `DISABLED`                | No support for JIT provisioning       |                      |                      | | All other IdP types                                                | `AUTO`, `DISABLED`        | `NONE` or `ASSIGN`                    | `AUTO`, `DISABLED`   | `groups`, `users`    |
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **account_link** | [**PolicyAccountLink**](PolicyAccountLink.md) |  | [optional] 
-**map_amr_claims** | **bool** | Enable mapping AMR from IdP to Okta to downstream apps | [optional] [default to False]
-**max_clock_skew** | **int** |  | [optional] 
+**max_clock_skew** | **int** | Maximum allowable clock skew when processing messages from the IdP | [optional] 
 **provisioning** | [**Provisioning**](Provisioning.md) |  | [optional] 
 **subject** | [**PolicySubject**](PolicySubject.md) |  | [optional] 
 

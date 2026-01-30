@@ -27,7 +27,12 @@ import pprint
 from typing import Any
 from typing import Union, Set, Optional, Dict
 
-from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    ValidationError,
+    field_validator,
+)
 from pydantic import StrictStr
 from typing_extensions import Self
 
@@ -42,7 +47,7 @@ class ListSubscriptionsRoleRoleRefParameter(BaseModel):
     """
 
     # data type: RoleType
-    oneof_schema_1_validator: Optional[StrictStr] = None
+    oneof_schema_1_validator: Optional[RoleType] = None
     # data type: str
     oneof_schema_2_validator: Optional[StrictStr] = None
     actual_instance: Optional[Union[RoleType, str]] = None
@@ -69,7 +74,6 @@ class ListSubscriptionsRoleRoleRefParameter(BaseModel):
 
     @field_validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
-        instance = ListSubscriptionsRoleRoleRefParameter.model_construct()
         error_messages = []
         match = 0
         # validate data type: RoleType
@@ -79,6 +83,7 @@ class ListSubscriptionsRoleRoleRefParameter(BaseModel):
             match += 1
         # validate data type: str
         try:
+            instance = ListSubscriptionsRoleRoleRefParameter.model_construct()
             instance.oneof_schema_2_validator = v
             match += 1
         except (ValidationError, ValueError) as e:
@@ -128,16 +133,14 @@ class ListSubscriptionsRoleRoleRefParameter(BaseModel):
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when deserializing the JSON string into ListSubscriptionsRoleRoleRefParameter with " +
-                "oneOf schemas: RoleType, str. Details: " +
-                ", ".join(error_messages)
+                "Multiple matches found when deserializing the JSON string into ListSubscriptionsRoleRoleRefParameter with "
+                "oneOf schemas: RoleType, str. Details: " + ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into ListSubscriptionsRoleRoleRefParameter with oneOf " +
-                "schemas: RoleType, str. Details: " +
-                ", ".join(error_messages)
+                "No match found when deserializing the JSON string into ListSubscriptionsRoleRoleRefParameter with oneOf "
+                "schemas: RoleType, str. Details: " + ", ".join(error_messages)
             )
         else:
             return instance
@@ -148,7 +151,7 @@ class ListSubscriptionsRoleRoleRefParameter(BaseModel):
             return "null"
 
         if hasattr(self.actual_instance, "to_json") and callable(
-                self.actual_instance.to_json
+            self.actual_instance.to_json
         ):
             return self.actual_instance.to_json()
         else:
@@ -160,7 +163,7 @@ class ListSubscriptionsRoleRoleRefParameter(BaseModel):
             return None
 
         if hasattr(self.actual_instance, "to_dict") and callable(
-                self.actual_instance.to_dict
+            self.actual_instance.to_dict
         ):
             return self.actual_instance.to_dict()
         else:

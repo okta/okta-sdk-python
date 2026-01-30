@@ -21,6 +21,7 @@ from blinker import signal
 from urllib.parse import quote
 from typing import Tuple, Optional, List, Dict, Union
 from pydantic import SecretStr
+from pydash.strings import camel_case
 {{#tornado}}
 import tornado.gen
 {{/tornado}}
@@ -106,7 +107,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = '{{{httpUserAgent}}}{{^httpUserAgent}}OpenAPI-Generator/{{{packageVersion}}}/python{{/httpUserAgent}}'
+        self.user_agent = '{{{httpUserAgent}}}{{^httpUserAgent}}OpenAPI-Generator/1.0.0/python{{/httpUserAgent}}'
         self.client_side_validation = self.configuration.client_side_validation
 
 {{#asyncio}}

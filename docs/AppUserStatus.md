@@ -1,6 +1,6 @@
 # AppUserStatus
 
-Status of an App User
+Status of an application user
 
 ## Properties
 

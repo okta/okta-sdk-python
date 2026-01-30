@@ -1,0 +1,91 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/apps
+  response:
+    body:
+      string: '[{"id":"0oanwlw0oco6NshA65d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:saasure:0oanwlw0oco6NshA65d7","name":"saasure","label":"Okta
+        Admin Console","status":"ACTIVE","lastUpdated":"2025-04-24T16:03:48.000Z","created":"2025-03-19T08:01:45.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{"admin":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"admin","href":"https://test.okta.com/home/saasure/0oanwlw0oco6NshA65d7/2","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/okta_admin_app.da3325676d57eaf566cb786dd0c7a819.png","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp13cg3r0SMK5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/lifecycle/deactivate"}}},{"id":"0oanwlw0so3WcfOQi5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:okta_enduser:0oanwlw0so3WcfOQi5d7","name":"okta_enduser","label":"Okta
+        Dashboard","status":"ACTIVE","lastUpdated":"2025-05-08T17:56:48.000Z","created":"2025-03-19T08:01:48.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/logo","hints":{"allow":["POST"]}},"appLinks":[],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/okta-logo-end-user-dashboard.fc6d8fdbcb8cb4c933d009e71456cec6.svg","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14eRfwWzKF5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/lifecycle/deactivate"}}},{"id":"0oanwlw0swSpMND6F5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:okta_browser_plugin:0oanwlw0swSpMND6F5d7","name":"okta_browser_plugin","label":"Okta
+        Browser Plugin","status":"ACTIVE","lastUpdated":"2025-03-19T08:01:48.000Z","created":"2025-03-19T08:01:48.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/logo","hints":{"allow":["POST"]}},"appLinks":[],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/okta-logo-browser-plugin.1db9f55776407dfc548a5d6985ff280a.svg","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14eRfwWzKF5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/lifecycle/deactivate"}}},{"id":"0oanxflnkoMfZkgM05d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:zoomus:0oanxflnkoMfZkgM05d7","name":"zoomus","label":"Zoom","status":"ACTIVE","lastUpdated":"2025-03-20T16:16:21.000Z","created":"2025-03-20T16:16:20.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{"login":true}},"features":[],"signOnMode":"SAML_2_0","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"8jn49cpSBmcfB2f1ZTnEDevwRU_TdXHTYE-DEwyN3GM"}},"universalLogout":null,"settings":{"app":{"subDomain":"acme","audience_uri":null,"acs_url":null},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null},"signOn":{"defaultRelayState":null,"ssoAcsUrlOverride":null,"audienceOverride":null,"recipientOverride":null,"destinationOverride":null,"attributeStatements":[],"configuredAttributeStatements":[{"type":"GROUP","name":"IMGroup","namespace":null,"filterType":null,"filterValue":null},{"type":"GROUP","name":"UserGroup","namespace":null,"filterType":null,"filterValue":null}]}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/zoomus/0oanxflnkoMfZkgM05d7/setup/help/SAML_2_0/external-doc","type":"text/html"},"metadata":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/sso/saml/metadata","type":"application/xml"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"login","href":"https://test.okta.com/home/zoomus/0oanxflnkoMfZkgM05d7/1835","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfs4tu254Ei6Ee3ll5d6","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/lifecycle/deactivate"}}},{"id":"0oarim2u5gYaSNb525d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:test-cwo-app-2:0oarim2u5gYaSNb525d7","name":"test-cwo-app-2","label":"Todo0
+        - Cross App Access (XAA) Sample Resource App","status":"ACTIVE","lastUpdated":"2025-11-17T11:09:26.000Z","created":"2025-11-17T11:04:32.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"login":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{"redirectURI":"http://localhost:5001/openid/callback/customer1"},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/test-cwo-app-2/0oarim2u5gYaSNb525d7/setup/help/OPENID_CONNECT/external-doc","type":"text/html"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"login","href":"https://test.okta.com/home/test-cwo-app-2/0oarim2u5gYaSNb525d7/alnoun1wzgkubAeAV0g7","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfsqb1g7n64dCGWcM5d7","type":"image/png"}],"clientCredentials":[{"name":"secrets","href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/credentials/secrets"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/lifecycle/deactivate"}}},{"id":"0oarim2ze64Kzfw4J5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:test-cwo-app:0oarim2ze64Kzfw4J5d7","name":"test-cwo-app","label":"Agent0
+        - Cross App Access (XAA) Sample Requesting App","status":"ACTIVE","lastUpdated":"2025-11-17T11:09:11.000Z","created":"2025-11-17T11:03:58.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"test-cwo-app_link":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{"redirectURI":"http://localhost:5000/openid/callback/customer1","postLogoutUri":null},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/test-cwo-app/0oarim2ze64Kzfw4J5d7/setup/help/OPENID_CONNECT/external-doc","type":"text/html"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"test-cwo-app_link","href":"https://test.okta.com/home/test-cwo-app/0oarim2ze64Kzfw4J5d7/alnff91hn7spvrpRg0w6","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfsqb1gmdyY61WmEw5d7","type":"image/png"}],"clientCredentials":[{"name":"secrets","href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/credentials/secrets"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/lifecycle/deactivate"}}}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 07 Jan 2026 09:37:35 GMT
+      Expires:
+      - '0'
+      Link:
+      - <https://dev-20982288.okta.com/api/v1/apps?limit=20>; rel="self"
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=FC21E1FADE3CE5588CC92AF4D66641E6; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
+        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
+        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
+        ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 5a97926910fdec8d008d5fd0855dafd3
+      x-rate-limit-limit:
+      - '10'
+      x-rate-limit-remaining:
+      - '9'
+      x-rate-limit-reset:
+      - '1767778715'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

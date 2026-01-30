@@ -28,23 +28,45 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing_extensions import Self
 
+from okta.models.aaguid_group_object import AAGUIDGroupObject
 from okta.models.user_verification_enum import UserVerificationEnum
-from okta.models.web_authn_attachment import WebAuthnAttachment
+from okta.models.web_authn_attachment_enum import WebAuthnAttachmentEnum
+from okta.models.web_authn_rp_id import WebAuthnRpId
 
 
 class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
     """
-    AuthenticatorMethodWebAuthnAllOfSettings
+    The settings for the WebAuthn authenticator method
     """  # noqa: E501
 
+    aaguid_groups: Optional[List[AAGUIDGroupObject]] = Field(
+        default=None,
+        description="The FIDO2 Authenticator Attestation Global Unique Identifiers (AAGUID) groups available to the WebAuthn "
+        "authenticator",
+        alias="aaguidGroups",
+    )
     user_verification: Optional[UserVerificationEnum] = Field(
         default=None, alias="userVerification"
     )
-    attachment: Optional[WebAuthnAttachment] = None
-    __properties: ClassVar[List[str]] = ["userVerification", "attachment"]
+    attachment: Optional[WebAuthnAttachmentEnum] = None
+    rp_id: Optional[WebAuthnRpId] = Field(default=None, alias="rpId")
+    enable_autofill_ui: Optional[StrictBool] = Field(
+        default=False,
+        description='<x-lifecycle-container><x-lifecycle class="ea"></x-lifecycle></x-lifecycle-container>Enables the '
+        'passkeys autofill UI to display available WebAuthn discoverable credentials ("resident key") from the '
+        "Sign-In Widget username field",
+        alias="enableAutofillUI",
+    )
+    __properties: ClassVar[List[str]] = [
+        "aaguidGroups",
+        "userVerification",
+        "attachment",
+        "rpId",
+        "enableAutofillUI",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +105,20 @@ class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in aaguid_groups (list)
+        _items = []
+        if self.aaguid_groups:
+            for _item in self.aaguid_groups:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["aaguidGroups"] = _items
+        # override the default output from pydantic by calling `to_dict()` of rp_id
+        if self.rp_id:
+            if not isinstance(self.rp_id, dict):
+                _dict["rpId"] = self.rp_id.to_dict()
+            else:
+                _dict["rpId"] = self.rp_id
+
         return _dict
 
     @classmethod
@@ -96,8 +132,26 @@ class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "aaguidGroups": (
+                    [
+                        AAGUIDGroupObject.from_dict(_item)
+                        for _item in obj["aaguidGroups"]
+                    ]
+                    if obj.get("aaguidGroups") is not None
+                    else None
+                ),
                 "userVerification": obj.get("userVerification"),
                 "attachment": obj.get("attachment"),
+                "rpId": (
+                    WebAuthnRpId.from_dict(obj["rpId"])
+                    if obj.get("rpId") is not None
+                    else None
+                ),
+                "enableAutofillUI": (
+                    obj.get("enableAutofillUI")
+                    if obj.get("enableAutofillUI") is not None
+                    else False
+                ),
             }
         )
         return _obj

@@ -35,17 +35,31 @@ from typing_extensions import Self
 
 class SocialAuthToken(BaseModel):
     """
-    SocialAuthToken
+    The social authentication token object provides the tokens and associated metadata provided by social providers during
+    social authentication.
     """  # noqa: E501
 
-    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
-    id: Optional[StrictStr] = None
-    scopes: Optional[List[StrictStr]] = None
-    token: Optional[StrictStr] = None
-    token_auth_scheme: Optional[StrictStr] = Field(
-        default=None, alias="tokenAuthScheme"
+    expires_at: Optional[datetime] = Field(
+        default=None, description="Timestamp when the object expires", alias="expiresAt"
     )
-    token_type: Optional[StrictStr] = Field(default=None, alias="tokenType")
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier for the token"
+    )
+    scopes: Optional[List[StrictStr]] = Field(
+        default=None, description="The scopes that the token is good for"
+    )
+    token: Optional[StrictStr] = Field(default=None, description="The raw token")
+    token_auth_scheme: Optional[StrictStr] = Field(
+        default=None,
+        description="The token authentication scheme as defined by the social provider",
+        alias="tokenAuthScheme",
+    )
+    token_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of token defined by the [OAuth Token Exchange Spec]("
+        "https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-07#section-3)",
+        alias="tokenType",
+    )
     __properties: ClassVar[List[str]] = [
         "expiresAt",
         "id",
@@ -86,11 +100,19 @@ class SocialAuthToken(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "expires_at",
                 "id",
+                "scopes",
+                "token",
+                "token_auth_scheme",
+                "token_type",
             ]
         )
 

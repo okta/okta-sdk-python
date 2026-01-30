@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class InlineHookType(str, Enum):
     """
-    InlineHookType
+    One of the inline hook types
     """
 
     """
@@ -41,6 +41,7 @@ class InlineHookType(str, Enum):
         "com.okta.oauth2.tokens.transform"
     )
     COM_DOT_OKTA_DOT_SAML_DOT_TOKENS_DOT_TRANSFORM = "com.okta.saml.tokens.transform"
+    COM_DOT_OKTA_DOT_TELEPHONY_DOT_PROVIDER = "com.okta.telephony.provider"
     COM_DOT_OKTA_DOT_USER_DOT_CREDENTIAL_DOT_PASSWORD_DOT_IMPORT = (
         "com.okta.user.credential.password.import"
     )

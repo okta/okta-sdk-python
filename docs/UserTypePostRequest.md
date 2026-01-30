@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** | The updated human-readable description of the User Type | [optional] 
-**display_name** | **str** | The updated human-readable display name for the User Type | [optional] 
+**description** | **str** | The updated human-readable description of the user type | [optional] 
+**display_name** | **str** | The updated human-readable display name for the user type | [optional] 
 
 ## Example
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **deactivate** | [**HrefObjectDeactivateLink**](HrefObjectDeactivateLink.md) |  | [optional] 
 **suspend** | [**HrefObjectSuspendLink**](HrefObjectSuspendLink.md) |  | [optional] 
 **unsuspend** | [**HrefObjectUnsuspendLink**](HrefObjectUnsuspendLink.md) |  | [optional] 
-**users** | [**HrefObject**](HrefObject.md) | Link to Device users | [optional] 
+**users** | [**HrefObject**](HrefObject.md) | Link to device users | [optional] 
 
 ## Example
 

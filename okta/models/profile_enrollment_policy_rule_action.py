@@ -45,43 +45,83 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
     ProfileEnrollmentPolicyRuleAction
     """  # noqa: E501
 
-    access: Optional[StrictStr] = None
+    access: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates if the user profile is granted access  > **Note:** You can't set the `access` property to "
+        "`DENY` after you create the policy",
+    )
     activation_requirements: Optional[
         ProfileEnrollmentPolicyRuleActivationRequirement
     ] = Field(default=None, alias="activationRequirements")
+    allowed_identifiers: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="A list of attributes to identify an end user. Can be used across Okta sign-in, unlock, and recovery "
+        "flows.",
+        alias="allowedIdentifiers",
+    )
+    enroll_authenticator_types: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Additional authenticator fields that can be used on the first page of user registration. Valid values "
+        "only includes `'password'`.",
+        alias="enrollAuthenticatorTypes",
+    )
     pre_registration_inline_hooks: Optional[List[PreRegistrationInlineHook]] = Field(
-        default=None, alias="preRegistrationInlineHooks"
+        default=None,
+        description="(Optional) The `id` of at most one registration inline hook",
+        alias="preRegistrationInlineHooks",
     )
     profile_attributes: Optional[List[ProfileEnrollmentPolicyRuleProfileAttribute]] = (
-        Field(default=None, alias="profileAttributes")
-    )
-    target_group_ids: Optional[List[StrictStr]] = Field(
-        default=None, alias="targetGroupIds"
-    )
-    unknown_user_action: Optional[StrictStr] = Field(
-        default=None, alias="unknownUserAction"
+        Field(
+            default=None,
+            description="A list of attributes to prompt the user for during registration or progressive profiling. Where "
+            "defined on the user schema, these attributes are persisted in the user profile. You can also add "
+            "non-schema attributes, which aren't persisted to the user's profile, but are included in requests "
+            "to the registration inline hook. A maximum of 10 profile properties is supported.",
+            alias="profileAttributes",
+        )
     )
     progressive_profiling_action: Optional[StrictStr] = Field(
-        default=None, alias="progressiveProfilingAction"
+        default=None,
+        description="Progressive profile enrollment helps evaluate the user profile policy at every user login. Users can be "
+        "prompted to provide input for newly required attributes.",
+        alias="progressiveProfilingAction",
+    )
+    target_group_ids: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="(Optional, max 1 entry) The `id` of a group that this user should be added to",
+        alias="targetGroupIds",
+    )
+    ui_schema_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Value created by the backend. If present, all policy updates must include this attribute/value.",
+        alias="uiSchemaId",
+    )
+    unknown_user_action: Optional[StrictStr] = Field(
+        default=None,
+        description="Which action should be taken if this user is new",
+        alias="unknownUserAction",
     )
     __properties: ClassVar[List[str]] = [
         "access",
         "activationRequirements",
+        "allowedIdentifiers",
+        "enrollAuthenticatorTypes",
         "preRegistrationInlineHooks",
         "profileAttributes",
-        "targetGroupIds",
-        "unknownUserAction",
         "progressiveProfilingAction",
+        "targetGroupIds",
+        "uiSchemaId",
+        "unknownUserAction",
     ]
 
-    @field_validator("unknown_user_action")
-    def unknown_user_action_validate_enum(cls, value):
+    @field_validator("access")
+    def access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["DENY", "REGISTER"]):
-            raise ValueError("must be one of enum values ('DENY', 'REGISTER')")
+        if value not in set(["ALLOW", "DENY"]):
+            raise ValueError("must be one of enum values ('ALLOW', 'DENY')")
         return value
 
     @field_validator("progressive_profiling_action")
@@ -92,6 +132,16 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
 
         if value not in set(["ENABLED", "DISABLED"]):
             raise ValueError("must be one of enum values ('ENABLED', 'DISABLED')")
+        return value
+
+    @field_validator("unknown_user_action")
+    def unknown_user_action_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["DENY", "REGISTER"]):
+            raise ValueError("must be one of enum values ('DENY', 'REGISTER')")
         return value
 
     model_config = ConfigDict(
@@ -138,8 +188,7 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
             else:
                 _dict["activationRequirements"] = self.activation_requirements
 
-        # override the default output from pydantic by calling `to_dict()` of each item in pre_registration_inline_hooks (
-        # list)
+        # override the default output from pydantic by calling `to_dict()` of each item in pre_registration_inline_hooks (list)
         _items = []
         if self.pre_registration_inline_hooks:
             for _item in self.pre_registration_inline_hooks:
@@ -174,6 +223,8 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
                     if obj.get("activationRequirements") is not None
                     else None
                 ),
+                "allowedIdentifiers": obj.get("allowedIdentifiers"),
+                "enrollAuthenticatorTypes": obj.get("enrollAuthenticatorTypes"),
                 "preRegistrationInlineHooks": (
                     [
                         PreRegistrationInlineHook.from_dict(_item)
@@ -190,9 +241,10 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
                     if obj.get("profileAttributes") is not None
                     else None
                 ),
-                "targetGroupIds": obj.get("targetGroupIds"),
-                "unknownUserAction": obj.get("unknownUserAction"),
                 "progressiveProfilingAction": obj.get("progressiveProfilingAction"),
+                "targetGroupIds": obj.get("targetGroupIds"),
+                "uiSchemaId": obj.get("uiSchemaId"),
+                "unknownUserAction": obj.get("unknownUserAction"),
             }
         )
         return _obj

@@ -37,7 +37,7 @@ from okta.models.user_condition import UserCondition
 
 class PolicyPeopleCondition(BaseModel):
     """
-    PolicyPeopleCondition
+    Identifies users and groups that are used together
     """  # noqa: E501
 
     groups: Optional[GroupCondition] = None

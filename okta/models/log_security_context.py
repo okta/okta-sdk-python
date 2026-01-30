@@ -34,20 +34,48 @@ from typing_extensions import Self
 
 class LogSecurityContext(BaseModel):
     """
-    LogSecurityContext
+    The `securityContext` object provides security information that is directly related to the evaluation of the event's IP
+    reputation. IP reputation is a trustworthiness rating that evaluates how likely a sender is to be malicious and is based
+    on the sender's IP address. As the name implies, the `securityContext` object is useful for security
+    applications-flagging and inspecting suspicious events.
     """  # noqa: E501
 
-    as_number: Optional[StrictInt] = Field(default=None, alias="asNumber")
-    as_org: Optional[StrictStr] = Field(default=None, alias="asOrg")
-    domain: Optional[StrictStr] = None
-    isp: Optional[StrictStr] = None
-    is_proxy: Optional[StrictBool] = Field(default=None, alias="isProxy")
+    as_number: Optional[StrictInt] = Field(
+        default=None,
+        description="The [Autonomous system](https://docs.telemetry.mozilla.org/datasets/other/asn_aggregates/reference) "
+        "number that's associated with the autonomous system the event request was sourced to",
+        alias="asNumber",
+    )
+    as_org: Optional[StrictStr] = Field(
+        default=None,
+        description="The organization that is associated with the autonomous system that the event request is sourced to",
+        alias="asOrg",
+    )
+    domain: Optional[StrictStr] = Field(
+        default=None,
+        description="The domain name that's associated with the IP address of the inbound event request",
+    )
+    isp: Optional[StrictStr] = Field(
+        default=None,
+        description="The Internet service provider that's used to send the event's request",
+    )
+    is_proxy: Optional[StrictBool] = Field(
+        default=None,
+        description="Specifies whether an event's request is from a known proxy",
+        alias="isProxy",
+    )
+    user_behaviors: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="The result of the user behavior detection models associated with the event",
+        alias="userBehaviors",
+    )
     __properties: ClassVar[List[str]] = [
         "asNumber",
         "asOrg",
         "domain",
         "isp",
         "isProxy",
+        "userBehaviors",
     ]
 
     model_config = ConfigDict(
@@ -84,6 +112,7 @@ class LogSecurityContext(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
@@ -92,6 +121,7 @@ class LogSecurityContext(BaseModel):
                 "domain",
                 "isp",
                 "is_proxy",
+                "user_behaviors",
             ]
         )
 
@@ -100,6 +130,36 @@ class LogSecurityContext(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if as_number (nullable) is None
+        # and model_fields_set contains the field
+        if self.as_number is None and "as_number" in self.model_fields_set:
+            _dict["asNumber"] = None
+
+        # set to None if as_org (nullable) is None
+        # and model_fields_set contains the field
+        if self.as_org is None and "as_org" in self.model_fields_set:
+            _dict["asOrg"] = None
+
+        # set to None if domain (nullable) is None
+        # and model_fields_set contains the field
+        if self.domain is None and "domain" in self.model_fields_set:
+            _dict["domain"] = None
+
+        # set to None if isp (nullable) is None
+        # and model_fields_set contains the field
+        if self.isp is None and "isp" in self.model_fields_set:
+            _dict["isp"] = None
+
+        # set to None if is_proxy (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_proxy is None and "is_proxy" in self.model_fields_set:
+            _dict["isProxy"] = None
+
+        # set to None if user_behaviors (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_behaviors is None and "user_behaviors" in self.model_fields_set:
+            _dict["userBehaviors"] = None
+
         return _dict
 
     @classmethod
@@ -118,6 +178,7 @@ class LogSecurityContext(BaseModel):
                 "domain": obj.get("domain"),
                 "isp": obj.get("isp"),
                 "isProxy": obj.get("isProxy"),
+                "userBehaviors": obj.get("userBehaviors"),
             }
         )
         return _obj

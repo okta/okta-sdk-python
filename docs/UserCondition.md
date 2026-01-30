@@ -1,6 +1,6 @@
 # UserCondition
 
-Specifies a set of Users to be included or excluded
+Specifies a set of users to be included or excluded
 
 ## Properties
 

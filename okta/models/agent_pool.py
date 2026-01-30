@@ -28,33 +28,48 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing_extensions import Self
 
 from okta.models.agent import Agent
 from okta.models.agent_type import AgentType
+from okta.models.links_self import LinksSelf
 from okta.models.operational_status import OperationalStatus
 
 
 class AgentPool(BaseModel):
     """
-    An AgentPool is a collection of agents that serve a common purpose. An AgentPool has a unique ID within an org,
-    and contains a collection of agents disjoint to every other AgentPool (i.e. no two AgentPools share an Agent).
+    An agent pool is a collection of agents that serve a common purpose. An agent pool has a unique ID within an org,
+    and contains a collection of agents disjoint to every other agent pool, meaning that no two agent pools share an agent.
     """  # noqa: E501
 
     agents: Optional[List[Agent]] = None
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
+    disrupted_agents: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of agents in the pool that are in a disrupted state",
+        alias="disruptedAgents",
+    )
+    id: Optional[StrictStr] = Field(default=None, description="Agent pool ID")
+    inactive_agents: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of agents in the pool that are in an inactive state",
+        alias="inactiveAgents",
+    )
+    name: Optional[StrictStr] = Field(default=None, description="Agent pool name")
     operational_status: Optional[OperationalStatus] = Field(
         default=None, alias="operationalStatus"
     )
     type: Optional[AgentType] = None
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "agents",
+        "disruptedAgents",
         "id",
+        "inactiveAgents",
         "name",
         "operationalStatus",
         "type",
+        "_links",
     ]
 
     model_config = ConfigDict(
@@ -106,6 +121,13 @@ class AgentPool(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["agents"] = _items
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
+
         return _dict
 
     @classmethod
@@ -124,10 +146,17 @@ class AgentPool(BaseModel):
                     if obj.get("agents") is not None
                     else None
                 ),
+                "disruptedAgents": obj.get("disruptedAgents"),
                 "id": obj.get("id"),
+                "inactiveAgents": obj.get("inactiveAgents"),
                 "name": obj.get("name"),
                 "operationalStatus": obj.get("operationalStatus"),
                 "type": obj.get("type"),
+                "_links": (
+                    LinksSelf.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
+                ),
             }
         )
         return _obj

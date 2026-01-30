@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
@@ -37,7 +37,9 @@ class ResourceSetResourcePatchRequest(BaseModel):
     ResourceSetResourcePatchRequest
     """  # noqa: E501
 
-    additions: Optional[List[StrictStr]] = None
+    additions: Optional[List[StrictStr]] = Field(
+        default=None, description="A list of resources to add to the resource set"
+    )
     __properties: ClassVar[List[str]] = ["additions"]
 
     model_config = ConfigDict(

@@ -30,9 +30,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
+from okta.models.lifecycle_status import LifecycleStatus
+from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.trusted_origin_scope import TrustedOriginScope
 
 
@@ -41,16 +43,41 @@ class TrustedOrigin(BaseModel):
     TrustedOrigin
     """  # noqa: E501
 
-    created: Optional[datetime] = None
-    created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
-    id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    last_updated_by: Optional[StrictStr] = Field(default=None, alias="lastUpdatedBy")
-    name: Optional[StrictStr] = None
-    origin: Optional[StrictStr] = None
-    scopes: Optional[List[TrustedOriginScope]] = None
-    status: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the trusted origin was created"
+    )
+    created_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the user who created the trusted origin",
+        alias="createdBy",
+    )
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier for the trusted origin"
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the trusted origin was last updated",
+        alias="lastUpdated",
+    )
+    last_updated_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the user who last updated the trusted origin",
+        alias="lastUpdatedBy",
+    )
+    name: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="Unique name for the trusted origin"
+    )
+    origin: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="Unique origin URL for the trusted origin. The supported schemes for this attribute are HTTP, HTTPS, "
+        "FTP, Ionic 2, and Capacitor.",
+    )
+    scopes: Optional[List[TrustedOriginScope]] = Field(
+        default=None,
+        description="Array of scope types that this trusted origin is used for",
+    )
+    status: Optional[LifecycleStatus] = None
+    links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "created",
         "createdBy",
@@ -151,7 +178,7 @@ class TrustedOrigin(BaseModel):
                 ),
                 "status": obj.get("status"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    LinksSelfAndLifecycle.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

@@ -28,89 +28,168 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictInt,
+    StrictStr,
+    field_validator,
+)
 from typing_extensions import Self
 
 from okta.models.acs_endpoint import AcsEndpoint
+from okta.models.saml_assertion_encryption import SamlAssertionEncryption
 from okta.models.saml_attribute_statement import SamlAttributeStatement
+from okta.models.saml_sp_certificate import SamlSpCertificate
 from okta.models.sign_on_inline_hook import SignOnInlineHook
 from okta.models.single_logout import SingleLogout
 from okta.models.slo_participate import SloParticipate
-from okta.models.sp_certificate import SpCertificate
 
 
 class SamlApplicationSettingsSignOn(BaseModel):
     """
-    SamlApplicationSettingsSignOn
+    SAML 2.0 sign-on attributes. > **Note:** Set either `destinationOverride` or `ssoAcsUrl` to configure any other SAML 2.0
+    attributes in this section.
     """  # noqa: E501
 
     acs_endpoints: Optional[List[AcsEndpoint]] = Field(
-        default=None, alias="acsEndpoints"
+        default=None,
+        description="An array of ACS endpoints. You can configure a maximum of 100 endpoints.",
+        alias="acsEndpoints",
     )
-    allow_multiple_acs_endpoints: Optional[StrictBool] = Field(
-        default=None, alias="allowMultipleAcsEndpoints"
+    allow_multiple_acs_endpoints: StrictBool = Field(
+        description="Determines whether the app allows you to configure multiple ACS URIs",
+        alias="allowMultipleAcsEndpoints",
     )
-    assertion_signed: Optional[StrictBool] = Field(
-        default=None, alias="assertionSigned"
+    assertion_encryption: Optional[SamlAssertionEncryption] = Field(
+        default=None, alias="assertionEncryption"
+    )
+    assertion_signed: StrictBool = Field(
+        description="Determines whether the SAML assertion is digitally signed",
+        alias="assertionSigned",
     )
     attribute_statements: Optional[List[SamlAttributeStatement]] = Field(
-        default=None, alias="attributeStatements"
+        default=None,
+        description="A list of custom attribute statements for the app's SAML assertion. See [SAML 2.0 Technical Overview]("
+        "https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html).  There are "
+        "two types of attribute statements: | Type | Description | | ---- | ----------- | | EXPRESSION | Generic "
+        "attribute statement that can be dynamic and supports [Okta Expression Language]("
+        "https://developer.okta.com/docs/reference/okta-expression-language/) | | GROUP | Group attribute "
+        "statement | ",
+        alias="attributeStatements",
     )
-    audience: Optional[StrictStr] = None
+    audience: StrictStr = Field(
+        description="The entity ID of the SP. Use the entity ID value exactly as provided by the SP."
+    )
     audience_override: Optional[StrictStr] = Field(
-        default=None, alias="audienceOverride"
+        default=None,
+        description="Audience override for CASB configuration. See [CASB config guide]("
+        "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="audienceOverride",
     )
-    authn_context_class_ref: Optional[StrictStr] = Field(
-        default=None, alias="authnContextClassRef"
+    authn_context_class_ref: StrictStr = Field(
+        description="Identifies the SAML authentication context class for the assertion's authentication statement",
+        alias="authnContextClassRef",
     )
     configured_attribute_statements: Optional[List[SamlAttributeStatement]] = Field(
-        default=None, alias="configuredAttributeStatements"
+        default=None,
+        description="The list of dynamic attribute statements for the SAML assertion inherited from app metadata (apps from "
+        "the OIN) during app creation.  There are two types of attribute statements: `EXPRESSION` and `GROUP`. ",
+        alias="configuredAttributeStatements",
     )
     default_relay_state: Optional[StrictStr] = Field(
-        default=None, alias="defaultRelayState"
+        default=None,
+        description="Identifies a specific application resource in an IdP-initiated SSO scenario",
+        alias="defaultRelayState",
     )
-    destination: Optional[StrictStr] = None
+    destination: StrictStr = Field(
+        description="Identifies the location inside the SAML assertion where the SAML response should be sent"
+    )
     destination_override: Optional[StrictStr] = Field(
-        default=None, alias="destinationOverride"
+        default=None,
+        description="Destination override for CASB configuration. See [CASB config guide]("
+        "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="destinationOverride",
     )
-    digest_algorithm: Optional[StrictStr] = Field(default=None, alias="digestAlgorithm")
-    honor_force_authn: Optional[StrictBool] = Field(
-        default=None, alias="honorForceAuthn"
+    digest_algorithm: StrictStr = Field(
+        description="Determines the digest algorithm used to digitally sign the SAML assertion and response",
+        alias="digestAlgorithm",
     )
-    idp_issuer: Optional[StrictStr] = Field(default=None, alias="idpIssuer")
+    honor_force_authn: StrictBool = Field(
+        description="Set to `true` to prompt users for their credentials when a SAML request has the `ForceAuthn` attribute "
+        "set to `true`",
+        alias="honorForceAuthn",
+    )
+    idp_issuer: StrictStr = Field(description="SAML Issuer ID", alias="idpIssuer")
     inline_hooks: Optional[List[SignOnInlineHook]] = Field(
-        default=None, alias="inlineHooks"
+        default=None,
+        description="Associates the app with SAML inline hooks. See [the SAML assertion inline hook reference]("
+        "https://developer.okta.com/docs/reference/saml-hook/).",
+        alias="inlineHooks",
     )
     participate_slo: Optional[SloParticipate] = Field(
         default=None, alias="participateSlo"
     )
-    recipient: Optional[StrictStr] = None
+    recipient: StrictStr = Field(
+        description="The location where the app may present the SAML assertion"
+    )
     recipient_override: Optional[StrictStr] = Field(
-        default=None, alias="recipientOverride"
+        default=None,
+        description="Recipient override for CASB configuration. See [CASB config guide]("
+        "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="recipientOverride",
     )
-    request_compressed: Optional[StrictBool] = Field(
-        default=None, alias="requestCompressed"
+    request_compressed: StrictBool = Field(
+        description="Determines whether the SAML request is expected to be compressed",
+        alias="requestCompressed",
     )
-    response_signed: Optional[StrictBool] = Field(default=None, alias="responseSigned")
-    signature_algorithm: Optional[StrictStr] = Field(
-        default=None, alias="signatureAlgorithm"
+    response_signed: StrictBool = Field(
+        description="Determines whether the SAML authentication response message is digitally signed by the IdP > **Note:** "
+        "Either (or both) `responseSigned` or `assertionSigned` must be `TRUE`.",
+        alias="responseSigned",
+    )
+    saml_assertion_lifetime_seconds: Optional[StrictInt] = Field(
+        default=None,
+        description="Determines the SAML app session lifetimes with Okta",
+        alias="samlAssertionLifetimeSeconds",
+    )
+    signature_algorithm: StrictStr = Field(
+        description="Determines the signing algorithm used to digitally sign the SAML assertion and response",
+        alias="signatureAlgorithm",
     )
     slo: Optional[SingleLogout] = None
-    sp_certificate: Optional[SpCertificate] = Field(default=None, alias="spCertificate")
-    sp_issuer: Optional[StrictStr] = Field(default=None, alias="spIssuer")
-    sso_acs_url: Optional[StrictStr] = Field(default=None, alias="ssoAcsUrl")
+    sp_certificate: Optional[SamlSpCertificate] = Field(
+        default=None, alias="spCertificate"
+    )
+    sp_issuer: Optional[StrictStr] = Field(
+        default=None,
+        description="The issuer ID for the Service Provider. This property appears when SLO is enabled.",
+        alias="spIssuer",
+    )
+    sso_acs_url: StrictStr = Field(
+        description="Single Sign-On Assertion Consumer Service (ACS) URL",
+        alias="ssoAcsUrl",
+    )
     sso_acs_url_override: Optional[StrictStr] = Field(
-        default=None, alias="ssoAcsUrlOverride"
+        default=None,
+        description="Assertion Consumer Service (ACS) URL override for CASB configuration. See [CASB config guide]("
+        "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
+        alias="ssoAcsUrlOverride",
     )
-    subject_name_id_format: Optional[StrictStr] = Field(
-        default=None, alias="subjectNameIdFormat"
+    subject_name_id_format: StrictStr = Field(
+        description="Identifies the SAML processing rules. Supported values:",
+        alias="subjectNameIdFormat",
     )
-    subject_name_id_template: Optional[StrictStr] = Field(
-        default=None, alias="subjectNameIdTemplate"
+    subject_name_id_template: StrictStr = Field(
+        description="Template for app user's username when a user is assigned to the app",
+        alias="subjectNameIdTemplate",
     )
     __properties: ClassVar[List[str]] = [
         "acsEndpoints",
         "allowMultipleAcsEndpoints",
+        "assertionEncryption",
         "assertionSigned",
         "attributeStatements",
         "audience",
@@ -129,6 +208,7 @@ class SamlApplicationSettingsSignOn(BaseModel):
         "recipientOverride",
         "requestCompressed",
         "responseSigned",
+        "samlAssertionLifetimeSeconds",
         "signatureAlgorithm",
         "slo",
         "spCertificate",
@@ -138,6 +218,64 @@ class SamlApplicationSettingsSignOn(BaseModel):
         "subjectNameIdFormat",
         "subjectNameIdTemplate",
     ]
+
+    @field_validator("authn_context_class_ref")
+    def authn_context_class_ref_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(
+            [
+                "urn:federation:authentication:windows",
+                "oasis:names:tc:SAML:2.0:ac:classes:Kerberos",
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:Password",
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient",
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified",
+                "urn:oasis:names:tc:SAML:2.0:ac:classes:X509",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('urn:federation:authentication:windows', "
+                "'oasis:names:tc:SAML:2.0:ac:classes:Kerberos', 'urn:oasis:names:tc:SAML:2.0:ac:classes:Password', "
+                "'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport', "
+                "'urn:oasis:names:tc:SAML:2.0:ac:classes:TLSClient', 'urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified', "
+                "'urn:oasis:names:tc:SAML:2.0:ac:classes:X509')"
+            )
+        return value
+
+    @field_validator("digest_algorithm")
+    def digest_algorithm_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["SHA1", "SHA256"]):
+            raise ValueError("must be one of enum values ('SHA1', 'SHA256')")
+        return value
+
+    @field_validator("signature_algorithm")
+    def signature_algorithm_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["RSA_SHA1", "RSA_SHA256"]):
+            raise ValueError("must be one of enum values ('RSA_SHA1', 'RSA_SHA256')")
+        return value
+
+    @field_validator("subject_name_id_format")
+    def subject_name_id_format_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(
+            [
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+                "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent",
+                "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+                "urn:oasis:names:tc:SAML:1.1:nameid-format:x509SubjectName",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress', "
+                "'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent', "
+                "'urn:oasis:names:tc:SAML:2.0:nameid-format:transient', "
+                "'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified', "
+                "'urn:oasis:names:tc:SAML:1.1:nameid-format:x509SubjectName')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -183,6 +321,13 @@ class SamlApplicationSettingsSignOn(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["acsEndpoints"] = _items
+        # override the default output from pydantic by calling `to_dict()` of assertion_encryption
+        if self.assertion_encryption:
+            if not isinstance(self.assertion_encryption, dict):
+                _dict["assertionEncryption"] = self.assertion_encryption.to_dict()
+            else:
+                _dict["assertionEncryption"] = self.assertion_encryption
+
         # override the default output from pydantic by calling `to_dict()` of each item in attribute_statements (list)
         _items = []
         if self.attribute_statements:
@@ -190,8 +335,8 @@ class SamlApplicationSettingsSignOn(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["attributeStatements"] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in configured_attribute_statements
-        # (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in configured_attribute_statements (
+        # list)
         _items = []
         if self.configured_attribute_statements:
             for _item in self.configured_attribute_statements:
@@ -245,6 +390,11 @@ class SamlApplicationSettingsSignOn(BaseModel):
                     else None
                 ),
                 "allowMultipleAcsEndpoints": obj.get("allowMultipleAcsEndpoints"),
+                "assertionEncryption": (
+                    SamlAssertionEncryption.from_dict(obj["assertionEncryption"])
+                    if obj.get("assertionEncryption") is not None
+                    else None
+                ),
                 "assertionSigned": obj.get("assertionSigned"),
                 "attributeStatements": (
                     [
@@ -285,6 +435,7 @@ class SamlApplicationSettingsSignOn(BaseModel):
                 "recipientOverride": obj.get("recipientOverride"),
                 "requestCompressed": obj.get("requestCompressed"),
                 "responseSigned": obj.get("responseSigned"),
+                "samlAssertionLifetimeSeconds": obj.get("samlAssertionLifetimeSeconds"),
                 "signatureAlgorithm": obj.get("signatureAlgorithm"),
                 "slo": (
                     SingleLogout.from_dict(obj["slo"])
@@ -292,7 +443,7 @@ class SamlApplicationSettingsSignOn(BaseModel):
                     else None
                 ),
                 "spCertificate": (
-                    SpCertificate.from_dict(obj["spCertificate"])
+                    SamlSpCertificate.from_dict(obj["spCertificate"])
                     if obj.get("spCertificate") is not None
                     else None
                 ),

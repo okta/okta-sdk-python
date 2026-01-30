@@ -30,6 +30,7 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.sms_template_type import SmsTemplateType
@@ -43,9 +44,24 @@ class SmsTemplate(BaseModel):
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
     last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = None
-    template: Optional[StrictStr] = None
-    translations: Optional[Dict[str, Any]] = None
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = (
+        Field(default=None, description="Human-readable name of the Template")
+    )
+    template: Optional[
+        Annotated[str, Field(min_length=1, strict=True, max_length=161)]
+    ] = Field(
+        default=None,
+        description="Text of the Template, including any [macros]("
+        "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Template/)",
+    )
+    translations: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="- Template translations are optionally provided when you want to localize the SMS messages. "
+        "Translations are provided as an object that contains `key:value` pairs: the language and the translated "
+        "Template text. The key portion is a two-letter country code that conforms to [ISO 639-1]("
+        "https://www.loc.gov/standards/iso639-2/php/code_list.php). The value is the translated SMS Template. - "
+        "Just like with regular SMS Templates, the length of the SMS message can't exceed 160 characters. ",
+    )
     type: Optional[SmsTemplateType] = None
     __properties: ClassVar[List[str]] = [
         "created",

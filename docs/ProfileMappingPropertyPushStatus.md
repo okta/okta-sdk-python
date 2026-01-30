@@ -1,6 +1,6 @@
 # ProfileMappingPropertyPushStatus
 
-Indicates whether to update target properties for user create and update or just for user create.  Having a pushStatus of `PUSH` causes properties in the target to be updated on create and update. Having a pushStatus of `DONT_PUSH` causes properties in the target to be updated only on create.
+Indicates whether to update target properties for user create and update or just for user create.  - Having a pushStatus of `PUSH` causes properties in the target to be updated on create and update. - Having a pushStatus of `DONT_PUSH` causes properties in the target to be updated only on create.
 
 ## Properties
 

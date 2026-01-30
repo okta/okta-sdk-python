@@ -40,11 +40,11 @@ class AuthenticatorMethodConstraint(BaseModel):
     and Google authenticator (key : 'google_otp') is the only allowed authenticator.
     """  # noqa: E501
 
-    method: Optional[StrictStr] = None
     allowed_authenticators: Optional[List[AuthenticatorIdentity]] = Field(
         default=None, alias="allowedAuthenticators"
     )
-    __properties: ClassVar[List[str]] = ["method", "allowedAuthenticators"]
+    method: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["allowedAuthenticators", "method"]
 
     @field_validator("method")
     def method_validate_enum(cls, value):
@@ -113,7 +113,6 @@ class AuthenticatorMethodConstraint(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "method": obj.get("method"),
                 "allowedAuthenticators": (
                     [
                         AuthenticatorIdentity.from_dict(_item)
@@ -122,6 +121,7 @@ class AuthenticatorMethodConstraint(BaseModel):
                     if obj.get("allowedAuthenticators") is not None
                     else None
                 ),
+                "method": obj.get("method"),
             }
         )
         return _obj

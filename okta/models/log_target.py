@@ -31,21 +31,31 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
+from okta.models.log_target_change_details import LogTargetChangeDetails
+
 
 class LogTarget(BaseModel):
     """
     LogTarget
     """  # noqa: E501
 
-    alternate_id: Optional[StrictStr] = Field(default=None, alias="alternateId")
-    detail_entry: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, alias="detailEntry"
+    alternate_id: Optional[StrictStr] = Field(
+        default=None, description="The alternate ID of the target", alias="alternateId"
     )
-    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    id: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    change_details: Optional[LogTargetChangeDetails] = Field(
+        default=None, alias="changeDetails"
+    )
+    detail_entry: Optional[Dict[str, Any]] = Field(
+        default=None, description="Further details on the target", alias="detailEntry"
+    )
+    display_name: Optional[StrictStr] = Field(
+        default=None, description="The display name of the target", alias="displayName"
+    )
+    id: Optional[StrictStr] = Field(default=None, description="The ID of the target")
+    type: Optional[StrictStr] = Field(default=None, description="The type of target")
     __properties: ClassVar[List[str]] = [
         "alternateId",
+        "changeDetails",
         "detailEntry",
         "displayName",
         "id",
@@ -102,6 +112,13 @@ class LogTarget(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of change_details
+        if self.change_details:
+            if not isinstance(self.change_details, dict):
+                _dict["changeDetails"] = self.change_details.to_dict()
+            else:
+                _dict["changeDetails"] = self.change_details
+
         return _dict
 
     @classmethod
@@ -116,6 +133,11 @@ class LogTarget(BaseModel):
         _obj = cls.model_validate(
             {
                 "alternateId": obj.get("alternateId"),
+                "changeDetails": (
+                    LogTargetChangeDetails.from_dict(obj["changeDetails"])
+                    if obj.get("changeDetails") is not None
+                    else None
+                ),
                 "detailEntry": obj.get("detailEntry"),
                 "displayName": obj.get("displayName"),
                 "id": obj.get("id"),

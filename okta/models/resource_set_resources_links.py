@@ -32,6 +32,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
 from okta.models.href_object import HrefObject
+from okta.models.href_object_next_link import HrefObjectNextLink
 
 
 class ResourceSetResourcesLinks(BaseModel):
@@ -39,7 +40,7 @@ class ResourceSetResourcesLinks(BaseModel):
     ResourceSetResourcesLinks
     """  # noqa: E501
 
-    next: Optional[HrefObject] = None
+    next: Optional[HrefObjectNextLink] = None
     resource_set: Optional[HrefObject] = Field(default=None, alias="resource-set")
     __properties: ClassVar[List[str]] = ["next", "resource-set"]
 
@@ -108,7 +109,7 @@ class ResourceSetResourcesLinks(BaseModel):
         _obj = cls.model_validate(
             {
                 "next": (
-                    HrefObject.from_dict(obj["next"])
+                    HrefObjectNextLink.from_dict(obj["next"])
                     if obj.get("next") is not None
                     else None
                 ),

@@ -5,8 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**next** | [**HrefObject**](HrefObject.md) |  | [optional] 
-**binding** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
+**next** | [**ResourceSetBindingMembersLinksAllOfNext**](ResourceSetBindingMembersLinksAllOfNext.md) |  | [optional] 
+**binding** | [**HrefObjectBindingLink**](HrefObjectBindingLink.md) |  | [optional] 
 
 ## Example
 

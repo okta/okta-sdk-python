@@ -42,19 +42,19 @@ class Realm(BaseModel):
     """  # noqa: E501
 
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the Realm was created"
+        default=None, description="Timestamp when the realm was created"
     )
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique key for the Realm"
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique ID for the realm")
     is_default: Optional[StrictBool] = Field(
         default=None,
-        description="Conveys whether the Realm is the default",
+        description="Indicates the default realm. Existing users will start out in the default realm and can be moved to "
+        "other realms individually or through realm assignments. See [Realms Assignments API]("
+        "/openapi/okta-management/management/tag/RealmAssignment/).",
         alias="isDefault",
     )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the Realm was last updated",
+        description="Timestamp when the realm was updated",
         alias="lastUpdated",
     )
     profile: Optional[RealmProfile] = None

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class NetworkZoneAddressType(str, Enum):
     """
-    Format of the value
+    Format of the IP addresses
     """
 
     """

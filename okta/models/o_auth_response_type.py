@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OAuthResponseType(str, Enum):
     """
-    OAuthResponseType
+    Array of OAuth 2.0 response type strings
     """
 
     """

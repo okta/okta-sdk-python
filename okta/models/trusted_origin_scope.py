@@ -41,7 +41,9 @@ class TrustedOriginScope(BaseModel):
     """  # noqa: E501
 
     allowed_okta_apps: Optional[List[IframeEmbedScopeAllowedApps]] = Field(
-        default=None, alias="allowedOktaApps"
+        default=None,
+        description="The allowed Okta apps for the trusted origin scope",
+        alias="allowedOktaApps",
     )
     type: Optional[TrustedOriginScopeType] = None
     __properties: ClassVar[List[str]] = ["allowedOktaApps", "type"]

@@ -31,8 +31,6 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.role_permission_type import RolePermissionType
-
 
 class CreateIamRoleRequest(BaseModel):
     """
@@ -41,9 +39,9 @@ class CreateIamRoleRequest(BaseModel):
 
     description: StrictStr = Field(description="Description of the role")
     label: StrictStr = Field(description="Unique label for the role")
-    permissions: List[RolePermissionType] = Field(
-        description="Array of permissions that the role will grant. See [Permission Types]("
-                    "https://developer.okta.com/docs/concepts/role-assignment/#permission-types)."
+    permissions: List[StrictStr] = Field(
+        description="Array of permissions that the role grants. See [Permissions]("
+        "/openapi/okta-management/guides/permissions)."
     )
     __properties: ClassVar[List[str]] = ["description", "label", "permissions"]
 

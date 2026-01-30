@@ -30,13 +30,13 @@ from typing_extensions import Self
 
 class OAuth2ScopeConsentType(str, Enum):
     """
-    OAuth2ScopeConsentType
+    Indicates whether a consent dialog is needed for the Scope
     """
 
     """
     allowed enum values
     """
-    ADMIN = "ADMIN"
+    FLEXIBLE = "FLEXIBLE"
     IMPLICIT = "IMPLICIT"
     REQUIRED = "REQUIRED"
 

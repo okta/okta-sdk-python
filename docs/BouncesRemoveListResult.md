@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**errors** | [**List[BouncesRemoveListError]**](BouncesRemoveListError.md) |  | [optional] 
+**errors** | [**List[BouncesRemoveListError]**](BouncesRemoveListError.md) | A list of emails that wasn&#39;t added to the email-bounced remove list and the error reason | [optional] 
 
 ## Example
 

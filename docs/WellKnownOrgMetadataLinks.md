@@ -1,12 +1,13 @@
 # WellKnownOrgMetadataLinks
 
+Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for this object using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**alternate** | [**HrefObject**](HrefObject.md) |  | [optional] 
-**organization** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**alternate** | [**WellKnownOrgMetadataLinksAlternate**](WellKnownOrgMetadataLinksAlternate.md) |  | [optional] 
+**organization** | [**WellKnownOrgMetadataLinksOrganization**](WellKnownOrgMetadataLinksOrganization.md) |  | [optional] 
 
 ## Example
 

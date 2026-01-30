@@ -31,30 +31,45 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
+from okta.models.access_policy_link import AccessPolicyLink
+from okta.models.groups_link import GroupsLink
+from okta.models.help_link import HelpLink
 from okta.models.href_object import HrefObject
 from okta.models.href_object_activate_link import HrefObjectActivateLink
 from okta.models.href_object_deactivate_link import HrefObjectDeactivateLink
 from okta.models.href_object_self_link import HrefObjectSelfLink
+from okta.models.metadata_link import MetadataLink
+from okta.models.users_link import UsersLink
 
 
 class ApplicationLinks(BaseModel):
     """
-    ApplicationLinks
+    Discoverable resources related to the app
     """  # noqa: E501
 
-    access_policy: Optional[HrefObject] = Field(default=None, alias="accessPolicy")
+    access_policy: Optional[AccessPolicyLink] = Field(
+        default=None, alias="accessPolicy"
+    )
     activate: Optional[HrefObjectActivateLink] = None
+    app_links: Optional[List[HrefObject]] = Field(
+        default=None, description="List of app link resources", alias="appLinks"
+    )
     deactivate: Optional[HrefObjectDeactivateLink] = None
-    groups: Optional[HrefObject] = None
-    logo: Optional[List[HrefObject]] = None
-    metadata: Optional[HrefObject] = None
+    groups: Optional[GroupsLink] = None
+    help: Optional[HelpLink] = None
+    logo: Optional[List[HrefObject]] = Field(
+        default=None, description="List of app logo resources"
+    )
+    metadata: Optional[MetadataLink] = None
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
-    users: Optional[HrefObject] = None
+    users: Optional[UsersLink] = None
     __properties: ClassVar[List[str]] = [
         "accessPolicy",
         "activate",
+        "appLinks",
         "deactivate",
         "groups",
+        "help",
         "logo",
         "metadata",
         "self",
@@ -112,6 +127,13 @@ class ApplicationLinks(BaseModel):
             else:
                 _dict["activate"] = self.activate
 
+        # override the default output from pydantic by calling `to_dict()` of each item in app_links (list)
+        _items = []
+        if self.app_links:
+            for _item in self.app_links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["appLinks"] = _items
         # override the default output from pydantic by calling `to_dict()` of deactivate
         if self.deactivate:
             if not isinstance(self.deactivate, dict):
@@ -125,6 +147,13 @@ class ApplicationLinks(BaseModel):
                 _dict["groups"] = self.groups.to_dict()
             else:
                 _dict["groups"] = self.groups
+
+        # override the default output from pydantic by calling `to_dict()` of help
+        if self.help:
+            if not isinstance(self.help, dict):
+                _dict["help"] = self.help.to_dict()
+            else:
+                _dict["help"] = self.help
 
         # override the default output from pydantic by calling `to_dict()` of each item in logo (list)
         _items = []
@@ -168,7 +197,7 @@ class ApplicationLinks(BaseModel):
         _obj = cls.model_validate(
             {
                 "accessPolicy": (
-                    HrefObject.from_dict(obj["accessPolicy"])
+                    AccessPolicyLink.from_dict(obj["accessPolicy"])
                     if obj.get("accessPolicy") is not None
                     else None
                 ),
@@ -177,14 +206,24 @@ class ApplicationLinks(BaseModel):
                     if obj.get("activate") is not None
                     else None
                 ),
+                "appLinks": (
+                    [HrefObject.from_dict(_item) for _item in obj["appLinks"]]
+                    if obj.get("appLinks") is not None
+                    else None
+                ),
                 "deactivate": (
                     HrefObjectDeactivateLink.from_dict(obj["deactivate"])
                     if obj.get("deactivate") is not None
                     else None
                 ),
                 "groups": (
-                    HrefObject.from_dict(obj["groups"])
+                    GroupsLink.from_dict(obj["groups"])
                     if obj.get("groups") is not None
+                    else None
+                ),
+                "help": (
+                    HelpLink.from_dict(obj["help"])
+                    if obj.get("help") is not None
                     else None
                 ),
                 "logo": (
@@ -193,7 +232,7 @@ class ApplicationLinks(BaseModel):
                     else None
                 ),
                 "metadata": (
-                    HrefObject.from_dict(obj["metadata"])
+                    MetadataLink.from_dict(obj["metadata"])
                     if obj.get("metadata") is not None
                     else None
                 ),
@@ -203,7 +242,7 @@ class ApplicationLinks(BaseModel):
                     else None
                 ),
                 "users": (
-                    HrefObject.from_dict(obj["users"])
+                    UsersLink.from_dict(obj["users"])
                     if obj.get("users") is not None
                     else None
                 ),

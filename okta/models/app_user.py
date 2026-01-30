@@ -40,74 +40,67 @@ from okta.models.links_app_and_user import LinksAppAndUser
 
 class AppUser(BaseModel):
     """
-    The App User object defines a user's app-specific profile and credentials for an app.
+    The application user object defines a user's app-specific profile and credentials for an app
     """  # noqa: E501
 
-    created: datetime = Field(
-        description="Timestamp when the App User object was created"
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the object was created"
     )
     credentials: Optional[AppUserCredentials] = None
     external_id: Optional[StrictStr] = Field(
         default=None,
-        description="The ID of the user in the target app that's linked to the Okta "
-                    "App User object. This value is the native app-specific identifier "
-                    "or primary key for the user in the target app.  The `externalId` "
-                    "is set during import when the user is confirmed (reconciled) or "
-                    "during provisioning when the user has been successfully created "
-                    "in the target app. This value isn't populated for SSO app "
-                    "assignments (for example, SAML or SWA) because it isn't "
-                    "synchronized with a target app.",
+        description="The ID of the user in the target app that's linked to the Okta application user object. This value is "
+        "the native app-specific identifier or primary key for the user in the target app.  The `externalId` is "
+        "set during import when the user is confirmed (reconciled) or during provisioning when the user is "
+        "created in the target app. This value isn't populated for SSO app assignments (for example, "
+        "SAML or SWA) because it isn't synchronized with a target app.",
         alias="externalId",
     )
     id: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique identifier of the App User object (only required for apps with "
-                    "`signOnMode` or authentication schemes that don't require credentials)",
+        default=None, description="Unique identifier for the Okta user"
     )
     last_sync: Optional[datetime] = Field(
         default=None,
-        description="Timestamp of the last synchronization operation. This value is only "
-                    "updated for apps with the `IMPORT_PROFILE_UPDATES` or `PUSH "
-                    "PROFILE_UPDATES` feature.",
+        description="Timestamp of the last synchronization operation. This value is only updated for apps with the "
+        "`IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature.",
         alias="lastSync",
     )
-    last_updated: datetime = Field(
-        description="Timestamp when App User was last updated", alias="lastUpdated"
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated",
     )
     password_changed: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the App User password was last changed",
+        description="Timestamp when the application user password was last changed",
         alias="passwordChanged",
     )
-    profile: Optional[Dict[str, Dict[str, Any]]] = Field(
+    profile: Optional[Dict[str, Any]] = Field(
         default=None,
-        description="App user profiles are app-specific and can be "
-                    "customized by the Profile Editor in the Admin "
-                    "Console. SSO apps typically don't support app user "
-                    "profiles, while apps with user provisioning features "
-                    "have app-specific profiles. Properties that are "
-                    "visible in the Admin Console for an app assignment "
-                    "can also be assigned through the API. Some properties "
-                    "are reference properties that are imported from the "
-                    "target app and can't be configured.",
+        description="Specifies the default and custom profile properties for a user. Properties that are visible in the "
+        "Admin Console for an app assignment can also be assigned through the API. Some properties are reference "
+        "properties that are imported from the target app and can't be configured. See [profile]("
+        "/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response"
+        "). ",
     )
-    scope: StrictStr = Field(
-        description="Toggles the assignment between user or group scope"
+    scope: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates if the assignment is direct (`USER`) or by group membership (`GROUP`).",
     )
-    status: AppUserStatus
-    status_changed: datetime = Field(
-        description="Timestamp when the App User status was last changed",
+    status: Optional[AppUserStatus] = None
+    status_changed: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the application user status was last changed",
         alias="statusChanged",
     )
     sync_state: Optional[AppUserSyncState] = Field(default=None, alias="syncState")
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
         default=None,
-        description="Embedded resources related to the App User using the "
-                    "[JSON Hypertext Application Language]("
-                    "https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification",
+        description="Embedded resources related to the application user using the [JSON Hypertext Application Language]("
+        "https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification",
         alias="_embedded",
     )
-    links: LinksAppAndUser = Field(alias="_links")
+    links: Optional[LinksAppAndUser] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "created",
         "credentials",
@@ -128,6 +121,9 @@ class AppUser(BaseModel):
     @field_validator("scope")
     def scope_validate_enum(cls, value):
         """Validates the enum"""
+        if value is None:
+            return value
+
         if value not in set(["USER", "GROUP"]):
             raise ValueError("must be one of enum values ('USER', 'GROUP')")
         return value
@@ -203,8 +199,8 @@ class AppUser(BaseModel):
         # set to None if password_changed (nullable) is None
         # and model_fields_set contains the field
         if (
-                self.password_changed is None
-                and "password_changed" in self.model_fields_set
+            self.password_changed is None
+            and "password_changed" in self.model_fields_set
         ):
             _dict["passwordChanged"] = None
 

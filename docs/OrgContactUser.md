@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**user_id** | **str** | Contact user ID | [optional] 
+**links** | [**OrgContactUserLinks**](OrgContactUserLinks.md) |  | [optional] 
 
 ## Example
 

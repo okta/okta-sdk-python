@@ -5,14 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**consent** | [**OAuth2ScopeConsentType**](OAuth2ScopeConsentType.md) |  | [optional] 
-**default** | **bool** |  | [optional] 
-**description** | **str** |  | [optional] 
-**display_name** | **str** |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**metadata_publish** | [**OAuth2ScopeMetadataPublish**](OAuth2ScopeMetadataPublish.md) |  | [optional] 
-**name** | **str** |  | [optional] 
-**system** | **bool** |  | [optional] 
+**consent** | [**OAuth2ScopeConsentType**](OAuth2ScopeConsentType.md) |  | [optional] [default to OAuth2ScopeConsentType.IMPLICIT]
+**default** | **bool** | Indicates if this Scope is a default scope | [optional] [default to False]
+**description** | **str** | Description of the Scope | [optional] 
+**display_name** | **str** | Name of the end user displayed in a consent dialog | [optional] 
+**id** | **str** | Scope object ID | [optional] [readonly] 
+**metadata_publish** | [**OAuth2ScopeMetadataPublish**](OAuth2ScopeMetadataPublish.md) |  | [optional] [default to OAuth2ScopeMetadataPublish.NO_CLIENTS]
+**name** | **str** | Scope name | 
+**optional** | **bool** | Indicates whether the Scope is optional. When set to &#x60;true&#x60;, the user can skip consent for the scope. | [optional] [default to False]
+**system** | **bool** | Indicates if Okta created the Scope | [optional] [default to False]
+**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example
 

@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
@@ -37,8 +37,10 @@ class UserSchemaAttributeEnum(BaseModel):
     UserSchemaAttributeEnum
     """  # noqa: E501
 
-    const: Optional[StrictStr] = None
-    title: Optional[StrictStr] = None
+    const: Optional[StrictStr] = Field(default=None, description="The enumerated value")
+    title: Optional[StrictStr] = Field(
+        default=None, description="The display label for the enumerated value"
+    )
     __properties: ClassVar[List[str]] = ["const", "title"]
 
     model_config = ConfigDict(

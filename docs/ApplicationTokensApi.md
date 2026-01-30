@@ -4,18 +4,18 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_o_auth2_token_for_application**](ApplicationTokensApi.md#get_o_auth2_token_for_application) | **GET** /api/v1/apps/{appId}/tokens/{tokenId} | Retrieve an OAuth 2.0 Token
-[**list_o_auth2_tokens_for_application**](ApplicationTokensApi.md#list_o_auth2_tokens_for_application) | **GET** /api/v1/apps/{appId}/tokens | List all OAuth 2.0 Tokens
-[**revoke_o_auth2_token_for_application**](ApplicationTokensApi.md#revoke_o_auth2_token_for_application) | **DELETE** /api/v1/apps/{appId}/tokens/{tokenId} | Revoke an OAuth 2.0 Token
-[**revoke_o_auth2_tokens_for_application**](ApplicationTokensApi.md#revoke_o_auth2_tokens_for_application) | **DELETE** /api/v1/apps/{appId}/tokens | Revoke all OAuth 2.0 Tokens
+[**get_o_auth2_token_for_application**](ApplicationTokensApi.md#get_o_auth2_token_for_application) | **GET** /api/v1/apps/{appId}/tokens/{tokenId} | Retrieve an application token
+[**list_o_auth2_tokens_for_application**](ApplicationTokensApi.md#list_o_auth2_tokens_for_application) | **GET** /api/v1/apps/{appId}/tokens | List all application refresh tokens
+[**revoke_o_auth2_token_for_application**](ApplicationTokensApi.md#revoke_o_auth2_token_for_application) | **DELETE** /api/v1/apps/{appId}/tokens/{tokenId} | Revoke an application token
+[**revoke_o_auth2_tokens_for_application**](ApplicationTokensApi.md#revoke_o_auth2_tokens_for_application) | **DELETE** /api/v1/apps/{appId}/tokens | Revoke all application tokens
 
 
 # **get_o_auth2_token_for_application**
-> OAuth2Token get_o_auth2_token_for_application(app_id, token_id, expand=expand)
+> OAuth2RefreshToken get_o_auth2_token_for_application(app_id, token_id, expand=expand)
 
-Retrieve an OAuth 2.0 Token
+Retrieve an application token
 
-Retrieves a token for the specified application
+Retrieves a refresh token for the specified app
 
 ### Example
 
@@ -24,7 +24,7 @@ Retrieves a token for the specified application
 
 ```python
 import okta
-from okta.models.o_auth2_token import OAuth2Token
+from okta.models.o_auth2_refresh_token import OAuth2RefreshToken
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -51,12 +51,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationTokensApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
     token_id = 'sHHSth53yJAyNSTQKDJZ' # str | `id` of Token
-    expand = 'expand_example' # str |  (optional)
+    expand = 'scope' # str | An optional parameter to return scope details in the `_embedded` property. Valid value: `scope` (optional)
 
     try:
-        # Retrieve an OAuth 2.0 Token
+        # Retrieve an application token
         api_response = api_instance.get_o_auth2_token_for_application(app_id, token_id, expand=expand)
         print("The response of ApplicationTokensApi->get_o_auth2_token_for_application:\n")
         pprint(api_response)
@@ -71,13 +71,13 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
+ **app_id** | **str**| Application ID | 
  **token_id** | **str**| &#x60;id&#x60; of Token | 
- **expand** | **str**|  | [optional] 
+ **expand** | **str**| An optional parameter to return scope details in the &#x60;_embedded&#x60; property. Valid value: &#x60;scope&#x60; | [optional] 
 
 ### Return type
 
-[**OAuth2Token**](OAuth2Token.md)
+[**OAuth2RefreshToken**](OAuth2RefreshToken.md)
 
 ### Authorization
 
@@ -100,11 +100,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_o_auth2_tokens_for_application**
-> List[OAuth2Token] list_o_auth2_tokens_for_application(app_id, expand=expand, after=after, limit=limit)
+> List[OAuth2RefreshToken] list_o_auth2_tokens_for_application(app_id, expand=expand, after=after, limit=limit)
 
-List all OAuth 2.0 Tokens
+List all application refresh tokens
 
-Lists all tokens for the application
+Lists all refresh tokens for an app  > **Note:** The results are [paginated](/#pagination) according to the `limit` parameter. > If there are multiple pages of results, the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). 
 
 ### Example
 
@@ -113,7 +113,7 @@ Lists all tokens for the application
 
 ```python
 import okta
-from okta.models.o_auth2_token import OAuth2Token
+from okta.models.o_auth2_refresh_token import OAuth2RefreshToken
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -140,13 +140,13 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationTokensApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    expand = 'expand_example' # str |  (optional)
-    after = 'after_example' # str |  (optional)
-    limit = 20 # int |  (optional) (default to 20)
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    expand = 'scope' # str | An optional parameter to return scope details in the `_embedded` property. Valid value: `scope` (optional)
+    after = '16275000448691' # str | Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](/#pagination). (optional)
+    limit = 20 # int | A limit on the number of objects to return (optional) (default to 20)
 
     try:
-        # List all OAuth 2.0 Tokens
+        # List all application refresh tokens
         api_response = api_instance.list_o_auth2_tokens_for_application(app_id, expand=expand, after=after, limit=limit)
         print("The response of ApplicationTokensApi->list_o_auth2_tokens_for_application:\n")
         pprint(api_response)
@@ -161,14 +161,14 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **expand** | **str**|  | [optional] 
- **after** | **str**|  | [optional] 
- **limit** | **int**|  | [optional] [default to 20]
+ **app_id** | **str**| Application ID | 
+ **expand** | **str**| An optional parameter to return scope details in the &#x60;_embedded&#x60; property. Valid value: &#x60;scope&#x60; | [optional] 
+ **after** | **str**| Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](/#pagination). | [optional] 
+ **limit** | **int**| A limit on the number of objects to return | [optional] [default to 20]
 
 ### Return type
 
-[**List[OAuth2Token]**](OAuth2Token.md)
+[**List[OAuth2RefreshToken]**](OAuth2RefreshToken.md)
 
 ### Authorization
 
@@ -193,9 +193,9 @@ Name | Type | Description  | Notes
 # **revoke_o_auth2_token_for_application**
 > revoke_o_auth2_token_for_application(app_id, token_id)
 
-Revoke an OAuth 2.0 Token
+Revoke an application token
 
-Revokes the specified token for the specified application
+Revokes the specified token for the specified app
 
 ### Example
 
@@ -230,11 +230,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationTokensApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
     token_id = 'sHHSth53yJAyNSTQKDJZ' # str | `id` of Token
 
     try:
-        # Revoke an OAuth 2.0 Token
+        # Revoke an application token
         api_instance.revoke_o_auth2_token_for_application(app_id, token_id)
     except Exception as e:
         print("Exception when calling ApplicationTokensApi->revoke_o_auth2_token_for_application: %s\n" % e)
@@ -247,7 +247,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
+ **app_id** | **str**| Application ID | 
  **token_id** | **str**| &#x60;id&#x60; of Token | 
 
 ### Return type
@@ -277,9 +277,9 @@ void (empty response body)
 # **revoke_o_auth2_tokens_for_application**
 > revoke_o_auth2_tokens_for_application(app_id)
 
-Revoke all OAuth 2.0 Tokens
+Revoke all application tokens
 
-Revokes all tokens for the specified application
+Revokes all OAuth 2.0 refresh tokens for the specified app. Any access tokens issued with these refresh tokens are also revoked, but access tokens issued without a refresh token aren't affected.
 
 ### Example
 
@@ -314,10 +314,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationTokensApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
 
     try:
-        # Revoke all OAuth 2.0 Tokens
+        # Revoke all application tokens
         api_instance.revoke_o_auth2_tokens_for_application(app_id)
     except Exception as e:
         print("Exception when calling ApplicationTokensApi->revoke_o_auth2_tokens_for_application: %s\n" % e)
@@ -330,7 +330,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
+ **app_id** | **str**| Application ID | 
 
 ### Return type
 

@@ -28,7 +28,8 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.o_auth_endpoint_authentication_method import (
@@ -42,15 +43,41 @@ class ApplicationCredentialsOAuthClient(BaseModel):
     """  # noqa: E501
 
     auto_key_rotation: Optional[StrictBool] = Field(
-        default=None, alias="autoKeyRotation"
+        default=True, description="Requested key rotation mode", alias="autoKeyRotation"
     )
-    client_id: Optional[StrictStr] = None
-    client_secret: Optional[StrictStr] = None
-    token_endpoint_auth_method: Optional[OAuthEndpointAuthenticationMethod] = None
+    client_id: Optional[
+        Annotated[str, Field(min_length=6, strict=True, max_length=100)]
+    ] = Field(
+        default=None,
+        description="Unique identifier for the OAuth 2.0 client app  > **Notes:** > * If you don't specify the `client_id`, "
+        "this immutable property is populated with the [Application instance ID]("
+        "/openapi/okta-management/management/tag/Application/#tag/Application/operation/getApplication!c=200"
+        "&path=4/id&t=response). > * The `client_id` must consist of alphanumeric characters or the following "
+        "special characters: `$-_.+!*'(),`. > * You can't use the reserved word `ALL_CLIENTS`.",
+    )
+    client_secret: Optional[
+        Annotated[str, Field(min_length=14, strict=True, max_length=100)]
+    ] = Field(
+        default=None,
+        description="OAuth 2.0 client secret string (used for confidential clients)  > **Notes:** If a `client_secret` isn't "
+        "provided on creation, and the `token_endpoint_auth_method` requires one, Okta generates a random "
+        "`client_secret` for the client app. > The `client_secret` is only shown when an OAuth 2.0 client app is "
+        "created or updated (and only if the `token_endpoint_auth_method` requires a client secret).",
+    )
+    pkce_required: Optional[StrictBool] = Field(
+        default=True,
+        description="Requires Proof Key for Code Exchange (PKCE) for additional verification. If "
+        "`token_endpoint_auth_method` is `none`, then `pkce_required` must be `true`. The default is `true` for "
+        "browser and native app types.",
+    )
+    token_endpoint_auth_method: Optional[OAuthEndpointAuthenticationMethod] = (
+        OAuthEndpointAuthenticationMethod.CLIENT_SECRET_BASIC
+    )
     __properties: ClassVar[List[str]] = [
         "autoKeyRotation",
         "client_id",
         "client_secret",
+        "pkce_required",
         "token_endpoint_auth_method",
     ]
 
@@ -104,9 +131,18 @@ class ApplicationCredentialsOAuthClient(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "autoKeyRotation": obj.get("autoKeyRotation"),
+                "autoKeyRotation": (
+                    obj.get("autoKeyRotation")
+                    if obj.get("autoKeyRotation") is not None
+                    else True
+                ),
                 "client_id": obj.get("client_id"),
                 "client_secret": obj.get("client_secret"),
+                "pkce_required": (
+                    obj.get("pkce_required")
+                    if obj.get("pkce_required") is not None
+                    else True
+                ),
                 "token_endpoint_auth_method": obj.get("token_endpoint_auth_method"),
             }
         )

@@ -4,17 +4,17 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_ui_schema**](UISchemaApi.md#create_ui_schema) | **POST** /api/v1/meta/uischemas | Create a UI Schema
-[**delete_ui_schemas**](UISchemaApi.md#delete_ui_schemas) | **DELETE** /api/v1/meta/uischemas/{id} | Delete a UI Schema
-[**get_ui_schema**](UISchemaApi.md#get_ui_schema) | **GET** /api/v1/meta/uischemas/{id} | Retrieve a UI Schema
-[**list_ui_schemas**](UISchemaApi.md#list_ui_schemas) | **GET** /api/v1/meta/uischemas | List all UI Schemas
-[**replace_ui_schemas**](UISchemaApi.md#replace_ui_schemas) | **PUT** /api/v1/meta/uischemas/{id} | Replace a UI Schema
+[**create_ui_schema**](UISchemaApi.md#create_ui_schema) | **POST** /api/v1/meta/uischemas | Create a UI schema
+[**delete_ui_schemas**](UISchemaApi.md#delete_ui_schemas) | **DELETE** /api/v1/meta/uischemas/{id} | Delete a UI schema
+[**get_ui_schema**](UISchemaApi.md#get_ui_schema) | **GET** /api/v1/meta/uischemas/{id} | Retrieve a UI schema
+[**list_ui_schemas**](UISchemaApi.md#list_ui_schemas) | **GET** /api/v1/meta/uischemas | List all UI schemas
+[**replace_ui_schemas**](UISchemaApi.md#replace_ui_schemas) | **PUT** /api/v1/meta/uischemas/{id} | Replace a UI schema
 
 
 # **create_ui_schema**
 > UISchemasResponseObject create_ui_schema(uischemabody)
 
-Create a UI Schema
+Create a UI schema
 
 Creates an input for an enrollment form
 
@@ -56,7 +56,7 @@ with okta.ApiClient(configuration) as api_client:
     uischemabody = okta.CreateUISchema() # CreateUISchema | 
 
     try:
-        # Create a UI Schema
+        # Create a UI schema
         api_response = api_instance.create_ui_schema(uischemabody)
         print("The response of UISchemaApi->create_ui_schema:\n")
         pprint(api_response)
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 # **delete_ui_schemas**
 > delete_ui_schemas(id)
 
-Delete a UI Schema
+Delete a UI schema
 
 Deletes a UI Schema by `id`
 
@@ -140,7 +140,7 @@ with okta.ApiClient(configuration) as api_client:
     id = 'uis4a7liocgcRgcxZ0g7' # str | The unique ID of the UI Schema
 
     try:
-        # Delete a UI Schema
+        # Delete a UI schema
         api_instance.delete_ui_schemas(id)
     except Exception as e:
         print("Exception when calling UISchemaApi->delete_ui_schemas: %s\n" % e)
@@ -183,7 +183,7 @@ void (empty response body)
 # **get_ui_schema**
 > UISchemasResponseObject get_ui_schema(id)
 
-Retrieve a UI Schema
+Retrieve a UI schema
 
 Retrieves a UI Schema by `id`
 
@@ -224,7 +224,7 @@ with okta.ApiClient(configuration) as api_client:
     id = 'uis4a7liocgcRgcxZ0g7' # str | The unique ID of the UI Schema
 
     try:
-        # Retrieve a UI Schema
+        # Retrieve a UI schema
         api_response = api_instance.get_ui_schema(id)
         print("The response of UISchemaApi->get_ui_schema:\n")
         pprint(api_response)
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 # **list_ui_schemas**
 > List[UISchemasResponseObject] list_ui_schemas()
 
-List all UI Schemas
+List all UI schemas
 
 Lists all UI Schemas in your org
 
@@ -308,7 +308,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.UISchemaApi(api_client)
 
     try:
-        # List all UI Schemas
+        # List all UI schemas
         api_response = api_instance.list_ui_schemas()
         print("The response of UISchemaApi->list_ui_schemas:\n")
         pprint(api_response)
@@ -348,7 +348,7 @@ This endpoint does not need any parameter.
 # **replace_ui_schemas**
 > UISchemasResponseObject replace_ui_schemas(id, update_ui_schema_body)
 
-Replace a UI Schema
+Replace a UI schema
 
 Replaces a UI Schema by `id`
 
@@ -391,7 +391,7 @@ with okta.ApiClient(configuration) as api_client:
     update_ui_schema_body = okta.UpdateUISchema() # UpdateUISchema | 
 
     try:
-        # Replace a UI Schema
+        # Replace a UI schema
         api_response = api_instance.replace_ui_schemas(id, update_ui_schema_body)
         print("The response of UISchemaApi->replace_ui_schemas:\n")
         pprint(api_response)

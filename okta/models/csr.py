@@ -29,8 +29,10 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
+
+from okta.models.csr_links import CSRLinks
 
 
 class Csr(BaseModel):
@@ -38,11 +40,14 @@ class Csr(BaseModel):
     Csr
     """  # noqa: E501
 
-    created: Optional[datetime] = None
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the object was created"
+    )
     csr: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
     kty: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["created", "csr", "id", "kty"]
+    links: Optional[CSRLinks] = Field(default=None, alias="_links")
+    __properties: ClassVar[List[str]] = ["created", "csr", "id", "kty", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,6 +97,13 @@ class Csr(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
+
         return _dict
 
     @classmethod
@@ -109,6 +121,11 @@ class Csr(BaseModel):
                 "csr": obj.get("csr"),
                 "id": obj.get("id"),
                 "kty": obj.get("kty"),
+                "_links": (
+                    CSRLinks.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
+                ),
             }
         )
         return _obj

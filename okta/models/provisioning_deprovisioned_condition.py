@@ -38,7 +38,7 @@ from okta.models.provisioning_deprovisioned_action import (
 
 class ProvisioningDeprovisionedCondition(BaseModel):
     """
-    ProvisioningDeprovisionedCondition
+    Behavior for a previously deprovisioned IdP user during authentication. Not supported with OIDC IdPs.
     """  # noqa: E501
 
     action: Optional[ProvisioningDeprovisionedAction] = None

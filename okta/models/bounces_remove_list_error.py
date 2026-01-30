@@ -37,8 +37,14 @@ class BouncesRemoveListError(BaseModel):
     BouncesRemoveListError
     """  # noqa: E501
 
-    email_address: Optional[StrictStr] = Field(default=None, alias="emailAddress")
-    reason: Optional[StrictStr] = None
+    email_address: Optional[StrictStr] = Field(
+        default=None,
+        description="An email address with a validation error",
+        alias="emailAddress",
+    )
+    reason: Optional[StrictStr] = Field(
+        default=None, description="Validation error reason"
+    )
     __properties: ClassVar[List[str]] = ["emailAddress", "reason"]
 
     model_config = ConfigDict(

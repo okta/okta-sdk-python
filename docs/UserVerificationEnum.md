@@ -1,6 +1,6 @@
 # UserVerificationEnum
 
-User verification setting
+User verification setting. Possible values `DISCOURAGED` (the authenticator isn't asked to perform user verification, but may do so at its discretion), `PREFERRED` (the client uses an authenticator capable of user verification if possible), or `REQUIRED`(the client uses only an authenticator capable of user verification)
 
 ## Properties
 

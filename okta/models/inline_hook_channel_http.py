@@ -32,7 +32,7 @@ from pydantic import ConfigDict
 from typing_extensions import Self
 
 from okta.models.inline_hook_channel import InlineHookChannel
-from okta.models.inline_hook_channel_config import InlineHookChannelConfig
+from okta.models.inline_hook_http_config import InlineHookHttpConfig
 
 
 class InlineHookChannelHttp(InlineHookChannel):
@@ -40,7 +40,7 @@ class InlineHookChannelHttp(InlineHookChannel):
     InlineHookChannelHttp
     """  # noqa: E501
 
-    config: Optional[InlineHookChannelConfig] = None
+    config: Optional[InlineHookHttpConfig] = None
     __properties: ClassVar[List[str]] = ["type", "version", "config"]
 
     model_config = ConfigDict(
@@ -103,7 +103,7 @@ class InlineHookChannelHttp(InlineHookChannel):
                 "type": obj.get("type"),
                 "version": obj.get("version"),
                 "config": (
-                    InlineHookChannelConfig.from_dict(obj["config"])
+                    InlineHookHttpConfig.from_dict(obj["config"])
                     if obj.get("config") is not None
                     else None
                 ),

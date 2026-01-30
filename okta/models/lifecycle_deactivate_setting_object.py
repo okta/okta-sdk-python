@@ -79,13 +79,6 @@ class LifecycleDeactivateSettingObject(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of status
-        if self.status:
-            if not isinstance(self.status, dict):
-                _dict["status"] = self.status.to_dict()
-            else:
-                _dict["status"] = self.status
-
         return _dict
 
     @classmethod
@@ -97,13 +90,5 @@ class LifecycleDeactivateSettingObject(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "status": (
-                    EnabledStatus.from_dict(obj["status"])
-                    if obj.get("status") is not None
-                    else None
-                )
-            }
-        )
+        _obj = cls.model_validate({"status": obj.get("status")})
         return _obj

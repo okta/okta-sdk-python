@@ -32,47 +32,64 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
-
 
 class JsonWebKey(BaseModel):
     """
     JsonWebKey
     """  # noqa: E501
 
-    alg: Optional[StrictStr] = None
-    created: Optional[datetime] = None
-    e: Optional[StrictStr] = None
-    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
-    key_ops: Optional[List[StrictStr]] = None
-    kid: Optional[StrictStr] = None
-    kty: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    n: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    use: Optional[StrictStr] = None
-    x5c: Optional[List[StrictStr]] = None
-    x5t: Optional[StrictStr] = None
-    x5t_s256: Optional[StrictStr] = Field(default=None, alias="x5t#S256")
-    x5u: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the object was created"
+    )
+    e: Optional[StrictStr] = Field(
+        default=None, description="RSA key value (public exponent) for Key binding"
+    )
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the certificate expires",
+        alias="expiresAt",
+    )
+    kid: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier for the certificate"
+    )
+    kty: Optional[StrictStr] = Field(
+        default=None,
+        description="Cryptographic algorithm family for the certificate's keypair. Valid value: `RSA`",
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated",
+    )
+    n: Optional[StrictStr] = Field(
+        default=None,
+        description="RSA modulus value that is used by both the public and private keys and provides a link between them",
+    )
+    use: Optional[StrictStr] = Field(
+        default=None,
+        description="Acceptable use of the certificate. Valid value: `sig`",
+    )
+    x5c: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="X.509 certificate chain that contains a chain of one or more certificates",
+    )
+    x5t_s256: Optional[StrictStr] = Field(
+        default=None,
+        description="X.509 certificate SHA-256 thumbprint, which is the base64url-encoded SHA-256 thumbprint (digest) of the "
+        "DER encoding of an X.509 certificate",
+        alias="x5t#S256",
+    )
     __properties: ClassVar[List[str]] = [
-        "alg",
         "created",
         "e",
         "expiresAt",
-        "key_ops",
         "kid",
         "kty",
         "lastUpdated",
         "n",
-        "status",
         "use",
         "x5c",
-        "x5t",
         "x5t#S256",
-        "x5u",
-        "_links",
     ]
 
     model_config = ConfigDict(
@@ -104,21 +121,35 @@ class JsonWebKey(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "e",
+                "expires_at",
+                "kid",
+                "kty",
+                "last_updated",
+                "use",
+                "x5c",
+                "x5t_s256",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
-            if not isinstance(self.links, dict):
-                _dict["_links"] = self.links.to_dict()
-            else:
-                _dict["_links"] = self.links
-
         return _dict
 
     @classmethod
@@ -132,26 +163,16 @@ class JsonWebKey(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "alg": obj.get("alg"),
                 "created": obj.get("created"),
                 "e": obj.get("e"),
                 "expiresAt": obj.get("expiresAt"),
-                "key_ops": obj.get("key_ops"),
                 "kid": obj.get("kid"),
                 "kty": obj.get("kty"),
                 "lastUpdated": obj.get("lastUpdated"),
                 "n": obj.get("n"),
-                "status": obj.get("status"),
                 "use": obj.get("use"),
                 "x5c": obj.get("x5c"),
-                "x5t": obj.get("x5t"),
                 "x5t#S256": obj.get("x5t#S256"),
-                "x5u": obj.get("x5u"),
-                "_links": (
-                    LinksSelf.from_dict(obj["_links"])
-                    if obj.get("_links") is not None
-                    else None
-                ),
             }
         )
         return _obj

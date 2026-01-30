@@ -28,10 +28,14 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
-from okta.models.href_object import HrefObject
+from okta.models.href_object_binding_link import HrefObjectBindingLink
+from okta.models.href_object_self_link import HrefObjectSelfLink
+from okta.models.resource_set_binding_members_links_all_of_next import (
+    ResourceSetBindingMembersLinksAllOfNext,
+)
 
 
 class ResourceSetBindingMembersLinks(BaseModel):
@@ -39,9 +43,10 @@ class ResourceSetBindingMembersLinks(BaseModel):
     ResourceSetBindingMembersLinks
     """  # noqa: E501
 
-    next: Optional[HrefObject] = None
-    binding: Optional[HrefObject] = None
-    __properties: ClassVar[List[str]] = ["next", "binding"]
+    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
+    next: Optional[ResourceSetBindingMembersLinksAllOfNext] = None
+    binding: Optional[HrefObjectBindingLink] = None
+    __properties: ClassVar[List[str]] = ["self", "next", "binding"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +85,13 @@ class ResourceSetBindingMembersLinks(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of var_self
+        if self.var_self:
+            if not isinstance(self.var_self, dict):
+                _dict["self"] = self.var_self.to_dict()
+            else:
+                _dict["self"] = self.var_self
+
         # override the default output from pydantic by calling `to_dict()` of next
         if self.next:
             if not isinstance(self.next, dict):
@@ -107,13 +119,18 @@ class ResourceSetBindingMembersLinks(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "self": (
+                    HrefObjectSelfLink.from_dict(obj["self"])
+                    if obj.get("self") is not None
+                    else None
+                ),
                 "next": (
-                    HrefObject.from_dict(obj["next"])
+                    ResourceSetBindingMembersLinksAllOfNext.from_dict(obj["next"])
                     if obj.get("next") is not None
                     else None
                 ),
                 "binding": (
-                    HrefObject.from_dict(obj["binding"])
+                    HrefObjectBindingLink.from_dict(obj["binding"])
                     if obj.get("binding") is not None
                     else None
                 ),

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AuthorizationServerCredentialsUse(str, Enum):
     """
-    AuthorizationServerCredentialsUse
+    How the key is used
     """
 
     """

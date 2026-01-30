@@ -6,16 +6,17 @@ Google Chrome Device Trust Connector provider
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**antivirus_enabled** | **bool** | &lt;x-lifecycle-container&gt;&lt;x-lifecycle class&#x3D;\&quot;ea\&quot;&gt;&lt;/x-lifecycle&gt;&lt;/x-lifecycle-container&gt;Indicates whether antivirus software is enabled | [optional] 
 **browser_version** | [**ChromeBrowserVersion**](ChromeBrowserVersion.md) |  | [optional] 
 **built_in_dns_client_enabled** | **bool** | Indicates if a software stack is used to communicate with the DNS server | [optional] 
 **chrome_remote_desktop_app_blocked** | **bool** | Indicates whether access to the Chrome Remote Desktop application is blocked through a policy | [optional] 
 **crowd_strike_agent_id** | **str** | Agent ID of an installed CrowdStrike agent | [optional] 
 **crowd_strike_customer_id** | **str** | Customer ID of an installed CrowdStrike agent | [optional] 
 **device_enrollment_domain** | **str** | Enrollment domain of the customer that is currently managing the device | [optional] 
-**disk_enrypted** | **bool** | Indicates whether the main disk is encrypted | [optional] 
+**disk_encrypted** | **bool** | Indicates whether the main disk is encrypted | [optional] 
 **key_trust_level** | [**KeyTrustLevelBrowserKey**](KeyTrustLevelBrowserKey.md) |  | [optional] 
 **os_firewall** | **bool** | Indicates whether a firewall is enabled at the OS-level on the device | [optional] 
-**os_version** | [**OSVersion**](OSVersion.md) |  | [optional] 
+**os_version** | [**OSVersionFourComponents**](OSVersionFourComponents.md) |  | [optional] 
 **password_protection_warning_trigger** | [**PasswordProtectionWarningTrigger**](PasswordProtectionWarningTrigger.md) |  | [optional] 
 **realtime_url_check_mode** | **bool** | Indicates whether enterprise-grade (custom) unsafe URL scanning is enabled | [optional] 
 **safe_browsing_protection_level** | [**SafeBrowsingProtectionLevel**](SafeBrowsingProtectionLevel.md) |  | [optional] 

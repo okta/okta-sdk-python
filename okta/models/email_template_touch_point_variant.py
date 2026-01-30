@@ -30,7 +30,8 @@ from typing_extensions import Self
 
 class EmailTemplateTouchPointVariant(str, Enum):
     """
-    EmailTemplateTouchPointVariant
+    Variant for email templates. You can publish a theme for email templates with different combinations of assets. Variants
+    are preset combinations of those assets.
     """
 
     """

@@ -4,21 +4,21 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activate_network_zone**](NetworkZoneApi.md#activate_network_zone) | **POST** /api/v1/zones/{zoneId}/lifecycle/activate | Activate a Network Zone
-[**create_network_zone**](NetworkZoneApi.md#create_network_zone) | **POST** /api/v1/zones | Create a Network Zone
-[**deactivate_network_zone**](NetworkZoneApi.md#deactivate_network_zone) | **POST** /api/v1/zones/{zoneId}/lifecycle/deactivate | Deactivate a Network Zone
-[**delete_network_zone**](NetworkZoneApi.md#delete_network_zone) | **DELETE** /api/v1/zones/{zoneId} | Delete a Network Zone
-[**get_network_zone**](NetworkZoneApi.md#get_network_zone) | **GET** /api/v1/zones/{zoneId} | Retrieve a Network Zone
-[**list_network_zones**](NetworkZoneApi.md#list_network_zones) | **GET** /api/v1/zones | List all Network Zones
-[**replace_network_zone**](NetworkZoneApi.md#replace_network_zone) | **PUT** /api/v1/zones/{zoneId} | Replace a Network Zone
+[**activate_network_zone**](NetworkZoneApi.md#activate_network_zone) | **POST** /api/v1/zones/{zoneId}/lifecycle/activate | Activate a network zone
+[**create_network_zone**](NetworkZoneApi.md#create_network_zone) | **POST** /api/v1/zones | Create a network zone
+[**deactivate_network_zone**](NetworkZoneApi.md#deactivate_network_zone) | **POST** /api/v1/zones/{zoneId}/lifecycle/deactivate | Deactivate a network zone
+[**delete_network_zone**](NetworkZoneApi.md#delete_network_zone) | **DELETE** /api/v1/zones/{zoneId} | Delete a network zone
+[**get_network_zone**](NetworkZoneApi.md#get_network_zone) | **GET** /api/v1/zones/{zoneId} | Retrieve a network zone
+[**list_network_zones**](NetworkZoneApi.md#list_network_zones) | **GET** /api/v1/zones | List all network zones
+[**replace_network_zone**](NetworkZoneApi.md#replace_network_zone) | **PUT** /api/v1/zones/{zoneId} | Replace a network zone
 
 
 # **activate_network_zone**
 > NetworkZone activate_network_zone(zone_id)
 
-Activate a Network Zone
+Activate a network zone
 
-Activates a network zone by `zoneId`
+Activates a Network Zone by `zoneId`
 
 ### Example
 
@@ -57,7 +57,7 @@ with okta.ApiClient(configuration) as api_client:
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
 
     try:
-        # Activate a Network Zone
+        # Activate a network zone
         api_response = api_instance.activate_network_zone(zone_id)
         print("The response of NetworkZoneApi->activate_network_zone:\n")
         pprint(api_response)
@@ -101,9 +101,9 @@ Name | Type | Description  | Notes
 # **create_network_zone**
 > NetworkZone create_network_zone(zone)
 
-Create a Network Zone
+Create a network zone
 
-Creates a new network zone. * At least one of either the `gateways` attribute or `proxies` attribute must be defined when creating a Network Zone. * At least one of the following attributes must be defined: `proxyType`, `locations`, or `asns`.
+Creates a Network Zone * For an IP Network Zone, you must define either `gateways` or `proxies`. * For a Dynamic Network Zone, you must define at least one of the following: `asns`, `locations`, or `proxyType`. * For an Enhanced Dynamic Network Zone, you must define at least one of the following: `asns`, `locations`, or `ipServiceCategories`. > **Note:** To view all properties for an Enhanced Dynamic Network Zone, select `DYNAMIC_V2` from the `type` dropdown list.
 
 ### Example
 
@@ -142,7 +142,7 @@ with okta.ApiClient(configuration) as api_client:
     zone = okta.NetworkZone() # NetworkZone | 
 
     try:
-        # Create a Network Zone
+        # Create a network zone
         api_response = api_instance.create_network_zone(zone)
         print("The response of NetworkZoneApi->create_network_zone:\n")
         pprint(api_response)
@@ -186,9 +186,9 @@ Name | Type | Description  | Notes
 # **deactivate_network_zone**
 > NetworkZone deactivate_network_zone(zone_id)
 
-Deactivate a Network Zone
+Deactivate a network zone
 
-Deactivates a network zone by `zoneId`
+Deactivates a Network Zone by `zoneId`
 
 ### Example
 
@@ -227,7 +227,7 @@ with okta.ApiClient(configuration) as api_client:
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
 
     try:
-        # Deactivate a Network Zone
+        # Deactivate a network zone
         api_response = api_instance.deactivate_network_zone(zone_id)
         print("The response of NetworkZoneApi->deactivate_network_zone:\n")
         pprint(api_response)
@@ -271,9 +271,9 @@ Name | Type | Description  | Notes
 # **delete_network_zone**
 > delete_network_zone(zone_id)
 
-Delete a Network Zone
+Delete a network zone
 
-Deletes network zone by `zoneId`
+Deletes a Network Zone by `zoneId` > **Notes:** > * You can't delete a Network Zone that's used by a [Policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) or [Rule](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/listPolicyRules). > * For Okta Identity Engine orgs, you can't delete a Network Zone with an ACTIVE `status`. <x-lifecycle class=\"oie\"></x-lifecycle>
 
 ### Example
 
@@ -311,7 +311,7 @@ with okta.ApiClient(configuration) as api_client:
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
 
     try:
-        # Delete a Network Zone
+        # Delete a network zone
         api_instance.delete_network_zone(zone_id)
     except Exception as e:
         print("Exception when calling NetworkZoneApi->delete_network_zone: %s\n" % e)
@@ -353,9 +353,9 @@ void (empty response body)
 # **get_network_zone**
 > NetworkZone get_network_zone(zone_id)
 
-Retrieve a Network Zone
+Retrieve a network zone
 
-Retrieves a network zone by `zoneId`
+Retrieves a Network Zone by `zoneId`
 
 ### Example
 
@@ -394,7 +394,7 @@ with okta.ApiClient(configuration) as api_client:
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
 
     try:
-        # Retrieve a Network Zone
+        # Retrieve a network zone
         api_response = api_instance.get_network_zone(zone_id)
         print("The response of NetworkZoneApi->get_network_zone:\n")
         pprint(api_response)
@@ -438,9 +438,9 @@ Name | Type | Description  | Notes
 # **list_network_zones**
 > List[NetworkZone] list_network_zones(after=after, limit=limit, filter=filter)
 
-List all Network Zones
+List all network zones
 
-Lists all network zones with pagination. A subset of zones can be returned that match a supported filter expression or query.  This operation requires URL encoding. For example, `filter=(id eq \"nzoul0wf9jyb8xwZm0g3\" or id eq \"nzoul1MxmGN18NDQT0g3\")` is encoded as `filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29`.  Okta supports filtering on the `id` and `usage` properties. See [Filtering](https://developer.okta.com/docs/reference/core-okta-api/#filter) for more information on the expressions that are used in filtering.
+Lists all Network Zones with pagination. A subset of zones can be returned that match a supported filter expression or query.  This operation requires URL encoding. For example, `filter=(id eq \"nzoul0wf9jyb8xwZm0g3\" or id eq \"nzoul1MxmGN18NDQT0g3\")` is encoded as `filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29`.  Okta supports filtering on the `id`, `usage`, and `system` properties. See [Filter](https://developer.okta.com/docs/api/#filter) for more information on the expressions that are used in filtering.
 
 ### Example
 
@@ -476,12 +476,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.NetworkZoneApi(api_client)
-    after = '200u7yq5goxNFTiMjW1d7' # str | Specifies the pagination cursor for the next page of network zones (optional)
-    limit = -1 # int | Specifies the number of results for a page (optional) (default to -1)
-    filter = 'filter=%28id+eq+%22nzowc1U5Jh5xuAK0o0g3%22%29' # str | Filters zones by usage or ID expression (optional)
+    after = 'BlockedIpZones' # str |  (optional)
+    limit = -1 # int |  (optional) (default to -1)
+    filter = 'id eq \"nzowc1U5Jh5xuAK0o0g3\"' # str |  (optional)
 
     try:
-        # List all Network Zones
+        # List all network zones
         api_response = api_instance.list_network_zones(after=after, limit=limit, filter=filter)
         print("The response of NetworkZoneApi->list_network_zones:\n")
         pprint(api_response)
@@ -496,9 +496,9 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **after** | **str**| Specifies the pagination cursor for the next page of network zones | [optional] 
- **limit** | **int**| Specifies the number of results for a page | [optional] [default to -1]
- **filter** | **str**| Filters zones by usage or ID expression | [optional] 
+ **after** | **str**|  | [optional] 
+ **limit** | **int**|  | [optional] [default to -1]
+ **filter** | **str**|  | [optional] 
 
 ### Return type
 
@@ -526,9 +526,9 @@ Name | Type | Description  | Notes
 # **replace_network_zone**
 > NetworkZone replace_network_zone(zone_id, zone)
 
-Replace a Network Zone
+Replace a network zone
 
-Replaces a network zone by `zoneId`. The replaced network zone type must be the same as the existing type. You may replace the usage (`POLICY`, `BLOCKLIST`) of a network zone by updating the `usage` attribute.
+Replaces a Network Zone by `zoneId`. The replaced Network Zone type must be the same as the existing type. You can replace the usage (`POLICY`, `BLOCKLIST`) of a Network Zone by updating the `usage` attribute.  **IP exempt zone**<br> If you have the IP exempt zone feature enabled, you can allow traffic from specific gateway IPs irrespective of Okta ThreatInsight configurations, blocked network zones, or IP change events within Identity Threat Protection with Okta AI.<br> <br> When you enable this feature, Okta creates a zone called `DefaultExemptIpZone`. Gateway IPs that you add to this zone always have access to Okta resources. See [IP exempt zone](https://help.okta.com/okta_help.htm?type=oie&id=csh-about-ip-exempt-zone).  > **Note:** You can't add trusted proxy IPs to this zone, delete the zone, or create additional exempt IP zones.
 
 ### Example
 
@@ -568,7 +568,7 @@ with okta.ApiClient(configuration) as api_client:
     zone = okta.NetworkZone() # NetworkZone | 
 
     try:
-        # Replace a Network Zone
+        # Replace a network zone
         api_response = api_instance.replace_network_zone(zone_id, zone)
         print("The response of NetworkZoneApi->replace_network_zone:\n")
         pprint(api_response)

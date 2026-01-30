@@ -28,17 +28,26 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 
 class RiskScorePolicyRuleCondition(BaseModel):
     """
-    RiskScorePolicyRuleCondition
+    Specifies a particular level of risk to match on
     """  # noqa: E501
 
-    level: Optional[StrictStr] = None
+    level: StrictStr = Field(description="The level to match")
     __properties: ClassVar[List[str]] = ["level"]
+
+    @field_validator("level")
+    def level_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["ANY", "LOW", "MEDIUM", "HIGH"]):
+            raise ValueError(
+                "must be one of enum values ('ANY', 'LOW', 'MEDIUM', 'HIGH')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

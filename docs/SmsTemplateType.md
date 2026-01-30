@@ -1,5 +1,6 @@
 # SmsTemplateType
 
+Type of the Template
 
 ## Properties
 

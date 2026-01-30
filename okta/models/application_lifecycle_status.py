@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class ApplicationLifecycleStatus(str, Enum):
     """
-    ApplicationLifecycleStatus
+    App instance status
     """
 
     """

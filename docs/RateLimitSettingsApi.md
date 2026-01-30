@@ -4,18 +4,18 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_rate_limit_settings_admin_notifications**](RateLimitSettingsApi.md#get_rate_limit_settings_admin_notifications) | **GET** /api/v1/rate-limit-settings/admin-notifications | Retrieve the Rate Limit Admin Notification Settings
-[**get_rate_limit_settings_per_client**](RateLimitSettingsApi.md#get_rate_limit_settings_per_client) | **GET** /api/v1/rate-limit-settings/per-client | Retrieve the Per-Client Rate Limit Settings
-[**get_rate_limit_settings_warning_threshold**](RateLimitSettingsApi.md#get_rate_limit_settings_warning_threshold) | **GET** /api/v1/rate-limit-settings/warning-threshold | Retrieve the Rate Limit Warning Threshold Percentage
-[**replace_rate_limit_settings_admin_notifications**](RateLimitSettingsApi.md#replace_rate_limit_settings_admin_notifications) | **PUT** /api/v1/rate-limit-settings/admin-notifications | Replace the Rate Limit Admin Notification Settings
-[**replace_rate_limit_settings_per_client**](RateLimitSettingsApi.md#replace_rate_limit_settings_per_client) | **PUT** /api/v1/rate-limit-settings/per-client | Replace the Per-Client Rate Limit Settings
-[**replace_rate_limit_settings_warning_threshold**](RateLimitSettingsApi.md#replace_rate_limit_settings_warning_threshold) | **PUT** /api/v1/rate-limit-settings/warning-threshold | Replace the Rate Limit Warning Threshold Percentage
+[**get_rate_limit_settings_admin_notifications**](RateLimitSettingsApi.md#get_rate_limit_settings_admin_notifications) | **GET** /api/v1/rate-limit-settings/admin-notifications | Retrieve the rate limit admin notification settings
+[**get_rate_limit_settings_per_client**](RateLimitSettingsApi.md#get_rate_limit_settings_per_client) | **GET** /api/v1/rate-limit-settings/per-client | Retrieve the per-client rate limit settings
+[**get_rate_limit_settings_warning_threshold**](RateLimitSettingsApi.md#get_rate_limit_settings_warning_threshold) | **GET** /api/v1/rate-limit-settings/warning-threshold | Retrieve the rate limit warning threshold percentage
+[**replace_rate_limit_settings_admin_notifications**](RateLimitSettingsApi.md#replace_rate_limit_settings_admin_notifications) | **PUT** /api/v1/rate-limit-settings/admin-notifications | Replace the rate limit admin notification settings
+[**replace_rate_limit_settings_per_client**](RateLimitSettingsApi.md#replace_rate_limit_settings_per_client) | **PUT** /api/v1/rate-limit-settings/per-client | Replace the per-client rate limit settings
+[**replace_rate_limit_settings_warning_threshold**](RateLimitSettingsApi.md#replace_rate_limit_settings_warning_threshold) | **PUT** /api/v1/rate-limit-settings/warning-threshold | Replace the rate limit warning threshold percentage
 
 
 # **get_rate_limit_settings_admin_notifications**
 > RateLimitAdminNotifications get_rate_limit_settings_admin_notifications()
 
-Retrieve the Rate Limit Admin Notification Settings
+Retrieve the rate limit admin notification settings
 
 Retrieves the currently configured Rate Limit Admin Notification Settings
 
@@ -55,7 +55,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.RateLimitSettingsApi(api_client)
 
     try:
-        # Retrieve the Rate Limit Admin Notification Settings
+        # Retrieve the rate limit admin notification settings
         api_response = api_instance.get_rate_limit_settings_admin_notifications()
         print("The response of RateLimitSettingsApi->get_rate_limit_settings_admin_notifications:\n")
         pprint(api_response)
@@ -95,7 +95,7 @@ This endpoint does not need any parameter.
 # **get_rate_limit_settings_per_client**
 > PerClientRateLimitSettings get_rate_limit_settings_per_client()
 
-Retrieve the Per-Client Rate Limit Settings
+Retrieve the per-client rate limit settings
 
 Retrieves the currently configured Per-Client Rate Limit Settings
 
@@ -135,7 +135,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.RateLimitSettingsApi(api_client)
 
     try:
-        # Retrieve the Per-Client Rate Limit Settings
+        # Retrieve the per-client rate limit settings
         api_response = api_instance.get_rate_limit_settings_per_client()
         print("The response of RateLimitSettingsApi->get_rate_limit_settings_per_client:\n")
         pprint(api_response)
@@ -175,7 +175,7 @@ This endpoint does not need any parameter.
 # **get_rate_limit_settings_warning_threshold**
 > RateLimitWarningThresholdResponse get_rate_limit_settings_warning_threshold()
 
-Retrieve the Rate Limit Warning Threshold Percentage
+Retrieve the rate limit warning threshold percentage
 
 Retrieves the currently configured threshold for warning notifications when the API's rate limit is exceeded
 
@@ -215,7 +215,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.RateLimitSettingsApi(api_client)
 
     try:
-        # Retrieve the Rate Limit Warning Threshold Percentage
+        # Retrieve the rate limit warning threshold percentage
         api_response = api_instance.get_rate_limit_settings_warning_threshold()
         print("The response of RateLimitSettingsApi->get_rate_limit_settings_warning_threshold:\n")
         pprint(api_response)
@@ -255,7 +255,7 @@ This endpoint does not need any parameter.
 # **replace_rate_limit_settings_admin_notifications**
 > RateLimitAdminNotifications replace_rate_limit_settings_admin_notifications(rate_limit_admin_notifications)
 
-Replace the Rate Limit Admin Notification Settings
+Replace the rate limit admin notification settings
 
 Replaces the Rate Limit Admin Notification Settings and returns the configured properties
 
@@ -296,7 +296,7 @@ with okta.ApiClient(configuration) as api_client:
     rate_limit_admin_notifications = okta.RateLimitAdminNotifications() # RateLimitAdminNotifications | 
 
     try:
-        # Replace the Rate Limit Admin Notification Settings
+        # Replace the rate limit admin notification settings
         api_response = api_instance.replace_rate_limit_settings_admin_notifications(rate_limit_admin_notifications)
         print("The response of RateLimitSettingsApi->replace_rate_limit_settings_admin_notifications:\n")
         pprint(api_response)
@@ -340,7 +340,7 @@ Name | Type | Description  | Notes
 # **replace_rate_limit_settings_per_client**
 > PerClientRateLimitSettings replace_rate_limit_settings_per_client(per_client_rate_limit_settings)
 
-Replace the Per-Client Rate Limit Settings
+Replace the per-client rate limit settings
 
 Replaces the Per-Client Rate Limit Settings and returns the configured properties
 
@@ -381,7 +381,7 @@ with okta.ApiClient(configuration) as api_client:
     per_client_rate_limit_settings = okta.PerClientRateLimitSettings() # PerClientRateLimitSettings | 
 
     try:
-        # Replace the Per-Client Rate Limit Settings
+        # Replace the per-client rate limit settings
         api_response = api_instance.replace_rate_limit_settings_per_client(per_client_rate_limit_settings)
         print("The response of RateLimitSettingsApi->replace_rate_limit_settings_per_client:\n")
         pprint(api_response)
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 # **replace_rate_limit_settings_warning_threshold**
 > RateLimitWarningThresholdResponse replace_rate_limit_settings_warning_threshold(rate_limit_warning_threshold=rate_limit_warning_threshold)
 
-Replace the Rate Limit Warning Threshold Percentage
+Replace the rate limit warning threshold percentage
 
 Replaces the Rate Limit Warning Threshold Percentage and returns the configured property
 
@@ -467,7 +467,7 @@ with okta.ApiClient(configuration) as api_client:
     rate_limit_warning_threshold = okta.RateLimitWarningThresholdRequest() # RateLimitWarningThresholdRequest |  (optional)
 
     try:
-        # Replace the Rate Limit Warning Threshold Percentage
+        # Replace the rate limit warning threshold percentage
         api_response = api_instance.replace_rate_limit_settings_warning_threshold(rate_limit_warning_threshold=rate_limit_warning_threshold)
         print("The response of RateLimitSettingsApi->replace_rate_limit_settings_warning_threshold:\n")
         pprint(api_response)

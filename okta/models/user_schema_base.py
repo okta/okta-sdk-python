@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.user_schema_base_properties import UserSchemaBaseProperties
@@ -36,13 +36,21 @@ from okta.models.user_schema_base_properties import UserSchemaBaseProperties
 
 class UserSchemaBase(BaseModel):
     """
-    UserSchemaBase
+    All Okta-defined profile properties are defined in a profile subschema with the resolution scope `#base`. You can't
+    modify these properties, except to update permissions, to change the nullability of `firstName` and `lastName`,
+    or to specify a pattern for `login`. They can't be removed.  The base user profile is based on the [System for
+    Cross-domain Identity Management: Core Schema](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#section-4.1.1)
+    and has the standard properties detailed below.
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    properties: Optional[UserSchemaBaseProperties] = None
-    required: Optional[List[StrictStr]] = None
-    type: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="The subschema name")
+    properties: Optional[UserSchemaBaseProperties] = Field(
+        default=None, description="The `#base` object properties"
+    )
+    required: Optional[List[StrictStr]] = Field(
+        default=None, description="A collection indicating required property names"
+    )
+    type: Optional[StrictStr] = Field(default=None, description="The object type")
     __properties: ClassVar[List[str]] = ["id", "properties", "required", "type"]
 
     model_config = ConfigDict(
@@ -74,8 +82,17 @@ class UserSchemaBase(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "id",
+                "required",
+                "type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,

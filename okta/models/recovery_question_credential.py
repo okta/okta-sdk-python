@@ -28,17 +28,23 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 
 class RecoveryQuestionCredential(BaseModel):
     """
-    RecoveryQuestionCredential
+    Specifies a secret question and answer that's validated (case insensitive) when a user forgets their password or unlocks
+    their account. The answer property is write-only.
     """  # noqa: E501
 
-    answer: Optional[StrictStr] = None
-    question: Optional[StrictStr] = None
+    answer: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="The answer to the recovery question"
+    )
+    question: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="The recovery question"
+    )
     __properties: ClassVar[List[str]] = ["answer", "question"]
 
     model_config = ConfigDict(

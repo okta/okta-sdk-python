@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -23,16 +23,27 @@ Do not edit the class manually.
 from typing import Any, Dict, Tuple, Union
 from typing import List, Optional
 
-from pydantic import StrictStr
-from pydantic import validate_call, Field, StrictFloat, StrictInt
+from pydantic import Field, StrictStr
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
 
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
 from okta.models.bulk_delete_request_body import BulkDeleteRequestBody
+from okta.models.bulk_group_delete_request_body import BulkGroupDeleteRequestBody
+from okta.models.bulk_group_memberships_delete_request_body import (
+    BulkGroupMembershipsDeleteRequestBody,
+)
+from okta.models.bulk_group_memberships_upsert_request_body import (
+    BulkGroupMembershipsUpsertRequestBody,
+)
+from okta.models.bulk_group_upsert_request_body import BulkGroupUpsertRequestBody
 from okta.models.bulk_upsert_request_body import BulkUpsertRequestBody
 from okta.models.identity_source_session import IdentitySourceSession
 from okta.models.success import Success
+from okta.models.user_request_schema import UserRequestSchema
+from okta.models.user_response_schema import UserResponseSchema
+from okta.models.users_update_request_schema import UsersUpdateRequestSchema
 from okta.rest import RESTResponse
 
 
@@ -49,7 +60,12 @@ class IdentitySourceApi(ApiClient):
     @validate_call
     async def create_identity_source_session(
         self,
-        identity_source_id: StrictStr,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,12 +77,12 @@ class IdentitySourceApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IdentitySourceSession]:
-        """Create an Identity Source Session
+    ) -> IdentitySourceSession:
+        """Create an identity source session
 
         Creates an identity source session for the given identity source instance
 
-        :param identity_source_id: (required)
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -91,7 +107,7 @@ class IdentitySourceApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[IdentitySourceSession]",
+            "200": "IdentitySourceSession",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -115,12 +131,12 @@ class IdentitySourceApi(ApiClient):
         )
 
         if error:
-            if List[IdentitySourceSession] is Success:
+            if IdentitySourceSession is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if List[IdentitySourceSession] is Success:
+        if IdentitySourceSession is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
@@ -142,225 +158,7 @@ class IdentitySourceApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if List[IdentitySourceSession] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def create_identity_source_session_with_http_info(
-        self,
-        identity_source_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IdentitySourceSession]:
-        """Create an Identity Source Session
-
-        Creates an identity source session for the given identity source instance
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[IdentitySourceSession]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._create_identity_source_session_serialize(
-                identity_source_id=identity_source_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[IdentitySourceSession] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[IdentitySourceSession] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, IdentitySourceSession
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[IdentitySourceSession] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def create_identity_source_session_without_preload_content(
-        self,
-        identity_source_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IdentitySourceSession]:
-        """Create an Identity Source Session
-
-        Creates an identity source session for the given identity source instance
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[IdentitySourceSession]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._create_identity_source_session_serialize(
-                identity_source_id=identity_source_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[IdentitySourceSession] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[IdentitySourceSession] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, IdentitySourceSession
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[IdentitySourceSession] is Success:
+                if IdentitySourceSession is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -423,10 +221,184 @@ class IdentitySourceApi(ApiClient):
         )
 
     @validate_call
+    async def create_identity_source_user(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        user_request_schema: Optional[UserRequestSchema] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Create an identity source user
+
+        Creates a user in an identity source for the given identity source instance
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param user_request_schema:
+        :type user_request_schema: UserRequestSchema
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": None,
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._create_identity_source_user_serialize(
+                identity_source_id=identity_source_id,
+                user_request_schema=user_request_schema,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _create_identity_source_user_serialize(
+        self,
+        identity_source_id,
+        user_request_schema,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if user_request_schema is not None:
+            _body_params = user_request_schema
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/users",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def delete_identity_source_session(
         self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -439,213 +411,13 @@ class IdentitySourceApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Delete an Identity Source Session
+        """Delete an identity source session
 
-        Deletes an identity source session for a given `identitySourceId` and `sessionId`
+        Deletes an identity source session for a given identity source ID and session Id
 
-        :param identity_source_id: (required)
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._delete_identity_source_session_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def delete_identity_source_session_with_http_info(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete an Identity Source Session
-
-        Deletes an identity source session for a given `identitySourceId` and `sessionId`
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._delete_identity_source_session_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def delete_identity_source_session_without_preload_content(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete an Identity Source Session
-
-        Deletes an identity source session for a given `identitySourceId` and `sessionId`
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
+        :param session_id: The ID of the identity source session (required)
         :type session_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -775,10 +547,176 @@ class IdentitySourceApi(ApiClient):
         )
 
     @validate_call
+    async def delete_identity_source_user(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        external_id: Annotated[
+            StrictStr, Field(description="The external ID of the user")
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Delete an identity source user
+
+        Deletes a user in an identity source for the given identity source instance and external ID
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param external_id: The external ID of the user (required)
+        :type external_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "204": None,
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._delete_identity_source_user_serialize(
+                identity_source_id=identity_source_id,
+                external_id=external_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _delete_identity_source_user_serialize(
+        self,
+        identity_source_id,
+        external_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        if external_id is not None:
+            _path_params["externalId"] = external_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="DELETE",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/users/{externalId}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def get_identity_source_session(
         self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -791,239 +729,13 @@ class IdentitySourceApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> IdentitySourceSession:
-        """Retrieve an Identity Source Session
+        """Retrieve an identity source session
 
-        Retrieves an identity source session for a given identity source id and session id
+        Retrieves an identity source session for a given identity source ID and session ID
 
-        :param identity_source_id: (required)
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "IdentitySourceSession",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_identity_source_session_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if IdentitySourceSession is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if IdentitySourceSession is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, IdentitySourceSession
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if IdentitySourceSession is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_identity_source_session_with_http_info(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IdentitySourceSession:
-        """Retrieve an Identity Source Session
-
-        Retrieves an identity source session for a given identity source id and session id
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "IdentitySourceSession",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_identity_source_session_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if IdentitySourceSession is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if IdentitySourceSession is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, IdentitySourceSession
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if IdentitySourceSession is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_identity_source_session_without_preload_content(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> IdentitySourceSession:
-        """Retrieve an Identity Source Session
-
-        Retrieves an identity source session for a given identity source id and session id
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
+        :param session_id: The ID of the identity source session (required)
         :type session_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1166,9 +878,186 @@ class IdentitySourceApi(ApiClient):
         )
 
     @validate_call
+    async def get_identity_source_user(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        external_id: Annotated[
+            StrictStr, Field(description="The external ID of the user")
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UserResponseSchema:
+        """Retrieve an identity source user
+
+        Retrieves a user by external ID in an identity source for the given identity source instance
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param external_id: The external ID of the user (required)
+        :type external_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "UserResponseSchema",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._get_identity_source_user_serialize(
+                identity_source_id=identity_source_id,
+                external_id=external_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if UserResponseSchema is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if UserResponseSchema is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, UserResponseSchema
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if UserResponseSchema is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _get_identity_source_user_serialize(
+        self,
+        identity_source_id,
+        external_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        if external_id is not None:
+            _path_params["externalId"] = external_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="GET",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/users/{externalId}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def list_identity_source_sessions(
         self,
-        identity_source_id: StrictStr,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1181,229 +1070,11 @@ class IdentitySourceApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[IdentitySourceSession]:
-        """List all Identity Source Sessions
+        """List all identity source sessions
 
         Lists all identity source sessions for the given identity source instance
 
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[IdentitySourceSession]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_identity_source_sessions_serialize(
-                identity_source_id=identity_source_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[IdentitySourceSession] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[IdentitySourceSession] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, IdentitySourceSession
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[IdentitySourceSession] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_identity_source_sessions_with_http_info(
-        self,
-        identity_source_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IdentitySourceSession]:
-        """List all Identity Source Sessions
-
-        Lists all identity source sessions for the given identity source instance
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[IdentitySourceSession]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_identity_source_sessions_serialize(
-                identity_source_id=identity_source_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[IdentitySourceSession] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[IdentitySourceSession] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, IdentitySourceSession
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[IdentitySourceSession] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_identity_source_sessions_without_preload_content(
-        self,
-        identity_source_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IdentitySourceSession]:
-        """List all Identity Source Sessions
-
-        Lists all identity source sessions for the given identity source instance
-
-        :param identity_source_id: (required)
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1542,10 +1213,206 @@ class IdentitySourceApi(ApiClient):
         )
 
     @validate_call
+    async def replace_existing_identity_source_user(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        external_id: Annotated[
+            StrictStr, Field(description="The external ID of the user")
+        ],
+        user_request_schema: Optional[UserRequestSchema] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UserResponseSchema:
+        """Replace an existing identity source user
+
+        Replaces an existing user for the given identity source instance and external ID
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param external_id: The external ID of the user (required)
+        :type external_id: str
+        :param user_request_schema:
+        :type user_request_schema: UserRequestSchema
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "UserResponseSchema",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._replace_existing_identity_source_user_serialize(
+                identity_source_id=identity_source_id,
+                external_id=external_id,
+                user_request_schema=user_request_schema,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if UserResponseSchema is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if UserResponseSchema is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, UserResponseSchema
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if UserResponseSchema is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _replace_existing_identity_source_user_serialize(
+        self,
+        identity_source_id,
+        external_id,
+        user_request_schema,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        if external_id is not None:
+            _path_params["externalId"] = external_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if user_request_schema is not None:
+            _body_params = user_request_schema
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="PUT",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/users/{externalId}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def start_import_from_identity_source(
         self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1557,14 +1424,14 @@ class IdentitySourceApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IdentitySourceSession]:
-        """Start the import from the Identity Source
+    ) -> IdentitySourceSession:
+        """Start the import from the identity source
 
         Starts the import from the identity source described by the uploaded bulk operations
 
-        :param identity_source_id: (required)
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
-        :param session_id: (required)
+        :param session_id: The ID of the identity source session (required)
         :type session_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1589,7 +1456,7 @@ class IdentitySourceApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[IdentitySourceSession]",
+            "200": "IdentitySourceSession",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -1614,12 +1481,12 @@ class IdentitySourceApi(ApiClient):
         )
 
         if error:
-            if List[IdentitySourceSession] is Success:
+            if IdentitySourceSession is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if List[IdentitySourceSession] is Success:
+        if IdentitySourceSession is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
@@ -1641,233 +1508,7 @@ class IdentitySourceApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if List[IdentitySourceSession] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def start_import_from_identity_source_with_http_info(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IdentitySourceSession]:
-        """Start the import from the Identity Source
-
-        Starts the import from the identity source described by the uploaded bulk operations
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[IdentitySourceSession]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._start_import_from_identity_source_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[IdentitySourceSession] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[IdentitySourceSession] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, IdentitySourceSession
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[IdentitySourceSession] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def start_import_from_identity_source_without_preload_content(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[IdentitySourceSession]:
-        """Start the import from the Identity Source
-
-        Starts the import from the identity source described by the uploaded bulk operations
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[IdentitySourceSession]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._start_import_from_identity_source_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[IdentitySourceSession] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[IdentitySourceSession] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, IdentitySourceSession
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[IdentitySourceSession] is Success:
+                if IdentitySourceSession is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -1933,10 +1574,206 @@ class IdentitySourceApi(ApiClient):
         )
 
     @validate_call
+    async def update_identity_source_users(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        external_id: Annotated[
+            StrictStr, Field(description="The external ID of the user")
+        ],
+        users_update_request_schema: Optional[UsersUpdateRequestSchema] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UserResponseSchema:
+        """Update an identity source user
+
+        Updates a user to an identity source for the given identity source instance and external ID
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param external_id: The external ID of the user (required)
+        :type external_id: str
+        :param users_update_request_schema:
+        :type users_update_request_schema: UsersUpdateRequestSchema
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "UserResponseSchema",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._update_identity_source_users_serialize(
+                identity_source_id=identity_source_id,
+                external_id=external_id,
+                users_update_request_schema=users_update_request_schema,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if UserResponseSchema is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if UserResponseSchema is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, UserResponseSchema
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if UserResponseSchema is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _update_identity_source_users_serialize(
+        self,
+        identity_source_id,
+        external_id,
+        users_update_request_schema,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        if external_id is not None:
+            _path_params["externalId"] = external_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if users_update_request_schema is not None:
+            _body_params = users_update_request_schema
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="PATCH",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/users/{externalId}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def upload_identity_source_data_for_delete(
         self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
         bulk_delete_request_body: Optional[BulkDeleteRequestBody] = None,
         _request_timeout: Union[
             None,
@@ -1952,221 +1789,11 @@ class IdentitySourceApi(ApiClient):
     ) -> None:
         """Upload the data to be deleted in Okta
 
-        Uploads entities that need to be deleted in Okta from the identity source for the given session
+        Uploads external IDs of entities that need to be deleted in Okta from the identity source for the given session
 
-        :param identity_source_id: (required)
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param bulk_delete_request_body:
-        :type bulk_delete_request_body: BulkDeleteRequestBody
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "202": None,
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._upload_identity_source_data_for_delete_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                bulk_delete_request_body=bulk_delete_request_body,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def upload_identity_source_data_for_delete_with_http_info(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        bulk_delete_request_body: Optional[BulkDeleteRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Upload the data to be deleted in Okta
-
-        Uploads entities that need to be deleted in Okta from the identity source for the given session
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param bulk_delete_request_body:
-        :type bulk_delete_request_body: BulkDeleteRequestBody
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "202": None,
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._upload_identity_source_data_for_delete_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                bulk_delete_request_body=bulk_delete_request_body,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def upload_identity_source_data_for_delete_without_preload_content(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        bulk_delete_request_body: Optional[BulkDeleteRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Upload the data to be deleted in Okta
-
-        Uploads entities that need to be deleted in Okta from the identity source for the given session
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
+        :param session_id: The ID of the identity source session (required)
         :type session_id: str
         :param bulk_delete_request_body:
         :type bulk_delete_request_body: BulkDeleteRequestBody
@@ -2315,8 +1942,15 @@ class IdentitySourceApi(ApiClient):
     @validate_call
     async def upload_identity_source_data_for_upsert(
         self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
         bulk_upsert_request_body: Optional[BulkUpsertRequestBody] = None,
         _request_timeout: Union[
             None,
@@ -2332,221 +1966,11 @@ class IdentitySourceApi(ApiClient):
     ) -> None:
         """Upload the data to be upserted in Okta
 
-        Uploads entities that need to be upserted in Okta from the identity source for the given session
+        Uploads entities that need to be inserted or updated in Okta from the identity source for the given session
 
-        :param identity_source_id: (required)
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
         :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param bulk_upsert_request_body:
-        :type bulk_upsert_request_body: BulkUpsertRequestBody
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "202": None,
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._upload_identity_source_data_for_upsert_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                bulk_upsert_request_body=bulk_upsert_request_body,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def upload_identity_source_data_for_upsert_with_http_info(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        bulk_upsert_request_body: Optional[BulkUpsertRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Upload the data to be upserted in Okta
-
-        Uploads entities that need to be upserted in Okta from the identity source for the given session
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
-        :type session_id: str
-        :param bulk_upsert_request_body:
-        :type bulk_upsert_request_body: BulkUpsertRequestBody
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "202": None,
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._upload_identity_source_data_for_upsert_serialize(
-                identity_source_id=identity_source_id,
-                session_id=session_id,
-                bulk_upsert_request_body=bulk_upsert_request_body,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def upload_identity_source_data_for_upsert_without_preload_content(
-        self,
-        identity_source_id: StrictStr,
-        session_id: StrictStr,
-        bulk_upsert_request_body: Optional[BulkUpsertRequestBody] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Upload the data to be upserted in Okta
-
-        Uploads entities that need to be upserted in Okta from the identity source for the given session
-
-        :param identity_source_id: (required)
-        :type identity_source_id: str
-        :param session_id: (required)
+        :param session_id: The ID of the identity source session (required)
         :type session_id: str
         :param bulk_upsert_request_body:
         :type bulk_upsert_request_body: BulkUpsertRequestBody
@@ -2680,6 +2104,720 @@ class IdentitySourceApi(ApiClient):
         return self.param_serialize(
             method="POST",
             resource_path="/api/v1/identity-sources/{identitySourceId}/sessions/{sessionId}/bulk-upsert",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    async def upload_identity_source_group_memberships_for_delete(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
+        bulk_group_memberships_delete_request_body: Optional[
+            BulkGroupMembershipsDeleteRequestBody
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Upload the group memberships to be deleted in Okta
+
+        Uploads the group memberships that need to be deleted in Okta from the identity source for the given session
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param session_id: The ID of the identity source session (required)
+        :type session_id: str
+        :param bulk_group_memberships_delete_request_body:
+        :type bulk_group_memberships_delete_request_body: BulkGroupMembershipsDeleteRequestBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "202": None,
+            "400": "Error",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._upload_identity_source_group_memberships_for_delete_serialize(
+                identity_source_id=identity_source_id,
+                session_id=session_id,
+                bulk_group_memberships_delete_request_body=bulk_group_memberships_delete_request_body,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _upload_identity_source_group_memberships_for_delete_serialize(
+        self,
+        identity_source_id,
+        session_id,
+        bulk_group_memberships_delete_request_body,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        if session_id is not None:
+            _path_params["sessionId"] = session_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if bulk_group_memberships_delete_request_body is not None:
+            _body_params = bulk_group_memberships_delete_request_body
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/sessions/{sessionId}/bulk-group-memberships-delete",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    async def upload_identity_source_group_memberships_for_upsert(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
+        bulk_group_memberships_upsert_request_body: Optional[
+            BulkGroupMembershipsUpsertRequestBody
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Upload the group memberships to be upserted in Okta
+
+        Uploads the group memberships that need to be inserted or updated in Okta from the identity source for the given
+        session
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param session_id: The ID of the identity source session (required)
+        :type session_id: str
+        :param bulk_group_memberships_upsert_request_body:
+        :type bulk_group_memberships_upsert_request_body: BulkGroupMembershipsUpsertRequestBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "202": None,
+            "400": "Error",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._upload_identity_source_group_memberships_for_upsert_serialize(
+                identity_source_id=identity_source_id,
+                session_id=session_id,
+                bulk_group_memberships_upsert_request_body=bulk_group_memberships_upsert_request_body,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _upload_identity_source_group_memberships_for_upsert_serialize(
+        self,
+        identity_source_id,
+        session_id,
+        bulk_group_memberships_upsert_request_body,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        if session_id is not None:
+            _path_params["sessionId"] = session_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if bulk_group_memberships_upsert_request_body is not None:
+            _body_params = bulk_group_memberships_upsert_request_body
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/sessions/{sessionId}/bulk-group-memberships-upsert",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    async def upload_identity_source_groups_data_for_delete(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
+        bulk_group_delete_request_body: Optional[BulkGroupDeleteRequestBody] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Upload the group external IDs to be deleted in Okta
+
+        Uploads external IDs of groups that need to be deleted in Okta from the identity source for the given session
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param session_id: The ID of the identity source session (required)
+        :type session_id: str
+        :param bulk_group_delete_request_body:
+        :type bulk_group_delete_request_body: BulkGroupDeleteRequestBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "202": None,
+            "400": "Error",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._upload_identity_source_groups_data_for_delete_serialize(
+                identity_source_id=identity_source_id,
+                session_id=session_id,
+                bulk_group_delete_request_body=bulk_group_delete_request_body,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _upload_identity_source_groups_data_for_delete_serialize(
+        self,
+        identity_source_id,
+        session_id,
+        bulk_group_delete_request_body,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        if session_id is not None:
+            _path_params["sessionId"] = session_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if bulk_group_delete_request_body is not None:
+            _body_params = bulk_group_delete_request_body
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/sessions/{sessionId}/bulk-groups-delete",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    async def upload_identity_source_groups_for_upsert(
+        self,
+        identity_source_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the identity source for which the session is created"
+            ),
+        ],
+        session_id: Annotated[
+            StrictStr, Field(description="The ID of the identity source session")
+        ],
+        bulk_group_upsert_request_body: Optional[BulkGroupUpsertRequestBody] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Upload the group profiles without memberships to be upserted in Okta
+
+        Uploads the group profiles without memberships that need to be inserted or updated in Okta from the identity source
+        for the given session
+
+        :param identity_source_id: The ID of the identity source for which the session is created (required)
+        :type identity_source_id: str
+        :param session_id: The ID of the identity source session (required)
+        :type session_id: str
+        :param bulk_group_upsert_request_body:
+        :type bulk_group_upsert_request_body: BulkGroupUpsertRequestBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "202": None,
+            "400": "Error",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._upload_identity_source_groups_for_upsert_serialize(
+                identity_source_id=identity_source_id,
+                session_id=session_id,
+                bulk_group_upsert_request_body=bulk_group_upsert_request_body,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _upload_identity_source_groups_for_upsert_serialize(
+        self,
+        identity_source_id,
+        session_id,
+        bulk_group_upsert_request_body,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if identity_source_id is not None:
+            _path_params["identitySourceId"] = identity_source_id
+        if session_id is not None:
+            _path_params["sessionId"] = session_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if bulk_group_upsert_request_body is not None:
+            _body_params = bulk_group_upsert_request_body
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/identity-sources/{identitySourceId}/sessions/{sessionId}/bulk-groups-upsert",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

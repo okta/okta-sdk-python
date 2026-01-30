@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
 **activate** | [**HrefObjectActivateLink**](HrefObjectActivateLink.md) |  | [optional] 
 **deactivate** | [**HrefObjectDeactivateLink**](HrefObjectDeactivateLink.md) |  | [optional] 
-**methods** | [**HrefObject**](HrefObject.md) | Link to Authenticator methods | [optional] 
+**methods** | [**HrefObject**](HrefObject.md) | Link to authenticator methods | [optional] 
 
 ## Example
 

@@ -7,10 +7,6 @@
 # coding: utf-8
 
 import os
-import okta.models as models
-from okta.models.application_sign_on_mode import ApplicationSignOnMode as ASM
-from okta.models.factor_type import FactorType as FT
-from okta.models.policy_type import PolicyType as PT
 
 DEV_OKTA = "https://developer.okta.com"
 
@@ -32,62 +28,5 @@ _GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
                                  "okta.yaml")
 _LOCAL_YAML_PATH = os.path.join(os.getcwd(), "okta.yaml")
 
-# This dictionary is now built by iterating through all models to find the 'Application' model
-# and then accessing its discriminator mapping.
-
-
-
-OKTA_APP_SIGN_ON_TO_MODEL = {
-    {{#app_sign_on_to_model}}
-    ASM.{{key}}: models.{{value}},
-    {{/app_sign_on_to_model}}
-}
-
 SWA_APP_NAME = "template_swa"
 SWA3_APP_NAME = "template_swa3field"
-
-
-def find_app_model(sign_on_mode, template_name):
-    # If ASM found in model map, return model
-    if sign_on_mode in OKTA_APP_SIGN_ON_TO_MODEL:
-        return OKTA_APP_SIGN_ON_TO_MODEL[sign_on_mode]
-    # O/W must be BROWSER PLUGIN APP
-    if template_name in OKTA_APP_NAME_TO_MODEL:
-        return OKTA_APP_NAME_TO_MODEL[template_name]
-    # If nothing matches, use default basic application:
-    return models.Application
-
-
-OKTA_FACTOR_TYPE_TO_FACTOR = {
-    {{#factor_type_to_factor}}
-    FT.{{key}}: models.{{value}},
-    {{/factor_type_to_factor}}
-}
-
-def find_factor_model(factor_type):
-    return OKTA_FACTOR_TYPE_TO_FACTOR[factor_type]
-
-
-OKTA_POLICY_TYPE_TO_MODEL = {
-    {{#policy_type_to_model}}
-    PT.{{key}}: models.{{value}},
-    {{/policy_type_to_model}}
-}
-
-
-
-def find_policy_model(policy_type):
-    return OKTA_POLICY_TYPE_TO_MODEL[policy_type]
-
-
-
-OKTA_POLICY_RULE_TYPE_TO_MODEL = {
-    {{#policy_rule_type_to_model}}
-    "{{key}}": models.{{value}},
-    {{/policy_rule_type_to_model}}
-}
-
-def find_policy_rule_model(policy_rule):
-    if policy_rule in OKTA_POLICY_RULE_TYPE_TO_MODEL:
-        return OKTA_POLICY_RULE_TYPE_TO_MODEL[policy_rule]
-    return models.PolicyRule

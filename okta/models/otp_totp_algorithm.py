@@ -36,9 +36,9 @@ class OtpTotpAlgorithm(str, Enum):
     """
     allowed enum values
     """
-    HMACSHA1 = "HMacSHA1"
-    HMACSHA256 = "HMacSHA256"
-    HMACSHA512 = "HMacSHA512"
+    HMACSHA1 = "HMACSHA1"
+    HMACSHA256 = "HMACSHA256"
+    HMACSHA512 = "HMACSHA512"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

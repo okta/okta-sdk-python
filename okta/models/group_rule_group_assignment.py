@@ -34,10 +34,14 @@ from typing_extensions import Self
 
 class GroupRuleGroupAssignment(BaseModel):
     """
-    GroupRuleGroupAssignment
+    Contains the `groupIds` array
     """  # noqa: E501
 
-    group_ids: Optional[List[StrictStr]] = Field(default=None, alias="groupIds")
+    group_ids: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Array of `groupIds` to which users are added",
+        alias="groupIds",
+    )
     __properties: ClassVar[List[str]] = ["groupIds"]
 
     model_config = ConfigDict(

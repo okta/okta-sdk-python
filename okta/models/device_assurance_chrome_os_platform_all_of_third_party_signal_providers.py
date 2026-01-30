@@ -28,9 +28,10 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
+from okta.models.device_posture_id_p import DevicePostureIdP
 from okta.models.dtc_chrome_os import DTCChromeOS
 
 
@@ -40,7 +41,10 @@ class DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders(BaseModel):
     """  # noqa: E501
 
     dtc: Optional[DTCChromeOS] = None
-    __properties: ClassVar[List[str]] = ["dtc"]
+    device_posture_id_p: Optional[DevicePostureIdP] = Field(
+        default=None, alias="devicePostureIdP"
+    )
+    __properties: ClassVar[List[str]] = ["dtc", "devicePostureIdP"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +90,13 @@ class DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders(BaseModel):
             else:
                 _dict["dtc"] = self.dtc
 
+        # override the default output from pydantic by calling `to_dict()` of device_posture_id_p
+        if self.device_posture_id_p:
+            if not isinstance(self.device_posture_id_p, dict):
+                _dict["devicePostureIdP"] = self.device_posture_id_p.to_dict()
+            else:
+                _dict["devicePostureIdP"] = self.device_posture_id_p
+
         return _dict
 
     @classmethod
@@ -103,7 +114,12 @@ class DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders(BaseModel):
                     DTCChromeOS.from_dict(obj["dtc"])
                     if obj.get("dtc") is not None
                     else None
-                )
+                ),
+                "devicePostureIdP": (
+                    DevicePostureIdP.from_dict(obj["devicePostureIdP"])
+                    if obj.get("devicePostureIdP") is not None
+                    else None
+                ),
             }
         )
         return _obj

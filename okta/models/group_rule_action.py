@@ -36,7 +36,7 @@ from okta.models.group_rule_group_assignment import GroupRuleGroupAssignment
 
 class GroupRuleAction(BaseModel):
     """
-    GroupRuleAction
+    Defines which users and groups to assign
     """  # noqa: E501
 
     assign_user_to_groups: Optional[GroupRuleGroupAssignment] = Field(

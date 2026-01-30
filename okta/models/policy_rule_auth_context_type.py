@@ -30,13 +30,14 @@ from typing_extensions import Self
 
 class PolicyRuleAuthContextType(str, Enum):
     """
-    PolicyRuleAuthContextType
+    Specifies how the user is authenticated
     """
 
     """
     allowed enum values
     """
     ANY = "ANY"
+    LDAP_INTERFACE = "LDAP_INTERFACE"
     RADIUS = "RADIUS"
 
     @classmethod

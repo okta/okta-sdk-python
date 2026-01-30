@@ -39,6 +39,12 @@ class EmailDomain(BaseModel):
 
     brand_id: StrictStr = Field(alias="brandId")
     domain: StrictStr
+    validation_subdomain: Optional[StrictStr] = Field(
+        default="mail",
+        description="Subdomain for the email sender's custom mail domain. Specify your subdomain when you configure a custom "
+        "mail domain.",
+        alias="validationSubdomain",
+    )
     display_name: StrictStr = Field(alias="displayName")
     user_name: StrictStr = Field(alias="userName")
     __properties: ClassVar[List[str]] = ["displayName", "userName"]

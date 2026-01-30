@@ -40,6 +40,7 @@ class BehaviorRuleType(str, Enum):
     ANOMALOUS_IP = "ANOMALOUS_IP"
     ANOMALOUS_LOCATION = "ANOMALOUS_LOCATION"
     VELOCITY = "VELOCITY"
+    ANOMALOUS_ASN = "ANOMALOUS_ASN"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

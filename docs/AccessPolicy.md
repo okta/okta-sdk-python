@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conditions** | [**PolicyRuleConditions**](PolicyRuleConditions.md) |  | [optional] 
+**conditions** | **str** | Policy conditions aren&#39;t supported. Conditions are applied at the rule level for this policy type. | [optional] 
 
 ## Example
 

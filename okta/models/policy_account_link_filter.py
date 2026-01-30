@@ -32,15 +32,17 @@ from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
 from okta.models.policy_account_link_filter_groups import PolicyAccountLinkFilterGroups
+from okta.models.policy_account_link_filter_users import PolicyAccountLinkFilterUsers
 
 
 class PolicyAccountLinkFilter(BaseModel):
     """
-    PolicyAccountLinkFilter
+    Specifies filters on which users are available for account linking by an IdP
     """  # noqa: E501
 
     groups: Optional[PolicyAccountLinkFilterGroups] = None
-    __properties: ClassVar[List[str]] = ["groups"]
+    users: Optional[PolicyAccountLinkFilterUsers] = None
+    __properties: ClassVar[List[str]] = ["groups", "users"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,6 +88,13 @@ class PolicyAccountLinkFilter(BaseModel):
             else:
                 _dict["groups"] = self.groups
 
+        # override the default output from pydantic by calling `to_dict()` of users
+        if self.users:
+            if not isinstance(self.users, dict):
+                _dict["users"] = self.users.to_dict()
+            else:
+                _dict["users"] = self.users
+
         return _dict
 
     @classmethod
@@ -103,7 +112,12 @@ class PolicyAccountLinkFilter(BaseModel):
                     PolicyAccountLinkFilterGroups.from_dict(obj["groups"])
                     if obj.get("groups") is not None
                     else None
-                )
+                ),
+                "users": (
+                    PolicyAccountLinkFilterUsers.from_dict(obj["users"])
+                    if obj.get("users") is not None
+                    else None
+                ),
             }
         )
         return _obj

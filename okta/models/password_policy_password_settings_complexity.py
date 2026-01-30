@@ -36,21 +36,54 @@ from okta.models.password_dictionary import PasswordDictionary
 
 class PasswordPolicyPasswordSettingsComplexity(BaseModel):
     """
-    PasswordPolicyPasswordSettingsComplexity
+    Complexity settings
     """  # noqa: E501
 
     dictionary: Optional[PasswordDictionary] = None
     exclude_attributes: Optional[List[StrictStr]] = Field(
-        default=None, alias="excludeAttributes"
+        default=None,
+        description="The User profile attributes whose values must be excluded from the password: currently only supports "
+        "`firstName` and `lastName`",
+        alias="excludeAttributes",
     )
     exclude_username: Optional[StrictBool] = Field(
-        default=True, alias="excludeUsername"
+        default=True,
+        description="Indicates if the Username must be excluded from the password",
+        alias="excludeUsername",
     )
-    min_length: Optional[StrictInt] = Field(default=None, alias="minLength")
-    min_lower_case: Optional[StrictInt] = Field(default=None, alias="minLowerCase")
-    min_number: Optional[StrictInt] = Field(default=None, alias="minNumber")
-    min_symbol: Optional[StrictInt] = Field(default=None, alias="minSymbol")
-    min_upper_case: Optional[StrictInt] = Field(default=None, alias="minUpperCase")
+    min_length: Optional[StrictInt] = Field(
+        default=8, description="Minimum password length", alias="minLength"
+    )
+    min_lower_case: Optional[StrictInt] = Field(
+        default=1,
+        description="Indicates if a password must contain at least one lower case letter: `0` indicates no, `1` indicates yes",
+        alias="minLowerCase",
+    )
+    min_number: Optional[StrictInt] = Field(
+        default=1,
+        description="Indicates if a password must contain at least one number: `0` indicates no, `1` indicates yes",
+        alias="minNumber",
+    )
+    min_symbol: Optional[StrictInt] = Field(
+        default=1,
+        description="Indicates if a password must contain at least one symbol (For example: !@#$%^&*): `0` indicates no, "
+        "`1` indicates yes",
+        alias="minSymbol",
+    )
+    min_upper_case: Optional[StrictInt] = Field(
+        default=1,
+        description="Indicates if a password must contain at least one upper case letter: `0` indicates no, `1` indicates yes",
+        alias="minUpperCase",
+    )
+    oel_statement: Optional[StrictStr] = Field(
+        default=None,
+        description='<x-lifecycle-container><x-lifecycle class="ea"></x-lifecycle> <x-lifecycle '
+        'class="oie"></x-lifecycle></x-lifecycle-container>Use an [Expression Language]('
+        "https://developer.okta.com/docs/reference/okta-expression-language-in-identity-engine/) expression to "
+        "block a word from being used in a password. You can only block one word per expression. Use the `OR` "
+        "operator to connect multiple expressions to block multiple words.",
+        alias="oelStatement",
+    )
     __properties: ClassVar[List[str]] = [
         "dictionary",
         "excludeAttributes",
@@ -60,6 +93,7 @@ class PasswordPolicyPasswordSettingsComplexity(BaseModel):
         "minNumber",
         "minSymbol",
         "minUpperCase",
+        "oelStatement",
     ]
 
     model_config = ConfigDict(
@@ -130,11 +164,26 @@ class PasswordPolicyPasswordSettingsComplexity(BaseModel):
                     if obj.get("excludeUsername") is not None
                     else True
                 ),
-                "minLength": obj.get("minLength"),
-                "minLowerCase": obj.get("minLowerCase"),
-                "minNumber": obj.get("minNumber"),
-                "minSymbol": obj.get("minSymbol"),
-                "minUpperCase": obj.get("minUpperCase"),
+                "minLength": (
+                    obj.get("minLength") if obj.get("minLength") is not None else 8
+                ),
+                "minLowerCase": (
+                    obj.get("minLowerCase")
+                    if obj.get("minLowerCase") is not None
+                    else 1
+                ),
+                "minNumber": (
+                    obj.get("minNumber") if obj.get("minNumber") is not None else 1
+                ),
+                "minSymbol": (
+                    obj.get("minSymbol") if obj.get("minSymbol") is not None else 1
+                ),
+                "minUpperCase": (
+                    obj.get("minUpperCase")
+                    if obj.get("minUpperCase") is not None
+                    else 1
+                ),
+                "oelStatement": obj.get("oelStatement"),
             }
         )
         return _obj

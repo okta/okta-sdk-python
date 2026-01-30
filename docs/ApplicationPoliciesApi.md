@@ -4,15 +4,15 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**assign_application_policy**](ApplicationPoliciesApi.md#assign_application_policy) | **PUT** /api/v1/apps/{appId}/policies/{policyId} | Assign an application to a Policy
+[**assign_application_policy**](ApplicationPoliciesApi.md#assign_application_policy) | **PUT** /api/v1/apps/{appId}/policies/{policyId} | Assign an app sign-in policy
 
 
 # **assign_application_policy**
 > assign_application_policy(app_id, policy_id)
 
-Assign an application to a Policy
+Assign an app sign-in policy
 
-Assigns an application to an [authentication policy](/openapi/okta-management/management/tag/Policy/), identified by `policyId`. If the application was previously assigned to another policy, this operation replaces that assignment with the updated policy identified by `policyId`.  > **Note:** When you [merge duplicate authentication policies](https://help.okta.com/okta_help.htm?type=oie&id=ext-merge-auth-policies), the policy and mapping CRUD operations may be unavailable during the consolidation. When the consolidation is complete, you receive an email.
+Assigns an app to an [app sign-in policy](/openapi/okta-management/management/tag/Policy/), identified by `policyId`. If the app was previously assigned to another policy, this operation replaces that assignment with the updated policy identified by `policyId`.  > **Note:** When you [merge duplicate app sign-in policies](https://help.okta.com/okta_help.htm?type=oie&id=ext-merge-auth-policies), the policy and mapping CRUD operations may be unavailable during the consolidation. When the consolidation is complete, you receive an email with merged results.
 
 ### Example
 
@@ -47,11 +47,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationPoliciesApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
     policy_id = '00plrilJ7jZ66Gn0X0g3' # str | `id` of the Policy
 
     try:
-        # Assign an application to a Policy
+        # Assign an app sign-in policy
         api_instance.assign_application_policy(app_id, policy_id)
     except Exception as e:
         print("Exception when calling ApplicationPoliciesApi->assign_application_policy: %s\n" % e)
@@ -64,7 +64,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
+ **app_id** | **str**| Application ID | 
  **policy_id** | **str**| &#x60;id&#x60; of the Policy | 
 
 ### Return type

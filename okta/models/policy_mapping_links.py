@@ -35,9 +35,6 @@ from okta.models.href_object_self_link import HrefObjectSelfLink
 from okta.models.policy_mapping_links_all_of_application import (
     PolicyMappingLinksAllOfApplication,
 )
-from okta.models.policy_mapping_links_all_of_authenticator import (
-    PolicyMappingLinksAllOfAuthenticator,
-)
 from okta.models.policy_mapping_links_all_of_policy import PolicyMappingLinksAllOfPolicy
 
 
@@ -48,14 +45,8 @@ class PolicyMappingLinks(BaseModel):
 
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     application: Optional[PolicyMappingLinksAllOfApplication] = None
-    authenticator: Optional[PolicyMappingLinksAllOfAuthenticator] = None
     policy: Optional[PolicyMappingLinksAllOfPolicy] = None
-    __properties: ClassVar[List[str]] = [
-        "self",
-        "application",
-        "authenticator",
-        "policy",
-    ]
+    __properties: ClassVar[List[str]] = ["self", "application", "policy"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,13 +99,6 @@ class PolicyMappingLinks(BaseModel):
             else:
                 _dict["application"] = self.application
 
-        # override the default output from pydantic by calling `to_dict()` of authenticator
-        if self.authenticator:
-            if not isinstance(self.authenticator, dict):
-                _dict["authenticator"] = self.authenticator.to_dict()
-            else:
-                _dict["authenticator"] = self.authenticator
-
         # override the default output from pydantic by calling `to_dict()` of policy
         if self.policy:
             if not isinstance(self.policy, dict):
@@ -143,11 +127,6 @@ class PolicyMappingLinks(BaseModel):
                 "application": (
                     PolicyMappingLinksAllOfApplication.from_dict(obj["application"])
                     if obj.get("application") is not None
-                    else None
-                ),
-                "authenticator": (
-                    PolicyMappingLinksAllOfAuthenticator.from_dict(obj["authenticator"])
-                    if obj.get("authenticator") is not None
                     else None
                 ),
                 "policy": (

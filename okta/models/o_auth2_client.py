@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
+from okta.models.o_auth2_client_links import OAuth2ClientLinks
 
 
 class OAuth2Client(BaseModel):
@@ -39,11 +39,19 @@ class OAuth2Client(BaseModel):
     OAuth2Client
     """  # noqa: E501
 
-    client_id: Optional[StrictStr] = None
-    client_name: Optional[StrictStr] = None
+    client_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique key for the client application. The `client_id` is immutable.",
+    )
+    client_name: Optional[StrictStr] = Field(
+        default=None, description="Human-readable string name of the client application"
+    )
     client_uri: Optional[StrictStr] = None
-    logo_uri: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    logo_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="URL string that references a logo for the client consent dialog (not the sign-in dialog)",
+    )
+    links: Optional[OAuth2ClientLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "client_id",
         "client_name",
@@ -125,7 +133,7 @@ class OAuth2Client(BaseModel):
                 "client_uri": obj.get("client_uri"),
                 "logo_uri": obj.get("logo_uri"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    OAuth2ClientLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

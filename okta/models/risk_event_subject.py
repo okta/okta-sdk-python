@@ -44,7 +44,7 @@ class RiskEventSubject(BaseModel):
         description="The risk event subject IP address (either an IPv4 or IPv6 address)"
     )
     message: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
-        default=None, description="Additional reasons for the " "risk level of the IP"
+        default=None, description="Additional reasons for the risk level of the IP"
     )
     risk_level: RiskEventSubjectRiskLevel = Field(alias="riskLevel")
     __properties: ClassVar[List[str]] = ["ip", "message", "riskLevel"]

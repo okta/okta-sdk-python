@@ -28,7 +28,8 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.open_id_connect_refresh_token_rotation_type import (
@@ -38,11 +39,20 @@ from okta.models.open_id_connect_refresh_token_rotation_type import (
 
 class OpenIdConnectApplicationSettingsRefreshToken(BaseModel):
     """
-    OpenIdConnectApplicationSettingsRefreshToken
+    Refresh token configuration for an OAuth 2.0 client  When you create or update an OAuth 2.0 client, you can configure
+    refresh token rotation by setting the `rotation_type` and `leeway` properties. If you don't set these properties when
+    you create an app integration, the default values are used. When you update an app integration, your previously
+    configured values are used.
     """  # noqa: E501
 
-    leeway: Optional[StrictInt] = None
-    rotation_type: Optional[OpenIdConnectRefreshTokenRotationType] = None
+    leeway: Optional[Annotated[int, Field(le=60, strict=True, ge=0)]] = Field(
+        default=30,
+        description="The leeway, in seconds, allowed for the OAuth 2.0 client. After the refresh token is rotated, "
+        "the previous token remains valid for the specified period of time so clients can get the new token.  > "
+        "**Note:** A leeway of 0 doesn't necessarily mean that the previous token is immediately invalidated. "
+        "The previous token is invalidated after the new token is generated and returned in the response. ",
+    )
+    rotation_type: OpenIdConnectRefreshTokenRotationType
     __properties: ClassVar[List[str]] = ["leeway", "rotation_type"]
 
     model_config = ConfigDict(
@@ -94,6 +104,9 @@ class OpenIdConnectApplicationSettingsRefreshToken(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"leeway": obj.get("leeway"), "rotation_type": obj.get("rotation_type")}
+            {
+                "leeway": obj.get("leeway") if obj.get("leeway") is not None else 30,
+                "rotation_type": obj.get("rotation_type"),
+            }
         )
         return _obj

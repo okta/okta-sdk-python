@@ -150,7 +150,9 @@ class Role(BaseModel):
                 "type": obj.get("type"),
                 "_embedded": obj.get("_embedded"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+                    LinksSelf.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
                 ),
             }
         )

@@ -42,11 +42,12 @@ if TYPE_CHECKING:
     )
     from okta.models.authenticator_method_simple import AuthenticatorMethodSimple
     from okta.models.authenticator_method_otp import AuthenticatorMethodOtp
-    from okta.models.authenticator_method_totp import AuthenticatorMethodTotp
     from okta.models.authenticator_method_push import AuthenticatorMethodPush
     from okta.models.authenticator_method_signed_nonce import (
         AuthenticatorMethodSignedNonce,
     )
+    from okta.models.authenticator_method_tac import AuthenticatorMethodTac
+    from okta.models.authenticator_method_totp import AuthenticatorMethodTotp
     from okta.models.authenticator_method_web_authn import AuthenticatorMethodWebAuthn
 
 
@@ -81,6 +82,7 @@ class AuthenticatorMethodBase(BaseModel):
         "security_question": "AuthenticatorMethodSimple",
         "signed_nonce": "AuthenticatorMethodSignedNonce",
         "sms": "AuthenticatorMethodSimple",
+        "tac": "AuthenticatorMethodTac",
         "totp": "AuthenticatorMethodTotp",
         "voice": "AuthenticatorMethodSimple",
         "webauthn": "AuthenticatorMethodWebAuthn",
@@ -117,6 +119,7 @@ class AuthenticatorMethodBase(BaseModel):
             AuthenticatorMethodSimple,
             AuthenticatorMethodSignedNonce,
             AuthenticatorMethodSimple,
+            AuthenticatorMethodTac,
             AuthenticatorMethodTotp,
             AuthenticatorMethodSimple,
             AuthenticatorMethodWebAuthn,
@@ -164,6 +167,7 @@ class AuthenticatorMethodBase(BaseModel):
             AuthenticatorMethodSimple,
             AuthenticatorMethodSignedNonce,
             AuthenticatorMethodSimple,
+            AuthenticatorMethodTac,
             AuthenticatorMethodTotp,
             AuthenticatorMethodSimple,
             AuthenticatorMethodWebAuthn,
@@ -212,6 +216,10 @@ class AuthenticatorMethodBase(BaseModel):
             return import_module(
                 "okta.models.authenticator_method_simple"
             ).AuthenticatorMethodSimple.from_dict(obj)
+        if object_type == "AuthenticatorMethodTac":
+            return import_module(
+                "okta.models.authenticator_method_tac"
+            ).AuthenticatorMethodTac.from_dict(obj)
         if object_type == "AuthenticatorMethodTotp":
             return import_module(
                 "okta.models.authenticator_method_totp"
@@ -226,10 +234,10 @@ class AuthenticatorMethodBase(BaseModel):
             ).AuthenticatorMethodWebAuthn.from_dict(obj)
 
         raise ValueError(
-            "AuthenticatorMethodBase failed to lookup discriminator value from " +
-            json.dumps(obj) +
-            ". Discriminator property name: " +
-            cls.__discriminator_property_name +
-            ", mapping: " +
-            json.dumps(cls.__discriminator_value_class_map)
+            "AuthenticatorMethodBase failed to lookup discriminator value from "
+            + json.dumps(obj)
+            + ". Discriminator property name: "
+            + cls.__discriminator_property_name
+            + ", mapping: "
+            + json.dumps(cls.__discriminator_value_class_map)
         )

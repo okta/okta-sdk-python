@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
 from okta.models.bounces_remove_list_error import BouncesRemoveListError
@@ -39,7 +39,10 @@ class BouncesRemoveListResult(BaseModel):
     BouncesRemoveListResult
     """  # noqa: E501
 
-    errors: Optional[List[BouncesRemoveListError]] = None
+    errors: Optional[List[BouncesRemoveListError]] = Field(
+        default=None,
+        description="A list of emails that wasn't added to the email-bounced remove list and the error reason",
+    )
     __properties: ClassVar[List[str]] = ["errors"]
 
     model_config = ConfigDict(

@@ -58,14 +58,12 @@ class Session(BaseModel):
     idp: Optional[SessionIdentityProvider] = None
     last_factor_verification: Optional[datetime] = Field(
         default=None,
-        description="A timestamp when the user last performed multifactor "
-                    "authentication",
+        description="A timestamp when the user last performed multifactor authentication",
         alias="lastFactorVerification",
     )
     last_password_verification: Optional[datetime] = Field(
         default=None,
-        description="A timestamp when the user last performed the "
-                    "primary or step-up authentication with a password",
+        description="A timestamp when the user last performed the primary or step-up authentication with a password",
         alias="lastPasswordVerification",
     )
     login: Optional[StrictStr] = Field(

@@ -37,8 +37,20 @@ class UserActivationToken(BaseModel):
     UserActivationToken
     """  # noqa: E501
 
-    activation_token: Optional[StrictStr] = Field(default=None, alias="activationToken")
-    activation_url: Optional[StrictStr] = Field(default=None, alias="activationUrl")
+    activation_token: Optional[StrictStr] = Field(
+        default=None,
+        description="Token received as part of an activation user request. If a password was set before the user was "
+        "activated, then user must sign in with their password or the `activationToken` and not the activation "
+        "link. More information about using the `activationToken` to login can be found in the [Authentication "
+        "API](https://developer.okta.com/docs/reference/api/authn/#primary-authentication-with-activation-token).",
+        alias="activationToken",
+    )
+    activation_url: Optional[StrictStr] = Field(
+        default=None,
+        description="If `sendEmail` is `false`, returns an activation link for the user to set up their account. The "
+        "activation token can be used to create a custom activation link.",
+        alias="activationUrl",
+    )
     __properties: ClassVar[List[str]] = ["activationToken", "activationUrl"]
 
     model_config = ConfigDict(

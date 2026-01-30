@@ -1,5 +1,6 @@
 # PasswordPolicySettings
 
+Specifies the policy level settings
 
 ## Properties
 

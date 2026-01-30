@@ -25,87 +25,163 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
-from typing import Any, ClassVar, Dict, List
-from typing import Optional, Set
+from typing import Union, Any, Set, TYPE_CHECKING, Optional, Dict
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import (
+    BaseModel,
+    ValidationError,
+    field_validator,
+)
 from typing_extensions import Self
+
+from okta.models.okta_active_directory_group_profile import (
+    OktaActiveDirectoryGroupProfile,
+)
+from okta.models.okta_user_group_profile import OktaUserGroupProfile
+
+GROUPPROFILE_ANY_OF_SCHEMAS = [
+    "OktaActiveDirectoryGroupProfile",
+    "OktaUserGroupProfile",
+]
 
 
 class GroupProfile(BaseModel):
     """
-    GroupProfile
-    """  # noqa: E501
+    Specifies required and optional properties for a group. The `objectClass` of a group determines which additional
+    properties are available.  You can extend group profiles with custom properties, but you must first add the properties
+    to the group profile schema before you can reference them. Use the Profile Editor in the Admin Console or the [Schemas
+    API](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/) to manage schema extensions.
+    Custom properties can contain HTML tags. It is the client's responsibility to escape or encode this data before
+    displaying it. Use [best-practices](
+    https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) to prevent cross-site
+    scripting.
+    """
 
-    description: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["description", "name"]
+    # data type: OktaUserGroupProfile
+    anyof_schema_1_validator: Optional[OktaUserGroupProfile] = None
+    # data type: OktaActiveDirectoryGroupProfile
+    anyof_schema_2_validator: Optional[OktaActiveDirectoryGroupProfile] = None
+    if TYPE_CHECKING:
+        actual_instance: Optional[
+            Union[OktaActiveDirectoryGroupProfile, OktaUserGroupProfile]
+        ] = None
+    else:
+        actual_instance: Any = None
+    any_of_schemas: Set[str] = {
+        "OktaActiveDirectoryGroupProfile",
+        "OktaUserGroupProfile",
+    }
 
-    model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
+    model_config = {
+        "validate_assignment": True,
+        "protected_namespaces": (),
+    }
 
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.model_dump(by_alias=True))
+    def __init__(self, *args, **kwargs) -> None:
+        if args:
+            if len(args) > 1:
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
+            if kwargs:
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
+            super().__init__(actual_instance=args[0])
+        else:
+            super().__init__(**kwargs)
+
+    @field_validator("actual_instance")
+    def actual_instance_must_validate_anyof(cls, v):
+        error_messages = []
+        # validate data type: OktaUserGroupProfile
+        if not isinstance(v, OktaUserGroupProfile):
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `OktaUserGroupProfile`"
+            )
+        else:
+            return v
+
+        # validate data type: OktaActiveDirectoryGroupProfile
+        if not isinstance(v, OktaActiveDirectoryGroupProfile):
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `OktaActiveDirectoryGroupProfile`"
+            )
+        else:
+            return v
+
+        if error_messages:
+            # no match
+            raise ValueError(
+                "No match found when setting the actual_instance in GroupProfile with anyOf schemas: "
+                "OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: "
+                + ", ".join(error_messages)
+            )
+        else:
+            return v
+
+    @classmethod
+    def from_dict(cls, obj: Dict[str, Any]) -> Self:
+        return cls.from_json(json.dumps(obj))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Self:
+        """Returns the object represented by the json string"""
+        instance = cls.model_construct()
+        error_messages = []
+        # anyof_schema_1_validator: Optional[OktaUserGroupProfile] = None
+        try:
+            instance.actual_instance = OktaUserGroupProfile.from_json(json_str)
+            return instance
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # anyof_schema_2_validator: Optional[OktaActiveDirectoryGroupProfile] = None
+        try:
+            instance.actual_instance = OktaActiveDirectoryGroupProfile.from_json(
+                json_str
+            )
+            return instance
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if error_messages:
+            # no match
+            raise ValueError(
+                "No match found when deserializing the JSON string into GroupProfile with anyOf schemas: "
+                "OktaActiveDirectoryGroupProfile, OktaUserGroupProfile. Details: "
+                + ", ".join(error_messages)
+            )
+        else:
+            return instance
 
     def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        """Returns the JSON representation of the actual instance"""
+        if self.actual_instance is None:
+            return "null"
 
-    @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of GroupProfile from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
+        if hasattr(self.actual_instance, "to_json") and callable(
+            self.actual_instance.to_json
+        ):
+            return self.actual_instance.to_json()
+        else:
+            return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Dict[str, Any]:
-        """Return the dictionary representation of the model using alias.
-
-        This has the following differences from calling pydantic's
-        `self.model_dump(by_alias=True)`:
-
-        * `None` is only added to the output dict for nullable fields that
-          were set at model initialization. Other fields with value `None`
-          are ignored.
-        * Fields in `self.additional_properties` are added to the output dict.
-        """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
-
-        _dict = self.model_dump(
-            by_alias=True,
-            exclude=excluded_fields,
-            exclude_none=True,
-        )
-        # puts key-value pairs in additional_properties in the top level
-        if self.additional_properties is not None:
-            for _key, _value in self.additional_properties.items():
-                _dict[_key] = _value
-
-        return _dict
-
-    @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of GroupProfile from a dict"""
-        if obj is None:
+    def to_dict(
+        self,
+    ) -> Optional[
+        Union[Dict[str, Any], OktaActiveDirectoryGroupProfile, OktaUserGroupProfile]
+    ]:
+        """Returns the dict representation of the actual instance"""
+        if self.actual_instance is None:
             return None
 
-        if not isinstance(obj, dict):
-            return cls.model_validate(obj)
+        if hasattr(self.actual_instance, "to_dict") and callable(
+            self.actual_instance.to_dict
+        ):
+            return self.actual_instance.to_dict()
+        else:
+            return self.actual_instance
 
-        _obj = cls.model_validate(
-            {"description": obj.get("description"), "name": obj.get("name")}
-        )
-        # store additional fields in additional_properties
-        for _key in obj.keys():
-            if _key not in cls.__properties:
-                _obj.additional_properties[_key] = obj.get(_key)
-
-        return _obj
+    def to_str(self) -> str:
+        """Returns the string representation of the actual instance"""
+        return pprint.pformat(self.model_dump())

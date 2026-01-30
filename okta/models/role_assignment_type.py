@@ -30,12 +30,13 @@ from typing_extensions import Self
 
 class RoleAssignmentType(str, Enum):
     """
-    RoleAssignmentType
+    Role assignment type
     """
 
     """
     allowed enum values
     """
+    CLIENT = "CLIENT"
     GROUP = "GROUP"
     USER = "USER"
 

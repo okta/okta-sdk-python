@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**external_id** | **str** |  | [optional] 
+**external_id** | **str** | The external ID of the entity that needs to be deleted in Okta | [optional] 
 
 ## Example
 

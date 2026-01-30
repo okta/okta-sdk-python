@@ -36,7 +36,11 @@ from okta.models.password_policy_recovery_factors import PasswordPolicyRecoveryF
 
 class PasswordPolicyRecoverySettings(BaseModel):
     """
-    PasswordPolicyRecoverySettings
+    Specifies the password recovery settings for the policy > **Note:** With Identity Engine, you can specify recovery
+    factors inside the password policy rule instead of in the policy settings object. Recovery factors for the rule are
+    defined inside the [`selfServicePasswordReset` action](
+    https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/createPolicyRule
+    !path=1/actions/selfServicePasswordReset&t=request).
     """  # noqa: E501
 
     factors: Optional[PasswordPolicyRecoveryFactors] = None

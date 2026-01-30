@@ -29,15 +29,19 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
+from okta.models.group_schema_attribute_enum_inner import GroupSchemaAttributeEnumInner
 from okta.models.user_schema_attribute_enum import UserSchemaAttributeEnum
-from okta.models.user_schema_attribute_items import UserSchemaAttributeItems
+from okta.models.user_schema_attribute_format import UserSchemaAttributeFormat
 from okta.models.user_schema_attribute_master import UserSchemaAttributeMaster
+from okta.models.user_schema_attribute_mutability_string import (
+    UserSchemaAttributeMutabilityString,
+)
 from okta.models.user_schema_attribute_permission import UserSchemaAttributePermission
 from okta.models.user_schema_attribute_scope import UserSchemaAttributeScope
 from okta.models.user_schema_attribute_type import UserSchemaAttributeType
-from okta.models.user_schema_attribute_union import UserSchemaAttributeUnion
 
 
 class UserSchemaAttribute(BaseModel):
@@ -45,32 +49,91 @@ class UserSchemaAttribute(BaseModel):
     UserSchemaAttribute
     """  # noqa: E501
 
-    description: Optional[StrictStr] = None
-    enum: Optional[List[StrictStr]] = None
-    external_name: Optional[StrictStr] = Field(default=None, alias="externalName")
-    external_namespace: Optional[StrictStr] = Field(
-        default=None, alias="externalNamespace"
+    default: Optional[Any] = Field(
+        default=None,
+        description="If specified, assigns the value as the default value for the custom attribute. This is a nullable "
+        "property. If you don't specify a value for this custom attribute during user creation or update, "
+        "the `default` is used instead of setting the value to `null` or empty.",
     )
-    items: Optional[UserSchemaAttributeItems] = None
-    master: Optional[UserSchemaAttributeMaster] = None
-    max_length: Optional[StrictInt] = Field(default=None, alias="maxLength")
-    min_length: Optional[StrictInt] = Field(default=None, alias="minLength")
-    mutability: Optional[StrictStr] = None
-    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(default=None, alias="oneOf")
-    pattern: Optional[StrictStr] = None
-    permissions: Optional[List[UserSchemaAttributePermission]] = None
-    required: Optional[StrictBool] = None
+    description: Optional[StrictStr] = Field(
+        default=None, description="Description of the property"
+    )
+    enum: Optional[List[GroupSchemaAttributeEnumInner]] = Field(
+        default=None,
+        description="Enumerated value of the property.  The value of the property is limited to one of the values specified "
+        "in the enum definition. The list of values for the enum must consist of unique elements.",
+    )
+    external_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the property as it exists in an external application  **NOTE**: When you add a custom property, "
+        "only Identity Provider app user schemas require `externalName` to be included in the request body. If "
+        "an existing custom Identity Provider app user schema property has an empty `externalName`, "
+        "requests aren't allowed to update other properties until the `externalName` is defined.",
+        alias="externalName",
+    )
+    external_namespace: Optional[StrictStr] = Field(
+        default=None,
+        description="Namespace from the external application",
+        alias="externalNamespace",
+    )
+    format: Optional[UserSchemaAttributeFormat] = Field(
+        default=None,
+        description="Identifies the type of data represented by the string",
+    )
+    master: Optional[UserSchemaAttributeMaster] = Field(
+        default=None, description="Identifies where the property is mastered"
+    )
+    max_length: Optional[StrictInt] = Field(
+        default=None,
+        description="Maximum character length of a string property",
+        alias="maxLength",
+    )
+    min_length: Optional[StrictInt] = Field(
+        default=None,
+        description="Minimum character length of a string property",
+        alias="minLength",
+    )
+    mutability: Optional[UserSchemaAttributeMutabilityString] = Field(
+        default=None, description="Defines the mutability of the property"
+    )
+    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(
+        default=None,
+        description="Non-empty array of valid JSON schemas.  The `oneOf` key is only supported in conjunction with `enum` "
+        "and provides a mechanism to return a display name for the `enum` value.<br> Each schema has the "
+        'following format:  ``` {   "const": "enumValue",   "title": "display name" } ```  When `enum` is used '
+        "in conjunction with `oneOf`, you must keep the set of enumerated values and their order.<br> For "
+        'example:  ``` "enum": ["S","M","L","XL"], "oneOf": [     {"const": "S", "title": "Small"},     '
+        '{"const": "M", "title": "Medium"},     {"const": "L", "title": "Large"},     {"const": "XL", '
+        '"title": "Extra Large"}   ] ```',
+        alias="oneOf",
+    )
+    pattern: Optional[StrictStr] = Field(
+        default=None,
+        description="For `string` property types, specifies the regular expression used to validate the property",
+    )
+    permissions: Optional[List[UserSchemaAttributePermission]] = Field(
+        default=None, description="Access control permissions for the property"
+    )
+    required: Optional[StrictBool] = Field(
+        default=None, description="Determines whether the property is required"
+    )
     scope: Optional[UserSchemaAttributeScope] = None
-    title: Optional[StrictStr] = None
-    type: Optional[UserSchemaAttributeType] = None
-    union: Optional[UserSchemaAttributeUnion] = None
-    unique: Optional[StrictStr] = None
+    title: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(
+        default=None, description="User-defined display name for the property"
+    )
+    type: Optional[UserSchemaAttributeType] = Field(
+        default=None, description="Type of property"
+    )
+    unique: Optional[StrictBool] = Field(
+        default=None, description="Determines whether property values must be unique"
+    )
     __properties: ClassVar[List[str]] = [
+        "default",
         "description",
         "enum",
         "externalName",
         "externalNamespace",
-        "items",
+        "format",
         "master",
         "maxLength",
         "minLength",
@@ -82,7 +145,6 @@ class UserSchemaAttribute(BaseModel):
         "scope",
         "title",
         "type",
-        "union",
         "unique",
     ]
 
@@ -123,13 +185,13 @@ class UserSchemaAttribute(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of items
-        if self.items:
-            if not isinstance(self.items, dict):
-                _dict["items"] = self.items.to_dict()
-            else:
-                _dict["items"] = self.items
-
+        # override the default output from pydantic by calling `to_dict()` of each item in enum (list)
+        _items = []
+        if self.enum:
+            for _item in self.enum:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["enum"] = _items
         # override the default output from pydantic by calling `to_dict()` of master
         if self.master:
             if not isinstance(self.master, dict):
@@ -151,6 +213,21 @@ class UserSchemaAttribute(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["permissions"] = _items
+        # set to None if default (nullable) is None
+        # and model_fields_set contains the field
+        if self.default is None and "default" in self.model_fields_set:
+            _dict["default"] = None
+
+        # set to None if enum (nullable) is None
+        # and model_fields_set contains the field
+        if self.enum is None and "enum" in self.model_fields_set:
+            _dict["enum"] = None
+
+        # set to None if master (nullable) is None
+        # and model_fields_set contains the field
+        if self.master is None and "master" in self.model_fields_set:
+            _dict["master"] = None
+
         # set to None if max_length (nullable) is None
         # and model_fields_set contains the field
         if self.max_length is None and "max_length" in self.model_fields_set:
@@ -160,6 +237,26 @@ class UserSchemaAttribute(BaseModel):
         # and model_fields_set contains the field
         if self.min_length is None and "min_length" in self.model_fields_set:
             _dict["minLength"] = None
+
+        # set to None if one_of (nullable) is None
+        # and model_fields_set contains the field
+        if self.one_of is None and "one_of" in self.model_fields_set:
+            _dict["oneOf"] = None
+
+        # set to None if permissions (nullable) is None
+        # and model_fields_set contains the field
+        if self.permissions is None and "permissions" in self.model_fields_set:
+            _dict["permissions"] = None
+
+        # set to None if required (nullable) is None
+        # and model_fields_set contains the field
+        if self.required is None and "required" in self.model_fields_set:
+            _dict["required"] = None
+
+        # set to None if unique (nullable) is None
+        # and model_fields_set contains the field
+        if self.unique is None and "unique" in self.model_fields_set:
+            _dict["unique"] = None
 
         return _dict
 
@@ -174,15 +271,19 @@ class UserSchemaAttribute(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "default": obj.get("default"),
                 "description": obj.get("description"),
-                "enum": obj.get("enum"),
-                "externalName": obj.get("externalName"),
-                "externalNamespace": obj.get("externalNamespace"),
-                "items": (
-                    UserSchemaAttributeItems.from_dict(obj["items"])
-                    if obj.get("items") is not None
+                "enum": (
+                    [
+                        GroupSchemaAttributeEnumInner.from_dict(_item)
+                        for _item in obj["enum"]
+                    ]
+                    if obj.get("enum") is not None
                     else None
                 ),
+                "externalName": obj.get("externalName"),
+                "externalNamespace": obj.get("externalNamespace"),
+                "format": obj.get("format"),
                 "master": (
                     UserSchemaAttributeMaster.from_dict(obj["master"])
                     if obj.get("master") is not None
@@ -209,7 +310,6 @@ class UserSchemaAttribute(BaseModel):
                 "scope": obj.get("scope"),
                 "title": obj.get("title"),
                 "type": obj.get("type"),
-                "union": obj.get("union"),
                 "unique": obj.get("unique"),
             }
         )

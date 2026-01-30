@@ -41,8 +41,14 @@ class BulkDeleteRequestBody(BaseModel):
     BulkDeleteRequestBody
     """  # noqa: E501
 
-    entity_type: Optional[StrictStr] = Field(default=None, alias="entityType")
-    profiles: Optional[List[IdentitySourceUserProfileForDelete]] = None
+    entity_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of data to bulk delete in a session. Currently, only `USERS` is supported.",
+        alias="entityType",
+    )
+    profiles: Optional[List[IdentitySourceUserProfileForDelete]] = Field(
+        default=None, description="Array of profiles to be deleted"
+    )
     __properties: ClassVar[List[str]] = ["entityType", "profiles"]
 
     @field_validator("entity_type")

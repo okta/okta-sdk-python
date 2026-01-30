@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class EventHookVerificationStatus(str, Enum):
     """
-    EventHookVerificationStatus
+    Verification status of the event hook. `UNVERIFIED` event hooks won't receive any events.
     """
 
     """

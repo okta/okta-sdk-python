@@ -1,11 +1,12 @@
 # AccessPolicyRuleCustomCondition
 
+Specifies [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language-in-identity-engine/) expressions
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**condition** | **str** |  | [optional] 
+**condition** | **str** | expression to match | 
 
 ## Example
 

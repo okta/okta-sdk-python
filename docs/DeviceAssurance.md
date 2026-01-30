@@ -7,10 +7,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created_by** | **str** |  | [optional] [readonly] 
 **created_date** | **str** |  | [optional] [readonly] 
+**device_posture_checks** | [**DevicePostureChecks**](DevicePostureChecks.md) |  | [optional] 
+**display_remediation_mode** | **str** | &lt;x-lifecycle-container&gt;&lt;x-lifecycle class&#x3D;\&quot;ea\&quot;&gt;&lt;/x-lifecycle&gt;&lt;/x-lifecycle-container&gt;Represents the remediation mode of this device assurance policy when users are denied access due to device noncompliance | [optional] 
+**grace_period** | [**GracePeriod**](GracePeriod.md) |  | [optional] 
 **id** | **str** |  | [optional] [readonly] 
+**last_update** | **str** |  | [optional] [readonly] 
 **last_updated_by** | **str** |  | [optional] [readonly] 
-**last_updated_date** | **str** |  | [optional] [readonly] 
-**name** | **str** | Display name of the Device Assurance Policy | [optional] 
+**name** | **str** | Display name of the device assurance policy | [optional] 
 **platform** | [**Platform**](Platform.md) |  | [optional] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 

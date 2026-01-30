@@ -4,18 +4,18 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_principal_rate_limit_entity**](PrincipalRateLimitApi.md#create_principal_rate_limit_entity) | **POST** /api/v1/principal-rate-limits | Create a Principal Rate Limit
-[**get_principal_rate_limit_entity**](PrincipalRateLimitApi.md#get_principal_rate_limit_entity) | **GET** /api/v1/principal-rate-limits/{principalRateLimitId} | Retrieve a Principal Rate Limit
-[**list_principal_rate_limit_entities**](PrincipalRateLimitApi.md#list_principal_rate_limit_entities) | **GET** /api/v1/principal-rate-limits | List all Principal Rate Limits
-[**replace_principal_rate_limit_entity**](PrincipalRateLimitApi.md#replace_principal_rate_limit_entity) | **PUT** /api/v1/principal-rate-limits/{principalRateLimitId} | Replace a Principal Rate Limit
+[**create_principal_rate_limit_entity**](PrincipalRateLimitApi.md#create_principal_rate_limit_entity) | **POST** /api/v1/principal-rate-limits | Create a principal rate limit
+[**get_principal_rate_limit_entity**](PrincipalRateLimitApi.md#get_principal_rate_limit_entity) | **GET** /api/v1/principal-rate-limits/{principalRateLimitId} | Retrieve a principal rate limit
+[**list_principal_rate_limit_entities**](PrincipalRateLimitApi.md#list_principal_rate_limit_entities) | **GET** /api/v1/principal-rate-limits | List all principal rate limits
+[**replace_principal_rate_limit_entity**](PrincipalRateLimitApi.md#replace_principal_rate_limit_entity) | **PUT** /api/v1/principal-rate-limits/{principalRateLimitId} | Replace a principal rate limit
 
 
 # **create_principal_rate_limit_entity**
 > PrincipalRateLimitEntity create_principal_rate_limit_entity(entity)
 
-Create a Principal Rate Limit
+Create a principal rate limit
 
-Creates a new Principal Rate Limit entity. In the current release, we only allow one Principal Rate Limit entity per org and principal.
+Creates a new principal rate limit entity. Okta only allows one principal rate limit entity per org and principal.
 
 ### Example
 
@@ -54,7 +54,7 @@ with okta.ApiClient(configuration) as api_client:
     entity = okta.PrincipalRateLimitEntity() # PrincipalRateLimitEntity | 
 
     try:
-        # Create a Principal Rate Limit
+        # Create a principal rate limit
         api_response = api_instance.create_principal_rate_limit_entity(entity)
         print("The response of PrincipalRateLimitApi->create_principal_rate_limit_entity:\n")
         pprint(api_response)
@@ -99,9 +99,9 @@ Name | Type | Description  | Notes
 # **get_principal_rate_limit_entity**
 > PrincipalRateLimitEntity get_principal_rate_limit_entity(principal_rate_limit_id)
 
-Retrieve a Principal Rate Limit
+Retrieve a principal rate limit
 
-Retrieves a Principal Rate Limit entity by `principalRateLimitId`
+Retrieves a principal rate limit entity by `principalRateLimitId`
 
 ### Example
 
@@ -137,10 +137,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.PrincipalRateLimitApi(api_client)
-    principal_rate_limit_id = 'abcd1234' # str | id of the Principal Rate Limit
+    principal_rate_limit_id = '0oacamvryxiyMqgiY1d7' # str | ID of the principal rate limit
 
     try:
-        # Retrieve a Principal Rate Limit
+        # Retrieve a principal rate limit
         api_response = api_instance.get_principal_rate_limit_entity(principal_rate_limit_id)
         print("The response of PrincipalRateLimitApi->get_principal_rate_limit_entity:\n")
         pprint(api_response)
@@ -155,7 +155,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **principal_rate_limit_id** | **str**| id of the Principal Rate Limit | 
+ **principal_rate_limit_id** | **str**| ID of the principal rate limit | 
 
 ### Return type
 
@@ -182,9 +182,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_principal_rate_limit_entities**
-> List[PrincipalRateLimitEntity] list_principal_rate_limit_entities(filter=filter, after=after, limit=limit)
+> List[PrincipalRateLimitEntity] list_principal_rate_limit_entities(filter, after=after, limit=limit)
 
-List all Principal Rate Limits
+List all principal rate limits
 
 Lists all Principal Rate Limit entities considering the provided parameters
 
@@ -222,13 +222,13 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.PrincipalRateLimitApi(api_client)
-    filter = 'filter_example' # str |  (optional)
-    after = 'after_example' # str |  (optional)
-    limit = 20 # int |  (optional) (default to 20)
+    filter = 'filter_example' # str | Filters the list of principal rate limit entities by the provided principal type (`principalType`). For example, `filter=principalType eq \"SSWS_TOKEN\"` or `filter=principalType eq \"OAUTH_CLIENT\"`.
+    after = 'after_example' # str | The cursor to use for pagination. It's an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination). (optional)
+    limit = 20 # int | Specifies the number of items to return in a single response page. (optional) (default to 20)
 
     try:
-        # List all Principal Rate Limits
-        api_response = api_instance.list_principal_rate_limit_entities(filter=filter, after=after, limit=limit)
+        # List all principal rate limits
+        api_response = api_instance.list_principal_rate_limit_entities(filter, after=after, limit=limit)
         print("The response of PrincipalRateLimitApi->list_principal_rate_limit_entities:\n")
         pprint(api_response)
     except Exception as e:
@@ -242,9 +242,9 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filter** | **str**|  | [optional] 
- **after** | **str**|  | [optional] 
- **limit** | **int**|  | [optional] [default to 20]
+ **filter** | **str**| Filters the list of principal rate limit entities by the provided principal type (&#x60;principalType&#x60;). For example, &#x60;filter&#x3D;principalType eq \&quot;SSWS_TOKEN\&quot;&#x60; or &#x60;filter&#x3D;principalType eq \&quot;OAUTH_CLIENT\&quot;&#x60;. | 
+ **after** | **str**| The cursor to use for pagination. It&#39;s an opaque string that specifies your current location in the list and is obtained from the &#x60;Link&#x60; response header. See [Pagination](https://developer.okta.com/docs/api/#pagination). | [optional] 
+ **limit** | **int**| Specifies the number of items to return in a single response page. | [optional] [default to 20]
 
 ### Return type
 
@@ -273,7 +273,7 @@ Name | Type | Description  | Notes
 # **replace_principal_rate_limit_entity**
 > PrincipalRateLimitEntity replace_principal_rate_limit_entity(principal_rate_limit_id, entity)
 
-Replace a Principal Rate Limit
+Replace a principal rate limit
 
 Replaces a principal rate limit entity by `principalRateLimitId`
 
@@ -311,11 +311,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.PrincipalRateLimitApi(api_client)
-    principal_rate_limit_id = 'abcd1234' # str | id of the Principal Rate Limit
+    principal_rate_limit_id = '0oacamvryxiyMqgiY1d7' # str | ID of the principal rate limit
     entity = okta.PrincipalRateLimitEntity() # PrincipalRateLimitEntity | 
 
     try:
-        # Replace a Principal Rate Limit
+        # Replace a principal rate limit
         api_response = api_instance.replace_principal_rate_limit_entity(principal_rate_limit_id, entity)
         print("The response of PrincipalRateLimitApi->replace_principal_rate_limit_entity:\n")
         pprint(api_response)
@@ -330,7 +330,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **principal_rate_limit_id** | **str**| id of the Principal Rate Limit | 
+ **principal_rate_limit_id** | **str**| ID of the principal rate limit | 
  **entity** | [**PrincipalRateLimitEntity**](PrincipalRateLimitEntity.md)|  | 
 
 ### Return type

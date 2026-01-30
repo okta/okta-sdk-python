@@ -28,13 +28,18 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import ConfigDict, StrictStr
+from pydantic import ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.application import Application
 from okta.models.application_accessibility import ApplicationAccessibility
+from okta.models.application_embedded import ApplicationEmbedded
+from okta.models.application_express_configuration import (
+    ApplicationExpressConfiguration,
+)
 from okta.models.application_licensing import ApplicationLicensing
 from okta.models.application_links import ApplicationLinks
+from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.o_auth_application_credentials import OAuthApplicationCredentials
 from okta.models.open_id_connect_application_settings import (
@@ -47,20 +52,25 @@ class OpenIdConnectApplication(Application):
     OpenIdConnectApplication
     """  # noqa: E501
 
-    credentials: Optional[OAuthApplicationCredentials] = None
-    name: Optional[StrictStr] = "oidc_client"
-    settings: Optional[OpenIdConnectApplicationSettings] = None
+    credentials: OAuthApplicationCredentials
+    name: StrictStr = Field(
+        description="`oidc_client` is the key name for an OAuth 2.0 client app instance"
+    )
+    settings: OpenIdConnectApplicationSettings
     __properties: ClassVar[List[str]] = [
         "accessibility",
         "created",
+        "expressConfiguration",
         "features",
         "id",
         "label",
         "lastUpdated",
         "licensing",
+        "orn",
         "profile",
         "signOnMode",
         "status",
+        "universalLogout",
         "visibility",
         "_embedded",
         "_links",
@@ -113,6 +123,13 @@ class OpenIdConnectApplication(Application):
             else:
                 _dict["accessibility"] = self.accessibility
 
+        # override the default output from pydantic by calling `to_dict()` of express_configuration
+        if self.express_configuration:
+            if not isinstance(self.express_configuration, dict):
+                _dict["expressConfiguration"] = self.express_configuration.to_dict()
+            else:
+                _dict["expressConfiguration"] = self.express_configuration
+
         # override the default output from pydantic by calling `to_dict()` of licensing
         if self.licensing:
             if not isinstance(self.licensing, dict):
@@ -120,12 +137,26 @@ class OpenIdConnectApplication(Application):
             else:
                 _dict["licensing"] = self.licensing
 
+        # override the default output from pydantic by calling `to_dict()` of universal_logout
+        if self.universal_logout:
+            if not isinstance(self.universal_logout, dict):
+                _dict["universalLogout"] = self.universal_logout.to_dict()
+            else:
+                _dict["universalLogout"] = self.universal_logout
+
         # override the default output from pydantic by calling `to_dict()` of visibility
         if self.visibility:
             if not isinstance(self.visibility, dict):
                 _dict["visibility"] = self.visibility.to_dict()
             else:
                 _dict["visibility"] = self.visibility
+
+        # override the default output from pydantic by calling `to_dict()` of embedded
+        if self.embedded:
+            if not isinstance(self.embedded, dict):
+                _dict["_embedded"] = self.embedded.to_dict()
+            else:
+                _dict["_embedded"] = self.embedded
 
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
@@ -167,6 +198,13 @@ class OpenIdConnectApplication(Application):
                     else None
                 ),
                 "created": obj.get("created"),
+                "expressConfiguration": (
+                    ApplicationExpressConfiguration.from_dict(
+                        obj["expressConfiguration"]
+                    )
+                    if obj.get("expressConfiguration") is not None
+                    else None
+                ),
                 "features": obj.get("features"),
                 "id": obj.get("id"),
                 "label": obj.get("label"),
@@ -176,28 +214,42 @@ class OpenIdConnectApplication(Application):
                     if obj.get("licensing") is not None
                     else None
                 ),
+                "orn": obj.get("orn"),
                 "profile": obj.get("profile"),
                 "signOnMode": obj.get("signOnMode"),
                 "status": obj.get("status"),
+                "universalLogout": (
+                    ApplicationUniversalLogout.from_dict(obj["universalLogout"])
+                    if obj.get("universalLogout") is not None
+                    else None
+                ),
                 "visibility": (
                     ApplicationVisibility.from_dict(obj["visibility"])
                     if obj.get("visibility") is not None
                     else None
                 ),
-                "_embedded": obj.get("_embedded"),
+                "_embedded": (
+                    ApplicationEmbedded.from_dict(obj["_embedded"])
+                    if obj.get("_embedded") is not None
+                    else None
+                ),
                 "_links": (
-                    ApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+                    ApplicationLinks.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
                 ),
                 "credentials": (
-                    OAuthApplicationCredentials.from_dict(obj["credentials"]) if
-                    obj.get("credentials") is not None
+                    OAuthApplicationCredentials.from_dict(obj["credentials"])
+                    if obj.get("credentials") is not None
                     else None
                 ),
                 "name": (
                     obj.get("name") if obj.get("name") is not None else "oidc_client"
                 ),
                 "settings": (
-                    OpenIdConnectApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
+                    OpenIdConnectApplicationSettings.from_dict(obj["settings"])
+                    if obj.get("settings") is not None
+                    else None
                 ),
             }
         )

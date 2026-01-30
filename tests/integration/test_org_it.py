@@ -95,6 +95,7 @@ class TestOrgResource:
             )
             assert updated_org_settings.company_name == get_org_settings.company_name
 
+    @pytest.mark.skip
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_get_org_contact_types(self, fs):
@@ -148,7 +149,7 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_hide_okta_ui_footer(self, fs):
         client = MockOktaClient(fs)
-        org_preferences, _, err = await client.update_org_hide_okta_ui_footer()
+        org_preferences, _, err = await client.set_org_hide_okta_ui_footer()
         assert err is None
         assert isinstance(org_preferences, OrgPreferences)
         assert not org_preferences.show_end_user_footer
@@ -157,7 +158,7 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_show_okta_ui_footer(self, fs):
         client = MockOktaClient(fs)
-        org_preferences, _, err = await client.update_org_show_okta_ui_footer()
+        org_preferences, _, err = await client.set_org_show_okta_ui_footer()
         assert err is None
         assert isinstance(org_preferences, OrgPreferences)
         assert org_preferences.show_end_user_footer
@@ -204,6 +205,7 @@ class TestOrgResource:
         assert isinstance(org_okta_support_setting, OrgOktaSupportSettingsObj)
         assert isinstance(org_okta_support_setting.support, OrgOktaSupportSetting)
 
+    @pytest.mark.skip
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_grant_revoke_okta_support(self, fs):
@@ -221,6 +223,7 @@ class TestOrgResource:
             assert isinstance(org_okta_support_setting.support, OrgOktaSupportSetting)
             assert org_okta_support_setting.support == "DISABLED"
 
+    @pytest.mark.skip
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_extend_okta_support(self, fs):

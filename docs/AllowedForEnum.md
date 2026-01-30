@@ -1,5 +1,6 @@
 # AllowedForEnum
 
+The allowed types of uses for the authenticator
 
 ## Properties
 

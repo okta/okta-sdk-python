@@ -31,10 +31,8 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
-from okta.models.resource_set_binding_response_links import (
-    ResourceSetBindingResponseLinks,
-)
 from okta.models.resource_set_binding_role import ResourceSetBindingRole
+from okta.models.resource_set_bindings_links import ResourceSetBindingsLinks
 
 
 class ResourceSetBindings(BaseModel):
@@ -42,10 +40,12 @@ class ResourceSetBindings(BaseModel):
     ResourceSetBindings
     """  # noqa: E501
 
-    roles: Optional[List[ResourceSetBindingRole]] = None
-    links: Optional[ResourceSetBindingResponseLinks] = Field(
-        default=None, alias="_links"
+    roles: Optional[List[ResourceSetBindingRole]] = Field(
+        default=None,
+        description="Roles associated with the resource set binding. If there are more than 100 bindings for the specified "
+        "resource set, then the `_links.next` resource is returned with the next list of bindings.",
     )
+    links: Optional[ResourceSetBindingsLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["roles", "_links"]
 
     model_config = ConfigDict(
@@ -118,7 +118,7 @@ class ResourceSetBindings(BaseModel):
                     else None
                 ),
                 "_links": (
-                    ResourceSetBindingResponseLinks.from_dict(obj["_links"])
+                    ResourceSetBindingsLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

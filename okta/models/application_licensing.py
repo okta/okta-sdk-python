@@ -34,10 +34,14 @@ from typing_extensions import Self
 
 class ApplicationLicensing(BaseModel):
     """
-    ApplicationLicensing
+    Licenses for the app
     """  # noqa: E501
 
-    seat_count: Optional[StrictInt] = Field(default=None, alias="seatCount")
+    seat_count: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of licenses purchased for the app",
+        alias="seatCount",
+    )
     __properties: ClassVar[List[str]] = ["seatCount"]
 
     model_config = ConfigDict(

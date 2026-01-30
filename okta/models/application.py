@@ -31,13 +31,18 @@ from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 
 from okta.models.application_accessibility import ApplicationAccessibility
+from okta.models.application_embedded import ApplicationEmbedded
+from okta.models.application_express_configuration import (
+    ApplicationExpressConfiguration,
+)
 from okta.models.application_licensing import ApplicationLicensing
 from okta.models.application_lifecycle_status import ApplicationLifecycleStatus
 from okta.models.application_links import ApplicationLinks
 from okta.models.application_sign_on_mode import ApplicationSignOnMode
+from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 
 if TYPE_CHECKING:
@@ -46,6 +51,7 @@ if TYPE_CHECKING:
     from okta.models.bookmark_application import BookmarkApplication
     from okta.models.browser_plugin_application import BrowserPluginApplication
     from okta.models.open_id_connect_application import OpenIdConnectApplication
+    from okta.models.saml11_application import Saml11Application
     from okta.models.saml_application import SamlApplication
     from okta.models.secure_password_store_application import (
         SecurePasswordStoreApplication,
@@ -59,37 +65,134 @@ class Application(BaseModel):
     """  # noqa: E501
 
     accessibility: Optional[ApplicationAccessibility] = None
-    created: Optional[datetime] = None
-    features: Optional[List[StrictStr]] = None
-    id: Optional[StrictStr] = None
-    label: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the application object was created"
+    )
+    express_configuration: Optional[ApplicationExpressConfiguration] = Field(
+        default=None, alias="expressConfiguration"
+    )
+    features: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Enabled app features > **Note:** See [Application Features]("
+        "/openapi/okta-management/management/tag/ApplicationFeatures/) for app provisioning features. ",
+    )
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique ID for the app instance"
+    )
+    label: StrictStr = Field(description="User-defined display name for app")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the application object was last updated",
+        alias="lastUpdated",
+    )
     licensing: Optional[ApplicationLicensing] = None
-    profile: Optional[Dict[str, Dict[str, Any]]] = None
-    sign_on_mode: Optional[ApplicationSignOnMode] = Field(
-        default=None, alias="signOnMode"
+    orn: Optional[StrictStr] = Field(
+        default=None,
+        description="The Okta resource name (ORN) for the current app instance",
     )
+    profile: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Contains any valid JSON schema for specifying properties that can be referenced from a request (only "
+        "available to OAuth 2.0 client apps). For example, add an app manager contact email address or define an "
+        "allowlist of groups that you can then reference using the Okta Expression Language `getFilteredGroups` "
+        "function.  > **Notes:** > * `profile` isn't encrypted, so don't store sensitive data in it. > * "
+        "`profile` doesn't limit the level of nesting in the JSON schema you created, but there is a practical "
+        "size limit. Okta recommends a JSON schema size of 1 MB or less for best performance.",
+    )
+    sign_on_mode: ApplicationSignOnMode = Field(alias="signOnMode")
     status: Optional[ApplicationLifecycleStatus] = None
-    visibility: Optional[ApplicationVisibility] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, alias="_embedded"
+    universal_logout: Optional[ApplicationUniversalLogout] = Field(
+        default=None, alias="universalLogout"
     )
+    visibility: Optional[ApplicationVisibility] = None
+    embedded: Optional[ApplicationEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[ApplicationLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "accessibility",
         "created",
+        "expressConfiguration",
         "features",
         "id",
         "label",
         "lastUpdated",
         "licensing",
+        "orn",
         "profile",
         "signOnMode",
         "status",
+        "universalLogout",
         "visibility",
         "_embedded",
         "_links",
     ]
+
+    @field_validator("features")
+    def features_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(
+                [
+                    "GROUP_PUSH",
+                    "IMPORT_NEW_USERS",
+                    "IMPORT_PROFILE_UPDATES",
+                    "IMPORT_USER_SCHEMA",
+                    "PROFILE_MASTERING",
+                    "PUSH_NEW_USERS",
+                    "PUSH_PASSWORD_UPDATES",
+                    "PUSH_PROFILE_UPDATES",
+                    "PUSH_USER_DEACTIVATION",
+                    "REACTIVATE_USERS",
+                    "OUTBOUND_DEL_AUTH",
+                    "DESKTOP_SSO",
+                    "FEDERATED_PROFILE",
+                    "SUPPRESS_ACTIVATION_EMAIL",
+                    "PUSH_PENDING_USERS",
+                    "MFA",
+                    "UPDATE_EXISTING_USERNAME",
+                    "EXCLUDE_USERNAME_UPDATE_ON_PROFILE_PUSH",
+                    "EXCHANGE_ACTIVE_SYNC",
+                    "IMPORT_SYNC",
+                    "IMPORT_SYNC_CONTACTS",
+                    "DEVICE_COMPLIANCE",
+                    "VPN_CONFIG",
+                    "IMPORT_SCHEMA_ENUM_VALUES",
+                    "SCIM_PROVISIONING",
+                    "DEVICE_FILTER_IN_SIGN_ON_RULES",
+                    "PROFILE_TEMPLATE_UPGRADE",
+                    "DEFAULT_PUSH_STATUS_TO_PUSH",
+                    "REAL_TIME_SYNC",
+                    "SSO",
+                    "AUTHN_CONTEXT",
+                    "JIT_PROVISIONING",
+                    "GROUP_SYNC",
+                    "OPP_SCIM_INCREMENTAL_IMPORTS",
+                    "IN_MEMORY_APP_USER",
+                    "LOG_STREAMING",
+                    "OAUTH_INTEGRATION",
+                    "IDP",
+                    "PUSH_NEW_USERS_WITHOUT_PASSWORD",
+                    "SKYHOOK_SERVICE",
+                    "ENTITLEMENT_MANAGEMENT",
+                    "PUSH_NEW_USERS_WITH_HASHED_PASSWORD",
+                ]
+            ):
+                raise ValueError(
+                    "each list item must be one of ('GROUP_PUSH', 'IMPORT_NEW_USERS', 'IMPORT_PROFILE_UPDATES', "
+                    "'IMPORT_USER_SCHEMA', 'PROFILE_MASTERING', 'PUSH_NEW_USERS', 'PUSH_PASSWORD_UPDATES', "
+                    "'PUSH_PROFILE_UPDATES', 'PUSH_USER_DEACTIVATION', 'REACTIVATE_USERS', 'OUTBOUND_DEL_AUTH', "
+                    "'DESKTOP_SSO', 'FEDERATED_PROFILE', 'SUPPRESS_ACTIVATION_EMAIL', 'PUSH_PENDING_USERS', 'MFA', "
+                    "'UPDATE_EXISTING_USERNAME', 'EXCLUDE_USERNAME_UPDATE_ON_PROFILE_PUSH', 'EXCHANGE_ACTIVE_SYNC', "
+                    "'IMPORT_SYNC', 'IMPORT_SYNC_CONTACTS', 'DEVICE_COMPLIANCE', 'VPN_CONFIG', 'IMPORT_SCHEMA_ENUM_VALUES', "
+                    "'SCIM_PROVISIONING', 'DEVICE_FILTER_IN_SIGN_ON_RULES', 'PROFILE_TEMPLATE_UPGRADE', "
+                    "'DEFAULT_PUSH_STATUS_TO_PUSH', 'REAL_TIME_SYNC', 'SSO', 'AUTHN_CONTEXT', 'JIT_PROVISIONING', "
+                    "'GROUP_SYNC', 'OPP_SCIM_INCREMENTAL_IMPORTS', 'IN_MEMORY_APP_USER', 'LOG_STREAMING', "
+                    "'OAUTH_INTEGRATION', 'IDP', 'PUSH_NEW_USERS_WITHOUT_PASSWORD', 'SKYHOOK_SERVICE', "
+                    "'ENTITLEMENT_MANAGEMENT', 'PUSH_NEW_USERS_WITH_HASHED_PASSWORD')"
+                )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -107,7 +210,7 @@ class Application(BaseModel):
         "BOOKMARK": "BookmarkApplication",
         "BROWSER_PLUGIN": "BrowserPluginApplication",
         "OPENID_CONNECT": "OpenIdConnectApplication",
-        "SAML_1_1": "SamlApplication",
+        "SAML_1_1": "Saml11Application",
         "SAML_2_0": "SamlApplication",
         "SECURE_PASSWORD_STORE": "SecurePasswordStoreApplication",
         "WS_FEDERATION": "WsFederationApplication",
@@ -139,7 +242,7 @@ class Application(BaseModel):
             BookmarkApplication,
             BrowserPluginApplication,
             OpenIdConnectApplication,
-            SamlApplication,
+            Saml11Application,
             SamlApplication,
             SecurePasswordStoreApplication,
             WsFederationApplication,
@@ -161,13 +264,15 @@ class Application(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "created",
+                "features",
                 "id",
                 "last_updated",
-                "embedded",
+                "orn",
             ]
         )
 
@@ -183,6 +288,13 @@ class Application(BaseModel):
             else:
                 _dict["accessibility"] = self.accessibility
 
+        # override the default output from pydantic by calling `to_dict()` of express_configuration
+        if self.express_configuration:
+            if not isinstance(self.express_configuration, dict):
+                _dict["expressConfiguration"] = self.express_configuration.to_dict()
+            else:
+                _dict["expressConfiguration"] = self.express_configuration
+
         # override the default output from pydantic by calling `to_dict()` of licensing
         if self.licensing:
             if not isinstance(self.licensing, dict):
@@ -190,12 +302,26 @@ class Application(BaseModel):
             else:
                 _dict["licensing"] = self.licensing
 
+        # override the default output from pydantic by calling `to_dict()` of universal_logout
+        if self.universal_logout:
+            if not isinstance(self.universal_logout, dict):
+                _dict["universalLogout"] = self.universal_logout.to_dict()
+            else:
+                _dict["universalLogout"] = self.universal_logout
+
         # override the default output from pydantic by calling `to_dict()` of visibility
         if self.visibility:
             if not isinstance(self.visibility, dict):
                 _dict["visibility"] = self.visibility.to_dict()
             else:
                 _dict["visibility"] = self.visibility
+
+        # override the default output from pydantic by calling `to_dict()` of embedded
+        if self.embedded:
+            if not isinstance(self.embedded, dict):
+                _dict["_embedded"] = self.embedded.to_dict()
+            else:
+                _dict["_embedded"] = self.embedded
 
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
@@ -214,7 +340,7 @@ class Application(BaseModel):
             BookmarkApplication,
             BrowserPluginApplication,
             OpenIdConnectApplication,
-            SamlApplication,
+            Saml11Application,
             SamlApplication,
             SecurePasswordStoreApplication,
             WsFederationApplication,
@@ -243,10 +369,10 @@ class Application(BaseModel):
             return import_module(
                 "okta.models.open_id_connect_application"
             ).OpenIdConnectApplication.from_dict(obj)
-        if object_type == "SamlApplication":
+        if object_type == "Saml11Application":
             return import_module(
-                "okta.models.saml_application"
-            ).SamlApplication.from_dict(obj)
+                "okta.models.saml11_application"
+            ).Saml11Application.from_dict(obj)
         if object_type == "SamlApplication":
             return import_module(
                 "okta.models.saml_application"
@@ -261,10 +387,10 @@ class Application(BaseModel):
             ).WsFederationApplication.from_dict(obj)
 
         raise ValueError(
-            "Application failed to lookup discriminator value from " +
-            json.dumps(obj) +
-            ". Discriminator property name: " +
-            cls.__discriminator_property_name +
-            ", mapping: " +
-            json.dumps(cls.__discriminator_value_class_map)
+            "Application failed to lookup discriminator value from "
+            + json.dumps(obj)
+            + ". Discriminator property name: "
+            + cls.__discriminator_property_name
+            + ", mapping: "
+            + json.dumps(cls.__discriminator_value_class_map)
         )

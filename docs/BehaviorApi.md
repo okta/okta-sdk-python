@@ -4,19 +4,19 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activate_behavior_detection_rule**](BehaviorApi.md#activate_behavior_detection_rule) | **POST** /api/v1/behaviors/{behaviorId}/lifecycle/activate | Activate a Behavior Detection Rule
-[**create_behavior_detection_rule**](BehaviorApi.md#create_behavior_detection_rule) | **POST** /api/v1/behaviors | Create a Behavior Detection Rule
-[**deactivate_behavior_detection_rule**](BehaviorApi.md#deactivate_behavior_detection_rule) | **POST** /api/v1/behaviors/{behaviorId}/lifecycle/deactivate | Deactivate a Behavior Detection Rule
-[**delete_behavior_detection_rule**](BehaviorApi.md#delete_behavior_detection_rule) | **DELETE** /api/v1/behaviors/{behaviorId} | Delete a Behavior Detection Rule
-[**get_behavior_detection_rule**](BehaviorApi.md#get_behavior_detection_rule) | **GET** /api/v1/behaviors/{behaviorId} | Retrieve a Behavior Detection Rule
-[**list_behavior_detection_rules**](BehaviorApi.md#list_behavior_detection_rules) | **GET** /api/v1/behaviors | List all Behavior Detection Rules
-[**replace_behavior_detection_rule**](BehaviorApi.md#replace_behavior_detection_rule) | **PUT** /api/v1/behaviors/{behaviorId} | Replace a Behavior Detection Rule
+[**activate_behavior_detection_rule**](BehaviorApi.md#activate_behavior_detection_rule) | **POST** /api/v1/behaviors/{behaviorId}/lifecycle/activate | Activate a behavior detection rule
+[**create_behavior_detection_rule**](BehaviorApi.md#create_behavior_detection_rule) | **POST** /api/v1/behaviors | Create a behavior detection rule
+[**deactivate_behavior_detection_rule**](BehaviorApi.md#deactivate_behavior_detection_rule) | **POST** /api/v1/behaviors/{behaviorId}/lifecycle/deactivate | Deactivate a behavior detection rule
+[**delete_behavior_detection_rule**](BehaviorApi.md#delete_behavior_detection_rule) | **DELETE** /api/v1/behaviors/{behaviorId} | Delete a behavior detection rule
+[**get_behavior_detection_rule**](BehaviorApi.md#get_behavior_detection_rule) | **GET** /api/v1/behaviors/{behaviorId} | Retrieve a behavior detection rule
+[**list_behavior_detection_rules**](BehaviorApi.md#list_behavior_detection_rules) | **GET** /api/v1/behaviors | List all behavior detection rules
+[**replace_behavior_detection_rule**](BehaviorApi.md#replace_behavior_detection_rule) | **PUT** /api/v1/behaviors/{behaviorId} | Replace a behavior detection rule
 
 
 # **activate_behavior_detection_rule**
 > BehaviorRule activate_behavior_detection_rule(behavior_id)
 
-Activate a Behavior Detection Rule
+Activate a behavior detection rule
 
 Activates a behavior detection rule
 
@@ -54,10 +54,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.BehaviorApi(api_client)
-    behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
+    behavior_id = 'abcd1234' # str | ID of the Behavior Detection Rule
 
     try:
-        # Activate a Behavior Detection Rule
+        # Activate a behavior detection rule
         api_response = api_instance.activate_behavior_detection_rule(behavior_id)
         print("The response of BehaviorApi->activate_behavior_detection_rule:\n")
         pprint(api_response)
@@ -72,7 +72,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **behavior_id** | **str**| id of the Behavior Detection Rule | 
+ **behavior_id** | **str**| ID of the Behavior Detection Rule | 
 
 ### Return type
 
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 # **create_behavior_detection_rule**
 > BehaviorRule create_behavior_detection_rule(rule)
 
-Create a Behavior Detection Rule
+Create a behavior detection rule
 
 Creates a new behavior detection rule
 
@@ -142,7 +142,7 @@ with okta.ApiClient(configuration) as api_client:
     rule = okta.BehaviorRule() # BehaviorRule | 
 
     try:
-        # Create a Behavior Detection Rule
+        # Create a behavior detection rule
         api_response = api_instance.create_behavior_detection_rule(rule)
         print("The response of BehaviorApi->create_behavior_detection_rule:\n")
         pprint(api_response)
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Created |  -  |
+**200** | Created |  -  |
 **400** | Bad Request |  -  |
 **403** | Forbidden |  -  |
 **429** | Too Many Requests |  -  |
@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 # **deactivate_behavior_detection_rule**
 > BehaviorRule deactivate_behavior_detection_rule(behavior_id)
 
-Deactivate a Behavior Detection Rule
+Deactivate a behavior detection rule
 
 Deactivates a behavior detection rule
 
@@ -224,10 +224,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.BehaviorApi(api_client)
-    behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
+    behavior_id = 'abcd1234' # str | ID of the Behavior Detection Rule
 
     try:
-        # Deactivate a Behavior Detection Rule
+        # Deactivate a behavior detection rule
         api_response = api_instance.deactivate_behavior_detection_rule(behavior_id)
         print("The response of BehaviorApi->deactivate_behavior_detection_rule:\n")
         pprint(api_response)
@@ -242,7 +242,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **behavior_id** | **str**| id of the Behavior Detection Rule | 
+ **behavior_id** | **str**| ID of the Behavior Detection Rule | 
 
 ### Return type
 
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 # **delete_behavior_detection_rule**
 > delete_behavior_detection_rule(behavior_id)
 
-Delete a Behavior Detection Rule
+Delete a behavior detection rule
 
 Deletes a Behavior Detection Rule by `behaviorId`
 
@@ -308,10 +308,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.BehaviorApi(api_client)
-    behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
+    behavior_id = 'abcd1234' # str | ID of the Behavior Detection Rule
 
     try:
-        # Delete a Behavior Detection Rule
+        # Delete a behavior detection rule
         api_instance.delete_behavior_detection_rule(behavior_id)
     except Exception as e:
         print("Exception when calling BehaviorApi->delete_behavior_detection_rule: %s\n" % e)
@@ -324,7 +324,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **behavior_id** | **str**| id of the Behavior Detection Rule | 
+ **behavior_id** | **str**| ID of the Behavior Detection Rule | 
 
 ### Return type
 
@@ -353,7 +353,7 @@ void (empty response body)
 # **get_behavior_detection_rule**
 > BehaviorRule get_behavior_detection_rule(behavior_id)
 
-Retrieve a Behavior Detection Rule
+Retrieve a behavior detection rule
 
 Retrieves a Behavior Detection Rule by `behaviorId`
 
@@ -391,10 +391,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.BehaviorApi(api_client)
-    behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
+    behavior_id = 'abcd1234' # str | ID of the Behavior Detection Rule
 
     try:
-        # Retrieve a Behavior Detection Rule
+        # Retrieve a behavior detection rule
         api_response = api_instance.get_behavior_detection_rule(behavior_id)
         print("The response of BehaviorApi->get_behavior_detection_rule:\n")
         pprint(api_response)
@@ -409,7 +409,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **behavior_id** | **str**| id of the Behavior Detection Rule | 
+ **behavior_id** | **str**| ID of the Behavior Detection Rule | 
 
 ### Return type
 
@@ -438,7 +438,7 @@ Name | Type | Description  | Notes
 # **list_behavior_detection_rules**
 > List[BehaviorRule] list_behavior_detection_rules()
 
-List all Behavior Detection Rules
+List all behavior detection rules
 
 Lists all behavior detection rules with pagination support
 
@@ -478,7 +478,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.BehaviorApi(api_client)
 
     try:
-        # List all Behavior Detection Rules
+        # List all behavior detection rules
         api_response = api_instance.list_behavior_detection_rules()
         print("The response of BehaviorApi->list_behavior_detection_rules:\n")
         pprint(api_response)
@@ -518,7 +518,7 @@ This endpoint does not need any parameter.
 # **replace_behavior_detection_rule**
 > BehaviorRule replace_behavior_detection_rule(behavior_id, rule)
 
-Replace a Behavior Detection Rule
+Replace a behavior detection rule
 
 Replaces a Behavior Detection Rule by `behaviorId`
 
@@ -556,11 +556,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.BehaviorApi(api_client)
-    behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
+    behavior_id = 'abcd1234' # str | ID of the Behavior Detection Rule
     rule = okta.BehaviorRule() # BehaviorRule | 
 
     try:
-        # Replace a Behavior Detection Rule
+        # Replace a behavior detection rule
         api_response = api_instance.replace_behavior_detection_rule(behavior_id, rule)
         print("The response of BehaviorApi->replace_behavior_detection_rule:\n")
         pprint(api_response)
@@ -575,7 +575,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **behavior_id** | **str**| id of the Behavior Detection Rule | 
+ **behavior_id** | **str**| ID of the Behavior Detection Rule | 
  **rule** | [**BehaviorRule**](BehaviorRule.md)|  | 
 
 ### Return type

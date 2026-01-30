@@ -28,18 +28,19 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class GroupRuleGroupCondition(BaseModel):
     """
-    GroupRuleGroupCondition
+    Currently not supported
     """  # noqa: E501
 
-    exclude: Optional[List[StrictStr]] = None
-    include: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["exclude", "include"]
+    exclude: Optional[List[StrictStr]] = Field(
+        default=None, description="Currently not supported"
+    )
+    __properties: ClassVar[List[str]] = ["exclude"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,7 +90,5 @@ class GroupRuleGroupCondition(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"exclude": obj.get("exclude"), "include": obj.get("include")}
-        )
+        _obj = cls.model_validate({"exclude": obj.get("exclude")})
         return _obj

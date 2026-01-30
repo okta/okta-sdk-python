@@ -41,17 +41,36 @@ class OAuth2Token(BaseModel):
     OAuth2Token
     """  # noqa: E501
 
-    client_id: Optional[StrictStr] = Field(default=None, alias="clientId")
-    created: Optional[datetime] = None
-    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
-    id: Optional[StrictStr] = None
-    issuer: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    scopes: Optional[List[StrictStr]] = None
+    client_id: Optional[StrictStr] = Field(
+        default=None, description="Client ID", alias="clientId"
+    )
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the object was created"
+    )
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Expiration time of the OAuth 2.0 Token",
+        alias="expiresAt",
+    )
+    id: Optional[StrictStr] = Field(default=None, description="ID of the Token object")
+    issuer: Optional[StrictStr] = Field(
+        default=None,
+        description="The complete URL of the authorization server that issued the Token",
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated",
+    )
+    scopes: Optional[List[StrictStr]] = Field(
+        default=None, description="Name of scopes attached to the Token"
+    )
     status: Optional[GrantOrTokenStatus] = None
     user_id: Optional[StrictStr] = Field(default=None, alias="userId")
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, alias="_embedded"
+        default=None,
+        description="Embedded resources related to the object if the `expand` query parameter is specified",
+        alias="_embedded",
     )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
@@ -102,9 +121,11 @@ class OAuth2Token(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
+                "client_id",
                 "created",
                 "expires_at",
                 "id",

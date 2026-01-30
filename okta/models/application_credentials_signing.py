@@ -39,13 +39,28 @@ from okta.models.application_credentials_signing_use import (
 
 class ApplicationCredentialsSigning(BaseModel):
     """
-    ApplicationCredentialsSigning
+    App signing key properties > **Note:** Only apps with SAML_2_0, SAML_1_1, WS_FEDERATION, or OPENID_CONNECT `signOnMode`
+    support the key rotation feature.
     """  # noqa: E501
 
-    kid: Optional[StrictStr] = None
-    last_rotated: Optional[datetime] = Field(default=None, alias="lastRotated")
-    next_rotation: Optional[datetime] = Field(default=None, alias="nextRotation")
-    rotation_mode: Optional[StrictStr] = Field(default=None, alias="rotationMode")
+    kid: Optional[StrictStr] = Field(
+        default=None,
+        description="Key identifier used for signing assertions > **Note:** Currently, only the X.509 JWK format is "
+        "supported for apps with SAML_2_0 `signOnMode`.",
+    )
+    last_rotated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the signing key was last rotated",
+        alias="lastRotated",
+    )
+    next_rotation: Optional[datetime] = Field(
+        default=None,
+        description="The scheduled time for the next signing key rotation",
+        alias="nextRotation",
+    )
+    rotation_mode: Optional[StrictStr] = Field(
+        default=None, description="The mode of key rotation", alias="rotationMode"
+    )
     use: Optional[ApplicationCredentialsSigningUse] = None
     __properties: ClassVar[List[str]] = [
         "kid",

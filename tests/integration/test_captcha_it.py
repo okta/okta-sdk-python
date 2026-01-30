@@ -27,13 +27,13 @@ class TestCaptchaResource:
         """
         Test the complete lifecycle of a CAPTCHA instance:
         1. Create CAPTCHA instance
-        2. Get CAPTCHA instance (with both regular and _with_http_info variants)
-        3. List CAPTCHA instances (with both regular and _with_http_info variants)
-        4. Replace CAPTCHA instance (with both regular and _with_http_info variants)
-        5. Configure org-wide CAPTCHA settings (with both regular and _with_http_info variants)
-        6. Get org-wide CAPTCHA settings (with both regular and _with_http_info variants)
-        7. Delete org-wide CAPTCHA settings (with both regular and _with_http_info variants)
-        8. Delete CAPTCHA instance (with both regular and _with_http_info variants)
+        2. Get CAPTCHA instance (with both regular and  variants)
+        3. List CAPTCHA instances (with both regular and  variants)
+        4. Replace CAPTCHA instance (with both regular and  variants)
+        5. Configure org-wide CAPTCHA settings (with both regular and  variants)
+        6. Get org-wide CAPTCHA settings (with both regular and  variants)
+        7. Delete org-wide CAPTCHA settings (with both regular and  variants)
+        8. Delete CAPTCHA instance (with both regular and  variants)
         9. Verify deletion
         """
         # Instantiate Mock Client
@@ -84,7 +84,7 @@ class TestCaptchaResource:
 
             captcha_id = created_instance.id
 
-            # Test _without_preload_content variant for create (will be used later)
+            # Test  variant for create (will be used later)
             # This tests the lower-level API method signature
             try:
                 new_captcha_for_preload_test = models.CAPTCHAInstance(
@@ -94,7 +94,7 @@ class TestCaptchaResource:
                     secret_key="0x4444444444444444444444444444444444444444",
                 )
                 # This should fail due to org limit, but exercises the method signature
-                resp = await client.create_captcha_instance_without_preload_content(
+                resp = await client.create_captcha_instance(
                     new_captcha_for_preload_test
                 )
                 # If it doesn't fail, clean it up
@@ -119,15 +119,15 @@ class TestCaptchaResource:
 
             # Test with_http_info variant for get
             retrieved_instance_http, resp, err = (
-                await client.get_captcha_instance_with_http_info(captcha_id)
+                await client.get_captcha_instance(captcha_id)
             )
             assert err is None
             assert resp is not None
             assert isinstance(retrieved_instance_http, models.CAPTCHAInstance)
             assert retrieved_instance_http.id == captcha_id
 
-            # Test _without_preload_content variant for get
-            resp_preload = await client.get_captcha_instance_without_preload_content(
+            # Test  variant for get
+            resp_preload = await client.get_captcha_instance(
                 captcha_id
             )
             assert resp_preload is not None
@@ -140,16 +140,16 @@ class TestCaptchaResource:
 
             # Test with_http_info variant for list
             instances_list_http, resp, err = (
-                await client.list_captcha_instances_with_http_info()
+                await client.list_captcha_instances()
             )
             assert err is None
             assert resp is not None
             assert isinstance(instances_list_http, list)
             assert len(instances_list_http) >= 1
 
-            # Test _without_preload_content variant for list
+            # Test  variant for list
             resp_list_preload = (
-                await client.list_captcha_instances_without_preload_content()
+                await client.list_captcha_instances()
             )
             assert resp_list_preload is not None
 
@@ -189,7 +189,7 @@ class TestCaptchaResource:
                 secret_key="0x2222222222222222222222222222222222222222",
             )
             replaced_instance_http, resp, err = (
-                await client.replace_captcha_instance_with_http_info(
+                await client.replace_captcha_instance(
                     captcha_id, updated_instance_2
                 )
             )
@@ -199,7 +199,7 @@ class TestCaptchaResource:
             assert replaced_instance_http.id == captcha_id
             assert replaced_instance_http.type == models.CAPTCHAType.HCAPTCHA
 
-            # Test _without_preload_content variant for replace
+            # Test  variant for replace
             updated_instance_3 = models.CAPTCHAInstance(
                 name="Preload Replace Test",
                 type=models.CAPTCHAType.RECAPTCHA_V2,
@@ -207,7 +207,7 @@ class TestCaptchaResource:
                 secret_key="0x5555555555555555555555555555555555555555",
             )
             resp_replace_preload = (
-                await client.replace_captcha_instance_without_preload_content(
+                await client.replace_captcha_instance(
                     captcha_id, updated_instance_3
                 )
             )
@@ -237,7 +237,7 @@ class TestCaptchaResource:
                 captcha_id=captcha_id, enabled_pages=[models.EnabledPagesType.SIGN_IN]
             )
             created_org_settings_http, resp, err = (
-                await client.replaces_org_captcha_settings_with_http_info(
+                await client.replaces_org_captcha_settings(
                     org_settings_updated
                 )
             )
@@ -247,12 +247,12 @@ class TestCaptchaResource:
             assert created_org_settings_http.captcha_id == captcha_id
             assert len(created_org_settings_http.enabled_pages) == 1
 
-            # Test _without_preload_content variant for replace org settings
+            # Test  variant for replace org settings
             org_settings_preload = models.OrgCAPTCHASettings(
                 captcha_id=captcha_id, enabled_pages=[models.EnabledPagesType.SSPR]
             )
             resp_org_preload = (
-                await client.replaces_org_captcha_settings_without_preload_content(
+                await client.replaces_org_captcha_settings(
                     org_settings_preload
                 )
             )
@@ -267,16 +267,16 @@ class TestCaptchaResource:
 
             # Test with_http_info variant for get org settings
             retrieved_org_settings_http, resp, err = (
-                await client.get_org_captcha_settings_with_http_info()
+                await client.get_org_captcha_settings()
             )
             assert err is None
             assert resp is not None
             assert isinstance(retrieved_org_settings_http, models.OrgCAPTCHASettings)
             assert retrieved_org_settings_http.captcha_id == captcha_id
 
-            # Test _without_preload_content variant for get org settings
+            # Test  variant for get org settings
             resp_get_org_preload = (
-                await client.get_org_captcha_settings_without_preload_content()
+                await client.get_org_captcha_settings()
             )
             assert resp_get_org_preload is not None
 
@@ -286,7 +286,7 @@ class TestCaptchaResource:
 
             # Test with_http_info variant for delete org settings (should be no-op now)
             try:
-                _, resp, err = await client.delete_org_captcha_settings_with_http_info()
+                _, resp, err = await client.delete_org_captcha_settings()
                 # This might succeed or fail depending on implementation
                 if err is None:
                     assert resp is not None
@@ -294,10 +294,10 @@ class TestCaptchaResource:
                 # Expected - settings already deleted
                 pass
 
-            # Test _without_preload_content variant for delete org settings
+            # Test  variant for delete org settings
             try:
                 resp_delete_org_preload = (
-                    await client.delete_org_captcha_settings_without_preload_content()
+                    await client.delete_org_captcha_settings()
                 )
                 # May return response even if settings already deleted
                 assert resp_delete_org_preload is not None
@@ -327,19 +327,19 @@ class TestCaptchaResource:
                 # Expected behavior - should get 404 error
                 assert e.error_code == "E0000007" or "404" in str(e)
 
-            # Test error handling for non-existent ID with _with_http_info
+            # Test error handling for non-existent ID with
             try:
                 non_existent_instance, resp, err = (
-                    await client.get_captcha_instance_with_http_info(captcha_id)
+                    await client.get_captcha_instance(captcha_id)
                 )
                 assert err is not None or non_existent_instance is None
             except OktaAPIError:
                 # Expected - 404 error for deleted instance
                 pass
 
-            # Test error handling for non-existent ID with _without_preload_content
+            # Test error handling for non-existent ID with
             try:
-                resp_error = await client.get_captcha_instance_without_preload_content(
+                resp_error = await client.get_captcha_instance(
                     captcha_id
                 )
                 # Should handle error appropriately
@@ -347,8 +347,8 @@ class TestCaptchaResource:
                 # Expected - instance was deleted
                 pass
 
-            # Test additional _with_http_info variant for create (since we deleted the instance)
-            # This tests create_captcha_instance_with_http_info after deletion
+            # Test additional  variant for create (since we deleted the instance)
+            # This tests create_captcha_instance after deletion
             new_captcha_instance = models.CAPTCHAInstance(
                 name="New CAPTCHA Instance via HTTP Info",
                 type=models.CAPTCHAType.RECAPTCHA_V2,
@@ -356,7 +356,7 @@ class TestCaptchaResource:
                 secret_key="0x3333333333333333333333333333333333333333",
             )
             created_instance_http, resp, err = (
-                await client.create_captcha_instance_with_http_info(
+                await client.create_captcha_instance(
                     new_captcha_instance
                 )
             )
@@ -366,9 +366,9 @@ class TestCaptchaResource:
 
             new_captcha_id = created_instance_http.id
 
-            # Test _without_preload_content variant for delete (clean up the new instance)
+            # Test  variant for delete (clean up the new instance)
             resp_delete_preload = (
-                await client.delete_captcha_instance_without_preload_content(
+                await client.delete_captcha_instance(
                     new_captcha_id
                 )
             )
@@ -377,7 +377,7 @@ class TestCaptchaResource:
             # Final verification - instance should be deleted
             try:
                 deleted_instance_http, _, err = (
-                    await client.get_captcha_instance_with_http_info(new_captcha_id)
+                    await client.get_captcha_instance(new_captcha_id)
                 )
                 assert err is not None or deleted_instance_http is None
             except OktaAPIError as e:
@@ -421,9 +421,9 @@ class TestCaptchaResource:
             # Expected - 404 error
             pass
 
-        # Test get with invalid ID using _with_http_info
+        # Test get with invalid ID using
         try:
-            instance_http, resp, err = await client.get_captcha_instance_with_http_info(
+            instance_http, resp, err = await client.get_captcha_instance(
                 fake_id
             )
             assert err is not None or instance_http is None
@@ -431,9 +431,9 @@ class TestCaptchaResource:
             # Expected - 404 error
             pass
 
-        # Test get with invalid ID using _without_preload_content
+        # Test get with invalid ID using
         try:
-            resp_preload = await client.get_captcha_instance_without_preload_content(
+            resp_preload = await client.get_captcha_instance(
                 fake_id
             )
             # Should handle error appropriately
@@ -449,17 +449,17 @@ class TestCaptchaResource:
             # Expected - 404 error
             pass
 
-        # Test delete with invalid ID using _with_http_info
+        # Test delete with invalid ID using
         try:
-            _, resp, err = await client.delete_captcha_instance_with_http_info(fake_id)
+            _, resp, err = await client.delete_captcha_instance(fake_id)
             assert err is not None
         except Exception:
             # Expected - 404 error
             pass
 
-        # Test delete with invalid ID using _without_preload_content
+        # Test delete with invalid ID using
         try:
-            resp_delete = await client.delete_captcha_instance_without_preload_content(
+            resp_delete = await client.delete_captcha_instance(
                 fake_id
             )
             # Should handle error appropriately
@@ -483,10 +483,10 @@ class TestCaptchaResource:
             # Expected - 404 error
             pass
 
-        # Test replace with invalid ID using _with_http_info
+        # Test replace with invalid ID using
         try:
             instance_http, resp, err = (
-                await client.replace_captcha_instance_with_http_info(
+                await client.replace_captcha_instance(
                     fake_id, invalid_update
                 )
             )
@@ -495,10 +495,10 @@ class TestCaptchaResource:
             # Expected - 404 error
             pass
 
-        # Test replace with invalid ID using _without_preload_content
+        # Test replace with invalid ID using
         try:
             resp_replace = (
-                await client.replace_captcha_instance_without_preload_content(
+                await client.replace_captcha_instance(
                     fake_id, invalid_update
                 )
             )

@@ -31,6 +31,8 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
+from okta.models.ui_element import UIElement
+
 
 class UISchemaObject(BaseModel):
     """
@@ -39,14 +41,13 @@ class UISchemaObject(BaseModel):
 
     button_label: Optional[StrictStr] = Field(
         default="Submit",
-        description="Specifies the button label for the `Submit` button at the bottom "
-                    "of the enrollment form.",
+        description="Specifies the button label for the `Submit` button at the bottom of the enrollment form",
         alias="buttonLabel",
     )
-    elements: Optional[Any] = None
+    elements: Optional[List[UIElement]] = None
     label: Optional[StrictStr] = Field(
         default="Sign in",
-        description="Specifies the label at the top of the enrollment form under the logo.",
+        description="Specifies the label at the top of the enrollment form under the logo",
     )
     type: Optional[StrictStr] = Field(
         default=None, description="Specifies the type of layout"
@@ -90,11 +91,13 @@ class UISchemaObject(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if elements (nullable) is None
-        # and model_fields_set contains the field
-        if self.elements is None and "elements" in self.model_fields_set:
-            _dict["elements"] = None
-
+        # override the default output from pydantic by calling `to_dict()` of each item in elements (list)
+        _items = []
+        if self.elements:
+            for _item in self.elements:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["elements"] = _items
         return _dict
 
     @classmethod
@@ -113,7 +116,11 @@ class UISchemaObject(BaseModel):
                     if obj.get("buttonLabel") is not None
                     else "Submit"
                 ),
-                "elements": obj.get("elements"),
+                "elements": (
+                    [UIElement.from_dict(_item) for _item in obj["elements"]]
+                    if obj.get("elements") is not None
+                    else None
+                ),
                 "label": (
                     obj.get("label") if obj.get("label") is not None else "Sign in"
                 ),

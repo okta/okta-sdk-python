@@ -25,38 +25,57 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
-from typing import Any, ClassVar, Dict, List
+from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
+from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing_extensions import Self
+from pydantic import BaseModel, ConfigDict
 
-from okta.models.access_policy_constraints import AccessPolicyConstraints
+from okta.models.policy_rule_verification_method_type import (
+    PolicyRuleVerificationMethodType,
+)
+
+if TYPE_CHECKING:
+    from okta.models.assurance_method import AssuranceMethod
+    from okta.models.authentication_method_chain_method import (
+        AuthenticationMethodChainMethod,
+    )
+    from okta.models.id_proofing_method import IdProofingMethod
 
 
 class VerificationMethod(BaseModel):
     """
-    VerificationMethod
+    The method used to verify a user
     """  # noqa: E501
 
-    constraints: Optional[List[AccessPolicyConstraints]] = None
-    factor_mode: Optional[StrictStr] = Field(default=None, alias="factorMode")
-    reauthenticate_in: Optional[StrictStr] = Field(
-        default=None, alias="reauthenticateIn"
-    )
-    type: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = [
-        "constraints",
-        "factorMode",
-        "reauthenticateIn",
-        "type",
-    ]
+    type: Optional[PolicyRuleVerificationMethodType] = None
+    __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
+
+    # JSON field name that stores the object type
+    __discriminator_property_name: ClassVar[str] = "type"
+
+    # discriminator mappings
+    __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
+        "ASSURANCE": "AssuranceMethod",
+        "AUTH_METHOD_CHAIN": "AuthenticationMethodChainMethod",
+        "ID_PROOFING": "IdProofingMethod",
+    }
+
+    @classmethod
+    def get_discriminator_value(cls, obj: Dict[str, Any]) -> Optional[str]:
+        """Returns the discriminator value (object type) of the data"""
+        discriminator_value = obj[cls.__discriminator_property_name]
+        if discriminator_value:
+            return cls.__discriminator_value_class_map.get(discriminator_value)
+        else:
+            return None
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -68,7 +87,11 @@ class VerificationMethod(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(
+        cls, json_str: str
+    ) -> Optional[
+        Union[AssuranceMethod, AuthenticationMethodChainMethod, IdProofingMethod]
+    ]:
         """Create an instance of VerificationMethod from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -89,37 +112,35 @@ class VerificationMethod(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in constraints (list)
-        _items = []
-        if self.constraints:
-            for _item in self.constraints:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["constraints"] = _items
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(
+        cls, obj: Dict[str, Any]
+    ) -> Optional[
+        Union[AssuranceMethod, AuthenticationMethodChainMethod, IdProofingMethod]
+    ]:
         """Create an instance of VerificationMethod from a dict"""
-        if obj is None:
-            return None
+        # look up the object type based on discriminator mapping
+        object_type = cls.get_discriminator_value(obj)
+        if object_type == "AssuranceMethod":
+            return import_module(
+                "okta.models.assurance_method"
+            ).AssuranceMethod.from_dict(obj)
+        if object_type == "AuthenticationMethodChainMethod":
+            return import_module(
+                "okta.models.authentication_method_chain_method"
+            ).AuthenticationMethodChainMethod.from_dict(obj)
+        if object_type == "IdProofingMethod":
+            return import_module(
+                "okta.models.id_proofing_method"
+            ).IdProofingMethod.from_dict(obj)
 
-        if not isinstance(obj, dict):
-            return cls.model_validate(obj)
-
-        _obj = cls.model_validate(
-            {
-                "constraints": (
-                    [
-                        AccessPolicyConstraints.from_dict(_item)
-                        for _item in obj["constraints"]
-                    ]
-                    if obj.get("constraints") is not None
-                    else None
-                ),
-                "factorMode": obj.get("factorMode"),
-                "reauthenticateIn": obj.get("reauthenticateIn"),
-                "type": obj.get("type"),
-            }
+        raise ValueError(
+            "VerificationMethod failed to lookup discriminator value from "
+            + json.dumps(obj)
+            + ". Discriminator property name: "
+            + cls.__discriminator_property_name
+            + ", mapping: "
+            + json.dumps(cls.__discriminator_value_class_map)
         )
-        return _obj

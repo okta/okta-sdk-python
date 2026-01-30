@@ -1,16 +1,19 @@
 # AgentPool
 
-An AgentPool is a collection of agents that serve a common purpose. An AgentPool has a unique ID within an org, and contains a collection of agents disjoint to every other AgentPool (i.e. no two AgentPools share an Agent).
+An agent pool is a collection of agents that serve a common purpose. An agent pool has a unique ID within an org, and contains a collection of agents disjoint to every other agent pool, meaning that no two agent pools share an agent.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **agents** | [**List[Agent]**](Agent.md) |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] 
+**disrupted_agents** | **int** | Number of agents in the pool that are in a disrupted state | [optional] 
+**id** | **str** | Agent pool ID | [optional] [readonly] 
+**inactive_agents** | **int** | Number of agents in the pool that are in an inactive state | [optional] 
+**name** | **str** | Agent pool name | [optional] 
 **operational_status** | [**OperationalStatus**](OperationalStatus.md) |  | [optional] 
 **type** | [**AgentType**](AgentType.md) |  | [optional] 
+**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example
 

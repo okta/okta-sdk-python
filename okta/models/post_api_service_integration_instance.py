@@ -32,6 +32,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.api_service_integration_links import APIServiceIntegrationLinks
+from okta.models.app_properties_value import AppPropertiesValue
 
 
 class PostAPIServiceIntegrationInstance(BaseModel):
@@ -56,9 +57,8 @@ class PostAPIServiceIntegrationInstance(BaseModel):
     )
     granted_scopes: Optional[List[StrictStr]] = Field(
         default=None,
-        description="The list of Okta management scopes granted to the API "
-                    "Service Integration instance. See [Okta management OAuth "
-                    "2.0 scopes](/oauth2/#okta-admin-management).",
+        description="The list of Okta management scopes granted to the API Service Integration instance. See [Okta "
+        "management OAuth 2.0 scopes](/oauth2/#okta-admin-management).",
         alias="grantedScopes",
     )
     id: Optional[StrictStr] = Field(
@@ -67,12 +67,15 @@ class PostAPIServiceIntegrationInstance(BaseModel):
     name: Optional[StrictStr] = Field(
         default=None,
         description="The name of the API service integration that corresponds with the `type` property. This is the full "
-                    "name of the API service integration listed in the Okta Integration Network (OIN) catalog.",
+        "name of the API service integration listed in the Okta Integration Network (OIN) catalog.",
+    )
+    properties: Optional[Dict[str, AppPropertiesValue]] = Field(
+        default=None, description="App instance properties"
     )
     type: Optional[StrictStr] = Field(
         default=None,
         description="The type of the API service integration. This string is an underscore-concatenated, lowercased API "
-                    "service integration name. For example, `my_api_log_integration`.",
+        "service integration name. For example, `my_api_log_integration`.",
     )
     links: Optional[APIServiceIntegrationLinks] = Field(default=None, alias="_links")
     client_secret: Optional[StrictStr] = Field(
@@ -88,6 +91,7 @@ class PostAPIServiceIntegrationInstance(BaseModel):
         "grantedScopes",
         "id",
         "name",
+        "properties",
         "type",
         "_links",
         "clientSecret",
@@ -145,6 +149,13 @@ class PostAPIServiceIntegrationInstance(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict["properties"] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -171,6 +182,14 @@ class PostAPIServiceIntegrationInstance(BaseModel):
                 "grantedScopes": obj.get("grantedScopes"),
                 "id": obj.get("id"),
                 "name": obj.get("name"),
+                "properties": (
+                    dict(
+                        (_k, AppPropertiesValue.from_dict(_v))
+                        for _k, _v in obj["properties"].items()
+                    )
+                    if obj.get("properties") is not None
+                    else None
+                ),
                 "type": obj.get("type"),
                 "_links": (
                     APIServiceIntegrationLinks.from_dict(obj["_links"])

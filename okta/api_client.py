@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -33,13 +33,17 @@ from urllib.parse import quote
 from blinker import signal
 from dateutil.parser import parse
 from pydantic import SecretStr
+from pydash.strings import camel_case
 
 import okta.models
 from okta import rest
 from okta.api_response import ApiResponse, T as ApiResponseT
 from okta.call_info import CallInfo
 from okta.configuration import Configuration
-from okta.exceptions.exceptions import ApiValueError, ApiException
+from okta.exceptions.exceptions import (
+    ApiValueError,
+    ApiException,
+)
 
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
 
@@ -766,7 +770,7 @@ class ApiClient:
             if val is None:
                 continue
             if not isinstance(val, dict):
-                result[camel_case(key)] = val  # noqa: F821
+                result[camel_case(key)] = val
             else:
-                result[camel_case(key)] = ApiClient.form_response_body(val)  # noqa: F821
+                result[camel_case(key)] = ApiClient.form_response_body(val)
         return result

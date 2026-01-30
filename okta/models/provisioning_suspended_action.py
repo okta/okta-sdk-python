@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class ProvisioningSuspendedAction(str, Enum):
     """
-    ProvisioningSuspendedAction
+    Specifies the action during authentication when an IdP user is linked to a previously suspended Okta user
     """
 
     """

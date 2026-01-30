@@ -26,25 +26,23 @@ import json
 import pprint
 import re  # noqa: F401
 from datetime import datetime
-from typing import Any, ClassVar, Dict, List
+from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
+from typing import TYPE_CHECKING
 
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-    Field,
-    StrictBool,
-    StrictStr,
-    field_validator,
-)
-from typing_extensions import Self
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing_extensions import Annotated
 
-from okta.models.network_zone_address import NetworkZoneAddress
-from okta.models.network_zone_links import NetworkZoneLinks
-from okta.models.network_zone_location import NetworkZoneLocation
+from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.network_zone_status import NetworkZoneStatus
 from okta.models.network_zone_type import NetworkZoneType
 from okta.models.network_zone_usage import NetworkZoneUsage
+
+if TYPE_CHECKING:
+    from okta.models.dynamic_network_zone import DynamicNetworkZone
+    from okta.models.enhanced_dynamic_network_zone import EnhancedDynamicNetworkZone
+    from okta.models.ip_network_zone import IPNetworkZone
 
 
 class NetworkZone(BaseModel):
@@ -52,69 +50,36 @@ class NetworkZone(BaseModel):
     NetworkZone
     """  # noqa: E501
 
-    asns: Optional[List[StrictStr]] = Field(
-        default=None,
-        description="Dynamic network zone property. array of strings that represent an "
-                    "ASN numeric value",
-    )
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the network zone was created"
-    )
-    gateways: Optional[List[NetworkZoneAddress]] = Field(
-        default=None,
-        description="IP network zone property: the IP addresses (range or "
-                    "CIDR form) of this zone. The maximum array length is 150 entries for admin-created IP zones, "
-                    "1000 entries for IP blocklist zones, and 5000 entries for the default system IP Zone.",
+        default=None, description="Timestamp when the object was created"
     )
     id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier for the network zone"
+        default=None, description="Unique identifier for the Network Zone"
     )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the network zone was last modified",
+        description="Timestamp when the object was last modified",
         alias="lastUpdated",
     )
-    locations: Optional[List[NetworkZoneLocation]] = Field(
-        default=None,
-        description="Dynamic network zone property: an array of geolocations of this network zone",
-    )
-    name: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique name for this network zone. Maximum of 128 characters.",
-    )
-    proxies: Optional[List[NetworkZoneAddress]] = Field(
-        default=None,
-        description="IP network zone property: the IP addresses (range or CIDR form) that are allowed to forward a request "
-                    "from gateway addresses These proxies are automatically trusted by Threat Insights, and used to "
-                    "identify the client IP of a request. The maximum array length is 150 entries for admin-created zones "
-                    "and 5000 entries for the default system IP Zone.",
-    )
-    proxy_type: Optional[StrictStr] = Field(
-        default=None,
-        description="Dynamic network zone property: the proxy type used",
-        alias="proxyType",
+    name: Annotated[str, Field(strict=True, max_length=128)] = Field(
+        description="Unique name for this Network Zone"
     )
     status: Optional[NetworkZoneStatus] = None
     system: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if this is a system network zone. For admin-created zones, this is always `false`. The "
-                    "system IP Policy Network Zone (`LegacyIpZone`) is included by default in your Okta org. Notice that "
-                    "`system=true` for the `LegacyIpZone` object. Admin users can modify the name of this default system "
-                    "Zone and can add up to 5000 gateway or proxy IP entries.",
+        description="Indicates a system Network Zone: * `true` for system Network Zones * `false` for custom Network Zones  "
+        "The Okta org provides the following default system Network Zones: * `LegacyIpZone` * `BlockedIpZone` * "
+        "`DefaultEnhancedDynamicZone` * `DefaultExemptIpZone`  Admins can modify the name of the default system "
+        "Network Zone and add up to 5000 gateway or proxy IP entries. ",
     )
-    type: Optional[NetworkZoneType] = None
+    type: NetworkZoneType
     usage: Optional[NetworkZoneUsage] = None
-    links: Optional[NetworkZoneLinks] = Field(default=None, alias="_links")
+    links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
-        "asns",
         "created",
-        "gateways",
         "id",
         "lastUpdated",
-        "locations",
         "name",
-        "proxies",
-        "proxyType",
         "status",
         "system",
         "type",
@@ -122,23 +87,30 @@ class NetworkZone(BaseModel):
         "_links",
     ]
 
-    @field_validator("proxy_type")
-    def proxy_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(["null", "Any", "Tor", "NotTorAnonymizer"]):
-            raise ValueError(
-                "must be one of enum values ('null', 'Any', 'Tor', 'NotTorAnonymizer')"
-            )
-        return value
-
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
+
+    # JSON field name that stores the object type
+    __discriminator_property_name: ClassVar[str] = "type"
+
+    # discriminator mappings
+    __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
+        "DYNAMIC": "DynamicNetworkZone",
+        "DYNAMIC_V2": "EnhancedDynamicNetworkZone",
+        "IP": "IPNetworkZone",
+    }
+
+    @classmethod
+    def get_discriminator_value(cls, obj: Dict[str, Any]) -> Optional[str]:
+        """Returns the discriminator value (object type) of the data"""
+        discriminator_value = obj[cls.__discriminator_property_name]
+        if discriminator_value:
+            return cls.__discriminator_value_class_map.get(discriminator_value)
+        else:
+            return None
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -150,7 +122,9 @@ class NetworkZone(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(
+        cls, json_str: str
+    ) -> Optional[Union[DynamicNetworkZone, EnhancedDynamicNetworkZone, IPNetworkZone]]:
         """Create an instance of NetworkZone from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -166,12 +140,14 @@ class NetworkZone(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "created",
                 "id",
                 "last_updated",
+                "system",
             ]
         )
 
@@ -180,27 +156,6 @@ class NetworkZone(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in gateways (list)
-        _items = []
-        if self.gateways:
-            for _item in self.gateways:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["gateways"] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in locations (list)
-        _items = []
-        if self.locations:
-            for _item in self.locations:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["locations"] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in proxies (list)
-        _items = []
-        if self.proxies:
-            for _item in self.proxies:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["proxies"] = _items
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -208,54 +163,33 @@ class NetworkZone(BaseModel):
             else:
                 _dict["_links"] = self.links
 
-        # set to None if proxies (nullable) is None
-        # and model_fields_set contains the field
-        if self.proxies is None and "proxies" in self.model_fields_set:
-            _dict["proxies"] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(
+        cls, obj: Dict[str, Any]
+    ) -> Optional[Union[DynamicNetworkZone, EnhancedDynamicNetworkZone, IPNetworkZone]]:
         """Create an instance of NetworkZone from a dict"""
-        if obj is None:
-            return None
+        # look up the object type based on discriminator mapping
+        object_type = cls.get_discriminator_value(obj)
+        if object_type == "DynamicNetworkZone":
+            return import_module(
+                "okta.models.dynamic_network_zone"
+            ).DynamicNetworkZone.from_dict(obj)
+        if object_type == "EnhancedDynamicNetworkZone":
+            return import_module(
+                "okta.models.enhanced_dynamic_network_zone"
+            ).EnhancedDynamicNetworkZone.from_dict(obj)
+        if object_type == "IPNetworkZone":
+            return import_module("okta.models.ip_network_zone").IPNetworkZone.from_dict(
+                obj
+            )
 
-        if not isinstance(obj, dict):
-            return cls.model_validate(obj)
-
-        _obj = cls.model_validate(
-            {
-                "asns": obj.get("asns"),
-                "created": obj.get("created"),
-                "gateways": (
-                    [NetworkZoneAddress.from_dict(_item) for _item in obj["gateways"]]
-                    if obj.get("gateways") is not None
-                    else None
-                ),
-                "id": obj.get("id"),
-                "lastUpdated": obj.get("lastUpdated"),
-                "locations": (
-                    [NetworkZoneLocation.from_dict(_item) for _item in obj["locations"]]
-                    if obj.get("locations") is not None
-                    else None
-                ),
-                "name": obj.get("name"),
-                "proxies": (
-                    [NetworkZoneAddress.from_dict(_item) for _item in obj["proxies"]]
-                    if obj.get("proxies") is not None
-                    else None
-                ),
-                "proxyType": obj.get("proxyType"),
-                "status": obj.get("status"),
-                "system": obj.get("system"),
-                "type": obj.get("type"),
-                "usage": obj.get("usage"),
-                "_links": (
-                    NetworkZoneLinks.from_dict(obj["_links"])
-                    if obj.get("_links") is not None
-                    else None
-                ),
-            }
+        raise ValueError(
+            "NetworkZone failed to lookup discriminator value from "
+            + json.dumps(obj)
+            + ". Discriminator property name: "
+            + cls.__discriminator_property_name
+            + ", mapping: "
+            + json.dumps(cls.__discriminator_value_class_map)
         )
-        return _obj

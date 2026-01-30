@@ -37,15 +37,17 @@ from okta.models.sspr_requirement import SsprRequirement
 
 class SelfServicePasswordResetAction(BaseModel):
     """
-    SelfServicePasswordResetAction
+    Enables or disables users to reset their own password and defines the authenticators and constraints needed to complete
+    the reset
     """  # noqa: E501
 
     access: Optional[PolicyAccess] = None
-    type: Optional[StrictStr] = Field(
-        default=None, description="The type of rule action"
-    )
     requirement: Optional[SsprRequirement] = None
-    __properties: ClassVar[List[str]] = ["access", "type", "requirement"]
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description='<x-lifecycle class="oie"></x-lifecycle> The type of rule action',
+    )
+    __properties: ClassVar[List[str]] = ["access", "requirement", "type"]
 
     @field_validator("type")
     def type_validate_enum(cls, value):
@@ -86,13 +88,8 @@ class SelfServicePasswordResetAction(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "type",
-            ]
-        )
+        excluded_fields: Set[str] = set([])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -120,12 +117,12 @@ class SelfServicePasswordResetAction(BaseModel):
         _obj = cls.model_validate(
             {
                 "access": obj.get("access"),
-                "type": obj.get("type"),
                 "requirement": (
                     SsprRequirement.from_dict(obj["requirement"])
                     if obj.get("requirement") is not None
                     else None
                 ),
+                "type": obj.get("type"),
             }
         )
         return _obj

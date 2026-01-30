@@ -34,8 +34,8 @@ from typing_extensions import Self
 
 class AppUserPasswordCredential(BaseModel):
     """
-    Specifies a password for a user. This is a write-only property. An empty `password` object is returned to indicate that
-    a password value exists.
+    The user's password. This is a write-only property. An empty `password` object is returned to indicate that a password
+    value exists.
     """  # noqa: E501
 
     value: Optional[SecretStr] = Field(default=None, description="Password value")

@@ -1,12 +1,13 @@
 # ApplicationSettingsNotes
 
+App notes visible to either the admin or end user
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**admin** | **str** |  | [optional] 
-**enduser** | **str** |  | [optional] 
+**admin** | **str** | An app message that&#39;s visible to admins | [optional] 
+**enduser** | **str** | A message that&#39;s visible in the End-User Dashboard | [optional] 
 
 ## Example
 

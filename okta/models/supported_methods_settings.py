@@ -28,13 +28,14 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
 from okta.models.authenticator_method_algorithm import AuthenticatorMethodAlgorithm
 from okta.models.authenticator_method_transaction_type import (
     AuthenticatorMethodTransactionType,
 )
+from okta.models.push_method_key_protection import PushMethodKeyProtection
 
 
 class SupportedMethodsSettings(BaseModel):
@@ -42,10 +43,17 @@ class SupportedMethodsSettings(BaseModel):
     SupportedMethodsSettings
     """  # noqa: E501
 
-    key_protection: Optional[StrictStr] = Field(default=None, alias="keyProtection")
-    algorithms: Optional[List[AuthenticatorMethodAlgorithm]] = None
+    key_protection: Optional[PushMethodKeyProtection] = Field(
+        default=None, alias="keyProtection"
+    )
+    algorithms: Optional[List[AuthenticatorMethodAlgorithm]] = Field(
+        default=None,
+        description="The encryption algorithm for this authenticator method",
+    )
     transaction_types: Optional[List[AuthenticatorMethodTransactionType]] = Field(
-        default=None, alias="transactionTypes"
+        default=None,
+        description="The transaction type for this authenticator method",
+        alias="transactionTypes",
     )
     __properties: ClassVar[List[str]] = [
         "keyProtection",

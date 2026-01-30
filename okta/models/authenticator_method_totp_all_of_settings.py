@@ -28,8 +28,12 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing_extensions import Annotated
 from typing_extensions import Self
+
+from okta.models.otp_totp_algorithm import OtpTotpAlgorithm
+from okta.models.otp_totp_encoding import OtpTotpEncoding
 
 
 class AuthenticatorMethodTotpAllOfSettings(BaseModel):
@@ -38,11 +42,19 @@ class AuthenticatorMethodTotpAllOfSettings(BaseModel):
     """  # noqa: E501
 
     time_interval_in_seconds: Optional[StrictInt] = Field(
-        default=None, alias="timeIntervalInSeconds"
+        default=None,
+        description="Time interval for TOTP in seconds",
+        alias="timeIntervalInSeconds",
     )
-    encoding: Optional[StrictStr] = None
-    algorithm: Optional[StrictStr] = None
-    pass_code_length: Optional[StrictInt] = Field(default=None, alias="passCodeLength")
+    encoding: Optional[OtpTotpEncoding] = None
+    algorithm: Optional[OtpTotpAlgorithm] = None
+    pass_code_length: Optional[
+        Annotated[int, Field(multiple_of=2, le=10, strict=True, ge=6)]
+    ] = Field(
+        default=None,
+        description="Number of digits in an OTP value",
+        alias="passCodeLength",
+    )
     __properties: ClassVar[List[str]] = [
         "timeIntervalInSeconds",
         "encoding",

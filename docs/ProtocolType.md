@@ -1,5 +1,6 @@
 # ProtocolType
 
+The authentication protocol type used for the connection
 
 ## Properties
 

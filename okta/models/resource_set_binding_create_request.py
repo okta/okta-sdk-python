@@ -37,7 +37,10 @@ class ResourceSetBindingCreateRequest(BaseModel):
     ResourceSetBindingCreateRequest
     """  # noqa: E501
 
-    members: Optional[List[StrictStr]] = None
+    members: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="URLs to user and/or group instances that are assigned to the role",
+    )
     role: Optional[StrictStr] = Field(
         default=None, description="Unique key for the role"
     )

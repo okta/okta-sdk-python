@@ -1,6 +1,8 @@
 templateDir: ./templates
 outputDir: ..
 packageName: okta
+packageVersion: 3.1.0
+useOneOfDiscriminatorLookup: true
 files:
   okta/okta_configuration.mustache:
     destinationFilename: okta/okta_configuration.py
@@ -36,6 +38,9 @@ files:
     destinationFilename: okta/user_agent.py
   okta/utils.mustache:
     destinationFilename: okta/utils.py
+  okta/DOC_GUIDE.mustache:
+    destinationFilename: okta/DOC_GUIDE.md
+    templateType: SupportingFiles
 modelPackage: models
 apiPackage: api
 additionalProperties:

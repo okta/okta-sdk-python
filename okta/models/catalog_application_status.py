@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class CatalogApplicationStatus(str, Enum):
     """
-    CatalogApplicationStatus
+    App status
     """
 
     """

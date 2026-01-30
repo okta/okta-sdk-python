@@ -29,11 +29,9 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
-from okta.models.inline_hook_channel_config_auth_scheme import (
-    InlineHookChannelConfigAuthScheme,
-)
 from okta.models.inline_hook_channel_config_headers import (
     InlineHookChannelConfigHeaders,
 )
@@ -41,16 +39,23 @@ from okta.models.inline_hook_channel_config_headers import (
 
 class InlineHookChannelConfig(BaseModel):
     """
-    InlineHookChannelConfig
+    Properties of the communications channel that are used to contact your external service
     """  # noqa: E501
 
-    auth_scheme: Optional[InlineHookChannelConfigAuthScheme] = Field(
-        default=None, alias="authScheme"
+    headers: Optional[List[InlineHookChannelConfigHeaders]] = Field(
+        default=None,
+        description="An optional list of key/value pairs for headers that you can send with the request to the external "
+        "service",
     )
-    headers: Optional[List[InlineHookChannelConfigHeaders]] = None
-    method: Optional[StrictStr] = None
-    uri: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["authScheme", "headers", "method", "uri"]
+    method: Optional[StrictStr] = Field(
+        default=None, description="The method of the Okta inline hook request"
+    )
+    uri: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="The external service endpoint that executes the inline hook handler. It must begin with `https://` and "
+        "be reachable by Okta. No white space is allowed in the URI.",
+    )
+    __properties: ClassVar[List[str]] = ["headers", "method", "uri"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,13 +94,6 @@ class InlineHookChannelConfig(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of auth_scheme
-        if self.auth_scheme:
-            if not isinstance(self.auth_scheme, dict):
-                _dict["authScheme"] = self.auth_scheme.to_dict()
-            else:
-                _dict["authScheme"] = self.auth_scheme
-
         # override the default output from pydantic by calling `to_dict()` of each item in headers (list)
         _items = []
         if self.headers:
@@ -116,11 +114,6 @@ class InlineHookChannelConfig(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "authScheme": (
-                    InlineHookChannelConfigAuthScheme.from_dict(obj["authScheme"])
-                    if obj.get("authScheme") is not None
-                    else None
-                ),
                 "headers": (
                     [
                         InlineHookChannelConfigHeaders.from_dict(_item)

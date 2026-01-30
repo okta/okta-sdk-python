@@ -30,13 +30,14 @@ from typing_extensions import Self
 
 class PolicyMappingResourceType(str, Enum):
     """
-    PolicyMappingResourceType
+    Specifies the type of resource to map. You can only map an app sign-in policy to a device signal collection policy (the
+    `policyId` path parameter).
     """
 
     """
     allowed enum values
     """
-    APP = "APP"
+    ACCESS_POLICY = "ACCESS_POLICY"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

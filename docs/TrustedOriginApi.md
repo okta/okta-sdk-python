@@ -4,21 +4,21 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activate_trusted_origin**](TrustedOriginApi.md#activate_trusted_origin) | **POST** /api/v1/trustedOrigins/{trustedOriginId}/lifecycle/activate | Activate a Trusted Origin
-[**create_trusted_origin**](TrustedOriginApi.md#create_trusted_origin) | **POST** /api/v1/trustedOrigins | Create a Trusted Origin
-[**deactivate_trusted_origin**](TrustedOriginApi.md#deactivate_trusted_origin) | **POST** /api/v1/trustedOrigins/{trustedOriginId}/lifecycle/deactivate | Deactivate a Trusted Origin
-[**delete_trusted_origin**](TrustedOriginApi.md#delete_trusted_origin) | **DELETE** /api/v1/trustedOrigins/{trustedOriginId} | Delete a Trusted Origin
-[**get_trusted_origin**](TrustedOriginApi.md#get_trusted_origin) | **GET** /api/v1/trustedOrigins/{trustedOriginId} | Retrieve a Trusted Origin
-[**list_trusted_origins**](TrustedOriginApi.md#list_trusted_origins) | **GET** /api/v1/trustedOrigins | List all Trusted Origins
-[**replace_trusted_origin**](TrustedOriginApi.md#replace_trusted_origin) | **PUT** /api/v1/trustedOrigins/{trustedOriginId} | Replace a Trusted Origin
+[**activate_trusted_origin**](TrustedOriginApi.md#activate_trusted_origin) | **POST** /api/v1/trustedOrigins/{trustedOriginId}/lifecycle/activate | Activate a trusted origin
+[**create_trusted_origin**](TrustedOriginApi.md#create_trusted_origin) | **POST** /api/v1/trustedOrigins | Create a trusted origin
+[**deactivate_trusted_origin**](TrustedOriginApi.md#deactivate_trusted_origin) | **POST** /api/v1/trustedOrigins/{trustedOriginId}/lifecycle/deactivate | Deactivate a trusted origin
+[**delete_trusted_origin**](TrustedOriginApi.md#delete_trusted_origin) | **DELETE** /api/v1/trustedOrigins/{trustedOriginId} | Delete a trusted origin
+[**get_trusted_origin**](TrustedOriginApi.md#get_trusted_origin) | **GET** /api/v1/trustedOrigins/{trustedOriginId} | Retrieve a trusted origin
+[**list_trusted_origins**](TrustedOriginApi.md#list_trusted_origins) | **GET** /api/v1/trustedOrigins | List all trusted origins
+[**replace_trusted_origin**](TrustedOriginApi.md#replace_trusted_origin) | **PUT** /api/v1/trustedOrigins/{trustedOriginId} | Replace a trusted origin
 
 
 # **activate_trusted_origin**
 > TrustedOrigin activate_trusted_origin(trusted_origin_id)
 
-Activate a Trusted Origin
+Activate a trusted origin
 
-Activates a trusted origin
+Activates a trusted origin. Sets the `status` to `ACTIVE`.
 
 ### Example
 
@@ -54,10 +54,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.TrustedOriginApi(api_client)
-    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
+    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the trusted origin
 
     try:
-        # Activate a Trusted Origin
+        # Activate a trusted origin
         api_response = api_instance.activate_trusted_origin(trusted_origin_id)
         print("The response of TrustedOriginApi->activate_trusted_origin:\n")
         pprint(api_response)
@@ -72,7 +72,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **trusted_origin_id** | **str**| &#x60;id&#x60; of the Trusted Origin | 
+ **trusted_origin_id** | **str**| &#x60;id&#x60; of the trusted origin | 
 
 ### Return type
 
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 # **create_trusted_origin**
 > TrustedOrigin create_trusted_origin(trusted_origin)
 
-Create a Trusted Origin
+Create a trusted origin
 
 Creates a trusted origin
 
@@ -113,6 +113,7 @@ Creates a trusted origin
 ```python
 import okta
 from okta.models.trusted_origin import TrustedOrigin
+from okta.models.trusted_origin_write import TrustedOriginWrite
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -139,10 +140,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.TrustedOriginApi(api_client)
-    trusted_origin = okta.TrustedOrigin() # TrustedOrigin | 
+    trusted_origin = okta.TrustedOriginWrite() # TrustedOriginWrite | 
 
     try:
-        # Create a Trusted Origin
+        # Create a trusted origin
         api_response = api_instance.create_trusted_origin(trusted_origin)
         print("The response of TrustedOriginApi->create_trusted_origin:\n")
         pprint(api_response)
@@ -157,7 +158,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **trusted_origin** | [**TrustedOrigin**](TrustedOrigin.md)|  | 
+ **trusted_origin** | [**TrustedOriginWrite**](TrustedOriginWrite.md)|  | 
 
 ### Return type
 
@@ -186,9 +187,9 @@ Name | Type | Description  | Notes
 # **deactivate_trusted_origin**
 > TrustedOrigin deactivate_trusted_origin(trusted_origin_id)
 
-Deactivate a Trusted Origin
+Deactivate a trusted origin
 
-Deactivates a trusted origin
+Deactivates a trusted origin. Sets the `status` to `INACTIVE`.
 
 ### Example
 
@@ -224,10 +225,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.TrustedOriginApi(api_client)
-    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
+    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the trusted origin
 
     try:
-        # Deactivate a Trusted Origin
+        # Deactivate a trusted origin
         api_response = api_instance.deactivate_trusted_origin(trusted_origin_id)
         print("The response of TrustedOriginApi->deactivate_trusted_origin:\n")
         pprint(api_response)
@@ -242,7 +243,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **trusted_origin_id** | **str**| &#x60;id&#x60; of the Trusted Origin | 
+ **trusted_origin_id** | **str**| &#x60;id&#x60; of the trusted origin | 
 
 ### Return type
 
@@ -271,7 +272,7 @@ Name | Type | Description  | Notes
 # **delete_trusted_origin**
 > delete_trusted_origin(trusted_origin_id)
 
-Delete a Trusted Origin
+Delete a trusted origin
 
 Deletes a trusted origin
 
@@ -308,10 +309,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.TrustedOriginApi(api_client)
-    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
+    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the trusted origin
 
     try:
-        # Delete a Trusted Origin
+        # Delete a trusted origin
         api_instance.delete_trusted_origin(trusted_origin_id)
     except Exception as e:
         print("Exception when calling TrustedOriginApi->delete_trusted_origin: %s\n" % e)
@@ -324,7 +325,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **trusted_origin_id** | **str**| &#x60;id&#x60; of the Trusted Origin | 
+ **trusted_origin_id** | **str**| &#x60;id&#x60; of the trusted origin | 
 
 ### Return type
 
@@ -353,7 +354,7 @@ void (empty response body)
 # **get_trusted_origin**
 > TrustedOrigin get_trusted_origin(trusted_origin_id)
 
-Retrieve a Trusted Origin
+Retrieve a trusted origin
 
 Retrieves a trusted origin
 
@@ -391,10 +392,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.TrustedOriginApi(api_client)
-    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
+    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the trusted origin
 
     try:
-        # Retrieve a Trusted Origin
+        # Retrieve a trusted origin
         api_response = api_instance.get_trusted_origin(trusted_origin_id)
         print("The response of TrustedOriginApi->get_trusted_origin:\n")
         pprint(api_response)
@@ -409,7 +410,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **trusted_origin_id** | **str**| &#x60;id&#x60; of the Trusted Origin | 
+ **trusted_origin_id** | **str**| &#x60;id&#x60; of the trusted origin | 
 
 ### Return type
 
@@ -438,7 +439,7 @@ Name | Type | Description  | Notes
 # **list_trusted_origins**
 > List[TrustedOrigin] list_trusted_origins(q=q, filter=filter, after=after, limit=limit)
 
-List all Trusted Origins
+List all trusted origins
 
 Lists all trusted origins
 
@@ -476,13 +477,13 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.TrustedOriginApi(api_client)
-    q = 'q_example' # str |  (optional)
-    filter = 'filter_example' # str |  (optional)
-    after = 'after_example' # str |  (optional)
-    limit = -1 # int |  (optional) (default to -1)
+    q = 'q_example' # str | A search string that prefix matches against the `name` and `origin` (optional)
+    filter = 'name eq \"Example trusted origin\"' # str | [Filter](https://developer.okta.com/docs/api/#filter) trusted origins with a supported expression for a subset of properties. You can filter on the following properties: `name`, `origin`, `status`, and `type` (type of scopes).  (optional)
+    after = 'after_example' # str | After cursor provided by a prior request (optional)
+    limit = 20 # int | Specifies the number of results (optional) (default to 20)
 
     try:
-        # List all Trusted Origins
+        # List all trusted origins
         api_response = api_instance.list_trusted_origins(q=q, filter=filter, after=after, limit=limit)
         print("The response of TrustedOriginApi->list_trusted_origins:\n")
         pprint(api_response)
@@ -497,10 +498,10 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **q** | **str**|  | [optional] 
- **filter** | **str**|  | [optional] 
- **after** | **str**|  | [optional] 
- **limit** | **int**|  | [optional] [default to -1]
+ **q** | **str**| A search string that prefix matches against the &#x60;name&#x60; and &#x60;origin&#x60; | [optional] 
+ **filter** | **str**| [Filter](https://developer.okta.com/docs/api/#filter) trusted origins with a supported expression for a subset of properties. You can filter on the following properties: &#x60;name&#x60;, &#x60;origin&#x60;, &#x60;status&#x60;, and &#x60;type&#x60; (type of scopes).  | [optional] 
+ **after** | **str**| After cursor provided by a prior request | [optional] 
+ **limit** | **int**| Specifies the number of results | [optional] [default to 20]
 
 ### Return type
 
@@ -528,7 +529,7 @@ Name | Type | Description  | Notes
 # **replace_trusted_origin**
 > TrustedOrigin replace_trusted_origin(trusted_origin_id, trusted_origin)
 
-Replace a Trusted Origin
+Replace a trusted origin
 
 Replaces a trusted origin
 
@@ -566,11 +567,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.TrustedOriginApi(api_client)
-    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
+    trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the trusted origin
     trusted_origin = okta.TrustedOrigin() # TrustedOrigin | 
 
     try:
-        # Replace a Trusted Origin
+        # Replace a trusted origin
         api_response = api_instance.replace_trusted_origin(trusted_origin_id, trusted_origin)
         print("The response of TrustedOriginApi->replace_trusted_origin:\n")
         pprint(api_response)
@@ -585,7 +586,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **trusted_origin_id** | **str**| &#x60;id&#x60; of the Trusted Origin | 
+ **trusted_origin_id** | **str**| &#x60;id&#x60; of the trusted origin | 
  **trusted_origin** | [**TrustedOrigin**](TrustedOrigin.md)|  | 
 
 ### Return type

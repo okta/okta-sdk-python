@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.linked_object_details_type import LinkedObjectDetailsType
@@ -39,10 +39,18 @@ class LinkedObjectDetails(BaseModel):
     LinkedObjectDetails
     """  # noqa: E501
 
-    description: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    title: Optional[StrictStr] = None
-    type: Optional[LinkedObjectDetailsType] = None
+    description: Optional[StrictStr] = Field(
+        default=None,
+        description="Description of the `primary` or the `associated` relationship",
+    )
+    name: StrictStr = Field(
+        description="API name of the `primary` or the `associated` link. The `name` parameter can't start with a number and "
+        "can only contain the following characters: `a-z`, `A-Z`,` 0-9`, and `_`."
+    )
+    title: StrictStr = Field(
+        description="Display name of the `primary` or the `associated` link"
+    )
+    type: LinkedObjectDetailsType
     __properties: ClassVar[List[str]] = ["description", "name", "title", "type"]
 
     model_config = ConfigDict(

@@ -1,5 +1,6 @@
 # ErrorPageTouchPointVariant
 
+Variant for the error page. You can publish a theme for error page with different combinations of assets. Variants are preset combinations of those assets. 
 
 ## Properties
 

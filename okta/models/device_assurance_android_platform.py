@@ -38,6 +38,11 @@ from okta.models.device_assurance_android_platform_all_of_disk_encryption_type i
 from okta.models.device_assurance_android_platform_all_of_screen_lock_type import (
     DeviceAssuranceAndroidPlatformAllOfScreenLockType,
 )
+from okta.models.device_assurance_android_platform_all_of_third_party_signal_providers import (
+    DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders,
+)
+from okta.models.device_posture_checks import DevicePostureChecks
+from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
 from okta.models.os_version import OSVersion
 
@@ -58,12 +63,18 @@ class DeviceAssuranceAndroidPlatform(DeviceAssurance):
     secure_hardware_present: Optional[StrictBool] = Field(
         default=None, alias="secureHardwarePresent"
     )
+    third_party_signal_providers: Optional[
+        DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders
+    ] = Field(default=None, alias="thirdPartySignalProviders")
     __properties: ClassVar[List[str]] = [
         "createdBy",
         "createdDate",
+        "devicePostureChecks",
+        "displayRemediationMode",
+        "gracePeriod",
         "id",
+        "lastUpdate",
         "lastUpdatedBy",
-        "lastUpdatedDate",
         "name",
         "platform",
         "_links",
@@ -72,6 +83,7 @@ class DeviceAssuranceAndroidPlatform(DeviceAssurance):
         "osVersion",
         "screenLockType",
         "secureHardwarePresent",
+        "thirdPartySignalProviders",
     ]
 
     model_config = ConfigDict(
@@ -111,6 +123,20 @@ class DeviceAssuranceAndroidPlatform(DeviceAssurance):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of device_posture_checks
+        if self.device_posture_checks:
+            if not isinstance(self.device_posture_checks, dict):
+                _dict["devicePostureChecks"] = self.device_posture_checks.to_dict()
+            else:
+                _dict["devicePostureChecks"] = self.device_posture_checks
+
+        # override the default output from pydantic by calling `to_dict()` of grace_period
+        if self.grace_period:
+            if not isinstance(self.grace_period, dict):
+                _dict["gracePeriod"] = self.grace_period.to_dict()
+            else:
+                _dict["gracePeriod"] = self.grace_period
+
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -139,6 +165,15 @@ class DeviceAssuranceAndroidPlatform(DeviceAssurance):
             else:
                 _dict["screenLockType"] = self.screen_lock_type
 
+        # override the default output from pydantic by calling `to_dict()` of third_party_signal_providers
+        if self.third_party_signal_providers:
+            if not isinstance(self.third_party_signal_providers, dict):
+                _dict["thirdPartySignalProviders"] = (
+                    self.third_party_signal_providers.to_dict()
+                )
+            else:
+                _dict["thirdPartySignalProviders"] = self.third_party_signal_providers
+
         return _dict
 
     @classmethod
@@ -154,9 +189,20 @@ class DeviceAssuranceAndroidPlatform(DeviceAssurance):
             {
                 "createdBy": obj.get("createdBy"),
                 "createdDate": obj.get("createdDate"),
+                "devicePostureChecks": (
+                    DevicePostureChecks.from_dict(obj["devicePostureChecks"])
+                    if obj.get("devicePostureChecks") is not None
+                    else None
+                ),
+                "displayRemediationMode": obj.get("displayRemediationMode"),
+                "gracePeriod": (
+                    GracePeriod.from_dict(obj["gracePeriod"])
+                    if obj.get("gracePeriod") is not None
+                    else None
+                ),
                 "id": obj.get("id"),
+                "lastUpdate": obj.get("lastUpdate"),
                 "lastUpdatedBy": obj.get("lastUpdatedBy"),
-                "lastUpdatedDate": obj.get("lastUpdatedDate"),
                 "name": obj.get("name"),
                 "platform": obj.get("platform"),
                 "_links": (
@@ -185,6 +231,13 @@ class DeviceAssuranceAndroidPlatform(DeviceAssurance):
                     else None
                 ),
                 "secureHardwarePresent": obj.get("secureHardwarePresent"),
+                "thirdPartySignalProviders": (
+                    DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders.from_dict(
+                        obj["thirdPartySignalProviders"]
+                    )
+                    if obj.get("thirdPartySignalProviders") is not None
+                    else None
+                ),
             }
         )
         return _obj

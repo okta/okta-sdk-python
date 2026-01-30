@@ -38,12 +38,18 @@ from okta.models.application_settings_notifications_vpn_network import (
 
 class ApplicationSettingsNotificationsVpn(BaseModel):
     """
-    ApplicationSettingsNotificationsVpn
+    Sends customizable messages with conditions to end users when a VPN connection is required
     """  # noqa: E501
 
-    help_url: Optional[StrictStr] = Field(default=None, alias="helpUrl")
-    message: Optional[StrictStr] = None
-    network: Optional[ApplicationSettingsNotificationsVpnNetwork] = None
+    help_url: Optional[StrictStr] = Field(
+        default=None,
+        description="An optional URL to a help page to assist your end users in signing in to your company VPN",
+        alias="helpUrl",
+    )
+    message: Optional[StrictStr] = Field(
+        default=None, description="A VPN requirement message that's displayed to users"
+    )
+    network: ApplicationSettingsNotificationsVpnNetwork
     __properties: ClassVar[List[str]] = ["helpUrl", "message", "network"]
 
     model_config = ConfigDict(

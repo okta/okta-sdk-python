@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**include** | [**List[DiskEncryptionType]**](DiskEncryptionType.md) |  | [optional] 
+**include** | [**List[DiskEncryptionTypeAndroid]**](DiskEncryptionTypeAndroid.md) |  | [optional] 
 
 ## Example
 

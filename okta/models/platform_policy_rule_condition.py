@@ -38,7 +38,7 @@ from okta.models.platform_condition_evaluator_platform import (
 
 class PlatformPolicyRuleCondition(BaseModel):
     """
-    PlatformPolicyRuleCondition
+    Specifies a particular platform or device to match on
     """  # noqa: E501
 
     exclude: Optional[List[PlatformConditionEvaluatorPlatform]] = None

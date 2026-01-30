@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
 **application** | [**PolicyMappingLinksAllOfApplication**](PolicyMappingLinksAllOfApplication.md) |  | [optional] 
-**authenticator** | [**PolicyMappingLinksAllOfAuthenticator**](PolicyMappingLinksAllOfAuthenticator.md) |  | [optional] 
 **policy** | [**PolicyMappingLinksAllOfPolicy**](PolicyMappingLinksAllOfPolicy.md) |  | [optional] 
 
 ## Example

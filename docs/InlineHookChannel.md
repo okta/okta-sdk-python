@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**InlineHookChannelType**](InlineHookChannelType.md) |  | [optional] 
-**version** | **str** |  | [optional] 
+**version** | **str** | Version of the inline hook type. The currently supported version is &#x60;1.0.0&#x60;. | [optional] 
 
 ## Example
 

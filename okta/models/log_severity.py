@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class LogSeverity(str, Enum):
     """
-    LogSeverity
+    Indicates how severe the event is
     """
 
     """

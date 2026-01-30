@@ -28,7 +28,8 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.application_credentials_scheme import ApplicationCredentialsScheme
@@ -49,9 +50,15 @@ class SchemeApplicationCredentials(BaseModel):
         default=None, alias="userNameTemplate"
     )
     password: Optional[PasswordCredential] = None
-    reveal_password: Optional[StrictBool] = Field(default=None, alias="revealPassword")
+    reveal_password: Optional[StrictBool] = Field(
+        default=None,
+        description="Allow users to securely see their password",
+        alias="revealPassword",
+    )
     scheme: Optional[ApplicationCredentialsScheme] = None
-    user_name: Optional[StrictStr] = Field(default=None, alias="userName")
+    user_name: Optional[
+        Annotated[str, Field(min_length=1, strict=True, max_length=100)]
+    ] = Field(default=None, description="Shared username for the app", alias="userName")
     __properties: ClassVar[List[str]] = [
         "signing",
         "userNameTemplate",

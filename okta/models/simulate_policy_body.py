@@ -32,26 +32,25 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.policy_context import PolicyContext
-from okta.models.policy_type import PolicyType
+from okta.models.policy_type_simulation import PolicyTypeSimulation
 
 
 class SimulatePolicyBody(BaseModel):
     """
-    The request body required for a simulate policy operation.
+    The request body required for a simulate policy operation
     """  # noqa: E501
 
-    policy_types: Optional[List[PolicyType]] = Field(
-        default=None,
-        description="Supported policy types for a simulate operation. The "
-                    "default value, `null`, returns all types.",
-        alias="policyTypes",
-    )
     app_instance: StrictStr = Field(
         description="The application instance ID for a simulate operation",
         alias="appInstance",
     )
     policy_context: Optional[PolicyContext] = Field(default=None, alias="policyContext")
-    __properties: ClassVar[List[str]] = ["policyTypes", "appInstance", "policyContext"]
+    policy_types: Optional[List[PolicyTypeSimulation]] = Field(
+        default=None,
+        description="Supported policy types for a simulate operation. The default value, `null`, returns all types.",
+        alias="policyTypes",
+    )
+    __properties: ClassVar[List[str]] = ["appInstance", "policyContext", "policyTypes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,13 +109,13 @@ class SimulatePolicyBody(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "policyTypes": obj.get("policyTypes"),
                 "appInstance": obj.get("appInstance"),
                 "policyContext": (
                     PolicyContext.from_dict(obj["policyContext"])
                     if obj.get("policyContext") is not None
                     else None
                 ),
+                "policyTypes": obj.get("policyTypes"),
             }
         )
         return _obj

@@ -33,7 +33,7 @@ from typing_extensions import Self
 
 from okta.models.chrome_browser_version import ChromeBrowserVersion
 from okta.models.key_trust_level_browser_key import KeyTrustLevelBrowserKey
-from okta.models.os_version import OSVersion
+from okta.models.os_version_three_components import OSVersionThreeComponents
 from okta.models.password_protection_warning_trigger import (
     PasswordProtectionWarningTrigger,
 )
@@ -50,14 +50,12 @@ class DTCMacOS(BaseModel):
     )
     built_in_dns_client_enabled: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates if a software stack is used to "
-                    "communicate with the DNS server",
+        description="Indicates if a software stack is used to communicate with the DNS server",
         alias="builtInDnsClientEnabled",
     )
     chrome_remote_desktop_app_blocked: Optional[StrictBool] = Field(
         default=None,
-        description="Indicates whether access to the Chrome "
-                    "Remote Desktop application is blocked through a policy",
+        description="Indicates whether access to the Chrome Remote Desktop application is blocked through a policy",
         alias="chromeRemoteDesktopAppBlocked",
     )
     device_enrollment_domain: Optional[StrictStr] = Field(
@@ -65,10 +63,10 @@ class DTCMacOS(BaseModel):
         description="Enrollment domain of the customer that is currently managing the device",
         alias="deviceEnrollmentDomain",
     )
-    disk_enrypted: Optional[StrictBool] = Field(
+    disk_encrypted: Optional[StrictBool] = Field(
         default=None,
         description="Indicates whether the main disk is encrypted",
-        alias="diskEnrypted",
+        alias="diskEncrypted",
     )
     key_trust_level: Optional[KeyTrustLevelBrowserKey] = Field(
         default=None, alias="keyTrustLevel"
@@ -78,7 +76,9 @@ class DTCMacOS(BaseModel):
         description="Indicates whether a firewall is enabled at the OS-level on the device",
         alias="osFirewall",
     )
-    os_version: Optional[OSVersion] = Field(default=None, alias="osVersion")
+    os_version: Optional[OSVersionThreeComponents] = Field(
+        default=None, alias="osVersion"
+    )
     password_protection_warning_trigger: Optional[PasswordProtectionWarningTrigger] = (
         Field(default=None, alias="passwordProtectionWarningTrigger")
     )
@@ -105,7 +105,7 @@ class DTCMacOS(BaseModel):
         "builtInDnsClientEnabled",
         "chromeRemoteDesktopAppBlocked",
         "deviceEnrollmentDomain",
-        "diskEnrypted",
+        "diskEncrypted",
         "keyTrustLevel",
         "osFirewall",
         "osVersion",
@@ -190,11 +190,11 @@ class DTCMacOS(BaseModel):
                     "chromeRemoteDesktopAppBlocked"
                 ),
                 "deviceEnrollmentDomain": obj.get("deviceEnrollmentDomain"),
-                "diskEnrypted": obj.get("diskEnrypted"),
+                "diskEncrypted": obj.get("diskEncrypted"),
                 "keyTrustLevel": obj.get("keyTrustLevel"),
                 "osFirewall": obj.get("osFirewall"),
                 "osVersion": (
-                    OSVersion.from_dict(obj["osVersion"])
+                    OSVersionThreeComponents.from_dict(obj["osVersion"])
                     if obj.get("osVersion") is not None
                     else None
                 ),

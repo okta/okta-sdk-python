@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class LogAuthenticationProvider(str, Enum):
     """
-    LogAuthenticationProvider
+    The system that proves the identity of an actor using the credentials provided to it
     """
 
     """

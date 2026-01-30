@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
@@ -37,8 +37,13 @@ class UserSchemaAttributePermission(BaseModel):
     UserSchemaAttributePermission
     """  # noqa: E501
 
-    action: Optional[StrictStr] = None
-    principal: Optional[StrictStr] = None
+    action: Optional[StrictStr] = Field(
+        default=None,
+        description="Determines whether the principal can view or modify the property",
+    )
+    principal: Optional[StrictStr] = Field(
+        default=None, description="Security principal"
+    )
     __properties: ClassVar[List[str]] = ["action", "principal"]
 
     model_config = ConfigDict(

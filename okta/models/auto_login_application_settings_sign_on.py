@@ -37,8 +37,14 @@ class AutoLoginApplicationSettingsSignOn(BaseModel):
     AutoLoginApplicationSettingsSignOn
     """  # noqa: E501
 
-    login_url: Optional[StrictStr] = Field(default=None, alias="loginUrl")
-    redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
+    login_url: StrictStr = Field(
+        description="Primary URL of the sign-in page for this app", alias="loginUrl"
+    )
+    redirect_url: Optional[StrictStr] = Field(
+        default=None,
+        description="Secondary URL of the sign-in page for this app",
+        alias="redirectUrl",
+    )
     __properties: ClassVar[List[str]] = ["loginUrl", "redirectUrl"]
 
     model_config = ConfigDict(

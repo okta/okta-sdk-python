@@ -12,7 +12,8 @@ Name | Type | Description | Notes
 **id** | **str** |  | [optional] [readonly] 
 **last_updated** | **datetime** |  | [optional] [readonly] 
 **name** | **str** |  | 
-**token_window** | **str** | A time duration specified as an [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). | [optional] 
+**network** | [**ApiTokenNetwork**](ApiTokenNetwork.md) |  | [optional] 
+**token_window** | **str** | A time duration specified as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations). | [optional] 
 **user_id** | **str** |  | [optional] 
 **link** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 

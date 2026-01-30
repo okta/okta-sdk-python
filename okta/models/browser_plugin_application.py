@@ -28,13 +28,18 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import ConfigDict, StrictStr
+from pydantic import ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 from okta.models.application import Application
 from okta.models.application_accessibility import ApplicationAccessibility
+from okta.models.application_embedded import ApplicationEmbedded
+from okta.models.application_express_configuration import (
+    ApplicationExpressConfiguration,
+)
 from okta.models.application_licensing import ApplicationLicensing
 from okta.models.application_links import ApplicationLinks
+from okta.models.application_universal_logout import ApplicationUniversalLogout
 from okta.models.application_visibility import ApplicationVisibility
 from okta.models.scheme_application_credentials import SchemeApplicationCredentials
 from okta.models.swa_application_settings import SwaApplicationSettings
@@ -46,19 +51,22 @@ class BrowserPluginApplication(Application):
     """  # noqa: E501
 
     credentials: Optional[SchemeApplicationCredentials] = None
-    name: Optional[StrictStr] = None
-    settings: Optional[SwaApplicationSettings] = None
+    name: StrictStr = Field(description="The key name for the app definition")
+    settings: SwaApplicationSettings
     __properties: ClassVar[List[str]] = [
         "accessibility",
         "created",
+        "expressConfiguration",
         "features",
         "id",
         "label",
         "lastUpdated",
         "licensing",
+        "orn",
         "profile",
         "signOnMode",
         "status",
+        "universalLogout",
         "visibility",
         "_embedded",
         "_links",
@@ -66,6 +74,15 @@ class BrowserPluginApplication(Application):
         "name",
         "settings",
     ]
+
+    @field_validator("name")
+    def name_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["template_swa", "template_swa3field"]):
+            raise ValueError(
+                "must be one of enum values ('template_swa', 'template_swa3field')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +128,13 @@ class BrowserPluginApplication(Application):
             else:
                 _dict["accessibility"] = self.accessibility
 
+        # override the default output from pydantic by calling `to_dict()` of express_configuration
+        if self.express_configuration:
+            if not isinstance(self.express_configuration, dict):
+                _dict["expressConfiguration"] = self.express_configuration.to_dict()
+            else:
+                _dict["expressConfiguration"] = self.express_configuration
+
         # override the default output from pydantic by calling `to_dict()` of licensing
         if self.licensing:
             if not isinstance(self.licensing, dict):
@@ -118,12 +142,26 @@ class BrowserPluginApplication(Application):
             else:
                 _dict["licensing"] = self.licensing
 
+        # override the default output from pydantic by calling `to_dict()` of universal_logout
+        if self.universal_logout:
+            if not isinstance(self.universal_logout, dict):
+                _dict["universalLogout"] = self.universal_logout.to_dict()
+            else:
+                _dict["universalLogout"] = self.universal_logout
+
         # override the default output from pydantic by calling `to_dict()` of visibility
         if self.visibility:
             if not isinstance(self.visibility, dict):
                 _dict["visibility"] = self.visibility.to_dict()
             else:
                 _dict["visibility"] = self.visibility
+
+        # override the default output from pydantic by calling `to_dict()` of embedded
+        if self.embedded:
+            if not isinstance(self.embedded, dict):
+                _dict["_embedded"] = self.embedded.to_dict()
+            else:
+                _dict["_embedded"] = self.embedded
 
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
@@ -165,6 +203,13 @@ class BrowserPluginApplication(Application):
                     else None
                 ),
                 "created": obj.get("created"),
+                "expressConfiguration": (
+                    ApplicationExpressConfiguration.from_dict(
+                        obj["expressConfiguration"]
+                    )
+                    if obj.get("expressConfiguration") is not None
+                    else None
+                ),
                 "features": obj.get("features"),
                 "id": obj.get("id"),
                 "label": obj.get("label"),
@@ -174,29 +219,39 @@ class BrowserPluginApplication(Application):
                     if obj.get("licensing") is not None
                     else None
                 ),
+                "orn": obj.get("orn"),
                 "profile": obj.get("profile"),
                 "signOnMode": obj.get("signOnMode"),
                 "status": obj.get("status"),
-                "visibility": (
-                    ApplicationVisibility.from_dict(obj["visibility"]) if
-                    obj.get("visibility") is not None
+                "universalLogout": (
+                    ApplicationUniversalLogout.from_dict(obj["universalLogout"])
+                    if obj.get("universalLogout") is not None
                     else None
                 ),
-                "_embedded": obj.get("_embedded"),
+                "visibility": (
+                    ApplicationVisibility.from_dict(obj["visibility"])
+                    if obj.get("visibility") is not None
+                    else None
+                ),
+                "_embedded": (
+                    ApplicationEmbedded.from_dict(obj["_embedded"])
+                    if obj.get("_embedded") is not None
+                    else None
+                ),
                 "_links": (
-                    ApplicationLinks.from_dict(obj["_links"]) if
-                    obj.get("_links") is not None
+                    ApplicationLinks.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
                     else None
                 ),
                 "credentials": (
-                    SchemeApplicationCredentials.from_dict(obj["credentials"]) if
-                    obj.get("credentials") is not None
+                    SchemeApplicationCredentials.from_dict(obj["credentials"])
+                    if obj.get("credentials") is not None
                     else None
                 ),
                 "name": obj.get("name"),
                 "settings": (
-                    SwaApplicationSettings.from_dict(obj["settings"]) if
-                    obj.get("settings") is not None
+                    SwaApplicationSettings.from_dict(obj["settings"])
+                    if obj.get("settings") is not None
                     else None
                 ),
             }

@@ -28,8 +28,10 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
+
+from okta.models.custom_app_user_verification_enum import CustomAppUserVerificationEnum
 
 
 class WellKnownAppAuthenticatorConfigurationSettings(BaseModel):
@@ -37,7 +39,7 @@ class WellKnownAppAuthenticatorConfigurationSettings(BaseModel):
     WellKnownAppAuthenticatorConfigurationSettings
     """  # noqa: E501
 
-    user_verification: Optional[StrictStr] = Field(
+    user_verification: Optional[CustomAppUserVerificationEnum] = Field(
         default=None, alias="userVerification"
     )
     __properties: ClassVar[List[str]] = ["userVerification"]

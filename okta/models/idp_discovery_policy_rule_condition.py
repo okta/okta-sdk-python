@@ -48,11 +48,11 @@ class IdpDiscoveryPolicyRuleCondition(BaseModel):
 
     app: Optional[AppAndInstancePolicyRuleCondition] = None
     network: Optional[PolicyNetworkCondition] = None
+    platform: Optional[PlatformPolicyRuleCondition] = None
     user_identifier: Optional[UserIdentifierPolicyRuleCondition] = Field(
         default=None, alias="userIdentifier"
     )
-    platform: Optional[PlatformPolicyRuleCondition] = None
-    __properties: ClassVar[List[str]] = ["app", "network", "userIdentifier", "platform"]
+    __properties: ClassVar[List[str]] = ["app", "network", "platform", "userIdentifier"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,19 +105,19 @@ class IdpDiscoveryPolicyRuleCondition(BaseModel):
             else:
                 _dict["network"] = self.network
 
-        # override the default output from pydantic by calling `to_dict()` of user_identifier
-        if self.user_identifier:
-            if not isinstance(self.user_identifier, dict):
-                _dict["userIdentifier"] = self.user_identifier.to_dict()
-            else:
-                _dict["userIdentifier"] = self.user_identifier
-
         # override the default output from pydantic by calling `to_dict()` of platform
         if self.platform:
             if not isinstance(self.platform, dict):
                 _dict["platform"] = self.platform.to_dict()
             else:
                 _dict["platform"] = self.platform
+
+        # override the default output from pydantic by calling `to_dict()` of user_identifier
+        if self.user_identifier:
+            if not isinstance(self.user_identifier, dict):
+                _dict["userIdentifier"] = self.user_identifier.to_dict()
+            else:
+                _dict["userIdentifier"] = self.user_identifier
 
         return _dict
 
@@ -142,14 +142,14 @@ class IdpDiscoveryPolicyRuleCondition(BaseModel):
                     if obj.get("network") is not None
                     else None
                 ),
-                "userIdentifier": (
-                    UserIdentifierPolicyRuleCondition.from_dict(obj["userIdentifier"])
-                    if obj.get("userIdentifier") is not None
-                    else None
-                ),
                 "platform": (
                     PlatformPolicyRuleCondition.from_dict(obj["platform"])
                     if obj.get("platform") is not None
+                    else None
+                ),
+                "userIdentifier": (
+                    UserIdentifierPolicyRuleCondition.from_dict(obj["userIdentifier"])
+                    if obj.get("userIdentifier") is not None
                     else None
                 ),
             }

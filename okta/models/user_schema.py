@@ -41,15 +41,36 @@ class UserSchema(BaseModel):
     UserSchema
     """  # noqa: E501
 
-    var_schema: Optional[StrictStr] = Field(default=None, alias="$schema")
-    created: Optional[StrictStr] = None
-    definitions: Optional[UserSchemaDefinitions] = None
-    id: Optional[StrictStr] = None
-    last_updated: Optional[StrictStr] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = None
-    properties: Optional[UserSchemaProperties] = None
-    title: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    var_schema: Optional[StrictStr] = Field(
+        default=None, description="JSON schema version identifier", alias="$schema"
+    )
+    created: Optional[StrictStr] = Field(
+        default=None, description="Timestamp when the schema was created"
+    )
+    definitions: Optional[UserSchemaDefinitions] = Field(
+        default=None,
+        description="User profile subschemas  The profile object for a user is defined by a composite schema of base and "
+        "custom properties using a JSON path to reference subschemas. The `#base` properties are defined and "
+        "versioned by Okta, while `#custom` properties are extensible. Custom property names for the profile "
+        "object must be unique and can't conflict with a property name defined in the `#base` subschema.",
+    )
+    id: Optional[StrictStr] = Field(default=None, description="URI of user schema")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the schema was last updated",
+        alias="lastUpdated",
+    )
+    name: Optional[StrictStr] = Field(default=None, description="Name of the schema")
+    properties: Optional[UserSchemaProperties] = Field(
+        default=None, description="User Object Properties"
+    )
+    title: Optional[StrictStr] = Field(
+        default=None, description="User-defined display name for the schema"
+    )
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="Type of [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4)",
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "$schema",

@@ -36,14 +36,12 @@ from okta.models.user_identifier_match_type import UserIdentifierMatchType
 
 class UserIdentifierConditionEvaluatorPattern(BaseModel):
     """
-    Used in the User Identifier Condition object. Specifies the details of the patterns to match against.
+    Specifies the details of the patterns to match against
     """  # noqa: E501
 
-    match_type: Optional[UserIdentifierMatchType] = Field(
-        default=None, alias="matchType"
-    )
-    value: Optional[StrictStr] = Field(
-        default=None, description="The regex expression of a simple match string"
+    match_type: UserIdentifierMatchType = Field(alias="matchType")
+    value: StrictStr = Field(
+        description="The regular expression or simple match string"
     )
     __properties: ClassVar[List[str]] = ["matchType", "value"]
 

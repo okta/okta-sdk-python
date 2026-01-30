@@ -49,10 +49,9 @@ class ThreatInsightConfiguration(BaseModel):
     )
     exclude_zones: Optional[List[StrictStr]] = Field(
         default=None,
-        description="Accepts a list of [Network Zone]("
-                    "/openapi/okta-management/management/tag/NetworkZone/) "
-                    "IDs. IPs in the excluded network zones aren't logged or blocked. This ensures that traffic from known, "
-                    "trusted IPs isn't accidentally logged or blocked.",
+        description="Accepts a list of [Network Zone](/openapi/okta-management/management/tag/NetworkZone/) IDs. IPs in the "
+        "excluded network zones aren't logged or blocked. This ensures that traffic from known, trusted IPs "
+        "isn't accidentally logged or blocked.",
         alias="excludeZones",
     )
     last_updated: Optional[datetime] = Field(

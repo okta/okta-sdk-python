@@ -31,8 +31,13 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
-from okta.models.href_object import HrefObject
+from okta.models.app_resource_href_object import AppResourceHrefObject
+from okta.models.authorization_server_resource_href_object import (
+    AuthorizationServerResourceHrefObject,
+)
 from okta.models.href_object_self_link import HrefObjectSelfLink
+from okta.models.scope_resource_href_object import ScopeResourceHrefObject
+from okta.models.user_resource_href_object import UserResourceHrefObject
 
 
 class OAuth2ScopeConsentGrantLinks(BaseModel):
@@ -41,9 +46,31 @@ class OAuth2ScopeConsentGrantLinks(BaseModel):
     """  # noqa: E501
 
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
-    app: Optional[HrefObject] = Field(default=None, description="Link to app")
-    client: Optional[HrefObject] = Field(default=None, description="Link to client")
-    __properties: ClassVar[List[str]] = ["self", "app", "client"]
+    app: Optional[AppResourceHrefObject] = Field(
+        default=None, description="Link to the app resource"
+    )
+    client: Optional[AppResourceHrefObject] = Field(
+        default=None, description="Link to the client resource"
+    )
+    scope: Optional[ScopeResourceHrefObject] = Field(
+        default=None, description="Link to the scope resource"
+    )
+    user: Optional[UserResourceHrefObject] = Field(
+        default=None, description="Link to the user resource"
+    )
+    authorization_server: Optional[AuthorizationServerResourceHrefObject] = Field(
+        default=None,
+        description="Link to the authorization server resource",
+        alias="authorizationServer",
+    )
+    __properties: ClassVar[List[str]] = [
+        "self",
+        "app",
+        "client",
+        "scope",
+        "user",
+        "authorizationServer",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +130,27 @@ class OAuth2ScopeConsentGrantLinks(BaseModel):
             else:
                 _dict["client"] = self.client
 
+        # override the default output from pydantic by calling `to_dict()` of scope
+        if self.scope:
+            if not isinstance(self.scope, dict):
+                _dict["scope"] = self.scope.to_dict()
+            else:
+                _dict["scope"] = self.scope
+
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            if not isinstance(self.user, dict):
+                _dict["user"] = self.user.to_dict()
+            else:
+                _dict["user"] = self.user
+
+        # override the default output from pydantic by calling `to_dict()` of authorization_server
+        if self.authorization_server:
+            if not isinstance(self.authorization_server, dict):
+                _dict["authorizationServer"] = self.authorization_server.to_dict()
+            else:
+                _dict["authorizationServer"] = self.authorization_server
+
         return _dict
 
     @classmethod
@@ -122,13 +170,30 @@ class OAuth2ScopeConsentGrantLinks(BaseModel):
                     else None
                 ),
                 "app": (
-                    HrefObject.from_dict(obj["app"])
+                    AppResourceHrefObject.from_dict(obj["app"])
                     if obj.get("app") is not None
                     else None
                 ),
                 "client": (
-                    HrefObject.from_dict(obj["client"])
+                    AppResourceHrefObject.from_dict(obj["client"])
                     if obj.get("client") is not None
+                    else None
+                ),
+                "scope": (
+                    ScopeResourceHrefObject.from_dict(obj["scope"])
+                    if obj.get("scope") is not None
+                    else None
+                ),
+                "user": (
+                    UserResourceHrefObject.from_dict(obj["user"])
+                    if obj.get("user") is not None
+                    else None
+                ),
+                "authorizationServer": (
+                    AuthorizationServerResourceHrefObject.from_dict(
+                        obj["authorizationServer"]
+                    )
+                    if obj.get("authorizationServer") is not None
                     else None
                 ),
             }

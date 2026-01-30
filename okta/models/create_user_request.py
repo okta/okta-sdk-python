@@ -31,9 +31,9 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.user_credentials import UserCredentials
+from okta.models.create_user_request_type import CreateUserRequestType
+from okta.models.user_credentials_writable import UserCredentialsWritable
 from okta.models.user_profile import UserProfile
-from okta.models.user_type import UserType
 
 
 class CreateUserRequest(BaseModel):
@@ -41,15 +41,20 @@ class CreateUserRequest(BaseModel):
     CreateUserRequest
     """  # noqa: E501
 
-    credentials: Optional[UserCredentials] = None
-    group_ids: Optional[List[StrictStr]] = Field(default=None, alias="groupIds")
+    credentials: Optional[UserCredentialsWritable] = None
+    group_ids: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="The list of group IDs of groups that the user is added to at the time of creation",
+        alias="groupIds",
+    )
     profile: UserProfile
     realm_id: Optional[StrictStr] = Field(
         default=None,
-        description="The ID of the realm in which the user is residing",
+        description="The ID of the realm in which the user is residing. See [Realms]("
+        "/openapi/okta-management/management/tag/Realm/).",
         alias="realmId",
     )
-    type: Optional[UserType] = None
+    type: Optional[CreateUserRequestType] = None
     __properties: ClassVar[List[str]] = [
         "credentials",
         "groupIds",
@@ -130,7 +135,7 @@ class CreateUserRequest(BaseModel):
         _obj = cls.model_validate(
             {
                 "credentials": (
-                    UserCredentials.from_dict(obj["credentials"])
+                    UserCredentialsWritable.from_dict(obj["credentials"])
                     if obj.get("credentials") is not None
                     else None
                 ),
@@ -142,7 +147,7 @@ class CreateUserRequest(BaseModel):
                 ),
                 "realmId": obj.get("realmId"),
                 "type": (
-                    UserType.from_dict(obj["type"])
+                    CreateUserRequestType.from_dict(obj["type"])
                     if obj.get("type") is not None
                     else None
                 ),

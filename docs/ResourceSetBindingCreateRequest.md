@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**members** | **List[str]** |  | [optional] 
+**members** | **List[str]** | URLs to user and/or group instances that are assigned to the role | [optional] 
 **role** | **str** | Unique key for the role | [optional] 
 
 ## Example

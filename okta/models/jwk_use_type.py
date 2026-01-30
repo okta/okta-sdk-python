@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class JwkUseType(str, Enum):
     """
-    JwkUseType
+    Purpose of the certificate. The only supported value is `sig`.
     """
 
     """

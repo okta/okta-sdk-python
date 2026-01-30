@@ -6,9 +6,9 @@ Properties of the UI schema
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**button_label** | **str** | Specifies the button label for the &#x60;Submit&#x60; button at the bottom of the enrollment form. | [optional] [default to 'Submit']
-**elements** | **object** |  | [optional] 
-**label** | **str** | Specifies the label at the top of the enrollment form under the logo. | [optional] [default to 'Sign in']
+**button_label** | **str** | Specifies the button label for the &#x60;Submit&#x60; button at the bottom of the enrollment form | [optional] [default to 'Submit']
+**elements** | [**List[UIElement]**](UIElement.md) |  | [optional] 
+**label** | **str** | Specifies the label at the top of the enrollment form under the logo | [optional] [default to 'Sign in']
 **type** | **str** | Specifies the type of layout | [optional] 
 
 ## Example

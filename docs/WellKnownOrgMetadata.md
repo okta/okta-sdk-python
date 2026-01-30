@@ -5,9 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The unique identifier of the Org | [optional] 
+**id** | **str** | Org unique identifier | [optional] 
 **pipeline** | [**PipelineType**](PipelineType.md) |  | [optional] 
-**settings** | [**WellKnownOrgMetadataSettings**](WellKnownOrgMetadataSettings.md) |  | [optional] 
 **links** | [**WellKnownOrgMetadataLinks**](WellKnownOrgMetadataLinks.md) |  | [optional] 
 
 ## Example

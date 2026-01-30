@@ -28,17 +28,34 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
+
+from okta.models.os_version_dynamic_version_requirement import (
+    OSVersionDynamicVersionRequirement,
+)
 
 
 class OSVersion(BaseModel):
     """
-    Current version of the operating system
+    Specifies the OS requirement for the policy.  There are two types of OS requirements:  * **Static**: A specific OS
+    version requirement that doesn't change until you update the policy. A static OS requirement is specified with the
+    `osVersion.minimum` property. * **Dynamic**: An OS version requirement that is relative to the latest major OS release
+    and security patch. A dynamic OS requirement is specified with the `osVersion.dynamicVersionRequirement` property. >
+    **Note:** Dynamic OS requirements are available only if the **Dynamic OS version compliance** [self-service EA](
+    /openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature is enabled. You can't specify both
+    `osVersion.minimum` and `osVersion.dynamicVersionRequirement` properties at the same time.
     """  # noqa: E501
 
-    minimum: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["minimum"]
+    dynamic_version_requirement: Optional[OSVersionDynamicVersionRequirement] = Field(
+        default=None, alias="dynamicVersionRequirement"
+    )
+    minimum: Optional[StrictStr] = Field(
+        default=None,
+        description="The device version must be equal to or newer than the specified version string (maximum of three "
+        "components for iOS and macOS, and maximum of four components for Android)",
+    )
+    __properties: ClassVar[List[str]] = ["dynamicVersionRequirement", "minimum"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,6 +94,15 @@ class OSVersion(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of dynamic_version_requirement
+        if self.dynamic_version_requirement:
+            if not isinstance(self.dynamic_version_requirement, dict):
+                _dict["dynamicVersionRequirement"] = (
+                    self.dynamic_version_requirement.to_dict()
+                )
+            else:
+                _dict["dynamicVersionRequirement"] = self.dynamic_version_requirement
+
         return _dict
 
     @classmethod
@@ -88,5 +114,16 @@ class OSVersion(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"minimum": obj.get("minimum")})
+        _obj = cls.model_validate(
+            {
+                "dynamicVersionRequirement": (
+                    OSVersionDynamicVersionRequirement.from_dict(
+                        obj["dynamicVersionRequirement"]
+                    )
+                    if obj.get("dynamicVersionRequirement") is not None
+                    else None
+                ),
+                "minimum": obj.get("minimum"),
+            }
+        )
         return _obj

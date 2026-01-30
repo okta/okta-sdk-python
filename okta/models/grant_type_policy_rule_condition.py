@@ -39,7 +39,7 @@ class GrantTypePolicyRuleCondition(BaseModel):
     """  # noqa: E501
 
     include: Optional[List[StrictStr]] = Field(
-        default=None, description="Array of grant types thagt this condition includes."
+        default=None, description="Array of grant types that this condition includes."
     )
     __properties: ClassVar[List[str]] = ["include"]
 

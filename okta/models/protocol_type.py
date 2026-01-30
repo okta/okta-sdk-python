@@ -30,16 +30,14 @@ from typing_extensions import Self
 
 class ProtocolType(str, Enum):
     """
-    ProtocolType
+    The authentication protocol type used for the connection
     """
 
     """
     allowed enum values
     """
-    MTLS = "MTLS"
-    OAUTH2 = "OAUTH2"
-    OIDC = "OIDC"
-    SAML2 = "SAML2"
+    IDENTITY_ASSERTION = "IDENTITY_ASSERTION"
+    STS = "STS"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class ShowSignInWithOV(str, Enum):
     """
-    ShowSignInWithOV
+    Controls whether to show the Sign in with Okta Verify button on the Sign-In Widget
     """
 
     """

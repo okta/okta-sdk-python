@@ -29,6 +29,7 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.digest_algorithm import DigestAlgorithm
@@ -39,19 +40,56 @@ from okta.models.password_credential_hash_algorithm import (
 
 class PasswordCredentialHash(BaseModel):
     """
-    PasswordCredentialHash
+    Specifies a hashed password to import into Okta. This allows an existing password to be imported into Okta directly from
+    some other store. Okta supports the BCRYPT, SHA-512, SHA-256, SHA-1, MD5, and PBKDF2 hash functions for password import.
+     A hashed password may be specified in a password object when creating or updating a user, but not for other operations.
+      See the [Create user with imported hashed password](
+      https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#create-user-with-imported-hashed
+      -password) description. When you update a user with a hashed password, the user must be in the `STAGED` status.
     """  # noqa: E501
 
     algorithm: Optional[PasswordCredentialHashAlgorithm] = None
     digest_algorithm: Optional[DigestAlgorithm] = Field(
         default=None, alias="digestAlgorithm"
     )
-    iteration_count: Optional[StrictInt] = Field(default=None, alias="iterationCount")
-    key_size: Optional[StrictInt] = Field(default=None, alias="keySize")
-    salt: Optional[StrictStr] = None
-    salt_order: Optional[StrictStr] = Field(default=None, alias="saltOrder")
-    value: Optional[StrictStr] = None
-    work_factor: Optional[StrictInt] = Field(default=None, alias="workFactor")
+    iteration_count: Optional[StrictInt] = Field(
+        default=None,
+        description="The number of iterations used when hashing passwords using PBKDF2. Must be >= 4096. Only required for "
+        "PBKDF2 algorithm.",
+        alias="iterationCount",
+    )
+    key_size: Optional[StrictInt] = Field(
+        default=None,
+        description="Size of the derived key in bytes. Only required for PBKDF2 algorithm.",
+        alias="keySize",
+    )
+    salt: Optional[StrictStr] = Field(
+        default=None,
+        description="Only required for salted hashes. For BCRYPT, this specifies Radix-64 as the encoded salt used to "
+        "generate the hash, which must be 22 characters long. For other salted hashes, this specifies the "
+        "Base64-encoded salt used to generate the hash.",
+    )
+    salt_order: Optional[StrictStr] = Field(
+        default=None,
+        description="Specifies whether salt was pre- or postfixed to the password before hashing. Only required for salted "
+        "algorithms.",
+        alias="saltOrder",
+    )
+    value: Optional[StrictStr] = Field(
+        default=None,
+        description="For SHA-512, SHA-256, SHA-1, MD5, and PBKDF2, this is the actual base64-encoded hash of the password ("
+        "and salt, if used). This is the Base64-encoded `value` of the SHA-512/SHA-256/SHA-1/MD5/PBKDF2 digest "
+        "that was computed by either pre-fixing or post-fixing the `salt` to the `password`, depending on the "
+        "`saltOrder`. If a `salt` was not used in the `source` system, then this should just be the "
+        "Base64-encoded `value` of the password's SHA-512/SHA-256/SHA-1/MD5/PBKDF2 digest. For BCRYPT, "
+        "this is the actual Radix-64 encoded hashed password.",
+    )
+    work_factor: Optional[Annotated[int, Field(le=20, strict=True, ge=1)]] = Field(
+        default=None,
+        description="Governs the strength of the hash and the time required to compute it. Only required for BCRYPT "
+        "algorithm.",
+        alias="workFactor",
+    )
     __properties: ClassVar[List[str]] = [
         "algorithm",
         "digestAlgorithm",

@@ -35,21 +35,28 @@ from typing_extensions import Self
 
 class AutoUpdateSchedule(BaseModel):
     """
-    The schedule of auto-update configured by admin.
+    The schedule of auto-update configured by the admin
     """  # noqa: E501
 
-    cron: Optional[StrictStr] = None
-    delay: Optional[StrictInt] = Field(default=None, description="delay in days")
+    cron: Optional[StrictStr] = Field(
+        default=None,
+        description="The schedule of the update in cron format. The cron settings are limited to only the day of the month "
+        "or the nth-day-of-the-week configurations. For example, `0 8 ? * 6#3` indicates every third Saturday at"
+        " 8:00 AM.",
+    )
+    delay: Optional[StrictInt] = Field(default=None, description="Delay in days")
     duration: Optional[StrictInt] = Field(
-        default=None, description="duration in minutes"
+        default=None, description="Duration in minutes"
     )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="last time when the updated finished (success or failed, "
-                    "exclude cancelled), null if job haven't finished once yet.",
+        description="Timestamp when the update finished (only for a successful or failed update, not for a cancelled "
+        "update). Null is returned if the job hasn't finished once yet.",
         alias="lastUpdated",
     )
-    timezone: Optional[StrictStr] = None
+    timezone: Optional[StrictStr] = Field(
+        default=None, description="Timezone of where the scheduled job takes place"
+    )
     __properties: ClassVar[List[str]] = [
         "cron",
         "delay",

@@ -29,20 +29,24 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictBool
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.device_assurance import DeviceAssurance
-from okta.models.device_assurance_android_platform_all_of_disk_encryption_type import (
-    DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType,
-)
 from okta.models.device_assurance_android_platform_all_of_screen_lock_type import (
     DeviceAssuranceAndroidPlatformAllOfScreenLockType,
+)
+from okta.models.device_assurance_mac_os_platform_all_of_disk_encryption_type import (
+    DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType,
 )
 from okta.models.device_assurance_windows_platform_all_of_third_party_signal_providers import (
     DeviceAssuranceWindowsPlatformAllOfThirdPartySignalProviders,
 )
+from okta.models.device_posture_checks import DevicePostureChecks
+from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
-from okta.models.os_version import OSVersion
+from okta.models.os_version_constraint import OSVersionConstraint
+from okta.models.os_version_four_components import OSVersionFourComponents
 
 
 class DeviceAssuranceWindowsPlatform(DeviceAssurance):
@@ -51,10 +55,30 @@ class DeviceAssuranceWindowsPlatform(DeviceAssurance):
     """  # noqa: E501
 
     disk_encryption_type: Optional[
-        DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType
+        DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType
     ] = Field(default=None, alias="diskEncryptionType")
-    jailbreak: Optional[StrictBool] = None
-    os_version: Optional[OSVersion] = Field(default=None, alias="osVersion")
+    os_version: Optional[OSVersionFourComponents] = Field(
+        default=None, alias="osVersion"
+    )
+    os_version_constraints: Optional[
+        Annotated[List[OSVersionConstraint], Field(min_length=1, max_length=2)]
+    ] = Field(
+        default=None,
+        description='<x-lifecycle-container><x-lifecycle class="ea"></x-lifecycle></x-lifecycle-container>Specifies the '
+        "Windows version requirements for the assurance policy. Each requirement must correspond to a different "
+        "major version (Windows 11 or Windows 10). If a requirement isn't specified for a major version, "
+        "then devices on that major version satisfy the condition.  There are two types of OS requirements: * "
+        "**Static**: A specific Windows version requirement that doesn't change until you update the policy. A "
+        "static OS Windows requirement is specified with `majorVersionConstraint` and `minimum`. * **Dynamic**: "
+        "A Windows version requirement that is relative to the latest major release and security patch. A "
+        "dynamic OS Windows requirement is specified with `majorVersionConstraint` and "
+        "`dynamicVersionRequirement`.  > **Note:** Dynamic OS requirements are available only if the **Dynamic "
+        "OS version compliance** [self-service EA]("
+        "/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature is enabled. The "
+        "`osVersionConstraints` property is only supported for the Windows platform. You can't specify both "
+        "`osVersion.minimum` and `osVersionConstraints` properties at the same time. ",
+        alias="osVersionConstraints",
+    )
     screen_lock_type: Optional[DeviceAssuranceAndroidPlatformAllOfScreenLockType] = (
         Field(default=None, alias="screenLockType")
     )
@@ -67,15 +91,18 @@ class DeviceAssuranceWindowsPlatform(DeviceAssurance):
     __properties: ClassVar[List[str]] = [
         "createdBy",
         "createdDate",
+        "devicePostureChecks",
+        "displayRemediationMode",
+        "gracePeriod",
         "id",
+        "lastUpdate",
         "lastUpdatedBy",
-        "lastUpdatedDate",
         "name",
         "platform",
         "_links",
         "diskEncryptionType",
-        "jailbreak",
         "osVersion",
+        "osVersionConstraints",
         "screenLockType",
         "secureHardwarePresent",
         "thirdPartySignalProviders",
@@ -118,6 +145,20 @@ class DeviceAssuranceWindowsPlatform(DeviceAssurance):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of device_posture_checks
+        if self.device_posture_checks:
+            if not isinstance(self.device_posture_checks, dict):
+                _dict["devicePostureChecks"] = self.device_posture_checks.to_dict()
+            else:
+                _dict["devicePostureChecks"] = self.device_posture_checks
+
+        # override the default output from pydantic by calling `to_dict()` of grace_period
+        if self.grace_period:
+            if not isinstance(self.grace_period, dict):
+                _dict["gracePeriod"] = self.grace_period.to_dict()
+            else:
+                _dict["gracePeriod"] = self.grace_period
+
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -139,6 +180,13 @@ class DeviceAssuranceWindowsPlatform(DeviceAssurance):
             else:
                 _dict["osVersion"] = self.os_version
 
+        # override the default output from pydantic by calling `to_dict()` of each item in os_version_constraints (list)
+        _items = []
+        if self.os_version_constraints:
+            for _item in self.os_version_constraints:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["osVersionConstraints"] = _items
         # override the default output from pydantic by calling `to_dict()` of screen_lock_type
         if self.screen_lock_type:
             if not isinstance(self.screen_lock_type, dict):
@@ -170,9 +218,20 @@ class DeviceAssuranceWindowsPlatform(DeviceAssurance):
             {
                 "createdBy": obj.get("createdBy"),
                 "createdDate": obj.get("createdDate"),
+                "devicePostureChecks": (
+                    DevicePostureChecks.from_dict(obj["devicePostureChecks"])
+                    if obj.get("devicePostureChecks") is not None
+                    else None
+                ),
+                "displayRemediationMode": obj.get("displayRemediationMode"),
+                "gracePeriod": (
+                    GracePeriod.from_dict(obj["gracePeriod"])
+                    if obj.get("gracePeriod") is not None
+                    else None
+                ),
                 "id": obj.get("id"),
+                "lastUpdate": obj.get("lastUpdate"),
                 "lastUpdatedBy": obj.get("lastUpdatedBy"),
-                "lastUpdatedDate": obj.get("lastUpdatedDate"),
                 "name": obj.get("name"),
                 "platform": obj.get("platform"),
                 "_links": (
@@ -181,16 +240,23 @@ class DeviceAssuranceWindowsPlatform(DeviceAssurance):
                     else None
                 ),
                 "diskEncryptionType": (
-                    DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType.from_dict(
+                    DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType.from_dict(
                         obj["diskEncryptionType"]
                     )
                     if obj.get("diskEncryptionType") is not None
                     else None
                 ),
-                "jailbreak": obj.get("jailbreak"),
                 "osVersion": (
-                    OSVersion.from_dict(obj["osVersion"])
+                    OSVersionFourComponents.from_dict(obj["osVersion"])
                     if obj.get("osVersion") is not None
+                    else None
+                ),
+                "osVersionConstraints": (
+                    [
+                        OSVersionConstraint.from_dict(_item)
+                        for _item in obj["osVersionConstraints"]
+                    ]
+                    if obj.get("osVersionConstraints") is not None
                     else None
                 ),
                 "screenLockType": (

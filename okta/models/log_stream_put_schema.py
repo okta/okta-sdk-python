@@ -44,7 +44,7 @@ class LogStreamPutSchema(BaseModel):
     LogStreamPutSchema
     """  # noqa: E501
 
-    name: StrictStr = Field(description="Unique name for the Log Stream object")
+    name: StrictStr = Field(description="Unique name for the log stream object")
     type: LogStreamType
     __properties: ClassVar[List[str]] = ["name", "type"]
 
@@ -83,7 +83,7 @@ class LogStreamPutSchema(BaseModel):
 
     @classmethod
     def from_json(
-            cls, json_str: str
+        cls, json_str: str
     ) -> Optional[Union[LogStreamAwsPutSchema, LogStreamSplunkPutSchema]]:
         """Create an instance of LogStreamPutSchema from a JSON string"""
         return cls.from_dict(json.loads(json_str))
@@ -109,7 +109,7 @@ class LogStreamPutSchema(BaseModel):
 
     @classmethod
     def from_dict(
-            cls, obj: Dict[str, Any]
+        cls, obj: Dict[str, Any]
     ) -> Optional[Union[LogStreamAwsPutSchema, LogStreamSplunkPutSchema]]:
         """Create an instance of LogStreamPutSchema from a dict"""
         # look up the object type based on discriminator mapping

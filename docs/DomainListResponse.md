@@ -1,12 +1,12 @@
 # DomainListResponse
 
-Defines a list of domains with a subset of the properties for each domain.
+Defines a list of domains with a subset of the properties for each domain
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domains** | [**List[DomainResponse]**](DomainResponse.md) | Each element of the array defines an individual domain. | [optional] 
+**domains** | [**List[DomainResponse]**](DomainResponse.md) | Each element of the array defines an individual domain | [optional] 
 
 ## Example
 

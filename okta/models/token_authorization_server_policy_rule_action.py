@@ -42,16 +42,23 @@ class TokenAuthorizationServerPolicyRuleAction(BaseModel):
     """  # noqa: E501
 
     access_token_lifetime_minutes: Optional[StrictInt] = Field(
-        default=None, alias="accessTokenLifetimeMinutes"
+        default=None,
+        description="Lifetime of the access token in minutes. The minimum is five minutes. The maximum is one day.",
+        alias="accessTokenLifetimeMinutes",
     )
     inline_hook: Optional[TokenAuthorizationServerPolicyRuleActionInlineHook] = Field(
         default=None, alias="inlineHook"
     )
     refresh_token_lifetime_minutes: Optional[StrictInt] = Field(
-        default=None, alias="refreshTokenLifetimeMinutes"
+        default=None,
+        description="Lifetime of the refresh token is the minimum access token lifetime.",
+        alias="refreshTokenLifetimeMinutes",
     )
     refresh_token_window_minutes: Optional[StrictInt] = Field(
-        default=None, alias="refreshTokenWindowMinutes"
+        default=None,
+        description="Timeframe when the refresh token is valid. The minimum is 10 minutes. The maximum is five years (2,628,"
+        "000 minutes).",
+        alias="refreshTokenWindowMinutes",
     )
     __properties: ClassVar[List[str]] = [
         "accessTokenLifetimeMinutes",

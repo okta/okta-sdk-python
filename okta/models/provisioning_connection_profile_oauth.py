@@ -28,22 +28,22 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.provisioning_connection_profile import ProvisioningConnectionProfile
+from okta.models.provisioning_connection_oauth_auth_scheme import (
+    ProvisioningConnectionOauthAuthScheme,
+)
 
 
-class ProvisioningConnectionProfileOauth(ProvisioningConnectionProfile):
+class ProvisioningConnectionProfileOauth(BaseModel):
     """
     The app provisioning connection profile used to configure the method of authentication and the credentials. Currently,
     token-based and OAuth 2.0-based authentication are supported.
     """  # noqa: E501
 
-    client_id: StrictStr = Field(
-        description="Unique client identifier for the OAuth 2.0 service app from the target org",
-        alias="clientId",
-    )
+    auth_scheme: ProvisioningConnectionOauthAuthScheme = Field(alias="authScheme")
+    client_id: Optional[StrictStr] = Field(default=None, alias="clientId")
     __properties: ClassVar[List[str]] = ["authScheme", "clientId"]
 
     model_config = ConfigDict(

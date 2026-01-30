@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_schema** | **str** |  | [optional] [readonly] 
-**created** | **str** |  | [optional] [readonly] 
-**definitions** | [**UserSchemaDefinitions**](UserSchemaDefinitions.md) |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **str** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] [readonly] 
-**properties** | [**UserSchemaProperties**](UserSchemaProperties.md) |  | [optional] 
-**title** | **str** |  | [optional] 
-**type** | **str** |  | [optional] [readonly] 
+**var_schema** | **str** | JSON schema version identifier | [optional] [readonly] 
+**created** | **str** | Timestamp when the schema was created | [optional] [readonly] 
+**definitions** | [**UserSchemaDefinitions**](UserSchemaDefinitions.md) | User profile subschemas  The profile object for a user is defined by a composite schema of base and custom properties using a JSON path to reference subschemas. The &#x60;#base&#x60; properties are defined and versioned by Okta, while &#x60;#custom&#x60; properties are extensible. Custom property names for the profile object must be unique and can&#39;t conflict with a property name defined in the &#x60;#base&#x60; subschema. | [optional] 
+**id** | **str** | URI of user schema | [optional] [readonly] 
+**last_updated** | **str** | Timestamp when the schema was last updated | [optional] [readonly] 
+**name** | **str** | Name of the schema | [optional] [readonly] 
+**properties** | [**UserSchemaProperties**](UserSchemaProperties.md) | User Object Properties | [optional] 
+**title** | **str** | User-defined display name for the schema | [optional] 
+**type** | **str** | Type of [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4) | [optional] [readonly] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example

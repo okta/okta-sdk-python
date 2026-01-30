@@ -30,7 +30,8 @@ from typing_extensions import Self
 
 class EndUserDashboardTouchPointVariant(str, Enum):
     """
-    EndUserDashboardTouchPointVariant
+    Variant for the Okta End-User Dashboard. You can publish a theme for end-user dashboard with different combinations of
+    assets. Variants are preset combinations of those assets.
     """
 
     """

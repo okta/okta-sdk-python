@@ -1,6 +1,6 @@
 # NetworkZoneStatus
 
-Network zone status
+Network Zone status
 
 ## Properties
 

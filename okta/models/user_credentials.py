@@ -38,7 +38,8 @@ from okta.models.recovery_question_credential import RecoveryQuestionCredential
 
 class UserCredentials(BaseModel):
     """
-    UserCredentials
+    Specifies primary authentication and recovery credentials for a user. Credential types and requirements vary depending
+    on the provider and security policy of the org.
     """  # noqa: E501
 
     password: Optional[PasswordCredential] = None

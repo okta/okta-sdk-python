@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -30,8 +30,11 @@ from typing_extensions import Annotated
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
 from okta.models.application_feature import ApplicationFeature
-from okta.models.capabilities_object import CapabilitiesObject
+from okta.models.application_feature_type import ApplicationFeatureType
 from okta.models.success import Success
+from okta.models.update_feature_for_application_request import (
+    UpdateFeatureForApplicationRequest,
+)
 from okta.rest import RESTResponse
 
 
@@ -48,8 +51,10 @@ class ApplicationFeaturesApi(ApiClient):
     @validate_call
     async def get_feature_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        feature_name: Annotated[
+            ApplicationFeatureType, Field(description="Name of the Feature")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -62,240 +67,14 @@ class ApplicationFeaturesApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApplicationFeature:
-        """Retrieve a Feature
+        """Retrieve a feature
 
-        Retrieves a Feature object for an application
+        Retrieves a Feature object for an app
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
         :param feature_name: Name of the Feature (required)
-        :type feature_name: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApplicationFeature",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_feature_for_application_serialize(
-                app_id=app_id,
-                feature_name=feature_name,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if ApplicationFeature is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if ApplicationFeature is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ApplicationFeature
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if ApplicationFeature is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_feature_for_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApplicationFeature:
-        """Retrieve a Feature
-
-        Retrieves a Feature object for an application
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param feature_name: Name of the Feature (required)
-        :type feature_name: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApplicationFeature",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_feature_for_application_serialize(
-                app_id=app_id,
-                feature_name=feature_name,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if ApplicationFeature is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if ApplicationFeature is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ApplicationFeature
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if ApplicationFeature is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_feature_for_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApplicationFeature:
-        """Retrieve a Feature
-
-        Retrieves a Feature object for an application
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param feature_name: Name of the Feature (required)
-        :type feature_name: str
+        :type feature_name: ApplicationFeatureType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -409,7 +188,7 @@ class ApplicationFeaturesApi(ApiClient):
         if app_id is not None:
             _path_params["appId"] = app_id
         if feature_name is not None:
-            _path_params["featureName"] = feature_name
+            _path_params["featureName"] = feature_name.value
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -439,7 +218,7 @@ class ApplicationFeaturesApi(ApiClient):
     @validate_call
     async def list_features_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -452,243 +231,14 @@ class ApplicationFeaturesApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[ApplicationFeature]:
-        """List all Features
+        """List all features
 
-        Lists all features for an application > **Note:** The only application feature currently supported is
-        `USER_PROVISIONING`. > This request returns an error if provisioning isn't enabled for the application. > To set up
-        provisioning, see [Update the default Provisioning Connection](
+        Lists all features for an app > **Note:** This request returns an error if provisioning isn't enabled for the app. >
+        To set up provisioning, see [Update the default provisioning connection](
         /openapi/okta-management/management/tag/ApplicationConnections/#tag/ApplicationConnections/operation
         /updateDefaultProvisioningConnectionForApplication).
 
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[ApplicationFeature]",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_features_for_application_serialize(
-                app_id=app_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[ApplicationFeature] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[ApplicationFeature] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ApplicationFeature
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[ApplicationFeature] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_features_for_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[ApplicationFeature]:
-        """List all Features
-
-        Lists all features for an application > **Note:** The only application feature currently supported is
-        `USER_PROVISIONING`. > This request returns an error if provisioning isn't enabled for the application. > To set up
-        provisioning, see [Update the default Provisioning Connection](
-        /openapi/okta-management/management/tag/ApplicationConnections/#tag/ApplicationConnections/operation
-        /updateDefaultProvisioningConnectionForApplication).
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[ApplicationFeature]",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_features_for_application_serialize(
-                app_id=app_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[ApplicationFeature] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[ApplicationFeature] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ApplicationFeature
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[ApplicationFeature] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_features_for_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[ApplicationFeature]:
-        """List all Features
-
-        Lists all features for an application > **Note:** The only application feature currently supported is
-        `USER_PROVISIONING`. > This request returns an error if provisioning isn't enabled for the application. > To set up
-        provisioning, see [Update the default Provisioning Connection](
-        /openapi/okta-management/management/tag/ApplicationConnections/#tag/ApplicationConnections/operation
-        /updateDefaultProvisioningConnectionForApplication).
-
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -830,9 +380,11 @@ class ApplicationFeaturesApi(ApiClient):
     @validate_call
     async def update_feature_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
-        capabilities_object: CapabilitiesObject,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        feature_name: Annotated[
+            ApplicationFeatureType, Field(description="Name of the Feature")
+        ],
+        update_feature_for_application_request: UpdateFeatureForApplicationRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -845,16 +397,16 @@ class ApplicationFeaturesApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApplicationFeature:
-        """Update a Feature
+        """Update a feature
 
-        Updates a Feature object for an application > **Note:** This endpoint supports partial updates.
+        Updates a Feature object for an app > **Note:** This endpoint supports partial updates.
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
         :param feature_name: Name of the Feature (required)
-        :type feature_name: str
-        :param capabilities_object: (required)
-        :type capabilities_object: CapabilitiesObject
+        :type feature_name: ApplicationFeatureType
+        :param update_feature_for_application_request: (required)
+        :type update_feature_for_application_request: UpdateFeatureForApplicationRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -889,243 +441,7 @@ class ApplicationFeaturesApi(ApiClient):
             self._update_feature_for_application_serialize(
                 app_id=app_id,
                 feature_name=feature_name,
-                capabilities_object=capabilities_object,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if ApplicationFeature is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if ApplicationFeature is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ApplicationFeature
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if ApplicationFeature is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def update_feature_for_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
-        capabilities_object: CapabilitiesObject,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApplicationFeature:
-        """Update a Feature
-
-        Updates a Feature object for an application > **Note:** This endpoint supports partial updates.
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param feature_name: Name of the Feature (required)
-        :type feature_name: str
-        :param capabilities_object: (required)
-        :type capabilities_object: CapabilitiesObject
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApplicationFeature",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._update_feature_for_application_serialize(
-                app_id=app_id,
-                feature_name=feature_name,
-                capabilities_object=capabilities_object,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if ApplicationFeature is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if ApplicationFeature is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, ApplicationFeature
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if ApplicationFeature is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def update_feature_for_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
-        capabilities_object: CapabilitiesObject,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApplicationFeature:
-        """Update a Feature
-
-        Updates a Feature object for an application > **Note:** This endpoint supports partial updates.
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param feature_name: Name of the Feature (required)
-        :type feature_name: str
-        :param capabilities_object: (required)
-        :type capabilities_object: CapabilitiesObject
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "ApplicationFeature",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._update_feature_for_application_serialize(
-                app_id=app_id,
-                feature_name=feature_name,
-                capabilities_object=capabilities_object,
+                update_feature_for_application_request=update_feature_for_application_request,
                 _request_auth=_request_auth,
                 _content_type=_content_type,
                 _headers=_headers,
@@ -1185,7 +501,7 @@ class ApplicationFeaturesApi(ApiClient):
         self,
         app_id,
         feature_name,
-        capabilities_object,
+        update_feature_for_application_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1207,13 +523,13 @@ class ApplicationFeaturesApi(ApiClient):
         if app_id is not None:
             _path_params["appId"] = app_id
         if feature_name is not None:
-            _path_params["featureName"] = feature_name
+            _path_params["featureName"] = feature_name.value
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if capabilities_object is not None:
-            _body_params = capabilities_object
+        if update_feature_for_application_request is not None:
+            _body_params = update_feature_for_application_request
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])

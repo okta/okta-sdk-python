@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **new_password** | [**PasswordCredential**](PasswordCredential.md) |  | [optional] 
 **old_password** | [**PasswordCredential**](PasswordCredential.md) |  | [optional] 
-**revoke_sessions** | **bool** |  | [optional] 
+**revoke_sessions** | **bool** | When set to &#x60;true&#x60;, revokes all user sessions, except for the current session | [optional] [default to False]
 
 ## Example
 

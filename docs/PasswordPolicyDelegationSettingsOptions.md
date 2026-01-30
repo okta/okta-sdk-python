@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**skip_unlock** | **bool** |  | [optional] 
+**skip_unlock** | **bool** | Indicates if, when performing an unlock operation on an Active Directory sourced User who is locked out of Okta, the system should also attempt to unlock the User&#39;s Windows account | [optional] [default to False]
 
 ## Example
 

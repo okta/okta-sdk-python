@@ -38,10 +38,8 @@ class UserLockoutSettings(BaseModel):
     """  # noqa: E501
 
     prevent_brute_force_lockout_from_unknown_devices: Optional[StrictBool] = Field(
-        default=None,
-        description="Prevents brute-force "
-                    "lockout from unknown "
-                    "devices for the password authenticator.",
+        default=False,
+        description="Prevents brute-force lockout from unknown devices for the password authenticator.",
         alias="preventBruteForceLockoutFromUnknownDevices",
     )
     __properties: ClassVar[List[str]] = ["preventBruteForceLockoutFromUnknownDevices"]
@@ -96,8 +94,10 @@ class UserLockoutSettings(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "preventBruteForceLockoutFromUnknownDevices": obj.get(
-                    "preventBruteForceLockoutFromUnknownDevices"
+                "preventBruteForceLockoutFromUnknownDevices": (
+                    obj.get("preventBruteForceLockoutFromUnknownDevices")
+                    if obj.get("preventBruteForceLockoutFromUnknownDevices") is not None
+                    else False
                 )
             }
         )

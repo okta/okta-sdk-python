@@ -37,16 +37,15 @@ class EmailServerPost(BaseModel):
     EmailServerPost
     """  # noqa: E501
 
-    alias: StrictStr = Field(description="A name to identify this configuration")
+    alias: StrictStr = Field(description="Human-readable name for your SMTP server")
     enabled: Optional[StrictBool] = Field(
         default=None,
-        description="True if and only if all email traffic should be routed through this "
-                    "SMTP Server",
+        description="If `true`, routes all email traffic through your SMTP server",
     )
-    host: StrictStr = Field(description="The address of the SMTP Server")
-    port: StrictInt = Field(description="The port number of the SMTP Server")
-    username: StrictStr = Field(description="The username to use with your SMTP Server")
-    password: StrictStr = Field(description="The password to use with your SMTP server")
+    host: StrictStr = Field(description="Hostname or IP address of your SMTP server")
+    port: StrictInt = Field(description="Port number of your SMTP server")
+    username: StrictStr = Field(description="Username used to access your SMTP server")
+    password: StrictStr = Field(description="Password used to access your SMTP server")
     __properties: ClassVar[List[str]] = [
         "alias",
         "enabled",

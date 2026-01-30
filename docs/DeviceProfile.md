@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | Display name of the device | 
 **imei** | **str** | International Mobile Equipment Identity (IMEI) of the device | [optional] 
 **integrity_jailbreak** | **bool** | Indicates if the device is jailbroken or rooted. Only applicable to &#x60;IOS&#x60; and &#x60;ANDROID&#x60; platforms | [optional] 
+**managed** | **bool** | Indicates if the device is managed by mobile device management (MDM) software | [optional] 
 **manufacturer** | **str** | Name of the manufacturer of the device | [optional] 
 **meid** | **str** | Mobile equipment identifier of the device | [optional] 
 **model** | **str** | Model of the device | [optional] 
@@ -18,8 +19,8 @@ Name | Type | Description | Notes
 **secure_hardware_present** | **bool** | Indicates if the device contains a secure hardware functionality | [optional] 
 **serial_number** | **str** | Serial number of the device | [optional] 
 **sid** | **str** | Windows Security identifier of the device | [optional] 
-**tpm_public_key_hash** | **str** | Windows Trsted Platform Module hash value | [optional] 
-**udid** | **str** | macOS Unique Device identifier of the device | [optional] 
+**tpm_public_key_hash** | **str** | Windows Trusted Platform Module hash value | [optional] 
+**udid** | **str** | macOS Unique device identifier of the device | [optional] 
 
 ## Example
 

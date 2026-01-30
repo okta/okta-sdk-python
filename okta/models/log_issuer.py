@@ -28,17 +28,25 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class LogIssuer(BaseModel):
     """
-    LogIssuer
+    Describes the issuer of the authorization server when the authentication is performed through OAuth. This is the
+    location where well-known resources regarding the details of the authorization servers are published.
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="Varies depending on the type of authentication. If authentication is SAML 2.0, `id` is the issuer in "
+        "the SAML assertion. For social login, `id` is the issuer of the token.",
+    )
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="Information on the `issuer` and source of the SAML assertion or token",
+    )
     __properties: ClassVar[List[str]] = ["id", "type"]
 
     model_config = ConfigDict(

@@ -1,11 +1,13 @@
 # AccessPolicyRuleApplicationSignOn
 
+Specifies the results when a user attempts to sign in
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access** | **str** |  | [optional] 
+**access** | [**AccessPolicyRuleApplicationSignOnAccess**](AccessPolicyRuleApplicationSignOnAccess.md) |  | [optional] 
+**keep_me_signed_in** | [**KeepMeSignedIn**](KeepMeSignedIn.md) |  | [optional] 
 **verification_method** | [**VerificationMethod**](VerificationMethod.md) |  | [optional] 
 
 ## Example

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class FeatureType(str, Enum):
     """
-    FeatureType
+    Type of feature
     """
 
     """

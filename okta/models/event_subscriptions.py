@@ -28,9 +28,10 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
+from okta.models.event_hook_filters import EventHookFilters
 from okta.models.event_subscription_type import EventSubscriptionType
 
 
@@ -39,9 +40,16 @@ class EventSubscriptions(BaseModel):
     EventSubscriptions
     """  # noqa: E501
 
-    items: Optional[List[StrictStr]] = None
-    type: Optional[EventSubscriptionType] = None
-    __properties: ClassVar[List[str]] = ["items", "type"]
+    filter: Optional[EventHookFilters] = None
+    items: List[StrictStr] = Field(
+        description="The subscribed event types that trigger the event hook. When you register an event hook you need to "
+        "specify which events you want to subscribe to. To see the list of event types currently eligible for "
+        "use in event hooks, use the [Event Types catalog]("
+        "https://developer.okta.com/docs/reference/api/event-types/#catalog) and search with the parameter "
+        "`event-hook-eligible`."
+    )
+    type: EventSubscriptionType
+    __properties: ClassVar[List[str]] = ["filter", "items", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +88,18 @@ class EventSubscriptions(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of filter
+        if self.filter:
+            if not isinstance(self.filter, dict):
+                _dict["filter"] = self.filter.to_dict()
+            else:
+                _dict["filter"] = self.filter
+
+        # set to None if filter (nullable) is None
+        # and model_fields_set contains the field
+        if self.filter is None and "filter" in self.model_fields_set:
+            _dict["filter"] = None
+
         return _dict
 
     @classmethod
@@ -91,5 +111,15 @@ class EventSubscriptions(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"items": obj.get("items"), "type": obj.get("type")})
+        _obj = cls.model_validate(
+            {
+                "filter": (
+                    EventHookFilters.from_dict(obj["filter"])
+                    if obj.get("filter") is not None
+                    else None
+                ),
+                "items": obj.get("items"),
+                "type": obj.get("type"),
+            }
+        )
         return _obj

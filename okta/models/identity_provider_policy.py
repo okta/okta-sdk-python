@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing_extensions import Self
 
 from okta.models.policy_account_link import PolicyAccountLink
@@ -38,21 +38,29 @@ from okta.models.provisioning import Provisioning
 
 class IdentityProviderPolicy(BaseModel):
     """
-    IdentityProviderPolicy
+    Policy settings for the IdP. The following provisioning and account linking actions are supported by each IdP provider:
+    | IdP type                                                           | User provisioning actions | Group provisioning
+    actions            | Account link actions | Account link filters | |
+    -----------------------------------------------------------------  | ------------------------- |
+    ------------------------------------- | -------------------- | -------------------- | | `SAML2`
+                                      | `AUTO` or `DISABLED`      | `NONE`, `ASSIGN`, `APPEND`, or `SYNC` | `AUTO`,
+                                      `DISABLED`   | `groups`, `users`    | | `X509`, `IDV_PERSONA`, `IDV_INCODE`,
+                                      `IDV_CLEAR` and `IDV_STANDARD`| `DISABLED`                | No support for JIT
+                                      provisioning       |                      |                      | | All other IdP
+                                      types                                                | `AUTO`, `DISABLED`        |
+                                      `NONE` or `ASSIGN`                    | `AUTO`, `DISABLED`   | `groups`, `users`    |
     """  # noqa: E501
 
     account_link: Optional[PolicyAccountLink] = Field(default=None, alias="accountLink")
-    map_amr_claims: Optional[StrictBool] = Field(
-        default=False,
-        description="Enable mapping AMR from IdP to Okta to downstream apps",
-        alias="mapAMRClaims",
+    max_clock_skew: Optional[StrictInt] = Field(
+        default=None,
+        description="Maximum allowable clock skew when processing messages from the IdP",
+        alias="maxClockSkew",
     )
-    max_clock_skew: Optional[StrictInt] = Field(default=None, alias="maxClockSkew")
     provisioning: Optional[Provisioning] = None
     subject: Optional[PolicySubject] = None
     __properties: ClassVar[List[str]] = [
         "accountLink",
-        "mapAMRClaims",
         "maxClockSkew",
         "provisioning",
         "subject",
@@ -133,11 +141,6 @@ class IdentityProviderPolicy(BaseModel):
                     PolicyAccountLink.from_dict(obj["accountLink"])
                     if obj.get("accountLink") is not None
                     else None
-                ),
-                "mapAMRClaims": (
-                    obj.get("mapAMRClaims")
-                    if obj.get("mapAMRClaims") is not None
-                    else False
                 ),
                 "maxClockSkew": obj.get("maxClockSkew"),
                 "provisioning": (

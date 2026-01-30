@@ -31,16 +31,22 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
-from okta.models.href_object import HrefObject
+from okta.models.well_known_org_metadata_links_alternate import (
+    WellKnownOrgMetadataLinksAlternate,
+)
+from okta.models.well_known_org_metadata_links_organization import (
+    WellKnownOrgMetadataLinksOrganization,
+)
 
 
 class WellKnownOrgMetadataLinks(BaseModel):
     """
-    WellKnownOrgMetadataLinks
+    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for this object using the
+    [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification
     """  # noqa: E501
 
-    alternate: Optional[HrefObject] = None
-    organization: Optional[HrefObject] = None
+    alternate: Optional[WellKnownOrgMetadataLinksAlternate] = None
+    organization: Optional[WellKnownOrgMetadataLinksOrganization] = None
     __properties: ClassVar[List[str]] = ["alternate", "organization"]
 
     model_config = ConfigDict(
@@ -108,12 +114,12 @@ class WellKnownOrgMetadataLinks(BaseModel):
         _obj = cls.model_validate(
             {
                 "alternate": (
-                    HrefObject.from_dict(obj["alternate"])
+                    WellKnownOrgMetadataLinksAlternate.from_dict(obj["alternate"])
                     if obj.get("alternate") is not None
                     else None
                 ),
                 "organization": (
-                    HrefObject.from_dict(obj["organization"])
+                    WellKnownOrgMetadataLinksOrganization.from_dict(obj["organization"])
                     if obj.get("organization") is not None
                     else None
                 ),

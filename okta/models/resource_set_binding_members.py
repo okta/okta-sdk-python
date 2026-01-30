@@ -42,7 +42,11 @@ class ResourceSetBindingMembers(BaseModel):
     ResourceSetBindingMembers
     """  # noqa: E501
 
-    members: Optional[List[ResourceSetBindingMember]] = None
+    members: Optional[List[ResourceSetBindingMember]] = Field(
+        default=None,
+        description="The members of the role resource set binding. If there are more than 100 members for the binding, "
+        "then the `_links.next` resource is returned with the next list of members.",
+    )
     links: Optional[ResourceSetBindingMembersLinks] = Field(
         default=None, alias="_links"
     )

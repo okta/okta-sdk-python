@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AuthenticatorMethodType(str, Enum):
     """
-    AuthenticatorMethodType
+    The type of authenticator method
     """
 
     """
@@ -49,6 +49,7 @@ class AuthenticatorMethodType(str, Enum):
     TOTP = "totp"
     VOICE = "voice"
     WEBAUTHN = "webauthn"
+    TAC = "tac"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

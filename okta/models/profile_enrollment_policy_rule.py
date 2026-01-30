@@ -28,11 +28,11 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import ConfigDict
+from pydantic import ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
+from okta.models.policy_links import PolicyLinks
 from okta.models.policy_rule import PolicyRule
-from okta.models.policy_rule_conditions import PolicyRuleConditions
 from okta.models.profile_enrollment_policy_rule_actions import (
     ProfileEnrollmentPolicyRuleActions,
 )
@@ -44,7 +44,10 @@ class ProfileEnrollmentPolicyRule(PolicyRule):
     """  # noqa: E501
 
     actions: Optional[ProfileEnrollmentPolicyRuleActions] = None
-    conditions: Optional[PolicyRuleConditions] = None
+    conditions: Optional[StrictStr] = Field(
+        default=None,
+        description="Policy rule conditions aren't supported for this policy type",
+    )
     __properties: ClassVar[List[str]] = [
         "created",
         "id",
@@ -54,6 +57,7 @@ class ProfileEnrollmentPolicyRule(PolicyRule):
         "status",
         "system",
         "type",
+        "_links",
         "actions",
         "conditions",
     ]
@@ -95,19 +99,19 @@ class ProfileEnrollmentPolicyRule(PolicyRule):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
+
         # override the default output from pydantic by calling `to_dict()` of actions
         if self.actions:
             if not isinstance(self.actions, dict):
                 _dict["actions"] = self.actions.to_dict()
             else:
                 _dict["actions"] = self.actions
-
-        # override the default output from pydantic by calling `to_dict()` of conditions
-        if self.conditions:
-            if not isinstance(self.conditions, dict):
-                _dict["conditions"] = self.conditions.to_dict()
-            else:
-                _dict["conditions"] = self.conditions
 
         # set to None if created (nullable) is None
         # and model_fields_set contains the field
@@ -118,6 +122,16 @@ class ProfileEnrollmentPolicyRule(PolicyRule):
         # and model_fields_set contains the field
         if self.last_updated is None and "last_updated" in self.model_fields_set:
             _dict["lastUpdated"] = None
+
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict["priority"] = None
+
+        # set to None if conditions (nullable) is None
+        # and model_fields_set contains the field
+        if self.conditions is None and "conditions" in self.model_fields_set:
+            _dict["conditions"] = None
 
         return _dict
 
@@ -140,16 +154,17 @@ class ProfileEnrollmentPolicyRule(PolicyRule):
                 "status": obj.get("status"),
                 "system": obj.get("system") if obj.get("system") is not None else False,
                 "type": obj.get("type"),
+                "_links": (
+                    PolicyLinks.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
+                ),
                 "actions": (
                     ProfileEnrollmentPolicyRuleActions.from_dict(obj["actions"])
                     if obj.get("actions") is not None
                     else None
                 ),
-                "conditions": (
-                    PolicyRuleConditions.from_dict(obj["conditions"])
-                    if obj.get("conditions") is not None
-                    else None
-                ),
+                "conditions": obj.get("conditions"),
             }
         )
         return _obj

@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**SchemeApplicationCredentials**](SchemeApplicationCredentials.md) |  | [optional] 
-**name** | **str** |  | [optional] [default to 'template_basic_auth']
-**settings** | [**BasicApplicationSettings**](BasicApplicationSettings.md) |  | [optional] 
+**name** | **str** | &#x60;template_basic_auth&#x60; is the key name for a Basic Authentication scheme app instance | [default to 'template_basic_auth']
+**settings** | [**BasicApplicationSettings**](BasicApplicationSettings.md) |  | 
 
 ## Example
 

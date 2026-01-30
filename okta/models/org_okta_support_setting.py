@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OrgOktaSupportSetting(str, Enum):
     """
-    OrgOktaSupportSetting
+    Status of Okta Support Settings
     """
 
     """

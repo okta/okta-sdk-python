@@ -28,22 +28,33 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
+from okta.models.access_policy_rule_application_sign_on_access import (
+    AccessPolicyRuleApplicationSignOnAccess,
+)
+from okta.models.keep_me_signed_in import KeepMeSignedIn
 from okta.models.verification_method import VerificationMethod
 
 
 class AccessPolicyRuleApplicationSignOn(BaseModel):
     """
-    AccessPolicyRuleApplicationSignOn
+    Specifies the results when a user attempts to sign in
     """  # noqa: E501
 
-    access: Optional[StrictStr] = None
+    access: Optional[AccessPolicyRuleApplicationSignOnAccess] = None
+    keep_me_signed_in: Optional[KeepMeSignedIn] = Field(
+        default=None, alias="keepMeSignedIn"
+    )
     verification_method: Optional[VerificationMethod] = Field(
         default=None, alias="verificationMethod"
     )
-    __properties: ClassVar[List[str]] = ["access", "verificationMethod"]
+    __properties: ClassVar[List[str]] = [
+        "access",
+        "keepMeSignedIn",
+        "verificationMethod",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +93,13 @@ class AccessPolicyRuleApplicationSignOn(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of keep_me_signed_in
+        if self.keep_me_signed_in:
+            if not isinstance(self.keep_me_signed_in, dict):
+                _dict["keepMeSignedIn"] = self.keep_me_signed_in.to_dict()
+            else:
+                _dict["keepMeSignedIn"] = self.keep_me_signed_in
+
         # override the default output from pydantic by calling `to_dict()` of verification_method
         if self.verification_method:
             if not isinstance(self.verification_method, dict):
@@ -103,6 +121,11 @@ class AccessPolicyRuleApplicationSignOn(BaseModel):
         _obj = cls.model_validate(
             {
                 "access": obj.get("access"),
+                "keepMeSignedIn": (
+                    KeepMeSignedIn.from_dict(obj["keepMeSignedIn"])
+                    if obj.get("keepMeSignedIn") is not None
+                    else None
+                ),
                 "verificationMethod": (
                     VerificationMethod.from_dict(obj["verificationMethod"])
                     if obj.get("verificationMethod") is not None

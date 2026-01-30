@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class PasswordCredentialHashAlgorithm(str, Enum):
     """
-    PasswordCredentialHashAlgorithm
+    The algorithm used to generate the hash using the password (and salt, when applicable).
     """
 
     """

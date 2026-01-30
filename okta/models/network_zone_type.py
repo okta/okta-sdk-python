@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class NetworkZoneType(str, Enum):
     """
-    The type of network zone
+    The type of Network Zone
     """
 
     """
@@ -38,6 +38,7 @@ class NetworkZoneType(str, Enum):
     """
     DYNAMIC = "DYNAMIC"
     IP = "IP"
+    DYNAMIC_V2 = "DYNAMIC_V2"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

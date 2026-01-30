@@ -6,9 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **geographical_context** | [**LogGeographicalContext**](LogGeographicalContext.md) |  | [optional] 
-**ip** | **str** |  | [optional] [readonly] 
-**source** | **str** |  | [optional] [readonly] 
-**version** | **str** |  | [optional] [readonly] 
+**ip** | **str** | IP address | [optional] [readonly] 
+**source** | **str** | Details regarding the source | [optional] [readonly] 
+**version** | **str** | IP address version | [optional] [readonly] 
 
 ## Example
 

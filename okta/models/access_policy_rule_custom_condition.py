@@ -28,16 +28,17 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class AccessPolicyRuleCustomCondition(BaseModel):
     """
-    AccessPolicyRuleCustomCondition
+    Specifies [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language-in-identity
+    -engine/) expressions
     """  # noqa: E501
 
-    condition: Optional[StrictStr] = None
+    condition: StrictStr = Field(description="expression to match")
     __properties: ClassVar[List[str]] = ["condition"]
 
     model_config = ConfigDict(

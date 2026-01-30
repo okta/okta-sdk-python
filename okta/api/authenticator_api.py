@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -29,9 +29,19 @@ from typing_extensions import Annotated
 
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
-from okta.models.authenticator import Authenticator
+from okta.models.authenticator_base import AuthenticatorBase
 from okta.models.authenticator_method_base import AuthenticatorMethodBase
 from okta.models.authenticator_method_type import AuthenticatorMethodType
+from okta.models.authenticator_method_type_web_authn import (
+    AuthenticatorMethodTypeWebAuthn,
+)
+from okta.models.custom_aaguid_create_request_object import (
+    CustomAAGUIDCreateRequestObject,
+)
+from okta.models.custom_aaguid_response_object import CustomAAGUIDResponseObject
+from okta.models.custom_aaguid_update_request_object import (
+    CustomAAGUIDUpdateRequestObject,
+)
 from okta.models.success import Success
 from okta.models.well_known_app_authenticator_configuration import (
     WellKnownAppAuthenticatorConfiguration,
@@ -53,7 +63,7 @@ class AuthenticatorApi(ApiClient):
     async def activate_authenticator(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
         _request_timeout: Union[
             None,
@@ -66,12 +76,12 @@ class AuthenticatorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Activate an Authenticator
+    ) -> AuthenticatorBase:
+        """Activate an authenticator
 
         Activates an authenticator by `authenticatorId`
 
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -96,7 +106,7 @@ class AuthenticatorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
+            "200": "AuthenticatorBase",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -120,18 +130,18 @@ class AuthenticatorApi(ApiClient):
         )
 
         if error:
-            if Authenticator is Success:
+            if AuthenticatorBase is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if Authenticator is Success:
+        if AuthenticatorBase is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
+                request, AuthenticatorBase
             )
 
         if response_body == "" or response.status == 204:
@@ -147,229 +157,7 @@ class AuthenticatorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def activate_authenticator_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Activate an Authenticator
-
-        Activates an authenticator by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._activate_authenticator_serialize(
-                authenticator_id=authenticator_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def activate_authenticator_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Activate an Authenticator
-
-        Activates an authenticator by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._activate_authenticator_serialize(
-                authenticator_id=authenticator_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
+                if AuthenticatorBase is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -435,11 +223,10 @@ class AuthenticatorApi(ApiClient):
     async def activate_authenticator_method(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
         method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
+            AuthenticatorMethodType, Field(description="Type of authenticator method")
         ],
         _request_timeout: Union[
             None,
@@ -453,249 +240,13 @@ class AuthenticatorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorMethodBase:
-        """Activate an Authenticator Method
+        """Activate an authenticator method
 
-        Activates a Method for an Authenticator identified by `authenticatorId` and `methodType`
+        Activates a method for an authenticator identified by `authenticatorId` and `methodType`
 
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
-        :type method_type: AuthenticatorMethodType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AuthenticatorMethodBase",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._activate_authenticator_method_serialize(
-                authenticator_id=authenticator_id,
-                method_type=method_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AuthenticatorMethodBase is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AuthenticatorMethodBase is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AuthenticatorMethodBase is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def activate_authenticator_method_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthenticatorMethodBase:
-        """Activate an Authenticator Method
-
-        Activates a Method for an Authenticator identified by `authenticatorId` and `methodType`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
-        :type method_type: AuthenticatorMethodType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AuthenticatorMethodBase",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._activate_authenticator_method_serialize(
-                authenticator_id=authenticator_id,
-                method_type=method_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AuthenticatorMethodBase is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AuthenticatorMethodBase is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AuthenticatorMethodBase is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def activate_authenticator_method_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthenticatorMethodBase:
-        """Activate an Authenticator Method
-
-        Activates a Method for an Authenticator identified by `authenticatorId` and `methodType`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
+        :param method_type: Type of authenticator method (required)
         :type method_type: AuthenticatorMethodType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -840,7 +391,7 @@ class AuthenticatorApi(ApiClient):
     @validate_call
     async def create_authenticator(
         self,
-        authenticator: Authenticator,
+        authenticator: AuthenticatorBase,
         activate: Annotated[
             Optional[StrictBool],
             Field(
@@ -858,13 +409,13 @@ class AuthenticatorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Create an Authenticator
+    ) -> AuthenticatorBase:
+        """Create an authenticator
 
         Creates an authenticator
 
         :param authenticator: (required)
-        :type authenticator: Authenticator
+        :type authenticator: AuthenticatorBase
         :param activate: Whether to execute the activation lifecycle operation when Okta creates the authenticator
         :type activate: bool
         :param _request_timeout: timeout setting for this request. If one
@@ -890,7 +441,7 @@ class AuthenticatorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
+            "200": "AuthenticatorBase",
             "400": "Error",
             "403": "Error",
             "429": "Error",
@@ -915,18 +466,18 @@ class AuthenticatorApi(ApiClient):
         )
 
         if error:
-            if Authenticator is Success:
+            if AuthenticatorBase is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if Authenticator is Success:
+        if AuthenticatorBase is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
+                request, AuthenticatorBase
             )
 
         if response_body == "" or response.status == 204:
@@ -942,243 +493,7 @@ class AuthenticatorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def create_authenticator_with_http_info(
-        self,
-        authenticator: Authenticator,
-        activate: Annotated[
-            Optional[StrictBool],
-            Field(
-                description="Whether to execute the activation lifecycle operation when Okta creates the authenticator"
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Create an Authenticator
-
-        Creates an authenticator
-
-        :param authenticator: (required)
-        :type authenticator: Authenticator
-        :param activate: Whether to execute the activation lifecycle operation when Okta creates the authenticator
-        :type activate: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "400": "Error",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._create_authenticator_serialize(
-                authenticator=authenticator,
-                activate=activate,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def create_authenticator_without_preload_content(
-        self,
-        authenticator: Authenticator,
-        activate: Annotated[
-            Optional[StrictBool],
-            Field(
-                description="Whether to execute the activation lifecycle operation when Okta creates the authenticator"
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Create an Authenticator
-
-        Creates an authenticator
-
-        :param authenticator: (required)
-        :type authenticator: Authenticator
-        :param activate: Whether to execute the activation lifecycle operation when Okta creates the authenticator
-        :type activate: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "400": "Error",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._create_authenticator_serialize(
-                authenticator=authenticator,
-                activate=activate,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
+                if AuthenticatorBase is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -1255,10 +570,189 @@ class AuthenticatorApi(ApiClient):
         )
 
     @validate_call
+    async def create_custom_aaguid(
+        self,
+        authenticator_id: Annotated[
+            StrictStr, Field(description="`id` of the authenticator")
+        ],
+        custom_aaguid_create_request_object: Optional[
+            CustomAAGUIDCreateRequestObject
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CustomAAGUIDResponseObject:
+        """Create a custom AAGUID
+
+        Creates a custom AAGUID for the WebAuthn authenticator
+
+        :param authenticator_id: `id` of the authenticator (required)
+        :type authenticator_id: str
+        :param custom_aaguid_create_request_object:
+        :type custom_aaguid_create_request_object: CustomAAGUIDCreateRequestObject
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "CustomAAGUIDResponseObject",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._create_custom_aaguid_serialize(
+                authenticator_id=authenticator_id,
+                custom_aaguid_create_request_object=custom_aaguid_create_request_object,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if CustomAAGUIDResponseObject is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if CustomAAGUIDResponseObject is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, CustomAAGUIDResponseObject
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if CustomAAGUIDResponseObject is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _create_custom_aaguid_serialize(
+        self,
+        authenticator_id,
+        custom_aaguid_create_request_object,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if authenticator_id is not None:
+            _path_params["authenticatorId"] = authenticator_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if custom_aaguid_create_request_object is not None:
+            _body_params = custom_aaguid_create_request_object
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/authenticators/{authenticatorId}/aaguids",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def deactivate_authenticator(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
         _request_timeout: Union[
             None,
@@ -1271,12 +765,12 @@ class AuthenticatorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Deactivate an Authenticator
+    ) -> AuthenticatorBase:
+        """Deactivate an authenticator
 
         Deactivates an authenticator by `authenticatorId`
 
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1301,7 +795,7 @@ class AuthenticatorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
+            "200": "AuthenticatorBase",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -1325,18 +819,18 @@ class AuthenticatorApi(ApiClient):
         )
 
         if error:
-            if Authenticator is Success:
+            if AuthenticatorBase is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if Authenticator is Success:
+        if AuthenticatorBase is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
+                request, AuthenticatorBase
             )
 
         if response_body == "" or response.status == 204:
@@ -1352,229 +846,7 @@ class AuthenticatorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def deactivate_authenticator_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Deactivate an Authenticator
-
-        Deactivates an authenticator by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._deactivate_authenticator_serialize(
-                authenticator_id=authenticator_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def deactivate_authenticator_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Deactivate an Authenticator
-
-        Deactivates an authenticator by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._deactivate_authenticator_serialize(
-                authenticator_id=authenticator_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
+                if AuthenticatorBase is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -1640,11 +912,10 @@ class AuthenticatorApi(ApiClient):
     async def deactivate_authenticator_method(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
         method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
+            AuthenticatorMethodType, Field(description="Type of authenticator method")
         ],
         _request_timeout: Union[
             None,
@@ -1658,249 +929,13 @@ class AuthenticatorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorMethodBase:
-        """Deactivate an Authenticator Method
+        """Deactivate an authenticator method
 
-        Deactivates a Method for an Authenticator identified by `authenticatorId` and `methodType`
+        Deactivates a method for an authenticator identified by `authenticatorId` and `methodType`
 
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
-        :type method_type: AuthenticatorMethodType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AuthenticatorMethodBase",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._deactivate_authenticator_method_serialize(
-                authenticator_id=authenticator_id,
-                method_type=method_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AuthenticatorMethodBase is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AuthenticatorMethodBase is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AuthenticatorMethodBase is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def deactivate_authenticator_method_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthenticatorMethodBase:
-        """Deactivate an Authenticator Method
-
-        Deactivates a Method for an Authenticator identified by `authenticatorId` and `methodType`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
-        :type method_type: AuthenticatorMethodType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AuthenticatorMethodBase",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._deactivate_authenticator_method_serialize(
-                authenticator_id=authenticator_id,
-                method_type=method_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AuthenticatorMethodBase is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AuthenticatorMethodBase is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AuthenticatorMethodBase is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def deactivate_authenticator_method_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthenticatorMethodBase:
-        """Deactivate an Authenticator Method
-
-        Deactivates a Method for an Authenticator identified by `authenticatorId` and `methodType`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
+        :param method_type: Type of authenticator method (required)
         :type method_type: AuthenticatorMethodType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2043,10 +1078,164 @@ class AuthenticatorApi(ApiClient):
         )
 
     @validate_call
+    async def delete_custom_aaguid(
+        self,
+        authenticator_id: Annotated[
+            StrictStr, Field(description="`id` of the authenticator")
+        ],
+        aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Delete a custom AAGUID
+
+        Deletes a custom AAGUID  You can only delete custom AAGUIDs that an admin has created.
+
+        :param authenticator_id: `id` of the authenticator (required)
+        :type authenticator_id: str
+        :param aaguid: Unique ID of a custom AAGUID (required)
+        :type aaguid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "204": None,
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._delete_custom_aaguid_serialize(
+                authenticator_id=authenticator_id,
+                aaguid=aaguid,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _delete_custom_aaguid_serialize(
+        self,
+        authenticator_id,
+        aaguid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if authenticator_id is not None:
+            _path_params["authenticatorId"] = authenticator_id
+        if aaguid is not None:
+            _path_params["aaguid"] = aaguid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="DELETE",
+            resource_path="/api/v1/authenticators/{authenticatorId}/aaguids/{aaguid}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def get_authenticator(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
         _request_timeout: Union[
             None,
@@ -2059,12 +1248,12 @@ class AuthenticatorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Retrieve an Authenticator
+    ) -> AuthenticatorBase:
+        """Retrieve an authenticator
 
         Retrieves an authenticator from your Okta organization by `authenticatorId`
 
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2089,7 +1278,7 @@ class AuthenticatorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
+            "200": "AuthenticatorBase",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -2113,18 +1302,18 @@ class AuthenticatorApi(ApiClient):
         )
 
         if error:
-            if Authenticator is Success:
+            if AuthenticatorBase is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if Authenticator is Success:
+        if AuthenticatorBase is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
+                request, AuthenticatorBase
             )
 
         if response_body == "" or response.status == 204:
@@ -2140,229 +1329,7 @@ class AuthenticatorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_authenticator_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Retrieve an Authenticator
-
-        Retrieves an authenticator from your Okta organization by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_authenticator_serialize(
-                authenticator_id=authenticator_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_authenticator_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Retrieve an Authenticator
-
-        Retrieves an authenticator from your Okta organization by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_authenticator_serialize(
-                authenticator_id=authenticator_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
+                if AuthenticatorBase is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -2428,11 +1395,10 @@ class AuthenticatorApi(ApiClient):
     async def get_authenticator_method(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
         method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
+            AuthenticatorMethodType, Field(description="Type of authenticator method")
         ],
         _request_timeout: Union[
             None,
@@ -2446,249 +1412,13 @@ class AuthenticatorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorMethodBase:
-        """Retrieve a Method
+        """Retrieve an authenticator method
 
-        Retrieves a Method identified by `methodType` of an Authenticator identified by `authenticatorId`
+        Retrieves a method identified by `methodType` of an authenticator identified by `authenticatorId`
 
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
-        :type method_type: AuthenticatorMethodType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AuthenticatorMethodBase",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_authenticator_method_serialize(
-                authenticator_id=authenticator_id,
-                method_type=method_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AuthenticatorMethodBase is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AuthenticatorMethodBase is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AuthenticatorMethodBase is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_authenticator_method_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthenticatorMethodBase:
-        """Retrieve a Method
-
-        Retrieves a Method identified by `methodType` of an Authenticator identified by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
-        :type method_type: AuthenticatorMethodType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AuthenticatorMethodBase",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_authenticator_method_serialize(
-                authenticator_id=authenticator_id,
-                method_type=method_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AuthenticatorMethodBase is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AuthenticatorMethodBase is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AuthenticatorMethodBase is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_authenticator_method_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthenticatorMethodBase:
-        """Retrieve a Method
-
-        Retrieves a Method identified by `methodType` of an Authenticator identified by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
+        :param method_type: Type of authenticator method (required)
         :type method_type: AuthenticatorMethodType
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2831,6 +1561,173 @@ class AuthenticatorApi(ApiClient):
         )
 
     @validate_call
+    async def get_custom_aaguid(
+        self,
+        authenticator_id: Annotated[
+            StrictStr, Field(description="`id` of the authenticator")
+        ],
+        aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CustomAAGUIDResponseObject:
+        """Retrieve a custom AAGUID
+
+        Retrieves a custom AAGUID
+
+        :param authenticator_id: `id` of the authenticator (required)
+        :type authenticator_id: str
+        :param aaguid: Unique ID of a custom AAGUID (required)
+        :type aaguid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "CustomAAGUIDResponseObject",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._get_custom_aaguid_serialize(
+                authenticator_id=authenticator_id,
+                aaguid=aaguid,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if CustomAAGUIDResponseObject is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if CustomAAGUIDResponseObject is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, CustomAAGUIDResponseObject
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if CustomAAGUIDResponseObject is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _get_custom_aaguid_serialize(
+        self,
+        authenticator_id,
+        aaguid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if authenticator_id is not None:
+            _path_params["authenticatorId"] = authenticator_id
+        if aaguid is not None:
+            _path_params["aaguid"] = aaguid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="GET",
+            resource_path="/api/v1/authenticators/{authenticatorId}/aaguids/{aaguid}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def get_well_known_app_authenticator_configuration(
         self,
         oauth_client_id: Annotated[
@@ -2851,235 +1748,10 @@ class AuthenticatorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[WellKnownAppAuthenticatorConfiguration]:
-        """Retrieve the Well-Known App Authenticator Configuration
+        """Retrieve the well-known app authenticator configuration
 
-        Retrieves the well-known app authenticator configuration, which includes an app authenticator's settings, supported methods and various other configuration details
-
-        :param oauth_client_id: Filters app authenticator configurations by `oauthClientId` (required)
-        :type oauth_client_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[WellKnownAppAuthenticatorConfiguration]",
-            "400": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_well_known_app_authenticator_configuration_serialize(
-                oauth_client_id=oauth_client_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[WellKnownAppAuthenticatorConfiguration] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[WellKnownAppAuthenticatorConfiguration] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, WellKnownAppAuthenticatorConfiguration
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[WellKnownAppAuthenticatorConfiguration] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_well_known_app_authenticator_configuration_with_http_info(
-        self,
-        oauth_client_id: Annotated[
-            StrictStr,
-            Field(
-                description="Filters app authenticator configurations by `oauthClientId`"
-            ),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[WellKnownAppAuthenticatorConfiguration]:
-        """Retrieve the Well-Known App Authenticator Configuration
-
-        Retrieves the well-known app authenticator configuration, which includes an app authenticator's settings, supported methods and various other configuration details
-
-        :param oauth_client_id: Filters app authenticator configurations by `oauthClientId` (required)
-        :type oauth_client_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[WellKnownAppAuthenticatorConfiguration]",
-            "400": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_well_known_app_authenticator_configuration_serialize(
-                oauth_client_id=oauth_client_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[WellKnownAppAuthenticatorConfiguration] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[WellKnownAppAuthenticatorConfiguration] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, WellKnownAppAuthenticatorConfiguration
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[WellKnownAppAuthenticatorConfiguration] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_well_known_app_authenticator_configuration_without_preload_content(
-        self,
-        oauth_client_id: Annotated[
-            StrictStr,
-            Field(
-                description="Filters app authenticator configurations by `oauthClientId`"
-            ),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[WellKnownAppAuthenticatorConfiguration]:
-        """Retrieve the Well-Known App Authenticator Configuration
-
-        Retrieves the well-known app authenticator configuration, which includes an app authenticator's settings, supported methods and various other configuration details
+        Retrieves the well-known app authenticator configuration. Includes an app authenticator's settings,
+        supported methods, and other details.
 
         :param oauth_client_id: Filters app authenticator configurations by `oauthClientId` (required)
         :type oauth_client_id: str
@@ -3220,10 +1892,171 @@ class AuthenticatorApi(ApiClient):
         )
 
     @validate_call
+    async def list_all_custom_aaguids(
+        self,
+        authenticator_id: Annotated[
+            StrictStr, Field(description="`id` of the authenticator")
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[CustomAAGUIDResponseObject]:
+        """List all custom AAGUIDs
+
+        Lists all custom Authenticator Attestation Global Unique Identifiers (AAGUIDs) in the org  Only custom AAGUIDs that
+        an admin has created are returned.
+
+        :param authenticator_id: `id` of the authenticator (required)
+        :type authenticator_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "List[CustomAAGUIDResponseObject]",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._list_all_custom_aaguids_serialize(
+                authenticator_id=authenticator_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if List[CustomAAGUIDResponseObject] is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if List[CustomAAGUIDResponseObject] is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, CustomAAGUIDResponseObject
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if List[CustomAAGUIDResponseObject] is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _list_all_custom_aaguids_serialize(
+        self,
+        authenticator_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if authenticator_id is not None:
+            _path_params["authenticatorId"] = authenticator_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="GET",
+            resource_path="/api/v1/authenticators/{authenticatorId}/aaguids",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def list_authenticator_methods(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
         _request_timeout: Union[
             None,
@@ -3237,233 +2070,11 @@ class AuthenticatorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AuthenticatorMethodBase]:
-        """List all Methods of an Authenticator
+        """List all methods of an authenticator
 
-        Lists all Methods of an Authenticator identified by `authenticatorId`
+        Lists all methods of an authenticator identified by `authenticatorId`
 
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[AuthenticatorMethodBase]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_authenticator_methods_serialize(
-                authenticator_id=authenticator_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[AuthenticatorMethodBase] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[AuthenticatorMethodBase] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[AuthenticatorMethodBase] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_authenticator_methods_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[AuthenticatorMethodBase]:
-        """List all Methods of an Authenticator
-
-        Lists all Methods of an Authenticator identified by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[AuthenticatorMethodBase]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_authenticator_methods_serialize(
-                authenticator_id=authenticator_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[AuthenticatorMethodBase] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[AuthenticatorMethodBase] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[AuthenticatorMethodBase] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_authenticator_methods_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[AuthenticatorMethodBase]:
-        """List all Methods of an Authenticator
-
-        Lists all Methods of an Authenticator identified by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3615,8 +2226,8 @@ class AuthenticatorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Authenticator]:
-        """List all Authenticators
+    ) -> List[AuthenticatorBase]:
+        """List all authenticators
 
         Lists all authenticators
 
@@ -3643,7 +2254,7 @@ class AuthenticatorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Authenticator]",
+            "200": "List[AuthenticatorBase]",
             "403": "Error",
             "429": "Error",
         }
@@ -3665,18 +2276,18 @@ class AuthenticatorApi(ApiClient):
         )
 
         if error:
-            if List[Authenticator] is Success:
+            if List[AuthenticatorBase] is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if List[Authenticator] is Success:
+        if List[AuthenticatorBase] is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
+                request, AuthenticatorBase
             )
 
         if response_body == "" or response.status == 204:
@@ -3692,215 +2303,7 @@ class AuthenticatorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if List[Authenticator] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_authenticators_with_http_info(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Authenticator]:
-        """List all Authenticators
-
-        Lists all authenticators
-
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Authenticator]",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_authenticators_serialize(
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[Authenticator] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[Authenticator] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[Authenticator] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_authenticators_without_preload_content(
-        self,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Authenticator]:
-        """List all Authenticators
-
-        Lists all authenticators
-
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Authenticator]",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_authenticators_serialize(
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[Authenticator] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[Authenticator] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[Authenticator] is Success:
+                if List[AuthenticatorBase] is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -3963,9 +2366,9 @@ class AuthenticatorApi(ApiClient):
     async def replace_authenticator(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
-        authenticator: Authenticator,
+        authenticator: AuthenticatorBase,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3977,15 +2380,15 @@ class AuthenticatorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Replace an Authenticator
+    ) -> AuthenticatorBase:
+        """Replace an authenticator
 
-        Replaces the properties for an Authenticator identified by `authenticatorId`
+        Replaces the properties for an authenticator identified by `authenticatorId`
 
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
         :param authenticator: (required)
-        :type authenticator: Authenticator
+        :type authenticator: AuthenticatorBase
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4009,7 +2412,7 @@ class AuthenticatorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
+            "200": "AuthenticatorBase",
             "400": "Error",
             "403": "Error",
             "404": "Error",
@@ -4035,18 +2438,18 @@ class AuthenticatorApi(ApiClient):
         )
 
         if error:
-            if Authenticator is Success:
+            if AuthenticatorBase is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if Authenticator is Success:
+        if AuthenticatorBase is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
+                request, AuthenticatorBase
             )
 
         if response_body == "" or response.status == 204:
@@ -4062,239 +2465,7 @@ class AuthenticatorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def replace_authenticator_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        authenticator: Authenticator,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Replace an Authenticator
-
-        Replaces the properties for an Authenticator identified by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param authenticator: (required)
-        :type authenticator: Authenticator
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._replace_authenticator_serialize(
-                authenticator_id=authenticator_id,
-                authenticator=authenticator,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def replace_authenticator_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        authenticator: Authenticator,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Authenticator:
-        """Replace an Authenticator
-
-        Replaces the properties for an Authenticator identified by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param authenticator: (required)
-        :type authenticator: Authenticator
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Authenticator",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._replace_authenticator_serialize(
-                authenticator_id=authenticator_id,
-                authenticator=authenticator,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Authenticator is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Authenticator is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Authenticator
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Authenticator is Success:
+                if AuthenticatorBase is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -4373,11 +2544,10 @@ class AuthenticatorApi(ApiClient):
     async def replace_authenticator_method(
         self,
         authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
+            StrictStr, Field(description="`id` of the authenticator")
         ],
         method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
+            AuthenticatorMethodType, Field(description="Type of authenticator method")
         ],
         authenticator_method_base: Optional[AuthenticatorMethodBase] = None,
         _request_timeout: Union[
@@ -4392,259 +2562,13 @@ class AuthenticatorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AuthenticatorMethodBase:
-        """Replace a Method
+        """Replace an authenticator method
 
-        Replaces a Method of `methodType` for an Authenticator identified by `authenticatorId`
+        Replaces a method of `methodType` for an authenticator identified by `authenticatorId`
 
-        :param authenticator_id: `id` of the Authenticator (required)
+        :param authenticator_id: `id` of the authenticator (required)
         :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
-        :type method_type: AuthenticatorMethodType
-        :param authenticator_method_base:
-        :type authenticator_method_base: AuthenticatorMethodBase
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AuthenticatorMethodBase",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._replace_authenticator_method_serialize(
-                authenticator_id=authenticator_id,
-                method_type=method_type,
-                authenticator_method_base=authenticator_method_base,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AuthenticatorMethodBase is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AuthenticatorMethodBase is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AuthenticatorMethodBase is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def replace_authenticator_method_with_http_info(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
-        ],
-        authenticator_method_base: Optional[AuthenticatorMethodBase] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthenticatorMethodBase:
-        """Replace a Method
-
-        Replaces a Method of `methodType` for an Authenticator identified by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
-        :type method_type: AuthenticatorMethodType
-        :param authenticator_method_base:
-        :type authenticator_method_base: AuthenticatorMethodBase
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AuthenticatorMethodBase",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._replace_authenticator_method_serialize(
-                authenticator_id=authenticator_id,
-                method_type=method_type,
-                authenticator_method_base=authenticator_method_base,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AuthenticatorMethodBase is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AuthenticatorMethodBase is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AuthenticatorMethodBase
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AuthenticatorMethodBase is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def replace_authenticator_method_without_preload_content(
-        self,
-        authenticator_id: Annotated[
-            StrictStr, Field(description="`id` of the Authenticator")
-        ],
-        method_type: Annotated[
-            AuthenticatorMethodType,
-            Field(description="Type of the authenticator method"),
-        ],
-        authenticator_method_base: Optional[AuthenticatorMethodBase] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuthenticatorMethodBase:
-        """Replace a Method
-
-        Replaces a Method of `methodType` for an Authenticator identified by `authenticatorId`
-
-        :param authenticator_id: `id` of the Authenticator (required)
-        :type authenticator_id: str
-        :param method_type: Type of the authenticator method (required)
+        :param method_type: Type of authenticator method (required)
         :type method_type: AuthenticatorMethodType
         :param authenticator_method_base:
         :type authenticator_method_base: AuthenticatorMethodBase
@@ -4791,6 +2715,537 @@ class AuthenticatorApi(ApiClient):
         return self.param_serialize(
             method="PUT",
             resource_path="/api/v1/authenticators/{authenticatorId}/methods/{methodType}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    async def replace_custom_aaguid(
+        self,
+        authenticator_id: Annotated[
+            StrictStr, Field(description="`id` of the authenticator")
+        ],
+        aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
+        custom_aaguid_update_request_object: Optional[
+            CustomAAGUIDUpdateRequestObject
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CustomAAGUIDResponseObject:
+        """Replace a custom AAGUID
+
+        Replaces a custom AAGUID for the specified WebAuthn authenticator
+
+        :param authenticator_id: `id` of the authenticator (required)
+        :type authenticator_id: str
+        :param aaguid: Unique ID of a custom AAGUID (required)
+        :type aaguid: str
+        :param custom_aaguid_update_request_object:
+        :type custom_aaguid_update_request_object: CustomAAGUIDUpdateRequestObject
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "CustomAAGUIDResponseObject",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._replace_custom_aaguid_serialize(
+                authenticator_id=authenticator_id,
+                aaguid=aaguid,
+                custom_aaguid_update_request_object=custom_aaguid_update_request_object,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if CustomAAGUIDResponseObject is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if CustomAAGUIDResponseObject is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, CustomAAGUIDResponseObject
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if CustomAAGUIDResponseObject is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _replace_custom_aaguid_serialize(
+        self,
+        authenticator_id,
+        aaguid,
+        custom_aaguid_update_request_object,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if authenticator_id is not None:
+            _path_params["authenticatorId"] = authenticator_id
+        if aaguid is not None:
+            _path_params["aaguid"] = aaguid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if custom_aaguid_update_request_object is not None:
+            _body_params = custom_aaguid_update_request_object
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="PUT",
+            resource_path="/api/v1/authenticators/{authenticatorId}/aaguids/{aaguid}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    async def update_custom_aaguid(
+        self,
+        authenticator_id: Annotated[
+            StrictStr, Field(description="`id` of the authenticator")
+        ],
+        aaguid: Annotated[StrictStr, Field(description="Unique ID of a custom AAGUID")],
+        custom_aaguid_update_request_object: Optional[
+            CustomAAGUIDUpdateRequestObject
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CustomAAGUIDResponseObject:
+        """Update a custom AAGUID
+
+        Updates the properties of a custom AAGUID by the `authenticatorId` and `aaguid` ID
+
+        :param authenticator_id: `id` of the authenticator (required)
+        :type authenticator_id: str
+        :param aaguid: Unique ID of a custom AAGUID (required)
+        :type aaguid: str
+        :param custom_aaguid_update_request_object:
+        :type custom_aaguid_update_request_object: CustomAAGUIDUpdateRequestObject
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "CustomAAGUIDResponseObject",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._update_custom_aaguid_serialize(
+                authenticator_id=authenticator_id,
+                aaguid=aaguid,
+                custom_aaguid_update_request_object=custom_aaguid_update_request_object,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if CustomAAGUIDResponseObject is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if CustomAAGUIDResponseObject is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, CustomAAGUIDResponseObject
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if CustomAAGUIDResponseObject is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _update_custom_aaguid_serialize(
+        self,
+        authenticator_id,
+        aaguid,
+        custom_aaguid_update_request_object,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if authenticator_id is not None:
+            _path_params["authenticatorId"] = authenticator_id
+        if aaguid is not None:
+            _path_params["aaguid"] = aaguid
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if custom_aaguid_update_request_object is not None:
+            _body_params = custom_aaguid_update_request_object
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/merge-patch+json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="PATCH",
+            resource_path="/api/v1/authenticators/{authenticatorId}/aaguids/{aaguid}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
+    async def verify_rp_id_domain(
+        self,
+        authenticator_id: Annotated[
+            StrictStr, Field(description="`id` of the authenticator")
+        ],
+        web_authn_method_type: Annotated[
+            AuthenticatorMethodTypeWebAuthn,
+            Field(description="Type of authenticator method"),
+        ],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Verify a Relying Party ID domain
+
+        Verifies the [Relying Party identifier (RP ID)](https://www.w3.org/TR/webauthn/#relying-party-identifier) domain for
+        the specified WebAuthn authenticator and the specific `webauthn` authenticator method
+
+        :param authenticator_id: `id` of the authenticator (required)
+        :type authenticator_id: str
+        :param web_authn_method_type: Type of authenticator method (required)
+        :type web_authn_method_type: AuthenticatorMethodTypeWebAuthn
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "204": None,
+            "400": "Error",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._verify_rp_id_domain_serialize(
+                authenticator_id=authenticator_id,
+                web_authn_method_type=web_authn_method_type,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, response_body, error = await self._request_executor.execute(request)
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                return (response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _verify_rp_id_domain_serialize(
+        self,
+        authenticator_id,
+        web_authn_method_type,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if authenticator_id is not None:
+            _path_params["authenticatorId"] = authenticator_id
+        if web_authn_method_type is not None:
+            _path_params["webAuthnMethodType"] = web_authn_method_type.value
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/authenticators/{authenticatorId}/methods/{webAuthnMethodType}/verify-rp-id-domain",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

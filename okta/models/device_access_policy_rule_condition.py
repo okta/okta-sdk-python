@@ -34,35 +34,26 @@ from typing_extensions import Self
 from okta.models.device_policy_rule_condition_assurance import (
     DevicePolicyRuleConditionAssurance,
 )
-from okta.models.device_policy_rule_condition_platform import (
-    DevicePolicyRuleConditionPlatform,
-)
-from okta.models.device_policy_trust_level import DevicePolicyTrustLevel
 
 
 class DeviceAccessPolicyRuleCondition(BaseModel):
     """
-    DeviceAccessPolicyRuleCondition
+    <x-lifecycle class=\"oie\"></x-lifecycle> Specifies the device condition to match on
     """  # noqa: E501
 
-    migrated: Optional[StrictBool] = None
-    platform: Optional[DevicePolicyRuleConditionPlatform] = None
-    rooted: Optional[StrictBool] = None
-    trust_level: Optional[DevicePolicyTrustLevel] = Field(
-        default=None, alias="trustLevel"
-    )
-    managed: Optional[StrictBool] = None
-    registered: Optional[StrictBool] = None
     assurance: Optional[DevicePolicyRuleConditionAssurance] = None
-    __properties: ClassVar[List[str]] = [
-        "migrated",
-        "platform",
-        "rooted",
-        "trustLevel",
-        "managed",
-        "registered",
-        "assurance",
-    ]
+    managed: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is managed. A device is considered managed if it's part of a device management "
+        "system.",
+    )
+    registered: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is registered. A device is registered if the User enrolls with Okta Verify "
+        "that's installed on the device. When the `managed` property is passed, you must also include the "
+        "`registered` property and set it to `true`. ",
+    )
+    __properties: ClassVar[List[str]] = ["assurance", "managed", "registered"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,13 +92,6 @@ class DeviceAccessPolicyRuleCondition(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of platform
-        if self.platform:
-            if not isinstance(self.platform, dict):
-                _dict["platform"] = self.platform.to_dict()
-            else:
-                _dict["platform"] = self.platform
-
         # override the default output from pydantic by calling `to_dict()` of assurance
         if self.assurance:
             if not isinstance(self.assurance, dict):
@@ -128,21 +112,13 @@ class DeviceAccessPolicyRuleCondition(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "migrated": obj.get("migrated"),
-                "platform": (
-                    DevicePolicyRuleConditionPlatform.from_dict(obj["platform"])
-                    if obj.get("platform") is not None
-                    else None
-                ),
-                "rooted": obj.get("rooted"),
-                "trustLevel": obj.get("trustLevel"),
-                "managed": obj.get("managed"),
-                "registered": obj.get("registered"),
                 "assurance": (
                     DevicePolicyRuleConditionAssurance.from_dict(obj["assurance"])
                     if obj.get("assurance") is not None
                     else None
                 ),
+                "managed": obj.get("managed"),
+                "registered": obj.get("registered"),
             }
         )
         return _obj

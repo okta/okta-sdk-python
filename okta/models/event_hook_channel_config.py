@@ -45,9 +45,19 @@ class EventHookChannelConfig(BaseModel):
     auth_scheme: Optional[EventHookChannelConfigAuthScheme] = Field(
         default=None, alias="authScheme"
     )
-    headers: Optional[List[EventHookChannelConfigHeader]] = None
-    uri: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["authScheme", "headers", "uri"]
+    headers: Optional[List[Optional[EventHookChannelConfigHeader]]] = Field(
+        default=None,
+        description="Optional list of key/value pairs for headers that can be sent with the request to the external service. "
+        "For example, `X-Other-Header` is an example of an optional header, with a value of `my-header-value`, "
+        "that you want Okta to pass to your external service.",
+    )
+    method: Optional[StrictStr] = Field(
+        default=None, description="The method of the Okta event hook request"
+    )
+    uri: StrictStr = Field(
+        description="The external service endpoint called to execute the event hook handler"
+    )
+    __properties: ClassVar[List[str]] = ["authScheme", "headers", "method", "uri"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,8 +88,13 @@ class EventHookChannelConfig(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "method",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -126,6 +141,7 @@ class EventHookChannelConfig(BaseModel):
                     if obj.get("headers") is not None
                     else None
                 ),
+                "method": obj.get("method"),
                 "uri": obj.get("uri"),
             }
         )

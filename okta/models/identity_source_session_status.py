@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class IdentitySourceSessionStatus(str, Enum):
     """
-    IdentitySourceSessionStatus
+    The current status of the identity source session
     """
 
     """

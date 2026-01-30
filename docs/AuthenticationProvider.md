@@ -1,11 +1,12 @@
 # AuthenticationProvider
 
+Specifies the authentication provider that validates the user's password credential. The user's current provider is managed by the **Delegated Authentication** settings for your org. The provider object is **read-only**.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** |  | [optional] 
+**name** | **str** | The name of the authentication provider | [optional] [readonly] 
 **type** | [**AuthenticationProviderType**](AuthenticationProviderType.md) |  | [optional] 
 
 ## Example

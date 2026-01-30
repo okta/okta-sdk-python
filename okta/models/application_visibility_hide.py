@@ -34,11 +34,17 @@ from typing_extensions import Self
 
 class ApplicationVisibilityHide(BaseModel):
     """
-    ApplicationVisibilityHide
+    Hides the app for specific end-user apps
     """  # noqa: E501
 
-    i_os: Optional[StrictBool] = Field(default=None, alias="iOS")
-    web: Optional[StrictBool] = None
+    i_os: Optional[StrictBool] = Field(
+        default=False,
+        description="Okta Mobile for iOS or Android (pre-dates Android)",
+        alias="iOS",
+    )
+    web: Optional[StrictBool] = Field(
+        default=False, description="Okta End-User Dashboard on a web browser"
+    )
     __properties: ClassVar[List[str]] = ["iOS", "web"]
 
     model_config = ConfigDict(
@@ -89,5 +95,10 @@ class ApplicationVisibilityHide(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"iOS": obj.get("iOS"), "web": obj.get("web")})
+        _obj = cls.model_validate(
+            {
+                "iOS": obj.get("iOS") if obj.get("iOS") is not None else False,
+                "web": obj.get("web") if obj.get("web") is not None else False,
+            }
+        )
         return _obj

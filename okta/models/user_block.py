@@ -28,18 +28,45 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 
 class UserBlock(BaseModel):
     """
-    UserBlock
+    Describes how the account is blocked from access. If `appliesTo` is `ANY_DEVICES`, then the account is blocked for all
+    devices. If `appliesTo` is `UNKNOWN_DEVICES`, then the account is only blocked for unknown devices.
     """  # noqa: E501
 
-    applies_to: Optional[StrictStr] = Field(default=None, alias="appliesTo")
-    type: Optional[StrictStr] = None
+    applies_to: Optional[StrictStr] = Field(
+        default=None,
+        description="The devices that the block applies to",
+        alias="appliesTo",
+    )
+    type: Optional[StrictStr] = Field(default=None, description="Type of access block")
     __properties: ClassVar[List[str]] = ["appliesTo", "type"]
+
+    @field_validator("applies_to")
+    def applies_to_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["ANY_DEVICES", "UNKNOWN_DEVICES"]):
+            raise ValueError(
+                "must be one of enum values ('ANY_DEVICES', 'UNKNOWN_DEVICES')"
+            )
+        return value
+
+    @field_validator("type")
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["DEVICE_BASED"]):
+            raise ValueError("must be one of enum values ('DEVICE_BASED')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

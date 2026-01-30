@@ -28,18 +28,32 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 
 class OpenIdConnectApplicationIdpInitiatedLogin(BaseModel):
     """
-    OpenIdConnectApplicationIdpInitiatedLogin
+    The type of IdP-initiated sign-in flow that the client supports
     """  # noqa: E501
 
-    default_scope: Optional[List[StrictStr]] = None
-    mode: Optional[StrictStr] = None
+    default_scope: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="The scopes to use for the request when `mode` is `OKTA`",
+    )
+    mode: StrictStr = Field(
+        description="The mode to use for the IdP-initiated sign-in flow. For `OKTA` or `SPEC` modes, the client must have an "
+        "`initiate_login_uri` registered. > **Note:** For web and SPA apps, if the mode is `SPEC` or `OKTA`, "
+        "you must set `grant_types` to `authorization_code`, `implicit`, or `interaction_code`. "
+    )
     __properties: ClassVar[List[str]] = ["default_scope", "mode"]
+
+    @field_validator("mode")
+    def mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["DISABLED", "SPEC", "OKTA"]):
+            raise ValueError("must be one of enum values ('DISABLED', 'SPEC', 'OKTA')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

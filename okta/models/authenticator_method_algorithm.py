@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AuthenticatorMethodAlgorithm(str, Enum):
     """
-    The encryption algorithm for this authenticator method
+    AuthenticatorMethodAlgorithm
     """
 
     """

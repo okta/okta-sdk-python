@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
 from typing_extensions import Self
 
 from okta.models.required_enum import RequiredEnum
@@ -42,6 +42,16 @@ class ChannelBinding(BaseModel):
     required: Optional[RequiredEnum] = None
     style: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["required", "style"]
+
+    @field_validator("style")
+    def style_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["NUMBER_CHALLENGE"]):
+            raise ValueError("must be one of enum values ('NUMBER_CHALLENGE')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

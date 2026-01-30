@@ -28,16 +28,19 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class DevicePolicyRuleConditionAssurance(BaseModel):
     """
-    DevicePolicyRuleConditionAssurance
+    Specifies [device assurance policies](https://developer.okta.com/docs/api/openapi/okta-management/management/tag
+    /DeviceAssurance/) in the policy rule
     """  # noqa: E501
 
-    include: Optional[List[StrictStr]] = None
+    include: Optional[List[StrictStr]] = Field(
+        default=None, description="Specifies the device assurance policy ID"
+    )
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(

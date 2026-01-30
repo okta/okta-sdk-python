@@ -46,7 +46,17 @@ class PolicyContextDevice(BaseModel):
     managed: Optional[StrictBool] = Field(
         default=None, description="If the device is managed"
     )
-    __properties: ClassVar[List[str]] = ["platform", "registered", "managed"]
+    assurance_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The device assurance policy ID for the simulation",
+        alias="assuranceId",
+    )
+    __properties: ClassVar[List[str]] = [
+        "platform",
+        "registered",
+        "managed",
+        "assuranceId",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,6 +111,7 @@ class PolicyContextDevice(BaseModel):
                 "platform": obj.get("platform"),
                 "registered": obj.get("registered"),
                 "managed": obj.get("managed"),
+                "assuranceId": obj.get("assuranceId"),
             }
         )
         return _obj

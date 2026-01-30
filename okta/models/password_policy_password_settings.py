@@ -28,11 +28,14 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
 from okta.models.password_policy_password_settings_age import (
     PasswordPolicyPasswordSettingsAge,
+)
+from okta.models.password_policy_password_settings_breached_protection import (
+    PasswordPolicyPasswordSettingsBreachedProtection,
 )
 from okta.models.password_policy_password_settings_complexity import (
     PasswordPolicyPasswordSettingsComplexity,
@@ -44,13 +47,21 @@ from okta.models.password_policy_password_settings_lockout import (
 
 class PasswordPolicyPasswordSettings(BaseModel):
     """
-    PasswordPolicyPasswordSettings
+    Specifies the password settings for the policy
     """  # noqa: E501
 
     age: Optional[PasswordPolicyPasswordSettingsAge] = None
     complexity: Optional[PasswordPolicyPasswordSettingsComplexity] = None
     lockout: Optional[PasswordPolicyPasswordSettingsLockout] = None
-    __properties: ClassVar[List[str]] = ["age", "complexity", "lockout"]
+    breached_protection: Optional[PasswordPolicyPasswordSettingsBreachedProtection] = (
+        Field(default=None, alias="breachedProtection")
+    )
+    __properties: ClassVar[List[str]] = [
+        "age",
+        "complexity",
+        "lockout",
+        "breachedProtection",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,6 +121,13 @@ class PasswordPolicyPasswordSettings(BaseModel):
             else:
                 _dict["lockout"] = self.lockout
 
+        # override the default output from pydantic by calling `to_dict()` of breached_protection
+        if self.breached_protection:
+            if not isinstance(self.breached_protection, dict):
+                _dict["breachedProtection"] = self.breached_protection.to_dict()
+            else:
+                _dict["breachedProtection"] = self.breached_protection
+
         return _dict
 
     @classmethod
@@ -138,6 +156,13 @@ class PasswordPolicyPasswordSettings(BaseModel):
                 "lockout": (
                     PasswordPolicyPasswordSettingsLockout.from_dict(obj["lockout"])
                     if obj.get("lockout") is not None
+                    else None
+                ),
+                "breachedProtection": (
+                    PasswordPolicyPasswordSettingsBreachedProtection.from_dict(
+                        obj["breachedProtection"]
+                    )
+                    if obj.get("breachedProtection") is not None
                     else None
                 ),
             }

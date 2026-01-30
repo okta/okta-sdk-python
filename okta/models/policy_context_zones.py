@@ -34,7 +34,7 @@ from typing_extensions import Self
 
 class PolicyContextZones(BaseModel):
     """
-    PolicyContextZones
+    The zone ID under the network rule condition.
     """  # noqa: E501
 
     ids: Optional[List[StrictStr]] = None

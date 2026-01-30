@@ -1,11 +1,12 @@
 # IdentityProviderPolicyRuleCondition
 
+Specifies the IdP that's used to sign in
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**idp_ids** | **List[str]** |  | [optional] 
+**idp_ids** | **List[str]** | Specifies the IdP ID | [optional] 
 **provider** | [**IdentityProviderPolicyProvider**](IdentityProviderPolicyProvider.md) |  | [optional] 
 
 ## Example

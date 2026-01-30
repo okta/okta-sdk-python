@@ -40,20 +40,39 @@ from okta.models.links_self import LinksSelf
 
 class AgentPoolUpdate(BaseModel):
     """
-    Various information about agent auto update configuration
+    Various information about agent auto-update configuration
     """  # noqa: E501
 
     agents: Optional[List[Agent]] = None
     agent_type: Optional[AgentType] = Field(default=None, alias="agentType")
-    enabled: Optional[StrictBool] = None
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    notify_admin: Optional[StrictBool] = Field(default=None, alias="notifyAdmin")
-    reason: Optional[StrictStr] = None
+    enabled: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if auto-update is enabled for the agent pool",
+    )
+    id: Optional[StrictStr] = Field(
+        default=None, description="ID of the agent pool update"
+    )
+    name: Optional[StrictStr] = Field(
+        default=None, description="Name of the agent pool update"
+    )
+    notify_admin: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the admin is notified about the update",
+        alias="notifyAdmin",
+    )
+    reason: Optional[StrictStr] = Field(
+        default=None, description="Reason for the update"
+    )
     schedule: Optional[AutoUpdateSchedule] = None
-    sort_order: Optional[StrictInt] = Field(default=None, alias="sortOrder")
+    sort_order: Optional[StrictInt] = Field(
+        default=None, description="Specifies the sort order", alias="sortOrder"
+    )
     status: Optional[AgentUpdateJobStatus] = None
-    target_version: Optional[StrictStr] = Field(default=None, alias="targetVersion")
+    target_version: Optional[StrictStr] = Field(
+        default=None,
+        description="The agent version to update to",
+        alias="targetVersion",
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "agents",

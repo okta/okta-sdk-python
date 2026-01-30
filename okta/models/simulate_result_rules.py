@@ -28,10 +28,11 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.simulate_result_conditions import SimulateResultConditions
+from okta.models.simulate_result_status import SimulateResultStatus
 
 
 class SimulateResultRules(BaseModel):
@@ -39,29 +40,18 @@ class SimulateResultRules(BaseModel):
     SimulateResultRules
     """  # noqa: E501
 
+    conditions: Optional[List[SimulateResultConditions]] = Field(
+        default=None,
+        description="List of all conditions involved for this rule evaluation",
+    )
     id: Optional[StrictStr] = Field(
         default=None, description="The unique ID number of the policy rule"
     )
     name: Optional[StrictStr] = Field(
         default=None, description="The name of the policy rule"
     )
-    status: Optional[StrictStr] = Field(
-        default=None, description="The result of the entity evaluation"
-    )
-    conditions: Optional[SimulateResultConditions] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "status", "conditions"]
-
-    @field_validator("status")
-    def status_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(["MATCH", "UNMATCHED", "UNDEFINED"]):
-            raise ValueError(
-                "must be one of enum values ('MATCH', 'UNMATCHED', 'UNDEFINED')"
-            )
-        return value
+    status: Optional[SimulateResultStatus] = None
+    __properties: ClassVar[List[str]] = ["conditions", "id", "name", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,13 +90,13 @@ class SimulateResultRules(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of conditions
+        # override the default output from pydantic by calling `to_dict()` of each item in conditions (list)
+        _items = []
         if self.conditions:
-            if not isinstance(self.conditions, dict):
-                _dict["conditions"] = self.conditions.to_dict()
-            else:
-                _dict["conditions"] = self.conditions
-
+            for _item in self.conditions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["conditions"] = _items
         return _dict
 
     @classmethod
@@ -120,14 +110,17 @@ class SimulateResultRules(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "id": obj.get("id"),
-                "name": obj.get("name"),
-                "status": obj.get("status"),
                 "conditions": (
-                    SimulateResultConditions.from_dict(obj["conditions"])
+                    [
+                        SimulateResultConditions.from_dict(_item)
+                        for _item in obj["conditions"]
+                    ]
                     if obj.get("conditions") is not None
                     else None
                 ),
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "status": obj.get("status"),
             }
         )
         return _obj

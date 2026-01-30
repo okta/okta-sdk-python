@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
+from okta.models.org_preferences_links import OrgPreferencesLinks
 
 
 class OrgPreferences(BaseModel):
@@ -40,9 +40,11 @@ class OrgPreferences(BaseModel):
     """  # noqa: E501
 
     show_end_user_footer: Optional[StrictBool] = Field(
-        default=None, alias="showEndUserFooter"
+        default=None,
+        description="Indicates if the footer is shown on the End-User Dashboard",
+        alias="showEndUserFooter",
     )
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[OrgPreferencesLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["showEndUserFooter", "_links"]
 
     model_config = ConfigDict(
@@ -109,7 +111,7 @@ class OrgPreferences(BaseModel):
             {
                 "showEndUserFooter": obj.get("showEndUserFooter"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    OrgPreferencesLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

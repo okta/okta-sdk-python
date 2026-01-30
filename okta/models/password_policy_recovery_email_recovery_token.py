@@ -38,7 +38,9 @@ class PasswordPolicyRecoveryEmailRecoveryToken(BaseModel):
     """  # noqa: E501
 
     token_lifetime_minutes: Optional[StrictInt] = Field(
-        default=None, alias="tokenLifetimeMinutes"
+        default=10080,
+        description="Lifetime (in minutes) of the recovery token",
+        alias="tokenLifetimeMinutes",
     )
     __properties: ClassVar[List[str]] = ["tokenLifetimeMinutes"]
 
@@ -91,6 +93,12 @@ class PasswordPolicyRecoveryEmailRecoveryToken(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"tokenLifetimeMinutes": obj.get("tokenLifetimeMinutes")}
+            {
+                "tokenLifetimeMinutes": (
+                    obj.get("tokenLifetimeMinutes")
+                    if obj.get("tokenLifetimeMinutes") is not None
+                    else 10080
+                )
+            }
         )
         return _obj

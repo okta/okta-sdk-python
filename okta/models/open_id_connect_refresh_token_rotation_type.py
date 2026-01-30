@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OpenIdConnectRefreshTokenRotationType(str, Enum):
     """
-    OpenIdConnectRefreshTokenRotationType
+    The refresh token rotation mode for the OAuth 2.0 client
     """
 
     """

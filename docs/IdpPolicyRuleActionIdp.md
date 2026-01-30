@@ -1,11 +1,12 @@
 # IdpPolicyRuleActionIdp
 
+Specifies IdP settings
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**providers** | [**List[IdpPolicyRuleActionProvider]**](IdpPolicyRuleActionProvider.md) | List of configured Identity Providers that a given Rule can route to. Ability to define multiple providers is a part of the Okta Identity Engine. This allows users to choose a Provider when they sign in. Contact support for information on the Identity Engine. | [optional] 
+**providers** | [**List[IdpPolicyRuleActionProvider]**](IdpPolicyRuleActionProvider.md) | List of configured identity providers that a given rule can route to. Ability to define multiple providers is a part of the Identity Engine. This allows users to choose a provider when they sign in. Contact support for information on the Identity Engine. | [optional] 
 **idp_selection_type** | [**IdpSelectionType**](IdpSelectionType.md) |  | [optional] 
 **match_criteria** | [**List[IdpPolicyRuleActionMatchCriteria]**](IdpPolicyRuleActionMatchCriteria.md) | Required if &#x60;idpSelectionType&#x60; is set to &#x60;DYNAMIC&#x60; | [optional] 
 

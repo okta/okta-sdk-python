@@ -28,17 +28,23 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class GroupRuleExpression(BaseModel):
     """
-    GroupRuleExpression
+    Defines Okta specific [group-rules expression](
+    https://developer.okta.com/docs/reference/okta-expression-language/#expressions-in-group-rules)
     """  # noqa: E501
 
-    type: Optional[StrictStr] = None
-    value: Optional[StrictStr] = None
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="Expression type. Only valid value is '`urn:okta:expression:1.0`'.",
+    )
+    value: Optional[StrictStr] = Field(
+        default=None, description="Okta expression that would result in a Boolean value"
+    )
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     model_config = ConfigDict(

@@ -42,9 +42,11 @@ class LogIpAddress(BaseModel):
     geographical_context: Optional[LogGeographicalContext] = Field(
         default=None, alias="geographicalContext"
     )
-    ip: Optional[StrictStr] = None
-    source: Optional[StrictStr] = None
-    version: Optional[StrictStr] = None
+    ip: Optional[StrictStr] = Field(default=None, description="IP address")
+    source: Optional[StrictStr] = Field(
+        default=None, description="Details regarding the source"
+    )
+    version: Optional[StrictStr] = Field(default=None, description="IP address version")
     __properties: ClassVar[List[str]] = [
         "geographicalContext",
         "ip",

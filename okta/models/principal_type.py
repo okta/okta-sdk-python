@@ -30,12 +30,13 @@ from typing_extensions import Self
 
 class PrincipalType(str, Enum):
     """
-    PrincipalType
+    The type of principal, either an API token or an OAuth 2.0 app
     """
 
     """
     allowed enum values
     """
+    OAUTH_CLIENT = "OAUTH_CLIENT"
     SSWS_TOKEN = "SSWS_TOKEN"
 
     @classmethod

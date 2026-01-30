@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | [**List[RoleAssignedUser]**](RoleAssignedUser.md) |  | [optional] 
-**links** | [**LinksNext**](LinksNext.md) |  | [optional] 
+**links** | [**LinksNextForRoleAssignments**](LinksNextForRoleAssignments.md) |  | [optional] 
 
 ## Example
 

@@ -37,21 +37,45 @@ class SecurePasswordStoreApplicationSettingsApplication(BaseModel):
     SecurePasswordStoreApplicationSettingsApplication
     """  # noqa: E501
 
-    optional_field1: Optional[StrictStr] = Field(default=None, alias="optionalField1")
+    optional_field1: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional parameter in the sign-in form",
+        alias="optionalField1",
+    )
     optional_field1_value: Optional[StrictStr] = Field(
-        default=None, alias="optionalField1Value"
+        default=None,
+        description="Name of the optional value in the sign-in form",
+        alias="optionalField1Value",
     )
-    optional_field2: Optional[StrictStr] = Field(default=None, alias="optionalField2")
+    optional_field2: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional parameter in the sign-in form",
+        alias="optionalField2",
+    )
     optional_field2_value: Optional[StrictStr] = Field(
-        default=None, alias="optionalField2Value"
+        default=None,
+        description="Name of the optional value in the sign-in form",
+        alias="optionalField2Value",
     )
-    optional_field3: Optional[StrictStr] = Field(default=None, alias="optionalField3")
+    optional_field3: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the optional parameter in the sign-in form",
+        alias="optionalField3",
+    )
     optional_field3_value: Optional[StrictStr] = Field(
-        default=None, alias="optionalField3Value"
+        default=None,
+        description="Name of the optional value in the sign-in form",
+        alias="optionalField3Value",
     )
-    password_field: Optional[StrictStr] = Field(default=None, alias="passwordField")
-    url: Optional[StrictStr] = None
-    username_field: Optional[StrictStr] = Field(default=None, alias="usernameField")
+    password_field: StrictStr = Field(
+        description="CSS selector for the **Password** field in the sign-in form",
+        alias="passwordField",
+    )
+    url: StrictStr = Field(description="The URL of the sign-in page for this app")
+    username_field: StrictStr = Field(
+        description="CSS selector for the **Username** field in the sign-in form",
+        alias="usernameField",
+    )
     __properties: ClassVar[List[str]] = [
         "optionalField1",
         "optionalField1Value",

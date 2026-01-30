@@ -28,19 +28,42 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 
 class ApplicationSettingsNotificationsVpnNetwork(BaseModel):
     """
-    ApplicationSettingsNotificationsVpnNetwork
+    Defines network zones for VPN notification
     """  # noqa: E501
 
-    connection: Optional[StrictStr] = None
-    exclude: Optional[List[StrictStr]] = None
-    include: Optional[List[StrictStr]] = None
+    connection: Optional[StrictStr] = Field(
+        default=None,
+        description="Specifies the VPN connection details required to access the app",
+    )
+    exclude: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Defines the IP addresses or network ranges that are excluded from the VPN requirement",
+    )
+    include: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Defines the IP addresses or network ranges that are required to use the VPN",
+    )
     __properties: ClassVar[List[str]] = ["connection", "exclude", "include"]
+
+    @field_validator("connection")
+    def connection_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(
+            ["DISABLED", "ANYWHERE", "ON_NETWORK", "OFF_NETWORK", "ZONE"]
+        ):
+            raise ValueError(
+                "must be one of enum values ('DISABLED', 'ANYWHERE', 'ON_NETWORK', 'OFF_NETWORK', 'ZONE')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

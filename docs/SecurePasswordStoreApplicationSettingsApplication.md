@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**optional_field1** | **str** |  | [optional] 
-**optional_field1_value** | **str** |  | [optional] 
-**optional_field2** | **str** |  | [optional] 
-**optional_field2_value** | **str** |  | [optional] 
-**optional_field3** | **str** |  | [optional] 
-**optional_field3_value** | **str** |  | [optional] 
-**password_field** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
-**username_field** | **str** |  | [optional] 
+**optional_field1** | **str** | Name of the optional parameter in the sign-in form | [optional] 
+**optional_field1_value** | **str** | Name of the optional value in the sign-in form | [optional] 
+**optional_field2** | **str** | Name of the optional parameter in the sign-in form | [optional] 
+**optional_field2_value** | **str** | Name of the optional value in the sign-in form | [optional] 
+**optional_field3** | **str** | Name of the optional parameter in the sign-in form | [optional] 
+**optional_field3_value** | **str** | Name of the optional value in the sign-in form | [optional] 
+**password_field** | **str** | CSS selector for the **Password** field in the sign-in form | 
+**url** | **str** | The URL of the sign-in page for this app | 
+**username_field** | **str** | CSS selector for the **Username** field in the sign-in form | 
 
 ## Example
 

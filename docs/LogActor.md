@@ -1,15 +1,16 @@
 # LogActor
 
+Describes the user, app, client, or other entity (actor) who performs an action on a target. The actor is dependent on the action that is performed. All events have actors.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**alternate_id** | **str** |  | [optional] [readonly] 
-**detail_entry** | **Dict[str, object]** |  | [optional] [readonly] 
-**display_name** | **str** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**type** | **str** |  | [optional] [readonly] 
+**alternate_id** | **str** | Alternative ID of the actor | [optional] [readonly] 
+**detail_entry** | **Dict[str, object]** | Further details about the actor | [optional] [readonly] 
+**display_name** | **str** | Display name of the actor | [optional] [readonly] 
+**id** | **str** | ID of the actor | [optional] [readonly] 
+**type** | **str** | Type of actor | [optional] [readonly] 
 
 ## Example
 

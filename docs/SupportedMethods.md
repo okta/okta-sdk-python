@@ -1,13 +1,14 @@
 # SupportedMethods
 
+The supported methods of an authenticator
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **settings** | [**SupportedMethodsSettings**](SupportedMethodsSettings.md) |  | [optional] 
-**status** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
+**status** | [**LifecycleStatus**](LifecycleStatus.md) |  | [optional] 
+**type** | **str** | The type of authenticator method | [optional] 
 
 ## Example
 

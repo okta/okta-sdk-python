@@ -28,7 +28,8 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 
@@ -37,7 +38,9 @@ class KeyRequest(BaseModel):
     KeyRequest
     """  # noqa: E501
 
-    name: Optional[StrictStr] = None
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = (
+        Field(default=None, description="Display name for the key")
+    )
     __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(

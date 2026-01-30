@@ -34,16 +34,22 @@ from typing import TYPE_CHECKING
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 
 from okta.models.lifecycle_status import LifecycleStatus
+from okta.models.policy_links import PolicyLinks
 from okta.models.policy_rule_type import PolicyRuleType
 
 if TYPE_CHECKING:
     from okta.models.access_policy_rule import AccessPolicyRule
-    from okta.models.idp_discovery_policy_rule import IdpDiscoveryPolicyRule
-    from okta.models.password_policy_rule import PasswordPolicyRule
-    from okta.models.profile_enrollment_policy_rule import ProfileEnrollmentPolicyRule
-    from okta.models.authorization_server_policy_rule import (
-        AuthorizationServerPolicyRule,
+    from okta.models.device_signal_collection_policy_rule import (
+        DeviceSignalCollectionPolicyRule,
     )
+    from okta.models.entity_risk_policy_rule import EntityRiskPolicyRule
+    from okta.models.idp_discovery_policy_rule import IdpDiscoveryPolicyRule
+    from okta.models.authenticator_enrollment_policy_rule import (
+        AuthenticatorEnrollmentPolicyRule,
+    )
+    from okta.models.password_policy_rule import PasswordPolicyRule
+    from okta.models.post_auth_session_policy_rule import PostAuthSessionPolicyRule
+    from okta.models.profile_enrollment_policy_rule import ProfileEnrollmentPolicyRule
     from okta.models.okta_sign_on_policy_rule import OktaSignOnPolicyRule
 
 
@@ -68,10 +74,11 @@ class PolicyRule(BaseModel):
     status: Optional[LifecycleStatus] = None
     system: Optional[StrictBool] = Field(
         default=False,
-        description="Specifies whether Okta created the Policy Rule (`system=true`). You "
-                    "can't delete Policy Rules that have `system` set to `true`.",
+        description="Specifies whether Okta created the policy rule (`system=true`). You can't delete policy rules that have "
+        "`system` set to `true`.",
     )
     type: Optional[PolicyRuleType] = None
+    links: Optional[PolicyLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "created",
         "id",
@@ -81,6 +88,7 @@ class PolicyRule(BaseModel):
         "status",
         "system",
         "type",
+        "_links",
     ]
 
     model_config = ConfigDict(
@@ -95,10 +103,13 @@ class PolicyRule(BaseModel):
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
         "ACCESS_POLICY": "AccessPolicyRule",
+        "DEVICE_SIGNAL_COLLECTION": "DeviceSignalCollectionPolicyRule",
+        "ENTITY_RISK": "EntityRiskPolicyRule",
         "IDP_DISCOVERY": "IdpDiscoveryPolicyRule",
+        "MFA_ENROLL": "AuthenticatorEnrollmentPolicyRule",
         "PASSWORD": "PasswordPolicyRule",
+        "POST_AUTH_SESSION": "PostAuthSessionPolicyRule",
         "PROFILE_ENROLLMENT": "ProfileEnrollmentPolicyRule",
-        "RESOURCE_ACCESS": "AuthorizationServerPolicyRule",
         "SIGN_ON": "OktaSignOnPolicyRule",
     }
 
@@ -124,10 +135,13 @@ class PolicyRule(BaseModel):
     def from_json(cls, json_str: str) -> Optional[
         Union[
             AccessPolicyRule,
+            DeviceSignalCollectionPolicyRule,
+            EntityRiskPolicyRule,
             IdpDiscoveryPolicyRule,
+            AuthenticatorEnrollmentPolicyRule,
             PasswordPolicyRule,
+            PostAuthSessionPolicyRule,
             ProfileEnrollmentPolicyRule,
-            AuthorizationServerPolicyRule,
             OktaSignOnPolicyRule,
         ]
     ]:
@@ -145,10 +159,12 @@ class PolicyRule(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "created",
+                "id",
                 "last_updated",
             ]
         )
@@ -158,6 +174,13 @@ class PolicyRule(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
+
         # set to None if created (nullable) is None
         # and model_fields_set contains the field
         if self.created is None and "created" in self.model_fields_set:
@@ -168,16 +191,24 @@ class PolicyRule(BaseModel):
         if self.last_updated is None and "last_updated" in self.model_fields_set:
             _dict["lastUpdated"] = None
 
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict["priority"] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[
         Union[
             AccessPolicyRule,
+            DeviceSignalCollectionPolicyRule,
+            EntityRiskPolicyRule,
             IdpDiscoveryPolicyRule,
+            AuthenticatorEnrollmentPolicyRule,
             PasswordPolicyRule,
+            PostAuthSessionPolicyRule,
             ProfileEnrollmentPolicyRule,
-            AuthorizationServerPolicyRule,
             OktaSignOnPolicyRule,
         ]
     ]:
@@ -188,22 +219,34 @@ class PolicyRule(BaseModel):
             return import_module(
                 "okta.models.access_policy_rule"
             ).AccessPolicyRule.from_dict(obj)
+        if object_type == "DeviceSignalCollectionPolicyRule":
+            return import_module(
+                "okta.models.device_signal_collection_policy_rule"
+            ).DeviceSignalCollectionPolicyRule.from_dict(obj)
+        if object_type == "EntityRiskPolicyRule":
+            return import_module(
+                "okta.models.entity_risk_policy_rule"
+            ).EntityRiskPolicyRule.from_dict(obj)
         if object_type == "IdpDiscoveryPolicyRule":
             return import_module(
                 "okta.models.idp_discovery_policy_rule"
             ).IdpDiscoveryPolicyRule.from_dict(obj)
+        if object_type == "AuthenticatorEnrollmentPolicyRule":
+            return import_module(
+                "okta.models.authenticator_enrollment_policy_rule"
+            ).AuthenticatorEnrollmentPolicyRule.from_dict(obj)
         if object_type == "PasswordPolicyRule":
             return import_module(
                 "okta.models.password_policy_rule"
             ).PasswordPolicyRule.from_dict(obj)
+        if object_type == "PostAuthSessionPolicyRule":
+            return import_module(
+                "okta.models.post_auth_session_policy_rule"
+            ).PostAuthSessionPolicyRule.from_dict(obj)
         if object_type == "ProfileEnrollmentPolicyRule":
             return import_module(
                 "okta.models.profile_enrollment_policy_rule"
             ).ProfileEnrollmentPolicyRule.from_dict(obj)
-        if object_type == "AuthorizationServerPolicyRule":
-            return import_module(
-                "okta.models.authorization_server_policy_rule"
-            ).AuthorizationServerPolicyRule.from_dict(obj)
         if object_type == "OktaSignOnPolicyRule":
             return import_module(
                 "okta.models.okta_sign_on_policy_rule"

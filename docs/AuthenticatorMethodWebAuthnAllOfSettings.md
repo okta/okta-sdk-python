@@ -1,12 +1,16 @@
 # AuthenticatorMethodWebAuthnAllOfSettings
 
+The settings for the WebAuthn authenticator method
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**aaguid_groups** | [**List[AAGUIDGroupObject]**](AAGUIDGroupObject.md) | The FIDO2 Authenticator Attestation Global Unique Identifiers (AAGUID) groups available to the WebAuthn authenticator | [optional] 
 **user_verification** | [**UserVerificationEnum**](UserVerificationEnum.md) |  | [optional] 
-**attachment** | [**WebAuthnAttachment**](WebAuthnAttachment.md) |  | [optional] 
+**attachment** | [**WebAuthnAttachmentEnum**](WebAuthnAttachmentEnum.md) |  | [optional] 
+**rp_id** | [**WebAuthnRpId**](WebAuthnRpId.md) |  | [optional] 
+**enable_autofill_ui** | **bool** | &lt;x-lifecycle-container&gt;&lt;x-lifecycle class&#x3D;\&quot;ea\&quot;&gt;&lt;/x-lifecycle&gt;&lt;/x-lifecycle-container&gt;Enables the passkeys autofill UI to display available WebAuthn discoverable credentials (\&quot;resident key\&quot;) from the Sign-In Widget username field | [optional] [default to False]
 
 ## Example
 

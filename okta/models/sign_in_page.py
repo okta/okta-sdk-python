@@ -43,7 +43,9 @@ class SignInPage(BaseModel):
     SignInPage
     """  # noqa: E501
 
-    page_content: Optional[StrictStr] = Field(default=None, alias="pageContent")
+    page_content: Optional[StrictStr] = Field(
+        default=None, description="The HTML for the page", alias="pageContent"
+    )
     content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(
         default=None, alias="contentSecurityPolicySetting"
     )
@@ -52,8 +54,9 @@ class SignInPage(BaseModel):
     )
     widget_version: Optional[Annotated[str, Field(strict=True)]] = Field(
         default=None,
-        description="The version specified as a [Semantic "
-                    "Version](https://semver.org/).",
+        description="The version specified as a [Semantic Version](https://semver.org/). This value can be a wildcard (`*`), "
+        "a major version range (for example, `^2`), a major-only version (for example, `7`), or a specific "
+        "`Major.Minor` version (for example, `5.15`).",
         alias="widgetVersion",
     )
     __properties: ClassVar[List[str]] = [
@@ -69,15 +72,9 @@ class SignInPage(BaseModel):
         if value is None:
             return value
 
-        if not re.match(
-                r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|["
-                r"1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$",
-                value,
-        ):
+        if not re.match(r"^(?:\*|\^?\d+(?:\.\d+){0,2})$", value):
             raise ValueError(
-                r"must validate the regular expression /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*["
-                r"a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.["
-                r"0-9a-zA-Z-]+)*))?$/"
+                r"must validate the regular expression /^(?:\*|\^?\d+(?:\.\d+){0,2})$/"
             )
         return value
 

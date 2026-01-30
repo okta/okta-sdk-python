@@ -31,8 +31,8 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
-from okta.models.identity_source_user_profile_for_upsert import (
-    IdentitySourceUserProfileForUpsert,
+from okta.models.bulk_upsert_request_body_profiles_inner import (
+    BulkUpsertRequestBodyProfilesInner,
 )
 
 
@@ -41,8 +41,14 @@ class BulkUpsertRequestBody(BaseModel):
     BulkUpsertRequestBody
     """  # noqa: E501
 
-    entity_type: Optional[StrictStr] = Field(default=None, alias="entityType")
-    profiles: Optional[List[IdentitySourceUserProfileForUpsert]] = None
+    entity_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of data to upsert into the session. Currently, only `USERS` is supported.",
+        alias="entityType",
+    )
+    profiles: Optional[List[BulkUpsertRequestBodyProfilesInner]] = Field(
+        default=None, description="Array of user profiles to be uploaded"
+    )
     __properties: ClassVar[List[str]] = ["entityType", "profiles"]
 
     @field_validator("entity_type")
@@ -115,7 +121,7 @@ class BulkUpsertRequestBody(BaseModel):
                 "entityType": obj.get("entityType"),
                 "profiles": (
                     [
-                        IdentitySourceUserProfileForUpsert.from_dict(_item)
+                        BulkUpsertRequestBodyProfilesInner.from_dict(_item)
                         for _item in obj["profiles"]
                     ]
                     if obj.get("profiles") is not None

@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_token_lifetime_minutes** | **int** |  | [optional] 
+**access_token_lifetime_minutes** | **int** | Lifetime of the access token in minutes. The minimum is five minutes. The maximum is one day. | [optional] 
 **inline_hook** | [**TokenAuthorizationServerPolicyRuleActionInlineHook**](TokenAuthorizationServerPolicyRuleActionInlineHook.md) |  | [optional] 
-**refresh_token_lifetime_minutes** | **int** |  | [optional] 
-**refresh_token_window_minutes** | **int** |  | [optional] 
+**refresh_token_lifetime_minutes** | **int** | Lifetime of the refresh token is the minimum access token lifetime. | [optional] 
+**refresh_token_window_minutes** | **int** | Timeframe when the refresh token is valid. The minimum is 10 minutes. The maximum is five years (2,628,000 minutes). | [optional] 
 
 ## Example
 

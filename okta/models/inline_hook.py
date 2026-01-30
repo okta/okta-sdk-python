@@ -30,28 +30,42 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.inline_hook_channel import InlineHookChannel
+from okta.models.inline_hook_links import InlineHookLinks
 from okta.models.inline_hook_status import InlineHookStatus
 from okta.models.inline_hook_type import InlineHookType
-from okta.models.links_self import LinksSelf
 
 
 class InlineHook(BaseModel):
     """
-    InlineHook
+    An inline hook object that specifies the details of the inline hook
     """  # noqa: E501
 
     channel: Optional[InlineHookChannel] = None
-    created: Optional[datetime] = None
-    id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = None
+    created: Optional[datetime] = Field(
+        default=None, description="Date of the inline hook creation"
+    )
+    id: Optional[StrictStr] = Field(
+        default=None, description="The unique identifier for the inline hook"
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Date of the last inline hook update",
+        alias="lastUpdated",
+    )
+    name: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="The display name of the inline hook"
+    )
     status: Optional[InlineHookStatus] = None
     type: Optional[InlineHookType] = None
-    version: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    version: Optional[StrictStr] = Field(
+        default=None,
+        description="Version of the inline hook type. The currently supported version is `1.0.0`.",
+    )
+    links: Optional[InlineHookLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "channel",
         "created",
@@ -96,12 +110,14 @@ class InlineHook(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "created",
                 "id",
                 "last_updated",
+                "version",
             ]
         )
 
@@ -150,7 +166,7 @@ class InlineHook(BaseModel):
                 "type": obj.get("type"),
                 "version": obj.get("version"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    InlineHookLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

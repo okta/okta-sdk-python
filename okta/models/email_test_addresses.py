@@ -37,11 +37,13 @@ class EmailTestAddresses(BaseModel):
     EmailTestAddresses
     """  # noqa: E501
 
-    var_from: StrictStr = Field(
-        description="An email address to send the test email from", alias="from"
+    from_address: StrictStr = Field(
+        description="Email address that sends test emails", alias="fromAddress"
     )
-    to: StrictStr = Field(description="An email address to send the test email to")
-    __properties: ClassVar[List[str]] = ["from", "to"]
+    to_address: StrictStr = Field(
+        description="Email address that receives test emails", alias="toAddress"
+    )
+    __properties: ClassVar[List[str]] = ["fromAddress", "toAddress"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,5 +93,7 @@ class EmailTestAddresses(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"from": obj.get("from"), "to": obj.get("to")})
+        _obj = cls.model_validate(
+            {"fromAddress": obj.get("fromAddress"), "toAddress": obj.get("toAddress")}
+        )
         return _obj

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**config** | [**InlineHookChannelConfig**](InlineHookChannelConfig.md) |  | [optional] 
+**config** | [**InlineHookHttpConfig**](InlineHookHttpConfig.md) |  | [optional] 
 
 ## Example
 

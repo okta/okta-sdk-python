@@ -40,13 +40,28 @@ class IdentitySourceSession(BaseModel):
     IdentitySourceSession
     """  # noqa: E501
 
-    created: Optional[datetime] = None
-    id: Optional[StrictStr] = None
-    identity_source_id: Optional[StrictStr] = Field(
-        default=None, alias="identitySourceId"
+    created: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the identity source session was created",
     )
-    import_type: Optional[StrictStr] = Field(default=None, alias="importType")
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    id: Optional[StrictStr] = Field(
+        default=None, description="The ID of the identity source session"
+    )
+    identity_source_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the custom identity source for which the session is created",
+        alias="identitySourceId",
+    )
+    import_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of import.  All imports are `INCREMENTAL` imports.",
+        alias="importType",
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the identity source session was created",
+        alias="lastUpdated",
+    )
     status: Optional[IdentitySourceSessionStatus] = None
     __properties: ClassVar[List[str]] = [
         "created",

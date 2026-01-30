@@ -1,11 +1,12 @@
 # Permissions
 
+Permissions assigned to the role
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**permissions** | [**List[Permission]**](Permission.md) |  | [optional] 
+**permissions** | [**List[Permission]**](Permission.md) | Array of permissions assigned to the role. See [Permissions](/openapi/okta-management/guides/permissions). | [optional] 
 
 ## Example
 

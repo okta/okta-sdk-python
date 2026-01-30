@@ -25,55 +25,62 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
-from typing import Any, ClassVar, Dict, List
+from importlib import import_module
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
+from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing_extensions import Self
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 
 from okta.models.application_feature_links import ApplicationFeatureLinks
-from okta.models.capabilities_object import CapabilitiesObject
+from okta.models.application_feature_type import ApplicationFeatureType
 from okta.models.enabled_status import EnabledStatus
+
+if TYPE_CHECKING:
+    from okta.models.inbound_provisioning_application_feature import (
+        InboundProvisioningApplicationFeature,
+    )
+    from okta.models.user_provisioning_application_feature import (
+        UserProvisioningApplicationFeature,
+    )
 
 
 class ApplicationFeature(BaseModel):
     """
-    The Feature object is used to configure application feature settings.  The only feature currently supported is
-    `USER_PROVISIONING` for the Org2Org application type.
+    The Feature object is used to configure app feature settings.
     """  # noqa: E501
 
-    capabilities: Optional[CapabilitiesObject] = None
     description: Optional[StrictStr] = Field(
         default=None, description="Description of the feature"
     )
-    name: Optional[StrictStr] = Field(
-        default=None, description="Identifying name of the feature"
-    )
+    name: Optional[ApplicationFeatureType] = None
     status: Optional[EnabledStatus] = None
     links: Optional[ApplicationFeatureLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = [
-        "capabilities",
-        "description",
-        "name",
-        "status",
-        "_links",
-    ]
-
-    @field_validator("name")
-    def name_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(["USER_PROVISIONING"]):
-            raise ValueError("must be one of enum values ('USER_PROVISIONING')")
-        return value
+    __properties: ClassVar[List[str]] = ["description", "name", "status", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
+
+    # JSON field name that stores the object type
+    __discriminator_property_name: ClassVar[str] = "name"
+
+    # discriminator mappings
+    __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
+        "INBOUND_PROVISIONING": "InboundProvisioningApplicationFeature",
+        "USER_PROVISIONING": "UserProvisioningApplicationFeature",
+    }
+
+    @classmethod
+    def get_discriminator_value(cls, obj: Dict[str, Any]) -> Optional[str]:
+        """Returns the discriminator value (object type) of the data"""
+        discriminator_value = obj[cls.__discriminator_property_name]
+        if discriminator_value:
+            return cls.__discriminator_value_class_map.get(discriminator_value)
+        else:
+            return None
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -85,7 +92,11 @@ class ApplicationFeature(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(
+        cls, json_str: str
+    ) -> Optional[
+        Union[InboundProvisioningApplicationFeature, UserProvisioningApplicationFeature]
+    ]:
         """Create an instance of ApplicationFeature from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -99,12 +110,10 @@ class ApplicationFeature(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "description",
-                "name",
             ]
         )
 
@@ -113,20 +122,6 @@ class ApplicationFeature(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of capabilities
-        if self.capabilities:
-            if not isinstance(self.capabilities, dict):
-                _dict["capabilities"] = self.capabilities.to_dict()
-            else:
-                _dict["capabilities"] = self.capabilities
-
-        # override the default output from pydantic by calling `to_dict()` of status
-        if self.status:
-            if not isinstance(self.status, dict):
-                _dict["status"] = self.status.to_dict()
-            else:
-                _dict["status"] = self.status
-
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -137,33 +132,28 @@ class ApplicationFeature(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(
+        cls, obj: Dict[str, Any]
+    ) -> Optional[
+        Union[InboundProvisioningApplicationFeature, UserProvisioningApplicationFeature]
+    ]:
         """Create an instance of ApplicationFeature from a dict"""
-        if obj is None:
-            return None
+        # look up the object type based on discriminator mapping
+        object_type = cls.get_discriminator_value(obj)
+        if object_type == "InboundProvisioningApplicationFeature":
+            return import_module(
+                "okta.models.inbound_provisioning_application_feature"
+            ).InboundProvisioningApplicationFeature.from_dict(obj)
+        if object_type == "UserProvisioningApplicationFeature":
+            return import_module(
+                "okta.models.user_provisioning_application_feature"
+            ).UserProvisioningApplicationFeature.from_dict(obj)
 
-        if not isinstance(obj, dict):
-            return cls.model_validate(obj)
-
-        _obj = cls.model_validate(
-            {
-                "capabilities": (
-                    CapabilitiesObject.from_dict(obj["capabilities"])
-                    if obj.get("capabilities") is not None
-                    else None
-                ),
-                "description": obj.get("description"),
-                "name": obj.get("name"),
-                "status": (
-                    EnabledStatus.from_dict(obj["status"])
-                    if obj.get("status") is not None
-                    else None
-                ),
-                "_links": (
-                    ApplicationFeatureLinks.from_dict(obj["_links"])
-                    if obj.get("_links") is not None
-                    else None
-                ),
-            }
+        raise ValueError(
+            "ApplicationFeature failed to lookup discriminator value from "
+            + json.dumps(obj)
+            + ". Discriminator property name: "
+            + cls.__discriminator_property_name
+            + ", mapping: "
+            + json.dumps(cls.__discriminator_value_class_map)
         )
-        return _obj

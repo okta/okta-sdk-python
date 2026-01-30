@@ -36,10 +36,12 @@ from okta.models.identity_provider_policy_provider import IdentityProviderPolicy
 
 class IdentityProviderPolicyRuleCondition(BaseModel):
     """
-    IdentityProviderPolicyRuleCondition
+    Specifies the IdP that's used to sign in
     """  # noqa: E501
 
-    idp_ids: Optional[List[StrictStr]] = Field(default=None, alias="idpIds")
+    idp_ids: Optional[List[StrictStr]] = Field(
+        default=None, description="Specifies the IdP ID", alias="idpIds"
+    )
     provider: Optional[IdentityProviderPolicyProvider] = None
     __properties: ClassVar[List[str]] = ["idpIds", "provider"]
 

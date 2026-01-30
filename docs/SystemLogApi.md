@@ -4,15 +4,15 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_log_events**](SystemLogApi.md#list_log_events) | **GET** /api/v1/logs | List all System Log Events
+[**list_log_events**](SystemLogApi.md#list_log_events) | **GET** /api/v1/logs | List all System Log events
 
 
 # **list_log_events**
-> List[LogEvent] list_log_events(since=since, until=until, filter=filter, q=q, limit=limit, sort_order=sort_order, after=after)
+> List[LogEvent] list_log_events(since=since, until=until, after=after, filter=filter, q=q, limit=limit, sort_order=sort_order)
 
-List all System Log Events
+List all System Log events
 
-Lists all system log events. The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API
+Lists all System Log events  See [System Log query](https://developer.okta.com/docs/reference/system-log-query/) for further details and examples, and [System Log filters and search](https://help.okta.com/okta_help.htm?type=oie&id=csh-syslog-filters) for common use cases.  By default, 100 System Log events are returned. If there are more events, see the [header link](https://developer.okta.com/docs/api/#link-header) for the `next` link, or increase the number of returned objects using the `limit` parameter.  >**Note:** The value of the `clientSecret` property in the System Log is secured by a hashing function, and isn't the value used during authentication.
 
 ### Example
 
@@ -48,17 +48,17 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SystemLogApi(api_client)
-    since = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
-    filter = 'filter_example' # str |  (optional)
-    q = 'q_example' # str |  (optional)
-    limit = 100 # int |  (optional) (default to 100)
-    sort_order = 'ASCENDING' # str |  (optional) (default to 'ASCENDING')
-    after = 'after_example' # str |  (optional)
+    since = '7 days prior to until' # str | Filters the lower time bound of the log events `published` property for bounded queries or persistence time for polling queries (optional) (default to '7 days prior to until')
+    until = 'current time' # str | Filters the upper time bound of the log events `published` property for bounded queries or persistence time for polling queries. (optional) (default to 'current time')
+    after = 'after_example' # str | Retrieves the next page of results. Okta returns a link in the HTTP Header (`rel=next`) that includes the after query parameter (optional)
+    filter = 'filter_example' # str | Filter expression that filters the results. All operators except [ ] are supported. See [Filter](https://developer.okta.com/docs/api/#filter) and [Operators](https://developer.okta.com/docs/api/#operators). (optional)
+    q = 'q_example' # str | Filters log events results by one or more case insensitive keywords. (optional)
+    limit = 100 # int | Sets the number of results that are returned in the response (optional) (default to 100)
+    sort_order = ASCENDING # str | The order of the returned events that are sorted by the `published` property (optional) (default to ASCENDING)
 
     try:
-        # List all System Log Events
-        api_response = api_instance.list_log_events(since=since, until=until, filter=filter, q=q, limit=limit, sort_order=sort_order, after=after)
+        # List all System Log events
+        api_response = api_instance.list_log_events(since=since, until=until, after=after, filter=filter, q=q, limit=limit, sort_order=sort_order)
         print("The response of SystemLogApi->list_log_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,13 +72,13 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **datetime**|  | [optional] 
- **until** | **datetime**|  | [optional] 
- **filter** | **str**|  | [optional] 
- **q** | **str**|  | [optional] 
- **limit** | **int**|  | [optional] [default to 100]
- **sort_order** | **str**|  | [optional] [default to &#39;ASCENDING&#39;]
- **after** | **str**|  | [optional] 
+ **since** | **str**| Filters the lower time bound of the log events &#x60;published&#x60; property for bounded queries or persistence time for polling queries | [optional] [default to &#39;7 days prior to until&#39;]
+ **until** | **str**| Filters the upper time bound of the log events &#x60;published&#x60; property for bounded queries or persistence time for polling queries. | [optional] [default to &#39;current time&#39;]
+ **after** | **str**| Retrieves the next page of results. Okta returns a link in the HTTP Header (&#x60;rel&#x3D;next&#x60;) that includes the after query parameter | [optional] 
+ **filter** | **str**| Filter expression that filters the results. All operators except [ ] are supported. See [Filter](https://developer.okta.com/docs/api/#filter) and [Operators](https://developer.okta.com/docs/api/#operators). | [optional] 
+ **q** | **str**| Filters log events results by one or more case insensitive keywords. | [optional] 
+ **limit** | **int**| Sets the number of results that are returned in the response | [optional] [default to 100]
+ **sort_order** | **str**| The order of the returned events that are sorted by the &#x60;published&#x60; property | [optional] [default to ASCENDING]
 
 ### Return type
 
@@ -98,6 +98,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success |  -  |
+**400** | Bad Request |  -  |
 **403** | Forbidden |  -  |
 **429** | Too Many Requests |  -  |
 

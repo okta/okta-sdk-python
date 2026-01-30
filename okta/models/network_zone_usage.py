@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class NetworkZoneUsage(str, Enum):
     """
-    The usage of the network zone
+    The usage of the Network Zone
     """
 
     """

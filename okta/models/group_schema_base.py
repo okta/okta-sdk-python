@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.group_schema_base_properties import GroupSchemaBaseProperties
@@ -39,10 +39,14 @@ class GroupSchemaBase(BaseModel):
     GroupSchemaBase
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    properties: Optional[GroupSchemaBaseProperties] = None
-    required: Optional[List[StrictStr]] = None
-    type: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="The subschema name")
+    properties: Optional[GroupSchemaBaseProperties] = Field(
+        default=None, description="The `#base` object properties"
+    )
+    required: Optional[List[StrictStr]] = Field(
+        default=None, description="A collection indicating required property names"
+    )
+    type: Optional[StrictStr] = Field(default=None, description="The object type")
     __properties: ClassVar[List[str]] = ["id", "properties", "required", "type"]
 
     model_config = ConfigDict(
@@ -75,10 +79,14 @@ class GroupSchemaBase(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "id",
+                "required",
+                "type",
             ]
         )
 

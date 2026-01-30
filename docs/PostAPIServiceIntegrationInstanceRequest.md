@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **granted_scopes** | **List[str]** | The list of Okta management scopes granted to the API Service Integration instance. See [Okta management OAuth 2.0 scopes](/oauth2/#okta-admin-management). | 
+**properties** | [**Dict[str, AppPropertiesValue]**](AppPropertiesValue.md) | App instance properties | [optional] 
 **type** | **str** | The type of the API service integration. This string is an underscore-concatenated, lowercased API service integration name. For example, &#x60;my_api_log_integration&#x60;. | 
 
 ## Example

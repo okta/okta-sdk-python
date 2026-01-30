@@ -29,14 +29,13 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 from okta.models.event_hook_channel import EventHookChannel
+from okta.models.event_hook_links import EventHookLinks
 from okta.models.event_hook_verification_status import EventHookVerificationStatus
 from okta.models.event_subscriptions import EventSubscriptions
-from okta.models.lifecycle_status import LifecycleStatus
-from okta.models.links_self import LinksSelf
 
 
 class EventHook(BaseModel):
@@ -44,22 +43,40 @@ class EventHook(BaseModel):
     EventHook
     """  # noqa: E501
 
-    channel: Optional[EventHookChannel] = None
-    created: Optional[datetime] = None
-    created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
-    events: Optional[EventSubscriptions] = None
-    id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = None
-    status: Optional[LifecycleStatus] = None
+    channel: EventHookChannel
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp of the event hook creation"
+    )
+    created_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the user who created the event hook",
+        alias="createdBy",
+    )
+    description: Optional[StrictStr] = Field(
+        default=None, description="Description of the event hook"
+    )
+    events: EventSubscriptions
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique key for the event hook"
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Date of the last event hook update",
+        alias="lastUpdated",
+    )
+    name: StrictStr = Field(description="Display name for the event hook")
+    status: Optional[StrictStr] = Field(
+        default=None, description="Status of the event hook"
+    )
     verification_status: Optional[EventHookVerificationStatus] = Field(
         default=None, alias="verificationStatus"
     )
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[EventHookLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "channel",
         "created",
         "createdBy",
+        "description",
         "events",
         "id",
         "lastUpdated",
@@ -68,6 +85,16 @@ class EventHook(BaseModel):
         "verificationStatus",
         "_links",
     ]
+
+    @field_validator("status")
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["ACTIVE", "INACTIVE"]):
+            raise ValueError("must be one of enum values ('ACTIVE', 'INACTIVE')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,12 +128,16 @@ class EventHook(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "created",
+                "created_by",
                 "id",
                 "last_updated",
+                "status",
             ]
         )
 
@@ -136,6 +167,11 @@ class EventHook(BaseModel):
             else:
                 _dict["_links"] = self.links
 
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict["description"] = None
+
         return _dict
 
     @classmethod
@@ -156,6 +192,7 @@ class EventHook(BaseModel):
                 ),
                 "created": obj.get("created"),
                 "createdBy": obj.get("createdBy"),
+                "description": obj.get("description"),
                 "events": (
                     EventSubscriptions.from_dict(obj["events"])
                     if obj.get("events") is not None
@@ -167,7 +204,7 @@ class EventHook(BaseModel):
                 "status": obj.get("status"),
                 "verificationStatus": obj.get("verificationStatus"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    EventHookLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

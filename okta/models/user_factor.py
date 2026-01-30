@@ -33,26 +33,23 @@ from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 
-from okta.models.factor_provider import FactorProvider
-from okta.models.factor_status import FactorStatus
-from okta.models.factor_type import FactorType
-from okta.models.links_self import LinksSelf
-from okta.models.verify_factor_request import VerifyFactorRequest
+from okta.models.user_factor_links import UserFactorLinks
+from okta.models.user_factor_status import UserFactorStatus
+from okta.models.user_factor_type import UserFactorType
 
 if TYPE_CHECKING:
-    from okta.models.call_user_factor import CallUserFactor
-    from okta.models.email_user_factor import EmailUserFactor
-    from okta.models.custom_hotp_user_factor import CustomHotpUserFactor
-    from okta.models.push_user_factor import PushUserFactor
-    from okta.models.security_question_user_factor import SecurityQuestionUserFactor
-    from okta.models.sms_user_factor import SmsUserFactor
-    from okta.models.token_user_factor import TokenUserFactor
-    from okta.models.hardware_user_factor import HardwareUserFactor
-    from okta.models.custom_hotp_user_factor import CustomHotpUserFactor   # noqa: F811
-    from okta.models.totp_user_factor import TotpUserFactor
-    from okta.models.u2f_user_factor import U2fUserFactor
-    from okta.models.web_user_factor import WebUserFactor
-    from okta.models.web_authn_user_factor import WebAuthnUserFactor
+    from okta.models.user_factor_call import UserFactorCall
+    from okta.models.user_factor_email import UserFactorEmail
+    from okta.models.user_factor_push import UserFactorPush
+    from okta.models.user_factor_security_question import UserFactorSecurityQuestion
+    from okta.models.user_factor_sms import UserFactorSMS
+    from okta.models.user_factor_token import UserFactorToken
+    from okta.models.user_factor_token_hardware import UserFactorTokenHardware
+    from okta.models.user_factor_token_hotp import UserFactorTokenHOTP
+    from okta.models.user_factor_token_software_totp import UserFactorTokenSoftwareTOTP
+    from okta.models.user_factor_u2_f import UserFactorU2F
+    from okta.models.user_factor_web import UserFactorWeb
+    from okta.models.user_factor_web_authn import UserFactorWebAuthn
 
 
 class UserFactor(BaseModel):
@@ -60,20 +57,34 @@ class UserFactor(BaseModel):
     UserFactor
     """  # noqa: E501
 
-    created: Optional[datetime] = None
-    factor_type: Optional[FactorType] = Field(default=None, alias="factorType")
-    id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    profile: Optional[Dict[str, Any]] = Field(
-        default=None, description="Factor-specific attributes"
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the factor was enrolled"
     )
-    provider: Optional[FactorProvider] = None
-    status: Optional[FactorStatus] = None
-    verify: Optional[VerifyFactorRequest] = None
+    factor_type: Optional[UserFactorType] = Field(default=None, alias="factorType")
+    id: Optional[StrictStr] = Field(default=None, description="ID of the factor")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the factor was last updated",
+        alias="lastUpdated",
+    )
+    profile: Optional[Dict[str, Any]] = Field(
+        default=None, description="Specific attributes related to the factor"
+    )
+    provider: Optional[StrictStr] = Field(
+        default=None,
+        description="Provider for the factor. Each provider can support a subset of factor types.",
+    )
+    status: Optional[UserFactorStatus] = None
+    vendor_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the factor vendor. This is usually the same as the provider except for On-Prem MFA, "
+        "which depends on admin settings.",
+        alias="vendorName",
+    )
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
         default=None, alias="_embedded"
     )
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[UserFactorLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "created",
         "factorType",
@@ -82,7 +93,7 @@ class UserFactor(BaseModel):
         "profile",
         "provider",
         "status",
-        "verify",
+        "vendorName",
         "_embedded",
         "_links",
     ]
@@ -98,19 +109,18 @@ class UserFactor(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
-        "call": "CallUserFactor",
-        "email": "EmailUserFactor",
-        "hotp": "CustomHotpUserFactor",
-        "push": "PushUserFactor",
-        "question": "SecurityQuestionUserFactor",
-        "sms": "SmsUserFactor",
-        "token": "TokenUserFactor",
-        "token:hardware": "HardwareUserFactor",
-        "token:hotp": "CustomHotpUserFactor",
-        "token:software:totp": "TotpUserFactor",
-        "u2f": "U2fUserFactor",
-        "web": "WebUserFactor",
-        "webauthn": "WebAuthnUserFactor",
+        "call": "UserFactorCall",
+        "email": "UserFactorEmail",
+        "push": "UserFactorPush",
+        "question": "UserFactorSecurityQuestion",
+        "sms": "UserFactorSMS",
+        "token": "UserFactorToken",
+        "token:hardware": "UserFactorTokenHardware",
+        "token:hotp": "UserFactorTokenHOTP",
+        "token:software:totp": "UserFactorTokenSoftwareTOTP",
+        "u2f": "UserFactorU2F",
+        "web": "UserFactorWeb",
+        "webauthn": "UserFactorWebAuthn",
     }
 
     @classmethod
@@ -134,19 +144,18 @@ class UserFactor(BaseModel):
     @classmethod
     def from_json(cls, json_str: str) -> Optional[
         Union[
-            CallUserFactor,
-            EmailUserFactor,
-            CustomHotpUserFactor,
-            PushUserFactor,
-            SecurityQuestionUserFactor,
-            SmsUserFactor,
-            TokenUserFactor,
-            HardwareUserFactor,
-            CustomHotpUserFactor,
-            TotpUserFactor,
-            U2fUserFactor,
-            WebUserFactor,
-            WebAuthnUserFactor,
+            UserFactorCall,
+            UserFactorEmail,
+            UserFactorPush,
+            UserFactorSecurityQuestion,
+            UserFactorSMS,
+            UserFactorToken,
+            UserFactorTokenHardware,
+            UserFactorTokenHOTP,
+            UserFactorTokenSoftwareTOTP,
+            UserFactorU2F,
+            UserFactorWeb,
+            UserFactorWebAuthn,
         ]
     ]:
         """Create an instance of UserFactor from a JSON string"""
@@ -165,12 +174,14 @@ class UserFactor(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "created",
                 "id",
                 "last_updated",
+                "vendor_name",
                 "embedded",
             ]
         )
@@ -180,13 +191,6 @@ class UserFactor(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of verify
-        if self.verify:
-            if not isinstance(self.verify, dict):
-                _dict["verify"] = self.verify.to_dict()
-            else:
-                _dict["verify"] = self.verify
-
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -199,76 +203,71 @@ class UserFactor(BaseModel):
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[
         Union[
-            CallUserFactor,
-            EmailUserFactor,
-            CustomHotpUserFactor,
-            PushUserFactor,
-            SecurityQuestionUserFactor,
-            SmsUserFactor,
-            TokenUserFactor,
-            HardwareUserFactor,
-            CustomHotpUserFactor,
-            TotpUserFactor,
-            U2fUserFactor,
-            WebUserFactor,
-            WebAuthnUserFactor,
+            UserFactorCall,
+            UserFactorEmail,
+            UserFactorPush,
+            UserFactorSecurityQuestion,
+            UserFactorSMS,
+            UserFactorToken,
+            UserFactorTokenHardware,
+            UserFactorTokenHOTP,
+            UserFactorTokenSoftwareTOTP,
+            UserFactorU2F,
+            UserFactorWeb,
+            UserFactorWebAuthn,
         ]
     ]:
         """Create an instance of UserFactor from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type == "CallUserFactor":
+        if object_type == "UserFactorCall":
             return import_module(
-                "okta.models.call_user_factor"
-            ).CallUserFactor.from_dict(obj)
-        if object_type == "EmailUserFactor":
+                "okta.models.user_factor_call"
+            ).UserFactorCall.from_dict(obj)
+        if object_type == "UserFactorEmail":
             return import_module(
-                "okta.models.email_user_factor"
-            ).EmailUserFactor.from_dict(obj)
-        if object_type == "CustomHotpUserFactor":
+                "okta.models.user_factor_email"
+            ).UserFactorEmail.from_dict(obj)
+        if object_type == "UserFactorPush":
             return import_module(
-                "okta.models.custom_hotp_user_factor"
-            ).CustomHotpUserFactor.from_dict(obj)
-        if object_type == "PushUserFactor":
+                "okta.models.user_factor_push"
+            ).UserFactorPush.from_dict(obj)
+        if object_type == "UserFactorSecurityQuestion":
             return import_module(
-                "okta.models.push_user_factor"
-            ).PushUserFactor.from_dict(obj)
-        if object_type == "SecurityQuestionUserFactor":
-            return import_module(
-                "okta.models.security_question_user_factor"
-            ).SecurityQuestionUserFactor.from_dict(obj)
-        if object_type == "SmsUserFactor":
-            return import_module("okta.models.sms_user_factor").SmsUserFactor.from_dict(
+                "okta.models.user_factor_security_question"
+            ).UserFactorSecurityQuestion.from_dict(obj)
+        if object_type == "UserFactorSMS":
+            return import_module("okta.models.user_factor_sms").UserFactorSMS.from_dict(
                 obj
             )
-        if object_type == "TokenUserFactor":
+        if object_type == "UserFactorToken":
             return import_module(
-                "okta.models.token_user_factor"
-            ).TokenUserFactor.from_dict(obj)
-        if object_type == "HardwareUserFactor":
+                "okta.models.user_factor_token"
+            ).UserFactorToken.from_dict(obj)
+        if object_type == "UserFactorTokenHardware":
             return import_module(
-                "okta.models.hardware_user_factor"
-            ).HardwareUserFactor.from_dict(obj)
-        if object_type == "CustomHotpUserFactor":
+                "okta.models.user_factor_token_hardware"
+            ).UserFactorTokenHardware.from_dict(obj)
+        if object_type == "UserFactorTokenHOTP":
             return import_module(
-                "okta.models.custom_hotp_user_factor"
-            ).CustomHotpUserFactor.from_dict(obj)
-        if object_type == "TotpUserFactor":
+                "okta.models.user_factor_token_hotp"
+            ).UserFactorTokenHOTP.from_dict(obj)
+        if object_type == "UserFactorTokenSoftwareTOTP":
             return import_module(
-                "okta.models.totp_user_factor"
-            ).TotpUserFactor.from_dict(obj)
-        if object_type == "U2fUserFactor":
-            return import_module("okta.models.u2f_user_factor").U2fUserFactor.from_dict(
+                "okta.models.user_factor_token_software_totp"
+            ).UserFactorTokenSoftwareTOTP.from_dict(obj)
+        if object_type == "UserFactorU2F":
+            return import_module(
+                "okta.models.user_factor_u2_f"
+            ).UserFactorU2F.from_dict(obj)
+        if object_type == "UserFactorWeb":
+            return import_module("okta.models.user_factor_web").UserFactorWeb.from_dict(
                 obj
             )
-        if object_type == "WebUserFactor":
-            return import_module("okta.models.web_user_factor").WebUserFactor.from_dict(
-                obj
-            )
-        if object_type == "WebAuthnUserFactor":
+        if object_type == "UserFactorWebAuthn":
             return import_module(
-                "okta.models.web_authn_user_factor"
-            ).WebAuthnUserFactor.from_dict(obj)
+                "okta.models.user_factor_web_authn"
+            ).UserFactorWebAuthn.from_dict(obj)
 
         raise ValueError(
             "UserFactor failed to lookup discriminator value from "

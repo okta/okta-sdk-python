@@ -38,24 +38,23 @@ class EmailServerRequest(BaseModel):
     """  # noqa: E501
 
     alias: Optional[StrictStr] = Field(
-        default=None, description="A name to identify this configuration"
+        default=None, description="Human-readable name for your SMTP server"
     )
     enabled: Optional[StrictBool] = Field(
         default=None,
-        description="True if and only if all email traffic should be routed through this "
-                    "SMTP Server",
+        description="If `true`, routes all email traffic through your SMTP server",
     )
     host: Optional[StrictStr] = Field(
-        default=None, description="The address of the SMTP Server"
+        default=None, description="Hostname or IP address of your SMTP server"
     )
     port: Optional[StrictInt] = Field(
-        default=None, description="The port number of the SMTP Server"
+        default=None, description="Port number of your SMTP server"
     )
     username: Optional[StrictStr] = Field(
-        default=None, description="The username to use with your SMTP Server"
+        default=None, description="Username used to access your SMTP server"
     )
     password: Optional[StrictStr] = Field(
-        default=None, description="The password to use with your SMTP server"
+        default=None, description="Password used to access your SMTP server"
     )
     __properties: ClassVar[List[str]] = [
         "alias",

@@ -43,59 +43,51 @@ from okta.models.authentication_method_object import AuthenticationMethodObject
 
 class AccessPolicyConstraint(BaseModel):
     """
-    AccessPolicyConstraint
+    Consists of a `POSSESSION` constraint, a `KNOWLEDGE` constraint, or both. You can't configure an `INHERENCE` constraint,
+    but an inherence factor can satisfy the second part of a 2FA assurance if no other constraints are specified.
+    Constraints are logically evaluated such that only one `constraint` object needs to be satisfied, but within a
+    `constraint` object, each `constraint` property must be satisfied.
     """  # noqa: E501
 
-    methods: Optional[List[StrictStr]] = Field(
-        default=None, description="The Authenticator methods that are permitted"
-    )
-    reauthenticate_in: Optional[StrictStr] = Field(
-        default=None,
-        description="The duration after which the user must re-authenticate "
-                    "regardless of user activity. This re-authentication interval "
-                    "overrides the Verification Method object's "
-                    "`reauthenticateIn` "
-                    "interval. The supported values use ISO 8601 period format "
-                    "for "
-                    "recurring time intervals (for example, `PT1H`).",
-        alias="reauthenticateIn",
-    )
-    types: Optional[List[StrictStr]] = Field(
-        default=None, description="The Authenticator types that are permitted"
-    )
     authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(
         default=None,
-        description="This property specifies the "
-                    "precise authenticator and method "
-                    "for authentication.",
+        description="This property specifies the precise authenticator and method for authentication. <x-lifecycle "
+        'class="oie"></x-lifecycle>',
         alias="authenticationMethods",
     )
     excluded_authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(
         default=None,
-        description="This property specifies "
-                    "the precise "
-                    "authenticator and "
-                    "method "
-                    "to exclude from "
-                    "authentication.",
+        description="This property specifies the precise authenticator and method to exclude from authentication. "
+        '<x-lifecycle class="oie"></x-lifecycle>',
         alias="excludedAuthenticationMethods",
+    )
+    methods: Optional[List[StrictStr]] = Field(
+        default=None, description="The authenticator methods that are permitted"
+    )
+    reauthenticate_in: Optional[StrictStr] = Field(
+        default=None,
+        description="The duration after which the user must re-authenticate regardless of user activity. This "
+        "re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The "
+        "supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).",
+        alias="reauthenticateIn",
     )
     required: Optional[StrictBool] = Field(
         default=None,
-        description="This property indicates whether the knowledge or possession factor "
-                    "is "
-                    "required by the assurance. It's optional in the request, "
-                    "but is always returned in the response. By default, this field is "
-                    "`true`. If the knowledge or possession constraint has values "
-                    "for`excludedAuthenticationMethods` the `required` value is false.",
+        description="This property indicates whether the knowledge or possession factor is required by the assurance. It's "
+        "optional in the request, but is always returned in the response. By default, this field is `true`. If "
+        "the knowledge or possession constraint has values for `excludedAuthenticationMethods` the `required` "
+        'value is false. <x-lifecycle class="oie"></x-lifecycle>',
+    )
+    types: Optional[List[StrictStr]] = Field(
+        default=None, description="The authenticator types that are permitted"
     )
     __properties: ClassVar[List[str]] = [
-        "methods",
-        "reauthenticateIn",
-        "types",
         "authenticationMethods",
         "excludedAuthenticationMethods",
+        "methods",
+        "reauthenticateIn",
         "required",
+        "types",
     ]
 
     @field_validator("methods")
@@ -106,21 +98,21 @@ class AccessPolicyConstraint(BaseModel):
 
         for i in value:
             if i not in set(
-                    [
-                        "PASSWORD",
-                        "SECURITY_QUESTION",
-                        "SMS",
-                        "VOICE",
-                        "EMAIL",
-                        "PUSH",
-                        "SIGNED_NONCE",
-                        "OTP",
-                        "TOTP",
-                        "WEBAUTHN",
-                        "DUO",
-                        "IDP",
-                        "CERT",
-                    ]
+                [
+                    "PASSWORD",
+                    "SECURITY_QUESTION",
+                    "SMS",
+                    "VOICE",
+                    "EMAIL",
+                    "PUSH",
+                    "SIGNED_NONCE",
+                    "OTP",
+                    "TOTP",
+                    "WEBAUTHN",
+                    "DUO",
+                    "IDP",
+                    "CERT",
+                ]
             ):
                 raise ValueError(
                     "each list item must be one of ('PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', "
@@ -136,20 +128,19 @@ class AccessPolicyConstraint(BaseModel):
 
         for i in value:
             if i not in set(
-                    [
-                        "SECURITY_KEY",
-                        "PHONE",
-                        "EMAIL",
-                        "PASSWORD",
-                        "SECURITY_QUESTION",
-                        "APP",
-                        "FEDERATED",
-                    ]
+                [
+                    "SECURITY_KEY",
+                    "PHONE",
+                    "EMAIL",
+                    "PASSWORD",
+                    "SECURITY_QUESTION",
+                    "APP",
+                    "FEDERATED",
+                ]
             ):
                 raise ValueError(
                     "each list item must be one of ('SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', "
-                    "'APP', "
-                    "'FEDERATED')"
+                    "'APP', 'FEDERATED')"
                 )
         return value
 
@@ -218,9 +209,6 @@ class AccessPolicyConstraint(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "methods": obj.get("methods"),
-                "reauthenticateIn": obj.get("reauthenticateIn"),
-                "types": obj.get("types"),
                 "authenticationMethods": (
                     [
                         AuthenticationMethodObject.from_dict(_item)
@@ -237,7 +225,10 @@ class AccessPolicyConstraint(BaseModel):
                     if obj.get("excludedAuthenticationMethods") is not None
                     else None
                 ),
+                "methods": obj.get("methods"),
+                "reauthenticateIn": obj.get("reauthenticateIn"),
                 "required": obj.get("required"),
+                "types": obj.get("types"),
             }
         )
         return _obj

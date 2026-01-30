@@ -37,6 +37,7 @@ class ScreenLockType(str, Enum):
     allowed enum values
     """
     BIOMETRIC = "BIOMETRIC"
+    NONE = "NONE"
     PASSCODE = "PASSCODE"
 
     @classmethod

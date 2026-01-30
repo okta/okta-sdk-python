@@ -40,7 +40,7 @@ from okta.models.password_policy_recovery_question import PasswordPolicyRecovery
 
 class PasswordPolicyRecoveryFactors(BaseModel):
     """
-    PasswordPolicyRecoveryFactors
+    Settings for the factors that can be used for recovery
     """  # noqa: E501
 
     okta_call: Optional[PasswordPolicyRecoveryFactorSettings] = None

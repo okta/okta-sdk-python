@@ -31,6 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
+from okta.models.update_user_request_type import UpdateUserRequestType
 from okta.models.user_credentials import UserCredentials
 from okta.models.user_profile import UserProfile
 
@@ -44,10 +45,12 @@ class UpdateUserRequest(BaseModel):
     profile: Optional[UserProfile] = None
     realm_id: Optional[StrictStr] = Field(
         default=None,
-        description="The ID of the realm in which the user is residing",
+        description="The ID of the realm in which the user is residing. See [Realms]("
+        "/openapi/okta-management/management/tag/Realm/).",
         alias="realmId",
     )
-    __properties: ClassVar[List[str]] = ["credentials", "profile", "realmId"]
+    type: Optional[UpdateUserRequestType] = None
+    __properties: ClassVar[List[str]] = ["credentials", "profile", "realmId", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,6 +103,13 @@ class UpdateUserRequest(BaseModel):
             else:
                 _dict["profile"] = self.profile
 
+        # override the default output from pydantic by calling `to_dict()` of type
+        if self.type:
+            if not isinstance(self.type, dict):
+                _dict["type"] = self.type.to_dict()
+            else:
+                _dict["type"] = self.type
+
         return _dict
 
     @classmethod
@@ -124,6 +134,11 @@ class UpdateUserRequest(BaseModel):
                     else None
                 ),
                 "realmId": obj.get("realmId"),
+                "type": (
+                    UpdateUserRequestType.from_dict(obj["type"])
+                    if obj.get("type") is not None
+                    else None
+                ),
             }
         )
         return _obj

@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 from okta.models.sspr_primary_requirement import SsprPrimaryRequirement
@@ -37,12 +37,31 @@ from okta.models.sspr_step_up_requirement import SsprStepUpRequirement
 
 class SsprRequirement(BaseModel):
     """
-    Describes the initial and secondary authenticator requirements a user needs to reset their password
+    <x-lifecycle class=\"oie\"></x-lifecycle> Describes the initial and secondary authenticator requirements a user needs to
+    reset their password
     """  # noqa: E501
 
+    access_control: Optional[StrictStr] = Field(
+        default=None,
+        description="Determines which authentication requirements a user needs to perform self-service operations. "
+        "`AUTH_POLICY` defers conditions and authentication requirements to the [Okta account management "
+        "policy](https://developer.okta.com/docs/guides/okta-account-management-policy/main/). `LEGACY` refers "
+        "to the requirements described by this rule.",
+        alias="accessControl",
+    )
     primary: Optional[SsprPrimaryRequirement] = None
     step_up: Optional[SsprStepUpRequirement] = Field(default=None, alias="stepUp")
-    __properties: ClassVar[List[str]] = ["primary", "stepUp"]
+    __properties: ClassVar[List[str]] = ["accessControl", "primary", "stepUp"]
+
+    @field_validator("access_control")
+    def access_control_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["AUTH_POLICY", "LEGACY"]):
+            raise ValueError("must be one of enum values ('AUTH_POLICY', 'LEGACY')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,6 +127,7 @@ class SsprRequirement(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "accessControl": obj.get("accessControl"),
                 "primary": (
                     SsprPrimaryRequirement.from_dict(obj["primary"])
                     if obj.get("primary") is not None

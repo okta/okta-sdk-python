@@ -36,9 +36,8 @@ from okta.models.lifecycle_create_setting_object import LifecycleCreateSettingOb
 
 class CapabilitiesCreateObject(BaseModel):
     """
-    Determines whether Okta assigns a new application account to each user managed by Okta.  Okta doesn't create a new
-    account if it detects that the username specified in Okta already exists in the application. The user's Okta username
-    is assigned by default.
+    Determines whether Okta assigns a new app account to each user managed by Okta.  Okta doesn't create a new account if it
+    detects that the username specified in Okta already exists in the app. The user's Okta username is assigned by default.
     """  # noqa: E501
 
     lifecycle_create: Optional[LifecycleCreateSettingObject] = Field(

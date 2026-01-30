@@ -4,13 +4,13 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**send_risk_events**](RiskEventApi.md#send_risk_events) | **POST** /api/v1/risk/events/ip | Send multiple Risk Events
+[**send_risk_events**](RiskEventApi.md#send_risk_events) | **POST** /api/v1/risk/events/ip | Send multiple risk events
 
 
 # **send_risk_events**
 > send_risk_events(instance)
 
-Send multiple Risk Events
+Send multiple risk events
 
 Sends multiple IP risk events to Okta. This request is used by a third-party risk provider to send IP risk events to Okta. The third-party risk provider needs to be registered with Okta before they can send events to Okta. See [Risk Providers](/openapi/okta-management/management/tag/RiskProvider/). This API has a rate limit of 30 requests per minute. You can include multiple risk events (up to a maximum of 20 events) in a single payload to reduce the number of API calls. Prioritize sending high risk signals if you have a burst of signals to send that would exceed the maximum request limits.
 
@@ -51,7 +51,7 @@ with okta.ApiClient(configuration) as api_client:
     instance = [okta.RiskEvent()] # List[RiskEvent] | 
 
     try:
-        # Send multiple Risk Events
+        # Send multiple risk events
         api_instance.send_risk_events(instance)
     except Exception as e:
         print("Exception when calling RiskEventApi->send_risk_events: %s\n" % e)

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OrgContactType(str, Enum):
     """
-    OrgContactType
+    Type of contact
     """
 
     """

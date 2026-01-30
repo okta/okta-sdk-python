@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **os_version** | [**OSVersion**](OSVersion.md) |  | [optional] 
 **screen_lock_type** | [**DeviceAssuranceAndroidPlatformAllOfScreenLockType**](DeviceAssuranceAndroidPlatformAllOfScreenLockType.md) |  | [optional] 
 **secure_hardware_present** | **bool** |  | [optional] 
+**third_party_signal_providers** | [**DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders**](DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders.md) |  | [optional] 
 
 ## Example
 

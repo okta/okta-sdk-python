@@ -126,7 +126,7 @@ class TestRealmsResource:
                 updated_profile = models.RealmProfile(name=f"{realm_name}-updated")
                 updated_realm = models.Realm(profile=updated_profile)
 
-                result, _, update_err = await client.update_realm(
+                result, _, update_err = await client.replace_realm(
                     realm_id, updated_realm
                 )
                 if update_err is None:
@@ -202,7 +202,7 @@ class TestRealmsResource:
             "list_realms",
             "create_realm",
             "get_realm",
-            "update_realm",
+            "replace_realm",
             "delete_realm",
         ]
 
@@ -264,7 +264,7 @@ class TestRealmsResource:
                 updated_profile = models.RealmProfile(name=f"{realm_name}-workflow")
                 updated_data = models.Realm(profile=updated_profile)
 
-                updated_realm, _, update_err = await client.update_realm(
+                updated_realm, _, update_err = await client.replace_realm(
                     realm_id, updated_data
                 )
                 if update_err is None:

@@ -36,7 +36,7 @@ from okta.models.provisioning_suspended_action import ProvisioningSuspendedActio
 
 class ProvisioningSuspendedCondition(BaseModel):
     """
-    ProvisioningSuspendedCondition
+    Behavior for a previously suspended IdP user during authentication. Not supported with OIDC IdPs.
     """  # noqa: E501
 
     action: Optional[ProvisioningSuspendedAction] = None

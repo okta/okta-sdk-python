@@ -28,8 +28,10 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
+
+from okta.models.simulate_result_status import SimulateResultStatus
 
 
 class SimulateResultConditions(BaseModel):
@@ -37,23 +39,9 @@ class SimulateResultConditions(BaseModel):
     SimulateResultConditions
     """  # noqa: E501
 
-    status: Optional[StrictStr] = Field(
-        default=None, description="The result of the entity evaluation"
-    )
+    status: Optional[SimulateResultStatus] = None
     type: Optional[StrictStr] = Field(default=None, description="The type of condition")
     __properties: ClassVar[List[str]] = ["status", "type"]
-
-    @field_validator("status")
-    def status_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(["MATCH", "UNMATCHED", "UNDEFINED"]):
-            raise ValueError(
-                "must be one of enum values ('MATCH', 'UNMATCHED', 'UNDEFINED')"
-            )
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

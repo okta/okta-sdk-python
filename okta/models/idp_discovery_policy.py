@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import ConfigDict
+from pydantic import ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.policy import Policy
@@ -40,7 +40,10 @@ class IdpDiscoveryPolicy(Policy):
     IdpDiscoveryPolicy
     """  # noqa: E501
 
-    conditions: Optional[Dict[str, Any]] = None
+    conditions: Optional[StrictStr] = Field(
+        default=None,
+        description="Policy conditions aren't supported for this policy type.",
+    )
     __properties: ClassVar[List[str]] = [
         "created",
         "description",
@@ -120,12 +123,12 @@ class IdpDiscoveryPolicy(Policy):
             {
                 "created": obj.get("created"),
                 "description": obj.get("description"),
-                "id": obj.get("id"),
+                "id": obj.get("id") if obj.get("id") is not None else "Assigned",
                 "lastUpdated": obj.get("lastUpdated"),
                 "name": obj.get("name"),
                 "priority": obj.get("priority"),
                 "status": obj.get("status"),
-                "system": obj.get("system"),
+                "system": obj.get("system") if obj.get("system") is not None else False,
                 "type": obj.get("type"),
                 "_embedded": obj.get("_embedded"),
                 "_links": (

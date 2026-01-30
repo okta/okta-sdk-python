@@ -1,12 +1,13 @@
 # OSVersion
 
-Current version of the operating system
+Specifies the OS requirement for the policy.  There are two types of OS requirements:  * **Static**: A specific OS version requirement that doesn't change until you update the policy. A static OS requirement is specified with the `osVersion.minimum` property. * **Dynamic**: An OS version requirement that is relative to the latest major OS release and security patch. A dynamic OS requirement is specified with the `osVersion.dynamicVersionRequirement` property. > **Note:** Dynamic OS requirements are available only if the **Dynamic OS version compliance** [self-service EA](/openapi/okta-management/guides/release-lifecycle/#early-access-ea) feature is enabled. You can't specify both `osVersion.minimum` and `osVersion.dynamicVersionRequirement` properties at the same time. 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**minimum** | **str** |  | [optional] 
+**dynamic_version_requirement** | [**OSVersionDynamicVersionRequirement**](OSVersionDynamicVersionRequirement.md) |  | [optional] 
+**minimum** | **str** | The device version must be equal to or newer than the specified version string (maximum of three components for iOS and macOS, and maximum of four components for Android) | [optional] 
 
 ## Example
 

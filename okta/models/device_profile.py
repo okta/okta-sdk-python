@@ -50,15 +50,17 @@ class DeviceProfile(BaseModel):
     imei: Optional[Annotated[str, Field(min_length=14, strict=True, max_length=17)]] = (
         Field(
             default=None,
-            description="International "
-                        "Mobile Equipment "
-                        "Identity (IMEI) of the device",
+            description="International Mobile Equipment Identity (IMEI) of the device",
         )
     )
     integrity_jailbreak: Optional[StrictBool] = Field(
         default=None,
         description="Indicates if the device is jailbroken or rooted. Only applicable to `IOS` and `ANDROID` platforms",
         alias="integrityJailbreak",
+    )
+    managed: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the device is managed by mobile device management (MDM) software",
     )
     manufacturer: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(
         default=None, description="Name of the manufacturer of the device"
@@ -89,17 +91,18 @@ class DeviceProfile(BaseModel):
     )
     tpm_public_key_hash: Optional[StrictStr] = Field(
         default=None,
-        description="Windows Trsted Platform Module hash value",
+        description="Windows Trusted Platform Module hash value",
         alias="tpmPublicKeyHash",
     )
     udid: Optional[Annotated[str, Field(strict=True, max_length=47)]] = Field(
-        default=None, description="macOS Unique Device identifier of the device"
+        default=None, description="macOS Unique device identifier of the device"
     )
     __properties: ClassVar[List[str]] = [
         "diskEncryptionType",
         "displayName",
         "imei",
         "integrityJailbreak",
+        "managed",
         "manufacturer",
         "meid",
         "model",
@@ -167,6 +170,7 @@ class DeviceProfile(BaseModel):
                 "displayName": obj.get("displayName"),
                 "imei": obj.get("imei"),
                 "integrityJailbreak": obj.get("integrityJailbreak"),
+                "managed": obj.get("managed"),
                 "manufacturer": obj.get("manufacturer"),
                 "meid": obj.get("meid"),
                 "model": obj.get("model"),

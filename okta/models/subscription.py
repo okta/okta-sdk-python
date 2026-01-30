@@ -43,8 +43,8 @@ class Subscription(BaseModel):
 
     channels: Optional[List[StrictStr]] = Field(
         default=None,
-        description="An array of sources send notifications to users. > **Note**: "
-                    "Currently, Okta only allows `email` channels.",
+        description="An array of sources send notifications to users. > **Note**: Currently, Okta only allows `email` "
+        "channels.",
     )
     notification_type: Optional[NotificationType] = Field(
         default=None, alias="notificationType"

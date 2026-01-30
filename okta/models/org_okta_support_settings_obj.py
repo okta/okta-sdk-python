@@ -29,11 +29,13 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
 from okta.models.org_okta_support_setting import OrgOktaSupportSetting
+from okta.models.org_okta_support_settings_obj_links import (
+    OrgOktaSupportSettingsObjLinks,
+)
 
 
 class OrgOktaSupportSettingsObj(BaseModel):
@@ -41,10 +43,24 @@ class OrgOktaSupportSettingsObj(BaseModel):
     OrgOktaSupportSettingsObj
     """  # noqa: E501
 
-    expiration: Optional[datetime] = None
+    case_number: Optional[StrictStr] = Field(
+        default=None,
+        description="Support case number for the Okta Support access grant",
+        alias="caseNumber",
+    )
+    expiration: Optional[datetime] = Field(
+        default=None, description="Expiration of Okta Support"
+    )
     support: Optional[OrgOktaSupportSetting] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["expiration", "support", "_links"]
+    links: Optional[OrgOktaSupportSettingsObjLinks] = Field(
+        default=None, alias="_links"
+    )
+    __properties: ClassVar[List[str]] = [
+        "caseNumber",
+        "expiration",
+        "support",
+        "_links",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,9 +92,11 @@ class OrgOktaSupportSettingsObj(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
+                "case_number",
                 "expiration",
             ]
         )
@@ -95,6 +113,16 @@ class OrgOktaSupportSettingsObj(BaseModel):
             else:
                 _dict["_links"] = self.links
 
+        # set to None if case_number (nullable) is None
+        # and model_fields_set contains the field
+        if self.case_number is None and "case_number" in self.model_fields_set:
+            _dict["caseNumber"] = None
+
+        # set to None if expiration (nullable) is None
+        # and model_fields_set contains the field
+        if self.expiration is None and "expiration" in self.model_fields_set:
+            _dict["expiration"] = None
+
         return _dict
 
     @classmethod
@@ -108,10 +136,11 @@ class OrgOktaSupportSettingsObj(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "caseNumber": obj.get("caseNumber"),
                 "expiration": obj.get("expiration"),
                 "support": obj.get("support"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    OrgOktaSupportSettingsObjLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

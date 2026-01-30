@@ -43,8 +43,8 @@ class APIServiceIntegrationInstanceSecret(BaseModel):
 
     client_secret: StrictStr = Field(
         description="The OAuth 2.0 client secret string. The client secret string is returned in the response of a Secret "
-                    "creation request. In other responses (such as list, activate, or deactivate requests), the client "
-                    "secret is returned as an undisclosed hashed value."
+        "creation request. In other responses (such as list, activate, or deactivate requests), the client "
+        "secret is returned as an undisclosed hashed value."
     )
     created: StrictStr = Field(
         description="Timestamp when the API Service Integration instance Secret was created"

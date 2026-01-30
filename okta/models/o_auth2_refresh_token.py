@@ -33,8 +33,8 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.grant_or_token_status import GrantOrTokenStatus
-from okta.models.links_self import LinksSelf
-from okta.models.o_auth2_actor import OAuth2Actor
+from okta.models.o_auth2_refresh_token_embedded import OAuth2RefreshTokenEmbedded
+from okta.models.o_auth2_refresh_token_links import OAuth2RefreshTokenLinks
 
 
 class OAuth2RefreshToken(BaseModel):
@@ -42,24 +42,43 @@ class OAuth2RefreshToken(BaseModel):
     OAuth2RefreshToken
     """  # noqa: E501
 
-    client_id: Optional[StrictStr] = Field(default=None, alias="clientId")
-    created: Optional[datetime] = None
-    created_by: Optional[OAuth2Actor] = Field(default=None, alias="createdBy")
-    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
-    id: Optional[StrictStr] = None
-    issuer: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    scopes: Optional[List[StrictStr]] = None
+    client_id: Optional[StrictStr] = Field(
+        default=None, description="Client ID", alias="clientId"
+    )
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the object was created"
+    )
+    expires_at: Optional[datetime] = Field(
+        default=None,
+        description="Expiration time of the OAuth 2.0 Token",
+        alias="expiresAt",
+    )
+    id: Optional[StrictStr] = Field(default=None, description="ID of the Token object")
+    issuer: Optional[StrictStr] = Field(
+        default=None,
+        description="The complete URL of the authorization server that issued the Token",
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the object was last updated",
+        alias="lastUpdated",
+    )
+    scopes: Optional[List[StrictStr]] = Field(
+        default=None, description="The scope names attached to the Token"
+    )
     status: Optional[GrantOrTokenStatus] = None
-    user_id: Optional[StrictStr] = Field(default=None, alias="userId")
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
+    user_id: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the user associated with the Token",
+        alias="userId",
+    )
+    embedded: Optional[OAuth2RefreshTokenEmbedded] = Field(
         default=None, alias="_embedded"
     )
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[OAuth2RefreshTokenLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "clientId",
         "created",
-        "createdBy",
         "expiresAt",
         "id",
         "issuer",
@@ -104,7 +123,6 @@ class OAuth2RefreshToken(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
@@ -112,7 +130,6 @@ class OAuth2RefreshToken(BaseModel):
                 "expires_at",
                 "id",
                 "last_updated",
-                "embedded",
             ]
         )
 
@@ -121,12 +138,12 @@ class OAuth2RefreshToken(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of created_by
-        if self.created_by:
-            if not isinstance(self.created_by, dict):
-                _dict["createdBy"] = self.created_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of embedded
+        if self.embedded:
+            if not isinstance(self.embedded, dict):
+                _dict["_embedded"] = self.embedded.to_dict()
             else:
-                _dict["createdBy"] = self.created_by
+                _dict["_embedded"] = self.embedded
 
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
@@ -150,11 +167,6 @@ class OAuth2RefreshToken(BaseModel):
             {
                 "clientId": obj.get("clientId"),
                 "created": obj.get("created"),
-                "createdBy": (
-                    OAuth2Actor.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
                 "expiresAt": obj.get("expiresAt"),
                 "id": obj.get("id"),
                 "issuer": obj.get("issuer"),
@@ -162,9 +174,13 @@ class OAuth2RefreshToken(BaseModel):
                 "scopes": obj.get("scopes"),
                 "status": obj.get("status"),
                 "userId": obj.get("userId"),
-                "_embedded": obj.get("_embedded"),
+                "_embedded": (
+                    OAuth2RefreshTokenEmbedded.from_dict(obj["_embedded"])
+                    if obj.get("_embedded") is not None
+                    else None
+                ),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    OAuth2RefreshTokenLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

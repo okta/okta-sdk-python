@@ -48,6 +48,11 @@ class EmailDomainResponse(BaseModel):
     validation_status: Optional[EmailDomainStatus] = Field(
         default=None, alias="validationStatus"
     )
+    validation_subdomain: Optional[StrictStr] = Field(
+        default="mail",
+        description="The subdomain for the email sender's custom mail domain",
+        alias="validationSubdomain",
+    )
     display_name: StrictStr = Field(alias="displayName")
     user_name: StrictStr = Field(alias="userName")
     __properties: ClassVar[List[str]] = ["displayName", "userName"]

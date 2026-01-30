@@ -32,6 +32,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
+from okta.models.permission_conditions import PermissionConditions
 from okta.models.permission_links import PermissionLinks
 
 
@@ -40,16 +41,17 @@ class Permission(BaseModel):
     Permission
     """  # noqa: E501
 
-    conditions: Optional[Dict[str, Any]] = Field(
-        default=None, description="Conditions for further restricting a permission"
-    )
+    conditions: Optional[PermissionConditions] = None
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the role was created"
+        default=None, description="Timestamp when the permission was assigned"
     )
-    label: Optional[StrictStr] = Field(default=None, description="The permission type")
+    label: Optional[StrictStr] = Field(
+        default=None,
+        description="The assigned Okta [permission](/openapi/okta-management/guides/permissions)",
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the role was last updated",
+        description="Timestamp when the permission was last updated",
         alias="lastUpdated",
     )
     links: Optional[PermissionLinks] = Field(default=None, alias="_links")
@@ -107,6 +109,13 @@ class Permission(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of conditions
+        if self.conditions:
+            if not isinstance(self.conditions, dict):
+                _dict["conditions"] = self.conditions.to_dict()
+            else:
+                _dict["conditions"] = self.conditions
+
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -132,7 +141,11 @@ class Permission(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "conditions": obj.get("conditions"),
+                "conditions": (
+                    PermissionConditions.from_dict(obj["conditions"])
+                    if obj.get("conditions") is not None
+                    else None
+                ),
                 "created": obj.get("created"),
                 "label": obj.get("label"),
                 "lastUpdated": obj.get("lastUpdated"),

@@ -28,16 +28,20 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class PolicyAccountLinkFilterGroups(BaseModel):
     """
-    PolicyAccountLinkFilterGroups
+    Group memberships used to determine link candidates
     """  # noqa: E501
 
-    include: Optional[List[StrictStr]] = None
+    include: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Specifies the allowlist of Group identifiers to match against. Group memberships are restricted to type "
+        "`OKTA_GROUP`.",
+    )
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(

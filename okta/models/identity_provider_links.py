@@ -47,8 +47,7 @@ class IdentityProviderLinks(BaseModel):
     )
     authorize: Optional[HrefObject] = Field(
         default=None,
-        description="OAuth 2.0 authorization endpoint for the IdP OAuth 2.0 "
-                    "Authorization Code flow",
+        description="OAuth 2.0 authorization endpoint for the IdP OAuth 2.0 Authorization Code flow",
     )
     client_redirect_uri: Optional[HrefObject] = Field(
         default=None,
@@ -57,8 +56,7 @@ class IdentityProviderLinks(BaseModel):
     )
     metadata: Optional[HrefObject] = Field(
         default=None,
-        description="Federation metadata document for the IdP (for example: SAML 2.0 "
-                    "Metadata)",
+        description="Federation metadata document for the IdP (for example: SAML 2.0 Metadata)",
     )
     users: Optional[HrefObject] = Field(default=None, description="IdP users")
     deactivate: Optional[HrefObject] = Field(default=None, description="Deactivate IdP")

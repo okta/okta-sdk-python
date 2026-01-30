@@ -1,12 +1,12 @@
 # GroupRuleUserCondition
 
+Defines conditions specific to user exclusion
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**exclude** | **List[str]** |  | [optional] 
-**include** | **List[str]** |  | [optional] 
+**exclude** | **List[str]** | Excluded &#x60;userIds&#x60; when processing rules | [optional] 
 
 ## Example
 

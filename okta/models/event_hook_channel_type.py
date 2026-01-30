@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class EventHookChannelType(str, Enum):
     """
-    EventHookChannelType
+    The channel type. Currently supports `HTTP`.
     """
 
     """

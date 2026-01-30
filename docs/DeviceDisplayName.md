@@ -6,8 +6,8 @@ Display name of the device
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sensitive** | **bool** |  | [optional] 
-**value** | **str** |  | [optional] 
+**sensitive** | **bool** | Indicates whether the associated value is Personal Identifiable Information (PII) and requires masking | [optional] [default to False]
+**value** | **str** | Display name of the device | [optional] 
 
 ## Example
 

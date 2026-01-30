@@ -31,7 +31,9 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
+from okta.models.org_okta_communication_setting_links import (
+    OrgOktaCommunicationSettingLinks,
+)
 
 
 class OrgOktaCommunicationSetting(BaseModel):
@@ -40,9 +42,13 @@ class OrgOktaCommunicationSetting(BaseModel):
     """  # noqa: E501
 
     opt_out_email_users: Optional[StrictBool] = Field(
-        default=None, alias="optOutEmailUsers"
+        default=None,
+        description="Indicates whether org users receive Okta communication emails",
+        alias="optOutEmailUsers",
     )
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[OrgOktaCommunicationSettingLinks] = Field(
+        default=None, alias="_links"
+    )
     __properties: ClassVar[List[str]] = ["optOutEmailUsers", "_links"]
 
     model_config = ConfigDict(
@@ -109,7 +115,7 @@ class OrgOktaCommunicationSetting(BaseModel):
             {
                 "optOutEmailUsers": obj.get("optOutEmailUsers"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    OrgOktaCommunicationSettingLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

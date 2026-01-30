@@ -6,7 +6,7 @@ The request body properties for the new UI Schema
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ui_schema** | [**UISchemaObject**](.md) |  | [optional] 
+**ui_schema** | [**UISchemaObject**](UISchemaObject.md) |  | [optional] 
 
 ## Example
 

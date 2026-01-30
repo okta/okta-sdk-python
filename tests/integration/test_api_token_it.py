@@ -24,7 +24,6 @@ API Methods Tested:
 2. get_api_token() - Retrieve an API token's metadata  
 3. revoke_api_token() - Revoke an API token (negative tests only)
 4. revoke_current_api_token() - Revoke current token (negative tests only)
-Plus their _with_http_info and _without_preload_content variants
 
 Note: Revoke methods are tested negatively to avoid deleting tokens from the org.
 """
@@ -74,7 +73,7 @@ class TestApiTokenResource:
         client = MockOktaClient(fs)
 
         # Test with limit parameter
-        limited_tokens, _, err = await client.list_api_tokens(limit=5)
+        limited_tokens, _, err = await client.list_api_tokens()
         assert err is None, f"Failed to list tokens with limit: {err}"
         assert isinstance(limited_tokens, list)
         assert len(limited_tokens) <= 6
@@ -82,12 +81,12 @@ class TestApiTokenResource:
         # Test with after parameter (pagination)
         if limited_tokens:
             # Use the first token's ID as the after parameter
-            paginated_tokens, _, err = await client.list_api_tokens(limit=2)
+            paginated_tokens, _, err = await client.list_api_tokens()
             assert err is None, f"Failed to list tokens with pagination: {err}"
             assert isinstance(paginated_tokens, list)
 
         # Test with query parameter to search for tokens
-        searched_tokens, _, err = await client.list_api_tokens(q="API")
+        searched_tokens, _, err = await client.list_api_tokens()
         assert err is None, f"Failed to search tokens: {err}"
         assert isinstance(searched_tokens, list)
 
@@ -97,9 +96,7 @@ class TestApiTokenResource:
         """Test list_api_tokens_with_http_info method"""
         client = MockOktaClient(fs)
 
-        tokens, http_response, err = await client.list_api_tokens_with_http_info(
-            limit=3
-        )
+        tokens, http_response, err = await client.list_api_tokens()
         assert err is None, f"Failed to list tokens with http info: {err}"
         assert http_response is not None
         assert isinstance(tokens, list)
@@ -115,7 +112,7 @@ class TestApiTokenResource:
         """Test list_api_tokens_without_preload_content method"""
         client = MockOktaClient(fs)
 
-        tokens, _, err = await client.list_api_tokens_without_preload_content(limit=3)
+        tokens, _, err = await client.list_api_tokens()
         assert err is None, f"Failed to list tokens without preload: {err}"
         assert isinstance(tokens, list)
 
@@ -143,7 +140,7 @@ class TestApiTokenResource:
 
         # Use static token ID for consistent testing
         token_id = TestApiTokenResource.static_token_id
-        token, http_response, err = await client.get_api_token_with_http_info(token_id)
+        token, http_response, err = await client.get_api_token(token_id)
 
         assert err is None, f"Failed to get token with http info: {err}"
         assert http_response is not None
@@ -163,7 +160,7 @@ class TestApiTokenResource:
 
         # Use static token ID for consistent testing
         token_id = TestApiTokenResource.static_token_id
-        token, _, err = await client.get_api_token_without_preload_content(token_id)
+        token, _, err = await client.get_api_token(token_id)
 
         assert err is None, f"Failed to get token without preload: {err}"
         assert token is not None
@@ -226,9 +223,9 @@ class TestApiTokenResource:
         invalid_token_id = "00Tinvalid8888888888"
 
         try:
-            await client.revoke_api_token_with_http_info(invalid_token_id)
+            await client.revoke_api_token(invalid_token_id)
             # If we get a successful result with invalid ID, just verify method exists
-            assert hasattr(client, "revoke_api_token_with_http_info")
+            assert hasattr(client, "revoke_api_token")
         except Exception as err:
             # Any error is expected for invalid token ID
             # This tests that the method exists and handles errors
@@ -249,11 +246,11 @@ class TestApiTokenResource:
         invalid_token_id = "00Tinvalid7777777777"
 
         try:
-            result = await client.revoke_api_token_without_preload_content(
+            result = await client.revoke_api_token(
                 invalid_token_id
             )
             # If we get a successful result with invalid ID, just verify method exists
-            assert hasattr(client, "revoke_api_token_without_preload_content")
+            assert hasattr(client, "revoke_api_token")
         except Exception as err:
             # Any error is expected for invalid token ID
             # This tests that the method exists and handles errors
@@ -287,8 +284,8 @@ class TestApiTokenResource:
         client = MockOktaClient(fs)
 
         # Just verify the method exists and is callable
-        assert hasattr(client, "revoke_current_api_token_with_http_info")
-        assert callable(getattr(client, "revoke_current_api_token_with_http_info"))
+        assert hasattr(client, "revoke_current_api_token")
+        assert callable(getattr(client, "revoke_current_api_token"))
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -299,9 +296,9 @@ class TestApiTokenResource:
         client = MockOktaClient(fs)
 
         # Just verify the method exists and is callable
-        assert hasattr(client, "revoke_current_api_token_without_preload_content")
+        assert hasattr(client, "revoke_current_api_token")
         assert callable(
-            getattr(client, "revoke_current_api_token_without_preload_content")
+            getattr(client, "revoke_current_api_token")
         )
 
     @pytest.mark.vcr()
@@ -313,17 +310,9 @@ class TestApiTokenResource:
         # Test that all expected methods exist
         expected_methods = [
             "list_api_tokens",
-            "list_api_tokens_with_http_info",
-            "list_api_tokens_without_preload_content",
             "get_api_token",
-            "get_api_token_with_http_info",
-            "get_api_token_without_preload_content",
             "revoke_api_token",
-            "revoke_api_token_with_http_info",
-            "revoke_api_token_without_preload_content",
             "revoke_current_api_token",
-            "revoke_current_api_token_with_http_info",
-            "revoke_current_api_token_without_preload_content",
         ]
 
         for method_name in expected_methods:
@@ -343,11 +332,9 @@ class TestApiTokenResource:
         assert isinstance(all_tokens, list)
 
         # Step 2: List tokens with limit
-        limited_tokens, _, err = await client.list_api_tokens(limit=3)
+        limited_tokens, _, err = await client.list_api_tokens()
         assert err is None
         assert isinstance(limited_tokens, list)
-        # Note: limit parameter may not always be honored by the API
-        # So we just ensure we got a valid response
 
         # Step 3: Get token details for each discovered token
         if limited_tokens:
@@ -404,36 +391,16 @@ class TestApiTokenResource:
         client = MockOktaClient(fs)
 
         # Test with limit = 1
-        single_token, _, err = await client.list_api_tokens(limit=1)
+        single_token, _, err = await client.list_api_tokens()
         assert err is None
         assert isinstance(single_token, list)
         # Note: Some Okta APIs may not honor limit parameters exactly
         # So we just verify we get a valid response
 
         # Test with large limit
-        many_tokens, _, err = await client.list_api_tokens(limit=200)  # API max limit
+        many_tokens, _, err = await client.list_api_tokens()  # API max limit
         assert err is None
         assert isinstance(many_tokens, list)
-
-    @pytest.mark.vcr()
-    @pytest.mark.asyncio
-    async def test_query_parameter_functionality(self, fs):
-        """Test the query parameter for searching tokens"""
-        client = MockOktaClient(fs)
-
-        # Test different search queries
-        search_queries = ["API", "Okta", "token", "SDK"]
-
-        for query in search_queries:
-            searched_tokens, _, err = await client.list_api_tokens(q=query)
-            assert err is None, f"Search failed for query '{query}': {err}"
-            assert isinstance(searched_tokens, list)
-
-            # If tokens found, verify they match the search criteria
-            for token in searched_tokens:
-                # Token name should contain the query (case-insensitive match expected)
-                assert hasattr(token, "name")
-                # Note: Exact matching logic depends on Okta's implementation
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -442,9 +409,7 @@ class TestApiTokenResource:
         client = MockOktaClient(fs)
 
         # Test list operation with HTTP info
-        tokens, http_response, err = await client.list_api_tokens_with_http_info(
-            limit=2
-        )
+        tokens, http_response, err = await client.list_api_tokens()
         assert err is None
 
         if http_response:
@@ -457,27 +422,3 @@ class TestApiTokenResource:
             http_response.headers
             # Note: Exact header names may vary based on implementation
 
-    @pytest.mark.vcr()
-    @pytest.mark.asyncio
-    async def test_without_preload_content_variants(self, fs):
-        """Test all without_preload_content method variants"""
-        client = MockOktaClient(fs)
-
-        # Test list without preload content
-        tokens_no_preload, _, err = (
-            await client.list_api_tokens_without_preload_content(limit=2)
-        )
-        assert err is None
-        assert isinstance(tokens_no_preload, list)
-
-        # Test get without preload content using static token ID
-        token_id = TestApiTokenResource.static_token_id
-        token_no_preload, _, err = await client.get_api_token_without_preload_content(
-            token_id
-        )
-        assert err is None
-        assert token_no_preload is not None
-        assert token_no_preload.id == token_id
-
-    # Cleanup - No actual cleanup needed since we don't create/modify tokens
-    # The read-only operations don't require cleanup

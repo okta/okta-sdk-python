@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class DigestAlgorithm(str, Enum):
     """
-    DigestAlgorithm
+    Algorithm used to generate the key. Only required for the PBKDF2 algorithm.
     """
 
     """

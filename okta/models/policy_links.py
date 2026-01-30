@@ -43,17 +43,17 @@ class PolicyLinks(BaseModel):
     PolicyLinks
     """  # noqa: E501
 
-    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     activate: Optional[HrefObjectActivateLink] = None
     deactivate: Optional[HrefObjectDeactivateLink] = None
-    rules: Optional[HrefObjectRulesLink] = None
     mappings: Optional[HrefObjectMappingsLink] = None
+    rules: Optional[HrefObjectRulesLink] = None
+    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     __properties: ClassVar[List[str]] = [
-        "self",
         "activate",
         "deactivate",
-        "rules",
         "mappings",
+        "rules",
+        "self",
     ]
 
     model_config = ConfigDict(
@@ -93,13 +93,6 @@ class PolicyLinks(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of var_self
-        if self.var_self:
-            if not isinstance(self.var_self, dict):
-                _dict["self"] = self.var_self.to_dict()
-            else:
-                _dict["self"] = self.var_self
-
         # override the default output from pydantic by calling `to_dict()` of activate
         if self.activate:
             if not isinstance(self.activate, dict):
@@ -114,6 +107,13 @@ class PolicyLinks(BaseModel):
             else:
                 _dict["deactivate"] = self.deactivate
 
+        # override the default output from pydantic by calling `to_dict()` of mappings
+        if self.mappings:
+            if not isinstance(self.mappings, dict):
+                _dict["mappings"] = self.mappings.to_dict()
+            else:
+                _dict["mappings"] = self.mappings
+
         # override the default output from pydantic by calling `to_dict()` of rules
         if self.rules:
             if not isinstance(self.rules, dict):
@@ -121,12 +121,12 @@ class PolicyLinks(BaseModel):
             else:
                 _dict["rules"] = self.rules
 
-        # override the default output from pydantic by calling `to_dict()` of mappings
-        if self.mappings:
-            if not isinstance(self.mappings, dict):
-                _dict["mappings"] = self.mappings.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of var_self
+        if self.var_self:
+            if not isinstance(self.var_self, dict):
+                _dict["self"] = self.var_self.to_dict()
             else:
-                _dict["mappings"] = self.mappings
+                _dict["self"] = self.var_self
 
         return _dict
 
@@ -141,11 +141,6 @@ class PolicyLinks(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "self": (
-                    HrefObjectSelfLink.from_dict(obj["self"])
-                    if obj.get("self") is not None
-                    else None
-                ),
                 "activate": (
                     HrefObjectActivateLink.from_dict(obj["activate"])
                     if obj.get("activate") is not None
@@ -156,14 +151,19 @@ class PolicyLinks(BaseModel):
                     if obj.get("deactivate") is not None
                     else None
                 ),
+                "mappings": (
+                    HrefObjectMappingsLink.from_dict(obj["mappings"])
+                    if obj.get("mappings") is not None
+                    else None
+                ),
                 "rules": (
                     HrefObjectRulesLink.from_dict(obj["rules"])
                     if obj.get("rules") is not None
                     else None
                 ),
-                "mappings": (
-                    HrefObjectMappingsLink.from_dict(obj["mappings"])
-                    if obj.get("mappings") is not None
+                "self": (
+                    HrefObjectSelfLink.from_dict(obj["self"])
+                    if obj.get("self") is not None
                     else None
                 ),
             }

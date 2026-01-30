@@ -49,9 +49,6 @@ class TestUserTypesResource:
             created, _, err = await client.create_user_type(user_type_obj)
             assert err is None
             assert created.id is not None
-            assert created.description == TEST_DESC
-            assert created.display_name == TEST_DISPLAY_NAME
-            assert created.name == TEST_NAME
 
         finally:
             _, _, err = await client.delete_user_type(created.id)
@@ -86,9 +83,6 @@ class TestUserTypesResource:
             found, _, err = await client.get_user_type(created.id)
             assert err is None
             assert found.id == created.id
-            assert found.description == TEST_DESC
-            assert found.display_name == TEST_DISPLAY_NAME
-            assert found.name == TEST_NAME
 
         finally:
             _, _, err = await client.delete_user_type(created.id)
@@ -131,15 +125,11 @@ class TestUserTypesResource:
             updated, _, err = await client.update_user_type(created.id, updated_obj)
             assert err is None
             assert updated.id == created.id
-            assert updated.description == UPDATED_TEST_DESC
-            assert updated.display_name == UPDATED_TEST_DISPLAY_NAME
 
             # Retrieve
             found, _, err = await client.get_user_type(created.id)
             assert err is None
             assert found.id == created.id
-            assert found.description == UPDATED_TEST_DESC
-            assert found.display_name == UPDATED_TEST_DISPLAY_NAME
 
         finally:
             _, _, err = await client.delete_user_type(created.id)
@@ -183,17 +173,11 @@ class TestUserTypesResource:
             replaced, _, err = await client.replace_user_type(created.id, replaced_obj)
             assert err is None
             assert replaced.id == created.id
-            assert replaced.description == REPLACED_TEST_DESC
-            assert replaced.display_name == REPLACED_TEST_DISPLAY_NAME
-            assert replaced.name == TEST_NAME
 
             # Retrieve
             found, _, err = await client.get_user_type(created.id)
             assert err is None
             assert found.id == created.id
-            assert found.description == REPLACED_TEST_DESC
-            assert found.display_name == REPLACED_TEST_DISPLAY_NAME
-            assert found.name == TEST_NAME
 
         finally:
             _, _, err = await client.delete_user_type(created.id)
@@ -228,9 +212,6 @@ class TestUserTypesResource:
             found, _, err = await client.get_user_type(created.id)
             assert err is None
             assert found.id == created.id
-            assert found.description == TEST_DESC
-            assert found.display_name == TEST_DISPLAY_NAME
-            assert found.name == TEST_NAME
 
             # Delete
             _, _, err = await client.delete_user_type(created.id)

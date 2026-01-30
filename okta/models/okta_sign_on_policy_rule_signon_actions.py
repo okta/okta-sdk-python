@@ -28,41 +28,78 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictInt,
+    StrictStr,
+    field_validator,
+)
 from typing_extensions import Self
 
 from okta.models.okta_sign_on_policy_factor_prompt_mode import (
     OktaSignOnPolicyFactorPromptMode,
 )
+from okta.models.okta_sign_on_policy_rule_signon_primary_factor import (
+    OktaSignOnPolicyRuleSignonPrimaryFactor,
+)
 from okta.models.okta_sign_on_policy_rule_signon_session_actions import (
     OktaSignOnPolicyRuleSignonSessionActions,
 )
-from okta.models.policy_access import PolicyAccess
 
 
 class OktaSignOnPolicyRuleSignonActions(BaseModel):
     """
-    OktaSignOnPolicyRuleSignonActions
+    Specifies settings for the policy rule
     """  # noqa: E501
 
-    access: Optional[PolicyAccess] = None
-    factor_lifetime: Optional[StrictInt] = Field(default=None, alias="factorLifetime")
+    access: Optional[StrictStr] = Field(
+        default=None, description="Indicates if a user is allowed to sign in"
+    )
+    factor_lifetime: Optional[StrictInt] = Field(
+        default=None,
+        description="Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is "
+        "set to `SESSION`  > **Note:** Required only if `requireFactor` is `true`. ",
+        alias="factorLifetime",
+    )
     factor_prompt_mode: Optional[OktaSignOnPolicyFactorPromptMode] = Field(
         default=None, alias="factorPromptMode"
     )
-    remember_device_by_default: Optional[StrictBool] = Field(
-        default=False, alias="rememberDeviceByDefault"
+    primary_factor: Optional[OktaSignOnPolicyRuleSignonPrimaryFactor] = Field(
+        default=None, alias="primaryFactor"
     )
-    require_factor: Optional[StrictBool] = Field(default=False, alias="requireFactor")
+    remember_device_by_default: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates if Okta should automatically remember the device",
+        alias="rememberDeviceByDefault",
+    )
+    require_factor: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates if multifactor authentication is required",
+        alias="requireFactor",
+    )
     session: Optional[OktaSignOnPolicyRuleSignonSessionActions] = None
     __properties: ClassVar[List[str]] = [
         "access",
         "factorLifetime",
         "factorPromptMode",
+        "primaryFactor",
         "rememberDeviceByDefault",
         "requireFactor",
         "session",
     ]
+
+    @field_validator("access")
+    def access_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["ALLOW", "DENY"]):
+            raise ValueError("must be one of enum values ('ALLOW', 'DENY')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -124,6 +161,7 @@ class OktaSignOnPolicyRuleSignonActions(BaseModel):
                 "access": obj.get("access"),
                 "factorLifetime": obj.get("factorLifetime"),
                 "factorPromptMode": obj.get("factorPromptMode"),
+                "primaryFactor": obj.get("primaryFactor"),
                 "rememberDeviceByDefault": (
                     obj.get("rememberDeviceByDefault")
                     if obj.get("rememberDeviceByDefault") is not None

@@ -1,5 +1,6 @@
 # GroupRuleConditions
 
+Defines group rule conditions
 
 ## Properties
 

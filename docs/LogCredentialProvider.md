@@ -1,5 +1,6 @@
 # LogCredentialProvider
 
+A credential provider is a software service that manages identities and their associated credentials. When authentication occurs through credentials provided by a credential provider, the credential provider is recorded here.
 
 ## Properties
 

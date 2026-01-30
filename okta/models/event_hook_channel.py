@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.event_hook_channel_config import EventHookChannelConfig
@@ -40,9 +40,11 @@ class EventHookChannel(BaseModel):
     EventHookChannel
     """  # noqa: E501
 
-    config: Optional[EventHookChannelConfig] = None
-    type: Optional[EventHookChannelType] = None
-    version: Optional[StrictStr] = None
+    config: EventHookChannelConfig
+    type: EventHookChannelType
+    version: StrictStr = Field(
+        description="Version of the channel. Currently the only supported version is `1.0.0`."
+    )
     __properties: ClassVar[List[str]] = ["config", "type", "version"]
 
     model_config = ConfigDict(

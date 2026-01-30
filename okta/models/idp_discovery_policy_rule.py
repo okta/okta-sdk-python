@@ -35,6 +35,7 @@ from okta.models.idp_discovery_policy_rule_condition import (
     IdpDiscoveryPolicyRuleCondition,
 )
 from okta.models.idp_policy_rule_action import IdpPolicyRuleAction
+from okta.models.policy_links import PolicyLinks
 from okta.models.policy_rule import PolicyRule
 
 
@@ -54,6 +55,7 @@ class IdpDiscoveryPolicyRule(PolicyRule):
         "status",
         "system",
         "type",
+        "_links",
         "actions",
         "conditions",
     ]
@@ -95,6 +97,13 @@ class IdpDiscoveryPolicyRule(PolicyRule):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
+
         # override the default output from pydantic by calling `to_dict()` of actions
         if self.actions:
             if not isinstance(self.actions, dict):
@@ -119,6 +128,11 @@ class IdpDiscoveryPolicyRule(PolicyRule):
         if self.last_updated is None and "last_updated" in self.model_fields_set:
             _dict["lastUpdated"] = None
 
+        # set to None if priority (nullable) is None
+        # and model_fields_set contains the field
+        if self.priority is None and "priority" in self.model_fields_set:
+            _dict["priority"] = None
+
         return _dict
 
     @classmethod
@@ -140,6 +154,11 @@ class IdpDiscoveryPolicyRule(PolicyRule):
                 "status": obj.get("status"),
                 "system": obj.get("system") if obj.get("system") is not None else False,
                 "type": obj.get("type"),
+                "_links": (
+                    PolicyLinks.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
+                ),
                 "actions": (
                     IdpPolicyRuleAction.from_dict(obj["actions"])
                     if obj.get("actions") is not None

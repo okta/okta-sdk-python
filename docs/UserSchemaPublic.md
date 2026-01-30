@@ -1,14 +1,15 @@
 # UserSchemaPublic
 
+All custom profile properties are defined in a profile subschema with the resolution scope `#custom`.  > **Notes:** > * When you refer to custom profile attributes that differ only by case, name collisions occur. This includes naming custom profile attributes the same as base profile attributes, for example, `firstName` and `FirstName`. > * Certain attributes are reserved and can't be used for custom user profiles. See [Review reserved attributes](https://help.okta.com/okta_help.htm?type=oie&id=reserved-attributes).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**properties** | [**Dict[str, UserSchemaAttribute]**](UserSchemaAttribute.md) |  | [optional] 
-**required** | **List[str]** |  | [optional] 
-**type** | **str** |  | [optional] 
+**id** | **str** | The subschema name | [optional] [readonly] 
+**properties** | [**Dict[str, UserSchemaAttribute]**](UserSchemaAttribute.md) | The &#x60;#custom&#x60; object properties | [optional] 
+**required** | **List[str]** | A collection indicating required property names | [optional] [readonly] 
+**type** | **str** | The object type | [optional] [readonly] 
 
 ## Example
 

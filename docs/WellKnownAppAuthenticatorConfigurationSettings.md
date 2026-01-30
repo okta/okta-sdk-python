@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_verification** | [**UserVerificationEnum**](UserVerificationEnum.md) |  | [optional] 
+**user_verification** | [**CustomAppUserVerificationEnum**](CustomAppUserVerificationEnum.md) |  | [optional] 
 
 ## Example
 

@@ -28,17 +28,26 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing_extensions import Self
 
 
 class LogGeolocation(BaseModel):
     """
-    LogGeolocation
+    The latitude and longitude of the geolocation where an action was performed. The object is formatted according to the [
+    ISO 6709](https://www.iso.org/obp/ui/fr/#iso:std:iso:6709:ed-3:v1:en) standard.
     """  # noqa: E501
 
-    lat: Optional[Union[StrictFloat, StrictInt]] = None
-    lon: Optional[Union[StrictFloat, StrictInt]] = None
+    lat: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Latitude which uses two digits for the [integer part]("
+        "https://www.iso.org/obp/ui/fr/#iso:std:iso:6709:ed-3:v1:en#Latitude)",
+    )
+    lon: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Longitude which uses three digits for the [integer part]("
+        "https://www.iso.org/obp/ui/fr/#iso:std:iso:6709:ed-3:v1:en#Longitude)",
+    )
     __properties: ClassVar[List[str]] = ["lat", "lon"]
 
     model_config = ConfigDict(

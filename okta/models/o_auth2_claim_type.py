@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OAuth2ClaimType(str, Enum):
     """
-    OAuth2ClaimType
+    Specifies whether the Claim is for an access token (`RESOURCE`) or an ID token (`IDENTITY`)
     """
 
     """

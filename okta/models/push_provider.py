@@ -45,9 +45,13 @@ class PushProvider(BaseModel):
     PushProvider
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique key for the Push Provider"
+    )
     last_updated_date: Optional[StrictStr] = Field(
-        default=None, alias="lastUpdatedDate"
+        default=None,
+        description="Timestamp when the Push Provider was last modified",
+        alias="lastUpdatedDate",
     )
     name: Optional[StrictStr] = Field(
         default=None, description="Display name of the push provider"
@@ -97,7 +101,7 @@ class PushProvider(BaseModel):
 
     @classmethod
     def from_json(
-            cls, json_str: str
+        cls, json_str: str
     ) -> Optional[Union[APNSPushProvider, FCMPushProvider]]:
         """Create an instance of PushProvider from a JSON string"""
         return cls.from_dict(json.loads(json_str))
@@ -137,7 +141,7 @@ class PushProvider(BaseModel):
 
     @classmethod
     def from_dict(
-            cls, obj: Dict[str, Any]
+        cls, obj: Dict[str, Any]
     ) -> Optional[Union[APNSPushProvider, FCMPushProvider]]:
         """Create an instance of PushProvider from a dict"""
         # look up the object type based on discriminator mapping

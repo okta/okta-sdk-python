@@ -1,5 +1,6 @@
 # FeatureStageValue
 
+Current release stage of the feature
 
 ## Properties
 

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OtpProtocol(str, Enum):
     """
-    OtpProtocol
+    The protocol used
     """
 
     """

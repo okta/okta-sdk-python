@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AuthorizationServerCredentialsRotationMode(str, Enum):
     """
-    AuthorizationServerCredentialsRotationMode
+    The Key rotation mode for the authorization server
     """
 
     """

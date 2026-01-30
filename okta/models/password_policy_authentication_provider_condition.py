@@ -38,7 +38,7 @@ from okta.models.password_policy_authentication_provider_type import (
 
 class PasswordPolicyAuthenticationProviderCondition(BaseModel):
     """
-    PasswordPolicyAuthenticationProviderCondition
+    Specifies an authentication provider that's the source of some or all users
     """  # noqa: E501
 
     include: Optional[List[StrictStr]] = None

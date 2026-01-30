@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** | Timestamp when the Policy was created | [optional] [readonly] 
-**description** | **str** | Policy description | [optional] 
-**id** | **str** | Policy ID | [optional] [readonly] 
-**last_updated** | **datetime** | Timestamp when the Policy was last updated | [optional] [readonly] 
-**name** | **str** | Policy name | [optional] 
-**priority** | **int** | Specifies the order in which this Policy is evaluated in relation to the other policies | [optional] 
+**created** | **datetime** | Timestamp when the policy was created | [optional] [readonly] 
+**description** | **str** | Description of the policy | [optional] 
+**id** | **str** | Identifier of the policy | [optional] [readonly] [default to 'Assigned']
+**last_updated** | **datetime** | Timestamp when the policy was last modified | [optional] [readonly] 
+**name** | **str** | Name of the policy | 
+**priority** | **int** | Specifies the order in which this policy is evaluated in relation to the other policies | [optional] 
 **status** | [**LifecycleStatus**](LifecycleStatus.md) |  | [optional] 
-**system** | **bool** | Specifies whether Okta created the Policy | [optional] 
-**type** | [**PolicyType**](PolicyType.md) |  | [optional] 
+**system** | **bool** | Specifies whether Okta created the policy | [optional] [default to False]
+**type** | [**PolicyType**](PolicyType.md) |  | 
 **embedded** | **Dict[str, object]** |  | [optional] [readonly] 
 **links** | [**PolicyLinks**](PolicyLinks.md) |  | [optional] 
 

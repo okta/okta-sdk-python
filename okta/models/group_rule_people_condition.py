@@ -37,7 +37,7 @@ from okta.models.group_rule_user_condition import GroupRuleUserCondition
 
 class GroupRulePeopleCondition(BaseModel):
     """
-    GroupRulePeopleCondition
+    Defines conditions for `people` in a group rule
     """  # noqa: E501
 
     groups: Optional[GroupRuleGroupCondition] = None

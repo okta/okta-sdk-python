@@ -44,11 +44,13 @@ class ResourceSet(BaseModel):
         default=None, description="Timestamp when the role was created"
     )
     description: Optional[StrictStr] = Field(
-        default=None, description="Description of the Resource Set"
+        default=None, description="Description of the resource set"
     )
-    id: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique ID for the resource set object"
+    )
     label: Optional[StrictStr] = Field(
-        default=None, description="Unique label for the Resource Set"
+        default=None, description="Unique label for the resource set"
     )
     last_updated: Optional[datetime] = Field(
         default=None,

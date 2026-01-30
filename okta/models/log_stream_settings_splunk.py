@@ -37,17 +37,17 @@ from okta.models.splunk_edition import SplunkEdition
 
 class LogStreamSettingsSplunk(BaseModel):
     """
-    Specifies the configuration for the `splunk_cloud_logstreaming` Log Stream type.
+    Specifies the configuration for the `splunk_cloud_logstreaming` log stream type.
     """  # noqa: E501
 
     edition: SplunkEdition
     host: Annotated[str, Field(min_length=17, strict=True, max_length=116)] = Field(
         description="The domain name for your Splunk Cloud instance. Don't include `http` or `https` in the string. For "
-                    "example: `acme.splunkcloud.com`"
+        "example: `acme.splunkcloud.com`"
     )
     token: Annotated[str, Field(strict=True)] = Field(
         description="The HEC token for your Splunk Cloud HTTP Event Collector. The token value is set at object creation, "
-                    "but isn't returned."
+        "but isn't returned."
     )
     __properties: ClassVar[List[str]] = ["edition", "host", "token"]
 
@@ -55,8 +55,8 @@ class LogStreamSettingsSplunk(BaseModel):
     def token_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if not re.match(
-                r"(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                value,
+            r"(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            value,
         ):
             raise ValueError(
                 r"must validate the regular expression /(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-["

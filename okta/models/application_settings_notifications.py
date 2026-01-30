@@ -38,7 +38,7 @@ from okta.models.application_settings_notifications_vpn import (
 
 class ApplicationSettingsNotifications(BaseModel):
     """
-    ApplicationSettingsNotifications
+    Specifies notifications settings for the app
     """  # noqa: E501
 
     vpn: Optional[ApplicationSettingsNotificationsVpn] = None

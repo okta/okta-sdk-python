@@ -1,5 +1,6 @@
 # ProvisioningDeprovisionedCondition
 
+Behavior for a previously deprovisioned IdP user during authentication. Not supported with OIDC IdPs.
 
 ## Properties
 

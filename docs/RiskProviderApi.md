@@ -4,19 +4,19 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_risk_provider**](RiskProviderApi.md#create_risk_provider) | **POST** /api/v1/risk/providers | Create a Risk Provider
-[**delete_risk_provider**](RiskProviderApi.md#delete_risk_provider) | **DELETE** /api/v1/risk/providers/{riskProviderId} | Delete a Risk Provider
-[**get_risk_provider**](RiskProviderApi.md#get_risk_provider) | **GET** /api/v1/risk/providers/{riskProviderId} | Retrieve a Risk Provider
-[**list_risk_providers**](RiskProviderApi.md#list_risk_providers) | **GET** /api/v1/risk/providers | List all Risk Providers
-[**replace_risk_provider**](RiskProviderApi.md#replace_risk_provider) | **PUT** /api/v1/risk/providers/{riskProviderId} | Replace a Risk Provider
+[**create_risk_provider**](RiskProviderApi.md#create_risk_provider) | **POST** /api/v1/risk/providers | Create a risk provider
+[**delete_risk_provider**](RiskProviderApi.md#delete_risk_provider) | **DELETE** /api/v1/risk/providers/{riskProviderId} | Delete a risk provider
+[**get_risk_provider**](RiskProviderApi.md#get_risk_provider) | **GET** /api/v1/risk/providers/{riskProviderId} | Retrieve a risk provider
+[**list_risk_providers**](RiskProviderApi.md#list_risk_providers) | **GET** /api/v1/risk/providers | List all risk providers
+[**replace_risk_provider**](RiskProviderApi.md#replace_risk_provider) | **PUT** /api/v1/risk/providers/{riskProviderId} | Replace a risk provider
 
 
 # **create_risk_provider**
 > RiskProvider create_risk_provider(instance)
 
-Create a Risk Provider
+Create a risk provider
 
-Creates a Risk Provider object. A maximum of three Risk Provider objects can be created.
+Creates a risk provider object. You can create a maximum of three risk provider objects.
 
 ### Example
 
@@ -55,7 +55,7 @@ with okta.ApiClient(configuration) as api_client:
     instance = okta.RiskProvider() # RiskProvider | 
 
     try:
-        # Create a Risk Provider
+        # Create a risk provider
         api_response = api_instance.create_risk_provider(instance)
         print("The response of RiskProviderApi->create_risk_provider:\n")
         pprint(api_response)
@@ -99,9 +99,9 @@ Name | Type | Description  | Notes
 # **delete_risk_provider**
 > delete_risk_provider(risk_provider_id)
 
-Delete a Risk Provider
+Delete a risk provider
 
-Deletes a Risk Provider object by its ID
+Deletes a risk provider object by its ID
 
 ### Example
 
@@ -136,10 +136,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.RiskProviderApi(api_client)
-    risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the Risk Provider object
+    risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the risk provider object
 
     try:
-        # Delete a Risk Provider
+        # Delete a risk provider
         api_instance.delete_risk_provider(risk_provider_id)
     except Exception as e:
         print("Exception when calling RiskProviderApi->delete_risk_provider: %s\n" % e)
@@ -152,7 +152,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **risk_provider_id** | **str**| &#x60;id&#x60; of the Risk Provider object | 
+ **risk_provider_id** | **str**| &#x60;id&#x60; of the risk provider object | 
 
 ### Return type
 
@@ -181,9 +181,9 @@ void (empty response body)
 # **get_risk_provider**
 > RiskProvider get_risk_provider(risk_provider_id)
 
-Retrieve a Risk Provider
+Retrieve a risk provider
 
-Retrieves a Risk Provider object by ID
+Retrieves a risk provider object by ID
 
 ### Example
 
@@ -219,10 +219,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.RiskProviderApi(api_client)
-    risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the Risk Provider object
+    risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the risk provider object
 
     try:
-        # Retrieve a Risk Provider
+        # Retrieve a risk provider
         api_response = api_instance.get_risk_provider(risk_provider_id)
         print("The response of RiskProviderApi->get_risk_provider:\n")
         pprint(api_response)
@@ -237,7 +237,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **risk_provider_id** | **str**| &#x60;id&#x60; of the Risk Provider object | 
+ **risk_provider_id** | **str**| &#x60;id&#x60; of the risk provider object | 
 
 ### Return type
 
@@ -266,9 +266,9 @@ Name | Type | Description  | Notes
 # **list_risk_providers**
 > List[RiskProvider] list_risk_providers()
 
-List all Risk Providers
+List all risk providers
 
-Lists all Risk Provider objects
+Lists all risk provider objects
 
 ### Example
 
@@ -306,7 +306,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.RiskProviderApi(api_client)
 
     try:
-        # List all Risk Providers
+        # List all risk providers
         api_response = api_instance.list_risk_providers()
         print("The response of RiskProviderApi->list_risk_providers:\n")
         pprint(api_response)
@@ -346,9 +346,9 @@ This endpoint does not need any parameter.
 # **replace_risk_provider**
 > RiskProvider replace_risk_provider(risk_provider_id, instance)
 
-Replace a Risk Provider
+Replace a risk provider
 
-Replaces the properties for a given Risk Provider object ID
+Replaces the properties for a given risk provider object ID
 
 ### Example
 
@@ -384,11 +384,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.RiskProviderApi(api_client)
-    risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the Risk Provider object
+    risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the risk provider object
     instance = okta.RiskProvider() # RiskProvider | 
 
     try:
-        # Replace a Risk Provider
+        # Replace a risk provider
         api_response = api_instance.replace_risk_provider(risk_provider_id, instance)
         print("The response of RiskProviderApi->replace_risk_provider:\n")
         pprint(api_response)
@@ -403,7 +403,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **risk_provider_id** | **str**| &#x60;id&#x60; of the Risk Provider object | 
+ **risk_provider_id** | **str**| &#x60;id&#x60; of the risk provider object | 
  **instance** | [**RiskProvider**](RiskProvider.md)|  | 
 
 ### Return type

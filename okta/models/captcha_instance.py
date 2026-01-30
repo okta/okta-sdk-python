@@ -46,14 +46,12 @@ class CAPTCHAInstance(BaseModel):
     )
     secret_key: Optional[StrictStr] = Field(
         default=None,
-        description="The secret key issued from the CAPTCHA provider to perform "
-                    "server-side validation for a CAPTCHA token",
+        description="The secret key issued from the CAPTCHA provider to perform server-side validation for a CAPTCHA token",
         alias="secretKey",
     )
     site_key: Optional[StrictStr] = Field(
         default=None,
-        description="The site key issued from the CAPTCHA provider to render a CAPTCHA on "
-                    "a page",
+        description="The site key issued from the CAPTCHA provider to render a CAPTCHA on a page",
         alias="siteKey",
     )
     type: Optional[CAPTCHAType] = None

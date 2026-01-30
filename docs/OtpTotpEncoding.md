@@ -1,5 +1,6 @@
 # OtpTotpEncoding
 
+The shared secret encoding
 
 ## Properties
 

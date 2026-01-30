@@ -6,17 +6,17 @@ Agent details
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] [readonly] 
-**is_hidden** | **bool** |  | [optional] 
-**is_latest_g_aed_version** | **bool** |  | [optional] 
-**last_connection** | **datetime** |  | [optional] 
-**name** | **str** |  | [optional] 
+**id** | **str** | Unique identifier for the agent that&#39;s generated during installation | [optional] [readonly] 
+**is_hidden** | **bool** | Determines if an agent is hidden from the Admin Console | [optional] 
+**is_latest_g_aed_version** | **bool** | Determines if the agent is on the latest generally available version | [optional] 
+**last_connection** | **int** | Unix timestamp in milliseconds when the agent last connected to Okta | [optional] 
+**name** | **str** | Agent name | [optional] 
 **operational_status** | [**OperationalStatus**](OperationalStatus.md) |  | [optional] 
-**pool_id** | **str** |  | [optional] 
+**pool_id** | **str** | Pool ID | [optional] 
 **type** | [**AgentType**](AgentType.md) |  | [optional] 
-**update_message** | **str** |  | [optional] 
+**update_message** | **str** | Status message of the agent | [optional] 
 **update_status** | [**AgentUpdateInstanceStatus**](AgentUpdateInstanceStatus.md) |  | [optional] 
-**version** | **str** |  | [optional] 
+**version** | **str** | Agent version number | [optional] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example

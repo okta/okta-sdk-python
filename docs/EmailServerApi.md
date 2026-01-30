@@ -5,11 +5,11 @@ All URIs are relative to *https://subdomain.okta.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_email_server**](EmailServerApi.md#create_email_server) | **POST** /api/v1/email-servers | Create a custom SMTP server
-[**delete_email_server**](EmailServerApi.md#delete_email_server) | **DELETE** /api/v1/email-servers/{emailServerId} | Delete an SMTP Server configuration
-[**get_email_server**](EmailServerApi.md#get_email_server) | **GET** /api/v1/email-servers/{emailServerId} | Retrieve an SMTP Server configuration
+[**delete_email_server**](EmailServerApi.md#delete_email_server) | **DELETE** /api/v1/email-servers/{emailServerId} | Delete an SMTP server configuration
+[**get_email_server**](EmailServerApi.md#get_email_server) | **GET** /api/v1/email-servers/{emailServerId} | Retrieve an SMTP server configuration
 [**list_email_servers**](EmailServerApi.md#list_email_servers) | **GET** /api/v1/email-servers | List all enrolled SMTP servers
-[**test_email_server**](EmailServerApi.md#test_email_server) | **POST** /api/v1/email-servers/{emailServerId}/test | Test an SMTP Server configuration
-[**update_email_server**](EmailServerApi.md#update_email_server) | **PATCH** /api/v1/email-servers/{emailServerId} | Update an SMTP Server configuration
+[**test_email_server**](EmailServerApi.md#test_email_server) | **POST** /api/v1/email-servers/{emailServerId}/test | Test an SMTP server configuration
+[**update_email_server**](EmailServerApi.md#update_email_server) | **PATCH** /api/v1/email-servers/{emailServerId} | Update an SMTP server configuration
 
 
 # **create_email_server**
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Create a custom SMTP server
 
-Creates a custom email SMTP server configuration for your organization
+Creates a custom email SMTP server configuration for your org
 
 ### Example
 
@@ -101,9 +101,9 @@ Name | Type | Description  | Notes
 # **delete_email_server**
 > delete_email_server(email_server_id)
 
-Delete an SMTP Server configuration
+Delete an SMTP server configuration
 
-Deletes your organization's custom SMTP server with the given ID
+Deletes the specified custom SMTP server configuration
 
 ### Example
 
@@ -141,7 +141,7 @@ with okta.ApiClient(configuration) as api_client:
     email_server_id = 'email_server_id_example' # str | 
 
     try:
-        # Delete an SMTP Server configuration
+        # Delete an SMTP server configuration
         api_instance.delete_email_server(email_server_id)
     except Exception as e:
         print("Exception when calling EmailServerApi->delete_email_server: %s\n" % e)
@@ -183,9 +183,9 @@ void (empty response body)
 # **get_email_server**
 > EmailServerListResponse get_email_server(email_server_id)
 
-Retrieve an SMTP Server configuration
+Retrieve an SMTP server configuration
 
-Retrieves a configuration of your organization's custom SMTP server with the given ID
+Retrieves the specified custom SMTP server configuration
 
 ### Example
 
@@ -224,7 +224,7 @@ with okta.ApiClient(configuration) as api_client:
     email_server_id = 'email_server_id_example' # str | 
 
     try:
-        # Retrieve an SMTP Server configuration
+        # Retrieve an SMTP server configuration
         api_response = api_instance.get_email_server(email_server_id)
         print("The response of EmailServerApi->get_email_server:\n")
         pprint(api_response)
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 List all enrolled SMTP servers
 
-Lists all the enrolled custom email SMTP servers
+Lists all the enrolled custom SMTP server configurations
 
 ### Example
 
@@ -348,9 +348,9 @@ This endpoint does not need any parameter.
 # **test_email_server**
 > test_email_server(email_server_id, email_test_addresses=email_test_addresses)
 
-Test an SMTP Server configuration
+Test an SMTP server configuration
 
-Tests your organization's custom SMTP Server with the given ID
+Tests the specified custom SMTP Server configuration
 
 ### Example
 
@@ -390,7 +390,7 @@ with okta.ApiClient(configuration) as api_client:
     email_test_addresses = okta.EmailTestAddresses() # EmailTestAddresses |  (optional)
 
     try:
-        # Test an SMTP Server configuration
+        # Test an SMTP server configuration
         api_instance.test_email_server(email_server_id, email_test_addresses=email_test_addresses)
     except Exception as e:
         print("Exception when calling EmailServerApi->test_email_server: %s\n" % e)
@@ -434,9 +434,9 @@ void (empty response body)
 # **update_email_server**
 > EmailServerResponse update_email_server(email_server_id, email_server_request=email_server_request)
 
-Update an SMTP Server configuration
+Update an SMTP server configuration
 
-Updates one or more fields of your organization's custom SMTP Server configuration
+Updates the specified custom SMTP server configuration
 
 ### Example
 
@@ -477,7 +477,7 @@ with okta.ApiClient(configuration) as api_client:
     email_server_request = okta.EmailServerRequest() # EmailServerRequest |  (optional)
 
     try:
-        # Update an SMTP Server configuration
+        # Update an SMTP server configuration
         api_response = api_instance.update_email_server(email_server_id, email_server_request=email_server_request)
         print("The response of EmailServerApi->update_email_server:\n")
         pprint(api_response)

@@ -36,8 +36,8 @@ class FeatureLifecycle(str, Enum):
     """
     allowed enum values
     """
-    DISABLE = "disable"
-    ENABLE = "enable"
+    DISABLE = "DISABLE"
+    ENABLE = "ENABLE"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

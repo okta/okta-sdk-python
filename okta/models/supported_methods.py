@@ -28,20 +28,23 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
+from okta.models.lifecycle_status import LifecycleStatus
 from okta.models.supported_methods_settings import SupportedMethodsSettings
 
 
 class SupportedMethods(BaseModel):
     """
-    SupportedMethods
+    The supported methods of an authenticator
     """  # noqa: E501
 
     settings: Optional[SupportedMethodsSettings] = None
-    status: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    status: Optional[LifecycleStatus] = None
+    type: Optional[StrictStr] = Field(
+        default=None, description="The type of authenticator method"
+    )
     __properties: ClassVar[List[str]] = ["settings", "status", "type"]
 
     @field_validator("type")

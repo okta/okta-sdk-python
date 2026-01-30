@@ -56,8 +56,8 @@ class GroupOwner(BaseModel):
     )
     origin_id: Optional[StrictStr] = Field(
         default=None,
-        description="The ID of the app instance if the `originType` is `APPLICATION`. "
-                    "This value is `NULL` if `originType` is `OKTA_DIRECTORY`.",
+        description="The ID of the app instance if the `originType` is `APPLICATION`. This value is `NULL` if `originType` "
+        "is `OKTA_DIRECTORY`.",
         alias="originId",
     )
     origin_type: Optional[GroupOwnerOriginType] = Field(
@@ -65,8 +65,8 @@ class GroupOwner(BaseModel):
     )
     resolved: Optional[StrictBool] = Field(
         default=None,
-        description="If `originType`is APPLICATION, this parameter is set to `FALSE` "
-                    "until the owner’s `originId` is reconciled with an associated Okta ID.",
+        description="If `originType`is APPLICATION, this parameter is set to `FALSE` until the owner's `originId` is "
+        "reconciled with an associated Okta ID.",
     )
     type: Optional[GroupOwnerType] = None
     __properties: ClassVar[List[str]] = [

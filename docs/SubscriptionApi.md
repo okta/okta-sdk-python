@@ -4,20 +4,20 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_subscriptions_notification_type_role**](SubscriptionApi.md#get_subscriptions_notification_type_role) | **GET** /api/v1/roles/{roleRef}/subscriptions/{notificationType} | Retrieve a Subscription for a Role
-[**get_subscriptions_notification_type_user**](SubscriptionApi.md#get_subscriptions_notification_type_user) | **GET** /api/v1/users/{userId}/subscriptions/{notificationType} | Retrieve a Subscription for a User
-[**list_subscriptions_role**](SubscriptionApi.md#list_subscriptions_role) | **GET** /api/v1/roles/{roleRef}/subscriptions | List all Subscriptions for a Role
-[**list_subscriptions_user**](SubscriptionApi.md#list_subscriptions_user) | **GET** /api/v1/users/{userId}/subscriptions | List all Subscriptions for a User
-[**subscribe_by_notification_type_role**](SubscriptionApi.md#subscribe_by_notification_type_role) | **POST** /api/v1/roles/{roleRef}/subscriptions/{notificationType}/subscribe | Subscribe a Role to a Specific Notification Type
-[**subscribe_by_notification_type_user**](SubscriptionApi.md#subscribe_by_notification_type_user) | **POST** /api/v1/users/{userId}/subscriptions/{notificationType}/subscribe | Subscribe a User to a Specific Notification Type
-[**unsubscribe_by_notification_type_role**](SubscriptionApi.md#unsubscribe_by_notification_type_role) | **POST** /api/v1/roles/{roleRef}/subscriptions/{notificationType}/unsubscribe | Unsubscribe a Role from a Specific Notification Type
-[**unsubscribe_by_notification_type_user**](SubscriptionApi.md#unsubscribe_by_notification_type_user) | **POST** /api/v1/users/{userId}/subscriptions/{notificationType}/unsubscribe | Unsubscribe a User from a Specific Notification Type
+[**get_subscriptions_notification_type_role**](SubscriptionApi.md#get_subscriptions_notification_type_role) | **GET** /api/v1/roles/{roleRef}/subscriptions/{notificationType} | Retrieve a subscription for a role
+[**get_subscriptions_notification_type_user**](SubscriptionApi.md#get_subscriptions_notification_type_user) | **GET** /api/v1/users/{userId}/subscriptions/{notificationType} | Retrieve a subscription for a user
+[**list_subscriptions_role**](SubscriptionApi.md#list_subscriptions_role) | **GET** /api/v1/roles/{roleRef}/subscriptions | List all subscriptions for a role
+[**list_subscriptions_user**](SubscriptionApi.md#list_subscriptions_user) | **GET** /api/v1/users/{userId}/subscriptions | List all subscriptions for a user
+[**subscribe_by_notification_type_role**](SubscriptionApi.md#subscribe_by_notification_type_role) | **POST** /api/v1/roles/{roleRef}/subscriptions/{notificationType}/subscribe | Subscribe a role to a specific notification type
+[**subscribe_by_notification_type_user**](SubscriptionApi.md#subscribe_by_notification_type_user) | **POST** /api/v1/users/{userId}/subscriptions/{notificationType}/subscribe | Subscribe a user to a specific notification type
+[**unsubscribe_by_notification_type_role**](SubscriptionApi.md#unsubscribe_by_notification_type_role) | **POST** /api/v1/roles/{roleRef}/subscriptions/{notificationType}/unsubscribe | Unsubscribe a role from a specific notification type
+[**unsubscribe_by_notification_type_user**](SubscriptionApi.md#unsubscribe_by_notification_type_user) | **POST** /api/v1/users/{userId}/subscriptions/{notificationType}/unsubscribe | Unsubscribe a user from a specific notification type
 
 
 # **get_subscriptions_notification_type_role**
 > Subscription get_subscriptions_notification_type_role(role_ref, notification_type)
 
-Retrieve a Subscription for a Role
+Retrieve a subscription for a role
 
 Retrieves a subscription by `notificationType` for a specified Role
 
@@ -56,11 +56,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SubscriptionApi(api_client)
-    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
+    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles).
     notification_type = okta.NotificationType() # NotificationType | 
 
     try:
-        # Retrieve a Subscription for a Role
+        # Retrieve a subscription for a role
         api_response = api_instance.get_subscriptions_notification_type_role(role_ref, notification_type)
         print("The response of SubscriptionApi->get_subscriptions_notification_type_role:\n")
         pprint(api_response)
@@ -75,7 +75,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **role_ref** | [**ListSubscriptionsRoleRoleRefParameter**](.md)| A reference to an existing role. Standard roles require a &#x60;roleType&#x60;, while Custom Roles require a &#x60;roleId&#x60;. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types). | 
+ **role_ref** | [**ListSubscriptionsRoleRoleRefParameter**](.md)| A reference to an existing role. Standard roles require a &#x60;roleType&#x60;, while Custom Roles require a &#x60;roleId&#x60;. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles). | 
  **notification_type** | [**NotificationType**](.md)|  | 
 
 ### Return type
@@ -105,9 +105,9 @@ Name | Type | Description  | Notes
 # **get_subscriptions_notification_type_user**
 > Subscription get_subscriptions_notification_type_user(notification_type, user_id)
 
-Retrieve a Subscription for a User
+Retrieve a subscription for a user
 
-Retrieves a subscription by `notificationType` for a specified User. Returns an `AccessDeniedException` message if requests are made for another user.
+Retrieves a subscription by `notificationType` for a specified user. Returns an `AccessDeniedException` message if requests are made for another user.
 
 ### Example
 
@@ -145,10 +145,10 @@ with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SubscriptionApi(api_client)
     notification_type = okta.NotificationType() # NotificationType | 
-    user_id = 'user_id_example' # str | 
+    user_id = '00ub0oNGTSWTBKOLGLNR' # str | ID of an existing Okta user
 
     try:
-        # Retrieve a Subscription for a User
+        # Retrieve a subscription for a user
         api_response = api_instance.get_subscriptions_notification_type_user(notification_type, user_id)
         print("The response of SubscriptionApi->get_subscriptions_notification_type_user:\n")
         pprint(api_response)
@@ -164,7 +164,7 @@ with okta.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **notification_type** | [**NotificationType**](.md)|  | 
- **user_id** | **str**|  | 
+ **user_id** | **str**| ID of an existing Okta user | 
 
 ### Return type
 
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 # **list_subscriptions_role**
 > List[Subscription] list_subscriptions_role(role_ref)
 
-List all Subscriptions for a Role
+List all subscriptions for a role
 
 Lists all subscriptions available to a specified Role
 
@@ -231,10 +231,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SubscriptionApi(api_client)
-    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
+    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles).
 
     try:
-        # List all Subscriptions for a Role
+        # List all subscriptions for a role
         api_response = api_instance.list_subscriptions_role(role_ref)
         print("The response of SubscriptionApi->list_subscriptions_role:\n")
         pprint(api_response)
@@ -249,7 +249,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **role_ref** | [**ListSubscriptionsRoleRoleRefParameter**](.md)| A reference to an existing role. Standard roles require a &#x60;roleType&#x60;, while Custom Roles require a &#x60;roleId&#x60;. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types). | 
+ **role_ref** | [**ListSubscriptionsRoleRoleRefParameter**](.md)| A reference to an existing role. Standard roles require a &#x60;roleType&#x60;, while Custom Roles require a &#x60;roleId&#x60;. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles). | 
 
 ### Return type
 
@@ -278,9 +278,9 @@ Name | Type | Description  | Notes
 # **list_subscriptions_user**
 > List[Subscription] list_subscriptions_user(user_id)
 
-List all Subscriptions for a User
+List all subscriptions for a user
 
-Lists all subscriptions available to a specified User. Returns an `AccessDeniedException` message if requests are made for another user.
+Lists all subscriptions available to a specified user. Returns an `AccessDeniedException` message if requests are made for another user.
 
 ### Example
 
@@ -316,10 +316,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SubscriptionApi(api_client)
-    user_id = 'user_id_example' # str | 
+    user_id = '00ub0oNGTSWTBKOLGLNR' # str | ID of an existing Okta user
 
     try:
-        # List all Subscriptions for a User
+        # List all subscriptions for a user
         api_response = api_instance.list_subscriptions_user(user_id)
         print("The response of SubscriptionApi->list_subscriptions_user:\n")
         pprint(api_response)
@@ -334,7 +334,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**|  | 
+ **user_id** | **str**| ID of an existing Okta user | 
 
 ### Return type
 
@@ -361,9 +361,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **subscribe_by_notification_type_role**
-> subscribe_by_notification_type_role(role_ref, notification_type)
+> Success subscribe_by_notification_type_role(role_ref, notification_type)
 
-Subscribe a Role to a Specific Notification Type
+Subscribe a role to a specific notification type
 
 Subscribes a Role to a specified notification type. Changes to Role subscriptions override the subscription status of any individual users with the Role.
 
@@ -375,6 +375,7 @@ Subscribes a Role to a specified notification type. Changes to Role subscription
 ```python
 import okta
 from okta.models.notification_type import NotificationType
+from okta.models.success import Success
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -401,12 +402,14 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SubscriptionApi(api_client)
-    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
+    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles).
     notification_type = okta.NotificationType() # NotificationType | 
 
     try:
-        # Subscribe a Role to a Specific Notification Type
-        api_instance.subscribe_by_notification_type_role(role_ref, notification_type)
+        # Subscribe a role to a specific notification type
+        api_response = api_instance.subscribe_by_notification_type_role(role_ref, notification_type)
+        print("The response of SubscriptionApi->subscribe_by_notification_type_role:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubscriptionApi->subscribe_by_notification_type_role: %s\n" % e)
 ```
@@ -418,12 +421,12 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **role_ref** | [**ListSubscriptionsRoleRoleRefParameter**](.md)| A reference to an existing role. Standard roles require a &#x60;roleType&#x60;, while Custom Roles require a &#x60;roleId&#x60;. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types). | 
+ **role_ref** | [**ListSubscriptionsRoleRoleRefParameter**](.md)| A reference to an existing role. Standard roles require a &#x60;roleType&#x60;, while Custom Roles require a &#x60;roleId&#x60;. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles). | 
  **notification_type** | [**NotificationType**](.md)|  | 
 
 ### Return type
 
-void (empty response body)
+[**Success**](Success.md)
 
 ### Authorization
 
@@ -446,9 +449,9 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **subscribe_by_notification_type_user**
-> subscribe_by_notification_type_user(notification_type, user_id)
+> Success subscribe_by_notification_type_user(notification_type, user_id)
 
-Subscribe a User to a Specific Notification Type
+Subscribe a user to a specific notification type
 
 Subscribes the current user to a specified notification type. Returns an `AccessDeniedException` message if requests are made for another user.
 
@@ -460,6 +463,7 @@ Subscribes the current user to a specified notification type. Returns an `Access
 ```python
 import okta
 from okta.models.notification_type import NotificationType
+from okta.models.success import Success
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -487,11 +491,13 @@ with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SubscriptionApi(api_client)
     notification_type = okta.NotificationType() # NotificationType | 
-    user_id = 'user_id_example' # str | 
+    user_id = '00ub0oNGTSWTBKOLGLNR' # str | ID of an existing Okta user
 
     try:
-        # Subscribe a User to a Specific Notification Type
-        api_instance.subscribe_by_notification_type_user(notification_type, user_id)
+        # Subscribe a user to a specific notification type
+        api_response = api_instance.subscribe_by_notification_type_user(notification_type, user_id)
+        print("The response of SubscriptionApi->subscribe_by_notification_type_user:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubscriptionApi->subscribe_by_notification_type_user: %s\n" % e)
 ```
@@ -504,11 +510,11 @@ with okta.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **notification_type** | [**NotificationType**](.md)|  | 
- **user_id** | **str**|  | 
+ **user_id** | **str**| ID of an existing Okta user | 
 
 ### Return type
 
-void (empty response body)
+[**Success**](Success.md)
 
 ### Authorization
 
@@ -531,9 +537,9 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **unsubscribe_by_notification_type_role**
-> unsubscribe_by_notification_type_role(role_ref, notification_type)
+> Success unsubscribe_by_notification_type_role(role_ref, notification_type)
 
-Unsubscribe a Role from a Specific Notification Type
+Unsubscribe a role from a specific notification type
 
 Unsubscribes a Role from a specified notification type. Changes to Role subscriptions override the subscription status of any individual users with the Role.
 
@@ -545,6 +551,7 @@ Unsubscribes a Role from a specified notification type. Changes to Role subscrip
 ```python
 import okta
 from okta.models.notification_type import NotificationType
+from okta.models.success import Success
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -571,12 +578,14 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SubscriptionApi(api_client)
-    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
+    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles).
     notification_type = okta.NotificationType() # NotificationType | 
 
     try:
-        # Unsubscribe a Role from a Specific Notification Type
-        api_instance.unsubscribe_by_notification_type_role(role_ref, notification_type)
+        # Unsubscribe a role from a specific notification type
+        api_response = api_instance.unsubscribe_by_notification_type_role(role_ref, notification_type)
+        print("The response of SubscriptionApi->unsubscribe_by_notification_type_role:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubscriptionApi->unsubscribe_by_notification_type_role: %s\n" % e)
 ```
@@ -588,12 +597,12 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **role_ref** | [**ListSubscriptionsRoleRoleRefParameter**](.md)| A reference to an existing role. Standard roles require a &#x60;roleType&#x60;, while Custom Roles require a &#x60;roleId&#x60;. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types). | 
+ **role_ref** | [**ListSubscriptionsRoleRoleRefParameter**](.md)| A reference to an existing role. Standard roles require a &#x60;roleType&#x60;, while Custom Roles require a &#x60;roleId&#x60;. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles). | 
  **notification_type** | [**NotificationType**](.md)|  | 
 
 ### Return type
 
-void (empty response body)
+[**Success**](Success.md)
 
 ### Authorization
 
@@ -616,9 +625,9 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **unsubscribe_by_notification_type_user**
-> unsubscribe_by_notification_type_user(notification_type, user_id)
+> Success unsubscribe_by_notification_type_user(notification_type, user_id)
 
-Unsubscribe a User from a Specific Notification Type
+Unsubscribe a user from a specific notification type
 
 Unsubscribes the current user from a specified notification type. Returns an `AccessDeniedException` message if requests are made for another user.
 
@@ -630,6 +639,7 @@ Unsubscribes the current user from a specified notification type. Returns an `Ac
 ```python
 import okta
 from okta.models.notification_type import NotificationType
+from okta.models.success import Success
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -657,11 +667,13 @@ with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.SubscriptionApi(api_client)
     notification_type = okta.NotificationType() # NotificationType | 
-    user_id = 'user_id_example' # str | 
+    user_id = '00ub0oNGTSWTBKOLGLNR' # str | ID of an existing Okta user
 
     try:
-        # Unsubscribe a User from a Specific Notification Type
-        api_instance.unsubscribe_by_notification_type_user(notification_type, user_id)
+        # Unsubscribe a user from a specific notification type
+        api_response = api_instance.unsubscribe_by_notification_type_user(notification_type, user_id)
+        print("The response of SubscriptionApi->unsubscribe_by_notification_type_user:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubscriptionApi->unsubscribe_by_notification_type_user: %s\n" % e)
 ```
@@ -674,11 +686,11 @@ with okta.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **notification_type** | [**NotificationType**](.md)|  | 
- **user_id** | **str**|  | 
+ **user_id** | **str**| ID of an existing Okta user | 
 
 ### Return type
 
-void (empty response body)
+[**Success**](Success.md)
 
 ### Authorization
 

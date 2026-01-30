@@ -37,7 +37,11 @@ class UserIdentityProviderLinkRequest(BaseModel):
     UserIdentityProviderLinkRequest
     """  # noqa: E501
 
-    external_id: Optional[StrictStr] = Field(default=None, alias="externalId")
+    external_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique IdP-specific identifier for a user",
+        alias="externalId",
+    )
     __properties: ClassVar[List[str]] = ["externalId"]
 
     model_config = ConfigDict(

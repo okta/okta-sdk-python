@@ -5,11 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**alternate_id** | **str** |  | [optional] [readonly] 
-**detail_entry** | **Dict[str, object]** |  | [optional] [readonly] 
-**display_name** | **str** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**type** | **str** |  | [optional] [readonly] 
+**alternate_id** | **str** | The alternate ID of the target | [optional] [readonly] 
+**change_details** | [**LogTargetChangeDetails**](LogTargetChangeDetails.md) |  | [optional] 
+**detail_entry** | **Dict[str, object]** | Further details on the target | [optional] [readonly] 
+**display_name** | **str** | The display name of the target | [optional] [readonly] 
+**id** | **str** | The ID of the target | [optional] [readonly] 
+**type** | **str** | The type of target | [optional] [readonly] 
 
 ## Example
 

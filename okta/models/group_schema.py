@@ -41,16 +41,31 @@ class GroupSchema(BaseModel):
     GroupSchema
     """  # noqa: E501
 
-    var_schema: Optional[StrictStr] = Field(default=None, alias="$schema")
-    created: Optional[StrictStr] = None
+    var_schema: Optional[StrictStr] = Field(
+        default=None, description="JSON schema version identifier", alias="$schema"
+    )
+    created: Optional[StrictStr] = Field(
+        default=None, description="Timestamp when the schema was created"
+    )
     definitions: Optional[GroupSchemaDefinitions] = None
-    description: Optional[StrictStr] = None
-    id: Optional[StrictStr] = None
-    last_updated: Optional[StrictStr] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = None
+    description: Optional[StrictStr] = Field(
+        default=None, description="Description for the schema"
+    )
+    id: Optional[StrictStr] = Field(default=None, description="URI of group schema")
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the schema was last updated",
+        alias="lastUpdated",
+    )
+    name: Optional[StrictStr] = Field(default=None, description="Name of the schema")
     properties: Optional[UserSchemaProperties] = None
-    title: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    title: Optional[StrictStr] = Field(
+        default=None, description="User-defined display name for the schema"
+    )
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="Type of [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4)",
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "$schema",

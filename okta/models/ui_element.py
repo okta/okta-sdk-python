@@ -45,14 +45,13 @@ class UIElement(BaseModel):
     options: Optional[UIElementOptions] = None
     scope: Optional[StrictStr] = Field(
         default=None,
-        description="Specifies the property bound to the input field. It must follow the "
-                    "format `#/properties/PROPERTY_NAME` where `PROPERTY_NAME` is a variable "
-                    "name for an attribute in `profile editor`.",
+        description="Specifies the property bound to the input field. It must follow the format `#/properties/PROPERTY_NAME` "
+        "where `PROPERTY_NAME` is a variable name for an attribute in `profile editor`.",
     )
     type: Optional[StrictStr] = Field(
         default=None,
         description="Specifies the relationship between this input element and `scope`. The `Control` value specifies that "
-                    "this input controls the value represented by `scope`.",
+        "this input controls the value represented by `scope`.",
     )
     __properties: ClassVar[List[str]] = ["label", "options", "scope", "type"]
 

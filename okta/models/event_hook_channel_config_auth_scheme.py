@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.event_hook_channel_config_auth_scheme_type import (
@@ -38,12 +38,20 @@ from okta.models.event_hook_channel_config_auth_scheme_type import (
 
 class EventHookChannelConfigAuthScheme(BaseModel):
     """
-    EventHookChannelConfigAuthScheme
+    The authentication scheme used for this request.  To use Basic Auth for authentication, set `type` to `HEADER`,
+    `key` to `Authorization`, and `value` to the Base64-encoded string of \"username:password\". Ensure that you include the
+    scheme (including space) as part of the `value` parameter. For example, `Basic YWRtaW46c3VwZXJzZWNyZXQ=`.
     """  # noqa: E501
 
-    key: Optional[StrictStr] = None
+    key: Optional[StrictStr] = Field(
+        default=None, description="The name for the authorization header"
+    )
     type: Optional[EventHookChannelConfigAuthSchemeType] = None
-    value: Optional[StrictStr] = None
+    value: Optional[StrictStr] = Field(
+        default=None,
+        description="The header value. This secret key is passed to your external service endpoint for security "
+        "verification. This property is not returned in the response.",
+    )
     __properties: ClassVar[List[str]] = ["key", "type", "value"]
 
     model_config = ConfigDict(

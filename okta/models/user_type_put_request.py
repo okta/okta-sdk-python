@@ -38,10 +38,10 @@ class UserTypePutRequest(BaseModel):
     """  # noqa: E501
 
     description: StrictStr = Field(
-        description="The human-readable description of the User Type"
+        description="The human-readable description of the user type"
     )
     display_name: StrictStr = Field(
-        description="The human-readable name of the User Type", alias="displayName"
+        description="The human-readable name of the user type", alias="displayName"
     )
     name: StrictStr = Field(description="The name of the existing type")
     __properties: ClassVar[List[str]] = ["description", "displayName", "name"]

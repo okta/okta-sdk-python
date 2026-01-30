@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OAuthEndpointAuthenticationMethod(str, Enum):
     """
-    OAuthEndpointAuthenticationMethod
+    Requested authentication method for the token endpoint
     """
 
     """

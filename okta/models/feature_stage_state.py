@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class FeatureStageState(str, Enum):
     """
-    FeatureStageState
+    Indicates the release state of the feature
     """
 
     """

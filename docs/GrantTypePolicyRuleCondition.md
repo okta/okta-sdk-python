@@ -6,7 +6,7 @@ Array of grant types that this condition includes. Determines the mechanism that
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**include** | **List[str]** | Array of grant types thagt this condition includes. | [optional] 
+**include** | **List[str]** | Array of grant types that this condition includes. | [optional] 
 
 ## Example
 

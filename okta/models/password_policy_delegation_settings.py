@@ -38,7 +38,7 @@ from okta.models.password_policy_delegation_settings_options import (
 
 class PasswordPolicyDelegationSettings(BaseModel):
     """
-    PasswordPolicyDelegationSettings
+    Specifies how to handle password delegation
     """  # noqa: E501
 
     options: Optional[PasswordPolicyDelegationSettingsOptions] = None

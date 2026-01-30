@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filter_type** | **str** |  | [optional] 
-**filter_value** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**namespace** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
-**values** | **List[str]** |  | [optional] 
+**type** | **str** | The type of attribute statements object | [optional] 
+**name** | **str** | The name of the group attribute in your app. The attribute name must be unique across all user and group attribute statements. | [optional] 
+**namespace** | **str** | The name format of the group attribute. Supported values: | [optional] 
+**values** | **List[str]** | The attribute values (supports [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/)) | [optional] 
+**filter_type** | **str** | The operation to filter groups based on &#x60;filterValue&#x60; | [optional] 
+**filter_value** | **str** | Filter the groups based on a specific value. | [optional] 
 
 ## Example
 

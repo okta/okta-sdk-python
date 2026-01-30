@@ -4,19 +4,19 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activate_log_stream**](LogStreamApi.md#activate_log_stream) | **POST** /api/v1/logStreams/{logStreamId}/lifecycle/activate | Activate a Log Stream
-[**create_log_stream**](LogStreamApi.md#create_log_stream) | **POST** /api/v1/logStreams | Create a Log Stream
-[**deactivate_log_stream**](LogStreamApi.md#deactivate_log_stream) | **POST** /api/v1/logStreams/{logStreamId}/lifecycle/deactivate | Deactivate a Log Stream
-[**delete_log_stream**](LogStreamApi.md#delete_log_stream) | **DELETE** /api/v1/logStreams/{logStreamId} | Delete a Log Stream
-[**get_log_stream**](LogStreamApi.md#get_log_stream) | **GET** /api/v1/logStreams/{logStreamId} | Retrieve a Log Stream
-[**list_log_streams**](LogStreamApi.md#list_log_streams) | **GET** /api/v1/logStreams | List all Log Streams
-[**replace_log_stream**](LogStreamApi.md#replace_log_stream) | **PUT** /api/v1/logStreams/{logStreamId} | Replace a Log Stream
+[**activate_log_stream**](LogStreamApi.md#activate_log_stream) | **POST** /api/v1/logStreams/{logStreamId}/lifecycle/activate | Activate a log stream
+[**create_log_stream**](LogStreamApi.md#create_log_stream) | **POST** /api/v1/logStreams | Create a log stream
+[**deactivate_log_stream**](LogStreamApi.md#deactivate_log_stream) | **POST** /api/v1/logStreams/{logStreamId}/lifecycle/deactivate | Deactivate a log stream
+[**delete_log_stream**](LogStreamApi.md#delete_log_stream) | **DELETE** /api/v1/logStreams/{logStreamId} | Delete a log stream
+[**get_log_stream**](LogStreamApi.md#get_log_stream) | **GET** /api/v1/logStreams/{logStreamId} | Retrieve a log stream
+[**list_log_streams**](LogStreamApi.md#list_log_streams) | **GET** /api/v1/logStreams | List all log streams
+[**replace_log_stream**](LogStreamApi.md#replace_log_stream) | **PUT** /api/v1/logStreams/{logStreamId} | Replace a log stream
 
 
 # **activate_log_stream**
 > LogStream activate_log_stream(log_stream_id)
 
-Activate a Log Stream
+Activate a log stream
 
 Activates a log stream by `logStreamId`
 
@@ -54,10 +54,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.LogStreamApi(api_client)
-    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
+    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the log stream
 
     try:
-        # Activate a Log Stream
+        # Activate a log stream
         api_response = api_instance.activate_log_stream(log_stream_id)
         print("The response of LogStreamApi->activate_log_stream:\n")
         pprint(api_response)
@@ -72,7 +72,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **log_stream_id** | **str**| Unique identifier for the Log Stream | 
+ **log_stream_id** | **str**| Unique identifier for the log stream | 
 
 ### Return type
 
@@ -101,9 +101,9 @@ Name | Type | Description  | Notes
 # **create_log_stream**
 > LogStream create_log_stream(instance)
 
-Create a Log Stream
+Create a log stream
 
-Creates a new Log Stream object
+Creates a new log stream object
 
 ### Example
 
@@ -142,7 +142,7 @@ with okta.ApiClient(configuration) as api_client:
     instance = okta.LogStream() # LogStream | 
 
     try:
-        # Create a Log Stream
+        # Create a log stream
         api_response = api_instance.create_log_stream(instance)
         print("The response of LogStreamApi->create_log_stream:\n")
         pprint(api_response)
@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 # **deactivate_log_stream**
 > LogStream deactivate_log_stream(log_stream_id)
 
-Deactivate a Log Stream
+Deactivate a log stream
 
 Deactivates a log stream by `logStreamId`
 
@@ -224,10 +224,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.LogStreamApi(api_client)
-    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
+    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the log stream
 
     try:
-        # Deactivate a Log Stream
+        # Deactivate a log stream
         api_response = api_instance.deactivate_log_stream(log_stream_id)
         print("The response of LogStreamApi->deactivate_log_stream:\n")
         pprint(api_response)
@@ -242,7 +242,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **log_stream_id** | **str**| Unique identifier for the Log Stream | 
+ **log_stream_id** | **str**| Unique identifier for the log stream | 
 
 ### Return type
 
@@ -271,9 +271,9 @@ Name | Type | Description  | Notes
 # **delete_log_stream**
 > delete_log_stream(log_stream_id)
 
-Delete a Log Stream
+Delete a log stream
 
-Deletes a Log Stream object from your org by ID
+Deletes a log stream object from your org by ID
 
 ### Example
 
@@ -308,10 +308,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.LogStreamApi(api_client)
-    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
+    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the log stream
 
     try:
-        # Delete a Log Stream
+        # Delete a log stream
         api_instance.delete_log_stream(log_stream_id)
     except Exception as e:
         print("Exception when calling LogStreamApi->delete_log_stream: %s\n" % e)
@@ -324,7 +324,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **log_stream_id** | **str**| Unique identifier for the Log Stream | 
+ **log_stream_id** | **str**| Unique identifier for the log stream | 
 
 ### Return type
 
@@ -353,9 +353,9 @@ void (empty response body)
 # **get_log_stream**
 > LogStream get_log_stream(log_stream_id)
 
-Retrieve a Log Stream
+Retrieve a log stream
 
-Retrieves a Log Stream object by ID
+Retrieves a log stream object by ID
 
 ### Example
 
@@ -391,10 +391,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.LogStreamApi(api_client)
-    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
+    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the log stream
 
     try:
-        # Retrieve a Log Stream
+        # Retrieve a log stream
         api_response = api_instance.get_log_stream(log_stream_id)
         print("The response of LogStreamApi->get_log_stream:\n")
         pprint(api_response)
@@ -409,7 +409,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **log_stream_id** | **str**| Unique identifier for the Log Stream | 
+ **log_stream_id** | **str**| Unique identifier for the log stream | 
 
 ### Return type
 
@@ -438,9 +438,9 @@ Name | Type | Description  | Notes
 # **list_log_streams**
 > List[LogStream] list_log_streams(after=after, limit=limit, filter=filter)
 
-List all Log Streams
+List all log streams
 
-Lists all Log Stream objects in your org. You can request a paginated list or a subset of Log Streams that match a supported filter expression.
+Lists all log stream objects in your org. You can request a paginated list or a subset of log streams that match a supported filter expression.
 
 ### Example
 
@@ -476,12 +476,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.LogStreamApi(api_client)
-    after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
+    after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header). (optional)
     limit = 20 # int | A limit on the number of objects to return (optional) (default to 20)
     filter = 'type eq \"aws_eventbridge\"' # str | An expression that [filters](/#filter) the returned objects. You can only use the `eq` operator on either the `status` or `type` properties in the filter expression. (optional)
 
     try:
-        # List all Log Streams
+        # List all log streams
         api_response = api_instance.list_log_streams(after=after, limit=limit, filter=filter)
         print("The response of LogStreamApi->list_log_streams:\n")
         pprint(api_response)
@@ -496,7 +496,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **after** | **str**| The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the &#x60;Link&#x60; response header. See [Pagination](/#pagination) for more information. | [optional] 
+ **after** | **str**| The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the &#x60;Link&#x60; response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header). | [optional] 
  **limit** | **int**| A limit on the number of objects to return | [optional] [default to 20]
  **filter** | **str**| An expression that [filters](/#filter) the returned objects. You can only use the &#x60;eq&#x60; operator on either the &#x60;status&#x60; or &#x60;type&#x60; properties in the filter expression. | [optional] 
 
@@ -526,9 +526,9 @@ Name | Type | Description  | Notes
 # **replace_log_stream**
 > LogStream replace_log_stream(log_stream_id, instance)
 
-Replace a Log Stream
+Replace a log stream
 
-Replaces the Log Stream object properties for a given ID.  This operation is typically used to update the configuration of a Log Stream. Depending on the type of Log Stream you want to update, certain properties can't be modified after the Log Stream is initially created. Use the [Retrieve the Log Stream Schema for the schema type](/openapi/okta-management/management/tag/Schema/#tag/Schema/operation/getLogStreamSchema) request to determine which properties you can update for the specific Log Stream type. Log Stream properties with the `\"writeOnce\" : true` attribute can't be updated after creation. You must still specify these `writeOnce` properties in the request body with the original values in the PUT request.  > **Note:** You don't have to specify properties that have both the `\"writeOnce\": true` and the `\"writeOnly\": true` attributes in the PUT request body. These property values are ignored even if you add them in the PUT request body.
+Replaces the log stream object properties for a given ID.  This operation is typically used to update the configuration of a log stream. Depending on the type of log stream you want to update, certain properties can't be modified after the log stream is initially created. Use the [Retrieve the log stream schema for the schema type](/openapi/okta-management/management/tag/Schema/#tag/Schema/operation/getLogStreamSchema) request to determine which properties you can update for the specific log stream type. Log stream properties with the `\"writeOnce\" : true` attribute can't be updated after creation. You must still specify these `writeOnce` properties in the request body with the original values in the PUT request.  > **Note:** You don't have to specify properties that have both the `\"writeOnce\": true` and the `\"writeOnly\": true` attributes in the PUT request body. These property values are ignored even if you add them in the PUT request body.
 
 ### Example
 
@@ -565,11 +565,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.LogStreamApi(api_client)
-    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
+    log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the log stream
     instance = okta.LogStreamPutSchema() # LogStreamPutSchema | 
 
     try:
-        # Replace a Log Stream
+        # Replace a log stream
         api_response = api_instance.replace_log_stream(log_stream_id, instance)
         print("The response of LogStreamApi->replace_log_stream:\n")
         pprint(api_response)
@@ -584,7 +584,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **log_stream_id** | **str**| Unique identifier for the Log Stream | 
+ **log_stream_id** | **str**| Unique identifier for the log stream | 
  **instance** | [**LogStreamPutSchema**](LogStreamPutSchema.md)|  | 
 
 ### Return type

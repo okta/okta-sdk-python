@@ -38,7 +38,7 @@ from okta.models.seed_enum import SeedEnum
 
 class PasswordSettingObject(BaseModel):
     """
-    Determines whether Okta creates and pushes a password in the application for each assigned user
+    Determines whether Okta creates and pushes a password in the app for each assigned user
     """  # noqa: E501
 
     change: Optional[ChangeEnum] = ChangeEnum.KEEP_EXISTING
@@ -83,13 +83,6 @@ class PasswordSettingObject(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of status
-        if self.status:
-            if not isinstance(self.status, dict):
-                _dict["status"] = self.status.to_dict()
-            else:
-                _dict["status"] = self.status
-
         return _dict
 
     @classmethod
@@ -105,11 +98,7 @@ class PasswordSettingObject(BaseModel):
             {
                 "change": obj.get("change"),
                 "seed": obj.get("seed"),
-                "status": (
-                    EnabledStatus.from_dict(obj["status"])
-                    if obj.get("status") is not None
-                    else None
-                ),
+                "status": obj.get("status"),
             }
         )
         return _obj

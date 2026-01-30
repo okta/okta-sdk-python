@@ -1,5 +1,6 @@
 # LogSeverity
 
+Indicates how severe the event is
 
 ## Properties
 

@@ -34,16 +34,29 @@ from typing_extensions import Self
 
 class ApplicationAccessibility(BaseModel):
     """
-    ApplicationAccessibility
+    Specifies access settings for the app
     """  # noqa: E501
 
     error_redirect_url: Optional[StrictStr] = Field(
-        default=None, alias="errorRedirectUrl"
+        default=None,
+        description="Custom error page URL for the app",
+        alias="errorRedirectUrl",
     )
     login_redirect_url: Optional[StrictStr] = Field(
-        default=None, alias="loginRedirectUrl"
+        default=None,
+        description="Custom login page URL for the app > **Note:** The `loginRedirectUrl` property is deprecated in Identity "
+        "Engine. This property is used with the custom app login feature. Orgs that actively use this feature "
+        "can continue to do so. See [Okta-hosted sign-in (redirect authentication)]("
+        "https://developer.okta.com/docs/guides/redirect-authentication/) or [configure IdP routing rules]("
+        "https://help.okta.com/okta_help.htm?type=oie&id=ext-cfg-routing-rules) to redirect users to the "
+        "appropriate sign-in app for orgs that don't use the custom app login feature.",
+        alias="loginRedirectUrl",
     )
-    self_service: Optional[StrictBool] = Field(default=None, alias="selfService")
+    self_service: Optional[StrictBool] = Field(
+        default=None,
+        description="Represents whether the app can be self-assignable by users",
+        alias="selfService",
+    )
     __properties: ClassVar[List[str]] = [
         "errorRedirectUrl",
         "loginRedirectUrl",

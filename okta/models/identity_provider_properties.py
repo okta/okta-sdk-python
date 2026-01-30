@@ -28,19 +28,67 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
+
+from okta.models.identity_provider_properties_idv_metadata import (
+    IdentityProviderPropertiesIdvMetadata,
+)
 
 
 class IdentityProviderProperties(BaseModel):
     """
-    IdentityProviderProperties
+    The properties in the IdP `properties` object vary depending on the IdP type
     """  # noqa: E501
 
-    additional_amr: Optional[List[StrictStr]] = Field(
-        default=None, alias="additionalAmr"
+    aal_value: Optional[StrictStr] = Field(
+        default=None,
+        description="The [authentication assurance level](https://developers.login.gov/oidc/#aal-values) (AAL) value for the "
+        "Login.gov IdP. See [Add a Login.gov IdP](https://developer.okta.com/docs/guides/add-logingov-idp/). "
+        "Applies to `LOGINGOV` and `LOGINGOV_SANDBOX` IdP types.",
+        alias="aalValue",
     )
-    __properties: ClassVar[List[str]] = ["additionalAmr"]
+    additional_amr: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="The additional Assurance Methods References (AMR) values for Smart Card IdPs. Applies to `X509` IdP "
+        "type.",
+        alias="additionalAmr",
+    )
+    ial_value: Optional[StrictStr] = Field(
+        default=None,
+        description="The [type of identity verification](https://developers.login.gov/oidc/#ial-values) (IAL) value for the "
+        "Login.gov IdP. See [Add a Login.gov IdP](https://developer.okta.com/docs/guides/add-logingov-idp/). "
+        "Applies to `LOGINGOV` and `LOGINGOV_SANDBOX` IdP types.",
+        alias="ialValue",
+    )
+    idv_metadata: Optional[IdentityProviderPropertiesIdvMetadata] = Field(
+        default=None, alias="idvMetadata"
+    )
+    inquiry_template_id: StrictStr = Field(
+        description="The ID of the inquiry template from your Persona dashboard. The inquiry template always starts with "
+        "`itmpl`. Applies to the `IDV_PERSONA` IdP type.",
+        alias="inquiryTemplateId",
+    )
+    __properties: ClassVar[List[str]] = [
+        "aalValue",
+        "additionalAmr",
+        "ialValue",
+        "idvMetadata",
+        "inquiryTemplateId",
+    ]
+
+    @field_validator("additional_amr")
+    def additional_amr_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in set(["sc", "hwk", "pin", "mfa"]):
+                raise ValueError(
+                    "each list item must be one of ('sc', 'hwk', 'pin', 'mfa')"
+                )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,10 +127,27 @@ class IdentityProviderProperties(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of idv_metadata
+        if self.idv_metadata:
+            if not isinstance(self.idv_metadata, dict):
+                _dict["idvMetadata"] = self.idv_metadata.to_dict()
+            else:
+                _dict["idvMetadata"] = self.idv_metadata
+
+        # set to None if aal_value (nullable) is None
+        # and model_fields_set contains the field
+        if self.aal_value is None and "aal_value" in self.model_fields_set:
+            _dict["aalValue"] = None
+
         # set to None if additional_amr (nullable) is None
         # and model_fields_set contains the field
         if self.additional_amr is None and "additional_amr" in self.model_fields_set:
             _dict["additionalAmr"] = None
+
+        # set to None if ial_value (nullable) is None
+        # and model_fields_set contains the field
+        if self.ial_value is None and "ial_value" in self.model_fields_set:
+            _dict["ialValue"] = None
 
         return _dict
 
@@ -95,5 +160,17 @@ class IdentityProviderProperties(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"additionalAmr": obj.get("additionalAmr")})
+        _obj = cls.model_validate(
+            {
+                "aalValue": obj.get("aalValue"),
+                "additionalAmr": obj.get("additionalAmr"),
+                "ialValue": obj.get("ialValue"),
+                "idvMetadata": (
+                    IdentityProviderPropertiesIdvMetadata.from_dict(obj["idvMetadata"])
+                    if obj.get("idvMetadata") is not None
+                    else None
+                ),
+                "inquiryTemplateId": obj.get("inquiryTemplateId"),
+            }
+        )
         return _obj

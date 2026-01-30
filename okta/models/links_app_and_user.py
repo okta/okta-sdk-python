@@ -32,19 +32,21 @@ from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
 from okta.models.href_object_app_link import HrefObjectAppLink
+from okta.models.href_object_group_link import HrefObjectGroupLink
 from okta.models.href_object_user_link import HrefObjectUserLink
 
 
 class LinksAppAndUser(BaseModel):
     """
-    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available using the [JSON
-    Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This
-    object is used for dynamic discovery of resources related to the App User.
+    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available using the [JSON Hypertext
+    Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. This object is used
+    for dynamic discovery of resources related to the application user.
     """  # noqa: E501
 
     app: Optional[HrefObjectAppLink] = None
+    group: Optional[HrefObjectGroupLink] = None
     user: Optional[HrefObjectUserLink] = None
-    __properties: ClassVar[List[str]] = ["app", "user"]
+    __properties: ClassVar[List[str]] = ["app", "group", "user"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +92,13 @@ class LinksAppAndUser(BaseModel):
             else:
                 _dict["app"] = self.app
 
+        # override the default output from pydantic by calling `to_dict()` of group
+        if self.group:
+            if not isinstance(self.group, dict):
+                _dict["group"] = self.group.to_dict()
+            else:
+                _dict["group"] = self.group
+
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             if not isinstance(self.user, dict):
@@ -113,6 +122,11 @@ class LinksAppAndUser(BaseModel):
                 "app": (
                     HrefObjectAppLink.from_dict(obj["app"])
                     if obj.get("app") is not None
+                    else None
+                ),
+                "group": (
+                    HrefObjectGroupLink.from_dict(obj["group"])
+                    if obj.get("group") is not None
                     else None
                 ),
                 "user": (

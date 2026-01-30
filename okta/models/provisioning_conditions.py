@@ -39,7 +39,7 @@ from okta.models.provisioning_suspended_condition import ProvisioningSuspendedCo
 
 class ProvisioningConditions(BaseModel):
     """
-    ProvisioningConditions
+    Conditional behaviors for an IdP user during authentication
     """  # noqa: E501
 
     deprovisioned: Optional[ProvisioningDeprovisionedCondition] = None

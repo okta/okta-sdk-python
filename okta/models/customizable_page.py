@@ -37,7 +37,9 @@ class CustomizablePage(BaseModel):
     CustomizablePage
     """  # noqa: E501
 
-    page_content: Optional[StrictStr] = Field(default=None, alias="pageContent")
+    page_content: Optional[StrictStr] = Field(
+        default=None, description="The HTML for the page", alias="pageContent"
+    )
     __properties: ClassVar[List[str]] = ["pageContent"]
 
     model_config = ConfigDict(

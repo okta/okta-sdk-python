@@ -34,7 +34,7 @@ from typing_extensions import Self
 
 class OAuth2ScopesMediationPolicyRuleCondition(BaseModel):
     """
-    OAuth2ScopesMediationPolicyRuleCondition
+    Array of scopes that the condition includes
     """  # noqa: E501
 
     include: Optional[List[StrictStr]] = None

@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing_extensions import Self
 
 
@@ -37,8 +37,13 @@ class DeviceDisplayName(BaseModel):
     Display name of the device
     """  # noqa: E501
 
-    sensitive: Optional[StrictBool] = None
-    value: Optional[StrictStr] = None
+    sensitive: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether the associated value is Personal Identifiable Information (PII) and requires masking",
+    )
+    value: Optional[StrictStr] = Field(
+        default=None, description="Display name of the device"
+    )
     __properties: ClassVar[List[str]] = ["sensitive", "value"]
 
     model_config = ConfigDict(
@@ -90,6 +95,11 @@ class DeviceDisplayName(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"sensitive": obj.get("sensitive"), "value": obj.get("value")}
+            {
+                "sensitive": (
+                    obj.get("sensitive") if obj.get("sensitive") is not None else False
+                ),
+                "value": obj.get("value"),
+            }
         )
         return _obj

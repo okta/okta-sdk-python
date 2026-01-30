@@ -25,89 +25,162 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
-from typing import Any, ClassVar, Dict, List
-from typing import Optional, Set
+from typing import Union, Any, Set, TYPE_CHECKING, Optional, Dict
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import (
+    BaseModel,
+    ValidationError,
+    field_validator,
+)
 from typing_extensions import Self
+
+from okta.models.saml_attribute_statement_expression import (
+    SamlAttributeStatementExpression,
+)
+from okta.models.saml_attribute_statement_group import SamlAttributeStatementGroup
+
+SAMLATTRIBUTESTATEMENT_ANY_OF_SCHEMAS = [
+    "SamlAttributeStatementExpression",
+    "SamlAttributeStatementGroup",
+]
 
 
 class SamlAttributeStatement(BaseModel):
     """
     SamlAttributeStatement
-    """  # noqa: E501
+    """
 
-    filter_type: Optional[StrictStr] = Field(default=None, alias="filterType")
-    filter_value: Optional[StrictStr] = Field(default=None, alias="filterValue")
-    name: Optional[StrictStr] = None
-    namespace: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
-    values: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = [
-        "filterType",
-        "filterValue",
-        "name",
-        "namespace",
-        "type",
-        "values",
-    ]
+    # data type: SamlAttributeStatementExpression
+    anyof_schema_1_validator: Optional[SamlAttributeStatementExpression] = None
+    # data type: SamlAttributeStatementGroup
+    anyof_schema_2_validator: Optional[SamlAttributeStatementGroup] = None
+    if TYPE_CHECKING:
+        actual_instance: Optional[
+            Union[SamlAttributeStatementExpression, SamlAttributeStatementGroup]
+        ] = None
+    else:
+        actual_instance: Any = None
+    any_of_schemas: Set[str] = {
+        "SamlAttributeStatementExpression",
+        "SamlAttributeStatementGroup",
+    }
 
-    model_config = ConfigDict(
-        populate_by_name=True,
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
+    model_config = {
+        "validate_assignment": True,
+        "protected_namespaces": (),
+    }
 
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.model_dump(by_alias=True))
+    discriminator_value_class_map: Dict[str, str] = {}
+
+    def __init__(self, *args, **kwargs) -> None:
+        if args:
+            if len(args) > 1:
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
+            if kwargs:
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
+            super().__init__(actual_instance=args[0])
+        else:
+            super().__init__(**kwargs)
+
+    @field_validator("actual_instance")
+    def actual_instance_must_validate_anyof(cls, v):
+        error_messages = []
+        # validate data type: SamlAttributeStatementExpression
+        if not isinstance(v, SamlAttributeStatementExpression):
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `SamlAttributeStatementExpression`"
+            )
+        else:
+            return v
+
+        # validate data type: SamlAttributeStatementGroup
+        if not isinstance(v, SamlAttributeStatementGroup):
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `SamlAttributeStatementGroup`"
+            )
+        else:
+            return v
+
+        if error_messages:
+            # no match
+            raise ValueError(
+                "No match found when setting the actual_instance in SamlAttributeStatement with anyOf schemas: "
+                "SamlAttributeStatementExpression, SamlAttributeStatementGroup. Details: "
+                + ", ".join(error_messages)
+            )
+        else:
+            return v
+
+    @classmethod
+    def from_dict(cls, obj: Dict[str, Any]) -> Self:
+        return cls.from_json(json.dumps(obj))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> Self:
+        """Returns the object represented by the json string"""
+        instance = cls.model_construct()
+        error_messages = []
+        # anyof_schema_1_validator: Optional[SamlAttributeStatementExpression] = None
+        try:
+            instance.actual_instance = SamlAttributeStatementExpression.from_json(
+                json_str
+            )
+            return instance
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # anyof_schema_2_validator: Optional[SamlAttributeStatementGroup] = None
+        try:
+            instance.actual_instance = SamlAttributeStatementGroup.from_json(json_str)
+            return instance
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if error_messages:
+            # no match
+            raise ValueError(
+                "No match found when deserializing the JSON string into SamlAttributeStatement with anyOf schemas: "
+                "SamlAttributeStatementExpression, SamlAttributeStatementGroup. Details: "
+                + ", ".join(error_messages)
+            )
+        else:
+            return instance
 
     def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        """Returns the JSON representation of the actual instance"""
+        if self.actual_instance is None:
+            return "null"
 
-    @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SamlAttributeStatement from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
+        if hasattr(self.actual_instance, "to_json") and callable(
+            self.actual_instance.to_json
+        ):
+            return self.actual_instance.to_json()
+        else:
+            return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Dict[str, Any]:
-        """Return the dictionary representation of the model using alias.
-
-        This has the following differences from calling pydantic's
-        `self.model_dump(by_alias=True)`:
-
-        * `None` is only added to the output dict for nullable fields that
-          were set at model initialization. Other fields with value `None`
-          are ignored.
-        """
-        excluded_fields: Set[str] = set([])
-
-        _dict = self.model_dump(
-            by_alias=True,
-            exclude=excluded_fields,
-            exclude_none=True,
-        )
-        return _dict
-
-    @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SamlAttributeStatement from a dict"""
-        if obj is None:
+    def to_dict(
+        self,
+    ) -> Optional[
+        Union[
+            Dict[str, Any],
+            SamlAttributeStatementExpression,
+            SamlAttributeStatementGroup,
+        ]
+    ]:
+        """Returns the dict representation of the actual instance"""
+        if self.actual_instance is None:
             return None
 
-        if not isinstance(obj, dict):
-            return cls.model_validate(obj)
+        if hasattr(self.actual_instance, "to_dict") and callable(
+            self.actual_instance.to_dict
+        ):
+            return self.actual_instance.to_dict()
+        else:
+            return self.actual_instance
 
-        _obj = cls.model_validate(
-            {
-                "filterType": obj.get("filterType"),
-                "filterValue": obj.get("filterValue"),
-                "name": obj.get("name"),
-                "namespace": obj.get("namespace"),
-                "type": obj.get("type"),
-                "values": obj.get("values"),
-            }
-        )
-        return _obj
+    def to_str(self) -> str:
+        """Returns the string representation of the actual instance"""
+        return pprint.pformat(self.model_dump())

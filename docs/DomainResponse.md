@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **brand_id** | **str** | The ID number of the brand | [optional] 
 **certificate_source_type** | [**DomainCertificateSourceType**](DomainCertificateSourceType.md) |  | [optional] 
-**dns_records** | [**List[DNSRecord]**](DNSRecord.md) |  | [optional] 
+**dns_records** | [**List[DNSRecordDomains]**](DNSRecordDomains.md) |  | [optional] 
 **domain** | **str** | Custom domain name | [optional] 
 **id** | **str** | Unique ID of the domain | [optional] 
 **public_certificate** | [**DomainCertificateMetadata**](DomainCertificateMetadata.md) |  | [optional] 

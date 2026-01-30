@@ -1,5 +1,6 @@
 # OtpProtocol
 
+The protocol used
 
 ## Properties
 

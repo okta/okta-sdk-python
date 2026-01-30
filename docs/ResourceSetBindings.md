@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**roles** | [**List[ResourceSetBindingRole]**](ResourceSetBindingRole.md) |  | [optional] 
-**links** | [**ResourceSetBindingResponseLinks**](ResourceSetBindingResponseLinks.md) |  | [optional] 
+**roles** | [**List[ResourceSetBindingRole]**](ResourceSetBindingRole.md) | Roles associated with the resource set binding. If there are more than 100 bindings for the specified resource set, then the &#x60;_links.next&#x60; resource is returned with the next list of bindings. | [optional] 
+**links** | [**ResourceSetBindingsLinks**](ResourceSetBindingsLinks.md) |  | [optional] 
 
 ## Example
 

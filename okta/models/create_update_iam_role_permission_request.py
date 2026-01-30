@@ -28,8 +28,10 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
+
+from okta.models.permission_conditions import PermissionConditions
 
 
 class CreateUpdateIamRolePermissionRequest(BaseModel):
@@ -37,9 +39,7 @@ class CreateUpdateIamRolePermissionRequest(BaseModel):
     CreateUpdateIamRolePermissionRequest
     """  # noqa: E501
 
-    conditions: Optional[Dict[str, Any]] = Field(
-        default=None, description="Conditions for further restricting a permission"
-    )
+    conditions: Optional[PermissionConditions] = None
     __properties: ClassVar[List[str]] = ["conditions"]
 
     model_config = ConfigDict(
@@ -79,6 +79,13 @@ class CreateUpdateIamRolePermissionRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of conditions
+        if self.conditions:
+            if not isinstance(self.conditions, dict):
+                _dict["conditions"] = self.conditions.to_dict()
+            else:
+                _dict["conditions"] = self.conditions
+
         # set to None if conditions (nullable) is None
         # and model_fields_set contains the field
         if self.conditions is None and "conditions" in self.model_fields_set:
@@ -95,5 +102,13 @@ class CreateUpdateIamRolePermissionRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"conditions": obj.get("conditions")})
+        _obj = cls.model_validate(
+            {
+                "conditions": (
+                    PermissionConditions.from_dict(obj["conditions"])
+                    if obj.get("conditions") is not None
+                    else None
+                )
+            }
+        )
         return _obj

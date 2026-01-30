@@ -29,6 +29,7 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 
@@ -37,18 +38,18 @@ class NetworkZoneLocation(BaseModel):
     NetworkZoneLocation
     """  # noqa: E501
 
-    country: Optional[StrictStr] = Field(
+    country: Optional[
+        Annotated[str, Field(min_length=2, strict=True, max_length=2)]
+    ] = Field(
         default=None,
-        description="Format of the country value: length 2 [ISO-3166-1]("
-                    "https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Do "
-                    "not use continent codes as they are treated as generic codes for undesignated countries.",
+        description="The two-character ISO 3166-1 country code. Don't use continent codes since they are treated as generic "
+        "codes for undesignated countries. <br>For example: `US`",
     )
     region: Optional[StrictStr] = Field(
         default=None,
-        description="Format of the region value (optional): region code [ISO-3166-2]("
-                    "https://en.wikipedia.org/wiki/ISO_3166-2) appended to country code (`countryCode-regionCode`), "
-                    "or `null` if empty. "
-                    "Do not use continent codes as they are treated as generic codes for undesignated regions.",
+        description="(Optional) The ISO 3166-2 region code appended to the country code (`countryCode-regionCode`), "
+        "or `null` if empty. Don't use continent codes since they are treated as generic codes for undesignated "
+        "regions. <br>For example: `CA` (for `US-CA` country and region code)",
     )
     __properties: ClassVar[List[str]] = ["country", "region"]
 

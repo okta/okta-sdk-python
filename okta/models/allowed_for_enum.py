@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AllowedForEnum(str, Enum):
     """
-    AllowedForEnum
+    The allowed types of uses for the authenticator
     """
 
     """

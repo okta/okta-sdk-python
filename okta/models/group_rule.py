@@ -30,6 +30,7 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.group_rule_action import GroupRuleAction
@@ -44,12 +45,23 @@ class GroupRule(BaseModel):
 
     actions: Optional[GroupRuleAction] = None
     conditions: Optional[GroupRuleConditions] = None
-    created: Optional[datetime] = None
-    id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = None
+    created: Optional[datetime] = Field(
+        default=None, description="Creation date for group rule"
+    )
+    id: Optional[StrictStr] = Field(default=None, description="ID of the group rule")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Date group rule was last updated",
+        alias="lastUpdated",
+    )
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = (
+        Field(default=None, description="Name of the group rule")
+    )
     status: Optional[GroupRuleStatus] = None
-    type: Optional[StrictStr] = None
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="Type to indicate a group rule operation. Only `group_rule` is allowed.",
+    )
     __properties: ClassVar[List[str]] = [
         "actions",
         "conditions",

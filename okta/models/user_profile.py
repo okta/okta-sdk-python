@@ -35,65 +35,193 @@ from typing_extensions import Self
 
 class UserProfile(BaseModel):
     """
-    UserProfile
+    Specifies the default and custom profile properties for a user.  The default user profile is based on the [System for
+    Cross-domain Identity Management: Core Schema](https://datatracker.ietf.org/doc/html/rfc7643).  The only permitted
+    customizations of the default profile are to update permissions, change whether the `firstName` and `lastName`
+    properties are nullable, and specify a [pattern](
+    https://developer.okta.com/docs/reference/api/schemas/#login-pattern-validation) for `login`. You can use the Profile
+    Editor in the Admin Console or the [Schemas API](
+    https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UISchema/#tag/UISchema) to make schema
+    modifications.  You can extend user profiles with custom properties. You must first add the custom property to the user
+    profile schema before you reference it. You can use the Profile Editor in the Admin Console or the [Schemas API](
+    https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UISchema/#tag/UISchema) to manage schema
+    extensions.  Custom attributes can contain HTML tags. It's the client's responsibility to escape or encode this data
+    before displaying it. Use [best-practices](
+    https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) to prevent cross-site
+    scripting.
     """  # noqa: E501
 
-    city: Optional[Annotated[str, Field(strict=True, max_length=128)]] = None
-    cost_center: Optional[StrictStr] = Field(default=None, alias="costCenter")
-    country_code: Optional[Annotated[str, Field(strict=True, max_length=2)]] = Field(
-        default=None, alias="countryCode"
+    city: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(
+        default=None,
+        description="The city or locality of the user's address (`locality`)",
     )
-    department: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    division: Optional[StrictStr] = None
+    cost_center: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the cost center assigned to a user",
+        alias="costCenter",
+    )
+    country_code: Optional[Annotated[str, Field(strict=True, max_length=2)]] = Field(
+        default=None,
+        description="The country name component of the user's address (`country`). For validation, see [ISO 3166-1 alpha 2 "
+        '"short" code format](https://datatracker.ietf.org/doc/html/draft-ietf-scim-core-schema-22#ref-ISO3166).',
+        alias="countryCode",
+    )
+    department: Optional[StrictStr] = Field(
+        default=None, description="Name of the user's department"
+    )
+    display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the user suitable for display to end users",
+        alias="displayName",
+    )
+    division: Optional[StrictStr] = Field(
+        default=None, description="Name of the user's division"
+    )
     email: Optional[
         Annotated[str, Field(min_length=5, strict=True, max_length=100)]
-    ] = None
-    employee_number: Optional[StrictStr] = Field(default=None, alias="employeeNumber")
+    ] = Field(
+        default=None,
+        description="The primary email address of the user. For validation, see [RFC 5322 Section 3.2.3]("
+        "https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).",
+    )
+    employee_number: Optional[StrictStr] = Field(
+        default=None,
+        description="The organization or company assigned unique identifier for the user",
+        alias="employeeNumber",
+    )
     first_name: Optional[
         Annotated[str, Field(min_length=1, strict=True, max_length=50)]
-    ] = Field(default=None, alias="firstName")
-    honorific_prefix: Optional[StrictStr] = Field(default=None, alias="honorificPrefix")
-    honorific_suffix: Optional[StrictStr] = Field(default=None, alias="honorificSuffix")
+    ] = Field(
+        default=None,
+        description="Given name of the user (`givenName`)",
+        alias="firstName",
+    )
+    honorific_prefix: Optional[StrictStr] = Field(
+        default=None,
+        description="Honorific prefix(es) of the user, or title in most Western languages",
+        alias="honorificPrefix",
+    )
+    honorific_suffix: Optional[StrictStr] = Field(
+        default=None,
+        description="Honorific suffix(es) of the user",
+        alias="honorificSuffix",
+    )
     last_name: Optional[
         Annotated[str, Field(min_length=1, strict=True, max_length=50)]
-    ] = Field(default=None, alias="lastName")
+    ] = Field(
+        default=None,
+        description="The family name of the user (`familyName`)",
+        alias="lastName",
+    )
     locale: Optional[StrictStr] = Field(
         default=None,
-        description="The language specified as an [IETF BCP 47 language tag]("
-                    "https://datatracker.ietf.org/doc/html/rfc5646)",
+        description="The user's default location for purposes of localizing items such as currency, date time format, "
+        "numerical representations, and so on. A locale value is a concatenation of the ISO 639-1 two-letter "
+        "language code, an underscore, and the ISO 3166-1 two-letter country code. For example, en_US specifies "
+        "the language English and country US. This value is `en_US` by default.",
     )
-    login: Optional[Annotated[str, Field(strict=True, max_length=100)]] = None
-    manager: Optional[StrictStr] = None
-    manager_id: Optional[StrictStr] = Field(default=None, alias="managerId")
-    middle_name: Optional[StrictStr] = Field(default=None, alias="middleName")
-    mobile_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
-        default=None, alias="mobilePhone"
+    login: Optional[Annotated[str, Field(min_length=5, strict=True)]] = Field(
+        default=None,
+        description="The unique identifier for the user (`username`). For validation, see [Login pattern validation]("
+        "https://developer.okta.com/docs/reference/api/schemas/#login-pattern-validation).  Every user within "
+        "your Okta org must have a unique identifier for a login. This constraint applies to all users you "
+        "import from other systems or applications such as Active Directory. Your organization is the top-level "
+        "namespace to mix and match logins from all your connected applications or directories. Careful "
+        "consideration of naming conventions for your login identifier will make it easier to onboard new "
+        "applications in the future.  Logins are not considered unique if they differ only in case and/or "
+        "diacritical marks. If one of your users has a login of Isaac.Brock@example.com, there cannot be another "
+        "user whose login is isaac.brock@example.com, nor isáàc.bröck@example.com.  Okta has a default ambiguous "
+        "name resolution policy for usernames that include @-signs. (By default, usernames must be formatted as "
+        "email addresses and thus always include @-signs. You can remove that restriction using either the Admin "
+        "Console or the [Schemas API]("
+        "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Schema/). Users can sign in "
+        "with their non-qualified short name (for example: isaac.brock with username isaac.brock@example.com) as "
+        "long as the short name is still unique within the organization. maxLength: 100",
     )
-    nick_name: Optional[StrictStr] = Field(default=None, alias="nickName")
-    organization: Optional[StrictStr] = None
+    manager: Optional[StrictStr] = Field(
+        default=None, description="The `displayName` of the user's manager"
+    )
+    manager_id: Optional[StrictStr] = Field(
+        default=None, description="The `id` of the user's manager", alias="managerId"
+    )
+    middle_name: Optional[StrictStr] = Field(
+        default=None, description="The middle name of the user", alias="middleName"
+    )
+    mobile_phone: Optional[
+        Annotated[str, Field(min_length=0, strict=True, max_length=100)]
+    ] = Field(
+        default=None,
+        description="The mobile phone number of the user",
+        alias="mobilePhone",
+    )
+    nick_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The casual way to address the user in real life",
+        alias="nickName",
+    )
+    organization: Optional[StrictStr] = Field(
+        default=None, description="Name of the the user's organization"
+    )
     postal_address: Optional[Annotated[str, Field(strict=True, max_length=4096)]] = (
-        Field(default=None, alias="postalAddress")
+        Field(
+            default=None,
+            description="Mailing address component of the user's address",
+            alias="postalAddress",
+        )
     )
     preferred_language: Optional[StrictStr] = Field(
-        default=None, alias="preferredLanguage"
+        default=None,
+        description="The user's preferred written or spoken language. For validation, see [RFC 7231 Section 5.3.5]("
+        "https://datatracker.ietf.org/doc/html/rfc7231#section-5.3.5).",
+        alias="preferredLanguage",
     )
-    primary_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
-        default=None, alias="primaryPhone"
+    primary_phone: Optional[
+        Annotated[str, Field(min_length=0, strict=True, max_length=100)]
+    ] = Field(
+        default=None,
+        description="The primary phone number of the user such as a home number",
+        alias="primaryPhone",
     )
-    profile_url: Optional[StrictStr] = Field(default=None, alias="profileUrl")
+    profile_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL of the user's online profile. For example, a web page. See [URL]("
+        "https://datatracker.ietf.org/doc/html/rfc1808).",
+        alias="profileUrl",
+    )
     second_email: Optional[
         Annotated[str, Field(min_length=5, strict=True, max_length=100)]
-    ] = Field(default=None, alias="secondEmail")
-    state: Optional[Annotated[str, Field(strict=True, max_length=128)]] = None
-    street_address: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = (
-        Field(default=None, alias="streetAddress")
+    ] = Field(
+        default=None,
+        description="The secondary email address of the user typically used for account recovery. For validation, "
+        "see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).",
+        alias="secondEmail",
     )
-    timezone: Optional[StrictStr] = None
-    title: Optional[StrictStr] = None
-    user_type: Optional[StrictStr] = Field(default=None, alias="userType")
+    state: Optional[Annotated[str, Field(strict=True, max_length=128)]] = Field(
+        default=None,
+        description="The state or region component of the user's address (`region`)",
+    )
+    street_address: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = (
+        Field(
+            default=None,
+            description="The full street address component of the user's address",
+            alias="streetAddress",
+        )
+    )
+    timezone: Optional[StrictStr] = Field(
+        default=None, description="The user's time zone"
+    )
+    title: Optional[StrictStr] = Field(
+        default=None, description="The user's title, such as Vice President"
+    )
+    user_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The property used to describe the organization-to-user relationship, such as employee or contractor",
+        alias="userType",
+    )
     zip_code: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(
-        default=None, alias="zipCode"
+        default=None,
+        description="The ZIP code or postal code component of the user's address (`postalCode`)",
+        alias="zipCode",
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
@@ -182,35 +310,104 @@ class UserProfile(BaseModel):
         if self.city is None and "city" in self.model_fields_set:
             _dict["city"] = None
 
+        # set to None if cost_center (nullable) is None
+        # and model_fields_set contains the field
+        if self.cost_center is None and "cost_center" in self.model_fields_set:
+            _dict["costCenter"] = None
+
         # set to None if country_code (nullable) is None
         # and model_fields_set contains the field
         if self.country_code is None and "country_code" in self.model_fields_set:
             _dict["countryCode"] = None
+
+        # set to None if display_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.display_name is None and "display_name" in self.model_fields_set:
+            _dict["displayName"] = None
+
+        # set to None if division (nullable) is None
+        # and model_fields_set contains the field
+        if self.division is None and "division" in self.model_fields_set:
+            _dict["division"] = None
 
         # set to None if first_name (nullable) is None
         # and model_fields_set contains the field
         if self.first_name is None and "first_name" in self.model_fields_set:
             _dict["firstName"] = None
 
+        # set to None if honorific_prefix (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.honorific_prefix is None
+            and "honorific_prefix" in self.model_fields_set
+        ):
+            _dict["honorificPrefix"] = None
+
+        # set to None if honorific_suffix (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.honorific_suffix is None
+            and "honorific_suffix" in self.model_fields_set
+        ):
+            _dict["honorificSuffix"] = None
+
         # set to None if last_name (nullable) is None
         # and model_fields_set contains the field
         if self.last_name is None and "last_name" in self.model_fields_set:
             _dict["lastName"] = None
+
+        # set to None if manager (nullable) is None
+        # and model_fields_set contains the field
+        if self.manager is None and "manager" in self.model_fields_set:
+            _dict["manager"] = None
+
+        # set to None if manager_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.manager_id is None and "manager_id" in self.model_fields_set:
+            _dict["managerId"] = None
+
+        # set to None if middle_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.middle_name is None and "middle_name" in self.model_fields_set:
+            _dict["middleName"] = None
 
         # set to None if mobile_phone (nullable) is None
         # and model_fields_set contains the field
         if self.mobile_phone is None and "mobile_phone" in self.model_fields_set:
             _dict["mobilePhone"] = None
 
+        # set to None if nick_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.nick_name is None and "nick_name" in self.model_fields_set:
+            _dict["nickName"] = None
+
+        # set to None if organization (nullable) is None
+        # and model_fields_set contains the field
+        if self.organization is None and "organization" in self.model_fields_set:
+            _dict["organization"] = None
+
         # set to None if postal_address (nullable) is None
         # and model_fields_set contains the field
         if self.postal_address is None and "postal_address" in self.model_fields_set:
             _dict["postalAddress"] = None
 
+        # set to None if preferred_language (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.preferred_language is None
+            and "preferred_language" in self.model_fields_set
+        ):
+            _dict["preferredLanguage"] = None
+
         # set to None if primary_phone (nullable) is None
         # and model_fields_set contains the field
         if self.primary_phone is None and "primary_phone" in self.model_fields_set:
             _dict["primaryPhone"] = None
+
+        # set to None if profile_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.profile_url is None and "profile_url" in self.model_fields_set:
+            _dict["profileUrl"] = None
 
         # set to None if second_email (nullable) is None
         # and model_fields_set contains the field
@@ -226,6 +423,21 @@ class UserProfile(BaseModel):
         # and model_fields_set contains the field
         if self.street_address is None and "street_address" in self.model_fields_set:
             _dict["streetAddress"] = None
+
+        # set to None if timezone (nullable) is None
+        # and model_fields_set contains the field
+        if self.timezone is None and "timezone" in self.model_fields_set:
+            _dict["timezone"] = None
+
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict["title"] = None
+
+        # set to None if user_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_type is None and "user_type" in self.model_fields_set:
+            _dict["userType"] = None
 
         # set to None if zip_code (nullable) is None
         # and model_fields_set contains the field

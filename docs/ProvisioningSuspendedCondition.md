@@ -1,5 +1,6 @@
 # ProvisioningSuspendedCondition
 
+Behavior for a previously suspended IdP user during authentication. Not supported with OIDC IdPs.
 
 ## Properties
 

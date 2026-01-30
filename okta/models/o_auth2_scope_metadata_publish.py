@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class OAuth2ScopeMetadataPublish(str, Enum):
     """
-    OAuth2ScopeMetadataPublish
+    Indicates whether the Scope is included in the metadata
     """
 
     """

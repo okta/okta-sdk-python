@@ -36,12 +36,12 @@ from okta.models.domain_response import DomainResponse
 
 class DomainListResponse(BaseModel):
     """
-    Defines a list of domains with a subset of the properties for each domain.
+    Defines a list of domains with a subset of the properties for each domain
     """  # noqa: E501
 
     domains: Optional[List[DomainResponse]] = Field(
         default=None,
-        description="Each element of the array defines an individual domain.",
+        description="Each element of the array defines an individual domain",
     )
     __properties: ClassVar[List[str]] = ["domains"]
 

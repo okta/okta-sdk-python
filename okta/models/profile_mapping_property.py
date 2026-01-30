@@ -44,8 +44,8 @@ class ProfileMappingProperty(BaseModel):
 
     expression: Optional[StrictStr] = Field(
         default=None,
-        description="Combination or single source properties that are mapped to the "
-                    "target property",
+        description="Combination or single source properties that are mapped to the target property. See [Okta Expression "
+        "Language](https://developer.okta.com/docs/reference/okta-expression-language/).",
     )
     push_status: Optional[ProfileMappingPropertyPushStatus] = Field(
         default=None, alias="pushStatus"

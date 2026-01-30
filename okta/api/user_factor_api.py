@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -23,18 +23,28 @@ Do not edit the class manually.
 from typing import Any, Dict, Tuple, Union
 from typing import List, Optional
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
-from pydantic import validate_call, StrictFloat
+from pydantic import Field, StrictBool, StrictStr
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
 
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
-from okta.models.activate_factor_request import ActivateFactorRequest
-from okta.models.security_question import SecurityQuestion
+from okta.models.resend_user_factor import ResendUserFactor
 from okta.models.success import Success
+from okta.models.upload_yubikey_otp_token_seed_request import (
+    UploadYubikeyOtpTokenSeedRequest,
+)
 from okta.models.user_factor import UserFactor
-from okta.models.verify_factor_request import VerifyFactorRequest
-from okta.models.verify_user_factor_response import VerifyUserFactorResponse
+from okta.models.user_factor_activate_request import UserFactorActivateRequest
+from okta.models.user_factor_activate_response import UserFactorActivateResponse
+from okta.models.user_factor_push_transaction import UserFactorPushTransaction
+from okta.models.user_factor_security_question_profile import (
+    UserFactorSecurityQuestionProfile,
+)
+from okta.models.user_factor_supported import UserFactorSupported
+from okta.models.user_factor_verify_request import UserFactorVerifyRequest
+from okta.models.user_factor_verify_response import UserFactorVerifyResponse
+from okta.models.user_factor_yubikey_otp_token import UserFactorYubikeyOtpToken
 from okta.rest import RESTResponse
 
 
@@ -51,9 +61,11 @@ class UserFactorApi(ApiClient):
     @validate_call
     async def activate_factor(
         self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        body: Optional[ActivateFactorRequest] = None,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        factor_id: Annotated[
+            StrictStr, Field(description="ID of an existing user factor")
+        ],
+        body: Optional[UserFactorActivateRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,17 +77,23 @@ class UserFactorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Activate a Factor
+    ) -> UserFactorActivateResponse:
+        """Activate a factor
 
-        Activates a factor. The `sms` and `token:software:totp` factor types require activation to complete the enrollment process.
+        Activates a factor. Some factors (`call`, `email`, `push`, `sms`, `token:software:totp`, `u2f`, and `webauthn`)
+        require activation to complete the enrollment process.  Okta enforces a rate limit of five activation attempts
+        within five minutes. After a user exceeds the rate limit, Okta returns an error message.  > **Notes:** > * If the
+        user exceeds their SMS, call, or email factor activation rate limit, then an [OTP resend request](
+        ./#tag/UserFactor/operation/resendEnrollFactor) isn't allowed for the same factor. > * You can't use the Factors API
+        to activate Okta Fastpass (`signed_nonce`) for a user. See [Configure Okta Fastpass](
+        https://help.okta.com/okta_help.htm?type=oie&id=ext-fp-configure).
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param factor_id: `id` of the Factor (required)
+        :param factor_id: ID of an existing user factor (required)
         :type factor_id: str
         :param body:
-        :type body: ActivateFactorRequest
+        :type body: UserFactorActivateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -99,7 +117,7 @@ class UserFactorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
+            "200": "UserFactorActivateResponse",
             "400": "Error",
             "403": "Error",
             "404": "Error",
@@ -124,18 +142,18 @@ class UserFactorApi(ApiClient):
         )
 
         if error:
-            if UserFactor is Success:
+            if UserFactorActivateResponse is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if UserFactor is Success:
+        if UserFactorActivateResponse is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
+                request, UserFactorActivateResponse
             )
 
         if response_body == "" or response.status == 204:
@@ -151,239 +169,7 @@ class UserFactorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if UserFactor is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def activate_factor_with_http_info(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        body: Optional[ActivateFactorRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Activate a Factor
-
-        Activates a factor. The `sms` and `token:software:totp` factor types require activation to complete the enrollment process.
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param body:
-        :type body: ActivateFactorRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._activate_factor_serialize(
-            user_id=user_id,
-            factor_id=factor_id,
-            body=body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if UserFactor is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if UserFactor is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if UserFactor is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def activate_factor_without_preload_content(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        body: Optional[ActivateFactorRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Activate a Factor
-
-        Activates a factor. The `sms` and `token:software:totp` factor types require activation to complete the enrollment process.
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param body:
-        :type body: ActivateFactorRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._activate_factor_serialize(
-            user_id=user_id,
-            factor_id=factor_id,
-            body=body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if UserFactor is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if UserFactor is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if UserFactor is Success:
+                if UserFactorActivateResponse is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -464,15 +250,48 @@ class UserFactorApi(ApiClient):
     @validate_call
     async def enroll_factor(
         self,
-        user_id: StrictStr,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
         body: Annotated[UserFactor, Field(description="Factor")],
-        update_phone: Optional[StrictBool] = None,
+        update_phone: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If `true`, indicates that you are replacing the currently registered phone number for the "
+                            "specified "
+                            "user. This parameter is ignored if the existing phone number is used by an activated factor."
+            ),
+        ] = None,
         template_id: Annotated[
             Optional[StrictStr],
-            Field(description="id of SMS template (only for SMS factor)"),
+            Field(
+                description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter "
+                            "is "
+                            "only used by `sms` factors. If the provided ID doesn't exist, the default template is used "
+                            "instead."
+            ),
         ] = None,
-        token_lifetime_seconds: Optional[StrictInt] = None,
-        activate: Optional[StrictBool] = None,
+        token_lifetime_seconds: Annotated[
+            Optional[Annotated[int, Field(le=86400, strict=True, ge=1)]],
+            Field(description="Defines how long the token remains valid"),
+        ] = None,
+        activate: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If `true`, the factor is immediately activated as part of the enrollment. An activation process "
+                            "isn't required. Currently auto-activation is supported by `sms`, `call`, `email` and "
+                            "`token:hotp` ("
+                            "Custom TOTP) factors."
+            ),
+        ] = None,
+        accept_language: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="An ISO 639-1 two-letter language code that defines a localized message to send. This parameter "
+                            "is "
+                            "only used by `sms` factors. If a localized message doesn't exist or the `templateId` is "
+                            "incorrect, "
+                            "the default template is used instead."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -485,22 +304,53 @@ class UserFactorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactor:
-        """Enroll a Factor
+        """Enroll a factor
 
-        Enrolls a user with a supported factor
+        Enrolls a supported factor for the specified user  > **Notes:** >   * All responses return the enrolled factor with
+        a status of either `PENDING_ACTIVATION` or `ACTIVE`. >   * You can't use the Factors API to enroll Okta Fastpass (
+        `signed_nonce`) for a user. See [Configure Okta Fastpass](
+        https://help.okta.com/okta_help.htm?type=oie&id=ext-fp-configure).  #### Additional SMS/Call factor information  *
+        **Rate limits**: Okta may return a `429 Too Many Requests` status code if you attempt to resend an SMS or a voice
+        call challenge (OTP) within the same time window. The current [rate limit](
+        https://developer.okta.com/docs/reference/rate-limits/) is one SMS/CALL challenge per phone number every 30 seconds.
+         * **Existing phone numbers**: Okta may return a `400 Bad Request` status code if a user attempts to enroll with a
+         different phone number when the user has an existing mobile phone or has an existing phone with voice call
+         capability. A user can enroll only one mobile phone for `sms` and enroll only one voice call capable phone for
+         `call` factor.  #### Additional WebAuthn factor information  * For detailed information on the WebAuthn standard,
+         including an up-to-date list of supported browsers, see [webauthn.me](https://a0.to/webauthnme-okta-docs).  * When
+         you enroll a WebAuthn factor, the `activation` object in `_embedded` contains properties used to help the client to
+         create a new WebAuthn credential for use with Okta. See the [WebAuthn spec for PublicKeyCredentialCreationOptions](
+         https://www.w3.org/TR/webauthn/#dictionary-makecredentialoptions).  #### Additional Custom TOTP factor information
+         * The enrollment process involves passing both the `factorProfileId` and `sharedSecret` properties for a token.  *
+         A factor profile represents a particular configuration of the Custom TOTP factor. It includes certain properties
+         that match the hardware token that end users possess, such as the HMAC algorithm, passcode length,
+         and time interval. There can be multiple Custom TOTP factor profiles per org, but users can only enroll in one
+         Custom TOTP factor. Admins can [create Custom TOTP factor profiles](
+         https://help.okta.com/okta_help.htm?id=ext-mfa-totp) in the Admin Console. Then, copy the `factorProfileId` from
+         the Admin Console into the API request.  * <x-lifecycle class=\"oie\"></x-lifecycle> For Custom TOTP enrollment,
+         Okta automaticaly enrolls a user with a `token:software:totp` factor and the `push` factor if the user isn't
+         currently enrolled with these factors.
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param body: Factor (required)
         :type body: UserFactor
-        :param update_phone:
+        :param update_phone: If `true`, indicates that you are replacing the currently registered phone number for the
+        specified user. This parameter is ignored if the existing phone number is used by an activated factor.
         :type update_phone: bool
-        :param template_id: id of SMS template (only for SMS factor)
+        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter
+        is only used by `sms` factors. If the provided ID doesn't exist, the default template is used instead.
         :type template_id: str
-        :param token_lifetime_seconds:
+        :param token_lifetime_seconds: Defines how long the token remains valid
         :type token_lifetime_seconds: int
-        :param activate:
+        :param activate: If `true`, the factor is immediately activated as part of the enrollment. An activation process
+        isn't required. Currently auto-activation is supported by `sms`, `call`, `email` and `token:hotp` (Custom TOTP)
+        factors.
         :type activate: bool
+        :param accept_language: An ISO 639-1 two-letter language code that defines a localized message to send. This
+        parameter is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is incorrect,
+        the default template is used instead.
+        :type accept_language: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -538,268 +388,7 @@ class UserFactorApi(ApiClient):
             template_id=template_id,
             token_lifetime_seconds=token_lifetime_seconds,
             activate=activate,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if UserFactor is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if UserFactor is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if UserFactor is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def enroll_factor_with_http_info(
-        self,
-        user_id: StrictStr,
-        body: Annotated[UserFactor, Field(description="Factor")],
-        update_phone: Optional[StrictBool] = None,
-        template_id: Annotated[
-            Optional[StrictStr],
-            Field(description="id of SMS template (only for SMS factor)"),
-        ] = None,
-        token_lifetime_seconds: Optional[StrictInt] = None,
-        activate: Optional[StrictBool] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Enroll a Factor
-
-        Enrolls a user with a supported factor
-
-        :param user_id: (required)
-        :type user_id: str
-        :param body: Factor (required)
-        :type body: UserFactor
-        :param update_phone:
-        :type update_phone: bool
-        :param template_id: id of SMS template (only for SMS factor)
-        :type template_id: str
-        :param token_lifetime_seconds:
-        :type token_lifetime_seconds: int
-        :param activate:
-        :type activate: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._enroll_factor_serialize(
-            user_id=user_id,
-            body=body,
-            update_phone=update_phone,
-            template_id=template_id,
-            token_lifetime_seconds=token_lifetime_seconds,
-            activate=activate,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if UserFactor is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if UserFactor is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if UserFactor is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def enroll_factor_without_preload_content(
-        self,
-        user_id: StrictStr,
-        body: Annotated[UserFactor, Field(description="Factor")],
-        update_phone: Optional[StrictBool] = None,
-        template_id: Annotated[
-            Optional[StrictStr],
-            Field(description="id of SMS template (only for SMS factor)"),
-        ] = None,
-        token_lifetime_seconds: Optional[StrictInt] = None,
-        activate: Optional[StrictBool] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Enroll a Factor
-
-        Enrolls a user with a supported factor
-
-        :param user_id: (required)
-        :type user_id: str
-        :param body: Factor (required)
-        :type body: UserFactor
-        :param update_phone:
-        :type update_phone: bool
-        :param template_id: id of SMS template (only for SMS factor)
-        :type template_id: str
-        :param token_lifetime_seconds:
-        :type token_lifetime_seconds: int
-        :param activate:
-        :type activate: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._enroll_factor_serialize(
-            user_id=user_id,
-            body=body,
-            update_phone=update_phone,
-            template_id=template_id,
-            token_lifetime_seconds=token_lifetime_seconds,
-            activate=activate,
+            accept_language=accept_language,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -862,6 +451,7 @@ class UserFactorApi(ApiClient):
         template_id,
         token_lifetime_seconds,
         activate,
+        accept_language,
         _request_auth,
         _content_type,
         _headers,
@@ -896,6 +486,8 @@ class UserFactorApi(ApiClient):
             _query_params.append(("activate", activate))
 
         # process the header parameters
+        if accept_language is not None:
+            _header_params["Accept-Language"] = accept_language
         # process the form parameters
         # process the body parameter
         if body is not None:
@@ -935,8 +527,10 @@ class UserFactorApi(ApiClient):
     @validate_call
     async def get_factor(
         self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        factor_id: Annotated[
+            StrictStr, Field(description="ID of an existing user factor")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -949,235 +543,13 @@ class UserFactorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> UserFactor:
-        """Retrieve a Factor
+        """Retrieve a factor
 
-        Retrieves a factor for the specified user
+        Retrieves an existing factor for the specified user
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._get_factor_serialize(
-            user_id=user_id,
-            factor_id=factor_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if UserFactor is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if UserFactor is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if UserFactor is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_factor_with_http_info(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Retrieve a Factor
-
-        Retrieves a factor for the specified user
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._get_factor_serialize(
-            user_id=user_id,
-            factor_id=factor_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if UserFactor is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if UserFactor is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if UserFactor is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_factor_without_preload_content(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Retrieve a Factor
-
-        Retrieves a factor for the specified user
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
+        :param factor_id: ID of an existing user factor (required)
         :type factor_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1320,10 +692,13 @@ class UserFactorApi(ApiClient):
     @validate_call
     async def get_factor_transaction_status(
         self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        factor_id: Annotated[
+            StrictStr, Field(description="ID of an existing user factor")
+        ],
         transaction_id: Annotated[
-            StrictStr, Field(description="`id` of the Transaction")
+            StrictStr,
+            Field(description="ID of an existing factor verification transaction"),
         ],
         _request_timeout: Union[
             None,
@@ -1336,16 +711,22 @@ class UserFactorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> VerifyUserFactorResponse:
-        """Retrieve a Factor Transaction Status
+    ) -> UserFactorPushTransaction:
+        """Retrieve a factor transaction status
 
-        Retrieves the factors verification transaction status
+        Retrieves the status of a `push` factor verification transaction   > **Note:**  > The response body for a number
+        matching push challenge to an Okta Verify `push` factor enrollment is different from the response body of a standard
+        push challenge.  > The number matching push challenge [response body](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation
+        /getFactorTransactionStatus!c=200&path=1/_embedded&t=response) contains the correct answer for the challenge.  > Use
+        [Verify a factor](/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/verifyFactor) to
+        configure which challenge is sent.
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param factor_id: `id` of the Factor (required)
+        :param factor_id: ID of an existing user factor (required)
         :type factor_id: str
-        :param transaction_id: `id` of the Transaction (required)
+        :param transaction_id: ID of an existing factor verification transaction (required)
         :type transaction_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1370,7 +751,7 @@ class UserFactorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "VerifyUserFactorResponse",
+            "200": "UserFactorPushTransaction",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -1396,18 +777,18 @@ class UserFactorApi(ApiClient):
         )
 
         if error:
-            if VerifyUserFactorResponse is Success:
+            if UserFactorPushTransaction is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if VerifyUserFactorResponse is Success:
+        if UserFactorPushTransaction is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, VerifyUserFactorResponse
+                request, UserFactorPushTransaction
             )
 
         if response_body == "" or response.status == 204:
@@ -1423,245 +804,7 @@ class UserFactorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if VerifyUserFactorResponse is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_factor_transaction_status_with_http_info(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        transaction_id: Annotated[
-            StrictStr, Field(description="`id` of the Transaction")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> VerifyUserFactorResponse:
-        """Retrieve a Factor Transaction Status
-
-        Retrieves the factors verification transaction status
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param transaction_id: `id` of the Transaction (required)
-        :type transaction_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "VerifyUserFactorResponse",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_factor_transaction_status_serialize(
-                user_id=user_id,
-                factor_id=factor_id,
-                transaction_id=transaction_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if VerifyUserFactorResponse is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if VerifyUserFactorResponse is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, VerifyUserFactorResponse
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if VerifyUserFactorResponse is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_factor_transaction_status_without_preload_content(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        transaction_id: Annotated[
-            StrictStr, Field(description="`id` of the Transaction")
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> VerifyUserFactorResponse:
-        """Retrieve a Factor Transaction Status
-
-        Retrieves the factors verification transaction status
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param transaction_id: `id` of the Transaction (required)
-        :type transaction_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "VerifyUserFactorResponse",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_factor_transaction_status_serialize(
-                user_id=user_id,
-                factor_id=factor_id,
-                transaction_id=transaction_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if VerifyUserFactorResponse is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if VerifyUserFactorResponse is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, VerifyUserFactorResponse
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if VerifyUserFactorResponse is Success:
+                if UserFactorPushTransaction is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -1730,9 +873,167 @@ class UserFactorApi(ApiClient):
         )
 
     @validate_call
+    async def get_yubikey_otp_token_by_id(
+        self,
+        token_id: Annotated[StrictStr, Field(description="ID of a YubiKey token")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UserFactorYubikeyOtpToken:
+        """Retrieve a YubiKey OTP token
+
+        Retrieves the specified YubiKey OTP token by `id`
+
+        :param token_id: ID of a YubiKey token (required)
+        :type token_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "UserFactorYubikeyOtpToken",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._get_yubikey_otp_token_by_id_serialize(
+                token_id=token_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if UserFactorYubikeyOtpToken is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if UserFactorYubikeyOtpToken is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, UserFactorYubikeyOtpToken
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if UserFactorYubikeyOtpToken is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _get_yubikey_otp_token_by_id_serialize(
+        self,
+        token_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if token_id is not None:
+            _path_params["tokenId"] = token_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="GET",
+            resource_path="/api/v1/org/factors/yubikey_token/tokens/{tokenId}",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def list_factors(
         self,
-        user_id: StrictStr,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1745,225 +1046,20 @@ class UserFactorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[UserFactor]:
-        """List all Factors
+        """List all enrolled factors
 
-        Lists all the enrolled factors for the specified user
+        Lists all enrolled factors for the specified user that are included in the highest priority [authenticator
+        enrollment policy](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) that applies
+        to the user.  Only enrolled factors that are `REQUIRED` or `OPTIONAL` in the highest priority authenticator
+        enrollment policy can be returned.  > **Note:** When admins use this endpoint for other users, the authenticator
+        enrollment policy that's evaluated can vary depending on how client-specific conditions are configured in the rules
+        of an authenticator enrollment policy. The client-specific conditions of the admin's client are used during policy
+        evaluation instead of the client-specific conditions of the user. This can affect which authenticator enrollment
+        policy is evaluated and which factors are returned. > > For example, an admin in Europe lists all enrolled factors
+        for a user in North America. The network zone of the admin's client (in Europe) is used during policy evaluation
+        instead of the network zone of the user (in North America).
 
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[UserFactor]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._list_factors_serialize(
-            user_id=user_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[UserFactor] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[UserFactor] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[UserFactor] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_factors_with_http_info(
-        self,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[UserFactor]:
-        """List all Factors
-
-        Lists all the enrolled factors for the specified user
-
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[UserFactor]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._list_factors_serialize(
-            user_id=user_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[UserFactor] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[UserFactor] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[UserFactor] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_factors_without_preload_content(
-        self,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[UserFactor]:
-        """List all Factors
-
-        Lists all the enrolled factors for the specified user
-
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2102,7 +1198,7 @@ class UserFactorApi(ApiClient):
     @validate_call
     async def list_supported_factors(
         self,
-        user_id: StrictStr,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2114,12 +1210,22 @@ class UserFactorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[UserFactor]:
-        """List all Supported Factors
+    ) -> List[UserFactorSupported]:
+        """List all supported factors
 
-        Lists all the supported factors that can be enrolled for the specified user
+        Lists all the supported factors that can be enrolled for the specified user that are included in the highest
+        priority [authenticator enrollment policy](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/) that applies to the user.  Only
+        factors that are `REQUIRED` or `OPTIONAL` in the highest priority authenticator enrollment policy can be returned.
+        > **Note:** When admins use this endpoint for other users, the authenticator enrollment policy that's evaluated can
+        vary depending on how client-specific conditions are configured in the rules of an authenticator enrollment policy.
+        The client-specific conditions of the admin's client are used during policy evaluation instead of the
+        client-specific conditions of the user. This can affect which authenticator enrollment policy is evaluated and which
+        factors are returned. > > For example, an admin in Europe lists all supported factors for a user in North America.
+        The network zone of the admin's client (in Europe) is used during policy evaluation instead of the network zone of
+        the user (in North America).
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2144,7 +1250,7 @@ class UserFactorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[UserFactor]",
+            "200": "List[UserFactorSupported]",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -2168,18 +1274,18 @@ class UserFactorApi(ApiClient):
         )
 
         if error:
-            if List[UserFactor] is Success:
+            if List[UserFactorSupported] is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if List[UserFactor] is Success:
+        if List[UserFactorSupported] is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
+                request, UserFactorSupported
             )
 
         if response_body == "" or response.status == 204:
@@ -2195,225 +1301,7 @@ class UserFactorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if List[UserFactor] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_supported_factors_with_http_info(
-        self,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[UserFactor]:
-        """List all Supported Factors
-
-        Lists all the supported factors that can be enrolled for the specified user
-
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[UserFactor]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_supported_factors_serialize(
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[UserFactor] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[UserFactor] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[UserFactor] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_supported_factors_without_preload_content(
-        self,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[UserFactor]:
-        """List all Supported Factors
-
-        Lists all the supported factors that can be enrolled for the specified user
-
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[UserFactor]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_supported_factors_serialize(
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[UserFactor] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[UserFactor] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[UserFactor] is Success:
+                if List[UserFactorSupported] is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -2478,7 +1366,7 @@ class UserFactorApi(ApiClient):
     @validate_call
     async def list_supported_security_questions(
         self,
-        user_id: StrictStr,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2490,12 +1378,12 @@ class UserFactorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[SecurityQuestion]:
-        """List all Supported Security Questions
+    ) -> List[UserFactorSecurityQuestionProfile]:
+        """List all supported security questions
 
-        Lists all available security questions for a user's `question` factor
+        Lists all available security questions for the specified user
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2520,7 +1408,7 @@ class UserFactorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[SecurityQuestion]",
+            "200": "List[UserFactorSecurityQuestionProfile]",
             "403": "Error",
             "404": "Error",
             "429": "Error",
@@ -2544,18 +1432,18 @@ class UserFactorApi(ApiClient):
         )
 
         if error:
-            if List[SecurityQuestion] is Success:
+            if List[UserFactorSecurityQuestionProfile] is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if List[SecurityQuestion] is Success:
+        if List[UserFactorSecurityQuestionProfile] is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, SecurityQuestion
+                request, UserFactorSecurityQuestionProfile
             )
 
         if response_body == "" or response.status == 204:
@@ -2571,225 +1459,7 @@ class UserFactorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if List[SecurityQuestion] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_supported_security_questions_with_http_info(
-        self,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[SecurityQuestion]:
-        """List all Supported Security Questions
-
-        Lists all available security questions for a user's `question` factor
-
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[SecurityQuestion]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_supported_security_questions_serialize(
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[SecurityQuestion] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[SecurityQuestion] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, SecurityQuestion
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[SecurityQuestion] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_supported_security_questions_without_preload_content(
-        self,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[SecurityQuestion]:
-        """List all Supported Security Questions
-
-        Lists all available security questions for a user's `question` factor
-
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[SecurityQuestion]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_supported_security_questions_serialize(
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[SecurityQuestion] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[SecurityQuestion] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, SecurityQuestion
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[SecurityQuestion] is Success:
+                if List[UserFactorSecurityQuestionProfile] is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -2852,14 +1522,260 @@ class UserFactorApi(ApiClient):
         )
 
     @validate_call
+    async def list_yubikey_otp_tokens(
+        self,
+        after: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Specifies the pagination cursor for the next page of tokens"
+            ),
+        ] = None,
+        expand: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token "
+                            "is "
+                            "assigned to a user and `expand` is set to `user`"
+            ),
+        ] = None,
+        filter: Annotated[
+            Optional[StrictStr],
+            Field(description="The expression used to filter tokens"),
+        ] = None,
+        for_download: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="Returns tokens in a CSV to download instead of in the response. When you use this query "
+                            "parameter, "
+                            "the `limit` default changes to 1000."
+            ),
+        ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=200, strict=True)]],
+            Field(description="Specifies the number of results per page"),
+        ] = None,
+        sort_by: Annotated[
+            Optional[StrictStr],
+            Field(description="The value of how the tokens are sorted"),
+        ] = None,
+        sort_order: Annotated[
+            Optional[StrictStr],
+            Field(description="Specifies the sort order, either `ASC` or `DESC`"),
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[UserFactorYubikeyOtpToken]:
+        """List all YubiKey OTP tokens
+
+        Lists all YubiKey OTP tokens
+
+        :param after: Specifies the pagination cursor for the next page of tokens
+        :type after: str
+        :param expand: Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token is
+        assigned to a user and `expand` is set to `user`
+        :type expand: str
+        :param filter: The expression used to filter tokens
+        :type filter: str
+        :param for_download: Returns tokens in a CSV to download instead of in the response. When you use this query
+        parameter, the `limit` default changes to 1000.
+        :type for_download: bool
+        :param limit: Specifies the number of results per page
+        :type limit: int
+        :param sort_by: The value of how the tokens are sorted
+        :type sort_by: str
+        :param sort_order: Specifies the sort order, either `ASC` or `DESC`
+        :type sort_order: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "List[UserFactorYubikeyOtpToken]",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._list_yubikey_otp_tokens_serialize(
+                after=after,
+                expand=expand,
+                filter=filter,
+                for_download=for_download,
+                limit=limit,
+                sort_by=sort_by,
+                sort_order=sort_order,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if List[UserFactorYubikeyOtpToken] is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if List[UserFactorYubikeyOtpToken] is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, UserFactorYubikeyOtpToken
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if List[UserFactorYubikeyOtpToken] is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _list_yubikey_otp_tokens_serialize(
+        self,
+        after,
+        expand,
+        filter,
+        for_download,
+        limit,
+        sort_by,
+        sort_order,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if after is not None:
+            _query_params.append(("after", after))
+
+        if expand is not None:
+            _query_params.append(("expand", expand))
+
+        if filter is not None:
+            _query_params.append(("filter", filter))
+
+        if for_download is not None:
+            _query_params.append(("forDownload", for_download))
+
+        if limit is not None:
+            _query_params.append(("limit", limit))
+
+        if sort_by is not None:
+            _query_params.append(("sortBy", sort_by))
+
+        if sort_order is not None:
+            _query_params.append(("sortOrder", sort_order))
+
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="GET",
+            resource_path="/api/v1/org/factors/yubikey_token/tokens",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def resend_enroll_factor(
         self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        user_factor: Annotated[UserFactor, Field(description="Factor")],
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        factor_id: Annotated[
+            StrictStr, Field(description="ID of an existing user factor")
+        ],
+        resend_user_factor: ResendUserFactor,
         template_id: Annotated[
             Optional[StrictStr],
-            Field(description="ID of SMS template (only for SMS factor)"),
+            Field(
+                description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter "
+                            "is "
+                            "only used by `sms` factors."
+            ),
         ] = None,
         _request_timeout: Union[
             None,
@@ -2872,18 +1788,25 @@ class UserFactorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
+    ) -> ResendUserFactor:
         """Resend a factor enrollment
 
-        Resends a factor challenge (SMS/call/email OTP) as part of an enrollment flow. The current rate limit is one OTP challenge (call or SMS) per device every 30 seconds. Okta round-robins between SMS providers with every resend request to help ensure delivery of an SMS OTP across different carriers.
+        Resends an `sms`, `call`, or `email` factor challenge as part of an enrollment flow.  For `call` and `sms` factors,
+        Okta enforces a rate limit of one OTP challenge per device every 30 seconds. You can configure your `sms` and `call`
+        factors to use a third-party telephony provider. See the [Telephony inline hook reference](
+        https://developer.okta.com/docs/reference/telephony-hook/). Okta alternates between SMS providers with every resend
+        request to ensure delivery of SMS and Call OTPs across different carriers.  > **Note:** Resend operations aren't
+        allowed after a factor exceeds the activation rate limit. See [Activate a factor](
+        ./#tag/UserFactor/operation/activateFactor).
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param factor_id: `id` of the Factor (required)
+        :param factor_id: ID of an existing user factor (required)
         :type factor_id: str
-        :param user_factor: Factor (required)
-        :type user_factor: UserFactor
-        :param template_id: ID of SMS template (only for SMS factor)
+        :param resend_user_factor: (required)
+        :type resend_user_factor: ResendUserFactor
+        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter
+        is only used by `sms` factors.
         :type template_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2908,7 +1831,7 @@ class UserFactorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
+            "200": "ResendUserFactor",
             "400": "Error",
             "403": "Error",
             "404": "Error",
@@ -2919,7 +1842,7 @@ class UserFactorApi(ApiClient):
             self._resend_enroll_factor_serialize(
                 user_id=user_id,
                 factor_id=factor_id,
-                user_factor=user_factor,
+                resend_user_factor=resend_user_factor,
                 template_id=template_id,
                 _request_auth=_request_auth,
                 _content_type=_content_type,
@@ -2936,18 +1859,18 @@ class UserFactorApi(ApiClient):
         )
 
         if error:
-            if UserFactor is Success:
+            if ResendUserFactor is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if UserFactor is Success:
+        if ResendUserFactor is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
+                request, ResendUserFactor
             )
 
         if response_body == "" or response.status == 204:
@@ -2963,257 +1886,7 @@ class UserFactorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if UserFactor is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def resend_enroll_factor_with_http_info(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        user_factor: Annotated[UserFactor, Field(description="Factor")],
-        template_id: Annotated[
-            Optional[StrictStr],
-            Field(description="ID of SMS template (only for SMS factor)"),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Resend a factor enrollment
-
-        Resends a factor challenge (SMS/call/email OTP) as part of an enrollment flow. The current rate limit is one OTP challenge (call or SMS) per device every 30 seconds. Okta round-robins between SMS providers with every resend request to help ensure delivery of an SMS OTP across different carriers.
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param user_factor: Factor (required)
-        :type user_factor: UserFactor
-        :param template_id: ID of SMS template (only for SMS factor)
-        :type template_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._resend_enroll_factor_serialize(
-                user_id=user_id,
-                factor_id=factor_id,
-                user_factor=user_factor,
-                template_id=template_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if UserFactor is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if UserFactor is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if UserFactor is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def resend_enroll_factor_without_preload_content(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        user_factor: Annotated[UserFactor, Field(description="Factor")],
-        template_id: Annotated[
-            Optional[StrictStr],
-            Field(description="ID of SMS template (only for SMS factor)"),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UserFactor:
-        """Resend a factor enrollment
-
-        Resends a factor challenge (SMS/call/email OTP) as part of an enrollment flow. The current rate limit is one OTP challenge (call or SMS) per device every 30 seconds. Okta round-robins between SMS providers with every resend request to help ensure delivery of an SMS OTP across different carriers.
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param user_factor: Factor (required)
-        :type user_factor: UserFactor
-        :param template_id: ID of SMS template (only for SMS factor)
-        :type template_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "UserFactor",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._resend_enroll_factor_serialize(
-                user_id=user_id,
-                factor_id=factor_id,
-                user_factor=user_factor,
-                template_id=template_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if UserFactor is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if UserFactor is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, UserFactor
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if UserFactor is Success:
+                if ResendUserFactor is Success:
                     return (response, error)
                 else:
                     return (None, response, error)
@@ -3230,7 +1903,7 @@ class UserFactorApi(ApiClient):
         self,
         user_id,
         factor_id,
-        user_factor,
+        resend_user_factor,
         template_id,
         _request_auth,
         _content_type,
@@ -3261,8 +1934,8 @@ class UserFactorApi(ApiClient):
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if user_factor is not None:
-            _body_params = user_factor
+        if resend_user_factor is not None:
+            _body_params = resend_user_factor
 
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
@@ -3298,9 +1971,18 @@ class UserFactorApi(ApiClient):
     @validate_call
     async def unenroll_factor(
         self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        remove_recovery_enrollment: Optional[StrictBool] = None,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        factor_id: Annotated[
+            StrictStr, Field(description="ID of an existing user factor")
+        ],
+        remove_recovery_enrollment: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="If `true`, removes the phone number as both a recovery method and a factor. This parameter is "
+                            "only "
+                            "used for the `sms` and `call` factors."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3313,219 +1995,19 @@ class UserFactorApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Unenroll a Factor
+        """Unenroll a factor
 
-        Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor
+        Unenrolls an existing factor for the specified user. You can't unenroll a factor from a deactivated user.
+        Unenrolling a factor allows the user to enroll a new factor.  > **Note:** If you unenroll the `push` or the
+        `signed_nonce` factors, Okta also unenrolls any other `totp`, `signed_nonce`, or Okta Verify `push` factors
+        associated with the user.
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param factor_id: `id` of the Factor (required)
+        :param factor_id: ID of an existing user factor (required)
         :type factor_id: str
-        :param remove_recovery_enrollment:
-        :type remove_recovery_enrollment: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._unenroll_factor_serialize(
-            user_id=user_id,
-            factor_id=factor_id,
-            remove_recovery_enrollment=remove_recovery_enrollment,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def unenroll_factor_with_http_info(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        remove_recovery_enrollment: Optional[StrictBool] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unenroll a Factor
-
-        Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param remove_recovery_enrollment:
-        :type remove_recovery_enrollment: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._unenroll_factor_serialize(
-            user_id=user_id,
-            factor_id=factor_id,
-            remove_recovery_enrollment=remove_recovery_enrollment,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def unenroll_factor_without_preload_content(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        remove_recovery_enrollment: Optional[StrictBool] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unenroll a Factor
-
-        Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param remove_recovery_enrollment:
+        :param remove_recovery_enrollment: If `true`, removes the phone number as both a recovery method and a factor. This
+        parameter is only used for the `sms` and `call` factors.
         :type remove_recovery_enrollment: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -3660,16 +2142,322 @@ class UserFactorApi(ApiClient):
         )
 
     @validate_call
+    async def upload_yubikey_otp_token_seed(
+        self,
+        upload_yubikey_otp_token_seed_request: UploadYubikeyOtpTokenSeedRequest,
+        after: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Specifies the pagination cursor for the next page of tokens"
+            ),
+        ] = None,
+        expand: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token "
+                            "is "
+                            "assigned to a user and `expand` is set to `user`"
+            ),
+        ] = None,
+        filter: Annotated[
+            Optional[StrictStr],
+            Field(description="The expression used to filter tokens"),
+        ] = None,
+        for_download: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="Returns tokens in a CSV to download instead of in the response. When you use this query "
+                            "parameter, "
+                            "the `limit` default changes to 1000."
+            ),
+        ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=200, strict=True)]],
+            Field(description="Specifies the number of results per page"),
+        ] = None,
+        sort_by: Annotated[
+            Optional[StrictStr],
+            Field(description="The value of how the tokens are sorted"),
+        ] = None,
+        sort_order: Annotated[
+            Optional[StrictStr],
+            Field(description="Specifies the sort order, either `ASC` or `DESC`"),
+        ] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UserFactorYubikeyOtpToken:
+        """Upload a YubiKey OTP seed
+
+        Uploads a seed for a user to enroll a YubiKey OTP
+
+        :param upload_yubikey_otp_token_seed_request: (required)
+        :type upload_yubikey_otp_token_seed_request: UploadYubikeyOtpTokenSeedRequest
+        :param after: Specifies the pagination cursor for the next page of tokens
+        :type after: str
+        :param expand: Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token is
+        assigned to a user and `expand` is set to `user`
+        :type expand: str
+        :param filter: The expression used to filter tokens
+        :type filter: str
+        :param for_download: Returns tokens in a CSV to download instead of in the response. When you use this query
+        parameter, the `limit` default changes to 1000.
+        :type for_download: bool
+        :param limit: Specifies the number of results per page
+        :type limit: int
+        :param sort_by: The value of how the tokens are sorted
+        :type sort_by: str
+        :param sort_order: Specifies the sort order, either `ASC` or `DESC`
+        :type sort_order: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            "200": "UserFactorYubikeyOtpToken",
+            "400": "Error",
+            "403": "Error",
+            "404": "Error",
+            "429": "Error",
+        }
+
+        method, url, header_params, body, post_params = (
+            self._upload_yubikey_otp_token_seed_serialize(
+                upload_yubikey_otp_token_seed_request=upload_yubikey_otp_token_seed_request,
+                after=after,
+                expand=expand,
+                filter=filter,
+                for_download=for_download,
+                limit=limit,
+                sort_by=sort_by,
+                sort_order=sort_order,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
+        )
+
+        form = {}
+        keep_empty_params = False
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            if UserFactorYubikeyOtpToken is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+
+        if UserFactorYubikeyOtpToken is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, UserFactorYubikeyOtpToken
+            )
+
+        if response_body == "" or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b"",
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode("utf-8")
+
+            if error:
+                if UserFactorYubikeyOtpToken is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
+
+    def _upload_yubikey_otp_token_seed_serialize(
+        self,
+        upload_yubikey_otp_token_seed_request,
+        after,
+        expand,
+        filter,
+        for_download,
+        limit,
+        sort_by,
+        sort_order,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {}
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if after is not None:
+            _query_params.append(("after", after))
+
+        if expand is not None:
+            _query_params.append(("expand", expand))
+
+        if filter is not None:
+            _query_params.append(("filter", filter))
+
+        if for_download is not None:
+            _query_params.append(("forDownload", for_download))
+
+        if limit is not None:
+            _query_params.append(("limit", limit))
+
+        if sort_by is not None:
+            _query_params.append(("sortBy", sort_by))
+
+        if sort_order is not None:
+            _query_params.append(("sortOrder", sort_order))
+
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if upload_yubikey_otp_token_seed_request is not None:
+            _body_params = upload_yubikey_otp_token_seed_request
+
+        # set the HTTP header `Accept`
+        _header_params["Accept"] = self.select_header_accept(["application/json"])
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _default_content_type = self.select_header_content_type(
+                ["application/json"]
+            )
+            if _default_content_type is not None:
+                _header_params["Content-Type"] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = ["apiToken", "oauth2"]
+
+        return self.param_serialize(
+            method="POST",
+            resource_path="/api/v1/org/factors/yubikey_token/tokens",
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    @validate_call
     async def verify_factor(
         self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        template_id: Optional[StrictStr] = None,
-        token_lifetime_seconds: Optional[StrictInt] = None,
-        x_forwarded_for: Optional[StrictStr] = None,
-        user_agent: Optional[StrictStr] = None,
-        accept_language: Optional[StrictStr] = None,
-        body: Optional[VerifyFactorRequest] = None,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        factor_id: Annotated[
+            StrictStr, Field(description="ID of an existing user factor")
+        ],
+        template_id: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter "
+                            "is "
+                            "only used by `sms` factors."
+            ),
+        ] = None,
+        token_lifetime_seconds: Annotated[
+            Optional[Annotated[int, Field(le=86400, strict=True, ge=1)]],
+            Field(description="Defines how long the token remains valid"),
+        ] = None,
+        x_forwarded_for: Annotated[
+            Optional[StrictStr],
+            Field(description="Public IP address for the user agent"),
+        ] = None,
+        user_agent: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Type of user agent detected when the request is made. Required to verify `push` factors."
+            ),
+        ] = None,
+        accept_language: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="An ISO 639-1 two-letter language code that defines a localized message to send. This parameter "
+                            "is "
+                            "only used by `sms` factors. If a localized message doesn't exist or the `templateId` is "
+                            "incorrect, "
+                            "the default template is used instead."
+            ),
+        ] = None,
+        body: Annotated[
+            Optional[UserFactorVerifyRequest],
+            Field(
+                description="Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, "
+                            "and `webauthn`) "
+                            "must first issue a challenge before you can verify the factor. Do this by making a request "
+                            "without "
+                            "a body. After a challenge is issued, make another request to verify the factor.  > **Note:** > "
+                            "Unlike standard push challenges that don't require a request body, a number matching [`push`]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag"
+                            "/UserFactor/operation/verifyFactor!path=2/useNumberMatchingChallenge&t=request) challenge "
+                            "requires "
+                            "a request body. `useNumberMatchingChallenge` must be set to `true`. > When a number matching "
+                            "challenge is issued for an Okta Verify `push` factor enrollment, a `correctAnswer` challenge "
+                            "object "
+                            "is returned in the [`_embedded`]("
+                            "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag"
+                            "/UserFactor/operation/verifyFactor!c=200&path=_embedded&t=response) object."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3681,27 +2469,46 @@ class UserFactorApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> VerifyUserFactorResponse:
-        """Verify an MFA Factor
+    ) -> UserFactorVerifyResponse:
+        """Verify a factor
 
-        Verifies an OTP for a `token` or `token:hardware` factor
+        Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, and `webauthn`) must first issue
+        a challenge before you can verify the factor. Do this by making a request without a body. After a challenge is
+        issued, make another request to verify the factor.  > **Notes:** > - You can send standard push challenges or number
+        matching push challenges to Okta Verify `push` factor enrollments. Use a [request body](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation
+        /verifyFactor!path=2/useNumberMatchingChallenge&t=request) for number matching push challenges. > - To verify a
+        `push` factor, use the **poll** link returned when you issue the challenge. See [Retrieve a factor transaction
+        status](/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation/getFactorTransactionStatus).
 
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param factor_id: `id` of the Factor (required)
+        :param factor_id: ID of an existing user factor (required)
         :type factor_id: str
-        :param template_id:
+        :param template_id: ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter
+        is only used by `sms` factors.
         :type template_id: str
-        :param token_lifetime_seconds:
+        :param token_lifetime_seconds: Defines how long the token remains valid
         :type token_lifetime_seconds: int
-        :param x_forwarded_for:
+        :param x_forwarded_for: Public IP address for the user agent
         :type x_forwarded_for: str
-        :param user_agent:
+        :param user_agent: Type of user agent detected when the request is made. Required to verify `push` factors.
         :type user_agent: str
-        :param accept_language:
+        :param accept_language: An ISO 639-1 two-letter language code that defines a localized message to send. This
+        parameter is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is incorrect,
+        the default template is used instead.
         :type accept_language: str
-        :param body:
-        :type body: VerifyFactorRequest
+        :param body: Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, and `webauthn`) must
+        first issue a challenge before you can verify the factor. Do this by making a request without a body. After a
+        challenge is issued, make another request to verify the factor.  > **Note:** > Unlike standard push challenges that
+        don't require a request body, a number matching [`push`](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation
+        /verifyFactor!path=2/useNumberMatchingChallenge&t=request) challenge requires a request body.
+        `useNumberMatchingChallenge` must be set to `true`. > When a number matching challenge is issued for an Okta Verify
+        `push` factor enrollment, a `correctAnswer` challenge object is returned in the [`_embedded`](
+        https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag/UserFactor/operation
+        /verifyFactor!c=200&path=_embedded&t=response) object.
+        :type body: UserFactorVerifyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3725,7 +2532,8 @@ class UserFactorApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "VerifyUserFactorResponse",
+            "200": "UserFactorVerifyResponse",
+            "201": "UserFactorVerifyResponseWaiting",
             "400": "Error",
             "403": "Error",
             "404": "Error",
@@ -3755,18 +2563,18 @@ class UserFactorApi(ApiClient):
         )
 
         if error:
-            if VerifyUserFactorResponse is Success:
+            if UserFactorVerifyResponse is Success:
                 return (None, error)
             else:
                 return (None, None, error)
 
-        if VerifyUserFactorResponse is Success:
+        if UserFactorVerifyResponse is Success:
             response, response_body, error = await self._request_executor.execute(
                 request
             )
         else:
             response, response_body, error = await self._request_executor.execute(
-                request, VerifyUserFactorResponse
+                request, UserFactorVerifyResponse
             )
 
         if response_body == "" or response.status == 204:
@@ -3782,279 +2590,7 @@ class UserFactorApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                if VerifyUserFactorResponse is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def verify_factor_with_http_info(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        template_id: Optional[StrictStr] = None,
-        token_lifetime_seconds: Optional[StrictInt] = None,
-        x_forwarded_for: Optional[StrictStr] = None,
-        user_agent: Optional[StrictStr] = None,
-        accept_language: Optional[StrictStr] = None,
-        body: Optional[VerifyFactorRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> VerifyUserFactorResponse:
-        """Verify an MFA Factor
-
-        Verifies an OTP for a `token` or `token:hardware` factor
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param template_id:
-        :type template_id: str
-        :param token_lifetime_seconds:
-        :type token_lifetime_seconds: int
-        :param x_forwarded_for:
-        :type x_forwarded_for: str
-        :param user_agent:
-        :type user_agent: str
-        :param accept_language:
-        :type accept_language: str
-        :param body:
-        :type body: VerifyFactorRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "VerifyUserFactorResponse",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._verify_factor_serialize(
-            user_id=user_id,
-            factor_id=factor_id,
-            template_id=template_id,
-            token_lifetime_seconds=token_lifetime_seconds,
-            x_forwarded_for=x_forwarded_for,
-            user_agent=user_agent,
-            accept_language=accept_language,
-            body=body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if VerifyUserFactorResponse is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if VerifyUserFactorResponse is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, VerifyUserFactorResponse
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if VerifyUserFactorResponse is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def verify_factor_without_preload_content(
-        self,
-        user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
-        template_id: Optional[StrictStr] = None,
-        token_lifetime_seconds: Optional[StrictInt] = None,
-        x_forwarded_for: Optional[StrictStr] = None,
-        user_agent: Optional[StrictStr] = None,
-        accept_language: Optional[StrictStr] = None,
-        body: Optional[VerifyFactorRequest] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> VerifyUserFactorResponse:
-        """Verify an MFA Factor
-
-        Verifies an OTP for a `token` or `token:hardware` factor
-
-        :param user_id: (required)
-        :type user_id: str
-        :param factor_id: `id` of the Factor (required)
-        :type factor_id: str
-        :param template_id:
-        :type template_id: str
-        :param token_lifetime_seconds:
-        :type token_lifetime_seconds: int
-        :param x_forwarded_for:
-        :type x_forwarded_for: str
-        :param user_agent:
-        :type user_agent: str
-        :param accept_language:
-        :type accept_language: str
-        :param body:
-        :type body: VerifyFactorRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "VerifyUserFactorResponse",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._verify_factor_serialize(
-            user_id=user_id,
-            factor_id=factor_id,
-            template_id=template_id,
-            token_lifetime_seconds=token_lifetime_seconds,
-            x_forwarded_for=x_forwarded_for,
-            user_agent=user_agent,
-            accept_language=accept_language,
-            body=body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if VerifyUserFactorResponse is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if VerifyUserFactorResponse is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, VerifyUserFactorResponse
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if VerifyUserFactorResponse is Success:
+                if UserFactorVerifyResponse is Success:
                     return (response, error)
                 else:
                     return (None, response, error)

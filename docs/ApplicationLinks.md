@@ -1,18 +1,21 @@
 # ApplicationLinks
 
+Discoverable resources related to the app
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_policy** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**access_policy** | [**AccessPolicyLink**](AccessPolicyLink.md) |  | [optional] 
 **activate** | [**HrefObjectActivateLink**](HrefObjectActivateLink.md) |  | [optional] 
+**app_links** | [**List[HrefObject]**](HrefObject.md) | List of app link resources | [optional] 
 **deactivate** | [**HrefObjectDeactivateLink**](HrefObjectDeactivateLink.md) |  | [optional] 
-**groups** | [**HrefObject**](HrefObject.md) |  | [optional] 
-**logo** | [**List[HrefObject]**](HrefObject.md) |  | [optional] 
-**metadata** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**groups** | [**GroupsLink**](GroupsLink.md) |  | [optional] 
+**help** | [**HelpLink**](HelpLink.md) |  | [optional] 
+**logo** | [**List[HrefObject]**](HrefObject.md) | List of app logo resources | [optional] 
+**metadata** | [**MetadataLink**](MetadataLink.md) |  | [optional] 
 **var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
-**users** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**users** | [**UsersLink**](UsersLink.md) |  | [optional] 
 
 ## Example
 

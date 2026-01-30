@@ -29,11 +29,11 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
 from okta.models.user_credentials import UserCredentials
+from okta.models.user_links import UserLinks
 from okta.models.user_profile import UserProfile
 from okta.models.user_status import UserStatus
 from okta.models.user_type import UserType
@@ -44,29 +44,57 @@ class User(BaseModel):
     User
     """  # noqa: E501
 
-    activated: Optional[datetime] = None
-    created: Optional[datetime] = None
+    activated: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user status transitioned to `ACTIVE`",
+    )
+    created: Optional[datetime] = Field(
+        default=None, description="The timestamp when the user was created"
+    )
     credentials: Optional[UserCredentials] = None
-    id: Optional[StrictStr] = None
-    last_login: Optional[datetime] = Field(default=None, alias="lastLogin")
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    password_changed: Optional[datetime] = Field(default=None, alias="passwordChanged")
+    id: Optional[StrictStr] = Field(
+        default=None, description="The unique key for the user"
+    )
+    last_login: Optional[datetime] = Field(
+        default=None, description="The timestamp of the last login", alias="lastLogin"
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user was last updated",
+        alias="lastUpdated",
+    )
+    password_changed: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the user's password was last updated",
+        alias="passwordChanged",
+    )
     profile: Optional[UserProfile] = None
     realm_id: Optional[StrictStr] = Field(
         default=None,
-        description="The ID of the realm in which the user is residing",
+        description="The ID of the realm in which the user is residing. See [Realms]("
+        "/openapi/okta-management/management/tag/Realm/).",
         alias="realmId",
     )
     status: Optional[UserStatus] = None
-    status_changed: Optional[datetime] = Field(default=None, alias="statusChanged")
-    transitioning_to_status: Optional[UserStatus] = Field(
-        default=None, alias="transitioningToStatus"
+    status_changed: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the status of the user last changed",
+        alias="statusChanged",
+    )
+    transitioning_to_status: Optional[StrictStr] = Field(
+        default=None,
+        description="The target status of an in-progress asynchronous status transition. This property is only returned if "
+        "the user's state is transitioning.",
+        alias="transitioningToStatus",
     )
     type: Optional[UserType] = None
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, alias="_embedded"
+        default=None,
+        description="Embedded resources related to the user using the [JSON Hypertext Application Language]("
+        "https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification",
+        alias="_embedded",
     )
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[UserLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "activated",
         "created",
@@ -84,6 +112,18 @@ class User(BaseModel):
         "_embedded",
         "_links",
     ]
+
+    @field_validator("transitioning_to_status")
+    def transitioning_to_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["ACTIVE", "DEPROVISIONED", "PROVISIONED"]):
+            raise ValueError(
+                "must be one of enum values ('ACTIVE', 'DEPROVISIONED', 'PROVISIONED')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -124,7 +164,6 @@ class User(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
@@ -136,6 +175,7 @@ class User(BaseModel):
                 "password_changed",
                 "realm_id",
                 "status_changed",
+                "transitioning_to_status",
                 "embedded",
             ]
         )
@@ -186,8 +226,8 @@ class User(BaseModel):
         # set to None if password_changed (nullable) is None
         # and model_fields_set contains the field
         if (
-                self.password_changed is None
-                and "password_changed" in self.model_fields_set
+            self.password_changed is None
+            and "password_changed" in self.model_fields_set
         ):
             _dict["passwordChanged"] = None
 
@@ -195,6 +235,14 @@ class User(BaseModel):
         # and model_fields_set contains the field
         if self.status_changed is None and "status_changed" in self.model_fields_set:
             _dict["statusChanged"] = None
+
+        # set to None if transitioning_to_status (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.transitioning_to_status is None
+            and "transitioning_to_status" in self.model_fields_set
+        ):
+            _dict["transitioningToStatus"] = None
 
         return _dict
 
@@ -212,8 +260,8 @@ class User(BaseModel):
                 "activated": obj.get("activated"),
                 "created": obj.get("created"),
                 "credentials": (
-                    UserCredentials.from_dict(obj["credentials"]) if
-                    obj.get("credentials") is not None
+                    UserCredentials.from_dict(obj["credentials"])
+                    if obj.get("credentials") is not None
                     else None
                 ),
                 "id": obj.get("id"),
@@ -221,8 +269,8 @@ class User(BaseModel):
                 "lastUpdated": obj.get("lastUpdated"),
                 "passwordChanged": obj.get("passwordChanged"),
                 "profile": (
-                    UserProfile.from_dict(obj["profile"]) if
-                    obj.get("profile") is not None
+                    UserProfile.from_dict(obj["profile"])
+                    if obj.get("profile") is not None
                     else None
                 ),
                 "realmId": obj.get("realmId"),
@@ -230,14 +278,14 @@ class User(BaseModel):
                 "statusChanged": obj.get("statusChanged"),
                 "transitioningToStatus": obj.get("transitioningToStatus"),
                 "type": (
-                    UserType.from_dict(obj["type"]) if
-                    obj.get("type") is not None
+                    UserType.from_dict(obj["type"])
+                    if obj.get("type") is not None
                     else None
                 ),
                 "_embedded": obj.get("_embedded"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"]) if
-                    obj.get("_links") is not None
+                    UserLinks.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
                     else None
                 ),
             }

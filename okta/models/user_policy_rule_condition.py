@@ -45,12 +45,16 @@ from okta.models.user_lifecycle_attribute_policy_rule_condition import (
 
 class UserPolicyRuleCondition(BaseModel):
     """
-    UserPolicyRuleCondition
+    Specifies a set of Users to be included or excluded
     """  # noqa: E501
 
-    exclude: Optional[List[StrictStr]] = None
+    exclude: Optional[List[StrictStr]] = Field(
+        default=None, description="Users to be excluded"
+    )
     inactivity: Optional[InactivityPolicyRuleCondition] = None
-    include: Optional[List[StrictStr]] = None
+    include: Optional[List[StrictStr]] = Field(
+        default=None, description="Users to be included"
+    )
     lifecycle_expiration: Optional[LifecycleExpirationPolicyRuleCondition] = Field(
         default=None, alias="lifecycleExpiration"
     )

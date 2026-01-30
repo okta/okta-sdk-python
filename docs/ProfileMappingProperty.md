@@ -6,7 +6,7 @@ A target property, in string form, that maps to a valid [JSON Schema Draft](http
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**expression** | **str** | Combination or single source properties that are mapped to the target property | [optional] 
+**expression** | **str** | Combination or single source properties that are mapped to the target property. See [Okta Expression Language](https://developer.okta.com/docs/reference/okta-expression-language/). | [optional] 
 **push_status** | [**ProfileMappingPropertyPushStatus**](ProfileMappingPropertyPushStatus.md) |  | [optional] 
 
 ## Example

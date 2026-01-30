@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** | Timestamp when the role was created | [optional] [readonly] 
-**id** | **str** | Unique key for the role | [optional] [readonly] 
-**last_updated** | **datetime** | Timestamp when the role was last updated | [optional] [readonly] 
+**created** | **datetime** | Timestamp when the member was created | [optional] [readonly] 
+**id** | **str** | Role resource set binding member ID | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the member was last updated | [optional] [readonly] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example

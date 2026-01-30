@@ -129,7 +129,11 @@ class TestProfileMappingResource:
             original_property = original_properties[existing_field_name]
 
             # Use the original expression as a base, but modify it slightly to test updates
-            original_expression = getattr(original_property, "expression", "user.login")
+            # Properties are dicts, so access with dict notation
+            if isinstance(original_property, dict):
+                original_expression = original_property.get("expression", "user.login")
+            else:
+                original_expression = getattr(original_property, "expression", "user.login")
 
             # Create a simple modification to the expression to test the update
             if "user.login" in original_expression:
@@ -161,7 +165,11 @@ class TestProfileMappingResource:
         supports_push_status = False
         if current_mapping.properties:
             for prop in current_mapping.properties.values():
-                if hasattr(prop, "push_status") or hasattr(prop, "pushStatus"):
+                if isinstance(prop, dict):
+                    if "pushStatus" in prop or "push_status" in prop:
+                        supports_push_status = True
+                        break
+                elif hasattr(prop, "push_status") or hasattr(prop, "pushStatus"):
                     supports_push_status = True
                     break
 
@@ -259,18 +267,22 @@ class TestProfileMappingResource:
             assert isinstance(updated_mapping, models.ProfileMapping)
             assert updated_mapping.id == mapping_id
             assert field_to_update in updated_mapping.properties
-            assert (
-                    updated_mapping.properties[field_to_update].expression
-                    == test_expression
-            )
+
+            # Get the updated property
+            updated_property = updated_mapping.properties[field_to_update]
+            if isinstance(updated_property, dict):
+                assert updated_property.get("expression") == test_expression
+            else:
+                assert updated_property.expression == test_expression
 
             # Only check push_status if it was supported
             if supports_push_status:
                 expected_push_status = models.ProfileMappingPropertyPushStatus.DONT_PUSH
-                assert (
-                        updated_mapping.properties[field_to_update].push_status
-                        == expected_push_status
-                )
+                if isinstance(updated_property, dict):
+                    actual_push_status = updated_property.get("pushStatus") or updated_property.get("push_status")
+                    assert actual_push_status == expected_push_status.value or actual_push_status == expected_push_status
+                else:
+                    assert updated_property.push_status == expected_push_status
 
         finally:
             # Restore original properties
@@ -338,7 +350,11 @@ class TestProfileMappingResource:
         supports_push_status = False
         if current_mapping.properties:
             for prop in current_mapping.properties.values():
-                if hasattr(prop, "push_status") or hasattr(prop, "pushStatus"):
+                if isinstance(prop, dict):
+                    if "pushStatus" in prop or "push_status" in prop:
+                        supports_push_status = True
+                        break
+                elif hasattr(prop, "push_status") or hasattr(prop, "pushStatus"):
                     supports_push_status = True
                     break
 
@@ -565,9 +581,9 @@ class TestProfileMappingResource:
 
         # Handle the case where profile mappings are not available (404 error)
         try:
-            # Test the _with_http_info variant methods
+            # Test the  variant methods
             profile_mappings, response, err = (
-                await client.list_profile_mappings_with_http_info()
+                await client.list_profile_mappings()
             )
 
             # Handle the case where profile mappings are not available (404 error)
@@ -586,7 +602,7 @@ class TestProfileMappingResource:
 
                 # Test get with http info
                 profile_mapping, response, err = (
-                    await client.get_profile_mapping_with_http_info(mapping_id)
+                    await client.get_profile_mapping(mapping_id)
                 )
                 assert err is None
                 assert isinstance(profile_mapping, models.ProfileMapping)
@@ -647,10 +663,13 @@ class TestProfileMappingResource:
         supports_push_status = False
         if current_mapping.properties:
             for prop in current_mapping.properties.values():
-                if hasattr(prop, "push_status") and prop.push_status is not None:
-                    supports_push_status = True
-                    break
-                elif hasattr(prop, "pushStatus") and prop.pushStatus is not None:
+                if isinstance(prop, dict):
+                    if ("pushStatus" in prop and prop.get("pushStatus") is not None) or \
+                       ("push_status" in prop and prop.get("push_status") is not None):
+                        supports_push_status = True
+                        break
+                elif (hasattr(prop, "push_status") and prop.push_status is not None) or \
+                     (hasattr(prop, "pushStatus") and prop.pushStatus is not None):
                     supports_push_status = True
                     break
 
@@ -761,10 +780,12 @@ class TestProfileMappingResource:
                         updated_mapping.properties
                         and test_field_name in updated_mapping.properties
                 ):
-                    assert (
-                            updated_mapping.properties[test_field_name].push_status
-                            == push_status
-                    )
+                    updated_property = updated_mapping.properties[test_field_name]
+                    if isinstance(updated_property, dict):
+                        actual_push_status = updated_property.get("pushStatus") or updated_property.get("push_status")
+                        assert actual_push_status == push_status.value or actual_push_status == push_status
+                    else:
+                        assert updated_property.push_status == push_status
 
         finally:
             # Restore original properties

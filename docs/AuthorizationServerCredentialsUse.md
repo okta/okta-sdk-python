@@ -1,5 +1,6 @@
 # AuthorizationServerCredentialsUse
 
+How the key is used
 
 ## Properties
 

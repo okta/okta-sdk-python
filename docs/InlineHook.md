@@ -1,19 +1,20 @@
 # InlineHook
 
+An inline hook object that specifies the details of the inline hook
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **channel** | [**InlineHookChannel**](InlineHookChannel.md) |  | [optional] 
-**created** | **datetime** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] 
+**created** | **datetime** | Date of the inline hook creation | [optional] [readonly] 
+**id** | **str** | The unique identifier for the inline hook | [optional] [readonly] 
+**last_updated** | **datetime** | Date of the last inline hook update | [optional] [readonly] 
+**name** | **str** | The display name of the inline hook | [optional] 
 **status** | [**InlineHookStatus**](InlineHookStatus.md) |  | [optional] 
 **type** | [**InlineHookType**](InlineHookType.md) |  | [optional] 
-**version** | **str** |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**version** | **str** | Version of the inline hook type. The currently supported version is &#x60;1.0.0&#x60;. | [optional] [readonly] 
+**links** | [**InlineHookLinks**](InlineHookLinks.md) |  | [optional] 
 
 ## Example
 

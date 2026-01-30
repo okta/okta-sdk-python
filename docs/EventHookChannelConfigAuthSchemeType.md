@@ -1,5 +1,6 @@
 # EventHookChannelConfigAuthSchemeType
 
+The authentication scheme type. Currently only supports `HEADER`.
 
 ## Properties
 

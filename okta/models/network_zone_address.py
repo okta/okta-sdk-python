@@ -42,7 +42,7 @@ class NetworkZoneAddress(BaseModel):
     type: Optional[NetworkZoneAddressType] = None
     value: Optional[StrictStr] = Field(
         default=None,
-        description="Value in CIDR/range form depending on the type specified",
+        description="Value in CIDR/range form, depending on the `type` specified",
     )
     __properties: ClassVar[List[str]] = ["type", "value"]
 

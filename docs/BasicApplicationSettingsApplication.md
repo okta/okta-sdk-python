@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_url** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
+**auth_url** | **str** | The URL of the authenticating site for this app | 
+**url** | **str** | The URL of the sign-in page for this app | 
 
 ## Example
 

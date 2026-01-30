@@ -39,7 +39,7 @@ class ResourceSetBindingRole(BaseModel):
     ResourceSetBindingRole
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="`id` of the role")
     links: Optional[ResourceSetBindingRoleLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "_links"]
 

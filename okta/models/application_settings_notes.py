@@ -28,17 +28,21 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class ApplicationSettingsNotes(BaseModel):
     """
-    ApplicationSettingsNotes
+    App notes visible to either the admin or end user
     """  # noqa: E501
 
-    admin: Optional[StrictStr] = None
-    enduser: Optional[StrictStr] = None
+    admin: Optional[StrictStr] = Field(
+        default=None, description="An app message that's visible to admins"
+    )
+    enduser: Optional[StrictStr] = Field(
+        default=None, description="A message that's visible in the End-User Dashboard"
+    )
     __properties: ClassVar[List[str]] = ["admin", "enduser"]
 
     model_config = ConfigDict(

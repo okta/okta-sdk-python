@@ -1,5 +1,6 @@
 # PushMethodKeyProtection
 
+Indicates whether you must use a hardware key store
 
 ## Properties
 

@@ -37,7 +37,11 @@ class InlineHookOAuthChannelConfig(BaseModel):
     InlineHookOAuthChannelConfig
     """  # noqa: E501
 
-    auth_type: Optional[StrictStr] = Field(default=None, alias="authType")
+    auth_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The authentication method for the token endpoint",
+        alias="authType",
+    )
     __properties: ClassVar[List[str]] = ["authType"]
 
     model_config = ConfigDict(

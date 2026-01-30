@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_from** | **str** | An email address to send the test email from | 
-**to** | **str** | An email address to send the test email to | 
+**from_address** | **str** | Email address that sends test emails | 
+**to_address** | **str** | Email address that receives test emails | 
 
 ## Example
 

@@ -41,7 +41,7 @@ from typing_extensions import Self
 
 class SloParticipate(BaseModel):
     """
-    SloParticipate
+    Determines if the app participates in Single Logout (SLO)
     """  # noqa: E501
 
     binding_type: Optional[StrictStr] = Field(
@@ -49,16 +49,16 @@ class SloParticipate(BaseModel):
     )
     enabled: Optional[StrictBool] = Field(
         default=None,
-        description="Allows the app to participate in front-channel single logout.",
+        description="Indicates whether the app is allowed to participate in front-channel SLO",
     )
     logout_request_url: Optional[StrictStr] = Field(
         default=None,
-        description="URL where Okta sends the logout request.",
+        description="URL where Okta sends the logout request",
         alias="logoutRequestUrl",
     )
     session_index_required: Optional[StrictBool] = Field(
         default=None,
-        description="Include user session details.",
+        description="Determines whether Okta sends the `SessionIndex` elements in the logout request",
         alias="sessionIndexRequired",
     )
     __properties: ClassVar[List[str]] = [

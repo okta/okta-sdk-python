@@ -53,7 +53,6 @@ class NoOpCache(Cache):
             key {str} -- Key in pair
             value {str} -- Val in pair
         """
-        pass
 
     def delete(self, key):
         """This is a void method. No need to delete anything not contained.
@@ -61,10 +60,8 @@ class NoOpCache(Cache):
         Arguments:
             key {str} -- Key to delete
         """
-        pass
 
     def clear(self):
         """
         This is a void method. No need to clear when nothing's stored.
         """
-        pass

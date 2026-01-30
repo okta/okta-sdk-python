@@ -39,7 +39,9 @@ class ErrorPage(BaseModel):
     ErrorPage
     """  # noqa: E501
 
-    page_content: Optional[StrictStr] = Field(default=None, alias="pageContent")
+    page_content: Optional[StrictStr] = Field(
+        default=None, description="The HTML for the page", alias="pageContent"
+    )
     content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(
         default=None, alias="contentSecurityPolicySetting"
     )

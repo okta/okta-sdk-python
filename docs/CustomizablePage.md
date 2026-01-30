@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**page_content** | **str** |  | [optional] 
+**page_content** | **str** | The HTML for the page | [optional] 
 
 ## Example
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **str** | Description of the role | 
 **label** | **str** | Unique label for the role | 
-**permissions** | [**List[RolePermissionType]**](RolePermissionType.md) | Array of permissions that the role will grant. See [Permission Types](https://developer.okta.com/docs/concepts/role-assignment/#permission-types). | 
+**permissions** | **List[str]** | Array of permissions that the role grants. See [Permissions](/openapi/okta-management/guides/permissions). | 
 
 ## Example
 

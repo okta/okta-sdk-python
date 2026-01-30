@@ -28,20 +28,70 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 
 class ApplicationCredentialsUsernameTemplate(BaseModel):
     """
-    ApplicationCredentialsUsernameTemplate
+    The template used to generate the username when the app is assigned through a group or directly to a user
     """  # noqa: E501
 
-    push_status: Optional[StrictStr] = Field(default=None, alias="pushStatus")
-    template: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
-    user_suffix: Optional[StrictStr] = Field(default=None, alias="userSuffix")
+    push_status: Optional[StrictStr] = Field(
+        default=None,
+        description="Determines if the username is pushed to the app on updates for CUSTOM `type`",
+        alias="pushStatus",
+    )
+    template: Optional[StrictStr] = Field(
+        default="${source.login}",
+        description="Mapping expression used to generate usernames.  The following are supported mapping expressions that "
+        "are used with the `BUILT_IN` template type:  | Name                            | Template Expression    "
+        "                        | | ------------------------------- | "
+        "---------------------------------------------- | | AD Employee ID                  | `${"
+        "source.employeeID}`                         | | AD SAM Account Name             | `${"
+        "source.samAccountName}`                     | | AD SAM Account Name (lowercase) | `${fn:toLowerCase("
+        "source.samAccountName)}`     | | AD User Principal Name          | `${source.userName}`                 "
+        '          | | AD User Principal Name prefix   | `${fn:substringBefore(source.userName, "@")}`  | | '
+        "Email                           | `${source.email}`                              | | Email (lowercase)  "
+        "             | `${fn:toLowerCase(source.email)}`              | | Email prefix                    | `${"
+        'fn:substringBefore(source.email, "@")}`     | | LDAP UID + custom suffix        | `${source.userName}${'
+        "instance.userSuffix}`     | | Okta username                   | `${source.login}`                       "
+        '       | | Okta username prefix            | `${fn:substringBefore(source.login, "@")}`     |',
+    )
+    type: Optional[StrictStr] = Field(
+        default="BUILT_IN",
+        description="Type of mapping expression. Empty string is allowed.",
+    )
+    user_suffix: Optional[StrictStr] = Field(
+        default=None,
+        description="An optional suffix appended to usernames for `BUILT_IN` mapping expressions",
+        alias="userSuffix",
+    )
     __properties: ClassVar[List[str]] = ["pushStatus", "template", "type", "userSuffix"]
+
+    @field_validator("push_status")
+    def push_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["PUSH", "DONT_PUSH", "NOT_CONFIGURED"]):
+            raise ValueError(
+                "must be one of enum values ('PUSH', 'DONT_PUSH', 'NOT_CONFIGURED')"
+            )
+        return value
+
+    @field_validator("type")
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["NONE", "BUILT_IN", "CUSTOM"]):
+            raise ValueError(
+                "must be one of enum values ('NONE', 'BUILT_IN', 'CUSTOM')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,8 +144,12 @@ class ApplicationCredentialsUsernameTemplate(BaseModel):
         _obj = cls.model_validate(
             {
                 "pushStatus": obj.get("pushStatus"),
-                "template": obj.get("template"),
-                "type": obj.get("type"),
+                "template": (
+                    obj.get("template")
+                    if obj.get("template") is not None
+                    else "${source.login}"
+                ),
+                "type": obj.get("type") if obj.get("type") is not None else "BUILT_IN",
                 "userSuffix": obj.get("userSuffix"),
             }
         )

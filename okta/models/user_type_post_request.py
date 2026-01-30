@@ -39,11 +39,11 @@ class UserTypePostRequest(BaseModel):
 
     description: Optional[StrictStr] = Field(
         default=None,
-        description="The updated human-readable description of the User Type",
+        description="The updated human-readable description of the user type",
     )
     display_name: Optional[StrictStr] = Field(
         default=None,
-        description="The updated human-readable display name for the User Type",
+        description="The updated human-readable display name for the user type",
         alias="displayName",
     )
     __properties: ClassVar[List[str]] = ["description", "displayName"]

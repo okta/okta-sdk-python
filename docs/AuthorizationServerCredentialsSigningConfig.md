@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**kid** | **str** |  | [optional] 
-**last_rotated** | **datetime** |  | [optional] [readonly] 
-**next_rotation** | **datetime** |  | [optional] [readonly] 
+**kid** | **str** | The ID of the JSON Web Key used for signing tokens issued by the authorization server | [optional] [readonly] 
+**last_rotated** | **datetime** | The timestamp when the authorization server started using the &#x60;kid&#x60; for signing tokens | [optional] [readonly] 
+**next_rotation** | **datetime** | The timestamp when the authorization server changes the Key for signing tokens. This is only returned when &#x60;rotationMode&#x60; is set to &#x60;AUTO&#x60;. | [optional] [readonly] 
 **rotation_mode** | [**AuthorizationServerCredentialsRotationMode**](AuthorizationServerCredentialsRotationMode.md) |  | [optional] 
 **use** | [**AuthorizationServerCredentialsUse**](AuthorizationServerCredentialsUse.md) |  | [optional] 
 

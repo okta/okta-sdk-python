@@ -1,5 +1,6 @@
 # PasswordPolicyRecoveryFactors
 
+Settings for the factors that can be used for recovery
 
 ## Properties
 

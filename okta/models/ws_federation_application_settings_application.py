@@ -28,7 +28,14 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictStr,
+    field_validator,
+)
 from typing_extensions import Self
 
 
@@ -38,27 +45,65 @@ class WsFederationApplicationSettingsApplication(BaseModel):
     """  # noqa: E501
 
     attribute_statements: Optional[StrictStr] = Field(
-        default=None, alias="attributeStatements"
+        default=None,
+        description="You can federate user attributes such as Okta profile fields, LDAP, Active Directory, and Workday "
+        "values. The SP uses the federated WS-Fed attribute values accordingly.",
+        alias="attributeStatements",
     )
-    audience_restriction: Optional[StrictStr] = Field(
-        default=None, alias="audienceRestriction"
+    audience_restriction: StrictStr = Field(
+        description="The entity ID of the SP. Use the entity ID value exactly as provided by the SP.",
+        alias="audienceRestriction",
     )
-    authn_context_class_ref: Optional[StrictStr] = Field(
-        default=None, alias="authnContextClassRef"
+    authn_context_class_ref: StrictStr = Field(
+        description="Identifies the SAML authentication context class for the assertion's authentication statement",
+        alias="authnContextClassRef",
     )
-    group_filter: Optional[StrictStr] = Field(default=None, alias="groupFilter")
-    group_name: Optional[StrictStr] = Field(default=None, alias="groupName")
-    group_value_format: Optional[StrictStr] = Field(
-        default=None, alias="groupValueFormat"
+    group_filter: Optional[StrictStr] = Field(
+        default=None,
+        description="A regular expression that filters for the User Groups you want included with the `groupName` attribute. "
+        "If the matching User Group has a corresponding AD group, then the attribute statement includes the "
+        "value of the attribute specified by `groupValueFormat`. If the matching User Group doesn't contain a "
+        "corresponding AD group, then the `groupName` is used in the attribute statement.",
+        alias="groupFilter",
     )
-    name_id_format: Optional[StrictStr] = Field(default=None, alias="nameIDFormat")
-    realm: Optional[StrictStr] = None
-    site_url: Optional[StrictStr] = Field(default=None, alias="siteURL")
-    username_attribute: Optional[StrictStr] = Field(
-        default=None, alias="usernameAttribute"
+    group_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The group name to include in the WS-Fed response attribute statement. This property is used in "
+        "conjunction with the `groupFilter` property.  Groups that are filtered through the `groupFilter` "
+        "expression are included with the `groupName` in the attribute statement. Any users that belong to the "
+        "group you've filtered are included in the WS-Fed response attribute statement.",
+        alias="groupName",
     )
-    w_reply_override: Optional[StrictBool] = Field(default=None, alias="wReplyOverride")
-    w_reply_url: Optional[StrictStr] = Field(default=None, alias="wReplyURL")
+    group_value_format: StrictStr = Field(
+        description="Specifies the WS-Fed assertion attribute value for filtered groups. This attribute is only applied to "
+        "Active Directory groups.",
+        alias="groupValueFormat",
+    )
+    name_id_format: StrictStr = Field(
+        description="The username format that you send in the WS-Fed response",
+        alias="nameIDFormat",
+    )
+    realm: Optional[StrictStr] = Field(
+        default=None,
+        description="The uniform resource identifier (URI) of the WS-Fed app that's used to share resources securely within "
+        "a domain. It's the identity that's sent to the Okta IdP when signing in. See [Realm name]("
+        "https://help.okta.com/okta_help.htm?type=oie&id=ext_Apps_Configure_Okta_Template_WS_Federation#Realm).",
+    )
+    site_url: StrictStr = Field(
+        description="Launch URL for the web app", alias="siteURL"
+    )
+    username_attribute: StrictStr = Field(
+        description="Specifies additional username attribute statements to include in the WS-Fed assertion",
+        alias="usernameAttribute",
+    )
+    w_reply_override: Optional[StrictBool] = Field(
+        default=None,
+        description="Enables a web app to override the `wReplyURL` URL with a reply parameter.",
+        alias="wReplyOverride",
+    )
+    w_reply_url: StrictStr = Field(
+        description="The WS-Fed SP endpoint where your users sign in", alias="wReplyURL"
+    )
     __properties: ClassVar[List[str]] = [
         "attributeStatements",
         "audienceRestriction",
@@ -73,6 +118,24 @@ class WsFederationApplicationSettingsApplication(BaseModel):
         "wReplyOverride",
         "wReplyURL",
     ]
+
+    @field_validator("group_value_format")
+    def group_value_format_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["windowsDomainQualifiedName", "samAccountName", "dn"]):
+            raise ValueError(
+                "must be one of enum values ('windowsDomainQualifiedName', 'samAccountName', 'dn')"
+            )
+        return value
+
+    @field_validator("username_attribute")
+    def username_attribute_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(["username", "upn", "upnAndUsername", "none"]):
+            raise ValueError(
+                "must be one of enum values ('username', 'upn', 'upnAndUsername', 'none')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

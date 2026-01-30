@@ -31,6 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing_extensions import Self
 
+from okta.models.links_self import LinksSelf
 from okta.models.o_auth2_scope_consent_type import OAuth2ScopeConsentType
 from okta.models.o_auth2_scope_metadata_publish import OAuth2ScopeMetadataPublish
 
@@ -40,16 +41,31 @@ class OAuth2Scope(BaseModel):
     OAuth2Scope
     """  # noqa: E501
 
-    consent: Optional[OAuth2ScopeConsentType] = None
-    default: Optional[StrictBool] = None
-    description: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    id: Optional[StrictStr] = None
-    metadata_publish: Optional[OAuth2ScopeMetadataPublish] = Field(
-        default=None, alias="metadataPublish"
+    consent: Optional[OAuth2ScopeConsentType] = OAuth2ScopeConsentType.IMPLICIT
+    default: Optional[StrictBool] = Field(
+        default=False, description="Indicates if this Scope is a default scope"
     )
-    name: Optional[StrictStr] = None
-    system: Optional[StrictBool] = None
+    description: Optional[StrictStr] = Field(
+        default=None, description="Description of the Scope"
+    )
+    display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the end user displayed in a consent dialog",
+        alias="displayName",
+    )
+    id: Optional[StrictStr] = Field(default=None, description="Scope object ID")
+    metadata_publish: Optional[OAuth2ScopeMetadataPublish] = Field(
+        default=OAuth2ScopeMetadataPublish.NO_CLIENTS, alias="metadataPublish"
+    )
+    name: StrictStr = Field(description="Scope name")
+    optional: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether the Scope is optional. When set to `true`, the user can skip consent for the scope.",
+    )
+    system: Optional[StrictBool] = Field(
+        default=False, description="Indicates if Okta created the Scope"
+    )
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "consent",
         "default",
@@ -58,7 +74,9 @@ class OAuth2Scope(BaseModel):
         "id",
         "metadataPublish",
         "name",
+        "optional",
         "system",
+        "_links",
     ]
 
     model_config = ConfigDict(
@@ -103,6 +121,13 @@ class OAuth2Scope(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
+
         return _dict
 
     @classmethod
@@ -117,13 +142,23 @@ class OAuth2Scope(BaseModel):
         _obj = cls.model_validate(
             {
                 "consent": obj.get("consent"),
-                "default": obj.get("default"),
+                "default": (
+                    obj.get("default") if obj.get("default") is not None else False
+                ),
                 "description": obj.get("description"),
                 "displayName": obj.get("displayName"),
                 "id": obj.get("id"),
                 "metadataPublish": obj.get("metadataPublish"),
                 "name": obj.get("name"),
-                "system": obj.get("system"),
+                "optional": (
+                    obj.get("optional") if obj.get("optional") is not None else False
+                ),
+                "system": obj.get("system") if obj.get("system") is not None else False,
+                "_links": (
+                    LinksSelf.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
+                ),
             }
         )
         return _obj

@@ -30,8 +30,9 @@ from typing_extensions import Self
 
 class AppUserSyncState(str, Enum):
     """
-    The synchronization state for the App User. The App User's `syncState` depends on whether the `PROFILE_MASTERING`
-    feature is enabled for the app.  > **Note:** User provisioning currently must be configured through the Admin Console.
+    The synchronization state for the application user. The application user's `syncState` depends on whether the
+    `PROFILE_MASTERING` feature is enabled for the app.  > **Note:** User provisioning currently must be configured through
+    the Admin Console.
     """
 
     """

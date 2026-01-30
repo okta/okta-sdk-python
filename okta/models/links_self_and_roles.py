@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
-from okta.models.href_object import HrefObject
+from okta.models.href_object_role_link import HrefObjectRoleLink
 from okta.models.href_object_self_link import HrefObjectSelfLink
 
 
@@ -41,7 +41,7 @@ class LinksSelfAndRoles(BaseModel):
     """  # noqa: E501
 
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
-    roles: Optional[HrefObject] = None
+    roles: Optional[HrefObjectRoleLink] = None
     __properties: ClassVar[List[str]] = ["self", "roles"]
 
     model_config = ConfigDict(
@@ -114,7 +114,7 @@ class LinksSelfAndRoles(BaseModel):
                     else None
                 ),
                 "roles": (
-                    HrefObject.from_dict(obj["roles"])
+                    HrefObjectRoleLink.from_dict(obj["roles"])
                     if obj.get("roles") is not None
                     else None
                 ),

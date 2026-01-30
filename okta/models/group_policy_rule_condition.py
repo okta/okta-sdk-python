@@ -34,7 +34,7 @@ from typing_extensions import Self
 
 class GroupPolicyRuleCondition(BaseModel):
     """
-    Specifies a set of Groups whose Users are to be included or excluded
+    Specifies a set of groups whose users are to be included or excluded
     """  # noqa: E501
 
     exclude: Optional[List[StrictStr]] = Field(

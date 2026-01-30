@@ -25,11 +25,10 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
-from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing_extensions import Self
 
 from okta.models.agent_type import AgentType
@@ -43,23 +42,42 @@ class Agent(BaseModel):
     Agent details
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    is_hidden: Optional[StrictBool] = Field(default=None, alias="isHidden")
-    is_latest_g_aed_version: Optional[StrictBool] = Field(
-        default=None, alias="isLatestGAedVersion"
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier for the agent that's generated during installation",
     )
-    last_connection: Optional[datetime] = Field(default=None, alias="lastConnection")
-    name: Optional[StrictStr] = None
+    is_hidden: Optional[StrictBool] = Field(
+        default=None,
+        description="Determines if an agent is hidden from the Admin Console",
+        alias="isHidden",
+    )
+    is_latest_g_aed_version: Optional[StrictBool] = Field(
+        default=None,
+        description="Determines if the agent is on the latest generally available version",
+        alias="isLatestGAedVersion",
+    )
+    last_connection: Optional[StrictInt] = Field(
+        default=None,
+        description="Unix timestamp in milliseconds when the agent last connected to Okta",
+        alias="lastConnection",
+    )
+    name: Optional[StrictStr] = Field(default=None, description="Agent name")
     operational_status: Optional[OperationalStatus] = Field(
         default=None, alias="operationalStatus"
     )
-    pool_id: Optional[StrictStr] = Field(default=None, alias="poolId")
+    pool_id: Optional[StrictStr] = Field(
+        default=None, description="Pool ID", alias="poolId"
+    )
     type: Optional[AgentType] = None
-    update_message: Optional[StrictStr] = Field(default=None, alias="updateMessage")
+    update_message: Optional[StrictStr] = Field(
+        default=None, description="Status message of the agent", alias="updateMessage"
+    )
     update_status: Optional[AgentUpdateInstanceStatus] = Field(
         default=None, alias="updateStatus"
     )
-    version: Optional[StrictStr] = None
+    version: Optional[StrictStr] = Field(
+        default=None, description="Agent version number"
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "id",

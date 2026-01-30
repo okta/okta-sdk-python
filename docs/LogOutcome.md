@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reason** | **str** |  | [optional] [readonly] 
-**result** | **str** |  | [optional] [readonly] 
+**reason** | **str** | Reason for the result, for example, &#x60;INVALID_CREDENTIALS&#x60; | [optional] [readonly] 
+**result** | **str** | Result of the action | [optional] [readonly] 
 
 ## Example
 

@@ -1,6 +1,6 @@
 # AgentPoolUpdate
 
-Various information about agent auto update configuration
+Various information about agent auto-update configuration
 
 ## Properties
 
@@ -8,15 +8,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **agents** | [**List[Agent]**](Agent.md) |  | [optional] 
 **agent_type** | [**AgentType**](AgentType.md) |  | [optional] 
-**enabled** | **bool** |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] 
-**notify_admin** | **bool** |  | [optional] 
-**reason** | **str** |  | [optional] 
+**enabled** | **bool** | Indicates if auto-update is enabled for the agent pool | [optional] 
+**id** | **str** | ID of the agent pool update | [optional] [readonly] 
+**name** | **str** | Name of the agent pool update | [optional] 
+**notify_admin** | **bool** | Indicates if the admin is notified about the update | [optional] 
+**reason** | **str** | Reason for the update | [optional] 
 **schedule** | [**AutoUpdateSchedule**](AutoUpdateSchedule.md) |  | [optional] 
-**sort_order** | **int** |  | [optional] 
+**sort_order** | **int** | Specifies the sort order | [optional] 
 **status** | [**AgentUpdateJobStatus**](AgentUpdateJobStatus.md) |  | [optional] 
-**target_version** | **str** |  | [optional] 
+**target_version** | **str** | The agent version to update to | [optional] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example

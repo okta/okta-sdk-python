@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class PolicyAccountLinkAction(str, Enum):
     """
-    PolicyAccountLinkAction
+    Specifies the account linking action for an IdP user
     """
 
     """

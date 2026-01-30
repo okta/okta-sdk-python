@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class LinkedObjectDetailsType(str, Enum):
     """
-    LinkedObjectDetailsType
+    The object type for this relationship
     """
 
     """

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | &#x60;id&#x60; of the role | [optional] 
+**id** | **str** | &#x60;id&#x60; of the role resource set binding | [optional] 
 **links** | [**ResourceSetBindingResponseLinks**](ResourceSetBindingResponseLinks.md) |  | [optional] 
 
 ## Example

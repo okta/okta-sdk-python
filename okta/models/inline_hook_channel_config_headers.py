@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
@@ -37,8 +37,12 @@ class InlineHookChannelConfigHeaders(BaseModel):
     InlineHookChannelConfigHeaders
     """  # noqa: E501
 
-    key: Optional[StrictStr] = None
-    value: Optional[StrictStr] = None
+    key: Optional[StrictStr] = Field(
+        default=None, description="The optional field or header name"
+    )
+    value: Optional[StrictStr] = Field(
+        default=None, description="The value for the key"
+    )
     __properties: ClassVar[List[str]] = ["key", "value"]
 
     model_config = ConfigDict(

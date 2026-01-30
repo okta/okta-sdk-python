@@ -49,7 +49,7 @@ class UIElementOptions(BaseModel):
             return value
 
         if value not in set(
-                ["text", "radio", "select", "checkbox", "radio_yes_no", "radio_true_false"]
+            ["text", "radio", "select", "checkbox", "radio_yes_no", "radio_true_false"]
         ):
             raise ValueError(
                 "must be one of enum values ('text', 'radio', 'select', 'checkbox', 'radio_yes_no', 'radio_true_false')"

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class NetworkZoneStatus(str, Enum):
     """
-    Network zone status
+    Network Zone status
     """
 
     """

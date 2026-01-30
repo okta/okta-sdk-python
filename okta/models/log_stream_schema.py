@@ -32,6 +32,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.links_self import LinksSelf
+from okta.models.user_schema_attribute_enum import UserSchemaAttributeEnum
 
 
 class LogStreamSchema(BaseModel):
@@ -39,24 +40,50 @@ class LogStreamSchema(BaseModel):
     LogStreamSchema
     """  # noqa: E501
 
-    var_schema: Optional[StrictStr] = Field(default=None, alias="$schema")
-    created: Optional[StrictStr] = None
-    error_message: Optional[Dict[str, Any]] = Field(default=None, alias="errorMessage")
-    id: Optional[StrictStr] = None
-    last_updated: Optional[StrictStr] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = None
-    properties: Optional[Dict[str, Any]] = None
-    required: Optional[List[StrictStr]] = None
-    title: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    var_schema: Optional[StrictStr] = Field(
+        default=None, description="JSON schema version identifier", alias="$schema"
+    )
+    error_message: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="A collection of error messages for individual properties in the schema. Okta implements a subset of ["
+        "ajv-errors](https://github.com/ajv-validator/ajv-errors).",
+        alias="errorMessage",
+    )
+    id: Optional[StrictStr] = Field(
+        default=None, description="URI of log stream schema"
+    )
+    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(
+        default=None,
+        description="Non-empty array of valid JSON schemas.  Okta only supports `oneOf` for specifying display names for an "
+        '`enum`. Each schema has the following format:  ``` {   "const": "enumValue",   "title": "display name" '
+        "} ```",
+        alias="oneOf",
+    )
+    pattern: Optional[StrictStr] = Field(
+        default=None,
+        description="For `string` log stream schema property type, specifies the regular expression used to validate the "
+        "property",
+    )
+    properties: Optional[Dict[str, Any]] = Field(
+        default=None, description="log stream schema properties object"
+    )
+    required: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Required properties for this log stream schema object",
+    )
+    title: Optional[StrictStr] = Field(
+        default=None, description="Name of the log streaming integration"
+    )
+    type: Optional[StrictStr] = Field(
+        default=None, description="Type of log stream schema property"
+    )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "$schema",
-        "created",
         "errorMessage",
         "id",
-        "lastUpdated",
-        "name",
+        "oneOf",
+        "pattern",
         "properties",
         "required",
         "title",
@@ -96,17 +123,11 @@ class LogStreamSchema(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "var_schema",
-                "created",
                 "id",
-                "last_updated",
-                "name",
                 "type",
             ]
         )
@@ -116,12 +137,24 @@ class LogStreamSchema(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in one_of (list)
+        _items = []
+        if self.one_of:
+            for _item in self.one_of:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["oneOf"] = _items
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
                 _dict["_links"] = self.links.to_dict()
             else:
                 _dict["_links"] = self.links
+
+        # set to None if one_of (nullable) is None
+        # and model_fields_set contains the field
+        if self.one_of is None and "one_of" in self.model_fields_set:
+            _dict["oneOf"] = None
 
         return _dict
 
@@ -137,11 +170,14 @@ class LogStreamSchema(BaseModel):
         _obj = cls.model_validate(
             {
                 "$schema": obj.get("$schema"),
-                "created": obj.get("created"),
                 "errorMessage": obj.get("errorMessage"),
                 "id": obj.get("id"),
-                "lastUpdated": obj.get("lastUpdated"),
-                "name": obj.get("name"),
+                "oneOf": (
+                    [UserSchemaAttributeEnum.from_dict(_item) for _item in obj["oneOf"]]
+                    if obj.get("oneOf") is not None
+                    else None
+                ),
+                "pattern": obj.get("pattern"),
                 "properties": obj.get("properties"),
                 "required": obj.get("required"),
                 "title": obj.get("title"),

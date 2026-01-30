@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.authentication_provider_type import AuthenticationProviderType
@@ -36,10 +36,13 @@ from okta.models.authentication_provider_type import AuthenticationProviderType
 
 class AuthenticationProvider(BaseModel):
     """
-    AuthenticationProvider
+    Specifies the authentication provider that validates the user's password credential. The user's current provider is
+    managed by the **Delegated Authentication** settings for your org. The provider object is **read-only**.
     """  # noqa: E501
 
-    name: Optional[StrictStr] = None
+    name: Optional[StrictStr] = Field(
+        default=None, description="The name of the authentication provider"
+    )
     type: Optional[AuthenticationProviderType] = None
     __properties: ClassVar[List[str]] = ["name", "type"]
 
@@ -72,8 +75,13 @@ class AuthenticationProvider(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "name",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,

@@ -50,7 +50,7 @@ class LinksSelfAndFullUsersLifecycle(BaseModel):
     suspend: Optional[HrefObjectSuspendLink] = None
     unsuspend: Optional[HrefObjectUnsuspendLink] = None
     users: Optional[HrefObject] = Field(
-        default=None, description="Link to Device users"
+        default=None, description="Link to device users"
     )
     __properties: ClassVar[List[str]] = [
         "self",

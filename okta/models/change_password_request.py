@@ -45,7 +45,11 @@ class ChangePasswordRequest(BaseModel):
     old_password: Optional[PasswordCredential] = Field(
         default=None, alias="oldPassword"
     )
-    revoke_sessions: Optional[StrictBool] = Field(default=None, alias="revokeSessions")
+    revoke_sessions: Optional[StrictBool] = Field(
+        default=False,
+        description="When set to `true`, revokes all user sessions, except for the current session",
+        alias="revokeSessions",
+    )
     __properties: ClassVar[List[str]] = ["newPassword", "oldPassword", "revokeSessions"]
 
     model_config = ConfigDict(
@@ -122,7 +126,11 @@ class ChangePasswordRequest(BaseModel):
                     if obj.get("oldPassword") is not None
                     else None
                 ),
-                "revokeSessions": obj.get("revokeSessions"),
+                "revokeSessions": (
+                    obj.get("revokeSessions")
+                    if obj.get("revokeSessions") is not None
+                    else False
+                ),
             }
         )
         return _obj

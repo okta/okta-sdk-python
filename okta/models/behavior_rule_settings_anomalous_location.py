@@ -49,8 +49,7 @@ class BehaviorRuleSettingsAnomalousLocation(BaseModel):
     granularity: LocationGranularity
     radius_kilometers: Optional[StrictInt] = Field(
         default=None,
-        description="Required when `granularity` is `LAT_LONG`. Radius from the "
-                    "provided coordinates in kilometers.",
+        description="Required when `granularity` is `LAT_LONG`. Radius from the provided coordinates in kilometers.",
         alias="radiusKilometers",
     )
     __properties: ClassVar[List[str]] = [

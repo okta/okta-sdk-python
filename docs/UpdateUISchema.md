@@ -6,7 +6,7 @@ The updated request body properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ui_schema** | [**UISchemaObject**](.md) |  | [optional] 
+**ui_schema** | [**UISchemaObject**](UISchemaObject.md) |  | [optional] 
 
 ## Example
 

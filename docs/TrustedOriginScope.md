@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allowed_okta_apps** | [**List[IframeEmbedScopeAllowedApps]**](IframeEmbedScopeAllowedApps.md) |  | [optional] 
+**allowed_okta_apps** | [**List[IframeEmbedScopeAllowedApps]**](IframeEmbedScopeAllowedApps.md) | The allowed Okta apps for the trusted origin scope | [optional] 
 **type** | [**TrustedOriginScopeType**](TrustedOriginScopeType.md) |  | [optional] 
 
 ## Example

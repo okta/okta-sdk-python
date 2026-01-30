@@ -36,7 +36,7 @@ from okta.models.password_dictionary_common import PasswordDictionaryCommon
 
 class PasswordDictionary(BaseModel):
     """
-    PasswordDictionary
+    Weak password dictionary lookup settings
     """  # noqa: E501
 
     common: Optional[PasswordDictionaryCommon] = None

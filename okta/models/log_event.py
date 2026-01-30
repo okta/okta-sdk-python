@@ -55,22 +55,47 @@ class LogEvent(BaseModel):
     )
     client: Optional[LogClient] = None
     debug_context: Optional[LogDebugContext] = Field(default=None, alias="debugContext")
-    display_message: Optional[StrictStr] = Field(default=None, alias="displayMessage")
-    event_type: Optional[StrictStr] = Field(default=None, alias="eventType")
+    display_message: Optional[StrictStr] = Field(
+        default=None,
+        description="The display message for an event",
+        alias="displayMessage",
+    )
+    event_type: Optional[StrictStr] = Field(
+        default=None,
+        description="The published event type. Event instances are categorized by action in the event type attribute. This "
+        "attribute is key to navigating the System Log through expression filters. See [Event Types catalog]("
+        "https://developer.okta.com/docs/reference/api/event-types/#catalog) for a complete list of System Log "
+        "event types.",
+        alias="eventType",
+    )
     legacy_event_type: Optional[StrictStr] = Field(
-        default=None, alias="legacyEventType"
+        default=None,
+        description="Associated Events API Action `objectType` attribute value",
+        alias="legacyEventType",
     )
     outcome: Optional[LogOutcome] = None
-    published: Optional[datetime] = None
+    published: Optional[datetime] = Field(
+        default=None, description="Timestamp when the event is published"
+    )
     request: Optional[LogRequest] = None
     security_context: Optional[LogSecurityContext] = Field(
         default=None, alias="securityContext"
     )
     severity: Optional[LogSeverity] = None
-    target: Optional[List[LogTarget]] = None
+    target: Optional[List[LogTarget]] = Field(
+        default=None,
+        description="The entity that an actor performs an action on. Targets can be anything, such as an app user, "
+        "a sign-in token, or anything else.  > **Note:** When searching the target array, search for a given "
+        "`type` rather than the array location. Target types, such as `User` and `AppInstance`, for a given "
+        "`eventType` are not always in the same array location.",
+    )
     transaction: Optional[LogTransaction] = None
-    uuid: Optional[StrictStr] = None
-    version: Optional[StrictStr] = None
+    uuid: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier for an individual event"
+    )
+    version: Optional[StrictStr] = Field(
+        default=None, description="Versioning indicator"
+    )
     __properties: ClassVar[List[str]] = [
         "actor",
         "authenticationContext",

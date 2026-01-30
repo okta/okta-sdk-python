@@ -4,18 +4,18 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_email_domain**](EmailDomainApi.md#create_email_domain) | **POST** /api/v1/email-domains | Create an Email Domain
-[**delete_email_domain**](EmailDomainApi.md#delete_email_domain) | **DELETE** /api/v1/email-domains/{emailDomainId} | Delete an Email Domain
-[**get_email_domain**](EmailDomainApi.md#get_email_domain) | **GET** /api/v1/email-domains/{emailDomainId} | Retrieve an Email Domain
-[**list_email_domains**](EmailDomainApi.md#list_email_domains) | **GET** /api/v1/email-domains | List all Email Domains
-[**replace_email_domain**](EmailDomainApi.md#replace_email_domain) | **PUT** /api/v1/email-domains/{emailDomainId} | Replace an Email Domain
-[**verify_email_domain**](EmailDomainApi.md#verify_email_domain) | **POST** /api/v1/email-domains/{emailDomainId}/verify | Verify an Email Domain
+[**create_email_domain**](EmailDomainApi.md#create_email_domain) | **POST** /api/v1/email-domains | Create an email domain
+[**delete_email_domain**](EmailDomainApi.md#delete_email_domain) | **DELETE** /api/v1/email-domains/{emailDomainId} | Delete an email domain
+[**get_email_domain**](EmailDomainApi.md#get_email_domain) | **GET** /api/v1/email-domains/{emailDomainId} | Retrieve an email domain
+[**list_email_domains**](EmailDomainApi.md#list_email_domains) | **GET** /api/v1/email-domains | List all email domains
+[**replace_email_domain**](EmailDomainApi.md#replace_email_domain) | **PUT** /api/v1/email-domains/{emailDomainId} | Replace an email domain
+[**verify_email_domain**](EmailDomainApi.md#verify_email_domain) | **POST** /api/v1/email-domains/{emailDomainId}/verify | Verify an email domain
 
 
 # **create_email_domain**
 > EmailDomainResponse create_email_domain(email_domain, expand=expand)
 
-Create an Email Domain
+Create an email domain
 
 Creates an Email Domain in your org
 
@@ -58,7 +58,7 @@ with okta.ApiClient(configuration) as api_client:
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
-        # Create an Email Domain
+        # Create an email domain
         api_response = api_instance.create_email_domain(email_domain, expand=expand)
         print("The response of EmailDomainApi->create_email_domain:\n")
         pprint(api_response)
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 # **delete_email_domain**
 > delete_email_domain(email_domain_id, expand=expand)
 
-Delete an Email Domain
+Delete an email domain
 
 Deletes an Email Domain by `emailDomainId`
 
@@ -146,7 +146,7 @@ with okta.ApiClient(configuration) as api_client:
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
-        # Delete an Email Domain
+        # Delete an email domain
         api_instance.delete_email_domain(email_domain_id, expand=expand)
     except Exception as e:
         print("Exception when calling EmailDomainApi->delete_email_domain: %s\n" % e)
@@ -190,7 +190,7 @@ void (empty response body)
 # **get_email_domain**
 > EmailDomainResponseWithEmbedded get_email_domain(email_domain_id, expand=expand)
 
-Retrieve an Email Domain
+Retrieve an email domain
 
 Retrieves an Email Domain by `emailDomainId`
 
@@ -232,7 +232,7 @@ with okta.ApiClient(configuration) as api_client:
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
-        # Retrieve an Email Domain
+        # Retrieve an email domain
         api_response = api_instance.get_email_domain(email_domain_id, expand=expand)
         print("The response of EmailDomainApi->get_email_domain:\n")
         pprint(api_response)
@@ -277,7 +277,7 @@ Name | Type | Description  | Notes
 # **list_email_domains**
 > List[EmailDomainResponseWithEmbedded] list_email_domains(expand=expand)
 
-List all Email Domains
+List all email domains
 
 Lists all the Email Domains in your org
 
@@ -318,7 +318,7 @@ with okta.ApiClient(configuration) as api_client:
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
-        # List all Email Domains
+        # List all email domains
         api_response = api_instance.list_email_domains(expand=expand)
         print("The response of EmailDomainApi->list_email_domains:\n")
         pprint(api_response)
@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 # **replace_email_domain**
 > EmailDomainResponse replace_email_domain(email_domain_id, update_email_domain, expand=expand)
 
-Replace an Email Domain
+Replace an email domain
 
 Replaces associated username and sender display name by `emailDomainId`
 
@@ -405,7 +405,7 @@ with okta.ApiClient(configuration) as api_client:
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
-        # Replace an Email Domain
+        # Replace an email domain
         api_response = api_instance.replace_email_domain(email_domain_id, update_email_domain, expand=expand)
         print("The response of EmailDomainApi->replace_email_domain:\n")
         pprint(api_response)
@@ -452,7 +452,7 @@ Name | Type | Description  | Notes
 # **verify_email_domain**
 > EmailDomainResponse verify_email_domain(email_domain_id)
 
-Verify an Email Domain
+Verify an email domain
 
 Verifies an Email Domain by `emailDomainId`
 
@@ -493,7 +493,7 @@ with okta.ApiClient(configuration) as api_client:
     email_domain_id = 'email_domain_id_example' # str | 
 
     try:
-        # Verify an Email Domain
+        # Verify an email domain
         api_response = api_instance.verify_email_domain(email_domain_id)
         print("The response of EmailDomainApi->verify_email_domain:\n")
         pprint(api_response)

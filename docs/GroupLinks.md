@@ -1,5 +1,6 @@
 # GroupLinks
 
+[Discoverable resources](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path=_links&t=response) related to the group
 
 ## Properties
 

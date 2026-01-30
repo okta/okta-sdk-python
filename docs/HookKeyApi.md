@@ -5,19 +5,19 @@ All URIs are relative to *https://subdomain.okta.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_hook_key**](HookKeyApi.md#create_hook_key) | **POST** /api/v1/hook-keys | Create a key
-[**delete_hook_key**](HookKeyApi.md#delete_hook_key) | **DELETE** /api/v1/hook-keys/{hookKeyId} | Delete a key
-[**get_hook_key**](HookKeyApi.md#get_hook_key) | **GET** /api/v1/hook-keys/{hookKeyId} | Retrieve a key
-[**get_public_key**](HookKeyApi.md#get_public_key) | **GET** /api/v1/hook-keys/public/{publicKeyId} | Retrieve a public key
+[**delete_hook_key**](HookKeyApi.md#delete_hook_key) | **DELETE** /api/v1/hook-keys/{id} | Delete a key
+[**get_hook_key**](HookKeyApi.md#get_hook_key) | **GET** /api/v1/hook-keys/{id} | Retrieve a key by ID
+[**get_public_key**](HookKeyApi.md#get_public_key) | **GET** /api/v1/hook-keys/public/{keyId} | Retrieve a public key
 [**list_hook_keys**](HookKeyApi.md#list_hook_keys) | **GET** /api/v1/hook-keys | List all keys
-[**replace_hook_key**](HookKeyApi.md#replace_hook_key) | **PUT** /api/v1/hook-keys/{hookKeyId} | Replace a key
+[**replace_hook_key**](HookKeyApi.md#replace_hook_key) | **PUT** /api/v1/hook-keys/{id} | Replace a key
 
 
 # **create_hook_key**
-> HookKey create_hook_key(key_request)
+> DetailedHookKeyInstance create_hook_key(key_request)
 
 Create a key
 
-Creates a key for use with other parts of the application, such as inline hooks  Use the key name to access this key for inline hook operations.  The total number of keys that you can create in an Okta org is limited to 50. 
+Creates a key for use with other parts of the application, such as inline hooks  > **Note:**  Use the key name to access this key for inline hook operations.  The total number of keys that you can create in an Okta org is limited to 50.   The response is a [Key object](https://developer.okta.com/docs/reference/api/hook-keys/#key-object) that represents the  key that you create. The `id` property in the response serves as the unique ID for the key, which you can specify when  invoking other CRUD operations. The `keyId` provided in the response is the alias of the public key that you can use to get  details of the public key data in a separate call.  > **Note:** The keyId is the alias of the public key that you can use to retrieve the public key.
 
 ### Example
 
@@ -26,7 +26,7 @@ Creates a key for use with other parts of the application, such as inline hooks 
 
 ```python
 import okta
-from okta.models.hook_key import HookKey
+from okta.models.detailed_hook_key_instance import DetailedHookKeyInstance
 from okta.models.key_request import KeyRequest
 from okta.rest import ApiException
 from pprint import pprint
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HookKey**](HookKey.md)
+[**DetailedHookKeyInstance**](DetailedHookKeyInstance.md)
 
 ### Authorization
 
@@ -99,11 +99,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_hook_key**
-> delete_hook_key(hook_key_id)
+> delete_hook_key(id)
 
 Delete a key
 
-Deletes a key by `hookKeyId`. After being deleted, the key is unrecoverable.  As a safety precaution, only keys that aren't being used are eligible for deletion. 
+Deletes a key by `id`. After being deleted, the key is unrecoverable.  As a safety precaution, only keys that aren't being used are eligible for deletion. 
 
 ### Example
 
@@ -138,11 +138,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.HookKeyApi(api_client)
-    hook_key_id = 'XreKU5laGwBkjOTehusG' # str | `id` of the Hook Key
+    id = 'XreKU5laGwBkjOTehusG' # str | ID of the Hook Key
 
     try:
         # Delete a key
-        api_instance.delete_hook_key(hook_key_id)
+        api_instance.delete_hook_key(id)
     except Exception as e:
         print("Exception when calling HookKeyApi->delete_hook_key: %s\n" % e)
 ```
@@ -154,7 +154,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hook_key_id** | **str**| &#x60;id&#x60; of the Hook Key | 
+ **id** | **str**| ID of the Hook Key | 
 
 ### Return type
 
@@ -181,11 +181,11 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_hook_key**
-> HookKey get_hook_key(hook_key_id)
+> HookKey get_hook_key(id)
 
-Retrieve a key
+Retrieve a key by ID
 
-Retrieves a key by `hookKeyId`
+Retrieves the public portion of the Key object using the `id` parameter  >**Note:** The `?expand=publickey` query parameter optionally returns the full object including the details of the public key in the response body's `_embedded` property.
 
 ### Example
 
@@ -221,11 +221,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.HookKeyApi(api_client)
-    hook_key_id = 'XreKU5laGwBkjOTehusG' # str | `id` of the Hook Key
+    id = 'XreKU5laGwBkjOTehusG' # str | ID of the Hook Key
 
     try:
-        # Retrieve a key
-        api_response = api_instance.get_hook_key(hook_key_id)
+        # Retrieve a key by ID
+        api_response = api_instance.get_hook_key(id)
         print("The response of HookKeyApi->get_hook_key:\n")
         pprint(api_response)
     except Exception as e:
@@ -239,7 +239,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hook_key_id** | **str**| &#x60;id&#x60; of the Hook Key | 
+ **id** | **str**| ID of the Hook Key | 
 
 ### Return type
 
@@ -266,11 +266,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_public_key**
-> JsonWebKey get_public_key(public_key_id)
+> Embedded get_public_key(key_id)
 
 Retrieve a public key
 
-Retrieves a public key by `keyId`
+Retrieves a public key by `keyId`  >**Note:** keyId is the alias of the public key.
 
 ### Example
 
@@ -279,7 +279,7 @@ Retrieves a public key by `keyId`
 
 ```python
 import okta
-from okta.models.json_web_key import JsonWebKey
+from okta.models.embedded import Embedded
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -306,11 +306,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.HookKeyApi(api_client)
-    public_key_id = 'FcH2P9Eg7wr0o8N2FuV0' # str | `id` of the Public Key
+    key_id = 'FcH2P9Eg7wr0o8N2FuV0' # str | id\" of the Public Key
 
     try:
         # Retrieve a public key
-        api_response = api_instance.get_public_key(public_key_id)
+        api_response = api_instance.get_public_key(key_id)
         print("The response of HookKeyApi->get_public_key:\n")
         pprint(api_response)
     except Exception as e:
@@ -324,11 +324,11 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **public_key_id** | **str**| &#x60;id&#x60; of the Public Key | 
+ **key_id** | **str**| id\&quot; of the Public Key | 
 
 ### Return type
 
-[**JsonWebKey**](JsonWebKey.md)
+[**Embedded**](Embedded.md)
 
 ### Authorization
 
@@ -431,11 +431,11 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **replace_hook_key**
-> HookKey replace_hook_key(hook_key_id, key_request)
+> DetailedHookKeyInstance replace_hook_key(id, key_request)
 
 Replace a key
 
-Replaces a key by `hookKeyId`  This request replaces existing properties after passing validation.  Note: The only parameter that you can update is the name of the key, which must be unique at all times. 
+Replaces a key by `id`  This request replaces existing properties after passing validation.  > **Note:** The only parameter that you can update is the name of the key, which must be unique at all times.
 
 ### Example
 
@@ -444,7 +444,7 @@ Replaces a key by `hookKeyId`  This request replaces existing properties after p
 
 ```python
 import okta
-from okta.models.hook_key import HookKey
+from okta.models.detailed_hook_key_instance import DetailedHookKeyInstance
 from okta.models.key_request import KeyRequest
 from okta.rest import ApiException
 from pprint import pprint
@@ -472,12 +472,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.HookKeyApi(api_client)
-    hook_key_id = 'XreKU5laGwBkjOTehusG' # str | `id` of the Hook Key
+    id = 'XreKU5laGwBkjOTehusG' # str | ID of the Hook Key
     key_request = okta.KeyRequest() # KeyRequest | 
 
     try:
         # Replace a key
-        api_response = api_instance.replace_hook_key(hook_key_id, key_request)
+        api_response = api_instance.replace_hook_key(id, key_request)
         print("The response of HookKeyApi->replace_hook_key:\n")
         pprint(api_response)
     except Exception as e:
@@ -491,12 +491,12 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hook_key_id** | **str**| &#x60;id&#x60; of the Hook Key | 
+ **id** | **str**| ID of the Hook Key | 
  **key_request** | [**KeyRequest**](KeyRequest.md)|  | 
 
 ### Return type
 
-[**HookKey**](HookKey.md)
+[**DetailedHookKeyInstance**](DetailedHookKeyInstance.md)
 
 ### Authorization
 

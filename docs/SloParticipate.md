@@ -1,14 +1,15 @@
 # SloParticipate
 
+Determines if the app participates in Single Logout (SLO)
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **binding_type** | **str** | Request binding type | [optional] 
-**enabled** | **bool** | Allows the app to participate in front-channel single logout. | [optional] 
-**logout_request_url** | **str** | URL where Okta sends the logout request. | [optional] 
-**session_index_required** | **bool** | Include user session details. | [optional] 
+**enabled** | **bool** | Indicates whether the app is allowed to participate in front-channel SLO | [optional] 
+**logout_request_url** | **str** | URL where Okta sends the logout request | [optional] 
+**session_index_required** | **bool** | Determines whether Okta sends the &#x60;SessionIndex&#x60; elements in the logout request | [optional] 
 
 ## Example
 

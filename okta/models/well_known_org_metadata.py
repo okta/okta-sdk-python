@@ -33,7 +33,6 @@ from typing_extensions import Self
 
 from okta.models.pipeline_type import PipelineType
 from okta.models.well_known_org_metadata_links import WellKnownOrgMetadataLinks
-from okta.models.well_known_org_metadata_settings import WellKnownOrgMetadataSettings
 
 
 class WellKnownOrgMetadata(BaseModel):
@@ -41,13 +40,10 @@ class WellKnownOrgMetadata(BaseModel):
     WellKnownOrgMetadata
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(
-        default=None, description="The unique identifier of the Org"
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Org unique identifier")
     pipeline: Optional[PipelineType] = None
-    settings: Optional[WellKnownOrgMetadataSettings] = None
     links: Optional[WellKnownOrgMetadataLinks] = Field(default=None, alias="_links")
-    __properties: ClassVar[List[str]] = ["id", "pipeline", "settings", "_links"]
+    __properties: ClassVar[List[str]] = ["id", "pipeline", "_links"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,13 +82,6 @@ class WellKnownOrgMetadata(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of settings
-        if self.settings:
-            if not isinstance(self.settings, dict):
-                _dict["settings"] = self.settings.to_dict()
-            else:
-                _dict["settings"] = self.settings
-
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -115,11 +104,6 @@ class WellKnownOrgMetadata(BaseModel):
             {
                 "id": obj.get("id"),
                 "pipeline": obj.get("pipeline"),
-                "settings": (
-                    WellKnownOrgMetadataSettings.from_dict(obj["settings"])
-                    if obj.get("settings") is not None
-                    else None
-                ),
                 "_links": (
                     WellKnownOrgMetadataLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None

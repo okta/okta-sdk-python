@@ -1,13 +1,14 @@
 # ApplicationSettingsNotificationsVpn
 
+Sends customizable messages with conditions to end users when a VPN connection is required
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**help_url** | **str** |  | [optional] 
-**message** | **str** |  | [optional] 
-**network** | [**ApplicationSettingsNotificationsVpnNetwork**](ApplicationSettingsNotificationsVpnNetwork.md) |  | [optional] 
+**help_url** | **str** | An optional URL to a help page to assist your end users in signing in to your company VPN | [optional] 
+**message** | **str** | A VPN requirement message that&#39;s displayed to users | [optional] 
+**network** | [**ApplicationSettingsNotificationsVpnNetwork**](ApplicationSettingsNotificationsVpnNetwork.md) |  | 
 
 ## Example
 

@@ -12,11 +12,9 @@ interactions:
     uri: https://test.okta.com/api/v1/api-tokens
   response:
     body:
-      string: '[{"id":"00T1f3w86v9h8o1VZ1d7","name":"Aditya''s Token","userId":"00uq3v4l71WsFPInE1d7","clientName":"Okta
-        API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-16T05:34:42.000Z","created":"2025-09-16T05:34:42.000Z","lastUpdated":"2025-09-16T05:34:42.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T1f3w86v9h8o1VZ1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uq3v4l71WsFPInE1d7","hints":{"allow":["GET"]}}}},{"id":"00T1fgddrrL0btPWo1d7","name":"Aniket''s
-        Token","userId":"00ule6lkthEwcYeFf1d7","clientName":"Okta API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-29T07:14:41.000Z","created":"2025-09-25T08:14:13.000Z","lastUpdated":"2025-09-29T07:14:41.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T1fgddrrL0btPWo1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00ule6lkthEwcYeFf1d7","hints":{"allow":["GET"]}}}},{"id":"00T1f314nqiabS6Xc1d7","name":"Manmohan
-        Shaw","userId":"00ule6luybqelXTRp1d7","clientName":"Okta API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-23T09:55:22.000Z","created":"2025-09-15T11:29:08.000Z","lastUpdated":"2025-09-23T09:55:22.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T1f314nqiabS6Xc1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00ule6luybqelXTRp1d7","hints":{"allow":["GET"]}}}},{"id":"00T18g1a8zqneolDb1d7","name":"Prachi
-        Token","userId":"00uk71r2v7VpYogMi1d7","clientName":"Okta API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-26T07:39:35.000Z","created":"2025-02-06T15:22:26.000Z","lastUpdated":"2025-09-26T07:39:35.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T18g1a8zqneolDb1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uk71r2v7VpYogMi1d7","hints":{"allow":["GET"]}}}}]'
+      string: '[{"id":"00T3kinb0wOUpDUdV5d7","name":"API access token","userId":"00unwlw0tbo8E6aVj5d7","clientName":"Okta
+        API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2026-01-30T07:46:14.000Z","created":"2025-07-21T05:52:51.000Z","lastUpdated":"2025-12-31T07:46:14.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T3kinb0wOUpDUdV5d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7","hints":{"allow":["GET"]}}}},{"id":"00T45yrcisQjYlxJr5d7","name":"API
+        Token","userId":"00urzf0guohXNzvc65d7","clientName":"Okta API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2026-01-16T06:23:05.000Z","created":"2025-12-17T05:30:24.000Z","lastUpdated":"2025-12-17T06:23:05.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T45yrcisQjYlxJr5d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00urzf0guohXNzvc65d7","hints":{"allow":["GET"]}}}}]'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -27,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 29 Sep 2025 07:15:11 GMT
+      - Wed, 31 Dec 2025 07:46:14 GMT
       Expires:
       - '0'
       Pragma:
@@ -39,7 +37,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=E7968C6116CDCEC332BA7E7237080ACC; Path=/; Secure; HttpOnly
+      - JSESSIONID=91231FEE22B4AF0FE410CC65E5CB2A33; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -49,9 +47,9 @@ interactions:
       accept-ch:
       - Sec-CH-UA-Platform-Version
       content-security-policy:
-      - 'default-src ''self'' java-oie-sdk.oktapreview.com *.oktacdn.com; connect-src
-        ''self'' java-oie-sdk.oktapreview.com java-oie-sdk-admin.oktapreview.com *.oktacdn.com
-        *.mixpanel.com *.mapbox.com java-oie-sdk.kerberos.oktapreview.com *.authenticatorlocalprod.com:8769
+      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
         http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
         http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
         http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
@@ -59,13 +57,13 @@ interactions:
         http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
         http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
         data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        java-oie-sdk.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' java-oie-sdk.oktapreview.com *.oktacdn.com; frame-src ''self''
-        java-oie-sdk.oktapreview.com java-oie-sdk-admin.oktapreview.com login.okta.com
-        *.vidyard.com com-okta-authenticator:; img-src ''self'' java-oie-sdk.oktapreview.com
-        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
-        ''self'' java-oie-sdk.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
-        frame-ancestors ''self'''
+        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
+        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
+        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
+        ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -73,13 +71,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - f5d6297cd8d6f0088858e5cbb36ebfe3
+      - 555d1f1789a995f4c2c5a8e315cab9e8
       x-rate-limit-limit:
-      - '300'
+      - '50'
       x-rate-limit-remaining:
-      - '273'
+      - '49'
       x-rate-limit-reset:
-      - '1759130141'
+      - '1767167234'
       x-xss-protection:
       - '0'
     status:
@@ -95,14 +93,12 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/api-tokens?limit=3
+    uri: https://test.okta.com/api/v1/api-tokens
   response:
     body:
-      string: '[{"id":"00T1f3w86v9h8o1VZ1d7","name":"Aditya''s Token","userId":"00uq3v4l71WsFPInE1d7","clientName":"Okta
-        API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-16T05:34:42.000Z","created":"2025-09-16T05:34:42.000Z","lastUpdated":"2025-09-16T05:34:42.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T1f3w86v9h8o1VZ1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uq3v4l71WsFPInE1d7","hints":{"allow":["GET"]}}}},{"id":"00T1fgddrrL0btPWo1d7","name":"Aniket''s
-        Token","userId":"00ule6lkthEwcYeFf1d7","clientName":"Okta API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-29T07:14:41.000Z","created":"2025-09-25T08:14:13.000Z","lastUpdated":"2025-09-29T07:14:41.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T1fgddrrL0btPWo1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00ule6lkthEwcYeFf1d7","hints":{"allow":["GET"]}}}},{"id":"00T1f314nqiabS6Xc1d7","name":"Manmohan
-        Shaw","userId":"00ule6luybqelXTRp1d7","clientName":"Okta API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-23T09:55:22.000Z","created":"2025-09-15T11:29:08.000Z","lastUpdated":"2025-09-23T09:55:22.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T1f314nqiabS6Xc1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00ule6luybqelXTRp1d7","hints":{"allow":["GET"]}}}},{"id":"00T18g1a8zqneolDb1d7","name":"Prachi
-        Token","userId":"00uk71r2v7VpYogMi1d7","clientName":"Okta API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-26T07:39:35.000Z","created":"2025-02-06T15:22:26.000Z","lastUpdated":"2025-09-26T07:39:35.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T18g1a8zqneolDb1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uk71r2v7VpYogMi1d7","hints":{"allow":["GET"]}}}}]'
+      string: '[{"id":"00T3kinb0wOUpDUdV5d7","name":"API access token","userId":"00unwlw0tbo8E6aVj5d7","clientName":"Okta
+        API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2026-01-30T07:47:26.000Z","created":"2025-07-21T05:52:51.000Z","lastUpdated":"2025-12-31T07:47:26.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T3kinb0wOUpDUdV5d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7","hints":{"allow":["GET"]}}}},{"id":"00T45yrcisQjYlxJr5d7","name":"API
+        Token","userId":"00urzf0guohXNzvc65d7","clientName":"Okta API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2026-01-16T06:23:05.000Z","created":"2025-12-17T05:30:24.000Z","lastUpdated":"2025-12-17T06:23:05.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T45yrcisQjYlxJr5d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00urzf0guohXNzvc65d7","hints":{"allow":["GET"]}}}}]'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -113,7 +109,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 29 Sep 2025 07:15:12 GMT
+      - Wed, 31 Dec 2025 07:47:26 GMT
       Expires:
       - '0'
       Pragma:
@@ -125,7 +121,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=9E45A69B7B0BB00AE3B64A5BDF3924F3; Path=/; Secure; HttpOnly
+      - JSESSIONID=A485D966F7BC63A351B11175B22D1745; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -135,9 +131,9 @@ interactions:
       accept-ch:
       - Sec-CH-UA-Platform-Version
       content-security-policy:
-      - 'default-src ''self'' java-oie-sdk.oktapreview.com *.oktacdn.com; connect-src
-        ''self'' java-oie-sdk.oktapreview.com java-oie-sdk-admin.oktapreview.com *.oktacdn.com
-        *.mixpanel.com *.mapbox.com java-oie-sdk.kerberos.oktapreview.com *.authenticatorlocalprod.com:8769
+      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
         http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
         http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
         http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
@@ -145,13 +141,13 @@ interactions:
         http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
         http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
         data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        java-oie-sdk.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' java-oie-sdk.oktapreview.com *.oktacdn.com; frame-src ''self''
-        java-oie-sdk.oktapreview.com java-oie-sdk-admin.oktapreview.com login.okta.com
-        *.vidyard.com com-okta-authenticator:; img-src ''self'' java-oie-sdk.oktapreview.com
-        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
-        ''self'' java-oie-sdk.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
-        frame-ancestors ''self'''
+        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
+        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
+        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
+        ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -159,13 +155,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 7767c41ca0085b0e81eb3c5bd41a15cd
+      - 5738811314a3a5536eb455ba028c7185
       x-rate-limit-limit:
-      - '300'
+      - '50'
       x-rate-limit-remaining:
-      - '272'
+      - '49'
       x-rate-limit-reset:
-      - '1759130141'
+      - '1767167306'
       x-xss-protection:
       - '0'
     status:
@@ -181,11 +177,11 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/api-tokens/00T1f3w86v9h8o1VZ1d7
+    uri: https://test.okta.com/api/v1/api-tokens/00T3kinb0wOUpDUdV5d7
   response:
     body:
-      string: '{"id":"00T1f3w86v9h8o1VZ1d7","name":"Aditya''s Token","userId":"00uq3v4l71WsFPInE1d7","clientName":"Okta
-        API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-16T05:34:42.000Z","created":"2025-09-16T05:34:42.000Z","lastUpdated":"2025-09-16T05:34:42.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T1f3w86v9h8o1VZ1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uq3v4l71WsFPInE1d7","hints":{"allow":["GET"]}}}}'
+      string: '{"id":"00T3kinb0wOUpDUdV5d7","name":"API access token","userId":"00unwlw0tbo8E6aVj5d7","clientName":"Okta
+        API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2026-01-30T07:47:26.000Z","created":"2025-07-21T05:52:51.000Z","lastUpdated":"2025-12-31T07:47:26.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T3kinb0wOUpDUdV5d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7","hints":{"allow":["GET"]}}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -196,7 +192,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 29 Sep 2025 07:15:13 GMT
+      - Wed, 31 Dec 2025 07:47:27 GMT
       Expires:
       - '0'
       Pragma:
@@ -208,7 +204,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=D4F632CF17BCF8F05C75982B19659C2C; Path=/; Secure; HttpOnly
+      - JSESSIONID=9D4ED6BB8C127A7FDEEE07D139B2DEC2; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -218,9 +214,9 @@ interactions:
       accept-ch:
       - Sec-CH-UA-Platform-Version
       content-security-policy:
-      - 'default-src ''self'' java-oie-sdk.oktapreview.com *.oktacdn.com; connect-src
-        ''self'' java-oie-sdk.oktapreview.com java-oie-sdk-admin.oktapreview.com *.oktacdn.com
-        *.mixpanel.com *.mapbox.com java-oie-sdk.kerberos.oktapreview.com *.authenticatorlocalprod.com:8769
+      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
         http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
         http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
         http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
@@ -228,13 +224,13 @@ interactions:
         http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
         http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
         data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        java-oie-sdk.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' java-oie-sdk.oktapreview.com *.oktacdn.com; frame-src ''self''
-        java-oie-sdk.oktapreview.com java-oie-sdk-admin.oktapreview.com login.okta.com
-        *.vidyard.com com-okta-authenticator:; img-src ''self'' java-oie-sdk.oktapreview.com
-        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
-        ''self'' java-oie-sdk.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
-        frame-ancestors ''self'''
+        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
+        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
+        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
+        ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -242,13 +238,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - ab05f61467cef463bb35e95c447cd98b
+      - 4fcdc46f21c2fcf0120388c1878f81d7
       x-rate-limit-limit:
-      - '300'
+      - '50'
       x-rate-limit-remaining:
-      - '271'
+      - '48'
       x-rate-limit-reset:
-      - '1759130141'
+      - '1767167306'
       x-xss-protection:
       - '0'
     status:
@@ -264,11 +260,11 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/api-tokens/00T1fgddrrL0btPWo1d7
+    uri: https://test.okta.com/api/v1/api-tokens/00T45yrcisQjYlxJr5d7
   response:
     body:
-      string: '{"id":"00T1fgddrrL0btPWo1d7","name":"Aniket''s Token","userId":"00ule6lkthEwcYeFf1d7","clientName":"Okta
-        API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2025-10-29T07:14:41.000Z","created":"2025-09-25T08:14:13.000Z","lastUpdated":"2025-09-29T07:14:41.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T1fgddrrL0btPWo1d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00ule6lkthEwcYeFf1d7","hints":{"allow":["GET"]}}}}'
+      string: '{"id":"00T45yrcisQjYlxJr5d7","name":"API Token","userId":"00urzf0guohXNzvc65d7","clientName":"Okta
+        API","tokenWindow":"P30D","network":{"connection":"ANYWHERE"},"expiresAt":"2026-01-16T06:23:05.000Z","created":"2025-12-17T05:30:24.000Z","lastUpdated":"2025-12-17T06:23:05.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/api-tokens/00T45yrcisQjYlxJr5d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00urzf0guohXNzvc65d7","hints":{"allow":["GET"]}}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -279,7 +275,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 29 Sep 2025 07:15:14 GMT
+      - Wed, 31 Dec 2025 07:47:28 GMT
       Expires:
       - '0'
       Pragma:
@@ -291,7 +287,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=B1CA1D5227AB96BB7B30738476F5736C; Path=/; Secure; HttpOnly
+      - JSESSIONID=71524CE392FC14352C7827FDE143AB82; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -301,9 +297,9 @@ interactions:
       accept-ch:
       - Sec-CH-UA-Platform-Version
       content-security-policy:
-      - 'default-src ''self'' java-oie-sdk.oktapreview.com *.oktacdn.com; connect-src
-        ''self'' java-oie-sdk.oktapreview.com java-oie-sdk-admin.oktapreview.com *.oktacdn.com
-        *.mixpanel.com *.mapbox.com java-oie-sdk.kerberos.oktapreview.com *.authenticatorlocalprod.com:8769
+      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
         http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
         http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
         http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
@@ -311,13 +307,13 @@ interactions:
         http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
         http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
         data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        java-oie-sdk.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' java-oie-sdk.oktapreview.com *.oktacdn.com; frame-src ''self''
-        java-oie-sdk.oktapreview.com java-oie-sdk-admin.oktapreview.com login.okta.com
-        *.vidyard.com com-okta-authenticator:; img-src ''self'' java-oie-sdk.oktapreview.com
-        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
-        ''self'' java-oie-sdk.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
-        frame-ancestors ''self'''
+        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
+        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
+        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
+        ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -325,13 +321,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 2d01d903c14eaf767c10358df9a71c15
+      - e88868266bd4f23dc3bc0fe6ea57b455
       x-rate-limit-limit:
-      - '300'
+      - '50'
       x-rate-limit-remaining:
-      - '270'
+      - '47'
       x-rate-limit-reset:
-      - '1759130141'
+      - '1767167306'
       x-xss-protection:
       - '0'
     status:

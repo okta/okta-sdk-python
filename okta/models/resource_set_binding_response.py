@@ -41,7 +41,9 @@ class ResourceSetBindingResponse(BaseModel):
     ResourceSetBindingResponse
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(default=None, description="`id` of the role")
+    id: Optional[StrictStr] = Field(
+        default=None, description="`id` of the role resource set binding"
+    )
     links: Optional[ResourceSetBindingResponseLinks] = Field(
         default=None, alias="_links"
     )

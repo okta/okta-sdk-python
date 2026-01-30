@@ -1,5 +1,6 @@
 # OrgOktaSupportSetting
 
+Status of Okta Support Settings
 
 ## Properties
 

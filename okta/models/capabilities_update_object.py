@@ -40,7 +40,7 @@ from okta.models.profile_setting_object import ProfileSettingObject
 
 class CapabilitiesUpdateObject(BaseModel):
     """
-    Determines whether updates to a user's profile are pushed to the application
+    Determines whether updates to a user's profile are pushed to the app
     """  # noqa: E501
 
     lifecycle_deactivate: Optional[LifecycleDeactivateSettingObject] = Field(

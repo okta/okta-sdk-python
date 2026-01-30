@@ -50,7 +50,7 @@ class OAuth2ScopeConsentGrant(BaseModel):
         default=None, description="Client ID of the app integration", alias="clientId"
     )
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the Grant object was created"
+        default=None, description="Timestamp when the object was created"
     )
     created_by: Optional[OAuth2Actor] = Field(default=None, alias="createdBy")
     id: Optional[StrictStr] = Field(default=None, description="ID of the Grant object")
@@ -59,12 +59,12 @@ class OAuth2ScopeConsentGrant(BaseModel):
     )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the Grant object was last updated",
+        description="Timestamp when the object was last updated",
         alias="lastUpdated",
     )
     scope_id: StrictStr = Field(
         description="The name of the [Okta scope](https://developer.okta.com/docs/api/oauth2/#oauth-20-scopes) for which "
-                    "consent is granted",
+        "consent is granted",
         alias="scopeId",
     )
     source: Optional[OAuth2ScopeConsentGrantSource] = None

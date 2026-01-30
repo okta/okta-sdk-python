@@ -30,7 +30,8 @@ from typing_extensions import Self
 
 class OpenIdConnectApplicationType(str, Enum):
     """
-    OpenIdConnectApplicationType
+    The type of client app Specific `grant_types` are valid for each `application_type`. See [Create a Client Application](
+    /openapi/okta-oauth/oauth/tag/Client/#tag/Client/operation/createClient).
     """
 
     """

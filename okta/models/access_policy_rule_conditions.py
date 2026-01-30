@@ -34,47 +34,13 @@ from typing_extensions import Self
 from okta.models.access_policy_rule_custom_condition import (
     AccessPolicyRuleCustomCondition,
 )
-from okta.models.app_and_instance_policy_rule_condition import (
-    AppAndInstancePolicyRuleCondition,
-)
-from okta.models.app_instance_policy_rule_condition import (
-    AppInstancePolicyRuleCondition,
-)
-from okta.models.before_scheduled_action_policy_rule_condition import (
-    BeforeScheduledActionPolicyRuleCondition,
-)
-from okta.models.client_policy_condition import ClientPolicyCondition
-from okta.models.context_policy_rule_condition import ContextPolicyRuleCondition
 from okta.models.device_access_policy_rule_condition import (
     DeviceAccessPolicyRuleCondition,
-)
-from okta.models.grant_type_policy_rule_condition import GrantTypePolicyRuleCondition
-from okta.models.group_policy_rule_condition import GroupPolicyRuleCondition
-from okta.models.identity_provider_policy_rule_condition import (
-    IdentityProviderPolicyRuleCondition,
-)
-from okta.models.mdm_enrollment_policy_rule_condition import (
-    MDMEnrollmentPolicyRuleCondition,
-)
-from okta.models.o_auth2_scopes_mediation_policy_rule_condition import (
-    OAuth2ScopesMediationPolicyRuleCondition,
-)
-from okta.models.password_policy_authentication_provider_condition import (
-    PasswordPolicyAuthenticationProviderCondition,
 )
 from okta.models.platform_policy_rule_condition import PlatformPolicyRuleCondition
 from okta.models.policy_network_condition import PolicyNetworkCondition
 from okta.models.policy_people_condition import PolicyPeopleCondition
-from okta.models.policy_rule_auth_context_condition import (
-    PolicyRuleAuthContextCondition,
-)
-from okta.models.risk_policy_rule_condition import RiskPolicyRuleCondition
 from okta.models.risk_score_policy_rule_condition import RiskScorePolicyRuleCondition
-from okta.models.user_identifier_policy_rule_condition import (
-    UserIdentifierPolicyRuleCondition,
-)
-from okta.models.user_policy_rule_condition import UserPolicyRuleCondition
-from okta.models.user_status_policy_rule_condition import UserStatusPolicyRuleCondition
 from okta.models.user_type_condition import UserTypeCondition
 
 
@@ -83,72 +49,24 @@ class AccessPolicyRuleConditions(BaseModel):
     AccessPolicyRuleConditions
     """  # noqa: E501
 
-    app: Optional[AppAndInstancePolicyRuleCondition] = None
-    apps: Optional[AppInstancePolicyRuleCondition] = None
-    auth_context: Optional[PolicyRuleAuthContextCondition] = Field(
-        default=None, alias="authContext"
-    )
-    auth_provider: Optional[PasswordPolicyAuthenticationProviderCondition] = Field(
-        default=None, alias="authProvider"
-    )
-    before_scheduled_action: Optional[BeforeScheduledActionPolicyRuleCondition] = Field(
-        default=None, alias="beforeScheduledAction"
-    )
-    clients: Optional[ClientPolicyCondition] = None
-    context: Optional[ContextPolicyRuleCondition] = None
     device: Optional[DeviceAccessPolicyRuleCondition] = None
-    grant_types: Optional[GrantTypePolicyRuleCondition] = Field(
-        default=None, alias="grantTypes"
-    )
-    groups: Optional[GroupPolicyRuleCondition] = None
-    identity_provider: Optional[IdentityProviderPolicyRuleCondition] = Field(
-        default=None, alias="identityProvider"
-    )
-    mdm_enrollment: Optional[MDMEnrollmentPolicyRuleCondition] = Field(
-        default=None, alias="mdmEnrollment"
+    el_condition: Optional[AccessPolicyRuleCustomCondition] = Field(
+        default=None, alias="elCondition"
     )
     network: Optional[PolicyNetworkCondition] = None
     people: Optional[PolicyPeopleCondition] = None
     platform: Optional[PlatformPolicyRuleCondition] = None
-    risk: Optional[RiskPolicyRuleCondition] = None
     risk_score: Optional[RiskScorePolicyRuleCondition] = Field(
         default=None, alias="riskScore"
     )
-    scopes: Optional[OAuth2ScopesMediationPolicyRuleCondition] = None
-    user_identifier: Optional[UserIdentifierPolicyRuleCondition] = Field(
-        default=None, alias="userIdentifier"
-    )
-    users: Optional[UserPolicyRuleCondition] = None
-    user_status: Optional[UserStatusPolicyRuleCondition] = Field(
-        default=None, alias="userStatus"
-    )
-    el_condition: Optional[AccessPolicyRuleCustomCondition] = Field(
-        default=None, alias="elCondition"
-    )
     user_type: Optional[UserTypeCondition] = Field(default=None, alias="userType")
     __properties: ClassVar[List[str]] = [
-        "app",
-        "apps",
-        "authContext",
-        "authProvider",
-        "beforeScheduledAction",
-        "clients",
-        "context",
         "device",
-        "grantTypes",
-        "groups",
-        "identityProvider",
-        "mdmEnrollment",
+        "elCondition",
         "network",
         "people",
         "platform",
-        "risk",
         "riskScore",
-        "scopes",
-        "userIdentifier",
-        "users",
-        "userStatus",
-        "elCondition",
         "userType",
     ]
 
@@ -189,55 +107,6 @@ class AccessPolicyRuleConditions(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of app
-        if self.app:
-            if not isinstance(self.app, dict):
-                _dict["app"] = self.app.to_dict()
-            else:
-                _dict["app"] = self.app
-
-        # override the default output from pydantic by calling `to_dict()` of apps
-        if self.apps:
-            if not isinstance(self.apps, dict):
-                _dict["apps"] = self.apps.to_dict()
-            else:
-                _dict["apps"] = self.apps
-
-        # override the default output from pydantic by calling `to_dict()` of auth_context
-        if self.auth_context:
-            if not isinstance(self.auth_context, dict):
-                _dict["authContext"] = self.auth_context.to_dict()
-            else:
-                _dict["authContext"] = self.auth_context
-
-        # override the default output from pydantic by calling `to_dict()` of auth_provider
-        if self.auth_provider:
-            if not isinstance(self.auth_provider, dict):
-                _dict["authProvider"] = self.auth_provider.to_dict()
-            else:
-                _dict["authProvider"] = self.auth_provider
-
-        # override the default output from pydantic by calling `to_dict()` of before_scheduled_action
-        if self.before_scheduled_action:
-            if not isinstance(self.before_scheduled_action, dict):
-                _dict["beforeScheduledAction"] = self.before_scheduled_action.to_dict()
-            else:
-                _dict["beforeScheduledAction"] = self.before_scheduled_action
-
-        # override the default output from pydantic by calling `to_dict()` of clients
-        if self.clients:
-            if not isinstance(self.clients, dict):
-                _dict["clients"] = self.clients.to_dict()
-            else:
-                _dict["clients"] = self.clients
-
-        # override the default output from pydantic by calling `to_dict()` of context
-        if self.context:
-            if not isinstance(self.context, dict):
-                _dict["context"] = self.context.to_dict()
-            else:
-                _dict["context"] = self.context
-
         # override the default output from pydantic by calling `to_dict()` of device
         if self.device:
             if not isinstance(self.device, dict):
@@ -245,33 +114,12 @@ class AccessPolicyRuleConditions(BaseModel):
             else:
                 _dict["device"] = self.device
 
-        # override the default output from pydantic by calling `to_dict()` of grant_types
-        if self.grant_types:
-            if not isinstance(self.grant_types, dict):
-                _dict["grantTypes"] = self.grant_types.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of el_condition
+        if self.el_condition:
+            if not isinstance(self.el_condition, dict):
+                _dict["elCondition"] = self.el_condition.to_dict()
             else:
-                _dict["grantTypes"] = self.grant_types
-
-        # override the default output from pydantic by calling `to_dict()` of groups
-        if self.groups:
-            if not isinstance(self.groups, dict):
-                _dict["groups"] = self.groups.to_dict()
-            else:
-                _dict["groups"] = self.groups
-
-        # override the default output from pydantic by calling `to_dict()` of identity_provider
-        if self.identity_provider:
-            if not isinstance(self.identity_provider, dict):
-                _dict["identityProvider"] = self.identity_provider.to_dict()
-            else:
-                _dict["identityProvider"] = self.identity_provider
-
-        # override the default output from pydantic by calling `to_dict()` of mdm_enrollment
-        if self.mdm_enrollment:
-            if not isinstance(self.mdm_enrollment, dict):
-                _dict["mdmEnrollment"] = self.mdm_enrollment.to_dict()
-            else:
-                _dict["mdmEnrollment"] = self.mdm_enrollment
+                _dict["elCondition"] = self.el_condition
 
         # override the default output from pydantic by calling `to_dict()` of network
         if self.network:
@@ -294,54 +142,12 @@ class AccessPolicyRuleConditions(BaseModel):
             else:
                 _dict["platform"] = self.platform
 
-        # override the default output from pydantic by calling `to_dict()` of risk
-        if self.risk:
-            if not isinstance(self.risk, dict):
-                _dict["risk"] = self.risk.to_dict()
-            else:
-                _dict["risk"] = self.risk
-
         # override the default output from pydantic by calling `to_dict()` of risk_score
         if self.risk_score:
             if not isinstance(self.risk_score, dict):
                 _dict["riskScore"] = self.risk_score.to_dict()
             else:
                 _dict["riskScore"] = self.risk_score
-
-        # override the default output from pydantic by calling `to_dict()` of scopes
-        if self.scopes:
-            if not isinstance(self.scopes, dict):
-                _dict["scopes"] = self.scopes.to_dict()
-            else:
-                _dict["scopes"] = self.scopes
-
-        # override the default output from pydantic by calling `to_dict()` of user_identifier
-        if self.user_identifier:
-            if not isinstance(self.user_identifier, dict):
-                _dict["userIdentifier"] = self.user_identifier.to_dict()
-            else:
-                _dict["userIdentifier"] = self.user_identifier
-
-        # override the default output from pydantic by calling `to_dict()` of users
-        if self.users:
-            if not isinstance(self.users, dict):
-                _dict["users"] = self.users.to_dict()
-            else:
-                _dict["users"] = self.users
-
-        # override the default output from pydantic by calling `to_dict()` of user_status
-        if self.user_status:
-            if not isinstance(self.user_status, dict):
-                _dict["userStatus"] = self.user_status.to_dict()
-            else:
-                _dict["userStatus"] = self.user_status
-
-        # override the default output from pydantic by calling `to_dict()` of el_condition
-        if self.el_condition:
-            if not isinstance(self.el_condition, dict):
-                _dict["elCondition"] = self.el_condition.to_dict()
-            else:
-                _dict["elCondition"] = self.el_condition
 
         # override the default output from pydantic by calling `to_dict()` of user_type
         if self.user_type:
@@ -363,70 +169,14 @@ class AccessPolicyRuleConditions(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "app": (
-                    AppAndInstancePolicyRuleCondition.from_dict(obj["app"])
-                    if obj.get("app") is not None
-                    else None
-                ),
-                "apps": (
-                    AppInstancePolicyRuleCondition.from_dict(obj["apps"])
-                    if obj.get("apps") is not None
-                    else None
-                ),
-                "authContext": (
-                    PolicyRuleAuthContextCondition.from_dict(obj["authContext"])
-                    if obj.get("authContext") is not None
-                    else None
-                ),
-                "authProvider": (
-                    PasswordPolicyAuthenticationProviderCondition.from_dict(
-                        obj["authProvider"]
-                    )
-                    if obj.get("authProvider") is not None
-                    else None
-                ),
-                "beforeScheduledAction": (
-                    BeforeScheduledActionPolicyRuleCondition.from_dict(
-                        obj["beforeScheduledAction"]
-                    )
-                    if obj.get("beforeScheduledAction") is not None
-                    else None
-                ),
-                "clients": (
-                    ClientPolicyCondition.from_dict(obj["clients"])
-                    if obj.get("clients") is not None
-                    else None
-                ),
-                "context": (
-                    ContextPolicyRuleCondition.from_dict(obj["context"])
-                    if obj.get("context") is not None
-                    else None
-                ),
                 "device": (
                     DeviceAccessPolicyRuleCondition.from_dict(obj["device"])
                     if obj.get("device") is not None
                     else None
                 ),
-                "grantTypes": (
-                    GrantTypePolicyRuleCondition.from_dict(obj["grantTypes"])
-                    if obj.get("grantTypes") is not None
-                    else None
-                ),
-                "groups": (
-                    GroupPolicyRuleCondition.from_dict(obj["groups"])
-                    if obj.get("groups") is not None
-                    else None
-                ),
-                "identityProvider": (
-                    IdentityProviderPolicyRuleCondition.from_dict(
-                        obj["identityProvider"]
-                    )
-                    if obj.get("identityProvider") is not None
-                    else None
-                ),
-                "mdmEnrollment": (
-                    MDMEnrollmentPolicyRuleCondition.from_dict(obj["mdmEnrollment"])
-                    if obj.get("mdmEnrollment") is not None
+                "elCondition": (
+                    AccessPolicyRuleCustomCondition.from_dict(obj["elCondition"])
+                    if obj.get("elCondition") is not None
                     else None
                 ),
                 "network": (
@@ -444,39 +194,9 @@ class AccessPolicyRuleConditions(BaseModel):
                     if obj.get("platform") is not None
                     else None
                 ),
-                "risk": (
-                    RiskPolicyRuleCondition.from_dict(obj["risk"])
-                    if obj.get("risk") is not None
-                    else None
-                ),
                 "riskScore": (
                     RiskScorePolicyRuleCondition.from_dict(obj["riskScore"])
                     if obj.get("riskScore") is not None
-                    else None
-                ),
-                "scopes": (
-                    OAuth2ScopesMediationPolicyRuleCondition.from_dict(obj["scopes"])
-                    if obj.get("scopes") is not None
-                    else None
-                ),
-                "userIdentifier": (
-                    UserIdentifierPolicyRuleCondition.from_dict(obj["userIdentifier"])
-                    if obj.get("userIdentifier") is not None
-                    else None
-                ),
-                "users": (
-                    UserPolicyRuleCondition.from_dict(obj["users"])
-                    if obj.get("users") is not None
-                    else None
-                ),
-                "userStatus": (
-                    UserStatusPolicyRuleCondition.from_dict(obj["userStatus"])
-                    if obj.get("userStatus") is not None
-                    else None
-                ),
-                "elCondition": (
-                    AccessPolicyRuleCustomCondition.from_dict(obj["elCondition"])
-                    if obj.get("elCondition") is not None
                     else None
                 ),
                 "userType": (

@@ -28,11 +28,12 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.simulate_result_conditions import SimulateResultConditions
 from okta.models.simulate_result_rules import SimulateResultRules
+from okta.models.simulate_result_status import SimulateResultStatus
 
 
 class SimulateResultPoliciesItems(BaseModel):
@@ -40,12 +41,17 @@ class SimulateResultPoliciesItems(BaseModel):
     SimulateResultPoliciesItems
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    conditions: Optional[SimulateResultConditions] = None
-    rules: Optional[SimulateResultRules] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "status", "conditions", "rules"]
+    conditions: Optional[List[SimulateResultConditions]] = Field(
+        default=None,
+        description="List of all conditions involved for this policy evaluation",
+    )
+    id: Optional[StrictStr] = Field(
+        default=None, description="ID of the specified policy type"
+    )
+    name: Optional[StrictStr] = Field(default=None, description="Policy name")
+    rules: Optional[List[SimulateResultRules]] = None
+    status: Optional[SimulateResultStatus] = None
+    __properties: ClassVar[List[str]] = ["conditions", "id", "name", "rules", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,20 +90,20 @@ class SimulateResultPoliciesItems(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of conditions
+        # override the default output from pydantic by calling `to_dict()` of each item in conditions (list)
+        _items = []
         if self.conditions:
-            if not isinstance(self.conditions, dict):
-                _dict["conditions"] = self.conditions.to_dict()
-            else:
-                _dict["conditions"] = self.conditions
-
-        # override the default output from pydantic by calling `to_dict()` of rules
+            for _item in self.conditions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["conditions"] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in rules (list)
+        _items = []
         if self.rules:
-            if not isinstance(self.rules, dict):
-                _dict["rules"] = self.rules.to_dict()
-            else:
-                _dict["rules"] = self.rules
-
+            for _item in self.rules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["rules"] = _items
         return _dict
 
     @classmethod
@@ -111,19 +117,22 @@ class SimulateResultPoliciesItems(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "id": obj.get("id"),
-                "name": obj.get("name"),
-                "status": obj.get("status"),
                 "conditions": (
-                    SimulateResultConditions.from_dict(obj["conditions"])
+                    [
+                        SimulateResultConditions.from_dict(_item)
+                        for _item in obj["conditions"]
+                    ]
                     if obj.get("conditions") is not None
                     else None
                 ),
+                "id": obj.get("id"),
+                "name": obj.get("name"),
                 "rules": (
-                    SimulateResultRules.from_dict(obj["rules"])
+                    [SimulateResultRules.from_dict(_item) for _item in obj["rules"]]
                     if obj.get("rules") is not None
                     else None
                 ),
+                "status": obj.get("status"),
             }
         )
         return _obj

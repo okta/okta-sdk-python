@@ -28,16 +28,21 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 
 class PasswordCredentialHook(BaseModel):
     """
-    PasswordCredentialHook
+    Specify a [password import inline hook](/openapi/okta-management/management/tag/InlineHook/#tag/InlineHook/operation
+    /createPasswordImportInlineHook) to trigger verification of the user's password the first time the user signs in. This
+    allows an existing password to be imported into Okta directly from some other store.
     """  # noqa: E501
 
-    type: Optional[StrictStr] = None
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of password inline hook. Currently, must be set to default.",
+    )
     __properties: ClassVar[List[str]] = ["type"]
 
     model_config = ConfigDict(

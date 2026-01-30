@@ -1,5 +1,6 @@
 # OAuthResponseType
 
+Array of OAuth 2.0 response type strings
 
 ## Properties
 

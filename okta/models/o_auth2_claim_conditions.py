@@ -34,7 +34,7 @@ from typing_extensions import Self
 
 class OAuth2ClaimConditions(BaseModel):
     """
-    OAuth2ClaimConditions
+    Specifies the scopes for the Claim
     """  # noqa: E501
 
     scopes: Optional[List[StrictStr]] = None

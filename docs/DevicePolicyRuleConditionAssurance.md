@@ -1,11 +1,12 @@
 # DevicePolicyRuleConditionAssurance
 
+Specifies [device assurance policies](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/DeviceAssurance/) in the policy rule
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**include** | **List[str]** |  | [optional] 
+**include** | **List[str]** | Specifies the device assurance policy ID | [optional] 
 
 ## Example
 

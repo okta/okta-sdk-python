@@ -37,7 +37,7 @@ from okta.models.policy_account_link_filter import PolicyAccountLinkFilter
 
 class PolicyAccountLink(BaseModel):
     """
-    PolicyAccountLink
+    Specifies the behavior for linking an IdP user to an existing Okta user
     """  # noqa: E501
 
     action: Optional[PolicyAccountLinkAction] = None

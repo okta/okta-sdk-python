@@ -37,13 +37,15 @@ class AuthenticationMethodObject(BaseModel):
     AuthenticationMethodObject
     """  # noqa: E501
 
-    key: Optional[StrictStr] = Field(
-        default=None, description="A label that identifies the authenticator"
+    id: Optional[StrictStr] = Field(
+        default=None,
+        description='<x-lifecycle-container><x-lifecycle class="oie"></x-lifecycle></x-lifecycle-container>Authenticator ID',
     )
+    key: StrictStr = Field(description="A label that identifies the authenticator")
     method: Optional[StrictStr] = Field(
         default=None, description="Specifies the method used for the authenticator"
     )
-    __properties: ClassVar[List[str]] = ["key", "method"]
+    __properties: ClassVar[List[str]] = ["id", "key", "method"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,5 +95,7 @@ class AuthenticationMethodObject(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"key": obj.get("key"), "method": obj.get("method")})
+        _obj = cls.model_validate(
+            {"id": obj.get("id"), "key": obj.get("key"), "method": obj.get("method")}
+        )
         return _obj

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AppAndInstanceType(str, Enum):
     """
-    AppAndInstanceType
+    Type of app
     """
 
     """

@@ -39,59 +39,165 @@ class UserSchemaBaseProperties(BaseModel):
     UserSchemaBaseProperties
     """  # noqa: E501
 
-    city: Optional[UserSchemaAttribute] = None
-    cost_center: Optional[UserSchemaAttribute] = Field(default=None, alias="costCenter")
+    city: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="City or locality component of the user's address (`locality`)",
+    )
+    cost_center: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="Name of a cost center assigned to the user",
+        alias="costCenter",
+    )
     country_code: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="countryCode"
+        default=None,
+        description="Country name component of the user's address (`country`.) This property uses [ISO 3166-1 alpha 2 "
+        '"short" code format](https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#ref-ISO3166).',
+        alias="countryCode",
     )
-    department: Optional[UserSchemaAttribute] = None
+    department: Optional[UserSchemaAttribute] = Field(
+        default=None, description="Name of the user's department"
+    )
     display_name: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="displayName"
+        default=None,
+        description="Name of the user, suitable for display to end users",
+        alias="displayName",
     )
-    division: Optional[UserSchemaAttribute] = None
-    email: Optional[UserSchemaAttribute] = None
+    division: Optional[UserSchemaAttribute] = Field(
+        default=None, description="Name of the user's division"
+    )
+    email: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="Primary email address of the user. This property is formatted according to [RFC 5322 Section 3.2.3]("
+        "https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).",
+    )
     employee_number: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="employeeNumber"
+        default=None,
+        description="Organization or company assigned unique identifier for the user",
+        alias="employeeNumber",
     )
-    first_name: Optional[UserSchemaAttribute] = Field(default=None, alias="firstName")
+    first_name: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="Given name of the user (`givenName`)",
+        alias="firstName",
+    )
     honorific_prefix: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="honorificPrefix"
+        default=None,
+        description="Honorific prefix(es) of the user or title in most Western languages",
+        alias="honorificPrefix",
     )
     honorific_suffix: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="honorificSuffix"
+        default=None,
+        description="Honorific suffix(es) of the user",
+        alias="honorificSuffix",
     )
-    last_name: Optional[UserSchemaAttribute] = Field(default=None, alias="lastName")
-    locale: Optional[UserSchemaAttribute] = None
-    login: Optional[UserSchemaAttribute] = None
-    manager: Optional[UserSchemaAttribute] = None
-    manager_id: Optional[UserSchemaAttribute] = Field(default=None, alias="managerId")
-    middle_name: Optional[UserSchemaAttribute] = Field(default=None, alias="middleName")
+    last_name: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="Family name of the user (`familyName`)",
+        alias="lastName",
+    )
+    locale: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="User's default location for purposes of localizing items such as currency, date time format, "
+        "numerical representations, and so on.  A locale value is a concatenation of the ISO 639-1 two-letter "
+        "language code, an underscore, and the ISO 3166-1 two-letter country code. For example: `en_US` "
+        "specifies the language English and country US. This value is `en_US` by default.",
+    )
+    login: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="Unique identifier for the user (`userName`)  The login property is validated according to its pattern "
+        "attribute, which is a string. By default, the attribute is null. When the attribute is null, "
+        "the username is required to be formatted as an email address as defined by [RFC 6531 Section 3.3]("
+        "http://tools.ietf.org/html/rfc6531#section-3.3). The pattern can be set through the API to one of the "
+        'following forms. (The Admin Console provides access to the same forms.)   * A login pattern of `".+"` '
+        "indicates that there is no restriction on usernames. Any non-empty, unique value is permitted, "
+        "and the minimum length of five isn't enforced. In this case, usernames don't need to include the `@` "
+        "character. If a name does include `@`, the portion ahead of the `@` can be used for logging in, "
+        'provided it identifies a unique user within the org.   * A login pattern of the form `"[...]+"` '
+        "indicates that usernames must only contain characters from the set given between the brackets. The "
+        "enclosing brackets and final `+` are required for this form. Character ranges can be indicated using "
+        "hyphens. To include the hyphen itself in the allowed set, the hyphen must appear first. Any characters "
+        "in the set except the hyphen, a-z, A-Z, and 0-9 must be preceded by a backslash (`\\`). For example, "
+        '`"[a-z13579\\.]+"` would restrict usernames to lowercase letters, odd digits, and periods, '
+        'while `"[-a-zA-Z0-9]+"` would allow basic alphanumeric characters and hyphens.',
+    )
+    manager: Optional[UserSchemaAttribute] = Field(
+        default=None, description="The `displayName` of the user's manager"
+    )
+    manager_id: Optional[UserSchemaAttribute] = Field(
+        default=None, description="The `id` of the user's manager", alias="managerId"
+    )
+    middle_name: Optional[UserSchemaAttribute] = Field(
+        default=None, description="Middle name(s) of the user", alias="middleName"
+    )
     mobile_phone: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="mobilePhone"
+        default=None, description="Mobile phone number of the user", alias="mobilePhone"
     )
-    nick_name: Optional[UserSchemaAttribute] = Field(default=None, alias="nickName")
-    organization: Optional[UserSchemaAttribute] = None
+    nick_name: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="Casual way to address the user in real life",
+        alias="nickName",
+    )
+    organization: Optional[UserSchemaAttribute] = Field(
+        default=None, description="Name of the user's organization"
+    )
     postal_address: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="postalAddress"
+        default=None,
+        description="Mailing address component of the user's address",
+        alias="postalAddress",
     )
     preferred_language: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="preferredLanguage"
+        default=None,
+        description="User's preferred written or spoken languages. This property is formatted according to [RFC 7231 Section "
+        "5.3.5](https://tools.ietf.org/html/rfc7231#section-5.3.5).",
+        alias="preferredLanguage",
     )
     primary_phone: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="primaryPhone"
+        default=None,
+        description="Primary phone number of the user, such as home number",
+        alias="primaryPhone",
     )
-    profile_url: Optional[UserSchemaAttribute] = Field(default=None, alias="profileUrl")
+    profile_url: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="URL of the user's online profile (for example, a web page.) This property is formatted according to the "
+        "[Relative Uniform Resource Locators specification]("
+        "https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#ref-ISO3166).",
+        alias="profileUrl",
+    )
     second_email: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="secondEmail"
+        default=None,
+        description="Secondary email address of the user typically used for account recovery. This property is formatted "
+        "according to [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).",
+        alias="secondEmail",
     )
-    state: Optional[UserSchemaAttribute] = None
+    state: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="State or region component of the user's address (`region`)",
+    )
     street_address: Optional[UserSchemaAttribute] = Field(
-        default=None, alias="streetAddress"
+        default=None,
+        description="Full street address component of the user's address",
+        alias="streetAddress",
     )
-    timezone: Optional[UserSchemaAttribute] = None
-    title: Optional[UserSchemaAttribute] = None
-    user_type: Optional[UserSchemaAttribute] = Field(default=None, alias="userType")
-    zip_code: Optional[UserSchemaAttribute] = Field(default=None, alias="zipCode")
+    timezone: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="User's time zone. This property is formatted according to the [IANA Time Zone database format]("
+        "https://tools.ietf.org/html/rfc6557).",
+    )
+    title: Optional[UserSchemaAttribute] = Field(
+        default=None, description='User\'s title, such as "Vice President"'
+    )
+    user_type: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description='Used to describe the organization to the user relationship such as "Employee" or "Contractor".  '
+        "**Note:** The `userType` field is an arbitrary string value and isn't related to the newer [User "
+        "Types](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/) feature.",
+        alias="userType",
+    )
+    zip_code: Optional[UserSchemaAttribute] = Field(
+        default=None,
+        description="ZIP code or postal code component of the user's address (`postalCode`)",
+        alias="zipCode",
+    )
     __properties: ClassVar[List[str]] = [
         "city",
         "costCenter",

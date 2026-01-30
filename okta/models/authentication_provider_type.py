@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AuthenticationProviderType(str, Enum):
     """
-    AuthenticationProviderType
+    The type of authentication provider
     """
 
     """

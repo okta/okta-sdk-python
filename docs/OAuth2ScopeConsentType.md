@@ -1,5 +1,6 @@
 # OAuth2ScopeConsentType
 
+Indicates whether a consent dialog is needed for the Scope
 
 ## Properties
 

@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -23,13 +23,15 @@ Do not edit the class manually.
 from typing import Any, Dict, Tuple, Union
 from typing import List, Optional
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
-from pydantic import validate_call, StrictFloat
+from pydantic import Field, StrictBool, StrictStr
+from pydantic import validate_call, StrictFloat, StrictInt
 from typing_extensions import Annotated
 
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
 from okta.models.app_user import AppUser
+from okta.models.app_user_assign_request import AppUserAssignRequest
+from okta.models.app_user_update_request import AppUserUpdateRequest
 from okta.models.success import Success
 from okta.rest import RESTResponse
 
@@ -47,8 +49,8 @@ class ApplicationUsersApi(ApiClient):
     @validate_call
     async def assign_user_to_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        app_user: AppUser,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        app_user: AppUserAssignRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,242 +63,20 @@ class ApplicationUsersApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppUser:
-        """Assign a User
+        """Assign an application user
 
-        Assigns a user to an app with credentials and an app-specific [profile](/openapi/okta-management/management/tag/Application/#tag/Application/operation/assignUserToApplication!c=200&path=profile&t=response). Profile mappings defined for the app are applied first before applying any profile properties that are specified in the request.  > **Notes:** > * You need to specify the `id` and omit the `credentials` parameter in the request body only for `signOnMode` or authentication schemes (`credentials.scheme`) that don't require credentials. > * You can only specify profile properties that aren't defined by profile mappings when Universal Directory is enabled. > * If your SSO app requires a profile but doesn't have provisioning enabled, you need to add a profile to the request body.
+        Assigns a user to an app for:    * SSO only<br>     Assignments to SSO apps typically don't include a user profile.
+           However, if your SSO app requires a profile but doesn't have provisioning enabled, you can add profile attributes
+           in the request body.    * SSO and provisioning<br>     Assignments to SSO and provisioning apps typically include
+           credentials and an app-specific profile.     Profile mappings defined for the app are applied first before
+           applying any profile properties that are specified in the request body.     > **Notes:**     > * When Universal
+           Directory is enabled, you can only specify profile properties that aren't defined in profile mappings.     > *
+           Omit mapped properties during assignment to minimize assignment errors.
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
         :param app_user: (required)
-        :type app_user: AppUser
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AppUser",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._assign_user_to_application_serialize(
-                app_id=app_id,
-                app_user=app_user,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AppUser is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AppUser is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AppUser
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AppUser is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def assign_user_to_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        app_user: AppUser,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AppUser:
-        """Assign a User
-
-        Assigns a user to an app with credentials and an app-specific [profile](/openapi/okta-management/management/tag/Application/#tag/Application/operation/assignUserToApplication!c=200&path=profile&t=response). Profile mappings defined for the app are applied first before applying any profile properties that are specified in the request.  > **Notes:** > * You need to specify the `id` and omit the `credentials` parameter in the request body only for `signOnMode` or authentication schemes (`credentials.scheme`) that don't require credentials. > * You can only specify profile properties that aren't defined by profile mappings when Universal Directory is enabled. > * If your SSO app requires a profile but doesn't have provisioning enabled, you need to add a profile to the request body.
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param app_user: (required)
-        :type app_user: AppUser
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AppUser",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._assign_user_to_application_serialize(
-                app_id=app_id,
-                app_user=app_user,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AppUser is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AppUser is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AppUser
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AppUser is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def assign_user_to_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        app_user: AppUser,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AppUser:
-        """Assign a User
-
-        Assigns a user to an app with credentials and an app-specific [profile](/openapi/okta-management/management/tag/Application/#tag/Application/operation/assignUserToApplication!c=200&path=profile&t=response). Profile mappings defined for the app are applied first before applying any profile properties that are specified in the request.  > **Notes:** > * You need to specify the `id` and omit the `credentials` parameter in the request body only for `signOnMode` or authentication schemes (`credentials.scheme`) that don't require credentials. > * You can only specify profile properties that aren't defined by profile mappings when Universal Directory is enabled. > * If your SSO app requires a profile but doesn't have provisioning enabled, you need to add a profile to the request body.
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param app_user: (required)
-        :type app_user: AppUser
+        :type app_user: AppUserAssignRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -451,9 +231,16 @@ class ApplicationUsersApi(ApiClient):
     @validate_call
     async def get_application_user(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        expand: Optional[StrictStr] = None,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        expand: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="An optional query parameter to return the corresponding [User]("
+                            "/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: "
+                            "`user`"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -466,249 +253,16 @@ class ApplicationUsersApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppUser:
-        """Retrieve an assigned User
+        """Retrieve an application user
 
-        Retrieves a specific user assignment for app by `id`
+        Retrieves a specific user assignment for a specific app
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param expand:
-        :type expand: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AppUser",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_application_user_serialize(
-                app_id=app_id,
-                user_id=user_id,
-                expand=expand,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AppUser is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AppUser is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AppUser
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AppUser is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_application_user_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        expand: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AppUser:
-        """Retrieve an assigned User
-
-        Retrieves a specific user assignment for app by `id`
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param user_id: (required)
-        :type user_id: str
-        :param expand:
-        :type expand: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AppUser",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_application_user_serialize(
-                app_id=app_id,
-                user_id=user_id,
-                expand=expand,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AppUser is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AppUser is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AppUser
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AppUser is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_application_user_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        expand: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AppUser:
-        """Retrieve an assigned User
-
-        Retrieves a specific user assignment for app by `id`
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param user_id: (required)
-        :type user_id: str
-        :param expand:
+        :param expand: An optional query parameter to return the corresponding [User](
+        /openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user`
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -858,21 +412,42 @@ class ApplicationUsersApi(ApiClient):
     @validate_call
     async def list_application_users(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        q: Optional[StrictStr] = None,
-        query_scope: Optional[StrictStr] = None,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="specifies the pagination cursor for the next page of assignments"
+                description="Specifies the pagination cursor for the next page of results. Treat this as an opaque value "
+                            "obtained through the next link relationship. See [Pagination](/#pagination)."
             ),
         ] = None,
         limit: Annotated[
-            Optional[StrictInt],
-            Field(description="specifies the number of results for a page"),
+            Optional[Annotated[int, Field(le=500, strict=True, ge=1)]],
+            Field(
+                description="Specifies the number of objects to return per page. If there are multiple pages of results, "
+                            "the Link header contains a `next` link that you need to use as an opaque value (follow it, "
+                            "don't parse it). See [Pagination](/#pagination). "
+            ),
         ] = None,
-        filter: Optional[StrictStr] = None,
-        expand: Optional[StrictStr] = None,
+        q: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Specifies a filter for the list of application users returned based on their profile attributes. "
+                            "The value of `q` is matched against the beginning of the following profile attributes: "
+                            "`userName`, "
+                            "`firstName`, `lastName`, and `email`. This filter only supports the `startsWith` operation that "
+                            "matches the `q` string against the beginning of the attribute values. > **Note:** For OIDC apps, "
+                            "user profiles don't contain the `firstName` or `lastName` attributes. Therefore, the query only "
+                            "matches against the `userName` or `email` attributes. "
+            ),
+        ] = None,
+        expand: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="An optional query parameter to return the corresponding [User]("
+                            "/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: "
+                            "`user`"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -885,23 +460,27 @@ class ApplicationUsersApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[AppUser]:
-        """List all assigned Users
+        """List all application users
 
         Lists all assigned users for an app
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
-        :param q:
-        :type q: str
-        :param query_scope:
-        :type query_scope: str
-        :param after: specifies the pagination cursor for the next page of assignments
+        :param after: Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained
+        through the next link relationship. See [Pagination](/#pagination).
         :type after: str
-        :param limit: specifies the number of results for a page
+        :param limit: Specifies the number of objects to return per page. If there are multiple pages of results,
+        the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). See [
+        Pagination](/#pagination).
         :type limit: int
-        :param filter:
-        :type filter: str
-        :param expand:
+        :param q: Specifies a filter for the list of application users returned based on their profile attributes. The value
+        of `q` is matched against the beginning of the following profile attributes: `userName`, `firstName`, `lastName`,
+        and `email`. This filter only supports the `startsWith` operation that matches the `q` string against the beginning
+        of the attribute values. > **Note:** For OIDC apps, user profiles don't contain the `firstName` or `lastName`
+        attributes. Therefore, the query only matches against the `userName` or `email` attributes.
+        :type q: str
+        :param expand: An optional query parameter to return the corresponding [User](
+        /openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user`
         :type expand: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -935,293 +514,9 @@ class ApplicationUsersApi(ApiClient):
         method, url, header_params, body, post_params = (
             self._list_application_users_serialize(
                 app_id=app_id,
-                q=q,
-                query_scope=query_scope,
                 after=after,
                 limit=limit,
-                filter=filter,
-                expand=expand,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[AppUser] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[AppUser] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AppUser
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[AppUser] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_application_users_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        q: Optional[StrictStr] = None,
-        query_scope: Optional[StrictStr] = None,
-        after: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="specifies the pagination cursor for the next page of assignments"
-            ),
-        ] = None,
-        limit: Annotated[
-            Optional[StrictInt],
-            Field(description="specifies the number of results for a page"),
-        ] = None,
-        filter: Optional[StrictStr] = None,
-        expand: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[AppUser]:
-        """List all assigned Users
-
-        Lists all assigned users for an app
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param q:
-        :type q: str
-        :param query_scope:
-        :type query_scope: str
-        :param after: specifies the pagination cursor for the next page of assignments
-        :type after: str
-        :param limit: specifies the number of results for a page
-        :type limit: int
-        :param filter:
-        :type filter: str
-        :param expand:
-        :type expand: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[AppUser]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_application_users_serialize(
-                app_id=app_id,
                 q=q,
-                query_scope=query_scope,
-                after=after,
-                limit=limit,
-                filter=filter,
-                expand=expand,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[AppUser] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[AppUser] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AppUser
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[AppUser] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_application_users_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        q: Optional[StrictStr] = None,
-        query_scope: Optional[StrictStr] = None,
-        after: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="specifies the pagination cursor for the next page of assignments"
-            ),
-        ] = None,
-        limit: Annotated[
-            Optional[StrictInt],
-            Field(description="specifies the number of results for a page"),
-        ] = None,
-        filter: Optional[StrictStr] = None,
-        expand: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[AppUser]:
-        """List all assigned Users
-
-        Lists all assigned users for an app
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param q:
-        :type q: str
-        :param query_scope:
-        :type query_scope: str
-        :param after: specifies the pagination cursor for the next page of assignments
-        :type after: str
-        :param limit: specifies the number of results for a page
-        :type limit: int
-        :param filter:
-        :type filter: str
-        :param expand:
-        :type expand: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[AppUser]",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_application_users_serialize(
-                app_id=app_id,
-                q=q,
-                query_scope=query_scope,
-                after=after,
-                limit=limit,
-                filter=filter,
                 expand=expand,
                 _request_auth=_request_auth,
                 _content_type=_content_type,
@@ -1281,11 +576,9 @@ class ApplicationUsersApi(ApiClient):
     def _list_application_users_serialize(
         self,
         app_id,
-        q,
-        query_scope,
         after,
         limit,
-        filter,
+        q,
         expand,
         _request_auth,
         _content_type,
@@ -1308,20 +601,14 @@ class ApplicationUsersApi(ApiClient):
         if app_id is not None:
             _path_params["appId"] = app_id
         # process the query parameters
-        if q is not None:
-            _query_params.append(("q", q))
-
-        if query_scope is not None:
-            _query_params.append(("query_scope", query_scope))
-
         if after is not None:
             _query_params.append(("after", after))
 
         if limit is not None:
             _query_params.append(("limit", limit))
 
-        if filter is not None:
-            _query_params.append(("filter", filter))
+        if q is not None:
+            _query_params.append(("q", q))
 
         if expand is not None:
             _query_params.append(("expand", expand))
@@ -1354,9 +641,14 @@ class ApplicationUsersApi(ApiClient):
     @validate_call
     async def unassign_user_from_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        send_email: Optional[StrictBool] = None,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        send_email: Annotated[
+            Optional[StrictBool],
+            Field(
+                description="Sends a deactivation email to the administrator if `true`"
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1369,223 +661,19 @@ class ApplicationUsersApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Unassign an App User
+        """Unassign an application user
 
-        Unassigns a user from an application
+        Unassigns a user from an app  For directories like Active Directory and LDAP, they act as the owner of the user's
+        credential with Okta delegating authentication (DelAuth) to that directory. If this request is successful for a user
+        when DelAuth is enabled, then the user is in a state with no password. You can then reset the user's password.  >
+        **Important:** This is a destructive operation. You can't recover the user's app profile. If the app is enabled for
+        provisioning and configured to deactivate users, the user is also deactivated in the target app.
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
-        :param send_email:
-        :type send_email: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._unassign_user_from_application_serialize(
-                app_id=app_id,
-                user_id=user_id,
-                send_email=send_email,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def unassign_user_from_application_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        send_email: Optional[StrictBool] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unassign an App User
-
-        Unassigns a user from an application
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param user_id: (required)
-        :type user_id: str
-        :param send_email:
-        :type send_email: bool
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._unassign_user_from_application_serialize(
-                app_id=app_id,
-                user_id=user_id,
-                send_email=send_email,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def unassign_user_from_application_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        send_email: Optional[StrictBool] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unassign an App User
-
-        Unassigns a user from an application
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param user_id: (required)
-        :type user_id: str
-        :param send_email:
+        :param send_email: Sends a deactivation email to the administrator if `true`
         :type send_email: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1722,9 +810,9 @@ class ApplicationUsersApi(ApiClient):
     @validate_call
     async def update_application_user(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        app_user: AppUser,
+        app_id: Annotated[StrictStr, Field(description="Application ID")],
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
+        app_user: AppUserUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1737,252 +825,16 @@ class ApplicationUsersApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> AppUser:
-        """Update an App Profile for an assigned User
+        """Update an application user
 
-        Updates a user's profile for an application
+        Updates the profile or credentials of a user assigned to an app
 
-        :param app_id: ID of the Application (required)
+        :param app_id: Application ID (required)
         :type app_id: str
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param app_user: (required)
-        :type app_user: AppUser
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AppUser",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._update_application_user_serialize(
-                app_id=app_id,
-                user_id=user_id,
-                app_user=app_user,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AppUser is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AppUser is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AppUser
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AppUser is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def update_application_user_with_http_info(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        app_user: AppUser,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AppUser:
-        """Update an App Profile for an assigned User
-
-        Updates a user's profile for an application
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param user_id: (required)
-        :type user_id: str
-        :param app_user: (required)
-        :type app_user: AppUser
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "AppUser",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._update_application_user_serialize(
-                app_id=app_id,
-                user_id=user_id,
-                app_user=app_user,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if AppUser is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if AppUser is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, AppUser
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if AppUser is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def update_application_user_without_preload_content(
-        self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        user_id: StrictStr,
-        app_user: AppUser,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AppUser:
-        """Update an App Profile for an assigned User
-
-        Updates a user's profile for an application
-
-        :param app_id: ID of the Application (required)
-        :type app_id: str
-        :param user_id: (required)
-        :type user_id: str
-        :param app_user: (required)
-        :type app_user: AppUser
+        :type app_user: AppUserUpdateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

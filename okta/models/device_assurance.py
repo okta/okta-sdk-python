@@ -30,8 +30,10 @@ from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing import TYPE_CHECKING
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 
+from okta.models.device_posture_checks import DevicePostureChecks
+from okta.models.grace_period import GracePeriod
 from okta.models.links_self import LinksSelf
 from okta.models.platform import Platform
 
@@ -58,26 +60,48 @@ class DeviceAssurance(BaseModel):
 
     created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
     created_date: Optional[StrictStr] = Field(default=None, alias="createdDate")
-    id: Optional[StrictStr] = None
-    last_updated_by: Optional[StrictStr] = Field(default=None, alias="lastUpdatedBy")
-    last_updated_date: Optional[StrictStr] = Field(
-        default=None, alias="lastUpdatedDate"
+    device_posture_checks: Optional[DevicePostureChecks] = Field(
+        default=None, alias="devicePostureChecks"
     )
+    display_remediation_mode: Optional[StrictStr] = Field(
+        default=None,
+        description='<x-lifecycle-container><x-lifecycle class="ea"></x-lifecycle></x-lifecycle-container>Represents the '
+        "remediation mode of this device assurance policy when users are denied access due to device "
+        "noncompliance",
+        alias="displayRemediationMode",
+    )
+    grace_period: Optional[GracePeriod] = Field(default=None, alias="gracePeriod")
+    id: Optional[StrictStr] = None
+    last_update: Optional[StrictStr] = Field(default=None, alias="lastUpdate")
+    last_updated_by: Optional[StrictStr] = Field(default=None, alias="lastUpdatedBy")
     name: Optional[StrictStr] = Field(
-        default=None, description="Display name of the Device Assurance Policy"
+        default=None, description="Display name of the device assurance policy"
     )
     platform: Optional[Platform] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "createdBy",
         "createdDate",
+        "devicePostureChecks",
+        "displayRemediationMode",
+        "gracePeriod",
         "id",
+        "lastUpdate",
         "lastUpdatedBy",
-        "lastUpdatedDate",
         "name",
         "platform",
         "_links",
     ]
+
+    @field_validator("display_remediation_mode")
+    def display_remediation_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["HIDE", "SHOW"]):
+            raise ValueError("must be one of enum values ('HIDE', 'SHOW')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -148,8 +172,8 @@ class DeviceAssurance(BaseModel):
                 "created_by",
                 "created_date",
                 "id",
+                "last_update",
                 "last_updated_by",
-                "last_updated_date",
             ]
         )
 
@@ -158,6 +182,20 @@ class DeviceAssurance(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of device_posture_checks
+        if self.device_posture_checks:
+            if not isinstance(self.device_posture_checks, dict):
+                _dict["devicePostureChecks"] = self.device_posture_checks.to_dict()
+            else:
+                _dict["devicePostureChecks"] = self.device_posture_checks
+
+        # override the default output from pydantic by calling `to_dict()` of grace_period
+        if self.grace_period:
+            if not isinstance(self.grace_period, dict):
+                _dict["gracePeriod"] = self.grace_period.to_dict()
+            else:
+                _dict["gracePeriod"] = self.grace_period
+
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -202,10 +240,10 @@ class DeviceAssurance(BaseModel):
             ).DeviceAssuranceWindowsPlatform.from_dict(obj)
 
         raise ValueError(
-            "DeviceAssurance failed to lookup discriminator value from " +
-            json.dumps(obj) +
-            ". Discriminator property name: " +
-            cls.__discriminator_property_name +
-            ", mapping: " +
-            json.dumps(cls.__discriminator_value_class_map)
+            "DeviceAssurance failed to lookup discriminator value from "
+            + json.dumps(obj)
+            + ". Discriminator property name: "
+            + cls.__discriminator_property_name
+            + ", mapping: "
+            + json.dumps(cls.__discriminator_value_class_map)
         )

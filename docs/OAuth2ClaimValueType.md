@@ -1,5 +1,6 @@
 # OAuth2ClaimValueType
 
+Specifies whether the Claim is an Okta Expression Language (EL) expression (`EXPRESSION`), a set of groups (`GROUPS`), or a system claim (`SYSTEM`)
 
 ## Properties
 

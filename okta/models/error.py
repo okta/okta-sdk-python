@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.error_error_causes_inner import ErrorErrorCausesInner
+from okta.models.error_cause import ErrorCause
 
 
 class Error(BaseModel):
@@ -39,9 +39,7 @@ class Error(BaseModel):
     Error
     """  # noqa: E501
 
-    error_causes: Optional[List[ErrorErrorCausesInner]] = Field(
-        default=None, alias="errorCauses"
-    )
+    error_causes: Optional[List[ErrorCause]] = Field(default=None, alias="errorCauses")
     error_code: Optional[StrictStr] = Field(
         default=None,
         description="An Okta code for this type of error",
@@ -49,8 +47,7 @@ class Error(BaseModel):
     )
     error_id: Optional[StrictStr] = Field(
         default=None,
-        description="A unique identifier for this error. This can be used by Okta Support "
-                    "to help with troubleshooting.",
+        description="A unique identifier for this error. This can be used by Okta Support to help with troubleshooting.",
         alias="errorId",
     )
     error_link: Optional[StrictStr] = Field(
@@ -60,8 +57,8 @@ class Error(BaseModel):
     )
     error_summary: Optional[StrictStr] = Field(
         default=None,
-        description="A short description of what caused this error. Sometimes this "
-                    "contains dynamically-generated information about your specific error.",
+        description="A short description of what caused this error. Sometimes this contains dynamically-generated "
+        "information about your specific error.",
         alias="errorSummary",
     )
     __properties: ClassVar[List[str]] = [
@@ -130,10 +127,7 @@ class Error(BaseModel):
         _obj = cls.model_validate(
             {
                 "errorCauses": (
-                    [
-                        ErrorErrorCausesInner.from_dict(_item)
-                        for _item in obj["errorCauses"]
-                    ]
+                    [ErrorCause.from_dict(_item) for _item in obj["errorCauses"]]
                     if obj.get("errorCauses") is not None
                     else None
                 ),

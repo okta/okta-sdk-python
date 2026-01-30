@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.user_identifier_condition_evaluator_pattern import (
@@ -39,12 +39,15 @@ from okta.models.user_identifier_type import UserIdentifierType
 
 class UserIdentifierPolicyRuleCondition(BaseModel):
     """
-    UserIdentifierPolicyRuleCondition
+    Specifies a user identifier condition to match on
     """  # noqa: E501
 
-    attribute: Optional[StrictStr] = None
-    patterns: Optional[List[UserIdentifierConditionEvaluatorPattern]] = None
-    type: Optional[UserIdentifierType] = None
+    attribute: Optional[StrictStr] = Field(
+        default=None,
+        description="The name of the profile attribute to match against. Only used when type is `ATTRIBUTE`.",
+    )
+    patterns: List[UserIdentifierConditionEvaluatorPattern]
+    type: UserIdentifierType
     __properties: ClassVar[List[str]] = ["attribute", "patterns", "type"]
 
     model_config = ConfigDict(

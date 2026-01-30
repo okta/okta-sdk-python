@@ -1,11 +1,12 @@
 # OpenIdConnectApplicationSettingsClientKeys
 
+A [JSON Web Key Set](https://tools.ietf.org/html/rfc7517#section-5) for validating JWTs presented to Okta or for encrypting ID tokens minted by Okta for the client
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**keys** | [**List[JsonWebKey]**](JsonWebKey.md) |  | [optional] 
+**keys** | [**List[ListJwk200ResponseInner]**](ListJwk200ResponseInner.md) |  | [optional] 
 
 ## Example
 

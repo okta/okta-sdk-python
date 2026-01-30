@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **actions** | [**ProfileEnrollmentPolicyRuleActions**](ProfileEnrollmentPolicyRuleActions.md) |  | [optional] 
-**conditions** | [**PolicyRuleConditions**](PolicyRuleConditions.md) |  | [optional] 
+**conditions** | **str** | Policy rule conditions aren&#39;t supported for this policy type | [optional] 
 
 ## Example
 

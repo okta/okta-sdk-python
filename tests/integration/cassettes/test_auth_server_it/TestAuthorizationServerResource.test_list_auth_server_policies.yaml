@@ -68,7 +68,7 @@ interactions:
     uri: https://test.okta.com/api/v1/authorizationServers/aussf86eiPj6Q6kKU4x6/policies
   response:
     body:
-      string: '{"type":"OKTA_SIGN_ON","id":"00psfdb4sqFWj8qVC4x6","status":"ACTIVE","name":"Test
+      string: '{"type":"OAUTH_AUTHORIZATION_POLICY","id":"00psfdb4sqFWj8qVC4x6","status":"ACTIVE","name":"Test
         Policy","description":"Test Policy","priority":1,"system":false,"conditions":{"clients":{"include":["ALL_CLIENTS"]}},"created":"2020-08-27T18:14:54.000Z","lastUpdated":"2020-08-27T18:14:54.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aussf86eiPj6Q6kKU4x6/policies/00psfdb4sqFWj8qVC4x6","hints":{"allow":["GET","PUT","DELETE"]}},"rules":{"href":"https://test.okta.com/api/v1/authorizationServers/aussf86eiPj6Q6kKU4x6/policies/00psfdb4sqFWj8qVC4x6/rules","hints":{"allow":["GET"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aussf86eiPj6Q6kKU4x6/policies/00psfdb4sqFWj8qVC4x6/lifecycle/deactivate","hints":{"allow":["POST"]}}}}'
     headers:
       Connection: keep-alive
@@ -122,7 +122,7 @@ interactions:
     uri: https://test.okta.com/api/v1/authorizationServers/aussf86eiPj6Q6kKU4x6/policies
   response:
     body:
-      string: '[{"type":"OKTA_SIGN_ON","id":"00psfdb4sqFWj8qVC4x6","status":"ACTIVE","name":"Test
+      string: '[{"type":"OAUTH_AUTHORIZATION_POLICY","id":"00psfdb4sqFWj8qVC4x6","status":"ACTIVE","name":"Test
         Policy","description":"Test Policy","priority":1,"system":false,"conditions":{"clients":{"include":["ALL_CLIENTS"]}},"created":"2020-08-27T18:14:54.000Z","lastUpdated":"2020-08-27T18:14:54.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aussf86eiPj6Q6kKU4x6/policies/00psfdb4sqFWj8qVC4x6","hints":{"allow":["GET","PUT","DELETE"]}},"rules":{"href":"https://test.okta.com/api/v1/authorizationServers/aussf86eiPj6Q6kKU4x6/policies/00psfdb4sqFWj8qVC4x6/rules","hints":{"allow":["GET"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aussf86eiPj6Q6kKU4x6/policies/00psfdb4sqFWj8qVC4x6/lifecycle/deactivate","hints":{"allow":["POST"]}}}}]'
     headers:
       Connection: close

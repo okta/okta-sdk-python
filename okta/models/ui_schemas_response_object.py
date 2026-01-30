@@ -42,11 +42,11 @@ class UISchemasResponseObject(BaseModel):
     """  # noqa: E501
 
     created: datetime = Field(
-        description="Timestamp when the UI Schema was created (ISO-86001)"
+        description="Timestamp when the UI Schema was created (ISO 86001)"
     )
     id: StrictStr = Field(description="Unique identifier for the UI Schema")
     last_updated: datetime = Field(
-        description="Timestamp when the UI Schema was last modified (ISO-86001)",
+        description="Timestamp when the UI Schema was last modified (ISO 86001)",
         alias="lastUpdated",
     )
     ui_schema: UISchemaObject = Field(alias="uiSchema")

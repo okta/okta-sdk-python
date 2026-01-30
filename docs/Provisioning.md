@@ -1,5 +1,6 @@
 # Provisioning
 
+Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a new Okta user and their group memberships
 
 ## Properties
 
@@ -8,7 +9,7 @@ Name | Type | Description | Notes
 **action** | [**ProvisioningAction**](ProvisioningAction.md) |  | [optional] 
 **conditions** | [**ProvisioningConditions**](ProvisioningConditions.md) |  | [optional] 
 **groups** | [**ProvisioningGroups**](ProvisioningGroups.md) |  | [optional] 
-**profile_master** | **bool** |  | [optional] 
+**profile_master** | **bool** | Determines if the IdP should act as a source of truth for user profile attributes | [optional] 
 
 ## Example
 

@@ -5,14 +5,14 @@ All URIs are relative to *https://subdomain.okta.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_captcha_instance**](CAPTCHAApi.md#create_captcha_instance) | **POST** /api/v1/captchas | Create a CAPTCHA instance
-[**delete_captcha_instance**](CAPTCHAApi.md#delete_captcha_instance) | **DELETE** /api/v1/captchas/{captchaId} | Delete a CAPTCHA Instance
-[**delete_org_captcha_settings**](CAPTCHAApi.md#delete_org_captcha_settings) | **DELETE** /api/v1/org/captcha | Delete the Org-wide CAPTCHA Settings
-[**get_captcha_instance**](CAPTCHAApi.md#get_captcha_instance) | **GET** /api/v1/captchas/{captchaId} | Retrieve a CAPTCHA Instance
-[**get_org_captcha_settings**](CAPTCHAApi.md#get_org_captcha_settings) | **GET** /api/v1/org/captcha | Retrieve the Org-wide CAPTCHA Settings
-[**list_captcha_instances**](CAPTCHAApi.md#list_captcha_instances) | **GET** /api/v1/captchas | List all CAPTCHA Instances
-[**replace_captcha_instance**](CAPTCHAApi.md#replace_captcha_instance) | **PUT** /api/v1/captchas/{captchaId} | Replace a CAPTCHA Instance
-[**replaces_org_captcha_settings**](CAPTCHAApi.md#replaces_org_captcha_settings) | **PUT** /api/v1/org/captcha | Replace the Org-wide CAPTCHA Settings
-[**update_captcha_instance**](CAPTCHAApi.md#update_captcha_instance) | **POST** /api/v1/captchas/{captchaId} | Update a CAPTCHA Instance
+[**delete_captcha_instance**](CAPTCHAApi.md#delete_captcha_instance) | **DELETE** /api/v1/captchas/{captchaId} | Delete a CAPTCHA instance
+[**delete_org_captcha_settings**](CAPTCHAApi.md#delete_org_captcha_settings) | **DELETE** /api/v1/org/captcha | Delete the org-wide CAPTCHA settings
+[**get_captcha_instance**](CAPTCHAApi.md#get_captcha_instance) | **GET** /api/v1/captchas/{captchaId} | Retrieve a CAPTCHA instance
+[**get_org_captcha_settings**](CAPTCHAApi.md#get_org_captcha_settings) | **GET** /api/v1/org/captcha | Retrieve the org-wide CAPTCHA settings
+[**list_captcha_instances**](CAPTCHAApi.md#list_captcha_instances) | **GET** /api/v1/captchas | List all CAPTCHA instances
+[**replace_captcha_instance**](CAPTCHAApi.md#replace_captcha_instance) | **PUT** /api/v1/captchas/{captchaId} | Replace a CAPTCHA instance
+[**replaces_org_captcha_settings**](CAPTCHAApi.md#replaces_org_captcha_settings) | **PUT** /api/v1/org/captcha | Replace the org-wide CAPTCHA settings
+[**update_captcha_instance**](CAPTCHAApi.md#update_captcha_instance) | **POST** /api/v1/captchas/{captchaId} | Update a CAPTCHA instance
 
 
 # **create_captcha_instance**
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 # **delete_captcha_instance**
 > delete_captcha_instance(captcha_id)
 
-Delete a CAPTCHA Instance
+Delete a CAPTCHA instance
 
 Deletes a specified CAPTCHA instance > **Note:** If your CAPTCHA instance is still associated with your org, the request fails. You must first update your Org-wide CAPTCHA settings to remove the CAPTCHA instance.
 
@@ -143,7 +143,7 @@ with okta.ApiClient(configuration) as api_client:
     captcha_id = 'captcha_id_example' # str | The unique key used to identify your CAPTCHA instance
 
     try:
-        # Delete a CAPTCHA Instance
+        # Delete a CAPTCHA instance
         api_instance.delete_captcha_instance(captcha_id)
     except Exception as e:
         print("Exception when calling CAPTCHAApi->delete_captcha_instance: %s\n" % e)
@@ -185,7 +185,7 @@ void (empty response body)
 # **delete_org_captcha_settings**
 > delete_org_captcha_settings()
 
-Delete the Org-wide CAPTCHA Settings
+Delete the org-wide CAPTCHA settings
 
 Deletes the CAPTCHA settings object for your organization
 
@@ -224,7 +224,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.CAPTCHAApi(api_client)
 
     try:
-        # Delete the Org-wide CAPTCHA Settings
+        # Delete the org-wide CAPTCHA settings
         api_instance.delete_org_captcha_settings()
     except Exception as e:
         print("Exception when calling CAPTCHAApi->delete_org_captcha_settings: %s\n" % e)
@@ -263,7 +263,7 @@ void (empty response body)
 # **get_captcha_instance**
 > CAPTCHAInstance get_captcha_instance(captcha_id)
 
-Retrieve a CAPTCHA Instance
+Retrieve a CAPTCHA instance
 
 Retrieves the properties of a specified CAPTCHA instance
 
@@ -304,7 +304,7 @@ with okta.ApiClient(configuration) as api_client:
     captcha_id = 'captcha_id_example' # str | The unique key used to identify your CAPTCHA instance
 
     try:
-        # Retrieve a CAPTCHA Instance
+        # Retrieve a CAPTCHA instance
         api_response = api_instance.get_captcha_instance(captcha_id)
         print("The response of CAPTCHAApi->get_captcha_instance:\n")
         pprint(api_response)
@@ -348,9 +348,9 @@ Name | Type | Description  | Notes
 # **get_org_captcha_settings**
 > OrgCAPTCHASettings get_org_captcha_settings()
 
-Retrieve the Org-wide CAPTCHA Settings
+Retrieve the org-wide CAPTCHA settings
 
-Retrieves the CAPTCHA settings object for your organization. > **Note**: If the current organization hasn't configured CAPTCHA Settings, the request returns an empty object.
+Retrieves the CAPTCHA settings object for your organization > **Note**: If the current organization hasn't configured CAPTCHA Settings, the request returns an empty object.
 
 ### Example
 
@@ -388,7 +388,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.CAPTCHAApi(api_client)
 
     try:
-        # Retrieve the Org-wide CAPTCHA Settings
+        # Retrieve the org-wide CAPTCHA settings
         api_response = api_instance.get_org_captcha_settings()
         print("The response of CAPTCHAApi->get_org_captcha_settings:\n")
         pprint(api_response)
@@ -428,7 +428,7 @@ This endpoint does not need any parameter.
 # **list_captcha_instances**
 > List[CAPTCHAInstance] list_captcha_instances()
 
-List all CAPTCHA Instances
+List all CAPTCHA instances
 
 Lists all CAPTCHA instances with pagination support. A subset of CAPTCHA instances can be returned that match a supported filter expression or query.
 
@@ -468,7 +468,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.CAPTCHAApi(api_client)
 
     try:
-        # List all CAPTCHA Instances
+        # List all CAPTCHA instances
         api_response = api_instance.list_captcha_instances()
         print("The response of CAPTCHAApi->list_captcha_instances:\n")
         pprint(api_response)
@@ -508,7 +508,7 @@ This endpoint does not need any parameter.
 # **replace_captcha_instance**
 > CAPTCHAInstance replace_captcha_instance(captcha_id, instance)
 
-Replace a CAPTCHA Instance
+Replace a CAPTCHA instance
 
 Replaces the properties for a specified CAPTCHA instance
 
@@ -550,7 +550,7 @@ with okta.ApiClient(configuration) as api_client:
     instance = okta.CAPTCHAInstance() # CAPTCHAInstance | 
 
     try:
-        # Replace a CAPTCHA Instance
+        # Replace a CAPTCHA instance
         api_response = api_instance.replace_captcha_instance(captcha_id, instance)
         print("The response of CAPTCHAApi->replace_captcha_instance:\n")
         pprint(api_response)
@@ -596,9 +596,9 @@ Name | Type | Description  | Notes
 # **replaces_org_captcha_settings**
 > OrgCAPTCHASettings replaces_org_captcha_settings(org_captcha_settings)
 
-Replace the Org-wide CAPTCHA Settings
+Replace the org-wide CAPTCHA settings
 
-Replaces the CAPTCHA settings object for your organization. > **Note**: You can disable CAPTCHA for your organization by setting `captchaId` and `enabledPages` to `null`.
+Replaces the CAPTCHA settings object for your organization > **Note**: You can disable CAPTCHA for your organization by setting `captchaId` and `enabledPages` to `null`.
 
 ### Example
 
@@ -637,7 +637,7 @@ with okta.ApiClient(configuration) as api_client:
     org_captcha_settings = okta.OrgCAPTCHASettings() # OrgCAPTCHASettings | 
 
     try:
-        # Replace the Org-wide CAPTCHA Settings
+        # Replace the org-wide CAPTCHA settings
         api_response = api_instance.replaces_org_captcha_settings(org_captcha_settings)
         print("The response of CAPTCHAApi->replaces_org_captcha_settings:\n")
         pprint(api_response)
@@ -681,7 +681,7 @@ Name | Type | Description  | Notes
 # **update_captcha_instance**
 > CAPTCHAInstance update_captcha_instance(captcha_id, instance)
 
-Update a CAPTCHA Instance
+Update a CAPTCHA instance
 
 Partially updates the properties of a specified CAPTCHA instance
 
@@ -723,7 +723,7 @@ with okta.ApiClient(configuration) as api_client:
     instance = okta.CAPTCHAInstance() # CAPTCHAInstance | 
 
     try:
-        # Update a CAPTCHA Instance
+        # Update a CAPTCHA instance
         api_response = api_instance.update_captcha_instance(captcha_id, instance)
         print("The response of CAPTCHAApi->update_captcha_instance:\n")
         pprint(api_response)

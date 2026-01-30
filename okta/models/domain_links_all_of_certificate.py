@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing_extensions import Self
 
-from okta.models.href_object_hints import HrefObjectHints
+from okta.models.href_hints import HrefHints
 
 
 class DomainLinksAllOfCertificate(BaseModel):
@@ -39,20 +39,18 @@ class DomainLinksAllOfCertificate(BaseModel):
     DomainLinksAllOfCertificate
     """  # noqa: E501
 
-    hints: Optional[HrefObjectHints] = None
+    hints: Optional[HrefHints] = None
     href: StrictStr = Field(description="Link URI")
     name: Optional[StrictStr] = Field(default=None, description="Link name")
-    type: Optional[StrictStr] = Field(
-        default=None,
-        description="The media type of the link. If omitted, it is implicitly "
-                    "`application/json`.",
-    )
     templated: Optional[StrictBool] = Field(
         default=None,
-        description='Indicates whether the Link Object\'s "href" property is a URI '
-                    "Template.",
+        description="Indicates whether the link object's `href` property is a URI template.",
     )
-    __properties: ClassVar[List[str]] = ["hints", "href", "name", "type", "templated"]
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description="The media type of the link. If omitted, it is implicitly `application/json`.",
+    )
+    __properties: ClassVar[List[str]] = ["hints", "href", "name", "templated", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,8 +81,17 @@ class DomainLinksAllOfCertificate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "name",
+                "templated",
+                "type",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -112,14 +119,14 @@ class DomainLinksAllOfCertificate(BaseModel):
         _obj = cls.model_validate(
             {
                 "hints": (
-                    HrefObjectHints.from_dict(obj["hints"])
+                    HrefHints.from_dict(obj["hints"])
                     if obj.get("hints") is not None
                     else None
                 ),
                 "href": obj.get("href"),
                 "name": obj.get("name"),
-                "type": obj.get("type"),
                 "templated": obj.get("templated"),
+                "type": obj.get("type"),
             }
         )
         return _obj

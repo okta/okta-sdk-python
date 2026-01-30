@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AuthenticatorType(str, Enum):
     """
-    AuthenticatorType
+    The type of authenticator
     """
 
     """
@@ -43,6 +43,7 @@ class AuthenticatorType(str, Enum):
     PHONE = "phone"
     SECURITY_KEY = "security_key"
     SECURITY_QUESTION = "security_question"
+    TAC = "tac"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

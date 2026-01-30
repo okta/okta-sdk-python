@@ -1,13 +1,14 @@
 # ApplicationAccessibility
 
+Specifies access settings for the app
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error_redirect_url** | **str** |  | [optional] 
-**login_redirect_url** | **str** |  | [optional] 
-**self_service** | **bool** |  | [optional] 
+**error_redirect_url** | **str** | Custom error page URL for the app | [optional] 
+**login_redirect_url** | **str** | Custom login page URL for the app &gt; **Note:** The &#x60;loginRedirectUrl&#x60; property is deprecated in Identity Engine. This property is used with the custom app login feature. Orgs that actively use this feature can continue to do so. See [Okta-hosted sign-in (redirect authentication)](https://developer.okta.com/docs/guides/redirect-authentication/) or [configure IdP routing rules](https://help.okta.com/okta_help.htm?type&#x3D;oie&amp;id&#x3D;ext-cfg-routing-rules) to redirect users to the appropriate sign-in app for orgs that don&#39;t use the custom app login feature. | [optional] 
+**self_service** | **bool** | Represents whether the app can be self-assignable by users | [optional] 
 
 ## Example
 

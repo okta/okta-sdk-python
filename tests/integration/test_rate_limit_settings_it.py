@@ -367,7 +367,7 @@ class TestRateLimitSettingsResource:
 
         # Test admin notifications with HTTP info
         admin_notifications, response, err = (
-            await client.get_rate_limit_settings_admin_notifications_with_http_info()
+            await client.get_rate_limit_settings_admin_notifications()
         )
         assert err is None
         assert isinstance(admin_notifications, models.RateLimitAdminNotifications)
@@ -376,7 +376,7 @@ class TestRateLimitSettingsResource:
 
         # Test per-client settings with HTTP info
         per_client_settings, response, err = (
-            await client.get_rate_limit_settings_per_client_with_http_info()
+            await client.get_rate_limit_settings_per_client()
         )
         assert err is None
         assert isinstance(per_client_settings, models.PerClientRateLimitSettings)
@@ -385,7 +385,7 @@ class TestRateLimitSettingsResource:
 
         # Test warning threshold with HTTP info
         warning_threshold, response, err = (
-            await client.get_rate_limit_settings_warning_threshold_with_http_info()
+            await client.get_rate_limit_settings_warning_threshold()
         )
         assert err is None
         assert isinstance(warning_threshold, models.RateLimitWarningThresholdResponse)

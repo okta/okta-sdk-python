@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class SmsTemplateType(str, Enum):
     """
-    SmsTemplateType
+    Type of the Template
     """
 
     """

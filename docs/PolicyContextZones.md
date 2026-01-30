@@ -1,5 +1,6 @@
 # PolicyContextZones
 
+The zone ID under the network rule condition.
 
 ## Properties
 

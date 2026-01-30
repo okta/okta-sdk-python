@@ -39,7 +39,7 @@ from okta.models.application_credentials_username_template import (
 
 class ApplicationCredentials(BaseModel):
     """
-    ApplicationCredentials
+    Credentials for the specified `signOnMode`
     """  # noqa: E501
 
     signing: Optional[ApplicationCredentialsSigning] = None

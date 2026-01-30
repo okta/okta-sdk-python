@@ -36,7 +36,7 @@ from okta.models.policy_access import PolicyAccess
 
 class PasswordPolicyRuleAction(BaseModel):
     """
-    PasswordPolicyRuleAction
+    Indicates if a password can be changed
     """  # noqa: E501
 
     access: Optional[PolicyAccess] = None

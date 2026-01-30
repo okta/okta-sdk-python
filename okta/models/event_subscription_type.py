@@ -30,14 +30,13 @@ from typing_extensions import Self
 
 class EventSubscriptionType(str, Enum):
     """
-    EventSubscriptionType
+    The events object type. Currently supports `EVENT_TYPE`.
     """
 
     """
     allowed enum values
     """
     EVENT_TYPE = "EVENT_TYPE"
-    FLOW_EVENT = "FLOW_EVENT"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

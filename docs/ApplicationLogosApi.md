@@ -4,13 +4,13 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**upload_application_logo**](ApplicationLogosApi.md#upload_application_logo) | **POST** /api/v1/apps/{appId}/logo | Upload an application Logo
+[**upload_application_logo**](ApplicationLogosApi.md#upload_application_logo) | **POST** /api/v1/apps/{appId}/logo | Upload an application logo
 
 
 # **upload_application_logo**
 > upload_application_logo(app_id, file)
 
-Upload an application Logo
+Upload an application logo
 
 Uploads a logo for the app instance. If the app already has a logo, this operation replaces the previous logo.  The logo is visible in the Admin Console as an icon for your app instance. If you have one `appLink` object configured, this logo also appears in the End-User Dashboard as an icon for your app. > **Note:** If you have multiple `appLink` objects, use the Admin Console to add logos for each app link. > You can't use the API to add logos for multiple app links. 
 
@@ -47,11 +47,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationLogosApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    file = None # bytearray | The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling. 
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    file = None # bytearray | The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling.  > **Notes:** > * Only SVG files encoded in UTF-8 are supported. For example, `<xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\">` is a valid SVG file declaration. > * `multipart/form-data` isn't supported for Python. Remove the `\\\"Content-Type\\\": \\\"multipart/form-data\\\"` line if you use the Python request sample code. 
 
     try:
-        # Upload an application Logo
+        # Upload an application logo
         api_instance.upload_application_logo(app_id, file)
     except Exception as e:
         print("Exception when calling ApplicationLogosApi->upload_application_logo: %s\n" % e)
@@ -64,8 +64,8 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **file** | **bytearray**| The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling.  | 
+ **app_id** | **str**| Application ID | 
+ **file** | **bytearray**| The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling.  &gt; **Notes:** &gt; * Only SVG files encoded in UTF-8 are supported. For example, &#x60;&lt;xml version&#x3D;\\\&quot;1.0\\\&quot; encoding&#x3D;\\\&quot;UTF-8\\\&quot;&gt;&#x60; is a valid SVG file declaration. &gt; * &#x60;multipart/form-data&#x60; isn&#39;t supported for Python. Remove the &#x60;\\\&quot;Content-Type\\\&quot;: \\\&quot;multipart/form-data\\\&quot;&#x60; line if you use the Python request sample code.  | 
 
 ### Return type
 

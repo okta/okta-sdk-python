@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class PushMethodKeyProtection(str, Enum):
     """
-    PushMethodKeyProtection
+    Indicates whether you must use a hardware key store
     """
 
     """

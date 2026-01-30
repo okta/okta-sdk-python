@@ -36,7 +36,7 @@ from okta.models.policy_rule_auth_context_type import PolicyRuleAuthContextType
 
 class PolicyRuleAuthContextCondition(BaseModel):
     """
-    PolicyRuleAuthContextCondition
+    Specifies an authentication entry point
     """  # noqa: E501
 
     auth_type: Optional[PolicyRuleAuthContextType] = Field(

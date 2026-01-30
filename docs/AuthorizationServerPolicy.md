@@ -5,7 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conditions** | [**PolicyRuleConditions**](PolicyRuleConditions.md) |  | [optional] 
+**id** | **str** | ID of the Policy | [optional] 
+**type** | **str** | Indicates that the Policy is an authorization server Policy | [optional] 
+**name** | **str** | Name of the Policy | [optional] 
+**conditions** | [**AuthorizationServerPolicyConditions**](AuthorizationServerPolicyConditions.md) |  | [optional] 
+**description** | **str** | Description of the Policy | [optional] 
+**priority** | **int** | Specifies the order in which this Policy is evaluated in relation to the other Policies in a custom authorization server | [optional] 
+**status** | **str** | Specifies whether requests have access to this Policy | [optional] 
+**system** | **bool** | Specifies whether Okta created this Policy | [optional] 
+**created** | **datetime** | Timestamp when the Policy was created | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the Policy was last updated | [optional] [readonly] 
+**links** | [**AuthorizationServerPolicyAllOfLinks**](AuthorizationServerPolicyAllOfLinks.md) |  | [optional] 
 
 ## Example
 

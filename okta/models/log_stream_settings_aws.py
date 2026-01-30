@@ -37,8 +37,7 @@ from okta.models.aws_region import AwsRegion
 
 class LogStreamSettingsAws(BaseModel):
     """
-    Specifies the configuration for the `aws_eventbridge` Log Stream type. This configuration can't be modified after
-    creation.
+    Specifies the configuration for the `aws_eventbridge` log stream type. This configuration can't be modified after creation.
     """  # noqa: E501
 
     account_id: Annotated[str, Field(min_length=12, strict=True, max_length=12)] = (

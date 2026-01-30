@@ -32,7 +32,8 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
-from okta.models.links_self import LinksSelf
+from okta.models.resource_conditions import ResourceConditions
+from okta.models.resource_set_resource_links import ResourceSetResourceLinks
 
 
 class ResourceSetResource(BaseModel):
@@ -40,24 +41,29 @@ class ResourceSetResource(BaseModel):
     ResourceSetResource
     """  # noqa: E501
 
+    conditions: Optional[ResourceConditions] = None
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the role was created"
+        default=None,
+        description="Timestamp when the resource set resource object was created",
     )
-    description: Optional[StrictStr] = Field(
-        default=None, description="Description of the Resource Set"
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique ID of the resource set resource object"
     )
-    id: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the role was last updated",
+        description="Timestamp when this object was last updated",
         alias="lastUpdated",
     )
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    orn: Optional[StrictStr] = Field(
+        default=None, description="The Okta Resource Name (ORN) of the resource"
+    )
+    links: Optional[ResourceSetResourceLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
+        "conditions",
         "created",
-        "description",
         "id",
         "lastUpdated",
+        "orn",
         "_links",
     ]
 
@@ -107,6 +113,13 @@ class ResourceSetResource(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of conditions
+        if self.conditions:
+            if not isinstance(self.conditions, dict):
+                _dict["conditions"] = self.conditions.to_dict()
+            else:
+                _dict["conditions"] = self.conditions
+
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -127,12 +140,17 @@ class ResourceSetResource(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "conditions": (
+                    ResourceConditions.from_dict(obj["conditions"])
+                    if obj.get("conditions") is not None
+                    else None
+                ),
                 "created": obj.get("created"),
-                "description": obj.get("description"),
                 "id": obj.get("id"),
                 "lastUpdated": obj.get("lastUpdated"),
+                "orn": obj.get("orn"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    ResourceSetResourceLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

@@ -1,5 +1,6 @@
 # PolicyRuleAuthContextType
 
+Specifies how the user is authenticated
 
 ## Properties
 

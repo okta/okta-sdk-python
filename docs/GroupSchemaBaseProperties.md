@@ -1,12 +1,13 @@
 # GroupSchemaBaseProperties
 
+All Okta-defined profile properties are defined in a profile subschema with the resolution scope `#base`. These properties can't be removed or edited, regardless of any attempt to do so.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | [**GroupSchemaAttribute**](GroupSchemaAttribute.md) |  | [optional] 
-**name** | [**GroupSchemaAttribute**](GroupSchemaAttribute.md) |  | [optional] 
+**description** | [**GroupSchemaAttribute**](GroupSchemaAttribute.md) | Human readable description of the group | [optional] 
+**name** | [**GroupSchemaAttribute**](GroupSchemaAttribute.md) | Unique identifier for the group | [optional] 
 
 ## Example
 

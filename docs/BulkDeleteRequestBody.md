@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity_type** | **str** |  | [optional] 
-**profiles** | [**List[IdentitySourceUserProfileForDelete]**](IdentitySourceUserProfileForDelete.md) |  | [optional] 
+**entity_type** | **str** | The type of data to bulk delete in a session. Currently, only &#x60;USERS&#x60; is supported. | [optional] 
+**profiles** | [**List[IdentitySourceUserProfileForDelete]**](IdentitySourceUserProfileForDelete.md) | Array of profiles to be deleted | [optional] 
 
 ## Example
 

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class IdpSelectionType(str, Enum):
     """
-    IdpSelectionType
+    Determines whether the rule should use expression language or a specific IdP
     """
 
     """

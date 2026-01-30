@@ -31,18 +31,18 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
-from okta.models.href_object import HrefObject
+from okta.models.href_object_next_link import HrefObjectNextLink
 
 
 class LinksNext(BaseModel):
     """
-    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the current status
-    of an application using the [JSON Hypertext Application Language](
+    Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc8288)) available for the current status of
+    an application using the [JSON Hypertext Application Language](
     https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification. Use the `LinksNext` object for dynamic
     discovery of related resources and lifecycle operations.
     """  # noqa: E501
 
-    next: Optional[HrefObject] = None
+    next: Optional[HrefObjectNextLink] = None
     __properties: ClassVar[List[str]] = ["next"]
 
     model_config = ConfigDict(
@@ -103,7 +103,7 @@ class LinksNext(BaseModel):
         _obj = cls.model_validate(
             {
                 "next": (
-                    HrefObject.from_dict(obj["next"])
+                    HrefObjectNextLink.from_dict(obj["next"])
                     if obj.get("next") is not None
                     else None
                 )

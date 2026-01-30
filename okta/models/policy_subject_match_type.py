@@ -30,7 +30,8 @@ from typing_extensions import Self
 
 class PolicySubjectMatchType(str, Enum):
     """
-    PolicySubjectMatchType
+    Determines the Okta user profile attribute match conditions for account linking and authentication of the transformed
+    IdP username
     """
 
     """

@@ -30,8 +30,7 @@ from typing_extensions import Self
 
 class PipelineType(str, Enum):
     """
-    The authentication pipeline of the org. `idx` means the org is using the Identity Engine, while `v1` means the org is
-    using the Classic authentication pipeline.
+    The Okta authentication pipeline of the org
     """
 
     """

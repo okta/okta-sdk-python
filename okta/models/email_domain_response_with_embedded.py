@@ -49,6 +49,11 @@ class EmailDomainResponseWithEmbedded(BaseModel):
     validation_status: Optional[EmailDomainStatus] = Field(
         default=None, alias="validationStatus"
     )
+    validation_subdomain: Optional[StrictStr] = Field(
+        default="mail",
+        description="The subdomain for the email sender's custom mail domain",
+        alias="validationSubdomain",
+    )
     display_name: StrictStr = Field(alias="displayName")
     user_name: StrictStr = Field(alias="userName")
     __properties: ClassVar[List[str]] = [
@@ -56,6 +61,7 @@ class EmailDomainResponseWithEmbedded(BaseModel):
         "domain",
         "id",
         "validationStatus",
+        "validationSubdomain",
         "displayName",
         "userName",
     ]
@@ -133,6 +139,11 @@ class EmailDomainResponseWithEmbedded(BaseModel):
                 "domain": obj.get("domain"),
                 "id": obj.get("id"),
                 "validationStatus": obj.get("validationStatus"),
+                "validationSubdomain": (
+                    obj.get("validationSubdomain")
+                    if obj.get("validationSubdomain") is not None
+                    else "mail"
+                ),
                 "displayName": obj.get("displayName"),
                 "userName": obj.get("userName"),
             }

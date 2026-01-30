@@ -32,6 +32,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
+from okta.models.authenticator_key_enum import AuthenticatorKeyEnum
 from okta.models.supported_methods import SupportedMethods
 from okta.models.well_known_app_authenticator_configuration_settings import (
     WellKnownAppAuthenticatorConfigurationSettings,
@@ -44,25 +45,39 @@ class WellKnownAppAuthenticatorConfiguration(BaseModel):
     """  # noqa: E501
 
     app_authenticator_enroll_endpoint: Optional[StrictStr] = Field(
-        default=None, alias="appAuthenticatorEnrollEndpoint"
+        default=None,
+        description="The authenticator enrollment endpoint",
+        alias="appAuthenticatorEnrollEndpoint",
     )
     authenticator_id: Optional[StrictStr] = Field(
         default=None,
         description="The unique identifier of the app authenticator",
         alias="authenticatorId",
     )
-    created_date: Optional[datetime] = Field(default=None, alias="createdDate")
-    key: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    created_date: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the authenticator was created",
+        alias="createdDate",
+    )
+    key: Optional[AuthenticatorKeyEnum] = None
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the authenticator was last modified",
+        alias="lastUpdated",
+    )
     name: Optional[StrictStr] = Field(
         default=None, description="The authenticator display name"
     )
-    org_id: Optional[StrictStr] = Field(default=None, alias="orgId")
+    org_id: Optional[StrictStr] = Field(
+        default=None, description="The `id` of the Okta Org", alias="orgId"
+    )
     settings: Optional[WellKnownAppAuthenticatorConfigurationSettings] = None
     supported_methods: Optional[List[SupportedMethods]] = Field(
         default=None, alias="supportedMethods"
     )
-    type: Optional[StrictStr] = None
+    type: Optional[StrictStr] = Field(
+        default=None, description="The type of authenticator"
+    )
     __properties: ClassVar[List[str]] = [
         "appAuthenticatorEnrollEndpoint",
         "authenticatorId",

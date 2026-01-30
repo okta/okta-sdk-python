@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class EventHookChannelConfigAuthSchemeType(str, Enum):
     """
-    EventHookChannelConfigAuthSchemeType
+    The authentication scheme type. Currently only supports `HEADER`.
     """
 
     """

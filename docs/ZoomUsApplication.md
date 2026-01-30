@@ -1,0 +1,39 @@
+# ZoomUsApplication
+
+Schema for the Zoom app (key name: `zoomus`)  To create a Zoom app, use the [Create an Application](/openapi/okta-management/management/tag/Application/#tag/Application/operation/createApplication) request with the following parameters in the request body. > **Note:** The Zoom app only supports `SAML_2_0` sign-on mode. 
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**accessibility** | [**ApplicationAccessibility**](ApplicationAccessibility.md) |  | [optional] 
+**credentials** | [**SchemeApplicationCredentials**](SchemeApplicationCredentials.md) |  | [optional] 
+**label** | **str** | User-defined display name for app | 
+**licensing** | [**ApplicationLicensing**](ApplicationLicensing.md) |  | [optional] 
+**name** | **str** |  | [default to 'zoomus']
+**profile** | **Dict[str, object]** | Contains any valid JSON schema for specifying properties that can be referenced from a request (only available to OAuth 2.0 client apps) | [optional] 
+**sign_on_mode** | **str** |  | [optional] 
+**status** | [**ApplicationLifecycleStatus**](ApplicationLifecycleStatus.md) |  | [optional] 
+**visibility** | [**ApplicationVisibility**](ApplicationVisibility.md) |  | [optional] 
+**settings** | [**ZoomUsApplicationSettings**](ZoomUsApplicationSettings.md) |  | 
+
+## Example
+
+```python
+from okta.models.zoom_us_application import ZoomUsApplication
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ZoomUsApplication from a JSON string
+zoom_us_application_instance = ZoomUsApplication.from_json(json)
+# print the JSON string representation of the object
+print(ZoomUsApplication.to_json())
+
+# convert the object into a dict
+zoom_us_application_dict = zoom_us_application_instance.to_dict()
+# create an instance of ZoomUsApplication from a dict
+zoom_us_application_from_dict = ZoomUsApplication.from_dict(zoom_us_application_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

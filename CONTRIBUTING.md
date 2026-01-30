@@ -45,33 +45,43 @@ $ git commit -m "descriptive commit message for your changes"
 
 > The `-b` specifies that you want to create a new branch called `feature_x`. You only specify `-b` the first time you checkout because you are creating a new branch. Once the `feature_x` branch exists, you can later switch to it with only `git checkout feature_x`.
 
-## Generate models and resource clients
+## Generate models and APIs
 
-Models and resource clients are auto-generated in accordance with specific openapi spec version https://github.com/okta/okta-management-openapi-spec.
-In order to make changes in models and/or resource clients you need to determine what is the root of changes:
+Models and APIs are auto-generated in accordance with specific openapi spec defined in openapi/api.yaml file.
+In order to make changes in models and/or APIs you need to determine what is the root of changes:
 
-### if change is needed because of new version of openapi spec has been released, then:
+### Prerequisites
+This project uses the **JAR version** of `openapi-generator-cli` to resolve specific configuration issues found in the NPM package.
 
-   1. get specific openapi spec version (v2.7.1 in the following example):
-  ```sh
-  cd openapi
-  npm install @okta/openapi@2.7.1
-  ```
-  or copy file `https://github.com/okta/okta-management-openapi-spec/blob/master/dist/spec.json` to `openapi/node_modules/@okta/openapi/dist/spec.json` (in order to get specific version of a file use release tags or clone repo and checkout specific commit)
+1.  **Install Java:** Ensure you have a Java Runtime Environment (JRE) installed.
+2.  **Download the Generator:** Download the latest JAR file from the [official documentation](https://openapi-generator.tech/docs/installation#jar).
+3.  **Setup:** Place the downloaded JAR file into the `openapi` directory.
+4.  **Generate:** Run the generation script:
+    ```bash
+    cd openapi
+    ./generate.sh
+    ```
+### if change is needed because of new version of openapi spec that has been released, then:
 
-   2. re-generate okta-sdk-python (in openapi directory):
-  ```sh
-  yarn build
-  ```
+   1. Make changes to the management.yaml file.
+   2. Re-generate SDK and verify SDK generation is successfully.
+
+      a. Change directory to openapi. `cd openapi`
+
+      b. Run the build script to re-generate the Okta SDK Python package:
+`generate.sh`
+   3. Raise the PR mentioning details about the changes made to the management.yaml file.
 
 ### if change isn't related to new openapi spec version, for example, update template for models, then:
 
    1. edit needed templates under `openapi/templates` directory
 
    2. re-generate okta-sdk-python (in openapi directory):
-  ```sh
-  yarn build
-  ```
+
+      a. Change directory to openapi. `cd openapi`
+
+      b. Run the build script to re-generate the Okta SDK Python package:
+`generate.sh`
 
 ## Adding/Changing Tests
 

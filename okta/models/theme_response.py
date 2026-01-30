@@ -50,31 +50,43 @@ class ThemeResponse(BaseModel):
 
     background_image: Optional[StrictStr] = Field(default=None, alias="backgroundImage")
     email_template_touch_point_variant: Optional[EmailTemplateTouchPointVariant] = (
-        Field(default=None, alias="emailTemplateTouchPointVariant")
+        Field(
+            default=EmailTemplateTouchPointVariant.OKTA_DEFAULT,
+            alias="emailTemplateTouchPointVariant",
+        )
     )
     end_user_dashboard_touch_point_variant: Optional[
         EndUserDashboardTouchPointVariant
-    ] = Field(default=None, alias="endUserDashboardTouchPointVariant")
+    ] = Field(
+        default=EndUserDashboardTouchPointVariant.OKTA_DEFAULT,
+        alias="endUserDashboardTouchPointVariant",
+    )
     error_page_touch_point_variant: Optional[ErrorPageTouchPointVariant] = Field(
-        default=None, alias="errorPageTouchPointVariant"
+        default=ErrorPageTouchPointVariant.OKTA_DEFAULT,
+        alias="errorPageTouchPointVariant",
     )
     favicon: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
     loading_page_touch_point_variant: Optional[LoadingPageTouchPointVariant] = Field(
-        default=None, alias="loadingPageTouchPointVariant"
+        default=LoadingPageTouchPointVariant.OKTA_DEFAULT,
+        alias="loadingPageTouchPointVariant",
     )
     logo: Optional[StrictStr] = None
     primary_color_contrast_hex: Optional[StrictStr] = Field(
-        default=None, alias="primaryColorContrastHex"
+        default=None,
+        description="Primary color contrast hex code",
+        alias="primaryColorContrastHex",
     )
     primary_color_hex: Optional[StrictStr] = Field(
-        default=None, alias="primaryColorHex"
+        default=None, description="Primary color hex code", alias="primaryColorHex"
     )
     secondary_color_contrast_hex: Optional[StrictStr] = Field(
-        default=None, alias="secondaryColorContrastHex"
+        default=None,
+        description="Secondary color contrast hex code",
+        alias="secondaryColorContrastHex",
     )
     secondary_color_hex: Optional[StrictStr] = Field(
-        default=None, alias="secondaryColorHex"
+        default=None, description="Secondary color hex code", alias="secondaryColorHex"
     )
     sign_in_page_touch_point_variant: Optional[SignInPageTouchPointVariant] = Field(
         default=None, alias="signInPageTouchPointVariant"

@@ -1,14 +1,12 @@
 # VerificationMethod
 
+The method used to verify a user
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**constraints** | [**List[AccessPolicyConstraints]**](AccessPolicyConstraints.md) |  | [optional] 
-**factor_mode** | **str** |  | [optional] 
-**reauthenticate_in** | **str** |  | [optional] 
-**type** | **str** |  | [optional] 
+**type** | [**PolicyRuleVerificationMethodType**](PolicyRuleVerificationMethodType.md) |  | [optional] 
 
 ## Example
 

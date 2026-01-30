@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -52,8 +52,8 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
+                            "require a "
+                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,
@@ -69,257 +69,12 @@ class SubscriptionApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Subscription:
-        """Retrieve a Subscription for a Role
+        """Retrieve a subscription for a role
 
         Retrieves a subscription by `notificationType` for a specified Role
 
         :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
-        :type role_ref: ListSubscriptionsRoleRoleRefParameter
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Subscription",
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_subscriptions_notification_type_role_serialize(
-                role_ref=role_ref,
-                notification_type=notification_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Subscription is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Subscription is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Subscription
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Subscription is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_subscriptions_notification_type_role_with_http_info(
-        self,
-        role_ref: Annotated[
-            Any,
-            Field(
-                description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
-            ),
-        ],
-        notification_type: NotificationType,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Subscription:
-        """Retrieve a Subscription for a Role
-
-        Retrieves a subscription by `notificationType` for a specified Role
-
-        :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
-        :type role_ref: ListSubscriptionsRoleRoleRefParameter
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Subscription",
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_subscriptions_notification_type_role_serialize(
-                role_ref=role_ref,
-                notification_type=notification_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Subscription is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Subscription is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Subscription
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Subscription is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_subscriptions_notification_type_role_without_preload_content(
-        self,
-        role_ref: Annotated[
-            Any,
-            Field(
-                description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
-            ),
-        ],
-        notification_type: NotificationType,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Subscription:
-        """Retrieve a Subscription for a Role
-
-        Retrieves a subscription by `notificationType` for a specified Role
-
-        :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
+        `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles). (required)
         :type role_ref: ListSubscriptionsRoleRoleRefParameter
         :param notification_type: (required)
         :type notification_type: NotificationType
@@ -467,7 +222,7 @@ class SubscriptionApi(ApiClient):
     async def get_subscriptions_notification_type_user(
         self,
         notification_type: NotificationType,
-        user_id: StrictStr,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -480,242 +235,14 @@ class SubscriptionApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Subscription:
-        """Retrieve a Subscription for a User
+        """Retrieve a subscription for a user
 
-        Retrieves a subscription by `notificationType` for a specified User. Returns an `AccessDeniedException` message if
+        Retrieves a subscription by `notificationType` for a specified user. Returns an `AccessDeniedException` message if
         requests are made for another user.
 
         :param notification_type: (required)
         :type notification_type: NotificationType
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Subscription",
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_subscriptions_notification_type_user_serialize(
-                notification_type=notification_type,
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Subscription is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Subscription is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Subscription
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Subscription is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_subscriptions_notification_type_user_with_http_info(
-        self,
-        notification_type: NotificationType,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Subscription:
-        """Retrieve a Subscription for a User
-
-        Retrieves a subscription by `notificationType` for a specified User. Returns an `AccessDeniedException` message if
-        requests are made for another user.
-
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Subscription",
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._get_subscriptions_notification_type_user_serialize(
-                notification_type=notification_type,
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Subscription is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Subscription is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Subscription
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Subscription is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_subscriptions_notification_type_user_without_preload_content(
-        self,
-        notification_type: NotificationType,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Subscription:
-        """Retrieve a Subscription for a User
-
-        Retrieves a subscription by `notificationType` for a specified User. Returns an `AccessDeniedException` message if
-        requests are made for another user.
-
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -864,8 +391,8 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
+                            "require a "
+                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         _request_timeout: Union[
@@ -880,249 +407,12 @@ class SubscriptionApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Subscription]:
-        """List all Subscriptions for a Role
+        """List all subscriptions for a role
 
         Lists all subscriptions available to a specified Role
 
         :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
-        :type role_ref: ListSubscriptionsRoleRoleRefParameter
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Subscription]",
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_subscriptions_role_serialize(
-                role_ref=role_ref,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[Subscription] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[Subscription] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Subscription
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[Subscription] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_subscriptions_role_with_http_info(
-        self,
-        role_ref: Annotated[
-            Any,
-            Field(
-                description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
-            ),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Subscription]:
-        """List all Subscriptions for a Role
-
-        Lists all subscriptions available to a specified Role
-
-        :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
-        :type role_ref: ListSubscriptionsRoleRoleRefParameter
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Subscription]",
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_subscriptions_role_serialize(
-                role_ref=role_ref,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[Subscription] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[Subscription] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Subscription
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[Subscription] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_subscriptions_role_without_preload_content(
-        self,
-        role_ref: Annotated[
-            Any,
-            Field(
-                description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
-            ),
-        ],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Subscription]:
-        """List all Subscriptions for a Role
-
-        Lists all subscriptions available to a specified Role
-
-        :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
+        `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles). (required)
         :type role_ref: ListSubscriptionsRoleRoleRefParameter
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1263,7 +553,7 @@ class SubscriptionApi(ApiClient):
     @validate_call
     async def list_subscriptions_user(
         self,
-        user_id: StrictStr,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1276,232 +566,12 @@ class SubscriptionApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Subscription]:
-        """List all Subscriptions for a User
+        """List all subscriptions for a user
 
-        Lists all subscriptions available to a specified User. Returns an `AccessDeniedException` message if requests are
+        Lists all subscriptions available to a specified user. Returns an `AccessDeniedException` message if requests are
         made for another user.
 
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Subscription]",
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_subscriptions_user_serialize(
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[Subscription] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[Subscription] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Subscription
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[Subscription] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_subscriptions_user_with_http_info(
-        self,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Subscription]:
-        """List all Subscriptions for a User
-
-        Lists all subscriptions available to a specified User. Returns an `AccessDeniedException` message if requests are
-        made for another user.
-
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Subscription]",
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._list_subscriptions_user_serialize(
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[Subscription] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[Subscription] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Subscription
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[Subscription] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_subscriptions_user_without_preload_content(
-        self,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Subscription]:
-        """List all Subscriptions for a User
-
-        Lists all subscriptions available to a specified User. Returns an `AccessDeniedException` message if requests are
-        made for another user.
-
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1646,8 +716,8 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
+                            "require a "
+                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,
@@ -1662,15 +732,14 @@ class SubscriptionApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Subscribe a Role to a Specific Notification Type
+    ) -> Success:
+        """Subscribe a role to a specific notification type
 
         Subscribes a Role to a specified notification type. Changes to Role subscriptions override the subscription status
         of any individual users with the Role.
 
         :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
+        `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles). (required)
         :type role_ref: ListSubscriptionsRoleRoleRefParameter
         :param notification_type: (required)
         :type notification_type: NotificationType
@@ -1697,7 +766,7 @@ class SubscriptionApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
+            "200": "Success",
             "403": "Error",
             "404": None,
             "429": "Error",
@@ -1722,9 +791,19 @@ class SubscriptionApi(ApiClient):
         )
 
         if error:
-            return (None, error)
+            if Success is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
 
-        response, response_body, error = await self._request_executor.execute(request)
+        if Success is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, Success
+            )
 
         if response_body == "" or response.status == 204:
             response_data = RESTResponse(response)
@@ -1739,227 +818,10 @@ class SubscriptionApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def subscribe_by_notification_type_role_with_http_info(
-        self,
-        role_ref: Annotated[
-            Any,
-            Field(
-                description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
-            ),
-        ],
-        notification_type: NotificationType,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Subscribe a Role to a Specific Notification Type
-
-        Subscribes a Role to a specified notification type. Changes to Role subscriptions override the subscription status
-        of any individual users with the Role.
-
-        :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
-        :type role_ref: ListSubscriptionsRoleRoleRefParameter
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._subscribe_by_notification_type_role_serialize(
-                role_ref=role_ref,
-                notification_type=notification_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def subscribe_by_notification_type_role_without_preload_content(
-        self,
-        role_ref: Annotated[
-            Any,
-            Field(
-                description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
-            ),
-        ],
-        notification_type: NotificationType,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Subscribe a Role to a Specific Notification Type
-
-        Subscribes a Role to a specified notification type. Changes to Role subscriptions override the subscription status
-        of any individual users with the Role.
-
-        :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
-        :type role_ref: ListSubscriptionsRoleRoleRefParameter
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._subscribe_by_notification_type_role_serialize(
-                role_ref=role_ref,
-                notification_type=notification_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
+                if Success is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
 
             response_data = RESTResponse(response)
             response_data.read(response_body)
@@ -2025,7 +887,7 @@ class SubscriptionApi(ApiClient):
     async def subscribe_by_notification_type_user(
         self,
         notification_type: NotificationType,
-        user_id: StrictStr,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2037,15 +899,15 @@ class SubscriptionApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Subscribe a User to a Specific Notification Type
+    ) -> Success:
+        """Subscribe a user to a specific notification type
 
-        Subscribes the current user to a specified notification type. Returns an `AccessDeniedException` message if
-        requests are made for another user.
+        Subscribes the current user to a specified notification type. Returns an `AccessDeniedException` message if requests
+        are made for another user.
 
         :param notification_type: (required)
         :type notification_type: NotificationType
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2070,7 +932,7 @@ class SubscriptionApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
+            "200": "Success",
             "403": "Error",
             "404": None,
             "429": "Error",
@@ -2095,9 +957,19 @@ class SubscriptionApi(ApiClient):
         )
 
         if error:
-            return (None, error)
+            if Success is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
 
-        response, response_body, error = await self._request_executor.execute(request)
+        if Success is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, Success
+            )
 
         if response_body == "" or response.status == 204:
             response_data = RESTResponse(response)
@@ -2112,209 +984,10 @@ class SubscriptionApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def subscribe_by_notification_type_user_with_http_info(
-        self,
-        notification_type: NotificationType,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Subscribe a User to a Specific Notification Type
-
-        Subscribes the current user to a specified notification type. Returns an `AccessDeniedException` message if
-        requests are made for another user.
-
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._subscribe_by_notification_type_user_serialize(
-                notification_type=notification_type,
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def subscribe_by_notification_type_user_without_preload_content(
-        self,
-        notification_type: NotificationType,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Subscribe a User to a Specific Notification Type
-
-        Subscribes the current user to a specified notification type. Returns an `AccessDeniedException` message if
-        requests are made for another user.
-
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._subscribe_by_notification_type_user_serialize(
-                notification_type=notification_type,
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
+                if Success is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
 
             response_data = RESTResponse(response)
             response_data.read(response_body)
@@ -2383,8 +1056,8 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
+                            "require a "
+                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,
@@ -2399,15 +1072,14 @@ class SubscriptionApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unsubscribe a Role from a Specific Notification Type
+    ) -> Success:
+        """Unsubscribe a role from a specific notification type
 
         Unsubscribes a Role from a specified notification type. Changes to Role subscriptions override the subscription
         status of any individual users with the Role.
 
         :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
+        `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles). (required)
         :type role_ref: ListSubscriptionsRoleRoleRefParameter
         :param notification_type: (required)
         :type notification_type: NotificationType
@@ -2434,7 +1106,7 @@ class SubscriptionApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
+            "200": "Success",
             "403": "Error",
             "404": None,
             "429": "Error",
@@ -2459,9 +1131,19 @@ class SubscriptionApi(ApiClient):
         )
 
         if error:
-            return (None, error)
+            if Success is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
 
-        response, response_body, error = await self._request_executor.execute(request)
+        if Success is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, Success
+            )
 
         if response_body == "" or response.status == 204:
             response_data = RESTResponse(response)
@@ -2476,227 +1158,10 @@ class SubscriptionApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def unsubscribe_by_notification_type_role_with_http_info(
-        self,
-        role_ref: Annotated[
-            Any,
-            Field(
-                description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
-            ),
-        ],
-        notification_type: NotificationType,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unsubscribe a Role from a Specific Notification Type
-
-        Unsubscribes a Role from a specified notification type. Changes to Role subscriptions override the subscription
-        status of any individual users with the Role.
-
-        :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
-        :type role_ref: ListSubscriptionsRoleRoleRefParameter
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._unsubscribe_by_notification_type_role_serialize(
-                role_ref=role_ref,
-                notification_type=notification_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def unsubscribe_by_notification_type_role_without_preload_content(
-        self,
-        role_ref: Annotated[
-            Any,
-            Field(
-                description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                "require a `roleId`. See [Standard Role Types]("
-                "https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types)."
-            ),
-        ],
-        notification_type: NotificationType,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unsubscribe a Role from a Specific Notification Type
-
-        Unsubscribes a Role from a specified notification type. Changes to Role subscriptions override the subscription
-        status of any individual users with the Role.
-
-        :param role_ref: A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a
-        `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-        (required)
-        :type role_ref: ListSubscriptionsRoleRoleRefParameter
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._unsubscribe_by_notification_type_role_serialize(
-                role_ref=role_ref,
-                notification_type=notification_type,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
+                if Success is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
 
             response_data = RESTResponse(response)
             response_data.read(response_body)
@@ -2762,7 +1227,7 @@ class SubscriptionApi(ApiClient):
     async def unsubscribe_by_notification_type_user(
         self,
         notification_type: NotificationType,
-        user_id: StrictStr,
+        user_id: Annotated[StrictStr, Field(description="ID of an existing Okta user")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2774,15 +1239,15 @@ class SubscriptionApi(ApiClient):
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unsubscribe a User from a Specific Notification Type
+    ) -> Success:
+        """Unsubscribe a user from a specific notification type
 
         Unsubscribes the current user from a specified notification type. Returns an `AccessDeniedException` message if
         requests are made for another user.
 
         :param notification_type: (required)
         :type notification_type: NotificationType
-        :param user_id: (required)
+        :param user_id: ID of an existing Okta user (required)
         :type user_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2807,7 +1272,7 @@ class SubscriptionApi(ApiClient):
         """  # noqa: E501
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
+            "200": "Success",
             "403": "Error",
             "404": None,
             "429": "Error",
@@ -2832,9 +1297,19 @@ class SubscriptionApi(ApiClient):
         )
 
         if error:
-            return (None, error)
+            if Success is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
 
-        response, response_body, error = await self._request_executor.execute(request)
+        if Success is Success:
+            response, response_body, error = await self._request_executor.execute(
+                request
+            )
+        else:
+            response, response_body, error = await self._request_executor.execute(
+                request, Success
+            )
 
         if response_body == "" or response.status == 204:
             response_data = RESTResponse(response)
@@ -2849,209 +1324,10 @@ class SubscriptionApi(ApiClient):
             response_body = response_body.encode("utf-8")
 
             if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def unsubscribe_by_notification_type_user_with_http_info(
-        self,
-        notification_type: NotificationType,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unsubscribe a User from a Specific Notification Type
-
-        Unsubscribes the current user from a specified notification type. Returns an `AccessDeniedException` message if
-        requests are made for another user.
-
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._unsubscribe_by_notification_type_user_serialize(
-                notification_type=notification_type,
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def unsubscribe_by_notification_type_user_without_preload_content(
-        self,
-        notification_type: NotificationType,
-        user_id: StrictStr,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Unsubscribe a User from a Specific Notification Type
-
-        Unsubscribes the current user from a specified notification type. Returns an `AccessDeniedException` message if
-        requests are made for another user.
-
-        :param notification_type: (required)
-        :type notification_type: NotificationType
-        :param user_id: (required)
-        :type user_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": None,
-            "403": "Error",
-            "404": None,
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = (
-            self._unsubscribe_by_notification_type_user_serialize(
-                notification_type=notification_type,
-                user_id=user_id,
-                _request_auth=_request_auth,
-                _content_type=_content_type,
-                _headers=_headers,
-                _host_index=_host_index,
-            )
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
+                if Success is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
 
             response_data = RESTResponse(response)
             response_data.read(response_body)

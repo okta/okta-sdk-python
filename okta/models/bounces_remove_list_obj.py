@@ -38,7 +38,9 @@ class BouncesRemoveListObj(BaseModel):
     """  # noqa: E501
 
     email_addresses: Optional[List[StrictStr]] = Field(
-        default=None, alias="emailAddresses"
+        default=None,
+        description="A list of email addresses to remove from the email-service bounce list",
+        alias="emailAddresses",
     )
     __properties: ClassVar[List[str]] = ["emailAddresses"]
 

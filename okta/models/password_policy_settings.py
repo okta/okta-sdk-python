@@ -40,7 +40,7 @@ from okta.models.password_policy_recovery_settings import PasswordPolicyRecovery
 
 class PasswordPolicySettings(BaseModel):
     """
-    PasswordPolicySettings
+    Specifies the policy level settings
     """  # noqa: E501
 
     delegation: Optional[PasswordPolicyDelegationSettings] = None

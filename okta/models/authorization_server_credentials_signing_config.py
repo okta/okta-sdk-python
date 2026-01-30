@@ -45,9 +45,21 @@ class AuthorizationServerCredentialsSigningConfig(BaseModel):
     AuthorizationServerCredentialsSigningConfig
     """  # noqa: E501
 
-    kid: Optional[StrictStr] = None
-    last_rotated: Optional[datetime] = Field(default=None, alias="lastRotated")
-    next_rotation: Optional[datetime] = Field(default=None, alias="nextRotation")
+    kid: Optional[StrictStr] = Field(
+        default=None,
+        description="The ID of the JSON Web Key used for signing tokens issued by the authorization server",
+    )
+    last_rotated: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the authorization server started using the `kid` for signing tokens",
+        alias="lastRotated",
+    )
+    next_rotation: Optional[datetime] = Field(
+        default=None,
+        description="The timestamp when the authorization server changes the Key for signing tokens. This is only returned "
+        "when `rotationMode` is set to `AUTO`.",
+        alias="nextRotation",
+    )
     rotation_mode: Optional[AuthorizationServerCredentialsRotationMode] = Field(
         default=None, alias="rotationMode"
     )
@@ -91,9 +103,11 @@ class AuthorizationServerCredentialsSigningConfig(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
+                "kid",
                 "last_rotated",
                 "next_rotation",
             ]

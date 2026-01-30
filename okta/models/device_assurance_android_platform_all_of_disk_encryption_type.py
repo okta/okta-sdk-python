@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
-from okta.models.disk_encryption_type import DiskEncryptionType
+from okta.models.disk_encryption_type_android import DiskEncryptionTypeAndroid
 
 
 class DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(BaseModel):
@@ -39,7 +39,7 @@ class DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(BaseModel):
     DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType
     """  # noqa: E501
 
-    include: Optional[List[DiskEncryptionType]] = None
+    include: Optional[List[DiskEncryptionTypeAndroid]] = None
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(

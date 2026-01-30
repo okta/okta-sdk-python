@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.policy_network_connection import PolicyNetworkConnection
@@ -36,12 +36,20 @@ from okta.models.policy_network_connection import PolicyNetworkConnection
 
 class PolicyNetworkCondition(BaseModel):
     """
-    PolicyNetworkCondition
+    Specifies a network selection mode and a set of network zones to be included or excluded. If the connection parameter's
+    data type is `ZONE`, one of the `include` or `exclude` arrays is required. Specific zone IDs to include or exclude are
+    enumerated in the respective arrays.
     """  # noqa: E501
 
     connection: Optional[PolicyNetworkConnection] = None
-    exclude: Optional[List[StrictStr]] = None
-    include: Optional[List[StrictStr]] = None
+    exclude: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="The zones to exclude. Required only if connection data type is `ZONE`",
+    )
+    include: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="The zones to include. Required only if connection data type is `ZONE`",
+    )
     __properties: ClassVar[List[str]] = ["connection", "exclude", "include"]
 
     model_config = ConfigDict(

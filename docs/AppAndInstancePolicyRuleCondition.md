@@ -1,12 +1,13 @@
 # AppAndInstancePolicyRuleCondition
 
+Specifies apps to include or exclude. If `include` is empty, then the condition is met for all apps.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**exclude** | [**List[AppAndInstanceConditionEvaluatorAppOrInstance]**](AppAndInstanceConditionEvaluatorAppOrInstance.md) |  | [optional] 
-**include** | [**List[AppAndInstanceConditionEvaluatorAppOrInstance]**](AppAndInstanceConditionEvaluatorAppOrInstance.md) |  | [optional] 
+**exclude** | [**List[AppAndInstanceConditionEvaluatorAppOrInstance]**](AppAndInstanceConditionEvaluatorAppOrInstance.md) | The list of apps or app instances to exclude | [optional] 
+**include** | [**List[AppAndInstanceConditionEvaluatorAppOrInstance]**](AppAndInstanceConditionEvaluatorAppOrInstance.md) | The list of apps or app instances to match on | [optional] 
 
 ## Example
 

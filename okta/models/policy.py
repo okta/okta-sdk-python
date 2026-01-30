@@ -39,12 +39,16 @@ from okta.models.policy_type import PolicyType
 
 if TYPE_CHECKING:
     from okta.models.access_policy import AccessPolicy
+    from okta.models.device_signal_collection_policy import DeviceSignalCollectionPolicy
+    from okta.models.entity_risk_policy import EntityRiskPolicy
     from okta.models.idp_discovery_policy import IdpDiscoveryPolicy
-    from okta.models.multifactor_enrollment_policy import MultifactorEnrollmentPolicy
+    from okta.models.authenticator_enrollment_policy import (
+        AuthenticatorEnrollmentPolicy,
+    )
     from okta.models.okta_sign_on_policy import OktaSignOnPolicy
     from okta.models.password_policy import PasswordPolicy
+    from okta.models.post_auth_session_policy import PostAuthSessionPolicy
     from okta.models.profile_enrollment_policy import ProfileEnrollmentPolicy
-    from okta.models.authorization_server_policy import AuthorizationServerPolicy
 
 
 class Policy(BaseModel):
@@ -53,28 +57,29 @@ class Policy(BaseModel):
     """  # noqa: E501
 
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the Policy was created"
+        default=None, description="Timestamp when the policy was created"
     )
     description: Optional[StrictStr] = Field(
-        default=None, description="Policy description"
+        default=None, description="Description of the policy"
     )
-    id: Optional[StrictStr] = Field(default=None, description="Policy ID")
+    id: Optional[StrictStr] = Field(
+        default="Assigned", description="Identifier of the policy"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the Policy was last updated",
+        description="Timestamp when the policy was last modified",
         alias="lastUpdated",
     )
-    name: Optional[StrictStr] = Field(default=None, description="Policy name")
+    name: StrictStr = Field(description="Name of the policy")
     priority: Optional[StrictInt] = Field(
         default=None,
-        description="Specifies the order in which this Policy is evaluated in relation to "
-                    "the other policies",
+        description="Specifies the order in which this policy is evaluated in relation to the other policies",
     )
     status: Optional[LifecycleStatus] = None
     system: Optional[StrictBool] = Field(
-        default=None, description="Specifies whether Okta created the Policy"
+        default=False, description="Specifies whether Okta created the policy"
     )
-    type: Optional[PolicyType] = None
+    type: PolicyType
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
         default=None, alias="_embedded"
     )
@@ -105,12 +110,14 @@ class Policy(BaseModel):
     # discriminator mappings
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
         "ACCESS_POLICY": "AccessPolicy",
+        "DEVICE_SIGNAL_COLLECTION": "DeviceSignalCollectionPolicy",
+        "ENTITY_RISK": "EntityRiskPolicy",
         "IDP_DISCOVERY": "IdpDiscoveryPolicy",
-        "MFA_ENROLL": "MultifactorEnrollmentPolicy",
+        "MFA_ENROLL": "AuthenticatorEnrollmentPolicy",
         "OKTA_SIGN_ON": "OktaSignOnPolicy",
         "PASSWORD": "PasswordPolicy",
+        "POST_AUTH_SESSION": "PostAuthSessionPolicy",
         "PROFILE_ENROLLMENT": "ProfileEnrollmentPolicy",
-        "AuthorizationServerPolicy": "AuthorizationServerPolicy",
     }
 
     @classmethod
@@ -135,12 +142,14 @@ class Policy(BaseModel):
     def from_json(cls, json_str: str) -> Optional[
         Union[
             AccessPolicy,
+            DeviceSignalCollectionPolicy,
+            EntityRiskPolicy,
             IdpDiscoveryPolicy,
-            MultifactorEnrollmentPolicy,
+            AuthenticatorEnrollmentPolicy,
             OktaSignOnPolicy,
             PasswordPolicy,
+            PostAuthSessionPolicy,
             ProfileEnrollmentPolicy,
-            AuthorizationServerPolicy,
         ]
     ]:
         """Create an instance of Policy from a JSON string"""
@@ -187,12 +196,14 @@ class Policy(BaseModel):
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[
         Union[
             AccessPolicy,
+            DeviceSignalCollectionPolicy,
+            EntityRiskPolicy,
             IdpDiscoveryPolicy,
-            MultifactorEnrollmentPolicy,
+            AuthenticatorEnrollmentPolicy,
             OktaSignOnPolicy,
             PasswordPolicy,
+            PostAuthSessionPolicy,
             ProfileEnrollmentPolicy,
-            AuthorizationServerPolicy,
         ]
     ]:
         """Create an instance of Policy from a dict"""
@@ -202,14 +213,22 @@ class Policy(BaseModel):
             return import_module("okta.models.access_policy").AccessPolicy.from_dict(
                 obj
             )
+        if object_type == "DeviceSignalCollectionPolicy":
+            return import_module(
+                "okta.models.device_signal_collection_policy"
+            ).DeviceSignalCollectionPolicy.from_dict(obj)
+        if object_type == "EntityRiskPolicy":
+            return import_module(
+                "okta.models.entity_risk_policy"
+            ).EntityRiskPolicy.from_dict(obj)
         if object_type == "IdpDiscoveryPolicy":
             return import_module(
                 "okta.models.idp_discovery_policy"
             ).IdpDiscoveryPolicy.from_dict(obj)
-        if object_type == "MultifactorEnrollmentPolicy":
+        if object_type == "AuthenticatorEnrollmentPolicy":
             return import_module(
-                "okta.models.multifactor_enrollment_policy"
-            ).MultifactorEnrollmentPolicy.from_dict(obj)
+                "okta.models.authenticator_enrollment_policy"
+            ).AuthenticatorEnrollmentPolicy.from_dict(obj)
         if object_type == "OktaSignOnPolicy":
             return import_module(
                 "okta.models.okta_sign_on_policy"
@@ -218,14 +237,14 @@ class Policy(BaseModel):
             return import_module(
                 "okta.models.password_policy"
             ).PasswordPolicy.from_dict(obj)
+        if object_type == "PostAuthSessionPolicy":
+            return import_module(
+                "okta.models.post_auth_session_policy"
+            ).PostAuthSessionPolicy.from_dict(obj)
         if object_type == "ProfileEnrollmentPolicy":
             return import_module(
                 "okta.models.profile_enrollment_policy"
             ).ProfileEnrollmentPolicy.from_dict(obj)
-        if object_type == "AuthorizationServerPolicy":
-            return import_module(
-                "okta.models.authorization_server_policy"
-            ).AuthorizationServerPolicy.from_dict(obj)
 
         raise ValueError(
             "Policy failed to lookup discriminator value from "

@@ -1,5 +1,6 @@
 # AppAndInstanceType
 
+Type of app
 
 ## Properties
 

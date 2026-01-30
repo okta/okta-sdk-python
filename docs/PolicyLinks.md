@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
 **activate** | [**HrefObjectActivateLink**](HrefObjectActivateLink.md) |  | [optional] 
 **deactivate** | [**HrefObjectDeactivateLink**](HrefObjectDeactivateLink.md) |  | [optional] 
-**rules** | [**HrefObjectRulesLink**](HrefObjectRulesLink.md) |  | [optional] 
 **mappings** | [**HrefObjectMappingsLink**](HrefObjectMappingsLink.md) |  | [optional] 
+**rules** | [**HrefObjectRulesLink**](HrefObjectRulesLink.md) |  | [optional] 
+**var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
 
 ## Example
 

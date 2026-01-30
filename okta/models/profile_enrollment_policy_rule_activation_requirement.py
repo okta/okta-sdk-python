@@ -34,7 +34,8 @@ from typing_extensions import Self
 
 class ProfileEnrollmentPolicyRuleActivationRequirement(BaseModel):
     """
-    ProfileEnrollmentPolicyRuleActivationRequirement
+    Contains a single Boolean property that indicates whether `emailVerification` should occur (`true`) or not (`false`,
+    default)
     """  # noqa: E501
 
     email_verification: Optional[StrictBool] = Field(

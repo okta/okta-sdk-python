@@ -32,6 +32,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
+from okta.models.group_embedded import GroupEmbedded
 from okta.models.group_links import GroupLinks
 from okta.models.group_profile import GroupProfile
 from okta.models.group_type import GroupType
@@ -42,18 +43,28 @@ class Group(BaseModel):
     Group
     """  # noqa: E501
 
-    created: Optional[datetime] = None
-    id: Optional[StrictStr] = None
-    last_membership_updated: Optional[datetime] = Field(
-        default=None, alias="lastMembershipUpdated"
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the group was created"
     )
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    object_class: Optional[List[StrictStr]] = Field(default=None, alias="objectClass")
+    id: Optional[StrictStr] = Field(default=None, description="Unique ID for the group")
+    last_membership_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the groups memberships were last updated",
+        alias="lastMembershipUpdated",
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the group's profile was last updated",
+        alias="lastUpdated",
+    )
+    object_class: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Determines the group's `profile`",
+        alias="objectClass",
+    )
     profile: Optional[GroupProfile] = None
     type: Optional[GroupType] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, alias="_embedded"
-    )
+    embedded: Optional[GroupEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[GroupLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "created",
@@ -101,7 +112,6 @@ class Group(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
@@ -110,7 +120,6 @@ class Group(BaseModel):
                 "last_membership_updated",
                 "last_updated",
                 "object_class",
-                "embedded",
             ]
         )
 
@@ -125,6 +134,13 @@ class Group(BaseModel):
                 _dict["profile"] = self.profile.to_dict()
             else:
                 _dict["profile"] = self.profile
+
+        # override the default output from pydantic by calling `to_dict()` of embedded
+        if self.embedded:
+            if not isinstance(self.embedded, dict):
+                _dict["_embedded"] = self.embedded.to_dict()
+            else:
+                _dict["_embedded"] = self.embedded
 
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
@@ -152,12 +168,20 @@ class Group(BaseModel):
                 "lastUpdated": obj.get("lastUpdated"),
                 "objectClass": obj.get("objectClass"),
                 "profile": (
-                    GroupProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
+                    GroupProfile.from_dict(obj["profile"])
+                    if obj.get("profile") is not None
+                    else None
                 ),
                 "type": obj.get("type"),
-                "_embedded": obj.get("_embedded"),
+                "_embedded": (
+                    GroupEmbedded.from_dict(obj["_embedded"])
+                    if obj.get("_embedded") is not None
+                    else None
+                ),
                 "_links": (
-                    GroupLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
+                    GroupLinks.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
                 ),
             }
         )

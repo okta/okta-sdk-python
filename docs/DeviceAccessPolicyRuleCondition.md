@@ -1,17 +1,14 @@
 # DeviceAccessPolicyRuleCondition
 
+<x-lifecycle class=\"oie\"></x-lifecycle> Specifies the device condition to match on
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**migrated** | **bool** |  | [optional] 
-**platform** | [**DevicePolicyRuleConditionPlatform**](DevicePolicyRuleConditionPlatform.md) |  | [optional] 
-**rooted** | **bool** |  | [optional] 
-**trust_level** | [**DevicePolicyTrustLevel**](DevicePolicyTrustLevel.md) |  | [optional] 
-**managed** | **bool** |  | [optional] 
-**registered** | **bool** |  | [optional] 
 **assurance** | [**DevicePolicyRuleConditionAssurance**](DevicePolicyRuleConditionAssurance.md) |  | [optional] 
+**managed** | **bool** | Indicates if the device is managed. A device is considered managed if it&#39;s part of a device management system. | [optional] 
+**registered** | **bool** | Indicates if the device is registered. A device is registered if the User enrolls with Okta Verify that&#39;s installed on the device. When the &#x60;managed&#x60; property is passed, you must also include the &#x60;registered&#x60; property and set it to &#x60;true&#x60;.  | [optional] 
 
 ## Example
 

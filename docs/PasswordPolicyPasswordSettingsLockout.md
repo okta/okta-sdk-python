@@ -1,14 +1,15 @@
 # PasswordPolicyPasswordSettingsLockout
 
+Lockout settings
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auto_unlock_minutes** | **int** |  | [optional] 
-**max_attempts** | **int** |  | [optional] 
-**show_lockout_failures** | **bool** |  | [optional] 
-**user_lockout_notification_channels** | **List[str]** |  | [optional] 
+**auto_unlock_minutes** | **int** | Specifies the time interval (in minutes) a locked account remains locked before it is automatically unlocked: &#x60;0&#x60; indicates no limit | [optional] [default to 0]
+**max_attempts** | **int** | Specifies the number of times Users can attempt to sign in to their accounts with an invalid password before their accounts are locked: &#x60;0&#x60; indicates no limit | [optional] [default to 10]
+**show_lockout_failures** | **bool** | Indicates if the User should be informed when their account is locked | [optional] [default to False]
+**user_lockout_notification_channels** | **List[str]** | How the user is notified when their account becomes locked. The only acceptable values are &#x60;[]&#x60; and &#x60;[&#39;EMAIL&#39;]&#x60;. | [optional] [default to []]
 
 ## Example
 

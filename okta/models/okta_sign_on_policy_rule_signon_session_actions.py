@@ -34,17 +34,27 @@ from typing_extensions import Self
 
 class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
     """
-    OktaSignOnPolicyRuleSignonSessionActions
+    Properties governing the user's session lifetime
     """  # noqa: E501
 
     max_session_idle_minutes: Optional[StrictInt] = Field(
-        default=None, alias="maxSessionIdleMinutes"
+        default=120,
+        description="Maximum number of minutes that a user session can be idle before the session is ended",
+        alias="maxSessionIdleMinutes",
     )
     max_session_lifetime_minutes: Optional[StrictInt] = Field(
-        default=None, alias="maxSessionLifetimeMinutes"
+        default=0,
+        description="Maximum number of minutes (from when the user signs in) that a user's session is active. Set this to "
+        "force users to sign in again after the number of specified minutes. Disable by setting to `0`.",
+        alias="maxSessionLifetimeMinutes",
     )
     use_persistent_cookie: Optional[StrictBool] = Field(
-        default=False, alias="usePersistentCookie"
+        default=False,
+        description="If set to `false`, user session cookies only last the length of a browser session. If set to `true`, "
+        "user session cookies last across browser sessions. This setting doesn't impact administrators who can "
+        "never have persistent session cookies. This property is read-only for the default rule of the default "
+        "global session policy.",
+        alias="usePersistentCookie",
     )
     __properties: ClassVar[List[str]] = [
         "maxSessionIdleMinutes",
@@ -102,8 +112,16 @@ class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "maxSessionIdleMinutes": obj.get("maxSessionIdleMinutes"),
-                "maxSessionLifetimeMinutes": obj.get("maxSessionLifetimeMinutes"),
+                "maxSessionIdleMinutes": (
+                    obj.get("maxSessionIdleMinutes")
+                    if obj.get("maxSessionIdleMinutes") is not None
+                    else 120
+                ),
+                "maxSessionLifetimeMinutes": (
+                    obj.get("maxSessionLifetimeMinutes")
+                    if obj.get("maxSessionLifetimeMinutes") is not None
+                    else 0
+                ),
                 "usePersistentCookie": (
                     obj.get("usePersistentCookie")
                     if obj.get("usePersistentCookie") is not None

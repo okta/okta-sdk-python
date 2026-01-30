@@ -39,19 +39,18 @@ class SsprPrimaryRequirement(BaseModel):
     Defines the authenticators permitted for the initial authentication step of password recovery
     """  # noqa: E501
 
-    methods: Optional[List[StrictStr]] = Field(
-        default=None,
-        description="Authenticator methods allowed for the initial authentication "
-                    "step of password recovery",
-    )
     method_constraints: Optional[List[AuthenticatorMethodConstraint]] = Field(
         default=None,
-        description="Constraints on the values "
-                    "specified in the `methods` array. Specifying a constraint limits methods to specific authenticator(s). "
-                    "Currently, Google OTP is the only accepted constraint.",
+        description="Constraints on the values specified in the `methods` array. Specifying a constraint limits methods to "
+        "specific authenticator(s). Currently, Google OTP is the only accepted constraint.",
         alias="methodConstraints",
     )
-    __properties: ClassVar[List[str]] = ["methods", "methodConstraints"]
+    methods: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Authenticator methods allowed for the initial authentication step of password recovery. Method `otp` "
+        "requires a constraint limiting it to a Google authenticator.",
+    )
+    __properties: ClassVar[List[str]] = ["methodConstraints", "methods"]
 
     @field_validator("methods")
     def methods_validate_enum(cls, value):
@@ -60,9 +59,9 @@ class SsprPrimaryRequirement(BaseModel):
             return value
 
         for i in value:
-            if i not in set(["push", "sms", "voice", "email"]):
+            if i not in set(["push", "sms", "voice", "email", "otp"]):
                 raise ValueError(
-                    "each list item must be one of ('push', 'sms', 'voice', 'email')"
+                    "each list item must be one of ('push', 'sms', 'voice', 'email', 'otp')"
                 )
         return value
 
@@ -123,7 +122,6 @@ class SsprPrimaryRequirement(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "methods": obj.get("methods"),
                 "methodConstraints": (
                     [
                         AuthenticatorMethodConstraint.from_dict(_item)
@@ -132,6 +130,7 @@ class SsprPrimaryRequirement(BaseModel):
                     if obj.get("methodConstraints") is not None
                     else None
                 ),
+                "methods": obj.get("methods"),
             }
         )
         return _obj

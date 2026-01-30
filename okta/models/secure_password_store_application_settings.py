@@ -28,7 +28,14 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictStr,
+    field_validator,
+)
 from typing_extensions import Self
 
 from okta.models.application_settings_notes import ApplicationSettingsNotes
@@ -45,17 +52,35 @@ class SecurePasswordStoreApplicationSettings(BaseModel):
     SecurePasswordStoreApplicationSettings
     """  # noqa: E501
 
+    em_opt_in_status: Optional[StrictStr] = Field(
+        default=None,
+        description="The entitlement management opt-in status for the app",
+        alias="emOptInStatus",
+    )
     identity_store_id: Optional[StrictStr] = Field(
-        default=None, alias="identityStoreId"
+        default=None,
+        description="Identifies an additional identity store app, if your app supports it. The `identityStoreId` value must "
+        "be a valid identity store app ID. This identity store app must be created in the same org as your app.",
+        alias="identityStoreId",
     )
     implicit_assignment: Optional[StrictBool] = Field(
-        default=None, alias="implicitAssignment"
+        default=None,
+        description="Controls whether Okta automatically assigns users to the app based on the user's role or group "
+        "membership.",
+        alias="implicitAssignment",
     )
-    inline_hook_id: Optional[StrictStr] = Field(default=None, alias="inlineHookId")
+    inline_hook_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Identifier of an inline hook. Inline hooks are outbound calls from Okta to your own custom code, "
+        "triggered at specific points in Okta process flows. They allow you to integrate custom functionality "
+        "into those flows. See [Inline hooks](/openapi/okta-management/management/tag/InlineHook/).",
+        alias="inlineHookId",
+    )
     notes: Optional[ApplicationSettingsNotes] = None
     notifications: Optional[ApplicationSettingsNotifications] = None
     app: Optional[SecurePasswordStoreApplicationSettingsApplication] = None
     __properties: ClassVar[List[str]] = [
+        "emOptInStatus",
         "identityStoreId",
         "implicitAssignment",
         "inlineHookId",
@@ -63,6 +88,18 @@ class SecurePasswordStoreApplicationSettings(BaseModel):
         "notifications",
         "app",
     ]
+
+    @field_validator("em_opt_in_status")
+    def em_opt_in_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["DISABLED", "DISABLING", "ENABLED", "ENABLING", "NONE"]):
+            raise ValueError(
+                "must be one of enum values ('DISABLED', 'DISABLING', 'ENABLED', 'ENABLING', 'NONE')"
+            )
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,8 +130,13 @@ class SecurePasswordStoreApplicationSettings(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "em_opt_in_status",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -135,6 +177,7 @@ class SecurePasswordStoreApplicationSettings(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "emOptInStatus": obj.get("emOptInStatus"),
                 "identityStoreId": obj.get("identityStoreId"),
                 "implicitAssignment": obj.get("implicitAssignment"),
                 "inlineHookId": obj.get("inlineHookId"),

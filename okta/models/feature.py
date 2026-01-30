@@ -32,23 +32,28 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.enabled_status import EnabledStatus
+from okta.models.feature_links import FeatureLinks
 from okta.models.feature_stage import FeatureStage
 from okta.models.feature_type import FeatureType
-from okta.models.links_self import LinksSelf
 
 
 class Feature(BaseModel):
     """
-    Feature
+    Specifies feature release cycle information
     """  # noqa: E501
 
-    description: Optional[StrictStr] = None
-    id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
+    description: Optional[StrictStr] = Field(
+        default=None,
+        description="Brief description of the feature and what it provides",
+    )
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier for this feature"
+    )
+    name: Optional[StrictStr] = Field(default=None, description="Name of the feature")
     stage: Optional[FeatureStage] = None
     status: Optional[EnabledStatus] = None
     type: Optional[FeatureType] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[FeatureLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "description",
         "id",
@@ -132,12 +137,14 @@ class Feature(BaseModel):
                 "id": obj.get("id"),
                 "name": obj.get("name"),
                 "stage": (
-                    FeatureStage.from_dict(obj["stage"]) if obj.get("stage") is not None else None
+                    FeatureStage.from_dict(obj["stage"])
+                    if obj.get("stage") is not None
+                    else None
                 ),
                 "status": obj.get("status"),
                 "type": obj.get("type"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
+                    FeatureLinks.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

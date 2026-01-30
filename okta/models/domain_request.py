@@ -42,7 +42,9 @@ class DomainRequest(BaseModel):
     certificate_source_type: DomainCertificateSourceType = Field(
         alias="certificateSourceType"
     )
-    domain: StrictStr = Field(description="Custom domain name")
+    domain: StrictStr = Field(
+        description="Custom domain name  > **Note:** You can't use the reserved `drapp.{yourOrgSubDomain}.okta.com` domain."
+    )
     __properties: ClassVar[List[str]] = ["certificateSourceType", "domain"]
 
     model_config = ConfigDict(

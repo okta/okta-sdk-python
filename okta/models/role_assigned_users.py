@@ -31,7 +31,7 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
-from okta.models.links_next import LinksNext
+from okta.models.links_next_for_role_assignments import LinksNextForRoleAssignments
 from okta.models.role_assigned_user import RoleAssignedUser
 
 
@@ -41,7 +41,7 @@ class RoleAssignedUsers(BaseModel):
     """  # noqa: E501
 
     value: Optional[List[RoleAssignedUser]] = None
-    links: Optional[LinksNext] = Field(default=None, alias="_links")
+    links: Optional[LinksNextForRoleAssignments] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["value", "_links"]
 
     model_config = ConfigDict(
@@ -114,7 +114,7 @@ class RoleAssignedUsers(BaseModel):
                     else None
                 ),
                 "_links": (
-                    LinksNext.from_dict(obj["_links"])
+                    LinksNextForRoleAssignments.from_dict(obj["_links"])
                     if obj.get("_links") is not None
                     else None
                 ),

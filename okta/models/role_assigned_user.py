@@ -39,8 +39,10 @@ class RoleAssignedUser(BaseModel):
     RoleAssignedUser
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    orn: Optional[StrictStr] = None
+    id: Optional[StrictStr] = Field(default=None, description="The ID of the user")
+    orn: Optional[StrictStr] = Field(
+        default=None, description="ORN representing the assignee"
+    )
     links: Optional[LinksSelfAndRoles] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "orn", "_links"]
 

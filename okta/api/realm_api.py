@@ -3,8 +3,8 @@
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
 # License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -29,8 +29,10 @@ from typing_extensions import Annotated
 
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
+from okta.models.create_realm_request import CreateRealmRequest
 from okta.models.realm import Realm
 from okta.models.success import Success
+from okta.models.update_realm_request import UpdateRealmRequest
 from okta.rest import RESTResponse
 
 
@@ -47,7 +49,7 @@ class RealmApi(ApiClient):
     @validate_call
     async def create_realm(
         self,
-        body: Realm,
+        body: CreateRealmRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,226 +62,12 @@ class RealmApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Realm:
-        """Create a Realm
+        """Create a realm
 
-        Creates a new Realm
-
-        :param body: (required)
-        :type body: Realm
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Realm",
-            "400": "Error",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._create_realm_serialize(
-            body=body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Realm is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Realm is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Realm
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Realm is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def create_realm_with_http_info(
-        self,
-        body: Realm,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Realm:
-        """Create a Realm
-
-        Creates a new Realm
+        Creates a new realm
 
         :param body: (required)
-        :type body: Realm
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Realm",
-            "400": "Error",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._create_realm_serialize(
-            body=body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Realm is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Realm is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Realm
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Realm is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def create_realm_without_preload_content(
-        self,
-        body: Realm,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Realm:
-        """Create a Realm
-
-        Creates a new Realm
-
-        :param body: (required)
-        :type body: Realm
+        :type body: CreateRealmRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -427,7 +215,7 @@ class RealmApi(ApiClient):
     @validate_call
     async def delete_realm(
         self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
+        realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -440,204 +228,12 @@ class RealmApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Delete a Realm
+        """Delete a realm
 
-        Deletes a Realm permanently. This operation can only be performed after disassociating other entities like Users
-        and Identity Providers from a Realm.
+        Deletes a realm permanently. This operation can only be performed after disassociating other entities like users and
+        identity providers from a realm.
 
-        :param realm_id: `id` of the Realm (required)
-        :type realm_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._delete_realm_serialize(
-            realm_id=realm_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def delete_realm_with_http_info(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete a Realm
-
-        Deletes a Realm permanently. This operation can only be performed after disassociating other entities like Users
-        and Identity Providers from a Realm.
-
-        :param realm_id: `id` of the Realm (required)
-        :type realm_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "204": None,
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._delete_realm_serialize(
-            realm_id=realm_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, response_body, error = await self._request_executor.execute(request)
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                return (response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def delete_realm_without_preload_content(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete a Realm
-
-        Deletes a Realm permanently. This operation can only be performed after disassociating other entities like Users
-        and Identity Providers from a Realm.
-
-        :param realm_id: `id` of the Realm (required)
+        :param realm_id: ID of the realm (required)
         :type realm_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -764,7 +360,7 @@ class RealmApi(ApiClient):
     @validate_call
     async def get_realm(
         self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
+        realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -777,227 +373,11 @@ class RealmApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Realm:
-        """Retrieve a Realm
+        """Retrieve a realm
 
-        Retrieves a Realm
+        Retrieves a realm
 
-        :param realm_id: `id` of the Realm (required)
-        :type realm_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Realm",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._get_realm_serialize(
-            realm_id=realm_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Realm is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Realm is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Realm
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Realm is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_realm_with_http_info(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Realm:
-        """Retrieve a Realm
-
-        Retrieves a Realm
-
-        :param realm_id: `id` of the Realm (required)
-        :type realm_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Realm",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._get_realm_serialize(
-            realm_id=realm_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Realm is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Realm is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Realm
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Realm is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def get_realm_without_preload_content(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Realm:
-        """Retrieve a Realm
-
-        Retrieves a Realm
-
-        :param realm_id: `id` of the Realm (required)
+        :param realm_id: ID of the realm (required)
         :type realm_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1146,28 +526,32 @@ class RealmApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                "in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) "
-                "for more information."
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
+                            "the list and is obtained from the `Link` response header. See [Pagination]("
+                            "https://developer.okta.com/docs/api/#pagination) and [Link header]("
+                            "https://developer.okta.com/docs/api/#link-header)."
             ),
         ] = None,
         search: Annotated[
             Optional[StrictStr],
             Field(
-                description="Searches for Realms with a supported filtering expression for most properties"
+                description="Searches for realms with a supported filtering expression for most properties.  Searches for "
+                            "realms "
+                            "can be filtered by the contains (`co`) operator. You can only use `co` with the `profile.name` "
+                            "property. See [Operators](https://developer.okta.com/docs/api/#operators)."
             ),
         ] = None,
         sort_by: Annotated[
             Optional[StrictStr],
             Field(
-                description="Specifies field to sort by and can be any single property (for search queries only)."
+                description="Specifies the field to sort by and can be any single property (for search queries only)"
             ),
         ] = None,
         sort_order: Annotated[
             Optional[StrictStr],
             Field(
-                description="Specifies sort order `asc` or `desc` (for search queries only). This parameter is ignored if "
-                "`sortBy` isn't present."
+                description="Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if "
+                            "`sortBy` isn't present."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1182,324 +566,24 @@ class RealmApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[Realm]:
-        """List all Realms
+        """List all realms
 
-        Lists all Realms
-
-        :param limit: Specifies the number of results returned. Defaults to 10 if `search` is provided.
-        :type limit: int
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
-        list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.
-        :type after: str
-        :param search: Searches for Realms with a supported filtering expression for most properties
-        :type search: str
-        :param sort_by: Specifies field to sort by and can be any single property (for search queries only).
-        :type sort_by: str
-        :param sort_order: Specifies sort order `asc` or `desc` (for search queries only). This parameter is ignored if
-        `sortBy` isn't present.
-        :type sort_order: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Realm]",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._list_realms_serialize(
-            limit=limit,
-            after=after,
-            search=search,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[Realm] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[Realm] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Realm
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[Realm] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_realms_with_http_info(
-        self,
-        limit: Annotated[
-            Optional[StrictInt],
-            Field(
-                description="Specifies the number of results returned. Defaults to 10 if `search` is provided."
-            ),
-        ] = None,
-        after: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                "in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) "
-                "for more information."
-            ),
-        ] = None,
-        search: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Searches for Realms with a supported filtering expression for most properties"
-            ),
-        ] = None,
-        sort_by: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Specifies field to sort by and can be any single property (for search queries only)."
-            ),
-        ] = None,
-        sort_order: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Specifies sort order `asc` or `desc` (for search queries only). This parameter is ignored if "
-                "`sortBy` isn't present."
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Realm]:
-        """List all Realms
-
-        Lists all Realms
+        Lists all realms.  > **Note:** The `search` parameter results are sourced from an eventually consistent datasource
+        and may not reflect the latest information.
 
         :param limit: Specifies the number of results returned. Defaults to 10 if `search` is provided.
         :type limit: int
         :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
-        list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.
+        list and is obtained from the `Link` response header. See [Pagination](
+        https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header).
         :type after: str
-        :param search: Searches for Realms with a supported filtering expression for most properties
+        :param search: Searches for realms with a supported filtering expression for most properties.  Searches for realms
+        can be filtered by the contains (`co`) operator. You can only use `co` with the `profile.name` property. See [
+        Operators](https://developer.okta.com/docs/api/#operators).
         :type search: str
-        :param sort_by: Specifies field to sort by and can be any single property (for search queries only).
+        :param sort_by: Specifies the field to sort by and can be any single property (for search queries only)
         :type sort_by: str
-        :param sort_order: Specifies sort order `asc` or `desc` (for search queries only). This parameter is ignored if
-        `sortBy` isn't present.
-        :type sort_order: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Realm]",
-            "403": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._list_realms_serialize(
-            limit=limit,
-            after=after,
-            search=search,
-            sort_by=sort_by,
-            sort_order=sort_order,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if List[Realm] is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if List[Realm] is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Realm
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if List[Realm] is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def list_realms_without_preload_content(
-        self,
-        limit: Annotated[
-            Optional[StrictInt],
-            Field(
-                description="Specifies the number of results returned. Defaults to 10 if `search` is provided."
-            ),
-        ] = None,
-        after: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                "in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) "
-                "for more information."
-            ),
-        ] = None,
-        search: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Searches for Realms with a supported filtering expression for most properties"
-            ),
-        ] = None,
-        sort_by: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Specifies field to sort by and can be any single property (for search queries only)."
-            ),
-        ] = None,
-        sort_order: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Specifies sort order `asc` or `desc` (for search queries only). This parameter is ignored if "
-                "`sortBy` isn't present."
-            ),
-        ] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Realm]:
-        """List all Realms
-
-        Lists all Realms
-
-        :param limit: Specifies the number of results returned. Defaults to 10 if `search` is provided.
-        :type limit: int
-        :param after: The cursor to use for pagination. It is an opaque string that specifies your current location in the
-        list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.
-        :type after: str
-        :param search: Searches for Realms with a supported filtering expression for most properties
-        :type search: str
-        :param sort_by: Specifies field to sort by and can be any single property (for search queries only).
-        :type sort_by: str
-        :param sort_order: Specifies sort order `asc` or `desc` (for search queries only). This parameter is ignored if
+        :param sort_order: Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if
         `sortBy` isn't present.
         :type sort_order: str
         :param _request_timeout: timeout setting for this request. If one
@@ -1657,10 +741,10 @@ class RealmApi(ApiClient):
         )
 
     @validate_call
-    async def update_realm(
+    async def replace_realm(
         self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
-        body: Realm,
+        realm_id: Annotated[StrictStr, Field(description="ID of the realm")],
+        body: UpdateRealmRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1673,14 +757,14 @@ class RealmApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Realm:
-        """Update a Realm
+        """Replace the realm profile
 
-        Updates a Realm
+        Replaces the realm profile
 
-        :param realm_id: `id` of the Realm (required)
+        :param realm_id: ID of the realm (required)
         :type realm_id: str
         :param body: (required)
-        :type body: Realm
+        :type body: UpdateRealmRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1711,7 +795,7 @@ class RealmApi(ApiClient):
             "429": "Error",
         }
 
-        method, url, header_params, body, post_params = self._update_realm_serialize(
+        method, url, header_params, body, post_params = self._replace_realm_serialize(
             realm_id=realm_id,
             body=body,
             _request_auth=_request_auth,
@@ -1768,231 +852,7 @@ class RealmApi(ApiClient):
             )
             return (resp.data, resp, None)
 
-    @validate_call
-    async def update_realm_with_http_info(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
-        body: Realm,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Realm:
-        """Update a Realm
-
-        Updates a Realm
-
-        :param realm_id: `id` of the Realm (required)
-        :type realm_id: str
-        :param body: (required)
-        :type body: Realm
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Realm",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._update_realm_serialize(
-            realm_id=realm_id,
-            body=body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Realm is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Realm is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Realm
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Realm is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    @validate_call
-    async def update_realm_without_preload_content(
-        self,
-        realm_id: Annotated[StrictStr, Field(description="`id` of the Realm")],
-        body: Realm,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Realm:
-        """Update a Realm
-
-        Updates a Realm
-
-        :param realm_id: `id` of the Realm (required)
-        :type realm_id: str
-        :param body: (required)
-        :type body: Realm
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """  # noqa: E501
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            "200": "Realm",
-            "400": "Error",
-            "403": "Error",
-            "404": "Error",
-            "429": "Error",
-        }
-
-        method, url, header_params, body, post_params = self._update_realm_serialize(
-            realm_id=realm_id,
-            body=body,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        )
-
-        form = {}
-        keep_empty_params = False
-
-        request, error = await self._request_executor.create_request(
-            method, url, body, header_params, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            if Realm is Success:
-                return (None, error)
-            else:
-                return (None, None, error)
-
-        if Realm is Success:
-            response, response_body, error = await self._request_executor.execute(
-                request
-            )
-        else:
-            response, response_body, error = await self._request_executor.execute(
-                request, Realm
-            )
-
-        if response_body == "" or response.status == 204:
-            response_data = RESTResponse(response)
-            resp = ApiResponse(
-                status_code=response_data.status,
-                data=None,
-                headers=response_data.getheaders(),
-                raw_data=b"",
-            )
-            return (None, resp, None)
-        else:
-            response_body = response_body.encode("utf-8")
-
-            if error:
-                if Realm is Success:
-                    return (response, error)
-                else:
-                    return (None, response, error)
-
-            response_data = RESTResponse(response)
-            response_data.read(response_body)
-            resp = self.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-            return (resp.data, resp, None)
-
-    def _update_realm_serialize(
+    def _replace_realm_serialize(
         self,
         realm_id,
         body,
@@ -2040,7 +900,7 @@ class RealmApi(ApiClient):
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
         return self.param_serialize(
-            method="POST",
+            method="PUT",
             resource_path="/api/v1/realms/{realmId}",
             path_params=_path_params,
             query_params=_query_params,

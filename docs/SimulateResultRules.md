@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**conditions** | [**List[SimulateResultConditions]**](SimulateResultConditions.md) | List of all conditions involved for this rule evaluation | [optional] 
 **id** | **str** | The unique ID number of the policy rule | [optional] 
 **name** | **str** | The name of the policy rule | [optional] 
-**status** | **str** | The result of the entity evaluation | [optional] 
-**conditions** | [**SimulateResultConditions**](SimulateResultConditions.md) |  | [optional] 
+**status** | [**SimulateResultStatus**](SimulateResultStatus.md) |  | [optional] 
 
 ## Example
 

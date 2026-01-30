@@ -37,10 +37,16 @@ class DefaultApp(BaseModel):
     DefaultApp
     """  # noqa: E501
 
-    app_instance_id: Optional[StrictStr] = Field(default=None, alias="appInstanceId")
-    app_link_name: Optional[StrictStr] = Field(default=None, alias="appLinkName")
+    app_instance_id: Optional[StrictStr] = Field(
+        default=None, description="ID for the App instance", alias="appInstanceId"
+    )
+    app_link_name: Optional[StrictStr] = Field(
+        default=None, description="Name for the app instance", alias="appLinkName"
+    )
     classic_application_uri: Optional[StrictStr] = Field(
-        default=None, alias="classicApplicationUri"
+        default=None,
+        description="Application URI for classic Orgs",
+        alias="classicApplicationUri",
     )
     __properties: ClassVar[List[str]] = [
         "appInstanceId",

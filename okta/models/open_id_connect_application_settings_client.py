@@ -28,10 +28,19 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictStr,
+    field_validator,
+)
+from typing_extensions import Annotated
 from typing_extensions import Self
 
-from okta.models.o_auth_grant_type import OAuthGrantType
+from okta.models.grant_type import GrantType
+from okta.models.id_token_key_encryption_algorithm import IdTokenKeyEncryptionAlgorithm
 from okta.models.o_auth_response_type import OAuthResponseType
 from okta.models.open_id_connect_application_consent_method import (
     OpenIdConnectApplicationConsentMethod,
@@ -41,6 +50,9 @@ from okta.models.open_id_connect_application_idp_initiated_login import (
 )
 from okta.models.open_id_connect_application_issuer_mode import (
     OpenIdConnectApplicationIssuerMode,
+)
+from okta.models.open_id_connect_application_network import (
+    OpenIdConnectApplicationNetwork,
 )
 from okta.models.open_id_connect_application_settings_client_keys import (
     OpenIdConnectApplicationSettingsClientKeys,
@@ -57,65 +69,231 @@ class OpenIdConnectApplicationSettingsClient(BaseModel):
     """  # noqa: E501
 
     application_type: Optional[OpenIdConnectApplicationType] = None
-    client_uri: Optional[StrictStr] = None
-    consent_method: Optional[OpenIdConnectApplicationConsentMethod] = None
+    backchannel_authentication_request_signing_alg: Optional[StrictStr] = Field(
+        default=None,
+        description="The signing algorithm for Client-Initiated Backchannel Authentication (CIBA) signed requests using JWT. "
+        "If this value isn't set and a JWT-signed request is sent, the request fails. > **Note:** This property "
+        "appears for clients with `urn:openid:params:grant-type:ciba` defined as one of the `grant_types`. ",
+    )
+    backchannel_custom_authenticator_id: Optional[
+        Annotated[str, Field(min_length=20, strict=True, max_length=20)]
+    ] = Field(
+        default=None,
+        description="The ID of the custom authenticator that authenticates the user > **Note:** This property appears for "
+        "clients with `urn:openid:params:grant-type:ciba` defined as one of the `grant_types`. ",
+    )
+    backchannel_token_delivery_mode: Optional[StrictStr] = Field(
+        default=None,
+        description="The delivery mode for Client-Initiated Backchannel Authentication (CIBA).  Currently, only `poll` is "
+        "supported. > **Note:** This property appears for clients with `urn:openid:params:grant-type:ciba` "
+        "defined as one of the `grant_types`. ",
+    )
+    client_uri: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None,
+        description="URL string of a web page providing information about the client",
+    )
+    consent_method: Optional[OpenIdConnectApplicationConsentMethod] = (
+        OpenIdConnectApplicationConsentMethod.TRUSTED
+    )
     dpop_bound_access_tokens: Optional[StrictBool] = Field(
         default=False,
-        description="Indicates that the client application uses "
-                    "Demonstrating Proof-of-Possession (DPoP) for token "
-                    "requests. If `true`, the authorization server rejects token requests from this client that don't "
-                    "contain the DPoP header.",
+        description="Indicates that the client application uses Demonstrating Proof-of-Possession (DPoP) for token requests. "
+        "If `true`, the authorization server rejects token requests from this client that don't contain the DPoP "
+        "header. > **Note:** If `dpop_bound_access_tokens` is true, then `client_credentials` and `implicit` "
+        "aren't allowed in `grant_types`. ",
     )
     frontchannel_logout_session_required: Optional[StrictBool] = Field(
-        default=None, description="Include user session details."
+        default=None,
+        description='<x-lifecycle-container><x-lifecycle class="ea"></x-lifecycle> <x-lifecycle '
+        'class="oie"></x-lifecycle></x-lifecycle-container>Determines whether Okta sends `sid` and `iss` in the '
+        "logout request",
     )
-    frontchannel_logout_uri: Optional[StrictStr] = Field(
-        default=None, description="URL where Okta sends the logout request."
+    frontchannel_logout_uri: Optional[
+        Annotated[str, Field(strict=True, max_length=1024)]
+    ] = Field(
+        default=None,
+        description='<x-lifecycle-container><x-lifecycle class="ea"></x-lifecycle> <x-lifecycle '
+        'class="oie"></x-lifecycle></x-lifecycle-container>URL where Okta sends the logout request',
     )
-    grant_types: Optional[List[OAuthGrantType]] = None
+    grant_types: List[GrantType]
+    id_token_encrypted_response_alg: Optional[IdTokenKeyEncryptionAlgorithm] = None
     idp_initiated_login: Optional[OpenIdConnectApplicationIdpInitiatedLogin] = None
-    initiate_login_uri: Optional[StrictStr] = None
+    initiate_login_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="URL string that a third party can use to initiate the sign-in flow by the client",
+    )
     issuer_mode: Optional[OpenIdConnectApplicationIssuerMode] = None
     jwks: Optional[OpenIdConnectApplicationSettingsClientKeys] = None
     jwks_uri: Optional[StrictStr] = Field(
         default=None,
-        description="URL string that references a JSON Web Key Set for validating JWTs presented to Okta.",
+        description="URL string that references a JSON Web Key Set for validating JWTs presented to Okta or for encrypting "
+        "ID tokens minted by Okta for the client",
     )
-    logo_uri: Optional[StrictStr] = None
+    logo_uri: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(
+        default=None,
+        description="The URL string that references a logo for the client. This logo appears on the client tile in the "
+        "End-User Dashboard. It also appears on the client consent dialog during the client consent flow.",
+    )
+    network: Optional[OpenIdConnectApplicationNetwork] = None
     participate_slo: Optional[StrictBool] = Field(
         default=None,
-        description="Allows the app to participate in front-channel single logout.",
+        description='<x-lifecycle-container><x-lifecycle class="ea"></x-lifecycle> <x-lifecycle '
+        'class="oie"></x-lifecycle></x-lifecycle-container>Allows the app to participate in front-channel Single '
+        "Logout  > **Note:** You can only enable `participate_slo` for `web` and `browser` application types ("
+        "`application_type`). ",
     )
-    policy_uri: Optional[StrictStr] = None
-    post_logout_redirect_uris: Optional[List[StrictStr]] = None
-    redirect_uris: Optional[List[StrictStr]] = None
+    policy_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="URL string of a web page providing the client's policy document",
+    )
+    post_logout_redirect_uris: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Array of redirection URI strings for relying party-initiated logouts",
+    )
+    redirect_uris: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Array of redirection URI strings for use in redirect-based flows. > **Note:** At least one "
+        "`redirect_uris` and `response_types` are required for all client types, with exceptions: if the client "
+        "uses the [Resource Owner Password ](https://tools.ietf.org/html/rfc6749#section-4.3)flow (`grant_types` "
+        "contains `password`) or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4)flow ("
+        "`grant_types` contains `client_credentials`), then no `redirect_uris` or `response_types` is necessary. "
+        "In these cases, you can pass either null or an empty array for these attributes.",
+    )
     refresh_token: Optional[OpenIdConnectApplicationSettingsRefreshToken] = None
-    response_types: Optional[List[OAuthResponseType]] = None
-    tos_uri: Optional[StrictStr] = None
-    wildcard_redirect: Optional[StrictStr] = None
+    request_object_signing_alg: Optional[StrictStr] = Field(
+        default=None,
+        description="The type of JSON Web Key Set (JWKS) algorithm that must be used for signing request objects",
+    )
+    response_types: Optional[List[OAuthResponseType]] = Field(
+        default=None, description="Array of OAuth 2.0 response type strings"
+    )
+    sector_identifier_uri: Optional[
+        Annotated[str, Field(strict=True, max_length=1024)]
+    ] = Field(
+        default=None,
+        description="The sector identifier used for pairwise `subject_type`. See [OIDC Pairwise Identifier Algorithm]("
+        "https://openid.net/specs/openid-connect-messages-1_0-20.html#idtype.pairwise.alg)",
+    )
+    subject_type: Optional[StrictStr] = Field(
+        default=None, description="Type of the subject"
+    )
+    tos_uri: Optional[StrictStr] = Field(
+        default=None,
+        description="URL string of a web page providing the client's terms of service document",
+    )
+    wildcard_redirect: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates if the client is allowed to use wildcard matching of `redirect_uris`",
+    )
     __properties: ClassVar[List[str]] = [
         "application_type",
+        "backchannel_authentication_request_signing_alg",
+        "backchannel_custom_authenticator_id",
+        "backchannel_token_delivery_mode",
         "client_uri",
         "consent_method",
         "dpop_bound_access_tokens",
         "frontchannel_logout_session_required",
         "frontchannel_logout_uri",
         "grant_types",
+        "id_token_encrypted_response_alg",
         "idp_initiated_login",
         "initiate_login_uri",
         "issuer_mode",
         "jwks",
         "jwks_uri",
         "logo_uri",
+        "network",
         "participate_slo",
         "policy_uri",
         "post_logout_redirect_uris",
         "redirect_uris",
         "refresh_token",
+        "request_object_signing_alg",
         "response_types",
+        "sector_identifier_uri",
+        "subject_type",
         "tos_uri",
         "wildcard_redirect",
     ]
+
+    @field_validator("backchannel_authentication_request_signing_alg")
+    def backchannel_authentication_request_signing_alg_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(
+            [
+                "HS256",
+                "HS384",
+                "HS512",
+                "RS256",
+                "RS384",
+                "RS512",
+                "ES256",
+                "ES384",
+                "ES512",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('HS256', 'HS384', 'HS512', 'RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512')"
+            )
+        return value
+
+    @field_validator("backchannel_token_delivery_mode")
+    def backchannel_token_delivery_mode_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["poll", "ping", "push"]):
+            raise ValueError("must be one of enum values ('poll', 'ping', 'push')")
+        return value
+
+    @field_validator("request_object_signing_alg")
+    def request_object_signing_alg_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(
+            [
+                "HS256",
+                "HS384",
+                "HS512",
+                "RS256",
+                "RS384",
+                "RS512",
+                "ES256",
+                "ES384",
+                "ES512",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('HS256', 'HS384', 'HS512', 'RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512')"
+            )
+        return value
+
+    @field_validator("subject_type")
+    def subject_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["public", "pairwise"]):
+            raise ValueError("must be one of enum values ('public', 'pairwise')")
+        return value
+
+    @field_validator("wildcard_redirect")
+    def wildcard_redirect_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["DISABLED", "SUBDOMAIN"]):
+            raise ValueError("must be one of enum values ('DISABLED', 'SUBDOMAIN')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -168,6 +346,13 @@ class OpenIdConnectApplicationSettingsClient(BaseModel):
             else:
                 _dict["jwks"] = self.jwks
 
+        # override the default output from pydantic by calling `to_dict()` of network
+        if self.network:
+            if not isinstance(self.network, dict):
+                _dict["network"] = self.network.to_dict()
+            else:
+                _dict["network"] = self.network
+
         # override the default output from pydantic by calling `to_dict()` of refresh_token
         if self.refresh_token:
             if not isinstance(self.refresh_token, dict):
@@ -189,6 +374,15 @@ class OpenIdConnectApplicationSettingsClient(BaseModel):
         _obj = cls.model_validate(
             {
                 "application_type": obj.get("application_type"),
+                "backchannel_authentication_request_signing_alg": obj.get(
+                    "backchannel_authentication_request_signing_alg"
+                ),
+                "backchannel_custom_authenticator_id": obj.get(
+                    "backchannel_custom_authenticator_id"
+                ),
+                "backchannel_token_delivery_mode": obj.get(
+                    "backchannel_token_delivery_mode"
+                ),
                 "client_uri": obj.get("client_uri"),
                 "consent_method": obj.get("consent_method"),
                 "dpop_bound_access_tokens": (
@@ -201,6 +395,9 @@ class OpenIdConnectApplicationSettingsClient(BaseModel):
                 ),
                 "frontchannel_logout_uri": obj.get("frontchannel_logout_uri"),
                 "grant_types": obj.get("grant_types"),
+                "id_token_encrypted_response_alg": obj.get(
+                    "id_token_encrypted_response_alg"
+                ),
                 "idp_initiated_login": (
                     OpenIdConnectApplicationIdpInitiatedLogin.from_dict(
                         obj["idp_initiated_login"]
@@ -217,6 +414,11 @@ class OpenIdConnectApplicationSettingsClient(BaseModel):
                 ),
                 "jwks_uri": obj.get("jwks_uri"),
                 "logo_uri": obj.get("logo_uri"),
+                "network": (
+                    OpenIdConnectApplicationNetwork.from_dict(obj["network"])
+                    if obj.get("network") is not None
+                    else None
+                ),
                 "participate_slo": obj.get("participate_slo"),
                 "policy_uri": obj.get("policy_uri"),
                 "post_logout_redirect_uris": obj.get("post_logout_redirect_uris"),
@@ -228,7 +430,10 @@ class OpenIdConnectApplicationSettingsClient(BaseModel):
                     if obj.get("refresh_token") is not None
                     else None
                 ),
+                "request_object_signing_alg": obj.get("request_object_signing_alg"),
                 "response_types": obj.get("response_types"),
+                "sector_identifier_uri": obj.get("sector_identifier_uri"),
+                "subject_type": obj.get("subject_type"),
                 "tos_uri": obj.get("tos_uri"),
                 "wildcard_redirect": obj.get("wildcard_redirect"),
             }

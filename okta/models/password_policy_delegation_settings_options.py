@@ -37,7 +37,12 @@ class PasswordPolicyDelegationSettingsOptions(BaseModel):
     PasswordPolicyDelegationSettingsOptions
     """  # noqa: E501
 
-    skip_unlock: Optional[StrictBool] = Field(default=None, alias="skipUnlock")
+    skip_unlock: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates if, when performing an unlock operation on an Active Directory sourced User who is locked out "
+        "of Okta, the system should also attempt to unlock the User's Windows account",
+        alias="skipUnlock",
+    )
     __properties: ClassVar[List[str]] = ["skipUnlock"]
 
     model_config = ConfigDict(
@@ -88,5 +93,13 @@ class PasswordPolicyDelegationSettingsOptions(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"skipUnlock": obj.get("skipUnlock")})
+        _obj = cls.model_validate(
+            {
+                "skipUnlock": (
+                    obj.get("skipUnlock")
+                    if obj.get("skipUnlock") is not None
+                    else False
+                )
+            }
+        )
         return _obj

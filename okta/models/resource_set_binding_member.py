@@ -41,12 +41,14 @@ class ResourceSetBindingMember(BaseModel):
     """  # noqa: E501
 
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the role was created"
+        default=None, description="Timestamp when the member was created"
     )
-    id: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
+    id: Optional[StrictStr] = Field(
+        default=None, description="Role resource set binding member ID"
+    )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the role was last updated",
+        description="Timestamp when the member was last updated",
         alias="lastUpdated",
     )
     links: Optional[LinksSelf] = Field(default=None, alias="_links")

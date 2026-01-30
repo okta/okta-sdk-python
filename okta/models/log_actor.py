@@ -34,16 +34,21 @@ from typing_extensions import Self
 
 class LogActor(BaseModel):
     """
-    LogActor
+    Describes the user, app, client, or other entity (actor) who performs an action on a target. The actor is dependent on
+    the action that is performed. All events have actors.
     """  # noqa: E501
 
-    alternate_id: Optional[StrictStr] = Field(default=None, alias="alternateId")
-    detail_entry: Optional[Dict[str, Dict[str, Any]]] = Field(
-        default=None, alias="detailEntry"
+    alternate_id: Optional[StrictStr] = Field(
+        default=None, description="Alternative ID of the actor", alias="alternateId"
     )
-    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    id: Optional[StrictStr] = None
-    type: Optional[StrictStr] = None
+    detail_entry: Optional[Dict[str, Any]] = Field(
+        default=None, description="Further details about the actor", alias="detailEntry"
+    )
+    display_name: Optional[StrictStr] = Field(
+        default=None, description="Display name of the actor", alias="displayName"
+    )
+    id: Optional[StrictStr] = Field(default=None, description="ID of the actor")
+    type: Optional[StrictStr] = Field(default=None, description="Type of actor")
     __properties: ClassVar[List[str]] = [
         "alternateId",
         "detailEntry",

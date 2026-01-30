@@ -53,9 +53,8 @@ class Device(BaseModel):
     )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the device record was last updated. Updates occur "
-                    "when Okta collects and saves device signals during "
-                    "authentication, and when the lifecycle state of the device changes.",
+        description="Timestamp when the device record was last updated. Updates occur when Okta collects and saves device "
+        "signals during authentication, and when the lifecycle state of the device changes.",
         alias="lastUpdated",
     )
     profile: Optional[DeviceProfile] = None

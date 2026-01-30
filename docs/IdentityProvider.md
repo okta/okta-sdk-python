@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**issuer_mode** | [**IssuerMode**](IssuerMode.md) |  | [optional] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] 
+**created** | **datetime** | Timestamp when the object was created | [optional] [readonly] 
+**id** | **str** | Unique key for the IdP | [optional] [readonly] 
+**issuer_mode** | [**IdentityProviderIssuerMode**](IdentityProviderIssuerMode.md) |  | [optional] [default to IdentityProviderIssuerMode.DYNAMIC]
+**last_updated** | **datetime** | Timestamp when the object was last updated | [optional] [readonly] 
+**name** | **str** | Unique name for the IdP | [optional] 
 **policy** | [**IdentityProviderPolicy**](IdentityProviderPolicy.md) |  | [optional] 
 **properties** | [**IdentityProviderProperties**](IdentityProviderProperties.md) |  | [optional] 
-**protocol** | [**Protocol**](Protocol.md) |  | [optional] 
+**protocol** | [**IdentityProviderProtocol**](IdentityProviderProtocol.md) |  | [optional] 
 **status** | [**LifecycleStatus**](LifecycleStatus.md) |  | [optional] 
 **type** | [**IdentityProviderType**](IdentityProviderType.md) |  | [optional] 
 **links** | [**IdentityProviderLinks**](IdentityProviderLinks.md) |  | [optional] 

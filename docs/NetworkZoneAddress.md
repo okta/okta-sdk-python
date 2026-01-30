@@ -7,7 +7,7 @@ Specifies the value of an IP address expressed using either `range` or `CIDR` fo
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | [**NetworkZoneAddressType**](NetworkZoneAddressType.md) |  | [optional] 
-**value** | **str** | Value in CIDR/range form depending on the type specified | [optional] 
+**value** | **str** | Value in CIDR/range form, depending on the &#x60;type&#x60; specified | [optional] 
 
 ## Example
 

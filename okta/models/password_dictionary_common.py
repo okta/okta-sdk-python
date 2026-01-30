@@ -28,16 +28,19 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, StrictBool
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing_extensions import Self
 
 
 class PasswordDictionaryCommon(BaseModel):
     """
-    PasswordDictionaryCommon
+    Lookup settings for commonly used passwords
     """  # noqa: E501
 
-    exclude: Optional[StrictBool] = False
+    exclude: Optional[StrictBool] = Field(
+        default=False,
+        description="Indicates whether to check passwords against the common password dictionary",
+    )
     __properties: ClassVar[List[str]] = ["exclude"]
 
     model_config = ConfigDict(

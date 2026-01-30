@@ -39,7 +39,9 @@ class IdentitySourceUserProfileForDelete(BaseModel):
     """  # noqa: E501
 
     external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(
-        default=None, alias="externalId"
+        default=None,
+        description="The external ID of the entity that needs to be deleted in Okta",
+        alias="externalId",
     )
     __properties: ClassVar[List[str]] = ["externalId"]
 

@@ -25,10 +25,19 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import ConfigDict
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StrictBool,
+    StrictInt,
+    StrictStr,
+    field_validator,
+)
 from typing_extensions import Self
 
 from okta.models.authorization_server_policy_rule_actions import (
@@ -37,17 +46,39 @@ from okta.models.authorization_server_policy_rule_actions import (
 from okta.models.authorization_server_policy_rule_conditions import (
     AuthorizationServerPolicyRuleConditions,
 )
-from okta.models.policy_rule import PolicyRule
+from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 
 
-class AuthorizationServerPolicyRule(PolicyRule):
+class AuthorizationServerPolicyRule(BaseModel):
     """
     AuthorizationServerPolicyRule
     """  # noqa: E501
 
     actions: Optional[AuthorizationServerPolicyRuleActions] = None
     conditions: Optional[AuthorizationServerPolicyRuleConditions] = None
+    created: Optional[datetime] = Field(
+        default=None, description="Timestamp when the rule was created"
+    )
+    id: Optional[StrictStr] = Field(default=None, description="Identifier of the rule")
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="Timestamp when the rule was last modified",
+        alias="lastUpdated",
+    )
+    name: Optional[StrictStr] = Field(default=None, description="Name of the rule")
+    priority: Optional[StrictInt] = Field(
+        default=None, description="Priority of the rule"
+    )
+    status: Optional[StrictStr] = Field(default=None, description="Status of the rule")
+    system: Optional[StrictBool] = Field(
+        default=None,
+        description="Set to `true` for system rules. You can't delete system rules.",
+    )
+    type: Optional[StrictStr] = Field(default=None, description="Rule type")
+    links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
+        "actions",
+        "conditions",
         "created",
         "id",
         "lastUpdated",
@@ -56,9 +87,28 @@ class AuthorizationServerPolicyRule(PolicyRule):
         "status",
         "system",
         "type",
-        "actions",
-        "conditions",
+        "_links",
     ]
+
+    @field_validator("status")
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["ACTIVE", "INACTIVE"]):
+            raise ValueError("must be one of enum values ('ACTIVE', 'INACTIVE')")
+        return value
+
+    @field_validator("type")
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["RESOURCE_ACCESS"]):
+            raise ValueError("must be one of enum values ('RESOURCE_ACCESS')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,8 +139,17 @@ class AuthorizationServerPolicyRule(PolicyRule):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "id",
+                "last_updated",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -111,15 +170,12 @@ class AuthorizationServerPolicyRule(PolicyRule):
             else:
                 _dict["conditions"] = self.conditions
 
-        # set to None if created (nullable) is None
-        # and model_fields_set contains the field
-        if self.created is None and "created" in self.model_fields_set:
-            _dict["created"] = None
-
-        # set to None if last_updated (nullable) is None
-        # and model_fields_set contains the field
-        if self.last_updated is None and "last_updated" in self.model_fields_set:
-            _dict["lastUpdated"] = None
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
 
         return _dict
 
@@ -134,14 +190,6 @@ class AuthorizationServerPolicyRule(PolicyRule):
 
         _obj = cls.model_validate(
             {
-                "created": obj.get("created"),
-                "id": obj.get("id"),
-                "lastUpdated": obj.get("lastUpdated"),
-                "name": obj.get("name"),
-                "priority": obj.get("priority"),
-                "status": obj.get("status"),
-                "system": obj.get("system") if obj.get("system") is not None else False,
-                "type": obj.get("type"),
                 "actions": (
                     AuthorizationServerPolicyRuleActions.from_dict(obj["actions"])
                     if obj.get("actions") is not None
@@ -150,6 +198,19 @@ class AuthorizationServerPolicyRule(PolicyRule):
                 "conditions": (
                     AuthorizationServerPolicyRuleConditions.from_dict(obj["conditions"])
                     if obj.get("conditions") is not None
+                    else None
+                ),
+                "created": obj.get("created"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "name": obj.get("name"),
+                "priority": obj.get("priority"),
+                "status": obj.get("status"),
+                "system": obj.get("system"),
+                "type": obj.get("type"),
+                "_links": (
+                    LinksSelfAndLifecycle.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
                     else None
                 ),
             }

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class AppUserStatus(str, Enum):
     """
-    Status of an App User
+    Status of an application user
     """
 
     """

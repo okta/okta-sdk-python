@@ -28,7 +28,7 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing_extensions import Self
 
 
@@ -37,8 +37,30 @@ class RealmProfile(BaseModel):
     RealmProfile
     """  # noqa: E501
 
-    name: Optional[StrictStr] = Field(default=None, description="Name of a Realm")
-    __properties: ClassVar[List[str]] = ["name"]
+    domains: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Array of allowed domains. No user in this realm can be created or updated unless they have a username "
+        "and email from one of these domains.  The following characters aren't allowed in the domain name: "
+        "`!$%^&()=*+,:;<>'[]|/?\\`",
+    )
+    name: StrictStr = Field(description="Name of a realm")
+    realm_type: Optional[StrictStr] = Field(
+        default=None,
+        description="Used to store partner users. This property must be set to `PARTNER` to access Okta's external partner "
+        "portal.",
+        alias="realmType",
+    )
+    __properties: ClassVar[List[str]] = ["domains", "name", "realmType"]
+
+    @field_validator("realm_type")
+    def realm_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["PARTNER", "DEFAULT"]):
+            raise ValueError("must be one of enum values ('PARTNER', 'DEFAULT')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,5 +110,11 @@ class RealmProfile(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"name": obj.get("name")})
+        _obj = cls.model_validate(
+            {
+                "domains": obj.get("domains"),
+                "name": obj.get("name"),
+                "realmType": obj.get("realmType"),
+            }
+        )
         return _obj

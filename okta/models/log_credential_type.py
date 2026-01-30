@@ -30,19 +30,23 @@ from typing_extensions import Self
 
 class LogCredentialType(str, Enum):
     """
-    LogCredentialType
+    The underlying technology/scheme used in the credential
     """
 
     """
     allowed enum values
     """
     ASSERTION = "ASSERTION"
+    CERTIFICATE = "CERTIFICATE"
+    DEVICE_UDID = "DEVICE_UDID"
     EMAIL = "EMAIL"
     IWA = "IWA"
     JWT = "JWT"
     O_AUTH_2_DOT_0 = "OAuth 2.0"
+    OKTA_CLIENT_SESSION = "OKTA_CLIENT_SESSION"
     OTP = "OTP"
     PASSWORD = "PASSWORD"
+    PRE_SHARED_SYMMETRIC_KEY = "PRE_SHARED_SYMMETRIC_KEY"
     SMS = "SMS"
 
     @classmethod

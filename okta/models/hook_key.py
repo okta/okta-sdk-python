@@ -30,39 +30,39 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
-
-from okta.models.json_web_key import JsonWebKey
 
 
 class HookKey(BaseModel):
     """
-    HookKey
+    The `id` property in the response as `id` serves as the unique ID for the key, which you can specify when invoking other
+    CRUD operations.  The `keyId` provided in the response is the alias of the public key that you can use to get details of
+    the public key data in a separate call.
     """  # noqa: E501
 
     created: Optional[datetime] = Field(
-        default=None, description="Timestamp when the key was created."
+        default=None, description="Timestamp when the key was created"
     )
     id: Optional[StrictStr] = Field(
-        default=None, description="The unique identifier for the key."
+        default=None, description="The unique identifier for the key"
     )
     is_used: Optional[StrictStr] = Field(
         default=None,
-        description="Whether this key is currently in use by other hooks.",
+        description="Whether this key is currently in use by other applications",
         alias="isUsed",
     )
     key_id: Optional[StrictStr] = Field(
-        default=None, description="The alias of the public key.", alias="keyId"
+        default=None, description="The alias of the public key", alias="keyId"
     )
     last_updated: Optional[datetime] = Field(
         default=None,
-        description="Timestamp when the key was updated.",
+        description="Timestamp when the key was updated",
         alias="lastUpdated",
     )
-    name: Optional[StrictStr] = Field(
-        default=None, description="Display name of the key."
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = (
+        Field(default=None, description="Display name of the key")
     )
-    embedded: Optional[JsonWebKey] = Field(default=None, alias="_embedded")
     __properties: ClassVar[List[str]] = [
         "created",
         "id",
@@ -70,7 +70,6 @@ class HookKey(BaseModel):
         "keyId",
         "lastUpdated",
         "name",
-        "_embedded",
     ]
 
     model_config = ConfigDict(
@@ -106,11 +105,13 @@ class HookKey(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
                 "created",
                 "id",
+                "is_used",
                 "key_id",
                 "last_updated",
             ]
@@ -121,12 +122,15 @@ class HookKey(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of embedded
-        if self.embedded:
-            if not isinstance(self.embedded, dict):
-                _dict["_embedded"] = self.embedded.to_dict()
-            else:
-                _dict["_embedded"] = self.embedded
+        # set to None if created (nullable) is None
+        # and model_fields_set contains the field
+        if self.created is None and "created" in self.model_fields_set:
+            _dict["created"] = None
+
+        # set to None if last_updated (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_updated is None and "last_updated" in self.model_fields_set:
+            _dict["lastUpdated"] = None
 
         return _dict
 
@@ -147,11 +151,6 @@ class HookKey(BaseModel):
                 "keyId": obj.get("keyId"),
                 "lastUpdated": obj.get("lastUpdated"),
                 "name": obj.get("name"),
-                "_embedded": (
-                    JsonWebKey.from_dict(obj["_embedded"])
-                    if obj.get("_embedded") is not None
-                    else None
-                ),
             }
         )
         return _obj

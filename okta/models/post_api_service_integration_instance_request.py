@@ -31,6 +31,8 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
+from okta.models.app_properties_value import AppPropertiesValue
+
 
 class PostAPIServiceIntegrationInstanceRequest(BaseModel):
     """
@@ -39,14 +41,17 @@ class PostAPIServiceIntegrationInstanceRequest(BaseModel):
 
     granted_scopes: List[StrictStr] = Field(
         description="The list of Okta management scopes granted to the API Service Integration instance. See [Okta "
-                    "management OAuth 2.0 scopes](/oauth2/#okta-admin-management).",
+        "management OAuth 2.0 scopes](/oauth2/#okta-admin-management).",
         alias="grantedScopes",
+    )
+    properties: Optional[Dict[str, AppPropertiesValue]] = Field(
+        default=None, description="App instance properties"
     )
     type: StrictStr = Field(
         description="The type of the API service integration. This string is an underscore-concatenated, lowercased API "
-                    "service integration name. For example, `my_api_log_integration`."
+        "service integration name. For example, `my_api_log_integration`."
     )
-    __properties: ClassVar[List[str]] = ["grantedScopes", "type"]
+    __properties: ClassVar[List[str]] = ["grantedScopes", "properties", "type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,6 +90,13 @@ class PostAPIServiceIntegrationInstanceRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict["properties"] = _field_dict
         return _dict
 
     @classmethod
@@ -97,6 +109,17 @@ class PostAPIServiceIntegrationInstanceRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"grantedScopes": obj.get("grantedScopes"), "type": obj.get("type")}
+            {
+                "grantedScopes": obj.get("grantedScopes"),
+                "properties": (
+                    dict(
+                        (_k, AppPropertiesValue.from_dict(_v))
+                        for _k, _v in obj["properties"].items()
+                    )
+                    if obj.get("properties") is not None
+                    else None
+                ),
+                "type": obj.get("type"),
+            }
         )
         return _obj

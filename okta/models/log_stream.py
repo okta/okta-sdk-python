@@ -49,15 +49,15 @@ class LogStream(BaseModel):
     """  # noqa: E501
 
     created: datetime = Field(
-        description="Timestamp when the Log Stream object was created"
+        description="Timestamp when the log stream object was created"
     )
-    id: StrictStr = Field(description="Unique identifier for the Log Stream")
+    id: StrictStr = Field(description="Unique identifier for the log stream")
     last_updated: datetime = Field(
-        description="Timestamp when the Log Stream object was last updated",
+        description="Timestamp when the log stream object was last updated",
         alias="lastUpdated",
     )
-    name: StrictStr = Field(description="Unique name for the Log Stream object")
-    status: StrictStr = Field(description="Lifecycle status of the Log Stream object")
+    name: StrictStr = Field(description="Unique name for the log stream object")
+    status: StrictStr = Field(description="Lifecycle status of the log stream object")
     type: LogStreamType
     links: LogStreamLinksSelfAndLifecycle = Field(alias="_links")
     __properties: ClassVar[List[str]] = [
@@ -154,7 +154,7 @@ class LogStream(BaseModel):
 
     @classmethod
     def from_dict(
-            cls, obj: Dict[str, Any]
+        cls, obj: Dict[str, Any]
     ) -> Optional[Union[LogStreamAws, LogStreamSplunk]]:
         """Create an instance of LogStream from a dict"""
         # look up the object type based on discriminator mapping
@@ -169,10 +169,10 @@ class LogStream(BaseModel):
             ).LogStreamSplunk.from_dict(obj)
 
         raise ValueError(
-            "LogStream failed to lookup discriminator value from " +
-            json.dumps(obj) +
-            ". Discriminator property name: " +
-            cls.__discriminator_property_name +
-            ", mapping: " +
-            json.dumps(cls.__discriminator_value_class_map)
+            "LogStream failed to lookup discriminator value from "
+            + json.dumps(obj)
+            + ". Discriminator property name: "
+            + cls.__discriminator_property_name
+            + ", mapping: "
+            + json.dumps(cls.__discriminator_value_class_map)
         )

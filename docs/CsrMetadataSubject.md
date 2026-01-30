@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**common_name** | **str** |  | [optional] 
-**country_name** | **str** |  | [optional] 
-**locality_name** | **str** |  | [optional] 
-**organizational_unit_name** | **str** |  | [optional] 
-**organization_name** | **str** |  | [optional] 
-**state_or_province_name** | **str** |  | [optional] 
+**common_name** | **str** | Common name of the subject | [optional] 
+**country_name** | **str** | Country name or code | [optional] 
+**locality_name** | **str** | Locality (city) name | [optional] 
+**organizational_unit_name** | **str** | Name of the smaller organization, for example, the department or the division | [optional] 
+**organization_name** | **str** | Large organization name | [optional] 
+**state_or_province_name** | **str** | State or province name | [optional] 
 
 ## Example
 

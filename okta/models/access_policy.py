@@ -28,12 +28,11 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import ConfigDict
+from pydantic import ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.policy import Policy
 from okta.models.policy_links import PolicyLinks
-from okta.models.policy_rule_conditions import PolicyRuleConditions
 
 
 class AccessPolicy(Policy):
@@ -41,7 +40,10 @@ class AccessPolicy(Policy):
     AccessPolicy
     """  # noqa: E501
 
-    conditions: Optional[PolicyRuleConditions] = None
+    conditions: Optional[StrictStr] = Field(
+        default=None,
+        description="Policy conditions aren't supported. Conditions are applied at the rule level for this policy type.",
+    )
     __properties: ClassVar[List[str]] = [
         "created",
         "description",
@@ -101,12 +103,10 @@ class AccessPolicy(Policy):
             else:
                 _dict["_links"] = self.links
 
-        # override the default output from pydantic by calling `to_dict()` of conditions
-        if self.conditions:
-            if not isinstance(self.conditions, dict):
-                _dict["conditions"] = self.conditions.to_dict()
-            else:
-                _dict["conditions"] = self.conditions
+        # set to None if conditions (nullable) is None
+        # and model_fields_set contains the field
+        if self.conditions is None and "conditions" in self.model_fields_set:
+            _dict["conditions"] = None
 
         return _dict
 
@@ -123,12 +123,12 @@ class AccessPolicy(Policy):
             {
                 "created": obj.get("created"),
                 "description": obj.get("description"),
-                "id": obj.get("id"),
+                "id": obj.get("id") if obj.get("id") is not None else "Assigned",
                 "lastUpdated": obj.get("lastUpdated"),
                 "name": obj.get("name"),
                 "priority": obj.get("priority"),
                 "status": obj.get("status"),
-                "system": obj.get("system"),
+                "system": obj.get("system") if obj.get("system") is not None else False,
                 "type": obj.get("type"),
                 "_embedded": obj.get("_embedded"),
                 "_links": (
@@ -136,11 +136,7 @@ class AccessPolicy(Policy):
                     if obj.get("_links") is not None
                     else None
                 ),
-                "conditions": (
-                    PolicyRuleConditions.from_dict(obj["conditions"])
-                    if obj.get("conditions") is not None
-                    else None
-                ),
+                "conditions": obj.get("conditions"),
             }
         )
         return _obj

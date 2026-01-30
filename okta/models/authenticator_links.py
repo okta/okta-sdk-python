@@ -46,7 +46,7 @@ class AuthenticatorLinks(BaseModel):
     activate: Optional[HrefObjectActivateLink] = None
     deactivate: Optional[HrefObjectDeactivateLink] = None
     methods: Optional[HrefObject] = Field(
-        default=None, description="Link to Authenticator methods"
+        default=None, description="Link to authenticator methods"
     )
     __properties: ClassVar[List[str]] = ["self", "activate", "deactivate", "methods"]
 

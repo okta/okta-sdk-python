@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**opt_out_email_users** | **bool** |  | [optional] [readonly] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**opt_out_email_users** | **bool** | Indicates whether org users receive Okta communication emails | [optional] [readonly] 
+**links** | [**OrgOktaCommunicationSettingLinks**](OrgOktaCommunicationSettingLinks.md) |  | [optional] 
 
 ## Example
 

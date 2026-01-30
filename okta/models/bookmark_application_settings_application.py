@@ -38,9 +38,11 @@ class BookmarkApplicationSettingsApplication(BaseModel):
     """  # noqa: E501
 
     request_integration: Optional[StrictBool] = Field(
-        default=None, alias="requestIntegration"
+        default=False,
+        description="Would you like Okta to add an integration for this app?",
+        alias="requestIntegration",
     )
-    url: Optional[StrictStr] = None
+    url: StrictStr = Field(description="The URL of the launch page for this app")
     __properties: ClassVar[List[str]] = ["requestIntegration", "url"]
 
     model_config = ConfigDict(
@@ -92,6 +94,13 @@ class BookmarkApplicationSettingsApplication(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"requestIntegration": obj.get("requestIntegration"), "url": obj.get("url")}
+            {
+                "requestIntegration": (
+                    obj.get("requestIntegration")
+                    if obj.get("requestIntegration") is not None
+                    else False
+                ),
+                "url": obj.get("url"),
+            }
         )
         return _obj

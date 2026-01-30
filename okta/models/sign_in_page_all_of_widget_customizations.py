@@ -31,57 +31,117 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing_extensions import Self
 
+from okta.models.post_auth_keep_me_signed_in_prompt import PostAuthKeepMeSignedInPrompt
+from okta.models.widget_generation import WidgetGeneration
+
 
 class SignInPageAllOfWidgetCustomizations(BaseModel):
     """
     SignInPageAllOfWidgetCustomizations
     """  # noqa: E501
 
-    sign_in_label: Optional[StrictStr] = Field(default=None, alias="signInLabel")
-    username_label: Optional[StrictStr] = Field(default=None, alias="usernameLabel")
-    username_info_tip: Optional[StrictStr] = Field(
-        default=None, alias="usernameInfoTip"
+    sign_in_label: Optional[StrictStr] = Field(
+        default=None,
+        description="The label for the sign in widget",
+        alias="signInLabel",
     )
-    password_label: Optional[StrictStr] = Field(default=None, alias="passwordLabel")
+    username_label: Optional[StrictStr] = Field(
+        default=None,
+        description="The label for the username field",
+        alias="usernameLabel",
+    )
+    username_info_tip: Optional[StrictStr] = Field(
+        default=None,
+        description="The label for the username information tip",
+        alias="usernameInfoTip",
+    )
+    password_label: Optional[StrictStr] = Field(
+        default=None,
+        description="The label for the password field",
+        alias="passwordLabel",
+    )
     password_info_tip: Optional[StrictStr] = Field(
-        default=None, alias="passwordInfoTip"
+        default=None,
+        description="The label for the password information tip",
+        alias="passwordInfoTip",
     )
     show_password_visibility_toggle: Optional[StrictBool] = Field(
-        default=None, alias="showPasswordVisibilityToggle"
+        default=None,
+        description="Allows users to see their passwords as they type",
+        alias="showPasswordVisibilityToggle",
     )
     show_user_identifier: Optional[StrictBool] = Field(
-        default=None, alias="showUserIdentifier"
+        default=None,
+        description="Allows the user's identifier to appear on authentication and enrollment pages",
+        alias="showUserIdentifier",
     )
     forgot_password_label: Optional[StrictStr] = Field(
-        default=None, alias="forgotPasswordLabel"
+        default=None,
+        description="The label for the forgot password page",
+        alias="forgotPasswordLabel",
     )
     forgot_password_url: Optional[StrictStr] = Field(
-        default=None, alias="forgotPasswordUrl"
+        default=None, description="The forgot password URL", alias="forgotPasswordUrl"
     )
     unlock_account_label: Optional[StrictStr] = Field(
-        default=None, alias="unlockAccountLabel"
+        default=None,
+        description="The label for the unlock account link",
+        alias="unlockAccountLabel",
     )
     unlock_account_url: Optional[StrictStr] = Field(
-        default=None, alias="unlockAccountUrl"
+        default=None, description="The unlock account URL", alias="unlockAccountUrl"
     )
-    help_label: Optional[StrictStr] = Field(default=None, alias="helpLabel")
-    help_url: Optional[StrictStr] = Field(default=None, alias="helpUrl")
+    help_label: Optional[StrictStr] = Field(
+        default=None, description="The label for the help link", alias="helpLabel"
+    )
+    help_url: Optional[StrictStr] = Field(
+        default=None, description="The help link URL", alias="helpUrl"
+    )
     custom_link1_label: Optional[StrictStr] = Field(
-        default=None, alias="customLink1Label"
+        default=None,
+        description="The label for the first custom link",
+        alias="customLink1Label",
     )
-    custom_link1_url: Optional[StrictStr] = Field(default=None, alias="customLink1Url")
+    custom_link1_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL for the first custom link",
+        alias="customLink1Url",
+    )
     custom_link2_label: Optional[StrictStr] = Field(
-        default=None, alias="customLink2Label"
+        default=None,
+        description="The label for the second custom link",
+        alias="customLink2Label",
     )
-    custom_link2_url: Optional[StrictStr] = Field(default=None, alias="customLink2Url")
+    custom_link2_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL for the second custom link",
+        alias="customLink2Url",
+    )
     authenticator_page_custom_link_label: Optional[StrictStr] = Field(
-        default=None, alias="authenticatorPageCustomLinkLabel"
+        default=None,
+        description="The label for the authenticator page custom link",
+        alias="authenticatorPageCustomLinkLabel",
     )
     authenticator_page_custom_link_url: Optional[StrictStr] = Field(
-        default=None, alias="authenticatorPageCustomLinkUrl"
+        default=None,
+        description="The URL for the authenticator page custom link",
+        alias="authenticatorPageCustomLinkUrl",
     )
     classic_recovery_flow_email_or_username_label: Optional[StrictStr] = Field(
-        default=None, alias="classicRecoveryFlowEmailOrUsernameLabel"
+        default=None,
+        description="The label for the username field in the classic recovery flow",
+        alias="classicRecoveryFlowEmailOrUsernameLabel",
+    )
+    widget_generation: Optional[WidgetGeneration] = Field(
+        default=None, alias="widgetGeneration"
+    )
+    post_auth_keep_me_signed_in_prompt: Optional[PostAuthKeepMeSignedInPrompt] = Field(
+        default=None, alias="postAuthKeepMeSignedInPrompt"
+    )
+    classic_footer_help_title: Optional[StrictStr] = Field(
+        default=None,
+        description="The title of the footer link on the sign-in page. Only applicable for Classic Engine orgs.",
+        alias="classicFooterHelpTitle",
     )
     __properties: ClassVar[List[str]] = [
         "signInLabel",
@@ -104,6 +164,9 @@ class SignInPageAllOfWidgetCustomizations(BaseModel):
         "authenticatorPageCustomLinkLabel",
         "authenticatorPageCustomLinkUrl",
         "classicRecoveryFlowEmailOrUsernameLabel",
+        "widgetGeneration",
+        "postAuthKeepMeSignedInPrompt",
+        "classicFooterHelpTitle",
     ]
 
     model_config = ConfigDict(
@@ -143,6 +206,17 @@ class SignInPageAllOfWidgetCustomizations(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of post_auth_keep_me_signed_in_prompt
+        if self.post_auth_keep_me_signed_in_prompt:
+            if not isinstance(self.post_auth_keep_me_signed_in_prompt, dict):
+                _dict["postAuthKeepMeSignedInPrompt"] = (
+                    self.post_auth_keep_me_signed_in_prompt.to_dict()
+                )
+            else:
+                _dict["postAuthKeepMeSignedInPrompt"] = (
+                    self.post_auth_keep_me_signed_in_prompt
+                )
+
         return _dict
 
     @classmethod
@@ -182,6 +256,15 @@ class SignInPageAllOfWidgetCustomizations(BaseModel):
                 "classicRecoveryFlowEmailOrUsernameLabel": obj.get(
                     "classicRecoveryFlowEmailOrUsernameLabel"
                 ),
+                "widgetGeneration": obj.get("widgetGeneration"),
+                "postAuthKeepMeSignedInPrompt": (
+                    PostAuthKeepMeSignedInPrompt.from_dict(
+                        obj["postAuthKeepMeSignedInPrompt"]
+                    )
+                    if obj.get("postAuthKeepMeSignedInPrompt") is not None
+                    else None
+                ),
+                "classicFooterHelpTitle": obj.get("classicFooterHelpTitle"),
             }
         )
         return _obj

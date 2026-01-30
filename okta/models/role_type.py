@@ -30,24 +30,38 @@ from typing_extensions import Self
 
 class RoleType(str, Enum):
     """
-    RoleType
+    | Role type                    | Description                                                 |
+    |------------------------------|-------------------------------------------------------------| |
+    ACCESS_CERTIFICATIONS_ADMIN  | Access Certifications Administrator IAM-based standard role | | ACCESS_REQUESTS_ADMIN
+       | Access Requests Administrator IAM-based standard role       | | API_ACCESS_MANAGEMENT_ADMIN  | Access Management
+       Administrator standard role               | | APP_ADMIN                    | Application Administrator standard role
+                          | | CUSTOM                       | Custom admin role                                           | |
+                          GROUP_MEMBERSHIP_ADMIN       | Group Membership Administrator standard role                | |
+                          HELP_DESK_ADMIN              | Help Desk Administrator standard role                       | |
+                          ORG_ADMIN                    | Organizational Administrator standard role                  | |
+                          READ_ONLY_ADMIN              | Read-Only Administrator standard role                       | |
+                          REPORT_ADMIN                 | Report Administrator standard role                          | |
+                          SUPER_ADMIN                  | Super Administrator standard role                           | |
+                          USER_ADMIN                   | User Administrator standard role                            | |
+                          WORKFLOWS_ADMIN              | Workflows Administrator IAM-based standard role             |
     """
 
     """
     allowed enum values
     """
+    ACCESS_CERTIFICATIONS_ADMIN = "ACCESS_CERTIFICATIONS_ADMIN"
+    ACCESS_REQUESTS_ADMIN = "ACCESS_REQUESTS_ADMIN"
     API_ACCESS_MANAGEMENT_ADMIN = "API_ACCESS_MANAGEMENT_ADMIN"
-    API_ADMIN = "API_ADMIN"
     APP_ADMIN = "APP_ADMIN"
     CUSTOM = "CUSTOM"
     GROUP_MEMBERSHIP_ADMIN = "GROUP_MEMBERSHIP_ADMIN"
     HELP_DESK_ADMIN = "HELP_DESK_ADMIN"
-    MOBILE_ADMIN = "MOBILE_ADMIN"
     ORG_ADMIN = "ORG_ADMIN"
     READ_ONLY_ADMIN = "READ_ONLY_ADMIN"
     REPORT_ADMIN = "REPORT_ADMIN"
     SUPER_ADMIN = "SUPER_ADMIN"
     USER_ADMIN = "USER_ADMIN"
+    WORKFLOWS_ADMIN = "WORKFLOWS_ADMIN"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -30,7 +30,7 @@ from typing_extensions import Self
 
 class PolicyNetworkConnection(str, Enum):
     """
-    PolicyNetworkConnection
+    Network selection mode
     """
 
     """

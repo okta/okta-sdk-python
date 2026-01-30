@@ -1,15 +1,16 @@
 # LogGeographicalContext
 
+Geographical context describes a set of geographic coordinates. In addition to containing latitude and longitude data, the `GeographicalContext` object also contains address data of postal code-level granularity. Within the `Client` object, the geographical context refers to the physical location of the client when it sends the request that triggers this event. All `Transaction` events with `type` equal to `WEB` have a geographical context set. `Transaction` events with `type` equal to `JOB` don't have a geographical context set. The geographical context data can be missing if the geographical data for a request can't be resolved.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**city** | **str** |  | [optional] [readonly] 
-**country** | **str** |  | [optional] [readonly] 
+**city** | **str** | The city that encompasses the area that contains the geolocation coordinates, if available (for example, Seattle, San Francisco) | [optional] [readonly] 
+**country** | **str** | Full name of the country that encompasses the area that contains the geolocation coordinates (for example, France, Uganda) | [optional] [readonly] 
 **geolocation** | [**LogGeolocation**](LogGeolocation.md) |  | [optional] 
-**postal_code** | **str** |  | [optional] [readonly] 
-**state** | **str** |  | [optional] [readonly] 
+**postal_code** | **str** | Postal code of the area that encompasses the geolocation coordinates | [optional] [readonly] 
+**state** | **str** | Full name of the state or province that encompasses the area that contains the geolocation coordinates (for example, Montana, Ontario) | [optional] [readonly] 
 
 ## Example
 

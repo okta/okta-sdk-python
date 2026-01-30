@@ -1,6 +1,6 @@
 # LogStreamSettingsSplunkPut
 
-Specifies the configuration for the `splunk_cloud_logstreaming` Log Stream type.
+Specifies the configuration for the `splunk_cloud_logstreaming` log stream type.
 
 ## Properties
 

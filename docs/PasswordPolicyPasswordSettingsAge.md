@@ -1,14 +1,15 @@
 # PasswordPolicyPasswordSettingsAge
 
+Age settings
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**expire_warn_days** | **int** |  | [optional] 
-**history_count** | **int** |  | [optional] 
-**max_age_days** | **int** |  | [optional] 
-**min_age_minutes** | **int** |  | [optional] 
+**expire_warn_days** | **int** | Specifies the number of days prior to password expiration when a User is warned to reset their password: &#x60;0&#x60; indicates no warning | [optional] [default to 0]
+**history_count** | **int** | Specifies the number of distinct passwords that a User must create before they can reuse a previous password: &#x60;0&#x60; indicates none | [optional] [default to 0]
+**max_age_days** | **int** | Specifies how long (in days) a password remains valid before it expires: &#x60;0&#x60; indicates no limit | [optional] [default to 0]
+**min_age_minutes** | **int** | Specifies the minimum time interval (in minutes) between password changes: &#x60;0&#x60; indicates no limit | [optional] [default to 0]
 
 ## Example
 

@@ -49,9 +49,8 @@ class Success(BaseModel):
     )
     success_summary: Optional[StrictStr] = Field(
         default=None,
-        description="A short description of success message. Sometimes this "
-                    "contains dynamically-generated information about your "
-                    "specific response.",
+        description="A short description of success message. Sometimes this contains dynamically-generated information about "
+        "your specific response.",
         alias="successSummary",
     )
     __properties: ClassVar[List[str]] = [

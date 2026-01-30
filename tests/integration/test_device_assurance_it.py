@@ -30,13 +30,13 @@ class TestDeviceAssuranceResource:
         # Create Windows Device Assurance Policy Object
         POLICY_NAME = "Test Windows Device Assurance Policy"
 
-        # Create OS version constraint
-        os_version = models.OSVersion(**{"minimum": "10.0.19041"})
+        # Create OS version constraint - Windows uses OSVersionFourComponents
+        os_version = models.OSVersionFourComponents(**{"minimum": "10.0.19041"})
 
         # Create disk encryption type constraint - Windows uses ALL_INTERNAL_VOLUMES
         disk_encryption_type = (
-            models.DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(
-                **{"include": [models.DiskEncryptionType.ALL_INTERNAL_VOLUMES]}
+            models.DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType(
+                **{"include": [models.DiskEncryptionTypeDesktop.ALL_INTERNAL_VOLUMES]}
             )
         )
 
@@ -94,13 +94,13 @@ class TestDeviceAssuranceResource:
         # Create macOS Device Assurance Policy Object
         POLICY_NAME = "Test macOS Device Assurance Policy"
 
-        # Create OS version constraint
+        # Create OS version constraint - macOS uses OSVersion
         os_version = models.OSVersion(**{"minimum": "12.0"})
 
         # Create disk encryption type constraint - macOS uses ALL_INTERNAL_VOLUMES
         disk_encryption_type = (
-            models.DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(
-                **{"include": [models.DiskEncryptionType.ALL_INTERNAL_VOLUMES]}
+            models.DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType(
+                **{"include": [models.DiskEncryptionTypeDesktop.ALL_INTERNAL_VOLUMES]}
             )
         )
 
@@ -325,7 +325,7 @@ class TestDeviceAssuranceResource:
         # Create a test policy first
         POLICY_NAME = "Test List Device Assurance Policy"
 
-        os_version = models.OSVersion(**{"minimum": "10.0"})
+        os_version = models.OSVersionFourComponents(**{"minimum": "10.0"})
 
         test_policy = models.DeviceAssuranceWindowsPlatform(
             **{
@@ -377,7 +377,7 @@ class TestDeviceAssuranceResource:
         ORIGINAL_NAME = "Original Device Assurance Policy"
         UPDATED_NAME = "Updated Device Assurance Policy"
 
-        os_version = models.OSVersion(**{"minimum": "10.0"})
+        os_version = models.OSVersionFourComponents(**{"minimum": "10.0"})
 
         # Create original policy - secureHardwarePresent only accepts true as valid value
         original_policy = models.DeviceAssuranceWindowsPlatform(
@@ -399,12 +399,12 @@ class TestDeviceAssuranceResource:
             assert created_policy.name == ORIGINAL_NAME
 
             # Update the policy with different OS version and name
-            updated_os_version = models.OSVersion(**{"minimum": "11.0"})
+            updated_os_version = models.OSVersionFourComponents(**{"minimum": "11.0"})
 
             # Create disk encryption type constraint for the update
             disk_encryption_type = (
-                models.DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(
-                    **{"include": [models.DiskEncryptionType.ALL_INTERNAL_VOLUMES]}
+                models.DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType(
+                    **{"include": [models.DiskEncryptionTypeDesktop.ALL_INTERNAL_VOLUMES]}
                 )
             )
 
@@ -497,12 +497,12 @@ class TestDeviceAssuranceResource:
         UPDATED_POLICY_NAME = "CRUD Updated Device Assurance Policy"
 
         # CREATE
-        os_version = models.OSVersion(**{"minimum": "10.0"})
+        os_version = models.OSVersionFourComponents(**{"minimum": "10.0"})
 
-        disk_encryption = models.DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(
+        disk_encryption = models.DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType(
             **{
                 "include": [
-                    models.DiskEncryptionType.ALL_INTERNAL_VOLUMES
+                    models.DiskEncryptionTypeDesktop.ALL_INTERNAL_VOLUMES
                 ]  # Use correct disk encryption type for Windows
             }
         )
@@ -533,7 +533,7 @@ class TestDeviceAssuranceResource:
             assert read_policy.name == POLICY_NAME
 
             # UPDATE - Replace the policy
-            updated_os_version = models.OSVersion(**{"minimum": "11.0"})
+            updated_os_version = models.OSVersionFourComponents(**{"minimum": "11.0"})
 
             updated_policy = models.DeviceAssuranceWindowsPlatform(
                 **{

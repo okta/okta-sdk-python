@@ -1,5 +1,6 @@
 # AuthenticatorType
 
+The type of authenticator
 
 ## Properties
 

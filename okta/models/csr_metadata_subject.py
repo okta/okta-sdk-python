@@ -37,17 +37,25 @@ class CsrMetadataSubject(BaseModel):
     CsrMetadataSubject
     """  # noqa: E501
 
-    common_name: Optional[StrictStr] = Field(default=None, alias="commonName")
-    country_name: Optional[StrictStr] = Field(default=None, alias="countryName")
-    locality_name: Optional[StrictStr] = Field(default=None, alias="localityName")
+    common_name: Optional[StrictStr] = Field(
+        default=None, description="Common name of the subject", alias="commonName"
+    )
+    country_name: Optional[StrictStr] = Field(
+        default=None, description="Country name or code", alias="countryName"
+    )
+    locality_name: Optional[StrictStr] = Field(
+        default=None, description="Locality (city) name", alias="localityName"
+    )
     organizational_unit_name: Optional[StrictStr] = Field(
-        default=None, alias="organizationalUnitName"
+        default=None,
+        description="Name of the smaller organization, for example, the department or the division",
+        alias="organizationalUnitName",
     )
     organization_name: Optional[StrictStr] = Field(
-        default=None, alias="organizationName"
+        default=None, description="Large organization name", alias="organizationName"
     )
     state_or_province_name: Optional[StrictStr] = Field(
-        default=None, alias="stateOrProvinceName"
+        default=None, description="State or province name", alias="stateOrProvinceName"
     )
     __properties: ClassVar[List[str]] = [
         "commonName",

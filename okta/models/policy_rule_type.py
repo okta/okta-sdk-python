@@ -30,18 +30,20 @@ from typing_extensions import Self
 
 class PolicyRuleType(str, Enum):
     """
-    PolicyRuleType
+    Rule type
     """
 
     """
     allowed enum values
     """
     ACCESS_POLICY = "ACCESS_POLICY"
+    DEVICE_SIGNAL_COLLECTION = "DEVICE_SIGNAL_COLLECTION"
+    ENTITY_RISK = "ENTITY_RISK"
     IDP_DISCOVERY = "IDP_DISCOVERY"
     MFA_ENROLL = "MFA_ENROLL"
     PASSWORD = "PASSWORD"
+    POST_AUTH_SESSION = "POST_AUTH_SESSION"
     PROFILE_ENROLLMENT = "PROFILE_ENROLLMENT"
-    RESOURCE_ACCESS = "RESOURCE_ACCESS"
     SIGN_ON = "SIGN_ON"
 
     @classmethod

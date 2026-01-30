@@ -1,16 +1,16 @@
 # AutoUpdateSchedule
 
-The schedule of auto-update configured by admin.
+The schedule of auto-update configured by the admin
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cron** | **str** |  | [optional] 
-**delay** | **int** | delay in days | [optional] 
-**duration** | **int** | duration in minutes | [optional] 
-**last_updated** | **datetime** | last time when the updated finished (success or failed, exclude cancelled), null if job haven&#39;t finished once yet. | [optional] 
-**timezone** | **str** |  | [optional] 
+**cron** | **str** | The schedule of the update in cron format. The cron settings are limited to only the day of the month or the nth-day-of-the-week configurations. For example, &#x60;0 8 ? * 6#3&#x60; indicates every third Saturday at 8:00 AM. | [optional] 
+**delay** | **int** | Delay in days | [optional] 
+**duration** | **int** | Duration in minutes | [optional] 
+**last_updated** | **datetime** | Timestamp when the update finished (only for a successful or failed update, not for a cancelled update). Null is returned if the job hasn&#39;t finished once yet. | [optional] 
+**timezone** | **str** | Timezone of where the scheduled job takes place | [optional] 
 
 ## Example
 

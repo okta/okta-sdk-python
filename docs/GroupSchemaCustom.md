@@ -1,14 +1,15 @@
 # GroupSchemaCustom
 
+All custom profile properties are defined in a profile subschema with the resolution scope `#custom`
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] [readonly] 
-**properties** | [**Dict[str, GroupSchemaAttribute]**](GroupSchemaAttribute.md) |  | [optional] 
-**required** | **List[str]** |  | [optional] 
-**type** | **str** |  | [optional] 
+**id** | **str** | The subschema name | [optional] [readonly] 
+**properties** | [**Dict[str, GroupSchemaAttribute]**](GroupSchemaAttribute.md) | The &#x60;#custom&#x60; object properties | [optional] 
+**required** | **List[str]** | A collection indicating required property names | [optional] [readonly] 
+**type** | **str** | The object type | [optional] [readonly] 
 
 ## Example
 

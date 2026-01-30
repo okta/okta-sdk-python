@@ -43,21 +43,21 @@ class PolicyContext(BaseModel):
     PolicyContext
     """  # noqa: E501
 
-    user: PolicyContextUser
+    device: Optional[PolicyContextDevice] = None
     groups: PolicyContextGroups
-    risk: Optional[PolicyContextRisk] = None
     ip: Optional[StrictStr] = Field(
         default=None, description="The network rule condition, zone, or IP address"
     )
+    risk: Optional[PolicyContextRisk] = None
+    user: PolicyContextUser
     zones: Optional[PolicyContextZones] = None
-    device: Optional[PolicyContextDevice] = None
     __properties: ClassVar[List[str]] = [
-        "user",
-        "groups",
-        "risk",
-        "ip",
-        "zones",
         "device",
+        "groups",
+        "ip",
+        "risk",
+        "user",
+        "zones",
     ]
 
     model_config = ConfigDict(
@@ -97,12 +97,12 @@ class PolicyContext(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of user
-        if self.user:
-            if not isinstance(self.user, dict):
-                _dict["user"] = self.user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of device
+        if self.device:
+            if not isinstance(self.device, dict):
+                _dict["device"] = self.device.to_dict()
             else:
-                _dict["user"] = self.user
+                _dict["device"] = self.device
 
         # override the default output from pydantic by calling `to_dict()` of groups
         if self.groups:
@@ -118,19 +118,19 @@ class PolicyContext(BaseModel):
             else:
                 _dict["risk"] = self.risk
 
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            if not isinstance(self.user, dict):
+                _dict["user"] = self.user.to_dict()
+            else:
+                _dict["user"] = self.user
+
         # override the default output from pydantic by calling `to_dict()` of zones
         if self.zones:
             if not isinstance(self.zones, dict):
                 _dict["zones"] = self.zones.to_dict()
             else:
                 _dict["zones"] = self.zones
-
-        # override the default output from pydantic by calling `to_dict()` of device
-        if self.device:
-            if not isinstance(self.device, dict):
-                _dict["device"] = self.device.to_dict()
-            else:
-                _dict["device"] = self.device
 
         return _dict
 
@@ -145,9 +145,9 @@ class PolicyContext(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "user": (
-                    PolicyContextUser.from_dict(obj["user"])
-                    if obj.get("user") is not None
+                "device": (
+                    PolicyContextDevice.from_dict(obj["device"])
+                    if obj.get("device") is not None
                     else None
                 ),
                 "groups": (
@@ -155,20 +155,20 @@ class PolicyContext(BaseModel):
                     if obj.get("groups") is not None
                     else None
                 ),
+                "ip": obj.get("ip"),
                 "risk": (
                     PolicyContextRisk.from_dict(obj["risk"])
                     if obj.get("risk") is not None
                     else None
                 ),
-                "ip": obj.get("ip"),
+                "user": (
+                    PolicyContextUser.from_dict(obj["user"])
+                    if obj.get("user") is not None
+                    else None
+                ),
                 "zones": (
                     PolicyContextZones.from_dict(obj["zones"])
                     if obj.get("zones") is not None
-                    else None
-                ),
-                "device": (
-                    PolicyContextDevice.from_dict(obj["device"])
-                    if obj.get("device") is not None
                     else None
                 ),
             }

@@ -31,7 +31,8 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
 
-from okta.models.href_object import HrefObject
+from okta.models.href_object_members_link import HrefObjectMembersLink
+from okta.models.href_object_resource_set_link import HrefObjectResourceSetLink
 from okta.models.href_object_self_link import HrefObjectSelfLink
 
 
@@ -41,9 +42,11 @@ class ResourceSetBindingResponseLinks(BaseModel):
     """  # noqa: E501
 
     var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
-    bindings: Optional[HrefObject] = None
-    resource_set: Optional[HrefObject] = Field(default=None, alias="resource-set")
-    __properties: ClassVar[List[str]] = ["self", "bindings", "resource-set"]
+    resource_set: Optional[HrefObjectResourceSetLink] = Field(
+        default=None, alias="resource-set"
+    )
+    members: Optional[HrefObjectMembersLink] = None
+    __properties: ClassVar[List[str]] = ["self", "resource-set", "members"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,19 +92,19 @@ class ResourceSetBindingResponseLinks(BaseModel):
             else:
                 _dict["self"] = self.var_self
 
-        # override the default output from pydantic by calling `to_dict()` of bindings
-        if self.bindings:
-            if not isinstance(self.bindings, dict):
-                _dict["bindings"] = self.bindings.to_dict()
-            else:
-                _dict["bindings"] = self.bindings
-
         # override the default output from pydantic by calling `to_dict()` of resource_set
         if self.resource_set:
             if not isinstance(self.resource_set, dict):
                 _dict["resource-set"] = self.resource_set.to_dict()
             else:
                 _dict["resource-set"] = self.resource_set
+
+        # override the default output from pydantic by calling `to_dict()` of members
+        if self.members:
+            if not isinstance(self.members, dict):
+                _dict["members"] = self.members.to_dict()
+            else:
+                _dict["members"] = self.members
 
         return _dict
 
@@ -121,14 +124,14 @@ class ResourceSetBindingResponseLinks(BaseModel):
                     if obj.get("self") is not None
                     else None
                 ),
-                "bindings": (
-                    HrefObject.from_dict(obj["bindings"])
-                    if obj.get("bindings") is not None
+                "resource-set": (
+                    HrefObjectResourceSetLink.from_dict(obj["resource-set"])
+                    if obj.get("resource-set") is not None
                     else None
                 ),
-                "resource-set": (
-                    HrefObject.from_dict(obj["resource-set"])
-                    if obj.get("resource-set") is not None
+                "members": (
+                    HrefObjectMembersLink.from_dict(obj["members"])
+                    if obj.get("members") is not None
                     else None
                 ),
             }

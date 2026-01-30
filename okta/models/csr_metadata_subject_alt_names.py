@@ -37,7 +37,9 @@ class CsrMetadataSubjectAltNames(BaseModel):
     CsrMetadataSubjectAltNames
     """  # noqa: E501
 
-    dns_names: Optional[List[StrictStr]] = Field(default=None, alias="dnsNames")
+    dns_names: Optional[List[StrictStr]] = Field(
+        default=None, description="DNS names of the subject", alias="dnsNames"
+    )
     __properties: ClassVar[List[str]] = ["dnsNames"]
 
     model_config = ConfigDict(
