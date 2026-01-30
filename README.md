@@ -162,7 +162,7 @@ password_credential = PasswordCredential(**password_value)
 user_credentials = {
     "password": password_credential
 }
-user_credentials = UserCredentials(**user_credentials)
+user_credentials = UserCredentialsWritable(**user_credentials)
 create_user_request = {
     "profile": user_profile,
     "credentials": user_credentials,
@@ -1154,5 +1154,3 @@ We're happy to accept contributions and PRs! Please see the [Contribution Guide]
 ## Author
 
 devex-public@okta.com
-
-
