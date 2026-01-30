@@ -39,7 +39,7 @@ files:
   okta/utils.mustache:
     destinationFilename: okta/utils.py
   okta/DOC_GUIDE.mustache:
-    destinationFilename: okta/DOC_GUIDE.py
+    destinationFilename: okta/DOC_GUIDE.md
     templateType: SupportingFiles
 modelPackage: models
 apiPackage: api
