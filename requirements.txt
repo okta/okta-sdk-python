@@ -19,5 +19,5 @@ pytest==8.3.5
 pytest-asyncio==0.26.0
 pytest-mock==3.14.0
 pytest-recording==0.13.2
-tox==4.24.2
+tox==4.30.3
 twine==6.1.0
