@@ -37,6 +37,16 @@ class OAuth:
         self._request_executor = request_executor
         self._config = config
         self._access_token = None
+        self._token_type = "Bearer"  # FIX #4: Default token type
+
+        # FIX #3, #7: Initialize DPoP if enabled
+        self._dpop_enabled = config["client"].get("dpopEnabled", False)
+        self._dpop_generator = None
+
+        if self._dpop_enabled:
+            from okta.dpop import DPoPProofGenerator
+            self._dpop_generator = DPoPProofGenerator(config["client"])
+            logger.info("DPoP authentication enabled")
 
     def get_JWT(self):
         """
@@ -55,11 +65,11 @@ class OAuth:
 
     async def get_access_token(self):
         """
-        Retrieves or generates the OAuth access token for the Okta Client
+        Retrieves or generates the OAuth access token for the Okta Client.
+        Supports both Bearer and DPoP token types.
 
         Returns:
-            str, Exception: Tuple of the access token, error that was raised
-            (if any)
+            tuple: (access_token, token_type, error) - token_type will be "DPoP" if DPoP is enabled
         """
         # Check if access token has expired or will expire soon
         current_time = int(time.time())
@@ -70,9 +80,9 @@ class OAuth:
             if current_time + renewal_offset >= self._access_token_expiry_time:
                 self.clear_access_token()
 
-        # Return token if already generated
+        # FIX #4: Return token with type if already generated
         if self._access_token:
-            return (self._access_token, None)
+            return (self._access_token, self._token_type, None)
 
         # Otherwise create new one
         # Get JWT and create parameters for new Oauth token
@@ -87,6 +97,21 @@ class OAuth:
         org_url = self._config["client"]["orgUrl"]
         url = f"{org_url}{OAuth.OAUTH_ENDPOINT}"
 
+        # Prepare headers
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
+
+        # FIX #3: Add DPoP header if enabled (first attempt without nonce)
+        if self._dpop_enabled:
+            dpop_proof = self._dpop_generator.generate_proof_jwt(
+                http_method="POST",
+                http_url=f"{org_url}{OAuth.OAUTH_ENDPOINT}"
+            )
+            headers['DPoP'] = dpop_proof
+            logger.debug("Added DPoP proof to token request (no nonce)")
+
         # Craft request
         oauth_req, err = await self._request_executor.create_request(
             "POST",
@@ -99,16 +124,63 @@ class OAuth:
             oauth=True,
         )
 
-        # TODO Make max 1 retry
-        # Shoot request
         if err:
-            return (None, err)
+            return (None, "Bearer", err)
+
+        # First attempt
         _, res_details, res_json, err = await self._request_executor.fire_request(
             oauth_req
         )
+
+        # FIX #3: Handle DPoP nonce challenge (RFC 9449 Section 8)
+        # Check for 400 response with use_dpop_nonce error
+        if (res_details.status == 400 and
+            isinstance(res_json, dict) and
+                res_json.get('error') == 'use_dpop_nonce'):
+
+            # Extract nonce from response header
+            dpop_nonce = res_details.headers.get('dpop-nonce')
+
+            if dpop_nonce and self._dpop_enabled:
+                logger.info(f"Received DPoP nonce challenge, retrying with nonce: {dpop_nonce[:8]}...")
+
+                # Store nonce
+                self._dpop_generator.set_nonce(dpop_nonce)
+
+                # Generate new client assertion JWT
+                jwt = self.get_JWT()
+                parameters['client_assertion'] = jwt
+                encoded_parameters = urlencode(parameters, quote_via=quote)
+                url = f"{org_url}{OAuth.OAUTH_ENDPOINT}?" + encoded_parameters
+
+                # Generate new DPoP proof with nonce
+                dpop_proof = self._dpop_generator.generate_proof_jwt(
+                    http_method="POST",
+                    http_url=f"{org_url}{OAuth.OAUTH_ENDPOINT}",
+                    nonce=dpop_nonce
+                )
+                headers['DPoP'] = dpop_proof
+                logger.debug("Retrying token request with nonce")
+
+                # Retry request
+                oauth_req, err = await self._request_executor.create_request(
+                    "POST",
+                    url,
+                    form={},  # Parameters are already in the URL
+                    headers=headers,
+                    oauth=True,
+                )
+
+                if err:
+                    return (None, "Bearer", err)
+
+                _, res_details, res_json, err = await self._request_executor.fire_request(
+                    oauth_req
+                )
+
         # Return HTTP Client error if raised
         if err:
-            return (None, err)
+            return (None, "Bearer", err)
 
         # Check response body for error message
         parsed_response, err = HTTPClient.check_response_for_error(
@@ -116,22 +188,50 @@ class OAuth:
         )
         # Return specific error if found in response
         if err:
-            return (None, err)
+            return (None, "Bearer", err)
 
-        # Otherwise set token and return it
-        self._access_token = parsed_response["access_token"]
+        # Extract token and token type
+        access_token = parsed_response["access_token"]
+        token_type = parsed_response.get("token_type", "Bearer")
+        expires_in = parsed_response.get("expires_in", 3600)
 
-        # Set token expiry time
-        self._access_token_expiry_time = (
-            int(time.time()) + parsed_response["expires_in"]
-        )
-        return (self._access_token, None)
+        # FIX #4: Store token and type
+        self._access_token = access_token
+        self._token_type = token_type
+        self._access_token_expiry_time = int(time.time()) + expires_in
+
+        # FIX #4: Update cache with token type
+        self._request_executor._cache.set("OKTA_ACCESS_TOKEN", access_token)
+        self._request_executor._cache.set("OKTA_TOKEN_TYPE", token_type)
+
+        # FIX #3: Extract and store nonce from successful response (if present)
+        if self._dpop_enabled and 'dpop-nonce' in res_details.headers:
+            self._dpop_generator.set_nonce(res_details.headers['dpop-nonce'])
+            logger.debug(f"Stored nonce from successful response: {res_details.headers['dpop-nonce'][:8]}...")
+
+        # FIX #7: Warn if DPoP was requested but server returned Bearer
+        if self._dpop_enabled and token_type == "Bearer":
+            logger.warning(
+                "DPoP was enabled but server returned Bearer token. "
+                "Ensure DPoP is enabled for this application in Okta admin console."
+            )
+        else:
+            logger.info(f"Successfully obtained {token_type} access token")
+
+        return (access_token, token_type, None)
 
     def clear_access_token(self):
         """
-        Clear currently used OAuth access token, probably expired
+        Clear currently used OAuth access token, probably expired.
+        FIX #4: Also clears token type.
         """
         self._access_token = None
+        self._token_type = "Bearer"  # Reset to default
         self._request_executor._cache.delete("OKTA_ACCESS_TOKEN")
+        self._request_executor._cache.delete("OKTA_TOKEN_TYPE")
         self._request_executor._default_headers.pop("Authorization", None)
         self._access_token_expiry_time = None
+
+    def get_dpop_generator(self):
+        """Get DPoP generator instance."""
+        return self._dpop_generator

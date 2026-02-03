@@ -70,6 +70,8 @@ class ConfigValidator:
             ]
             client_fields_values = [client.get(field, "") for field in client_fields]
             errors += self._validate_client_fields(*client_fields_values)
+            # FIX #9: Validate DPoP configuration if enabled
+            errors += self._validate_dpop_config(client)
         else:  # Not a valid authorization mode
             errors += [
                 (
@@ -169,10 +171,6 @@ class ConfigValidator:
             "-admin.okta.com",
             "-admin.oktapreview.com",
             "-admin.okta-emea.com",
-            "-admin.okta-gov.com",
-            "-admin.okta.mil",
-            "-admin.okta-miltest.com",
-            "-admin.trex-govcloud.com",
         ]
         if any(string in url for string in admin_strings) or "-admin" in url:
             url_errors.append(
@@ -226,3 +224,54 @@ class ConfigValidator:
                 proxy_errors.append(ERROR_MESSAGE_PROXY_INVALID_PORT)
 
         return proxy_errors
+
+    def _validate_dpop_config(self, client):
+        """
+        FIX #9: Validate DPoP-specific configuration.
+
+        Args:
+            client: Client configuration dict
+
+        Returns:
+            list: List of error messages (empty if valid)
+        """
+        import logging
+        logger = logging.getLogger("okta-sdk-python")
+
+        errors = []
+
+        if not client.get('dpopEnabled'):
+            return errors  # DPoP not enabled, nothing to validate
+
+        # DPoP requires PrivateKey authorization mode (already checked above)
+        auth_mode = client.get('authorizationMode')
+        if auth_mode != 'PrivateKey':
+            errors.append(
+                f"DPoP authentication requires authorizationMode='PrivateKey', "
+                f"but got '{auth_mode}'. "
+                "Update your configuration to use PrivateKey mode with DPoP."
+            )
+
+        # Validate key rotation interval
+        rotation_interval = client.get('dpopKeyRotationInterval', 86400)
+
+        if not isinstance(rotation_interval, int):
+            errors.append(
+                f"dpopKeyRotationInterval must be an integer (seconds), "
+                f"but got {type(rotation_interval).__name__}"
+            )
+        elif rotation_interval < 3600:  # Minimum 1 hour
+            errors.append(
+                f"dpopKeyRotationInterval must be at least 3600 seconds (1 hour), "
+                f"but got {rotation_interval} seconds. "
+                "Shorter intervals may cause performance issues."
+            )
+        elif rotation_interval > 604800:  # Maximum 7 days (recommendation)
+            # This is a warning, not an error
+            logger.warning(
+                f"dpopKeyRotationInterval is very long ({rotation_interval} seconds, "
+                f"{rotation_interval // 86400} days). "
+                "Consider shorter intervals (24-48 hours) for better security."
+            )
+
+        return errors

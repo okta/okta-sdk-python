@@ -153,20 +153,43 @@ class RequestExecutor:
 
         # OAuth
         if self._authorization_mode == "PrivateKey" and not oauth:
-            # check if access token exists
+            # check if access token exists and get token type (FIX #4)
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")
+                token_type = self._cache.get("OKTA_TOKEN_TYPE", "Bearer")
             else:
                 # if not, make one
                 # Generate using private key provided
-                access_token, error = await self._oauth.get_access_token()
+                access_token, token_type, error = await self._oauth.get_access_token()
                 # return error if problem retrieving token
                 if error:
                     return (None, error)
+                # Cache token and type
+                self._cache.add("OKTA_ACCESS_TOKEN", access_token)
+                self._cache.add("OKTA_TOKEN_TYPE", token_type)
 
-            # finally, add to header and cache
-            headers.update({"Authorization": f"Bearer {access_token}"})
-            self._cache.add("OKTA_ACCESS_TOKEN", access_token)
+            # Add Authorization header with token type
+            headers.update({"Authorization": f"{token_type} {access_token}"})
+
+            # FIX #6: Add DPoP header for API requests if using DPoP token
+            if token_type == "DPoP" and self._oauth._dpop_generator:
+                dpop_generator = self._oauth.get_dpop_generator()
+
+                # Generate DPoP proof with access token hash
+                dpop_proof = dpop_generator.generate_proof_jwt(
+                    http_method=method,
+                    http_url=url,
+                    access_token=access_token,
+                    nonce=dpop_generator.get_nonce()
+                )
+
+                # Add DPoP header and user agent extension
+                headers.update({
+                    "DPoP": dpop_proof,
+                    "x-okta-user-agent-extended": "isDPoP:true"
+                })
+
+                logger.debug(f"Added DPoP proof to {method} request to {url[:50]}...")
 
         # Add content type header if request body exists
         if body:
@@ -280,6 +303,32 @@ class RequestExecutor:
             return (None, None, None, error)
 
         headers = res_details.headers
+
+        # FIX #6, #8: Handle DPoP nonce challenges (401 or 400 with dpop-nonce header)
+        if (self._authorization_mode == "PrivateKey" and
+            hasattr(self, '_oauth') and
+            self._oauth._dpop_enabled and
+                res_details.status in (400, 401)):
+
+            dpop_nonce = headers.get('dpop-nonce')
+
+            if dpop_nonce:
+                logger.info(
+                    f"Received DPoP nonce in {res_details.status} response: {dpop_nonce[:8]}... "
+                    "Updating nonce for future requests."
+                )
+                self._oauth._dpop_generator.set_nonce(dpop_nonce)
+
+                # FIX #8: Log helpful error message if this is a DPoP-specific error
+                if isinstance(resp_body, dict):
+                    error_code = resp_body.get('error', '')
+                    if error_code:
+                        from okta.errors.dpop_errors import get_dpop_error_message, is_dpop_error
+
+                        if is_dpop_error(error_code):
+                            logger.error(
+                                f"DPoP Error ({error_code}): {get_dpop_error_message(error_code)}"
+                            )
 
         if attempts < max_retries and self.is_retryable_status(res_details.status):
             date_time = headers.get("Date", "")
