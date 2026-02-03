@@ -86,7 +86,7 @@ class DPoPProofGenerator:
         Generates a new RSA 2048-bit key pair and exports the public key as JWK.
         """
         logger.info("Generating new RSA 2048-bit key pair for DPoP")
-    self._rsa_key = RSA.generate(3072)
+        self._rsa_key = RSA.generate(3072)
         self._public_jwk = self._export_public_jwk()
         self._key_created_at = time.time()
         logger.debug(f"DPoP keys generated at {self._key_created_at}")
