@@ -12,7 +12,7 @@ import logging
 import os
 
 import yaml
-from flatdict import FlatDict
+from flatdict2 import FlatDict
 
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 
