@@ -39,7 +39,7 @@ class TestDPoPProofGenerator(unittest.TestCase):
     def test_key_generation(self):
         """Test RSA 2048-bit key generation."""
         # Key should be RSA
-        self.assertEqual(self.generator._rsa_key.size_in_bits(), 2048)
+        self.assertEqual(self.generator._rsa_key.size_in_bits(), 3072)
 
         # Should have both public and private components
         self.assertTrue(self.generator._rsa_key.has_private())

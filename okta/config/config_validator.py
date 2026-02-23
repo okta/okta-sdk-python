@@ -8,7 +8,7 @@
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
-from okta.constants import FINDING_OKTA_DOMAIN, REPO_URL
+from okta.constants import FINDING_OKTA_DOMAIN, REPO_URL, MIN_DPOP_KEY_ROTATION_SECONDS
 from okta.error_messages import (
     ERROR_MESSAGE_ORG_URL_MISSING,
     ERROR_MESSAGE_API_TOKEN_DEFAULT,
@@ -171,6 +171,10 @@ class ConfigValidator:
             "-admin.okta.com",
             "-admin.oktapreview.com",
             "-admin.okta-emea.com",
+            "-admin.okta-gov.com",
+            "-admin.okta.mil",
+            "-admin.okta-miltest.com",
+            "-admin.trex-govcloud.com",
         ]
         if any(string in url for string in admin_strings) or "-admin" in url:
             url_errors.append(
@@ -260,9 +264,9 @@ class ConfigValidator:
                 f"dpopKeyRotationInterval must be an integer (seconds), "
                 f"but got {type(rotation_interval).__name__}"
             )
-        elif rotation_interval < 3600:  # Minimum 1 hour
+        elif rotation_interval < MIN_DPOP_KEY_ROTATION_SECONDS:  # Minimum 1 hour
             errors.append(
-                f"dpopKeyRotationInterval must be at least 3600 seconds (1 hour), "
+                f"dpopKeyRotationInterval must be at least {MIN_DPOP_KEY_ROTATION_SECONDS} seconds (1 hour), "
                 f"but got {rotation_interval} seconds. "
                 "Shorter intervals may cause performance issues."
             )

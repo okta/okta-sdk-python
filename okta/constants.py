@@ -28,3 +28,5 @@ _LOCAL_YAML_PATH = os.path.join(os.getcwd(), "okta.yaml")
 
 SWA_APP_NAME = "template_swa"
 SWA3_APP_NAME = "template_swa3field"
+
+MIN_DPOP_KEY_ROTATION_SECONDS = 3600

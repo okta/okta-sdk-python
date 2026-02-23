@@ -27,7 +27,7 @@ import logging
 import threading
 import time
 import uuid
-from typing import Optional
+from typing import Any, Dict, Optional
 from urllib.parse import urlparse, urlunparse
 
 from Cryptodome.PublicKey import RSA
@@ -58,7 +58,7 @@ class DPoPProofGenerator:
     - Keys are rotated periodically for better security
     """
 
-    def __init__(self, config: dict):
+    def __init__(self, config: Dict[str, Any]) -> None:
         """
         Initialize DPoP proof generator.
 
@@ -67,12 +67,15 @@ class DPoPProofGenerator:
                 - dpopKeyRotationInterval: Key rotation interval in seconds (default: 86400 / 24 hours)
         """
         self._rsa_key: Optional[RSA.RsaKey] = None
-        self._public_jwk: Optional[dict] = None
+        self._public_jwk: Optional[Dict[str, str]] = None
         self._key_created_at: Optional[float] = None
         self._rotation_interval: int = config.get('dpopKeyRotationInterval', 86400)  # 24h default
         self._nonce: Optional[str] = None
-        self._lock = threading.Lock()  # Thread-safe lock for key operations
-        self._active_requests = 0  # Track active requests for safe key rotation
+
+        # Use RLock for reentrant lock support
+        # This allows the same thread to acquire the lock multiple times
+        self._lock: threading.RLock = threading.RLock()
+        self._active_requests: int = 0  # Track active requests for safe key rotation
 
         # Generate initial keys
         self._rotate_keys_internal()
@@ -85,7 +88,7 @@ class DPoPProofGenerator:
 
         Generates a new RSA 2048-bit key pair and exports the public key as JWK.
         """
-        logger.info("Generating new RSA 2048-bit key pair for DPoP")
+        logger.info("Generating new RSA 3072-bit key pair for DPoP")
         self._rsa_key = RSA.generate(3072)
         self._public_jwk = self._export_public_jwk()
         self._key_created_at = time.time()
@@ -125,6 +128,8 @@ class DPoPProofGenerator:
         Generate DPoP proof JWT per RFC 9449.
 
         FIX #1: Strips query parameters and fragments from http_url per RFC 9449 Section 4.2.
+        FIX #5 (IMPROVED): Thread-safe key access with proper lock protection to prevent
+        race conditions during key rotation.
 
         Args:
             http_method: HTTP method (GET, POST, etc.)
@@ -146,15 +151,24 @@ class DPoPProofGenerator:
             ...     access_token='eyJhbG...'
             ... )
         """
-        # FIX #5: Increment active request counter (thread-safe)
+        # FIX #5 (IMPROVED): Acquire lock and capture key references atomically
+        # This prevents race condition where rotation could happen between
+        # counter increment and key usage
         with self._lock:
             self._active_requests += 1
 
+            # Capture key references while holding lock
+            # This ensures we use consistent key state throughout JWT generation
+            rsa_key = self._rsa_key
+            public_jwk = self._public_jwk
+            key_created_at = self._key_created_at
+            stored_nonce = self._nonce
+
         try:
             # Check if auto-rotation is needed (but don't rotate during active request)
-            if self._should_rotate_keys():
+            if key_created_at and (time.time() - key_created_at) >= self._rotation_interval:
                 logger.warning(
-                    f"DPoP keys are {time.time() - self._key_created_at:.0f}s old, "
+                    f"DPoP keys are {time.time() - key_created_at:.0f}s old, "
                     f"rotation recommended (interval: {self._rotation_interval}s)"
                 )
 
@@ -187,7 +201,7 @@ class DPoPProofGenerator:
             }
 
             # Add optional nonce claim (use provided or stored)
-            effective_nonce = nonce or self._nonce
+            effective_nonce = nonce or stored_nonce
             if effective_nonce:
                 claims['nonce'] = effective_nonce
                 logger.debug(f"Added nonce to DPoP proof: {effective_nonce[:8]}...")
@@ -201,13 +215,13 @@ class DPoPProofGenerator:
             headers = {
                 'typ': 'dpop+jwt',
                 'alg': 'RS256',
-                'jwk': self._public_jwk
+                'jwk': public_jwk
             }
 
-            # Sign JWT with private key
+            # Sign JWT with private key (using captured reference)
             token = jwt_encode(
                 claims,
-                self._rsa_key.export_key(),
+                rsa_key.export_key(),
                 algorithm='RS256',
                 headers=headers
             )
@@ -221,7 +235,7 @@ class DPoPProofGenerator:
             return token
 
         finally:
-            # FIX #5: Decrement active request counter (thread-safe)
+            # FIX #5 (IMPROVED): Decrement counter (thread-safe)
             with self._lock:
                 self._active_requests -= 1
 
@@ -260,7 +274,7 @@ class DPoPProofGenerator:
         logger.debug(f"Computed access token hash: {ath[:16]}...")
         return ath
 
-    def _export_public_jwk(self) -> dict:
+    def _export_public_jwk(self) -> Dict[str, str]:
         """
         Export ONLY public key components as JWK per RFC 7517.
 
@@ -269,7 +283,7 @@ class DPoPProofGenerator:
         and MUST NOT contain a private key.
 
         Returns:
-            dict: JWK with only public components (kty, n, e)
+            Dict[str, str]: JWK with only public components (kty, n, e)
 
         Security Note:
             This method uses jwcrypto.export_public() to ensure only public
@@ -331,12 +345,12 @@ class DPoPProofGenerator:
         """
         return self._nonce
 
-    def get_public_jwk(self) -> dict:
+    def get_public_jwk(self) -> Dict[str, str]:
         """
         Get public key in JWK format.
 
         Returns:
-            Copy of the public JWK (kty, n, e)
+            Dict[str, str]: Copy of the public JWK (kty, n, e)
         """
         return self._public_jwk.copy() if self._public_jwk else {}
 

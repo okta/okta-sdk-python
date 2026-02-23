@@ -21,6 +21,8 @@ Do not edit the class manually.
 """  # noqa: E501
 
 import time
+from typing import Any, Dict, Optional, Tuple
+from urllib.parse import urlencode, quote
 
 from okta.http_client import HTTPClient
 from okta.jwt import JWT
@@ -33,22 +35,23 @@ class OAuth:
 
     OAUTH_ENDPOINT = "/oauth2/v1/token"
 
-    def __init__(self, request_executor, config):
+    def __init__(self, request_executor: Any, config: Dict[str, Any]) -> None:
         self._request_executor = request_executor
         self._config = config
-        self._access_token = None
-        self._token_type = "Bearer"  # FIX #4: Default token type
+        self._access_token: Optional[str] = None
+        self._token_type: str = "Bearer"  # FIX #4: Default token type
+        self._access_token_expiry_time: Optional[int] = None
 
         # FIX #3, #7: Initialize DPoP if enabled
-        self._dpop_enabled = config["client"].get("dpopEnabled", False)
-        self._dpop_generator = None
+        self._dpop_enabled: bool = config["client"].get("dpopEnabled", False)
+        self._dpop_generator: Optional[Any] = None
 
         if self._dpop_enabled:
             from okta.dpop import DPoPProofGenerator
             self._dpop_generator = DPoPProofGenerator(config["client"])
             logger.info("DPoP authentication enabled")
 
-    def get_JWT(self):
+    def get_JWT(self) -> str:
         """
         Generates JWT using client configuration
 
@@ -63,7 +66,7 @@ class OAuth:
 
         return JWT.create_token(org_url, client_id, private_key, kid)
 
-    async def get_access_token(self):
+    async def get_access_token(self) -> Tuple[Optional[str], str, Optional[Exception]]:
         """
         Retrieves or generates the OAuth access token for the Okta Client.
         Supports both Bearer and DPoP token types.
@@ -220,7 +223,7 @@ class OAuth:
 
         return (access_token, token_type, None)
 
-    def clear_access_token(self):
+    def clear_access_token(self) -> None:
         """
         Clear currently used OAuth access token, probably expired.
         FIX #4: Also clears token type.
@@ -232,6 +235,6 @@ class OAuth:
         self._request_executor._default_headers.pop("Authorization", None)
         self._access_token_expiry_time = None
 
-    def get_dpop_generator(self):
+    def get_dpop_generator(self) -> Optional[Any]:
         """Get DPoP generator instance."""
         return self._dpop_generator
