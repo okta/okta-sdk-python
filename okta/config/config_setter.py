@@ -12,9 +12,9 @@ import logging
 import os
 
 import yaml
-from flatdict import FlatDict
 
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
+from okta.utils import flatten_dict, unflatten_dict, remove_empty_values
 
 
 class ConfigSetter:
@@ -68,14 +68,7 @@ class ConfigSetter:
         This method cleans up the configuration object by removing fields
         with no value
         """
-        # Flatten dictionary to account for nested dictionary
-        flat_current_config = FlatDict(config, delimiter="_")
-        # Iterate through keys and remove if value is still empty string
-        for key in flat_current_config.keys():
-            if flat_current_config.get(key) == "":
-                del flat_current_config[key]
-
-        return flat_current_config.as_dict()
+        return remove_empty_values(config)
 
     def _update_config(self):
         """
@@ -124,17 +117,20 @@ class ConfigSetter:
         """
         # Update current configuration with new configuration
         # Flatten both dictionaries to account for nested dictionary values
-        flat_current_client = FlatDict(self._config["client"], delimiter="_")
-        flat_current_testing = FlatDict(self._config["testing"], delimiter="_")
+        flat_current_client = flatten_dict(self._config["client"], delimiter="::")
+        flat_current_testing = flatten_dict(self._config["testing"], delimiter="::")
 
-        flat_new_client = FlatDict(new_config.get("client", {}), delimiter="_")
-        flat_new_testing = FlatDict(new_config.get("testing", {}), delimiter="_")
+        flat_new_client = flatten_dict(new_config.get("client", {}), delimiter="::")
+        flat_new_testing = flatten_dict(new_config.get("testing", {}), delimiter="::")
+
+        # Update with new values
         flat_current_client.update(flat_new_client)
         flat_current_testing.update(flat_new_testing)
+
         # Update values in current config and unflatten
         self._config = {
-            "client": flat_current_client.as_dict(),
-            "testing": flat_current_testing.as_dict(),
+            "client": unflatten_dict(flat_current_client, delimiter="::"),
+            "testing": unflatten_dict(flat_current_testing, delimiter="::"),
         }
 
     def _apply_yaml_config(self, path: str):
@@ -148,6 +144,9 @@ class ConfigSetter:
         with open(path, "r") as file:
             # Open file stream and attempt to load YAML
             config = yaml.load(file, Loader=yaml.SafeLoader)
+        # Handle empty YAML files or files with only comments
+        if config is None:
+            config = {}
         # Apply acquired config to configuration
         self._apply_config(config.get("okta", {}))
 
@@ -156,18 +155,19 @@ class ConfigSetter:
         This method checks the environment variables for any OKTA
         configuration parameters and applies them if available.
         """
-        # Flatten current config and join with underscores
+        # Flatten current config with :: delimiter for internal processing
         # (for environment variable format)
-        flattened_config = FlatDict(self._config, delimiter="_")
+        flattened_config = flatten_dict(self._config, delimiter="::")
         flattened_keys = flattened_config.keys()
 
         # Create empty result config and populate
-        updated_config = FlatDict({}, delimiter="_")
+        updated_config = {}
 
         # Go through keys and search for it in the environment vars
         # using the format described in the README
         for key in flattened_keys:
-            env_key = ConfigSetter._OKTA + "_" + key.upper()
+            # Convert internal :: delimiter to _ for environment variable name
+            env_key = ConfigSetter._OKTA + "_" + key.replace("::", "_").upper()
             env_value = os.environ.get(env_key, None)
 
             if env_value is not None:
@@ -176,5 +176,6 @@ class ConfigSetter:
                     updated_config[key] = env_value.split(",")
                 else:
                     updated_config[key] = env_value
-            # apply to current configuration
-        self._apply_config(updated_config.as_dict())
+
+        # Apply to current configuration
+        self._apply_config(unflatten_dict(updated_config, delimiter="::"))
