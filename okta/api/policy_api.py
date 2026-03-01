@@ -176,6 +176,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -328,6 +332,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -485,6 +493,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -665,7 +677,6 @@ class PolicyApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -870,7 +881,6 @@ class PolicyApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -896,8 +906,8 @@ class PolicyApi(ApiClient):
         expand: Annotated[
             Optional[StrictStr],
             Field(
-                description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy rules. "
-                            "Use `expand=RULE` to include details about why a rule condition wasn't matched."
+                description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy "
+                            "rules. Use `expand=RULE` to include details about why a rule condition wasn't matched."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1057,7 +1067,6 @@ class PolicyApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1203,6 +1212,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1355,6 +1368,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1498,6 +1515,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1652,6 +1673,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1804,6 +1829,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1968,6 +1997,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -2135,6 +2168,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -2298,6 +2335,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -2322,10 +2363,9 @@ class PolicyApi(ApiClient):
         type: Annotated[
             StrictStr,
             Field(
-                description="Specifies the type of policy to return. The following policy types are available only with the "
-                            "Okta "
-                            'Identity Engine - `ACCESS_POLICY`, <x-lifecycle class="ea"></x-lifecycle> '
-                            "`DEVICE_SIGNAL_COLLECTION`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION` and `ENTITY_RISK`."
+                description='Specifies the type of policy to return. The following policy types are available only with the '
+                            'Okta Identity Engine - `ACCESS_POLICY`, <x-lifecycle class="ea"></x-lifecycle> '
+                            '`DEVICE_SIGNAL_COLLECTION`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION` and `ENTITY_RISK`.'
             ),
         ],
         status: Annotated[
@@ -2550,6 +2590,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -2713,6 +2757,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -2871,6 +2919,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -3044,6 +3096,10 @@ class PolicyApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -3221,7 +3277,6 @@ class PolicyApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -3395,7 +3450,6 @@ class PolicyApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -3578,7 +3632,6 @@ class PolicyApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

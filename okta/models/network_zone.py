@@ -172,18 +172,14 @@ class NetworkZone(BaseModel):
         """Create an instance of NetworkZone from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "DynamicNetworkZone":
-            return import_module(
-                "okta.models.dynamic_network_zone"
-            ).DynamicNetworkZone.from_dict(obj)
+            return models.DynamicNetworkZone.from_dict(obj)
         if object_type == "EnhancedDynamicNetworkZone":
-            return import_module(
-                "okta.models.enhanced_dynamic_network_zone"
-            ).EnhancedDynamicNetworkZone.from_dict(obj)
+            return models.EnhancedDynamicNetworkZone.from_dict(obj)
         if object_type == "IPNetworkZone":
-            return import_module("okta.models.ip_network_zone").IPNetworkZone.from_dict(
-                obj
-            )
+            return models.IPNetworkZone.from_dict(obj)
 
         raise ValueError(
             "NetworkZone failed to lookup discriminator value from "

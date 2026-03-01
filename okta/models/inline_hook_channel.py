@@ -117,14 +117,12 @@ class InlineHookChannel(BaseModel):
         """Create an instance of InlineHookChannel from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "InlineHookChannelHttp":
-            return import_module(
-                "okta.models.inline_hook_channel_http"
-            ).InlineHookChannelHttp.from_dict(obj)
+            return models.InlineHookChannelHttp.from_dict(obj)
         if object_type == "InlineHookChannelOAuth":
-            return import_module(
-                "okta.models.inline_hook_channel_o_auth"
-            ).InlineHookChannelOAuth.from_dict(obj)
+            return models.InlineHookChannelOAuth.from_dict(obj)
 
         raise ValueError(
             "InlineHookChannel failed to lookup discriminator value from "

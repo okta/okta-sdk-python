@@ -209,7 +209,6 @@ class ApplicationUsersApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -237,8 +236,8 @@ class ApplicationUsersApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="An optional query parameter to return the corresponding [User]("
-                            "/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: "
-                            "`user`"
+                            "/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value:"
+                            " `user`"
             ),
         ] = None,
         _request_timeout: Union[
@@ -391,6 +390,10 @@ class ApplicationUsersApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -431,21 +434,20 @@ class ApplicationUsersApi(ApiClient):
         q: Annotated[
             Optional[StrictStr],
             Field(
-                description="Specifies a filter for the list of application users returned based on their profile attributes. "
-                            "The value of `q` is matched against the beginning of the following profile attributes: "
-                            "`userName`, "
-                            "`firstName`, `lastName`, and `email`. This filter only supports the `startsWith` operation that "
-                            "matches the `q` string against the beginning of the attribute values. > **Note:** For OIDC apps, "
-                            "user profiles don't contain the `firstName` or `lastName` attributes. Therefore, the query only "
-                            "matches against the `userName` or `email` attributes. "
+                description="Specifies a filter for the list of application users returned based on their profile "
+                            "attributes. The value of `q` is matched against the beginning of the following profile "
+                            "attributes: `userName`, `firstName`, `lastName`, and `email`. This filter only supports the "
+                            "`startsWith` operation that matches the `q` string against the beginning of the attribute "
+                            "values. > **Note:** For OIDC apps, user profiles don't contain the `firstName` or `lastName` "
+                            "attributes. Therefore, the query only matches against the `userName` or `email` attributes. "
             ),
         ] = None,
         expand: Annotated[
             Optional[StrictStr],
             Field(
                 description="An optional query parameter to return the corresponding [User]("
-                            "/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: "
-                            "`user`"
+                            "/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value:"
+                            " `user`"
             ),
         ] = None,
         _request_timeout: Union[
@@ -620,6 +622,10 @@ class ApplicationUsersApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -789,6 +795,10 @@ class ApplicationUsersApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -971,7 +981,6 @@ class ApplicationUsersApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

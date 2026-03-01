@@ -122,10 +122,10 @@ class EnrollmentPolicyAuthenticatorGracePeriod(BaseModel):
         """Create an instance of EnrollmentPolicyAuthenticatorGracePeriod from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "ByDateTimeAuthenticatorGracePeriodExpiry":
-            return import_module(
-                "okta.models.by_date_time_authenticator_grace_period_expiry"
-            ).ByDateTimeAuthenticatorGracePeriodExpiry.from_dict(obj)
+            return models.ByDateTimeAuthenticatorGracePeriodExpiry.from_dict(obj)
 
         raise ValueError(
             "EnrollmentPolicyAuthenticatorGracePeriod failed to lookup discriminator value from "

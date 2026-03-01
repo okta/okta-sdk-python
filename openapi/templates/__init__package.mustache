@@ -12,10 +12,9 @@
 
 __version__ = "{{packageVersion}}"
 
-# import apis into sdk package
-{{#apiInfo}}{{#apis}}from {{packageName}}.{{apiPackage}}.{{classFilename}} import {{classname}}
-{{/apis}}{{/apiInfo}}
-# import ApiClient
+import importlib as _importlib
+
+# Eagerly import core SDK components (these are needed immediately)
 from {{packageName}}.api_response import ApiResponse
 from {{packageName}}.api_client import ApiClient
 from {{packageName}}.configuration import Configuration
@@ -29,12 +28,29 @@ from {{packageName}}.exceptions.exceptions import ApiException
 from {{packageName}}.signing import HttpSigningConfiguration
 {{/hasHttpSignatureMethods}}
 
-# import models into sdk package
-{{#models}}
-{{#model}}
-from {{modelPackage}}.{{classFilename}} import {{classname}}
-{{/model}}
-{{/models}}
+# Lazy import mapping for API classes and models
+_LAZY_IMPORT_MAP = {
+    # API classes
+{{#apiInfo}}{{#apis}}    "{{classname}}": "{{packageName}}.{{apiPackage}}.{{classFilename}}",
+{{/apis}}{{/apiInfo}}
+    # Model classes
+{{#models}}{{#model}}    "{{classname}}": "{{modelPackage}}.{{classFilename}}",
+{{/model}}{{/models}}
+}
+
+def __getattr__(name):
+    """Lazy load API classes and models on first access to improve import performance."""
+    if name in _LAZY_IMPORT_MAP:
+        module = _importlib.import_module(_LAZY_IMPORT_MAP[name])
+        attr = getattr(module, name)
+        # Cache in globals for subsequent access
+        globals()[name] = attr
+        return attr
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+def __dir__():
+    """Support for dir() to show available lazy-loaded attributes."""
+    return list(_LAZY_IMPORT_MAP.keys()) + list(globals().keys())
 {{#recursionLimit}}
 
 __import__('sys').setrecursionlimit({{{.}}})

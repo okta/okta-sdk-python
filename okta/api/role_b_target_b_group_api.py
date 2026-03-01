@@ -205,6 +205,10 @@ class RoleBTargetBGroupApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -388,6 +392,10 @@ class RoleBTargetBGroupApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -552,6 +560,10 @@ class RoleBTargetBGroupApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -580,8 +592,8 @@ class RoleBTargetBGroupApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
-                            "the list and is obtained from the `Link` response header. See [Pagination]("
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination) and [Link header]("
                             "https://developer.okta.com/docs/api/#link-header)."
             ),
@@ -750,6 +762,10 @@ class RoleBTargetBGroupApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -778,8 +794,8 @@ class RoleBTargetBGroupApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
-                            "the list and is obtained from the `Link` response header. See [Pagination]("
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
+                            "in the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination) and [Link header]("
                             "https://developer.okta.com/docs/api/#link-header)."
             ),
@@ -948,6 +964,10 @@ class RoleBTargetBGroupApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1125,6 +1145,10 @@ class RoleBTargetBGroupApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1295,6 +1319,10 @@ class RoleBTargetBGroupApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1457,6 +1485,10 @@ class RoleBTargetBGroupApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

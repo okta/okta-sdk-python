@@ -192,70 +192,40 @@ class AuthenticatorSimple(AuthenticatorBase):
         """Create an instance of AuthenticatorSimple from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "AuthenticatorKeyCustomApp":
-            return import_module(
-                "okta.models.authenticator_key_custom_app"
-            ).AuthenticatorKeyCustomApp.from_dict(obj)
+            return models.AuthenticatorKeyCustomApp.from_dict(obj)
         if object_type == "AuthenticatorKeyDuo":
-            return import_module(
-                "okta.models.authenticator_key_duo"
-            ).AuthenticatorKeyDuo.from_dict(obj)
+            return models.AuthenticatorKeyDuo.from_dict(obj)
         if object_type == "AuthenticatorKeyExternalIdp":
-            return import_module(
-                "okta.models.authenticator_key_external_idp"
-            ).AuthenticatorKeyExternalIdp.from_dict(obj)
+            return models.AuthenticatorKeyExternalIdp.from_dict(obj)
         if object_type == "AuthenticatorKeyGoogleOtp":
-            return import_module(
-                "okta.models.authenticator_key_google_otp"
-            ).AuthenticatorKeyGoogleOtp.from_dict(obj)
+            return models.AuthenticatorKeyGoogleOtp.from_dict(obj)
         if object_type == "AuthenticatorKeyEmail":
-            return import_module(
-                "okta.models.authenticator_key_email"
-            ).AuthenticatorKeyEmail.from_dict(obj)
+            return models.AuthenticatorKeyEmail.from_dict(obj)
         if object_type == "AuthenticatorKeyPassword":
-            return import_module(
-                "okta.models.authenticator_key_password"
-            ).AuthenticatorKeyPassword.from_dict(obj)
+            return models.AuthenticatorKeyPassword.from_dict(obj)
         if object_type == "AuthenticatorKeyOktaVerify":
-            return import_module(
-                "okta.models.authenticator_key_okta_verify"
-            ).AuthenticatorKeyOktaVerify.from_dict(obj)
+            return models.AuthenticatorKeyOktaVerify.from_dict(obj)
         if object_type == "AuthenticatorKeyOnprem":
-            return import_module(
-                "okta.models.authenticator_key_onprem"
-            ).AuthenticatorKeyOnprem.from_dict(obj)
+            return models.AuthenticatorKeyOnprem.from_dict(obj)
         if object_type == "AuthenticatorKeyPhone":
-            return import_module(
-                "okta.models.authenticator_key_phone"
-            ).AuthenticatorKeyPhone.from_dict(obj)
+            return models.AuthenticatorKeyPhone.from_dict(obj)
         if object_type == "AuthenticatorKeySecurityKey":
-            return import_module(
-                "okta.models.authenticator_key_security_key"
-            ).AuthenticatorKeySecurityKey.from_dict(obj)
+            return models.AuthenticatorKeySecurityKey.from_dict(obj)
         if object_type == "AuthenticatorKeySecurityQuestion":
-            return import_module(
-                "okta.models.authenticator_key_security_question"
-            ).AuthenticatorKeySecurityQuestion.from_dict(obj)
+            return models.AuthenticatorKeySecurityQuestion.from_dict(obj)
         if object_type == "AuthenticatorKeySmartCard":
-            return import_module(
-                "okta.models.authenticator_key_smart_card"
-            ).AuthenticatorKeySmartCard.from_dict(obj)
+            return models.AuthenticatorKeySmartCard.from_dict(obj)
         if object_type == "AuthenticatorKeySymantecVip":
-            return import_module(
-                "okta.models.authenticator_key_symantec_vip"
-            ).AuthenticatorKeySymantecVip.from_dict(obj)
+            return models.AuthenticatorKeySymantecVip.from_dict(obj)
         if object_type == "AuthenticatorKeyTac":
-            return import_module(
-                "okta.models.authenticator_key_tac"
-            ).AuthenticatorKeyTac.from_dict(obj)
+            return models.AuthenticatorKeyTac.from_dict(obj)
         if object_type == "AuthenticatorKeyWebauthn":
-            return import_module(
-                "okta.models.authenticator_key_webauthn"
-            ).AuthenticatorKeyWebauthn.from_dict(obj)
+            return models.AuthenticatorKeyWebauthn.from_dict(obj)
         if object_type == "AuthenticatorKeyYubikey":
-            return import_module(
-                "okta.models.authenticator_key_yubikey"
-            ).AuthenticatorKeyYubikey.from_dict(obj)
+            return models.AuthenticatorKeyYubikey.from_dict(obj)
 
         raise ValueError(
             "AuthenticatorSimple failed to lookup discriminator value from "

@@ -214,7 +214,6 @@ class ApplicationGroupsApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -397,6 +396,10 @@ class ApplicationGroupsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -423,10 +426,8 @@ class ApplicationGroupsApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="Specifies a filter for a list of assigned groups returned based on their names. The value of "
-                            "`q` is "
-                            "matched against the group `name`. This filter only supports the `startsWith` operation that "
-                            "matches "
-                            "the `q` string against the beginning of the [group name]("
+                            "`q` is matched against the group `name`. This filter only supports the `startsWith` operation "
+                            "that matches the `q` string against the beginning of the [group name]("
                             "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group"
                             "/operation/listGroups!c=200&path=profile/name&t=response)."
             ),
@@ -628,6 +629,10 @@ class ApplicationGroupsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -780,6 +785,10 @@ class ApplicationGroupsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -964,7 +973,6 @@ class ApplicationGroupsApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

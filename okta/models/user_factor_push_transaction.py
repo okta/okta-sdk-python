@@ -162,26 +162,18 @@ class UserFactorPushTransaction(BaseModel):  # noqa: F811
         """Create an instance of UserFactorPushTransaction from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "UserFactorPushTransactionRejected":
-            return import_module(
-                "okta.models.user_factor_push_transaction_rejected"
-            ).UserFactorPushTransactionRejected.from_dict(obj)
+            return models.UserFactorPushTransactionRejected.from_dict(obj)
         if object_type == "UserFactorPushTransaction":
-            return import_module(
-                "okta.models.user_factor_push_transaction"
-            ).UserFactorPushTransaction.from_dict(obj)
+            return models.UserFactorPushTransaction.from_dict(obj)
         if object_type == "UserFactorPushTransactionTimeout":
-            return import_module(
-                "okta.models.user_factor_push_transaction_timeout"
-            ).UserFactorPushTransactionTimeout.from_dict(obj)
+            return models.UserFactorPushTransactionTimeout.from_dict(obj)
         if object_type == "UserFactorPushTransactionWaitingNoNMC":
-            return import_module(
-                "okta.models.user_factor_push_transaction_waiting_no_nmc"
-            ).UserFactorPushTransactionWaitingNoNMC.from_dict(obj)
+            return models.UserFactorPushTransactionWaitingNoNMC.from_dict(obj)
         if object_type == "UserFactorPushTransactionWaitingNMC":
-            return import_module(
-                "okta.models.user_factor_push_transaction_waiting_nmc"
-            ).UserFactorPushTransactionWaitingNMC.from_dict(obj)
+            return models.UserFactorPushTransactionWaitingNMC.from_dict(obj)
 
         raise ValueError(
             "UserFactorPushTransaction failed to lookup discriminator value from "

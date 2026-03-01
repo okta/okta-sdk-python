@@ -240,7 +240,12 @@ class {{classname}}(ApiClient):
             if _default_content_type is not None:
                 _header_params['Content-Type'] = _default_content_type
         {{/hasConsumes}}
-
+        {{^hasConsumes}}
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _header_params['Content-Type'] = 'application/json'
+        {{/hasConsumes}}
         # authentication setting
         _auth_settings: List[str] = [{{#authMethods}}
             '{{name}}'{{^-last}}, {{/-last}}{{/authMethods}}

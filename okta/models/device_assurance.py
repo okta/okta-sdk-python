@@ -218,26 +218,18 @@ class DeviceAssurance(BaseModel):
         """Create an instance of DeviceAssurance from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "DeviceAssuranceAndroidPlatform":
-            return import_module(
-                "okta.models.device_assurance_android_platform"
-            ).DeviceAssuranceAndroidPlatform.from_dict(obj)
+            return models.DeviceAssuranceAndroidPlatform.from_dict(obj)
         if object_type == "DeviceAssuranceChromeOSPlatform":
-            return import_module(
-                "okta.models.device_assurance_chrome_os_platform"
-            ).DeviceAssuranceChromeOSPlatform.from_dict(obj)
+            return models.DeviceAssuranceChromeOSPlatform.from_dict(obj)
         if object_type == "DeviceAssuranceIOSPlatform":
-            return import_module(
-                "okta.models.device_assurance_ios_platform"
-            ).DeviceAssuranceIOSPlatform.from_dict(obj)
+            return models.DeviceAssuranceIOSPlatform.from_dict(obj)
         if object_type == "DeviceAssuranceMacOSPlatform":
-            return import_module(
-                "okta.models.device_assurance_mac_os_platform"
-            ).DeviceAssuranceMacOSPlatform.from_dict(obj)
+            return models.DeviceAssuranceMacOSPlatform.from_dict(obj)
         if object_type == "DeviceAssuranceWindowsPlatform":
-            return import_module(
-                "okta.models.device_assurance_windows_platform"
-            ).DeviceAssuranceWindowsPlatform.from_dict(obj)
+            return models.DeviceAssuranceWindowsPlatform.from_dict(obj)
 
         raise ValueError(
             "DeviceAssurance failed to lookup discriminator value from "

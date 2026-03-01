@@ -52,8 +52,7 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                            "require a "
-                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
+                            "require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,
@@ -200,6 +199,10 @@ class SubscriptionApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -366,6 +369,10 @@ class SubscriptionApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -391,8 +398,7 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                            "require a "
-                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
+                            "require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         _request_timeout: Union[
@@ -532,6 +538,10 @@ class SubscriptionApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -691,6 +701,10 @@ class SubscriptionApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -716,8 +730,7 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                            "require a "
-                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
+                            "require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,
@@ -865,6 +878,10 @@ class SubscriptionApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1031,6 +1048,10 @@ class SubscriptionApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1056,8 +1077,7 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                            "require a "
-                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
+                            "require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,
@@ -1205,6 +1225,10 @@ class SubscriptionApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1371,6 +1395,10 @@ class SubscriptionApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

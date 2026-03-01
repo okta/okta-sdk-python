@@ -5,13 +5,146 @@
 # Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
-
 # flake8: noqa
 {{>partial_header}}
-
-# import models into model package
+import importlib as _importlib
+import threading as _threading
+# Lock for thread-safe lazy imports
+_import_lock = _threading.Lock()
+# Groups of models that should be loaded together to ensure class identity consistency
+# When any model in a group is loaded, all models in that group are preloaded
+# This is critical for discriminator-based polymorphic models to prevent Pydantic validation errors
+# Groups are auto-generated from discriminator mappings, with manual field dependencies added
+_MODEL_GROUPS = {
 {{#models}}
 {{#model}}
-from {{modelPackage}}.{{classFilename}} import {{classname}}
+{{#hasChildren}}
+{{#discriminator}}
+    '{{classVarName}}': [
+        '{{classname}}',
+{{#mappedModels}}
+        '{{modelName}}',
+{{/mappedModels}}
+    ],
+{{/discriminator}}
+{{/hasChildren}}
 {{/model}}
 {{/models}}
+}
+
+# Field dependencies that must be loaded with discriminator groups
+#
+# IMPORTANT: This is hardcoded because OpenAPI Generator's mustache templates cannot
+# automatically detect field-level type dependencies. The generator can only detect
+# discriminator-based parent-child relationships through hasChildren and mappedModels tags.
+#
+# Why is this needed?
+# - Pydantic models cache class definitions during validation
+# - If a model uses another model as a field type, both must use the SAME class instance
+# - Lazy loading without grouping can create duplicate class instances, causing validation errors
+#
+# When to update this:
+# - If tests fail with Pydantic validation errors about class identity
+# - When new polymorphic model groups are added that reference field types
+# - If new models are added as field types within existing discriminator groups
+#
+# Example: DeviceAssurance models use OSVersion, DiskEncryptionType, etc. as field types.
+# Without preloading these together, Pydantic sees different OSVersion class instances.
+_FIELD_DEPENDENCIES = {
+    'application': [
+        # Settings classes used by different application types
+        'AutoLoginApplicationSettings', 'AutoLoginApplicationSettingsSignOn',
+        'BasicApplicationSettings', 'BasicApplicationSettingsApplication',
+        'BookmarkApplicationSettings', 'BookmarkApplicationSettingsApplication',
+        'BrowserPluginApplicationSettings',
+        'OpenIdConnectApplicationSettings', 'OpenIdConnectApplicationSettingsClient',
+        'OpenIdConnectApplicationSettingsClientKeys', 'OpenIdConnectApplicationSettingsRefreshToken',
+        'SamlApplicationSettings', 'SamlApplicationSettingsSignOn', 'SamlApplicationSettingsApplication',
+        'SamlAttributeStatement',
+        'SecurePasswordStoreApplicationSettings', 'SecurePasswordStoreApplicationSettingsApplication',
+        'SwaApplicationSettings', 'SwaApplicationSettingsApplication',
+        # Credentials classes
+        'ApplicationCredentials', 'ApplicationCredentialsOAuthClient',
+        'ApplicationCredentialsSigning', 'ApplicationCredentialsSigningUse',
+        'ApplicationCredentialsUsernameTemplate',
+        'OAuthApplicationCredentials',
+        'SchemeApplicationCredentials',
+        # Other shared field types
+        'ApplicationAccessibility',
+        'ApplicationEmbedded',
+        'ApplicationExpressConfiguration',
+        'ApplicationLicensing',
+        'ApplicationLifecycleStatus',
+        'ApplicationLinks',
+        'ApplicationSignOnMode',
+        'ApplicationUniversalLogout',
+        'ApplicationVisibility', 'ApplicationVisibilityHide',
+        'JsonWebKey',
+        'OAuthEndpointAuthenticationMethod',
+        'OAuthGrantType',
+        'OAuthResponseType',
+        'OpenIdConnectApplicationConsentMethod',
+        'OpenIdConnectApplicationIdpInitiatedLogin',
+        'OpenIdConnectApplicationIssuerMode',
+        'OpenIdConnectApplicationType',
+        'OpenIdConnectRefreshTokenRotationType',
+        'SamlAttributeType',
+    ],
+    'device_assurance': [
+        'OSVersion', 'OSVersionConstraint', 'OSVersionFourComponents',
+        'ScreenLockType', 'DiskEncryptionTypeDesktop', 'DiskEncryptionTypeMobile',
+        'DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType',
+        'DeviceAssuranceAndroidPlatformAllOfScreenLockType',
+        'DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders',
+        'DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders',
+        'DeviceAssuranceIOSPlatformAllOfThirdPartySignalProviders',
+        'DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType',
+        'DeviceAssuranceMacOSPlatformAllOfThirdPartySignalProviders',
+        'DeviceAssuranceWindowsPlatformAllOfThirdPartySignalProviders',
+    ],
+}
+
+# Merge field dependencies into model groups
+for group_name, dependencies in _FIELD_DEPENDENCIES.items():
+    if group_name in _MODEL_GROUPS:
+        _MODEL_GROUPS[group_name].extend(dependencies)
+# Reverse mapping: model name -> group name
+_MODEL_TO_GROUP = {}
+for group_name, models in _MODEL_GROUPS.items():
+    for model in models:
+        _MODEL_TO_GROUP[model] = group_name
+# Lazy import mapping: attribute name -> module path
+_LAZY_IMPORT_MAP = {
+{{#models}}
+{{#model}}
+    "{{classname}}": "{{modelPackage}}.{{classFilename}}",
+{{/model}}
+{{/models}}
+}
+def __getattr__(name):
+    if name in _LAZY_IMPORT_MAP:
+        # Use lock to ensure thread-safe importing and caching
+        with _import_lock:
+            # Check again after acquiring lock (double-checked locking pattern)
+            if name in globals():
+                return globals()[name]
+            # Check if this model belongs to a group that should be preloaded
+            if name in _MODEL_TO_GROUP:
+                group_name = _MODEL_TO_GROUP[name]
+                group_models = _MODEL_GROUPS[group_name]
+                # Preload all models in the group to ensure consistent class references
+                for model_name in group_models:
+                    if model_name in _LAZY_IMPORT_MAP and model_name not in globals():
+                        module = _importlib.import_module(_LAZY_IMPORT_MAP[model_name])
+                        attr = getattr(module, model_name)
+                        globals()[model_name] = attr
+                # Return the requested model (now guaranteed to be in globals)
+                return globals()[name]
+            # Standard lazy import for models not in a group
+            module = _importlib.import_module(_LAZY_IMPORT_MAP[name])
+            attr = getattr(module, name)
+            globals()[name] = attr
+            return attr
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+def __dir__():
+    return list(_LAZY_IMPORT_MAP.keys()) + list(globals().keys())

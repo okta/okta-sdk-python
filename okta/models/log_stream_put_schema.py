@@ -114,14 +114,12 @@ class LogStreamPutSchema(BaseModel):
         """Create an instance of LogStreamPutSchema from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "LogStreamAwsPutSchema":
-            return import_module(
-                "okta.models.log_stream_aws_put_schema"
-            ).LogStreamAwsPutSchema.from_dict(obj)
+            return models.LogStreamAwsPutSchema.from_dict(obj)
         if object_type == "LogStreamSplunkPutSchema":
-            return import_module(
-                "okta.models.log_stream_splunk_put_schema"
-            ).LogStreamSplunkPutSchema.from_dict(obj)
+            return models.LogStreamSplunkPutSchema.from_dict(obj)
 
         raise ValueError(
             "LogStreamPutSchema failed to lookup discriminator value from "

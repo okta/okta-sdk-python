@@ -51,9 +51,8 @@ class UserLinkedObjectApi(ApiClient):
             StrictStr,
             Field(
                 description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
-                            "ID. If "
-                            "for the `associated` relation, this is the user ID or login value of the user assigned the "
-                            "associated relationship.  This can be `me` to represent the current session user."
+                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
+                            "the associated relationship.  This can be `me` to represent the current session user."
             ),
         ],
         primary_relationship_name: Annotated[
@@ -205,6 +204,10 @@ class UserLinkedObjectApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["oauth2"]
 
@@ -230,9 +233,8 @@ class UserLinkedObjectApi(ApiClient):
             StrictStr,
             Field(
                 description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
-                            "ID. If "
-                            "for the `associated` relation, this is the user ID or login value of the user assigned the "
-                            "associated relationship.  This can be `me` to represent the current session user."
+                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
+                            "the associated relationship.  This can be `me` to represent the current session user."
             ),
         ],
         relationship_name: Annotated[
@@ -375,6 +377,10 @@ class UserLinkedObjectApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -400,9 +406,8 @@ class UserLinkedObjectApi(ApiClient):
             StrictStr,
             Field(
                 description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
-                            "ID. If "
-                            "for the `associated` relation, this is the user ID or login value of the user assigned the "
-                            "associated relationship.  This can be `me` to represent the current session user."
+                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
+                            "the associated relationship.  This can be `me` to represent the current session user."
             ),
         ],
         relationship_name: Annotated[
@@ -557,6 +562,10 @@ class UserLinkedObjectApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

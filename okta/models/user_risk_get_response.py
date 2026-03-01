@@ -134,22 +134,16 @@ class UserRiskGetResponse(BaseModel):
         """Create an instance of UserRiskGetResponse from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "UserRiskLevelExists":
-            return import_module(
-                "okta.models.user_risk_level_exists"
-            ).UserRiskLevelExists.from_dict(obj)
+            return models.UserRiskLevelExists.from_dict(obj)
         if object_type == "UserRiskLevelExists":
-            return import_module(
-                "okta.models.user_risk_level_exists"
-            ).UserRiskLevelExists.from_dict(obj)
+            return models.UserRiskLevelExists.from_dict(obj)
         if object_type == "UserRiskLevelExists":
-            return import_module(
-                "okta.models.user_risk_level_exists"
-            ).UserRiskLevelExists.from_dict(obj)
+            return models.UserRiskLevelExists.from_dict(obj)
         if object_type == "UserRiskLevelNone":
-            return import_module(
-                "okta.models.user_risk_level_none"
-            ).UserRiskLevelNone.from_dict(obj)
+            return models.UserRiskLevelNone.from_dict(obj)
 
         raise ValueError(
             "UserRiskGetResponse failed to lookup discriminator value from "
