@@ -50,6 +50,7 @@ if TYPE_CHECKING:
     from okta.models.basic_auth_application import BasicAuthApplication
     from okta.models.bookmark_application import BookmarkApplication
     from okta.models.browser_plugin_application import BrowserPluginApplication
+    from okta.models.application import Application
     from okta.models.open_id_connect_application import OpenIdConnectApplication
     from okta.models.saml11_application import Saml11Application
     from okta.models.saml_application import SamlApplication
@@ -59,7 +60,7 @@ if TYPE_CHECKING:
     from okta.models.ws_federation_application import WsFederationApplication
 
 
-class Application(BaseModel):
+class Application(BaseModel):  # noqa: F811
     """
     Application
     """  # noqa: E501
@@ -209,6 +210,7 @@ class Application(BaseModel):
         "BASIC_AUTH": "BasicAuthApplication",
         "BOOKMARK": "BookmarkApplication",
         "BROWSER_PLUGIN": "BrowserPluginApplication",
+        "MFA_AS_SERVICE": "Application",
         "OPENID_CONNECT": "OpenIdConnectApplication",
         "SAML_1_1": "Saml11Application",
         "SAML_2_0": "SamlApplication",
@@ -241,6 +243,7 @@ class Application(BaseModel):
             BasicAuthApplication,
             BookmarkApplication,
             BrowserPluginApplication,
+            Application,
             OpenIdConnectApplication,
             Saml11Application,
             SamlApplication,
@@ -339,6 +342,7 @@ class Application(BaseModel):
             BasicAuthApplication,
             BookmarkApplication,
             BrowserPluginApplication,
+            Application,
             OpenIdConnectApplication,
             Saml11Application,
             SamlApplication,
@@ -365,6 +369,8 @@ class Application(BaseModel):
             return import_module(
                 "okta.models.browser_plugin_application"
             ).BrowserPluginApplication.from_dict(obj)
+        if object_type == "Application":
+            return import_module("okta.models.application").Application.from_dict(obj)
         if object_type == "OpenIdConnectApplication":
             return import_module(
                 "okta.models.open_id_connect_application"
