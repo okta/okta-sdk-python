@@ -215,42 +215,26 @@ class PolicyRule(BaseModel):
         """Create an instance of PolicyRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "AccessPolicyRule":
-            return import_module(
-                "okta.models.access_policy_rule"
-            ).AccessPolicyRule.from_dict(obj)
+            return models.AccessPolicyRule.from_dict(obj)
         if object_type == "DeviceSignalCollectionPolicyRule":
-            return import_module(
-                "okta.models.device_signal_collection_policy_rule"
-            ).DeviceSignalCollectionPolicyRule.from_dict(obj)
+            return models.DeviceSignalCollectionPolicyRule.from_dict(obj)
         if object_type == "EntityRiskPolicyRule":
-            return import_module(
-                "okta.models.entity_risk_policy_rule"
-            ).EntityRiskPolicyRule.from_dict(obj)
+            return models.EntityRiskPolicyRule.from_dict(obj)
         if object_type == "IdpDiscoveryPolicyRule":
-            return import_module(
-                "okta.models.idp_discovery_policy_rule"
-            ).IdpDiscoveryPolicyRule.from_dict(obj)
+            return models.IdpDiscoveryPolicyRule.from_dict(obj)
         if object_type == "AuthenticatorEnrollmentPolicyRule":
-            return import_module(
-                "okta.models.authenticator_enrollment_policy_rule"
-            ).AuthenticatorEnrollmentPolicyRule.from_dict(obj)
+            return models.AuthenticatorEnrollmentPolicyRule.from_dict(obj)
         if object_type == "PasswordPolicyRule":
-            return import_module(
-                "okta.models.password_policy_rule"
-            ).PasswordPolicyRule.from_dict(obj)
+            return models.PasswordPolicyRule.from_dict(obj)
         if object_type == "PostAuthSessionPolicyRule":
-            return import_module(
-                "okta.models.post_auth_session_policy_rule"
-            ).PostAuthSessionPolicyRule.from_dict(obj)
+            return models.PostAuthSessionPolicyRule.from_dict(obj)
         if object_type == "ProfileEnrollmentPolicyRule":
-            return import_module(
-                "okta.models.profile_enrollment_policy_rule"
-            ).ProfileEnrollmentPolicyRule.from_dict(obj)
+            return models.ProfileEnrollmentPolicyRule.from_dict(obj)
         if object_type == "OktaSignOnPolicyRule":
-            return import_module(
-                "okta.models.okta_sign_on_policy_rule"
-            ).OktaSignOnPolicyRule.from_dict(obj)
+            return models.OktaSignOnPolicyRule.from_dict(obj)
 
         raise ValueError(
             "PolicyRule failed to lookup discriminator value from "

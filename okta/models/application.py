@@ -349,42 +349,26 @@ class Application(BaseModel):
         """Create an instance of Application from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "AutoLoginApplication":
-            return import_module(
-                "okta.models.auto_login_application"
-            ).AutoLoginApplication.from_dict(obj)
+            return models.AutoLoginApplication.from_dict(obj)
         if object_type == "BasicAuthApplication":
-            return import_module(
-                "okta.models.basic_auth_application"
-            ).BasicAuthApplication.from_dict(obj)
+            return models.BasicAuthApplication.from_dict(obj)
         if object_type == "BookmarkApplication":
-            return import_module(
-                "okta.models.bookmark_application"
-            ).BookmarkApplication.from_dict(obj)
+            return models.BookmarkApplication.from_dict(obj)
         if object_type == "BrowserPluginApplication":
-            return import_module(
-                "okta.models.browser_plugin_application"
-            ).BrowserPluginApplication.from_dict(obj)
+            return models.BrowserPluginApplication.from_dict(obj)
         if object_type == "OpenIdConnectApplication":
-            return import_module(
-                "okta.models.open_id_connect_application"
-            ).OpenIdConnectApplication.from_dict(obj)
+            return models.OpenIdConnectApplication.from_dict(obj)
         if object_type == "Saml11Application":
-            return import_module(
-                "okta.models.saml11_application"
-            ).Saml11Application.from_dict(obj)
+            return models.Saml11Application.from_dict(obj)
         if object_type == "SamlApplication":
-            return import_module(
-                "okta.models.saml_application"
-            ).SamlApplication.from_dict(obj)
+            return models.SamlApplication.from_dict(obj)
         if object_type == "SecurePasswordStoreApplication":
-            return import_module(
-                "okta.models.secure_password_store_application"
-            ).SecurePasswordStoreApplication.from_dict(obj)
+            return models.SecurePasswordStoreApplication.from_dict(obj)
         if object_type == "WsFederationApplication":
-            return import_module(
-                "okta.models.ws_federation_application"
-            ).WsFederationApplication.from_dict(obj)
+            return models.WsFederationApplication.from_dict(obj)
 
         raise ValueError(
             "Application failed to lookup discriminator value from "

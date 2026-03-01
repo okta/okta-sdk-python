@@ -180,62 +180,36 @@ class AuthenticatorMethodWithVerifiableProperties(AuthenticatorMethodBase):  # n
         """Create an instance of AuthenticatorMethodWithVerifiableProperties from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
-            return import_module(
-                "okta.models.authenticator_method_with_verifiable_properties"
-            ).AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
+            return models.AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
-            return import_module(
-                "okta.models.authenticator_method_with_verifiable_properties"
-            ).AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
+            return models.AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
-            return import_module(
-                "okta.models.authenticator_method_simple"
-            ).AuthenticatorMethodSimple.from_dict(obj)
+            return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
-            return import_module(
-                "okta.models.authenticator_method_with_verifiable_properties"
-            ).AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
+            return models.AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodOtp":
-            return import_module(
-                "okta.models.authenticator_method_otp"
-            ).AuthenticatorMethodOtp.from_dict(obj)
+            return models.AuthenticatorMethodOtp.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
-            return import_module(
-                "okta.models.authenticator_method_simple"
-            ).AuthenticatorMethodSimple.from_dict(obj)
+            return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodPush":
-            return import_module(
-                "okta.models.authenticator_method_push"
-            ).AuthenticatorMethodPush.from_dict(obj)
+            return models.AuthenticatorMethodPush.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
-            return import_module(
-                "okta.models.authenticator_method_simple"
-            ).AuthenticatorMethodSimple.from_dict(obj)
+            return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodSignedNonce":
-            return import_module(
-                "okta.models.authenticator_method_signed_nonce"
-            ).AuthenticatorMethodSignedNonce.from_dict(obj)
+            return models.AuthenticatorMethodSignedNonce.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
-            return import_module(
-                "okta.models.authenticator_method_simple"
-            ).AuthenticatorMethodSimple.from_dict(obj)
+            return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodTac":
-            return import_module(
-                "okta.models.authenticator_method_tac"
-            ).AuthenticatorMethodTac.from_dict(obj)
+            return models.AuthenticatorMethodTac.from_dict(obj)
         if object_type == "AuthenticatorMethodTotp":
-            return import_module(
-                "okta.models.authenticator_method_totp"
-            ).AuthenticatorMethodTotp.from_dict(obj)
+            return models.AuthenticatorMethodTotp.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
-            return import_module(
-                "okta.models.authenticator_method_simple"
-            ).AuthenticatorMethodSimple.from_dict(obj)
+            return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodWebAuthn":
-            return import_module(
-                "okta.models.authenticator_method_web_authn"
-            ).AuthenticatorMethodWebAuthn.from_dict(obj)
+            return models.AuthenticatorMethodWebAuthn.from_dict(obj)
 
         raise ValueError(
             "AuthenticatorMethodWithVerifiableProperties failed to lookup discriminator value from "

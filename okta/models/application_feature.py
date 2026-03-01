@@ -140,14 +140,12 @@ class ApplicationFeature(BaseModel):
         """Create an instance of ApplicationFeature from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "InboundProvisioningApplicationFeature":
-            return import_module(
-                "okta.models.inbound_provisioning_application_feature"
-            ).InboundProvisioningApplicationFeature.from_dict(obj)
+            return models.InboundProvisioningApplicationFeature.from_dict(obj)
         if object_type == "UserProvisioningApplicationFeature":
-            return import_module(
-                "okta.models.user_provisioning_application_feature"
-            ).UserProvisioningApplicationFeature.from_dict(obj)
+            return models.UserProvisioningApplicationFeature.from_dict(obj)
 
         raise ValueError(
             "ApplicationFeature failed to lookup discriminator value from "

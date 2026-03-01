@@ -205,7 +205,6 @@ class ApplicationCrossAppAccessConnectionsApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -359,6 +358,10 @@ class ApplicationCrossAppAccessConnectionsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -391,9 +394,8 @@ class ApplicationCrossAppAccessConnectionsApi(ApiClient):
             Optional[Annotated[int, Field(le=200, strict=True)]],
             Field(
                 description="Specifies the number of results to return per page. The values:   * -1: Return all results (up "
-                            "to "
-                            "system maximum)   * 0: Return an empty result set   * Positive integer: Return up to that many "
-                            "results (capped at system maximum) "
+                            "to system maximum)   * 0: Return an empty result set   * Positive integer: Return up to that "
+                            "many results (capped at system maximum) "
             ),
         ] = None,
         _request_timeout: Union[
@@ -549,6 +551,10 @@ class ApplicationCrossAppAccessConnectionsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -715,6 +721,10 @@ class ApplicationCrossAppAccessConnectionsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -898,7 +908,6 @@ class ApplicationCrossAppAccessConnectionsApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

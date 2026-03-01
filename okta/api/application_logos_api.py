@@ -49,12 +49,11 @@ class ApplicationLogosApi(ApiClient):
         file: Annotated[
             Union[StrictBytes, StrictStr],
             Field(
-                description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, "
-                            "and less than one MB in size. For best results, use an image with a transparent background and a "
-                            "square dimension of 200 x 200 pixels to prevent upscaling.  > **Notes:** > * Only SVG files "
-                            "encoded "
-                            'in UTF-8 are supported. For example, `<xml version=\\"1.0\\" encoding=\\"UTF-8\\">` is a valid '
-                            "SVG file declaration. > * `multipart/form-data` isn't supported for Python. Remove the "
+                description='The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, '
+                            'and less than one MB in size. For best results, use an image with a transparent background and '
+                            'a square dimension of 200 x 200 pixels to prevent upscaling.  > **Notes:** > * Only SVG files '
+                            'encoded in UTF-8 are supported. For example, `<xml version=\\"1.0\\" encoding=\\"UTF-8\\">` is '
+                            'a valid SVG file declaration. > * `multipart/form-data` isn\'t supported for Python. Remove the '
                             '`\\"Content-Type\\": \\"multipart/form-data\\"` line if you use the Python request sample code. '
             ),
         ],
@@ -206,7 +205,6 @@ class ApplicationLogosApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

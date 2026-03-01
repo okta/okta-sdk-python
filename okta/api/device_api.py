@@ -172,6 +172,10 @@ class DeviceApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -321,6 +325,10 @@ class DeviceApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -469,6 +477,10 @@ class DeviceApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -625,6 +637,10 @@ class DeviceApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -783,6 +799,10 @@ class DeviceApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -815,13 +835,11 @@ class DeviceApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="A SCIM filter expression that filters the results. Searches include all device `profile` "
-                            "properties "
-                            "and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices can be "
-                            "filtered "
-                            "by the contains (`co`) operator. You can only use `co` with these select device profile "
-                            "attributes: "
-                            "`profile.displayName`, `profile.serialNumber`, `profile.imei`, `profile.meid`, `profile.udid`, "
-                            "and `profile.sid`. See [Operators](https://developer.okta.com/docs/api/#operators)."
+                            "properties and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices "
+                            "can be filtered by the contains (`co`) operator. You can only use `co` with these select device "
+                            "profile attributes: `profile.displayName`, `profile.serialNumber`, `profile.imei`, "
+                            "`profile.meid`, `profile.udid`, and `profile.sid`. See [Operators]("
+                            "https://developer.okta.com/docs/api/#operators)."
             ),
         ] = None,
         expand: Annotated[
@@ -1001,6 +1019,10 @@ class DeviceApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1146,6 +1168,10 @@ class DeviceApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1292,6 +1318,10 @@ class DeviceApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

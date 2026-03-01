@@ -121,10 +121,10 @@ class AvailableActionProvider(BaseModel):
         """Create an instance of AvailableActionProvider from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "WorkflowAvailableActionProvider":
-            return import_module(
-                "okta.models.workflow_available_action_provider"
-            ).WorkflowAvailableActionProvider.from_dict(obj)
+            return models.WorkflowAvailableActionProvider.from_dict(obj)
 
         raise ValueError(
             "AvailableActionProvider failed to lookup discriminator value from "

@@ -1,11 +1,12 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
-
 # flake8: noqa
 """
 Okta Admin Management
@@ -20,7 +21,352 @@ Do not edit the class manually.
 """  # noqa: E501
 
 import importlib as _importlib
+import threading as _threading
 
+# Lock for thread-safe lazy imports
+_import_lock = _threading.Lock()
+# Groups of models that should be loaded together to ensure class identity consistency
+# When any model in a group is loaded, all models in that group are preloaded
+# This is critical for discriminator-based polymorphic models to prevent Pydantic validation errors
+# Groups are auto-generated from discriminator mappings, with manual field dependencies added
+_MODEL_GROUPS = {
+    "action_provider": [
+        "ActionProvider",
+        "WorkflowActionProvider",
+    ],
+    "app_config": [
+        "AppConfig",
+        "AppConfigActiveDirectory",
+    ],
+    "application": [
+        "Application",
+        "AutoLoginApplication",
+        "BasicAuthApplication",
+        "BookmarkApplication",
+        "BrowserPluginApplication",
+        "OpenIdConnectApplication",
+        "Saml11Application",
+        "SamlApplication",
+        "SecurePasswordStoreApplication",
+        "WsFederationApplication",
+    ],
+    "application_feature": [
+        "ApplicationFeature",
+        "InboundProvisioningApplicationFeature",
+        "UserProvisioningApplicationFeature",
+    ],
+    "authenticator_base": [
+        "AuthenticatorBase",
+        "AuthenticatorKeyCustomApp",
+        "AuthenticatorKeyDuo",
+        "AuthenticatorKeyExternalIdp",
+        "AuthenticatorKeyGoogleOtp",
+        "AuthenticatorKeyEmail",
+        "AuthenticatorKeyPassword",
+        "AuthenticatorKeyOktaVerify",
+        "AuthenticatorKeyOnprem",
+        "AuthenticatorKeyPhone",
+        "AuthenticatorKeySecurityKey",
+        "AuthenticatorKeySecurityQuestion",
+        "AuthenticatorKeySmartCard",
+        "AuthenticatorKeySymantecVip",
+        "AuthenticatorKeyTac",
+        "AuthenticatorKeyWebauthn",
+        "AuthenticatorKeyYubikey",
+        "AuthenticatorSimple",
+    ],
+    "authenticator_method_base": [
+        "AuthenticatorMethodBase",
+        "AuthenticatorMethodWithVerifiableProperties",
+        "AuthenticatorMethodWithVerifiableProperties",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodWithVerifiableProperties",
+        "AuthenticatorMethodOtp",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodPush",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodSignedNonce",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodTac",
+        "AuthenticatorMethodTotp",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodWebAuthn",
+    ],
+    "authenticator_method_with_verifiable_properties": [
+        "AuthenticatorMethodWithVerifiableProperties",
+        "AuthenticatorMethodWithVerifiableProperties",
+        "AuthenticatorMethodWithVerifiableProperties",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodWithVerifiableProperties",
+        "AuthenticatorMethodOtp",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodPush",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodSignedNonce",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodTac",
+        "AuthenticatorMethodTotp",
+        "AuthenticatorMethodSimple",
+        "AuthenticatorMethodWebAuthn",
+    ],
+    "authenticator_simple": [
+        "AuthenticatorSimple",
+        "AuthenticatorKeyCustomApp",
+        "AuthenticatorKeyDuo",
+        "AuthenticatorKeyExternalIdp",
+        "AuthenticatorKeyGoogleOtp",
+        "AuthenticatorKeyEmail",
+        "AuthenticatorKeyPassword",
+        "AuthenticatorKeyOktaVerify",
+        "AuthenticatorKeyOnprem",
+        "AuthenticatorKeyPhone",
+        "AuthenticatorKeySecurityKey",
+        "AuthenticatorKeySecurityQuestion",
+        "AuthenticatorKeySmartCard",
+        "AuthenticatorKeySymantecVip",
+        "AuthenticatorKeyTac",
+        "AuthenticatorKeyWebauthn",
+        "AuthenticatorKeyYubikey",
+    ],
+    "available_action_provider": [
+        "AvailableActionProvider",
+        "WorkflowAvailableActionProvider",
+    ],
+    "behavior_rule": [
+        "BehaviorRule",
+        "BehaviorRuleASN",
+        "BehaviorRuleAnomalousDevice",
+        "BehaviorRuleAnomalousIP",
+        "BehaviorRuleAnomalousLocation",
+        "BehaviorRuleVelocity",
+    ],
+    "device_assurance": [
+        "DeviceAssurance",
+        "DeviceAssuranceAndroidPlatform",
+        "DeviceAssuranceChromeOSPlatform",
+        "DeviceAssuranceIOSPlatform",
+        "DeviceAssuranceMacOSPlatform",
+        "DeviceAssuranceWindowsPlatform",
+    ],
+    "enrollment_policy_authenticator_grace_period": [
+        "EnrollmentPolicyAuthenticatorGracePeriod",
+        "ByDateTimeAuthenticatorGracePeriodExpiry",
+    ],
+    "inline_hook_channel": [
+        "InlineHookChannel",
+        "InlineHookChannelHttp",
+        "InlineHookChannelOAuth",
+    ],
+    "inline_hook_channel_create": [
+        "InlineHookChannelCreate",
+        "InlineHookChannelHttpCreate",
+        "InlineHookChannelOAuthCreate",
+    ],
+    "log_stream": [
+        "LogStream",
+        "LogStreamAws",
+        "LogStreamSplunk",
+    ],
+    "log_stream_put_schema": [
+        "LogStreamPutSchema",
+        "LogStreamAwsPutSchema",
+        "LogStreamSplunkPutSchema",
+    ],
+    "network_zone": [
+        "NetworkZone",
+        "DynamicNetworkZone",
+        "EnhancedDynamicNetworkZone",
+        "IPNetworkZone",
+    ],
+    "o_auth2_client_json_signing_key_response": [
+        "OAuth2ClientJsonSigningKeyResponse",
+        "OAuth2ClientJsonWebKeyECResponse",
+        "OAuth2ClientJsonWebKeyRsaResponse",
+    ],
+    "policy": [
+        "Policy",
+        "AccessPolicy",
+        "DeviceSignalCollectionPolicy",
+        "EntityRiskPolicy",
+        "IdpDiscoveryPolicy",
+        "AuthenticatorEnrollmentPolicy",
+        "OktaSignOnPolicy",
+        "PasswordPolicy",
+        "PostAuthSessionPolicy",
+        "ProfileEnrollmentPolicy",
+    ],
+    "policy_rule": [
+        "PolicyRule",
+        "AccessPolicyRule",
+        "DeviceSignalCollectionPolicyRule",
+        "EntityRiskPolicyRule",
+        "IdpDiscoveryPolicyRule",
+        "AuthenticatorEnrollmentPolicyRule",
+        "PasswordPolicyRule",
+        "PostAuthSessionPolicyRule",
+        "ProfileEnrollmentPolicyRule",
+        "OktaSignOnPolicyRule",
+    ],
+    "privileged_resource": [
+        "PrivilegedResource",
+        "PrivilegedResourceAccountAppRequest",
+        "PrivilegedResourceAccountOkta",
+        "PrivilegedResourceAccountAppResponse",
+    ],
+    "push_provider": [
+        "PushProvider",
+        "APNSPushProvider",
+        "FCMPushProvider",
+    ],
+    "registration_inline_hook_request": [
+        "RegistrationInlineHookRequest",
+        "RegistrationInlineHookPPData",
+        "RegistrationInlineHookSSRData",
+    ],
+    "service_account": [
+        "ServiceAccount",
+        "ServiceAccountDetailsAppAccount",
+        "ServiceAccountDetailsOktaUserAccount",
+    ],
+    "user_factor": [
+        "UserFactor",
+        "UserFactorCall",
+        "UserFactorEmail",
+        "UserFactorPush",
+        "UserFactorSecurityQuestion",
+        "UserFactorSMS",
+        "UserFactorToken",
+        "UserFactorTokenHardware",
+        "UserFactorTokenHOTP",
+        "UserFactorTokenSoftwareTOTP",
+        "UserFactorU2F",
+        "UserFactorWeb",
+        "UserFactorWebAuthn",
+    ],
+    "user_factor_push_transaction": [
+        "UserFactorPushTransaction",
+        "UserFactorPushTransactionRejected",
+        "UserFactorPushTransaction",
+        "UserFactorPushTransactionTimeout",
+        "UserFactorPushTransactionWaitingNoNMC",
+        "UserFactorPushTransactionWaitingNMC",
+    ],
+    "user_risk_get_response": [
+        "UserRiskGetResponse",
+        "UserRiskLevelExists",
+        "UserRiskLevelExists",
+        "UserRiskLevelExists",
+        "UserRiskLevelNone",
+    ],
+    "validation_detail_provider": [
+        "ValidationDetailProvider",
+        "WorkflowsValidationDetailProvider",
+    ],
+    "verification_method": [
+        "VerificationMethod",
+        "AssuranceMethod",
+        "AuthenticationMethodChainMethod",
+        "IdProofingMethod",
+    ],
+}
+
+# Field dependencies that must be loaded with discriminator groups
+#
+# IMPORTANT: This is hardcoded because OpenAPI Generator's mustache templates cannot
+# automatically detect field-level type dependencies. The generator can only detect
+# discriminator-based parent-child relationships through hasChildren and mappedModels tags.
+#
+# Why is this needed?
+# - Pydantic models cache class definitions during validation
+# - If a model uses another model as a field type, both must use the SAME class instance
+# - Lazy loading without grouping can create duplicate class instances, causing validation errors
+#
+# When to update this:
+# - If tests fail with Pydantic validation errors about class identity
+# - When new polymorphic model groups are added that reference field types
+# - If new models are added as field types within existing discriminator groups
+#
+# Example: DeviceAssurance models use OSVersion, DiskEncryptionType, etc. as field types.
+# Without preloading these together, Pydantic sees different OSVersion class instances.
+_FIELD_DEPENDENCIES = {
+    "application": [
+        # Settings classes used by different application types
+        "AutoLoginApplicationSettings",
+        "AutoLoginApplicationSettingsSignOn",
+        "BasicApplicationSettings",
+        "BasicApplicationSettingsApplication",
+        "BookmarkApplicationSettings",
+        "BookmarkApplicationSettingsApplication",
+        "BrowserPluginApplicationSettings",
+        "OpenIdConnectApplicationSettings",
+        "OpenIdConnectApplicationSettingsClient",
+        "OpenIdConnectApplicationSettingsClientKeys",
+        "OpenIdConnectApplicationSettingsRefreshToken",
+        "SamlApplicationSettings",
+        "SamlApplicationSettingsSignOn",
+        "SamlApplicationSettingsApplication",
+        "SamlAttributeStatement",
+        "SecurePasswordStoreApplicationSettings",
+        "SecurePasswordStoreApplicationSettingsApplication",
+        "SwaApplicationSettings",
+        "SwaApplicationSettingsApplication",
+        # Credentials classes
+        "ApplicationCredentials",
+        "ApplicationCredentialsOAuthClient",
+        "ApplicationCredentialsSigning",
+        "ApplicationCredentialsSigningUse",
+        "ApplicationCredentialsUsernameTemplate",
+        "OAuthApplicationCredentials",
+        "SchemeApplicationCredentials",
+        # Other shared field types
+        "ApplicationAccessibility",
+        "ApplicationEmbedded",
+        "ApplicationExpressConfiguration",
+        "ApplicationLicensing",
+        "ApplicationLifecycleStatus",
+        "ApplicationLinks",
+        "ApplicationSignOnMode",
+        "ApplicationUniversalLogout",
+        "ApplicationVisibility",
+        "ApplicationVisibilityHide",
+        "JsonWebKey",
+        "OAuthEndpointAuthenticationMethod",
+        "OAuthGrantType",
+        "OAuthResponseType",
+        "OpenIdConnectApplicationConsentMethod",
+        "OpenIdConnectApplicationIdpInitiatedLogin",
+        "OpenIdConnectApplicationIssuerMode",
+        "OpenIdConnectApplicationType",
+        "OpenIdConnectRefreshTokenRotationType",
+        "SamlAttributeType",
+    ],
+    "device_assurance": [
+        "OSVersion",
+        "OSVersionConstraint",
+        "OSVersionFourComponents",
+        "ScreenLockType",
+        "DiskEncryptionTypeDesktop",
+        "DiskEncryptionTypeMobile",
+        "DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType",
+        "DeviceAssuranceAndroidPlatformAllOfScreenLockType",
+        "DeviceAssuranceAndroidPlatformAllOfThirdPartySignalProviders",
+        "DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders",
+        "DeviceAssuranceIOSPlatformAllOfThirdPartySignalProviders",
+        "DeviceAssuranceMacOSPlatformAllOfDiskEncryptionType",
+        "DeviceAssuranceMacOSPlatformAllOfThirdPartySignalProviders",
+        "DeviceAssuranceWindowsPlatformAllOfThirdPartySignalProviders",
+    ],
+}
+
+# Merge field dependencies into model groups
+for group_name, dependencies in _FIELD_DEPENDENCIES.items():
+    if group_name in _MODEL_GROUPS:
+        _MODEL_GROUPS[group_name].extend(dependencies)
+# Reverse mapping: model name -> group name
+_MODEL_TO_GROUP = {}
+for group_name, models in _MODEL_GROUPS.items():
+    for model in models:
+        _MODEL_TO_GROUP[model] = group_name
 # Lazy import mapping: attribute name -> module path
 _LAZY_IMPORT_MAP = {
     "AAGUIDAuthenticatorCharacteristics": "okta.models.aaguid_authenticator_characteristics",
@@ -1296,7 +1642,8 @@ _LAZY_IMPORT_MAP = {
     "RealmAssignmentOperationResponseAllOfAssignmentOperation": "okta.models.realm_assignment_operation_response_all_of_assignment_operation",
     "RealmAssignmentOperationResponseAllOfAssignmentOperationConfiguration": "okta.models.realm_assignment_operation_response_all_of_assignment_operation_configuration",
     "RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActions": "okta.models.realm_assignment_operation_response_all_of_assignment_operation_configuration_actions",
-    "RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActionsAssignUserToRealm": "okta.models.realm_assignment_operation_response_all_of_assignment_operation_configuration_actions_assign_user_to_realm",
+    "RealmAssignmentOperationResponseAllOfAssignmentOperationConfigurationActionsAssignUserToRealm": "okta.models"
+    ".realm_assignment_operation_response_all_of_assignment_operation_configuration_actions_assign_user_to_realm",
     "RealmProfile": "okta.models.realm_profile",
     "RecoveryQuestionCredential": "okta.models.recovery_question_credential",
     "RefreshToken": "okta.models.refresh_token",
@@ -1801,10 +2148,28 @@ _LAZY_IMPORT_MAP = {
 
 def __getattr__(name):
     if name in _LAZY_IMPORT_MAP:
-        module = _importlib.import_module(_LAZY_IMPORT_MAP[name])
-        attr = getattr(module, name)
-        globals()[name] = attr
-        return attr
+        # Use lock to ensure thread-safe importing and caching
+        with _import_lock:
+            # Check again after acquiring lock (double-checked locking pattern)
+            if name in globals():
+                return globals()[name]
+            # Check if this model belongs to a group that should be preloaded
+            if name in _MODEL_TO_GROUP:
+                group_name = _MODEL_TO_GROUP[name]
+                group_models = _MODEL_GROUPS[group_name]
+                # Preload all models in the group to ensure consistent class references
+                for model_name in group_models:
+                    if model_name in _LAZY_IMPORT_MAP and model_name not in globals():
+                        module = _importlib.import_module(_LAZY_IMPORT_MAP[model_name])
+                        attr = getattr(module, model_name)
+                        globals()[model_name] = attr
+                # Return the requested model (now guaranteed to be in globals)
+                return globals()[name]
+            # Standard lazy import for models not in a group
+            module = _importlib.import_module(_LAZY_IMPORT_MAP[name])
+            attr = getattr(module, name)
+            globals()[name] = attr
+            return attr
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 

@@ -56,8 +56,7 @@ class UserSessionsApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="Clears the user's remembered factors for all devices. > **Note:** This parameter defaults to "
-                            "false "
-                            "in Classic Engine."
+                            "false in Classic Engine."
             ),
         ] = None,
         _request_timeout: Union[
@@ -203,6 +202,10 @@ class UserSessionsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

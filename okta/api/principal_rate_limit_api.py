@@ -194,7 +194,6 @@ class PrincipalRateLimitApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -355,6 +354,10 @@ class PrincipalRateLimitApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -379,17 +382,16 @@ class PrincipalRateLimitApi(ApiClient):
         filter: Annotated[
             StrictStr,
             Field(
-                description="Filters the list of principal rate limit entities by the provided principal type ("
-                            "`principalType`). "
-                            'For example, `filter=principalType eq "SSWS_TOKEN"` or `filter=principalType eq "OAUTH_CLIENT"`.'
+                description='Filters the list of principal rate limit entities by the provided principal type ('
+                            '`principalType`). For example, `filter=principalType eq "SSWS_TOKEN"` or `filter=principalType '
+                            'eq "OAUTH_CLIENT"`.'
             ),
         ],
         after: Annotated[
             Optional[StrictStr],
             Field(
                 description="The cursor to use for pagination. It's an opaque string that specifies your current location in "
-                            "the "
-                            "list and is obtained from the `Link` response header. See [Pagination]("
+                            "the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination)."
             ),
         ] = None,
@@ -553,6 +555,10 @@ class PrincipalRateLimitApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -730,7 +736,6 @@ class PrincipalRateLimitApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

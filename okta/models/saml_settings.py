@@ -42,7 +42,7 @@ class SamlSettings(BaseModel):
     honor_persistent_name_id: Optional[StrictBool] = Field(
         default=True,
         description="Determines if the IdP should persist account linking when the incoming assertion NameID format is "
-                    "`urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`",
+        "`urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`",
         alias="honorPersistentNameId",
     )
     name_format: Optional[SamlNameIdFormat] = Field(
@@ -53,13 +53,13 @@ class SamlSettings(BaseModel):
     participate_slo: Optional[StrictBool] = Field(
         default=None,
         description="Set to `true` to have Okta send a logout request to the upstream IdP when a user signs out of Okta or a "
-                    "downstream app.",
+        "downstream app.",
         alias="participateSlo",
     )
     send_application_context: Optional[StrictBool] = Field(
         default=False,
         description="Determines if the IdP should send the application context as `<OktaAppInstanceId>` and `<OktaAppName>` "
-                    "in the `<saml2p:Extensions>` element of the `<AuthnRequest>` message",
+        "in the `<saml2p:Extensions>` element of the `<AuthnRequest>` message",
         alias="sendApplicationContext",
     )
     __properties: ClassVar[List[str]] = [

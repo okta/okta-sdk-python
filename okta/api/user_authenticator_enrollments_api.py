@@ -207,7 +207,6 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -382,7 +381,6 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -537,6 +535,10 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -566,10 +568,8 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
             Optional[List[StrictStr]],
             Field(
                 description="Indicates whether or not the identifier of an authenticator enrollment is disclosed or "
-                            "anonymized. "
-                            "If it's included in the operation query, then the identifier of the authenticator enrollment ("
-                            "the "
-                            "actual phone number, for example) is included in the response."
+                            "anonymized. If it's included in the operation query, then the identifier of the authenticator "
+                            "enrollment (the actual phone number, for example) is included in the response."
             ),
         ] = None,
         _request_timeout: Union[
@@ -725,6 +725,10 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -751,10 +755,8 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
             Optional[List[StrictStr]],
             Field(
                 description="Indicates whether or not the identifier of an authenticator enrollment is disclosed or "
-                            "anonymized. "
-                            "If it's included in the operation query, then the identifier of the authenticator enrollment ("
-                            "the "
-                            "actual phone number, for example) is included in the response."
+                            "anonymized. If it's included in the operation query, then the identifier of the authenticator "
+                            "enrollment (the actual phone number, for example) is included in the response."
             ),
         ] = None,
         _request_timeout: Union[
@@ -904,6 +906,10 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

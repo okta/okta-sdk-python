@@ -206,7 +206,6 @@ class GroupPushMappingApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -375,6 +374,10 @@ class GroupPushMappingApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -541,6 +544,10 @@ class GroupPushMappingApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -578,8 +585,8 @@ class GroupPushMappingApi(ApiClient):
             Field(
                 description="Filters group push mappings by last updated date. The `lastUpdated` parameter supports the "
                             "following format: `YYYY-MM-DDTHH:mm:ssZ`. This filters mappings updated on or after the "
-                            "specified "
-                            "date and time in UTC.  If you don't specify a value, all group push mappings are returned."
+                            "specified date and time in UTC.  If you don't specify a value, all group push mappings are "
+                            "returned."
             ),
         ] = None,
         source_group_id: Annotated[
@@ -592,8 +599,8 @@ class GroupPushMappingApi(ApiClient):
         status: Annotated[
             Optional[GroupPushMappingStatus],
             Field(
-                description="Filters group push mappings by status. If you don't specify a value, all group push mappings are "
-                            "returned."
+                description="Filters group push mappings by status. If you don't specify a value, all group push mappings "
+                            "are returned."
             ),
         ] = None,
         _request_timeout: Union[
@@ -771,6 +778,10 @@ class GroupPushMappingApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -954,7 +965,6 @@ class GroupPushMappingApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

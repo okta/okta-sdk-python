@@ -228,7 +228,6 @@ class UserFactorApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -256,16 +255,15 @@ class UserFactorApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="If `true`, indicates that you are replacing the currently registered phone number for the "
-                            "specified "
-                            "user. This parameter is ignored if the existing phone number is used by an activated factor."
+                            "specified user. This parameter is ignored if the existing phone number is used by an activated "
+                            "factor."
             ),
         ] = None,
         template_id: Annotated[
             Optional[StrictStr],
             Field(
                 description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter "
-                            "is "
-                            "only used by `sms` factors. If the provided ID doesn't exist, the default template is used "
+                            "is only used by `sms` factors. If the provided ID doesn't exist, the default template is used "
                             "instead."
             ),
         ] = None,
@@ -278,18 +276,15 @@ class UserFactorApi(ApiClient):
             Field(
                 description="If `true`, the factor is immediately activated as part of the enrollment. An activation process "
                             "isn't required. Currently auto-activation is supported by `sms`, `call`, `email` and "
-                            "`token:hotp` ("
-                            "Custom TOTP) factors."
+                            "`token:hotp` (Custom TOTP) factors."
             ),
         ] = None,
         accept_language: Annotated[
             Optional[StrictStr],
             Field(
                 description="An ISO 639-1 two-letter language code that defines a localized message to send. This parameter "
-                            "is "
-                            "only used by `sms` factors. If a localized message doesn't exist or the `templateId` is "
-                            "incorrect, "
-                            "the default template is used instead."
+                            "is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is "
+                            "incorrect, the default template is used instead."
             ),
         ] = None,
         _request_timeout: Union[
@@ -505,7 +500,6 @@ class UserFactorApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -671,6 +665,10 @@ class UserFactorApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -854,6 +852,10 @@ class UserFactorApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1012,6 +1014,10 @@ class UserFactorApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1177,6 +1183,10 @@ class UserFactorApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1345,6 +1355,10 @@ class UserFactorApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1503,6 +1517,10 @@ class UserFactorApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken"]
 
@@ -1534,8 +1552,7 @@ class UserFactorApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token "
-                            "is "
-                            "assigned to a user and `expand` is set to `user`"
+                            "is assigned to a user and `expand` is set to `user`"
             ),
         ] = None,
         filter: Annotated[
@@ -1546,8 +1563,7 @@ class UserFactorApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="Returns tokens in a CSV to download instead of in the response. When you use this query "
-                            "parameter, "
-                            "the `limit` default changes to 1000."
+                            "parameter, the `limit` default changes to 1000."
             ),
         ] = None,
         limit: Annotated[
@@ -1743,6 +1759,10 @@ class UserFactorApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1773,8 +1793,7 @@ class UserFactorApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter "
-                            "is "
-                            "only used by `sms` factors."
+                            "is only used by `sms` factors."
             ),
         ] = None,
         _request_timeout: Union[
@@ -1949,7 +1968,6 @@ class UserFactorApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -1979,8 +1997,7 @@ class UserFactorApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="If `true`, removes the phone number as both a recovery method and a factor. This parameter is "
-                            "only "
-                            "used for the `sms` and `call` factors."
+                            "only used for the `sms` and `call` factors."
             ),
         ] = None,
         _request_timeout: Union[
@@ -2123,6 +2140,10 @@ class UserFactorApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
+        if _content_type:
+            _header_params["Content-Type"] = _content_type
+        else:
+            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -2155,8 +2176,7 @@ class UserFactorApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="Embeds the [user](/openapi/okta-management/management/tag/User/) resource if the YubiKey token "
-                            "is "
-                            "assigned to a user and `expand` is set to `user`"
+                            "is assigned to a user and `expand` is set to `user`"
             ),
         ] = None,
         filter: Annotated[
@@ -2167,8 +2187,7 @@ class UserFactorApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="Returns tokens in a CSV to download instead of in the response. When you use this query "
-                            "parameter, "
-                            "the `limit` default changes to 1000."
+                            "parameter, the `limit` default changes to 1000."
             ),
         ] = None,
         limit: Annotated[
@@ -2380,7 +2399,6 @@ class UserFactorApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -2410,8 +2428,7 @@ class UserFactorApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="ID of an existing custom SMS template. See the [SMS Templates API](../Template). This parameter "
-                            "is "
-                            "only used by `sms` factors."
+                            "is only used by `sms` factors."
             ),
         ] = None,
         token_lifetime_seconds: Annotated[
@@ -2432,28 +2449,23 @@ class UserFactorApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="An ISO 639-1 two-letter language code that defines a localized message to send. This parameter "
-                            "is "
-                            "only used by `sms` factors. If a localized message doesn't exist or the `templateId` is "
-                            "incorrect, "
-                            "the default template is used instead."
+                            "is only used by `sms` factors. If a localized message doesn't exist or the `templateId` is "
+                            "incorrect, the default template is used instead."
             ),
         ] = None,
         body: Annotated[
             Optional[UserFactorVerifyRequest],
             Field(
                 description="Verifies an OTP for a factor. Some factors (`call`, `email`, `push`, `sms`, `u2f`, "
-                            "and `webauthn`) "
-                            "must first issue a challenge before you can verify the factor. Do this by making a request "
-                            "without "
-                            "a body. After a challenge is issued, make another request to verify the factor.  > **Note:** > "
-                            "Unlike standard push challenges that don't require a request body, a number matching [`push`]("
+                            "and `webauthn`) must first issue a challenge before you can verify the factor. Do this by "
+                            "making a request without a body. After a challenge is issued, make another request to verify "
+                            "the factor.  > **Note:** > Unlike standard push challenges that don't require a request body, "
+                            "a number matching [`push`]("
                             "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag"
                             "/UserFactor/operation/verifyFactor!path=2/useNumberMatchingChallenge&t=request) challenge "
-                            "requires "
-                            "a request body. `useNumberMatchingChallenge` must be set to `true`. > When a number matching "
-                            "challenge is issued for an Okta Verify `push` factor enrollment, a `correctAnswer` challenge "
-                            "object "
-                            "is returned in the [`_embedded`]("
+                            "requires a request body. `useNumberMatchingChallenge` must be set to `true`. > When a number "
+                            "matching challenge is issued for an Okta Verify `push` factor enrollment, a `correctAnswer` "
+                            "challenge object is returned in the [`_embedded`]("
                             "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserFactor/#tag"
                             "/UserFactor/operation/verifyFactor!c=200&path=_embedded&t=response) object."
             ),
@@ -2666,7 +2678,6 @@ class UserFactorApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
-
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
