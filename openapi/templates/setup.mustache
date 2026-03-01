@@ -36,7 +36,6 @@ REQUIRES = [
     "aenum >= 3.1.11",
     "aiohttp >= 3.12.14",
     "blinker >= 1.9.0",
-    "flatdict >= 4.0.1",
     'jwcrypto >= 1.5.6',
     "pycryptodomex >= 3.23.0",
     "pydantic >= 2.11.3",
