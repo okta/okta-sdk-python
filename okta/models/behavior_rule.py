@@ -178,22 +178,37 @@ class BehaviorRule(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "BehaviorRuleASN":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.behavior_rule_asn"
             ).BehaviorRuleASN.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousDevice":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.behavior_rule_anomalous_device"
             ).BehaviorRuleAnomalousDevice.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousIP":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.behavior_rule_anomalous_ip"
             ).BehaviorRuleAnomalousIP.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousLocation":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.behavior_rule_anomalous_location"
             ).BehaviorRuleAnomalousLocation.from_dict(obj)
         if object_type == "BehaviorRuleVelocity":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.behavior_rule_velocity"
             ).BehaviorRuleVelocity.from_dict(obj)

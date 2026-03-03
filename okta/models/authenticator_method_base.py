@@ -177,58 +177,100 @@ class AuthenticatorMethodBase(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_with_verifiable_properties"
             ).AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_with_verifiable_properties"
             ).AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_simple"
             ).AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_with_verifiable_properties"
             ).AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodOtp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_otp"
             ).AuthenticatorMethodOtp.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_simple"
             ).AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodPush":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_push"
             ).AuthenticatorMethodPush.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_simple"
             ).AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodSignedNonce":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_signed_nonce"
             ).AuthenticatorMethodSignedNonce.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_simple"
             ).AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodTac":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_tac"
             ).AuthenticatorMethodTac.from_dict(obj)
         if object_type == "AuthenticatorMethodTotp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_totp"
             ).AuthenticatorMethodTotp.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_simple"
             ).AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodWebAuthn":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_method_web_authn"
             ).AuthenticatorMethodWebAuthn.from_dict(obj)

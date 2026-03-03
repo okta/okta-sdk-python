@@ -210,38 +210,65 @@ class Policy(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "AccessPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module("okta.models.access_policy").AccessPolicy.from_dict(
                 obj
             )
         if object_type == "DeviceSignalCollectionPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.device_signal_collection_policy"
             ).DeviceSignalCollectionPolicy.from_dict(obj)
         if object_type == "EntityRiskPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.entity_risk_policy"
             ).EntityRiskPolicy.from_dict(obj)
         if object_type == "IdpDiscoveryPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.idp_discovery_policy"
             ).IdpDiscoveryPolicy.from_dict(obj)
         if object_type == "AuthenticatorEnrollmentPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_enrollment_policy"
             ).AuthenticatorEnrollmentPolicy.from_dict(obj)
         if object_type == "OktaSignOnPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.okta_sign_on_policy"
             ).OktaSignOnPolicy.from_dict(obj)
         if object_type == "PasswordPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.password_policy"
             ).PasswordPolicy.from_dict(obj)
         if object_type == "PostAuthSessionPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.post_auth_session_policy"
             ).PostAuthSessionPolicy.from_dict(obj)
         if object_type == "ProfileEnrollmentPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.profile_enrollment_policy"
             ).ProfileEnrollmentPolicy.from_dict(obj)

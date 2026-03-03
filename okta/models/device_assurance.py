@@ -219,22 +219,37 @@ class DeviceAssurance(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "DeviceAssuranceAndroidPlatform":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.device_assurance_android_platform"
             ).DeviceAssuranceAndroidPlatform.from_dict(obj)
         if object_type == "DeviceAssuranceChromeOSPlatform":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.device_assurance_chrome_os_platform"
             ).DeviceAssuranceChromeOSPlatform.from_dict(obj)
         if object_type == "DeviceAssuranceIOSPlatform":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.device_assurance_ios_platform"
             ).DeviceAssuranceIOSPlatform.from_dict(obj)
         if object_type == "DeviceAssuranceMacOSPlatform":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.device_assurance_mac_os_platform"
             ).DeviceAssuranceMacOSPlatform.from_dict(obj)
         if object_type == "DeviceAssuranceWindowsPlatform":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.device_assurance_windows_platform"
             ).DeviceAssuranceWindowsPlatform.from_dict(obj)

@@ -120,10 +120,16 @@ class InlineHookChannelCreate(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "InlineHookChannelHttpCreate":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.inline_hook_channel_http_create"
             ).InlineHookChannelHttpCreate.from_dict(obj)
         if object_type == "InlineHookChannelOAuthCreate":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.inline_hook_channel_o_auth_create"
             ).InlineHookChannelOAuthCreate.from_dict(obj)

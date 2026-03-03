@@ -354,40 +354,70 @@ class Application(BaseModel):  # noqa: F811
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "AutoLoginApplication":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.auto_login_application"
             ).AutoLoginApplication.from_dict(obj)
         if object_type == "BasicAuthApplication":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.basic_auth_application"
             ).BasicAuthApplication.from_dict(obj)
         if object_type == "BookmarkApplication":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.bookmark_application"
             ).BookmarkApplication.from_dict(obj)
         if object_type == "BrowserPluginApplication":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.browser_plugin_application"
             ).BrowserPluginApplication.from_dict(obj)
         if object_type == "Application":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module("okta.models.application").Application.from_dict(obj)
         if object_type == "OpenIdConnectApplication":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.open_id_connect_application"
             ).OpenIdConnectApplication.from_dict(obj)
         if object_type == "Saml11Application":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.saml11_application"
             ).Saml11Application.from_dict(obj)
         if object_type == "SamlApplication":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.saml_application"
             ).SamlApplication.from_dict(obj)
         if object_type == "SecurePasswordStoreApplication":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.secure_password_store_application"
             ).SecurePasswordStoreApplication.from_dict(obj)
         if object_type == "WsFederationApplication":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.ws_federation_application"
             ).WsFederationApplication.from_dict(obj)

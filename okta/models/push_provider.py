@@ -147,10 +147,16 @@ class PushProvider(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "APNSPushProvider":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.apns_push_provider"
             ).APNSPushProvider.from_dict(obj)
         if object_type == "FCMPushProvider":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.fcm_push_provider"
             ).FCMPushProvider.from_dict(obj)

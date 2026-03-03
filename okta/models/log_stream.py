@@ -160,10 +160,16 @@ class LogStream(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "LogStreamAws":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module("okta.models.log_stream_aws").LogStreamAws.from_dict(
                 obj
             )
         if object_type == "LogStreamSplunk":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.log_stream_splunk"
             ).LogStreamSplunk.from_dict(obj)

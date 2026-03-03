@@ -163,22 +163,37 @@ class UserFactorPushTransaction(BaseModel):  # noqa: F811
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "UserFactorPushTransactionRejected":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.user_factor_push_transaction_rejected"
             ).UserFactorPushTransactionRejected.from_dict(obj)
         if object_type == "UserFactorPushTransaction":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.user_factor_push_transaction"
             ).UserFactorPushTransaction.from_dict(obj)
         if object_type == "UserFactorPushTransactionTimeout":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.user_factor_push_transaction_timeout"
             ).UserFactorPushTransactionTimeout.from_dict(obj)
         if object_type == "UserFactorPushTransactionWaitingNoNMC":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.user_factor_push_transaction_waiting_no_nmc"
             ).UserFactorPushTransactionWaitingNoNMC.from_dict(obj)
         if object_type == "UserFactorPushTransactionWaitingNMC":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.user_factor_push_transaction_waiting_nmc"
             ).UserFactorPushTransactionWaitingNMC.from_dict(obj)

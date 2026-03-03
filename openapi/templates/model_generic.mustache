@@ -257,6 +257,9 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
         object_type = cls.get_discriminator_value(obj)
         {{#mappedModels}}
         if object_type == '{{{modelName}}}':
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module("{{packageName}}.models.{{model.classVarName}}").{{modelName}}.from_dict(obj)
         {{/mappedModels}}
 

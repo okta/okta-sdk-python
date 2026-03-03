@@ -193,66 +193,114 @@ class AuthenticatorSimple(AuthenticatorBase):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "AuthenticatorKeyCustomApp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_custom_app"
             ).AuthenticatorKeyCustomApp.from_dict(obj)
         if object_type == "AuthenticatorKeyDuo":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_duo"
             ).AuthenticatorKeyDuo.from_dict(obj)
         if object_type == "AuthenticatorKeyExternalIdp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_external_idp"
             ).AuthenticatorKeyExternalIdp.from_dict(obj)
         if object_type == "AuthenticatorKeyGoogleOtp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_google_otp"
             ).AuthenticatorKeyGoogleOtp.from_dict(obj)
         if object_type == "AuthenticatorKeyEmail":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_email"
             ).AuthenticatorKeyEmail.from_dict(obj)
         if object_type == "AuthenticatorKeyPassword":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_password"
             ).AuthenticatorKeyPassword.from_dict(obj)
         if object_type == "AuthenticatorKeyOktaVerify":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_okta_verify"
             ).AuthenticatorKeyOktaVerify.from_dict(obj)
         if object_type == "AuthenticatorKeyOnprem":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_onprem"
             ).AuthenticatorKeyOnprem.from_dict(obj)
         if object_type == "AuthenticatorKeyPhone":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_phone"
             ).AuthenticatorKeyPhone.from_dict(obj)
         if object_type == "AuthenticatorKeySecurityKey":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_security_key"
             ).AuthenticatorKeySecurityKey.from_dict(obj)
         if object_type == "AuthenticatorKeySecurityQuestion":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_security_question"
             ).AuthenticatorKeySecurityQuestion.from_dict(obj)
         if object_type == "AuthenticatorKeySmartCard":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_smart_card"
             ).AuthenticatorKeySmartCard.from_dict(obj)
         if object_type == "AuthenticatorKeySymantecVip":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_symantec_vip"
             ).AuthenticatorKeySymantecVip.from_dict(obj)
         if object_type == "AuthenticatorKeyTac":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_tac"
             ).AuthenticatorKeyTac.from_dict(obj)
         if object_type == "AuthenticatorKeyWebauthn":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_webauthn"
             ).AuthenticatorKeyWebauthn.from_dict(obj)
         if object_type == "AuthenticatorKeyYubikey":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.authenticator_key_yubikey"
             ).AuthenticatorKeyYubikey.from_dict(obj)

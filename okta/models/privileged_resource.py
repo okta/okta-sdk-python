@@ -171,14 +171,23 @@ class PrivilegedResource(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "PrivilegedResourceAccountAppRequest":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.privileged_resource_account_app_request"
             ).PrivilegedResourceAccountAppRequest.from_dict(obj)
         if object_type == "PrivilegedResourceAccountOkta":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.privileged_resource_account_okta"
             ).PrivilegedResourceAccountOkta.from_dict(obj)
         if object_type == "PrivilegedResourceAccountAppResponse":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.privileged_resource_account_app_response"
             ).PrivilegedResourceAccountAppResponse.from_dict(obj)

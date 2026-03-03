@@ -173,14 +173,23 @@ class NetworkZone(BaseModel):
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type == "DynamicNetworkZone":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.dynamic_network_zone"
             ).DynamicNetworkZone.from_dict(obj)
         if object_type == "EnhancedDynamicNetworkZone":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module(
                 "okta.models.enhanced_dynamic_network_zone"
             ).EnhancedDynamicNetworkZone.from_dict(obj)
         if object_type == "IPNetworkZone":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return import_module("okta.models.ip_network_zone").IPNetworkZone.from_dict(
                 obj
             )
