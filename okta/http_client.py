@@ -102,17 +102,31 @@ class HTTPClient:
             if request["data"]:
                 params["data"] = json.dumps(request["data"])
             elif request["form"]:
-                filename = ""
-                if isinstance(request["form"]["file"], str):
-                    filename = request["form"]["file"].split("/")[-1]
-                data = aiohttp.FormData()
-                data.add_field(
-                    "file",
-                    open(request["form"]["file"], "rb"),
-                    filename=filename,
-                    content_type=self._default_headers["Content-Type"],
-                )
-                params["data"] = data
+                # Check if this is a file upload or form data
+                if "file" in request["form"]:
+                    # File upload
+                    filename = ""
+                    if isinstance(request["form"]["file"], str):
+                        filename = request["form"]["file"].split("/")[-1]
+                    data = aiohttp.FormData()
+                    data.add_field(
+                        "file",
+                        open(request["form"]["file"], "rb"),
+                        filename=filename,
+                        content_type=self._default_headers["Content-Type"],
+                    )
+                    params["data"] = data
+                else:
+                    # Regular form data (e.g., OAuth client_assertion)
+                    # When Content-Type is application/x-www-form-urlencoded,
+                    # aiohttp expects the data to be passed directly as a dict
+                    # and will handle the encoding if we don't set Content-Type manually.
+                    # However, if Content-Type is already set, we need to remove it
+                    # and let aiohttp set it automatically.
+                    if self._default_headers.get("Content-Type") == "application/x-www-form-urlencoded":
+                        # Remove the Content-Type header and let aiohttp handle it
+                        self._default_headers.pop("Content-Type", None)
+                    params["data"] = request["form"]
             json_data = request.get("json")
             # empty json param may cause issue, so include it if needed only
             # more details: https://github.com/okta/okta-sdk-python/issues/131
