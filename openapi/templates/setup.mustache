@@ -31,7 +31,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "okta"
-PYTHON_REQUIRES = ">=3.9"
+PYTHON_REQUIRES = ">=3.10"
 REQUIRES = [
     "aenum >= 3.1.11",
     "aiohttp >= 3.12.14",

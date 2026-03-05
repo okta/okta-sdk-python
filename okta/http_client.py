@@ -91,13 +91,13 @@ class HTTPClient:
         """
         try:
             logger.debug(f"Request: {request}")
-            # Set headers
-            self._default_headers.update(request["headers"])
+            # Create a local copy of headers to avoid mutating shared state
+            request_headers = {**self._default_headers, **request["headers"]}
             # Prepare request parameters
             params = {
                 "method": request["method"],
                 "url": request["url"],
-                "headers": self._default_headers,
+                "headers": request_headers,
             }
             if request["data"]:
                 params["data"] = json.dumps(request["data"])
@@ -113,19 +113,19 @@ class HTTPClient:
                         "file",
                         open(request["form"]["file"], "rb"),
                         filename=filename,
-                        content_type=self._default_headers["Content-Type"],
+                        content_type=request_headers["Content-Type"],
                     )
                     params["data"] = data
                 else:
                     # Regular form data (e.g., OAuth client_assertion)
-                    # When Content-Type is application/x-www-form-urlencoded,
-                    # aiohttp expects the data to be passed directly as a dict
-                    # and will handle the encoding if we don't set Content-Type manually.
-                    # However, if Content-Type is already set, we need to remove it
-                    # and let aiohttp set it automatically.
-                    if self._default_headers.get("Content-Type") == "application/x-www-form-urlencoded":
-                        # Remove the Content-Type header and let aiohttp handle it
-                        self._default_headers.pop("Content-Type", None)
+                    # For application/x-www-form-urlencoded, let aiohttp handle encoding
+                    # by not setting Content-Type header manually
+                    if request_headers.get("Content-Type") == "application/x-www-form-urlencoded":
+                        # Create headers without Content-Type for this request
+                        params["headers"] = {
+                            k: v for k, v in request_headers.items()
+                            if k != "Content-Type"
+                        }
                     params["data"] = request["form"]
             json_data = request.get("json")
             # empty json param may cause issue, so include it if needed only
