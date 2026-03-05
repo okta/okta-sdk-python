@@ -41,8 +41,8 @@ async def test_header_mutation():
         # We'll get an error since we're not actually making a request,
         # but we just want to check header mutation doesn't happen
         # in the preparation phase
-        result = await http_client.send_request(oauth_request)
-    except Exception as e:
+        _ = await http_client.send_request(oauth_request)
+    except Exception:
         # Expected to fail, we're just testing header mutation
         pass
 
@@ -78,5 +78,3 @@ if __name__ == '__main__':
     else:
         print("Tests failed! ❌")
         exit(1)
-
-

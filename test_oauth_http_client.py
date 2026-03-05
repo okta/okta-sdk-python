@@ -9,15 +9,12 @@ Tests cover:
 5. Multiple sequential requests maintain isolated state
 """
 
-import asyncio
-import json
 from unittest.mock import AsyncMock, MagicMock, patch, mock_open
 import pytest
 import aiohttp
 
 from okta.http_client import HTTPClient
 from okta.oauth import OAuth
-from okta.request_executor import RequestExecutor
 
 
 class TestOAuthTokenRequest:
@@ -498,7 +495,3 @@ if __name__ == "__main__":
     # Run tests with pytest
     import sys
     sys.exit(pytest.main([__file__, "-v", "-s"]))
-
-
-
-
