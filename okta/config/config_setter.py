@@ -8,13 +8,14 @@
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
+import copy
 import logging
 import os
 
 import yaml
-from flatdict import FlatDict
 
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
+from okta.utils import flatten_dict, unflatten_dict, remove_empty_values, deep_merge
 
 
 class ConfigSetter:
@@ -46,36 +47,33 @@ class ConfigSetter:
 
     def __init__(self):
         """
-        Consructor for Configuration Setter class. Sets default config
+        Constructor for Configuration Setter class. Sets default config
         and checks for configuration settings to update config.
         """
-        # Create configuration using default config
-        self._config = ConfigSetter._DEFAULT_CONFIG
+        # Create configuration using deep copy of default config
+        # This prevents shared mutable state across instances
+        self._config = copy.deepcopy(ConfigSetter._DEFAULT_CONFIG)
         # Update configuration
         self._update_config()
 
     def get_config(self):
         """
-        Return Okta client configuration
+        Return Okta client configuration.
+
+        Returns a deep copy to prevent external modification of internal state
+        and to avoid holding references to sensitive values.
 
         Returns:
-            dict -- Dictionary containing the client configuration
+            dict -- Deep copy of the client configuration dictionary
         """
-        return self._config
+        return copy.deepcopy(self._config)
 
     def _prune_config(self, config):
         """
         This method cleans up the configuration object by removing fields
         with no value
         """
-        # Flatten dictionary to account for nested dictionary
-        flat_current_config = FlatDict(config, delimiter="_")
-        # Iterate through keys and remove if value is still empty string
-        for key in flat_current_config.keys():
-            if flat_current_config.get(key) == "":
-                del flat_current_config[key]
-
-        return flat_current_config.as_dict()
+        return remove_empty_values(config)
 
     def _update_config(self):
         """
@@ -120,34 +118,47 @@ class ConfigSetter:
            overwriting values and adding new entries (if present).
 
         Arguments:
-            config {dict} -- A dictionary of client configuration details
+            new_config {dict} -- A dictionary of client configuration details
         """
-        # Update current configuration with new configuration
-        # Flatten both dictionaries to account for nested dictionary values
-        flat_current_client = FlatDict(self._config["client"], delimiter="_")
-        flat_current_testing = FlatDict(self._config["testing"], delimiter="_")
-
-        flat_new_client = FlatDict(new_config.get("client", {}), delimiter="_")
-        flat_new_testing = FlatDict(new_config.get("testing", {}), delimiter="_")
-        flat_current_client.update(flat_new_client)
-        flat_current_testing.update(flat_new_testing)
-        # Update values in current config and unflatten
-        self._config = {
-            "client": flat_current_client.as_dict(),
-            "testing": flat_current_testing.as_dict(),
-        }
+        # Update current configuration with new configuration using deep merge
+        # Use 'or {}' to handle None values from YAML (e.g., "client: null")
+        if "client" in new_config:
+            self._config["client"] = deep_merge(
+                self._config["client"],
+                new_config.get("client") or {}
+            )
+        if "testing" in new_config:
+            self._config["testing"] = deep_merge(
+                self._config["testing"],
+                new_config.get("testing") or {}
+            )
 
     def _apply_yaml_config(self, path: str):
         """This method applies a YAML configuration to the Okta Client Config
 
         Arguments:
             path {string} -- The filepath of the corresponding YAML file
+
+        Raises:
+            ValueError: If config file exceeds maximum allowed size
         """
+        # Check file size before loading (prevent memory exhaustion)
+        MAX_CONFIG_SIZE = 1_048_576  # 1 MB - generous for config files
+        file_size = os.path.getsize(path)
+        if file_size > MAX_CONFIG_SIZE:
+            raise ValueError(
+                f"Config file {path} ({file_size} bytes) exceeds maximum "
+                f"allowed size of {MAX_CONFIG_SIZE} bytes"
+            )
+
         # Start with empty config
         config = {}
         with open(path, "r") as file:
             # Open file stream and attempt to load YAML
             config = yaml.load(file, Loader=yaml.SafeLoader)
+        # Handle empty YAML files or files with only comments
+        if config is None:
+            config = {}
         # Apply acquired config to configuration
         self._apply_config(config.get("okta", {}))
 
@@ -156,18 +167,19 @@ class ConfigSetter:
         This method checks the environment variables for any OKTA
         configuration parameters and applies them if available.
         """
-        # Flatten current config and join with underscores
+        # Flatten current config with :: delimiter for internal processing
         # (for environment variable format)
-        flattened_config = FlatDict(self._config, delimiter="_")
+        flattened_config = flatten_dict(self._config, delimiter="::")
         flattened_keys = flattened_config.keys()
 
         # Create empty result config and populate
-        updated_config = FlatDict({}, delimiter="_")
+        updated_config = {}
 
         # Go through keys and search for it in the environment vars
         # using the format described in the README
         for key in flattened_keys:
-            env_key = ConfigSetter._OKTA + "_" + key.upper()
+            # Convert internal :: delimiter to _ for environment variable name
+            env_key = ConfigSetter._OKTA + "_" + key.replace("::", "_").upper()
             env_value = os.environ.get(env_key, None)
 
             if env_value is not None:
@@ -176,5 +188,6 @@ class ConfigSetter:
                     updated_config[key] = env_value.split(",")
                 else:
                     updated_config[key] = env_value
-            # apply to current configuration
-        self._apply_config(updated_config.as_dict())
+
+        # Apply to current configuration
+        self._apply_config(unflatten_dict(updated_config, delimiter="::"))
