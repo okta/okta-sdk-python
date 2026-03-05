@@ -262,7 +262,7 @@ class TestPerformance:
                      for i in range(10) for j in range(10) for k in range(10)}
 
         start = time.time()
-        unflattened = unflatten_dict(flattened)
+        _ = unflatten_dict(flattened)
         duration = time.time() - start
 
         # Should complete in reasonable time (< 1 second)
@@ -289,7 +289,7 @@ class TestPerformance:
         # Create 50-level deep nesting
         deep_dict = {'value': 'end'}
         for i in range(50):
-            deep_dict = {f'level_{49-i}': deep_dict}
+            deep_dict = {f'level_{49 - i}': deep_dict}
 
         # Should handle without stack overflow
         flattened = flatten_dict(deep_dict)
@@ -338,5 +338,251 @@ class TestInputValidation:
             remove_empty_values([1, 2, 3])
 
 
+class TestRecursionDepthGuards:
+    """Tests for recursion depth protection against DoS attacks."""
+
+    def test_flatten_dict_exceeds_max_depth(self):
+        """Test that flatten_dict raises ValueError when depth exceeds limit."""
+        # Create a deeply nested dict (depth > 100)
+        deeply_nested = {}
+        current = deeply_nested
+        for i in range(102):
+            current['level'] = {}
+            current = current['level']
+        current['value'] = 'deep'
+
+        # Should raise ValueError due to depth limit
+        with pytest.raises(ValueError) as exc_info:
+            flatten_dict(deeply_nested)
+
+        assert "nesting depth exceeds maximum" in str(exc_info.value).lower()
+        assert "100" in str(exc_info.value)
+
+    def test_flatten_dict_with_custom_max_depth(self):
+        """Test that custom max_depth parameter works."""
+        # Create a dict with depth 10
+        nested = {}
+        current = nested
+        for i in range(10):
+            current['level'] = {}
+            current = current['level']
+        current['value'] = 'end'
+
+        # Should work with default depth (100)
+        result = flatten_dict(nested)
+        assert 'level::level::level::level::level::level::level::level::level::level::value' in result
+
+        # Should fail with max_depth=5
+        with pytest.raises(ValueError) as exc_info:
+            flatten_dict(nested, max_depth=5)
+
+        assert "nesting depth exceeds maximum" in str(exc_info.value).lower()
+
+    def test_deep_merge_exceeds_max_depth(self):
+        """Test that deep_merge raises ValueError when depth exceeds limit."""
+        # Create deeply nested dicts
+        base = {}
+        updates = {}
+        current_base = base
+        current_updates = updates
+        for i in range(102):
+            current_base['level'] = {}
+            current_updates['level'] = {}
+            current_base = current_base['level']
+            current_updates = current_updates['level']
+        current_base['value'] = 'base'
+        current_updates['value'] = 'update'
+
+        # Should raise ValueError due to depth limit
+        with pytest.raises(ValueError) as exc_info:
+            deep_merge(base, updates)
+
+        assert "nesting depth exceeds maximum" in str(exc_info.value).lower()
+
+    def test_deep_merge_with_custom_max_depth(self):
+        """Test that custom max_depth parameter works for deep_merge."""
+        # Create dicts with depth 10
+        base = {}
+        updates = {}
+        current_base = base
+        current_updates = updates
+        for i in range(10):
+            current_base['level'] = {}
+            current_updates['level'] = {}
+            current_base = current_base['level']
+            current_updates = current_updates['level']
+        current_base['base_val'] = 'base'
+        current_updates['update_val'] = 'update'
+
+        # Should work with default depth (100)
+        result = deep_merge(base, updates)
+
+        # Navigate to deepest level
+        current = result
+        for i in range(10):
+            current = current['level']
+        assert current['base_val'] == 'base'
+        assert current['update_val'] == 'update'
+
+        # Should fail with max_depth=5
+        with pytest.raises(ValueError) as exc_info:
+            deep_merge(base, updates, max_depth=5)
+
+        assert "nesting depth exceeds maximum" in str(exc_info.value).lower()
+
+    def test_remove_empty_values_exceeds_max_depth(self):
+        """Test that remove_empty_values raises ValueError when depth exceeds limit."""
+        # Create deeply nested dict with empty strings
+        deeply_nested = {}
+        current = deeply_nested
+        for i in range(102):
+            current['level'] = {}
+            current = current['level']
+        current['empty'] = ''
+        current['value'] = 'keep'
+
+        # Should raise ValueError due to depth limit
+        with pytest.raises(ValueError) as exc_info:
+            remove_empty_values(deeply_nested)
+
+        assert "nesting depth exceeds maximum" in str(exc_info.value).lower()
+
+    def test_remove_empty_values_with_custom_max_depth(self):
+        """Test that custom max_depth parameter works for remove_empty_values."""
+        # Create dict with depth 10
+        nested = {}
+        current = nested
+        for i in range(10):
+            current['level'] = {}
+            current = current['level']
+        current['empty'] = ''
+        current['value'] = 'keep'
+
+        # Should work with default depth (100)
+        result = remove_empty_values(nested)
+
+        # Navigate to deepest level
+        current = result
+        for i in range(10):
+            current = current['level']
+        assert 'empty' not in current
+        assert current['value'] == 'keep'
+
+        # Should fail with max_depth=5
+        with pytest.raises(ValueError) as exc_info:
+            remove_empty_values(nested, max_depth=5)
+
+        assert "nesting depth exceeds maximum" in str(exc_info.value).lower()
 
 
+class TestTypeValidation:
+    """Tests for explicit type validation with clear error messages."""
+
+    def test_flatten_dict_type_error_message(self):
+        """Test that flatten_dict provides clear error message for wrong type."""
+        with pytest.raises(TypeError) as exc_info:
+            flatten_dict("not a dict")
+
+        assert "flatten_dict expects dict" in str(exc_info.value)
+        assert "str" in str(exc_info.value)
+
+    def test_unflatten_dict_type_error_message(self):
+        """Test that unflatten_dict provides clear error message for wrong type."""
+        with pytest.raises(TypeError) as exc_info:
+            unflatten_dict([1, 2, 3])
+
+        assert "unflatten_dict expects dict" in str(exc_info.value)
+        assert "list" in str(exc_info.value)
+
+    def test_deep_merge_base_type_error_message(self):
+        """Test that deep_merge provides clear error message for wrong base type."""
+        with pytest.raises(TypeError) as exc_info:
+            deep_merge(None, {'key': 'value'})
+
+        assert "deep_merge" in str(exc_info.value)
+        assert "expects dict" in str(exc_info.value)
+        assert "NoneType" in str(exc_info.value)
+
+    def test_deep_merge_updates_type_error_message(self):
+        """Test that deep_merge provides clear error message for wrong updates type."""
+        with pytest.raises(TypeError) as exc_info:
+            deep_merge({'key': 'value'}, 123)
+
+        assert "deep_merge" in str(exc_info.value)
+        assert "expects dict" in str(exc_info.value)
+        assert "int" in str(exc_info.value)
+
+    def test_remove_empty_values_type_error_message(self):
+        """Test that remove_empty_values provides clear error message for wrong type."""
+        with pytest.raises(TypeError) as exc_info:
+            remove_empty_values(42.5)
+
+        assert "remove_empty_values expects dict" in str(exc_info.value)
+        assert "float" in str(exc_info.value)
+
+
+class TestConflictingKeys:
+    """Tests for handling conflicting keys in unflatten_dict."""
+
+    def test_unflatten_dict_leaf_and_dict_conflict(self):
+        """Test that unflatten_dict detects when a key is both a leaf and a dict."""
+        # 'a::b' is a leaf with value 1
+        # 'a::b::c' tries to make 'a::b' a dict
+        conflicting = {
+            'a::b': 1,
+            'a::b::c': 2
+        }
+
+        with pytest.raises(ValueError) as exc_info:
+            unflatten_dict(conflicting)
+
+        assert "conflict" in str(exc_info.value).lower()
+        assert "a::b" in str(exc_info.value)
+        assert "leaf value" in str(exc_info.value).lower()
+
+    def test_unflatten_dict_overwrite_dict_conflict(self):
+        """Test that unflatten_dict detects when trying to overwrite a dict with a value."""
+        # Process 'a::b::c' first (creates nested structure)
+        # Then 'a::b' tries to overwrite the dict at 'b'
+        conflicting = {
+            'a::b::c': 1,
+            'a::b': 2  # This would overwrite the dict
+        }
+
+        with pytest.raises(ValueError) as exc_info:
+            unflatten_dict(conflicting)
+
+        assert "conflict" in str(exc_info.value).lower()
+        assert "a::b" in str(exc_info.value)
+
+    def test_unflatten_dict_no_conflict_different_paths(self):
+        """Test that unflatten_dict works fine with similar but non-conflicting keys."""
+        # These are fine - different paths
+        non_conflicting = {
+            'a::b::c': 1,
+            'a::b::d': 2,
+            'a::e': 3
+        }
+
+        result = unflatten_dict(non_conflicting)
+        assert result == {
+            'a': {
+                'b': {
+                    'c': 1,
+                    'd': 2
+                },
+                'e': 3
+            }
+        }
+
+    def test_unflatten_dict_conflict_with_custom_delimiter(self):
+        """Test conflict detection works with custom delimiter."""
+        conflicting = {
+            'a_b': 1,
+            'a_b_c': 2
+        }
+
+        with pytest.raises(ValueError) as exc_info:
+            unflatten_dict(conflicting, delimiter='_')
+
+        assert "conflict" in str(exc_info.value).lower()

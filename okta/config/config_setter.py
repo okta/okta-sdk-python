@@ -8,13 +8,14 @@
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
+import copy
 import logging
 import os
 
 import yaml
 
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
-from okta.utils import flatten_dict, unflatten_dict, remove_empty_values
+from okta.utils import flatten_dict, unflatten_dict, remove_empty_values, deep_merge
 
 
 class ConfigSetter:
@@ -46,22 +47,26 @@ class ConfigSetter:
 
     def __init__(self):
         """
-        Consructor for Configuration Setter class. Sets default config
+        Constructor for Configuration Setter class. Sets default config
         and checks for configuration settings to update config.
         """
-        # Create configuration using default config
-        self._config = ConfigSetter._DEFAULT_CONFIG
+        # Create configuration using deep copy of default config
+        # This prevents shared mutable state across instances
+        self._config = copy.deepcopy(ConfigSetter._DEFAULT_CONFIG)
         # Update configuration
         self._update_config()
 
     def get_config(self):
         """
-        Return Okta client configuration
+        Return Okta client configuration.
+
+        Returns a deep copy to prevent external modification of internal state
+        and to avoid holding references to sensitive values.
 
         Returns:
-            dict -- Dictionary containing the client configuration
+            dict -- Deep copy of the client configuration dictionary
         """
-        return self._config
+        return copy.deepcopy(self._config)
 
     def _prune_config(self, config):
         """
@@ -113,32 +118,39 @@ class ConfigSetter:
            overwriting values and adding new entries (if present).
 
         Arguments:
-            config {dict} -- A dictionary of client configuration details
+            new_config {dict} -- A dictionary of client configuration details
         """
-        # Update current configuration with new configuration
-        # Flatten both dictionaries to account for nested dictionary values
-        flat_current_client = flatten_dict(self._config["client"], delimiter="::")
-        flat_current_testing = flatten_dict(self._config["testing"], delimiter="::")
-
-        flat_new_client = flatten_dict(new_config.get("client", {}), delimiter="::")
-        flat_new_testing = flatten_dict(new_config.get("testing", {}), delimiter="::")
-
-        # Update with new values
-        flat_current_client.update(flat_new_client)
-        flat_current_testing.update(flat_new_testing)
-
-        # Update values in current config and unflatten
-        self._config = {
-            "client": unflatten_dict(flat_current_client, delimiter="::"),
-            "testing": unflatten_dict(flat_current_testing, delimiter="::"),
-        }
+        # Update current configuration with new configuration using deep merge
+        # Use 'or {}' to handle None values from YAML (e.g., "client: null")
+        if "client" in new_config:
+            self._config["client"] = deep_merge(
+                self._config["client"],
+                new_config.get("client") or {}
+            )
+        if "testing" in new_config:
+            self._config["testing"] = deep_merge(
+                self._config["testing"],
+                new_config.get("testing") or {}
+            )
 
     def _apply_yaml_config(self, path: str):
         """This method applies a YAML configuration to the Okta Client Config
 
         Arguments:
             path {string} -- The filepath of the corresponding YAML file
+
+        Raises:
+            ValueError: If config file exceeds maximum allowed size
         """
+        # Check file size before loading (prevent memory exhaustion)
+        MAX_CONFIG_SIZE = 1_048_576  # 1 MB - generous for config files
+        file_size = os.path.getsize(path)
+        if file_size > MAX_CONFIG_SIZE:
+            raise ValueError(
+                f"Config file {path} ({file_size} bytes) exceeds maximum "
+                f"allowed size of {MAX_CONFIG_SIZE} bytes"
+            )
+
         # Start with empty config
         config = {}
         with open(path, "r") as file:

@@ -12,8 +12,6 @@
 Unit tests for dictionary utility functions in okta.utils module.
 """
 
-import pytest
-
 from okta.utils import (
     flatten_dict,
     unflatten_dict,

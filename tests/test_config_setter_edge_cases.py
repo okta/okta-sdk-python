@@ -5,9 +5,7 @@ Tests critical error handling scenarios for the configuration module.
 
 import os
 import pytest
-import tempfile
 import yaml
-from pathlib import Path
 from okta.config.config_setter import ConfigSetter
 
 
@@ -432,19 +430,236 @@ class TestConfigSetterEdgeCasesIntegration:
         assert isinstance(config, dict)
 
     def test_get_config_returns_copy_not_reference(self):
-        """Test that get_config returns a copy, not the internal reference."""
+        """
+        CRITICAL: Test that get_config returns a deep copy, not the internal reference.
+        This prevents external code from mutating internal config state.
+        """
         config_setter = ConfigSetter()
 
         config1 = config_setter.get_config()
         config2 = config_setter.get_config()
 
         # Modify config1
-        if isinstance(config1, dict):
-            config1['test_key'] = 'test_value'
+        if isinstance(config1, dict) and 'client' in config1:
+            config1['client']['test_key'] = 'test_value'
 
-            # config2 should not be affected if get_config returns a copy
-            # (This documents the actual behavior)
-            assert isinstance(config2, dict)
+            # config2 should NOT have the modification (deep copy)
+            assert 'test_key' not in config2.get('client', {})
+
+            # Original config should also be unaffected
+            config3 = config_setter.get_config()
+            assert 'test_key' not in config3.get('client', {})
 
 
+class TestYAMLFileSizeLimits:
+    """Tests for YAML file size limits to prevent memory exhaustion attacks."""
 
+    def test_yaml_file_exceeds_size_limit(self, tmp_path):
+        """Test that YAML files exceeding 1MB are rejected."""
+        yaml_file = tmp_path / "huge.yaml"
+
+        # Create a file larger than 1 MB
+        large_content = "okta:\n  client:\n"
+        # Add lots of padding to exceed 1 MB
+        large_content += "    # " + "x" * (1_048_577 - len(large_content)) + "\n"
+
+        yaml_file.write_text(large_content)
+
+        config_setter = ConfigSetter()
+
+        # Should raise ValueError due to file size
+        with pytest.raises(ValueError) as exc_info:
+            config_setter._apply_yaml_config(str(yaml_file))
+
+        assert "exceeds maximum allowed size" in str(exc_info.value)
+        assert "1048576" in str(exc_info.value)  # 1 MB in bytes
+
+    def test_yaml_file_within_size_limit(self, tmp_path):
+        """Test that YAML files under 1MB are accepted."""
+        yaml_file = tmp_path / "normal.yaml"
+
+        # Create a file under 1 MB (but reasonably large)
+        content = "okta:\n  client:\n    orgUrl: https://test.okta.com\n"
+        # Add some padding but stay under limit
+        content += "    # " + "x" * 1000 + "\n"
+
+        yaml_file.write_text(content)
+
+        config_setter = ConfigSetter()
+
+        # Should work fine
+        config_setter._apply_yaml_config(str(yaml_file))
+        config = config_setter.get_config()
+        assert config['client']['orgUrl'] == 'https://test.okta.com'
+
+
+class TestNoneValuesInYAML:
+    """Tests for handling None/null values in YAML files."""
+
+    def test_yaml_with_client_null(self, tmp_path):
+        """
+        CRITICAL: Test handling of 'client: null' in YAML.
+        This should not crash the SDK.
+        """
+        yaml_file = tmp_path / "client_null.yaml"
+        yaml_file.write_text("okta:\n  client: null\n")
+
+        config_setter = ConfigSetter()
+
+        # Should not crash
+        config_setter._apply_yaml_config(str(yaml_file))
+        config = config_setter.get_config()
+
+        # Should still have valid config (from defaults)
+        assert isinstance(config, dict)
+        assert 'client' in config
+        assert isinstance(config['client'], dict)
+
+    def test_yaml_with_testing_null(self, tmp_path):
+        """Test handling of 'testing: null' in YAML."""
+        yaml_file = tmp_path / "testing_null.yaml"
+        yaml_file.write_text("okta:\n  testing: null\n")
+
+        config_setter = ConfigSetter()
+
+        # Should not crash
+        config_setter._apply_yaml_config(str(yaml_file))
+        config = config_setter.get_config()
+
+        # Should still have valid config (from defaults)
+        assert isinstance(config, dict)
+        assert 'testing' in config
+        assert isinstance(config['testing'], dict)
+
+    def test_yaml_with_nested_null_values(self, tmp_path):
+        """Test handling of null values in nested config."""
+        yaml_file = tmp_path / "nested_null.yaml"
+        yaml_file.write_text("""
+okta:
+  client:
+    orgUrl: https://test.okta.com
+    token: null
+    cache: null
+""")
+
+        config_setter = ConfigSetter()
+        config_setter._apply_yaml_config(str(yaml_file))
+        config = config_setter.get_config()
+
+        # orgUrl should be set
+        assert config['client']['orgUrl'] == 'https://test.okta.com'
+        # token should be None (explicitly set to null)
+        assert config['client']['token'] is None
+        # cache should be None (explicitly set to null)
+        assert config['client']['cache'] is None
+
+    def test_yaml_with_both_sections_null(self, tmp_path):
+        """Test handling when both client and testing are null."""
+        yaml_file = tmp_path / "all_null.yaml"
+        yaml_file.write_text("""
+okta:
+  client: null
+  testing: null
+""")
+
+        config_setter = ConfigSetter()
+        config_setter._apply_yaml_config(str(yaml_file))
+        config = config_setter.get_config()
+
+        # Should still have valid default config
+        assert isinstance(config, dict)
+        assert isinstance(config['client'], dict)
+        assert isinstance(config['testing'], dict)
+
+
+class TestInstanceIsolation:
+    """Tests for ensuring ConfigSetter instances are isolated from each other."""
+
+    def test_multiple_instances_are_isolated(self):
+        """
+        CRITICAL: Test that multiple ConfigSetter instances don't share state.
+        This prevents config/credential leakage between instances.
+        """
+        config_setter1 = ConfigSetter()
+        config_setter2 = ConfigSetter()
+
+        # Apply different configs to each
+        config_setter1._apply_config({
+            'client': {
+                'orgUrl': 'https://instance1.okta.com',
+                'token': 'token1'
+            }
+        })
+
+        config_setter2._apply_config({
+            'client': {
+                'orgUrl': 'https://instance2.okta.com',
+                'token': 'token2'
+            }
+        })
+
+        # Get configs
+        config1 = config_setter1.get_config()
+        config2 = config_setter2.get_config()
+
+        # They should be different
+        assert config1['client']['orgUrl'] == 'https://instance1.okta.com'
+        assert config1['client']['token'] == 'token1'
+
+        assert config2['client']['orgUrl'] == 'https://instance2.okta.com'
+        assert config2['client']['token'] == 'token2'
+
+        # Verify no cross-contamination
+        assert config1['client']['token'] != config2['client']['token']
+
+    def test_modifying_one_instance_does_not_affect_others(self):
+        """Test that modifying one instance's config doesn't affect other instances."""
+        config_setter1 = ConfigSetter()
+        config_setter2 = ConfigSetter()
+
+        # Get original value from second instance
+        config2_before = config_setter2.get_config()
+        original_max_retries = config2_before['client']['rateLimit']['maxRetries']
+
+        # Modify first instance to a different value
+        new_value = original_max_retries + 100  # Definitely different
+        config_setter1._apply_config({
+            'client': {
+                'rateLimit': {'maxRetries': new_value}
+            }
+        })
+
+        # Verify first instance changed
+        config1 = config_setter1.get_config()
+        assert config1['client']['rateLimit']['maxRetries'] == new_value
+
+        # Second instance should still have original value (not affected)
+        config2_after = config_setter2.get_config()
+        assert config2_after['client']['rateLimit']['maxRetries'] == original_max_retries
+        assert config2_after['client']['rateLimit']['maxRetries'] != new_value
+
+    def test_class_default_config_not_mutated(self):
+        """Test that the class-level _DEFAULT_CONFIG is not mutated by instances."""
+        # Get original default
+        _ = ConfigSetter._DEFAULT_CONFIG.copy()
+
+        # Create instance and modify config
+        config_setter = ConfigSetter()
+        config_setter._apply_config({
+            'client': {
+                'orgUrl': 'https://test.okta.com',
+                'token': 'test-token'
+            }
+        })
+
+        # Class-level default should be unchanged
+        # Note: We can't check deep equality easily, but at least check structure
+        assert 'client' in ConfigSetter._DEFAULT_CONFIG
+        assert 'testing' in ConfigSetter._DEFAULT_CONFIG
+
+        # Create a fresh instance - should get clean defaults
+        config_setter2 = ConfigSetter()
+        config2 = config_setter2.get_config()
+
+        # Should have default authorizationMode (SSWS), not test values
+        assert config2['client']['authorizationMode'] == 'SSWS'

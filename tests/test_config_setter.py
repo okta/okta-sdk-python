@@ -13,8 +13,6 @@ Unit tests for ConfigSetter to validate it works with new dict utilities.
 """
 
 import os
-import pytest
-import tempfile
 import yaml
 
 from okta.config.config_setter import ConfigSetter
@@ -61,7 +59,7 @@ class TestConfigSetter:
         config_setter = ConfigSetter()
 
         # Get initial config
-        initial_token = config_setter._config["client"].get("token", "")
+        _ = config_setter._config["client"].get("token", "")
 
         # Apply new config
         new_config = {

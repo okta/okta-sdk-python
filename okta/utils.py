@@ -14,7 +14,7 @@ Class of utility functions.
 
 from datetime import datetime as dt
 from enum import Enum
-from typing import Any, Dict
+from typing import Any
 from urllib.parse import urlsplit, urlunsplit
 
 from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH, EPOCH_YEAR
@@ -85,7 +85,13 @@ def convert_absolute_url_into_relative_url(absolute_url):
 # These replace the external flatdict dependency
 
 
-def flatten_dict(d: Dict[str, Any], parent_key: str = '', delimiter: str = '::') -> Dict[str, Any]:
+def flatten_dict(
+    d: dict[str, Any],
+    parent_key: str = '',
+    delimiter: str = '::',
+    _depth: int = 0,
+    max_depth: int = 100
+) -> dict[str, Any]:
     """
     Flatten a nested dictionary into a single-level dictionary.
 
@@ -93,9 +99,15 @@ def flatten_dict(d: Dict[str, Any], parent_key: str = '', delimiter: str = '::')
         d: The dictionary to flatten
         parent_key: The base key to prepend to all keys (used in recursion)
         delimiter: The delimiter to use when joining keys (default '::' to avoid collision with snake_case)
+        _depth: Internal recursion depth counter (do not set manually)
+        max_depth: Maximum allowed nesting depth (default 100)
 
     Returns:
         A flattened dictionary with delimited keys
+
+    Raises:
+        TypeError: If d is not a dictionary
+        ValueError: If nesting depth exceeds max_depth
 
     Examples:
         >>> flatten_dict({'a': {'b': 1, 'c': 2}})
@@ -107,17 +119,26 @@ def flatten_dict(d: Dict[str, Any], parent_key: str = '', delimiter: str = '::')
         >>> flatten_dict({'user_name': {'first_name': 'John'}})
         {'user_name::first_name': 'John'}
     """
-    items = []
+    if not isinstance(d, dict):
+        raise TypeError(f"flatten_dict expects dict, got {type(d).__name__}")
+
+    if _depth > max_depth:
+        raise ValueError(
+            f"Dictionary nesting depth exceeds maximum allowed depth of {max_depth}. "
+            f"This may indicate a circular reference or malformed configuration."
+        )
+
+    result = {}
     for key, value in d.items():
         new_key = f"{parent_key}{delimiter}{key}" if parent_key else key
         if isinstance(value, dict):
-            items.extend(flatten_dict(value, new_key, delimiter).items())
+            result.update(flatten_dict(value, new_key, delimiter, _depth + 1, max_depth))
         else:
-            items.append((new_key, value))
-    return dict(items)
+            result[new_key] = value
+    return result
 
 
-def unflatten_dict(d: Dict[str, Any], delimiter: str = '::') -> Dict[str, Any]:
+def unflatten_dict(d: dict[str, Any], delimiter: str = '::') -> dict[str, Any]:
     """
     Unflatten a dictionary with delimited keys into a nested structure.
 
@@ -128,35 +149,71 @@ def unflatten_dict(d: Dict[str, Any], delimiter: str = '::') -> Dict[str, Any]:
     Returns:
         A nested dictionary
 
+    Raises:
+        TypeError: If d is not a dictionary
+        ValueError: If there are conflicting keys (key is both a leaf value and a nested dict)
+
     Examples:
-        >>> unflatten_dict({'a_b': 1, 'a_c': 2})
+        >>> unflatten_dict({'a::b': 1, 'a::c': 2})
         {'a': {'b': 1, 'c': 2}}
 
-        >>> unflatten_dict({'x_y_z': 3})
+        >>> unflatten_dict({'x::y::z': 3})
         {'x': {'y': {'z': 3}}}
+
+        >>> unflatten_dict({'a_b': 1, 'a_c': 2}, delimiter='_')
+        {'a': {'b': 1, 'c': 2}}
     """
-    result: Dict[str, Any] = {}
+    if not isinstance(d, dict):
+        raise TypeError(f"unflatten_dict expects dict, got {type(d).__name__}")
+
+    result: dict[str, Any] = {}
     for key, value in d.items():
         parts = key.split(delimiter)
         current = result
-        for part in parts[:-1]:
+        for i, part in enumerate(parts[:-1]):
             if part not in current:
                 current[part] = {}
+            elif not isinstance(current[part], dict):
+                # Conflict: trying to traverse into a leaf value
+                conflicting_key = delimiter.join(parts[:i + 1])
+                raise ValueError(
+                    f"Key conflict in unflatten_dict: '{conflicting_key}' is both "
+                    f"a leaf value and a nested dictionary"
+                )
             current = current[part]
+
+        # Check final key conflict
+        if parts[-1] in current and isinstance(current[parts[-1]], dict):
+            raise ValueError(
+                f"Key conflict in unflatten_dict: '{key}' would overwrite "
+                f"existing nested dictionary"
+            )
+
         current[parts[-1]] = value
     return result
 
 
-def deep_merge(base: Dict[str, Any], updates: Dict[str, Any]) -> Dict[str, Any]:
+def deep_merge(
+    base: dict[str, Any],
+    updates: dict[str, Any],
+    _depth: int = 0,
+    max_depth: int = 100
+) -> dict[str, Any]:
     """
     Deep merge two dictionaries, with updates overriding base values.
 
     Args:
         base: The base dictionary
         updates: Dictionary with values to merge/override
+        _depth: Internal recursion depth counter (do not set manually)
+        max_depth: Maximum allowed nesting depth (default 100)
 
     Returns:
         A new dictionary with merged values
+
+    Raises:
+        TypeError: If base or updates is not a dictionary
+        ValueError: If nesting depth exceeds max_depth
 
     Examples:
         >>> deep_merge({'a': 1, 'b': 2}, {'b': 3, 'c': 4})
@@ -165,24 +222,45 @@ def deep_merge(base: Dict[str, Any], updates: Dict[str, Any]) -> Dict[str, Any]:
         >>> deep_merge({'a': {'b': 1}}, {'a': {'c': 2}})
         {'a': {'b': 1, 'c': 2}}
     """
+    if not isinstance(base, dict):
+        raise TypeError(f"deep_merge base expects dict, got {type(base).__name__}")
+    if not isinstance(updates, dict):
+        raise TypeError(f"deep_merge updates expects dict, got {type(updates).__name__}")
+
+    if _depth > max_depth:
+        raise ValueError(
+            f"Dictionary nesting depth exceeds maximum allowed depth of {max_depth}. "
+            f"This may indicate a circular reference or malformed configuration."
+        )
+
     result = base.copy()
     for key, value in updates.items():
         if key in result and isinstance(result[key], dict) and isinstance(value, dict):
-            result[key] = deep_merge(result[key], value)
+            result[key] = deep_merge(result[key], value, _depth + 1, max_depth)
         else:
             result[key] = value
     return result
 
 
-def remove_empty_values(d: Dict[str, Any]) -> Dict[str, Any]:
+def remove_empty_values(
+    d: dict[str, Any],
+    _depth: int = 0,
+    max_depth: int = 100
+) -> dict[str, Any]:
     """
     Recursively remove empty string values from a nested dictionary.
 
     Args:
         d: The dictionary to clean
+        _depth: Internal recursion depth counter (do not set manually)
+        max_depth: Maximum allowed nesting depth (default 100)
 
     Returns:
         A new dictionary with empty strings removed
+
+    Raises:
+        TypeError: If d is not a dictionary
+        ValueError: If nesting depth exceeds max_depth
 
     Examples:
         >>> remove_empty_values({'a': '', 'b': 'value'})
@@ -194,10 +272,19 @@ def remove_empty_values(d: Dict[str, Any]) -> Dict[str, Any]:
     Note:
         Only removes empty strings (""), not other falsy values like None, 0, False, []
     """
+    if not isinstance(d, dict):
+        raise TypeError(f"remove_empty_values expects dict, got {type(d).__name__}")
+
+    if _depth > max_depth:
+        raise ValueError(
+            f"Dictionary nesting depth exceeds maximum allowed depth of {max_depth}. "
+            f"This may indicate a circular reference or malformed configuration."
+        )
+
     result = {}
     for key, value in d.items():
         if isinstance(value, dict):
-            nested = remove_empty_values(value)
+            nested = remove_empty_values(value, _depth + 1, max_depth)
             if nested:  # Only add if nested dict is not empty after cleaning
                 result[key] = nested
         elif value != "":

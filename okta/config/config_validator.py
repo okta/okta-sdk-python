@@ -49,7 +49,10 @@ class ConfigValidator:
             ValueError: A configuration provided needs to be corrected.
         """
         errors = []
-        client = self._config.get("client")
+        # Defensive: default to empty dict if sections are missing
+        client = self._config.get("client", {})
+        _ = self._config.get("testing", {})
+
         # check org url
         errors += self._validate_org_url(client.get("orgUrl", ""))
         # check proxy settings if provided
@@ -143,8 +146,10 @@ class ConfigValidator:
         if not url:
             url_errors.append(ERROR_MESSAGE_ORG_URL_MISSING)
         # if url is not https (in non-testing env)
+        # Defensive: get testing section with default
+        testing = self._config.get("testing", {})
         if url and not (
-            self._config["testing"]["testingDisableHttpsCheck"]
+            testing.get("testingDisableHttpsCheck", False)
             or url.startswith("https")
         ):
             url_errors.append(
