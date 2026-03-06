@@ -202,6 +202,7 @@ class GroupOwnerApi(ApiClient):
             )
             if _default_content_type is not None:
                 _header_params["Content-Type"] = _default_content_type
+
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -356,10 +357,6 @@ class GroupOwnerApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
-        if _content_type:
-            _header_params["Content-Type"] = _content_type
-        else:
-            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 
@@ -555,10 +552,6 @@ class GroupOwnerApi(ApiClient):
         # set the HTTP header `Accept`
         _header_params["Accept"] = self.select_header_accept(["application/json"])
 
-        if _content_type:
-            _header_params["Content-Type"] = _content_type
-        else:
-            _header_params["Content-Type"] = "application/json"
         # authentication setting
         _auth_settings: List[str] = ["apiToken", "oauth2"]
 

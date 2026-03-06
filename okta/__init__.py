@@ -24,6 +24,10 @@
 __version__ = "3.1.0"
 
 import importlib as _importlib
+import threading as _threading
+
+# Lock for thread-safe lazy imports
+_import_lock = _threading.Lock()
 
 # Eagerly import core SDK components (these are needed immediately)
 from okta.api_response import ApiResponse
@@ -1936,11 +1940,27 @@ _LAZY_IMPORT_MAP = {
 def __getattr__(name):
     """Lazy load API classes and models on first access to improve import performance."""
     if name in _LAZY_IMPORT_MAP:
-        module = _importlib.import_module(_LAZY_IMPORT_MAP[name])
-        attr = getattr(module, name)
-        # Cache in globals for subsequent access
-        globals()[name] = attr
-        return attr
+        # Use lock to ensure thread-safe importing and caching
+        with _import_lock:
+            # Check again after acquiring lock (double-checked locking pattern)
+            if name in globals():
+                return globals()[name]
+
+            module_path = _LAZY_IMPORT_MAP[name]
+
+            # For model classes, delegate to okta.models to ensure proper class identity
+            # and discriminator grouping. This prevents duplicate class instances.
+            if module_path.startswith("okta.models."):
+                models = _importlib.import_module("okta.models")
+                attr = getattr(models, name)
+            else:
+                # For API classes and other components, import directly
+                module = _importlib.import_module(module_path)
+                attr = getattr(module, name)
+
+            # Cache in globals for subsequent access
+            globals()[name] = attr
+            return attr
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 def __dir__():

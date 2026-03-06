@@ -241,11 +241,15 @@ class {{classname}}(ApiClient):
                 _header_params['Content-Type'] = _default_content_type
         {{/hasConsumes}}
         {{^hasConsumes}}
+        {{#bodyParam}}
+        # set the HTTP header `Content-Type` for requests with body
         if _content_type:
             _header_params['Content-Type'] = _content_type
         else:
             _header_params['Content-Type'] = 'application/json'
+        {{/bodyParam}}
         {{/hasConsumes}}
+
         # authentication setting
         _auth_settings: List[str] = [{{#authMethods}}
             '{{name}}'{{^-last}}, {{/-last}}{{/authMethods}}
