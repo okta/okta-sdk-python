@@ -212,22 +212,49 @@ class Policy(BaseModel):
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "AccessPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AccessPolicy.from_dict(obj)
         if object_type == "DeviceSignalCollectionPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.DeviceSignalCollectionPolicy.from_dict(obj)
         if object_type == "EntityRiskPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.EntityRiskPolicy.from_dict(obj)
         if object_type == "IdpDiscoveryPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.IdpDiscoveryPolicy.from_dict(obj)
         if object_type == "AuthenticatorEnrollmentPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorEnrollmentPolicy.from_dict(obj)
         if object_type == "OktaSignOnPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.OktaSignOnPolicy.from_dict(obj)
         if object_type == "PasswordPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.PasswordPolicy.from_dict(obj)
         if object_type == "PostAuthSessionPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.PostAuthSessionPolicy.from_dict(obj)
         if object_type == "ProfileEnrollmentPolicy":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.ProfileEnrollmentPolicy.from_dict(obj)
 
         raise ValueError(

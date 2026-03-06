@@ -223,28 +223,64 @@ class UserFactor(BaseModel):
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "UserFactorCall":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorCall.from_dict(obj)
         if object_type == "UserFactorEmail":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorEmail.from_dict(obj)
         if object_type == "UserFactorPush":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorPush.from_dict(obj)
         if object_type == "UserFactorSecurityQuestion":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorSecurityQuestion.from_dict(obj)
         if object_type == "UserFactorSMS":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorSMS.from_dict(obj)
         if object_type == "UserFactorToken":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorToken.from_dict(obj)
         if object_type == "UserFactorTokenHardware":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorTokenHardware.from_dict(obj)
         if object_type == "UserFactorTokenHOTP":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorTokenHOTP.from_dict(obj)
         if object_type == "UserFactorTokenSoftwareTOTP":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorTokenSoftwareTOTP.from_dict(obj)
         if object_type == "UserFactorU2F":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorU2F.from_dict(obj)
         if object_type == "UserFactorWeb":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorWeb.from_dict(obj)
         if object_type == "UserFactorWebAuthn":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserFactorWebAuthn.from_dict(obj)
 
         raise ValueError(
