@@ -170,18 +170,14 @@ class PrivilegedResource(BaseModel):
         """Create an instance of PrivilegedResource from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "PrivilegedResourceAccountAppRequest":
-            return import_module(
-                "okta.models.privileged_resource_account_app_request"
-            ).PrivilegedResourceAccountAppRequest.from_dict(obj)
+            return models.PrivilegedResourceAccountAppRequest.from_dict(obj)
         if object_type == "PrivilegedResourceAccountOkta":
-            return import_module(
-                "okta.models.privileged_resource_account_okta"
-            ).PrivilegedResourceAccountOkta.from_dict(obj)
+            return models.PrivilegedResourceAccountOkta.from_dict(obj)
         if object_type == "PrivilegedResourceAccountAppResponse":
-            return import_module(
-                "okta.models.privileged_resource_account_app_response"
-            ).PrivilegedResourceAccountAppResponse.from_dict(obj)
+            return models.PrivilegedResourceAccountAppResponse.from_dict(obj)
 
         raise ValueError(
             "PrivilegedResource failed to lookup discriminator value from "

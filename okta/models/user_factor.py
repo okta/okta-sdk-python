@@ -220,54 +220,32 @@ class UserFactor(BaseModel):
         """Create an instance of UserFactor from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "UserFactorCall":
-            return import_module(
-                "okta.models.user_factor_call"
-            ).UserFactorCall.from_dict(obj)
+            return models.UserFactorCall.from_dict(obj)
         if object_type == "UserFactorEmail":
-            return import_module(
-                "okta.models.user_factor_email"
-            ).UserFactorEmail.from_dict(obj)
+            return models.UserFactorEmail.from_dict(obj)
         if object_type == "UserFactorPush":
-            return import_module(
-                "okta.models.user_factor_push"
-            ).UserFactorPush.from_dict(obj)
+            return models.UserFactorPush.from_dict(obj)
         if object_type == "UserFactorSecurityQuestion":
-            return import_module(
-                "okta.models.user_factor_security_question"
-            ).UserFactorSecurityQuestion.from_dict(obj)
+            return models.UserFactorSecurityQuestion.from_dict(obj)
         if object_type == "UserFactorSMS":
-            return import_module("okta.models.user_factor_sms").UserFactorSMS.from_dict(
-                obj
-            )
+            return models.UserFactorSMS.from_dict(obj)
         if object_type == "UserFactorToken":
-            return import_module(
-                "okta.models.user_factor_token"
-            ).UserFactorToken.from_dict(obj)
+            return models.UserFactorToken.from_dict(obj)
         if object_type == "UserFactorTokenHardware":
-            return import_module(
-                "okta.models.user_factor_token_hardware"
-            ).UserFactorTokenHardware.from_dict(obj)
+            return models.UserFactorTokenHardware.from_dict(obj)
         if object_type == "UserFactorTokenHOTP":
-            return import_module(
-                "okta.models.user_factor_token_hotp"
-            ).UserFactorTokenHOTP.from_dict(obj)
+            return models.UserFactorTokenHOTP.from_dict(obj)
         if object_type == "UserFactorTokenSoftwareTOTP":
-            return import_module(
-                "okta.models.user_factor_token_software_totp"
-            ).UserFactorTokenSoftwareTOTP.from_dict(obj)
+            return models.UserFactorTokenSoftwareTOTP.from_dict(obj)
         if object_type == "UserFactorU2F":
-            return import_module(
-                "okta.models.user_factor_u2_f"
-            ).UserFactorU2F.from_dict(obj)
+            return models.UserFactorU2F.from_dict(obj)
         if object_type == "UserFactorWeb":
-            return import_module("okta.models.user_factor_web").UserFactorWeb.from_dict(
-                obj
-            )
+            return models.UserFactorWeb.from_dict(obj)
         if object_type == "UserFactorWebAuthn":
-            return import_module(
-                "okta.models.user_factor_web_authn"
-            ).UserFactorWebAuthn.from_dict(obj)
+            return models.UserFactorWebAuthn.from_dict(obj)
 
         raise ValueError(
             "UserFactor failed to lookup discriminator value from "

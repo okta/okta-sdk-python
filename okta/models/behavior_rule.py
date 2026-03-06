@@ -177,26 +177,18 @@ class BehaviorRule(BaseModel):
         """Create an instance of BehaviorRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+        # Import from okta.models to ensure class identity consistency with lazy imports
+        models = import_module("okta.models")
         if object_type == "BehaviorRuleASN":
-            return import_module(
-                "okta.models.behavior_rule_asn"
-            ).BehaviorRuleASN.from_dict(obj)
+            return models.BehaviorRuleASN.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousDevice":
-            return import_module(
-                "okta.models.behavior_rule_anomalous_device"
-            ).BehaviorRuleAnomalousDevice.from_dict(obj)
+            return models.BehaviorRuleAnomalousDevice.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousIP":
-            return import_module(
-                "okta.models.behavior_rule_anomalous_ip"
-            ).BehaviorRuleAnomalousIP.from_dict(obj)
+            return models.BehaviorRuleAnomalousIP.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousLocation":
-            return import_module(
-                "okta.models.behavior_rule_anomalous_location"
-            ).BehaviorRuleAnomalousLocation.from_dict(obj)
+            return models.BehaviorRuleAnomalousLocation.from_dict(obj)
         if object_type == "BehaviorRuleVelocity":
-            return import_module(
-                "okta.models.behavior_rule_velocity"
-            ).BehaviorRuleVelocity.from_dict(obj)
+            return models.BehaviorRuleVelocity.from_dict(obj)
 
         raise ValueError(
             "BehaviorRule failed to lookup discriminator value from "

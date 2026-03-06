@@ -12,10 +12,13 @@
 
 __version__ = "{{packageVersion}}"
 
-# import apis into sdk package
-{{#apiInfo}}{{#apis}}from {{packageName}}.{{apiPackage}}.{{classFilename}} import {{classname}}
-{{/apis}}{{/apiInfo}}
-# import ApiClient
+import importlib as _importlib
+import threading as _threading
+
+# Lock for thread-safe lazy imports
+_import_lock = _threading.Lock()
+
+# Eagerly import core SDK components (these are needed immediately)
 from {{packageName}}.api_response import ApiResponse
 from {{packageName}}.api_client import ApiClient
 from {{packageName}}.configuration import Configuration
@@ -29,12 +32,45 @@ from {{packageName}}.exceptions.exceptions import ApiException
 from {{packageName}}.signing import HttpSigningConfiguration
 {{/hasHttpSignatureMethods}}
 
-# import models into sdk package
-{{#models}}
-{{#model}}
-from {{modelPackage}}.{{classFilename}} import {{classname}}
-{{/model}}
-{{/models}}
+# Lazy import mapping for API classes and models
+_LAZY_IMPORT_MAP = {
+    # API classes
+{{#apiInfo}}{{#apis}}    "{{classname}}": "{{packageName}}.{{apiPackage}}.{{classFilename}}",
+{{/apis}}{{/apiInfo}}
+    # Model classes
+{{#models}}{{#model}}    "{{classname}}": "{{modelPackage}}.{{classFilename}}",
+{{/model}}{{/models}}
+}
+
+def __getattr__(name):
+    """Lazy load API classes and models on first access to improve import performance."""
+    if name in _LAZY_IMPORT_MAP:
+        # Use lock to ensure thread-safe importing and caching
+        with _import_lock:
+            # Check again after acquiring lock (double-checked locking pattern)
+            if name in globals():
+                return globals()[name]
+
+            module_path = _LAZY_IMPORT_MAP[name]
+
+            # For model classes, delegate to okta.models to ensure proper class identity
+            # and discriminator grouping. This prevents duplicate class instances.
+            if module_path.startswith("{{modelPackage}}."):
+                models = _importlib.import_module("{{modelPackage}}")
+                attr = getattr(models, name)
+            else:
+                # For API classes and other components, import directly
+                module = _importlib.import_module(module_path)
+                attr = getattr(module, name)
+
+            # Cache in globals for subsequent access
+            globals()[name] = attr
+            return attr
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+def __dir__():
+    """Support for dir() to show available lazy-loaded attributes."""
+    return list(_LAZY_IMPORT_MAP.keys()) + list(globals().keys())
 {{#recursionLimit}}
 
 __import__('sys').setrecursionlimit({{{.}}})
