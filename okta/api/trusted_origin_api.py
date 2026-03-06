@@ -853,8 +853,10 @@ class TrustedOriginApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="[Filter](https://developer.okta.com/docs/api/#filter) trusted origins with a supported "
-                            "expression for a subset of properties. You can filter on the following properties: `name`, "
-                            "`origin`, `status`, and `type` (type of scopes). "
+                            "expression "
+                            "for a subset of properties. You can filter on the following properties: `name`, `origin`, "
+                            "`status`, "
+                            "and `type` (type of scopes). "
             ),
         ] = None,
         after: Annotated[

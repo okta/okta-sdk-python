@@ -71,8 +71,8 @@ class SystemLogApi(ApiClient):
         filter: Annotated[
             Optional[StrictStr],
             Field(
-                description="Filter expression that filters the results. All operators except [ ] are supported. See ["
-                            "Filter](https://developer.okta.com/docs/api/#filter) and [Operators]("
+                description="Filter expression that filters the results. All operators except [ ] are supported. See [Filter]("
+                            "https://developer.okta.com/docs/api/#filter) and [Operators]("
                             "https://developer.okta.com/docs/api/#operators)."
             ),
         ] = None,

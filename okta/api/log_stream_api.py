@@ -844,8 +844,8 @@ class LogStreamApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
+                            "the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination) and [Link header]("
                             "https://developer.okta.com/docs/api/#link-header)."
             ),
@@ -858,7 +858,8 @@ class LogStreamApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="An expression that [filters](/#filter) the returned objects. You can only use the `eq` operator "
-                            "on either the `status` or `type` properties in the filter expression."
+                            "on "
+                            "either the `status` or `type` properties in the filter expression."
             ),
         ] = None,
         _request_timeout: Union[

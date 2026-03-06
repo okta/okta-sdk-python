@@ -379,16 +379,17 @@ class PrincipalRateLimitApi(ApiClient):
         filter: Annotated[
             StrictStr,
             Field(
-                description='Filters the list of principal rate limit entities by the provided principal type ('
-                            '`principalType`). For example, `filter=principalType eq "SSWS_TOKEN"` or `filter=principalType '
-                            'eq "OAUTH_CLIENT"`.'
+                description="Filters the list of principal rate limit entities by the provided principal type ("
+                            "`principalType`). "
+                            'For example, `filter=principalType eq "SSWS_TOKEN"` or `filter=principalType eq "OAUTH_CLIENT"`.'
             ),
         ],
         after: Annotated[
             Optional[StrictStr],
             Field(
                 description="The cursor to use for pagination. It's an opaque string that specifies your current location in "
-                            "the list and is obtained from the `Link` response header. See [Pagination]("
+                            "the "
+                            "list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination)."
             ),
         ] = None,

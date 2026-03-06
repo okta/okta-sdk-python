@@ -56,7 +56,8 @@ class UserSessionsApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="Clears the user's remembered factors for all devices. > **Note:** This parameter defaults to "
-                            "false in Classic Engine."
+                            "false "
+                            "in Classic Engine."
             ),
         ] = None,
         _request_timeout: Union[

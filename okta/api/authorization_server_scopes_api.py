@@ -562,8 +562,8 @@ class AuthorizationServerScopesApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="Specifies the pagination cursor for the next page of scopes. Treat the after cursor as an "
-                            "opaque value and obtain it through the next link relationship. See [Pagination]("
+                description="Specifies the pagination cursor for the next page of scopes. Treat the after cursor as an opaque "
+                            "value and obtain it through the next link relationship. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination)."
             ),
         ] = None,

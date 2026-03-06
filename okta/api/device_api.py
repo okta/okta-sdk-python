@@ -815,11 +815,13 @@ class DeviceApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="A SCIM filter expression that filters the results. Searches include all device `profile` "
-                            "properties and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices "
-                            "can be filtered by the contains (`co`) operator. You can only use `co` with these select device "
-                            "profile attributes: `profile.displayName`, `profile.serialNumber`, `profile.imei`, "
-                            "`profile.meid`, `profile.udid`, and `profile.sid`. See [Operators]("
-                            "https://developer.okta.com/docs/api/#operators)."
+                            "properties "
+                            "and the device `id`, `status`, and `lastUpdated` properties.  Searches for devices can be "
+                            "filtered "
+                            "by the contains (`co`) operator. You can only use `co` with these select device profile "
+                            "attributes: "
+                            "`profile.displayName`, `profile.serialNumber`, `profile.imei`, `profile.meid`, `profile.udid`, "
+                            "and `profile.sid`. See [Operators](https://developer.okta.com/docs/api/#operators)."
             ),
         ] = None,
         expand: Annotated[

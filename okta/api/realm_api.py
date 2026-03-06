@@ -526,8 +526,8 @@ class RealmApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
+                            "the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination) and [Link header]("
                             "https://developer.okta.com/docs/api/#link-header)."
             ),
@@ -536,8 +536,9 @@ class RealmApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="Searches for realms with a supported filtering expression for most properties.  Searches for "
-                            "realms can be filtered by the contains (`co`) operator. You can only use `co` with the "
-                            "`profile.name` property. See [Operators](https://developer.okta.com/docs/api/#operators)."
+                            "realms "
+                            "can be filtered by the contains (`co`) operator. You can only use `co` with the `profile.name` "
+                            "property. See [Operators](https://developer.okta.com/docs/api/#operators)."
             ),
         ] = None,
         sort_by: Annotated[

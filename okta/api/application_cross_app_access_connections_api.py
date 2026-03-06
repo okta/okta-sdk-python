@@ -391,8 +391,9 @@ class ApplicationCrossAppAccessConnectionsApi(ApiClient):
             Optional[Annotated[int, Field(le=200, strict=True)]],
             Field(
                 description="Specifies the number of results to return per page. The values:   * -1: Return all results (up "
-                            "to system maximum)   * 0: Return an empty result set   * Positive integer: Return up to that "
-                            "many results (capped at system maximum) "
+                            "to "
+                            "system maximum)   * 0: Return an empty result set   * Positive integer: Return up to that many "
+                            "results (capped at system maximum) "
             ),
         ] = None,
         _request_timeout: Union[

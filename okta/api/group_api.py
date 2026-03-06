@@ -859,8 +859,8 @@ class GroupApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
+                            "the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination) and [Link header]("
                             "https://developer.okta.com/docs/api/#link-header)."
             ),
@@ -1047,33 +1047,38 @@ class GroupApi(ApiClient):
         search: Annotated[
             Optional[StrictStr],
             Field(
-                description='Searches for groups with a supported [filtering](https://developer.okta.com/docs/api/#filter) '
-                            'expression for all properties except for `_embedded`, `_links`, and `objectClass`. Okta '
-                            'recommends this query parameter because it provides the largest range of search options and '
-                            'optimal performance.  This operation supports [pagination]('
-                            'https://developer.okta.com/docs/api/#pagination).  Using search requires [URL encoding]('
-                            'https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding), for example, `search=type '
-                            'eq "OKTA_GROUP"` is encoded as `search=type+eq+%22OKTA_GROUP%22`.  This operation searches many '
-                            'properties:  * Any group profile attribute, including imported app group profile attributes. * '
-                            'The top-level properties: `id`, `created`, `lastMembershipUpdated`, `lastUpdated`, and `type`. '
-                            '* The [source](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c'
-                            '=200&path=_links/source&t=response) of groups with type of `APP_GROUP`, accessed as '
-                            '`source.id`.  You can also use the `sortBy` and `sortOrder` parameters.  Searches for groups '
-                            'can be filtered by the following operators: `sw`, `eq`, and `co`. You can only use `co` with '
-                            'these select profile attributes: `profile.name` and `profile.description`. See [Operators]('
-                            'https://developer.okta.com/docs/api/#operators).'
+                description="Searches for groups with a supported [filtering](https://developer.okta.com/docs/api/#filter) "
+                            "expression for all properties except for `_embedded`, `_links`, and `objectClass`. Okta "
+                            "recommends "
+                            "this query parameter because it provides the largest range of search options and optimal "
+                            "performance.  This operation supports [pagination]("
+                            "https://developer.okta.com/docs/api/#pagination).  Using search requires [URL encoding]("
+                            "https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding), for example, `search=type "
+                            "eq "
+                            '"OKTA_GROUP"` is encoded as `search=type+eq+%22OKTA_GROUP%22`.  This operation searches many '
+                            "properties:  * Any group profile attribute, including imported app group profile attributes. * "
+                            "The "
+                            "top-level properties: `id`, `created`, `lastMembershipUpdated`, `lastUpdated`, and `type`. * "
+                            "The ["
+                            "source](/openapi/okta-management/management/tag/Group/#tag/Group/operation/listGroups!c=200&path"
+                            "=_links/source&t=response) of groups with type of `APP_GROUP`, accessed as `source.id`.  You can "
+                            "also use the `sortBy` and `sortOrder` parameters.  Searches for groups can be filtered by the "
+                            "following operators: `sw`, `eq`, and `co`. You can only use `co` with these select profile "
+                            "attributes: `profile.name` and `profile.description`. See [Operators]("
+                            "https://developer.okta.com/docs/api/#operators)."
             ),
         ] = None,
         filter: Annotated[
             Optional[StrictStr],
             Field(
-                description='Filter expression for groups. See [Filter](https://developer.okta.com/docs/api/#filter).  '
-                            'Filtering supports the following limited number of properties: `id`, `type`, `lastUpdated`, '
-                            'and `lastMembershipUpdated`.  > **Note:** All filters must be [URL encoded]('
-                            'https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, '
+                description="Filter expression for groups. See [Filter](https://developer.okta.com/docs/api/#filter).  "
+                            "Filtering "
+                            "supports the following limited number of properties: `id`, `type`, `lastUpdated`, "
+                            "and `lastMembershipUpdated`.  > **Note:** All filters must be [URL encoded]("
+                            "https://developer.mozilla.org/en-US/docs/Glossary/Percent-encoding). For example, "
                             '`filter=lastUpdated gt "2013-06-01T00:00:00.000Z"` is encoded as '
-                            '`filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.  See [Special characters]('
-                            'https://developer.okta.com/docs/api/#special-characters).'
+                            "`filter=lastUpdated%20gt%20%222013-06-01T00:00:00.000Z%22`.  See [Special characters]("
+                            "https://developer.okta.com/docs/api/#special-characters)."
             ),
         ] = None,
         q: Annotated[
@@ -1081,15 +1086,18 @@ class GroupApi(ApiClient):
             Field(
                 description="Finds a group that matches the `name` property. > **Note:** Paging and searching are currently "
                             "mutually exclusive. You can't page a query. The default limit for a query is 300 results. Query "
-                            "is intended for an auto-complete picker use case where users refine their search string to "
-                            "constrain the results."
+                            "is "
+                            "intended for an auto-complete picker use case where users refine their search string to "
+                            "constrain "
+                            "the results."
             ),
         ] = None,
         after: Annotated[
             Optional[StrictStr],
             Field(
                 description="Specifies the pagination cursor for the next page of groups. The `after` cursor should be "
-                            "treated as an opaque value and obtained through the next link relation. See [Pagination]("
+                            "treated "
+                            "as an opaque value and obtained through the next link relation. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination)."
             ),
         ] = None,
@@ -1097,9 +1105,11 @@ class GroupApi(ApiClient):
             Optional[Annotated[int, Field(le=10000, strict=True)]],
             Field(
                 description="Specifies the number of group results in a page.  Okta recommends using a specific value other "
-                            "than the default or maximum. If your request times out, retry your request with a smaller "
-                            "`limit` and [page the results](https://developer.okta.com/docs/api/#pagination).  The Okta "
-                            "default `Everyone` group isn't returned for users with a group admin role."
+                            "than "
+                            "the default or maximum. If your request times out, retry your request with a smaller `limit` "
+                            "and ["
+                            "page the results](https://developer.okta.com/docs/api/#pagination).  The Okta default `Everyone` "
+                            "group isn't returned for users with a group admin role."
             ),
         ] = None,
         expand: Annotated[
@@ -1109,10 +1119,12 @@ class GroupApi(ApiClient):
                             "`app`. This additional metadata is listed in the [`_embedded`]("
                             "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group"
                             "/operation/addGroup!c=200&path=_embedded&t=response) property of the response.  > **Note:** You "
-                            "can use the `stats` value to return the number of users within a group. This is listed as the "
+                            "can "
+                            "use the `stats` value to return the number of users within a group. This is listed as the "
                             "`_embedded.stats.usersCount` value in the response. See this [Knowledge Base article]("
                             "https://support.okta.com/help/s/article/Is-there-an-API-that-returns-the-number-of-users-in-a"
-                            "-group?language=en_US) for more information and an example."
+                            "-group"
+                            "?language=en_US) for more information and an example."
             ),
         ] = None,
         sort_by: Annotated[
@@ -1120,7 +1132,8 @@ class GroupApi(ApiClient):
             Field(
                 description="Specifies the field to sort by (for search queries only). `sortBy` can be any single property, "
                             "for example `sortBy=profile.name`. Groups with the same value for the `sortBy` property are "
-                            "ordered by `id`'. Use with `sortOrder` to control the order of results."
+                            "ordered "
+                            "by `id`'. Use with `sortOrder` to control the order of results."
             ),
         ] = None,
         sort_order: Annotated[

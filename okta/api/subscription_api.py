@@ -52,7 +52,8 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                            "require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
+                            "require a "
+                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,
@@ -390,7 +391,8 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                            "require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
+                            "require a "
+                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         _request_timeout: Union[
@@ -714,7 +716,8 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                            "require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
+                            "require a "
+                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,
@@ -1053,7 +1056,8 @@ class SubscriptionApi(ApiClient):
             Any,
             Field(
                 description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles "
-                            "require a `roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
+                            "require a "
+                            "`roleId`. See [Standard roles](/openapi/okta-management/guides/roles/#standard-roles)."
             ),
         ],
         notification_type: NotificationType,

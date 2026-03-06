@@ -423,8 +423,10 @@ class ApplicationGroupsApi(ApiClient):
             Optional[StrictStr],
             Field(
                 description="Specifies a filter for a list of assigned groups returned based on their names. The value of "
-                            "`q` is matched against the group `name`. This filter only supports the `startsWith` operation "
-                            "that matches the `q` string against the beginning of the [group name]("
+                            "`q` is "
+                            "matched against the group `name`. This filter only supports the `startsWith` operation that "
+                            "matches "
+                            "the `q` string against the beginning of the [group name]("
                             "https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Group/#tag/Group"
                             "/operation/listGroups!c=200&path=profile/name&t=response)."
             ),

@@ -389,7 +389,8 @@ class AuthorizationServerAssocApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="Searches trusted authorization servers when `true` or searches untrusted authorization servers "
-                            "when `false`"
+                            "when "
+                            "`false`"
             ),
         ] = None,
         q: Annotated[

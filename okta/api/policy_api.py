@@ -896,8 +896,8 @@ class PolicyApi(ApiClient):
         expand: Annotated[
             Optional[StrictStr],
             Field(
-                description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy "
-                            "rules. Use `expand=RULE` to include details about why a rule condition wasn't matched."
+                description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy rules. "
+                            "Use `expand=RULE` to include details about why a rule condition wasn't matched."
             ),
         ] = None,
         _request_timeout: Union[
@@ -2322,9 +2322,10 @@ class PolicyApi(ApiClient):
         type: Annotated[
             StrictStr,
             Field(
-                description='Specifies the type of policy to return. The following policy types are available only with the '
-                            'Okta Identity Engine - `ACCESS_POLICY`, <x-lifecycle class="ea"></x-lifecycle> '
-                            '`DEVICE_SIGNAL_COLLECTION`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION` and `ENTITY_RISK`.'
+                description="Specifies the type of policy to return. The following policy types are available only with the "
+                            "Okta "
+                            'Identity Engine - `ACCESS_POLICY`, <x-lifecycle class="ea"></x-lifecycle> '
+                            "`DEVICE_SIGNAL_COLLECTION`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION` and `ENTITY_RISK`."
             ),
         ],
         status: Annotated[

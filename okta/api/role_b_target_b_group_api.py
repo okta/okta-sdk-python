@@ -580,8 +580,8 @@ class RoleBTargetBGroupApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
+                            "the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination) and [Link header]("
                             "https://developer.okta.com/docs/api/#link-header)."
             ),
@@ -778,8 +778,8 @@ class RoleBTargetBGroupApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
+                            "the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination) and [Link header]("
                             "https://developer.okta.com/docs/api/#link-header)."
             ),

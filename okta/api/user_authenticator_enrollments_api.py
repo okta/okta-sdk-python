@@ -566,8 +566,10 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
             Optional[List[StrictStr]],
             Field(
                 description="Indicates whether or not the identifier of an authenticator enrollment is disclosed or "
-                            "anonymized. If it's included in the operation query, then the identifier of the authenticator "
-                            "enrollment (the actual phone number, for example) is included in the response."
+                            "anonymized. "
+                            "If it's included in the operation query, then the identifier of the authenticator enrollment ("
+                            "the "
+                            "actual phone number, for example) is included in the response."
             ),
         ] = None,
         _request_timeout: Union[
@@ -749,8 +751,10 @@ class UserAuthenticatorEnrollmentsApi(ApiClient):
             Optional[List[StrictStr]],
             Field(
                 description="Indicates whether or not the identifier of an authenticator enrollment is disclosed or "
-                            "anonymized. If it's included in the operation query, then the identifier of the authenticator "
-                            "enrollment (the actual phone number, for example) is included in the response."
+                            "anonymized. "
+                            "If it's included in the operation query, then the identifier of the authenticator enrollment ("
+                            "the "
+                            "actual phone number, for example) is included in the response."
             ),
         ] = None,
         _request_timeout: Union[

@@ -894,7 +894,8 @@ class ApplicationApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="Specifies whether to use query optimization. If you specify `useOptimization=true` in the "
-                            "request query, the response contains a subset of app instance properties."
+                            "request "
+                            "query, the response contains a subset of app instance properties."
             ),
         ] = None,
         always_include_vpn_settings: Annotated[
@@ -919,10 +920,10 @@ class ApplicationApi(ApiClient):
         expand: Annotated[
             Optional[StrictStr],
             Field(
-                description='An optional parameter used for link expansion to embed more resources in the response. Only '
+                description="An optional parameter used for link expansion to embed more resources in the response. Only "
                             'supports `expand=user/{userId}` and must be used with the `user.id eq "{userId}"` filter query '
-                            'for the same user. Returns the assigned [application user]('
-                            '/openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property.'
+                            "for the same user. Returns the assigned [application user]("
+                            "/openapi/okta-management/management/tag/ApplicationUsers/) in the `_embedded` property."
             ),
         ] = None,
         include_non_deleted: Annotated[

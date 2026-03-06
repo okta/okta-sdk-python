@@ -1059,8 +1059,8 @@ class AgentPoolsApi(ApiClient):
         after: Annotated[
             Optional[StrictStr],
             Field(
-                description="The cursor to use for pagination. It is an opaque string that specifies your current location "
-                            "in the list and is obtained from the `Link` response header. See [Pagination]("
+                description="The cursor to use for pagination. It is an opaque string that specifies your current location in "
+                            "the list and is obtained from the `Link` response header. See [Pagination]("
                             "https://developer.okta.com/docs/api/#pagination) and [Link header]("
                             "https://developer.okta.com/docs/api/#link-header)."
             ),
@@ -1246,7 +1246,8 @@ class AgentPoolsApi(ApiClient):
             Optional[StrictBool],
             Field(
                 description="Return only scheduled or ad-hoc updates. If this parameter isn't provided, Okta returns the "
-                            "entire list of updates."
+                            "entire "
+                            "list of updates."
             ),
         ] = None,
         _request_timeout: Union[

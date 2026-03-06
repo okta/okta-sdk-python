@@ -578,8 +578,8 @@ class GroupPushMappingApi(ApiClient):
             Field(
                 description="Filters group push mappings by last updated date. The `lastUpdated` parameter supports the "
                             "following format: `YYYY-MM-DDTHH:mm:ssZ`. This filters mappings updated on or after the "
-                            "specified date and time in UTC.  If you don't specify a value, all group push mappings are "
-                            "returned."
+                            "specified "
+                            "date and time in UTC.  If you don't specify a value, all group push mappings are returned."
             ),
         ] = None,
         source_group_id: Annotated[
@@ -592,8 +592,8 @@ class GroupPushMappingApi(ApiClient):
         status: Annotated[
             Optional[GroupPushMappingStatus],
             Field(
-                description="Filters group push mappings by status. If you don't specify a value, all group push mappings "
-                            "are returned."
+                description="Filters group push mappings by status. If you don't specify a value, all group push mappings are "
+                            "returned."
             ),
         ] = None,
         _request_timeout: Union[

@@ -51,8 +51,9 @@ class UserLinkedObjectApi(ApiClient):
             StrictStr,
             Field(
                 description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
-                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
-                            "the associated relationship.  This can be `me` to represent the current session user."
+                            "ID. If "
+                            "for the `associated` relation, this is the user ID or login value of the user assigned the "
+                            "associated relationship.  This can be `me` to represent the current session user."
             ),
         ],
         primary_relationship_name: Annotated[
@@ -229,8 +230,9 @@ class UserLinkedObjectApi(ApiClient):
             StrictStr,
             Field(
                 description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
-                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
-                            "the associated relationship.  This can be `me` to represent the current session user."
+                            "ID. If "
+                            "for the `associated` relation, this is the user ID or login value of the user assigned the "
+                            "associated relationship.  This can be `me` to represent the current session user."
             ),
         ],
         relationship_name: Annotated[
@@ -398,8 +400,9 @@ class UserLinkedObjectApi(ApiClient):
             StrictStr,
             Field(
                 description="If for the `self` link, this is the ID of the user for whom you want to get the primary user "
-                            "ID. If for the `associated` relation, this is the user ID or login value of the user assigned "
-                            "the associated relationship.  This can be `me` to represent the current session user."
+                            "ID. If "
+                            "for the `associated` relation, this is the user ID or login value of the user assigned the "
+                            "associated relationship.  This can be `me` to represent the current session user."
             ),
         ],
         relationship_name: Annotated[
