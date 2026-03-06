@@ -21,7 +21,6 @@ Do not edit the class manually.
 """  # noqa: E501
 
 import time
-from urllib.parse import urlencode, quote
 
 from okta.http_client import HTTPClient
 from okta.jwt import JWT
@@ -85,15 +84,14 @@ class OAuth:
             "client_assertion": jwt,
         }
 
-        encoded_parameters = urlencode(parameters, quote_via=quote)
         org_url = self._config["client"]["orgUrl"]
-        url = f"{org_url}{OAuth.OAUTH_ENDPOINT}?" + encoded_parameters
+        url = f"{org_url}{OAuth.OAUTH_ENDPOINT}"
 
         # Craft request
         oauth_req, err = await self._request_executor.create_request(
             "POST",
             url,
-            form={"client_assertion": jwt},
+            form=parameters,
             headers={
                 "Accept": "application/json",
                 "Content-Type": "application/x-www-form-urlencoded",
