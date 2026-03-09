@@ -31,6 +31,8 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing_extensions import Self
 
+from okta.models.log_user_behavior import LogUserBehavior
+
 
 class LogSecurityContext(BaseModel):
     """
@@ -64,7 +66,7 @@ class LogSecurityContext(BaseModel):
         description="Specifies whether an event's request is from a known proxy",
         alias="isProxy",
     )
-    user_behaviors: Optional[List[StrictStr]] = Field(
+    user_behaviors: Optional[List[LogUserBehavior]] = Field(
         default=None,
         description="The result of the user behavior detection models associated with the event",
         alias="userBehaviors",
@@ -130,6 +132,13 @@ class LogSecurityContext(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in user_behaviors (list)
+        _items = []
+        if self.user_behaviors:
+            for _item in self.user_behaviors:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["userBehaviors"] = _items
         # set to None if as_number (nullable) is None
         # and model_fields_set contains the field
         if self.as_number is None and "as_number" in self.model_fields_set:
@@ -155,11 +164,6 @@ class LogSecurityContext(BaseModel):
         if self.is_proxy is None and "is_proxy" in self.model_fields_set:
             _dict["isProxy"] = None
 
-        # set to None if user_behaviors (nullable) is None
-        # and model_fields_set contains the field
-        if self.user_behaviors is None and "user_behaviors" in self.model_fields_set:
-            _dict["userBehaviors"] = None
-
         return _dict
 
     @classmethod
@@ -178,7 +182,11 @@ class LogSecurityContext(BaseModel):
                 "domain": obj.get("domain"),
                 "isp": obj.get("isp"),
                 "isProxy": obj.get("isProxy"),
-                "userBehaviors": obj.get("userBehaviors"),
+                "userBehaviors": (
+                    [LogUserBehavior.from_dict(_item) for _item in obj["userBehaviors"]]
+                    if obj.get("userBehaviors") is not None
+                    else None
+                ),
             }
         )
         return _obj

@@ -1246,6 +1246,7 @@ _LAZY_IMPORT_MAP = {
     "LogTargetChangeDetails": "okta.models.log_target_change_details",
     "LogTransaction": "okta.models.log_transaction",
     "LogUserAgent": "okta.models.log_user_agent",
+    "LogUserBehavior": "okta.models.log_user_behavior",
     "MDMEnrollmentPolicyEnrollment": "okta.models.mdm_enrollment_policy_enrollment",
     "MDMEnrollmentPolicyRuleCondition": "okta.models.mdm_enrollment_policy_rule_condition",
     "ManagedConnection": "okta.models.managed_connection",
@@ -2135,6 +2136,8 @@ _LAZY_IMPORT_MAP = {
     "ZscalerbyzApplicationSettings": "okta.models.zscalerbyz_application_settings",
     "ZscalerbyzApplicationSettingsApplication": "okta.models.zscalerbyz_application_settings_application",
 }
+
+
 def __getattr__(name):
     if name in _LAZY_IMPORT_MAP:
         # Use lock to ensure thread-safe importing and caching

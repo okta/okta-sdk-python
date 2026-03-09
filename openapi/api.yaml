@@ -68783,6 +68783,33 @@ components:
         - COUNTRY
         - LAT_LONG
         - SUBDIVISION
+    LogUserBehavior:
+      x-okta-lifecycle:
+        features:
+          - SECURITY_CONTEXT_AND_IP_CHAIN_SYSLOG_IMPROVEMENT
+      description: The result of the user behavior detection models associated with the event
+      type: object
+      properties:
+        name:
+          description: The name of the user behavior detection model [configured by admins](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Behavior/)
+          type: string
+          readOnly: true
+          nullable: true
+        id:
+          description: The unique identifier of the user behavior detection model
+          type: string
+          readOnly: true
+          nullable: true
+        result:
+          description: The result of the user behavior analysis
+          type: string
+          readOnly: true
+          nullable: true
+          enum:
+            - UNKNOWN
+            - POSITIVE
+            - NEGATIVE
+            - BAD_REQUEST
     LogActor:
       description: Describes the user, app, client, or other entity (actor) who performs an action on a target. The actor is dependent on the action that is performed. All events have actors.
       type: object
@@ -69185,7 +69212,8 @@ components:
           description: The result of the user behavior detection models associated with the event
           type: array
           readOnly: true
-          nullable: true
+          items:
+            $ref: '#/components/schemas/LogUserBehavior'
     LogSeverity:
       description: Indicates how severe the event is
       type: string
