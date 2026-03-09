@@ -1,0 +1,172 @@
+interactions:
+- request:
+    body:
+      client_assertion: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwb2F0aWhkaXAwZElnZ0htQTVkNyIsImlhdCI6MTc3MzA2NTU1NywiZXhwIjoxNzczMDY4NTU3LCJpc3MiOiIwb2F0aWhkaXAwZElnZ0htQTVkNyIsImF1ZCI6Imh0dHBzOi8vZGV2LTIwOTgyMjg4Lm9rdGEuY29tL29hdXRoMi92MS90b2tlbiIsImp0aSI6IjQzZGRjMDgzLTFjYmYtNGUwNS05OTZlLTM4YzZhMDc1YzM4MiJ9.Eycq-MZFjx5h96wWmImEHcQnspbPgZhxZSs7vRUc2CXm5g2GVnPF6hRMUwS7nYkjA3qsAWOQo8xYcBcFeYtmdNXlj1OnMjTPnnkvzoK4uXBxblMWUPebcd-buYybLo2T9nDsED49TQ5Iam2VncWst9Rpb7bXvkwbyqLF2_q-3ARRfb6BlqIghympxGkjyidluBU8ai-ZouYJxE3PxqIEpjdWe373scZal6r-2En1Pz-0oIq-YFo3yczX4mJcGqve9GBi1_YA9FtXFuQSGpl1WyJxVgaFKyqEPk94V9aukZYBo2fHfL8FmegdwBHokiFj-ceiG-BejB9mhIB6DVLyZ4J1M25i1Zv1t_lNBHn4CrSn9SzA0DSo455eaih21Y2Vg5wiZCGw_LykXkTEqrPPta0_DnfUcZwqG8ZZREkIeLB7Mj-LUidxz06JzlnnHIQT3ErBm4jMC15H1kGvW58cKymqmlctgLQ_GOTxRbBjNpAOYbPlAQZ1pr5aI1jIDXow
+      client_assertion_type: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      grant_type: client_credentials
+      scope: okta.users.read okta.apps.read okta.groups.read
+    headers:
+      Accept:
+      - application/json
+      DPoP:
+      - sanitized_dpop_proof_jwt
+      User-Agent:
+      - okta-sdk-python/3.1.0 python/3.12.3 Darwin/25.3.0
+    method: POST
+    uri: https://test.okta.com/oauth2/v1/token
+  response:
+    body:
+      string: '{"error":"use_dpop_nonce","error_description":"Authorization server
+        requires nonce in DPoP proof."}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 09 Mar 2026 14:12:39 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=FE3B118C5C6863DABC3D0534F854DC2A; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
+        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
+        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
+        ''self'''
+      dpop-nonce: sanitized_dpop_nonce
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - f58eb053b290ddc43e58a451404ce235
+      x-rate-limit-limit:
+      - '150'
+      x-rate-limit-remaining:
+      - '143'
+      x-rate-limit-reset:
+      - '1773065582'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body:
+      client_assertion: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwb2F0aWhkaXAwZElnZ0htQTVkNyIsImlhdCI6MTc3MzA2NTU1OSwiZXhwIjoxNzczMDY4NTU5LCJpc3MiOiIwb2F0aWhkaXAwZElnZ0htQTVkNyIsImF1ZCI6Imh0dHBzOi8vZGV2LTIwOTgyMjg4Lm9rdGEuY29tL29hdXRoMi92MS90b2tlbiIsImp0aSI6IjkzZTA1ZWJlLWY0OTItNDc3Yy05M2MyLTg5MDA3Y2MxYjA4YiJ9.VF1AF0lfZDCO5XN6hja2BhI1aYRXZBOL9HuQ5dApVH-nax-iLEdCHqpQyhwwesvZxLs_an-hl5HK4ll8XJxXf0eXH4EqZwYIo1yrLBU8L2DoaldjPH1MjwIw_oR6Mq102MVwbRgb-XcpVQkZbD1zUVNGAGEXEuWz9SRJC4zJQs5MVCY-K_9goLd8tJMQHW9NumtPf6tagyOiCD3Qs4ox9yGPa6syZTbLpHmgEUHLjxX49vPBaUbiRrXrqBwKtOifaxriAH-RtIS4db4CoAnIM5VYYvUF5csA71dPyV30t6LKmCGttWvKQ4a5oBigKqd5t56z5HEjNA3AQtcOqh4dztml8QFOs14y7M7uGXLi3nOxXkTKwBzoywf--8J1UAmiSskGHeh9QGtkqNWDyD7JNcu8NDr9WjaDpVwiHOdL0PuF3eHg2bPom8rVUci7DU33FdNxBS6F7YM98QqWV4TlObPCKtOM34k_wf69soXaS7umcEnvhzuhXXD8VOGhSr1T
+      client_assertion_type: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      grant_type: client_credentials
+      scope: okta.users.read okta.apps.read okta.groups.read
+    headers:
+      Accept:
+      - application/json
+      DPoP:
+      - sanitized_dpop_proof_jwt
+      User-Agent:
+      - okta-sdk-python/3.1.0 python/3.12.3 Darwin/25.3.0
+    method: POST
+    uri: https://test.okta.com/oauth2/v1/token
+  response:
+    body:
+      string: '{"token_type":"DPoP","expires_in":3600,"access_token":"eyJraWQiOiJvdE9zblppQm1pWGI2MWt6VzBFMXBFVThuNTVSMHcyV3MxTnljdjA3ZGJ3IiwidHlwIjoiYXBwbGljYXRpb24vb2t0YS1pbnRlcm5hbC1hdCtqd3QiLCJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImp0aSI6IkFULlkyRGVEcnJVWU15UTMyTEJELXVOdzhOTUJXQTVicno0NFVxZ0FNYkNQVjQiLCJpc3MiOiJodHRwczovL2Rldi0yMDk4MjI4OC5va3RhLmNvbSIsImF1ZCI6Imh0dHBzOi8vZGV2LTIwOTgyMjg4Lm9rdGEuY29tIiwic3ViIjoiMG9hdGloZGlwMGRJZ2dIbUE1ZDciLCJpYXQiOjE3NzMwNjU1NjAsImV4cCI6MTc3MzA2OTE2MCwiY2lkIjoiMG9hdGloZGlwMGRJZ2dIbUE1ZDciLCJzY3AiOlsib2t0YS51c2Vycy5yZWFkIiwib2t0YS5hcHBzLnJlYWQiLCJva3RhLmdyb3Vwcy5yZWFkIl0sImNuZiI6eyJqa3QiOiJ5RFFrdHM0YWtTT2VGLXB0V3RsR3hlZU93MEgyQ1VidzVndzU3Nm1WaFVNIn19.Q4UZRgb2e47dHc2HV9CAnrrDJ-nw0SQ79Tb51oIsOkUIhyEOjaFVyA19GBxxLx7F9_AkPtPtomtYE4BGhkFxUnTHcbDnzTZKqppH-RDT1amNxzrLKYYnUj4NSPxh1_nUfAAklmNFg5VXycDZ5jw5EkmS7fflYbs_oGGL28HF5JeggVw3JYrumrYajNOm7hMXTMHE7sUchTiTRm7Fn9gI_zFMJNq-mAbbtR-rXdTu7PL7tBI3Z04cm7iqdpfprPaw8X2FDUdLh-wwwqJJgBM7TDfaUmkSV1butl8xBLzH0m6PTF8lhIEDkqBrw7Tt427AZdZEXDzsIlZtps8nGACW9A","scope":"okta.users.read
+        okta.apps.read okta.groups.read"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 09 Mar 2026 14:12:41 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=934E3D20660798084AEBBE079ACA9F47; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Robots-Tag:
+      - noindex,nofollow
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
+        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
+        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
+        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
+        ''self'''
+      dpop-nonce: sanitized_dpop_nonce
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 467428a8bbbfd7bbc414bb028e3c8ca2
+      x-rate-limit-limit:
+      - '150'
+      x-rate-limit-remaining:
+      - '142'
+      x-rate-limit-reset:
+      - '1773065582'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

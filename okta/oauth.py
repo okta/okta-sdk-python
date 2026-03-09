@@ -28,7 +28,7 @@ from typing import Any, Dict, Optional, Tuple
 from okta.http_client import HTTPClient
 from okta.jwt import JWT
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("okta-sdk-python")
 
 
 class OAuth:
@@ -42,10 +42,10 @@ class OAuth:
         self._request_executor = request_executor
         self._config = config
         self._access_token: Optional[str] = None
-        self._token_type: str = "Bearer"  # FIX #4: Default token type
+        self._token_type: str = "Bearer"
         self._access_token_expiry_time: Optional[int] = None
 
-        # FIX #3, #7: Initialize DPoP if enabled
+        # Initialize DPoP if enabled
         self._dpop_enabled: bool = config["client"].get("dpopEnabled", False)
         self._dpop_generator: Optional[Any] = None
 
@@ -86,7 +86,7 @@ class OAuth:
             if current_time + renewal_offset >= self._access_token_expiry_time:
                 self.clear_access_token()
 
-        # FIX #4: Return token with type if already generated
+        # Return token with type if already generated
         if self._access_token:
             return (self._access_token, self._token_type, None)
 
@@ -109,7 +109,7 @@ class OAuth:
             "Content-Type": "application/x-www-form-urlencoded",
         }
 
-        # FIX #3: Add DPoP header if enabled (first attempt without nonce)
+        # Add DPoP header if enabled (first attempt without nonce)
         if self._dpop_enabled:
             dpop_proof = self._dpop_generator.generate_proof_jwt(
                 http_method="POST",
@@ -135,13 +135,13 @@ class OAuth:
             oauth_req
         )
 
-        # FIX #3: Handle DPoP nonce challenge (RFC 9449 Section 8)
+        # Handle DPoP nonce challenge (RFC 9449 Section 8)
         # Parse response body for checking
         res_json = None
         if res_body and res_details and res_details.content_type == "application/json":
             try:
                 res_json = json.loads(res_body)
-            except:
+            except (json.JSONDecodeError, ValueError, TypeError):
                 pass
 
         # Check for 400 response with use_dpop_nonce error (do this before checking err)
@@ -187,13 +187,6 @@ class OAuth:
                     oauth_req
                 )
 
-                # Parse the retry response
-                if res_body and res_details and res_details.content_type == "application/json":
-                    try:
-                        _ = json.loads(res_body)
-                    except:
-                        _ = None
-
         # Return HTTP Client error if raised
         if err:
             return (None, "Bearer", err)
@@ -211,21 +204,17 @@ class OAuth:
         token_type = parsed_response.get("token_type", "Bearer")
         expires_in = parsed_response.get("expires_in", 3600)
 
-        # FIX #4: Store token and type
+        # Store token and type
         self._access_token = access_token
         self._token_type = token_type
         self._access_token_expiry_time = int(time.time()) + expires_in
 
-        # FIX #4: Update cache with token type
-        self._request_executor._cache.add("OKTA_ACCESS_TOKEN", access_token)
-        self._request_executor._cache.add("OKTA_TOKEN_TYPE", token_type)
-
-        # FIX #3: Extract and store nonce from successful response (if present)
+        # Extract and store nonce from successful response (if present)
         if self._dpop_enabled and 'dpop-nonce' in res_details.headers:
             self._dpop_generator.set_nonce(res_details.headers['dpop-nonce'])
             logger.debug(f"Stored nonce from successful response: {res_details.headers['dpop-nonce'][:8]}...")
 
-        # FIX #7: Warn if DPoP was requested but server returned Bearer
+        # Warn if DPoP was requested but server returned Bearer
         if self._dpop_enabled and token_type == "Bearer":
             logger.warning(
                 "DPoP was enabled but server returned Bearer token. "
@@ -239,13 +228,14 @@ class OAuth:
     def clear_access_token(self) -> None:
         """
         Clear currently used OAuth access token, probably expired.
-        FIX #4: Also clears token type.
+        Also clears token type.
         """
         self._access_token = None
         self._token_type = "Bearer"  # Reset to default
+        # Note: Cache is managed by request_executor, not accessed directly
+        self._request_executor._default_headers.pop("Authorization", None)
         self._request_executor._cache.delete("OKTA_ACCESS_TOKEN")
         self._request_executor._cache.delete("OKTA_TOKEN_TYPE")
-        self._request_executor._default_headers.pop("Authorization", None)
         self._access_token_expiry_time = None
 
     def get_dpop_generator(self) -> Optional[Any]:

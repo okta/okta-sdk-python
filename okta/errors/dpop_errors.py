@@ -1,5 +1,5 @@
 """
-FIX #8: DPoP-specific error messages and handling.
+DPoP-specific error messages and handling.
 
 This module provides user-friendly error messages for DPoP-related errors
 returned by the Okta authorization server.
@@ -64,6 +64,13 @@ def is_dpop_error(error_code: str) -> bool:
     Returns:
         True if error is DPoP-related
     """
-    dpop_keywords = ['dpop', 'nonce', 'jkt', 'key_binding']
+    # Use more specific patterns to avoid false positives
+    # Check if it's a known DPoP error or contains 'dpop' prefix
     error_lower = error_code.lower()
-    return any(keyword in error_lower for keyword in dpop_keywords)
+
+    # Known DPoP error codes
+    if error_lower in DPOP_ERROR_MESSAGES:
+        return True
+
+    # Or contains 'dpop' keyword (more specific than just 'nonce')
+    return 'dpop' in error_lower

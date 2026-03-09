@@ -8,6 +8,8 @@
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
+import logging
+
 from okta.constants import FINDING_OKTA_DOMAIN, REPO_URL, MIN_DPOP_KEY_ROTATION_SECONDS
 from okta.error_messages import (
     ERROR_MESSAGE_ORG_URL_MISSING,
@@ -25,6 +27,8 @@ from okta.error_messages import (
     ERROR_MESSAGE_PROXY_MISSING_AUTH,
     ERROR_MESSAGE_PROXY_INVALID_PORT,
 )
+
+logger = logging.getLogger("okta-sdk-python")
 
 
 class ConfigValidator:
@@ -70,7 +74,7 @@ class ConfigValidator:
             ]
             client_fields_values = [client.get(field, "") for field in client_fields]
             errors += self._validate_client_fields(*client_fields_values)
-            # FIX #9: Validate DPoP configuration if enabled
+            # Validate DPoP configuration if enabled
             errors += self._validate_dpop_config(client)
         else:  # Not a valid authorization mode
             errors += [
@@ -231,7 +235,7 @@ class ConfigValidator:
 
     def _validate_dpop_config(self, client):
         """
-        FIX #9: Validate DPoP-specific configuration.
+        Validate DPoP-specific configuration.
 
         Args:
             client: Client configuration dict
@@ -239,8 +243,6 @@ class ConfigValidator:
         Returns:
             list: List of error messages (empty if valid)
         """
-        import logging
-        logger = logging.getLogger("okta-sdk-python")
 
         errors = []
 

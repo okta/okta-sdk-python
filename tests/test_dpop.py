@@ -8,14 +8,12 @@ Tests verify:
 - RFC 9449 compliance
 """
 
-import json
 import time
 import unittest
-from unittest.mock import patch, MagicMock
 import jwt
 
 from okta.dpop import DPoPProofGenerator
-
+from okta.jwt import JWT
 
 class TestDPoPProofGenerator(unittest.TestCase):
     """Test DPoP proof generator functionality."""
@@ -34,7 +32,6 @@ class TestDPoPProofGenerator(unittest.TestCase):
         self.assertIsNotNone(self.generator._key_created_at)
         self.assertEqual(self.generator._rotation_interval, 86400)
         self.assertIsNone(self.generator._nonce)
-        self.assertEqual(self.generator._active_requests, 0)
 
     def test_key_generation(self):
         """Test RSA 2048-bit key generation."""
@@ -180,19 +177,19 @@ class TestDPoPProofGenerator(unittest.TestCase):
         """Test SHA-256 hash computation for access token."""
         access_token = 'test-token'
 
-        # Compute hash
-        ath = self.generator._compute_access_token_hash(access_token)
+        # Compute hash using JWT._compute_ath (used by DPoP generator)
+        ath = JWT._compute_ath(access_token)
 
         # Should be base64url encoded
         self.assertIsInstance(ath, str)
         self.assertNotIn('=', ath)  # No padding
 
         # Should be deterministic (same input = same output)
-        ath2 = self.generator._compute_access_token_hash(access_token)
+        ath2 = JWT._compute_ath(access_token)
         self.assertEqual(ath, ath2)
 
         # Different token = different hash
-        ath3 = self.generator._compute_access_token_hash('different-token')
+        ath3 = JWT._compute_ath('different-token')
         self.assertNotEqual(ath, ath3)
 
     def test_jwt_headers(self):
@@ -316,36 +313,19 @@ class TestDPoPProofGenerator(unittest.TestCase):
 
     def test_key_rotation_waits_for_active_requests(self):
         """
-        FIX #5: Test key rotation waits for active requests to complete.
+        Test key rotation works correctly.
 
-        This prevents signature mismatch errors during rotation.
+        Note: In the asyncio context, rotation is safe because the event loop
+        is single-threaded. No active request tracking is needed.
         """
-        # Use a simpler test - just verify rotation works when no active requests
-        self.assertEqual(self.generator._active_requests, 0)
-
         old_n = self.generator._public_jwk['n']
 
-        # Rotation should succeed immediately when no active requests
+        # Rotation should succeed immediately
         self.generator.rotate_keys()
 
-        # Keys should be rotated
-        self.assertNotEqual(self.generator._public_jwk['n'], old_n)
-
-    def test_active_request_tracking(self):
-        """
-        FIX #5: Test active request counter is properly managed.
-        """
-        # Initially 0
-        self.assertEqual(self.generator.get_active_requests(), 0)
-
-        # Generate proof (should increment/decrement)
-        self.generator.generate_proof_jwt(
-            'GET',
-            'https://example.okta.com/api/v1/users'
-        )
-
-        # Should be back to 0 after completion
-        self.assertEqual(self.generator.get_active_requests(), 0)
+        # Key should have changed
+        new_n = self.generator._public_jwk['n']
+        self.assertNotEqual(old_n, new_n)
 
     def test_should_rotate_keys(self):
         """Test key rotation check based on age."""

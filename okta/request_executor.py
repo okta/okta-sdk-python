@@ -153,10 +153,10 @@ class RequestExecutor:
 
         # OAuth
         if self._authorization_mode == "PrivateKey" and not oauth:
-            # check if access token exists and get token type (FIX #4)
+            # check if access token exists and get token type
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")
-                token_type = self._cache.get("OKTA_TOKEN_TYPE", "Bearer")
+                token_type = self._cache.get("OKTA_TOKEN_TYPE") if self._cache.contains("OKTA_TOKEN_TYPE") else "Bearer"
             else:
                 # if not, make one
                 # Generate using private key provided
@@ -171,25 +171,25 @@ class RequestExecutor:
             # Add Authorization header with token type
             headers.update({"Authorization": f"{token_type} {access_token}"})
 
-            # FIX #6: Add DPoP header for API requests if using DPoP token
-            if token_type == "DPoP" and self._oauth._dpop_generator:
+            # Add DPoP header for API requests if using DPoP token
+            if token_type == "DPoP":
                 dpop_generator = self._oauth.get_dpop_generator()
+                if dpop_generator:
+                    # Generate DPoP proof with access token hash
+                    dpop_proof = dpop_generator.generate_proof_jwt(
+                        http_method=method,
+                        http_url=url,
+                        access_token=access_token,
+                        nonce=dpop_generator.get_nonce()
+                    )
 
-                # Generate DPoP proof with access token hash
-                dpop_proof = dpop_generator.generate_proof_jwt(
-                    http_method=method,
-                    http_url=url,
-                    access_token=access_token,
-                    nonce=dpop_generator.get_nonce()
-                )
+                    # Add DPoP header and user agent extension
+                    headers.update({
+                        "DPoP": dpop_proof,
+                        "x-okta-user-agent-extended": "isDPoP:true"
+                    })
 
-                # Add DPoP header and user agent extension
-                headers.update({
-                    "DPoP": dpop_proof,
-                    "x-okta-user-agent-extended": "isDPoP:true"
-                })
-
-                logger.debug(f"Added DPoP proof to {method} request to {url[:50]}...")
+                    logger.debug(f"Added DPoP proof to {method} request to {url[:50]}...")
 
         # Add content type header if request body exists
         if body:
@@ -304,7 +304,7 @@ class RequestExecutor:
 
         headers = res_details.headers
 
-        # FIX #6, #8: Handle DPoP nonce challenges (401 or 400 with dpop-nonce header)
+        # Handle DPoP nonce challenges (401 or 400 with dpop-nonce header)
         if (self._authorization_mode == "PrivateKey" and
             hasattr(self, '_oauth') and
             self._oauth._dpop_enabled and
@@ -319,9 +319,11 @@ class RequestExecutor:
                 )
                 self._oauth._dpop_generator.set_nonce(dpop_nonce)
 
-                # FIX #8: Log helpful error message if this is a DPoP-specific error
-                if isinstance(resp_body, dict):
-                    error_code = resp_body.get('error', '')
+                # Log helpful error message if this is a DPoP-specific error
+                # Parse response body to check for error code
+                try:
+                    body = json.loads(resp_body) if isinstance(resp_body, str) else resp_body
+                    error_code = body.get('error', '') if isinstance(body, dict) else ''
                     if error_code:
                         from okta.errors.dpop_errors import get_dpop_error_message, is_dpop_error
 
@@ -329,6 +331,8 @@ class RequestExecutor:
                             logger.error(
                                 f"DPoP Error ({error_code}): {get_dpop_error_message(error_code)}"
                             )
+                except (json.JSONDecodeError, ValueError, TypeError, AttributeError):
+                    pass  # Not JSON or not parseable, skip error check
 
         if attempts < max_retries and self.is_retryable_status(res_details.status):
             date_time = headers.get("Date", "")
