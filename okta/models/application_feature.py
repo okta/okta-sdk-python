@@ -143,8 +143,14 @@ class ApplicationFeature(BaseModel):
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "InboundProvisioningApplicationFeature":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.InboundProvisioningApplicationFeature.from_dict(obj)
         if object_type == "UserProvisioningApplicationFeature":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.UserProvisioningApplicationFeature.from_dict(obj)
 
         raise ValueError(

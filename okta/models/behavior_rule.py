@@ -180,14 +180,29 @@ class BehaviorRule(BaseModel):
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "BehaviorRuleASN":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.BehaviorRuleASN.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousDevice":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.BehaviorRuleAnomalousDevice.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousIP":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.BehaviorRuleAnomalousIP.from_dict(obj)
         if object_type == "BehaviorRuleAnomalousLocation":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.BehaviorRuleAnomalousLocation.from_dict(obj)
         if object_type == "BehaviorRuleVelocity":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.BehaviorRuleVelocity.from_dict(obj)
 
         raise ValueError(

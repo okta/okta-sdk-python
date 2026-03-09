@@ -120,6 +120,9 @@ class ValidationDetailProvider(BaseModel):
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "WorkflowsValidationDetailProvider":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.WorkflowsValidationDetailProvider.from_dict(obj)
 
         raise ValueError(

@@ -230,38 +230,89 @@ class AuthenticatorBase(BaseModel):
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "AuthenticatorKeyCustomApp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyCustomApp.from_dict(obj)
         if object_type == "AuthenticatorKeyDuo":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyDuo.from_dict(obj)
         if object_type == "AuthenticatorKeyExternalIdp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyExternalIdp.from_dict(obj)
         if object_type == "AuthenticatorKeyGoogleOtp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyGoogleOtp.from_dict(obj)
         if object_type == "AuthenticatorKeyEmail":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyEmail.from_dict(obj)
         if object_type == "AuthenticatorKeyPassword":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyPassword.from_dict(obj)
         if object_type == "AuthenticatorKeyOktaVerify":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyOktaVerify.from_dict(obj)
         if object_type == "AuthenticatorKeyOnprem":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyOnprem.from_dict(obj)
         if object_type == "AuthenticatorKeyPhone":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyPhone.from_dict(obj)
         if object_type == "AuthenticatorKeySecurityKey":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeySecurityKey.from_dict(obj)
         if object_type == "AuthenticatorKeySecurityQuestion":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeySecurityQuestion.from_dict(obj)
         if object_type == "AuthenticatorKeySmartCard":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeySmartCard.from_dict(obj)
         if object_type == "AuthenticatorKeySymantecVip":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeySymantecVip.from_dict(obj)
         if object_type == "AuthenticatorKeyTac":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyTac.from_dict(obj)
         if object_type == "AuthenticatorKeyWebauthn":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyWebauthn.from_dict(obj)
         if object_type == "AuthenticatorKeyYubikey":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorKeyYubikey.from_dict(obj)
         if object_type == "AuthenticatorSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorSimple.from_dict(obj)
 
         raise ValueError(

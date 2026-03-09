@@ -183,32 +183,74 @@ class AuthenticatorMethodWithVerifiableProperties(AuthenticatorMethodBase):  # n
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodWithVerifiableProperties":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
         if object_type == "AuthenticatorMethodOtp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodOtp.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodPush":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodPush.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodSignedNonce":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodSignedNonce.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodTac":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodTac.from_dict(obj)
         if object_type == "AuthenticatorMethodTotp":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodTotp.from_dict(obj)
         if object_type == "AuthenticatorMethodSimple":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodSimple.from_dict(obj)
         if object_type == "AuthenticatorMethodWebAuthn":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
             return models.AuthenticatorMethodWebAuthn.from_dict(obj)
 
         raise ValueError(
