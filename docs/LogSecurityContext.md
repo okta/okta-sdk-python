@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **domain** | **str** | The domain name that&#39;s associated with the IP address of the inbound event request | [optional] [readonly] 
 **isp** | **str** | The Internet service provider that&#39;s used to send the event&#39;s request | [optional] [readonly] 
 **is_proxy** | **bool** | Specifies whether an event&#39;s request is from a known proxy | [optional] [readonly] 
-**user_behaviors** | **List[str]** | The result of the user behavior detection models associated with the event | [optional] [readonly] 
+**user_behaviors** | [**List[LogUserBehavior]**](LogUserBehavior.md) | The result of the user behavior detection models associated with the event | [optional] [readonly] 
 
 ## Example
 
