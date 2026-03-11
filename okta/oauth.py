@@ -23,10 +23,24 @@ Do not edit the class manually.
 import json
 import logging
 import time
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple, TYPE_CHECKING
 
-from okta.http_client import HTTPClient
-from okta.jwt import JWT
+# Try to import DPoP - may fail if crypto libraries not installed
+_dpop_import_error_msg = None
+DPoPProofGenerator = None
+try:
+    from okta.dpop import DPoPProofGenerator
+except ImportError as e:
+    _dpop_import_error_msg = str(e)
+
+from okta.errors.okta_api_error import OktaAPIError  # noqa: E402
+from okta.http_client import HTTPClient  # noqa: E402
+from okta.jwt import JWT  # noqa: E402
+
+if TYPE_CHECKING:
+    from okta.dpop import DPoPProofGenerator as DPoPProofGeneratorType
+else:
+    DPoPProofGeneratorType = Any
 
 logger = logging.getLogger("okta-sdk-python")
 
@@ -50,9 +64,26 @@ class OAuth:
         self._dpop_generator: Optional[Any] = None
 
         if self._dpop_enabled:
-            from okta.dpop import DPoPProofGenerator
-            self._dpop_generator = DPoPProofGenerator(config["client"])
-            logger.info("DPoP authentication enabled")
+            if DPoPProofGenerator is None:
+                logger.error(
+                    f"DPoP enabled but crypto libraries unavailable: {_dpop_import_error_msg}"
+                )
+                error = (
+                    ImportError(_dpop_import_error_msg)
+                    if _dpop_import_error_msg
+                    else ImportError("DPoP import failed")
+                )
+                raise ValueError(
+                    "DPoP requires 'pycryptodomex' and 'jwcrypto' libraries. "
+                    "Install with: pip install pycryptodomex>=3.23.0 jwcrypto>=1.5.6"
+                ) from error
+
+            try:
+                self._dpop_generator = DPoPProofGenerator(config["client"])
+                logger.info("DPoP authentication enabled")
+            except Exception as e:
+                logger.error(f"Failed to initialize DPoP generator: {e}")
+                raise ValueError(f"DPoP initialization failed: {e}") from e
 
     def get_JWT(self) -> str:
         """
@@ -69,7 +100,39 @@ class OAuth:
 
         return JWT.create_token(org_url, client_id, private_key, kid)
 
-    async def get_access_token(self) -> Tuple[Optional[str], str, Optional[Exception]]:
+    @staticmethod
+    def _parse_json_response(res_body, res_details):
+        """
+        Parse response body if JSON content type.
+
+        Args:
+            res_body: Response body string
+            res_details: Response details object with content_type
+
+        Returns:
+            Parsed JSON dict or None if not JSON or parse error
+        """
+        if res_body and res_details and res_details.content_type == "application/json":
+            try:
+                return json.loads(res_body)
+            except (json.JSONDecodeError, ValueError, TypeError):
+                pass
+        return None
+
+    async def get_access_token(self) -> Tuple[Optional[str], Optional[Exception]]:
+        """
+        Retrieves or generates the OAuth access token for the Okta Client.
+
+        **DEPRECATED**: For DPoP support, use get_oauth_token() instead which returns
+        both token and token_type.
+
+        Returns:
+            tuple: (access_token, error) - Legacy 2-tuple for backward compatibility
+        """
+        access_token, _, error = await self.get_oauth_token()
+        return (access_token, error)
+
+    async def get_oauth_token(self) -> Tuple[Optional[str], str, Optional[Exception]]:
         """
         Retrieves or generates the OAuth access token for the Okta Client.
         Supports both Bearer and DPoP token types.
@@ -112,10 +175,9 @@ class OAuth:
         # Add DPoP header if enabled (first attempt without nonce)
         if self._dpop_enabled:
             dpop_proof = self._dpop_generator.generate_proof_jwt(
-                http_method="POST",
-                http_url=f"{org_url}{OAuth.OAUTH_ENDPOINT}"
+                http_method="POST", http_url=f"{org_url}{OAuth.OAUTH_ENDPOINT}"
             )
-            headers['DPoP'] = dpop_proof
+            headers["DPoP"] = dpop_proof
             logger.debug("Added DPoP proof to token request (no nonce)")
 
         # Craft request
@@ -135,69 +197,133 @@ class OAuth:
             oauth_req
         )
 
-        # Handle DPoP nonce challenge (RFC 9449 Section 8)
-        # Parse response body for checking
-        res_json = None
-        if res_body and res_details and res_details.content_type == "application/json":
-            try:
-                res_json = json.loads(res_body)
-            except (json.JSONDecodeError, ValueError, TypeError):
-                pass
+        # Parse response body once (avoid double-parsing)
+        parsed_response = self._parse_json_response(res_body, res_details)
 
-        # Check for 400 response with use_dpop_nonce error (do this before checking err)
-        if (res_details and res_details.status == 400 and
-            isinstance(res_json, dict) and
-                res_json.get('error') == 'use_dpop_nonce'):
+        # Handle DPoP-specific errors first (RFC 9449 Section 7)
+        if (
+            res_details
+            and res_details.status == 400
+            and isinstance(parsed_response, dict)
+        ):
+            error_code = parsed_response.get("error", "")
 
-            # Extract nonce from response header
-            dpop_nonce = res_details.headers.get('dpop-nonce')
+            # Check for DPoP-specific errors
+            from okta.errors.dpop_errors import is_dpop_error, get_dpop_error_message
 
-            if dpop_nonce and self._dpop_enabled:
-                logger.info(f"Received DPoP nonce challenge, retrying with nonce: {dpop_nonce[:8]}...")
+            if is_dpop_error(error_code):
+                # Special handling for use_dpop_nonce - this is retryable
+                if error_code == "use_dpop_nonce":
+                    # Extract nonce from response header
+                    # Note: aiohttp returns CIMultiDictProxy (case-insensitive)
+                    # RFC 9110 specifies HTTP headers are case-insensitive
+                    dpop_nonce = res_details.headers.get("dpop-nonce")
 
-                # Store nonce
-                self._dpop_generator.set_nonce(dpop_nonce)
+                    if dpop_nonce and self._dpop_enabled:
+                        logger.debug(
+                            "Received DPoP nonce challenge, retrying with nonce"
+                        )
 
-                # Generate new client assertion JWT
-                jwt = self.get_JWT()
-                parameters['client_assertion'] = jwt
+                        # Store nonce
+                        self._dpop_generator.set_nonce(dpop_nonce)
 
-                # Generate new DPoP proof with nonce
-                dpop_proof = self._dpop_generator.generate_proof_jwt(
-                    http_method="POST",
-                    http_url=f"{org_url}{OAuth.OAUTH_ENDPOINT}",
-                    nonce=dpop_nonce
-                )
-                headers['DPoP'] = dpop_proof
-                logger.debug("Retrying token request with nonce")
+                        # Generate new client assertion JWT
+                        jwt = self.get_JWT()
+                        parameters["client_assertion"] = jwt
 
-                # Retry request
-                oauth_req, err = await self._request_executor.create_request(
-                    "POST",
-                    url,
-                    form=parameters,  # Send as form data, not URL params
-                    headers=headers,
-                    oauth=True,
-                )
+                        # Generate new DPoP proof with nonce
+                        dpop_proof = self._dpop_generator.generate_proof_jwt(
+                            http_method="POST",
+                            http_url=f"{org_url}{OAuth.OAUTH_ENDPOINT}",
+                            nonce=dpop_nonce,
+                        )
+                        headers["DPoP"] = dpop_proof
+                        logger.debug("Retrying token request with nonce")
 
-                if err:
-                    return (None, "Bearer", err)
+                        # Retry request (only once - no infinite retry loop)
+                        oauth_req, err = await self._request_executor.create_request(
+                            "POST",
+                            url,
+                            form=parameters,  # Send as form data, not URL params
+                            headers=headers,
+                            oauth=True,
+                        )
 
-                _, res_details, res_body, err = await self._request_executor.fire_request(
-                    oauth_req
-                )
+                        if err:
+                            return (None, "Bearer", err)
+
+                        _, res_details, res_body, err = (
+                            await self._request_executor.fire_request(oauth_req)
+                        )
+
+                        # Re-parse response body for retry attempt
+                        parsed_response = self._parse_json_response(
+                            res_body, res_details
+                        )
+
+                        # If second attempt also returns use_dpop_nonce, fail with clear error
+                        if (
+                            res_details
+                            and res_details.status == 400
+                            and isinstance(parsed_response, dict)
+                            and parsed_response.get("error") == "use_dpop_nonce"
+                        ):
+                            return (
+                                None,
+                                "Bearer",
+                                OktaAPIError(
+                                    "https://developer.okta.com/docs/api/",
+                                    res_details,
+                                    "DPoP nonce challenge failed after retry. Server may have rotated nonce.",
+                                ),
+                            )
+
+                        # Continue to normal error handling and token extraction below
+                else:
+                    # Non-retryable DPoP error - provide helpful message
+                    error_msg = get_dpop_error_message(error_code)
+                    error_description = parsed_response.get("error_description", "")
+                    full_error_msg = f"{error_msg}"
+                    if error_description:
+                        full_error_msg += f"\n\nServer error: {error_description}"
+
+                    logger.error(f"DPoP Error ({error_code}): {error_msg}")
+
+                    return (
+                        None,
+                        "Bearer",
+                        OktaAPIError(
+                            "https://developer.okta.com/docs/api/",
+                            res_details,
+                            full_error_msg,
+                        ),
+                    )
+
+        # Handle non-DPoP errors or successful responses
 
         # Return HTTP Client error if raised
         if err:
             return (None, "Bearer", err)
 
-        # Check response body for error message
-        parsed_response, err = HTTPClient.check_response_for_error(
-            url, res_details, res_body
-        )
-        # Return specific error if found in response
-        if err:
-            return (None, "Bearer", err)
+        # Check parsed response for error message (avoid re-parsing)
+        # If not yet parsed, check_response_for_error will parse it
+        if parsed_response:
+            # Already parsed - check for error manually
+            if "error" in parsed_response or "errorCode" in parsed_response:
+                error_msg = (
+                    parsed_response.get("error_description")
+                    or parsed_response.get("errorSummary")
+                    or str(parsed_response)
+                )
+                return (None, "Bearer", OktaAPIError(url, res_details, error_msg))
+        else:
+            # Not parsed yet - let check_response_for_error parse and check
+            parsed_response, err = HTTPClient.check_response_for_error(
+                url, res_details, res_body
+            )
+            # Return specific error if found in response
+            if err:
+                return (None, "Bearer", err)
 
         # Extract token and token type
         access_token = parsed_response["access_token"]
@@ -210,9 +336,11 @@ class OAuth:
         self._access_token_expiry_time = int(time.time()) + expires_in
 
         # Extract and store nonce from successful response (if present)
-        if self._dpop_enabled and 'dpop-nonce' in res_details.headers:
-            self._dpop_generator.set_nonce(res_details.headers['dpop-nonce'])
-            logger.debug(f"Stored nonce from successful response: {res_details.headers['dpop-nonce'][:8]}...")
+        if self._dpop_enabled and "dpop-nonce" in res_details.headers:
+            self._dpop_generator.set_nonce(res_details.headers["dpop-nonce"])
+            logger.debug(
+                f"Stored nonce from successful response: {res_details.headers['dpop-nonce'][:8]}..."
+            )
 
         # Warn if DPoP was requested but server returned Bearer
         if self._dpop_enabled and token_type == "Bearer":
@@ -232,12 +360,16 @@ class OAuth:
         """
         self._access_token = None
         self._token_type = "Bearer"  # Reset to default
-        # Note: Cache is managed by request_executor, not accessed directly
+        # Note: Cache is managed by request_executor
+        # Token and type are now stored as atomic tuple in single cache entry
         self._request_executor._default_headers.pop("Authorization", None)
         self._request_executor._cache.delete("OKTA_ACCESS_TOKEN")
-        self._request_executor._cache.delete("OKTA_TOKEN_TYPE")
         self._access_token_expiry_time = None
 
-    def get_dpop_generator(self) -> Optional[Any]:
+    def get_dpop_generator(self) -> Optional["DPoPProofGeneratorType"]:
         """Get DPoP generator instance."""
         return self._dpop_generator
+
+    def is_dpop_enabled(self) -> bool:
+        """Check if DPoP is enabled for this OAuth client."""
+        return self._dpop_enabled

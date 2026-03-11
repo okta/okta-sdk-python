@@ -12,12 +12,75 @@
 Class of utility functions.
 """
 
+import base64
+import hashlib
 from datetime import datetime as dt
 from enum import Enum
 from typing import Any
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import urlsplit, urlunsplit, urlparse, urlunparse
 
 from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH, EPOCH_YEAR
+
+
+def normalize_dpop_url(url: str) -> str:
+    """
+    Normalize URL for DPoP htu claim per RFC 9449 Section 4.2.
+
+    The htu (HTTP URI) claim MUST be the HTTP URI (without query and fragment)
+    of the request to which the JWT is attached.
+
+    Strips query parameters and fragment, keeps scheme, host, port, and path.
+
+    Args:
+        url: Full HTTP URL potentially with query parameters and/or fragment
+
+    Returns:
+        Normalized URL with only scheme, netloc (host:port), and path
+
+    Reference:
+        RFC 9449 Section 4.2 - DPoP Proof JWT Syntax
+        https://datatracker.ietf.org/doc/html/rfc9449#section-4.2
+
+    Example:
+        >>> normalize_dpop_url('https://example.com/api/users?limit=10#section1')
+        'https://example.com/api/users'
+    """
+    parsed = urlparse(url)
+    return urlunparse((
+        parsed.scheme,   # scheme (http/https)
+        parsed.netloc,   # network location (host:port)
+        parsed.path,     # path
+        '',              # params (deprecated, kept for compatibility)
+        '',              # query (empty per RFC 9449)
+        ''               # fragment (empty per RFC 9449)
+    ))
+
+
+def compute_ath(access_token: str) -> str:
+    """
+    Compute SHA-256 hash of access token for DPoP 'ath' claim.
+
+    Per RFC 9449 Section 4.1: The value MUST be the result of a base64url
+    encoding the SHA-256 hash of the ASCII encoding of the associated
+    access token's value.
+
+    Args:
+        access_token: The access token to hash
+
+    Returns:
+        Base64url-encoded SHA-256 hash (without padding)
+
+    Reference:
+        RFC 9449 Section 4.1 - DPoP Access Token Binding
+        https://datatracker.ietf.org/doc/html/rfc9449#section-4.1
+    """
+    # SHA-256 hash of ASCII-encoded access token
+    hash_bytes = hashlib.sha256(access_token.encode('ascii')).digest()
+
+    # Base64url encode (no padding per RFC 7515 Section 2)
+    ath = base64.urlsafe_b64encode(hash_bytes).rstrip(b'=').decode('ascii')
+
+    return ath
 
 
 def format_url(base_string):

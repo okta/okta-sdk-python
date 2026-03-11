@@ -16,6 +16,12 @@ class NoOpCache(Cache):
     This is a disabled Cache Class where no operations occur
     in the cache.
     Implementing the okta.cache.cache.Cache abstract class.
+
+    .. warning::
+        **DPoP Performance Impact**: When using DPoP (Demonstrating Proof-of-Possession)
+        authentication with NoOpCache, OAuth tokens will be regenerated on every request
+        instead of being cached. This may significantly impact performance and could
+        trigger rate limits. Consider using OktaCache instead for production DPoP usage.
     """
 
     def __init__(self):

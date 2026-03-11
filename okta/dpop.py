@@ -20,18 +20,26 @@ client-possessed keys, preventing token theft and replay attacks.
 Reference: https://datatracker.ietf.org/doc/html/rfc9449
 """
 
+__all__ = ['DPoPProofGenerator', 'RSA_KEY_SIZE_BITS']
+
 import json
 import logging
+import threading
 import time
 import uuid
 from typing import Any, Dict, Optional
-from urllib.parse import urlparse, urlunparse
 
 from Cryptodome.PublicKey import RSA
 from jwcrypto.jwk import JWK
 from jwt import encode as jwt_encode
 
+# Import for access token hash computation and URL normalization
+from okta.utils import compute_ath, normalize_dpop_url
+
 logger = logging.getLogger("okta-sdk-python")
+
+# Per RFC 9449 Section 4.3: RSA keys SHOULD be at least 2048 bits, recommended 3072
+RSA_KEY_SIZE_BITS = 3072
 
 
 class DPoPProofGenerator:
@@ -48,10 +56,17 @@ class DPoPProofGenerator:
     - Manages server-provided nonces
     - Supports automatic key rotation
 
+    Thread Safety:
+    - All public methods are thread-safe using RLock (reentrant lock)
+    - Multiple threads can safely call generate_proof_jwt() concurrently
+    - Key rotation is blocked when active requests are in progress
+    - The same thread can acquire the lock multiple times (reentrant)
+
     Security Notes:
     - Private keys are kept in memory only
     - Only public key components are exported (kty, n, e)
     - Keys are rotated periodically for better security
+    - Nonces are validated and stored securely without logging
     """
 
     def __init__(self, config: Dict[str, Any]) -> None:
@@ -62,16 +77,18 @@ class DPoPProofGenerator:
             config: Configuration dictionary containing:
                 - dpopKeyRotationInterval: Key rotation interval in seconds (default: 86400 / 24 hours)
         """
+        self._lock = threading.RLock()  # Thread-safe access to shared state
         self._rsa_key: Optional[RSA.RsaKey] = None
         self._public_jwk: Optional[Dict[str, str]] = None
         self._key_created_at: Optional[float] = None
         self._rotation_interval: int = config.get('dpopKeyRotationInterval', 86400)  # 24h default
         self._nonce: Optional[str] = None
+        self._active_requests: int = 0  # Track active requests to prevent rotation during use
 
         # Generate initial keys
         self._rotate_keys_internal()
 
-        logger.info(f"DPoP proof generator initialized with {self._rotation_interval}s key rotation interval")
+        logger.debug(f"DPoP proof generator initialized with {self._rotation_interval}s key rotation interval")
 
     def _rotate_keys_internal(self) -> None:
         """
@@ -79,26 +96,59 @@ class DPoPProofGenerator:
 
         Generates a new RSA 3072-bit key pair and exports the public key as JWK.
         """
-        logger.info("Generating new RSA 3072-bit key pair for DPoP")
-        self._rsa_key = RSA.generate(3072)
+        logger.debug(f"Generating new RSA {RSA_KEY_SIZE_BITS}-bit key pair for DPoP")
+        self._rsa_key = RSA.generate(RSA_KEY_SIZE_BITS)
         self._public_jwk = self._export_public_jwk()
         self._key_created_at = time.time()
         logger.debug(f"DPoP keys generated at {self._key_created_at}")
 
-    def rotate_keys(self) -> None:
+    def rotate_keys(self, force: bool = False) -> bool:
         """
         Safely rotate RSA key pair.
 
-        In asyncio context, rotation is safe because the event loop is single-threaded.
-        All concurrent requests will use the new key after rotation completes.
+        Ensures no active requests are using the current key before rotating.
+        If active requests exist, rotation is skipped for safety.
 
-        Note: Callers should avoid rotating keys during active token operations.
+        Args:
+            force: If True, skip age check and rotate immediately (for testing/manual rotation)
+
+        Returns:
+            bool: True if rotation occurred, False if skipped
+
+        Note: Thread-safe - uses lock to ensure atomic check-and-rotate.
         """
-        self._rotate_keys_internal()
+        with self._lock:
+            # Check for active requests - if any exist, skip rotation
+            if self._active_requests > 0:
+                logger.warning(
+                    f"Skipping key rotation: {self._active_requests} active request(s) in progress"
+                )
+                return False
 
-        # Clear nonce as it was tied to old key
-        self._nonce = None
-        logger.info("DPoP keys rotated successfully, nonce cleared")
+            # Check if rotation is actually needed (unless forced)
+            if not force and self._key_created_at:
+                age = time.time() - self._key_created_at
+                if age < self._rotation_interval:
+                    logger.debug(
+                        f"Key rotation not needed: key age {age:.0f}s < interval {self._rotation_interval}s"
+                    )
+                    return False
+
+            # Clear old key from memory (M6 fix)
+            old_key = self._rsa_key
+
+            # Perform rotation
+            self._rotate_keys_internal()
+
+            # Clear nonce as it was tied to old key
+            self._nonce = None
+
+            # Explicitly delete old key to minimize memory exposure
+            if old_key:
+                del old_key
+
+            logger.debug("DPoP keys rotated successfully, nonce cleared")
+            return True
 
     def generate_proof_jwt(
         self,
@@ -110,110 +160,109 @@ class DPoPProofGenerator:
         """
         Generate DPoP proof JWT per RFC 9449.
 
-        Strips query parameters and fragments from http_url per RFC 9449 Section 4.2.
+        Creates a signed JWT proving possession of the private key corresponding
+        to the public key in the JWT header. The proof is bound to the specific
+        HTTP request and optionally to an access token.
+
+        RFC 9449 Section References:
+        - Section 4.1: DPoP Proof JWT syntax and required claims
+        - Section 4.2: URL normalization (htu claim must exclude query/fragment)
+        - Section 4.3: Signature algorithm requirements (RS256)
+        - Section 8: Server-provided nonces for replay protection
 
         Args:
-            http_method: HTTP method (GET, POST, etc.)
-            http_url: Full HTTP URL (query and fragment will be stripped)
-            access_token: Access token for 'ath' claim (optional, for API requests)
-            nonce: Server-provided nonce (optional, overrides stored nonce)
+            http_method: HTTP method (GET, POST, etc.) - will be uppercased for htm claim
+            http_url: Full HTTP URL - query/fragment automatically stripped per RFC 9449 §4.2
+            access_token: Access token for binding via 'ath' claim (optional, for API requests)
+            nonce: Server-provided nonce (optional). If not provided, uses stored nonce.
 
         Returns:
-            DPoP proof JWT as string
+            DPoP proof JWT as compact JWS string
 
-        Raises:
-            ValueError: If required parameters are missing or invalid
+        Thread Safety:
+            This method is thread-safe and can be called concurrently.
 
         Example:
-            >>> generator = DPoPProofGenerator({'dpopKeyRotationInterval': 86400})
+            >>> generator = DPoPProofGenerator(config)
             >>> proof = generator.generate_proof_jwt(
-            ...     'GET',
-            ...     'https://example.okta.com/api/v1/users?limit=10',
-            ...     access_token='eyJhbG...'
+            ...     http_method="POST",
+            ...     http_url="https://example.okta.com/oauth2/v1/token"
             ... )
+
+        Reference:
+            RFC 9449 - OAuth 2.0 Demonstrating Proof of Possession
+            https://datatracker.ietf.org/doc/html/rfc9449
         """
-        # Check if auto-rotation is needed (but don't rotate during active request)
-        if self._key_created_at and (time.time() - self._key_created_at) >= self._rotation_interval:
-            logger.warning(
-                f"DPoP keys are {time.time() - self._key_created_at:.0f}s old, "
-                f"rotation recommended (interval: {self._rotation_interval}s)"
-            )
+        with self._lock:
+            # Increment active request counter
+            self._active_requests += 1
 
-        # RFC 9449 Section 4.2 - htu must NOT include query and fragment
-        parsed_url = urlparse(http_url)
-        clean_url = urlunparse((
-            parsed_url.scheme,
-            parsed_url.netloc,
-            parsed_url.path,
-            '',  # params (empty)
-            '',  # query (empty)
-            ''   # fragment (empty)
-        ))
+            try:
+                # Check if auto-rotation is needed (but don't rotate during active request)
+                if self._key_created_at and (time.time() - self._key_created_at) >= self._rotation_interval:
+                    logger.warning(
+                        f"DPoP keys are {time.time() - self._key_created_at:.0f}s old, "
+                        f"rotation recommended (interval: {self._rotation_interval}s)"
+                    )
 
-        if parsed_url.query or parsed_url.fragment:
-            logger.debug(
-                f"Stripped query/fragment from URL for DPoP htu claim: "
-                f"{http_url} -> {clean_url}"
-            )
+                # Normalize URL: strip query and fragment per RFC 9449 Section 4.2
+                # The htu claim MUST be the HTTP URI without query and fragment
+                clean_url = normalize_dpop_url(http_url)
 
-        # Generate claims
-        issued_time = int(time.time())
-        jti = str(uuid.uuid4())
+                # Use optional nonce (provided or stored)
+                effective_nonce = nonce or self._nonce
+                if effective_nonce:
+                    logger.debug("Added nonce to DPoP proof")
 
-        claims = {
-            'jti': jti,
-            'htm': http_method.upper(),  # Ensure uppercase
-            'htu': clean_url,  # Clean URL without query/fragment
-            'iat': issued_time
-        }
+                # Generate claims
+                issued_time = int(time.time())
+                jti = str(uuid.uuid4())
 
-        # Add optional nonce claim (use provided or stored)
-        effective_nonce = nonce or self._nonce
-        if effective_nonce:
-            claims['nonce'] = effective_nonce
-            logger.debug(f"Added nonce to DPoP proof: {effective_nonce[:8]}...")
+                claims = {
+                    'jti': jti,
+                    'htm': http_method.upper(),  # Ensure uppercase
+                    'htu': clean_url,  # Clean URL without query/fragment
+                    'iat': issued_time
+                }
 
-        # Add access token hash claim for API requests
-        if access_token:
-            # Use JWT._compute_ath to avoid duplication
-            from okta.jwt import JWT
-            claims['ath'] = JWT._compute_ath(access_token)
-            logger.debug("Added access token hash (ath) to DPoP proof")
+                # Add optional nonce claim (use provided or stored)
+                if effective_nonce:
+                    claims['nonce'] = effective_nonce
 
-        # Build headers with public JWK
-        headers = {
-            'typ': 'dpop+jwt',
-            'alg': 'RS256',
-            'jwk': self._public_jwk
-        }
+                # Add access token hash claim for API requests
+                if access_token:
+                    # Compute SHA-256 hash per RFC 9449 Section 4.1
+                    claims['ath'] = compute_ath(access_token)
+                    logger.debug("Added access token hash (ath) to DPoP proof")
 
-        # Sign JWT with private key
-        token = jwt_encode(
-            claims,
-            self._rsa_key.export_key(),
-            algorithm='RS256',
-            headers=headers
-        )
+                # Build headers with public JWK (per RFC 9449 Section 4.1)
+                # JWK contains only public components: kty, e, n
+                # Intentionally excludes private components: d, p, q, dp, dq, qi
+                headers = {
+                    'typ': 'dpop+jwt',
+                    'alg': 'RS256',
+                    'jwk': self._public_jwk
+                }
 
-        logger.debug(
-            f"Generated DPoP proof JWT: jti={jti}, htm={claims['htm']}, "
-            f"htu={claims['htu'][:50]}..., ath={'yes' if access_token else 'no'}, "
-            f"nonce={'yes' if effective_nonce else 'no'}"
-        )
+                # Sign JWT with private key using PyJWT (same library as rest of SDK)
+                token = jwt_encode(
+                    claims,
+                    self._rsa_key.export_key(),
+                    algorithm='RS256',
+                    headers=headers
+                )
 
-        return token
+                logger.debug(
+                    f"Generated DPoP proof JWT (length: {len(token)} chars) - "
+                    f"HTM: {claims['htm']}, HTU: {claims['htu'][:50]}..., "
+                    f"ath: {'yes' if access_token else 'no'}, nonce: {'yes' if effective_nonce else 'no'}"
+                )
 
-    def _should_rotate_keys(self) -> bool:
-        """
-        Check if keys should be rotated based on age.
+                return token
 
-        Returns:
-            True if keys are older than rotation interval, False otherwise
-        """
-        if not self._key_created_at:
-            return True
-        age = time.time() - self._key_created_at
-        return age >= self._rotation_interval
+            finally:
+                # Decrement active request counter
+                self._active_requests -= 1
 
     def _export_public_jwk(self) -> Dict[str, str]:
         """
@@ -241,6 +290,16 @@ class DPoPProofGenerator:
         public_jwk_json = jwk_obj.export_public()
         public_jwk = json.loads(public_jwk_json)
 
+        # Verify no private components leaked BEFORE cleaning (defense in depth)
+        # This check is critical for security and must not be bypassable with python -O
+        private_components = {'d', 'p', 'q', 'dp', 'dq', 'qi'}
+        leaked = private_components & set(public_jwk.keys())
+        if leaked:
+            raise ValueError(
+                f"SECURITY VIOLATION: Private key components {leaked} found in exported JWK. "
+                "This indicates a critical bug in JWK export logic."
+            )
+
         # Keep only required components: kty, n, e
         # Remove any optional fields (kid, use, key_ops, alg, etc.)
         cleaned_jwk = {
@@ -248,16 +307,6 @@ class DPoPProofGenerator:
             'n': public_jwk['n'],      # Modulus (public)
             'e': public_jwk['e']       # Exponent (public)
         }
-
-        # Verify no private components leaked (use proper exceptions, not assert)
-        # This check is critical for security and must not be bypassable with python -O
-        private_components = {'d', 'p', 'q', 'dp', 'dq', 'qi'}
-        leaked = private_components & set(cleaned_jwk.keys())
-        if leaked:
-            raise ValueError(
-                f"SECURITY VIOLATION: Private key components {leaked} must not be in JWK. "
-                "This indicates a critical bug in key export logic."
-            )
 
         logger.debug(
             f"Exported public JWK: kty={cleaned_jwk['kty']}, "
@@ -276,8 +325,19 @@ class DPoPProofGenerator:
         Args:
             nonce: Nonce value from dpop-nonce header
         """
-        self._nonce = nonce
-        logger.debug(f"Stored DPoP nonce: {nonce[:8] if nonce else 'None'}...")
+        with self._lock:
+            if nonce == "":
+                logger.warning("Empty string nonce provided, treating as None")
+                nonce = None
+            elif nonce is not None:
+                # Basic validation: nonce should be printable ASCII (per RFC 9449 Section 8)
+                if not nonce.isprintable() or len(nonce) < 8:
+                    logger.warning(
+                        f"Nonce validation warning: nonce length={len(nonce)}, "
+                        f"printable={nonce.isprintable()}. Storing anyway to allow server validation."
+                    )
+            self._nonce = nonce
+            # Security: Nonce values are not logged to prevent potential replay attack information leakage
 
     def get_nonce(self) -> Optional[str]:
         """
@@ -286,7 +346,8 @@ class DPoPProofGenerator:
         Returns:
             Current nonce value or None if not set
         """
-        return self._nonce
+        with self._lock:
+            return self._nonce
 
     def get_public_jwk(self) -> Dict[str, str]:
         """
@@ -295,7 +356,8 @@ class DPoPProofGenerator:
         Returns:
             Dict[str, str]: Copy of the public JWK (kty, n, e)
         """
-        return self._public_jwk.copy() if self._public_jwk else {}
+        with self._lock:
+            return self._public_jwk.copy() if self._public_jwk else {}
 
     def get_key_age(self) -> float:
         """
@@ -304,6 +366,7 @@ class DPoPProofGenerator:
         Returns:
             Age in seconds, or 0 if keys not yet generated
         """
-        if not self._key_created_at:
-            return 0.0
-        return time.time() - self._key_created_at
+        with self._lock:
+            if not self._key_created_at:
+                return 0.0
+            return time.time() - self._key_created_at

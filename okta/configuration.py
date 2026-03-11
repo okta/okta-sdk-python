@@ -71,6 +71,12 @@ class Configuration:
         :param ssl_ca_cert: str - the path to a file of concatenated CA certificates
           in PEM format.
 
+        warning::
+            **Thread Safety**: Configuration objects should be treated as immutable
+            after initialization. Modifying configuration attributes after passing
+            to Client/ApiClient may result in undefined behavior in multi-threaded
+            or async environments.
+
         :Example:
 
         API Key Authentication Example.
@@ -109,6 +115,9 @@ class Configuration:
         server_operation_variables=None,
         ssl_ca_cert=None,
         authorization_mode=None,
+        dpop_enabled=False,
+        dpop_private_key=None,
+        dpop_key_rotation_interval=86400,
     ) -> None:
         """Constructor"""
         self._base_path = "https://subdomain.okta.com" if host is None else host
@@ -147,6 +156,16 @@ class Configuration:
         """
         self.access_token = access_token
         """Access token
+        """
+        # DPoP Settings
+        self.dpop_enabled = dpop_enabled
+        """Enable DPoP (Demonstrating Proof-of-Possession) per RFC 9449
+        """
+        self.dpop_private_key = dpop_private_key
+        """Private key for DPoP proof generation
+        """
+        self.dpop_key_rotation_interval = dpop_key_rotation_interval
+        """Key rotation interval in seconds (default: 86400 = 24 hours)
         """
         self.logger = {}
         """Logging Settings

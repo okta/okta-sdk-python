@@ -14,6 +14,7 @@ import logging
 import time
 from http import HTTPStatus
 
+from okta.constants import DPOP_USER_AGENT_EXTENSION
 from okta.error_messages import ERROR_MESSAGE_429_MISSING_DATE_X_RESET
 from okta.http_client import HTTPClient
 from okta.oauth import OAuth
@@ -153,20 +154,42 @@ class RequestExecutor:
 
         # OAuth
         if self._authorization_mode == "PrivateKey" and not oauth:
-            # check if access token exists and get token type
+            # check if access token exists (cached as tuple: (token, token_type))
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
-                access_token = self._cache.get("OKTA_ACCESS_TOKEN")
-                token_type = self._cache.get("OKTA_TOKEN_TYPE") if self._cache.contains("OKTA_TOKEN_TYPE") else "Bearer"
+                cached_value = self._cache.get("OKTA_ACCESS_TOKEN")
+                # Handle both old (string) and new (tuple) cache format for backward compatibility
+                if isinstance(cached_value, tuple) and len(cached_value) == 2:
+                    access_token, token_type = cached_value
+                else:
+                    # Legacy format: just the token string
+                    # If DPoP is enabled, we cannot safely assume this is a Bearer token
+                    # Invalidate cache and fetch fresh token to avoid auth failures
+                    if hasattr(self, '_oauth') and self._oauth.is_dpop_enabled():
+                        logger.warning(
+                            "Cached token found in legacy format (string) with DPoP enabled. "
+                            "Invalidating cache to fetch fresh DPoP token."
+                        )
+                        self._cache.delete("OKTA_ACCESS_TOKEN")
+                        # Fall through to token generation below
+                        access_token = None
+                        token_type = "Bearer"
+                    else:
+                        # Non-DPoP mode: safe to assume Bearer
+                        access_token = cached_value
+                        token_type = "Bearer"
             else:
-                # if not, make one
+                access_token = None
+                token_type = "Bearer"
+
+            # Generate token if not cached or cache was invalidated
+            if access_token is None:
                 # Generate using private key provided
-                access_token, token_type, error = await self._oauth.get_access_token()
+                access_token, token_type, error = await self._oauth.get_oauth_token()
                 # return error if problem retrieving token
                 if error:
                     return (None, error)
-                # Cache token and type
-                self._cache.add("OKTA_ACCESS_TOKEN", access_token)
-                self._cache.add("OKTA_TOKEN_TYPE", token_type)
+                # Cache token and type as atomic tuple to prevent cache inconsistency
+                self._cache.add("OKTA_ACCESS_TOKEN", (access_token, token_type))
 
             # Add Authorization header with token type
             headers.update({"Authorization": f"{token_type} {access_token}"})
@@ -186,7 +209,7 @@ class RequestExecutor:
                     # Add DPoP header and user agent extension
                     headers.update({
                         "DPoP": dpop_proof,
-                        "x-okta-user-agent-extended": "isDPoP:true"
+                        "x-okta-user-agent-extended": DPOP_USER_AGENT_EXTENSION
                     })
 
                     logger.debug(f"Added DPoP proof to {method} request to {url[:50]}...")
@@ -307,17 +330,20 @@ class RequestExecutor:
         # Handle DPoP nonce challenges (401 or 400 with dpop-nonce header)
         if (self._authorization_mode == "PrivateKey" and
             hasattr(self, '_oauth') and
-            self._oauth._dpop_enabled and
+            self._oauth.is_dpop_enabled() and
                 res_details.status in (400, 401)):
 
+            # Note: aiohttp.ClientResponse.headers is CIMultiDictProxy (case-insensitive per RFC 9110)
             dpop_nonce = headers.get('dpop-nonce')
 
             if dpop_nonce:
-                logger.info(
-                    f"Received DPoP nonce in {res_details.status} response: {dpop_nonce[:8]}... "
-                    "Updating nonce for future requests."
+                logger.debug(
+                    f"Received DPoP nonce in {res_details.status} response "
+                    "- updating for future requests"
                 )
-                self._oauth._dpop_generator.set_nonce(dpop_nonce)
+                dpop_generator = self._oauth.get_dpop_generator()
+                if dpop_generator:
+                    dpop_generator.set_nonce(dpop_nonce)
 
                 # Log helpful error message if this is a DPoP-specific error
                 # Parse response body to check for error code

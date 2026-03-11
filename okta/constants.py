@@ -30,3 +30,6 @@ SWA_APP_NAME = "template_swa"
 SWA3_APP_NAME = "template_swa3field"
 
 MIN_DPOP_KEY_ROTATION_SECONDS = 3600
+
+# DPoP (Demonstrating Proof-of-Possession) constants
+DPOP_USER_AGENT_EXTENSION = "isDPoP:true"

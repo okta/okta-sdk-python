@@ -237,6 +237,9 @@ class ConfigValidator:
         """
         Validate DPoP-specific configuration.
 
+        Note: This method is only called when authorizationMode is 'PrivateKey',
+        so no need to re-check the auth mode here.
+
         Args:
             client: Client configuration dict
 
@@ -248,15 +251,6 @@ class ConfigValidator:
 
         if not client.get('dpopEnabled'):
             return errors  # DPoP not enabled, nothing to validate
-
-        # DPoP requires PrivateKey authorization mode (already checked above)
-        auth_mode = client.get('authorizationMode')
-        if auth_mode != 'PrivateKey':
-            errors.append(
-                f"DPoP authentication requires authorizationMode='PrivateKey', "
-                f"but got '{auth_mode}'. "
-                "Update your configuration to use PrivateKey mode with DPoP."
-            )
 
         # Validate key rotation interval
         rotation_interval = client.get('dpopKeyRotationInterval', 86400)
