@@ -49,6 +49,8 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 
 The latest release can always be found on the [releases page][github-releases].
 
+**NOTE:** We have implemented DPoP and the support is now available in the latest version of the SDK.
+
 ## Need help?
 
 If you run into problems using the SDK, you can:

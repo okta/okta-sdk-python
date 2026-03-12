@@ -73,8 +73,14 @@ def before_record_request(request):
     if "authorization" in request.headers:
         if request.headers["authorization"].startswith("SSWS"):
             request.headers["authorization"] = "SSWS myAPIToken"
-        else:
+        elif request.headers["authorization"].startswith("Bearer"):
             request.headers["authorization"] = "Bearer myOAuthToken"
+        elif request.headers["authorization"].startswith("DPoP"):
+            request.headers["authorization"] = "DPoP myDPoPToken"
+
+    # Sanitize DPoP proof header (contains ephemeral keys and signatures)
+    if "dpop" in request.headers:
+        request.headers["dpop"] = "sanitized_dpop_proof_jwt"
 
     return request
 
@@ -99,6 +105,10 @@ def before_record_response(response):
     if "link" in response["headers"]:
         current = response["headers"]["link"]
         response["headers"]["link"] = re.sub(URL_REGEX, TEST_OKTA_URL, current)
+
+    # Sanitize DPoP nonce (server-provided nonce that changes each time)
+    if "dpop-nonce" in response["headers"]:
+        response["headers"]["dpop-nonce"] = "sanitized_dpop_nonce"
 
     return response
 
