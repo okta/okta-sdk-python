@@ -10,7 +10,7 @@
 
 import logging
 
-from okta.constants import FINDING_OKTA_DOMAIN, REPO_URL, MIN_DPOP_KEY_ROTATION_SECONDS
+from okta.constants import FINDING_OKTA_DOMAIN, REPO_URL, MIN_DPOP_KEY_ROTATION_SECONDS, MAX_DPOP_KEY_ROTATION_SECONDS
 from okta.error_messages import (
     ERROR_MESSAGE_ORG_URL_MISSING,
     ERROR_MESSAGE_API_TOKEN_DEFAULT,
@@ -266,7 +266,15 @@ class ConfigValidator:
                 f"but got {rotation_interval} seconds. "
                 "Shorter intervals may cause performance issues."
             )
-        elif rotation_interval > 604800:  # Maximum 7 days (recommendation)
+        elif rotation_interval > MAX_DPOP_KEY_ROTATION_SECONDS:  # Maximum 90 days
+            errors.append(
+                f"dpopKeyRotationInterval must be at most {MAX_DPOP_KEY_ROTATION_SECONDS} seconds "
+                f"({MAX_DPOP_KEY_ROTATION_SECONDS // 86400} days), "
+                f"but got {rotation_interval} seconds ({rotation_interval // 86400} days). "
+                "Excessive rotation intervals defeat the security purpose of DPoP. "
+                "Recommended: 24-48 hours for production use."
+            )
+        elif rotation_interval > 7 * 24 * 3600:  # Warning for > 7 days
             # This is a warning, not an error
             logger.warning(
                 f"dpopKeyRotationInterval is very long ({rotation_interval} seconds, "

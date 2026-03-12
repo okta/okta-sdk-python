@@ -1,11 +1,7 @@
 """
 Unit tests for DPoP (Demonstrating Proof-of-Possession) implementation.
 
-Tests verify:
-- Fix #1: URL parsing (strips query/fragment)
-- Fix #2: JWK export (public components only)
-- Fix #5: Key rotation safety (active request tracking)
-- RFC 9449 compliance
+See tests/DPOP_TESTING.md for detailed test documentation and coverage matrix.
 """
 
 import time

@@ -21,6 +21,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 import json
+import logging
 import os
 import time
 import uuid
@@ -32,6 +33,8 @@ from jwcrypto.jwk import JWK, InvalidJWKType
 from jwt import encode as jwt_encode
 
 from okta.utils import compute_ath
+
+logger = logging.getLogger("okta-sdk-python")
 
 
 class JWT:
@@ -170,8 +173,16 @@ class JWT:
                 if "kid" in private_key_dict:
                     headers["kid"] = private_key_dict["kid"]
             except json.JSONDecodeError:
-                if "kid" in headers:
-                    del headers["kid"]
+                # Private key is in PEM format (not JSON JWK), which is valid
+                # kid can only be extracted from JWK format or passed explicitly
+                # This is expected behavior - no error, just debug info
+                logger.debug(
+                    "Private key is PEM format (not JSON JWK), cannot auto-extract kid. "
+                    "If kid is required by your authorization server, pass it explicitly "
+                    "in the config or use JWK format with kid field."
+                )
+                # Note: Don't delete kid if it was already set from another source
+                # (e.g., from the kid parameter or from dict-based private_key)
 
         token = jwt_encode(claims, my_pem.export_key(), JWT.HASH_ALGORITHM, headers)
         return token

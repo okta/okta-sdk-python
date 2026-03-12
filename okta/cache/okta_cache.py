@@ -20,6 +20,22 @@ class OktaCache(Cache):
     """
     This is a base class implementing a Cache using TTL and TTI.
     Implementing the okta.cache.cache.Cache abstract class.
+
+    THREAD SAFETY WARNING:
+    ---------------------
+    This cache implementation is NOT thread-safe and should only be used in
+    single-threaded or single-coroutine contexts. In concurrent environments
+    (e.g., asyncio with multiple coroutines accessing the same cache instance),
+    race conditions may occur during cache operations.
+
+    For multi-threaded applications, consider:
+    1. Using threading.local() to create per-thread cache instances
+    2. Implementing a thread-safe cache wrapper with locks
+    3. Using an external cache (Redis, Memcached) for distributed scenarios
+
+    The default SDK usage pattern (one client instance per thread/coroutine)
+    is safe. Issues only arise when sharing a single client across multiple
+    concurrent execution contexts.
     """
 
     def __init__(self, ttl, tti):

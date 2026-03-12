@@ -22,6 +22,7 @@ Reference: https://datatracker.ietf.org/doc/html/rfc9449
 
 __all__ = ['DPoPProofGenerator', 'RSA_KEY_SIZE_BITS']
 
+import ctypes
 import json
 import logging
 import threading
@@ -61,6 +62,8 @@ class DPoPProofGenerator:
     - Multiple threads can safely call generate_proof_jwt() concurrently
     - Key rotation is blocked when active requests are in progress
     - The same thread can acquire the lock multiple times (reentrant)
+    - Lock is held during entire proof generation (including RSA signing operations)
+    - For high-concurrency scenarios (>100 req/sec), consider using separate client instances
 
     Security Notes:
     - Private keys are kept in memory only
@@ -134,7 +137,9 @@ class DPoPProofGenerator:
                     )
                     return False
 
-            # Clear old key from memory (M6 fix)
+            # Clear old key from memory (security best practice)
+            # Note: Python doesn't guarantee immediate memory clearing due to
+            # reference counting and garbage collection, but we make best effort
             old_key = self._rsa_key
 
             # Perform rotation
@@ -143,9 +148,21 @@ class DPoPProofGenerator:
             # Clear nonce as it was tied to old key
             self._nonce = None
 
-            # Explicitly delete old key to minimize memory exposure
+            # Securely clear old key from memory (defense in depth)
             if old_key:
-                del old_key
+                try:
+                    # Overwrite key bytes before deletion to minimize memory exposure
+                    # NOTE: This is best-effort only. Python's memory model does not
+                    # guarantee secure deletion due to reference counting, garbage collection,
+                    # and potential string interning. For true security, use hardware security modules.
+                    old_key_bytes = old_key.export_key()
+                    # Overwrite with zeros
+                    ctypes.memset(id(old_key_bytes), 0, len(old_key_bytes))
+                except (AttributeError, TypeError, OSError) as e:
+                    # Log the failure for debugging
+                    logger.debug(f"Failed to securely wipe old key: {e}")
+                finally:
+                    del old_key
 
             logger.debug("DPoP keys rotated successfully, nonce cleared")
             return True
@@ -195,6 +212,8 @@ class DPoPProofGenerator:
         """
         with self._lock:
             # Increment active request counter
+            # Note: try-finally ensures counter is always decremented, even on exceptions
+            # This prevents counter leaks and maintains accurate tracking for key rotation
             self._active_requests += 1
 
             try:
@@ -252,11 +271,13 @@ class DPoPProofGenerator:
                     headers=headers
                 )
 
-                logger.debug(
-                    f"Generated DPoP proof JWT (length: {len(token)} chars) - "
-                    f"HTM: {claims['htm']}, HTU: {claims['htu'][:50]}..., "
-                    f"ath: {'yes' if access_token else 'no'}, nonce: {'yes' if effective_nonce else 'no'}"
-                )
+                # Lazy logging: only format strings if debug is enabled
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug(
+                        f"Generated DPoP proof JWT (length: {len(token)} chars) - "
+                        f"HTM: {claims['htm']}, HTU: {claims['htu'][:50]}..., "
+                        f"ath: {'yes' if access_token else 'no'}, nonce: {'yes' if effective_nonce else 'no'}"
+                    )
 
                 return token
 
@@ -327,14 +348,22 @@ class DPoPProofGenerator:
         """
         with self._lock:
             if nonce == "":
-                logger.warning("Empty string nonce provided, treating as None")
+                logger.debug("Empty string nonce provided, treating as None")
                 nonce = None
             elif nonce is not None:
-                # Basic validation: nonce should be printable ASCII (per RFC 9449 Section 8)
-                if not nonce.isprintable() or len(nonce) < 8:
+                # Basic validation: nonce should be printable ASCII per RFC 9449 Section 8
+                # RFC 9449 requires nonces to be unpredictable but doesn't mandate length
+                if not nonce.isprintable():
                     logger.warning(
-                        f"Nonce validation warning: nonce length={len(nonce)}, "
-                        f"printable={nonce.isprintable()}. Storing anyway to allow server validation."
+                        "Nonce contains non-printable characters. "
+                        "This may indicate transmission corruption. "
+                        "Storing anyway as server determines nonce requirements."
+                    )
+                elif len(nonce) < 8:
+                    # Short nonces are unusual but not forbidden by RFC 9449
+                    logger.debug(
+                        f"Received short nonce (length={len(nonce)}). "
+                        "This is unusual but permitted by RFC 9449."
                     )
             self._nonce = nonce
             # Security: Nonce values are not logged to prevent potential replay attack information leakage

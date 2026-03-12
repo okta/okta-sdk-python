@@ -16,10 +16,11 @@ from http import HTTPStatus
 
 from okta.constants import DPOP_USER_AGENT_EXTENSION
 from okta.error_messages import ERROR_MESSAGE_429_MISSING_DATE_X_RESET
+from okta.errors.dpop_errors import get_dpop_error_message, is_dpop_error
 from okta.http_client import HTTPClient
 from okta.oauth import OAuth
 from okta.user_agent import UserAgent
-from okta.utils import convert_date_time_to_seconds
+from okta.utils import convert_date_time_to_seconds, truncate_url
 
 logger = logging.getLogger("okta-sdk-python")
 
@@ -70,6 +71,9 @@ class RequestExecutor:
             ).get_user_agent_string(),
             "Accept": "application/json",
         }
+
+        # Track if using OAuth mode (avoids hasattr checks later)
+        self._is_oauth_mode = self._authorization_mode == "PrivateKey"
 
         # SSWS or Bearer header
         token_type = config["client"]["authorizationMode"]
@@ -153,7 +157,7 @@ class RequestExecutor:
             url = self._config["client"]["orgUrl"] + url
 
         # OAuth
-        if self._authorization_mode == "PrivateKey" and not oauth:
+        if self._is_oauth_mode and not oauth:
             # check if access token exists (cached as tuple: (token, token_type))
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
                 cached_value = self._cache.get("OKTA_ACCESS_TOKEN")
@@ -164,7 +168,7 @@ class RequestExecutor:
                     # Legacy format: just the token string
                     # If DPoP is enabled, we cannot safely assume this is a Bearer token
                     # Invalidate cache and fetch fresh token to avoid auth failures
-                    if hasattr(self, '_oauth') and self._oauth.is_dpop_enabled():
+                    if self._oauth.is_dpop_enabled():
                         logger.warning(
                             "Cached token found in legacy format (string) with DPoP enabled. "
                             "Invalidating cache to fetch fresh DPoP token."
@@ -184,6 +188,9 @@ class RequestExecutor:
             # Generate token if not cached or cache was invalidated
             if access_token is None:
                 # Generate using private key provided
+                # Note: Token expiry and renewal logic is handled internally by
+                # OAuth.get_oauth_token() - we trust the OAuth class to manage
+                # token lifecycle and only request new tokens when needed
                 access_token, token_type, error = await self._oauth.get_oauth_token()
                 # return error if problem retrieving token
                 if error:
@@ -212,7 +219,7 @@ class RequestExecutor:
                         "x-okta-user-agent-extended": DPOP_USER_AGENT_EXTENSION
                     })
 
-                    logger.debug(f"Added DPoP proof to {method} request to {url[:50]}...")
+                    logger.debug(f"Added DPoP proof to {method} request to {truncate_url(url)}")
 
         # Add content type header if request body exists
         if body:
@@ -250,7 +257,7 @@ class RequestExecutor:
 
         return response, response_body, error
 
-    async def fire_request(self, request):
+    async def fire_request(self, request: dict):
         """
         Send Request using HTTP Client
 
@@ -258,8 +265,11 @@ class RequestExecutor:
             request (dict): HTTP request in dictionary format
 
         Returns:
-            aiohttp.RequestInfo, aiohttp.ClientResponse, json, Exception: Tuple
-            of request, response object, response json, and error if raised
+            Tuple: (request_info, response, response_body, error)
+                - request_info: aiohttp.RequestInfo or None
+                - response: aiohttp.ClientResponse or None
+                - response_body: Response body as string
+                - error: Exception if raised, None otherwise
         """
         # Retrieve URL from request and generate cache key
         url = request["url"]
@@ -328,8 +338,7 @@ class RequestExecutor:
         headers = res_details.headers
 
         # Handle DPoP nonce challenges (401 or 400 with dpop-nonce header)
-        if (self._authorization_mode == "PrivateKey" and
-            hasattr(self, '_oauth') and
+        if (self._is_oauth_mode and
             self._oauth.is_dpop_enabled() and
                 res_details.status in (400, 401)):
 
@@ -351,7 +360,6 @@ class RequestExecutor:
                     body = json.loads(resp_body) if isinstance(resp_body, str) else resp_body
                     error_code = body.get('error', '') if isinstance(body, dict) else ''
                     if error_code:
-                        from okta.errors.dpop_errors import get_dpop_error_message, is_dpop_error
 
                         if is_dpop_error(error_code):
                             logger.error(
@@ -366,12 +374,10 @@ class RequestExecutor:
                 date_time = convert_date_time_to_seconds(date_time)
 
             # Get X-Rate-Limit-Reset header
+            # Note: aiohttp.ClientResponse.headers is CIMultiDictProxy (case-insensitive per RFC 9110)
+            # so we don't need to check both uppercase and lowercase variants
             retry_limit_reset_headers = list(
                 map(float, headers.getall("X-Rate-Limit-Reset", []))
-            )
-            # header might be in lowercase, so check this too
-            retry_limit_reset_headers.extend(
-                list(map(float, headers.getall("x-rate-limit-reset", [])))
             )
             retry_limit_reset = (
                 min(retry_limit_reset_headers)
@@ -383,10 +389,6 @@ class RequestExecutor:
             retry_limit_limit_headers = list(
                 map(float, headers.getall("X-Rate-Limit-Limit", []))
             )
-            # header might be in lowercase, so check this too
-            retry_limit_limit_headers.extend(
-                list(map(float, headers.getall("x-rate-limit-limit", [])))
-            )
             retry_limit_limit = (
                 min(retry_limit_limit_headers)
                 if len(retry_limit_limit_headers) > 0
@@ -396,10 +398,6 @@ class RequestExecutor:
             # Get X-Rate-Limit-Remaining Header
             retry_limit_remaining_headers = list(
                 map(float, headers.getall("X-Rate-Limit-Remaining", []))
-            )
-            # header might be in lowercase, so check this too
-            retry_limit_remaining_headers.extend(
-                list(map(float, headers.getall("x-rate-limit-remaining", [])))
             )
             retry_limit_remaining = (
                 min(retry_limit_remaining_headers)
