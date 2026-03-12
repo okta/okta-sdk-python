@@ -144,7 +144,11 @@ class ServiceAccount(BaseModel):
         """Returns the discriminator value (object type) of the data"""
         discriminator_value = obj[cls.__discriminator_property_name]
         if discriminator_value:
-            return cls.__discriminator_value_class_map.get(discriminator_value)
+            mapped_class = cls.__discriminator_value_class_map.get(discriminator_value)
+            if mapped_class:
+                return mapped_class
+            # If not in mapping, return base class (will be handled by post-processing for Application)
+            return "ServiceAccount"
         else:
             return None
 
