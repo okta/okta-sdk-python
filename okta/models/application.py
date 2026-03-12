@@ -52,6 +52,7 @@ if TYPE_CHECKING:
     from okta.models.browser_plugin_application import BrowserPluginApplication
     from okta.models.application import Application
     from okta.models.open_id_connect_application import OpenIdConnectApplication
+    from okta.models.application import Application
     from okta.models.saml11_application import Saml11Application
     from okta.models.saml_application import SamlApplication
     from okta.models.secure_password_store_application import (
@@ -108,6 +109,8 @@ class Application(BaseModel):   # noqa: F811
     visibility: Optional[ApplicationVisibility] = None
     embedded: Optional[ApplicationEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[ApplicationLinks] = Field(default=None, alias="_links")
+    # Store the original sign-on mode value when it's not in the enum
+    _original_sign_on_mode: Optional[str] = None
     __properties: ClassVar[List[str]] = [
         "accessibility",
         "created",
@@ -212,6 +215,7 @@ class Application(BaseModel):   # noqa: F811
         "BROWSER_PLUGIN": "BrowserPluginApplication",
         "MFA_AS_SERVICE": "Application",
         "OPENID_CONNECT": "OpenIdConnectApplication",
+        "OTHER": "Application",
         "SAML_1_1": "Saml11Application",
         "SAML_2_0": "SamlApplication",
         "SECURE_PASSWORD_STORE": "SecurePasswordStoreApplication",
@@ -223,7 +227,11 @@ class Application(BaseModel):   # noqa: F811
         """Returns the discriminator value (object type) of the data"""
         discriminator_value = obj[cls.__discriminator_property_name]
         if discriminator_value:
-            return cls.__discriminator_value_class_map.get(discriminator_value)
+            mapped_class = cls.__discriminator_value_class_map.get(discriminator_value)
+            if mapped_class:
+                return mapped_class
+            # If not in mapping, return base class (will be handled by post-processing for Application)
+            return "Application"
         else:
             return None
 
@@ -245,6 +253,7 @@ class Application(BaseModel):   # noqa: F811
             BrowserPluginApplication,
             Application,
             OpenIdConnectApplication,
+            Application,
             Saml11Application,
             SamlApplication,
             SecurePasswordStoreApplication,
@@ -333,6 +342,9 @@ class Application(BaseModel):   # noqa: F811
             else:
                 _dict["_links"] = self.links
 
+        # If we have an original sign-on mode (was unknown), return it instead of OTHER
+        if self._original_sign_on_mode:
+            _dict["signOnMode"] = self._original_sign_on_mode
         return _dict
 
     @classmethod
@@ -344,6 +356,7 @@ class Application(BaseModel):   # noqa: F811
             BrowserPluginApplication,
             Application,
             OpenIdConnectApplication,
+            Application,
             Saml11Application,
             SamlApplication,
             SecurePasswordStoreApplication,
@@ -378,6 +391,20 @@ class Application(BaseModel):   # noqa: F811
         if object_type == "Application":
             # Check if the discriminator maps to the same class to avoid infinite recursion
             if object_type == cls.__name__:
+                # Handle unknown sign-on modes
+                original_discriminator = obj.get(cls.__discriminator_property_name)
+                if (
+                    original_discriminator
+                    and original_discriminator
+                    not in cls.__discriminator_value_class_map
+                ):
+                    # Store the original value and replace with OTHER
+                    obj_copy = obj.copy()
+                    # Note: This assumes an OTHER value exists in the discriminator enum
+                    obj_copy[cls.__discriminator_property_name] = "OTHER"
+                    instance = cls.model_validate(obj_copy)
+                    instance._original_sign_on_mode = original_discriminator
+                    return instance
                 return cls.model_validate(obj)
             return models.Application.from_dict(obj)
         if object_type == "OpenIdConnectApplication":
@@ -385,6 +412,11 @@ class Application(BaseModel):   # noqa: F811
             if object_type == cls.__name__:
                 return cls.model_validate(obj)
             return models.OpenIdConnectApplication.from_dict(obj)
+        if object_type == "Application":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
+            return models.Application.from_dict(obj)
         if object_type == "Saml11Application":
             # Check if the discriminator maps to the same class to avoid infinite recursion
             if object_type == cls.__name__:

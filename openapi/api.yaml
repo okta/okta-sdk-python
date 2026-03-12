@@ -59103,6 +59103,7 @@ components:
           maxLength: 1024
           example: test team id
     Application:
+      x-handle-unknown-discriminator: true
       type: object
       properties:
         accessibility:
@@ -59272,6 +59273,7 @@ components:
           SECURE_PASSWORD_STORE: '#/components/schemas/SecurePasswordStoreApplication'
           WS_FEDERATION: '#/components/schemas/WsFederationApplication'
           MFA_AS_SERVICE: '#/components/schemas/Application'
+          OTHER: '#/components/schemas/Application'
     ApplicationAccessibility:
       description: Specifies access settings for the app
       type: object
@@ -59735,6 +59737,7 @@ components:
         | SECURE_PASSWORD_STORE | Secure Web Authentication (SWA) with POST (plugin not required) |
         | WS_FEDERATION | Federated Authentication with WS-Federation Passive Requestor Profile |
         | MFA_AS_SERVICE | Application to use Okta's MFA as a service for RDP |
+        | OTHER | Unknown Sign on mode |
 
         Select the `signOnMode` for your custom app:
       type: string
@@ -59749,6 +59752,7 @@ components:
         - SECURE_PASSWORD_STORE
         - WS_FEDERATION
         - MFA_AS_SERVICE
+        - OTHER
     ApplicationType:
       description: 'The type of client application. Default value: `web`.'
       type: string
