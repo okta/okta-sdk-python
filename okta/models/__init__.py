@@ -41,7 +41,6 @@ _MODEL_GROUPS = {
         'BasicAuthApplication',
         'BookmarkApplication',
         'BrowserPluginApplication',
-        'Application'
         'OpenIdConnectApplication',
         'Saml11Application',
         'SamlApplication',

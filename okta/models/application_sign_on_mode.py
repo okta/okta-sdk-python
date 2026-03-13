@@ -53,7 +53,6 @@ class ApplicationSignOnMode(str, Enum):
     SECURE_PASSWORD_STORE = "SECURE_PASSWORD_STORE"
     WS_FEDERATION = "WS_FEDERATION"
     MFA_AS_SERVICE = "MFA_AS_SERVICE"
-    OTHER = "OTHER"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
