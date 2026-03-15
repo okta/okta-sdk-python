@@ -64461,6 +64461,7 @@ components:
         - IN_PROGRESS
         - NOT_STARTED
         - VERIFIED
+        - FAILED_TO_VERIFY
     Duration:
       type: object
       properties:
