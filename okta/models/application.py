@@ -49,7 +49,6 @@ if TYPE_CHECKING:
     from okta.models.basic_auth_application import BasicAuthApplication
     from okta.models.bookmark_application import BookmarkApplication
     from okta.models.browser_plugin_application import BrowserPluginApplication
-    from okta.models.application import Application
     from okta.models.open_id_connect_application import OpenIdConnectApplication
     from okta.models.saml11_application import Saml11Application
     from okta.models.saml_application import SamlApplication
@@ -60,7 +59,7 @@ if TYPE_CHECKING:
     from okta.models.active_directory_application import ActiveDirectoryApplication
 
 
-class Application(BaseModel):   # noqa: F811
+class Application(BaseModel):
     """
     Application
     """  # noqa: E501
@@ -212,7 +211,6 @@ class Application(BaseModel):   # noqa: F811
         "BASIC_AUTH": "BasicAuthApplication",
         "BOOKMARK": "BookmarkApplication",
         "BROWSER_PLUGIN": "BrowserPluginApplication",
-        "MFA_AS_SERVICE": "Application",
         "OPENID_CONNECT": "OpenIdConnectApplication",
         "SAML_1_1": "Saml11Application",
         "SAML_2_0": "SamlApplication",
@@ -246,7 +244,6 @@ class Application(BaseModel):   # noqa: F811
             BasicAuthApplication,
             BookmarkApplication,
             BrowserPluginApplication,
-            Application,
             OpenIdConnectApplication,
             Saml11Application,
             SamlApplication,
@@ -284,7 +281,6 @@ class Application(BaseModel):   # noqa: F811
             BasicAuthApplication,
             BookmarkApplication,
             BrowserPluginApplication,
-            Application,
             OpenIdConnectApplication,
             Saml11Application,
             SamlApplication,

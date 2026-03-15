@@ -1,4 +1,16 @@
+# The Okta software accompanied by this notice is provided pursuant to the following terms:
+# Copyright © 2025-Present, Okta, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
+# You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and limitations under the License.
+# coding: utf-8
+
 {{>partial_header}}
+
+import logging
 
 import json
 from typing import Dict, Any, Optional
@@ -15,6 +27,9 @@ from {{packageName}}.models.saml11_application import Saml11Application
 from {{packageName}}.models.saml_application import SamlApplication
 from {{packageName}}.models.secure_password_store_application import SecurePasswordStoreApplication
 from {{packageName}}.models.ws_federation_application import WsFederationApplication
+
+logger = logging.getLogger(__name__)
+
 
 class ApplicationJsonConverter:
     """
@@ -48,7 +63,6 @@ class ApplicationJsonConverter:
         "SAML_2_0",
         "SECURE_PASSWORD_STORE",
         "WS_FEDERATION",
-        "MFA_AS_SERVICE",  # Maps to base Application class
     }
 
     SIGN_ON_MODE_MAPPING = {
@@ -61,7 +75,6 @@ class ApplicationJsonConverter:
         "SAML_2_0": SamlApplication,
         "SECURE_PASSWORD_STORE": SecurePasswordStoreApplication,
         "WS_FEDERATION": WsFederationApplication,
-        "MFA_AS_SERVICE": Application,  # Explicitly map to base Application
     }
 
     @classmethod
@@ -93,10 +106,12 @@ class ApplicationJsonConverter:
         elif str(sign_on_mode).upper() in cls.KNOWN_SIGN_ON_MODES:
             # Known sign-on mode - map to specific class (or base Application for MFA_AS_SERVICE)
             target_type = cls.SIGN_ON_MODE_MAPPING[str(sign_on_mode).upper()]
-            obj_copy["signOnMode"] = str(sign_on_mode).upper()  # Normalize for validation
+            obj_copy["signOnMode"] = str(
+                sign_on_mode
+            ).upper()  # Normalize for validation
         else:
             # Unknown sign-on mode - preserve original value and set to None for validation
-            logger.info(
+            logger.debug(
                 f"Unknown signOnMode '{sign_on_mode}' encountered, "
                 f"routing to base Application class"
             )
@@ -109,7 +124,9 @@ class ApplicationJsonConverter:
         instance = target_type.model_validate(obj_copy)
 
         # Validate consistency (in dev/test mode)
-        if isinstance(instance, Application) and not isinstance(instance, type(instance).__bases__[0]):
+        if isinstance(instance, Application) and not isinstance(
+            instance, type(instance).__bases__[0]
+        ):
             # Log warning if subclass instantiated but fields seem inconsistent
             logger.debug(f"Routed {sign_on_mode} to {type(instance).__name__}")
 
@@ -117,9 +134,11 @@ class ApplicationJsonConverter:
         # For known modes, set to None to indicate no preservation needed
         if original_sign_on_mode is not None:
             # Use object.__setattr__ to bypass Pydantic's validation
-            object.__setattr__(instance, '_original_sign_on_mode', original_sign_on_mode)
+            object.__setattr__(
+                instance, "_original_sign_on_mode", original_sign_on_mode
+            )
         else:
-            object.__setattr__(instance, '_original_sign_on_mode', None)
+            object.__setattr__(instance, "_original_sign_on_mode", None)
 
         return instance
 
@@ -133,89 +152,53 @@ class ApplicationJsonConverter:
         if value is None:
             return None
 
-        # Use Pydantic's model_dump to serialize the instance
-        # This avoids calling to_dict() which would recurse back to this converter
         # Derive from model configuration
         excluded_fields = {
-            field_name for field_name, field_info in Application.model_fields.items()
-            if field_info.exclude or (field_info.json_schema_extra and field_info.json_schema_extra.get('readOnly'))
+            field_name
+            for field_name, field_info in Application.model_fields.items()
+            if field_info.exclude
+            or (
+                field_info.json_schema_extra
+                and field_info.json_schema_extra.get("readOnly")
+            )
         }
 
         _dict = value.model_dump(
             by_alias=True,
             exclude=excluded_fields,
             exclude_none=True,
-            mode='json',  # Serialize enums to their values
+            mode="json",  # Serialize enums to their values
         )
 
         # Restore original unknown signOnMode if it was preserved
-        if hasattr(value, '_original_sign_on_mode') and value._original_sign_on_mode is not None:
+        if (
+            hasattr(value, "_original_sign_on_mode")
+            and value._original_sign_on_mode is not None
+        ):
             _dict["signOnMode"] = value._original_sign_on_mode
         # Ensure signOnMode is serialized as string (in case mode='json' didn't handle it)
-        elif "signOnMode" in _dict and hasattr(_dict["signOnMode"], 'value'):
+        elif "signOnMode" in _dict and hasattr(_dict["signOnMode"], "value"):
             _dict["signOnMode"] = _dict["signOnMode"].value
 
-        # Handle nested model serialization manually
-        # (Pydantic will handle most of this, but we need to ensure proper to_dict() calls for nested models)
-        if value.accessibility:
-            if not isinstance(value.accessibility, dict):
-                _dict["accessibility"] = value.accessibility.to_dict()
-            else:
-                _dict["accessibility"] = value.accessibility
+        # NOTE: Pydantic's model_dump(mode='json') handles most nested BaseModel serialization.
+        # However, subclass-specific fields (settings, credentials, name) need manual handling
+        # because they're not in the base Application schema and model_dump doesn't call
+        # their custom to_dict() methods which may have additional logic.
 
-        if value.express_configuration:
-            if not isinstance(value.express_configuration, dict):
-                _dict["expressConfiguration"] = value.express_configuration.to_dict()
-            else:
-                _dict["expressConfiguration"] = value.express_configuration
-
-        if value.licensing:
-            if not isinstance(value.licensing, dict):
-                _dict["licensing"] = value.licensing.to_dict()
-            else:
-                _dict["licensing"] = value.licensing
-
-        if value.universal_logout:
-            if not isinstance(value.universal_logout, dict):
-                _dict["universalLogout"] = value.universal_logout.to_dict()
-            else:
-                _dict["universalLogout"] = value.universal_logout
-
-        if value.visibility:
-            if not isinstance(value.visibility, dict):
-                _dict["visibility"] = value.visibility.to_dict()
-            else:
-                _dict["visibility"] = value.visibility
-
-        if value.embedded:
-            if not isinstance(value.embedded, dict):
-                _dict["_embedded"] = value.embedded.to_dict()
-            else:
-                _dict["_embedded"] = value.embedded
-
-        if value.links:
-            if not isinstance(value.links, dict):
-                _dict["_links"] = value.links.to_dict()
-            else:
-                _dict["_links"] = value.links
-
-        # Handle subclass-specific fields
-        # Check if instance has settings (for subclasses like ActiveDirectoryApplication)
-        if hasattr(value, 'settings') and value.settings:
+        # Handle subclass-specific fields that may have custom serialization logic
+        if hasattr(value, "settings") and value.settings:
             if not isinstance(value.settings, dict):
                 _dict["settings"] = value.settings.to_dict()
             else:
                 _dict["settings"] = value.settings
 
-        # Check if instance has credentials (for subclasses like AutoLoginApplication)
-        if hasattr(value, 'credentials') and value.credentials:
+        if hasattr(value, "credentials") and value.credentials:
             if not isinstance(value.credentials, dict):
                 _dict["credentials"] = value.credentials.to_dict()
             else:
                 _dict["credentials"] = value.credentials
 
-        # Check if instance has name (for various subclasses)
-        if hasattr(value, 'name') and value.name:
+        if hasattr(value, "name") and value.name:
             _dict["name"] = value.name
 
         return _dict
