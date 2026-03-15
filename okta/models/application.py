@@ -26,15 +26,9 @@ import json
 import pprint
 import re  # noqa: F401
 from datetime import datetime
-from importlib import import_module
 from typing import Any, ClassVar, Dict, List, Union
-from typing import Optional, Set
+from typing import Optional
 from typing import TYPE_CHECKING
-from okta.application_converter import (
-    handle_unknown_sign_on_mode,
-    get_discriminator_value_safe,
-    restore_original_sign_on_mode,
-)
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 
@@ -63,6 +57,7 @@ if TYPE_CHECKING:
         SecurePasswordStoreApplication,
     )
     from okta.models.ws_federation_application import WsFederationApplication
+    from okta.models.active_directory_application import ActiveDirectoryApplication
 
 
 class Application(BaseModel):   # noqa: F811
@@ -105,7 +100,9 @@ class Application(BaseModel):   # noqa: F811
         "`profile` doesn't limit the level of nesting in the JSON schema you created, but there is a practical "
         "size limit. Okta recommends a JSON schema size of 1 MB or less for best performance.",
     )
-    sign_on_mode: ApplicationSignOnMode = Field(alias="signOnMode")
+    sign_on_mode: Optional[ApplicationSignOnMode] = Field(
+        default=None, alias="signOnMode"
+    )
     status: Optional[ApplicationLifecycleStatus] = None
     universal_logout: Optional[ApplicationUniversalLogout] = Field(
         default=None, alias="universalLogout"
@@ -113,8 +110,6 @@ class Application(BaseModel):   # noqa: F811
     visibility: Optional[ApplicationVisibility] = None
     embedded: Optional[ApplicationEmbedded] = Field(default=None, alias="_embedded")
     links: Optional[ApplicationLinks] = Field(default=None, alias="_links")
-    # Store the original sign-on mode value when it's not in the enum
-    _original_sign_on_mode: Optional[str] = None
     __properties: ClassVar[List[str]] = [
         "accessibility",
         "created",
@@ -223,12 +218,13 @@ class Application(BaseModel):   # noqa: F811
         "SAML_2_0": "SamlApplication",
         "SECURE_PASSWORD_STORE": "SecurePasswordStoreApplication",
         "WS_FEDERATION": "WsFederationApplication",
+        "ActiveDirectoryApplication": "ActiveDirectoryApplication",
     }
 
     @classmethod
     def get_discriminator_value(cls, obj: Dict[str, Any]) -> Optional[str]:
         """Returns the discriminator value (object type) of the data"""
-        discriminator_value = obj[cls.__discriminator_property_name]
+        discriminator_value = obj.get(cls.__discriminator_property_name)
         if discriminator_value:
             return cls.__discriminator_value_class_map.get(discriminator_value)
         else:
@@ -256,6 +252,7 @@ class Application(BaseModel):   # noqa: F811
             SamlApplication,
             SecurePasswordStoreApplication,
             WsFederationApplication,
+            ActiveDirectoryApplication,
         ]
     ]:
         """Create an instance of Application from a JSON string"""
@@ -276,71 +273,9 @@ class Application(BaseModel):   # noqa: F811
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "created",
-                "features",
-                "id",
-                "last_updated",
-                "orn",
-            ]
-        )
+        from okta.models.application_json_converter import ApplicationJsonConverter
 
-        _dict = self.model_dump(
-            by_alias=True,
-            exclude=excluded_fields,
-            exclude_none=True,
-        )
-        # override the default output from pydantic by calling `to_dict()` of accessibility
-        if self.accessibility:
-            if not isinstance(self.accessibility, dict):
-                _dict["accessibility"] = self.accessibility.to_dict()
-            else:
-                _dict["accessibility"] = self.accessibility
-
-        # override the default output from pydantic by calling `to_dict()` of express_configuration
-        if self.express_configuration:
-            if not isinstance(self.express_configuration, dict):
-                _dict["expressConfiguration"] = self.express_configuration.to_dict()
-            else:
-                _dict["expressConfiguration"] = self.express_configuration
-
-        # override the default output from pydantic by calling `to_dict()` of licensing
-        if self.licensing:
-            if not isinstance(self.licensing, dict):
-                _dict["licensing"] = self.licensing.to_dict()
-            else:
-                _dict["licensing"] = self.licensing
-
-        # override the default output from pydantic by calling `to_dict()` of universal_logout
-        if self.universal_logout:
-            if not isinstance(self.universal_logout, dict):
-                _dict["universalLogout"] = self.universal_logout.to_dict()
-            else:
-                _dict["universalLogout"] = self.universal_logout
-
-        # override the default output from pydantic by calling `to_dict()` of visibility
-        if self.visibility:
-            if not isinstance(self.visibility, dict):
-                _dict["visibility"] = self.visibility.to_dict()
-            else:
-                _dict["visibility"] = self.visibility
-
-        # override the default output from pydantic by calling `to_dict()` of embedded
-        if self.embedded:
-            if not isinstance(self.embedded, dict):
-                _dict["_embedded"] = self.embedded.to_dict()
-            else:
-                _dict["_embedded"] = self.embedded
-
-        # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
-            if not isinstance(self.links, dict):
-                _dict["_links"] = self.links.to_dict()
-            else:
-                _dict["_links"] = self.links
-
-        return _dict
+        return ApplicationJsonConverter.to_dict(self)
 
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[
@@ -355,69 +290,10 @@ class Application(BaseModel):   # noqa: F811
             SamlApplication,
             SecurePasswordStoreApplication,
             WsFederationApplication,
+            ActiveDirectoryApplication,
         ]
     ]:
         """Create an instance of Application from a dict"""
-        # look up the object type based on discriminator mapping
-        object_type = cls.get_discriminator_value(obj)
-        # Import from okta.models to ensure class identity consistency with lazy imports
-        models = import_module("okta.models")
-        if object_type == "AutoLoginApplication":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.AutoLoginApplication.from_dict(obj)
-        if object_type == "BasicAuthApplication":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.BasicAuthApplication.from_dict(obj)
-        if object_type == "BookmarkApplication":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.BookmarkApplication.from_dict(obj)
-        if object_type == "BrowserPluginApplication":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.BrowserPluginApplication.from_dict(obj)
-        if object_type == "Application":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.Application.from_dict(obj)
-        if object_type == "OpenIdConnectApplication":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.OpenIdConnectApplication.from_dict(obj)
-        if object_type == "Saml11Application":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.Saml11Application.from_dict(obj)
-        if object_type == "SamlApplication":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.SamlApplication.from_dict(obj)
-        if object_type == "SecurePasswordStoreApplication":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.SecurePasswordStoreApplication.from_dict(obj)
-        if object_type == "WsFederationApplication":
-            # Check if the discriminator maps to the same class to avoid infinite recursion
-            if object_type == cls.__name__:
-                return cls.model_validate(obj)
-            return models.WsFederationApplication.from_dict(obj)
+        from okta.models.application_json_converter import ApplicationJsonConverter
 
-        raise ValueError(
-            "Application failed to lookup discriminator value from "
-            + json.dumps(obj)
-            + ". Discriminator property name: "
-            + cls.__discriminator_property_name
-            + ", mapping: "
-            + json.dumps(cls.__discriminator_value_class_map)
-        )
+        return ApplicationJsonConverter.from_dict(obj)
