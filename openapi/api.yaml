@@ -57967,6 +57967,59 @@ components:
       enum:
         - DISTRIBUTION
         - SECURITY
+    ActiveDirectoryApplication:
+      description: Active Directory application for directory integrations. This application type has a null signOnMode.
+      allOf:
+        - $ref: '#/components/schemas/Application'
+        - type: object
+          properties:
+            name:
+              type: string
+              description: Unique key for the Active Directory app definition. Always 'active_directory' for AD apps.
+              readOnly: true
+            settings:
+              $ref: '#/components/schemas/ActiveDirectoryApplicationSettings'
+    ActiveDirectoryApplicationSettings:
+      description: Settings for Active Directory applications
+      allOf:
+        - $ref: '#/components/schemas/ApplicationSettings'
+        - type: object
+          properties:
+            app:
+              $ref: '#/components/schemas/ActiveDirectoryApplicationSettingsApplication'
+    ActiveDirectoryApplicationSettingsApplication:
+      description: App-specific settings for Active Directory applications
+      type: object
+      properties:
+        activationEmail:
+          type: string
+          description: Email address to send activation emails
+        filterGroupsByOU:
+          type: boolean
+          description: Whether to filter groups by organizational unit
+        jitGroupsAcrossDomains:
+          type: boolean
+          description: Whether to enable just-in-time provisioning of groups across domains
+        login:
+          type: string
+          description: Login username for AD connection
+          nullable: true
+        namingContext:
+          type: string
+          description: The AD domain naming context (e.g., 'corp.local')
+        password:
+          type: string
+          description: Password for AD connection
+          nullable: true
+        scanRate:
+          type: integer
+          description: Rate at which to scan the AD directory
+          nullable: true
+        searchOrgUnit:
+          type: string
+          description: Organizational unit to search within
+          nullable: true
+      additionalProperties: true
     AdminConsoleSettings:
       title: Okta Admin Console Settings
       description: Settings specific to the Okta Admin Console
@@ -59103,6 +59156,7 @@ components:
           maxLength: 1024
           example: test team id
     Application:
+      x-json-converter: ApplicationJsonConverter
       type: object
       properties:
         accessibility:
@@ -59237,6 +59291,7 @@ components:
           additionalProperties: true
         signOnMode:
           $ref: '#/components/schemas/ApplicationSignOnMode'
+          nullable: true
         status:
           $ref: '#/components/schemas/ApplicationLifecycleStatus'
         universalLogout:
@@ -59257,7 +59312,6 @@ components:
         _links:
           $ref: '#/components/schemas/ApplicationLinks'
       required:
-        - signOnMode
         - label
       discriminator:
         propertyName: signOnMode
@@ -59271,7 +59325,6 @@ components:
           SAML_2_0: '#/components/schemas/SamlApplication'
           SECURE_PASSWORD_STORE: '#/components/schemas/SecurePasswordStoreApplication'
           WS_FEDERATION: '#/components/schemas/WsFederationApplication'
-          MFA_AS_SERVICE: '#/components/schemas/Application'
     ApplicationAccessibility:
       description: Specifies access settings for the app
       type: object
@@ -59734,7 +59787,6 @@ components:
         | SAML_2_0 | Federated Authentication with SAML 2.0 WebSSO |
         | SECURE_PASSWORD_STORE | Secure Web Authentication (SWA) with POST (plugin not required) |
         | WS_FEDERATION | Federated Authentication with WS-Federation Passive Requestor Profile |
-        | MFA_AS_SERVICE | Application to use Okta's MFA as a service for RDP |
 
         Select the `signOnMode` for your custom app:
       type: string
@@ -59748,7 +59800,6 @@ components:
         - SAML_2_0
         - SECURE_PASSWORD_STORE
         - WS_FEDERATION
-        - MFA_AS_SERVICE
     ApplicationType:
       description: 'The type of client application. Default value: `web`.'
       type: string

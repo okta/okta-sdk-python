@@ -41,6 +41,10 @@ files:
   okta/DOC_GUIDE.mustache:
     destinationFilename: okta/DOC_GUIDE.md
     templateType: SupportingFiles
+  application_json_converter.mustache:
+    destinationFilename: application_json_converter.py
+    templateType: SupportingFiles
+    folder: okta/models
 modelPackage: models
 apiPackage: api
 additionalProperties:

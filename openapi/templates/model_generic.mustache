@@ -105,7 +105,7 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
     @classmethod
     def get_discriminator_value(cls, obj: Dict[str, Any]) -> Optional[str]:
         """Returns the discriminator value (object type) of the data"""
-        discriminator_value = obj[cls.__discriminator_property_name]
+        discriminator_value = obj.get(cls.__discriminator_property_name)
         if discriminator_value:
             return cls.__discriminator_value_class_map.get(discriminator_value)
         else:
@@ -143,6 +143,11 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
         * Fields in `self.additional_properties` are added to the output dict.
         {{/isAdditionalPropertiesTrue}}
         """
+        {{#vendorExtensions.x-json-converter}}
+        from {{packageName}}.models.application_json_converter import {{{.}}}
+        return {{{.}}}.to_dict(self)
+        {{/vendorExtensions.x-json-converter}}
+        {{^vendorExtensions.x-json-converter}}
         excluded_fields: Set[str] = set([
             {{#vendorExtensions.x-py-readonly}}
             "{{{.}}}",
@@ -247,11 +252,17 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
         {{/isNullable}}
         {{/allVars}}
         return _dict
+        {{/vendorExtensions.x-json-converter}}
 
     {{#hasChildren}}
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Optional[{{#discriminator}}Union[{{#mappedModels}}{{{modelName}}}{{^-last}}, {{/-last}}{{/mappedModels}}]{{/discriminator}}{{^discriminator}}Self{{/discriminator}}]:
         """Create an instance of {{{classname}}} from a dict"""
+        {{#vendorExtensions.x-json-converter}}
+        from {{packageName}}.models.application_json_converter import {{{.}}}
+        return {{{.}}}.from_dict(obj)
+        {{/vendorExtensions.x-json-converter}}
+        {{^vendorExtensions.x-json-converter}}
         {{#discriminator}}
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
@@ -269,6 +280,7 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
                             json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
                             ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
         {{/discriminator}}
+        {{/vendorExtensions.x-json-converter}}
     {{/hasChildren}}
     {{^hasChildren}}
     @classmethod

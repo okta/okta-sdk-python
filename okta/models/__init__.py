@@ -36,6 +36,7 @@ _MODEL_GROUPS = {
         'AppConfigActiveDirectory',
     ],
     'application': [
+        'ActiveDirectoryApplication',
         'Application',
         'AutoLoginApplication',
         'BasicAuthApplication',
@@ -391,6 +392,9 @@ _LAZY_IMPORT_MAP = {
     "ActionProviderPayloadType": "okta.models.action_provider_payload_type",
     "ActionProviderType": "okta.models.action_provider_type",
     "Actions": "okta.models.actions",
+    "ActiveDirectoryApplication": "okta.models.active_directory_application",
+    "ActiveDirectoryApplicationSettings": "okta.models.active_directory_application_settings",
+    "ActiveDirectoryApplicationSettingsApplication": "okta.models.active_directory_application_settings_application",
     "ActiveDirectoryGroupScope": "okta.models.active_directory_group_scope",
     "ActiveDirectoryGroupType": "okta.models.active_directory_group_type",
     "AddGroupRequest": "okta.models.add_group_request",

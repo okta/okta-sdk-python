@@ -36,8 +36,7 @@ class ApplicationSignOnMode(str, Enum):
     Federated Authentication with OpenID Connect (OIDC) | | SAML_1_1 | Federated Authentication with SAML 1.1 WebSSO (not
     supported for custom apps) | | SAML_2_0 | Federated Authentication with SAML 2.0 WebSSO | | SECURE_PASSWORD_STORE |
     Secure Web Authentication (SWA) with POST (plugin not required) | | WS_FEDERATION | Federated Authentication with
-    WS-Federation Passive Requestor Profile | | MFA_AS_SERVICE | Application to use Okta's MFA as a service for RDP |
-    Select the `signOnMode` for your custom app:
+    WS-Federation Passive Requestor Profile |  Select the `signOnMode` for your custom app:
     """
 
     """
@@ -52,7 +51,6 @@ class ApplicationSignOnMode(str, Enum):
     SAML_2_0 = "SAML_2_0"
     SECURE_PASSWORD_STORE = "SECURE_PASSWORD_STORE"
     WS_FEDERATION = "WS_FEDERATION"
-    MFA_AS_SERVICE = "MFA_AS_SERVICE"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
