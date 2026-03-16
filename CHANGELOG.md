@@ -1,6 +1,6 @@
 # Okta Python SDK Changelog
 
-# 3.1.1
+# 3.2.0
 
 * Replaced the `flatdict` dependency to fix critical configuration delimiter collisions and empty YAML crashes ([https://github.com/okta/okta-sdk-python/issues/417](https://github.com/okta/okta-sdk-python/issues/417), [https://github.com/okta/okta-sdk-python/issues/496](https://github.com/okta/okta-sdk-python/issues/496), [https://github.com/okta/okta-sdk-python/issues/499](https://github.com/okta/okta-sdk-python/issues/499)).
 * Implemented lazy loading for models and APIs to reduce SDK import time from 2 seconds to milliseconds (Issue #476). [https://github.com/okta/okta-sdk-python/issues/476](https://github.com/okta/okta-sdk-python/issues/476)
