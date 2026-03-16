@@ -40,6 +40,7 @@ class DomainValidationStatus(str, Enum):
     IN_PROGRESS = "IN_PROGRESS"
     NOT_STARTED = "NOT_STARTED"
     VERIFIED = "VERIFIED"
+    FAILED_TO_VERIFY = "FAILED_TO_VERIFY"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
