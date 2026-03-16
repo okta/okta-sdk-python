@@ -1,5 +1,13 @@
 # Okta Python SDK Changelog
 
+# 3.1.1
+
+* Replaced the `flatdict` dependency to fix critical configuration delimiter collisions and empty YAML crashes ([https://github.com/okta/okta-sdk-python/issues/417](https://github.com/okta/okta-sdk-python/issues/417), [https://github.com/okta/okta-sdk-python/issues/496](https://github.com/okta/okta-sdk-python/issues/496), [https://github.com/okta/okta-sdk-python/issues/499](https://github.com/okta/okta-sdk-python/issues/499)).
+* Implemented lazy loading for models and APIs to reduce SDK import time from 2 seconds to milliseconds (Issue #476). [https://github.com/okta/okta-sdk-python/issues/476](https://github.com/okta/okta-sdk-python/issues/476)
+* Fixed OAuth 2.0 token requests failing with 400 errors by removing duplicate `client_assertion` parameters ([https://github.com/okta/okta-sdk-python/issues/384](https://github.com/okta/okta-sdk-python/issues/384), [https://github.com/okta/okta-sdk-python/issues/489](https://github.com/okta/okta-sdk-python/issues/489)).
+* Added support for the `MFA_AS_SERVICE` application sign-on mode.
+* Resolved `userBehaviors` validation errors in `get_logs` by adding the new `LogUserBehavior` model.
+
 # 3.1.0
 
 ## OVERVIEW
