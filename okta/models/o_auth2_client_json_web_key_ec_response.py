@@ -112,10 +112,35 @@ class OAuth2ClientJsonWebKeyECResponse(OAuth2ClientJsonSigningKeyResponse):
             else:
                 _dict["_links"] = self.links
 
+        # set to None if created (nullable) is None
+        # and model_fields_set contains the field
+        if self.created is None and "created" in self.model_fields_set:
+            _dict["created"] = None
+
+        # set to None if last_updated (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_updated is None and "last_updated" in self.model_fields_set:
+            _dict["lastUpdated"] = None
+
         # set to None if kid (nullable) is None
         # and model_fields_set contains the field
         if self.kid is None and "kid" in self.model_fields_set:
             _dict["kid"] = None
+
+        # set to None if kty (nullable) is None
+        # and model_fields_set contains the field
+        if self.kty is None and "kty" in self.model_fields_set:
+            _dict["kty"] = None
+
+        # set to None if alg (nullable) is None
+        # and model_fields_set contains the field
+        if self.alg is None and "alg" in self.model_fields_set:
+            _dict["alg"] = None
+
+        # set to None if use (nullable) is None
+        # and model_fields_set contains the field
+        if self.use is None and "use" in self.model_fields_set:
+            _dict["use"] = None
 
         return _dict
 

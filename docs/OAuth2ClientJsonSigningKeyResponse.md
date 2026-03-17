@@ -7,14 +7,14 @@ A [JSON Web Key (JWK)](https://tools.ietf.org/html/rfc7517) is a JSON representa
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The unique ID of the OAuth Client JSON Web Key | [readonly] 
-**created** | **str** | Timestamp when the OAuth 2.0 client JSON Web Key was created | [readonly] 
-**last_updated** | **str** | Timestamp when the OAuth 2.0 client JSON Web Key was updated | [readonly] 
+**created** | **str** | Timestamp when the OAuth 2.0 client JSON Web Key was created | [optional] [readonly] 
+**last_updated** | **str** | Timestamp when the OAuth 2.0 client JSON Web Key was updated | [optional] [readonly] 
 **links** | [**OAuthClientSecretLinks**](OAuthClientSecretLinks.md) |  | [optional] 
 **kid** | **str** | Unique identifier of the JSON Web Key in the OAuth 2.0 client&#39;s JWKS | [optional] 
 **status** | **str** | Status of the OAuth 2.0 client JSON Web Key | [optional] 
-**kty** | **str** | Cryptographic algorithm family for the certificate&#39;s key pair | 
-**alg** | **str** | Algorithm used in the key | 
-**use** | **str** | Acceptable use of the JSON Web Key | 
+**kty** | **str** | Cryptographic algorithm family for the certificate&#39;s key pair | [optional] 
+**alg** | **str** | Algorithm used in the key | [optional] 
+**use** | **str** | Acceptable use of the JSON Web Key | [optional] 
 
 ## Example
 

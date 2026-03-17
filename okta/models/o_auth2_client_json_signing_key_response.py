@@ -51,10 +51,12 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
     """  # noqa: E501
 
     id: StrictStr = Field(description="The unique ID of the OAuth Client JSON Web Key")
-    created: StrictStr = Field(
-        description="Timestamp when the OAuth 2.0 client JSON Web Key was created"
+    created: Optional[StrictStr] = Field(
+        default=None,
+        description="Timestamp when the OAuth 2.0 client JSON Web Key was created",
     )
-    last_updated: StrictStr = Field(
+    last_updated: Optional[StrictStr] = Field(
+        default=None,
         description="Timestamp when the OAuth 2.0 client JSON Web Key was updated",
         alias="lastUpdated",
     )
@@ -66,11 +68,16 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
     status: Optional[StrictStr] = Field(
         default=None, description="Status of the OAuth 2.0 client JSON Web Key"
     )
-    kty: StrictStr = Field(
-        description="Cryptographic algorithm family for the certificate's key pair"
+    kty: Optional[StrictStr] = Field(
+        default=None,
+        description="Cryptographic algorithm family for the certificate's key pair",
     )
-    alg: StrictStr = Field(description="Algorithm used in the key")
-    use: StrictStr = Field(description="Acceptable use of the JSON Web Key")
+    alg: Optional[StrictStr] = Field(
+        default=None, description="Algorithm used in the key"
+    )
+    use: Optional[StrictStr] = Field(
+        default=None, description="Acceptable use of the JSON Web Key"
+    )
     __properties: ClassVar[List[str]] = [
         "id",
         "created",
@@ -96,6 +103,9 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
     @field_validator("kty")
     def kty_validate_enum(cls, value):
         """Validates the enum"""
+        if value is None:
+            return value
+
         if value not in set(["RSA", "EC"]):
             raise ValueError("must be one of enum values ('RSA', 'EC')")
         return value
@@ -103,6 +113,9 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
     @field_validator("use")
     def use_validate_enum(cls, value):
         """Validates the enum"""
+        if value is None:
+            return value
+
         if value not in set(["sig"]):
             raise ValueError("must be one of enum values ('sig')")
         return value
@@ -182,10 +195,35 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
             else:
                 _dict["_links"] = self.links
 
+        # set to None if created (nullable) is None
+        # and model_fields_set contains the field
+        if self.created is None and "created" in self.model_fields_set:
+            _dict["created"] = None
+
+        # set to None if last_updated (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_updated is None and "last_updated" in self.model_fields_set:
+            _dict["lastUpdated"] = None
+
         # set to None if kid (nullable) is None
         # and model_fields_set contains the field
         if self.kid is None and "kid" in self.model_fields_set:
             _dict["kid"] = None
+
+        # set to None if kty (nullable) is None
+        # and model_fields_set contains the field
+        if self.kty is None and "kty" in self.model_fields_set:
+            _dict["kty"] = None
+
+        # set to None if alg (nullable) is None
+        # and model_fields_set contains the field
+        if self.alg is None and "alg" in self.model_fields_set:
+            _dict["alg"] = None
+
+        # set to None if use (nullable) is None
+        # and model_fields_set contains the field
+        if self.use is None and "use" in self.model_fields_set:
+            _dict["use"] = None
 
         return _dict
 
@@ -198,6 +236,11 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
         """Create an instance of OAuth2ClientJsonSigningKeyResponse from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+
+        # Handle null discriminator by returning base class instance
+        if object_type is None:
+            return cls.model_validate(obj)
+
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "OAuth2ClientJsonWebKeyECResponse":

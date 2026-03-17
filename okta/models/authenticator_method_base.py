@@ -176,6 +176,11 @@ class AuthenticatorMethodBase(BaseModel):
         """Create an instance of AuthenticatorMethodBase from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
+
+        # Handle null discriminator by returning base class instance
+        if object_type is None:
+            return cls.model_validate(obj)
+
         # Import from okta.models to ensure class identity consistency with lazy imports
         models = import_module("okta.models")
         if object_type == "AuthenticatorMethodWithVerifiableProperties":

@@ -70314,13 +70314,13 @@ components:
           description: Timestamp when the OAuth 2.0 client JSON Web Key was created
           example: '2023-02-21T20:08:24.000Z'
           readOnly: true
-          nullable: false
+          nullable: true
         lastUpdated:
           type: string
           description: Timestamp when the OAuth 2.0 client JSON Web Key was updated
           example: '2023-02-21T20:08:24.000Z'
           readOnly: true
-          nullable: false
+          nullable: true
         _links:
           $ref: '#/components/schemas/OAuthClientSecretLinks'
           readOnly: true
@@ -70340,7 +70340,7 @@ components:
           type: string
           description: Cryptographic algorithm family for the certificate's key pair
           example: RSA
-          nullable: false
+          nullable: true
           enum:
             - RSA
             - EC
@@ -70348,12 +70348,12 @@ components:
           type: string
           description: Algorithm used in the key
           example: RS256
-          nullable: false
+          nullable: true
         use:
           type: string
           description: Acceptable use of the JSON Web Key
           example: sig
-          nullable: false
+          nullable: true
           enum:
             - sig
       discriminator:
@@ -70363,11 +70363,6 @@ components:
           EC: '#/components/schemas/OAuth2ClientJsonWebKeyECResponse'
       required:
         - id
-        - created
-        - lastUpdated
-        - kty
-        - alg
-        - use
     OAuth2ClientJsonWebKeyECRequest:
       title: EC Signing Key
       description: An EC signing key
@@ -70549,15 +70544,12 @@ components:
           type: string
           description: RSA key value (exponent) for key binding
           example: AQAB
-          nullable: false
+          nullable: true
         n:
           type: string
           description: RSA key value (modulus) for key binding
           example: mkC6yAJVvFwUlmM9gKjb2d-YK5qHFt-mXSsbjWKKs4EfNm-BoQeeovBZtSACyaqLc8IYFTPEURFcbDQ9DkAL04uUIRD2gaHYY7uK0jsluEaXGq2RAIsmzAwNTzkiDw4q9pDL_q7n0f_SDt1TsMaMQayB6bU5jWsmqcWJ8MCRJ1aJMjZ16un5UVx51IIeCbe4QRDxEXGAvYNczsBoZxspDt28esSpq5W0dBFxcyGVudyl54Er3FzAguhgfMVjH-bUec9j2Tl40qDTktrYgYfxz9pfjm01Hl4WYP1YQxeETpSL7cQ5Ihz4jGDtHUEOcZ4GfJrPzrGpUrak8Qp5xcwCqQ
-          nullable: false
-      required:
-        - e
-        - n
+          nullable: true
     OAuth2ClientSecret:
       type: object
       properties:
