@@ -852,6 +852,7 @@ _LAZY_IMPORT_MAP = {
     "EmailDomainDNSRecordType": "okta.models.email_domain_dns_record_type",
     "EmailDomainResponse": "okta.models.email_domain_response",
     "EmailDomainResponseWithEmbedded": "okta.models.email_domain_response_with_embedded",
+    "EmailDomainResponseWithEmbeddedAllOfEmbedded": "okta.models.email_domain_response_with_embedded_all_of_embedded",
     "EmailDomainStatus": "okta.models.email_domain_status",
     "EmailPreview": "okta.models.email_preview",
     "EmailPreviewLinks": "okta.models.email_preview_links",

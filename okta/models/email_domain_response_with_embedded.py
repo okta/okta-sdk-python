@@ -32,6 +32,9 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing_extensions import Self
 
 from okta.models.email_domain_dns_record import EmailDomainDNSRecord
+from okta.models.email_domain_response_with_embedded_all_of_embedded import (
+    EmailDomainResponseWithEmbeddedAllOfEmbedded,
+)
 from okta.models.email_domain_status import EmailDomainStatus
 
 
@@ -40,7 +43,8 @@ class EmailDomainResponseWithEmbedded(BaseModel):
     EmailDomainResponseWithEmbedded
     """  # noqa: E501
 
-    embedded: Optional[object] = Field(default=None, alias="_embedded")
+    display_name: StrictStr = Field(alias="displayName")
+    user_name: StrictStr = Field(alias="userName")
     dns_validation_records: Optional[List[EmailDomainDNSRecord]] = Field(
         default=None, alias="dnsValidationRecords"
     )
@@ -54,16 +58,18 @@ class EmailDomainResponseWithEmbedded(BaseModel):
         description="The subdomain for the email sender's custom mail domain",
         alias="validationSubdomain",
     )
-    display_name: StrictStr = Field(alias="displayName")
-    user_name: StrictStr = Field(alias="userName")
+    embedded: Optional[EmailDomainResponseWithEmbeddedAllOfEmbedded] = Field(
+        default=None, alias="_embedded"
+    )
     __properties: ClassVar[List[str]] = [
+        "displayName",
+        "userName",
         "dnsValidationRecords",
         "domain",
         "id",
         "validationStatus",
         "validationSubdomain",
-        "displayName",
-        "userName",
+        "_embedded",
     ]
 
     model_config = ConfigDict(
@@ -95,13 +101,8 @@ class EmailDomainResponseWithEmbedded(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "embedded",
-            ]
-        )
+        excluded_fields: Set[str] = set([])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -115,6 +116,13 @@ class EmailDomainResponseWithEmbedded(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict["dnsValidationRecords"] = _items
+        # override the default output from pydantic by calling `to_dict()` of embedded
+        if self.embedded:
+            if not isinstance(self.embedded, dict):
+                _dict["_embedded"] = self.embedded.to_dict()
+            else:
+                _dict["_embedded"] = self.embedded
+
         return _dict
 
     @classmethod
@@ -128,6 +136,8 @@ class EmailDomainResponseWithEmbedded(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "displayName": obj.get("displayName"),
+                "userName": obj.get("userName"),
                 "dnsValidationRecords": (
                     [
                         EmailDomainDNSRecord.from_dict(_item)
@@ -144,8 +154,13 @@ class EmailDomainResponseWithEmbedded(BaseModel):
                     if obj.get("validationSubdomain") is not None
                     else "mail"
                 ),
-                "displayName": obj.get("displayName"),
-                "userName": obj.get("userName"),
+                "_embedded": (
+                    EmailDomainResponseWithEmbeddedAllOfEmbedded.from_dict(
+                        obj["_embedded"]
+                    )
+                    if obj.get("_embedded") is not None
+                    else None
+                ),
             }
         )
         return _obj

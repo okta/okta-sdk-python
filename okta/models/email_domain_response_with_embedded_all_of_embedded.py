@@ -28,32 +28,19 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
+from okta.models.brand import Brand
 
-class EmailDomain(BaseModel):
+
+class EmailDomainResponseWithEmbeddedAllOfEmbedded(BaseModel):
     """
-    EmailDomain
+    EmailDomainResponseWithEmbeddedAllOfEmbedded
     """  # noqa: E501
 
-    display_name: StrictStr = Field(alias="displayName")
-    user_name: StrictStr = Field(alias="userName")
-    brand_id: StrictStr = Field(alias="brandId")
-    domain: StrictStr
-    validation_subdomain: Optional[StrictStr] = Field(
-        default="mail",
-        description="Subdomain for the email sender's custom mail domain. Specify your subdomain when you configure a custom "
-        "mail domain.",
-        alias="validationSubdomain",
-    )
-    __properties: ClassVar[List[str]] = [
-        "displayName",
-        "userName",
-        "brandId",
-        "domain",
-        "validationSubdomain",
-    ]
+    brands: Optional[List[Brand]] = None
+    __properties: ClassVar[List[str]] = ["brands"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,7 +59,7 @@ class EmailDomain(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of EmailDomain from a JSON string"""
+        """Create an instance of EmailDomainResponseWithEmbeddedAllOfEmbedded from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -92,11 +79,18 @@ class EmailDomain(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in brands (list)
+        _items = []
+        if self.brands:
+            for _item in self.brands:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["brands"] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of EmailDomain from a dict"""
+        """Create an instance of EmailDomainResponseWithEmbeddedAllOfEmbedded from a dict"""
         if obj is None:
             return None
 
@@ -105,15 +99,11 @@ class EmailDomain(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "displayName": obj.get("displayName"),
-                "userName": obj.get("userName"),
-                "brandId": obj.get("brandId"),
-                "domain": obj.get("domain"),
-                "validationSubdomain": (
-                    obj.get("validationSubdomain")
-                    if obj.get("validationSubdomain") is not None
-                    else "mail"
-                ),
+                "brands": (
+                    [Brand.from_dict(_item) for _item in obj["brands"]]
+                    if obj.get("brands") is not None
+                    else None
+                )
             }
         )
         return _obj

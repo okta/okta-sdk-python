@@ -40,6 +40,8 @@ class EmailDomainResponse(BaseModel):
     EmailDomainResponse
     """  # noqa: E501
 
+    display_name: StrictStr = Field(alias="displayName")
+    user_name: StrictStr = Field(alias="userName")
     dns_validation_records: Optional[List[EmailDomainDNSRecord]] = Field(
         default=None, alias="dnsValidationRecords"
     )
@@ -53,9 +55,15 @@ class EmailDomainResponse(BaseModel):
         description="The subdomain for the email sender's custom mail domain",
         alias="validationSubdomain",
     )
-    display_name: StrictStr = Field(alias="displayName")
-    user_name: StrictStr = Field(alias="userName")
-    __properties: ClassVar[List[str]] = ["displayName", "userName"]
+    __properties: ClassVar[List[str]] = [
+        "displayName",
+        "userName",
+        "dnsValidationRecords",
+        "domain",
+        "id",
+        "validationStatus",
+        "validationSubdomain",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,6 +102,13 @@ class EmailDomainResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in dns_validation_records (list)
+        _items = []
+        if self.dns_validation_records:
+            for _item in self.dns_validation_records:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["dnsValidationRecords"] = _items
         return _dict
 
     @classmethod
@@ -106,6 +121,25 @@ class EmailDomainResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {"displayName": obj.get("displayName"), "userName": obj.get("userName")}
+            {
+                "displayName": obj.get("displayName"),
+                "userName": obj.get("userName"),
+                "dnsValidationRecords": (
+                    [
+                        EmailDomainDNSRecord.from_dict(_item)
+                        for _item in obj["dnsValidationRecords"]
+                    ]
+                    if obj.get("dnsValidationRecords") is not None
+                    else None
+                ),
+                "domain": obj.get("domain"),
+                "id": obj.get("id"),
+                "validationStatus": obj.get("validationStatus"),
+                "validationSubdomain": (
+                    obj.get("validationSubdomain")
+                    if obj.get("validationSubdomain") is not None
+                    else "mail"
+                ),
+            }
         )
         return _obj

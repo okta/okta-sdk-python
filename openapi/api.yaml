@@ -64671,16 +64671,16 @@ components:
     EmailDomain:
       allOf:
         - $ref: '#/components/schemas/BaseEmailDomain'
-      type: object
-      properties:
-        brandId:
-          type: string
-        domain:
-          type: string
-        validationSubdomain:
-          type: string
-          description: Subdomain for the email sender's custom mail domain. Specify your subdomain when you configure a custom mail domain.
-          default: mail
+        - type: object
+          properties:
+            brandId:
+              type: string
+            domain:
+              type: string
+            validationSubdomain:
+              type: string
+              description: Subdomain for the email sender's custom mail domain. Specify your subdomain when you configure a custom mail domain.
+              default: mail
       required:
         - domain
         - brandId
@@ -64701,35 +64701,35 @@ components:
     EmailDomainResponse:
       allOf:
         - $ref: '#/components/schemas/BaseEmailDomain'
-      type: object
-      properties:
-        dnsValidationRecords:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailDomainDNSRecord'
-        domain:
-          type: string
-        id:
-          type: string
-        validationStatus:
-          $ref: '#/components/schemas/EmailDomainStatus'
-        validationSubdomain:
-          type: string
-          description: The subdomain for the email sender's custom mail domain
-          default: mail
+        - type: object
+          properties:
+            dnsValidationRecords:
+              type: array
+              items:
+                $ref: '#/components/schemas/EmailDomainDNSRecord'
+            domain:
+              type: string
+            id:
+              type: string
+            validationStatus:
+              $ref: '#/components/schemas/EmailDomainStatus'
+            validationSubdomain:
+              type: string
+              description: The subdomain for the email sender's custom mail domain
+              default: mail
     EmailDomainResponseWithEmbedded:
       allOf:
         - $ref: '#/components/schemas/EmailDomainResponse'
-      type: object
-      properties:
-        _embedded:
-          type: object
+        - type: object
           properties:
-            brands:
-              type: array
-              items:
-                $ref: '#/components/schemas/Brand'
-          readOnly: true
+            _embedded:
+              type: object
+              properties:
+                brands:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Brand'
+              readOnly: true
     EmailDomainStatus:
       type: string
       enum:
