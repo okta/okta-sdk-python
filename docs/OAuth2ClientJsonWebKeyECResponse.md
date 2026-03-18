@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **x** | **str** | The public x coordinate for the elliptic curve point | 
 **y** | **str** | The public y coordinate for the elliptic curve point | 
-**crv** | **str** | The cryptographic curve used with the key | 
+**crv** | **str** | The cryptographic curve used with the key | [optional] 
 
 ## Example
 

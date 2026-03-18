@@ -58,6 +58,8 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
         "kty",
         "alg",
         "use",
+        "e",
+        "n",
     ]
 
     model_config = ConfigDict(
@@ -134,6 +136,16 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
         if self.use is None and "use" in self.model_fields_set:
             _dict["use"] = None
 
+        # set to None if e (nullable) is None
+        # and model_fields_set contains the field
+        if self.e is None and "e" in self.model_fields_set:
+            _dict["e"] = None
+
+        # set to None if n (nullable) is None
+        # and model_fields_set contains the field
+        if self.n is None and "n" in self.model_fields_set:
+            _dict["n"] = None
+
         return _dict
 
     @classmethod
@@ -160,6 +172,8 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
                 "kty": obj.get("kty"),
                 "alg": obj.get("alg"),
                 "use": obj.get("use"),
+                "e": obj.get("e"),
+                "n": obj.get("n"),
             }
         )
         return _obj
