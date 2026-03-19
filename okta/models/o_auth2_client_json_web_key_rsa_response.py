@@ -42,8 +42,12 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
     An RSA signing key
     """  # noqa: E501
 
-    e: StrictStr = Field(description="RSA key value (exponent) for key binding")
-    n: StrictStr = Field(description="RSA key value (modulus) for key binding")
+    e: Optional[StrictStr] = Field(
+        default=None, description="RSA key value (exponent) for key binding"
+    )
+    n: Optional[StrictStr] = Field(
+        default=None, description="RSA key value (modulus) for key binding"
+    )
     __properties: ClassVar[List[str]] = [
         "id",
         "created",
@@ -54,6 +58,8 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
         "kty",
         "alg",
         "use",
+        "e",
+        "n",
     ]
 
     model_config = ConfigDict(
@@ -100,10 +106,40 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
             else:
                 _dict["_links"] = self.links
 
+        # set to None if created (nullable) is None
+        # and model_fields_set contains the field
+        if self.created is None and "created" in self.model_fields_set:
+            _dict["created"] = None
+
+        # set to None if last_updated (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_updated is None and "last_updated" in self.model_fields_set:
+            _dict["lastUpdated"] = None
+
         # set to None if kid (nullable) is None
         # and model_fields_set contains the field
         if self.kid is None and "kid" in self.model_fields_set:
             _dict["kid"] = None
+
+        # set to None if alg (nullable) is None
+        # and model_fields_set contains the field
+        if self.alg is None and "alg" in self.model_fields_set:
+            _dict["alg"] = None
+
+        # set to None if use (nullable) is None
+        # and model_fields_set contains the field
+        if self.use is None and "use" in self.model_fields_set:
+            _dict["use"] = None
+
+        # set to None if e (nullable) is None
+        # and model_fields_set contains the field
+        if self.e is None and "e" in self.model_fields_set:
+            _dict["e"] = None
+
+        # set to None if n (nullable) is None
+        # and model_fields_set contains the field
+        if self.n is None and "n" in self.model_fields_set:
+            _dict["n"] = None
 
         return _dict
 
@@ -131,6 +167,8 @@ class OAuth2ClientJsonWebKeyRsaResponse(OAuth2ClientJsonSigningKeyResponse):
                 "kty": obj.get("kty"),
                 "alg": obj.get("alg"),
                 "use": obj.get("use"),
+                "e": obj.get("e"),
+                "n": obj.get("n"),
             }
         )
         return _obj

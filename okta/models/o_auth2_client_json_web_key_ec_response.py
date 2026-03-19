@@ -48,7 +48,9 @@ class OAuth2ClientJsonWebKeyECResponse(OAuth2ClientJsonSigningKeyResponse):
     y: StrictStr = Field(
         description="The public y coordinate for the elliptic curve point"
     )
-    crv: StrictStr = Field(description="The cryptographic curve used with the key")
+    crv: Optional[StrictStr] = Field(
+        default=None, description="The cryptographic curve used with the key"
+    )
     __properties: ClassVar[List[str]] = [
         "id",
         "created",
@@ -59,11 +61,17 @@ class OAuth2ClientJsonWebKeyECResponse(OAuth2ClientJsonSigningKeyResponse):
         "kty",
         "alg",
         "use",
+        "x",
+        "y",
+        "crv",
     ]
 
     @field_validator("crv")
     def crv_validate_enum(cls, value):
         """Validates the enum"""
+        if value is None:
+            return value
+
         if value not in set(["P-256", "P-384", "P-521"]):
             raise ValueError("must be one of enum values ('P-256', 'P-384', 'P-521')")
         return value
@@ -112,10 +120,35 @@ class OAuth2ClientJsonWebKeyECResponse(OAuth2ClientJsonSigningKeyResponse):
             else:
                 _dict["_links"] = self.links
 
+        # set to None if created (nullable) is None
+        # and model_fields_set contains the field
+        if self.created is None and "created" in self.model_fields_set:
+            _dict["created"] = None
+
+        # set to None if last_updated (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_updated is None and "last_updated" in self.model_fields_set:
+            _dict["lastUpdated"] = None
+
         # set to None if kid (nullable) is None
         # and model_fields_set contains the field
         if self.kid is None and "kid" in self.model_fields_set:
             _dict["kid"] = None
+
+        # set to None if alg (nullable) is None
+        # and model_fields_set contains the field
+        if self.alg is None and "alg" in self.model_fields_set:
+            _dict["alg"] = None
+
+        # set to None if use (nullable) is None
+        # and model_fields_set contains the field
+        if self.use is None and "use" in self.model_fields_set:
+            _dict["use"] = None
+
+        # set to None if crv (nullable) is None
+        # and model_fields_set contains the field
+        if self.crv is None and "crv" in self.model_fields_set:
+            _dict["crv"] = None
 
         return _dict
 
@@ -143,6 +176,9 @@ class OAuth2ClientJsonWebKeyECResponse(OAuth2ClientJsonSigningKeyResponse):
                 "kty": obj.get("kty"),
                 "alg": obj.get("alg"),
                 "use": obj.get("use"),
+                "x": obj.get("x"),
+                "y": obj.get("y"),
+                "crv": obj.get("crv"),
             }
         )
         return _obj

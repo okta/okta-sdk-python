@@ -6,8 +6,8 @@ An RSA signing key
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**e** | **str** | RSA key value (exponent) for key binding | 
-**n** | **str** | RSA key value (modulus) for key binding | 
+**e** | **str** | RSA key value (exponent) for key binding | [optional] 
+**n** | **str** | RSA key value (modulus) for key binding | [optional] 
 
 ## Example
 
