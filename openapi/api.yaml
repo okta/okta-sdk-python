@@ -70340,7 +70340,6 @@ components:
           type: string
           description: Cryptographic algorithm family for the certificate's key pair
           example: RSA
-          nullable: true
           enum:
             - RSA
             - EC
@@ -70363,6 +70362,7 @@ components:
           EC: '#/components/schemas/OAuth2ClientJsonWebKeyECResponse'
       required:
         - id
+        - kty
     OAuth2ClientJsonWebKeyECRequest:
       title: EC Signing Key
       description: An EC signing key

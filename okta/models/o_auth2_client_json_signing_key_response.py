@@ -68,9 +68,8 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
     status: Optional[StrictStr] = Field(
         default=None, description="Status of the OAuth 2.0 client JSON Web Key"
     )
-    kty: Optional[StrictStr] = Field(
-        default=None,
-        description="Cryptographic algorithm family for the certificate's key pair",
+    kty: StrictStr = Field(
+        description="Cryptographic algorithm family for the certificate's key pair"
     )
     alg: Optional[StrictStr] = Field(
         default=None, description="Algorithm used in the key"
@@ -103,9 +102,6 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
     @field_validator("kty")
     def kty_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(["RSA", "EC"]):
             raise ValueError("must be one of enum values ('RSA', 'EC')")
         return value
@@ -209,11 +205,6 @@ class OAuth2ClientJsonSigningKeyResponse(BaseModel):
         # and model_fields_set contains the field
         if self.kid is None and "kid" in self.model_fields_set:
             _dict["kid"] = None
-
-        # set to None if kty (nullable) is None
-        # and model_fields_set contains the field
-        if self.kty is None and "kty" in self.model_fields_set:
-            _dict["kty"] = None
 
         # set to None if alg (nullable) is None
         # and model_fields_set contains the field

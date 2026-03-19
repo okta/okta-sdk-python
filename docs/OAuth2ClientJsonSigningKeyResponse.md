@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **links** | [**OAuthClientSecretLinks**](OAuthClientSecretLinks.md) |  | [optional] 
 **kid** | **str** | Unique identifier of the JSON Web Key in the OAuth 2.0 client&#39;s JWKS | [optional] 
 **status** | **str** | Status of the OAuth 2.0 client JSON Web Key | [optional] 
-**kty** | **str** | Cryptographic algorithm family for the certificate&#39;s key pair | [optional] 
+**kty** | **str** | Cryptographic algorithm family for the certificate&#39;s key pair | 
 **alg** | **str** | Algorithm used in the key | [optional] 
 **use** | **str** | Acceptable use of the JSON Web Key | [optional] 
 

@@ -135,11 +135,6 @@ class OAuth2ClientJsonWebKeyECResponse(OAuth2ClientJsonSigningKeyResponse):
         if self.kid is None and "kid" in self.model_fields_set:
             _dict["kid"] = None
 
-        # set to None if kty (nullable) is None
-        # and model_fields_set contains the field
-        if self.kty is None and "kty" in self.model_fields_set:
-            _dict["kty"] = None
-
         # set to None if alg (nullable) is None
         # and model_fields_set contains the field
         if self.alg is None and "alg" in self.model_fields_set:
