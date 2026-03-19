@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**embedded** | **object** |  | [optional] [readonly] 
+**display_name** | **str** |  | 
+**user_name** | **str** |  | 
 **dns_validation_records** | [**List[EmailDomainDNSRecord]**](EmailDomainDNSRecord.md) |  | [optional] 
 **domain** | **str** |  | [optional] 
 **id** | **str** |  | [optional] 
 **validation_status** | [**EmailDomainStatus**](EmailDomainStatus.md) |  | [optional] 
 **validation_subdomain** | **str** | The subdomain for the email sender&#39;s custom mail domain | [optional] [default to 'mail']
-**display_name** | **str** |  | 
-**user_name** | **str** |  | 
+**embedded** | [**EmailDomainResponseWithEmbeddedAllOfEmbedded**](EmailDomainResponseWithEmbeddedAllOfEmbedded.md) |  | [optional] 
 
 ## Example
 
