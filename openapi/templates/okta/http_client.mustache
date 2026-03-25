@@ -8,18 +8,25 @@
 
 {{>partial_header}}
 
-import aiohttp
 import asyncio
 import json
 import logging
+import mimetypes
 import os
+
+import aiohttp
 import xmltodict
+
 from okta.errors.http_error import HTTPError
 from okta.errors.okta_api_error import OktaAPIError
 from okta.exceptions import HTTPException, OktaAPIException
 
+logger = logging.getLogger("okta-sdk-python")
 
-logger = logging.getLogger('okta-sdk-python')
+
+def _remove_content_type_header(headers: dict) -> dict:
+    """Remove Content-Type header to let aiohttp.FormData set it with boundary."""
+    return {k: v for k, v in headers.items() if k.lower() != "content-type"}
 
 
 class HTTPClient:
@@ -27,6 +34,7 @@ class HTTPClient:
     This class is the basic HTTPClient for the Okta Client.
     Custom HTTP clients should inherit from this class.
     """
+
     raise_exception = False
 
     def __init__(self, http_config={}):
@@ -34,8 +42,11 @@ class HTTPClient:
         self._default_headers = http_config["headers"]
         # Create timeout for all HTTP requests
         self._timeout = aiohttp.ClientTimeout(
-            total=http_config["requestTimeout"] if "requestTimeout" in
-            http_config and http_config["requestTimeout"] > 0 else None
+            total=(
+                http_config["requestTimeout"]
+                if "requestTimeout" in http_config and http_config["requestTimeout"] > 0
+                else None
+            )
         )
         if "proxy" in http_config:
             self._proxy = self._setup_proxy(http_config["proxy"])
@@ -74,51 +85,85 @@ class HTTPClient:
         """
         try:
             logger.debug(f"Request: {request}")
-            # Set headers
-            self._default_headers.update(request["headers"])
-            # Prepare request parameters
-            params = {'method': request['method'],
-                      'url': request['url'],
-                      'headers': self._default_headers}
-            if request['data']:
-                params['data'] = json.dumps(request['data'])
-            elif request['form']:
-                filename = ""
-                if isinstance(request['form']['file'], str):
-                    filename = request['form']['file'].split('/')[-1]
-                data = aiohttp.FormData()
-                data.add_field('file',
-                                      open(request['form']['file'], 'rb'),
-                                      filename=filename,
-                                      content_type=self._default_headers['Content-Type'])
-                params['data'] = data
-            json_data = request.get('json')
-            # empty json param may cause issue, so include it if needed only
-            # more details: https://github.com/okta/okta-sdk-python/issues/131
+            # Create a local copy of headers to avoid mutating shared state
+            request_headers = {**self._default_headers, **request["headers"]}
+            params = {
+                "method": request["method"],
+                "url": request["url"],
+                "headers": request_headers,
+            }
+            if request["data"]:
+                params["data"] = json.dumps(request["data"])
+            elif request["form"]:
+                # Check if this is a file upload (list of tuples) or regular form data (dict)
+                if isinstance(request["form"], list) and len(request["form"]) > 0:
+                    # Format: [(field_name, (filename, filedata, mimetype)), ...]
+                    data = aiohttp.FormData()
+                    for field_name, file_tuple in request["form"]:
+                        if isinstance(file_tuple, tuple) and len(file_tuple) == 3:
+                            # This is a file field: (filename, filedata, mimetype)
+                            filename, filedata, mimetype = file_tuple
+                            data.add_field(
+                                field_name,
+                                filedata,
+                                filename=filename,
+                                content_type=mimetype,
+                            )
+                        else:
+                            # Regular form field
+                            data.add_field(field_name, file_tuple)
+                    params["data"] = data
+                    # Remove Content-Type header - aiohttp.FormData will set it with boundary
+                    params["headers"] = _remove_content_type_header(request_headers)
+                elif isinstance(request["form"], dict):
+                    # Legacy path: dict-based form data
+                    if "file" in request["form"]:
+                        # File upload with file path (legacy)
+                        filename = ""
+                        if isinstance(request["form"]["file"], str):
+                            filename = request["form"]["file"].split("/")[-1]
+                        data = aiohttp.FormData()
+                        with open(request["form"]["file"], "rb") as f:
+                            file_data = f.read()
+                        mimetype = mimetypes.guess_type(filename)[0] or "application/octet-stream"
+                        data.add_field("file", file_data, filename=filename, content_type=mimetype)
+                        params["data"] = data
+                        # Remove Content-Type header - aiohttp.FormData will set it with boundary
+                        params["headers"] = _remove_content_type_header(request_headers)
+                    else:
+                        # Remove Content-Type header - aiohttp.FormData will set it with boundary
+                        if request_headers.get("Content-Type") == "application/x-www-form-urlencoded":
+                            params["headers"] = _remove_content_type_header(request_headers)
+                        params["data"] = request["form"]
+            json_data = request.get("json")
             if json_data:
-                params['json'] = json_data
+                params["json"] = json_data
             if self._timeout:
-                params['timeout'] = self._timeout
+                params["timeout"] = self._timeout
             if self._proxy:
-                params['proxy'] = self._proxy
+                params["proxy"] = self._proxy
             if self._ssl_context:
-                params['ssl_context'] = self._ssl_context
+                params["ssl_context"] = self._ssl_context
             # Fire request
             if self._session is not None:
-                logger.debug('Request with re-usable session.')
+                logger.debug("Request with re-usable session.")
                 async with self._session.request(**params) as response:
-                    return (response.request_info,
-                            response,
-                            await response.text(),
-                            None)
+                    return (
+                        response.request_info,
+                        response,
+                        await response.text(),
+                        None,
+                    )
             else:
-                logger.debug('Request without re-usable session.')
+                logger.debug("Request without re-usable session.")
                 async with aiohttp.ClientSession() as session:
                     async with session.request(**params) as response:
-                        return (response.request_info,
-                                response,
-                                await response.text(),
-                                None)
+                        return (
+                            response.request_info,
+                            response,
+                            await response.text(),
+                            None,
+                        )
         except (aiohttp.ClientError, asyncio.TimeoutError) as error:
             # Return error if arises
             logger.exception(error)

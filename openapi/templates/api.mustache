@@ -40,7 +40,7 @@ class {{classname}}(ApiClient):
     @validate_call
     async def {{operationId}}{{>partial_api_args}} -> {{{returnType}}}{{^returnType}}None{{/returnType}}:
 {{>partial_api}}
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(

@@ -110,7 +110,7 @@ class PolicyApi(ApiClient):
             _host_index=_host_index,
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -259,7 +259,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -406,7 +406,7 @@ class PolicyApi(ApiClient):
             _host_index=_host_index,
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -573,7 +573,7 @@ class PolicyApi(ApiClient):
             _host_index=_host_index,
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -771,7 +771,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -963,7 +963,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -1137,7 +1137,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -1286,7 +1286,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -1432,7 +1432,7 @@ class PolicyApi(ApiClient):
             _host_index=_host_index,
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -1583,7 +1583,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -1735,7 +1735,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -1885,7 +1885,7 @@ class PolicyApi(ApiClient):
             _host_index=_host_index,
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -2053,7 +2053,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -2216,7 +2216,7 @@ class PolicyApi(ApiClient):
             _host_index=_host_index,
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -2442,7 +2442,7 @@ class PolicyApi(ApiClient):
             _host_index=_host_index,
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -2634,7 +2634,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -2792,7 +2792,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -2961,7 +2961,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -3130,7 +3130,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -3304,7 +3304,7 @@ class PolicyApi(ApiClient):
             _host_index=_host_index,
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
@@ -3484,7 +3484,7 @@ class PolicyApi(ApiClient):
             )
         )
 
-        form = {}
+        form = post_params if post_params else None
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
