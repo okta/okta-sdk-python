@@ -45,6 +45,7 @@ REQUIRES = [
     "PyYAML >= 6.0.2",
     "requests >= 2.32.3",
     "xmltodict >= 0.14.2",
+    "pillow >= 12.1.1",
 ]
 
 def get_version():
