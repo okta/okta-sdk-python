@@ -1,5 +1,5 @@
 aenum==3.1.11
-aiohttp==3.12.14
+aiohttp==3.13.3
 blinker==1.9.0
 jwcrypto==1.5.6
 pycryptodomex==3.23.0
