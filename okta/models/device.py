@@ -69,6 +69,9 @@ class Device(BaseModel):
     )
     resource_type: Optional[StrictStr] = Field(default="UDDevice", alias="resourceType")
     status: Optional[DeviceStatus] = None
+    embedded: Optional[Dict[str, Any]] = Field(
+        default=None, alias="_embedded", description="Embedded resources like users when expand parameter is used"
+    )
     links: Optional[LinksSelfAndFullUsersLifecycle] = Field(
         default=None, alias="_links"
     )
@@ -82,6 +85,7 @@ class Device(BaseModel):
         "resourceId",
         "resourceType",
         "status",
+        "_embedded",
         "_links",
     ]
 
@@ -192,6 +196,7 @@ class Device(BaseModel):
                     else "UDDevice"
                 ),
                 "status": obj.get("status"),
+                "_embedded": obj.get("_embedded"),
                 "_links": (
                     LinksSelfAndFullUsersLifecycle.from_dict(obj["_links"])
                     if obj.get("_links") is not None
