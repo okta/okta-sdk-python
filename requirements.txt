@@ -12,7 +12,7 @@ requests==2.32.3
 xmltodict==0.14.2
 
 # Development & Testing Tools
-flake8==7.1.2
+flake8==7.3.0
 pyfakefs==5.8.0
 pytest==8.3.5
 pytest-asyncio==0.26.0
