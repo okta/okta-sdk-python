@@ -86,12 +86,24 @@ class ApiClient:
         # use default configuration if none is provided
         if configuration is None:
             configuration = Configuration.get_default()
-        self.configuration = Configuration(
-            host=configuration["client"]["orgUrl"],
-            access_token=configuration["client"]["token"],
-            api_key=configuration["client"].get("privateKey", None),
-            authorization_mode=configuration["client"].get("authorizationMode", "SSWS"),
-        )
+
+        # Build Configuration with DPoP support if present
+        config_params = {
+            "host": configuration["client"]["orgUrl"],
+            "access_token": configuration["client"].get("token", None),  # Use .get() to handle PrivateKey mode
+            "api_key": configuration["client"].get("privateKey", None),
+            "authorization_mode": configuration["client"].get("authorizationMode", "SSWS"),
+        }
+
+        # Add DPoP parameters if enabled
+        if configuration["client"].get("dpopEnabled", False):
+            config_params.update({
+                "dpop_enabled": True,
+                "dpop_private_key": configuration["client"].get("privateKey"),
+                "dpop_key_rotation_interval": configuration["client"].get("dpopKeyRotationInterval", 86400),
+            })
+
+        self.configuration = Configuration(**config_params)
 
         if self.configuration.event_listeners is not None:
             if len(self.configuration.event_listeners["call_api_started"]) > 0:

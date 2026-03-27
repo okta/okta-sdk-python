@@ -21,14 +21,20 @@ Do not edit the class manually.
 """  # noqa: E501
 
 import json
+import logging
 import os
 import time
 import uuid
 from ast import literal_eval
+from typing import Optional
 
 from Cryptodome.PublicKey import RSA
 from jwcrypto.jwk import JWK, InvalidJWKType
 from jwt import encode as jwt_encode
+
+from okta.utils import compute_ath
+
+logger = logging.getLogger("okta-sdk-python")
 
 
 class JWT:
@@ -167,8 +173,92 @@ class JWT:
                 if "kid" in private_key_dict:
                     headers["kid"] = private_key_dict["kid"]
             except json.JSONDecodeError:
-                if "kid" in headers:
-                    del headers["kid"]
+                # Private key is in PEM format (not JSON JWK), which is valid
+                # kid can only be extracted from JWK format or passed explicitly
+                # This is expected behavior - no error, just debug info
+                logger.debug(
+                    "Private key is PEM format (not JSON JWK), cannot auto-extract kid. "
+                    "If kid is required by your authorization server, pass it explicitly "
+                    "in the config or use JWK format with kid field."
+                )
+                # Note: Don't delete kid if it was already set from another source
+                # (e.g., from the kid parameter or from dict-based private_key)
 
         token = jwt_encode(claims, my_pem.export_key(), JWT.HASH_ALGORITHM, headers)
+        return token
+
+    @staticmethod
+    def create_dpop_token(
+        http_method: str,
+        http_url: str,
+        private_key,
+        public_jwk: dict,
+        access_token: Optional[str] = None,
+        nonce: Optional[str] = None
+    ) -> str:
+        """
+        Create a DPoP proof JWT per RFC 9449.
+
+        This is a low-level utility method kept for potential future use or testing.
+        For production use, prefer DPoPProofGenerator.generate_proof_jwt() which
+        includes automatic URL cleaning per RFC 9449 Section 4.2.
+
+        This method creates a DPoP (Demonstrating Proof-of-Possession) proof JWT
+        that cryptographically binds requests to a specific key pair.
+
+        Args:
+            http_method: HTTP method (GET, POST, etc.)
+            http_url: Full HTTP URL. Query/fragment will NOT be automatically stripped.
+                     Use normalize_dpop_url() from okta.utils if needed.
+            private_key: RSA private key for signing (from Cryptodome)
+            public_jwk: Public key in JWK format (dict with kty, n, e)
+            access_token: Access token for 'ath' claim (optional, for API requests)
+            nonce: Server-provided nonce (optional)
+
+        Returns:
+            DPoP proof JWT as string
+
+        Note:
+            This is a low-level utility. For production use, prefer
+            DPoPProofGenerator.generate_proof_jwt() which automatically
+            normalizes URLs per RFC 9449 Section 4.2 using normalize_dpop_url().
+
+        Reference:
+            RFC 9449 - OAuth 2.0 Demonstrating Proof of Possession
+            https://datatracker.ietf.org/doc/html/rfc9449
+        """
+        issued_time = int(time.time())
+        jti = str(uuid.uuid4())
+
+        # Build claims per RFC 9449 Section 4.1
+        claims = {
+            'jti': jti,
+            'htm': http_method.upper(),
+            'htu': http_url,
+            'iat': issued_time
+        }
+
+        # Add optional nonce claim
+        if nonce:
+            claims['nonce'] = nonce
+
+        # Add access token hash claim for API requests
+        if access_token:
+            claims['ath'] = compute_ath(access_token)
+
+        # Build headers with public JWK per RFC 9449 Section 4.1
+        headers = {
+            'typ': 'dpop+jwt',
+            'alg': 'RS256',
+            'jwk': public_jwk
+        }
+
+        # Sign JWT with private key
+        token = jwt_encode(
+            claims,
+            private_key.export_key(),
+            algorithm='RS256',
+            headers=headers
+        )
+
         return token

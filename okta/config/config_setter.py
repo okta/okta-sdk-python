@@ -63,6 +63,12 @@ class ConfigSetter:
         Returns a deep copy to prevent external modification of internal state
         and to avoid holding references to sensitive values.
 
+        NOTE: Deep copying creates duplicate copies of all config data in memory,
+        including private keys. While this prevents external mutation, it means
+        sensitive data may be duplicated. Callers should not store this config
+        unnecessarily and should allow Python's garbage collector to clean up
+        the copy when no longer needed.
+
         Returns:
             dict -- Deep copy of the client configuration dictionary
         """
