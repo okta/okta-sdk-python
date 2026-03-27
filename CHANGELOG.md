@@ -1,12 +1,12 @@
 # Okta Python SDK Changelog
 
-## 3.3.0
+# 3.3.0
 
-### Features & Enhancements
+## Features & Enhancements
 * Implemented forward compatibility for Application models to gracefully handle unknown `signOnMode` values. By introducing `ApplicationJsonConverter`, the SDK now routes and preserves unrecognized sign-on modes without triggering Pydantic validation errors, matching the behavior of the .NET SDK.
 * Added the `FAILED_TO_VERIFY` value to the `DomainValidationStatus` enum to properly track and handle domain validation failure scenarios.
 
-### Bug Fixes
+## Bug Fixes
 * Fixed a `ValueError` crash in `list_applications()` that occurred when processing pre-existing OIDC apps with null JWKS fields (e.g., `use`, `kty`, `alg`, `e`, `n`, `crv`). The OpenAPI spec and code generation templates were updated to properly handle nullable discriminator fields.
 * Fixed a deserialization bug where `EmailDomain` and `EmailDomainResponse` models were silently dropping critical fields (such as `id`, `domain`, `validationStatus`, and `dnsValidationRecords`). The root cause—incorrect YAML indentation in the OpenAPI `allOf` composition—was corrected, restoring complete data for the create, replace, and verify email domain endpoints.
 
