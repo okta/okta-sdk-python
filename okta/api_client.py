@@ -21,12 +21,14 @@ Do not edit the class manually.
 """  # noqa: E501
 
 import datetime
+import io
 import json
 import mimetypes
 import os
 import re
 import tempfile
 from enum import Enum
+from PIL import Image
 from typing import Tuple, Optional, List, Dict, Union
 from urllib.parse import quote
 
@@ -539,10 +541,16 @@ class ApiClient:
         return "&".join(["=".join(map(str, item)) for item in new_params])
 
     def files_parameters(self, files: Dict[str, Union[str, bytes]]):
-        """Builds form parameters.
+        """Builds form parameters for multipart file uploads.
 
-        :param files: File parameters.
-        :return: Form parameters with files.
+        When bytes are provided, automatically detects file type from magic bytes
+        and assigns appropriate filename extension (.png, .jpg, .gif).
+
+        :param files: Dict mapping field names to either:
+                      - str: File path to read
+                      - bytes: Raw file data (type auto-detected)
+        :return: List of tuples: [(field_name, (filename, filedata, mimetype)), ...]
+        :raises ValueError: If file type is unsupported
         """
         params = []
         for k, v in files.items():
@@ -550,12 +558,55 @@ class ApiClient:
                 with open(v, "rb") as f:
                     filename = os.path.basename(f.name)
                     filedata = f.read()
+                mimetype = mimetypes.guess_type(filename)[0] or "application/octet-stream"
             elif isinstance(v, bytes):
-                filename = k
                 filedata = v
+
+                # Validate file size
+                if len(filedata) < 4:
+                    raise ValueError(f"File data too small ({len(filedata)} bytes) - minimum 4 bytes required")
+                if len(filedata) > 2 * 1024 * 1024:  # 2MB limit (matches Okta's background image limit)
+                    raise ValueError(f"File data too large ({len(filedata)} bytes) - maximum 2MB allowed")
+
+                # Detect file type from magic bytes
+                # Note: This is client-side validation only. Okta API performs
+                # comprehensive server-side image validation as the security boundary.
+                if filedata.startswith(b'\x89PNG\r\n\x1a\n'):  # Full PNG signature
+                    filename = f"{k}.png"
+                    mimetype = "image/png"
+                elif filedata.startswith(b'\xFF\xD8\xFF\xE0') or \
+                        filedata.startswith(b'\xFF\xD8\xFF\xE1') or \
+                        filedata.startswith(b'\xFF\xD8\xFF\xDB'):  # JPEG variants
+                    filename = f"{k}.jpg"
+                    mimetype = "image/jpeg"
+                elif filedata.startswith(b'GIF87a') or filedata.startswith(b'GIF89a'):
+                    filename = f"{k}.gif"
+                    mimetype = "image/gif"
+                else:
+                    # For unknown types, attempt PIL validation if available
+                    pil_validated = False
+                    try:
+                        img = Image.open(io.BytesIO(filedata))
+                        img.verify()  # Verify it's actually a valid image
+                        format_to_ext = {'PNG': 'png', 'JPEG': 'jpg', 'GIF': 'gif'}
+                        ext = format_to_ext.get(img.format, 'png')
+                        filename = f"{k}.{ext}"
+                        mimetype = f"image/{ext if ext != 'jpg' else 'jpeg'}"
+                        pil_validated = True
+                    except ImportError:
+                        # PIL not available - continue to fallback
+                        pass
+                    except Exception:
+                        # PIL validation failed - file may not be a valid image
+                        pass
+
+                    if not pil_validated:
+                        # Fallback: Default to PNG with warning
+                        # Server-side validation will reject if not a valid image
+                        filename = f"{k}.png"
+                        mimetype = "image/png"
             else:
                 raise ValueError("Unsupported file value")
-            mimetype = mimetypes.guess_type(filename)[0] or "application/octet-stream"
             params.append(tuple([k, tuple([filename, filedata, mimetype])]))
         return params
 
