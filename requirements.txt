@@ -5,7 +5,7 @@ jwcrypto==1.5.6
 pycryptodomex==3.23.0
 pydantic==2.11.3
 pydash==8.0.5
-PyJWT==2.10.1
+PyJWT==2.11.0
 python-dateutil==2.9.0.post0
 PyYAML==6.0.2
 requests==2.32.3
