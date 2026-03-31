@@ -95,7 +95,11 @@ class ApiClient:
             "authorization_mode": configuration["client"].get("authorizationMode", "SSWS"),
         }
 
-        # Add DPoP parameters if enabled
+        # Store DPoP parameters in Configuration for completeness.
+        # NOTE: DPoP proof generation and header injection are handled
+        # entirely by RequestExecutor → OAuth → DPoPProofGenerator.
+        # The Configuration object stores these values but they are NOT
+        # consumed by the synchronous urllib3/RESTClientObject path.
         if configuration["client"].get("dpopEnabled", False):
             config_params.update({
                 "dpop_enabled": True,

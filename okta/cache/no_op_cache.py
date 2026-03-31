@@ -17,15 +17,17 @@ class NoOpCache(Cache):
     in the cache.
     Implementing the okta.cache.cache.Cache abstract class.
 
-    .. warning::
-        **DPoP Performance Impact**: When using DPoP (Demonstrating Proof-of-Possession)
-        authentication with NoOpCache, OAuth tokens will be regenerated on every request
-        instead of being cached. This may significantly impact performance and could
-        trigger rate limits. Consider using OktaCache instead for production DPoP usage.
+    .. note::
+        **DPoP with NoOpCache**: When using NoOpCache, the ``OKTA_ACCESS_TOKEN``
+        cache key is not persisted between requests.  However, the OAuth class
+        maintains its own internal token state, so tokens are still reused
+        across requests without hitting the authorization server each time.
+        For production use with DPoP, enabling OktaCache provides an additional
+        layer of caching that avoids redundant ``get_oauth_token()`` calls.
     """
 
     def __init__(self):
-        super()
+        super().__init__()
 
     def get(self, key):
         """

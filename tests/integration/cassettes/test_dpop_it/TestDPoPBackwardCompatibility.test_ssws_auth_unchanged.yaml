@@ -1,0 +1,72 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/users?limit=1
+  response:
+    body:
+      string: '[{"id":"00unwlw0tbo8E6aVj5d7","status":"ACTIVE","created":"2025-03-19T08:01:48.000Z","activated":null,"statusChanged":"2025-03-19T09:20:48.000Z","lastLogin":"2026-03-27T11:05:20.000Z","lastUpdated":"2025-03-19T09:20:48.000Z","passwordChanged":"2025-03-19T09:20:48.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Binoy","lastName":"Oza","mobilePhone":null,"secondEmail":null,"login":"binoy.oza@okta.com","email":"binoy.oza@okta.com"},"credentials":{"password":{},"emails":[{"value":"binoy.oza@okta.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7"}}}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 30 Mar 2026 07:55:48 GMT
+      Expires:
+      - '0'
+      Link:
+      - <https://dev-20982288.okta.com/api/v1/users?limit=1>; rel="self"
+      - <https://dev-20982288.okta.com/api/v1/users?after=200unwlw0tbo8E6aVj5d7&limit=1>;
+        rel="next"
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=67FE18A5B9A1ED6DC3C38942C38ACCA4; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - frame-ancestors 'self'
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 3c1e149e9047e776e3336f08209e8500
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1774857408'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

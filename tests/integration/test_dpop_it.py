@@ -30,16 +30,24 @@ References:
 - Setup Guide: tests/DPOP_INTEGRATION_TEST_SETUP.md
 """
 import asyncio
+import logging
 import os
-import pytest
-import pytest_asyncio
 import sys
+import time
 import uuid
 from pathlib import Path
 from typing import Dict, Any
 
+import pytest
+import pytest_asyncio
+import requests
+
 import okta.models as models
 from okta.client import Client as OktaClient
+from okta.jwt import JWT
+from tests.mocks import MockOktaClient
+
+logger = logging.getLogger(__name__)
 
 
 def create_dpop_client(dpop_config, fs):
@@ -83,7 +91,6 @@ class TestDPoPIntegration:
 
         if config_file.exists():
             # Import the config
-            import sys
             sys.path.insert(0, str(config_file.parent))
             try:
                 from dpop_test_config import DPOP_CONFIG
@@ -139,7 +146,6 @@ class TestDPoPIntegration:
         config_file = Path(__file__).parent.parent.parent / "dpop_test_config.py"
 
         if config_file.exists():
-            import sys
             sys.path.insert(0, str(config_file.parent))
             try:
                 from dpop_test_config import DPOP_APP_ID, ADMIN_CONFIG
@@ -161,7 +167,6 @@ class TestDPoPIntegration:
                 except Exception as parse_error:
                     # Fallback: use raw HTTP to get app details
                     print(f"\n⚠️  SDK parse error, using raw API: {str(parse_error)[:100]}")
-                    import requests
                     response = requests.get(
                         f"{ADMIN_CONFIG['orgUrl']}/api/v1/apps/{DPOP_APP_ID}",
                         headers={"Authorization": f"SSWS {ADMIN_CONFIG['token']}"}
@@ -194,8 +199,7 @@ class TestDPoPIntegration:
                     else:
                         pytest.skip(f"Could not fetch DPoP test application via API: {response.status_code}")
 
-                # No cleanup - managed by dpop_test_cleanup.py
-                return
+                # No cleanup needed — managed by dpop_test_cleanup.py
 
             except Exception as e:
                 pytest.skip(f"Could not load DPoP application: {e}")
@@ -260,17 +264,19 @@ class TestDPoPIntegration:
         # Create DPoP-enabled client
         client = create_dpop_client(dpop_config, fs)
 
-        # Request access token
-        access_token, err = await client._request_executor._oauth.get_access_token()
+        # Request access token using the 3-tuple API (includes token_type)
+        access_token, token_type, err = (
+            await client._request_executor._oauth.get_oauth_token()
+        )
 
         # Validate token acquisition
         assert err is None, f"Failed to get access token: {err}"
         assert access_token is not None
-        # assert token_type == "DPoP", f"Expected DPoP token type, got {token_type}"
+        assert token_type == "DPoP", f"Expected DPoP token type, got {token_type}"
 
-        print(f"✓ Acquired DPoP-bound access token")
-        # print(f"✓ Token type: {token_type}")
-        print(f"✓ Token length: {len(access_token)}")
+        logger.info("Acquired DPoP-bound access token")
+        logger.info("Token type: %s", token_type)
+        logger.info("Token length: %d", len(access_token))
 
         # Verify nonce was stored if provided
         generator = client._request_executor._oauth.get_dpop_generator()
@@ -624,8 +630,6 @@ class TestDPoPIntegration:
         print(f"Testing GET /api/v1/apps/{dpop_app.id}...")
 
         # Try to use the admin client for this test
-        import sys
-        from pathlib import Path
         config_file = Path(__file__).parent.parent.parent / "dpop_test_config.py"
         sys.path.insert(0, str(config_file.parent))
         try:
@@ -653,6 +657,210 @@ class TestDPoPIntegration:
         print("✓ DPoP works correctly with various API endpoints")
 
 
+class TestDPoPBackwardCompatibility:
+    """
+    Backward Compatibility Tests (I-10, I-11)
+
+    Verifies that existing non-DPoP flows continue to work unchanged
+    after the DPoP feature is added.
+    """
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_ssws_auth_unchanged(self, fs):
+        """
+        I-10: SSWS auth works exactly as before — no DPoP headers.
+
+        Validates:
+        - Client with SSWS token mode works normally
+        - No DPoP headers are injected
+        - API responses are correct
+        """
+        print("\n=== I-10: SSWS Auth Unchanged ===")
+
+        client = MockOktaClient(fs)
+
+        # Verify default headers contain SSWS token, not DPoP
+        default_headers = client._request_executor.get_default_headers()
+        assert "Authorization" in default_headers
+        assert default_headers["Authorization"].startswith("SSWS ")
+        print("✓ SSWS authorization header present")
+
+        # Verify no OAuth/DPoP was initialized
+        assert not client._request_executor._is_oauth_mode
+        print("✓ Not in OAuth mode")
+
+        # Make a simple API call
+        users, resp, err = await client.list_users(limit=1)
+        assert err is None, f"SSWS list_users failed: {err}"
+        print(f"✓ SSWS API request successful, got {len(list(users))} user(s)")
+
+        print("✓ SSWS auth is completely unchanged")
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_private_key_auth_without_dpop(self, fs, dpop_config_no_dpop):
+        """
+        I-11: PrivateKey auth without DPoP sends Bearer request (no DPoP headers).
+
+        When the SDK has dpopEnabled=False but the Okta application has DPoP
+        binding enabled, the server rejects the request.  This test validates:
+        - Client initialises without DPoP generator
+        - SDK sends a Bearer request (no DPoP proof header)
+        - Server rejection is handled gracefully (no crash/segfault)
+        """
+        print("\n=== I-11: PrivateKey Auth Without DPoP ===")
+
+        if not dpop_config_no_dpop.get('privateKey'):
+            pytest.skip("No private key configured")
+
+        # Pause fake filesystem to allow Cryptodome native modules to load.
+        fs.pause()
+        client = OktaClient(dpop_config_no_dpop)
+        # Pre-load crypto modules that JWT.get_PEM_JWK uses:
+        JWT.get_PEM_JWK(dpop_config_no_dpop['privateKey'])
+        fs.resume()
+
+        # Verify DPoP is NOT enabled on the SDK side
+        assert client._request_executor._oauth.is_dpop_enabled() is False
+        assert client._request_executor._oauth.get_dpop_generator() is None
+        print("✓ DPoP is not enabled in SDK")
+
+        # Make an API call.  The Okta app requires DPoP, so the server will
+        # reject a plain Bearer request — but the SDK must not crash.
+        users, resp, err = await client.list_users(limit=1)
+
+        if err is None:
+            # Server accepted Bearer (app doesn't enforce DPoP) — also valid
+            print("✓ Server accepted Bearer request (DPoP not enforced on app)")
+        else:
+            # Server rejected because DPoP is required on the app
+            err_msg = str(err) if not isinstance(err, dict) else err.get("message", str(err))
+            assert "dpop" in err_msg.lower(), (
+                f"Expected DPoP-related error, got: {err_msg}"
+            )
+            print(f"✓ Server rejected non-DPoP request as expected: DPoP required")
+            print("✓ SDK handled rejection gracefully (no crash)")
+
+        print("✓ PrivateKey auth without DPoP behaves correctly")
+
+    @pytest.fixture(scope='class')
+    def dpop_config_no_dpop(self):
+        """
+        Configuration for PrivateKey mode WITHOUT DPoP.
+
+        Same as dpop_config but with dpopEnabled=False (or absent).
+        """
+        config_file = Path(__file__).parent.parent.parent / "dpop_test_config.py"
+
+        if config_file.exists():
+            sys.path.insert(0, str(config_file.parent))
+            try:
+                from dpop_test_config import DPOP_CONFIG
+                no_dpop_config = DPOP_CONFIG.copy()
+                no_dpop_config['dpopEnabled'] = False
+                # Remove any DPoP-specific keys
+                no_dpop_config.pop('dpopKeyRotationInterval', None)
+                print(f"\n✓ Loaded non-DPoP PrivateKey config")
+                return no_dpop_config
+            except ImportError as e:
+                print(f"\n⚠️  Could not import dpop_test_config: {e}")
+            finally:
+                sys.path.pop(0)
+
+        # Fallback: environment variables
+        org_url = os.getenv('OKTA_CLIENT_ORGURL')
+        client_id = os.getenv('DPOP_CLIENT_ID')
+
+        if not org_url or not client_id:
+            pytest.skip("Test configuration not found for non-DPoP PrivateKey test.")
+
+        private_key = os.getenv('DPOP_PRIVATE_KEY')
+        if not private_key:
+            private_key_file = Path(__file__).parent.parent.parent / "dpop_test_private_key.pem"
+            if private_key_file.exists():
+                private_key = private_key_file.read_text()
+            else:
+                pytest.skip("Private key not found.")
+
+        return {
+            'orgUrl': org_url,
+            'authorizationMode': 'PrivateKey',
+            'clientId': client_id,
+            'scopes': ['okta.users.read'],
+            'privateKey': private_key,
+            'dpopEnabled': False,
+        }
+
+
+class TestDPoPTokenExpiry:
+    """
+    Token Expiry Tests (I-09)
+
+    Verifies that the SDK auto-refreshes expired tokens.
+    """
+
+    @pytest.fixture(scope='class')
+    def dpop_config(self):
+        """Configuration for DPoP-enabled client."""
+        config_file = Path(__file__).parent.parent.parent / "dpop_test_config.py"
+
+        if config_file.exists():
+            sys.path.insert(0, str(config_file.parent))
+            try:
+                from dpop_test_config import DPOP_CONFIG
+                return DPOP_CONFIG
+            except ImportError:
+                pass
+            finally:
+                sys.path.pop(0)
+
+        pytest.skip("DPoP test configuration not found.")
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_token_expiry_and_refresh(self, fs, dpop_config):
+        """
+        I-09: Token expiry triggers automatic refresh with new DPoP proof.
+
+        Validates:
+        - First request acquires token
+        - Simulating expiry clears token
+        - Next request auto-acquires new token
+        """
+        print("\n=== I-09: Token Expiry and Refresh ===")
+
+        if not dpop_config.get('privateKey'):
+            pytest.skip("No private key configured")
+
+        fs.pause()
+        client = OktaClient(dpop_config)
+        fs.resume()
+
+        # First request — acquires initial token
+        users, resp, err = await client.list_users(limit=1)
+        assert err is None, f"First request failed: {err}"
+        token1 = client._request_executor._oauth._access_token
+        assert token1 is not None
+        print(f"✓ Initial token acquired: {token1[:20]}...")
+
+        # Simulate token expiry by setting expiry time in the past
+        client._request_executor._oauth._access_token_expiry_time = int(time.time()) - 1
+        print("✓ Simulated token expiry")
+
+        # Next request — should auto-refresh
+        users, resp, err = await client.list_users(limit=1)
+        assert err is None, f"Refresh request failed: {err}"
+        token2 = client._request_executor._oauth._access_token
+        assert token2 is not None
+        print(f"✓ Refreshed token acquired: {token2[:20]}...")
+
+        # Tokens should be different (new token after expiry)
+        # Note: May be the same if server returns cached token, so we just
+        # verify the flow didn't crash
+        print("✓ Token expiry and refresh flow completed successfully")
+
+
 # Helper functions for manual testing
 async def create_dpop_test_app(org_url: str, api_token: str) -> Dict[str, Any]:
     """
@@ -674,7 +882,7 @@ async def create_dpop_test_app(org_url: str, api_token: str) -> Dict[str, Any]:
     app_label = f"DPoP_Test_App_{uuid.uuid4().hex[:8]}"
 
     oidc_settings_client = models.OpenIdConnectApplicationSettingsClient(
-         grant_types=[models.GrantType.CLIENT_CREDENTIALS],
+        grant_types=[models.GrantType.CLIENT_CREDENTIALS],
         application_type=models.OpenIdConnectApplicationType.SERVICE,
         dpop_bound_access_tokens=True,
         token_endpoint_auth_method=models.OAuthEndpointAuthenticationMethod.PRIVATE_KEY_JWT

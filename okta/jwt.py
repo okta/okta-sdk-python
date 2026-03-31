@@ -26,15 +26,14 @@ import os
 import time
 import uuid
 from ast import literal_eval
-from typing import Optional
 
 from Cryptodome.PublicKey import RSA
 from jwcrypto.jwk import JWK, InvalidJWKType
 from jwt import encode as jwt_encode
 
-from okta.utils import compute_ath
+from okta.constants import LOGGER_NAME
 
-logger = logging.getLogger("okta-sdk-python")
+logger = logging.getLogger(LOGGER_NAME)
 
 
 class JWT:
@@ -45,7 +44,7 @@ class JWT:
     OAUTH_ENDPOINT = "/oauth2/v1/token"
     HASH_ALGORITHM = "RS256"
     PEM_FORMAT = "PKCS1"
-    EXPIRATION = 1 * 60 * 50
+    EXPIRATION = 50 * 60  # 50 minutes (3000 seconds)
     JWT_OPTIONS = {
         "verify_signature": True,
         "verify_aud": True,
@@ -71,7 +70,7 @@ class JWT:
     @staticmethod
     def get_PEM_JWK(private_key):
         """
-        This class gets the PEM and JWK representation of the private key
+        Gets the PEM and JWK representation of the private key
         from the Okta Client configuration.
 
         Args:
@@ -93,12 +92,10 @@ class JWT:
             # if string repr, convert to dict object
             if isinstance(private_key, str):
                 private_key = literal_eval(private_key)
-            # remove whitespace from key vaules
+            # remove whitespace from key values
             private_key = {k: "".join(private_key[k].split()) for k in private_key}
-            # ensure private_key is JSON formatted
-            try:
-                json.loads(private_key)
-            except TypeError:
+            # Ensure private_key is a JSON string for JWK.from_json()
+            if isinstance(private_key, dict):
                 private_key = json.dumps(private_key)
             try:
                 my_jwk = JWK.from_json(private_key)
@@ -110,9 +107,8 @@ class JWT:
                 private_key
             ):
                 # open file if exists and read
-                pem_file = open(private_key, "r")
-                private_key = pem_file.read()
-                pem_file.close()
+                with open(private_key, "r") as pem_file:
+                    private_key = pem_file.read()
             # remove leading whitespaces from each line
             my_pem = "\n".join([line.strip() for line in private_key.splitlines()])
             my_pem = bytes(my_pem, "ascii")
@@ -147,7 +143,7 @@ class JWT:
         issued_time = int(time.time())
         expiry_time = issued_time + JWT.EXPIRATION
         # generate unique JWT ID
-        generated_JWT_ID = str(uuid.uuid4())
+        generated_jwt_id = str(uuid.uuid4())
 
         # Create claims for token and create token
         claims = {
@@ -156,13 +152,13 @@ class JWT:
             "exp": expiry_time,
             "iss": client_id,
             "aud": org_url + JWT.OAUTH_ENDPOINT,
-            "jti": generated_JWT_ID,
+            "jti": generated_jwt_id,
         }
 
         # Add additional headers
         headers = {}
 
-        # # Check if kid was supplied
+        # Check if kid was supplied
         if kid:
             headers["kid"] = kid
         elif isinstance(private_key, dict) and "kid" in private_key:
@@ -185,80 +181,4 @@ class JWT:
                 # (e.g., from the kid parameter or from dict-based private_key)
 
         token = jwt_encode(claims, my_pem.export_key(), JWT.HASH_ALGORITHM, headers)
-        return token
-
-    @staticmethod
-    def create_dpop_token(
-        http_method: str,
-        http_url: str,
-        private_key,
-        public_jwk: dict,
-        access_token: Optional[str] = None,
-        nonce: Optional[str] = None
-    ) -> str:
-        """
-        Create a DPoP proof JWT per RFC 9449.
-
-        This is a low-level utility method kept for potential future use or testing.
-        For production use, prefer DPoPProofGenerator.generate_proof_jwt() which
-        includes automatic URL cleaning per RFC 9449 Section 4.2.
-
-        This method creates a DPoP (Demonstrating Proof-of-Possession) proof JWT
-        that cryptographically binds requests to a specific key pair.
-
-        Args:
-            http_method: HTTP method (GET, POST, etc.)
-            http_url: Full HTTP URL. Query/fragment will NOT be automatically stripped.
-                     Use normalize_dpop_url() from okta.utils if needed.
-            private_key: RSA private key for signing (from Cryptodome)
-            public_jwk: Public key in JWK format (dict with kty, n, e)
-            access_token: Access token for 'ath' claim (optional, for API requests)
-            nonce: Server-provided nonce (optional)
-
-        Returns:
-            DPoP proof JWT as string
-
-        Note:
-            This is a low-level utility. For production use, prefer
-            DPoPProofGenerator.generate_proof_jwt() which automatically
-            normalizes URLs per RFC 9449 Section 4.2 using normalize_dpop_url().
-
-        Reference:
-            RFC 9449 - OAuth 2.0 Demonstrating Proof of Possession
-            https://datatracker.ietf.org/doc/html/rfc9449
-        """
-        issued_time = int(time.time())
-        jti = str(uuid.uuid4())
-
-        # Build claims per RFC 9449 Section 4.1
-        claims = {
-            'jti': jti,
-            'htm': http_method.upper(),
-            'htu': http_url,
-            'iat': issued_time
-        }
-
-        # Add optional nonce claim
-        if nonce:
-            claims['nonce'] = nonce
-
-        # Add access token hash claim for API requests
-        if access_token:
-            claims['ath'] = compute_ath(access_token)
-
-        # Build headers with public JWK per RFC 9449 Section 4.1
-        headers = {
-            'typ': 'dpop+jwt',
-            'alg': 'RS256',
-            'jwk': public_jwk
-        }
-
-        # Sign JWT with private key
-        token = jwt_encode(
-            claims,
-            private_key.export_key(),
-            algorithm='RS256',
-            headers=headers
-        )
-
         return token

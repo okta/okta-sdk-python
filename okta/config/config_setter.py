@@ -41,6 +41,8 @@ class ConfigSetter:
             "proxy": {"port": "", "host": "", "username": "", "password": ""},
             "rateLimit": {"maxRetries": ""},
             "oauthTokenRenewalOffset": "",
+            "dpopEnabled": "",
+            "dpopKeyRotationInterval": "",
         },
         "testing": {"testingDisableHttpsCheck": ""},
     }

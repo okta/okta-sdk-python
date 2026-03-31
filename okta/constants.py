@@ -35,3 +35,6 @@ MAX_DPOP_KEY_ROTATION_SECONDS = 90 * 24 * 3600  # 90 days maximum
 MAX_DPOP_NONCE_RETRIES = 2
 MAX_DPOP_BACKOFF_DELAY = 1.0  # Maximum backoff delay in seconds for nonce retries
 DPOP_USER_AGENT_EXTENSION = "isDPoP:true"
+
+# SDK-wide logger name — single source of truth for all hand-written modules
+LOGGER_NAME = "okta-sdk-python"

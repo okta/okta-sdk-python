@@ -1,3 +1,13 @@
+# The Okta software accompanied by this notice is provided pursuant to the following terms:
+# Copyright © 2025-Present, Okta, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
+# You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and limitations under the License.
+# coding: utf-8
+
 """
 DPoP-specific error messages and handling.
 
@@ -6,6 +16,10 @@ returned by the Okta authorization server.
 
 Reference: RFC 9449 Section 7 (Error Handling)
 """
+
+# Well-formed DPoP error prefixes per RFC 9449 conventions.
+# Module-level constant to avoid re-creating on every is_dpop_error() call.
+_DPOP_ERROR_PREFIXES = ("invalid_dpop_", "use_dpop_", "dpop_")
 
 DPOP_ERROR_MESSAGES = {
     'invalid_dpop_proof': (
@@ -26,8 +40,8 @@ DPOP_ERROR_MESSAGES = {
         'Access token is not bound to the DPoP key. '
         'The access token was obtained with a different key than the one used for this request. '
         '\n\nACTION: '
-        '1. Clear token cache: client._request_executor._cache.clear() '
-        '2. Obtain a new token with the current key. '
+        '1. Create a new OktaClient instance to obtain a fresh DPoP-bound token. '
+        '2. Ensure you are using the same Client instance for all requests in a session. '
         '\n\nThis may happen if keys were rotated after obtaining the token.'
     ),
     'invalid_dpop_jkt': (
@@ -38,14 +52,6 @@ DPOP_ERROR_MESSAGES = {
         '2. Do not manually rotate keys during active sessions. '
         '3. Check that dpopKeyRotationInterval is configured consistently. '
         '\n\nEnsure you are using the same key pair for all requests.'
-    ),
-    'invalid_request': (
-        'Invalid request. Check your DPoP proof JWT format and claims. '
-        '\n\nACTION: '
-        '1. Enable DEBUG logging to inspect proof JWT claims. '
-        '2. Verify all required claims are present (jti, htm, htu, iat). '
-        '3. Check that HTU matches the request URL (without query/fragment). '
-        '\n\nEnsure the JWT is properly signed and all required claims are present.'
     ),
 }
 
@@ -61,7 +67,7 @@ def get_dpop_error_message(error_code: str) -> str:
         User-friendly error message
     """
     return DPOP_ERROR_MESSAGES.get(
-        error_code,
+        error_code.lower(),
         f'DPoP error: {error_code}. Check Okta logs for details. '
         f'See RFC 9449 for DPoP specification: https://datatracker.ietf.org/doc/html/rfc9449'
     )
@@ -71,19 +77,24 @@ def is_dpop_error(error_code: str) -> bool:
     """
     Check if error code is DPoP-related.
 
+    Matches known DPoP error codes and well-formed DPoP error prefixes
+    (e.g., 'invalid_dpop_*', 'use_dpop_*') to avoid false positives from
+    unrelated errors that happen to contain the substring 'dpop'.
+
     Args:
         error_code: Error code from OAuth error response
 
     Returns:
         True if error is DPoP-related
     """
-    # Use more specific patterns to avoid false positives
-    # Check if it's a known DPoP error or contains 'dpop' prefix
+    if not error_code:
+        return False
+
     error_lower = error_code.lower()
 
-    # Known DPoP error codes
+    # Known DPoP error codes (exact match)
     if error_lower in DPOP_ERROR_MESSAGES:
         return True
 
-    # Or contains 'dpop' keyword (more specific than just 'nonce')
-    return 'dpop' in error_lower
+    # Check well-formed DPoP error prefixes per RFC 9449 conventions
+    return any(error_lower.startswith(prefix) for prefix in _DPOP_ERROR_PREFIXES)

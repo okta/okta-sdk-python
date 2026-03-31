@@ -10,7 +10,10 @@
 
 import logging
 
-from okta.constants import FINDING_OKTA_DOMAIN, REPO_URL, MIN_DPOP_KEY_ROTATION_SECONDS, MAX_DPOP_KEY_ROTATION_SECONDS
+from okta.constants import (
+    FINDING_OKTA_DOMAIN, LOGGER_NAME, REPO_URL,
+    MIN_DPOP_KEY_ROTATION_SECONDS, MAX_DPOP_KEY_ROTATION_SECONDS,
+)
 from okta.error_messages import (
     ERROR_MESSAGE_ORG_URL_MISSING,
     ERROR_MESSAGE_API_TOKEN_DEFAULT,
@@ -28,7 +31,7 @@ from okta.error_messages import (
     ERROR_MESSAGE_PROXY_INVALID_PORT,
 )
 
-logger = logging.getLogger("okta-sdk-python")
+logger = logging.getLogger(LOGGER_NAME)
 
 
 class ConfigValidator:
@@ -55,7 +58,6 @@ class ConfigValidator:
         errors = []
         # Defensive: default to empty dict if sections are missing
         client = self._config.get("client", {})
-        _ = self._config.get("testing", {})
 
         # check org url
         errors += self._validate_org_url(client.get("orgUrl", ""))
@@ -65,6 +67,14 @@ class ConfigValidator:
         # check API details based on authorization mode
         if client.get("authorizationMode") in ("SSWS", "Bearer"):
             errors += self._validate_token(client.get("token", ""))
+            # Warn if DPoP is enabled with a non-OAuth auth mode (it has no effect)
+            if client.get("dpopEnabled", False):
+                logger.warning(
+                    "dpopEnabled is True but authorizationMode is '%s'. "
+                    "DPoP only applies to 'PrivateKey' (OAuth) mode and will "
+                    "be ignored. Set authorizationMode to 'PrivateKey' to use DPoP.",
+                    client.get("authorizationMode"),
+                )
         elif client.get("authorizationMode") == "PrivateKey":
             client_fields = [
                 "clientId",
@@ -237,11 +247,17 @@ class ConfigValidator:
         """
         Validate DPoP-specific configuration.
 
+        Coerces string values from environment variables to their expected
+        types (bool for ``dpopEnabled``, int for ``dpopKeyRotationInterval``)
+        before validation.  The coerced values are written back into *client*
+        so that downstream code receives the correct Python types.
+
         Note: This method is only called when authorizationMode is 'PrivateKey',
         so no need to re-check the auth mode here.
 
         Args:
-            client: Client configuration dict
+            client (dict): Client configuration dict (mutated in-place for
+                type coercion of string values from environment variables).
 
         Returns:
             list: List of error messages (empty if valid)
@@ -249,37 +265,71 @@ class ConfigValidator:
 
         errors = []
 
-        if not client.get('dpopEnabled'):
+        dpop_enabled = client.get('dpopEnabled', False)
+
+        # Coerce string from env vars to bool (e.g. "true" → True)
+        if isinstance(dpop_enabled, str):
+            dpop_enabled = dpop_enabled.strip().lower() == 'true'
+            client['dpopEnabled'] = dpop_enabled
+
+        # Validate dpopEnabled is a boolean
+        if not isinstance(dpop_enabled, bool):
+            errors.append(
+                "dpopEnabled must be a boolean (True/False), "
+                f"but got {type(dpop_enabled).__name__}: {dpop_enabled!r}"
+            )
+            return errors  # Cannot validate further if type is wrong
+
+        if not dpop_enabled:
             return errors  # DPoP not enabled, nothing to validate
 
         # Validate key rotation interval
         rotation_interval = client.get('dpopKeyRotationInterval', 86400)
 
+        # Coerce string from env vars to int (e.g. "86400" → 86400)
+        if isinstance(rotation_interval, str):
+            try:
+                rotation_interval = int(rotation_interval)
+                client['dpopKeyRotationInterval'] = rotation_interval
+            except ValueError:
+                errors.append(
+                    "dpopKeyRotationInterval must be a valid integer "
+                    f"(seconds), but got non-numeric string: "
+                    f"{rotation_interval!r}"
+                )
+                return errors
+
         if not isinstance(rotation_interval, int):
             errors.append(
-                f"dpopKeyRotationInterval must be an integer (seconds), "
+                "dpopKeyRotationInterval must be an integer (seconds), "
                 f"but got {type(rotation_interval).__name__}"
             )
-        elif rotation_interval < MIN_DPOP_KEY_ROTATION_SECONDS:  # Minimum 1 hour
+        elif rotation_interval < MIN_DPOP_KEY_ROTATION_SECONDS:
             errors.append(
-                f"dpopKeyRotationInterval must be at least {MIN_DPOP_KEY_ROTATION_SECONDS} seconds (1 hour), "
+                "dpopKeyRotationInterval must be at least "
+                f"{MIN_DPOP_KEY_ROTATION_SECONDS} seconds (1 hour), "
                 f"but got {rotation_interval} seconds. "
                 "Shorter intervals may cause performance issues."
             )
-        elif rotation_interval > MAX_DPOP_KEY_ROTATION_SECONDS:  # Maximum 90 days
+        elif rotation_interval > MAX_DPOP_KEY_ROTATION_SECONDS:
+            max_days = MAX_DPOP_KEY_ROTATION_SECONDS // 86400
+            given_days = rotation_interval // 86400
             errors.append(
-                f"dpopKeyRotationInterval must be at most {MAX_DPOP_KEY_ROTATION_SECONDS} seconds "
-                f"({MAX_DPOP_KEY_ROTATION_SECONDS // 86400} days), "
-                f"but got {rotation_interval} seconds ({rotation_interval // 86400} days). "
-                "Excessive rotation intervals defeat the security purpose of DPoP. "
+                "dpopKeyRotationInterval must be at most "
+                f"{MAX_DPOP_KEY_ROTATION_SECONDS} seconds "
+                f"({max_days} days), but got {rotation_interval} "
+                f"seconds ({given_days} days). "
+                "Excessive rotation intervals defeat the security "
+                "purpose of DPoP. "
                 "Recommended: 24-48 hours for production use."
             )
         elif rotation_interval > 7 * 24 * 3600:  # Warning for > 7 days
             # This is a warning, not an error
             logger.warning(
-                f"dpopKeyRotationInterval is very long ({rotation_interval} seconds, "
-                f"{rotation_interval // 86400} days). "
-                "Consider shorter intervals (24-48 hours) for better security."
+                "dpopKeyRotationInterval is very long (%d seconds, "
+                "%d days). Consider shorter intervals (24-48 hours) "
+                "for better security.",
+                rotation_interval, rotation_interval // 86400,
             )
 
         return errors
