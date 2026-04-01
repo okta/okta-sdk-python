@@ -131,7 +131,7 @@ class TestApplicationSSOResource:
                 # The test should still pass as we're validating the API method is accessible
                 assert err is not None
                 # Verify it's an expected error type
-                assert 'message' in str(err).lower() or 'error' in str(err).lower()
+                assert 400 == resp.status
 
             print("\n=== Test completed successfully ===")
 

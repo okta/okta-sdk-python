@@ -21,6 +21,7 @@ Do not edit the class manually.
 """  # noqa: E501
 
 import json
+import logging
 import os
 import time
 import uuid
@@ -29,6 +30,10 @@ from ast import literal_eval
 from Cryptodome.PublicKey import RSA
 from jwcrypto.jwk import JWK, InvalidJWKType
 from jwt import encode as jwt_encode
+
+from okta.constants import LOGGER_NAME
+
+logger = logging.getLogger(LOGGER_NAME)
 
 
 class JWT:
@@ -39,7 +44,7 @@ class JWT:
     OAUTH_ENDPOINT = "/oauth2/v1/token"
     HASH_ALGORITHM = "RS256"
     PEM_FORMAT = "PKCS1"
-    EXPIRATION = 1 * 60 * 50
+    EXPIRATION = 50 * 60  # 50 minutes (3000 seconds)
     JWT_OPTIONS = {
         "verify_signature": True,
         "verify_aud": True,
@@ -65,7 +70,7 @@ class JWT:
     @staticmethod
     def get_PEM_JWK(private_key):
         """
-        This class gets the PEM and JWK representation of the private key
+        Gets the PEM and JWK representation of the private key
         from the Okta Client configuration.
 
         Args:
@@ -87,12 +92,10 @@ class JWT:
             # if string repr, convert to dict object
             if isinstance(private_key, str):
                 private_key = literal_eval(private_key)
-            # remove whitespace from key vaules
+            # remove whitespace from key values
             private_key = {k: "".join(private_key[k].split()) for k in private_key}
-            # ensure private_key is JSON formatted
-            try:
-                json.loads(private_key)
-            except TypeError:
+            # Ensure private_key is a JSON string for JWK.from_json()
+            if isinstance(private_key, dict):
                 private_key = json.dumps(private_key)
             try:
                 my_jwk = JWK.from_json(private_key)
@@ -104,9 +107,8 @@ class JWT:
                 private_key
             ):
                 # open file if exists and read
-                pem_file = open(private_key, "r")
-                private_key = pem_file.read()
-                pem_file.close()
+                with open(private_key, "r") as pem_file:
+                    private_key = pem_file.read()
             # remove leading whitespaces from each line
             my_pem = "\n".join([line.strip() for line in private_key.splitlines()])
             my_pem = bytes(my_pem, "ascii")
@@ -141,7 +143,7 @@ class JWT:
         issued_time = int(time.time())
         expiry_time = issued_time + JWT.EXPIRATION
         # generate unique JWT ID
-        generated_JWT_ID = str(uuid.uuid4())
+        generated_jwt_id = str(uuid.uuid4())
 
         # Create claims for token and create token
         claims = {
@@ -150,13 +152,13 @@ class JWT:
             "exp": expiry_time,
             "iss": client_id,
             "aud": org_url + JWT.OAUTH_ENDPOINT,
-            "jti": generated_JWT_ID,
+            "jti": generated_jwt_id,
         }
 
         # Add additional headers
         headers = {}
 
-        # # Check if kid was supplied
+        # Check if kid was supplied
         if kid:
             headers["kid"] = kid
         elif isinstance(private_key, dict) and "kid" in private_key:
@@ -167,8 +169,16 @@ class JWT:
                 if "kid" in private_key_dict:
                     headers["kid"] = private_key_dict["kid"]
             except json.JSONDecodeError:
-                if "kid" in headers:
-                    del headers["kid"]
+                # Private key is in PEM format (not JSON JWK), which is valid
+                # kid can only be extracted from JWK format or passed explicitly
+                # This is expected behavior - no error, just debug info
+                logger.debug(
+                    "Private key is PEM format (not JSON JWK), cannot auto-extract kid. "
+                    "If kid is required by your authorization server, pass it explicitly "
+                    "in the config or use JWK format with kid field."
+                )
+                # Note: Don't delete kid if it was already set from another source
+                # (e.g., from the kid parameter or from dict-based private_key)
 
         token = jwt_encode(claims, my_pem.export_key(), JWT.HASH_ALGORITHM, headers)
         return token

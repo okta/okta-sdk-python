@@ -16,10 +16,18 @@ class NoOpCache(Cache):
     This is a disabled Cache Class where no operations occur
     in the cache.
     Implementing the okta.cache.cache.Cache abstract class.
+
+    .. note::
+        **DPoP with NoOpCache**: When using NoOpCache, the ``OKTA_ACCESS_TOKEN``
+        cache key is not persisted between requests.  However, the OAuth class
+        maintains its own internal token state, so tokens are still reused
+        across requests without hitting the authorization server each time.
+        For production use with DPoP, enabling OktaCache provides an additional
+        layer of caching that avoids redundant ``get_oauth_token()`` calls.
     """
 
     def __init__(self):
-        super()
+        super().__init__()
 
     def get(self, key):
         """
