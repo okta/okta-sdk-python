@@ -1,7 +1,7 @@
 interactions:
 - request:
     body:
-      client_assertion: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwb2F0dGNleG83UjYxNjZPUDVkNyIsImlhdCI6MTc3NDg1NzYwOSwiZXhwIjoxNzc0ODYwNjA5LCJpc3MiOiIwb2F0dGNleG83UjYxNjZPUDVkNyIsImF1ZCI6Imh0dHBzOi8vZGV2LTIwOTgyMjg4Lm9rdGEuY29tL29hdXRoMi92MS90b2tlbiIsImp0aSI6ImEwYjY5MzVjLTc1Y2UtNGVhOS1hYTNmLTI2ZjIyNTg0NzEwZiJ9.ircflFYEspaFmsUBnt6utkFV4EFUWWq19YB735KVBYQeU-wjCP6bD8f3dlwmiP-qQyVV0zlwWp6uhOwZBaexO60puMI__fmOW0Lf8zkZ_aj0WvWFHVPkqAjehAt7ZzKx_mYWf5hDjtT5j1gRNvDtZkRRs62h1hONd8L5S7-9ojW8OXc-5Cw_XdihttKDRZ79mNBEgtCo4YnuTKQ0WGgh4fSYcw1bSo2J6F7DgKaTn_IccfpJASMADG_GmkKS7TDYFoFKby0cv3qcdn3AqyVcottGNGoIDKF-9_57Hd96_a4nTima6wkeVLOzEtbkNaLyCG8z0_vb-oQMr319UqqRty_DA1le2xB_ArBTNcFhmgZ1tGKFMcPK6h1z6wKrMmo9gxVgTVfx0-FQSJJBd_Blw-umEwPUkHErWfYIQGtQGlGI6RaYByeVemDVvcG7oRkDScJ-u616gFqoaSkFfTmAF5Azp99WQZoU-y0d3nNEkynyr1X5V7IHm5OKpWKGZRTc
+      client_assertion: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwb2Ffc2FuaXRpemVkX2NsaWVudF9pZCIsImlhdCI6MTcwMDAwMDAwMCwiZXhwIjoxNzAwMDAzNjAwLCJpc3MiOiIwb2Ffc2FuaXRpemVkX2NsaWVudF9pZCIsImF1ZCI6Imh0dHBzOi8vdGVzdC5va3RhLmNvbS9vYXV0aDIvdjEvdG9rZW4iLCJqdGkiOiJzYW5pdGl6ZWQtand0LWlkIn0.SANITIZED_SIGNATURE_PLACEHOLDER_PADDING_TO_LOOK_REALISTIC_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       client_assertion_type: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
       grant_type: client_credentials
       scope: okta.users.read okta.apps.read okta.groups.read
@@ -36,7 +36,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=E00C32B826ADDF67AF593CE4A40E8A36; Path=/; Secure; HttpOnly
+      - JSESSIONID=SANITIZED_SESSION_ID_000000000000; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -44,9 +44,9 @@ interactions:
       accept-ch:
       - Sec-CH-UA-Platform-Version
       content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
+      - 'default-src ''self'' test.okta.com *.oktacdn.com; connect-src ''self''
+        test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769
         http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
         http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
         http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
@@ -54,12 +54,12 @@ interactions:
         http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
         http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
         data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
+        test.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' test.okta.com *.oktacdn.com; frame-src ''self''
+        test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com
         *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
+        test.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
         ''self'''
       p3p:
       - CP="HONK"

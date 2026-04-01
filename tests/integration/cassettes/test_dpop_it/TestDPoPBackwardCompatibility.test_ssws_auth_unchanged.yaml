@@ -27,8 +27,8 @@ interactions:
       Expires:
       - '0'
       Link:
-      - <https://dev-20982288.okta.com/api/v1/users?limit=1>; rel="self"
-      - <https://dev-20982288.okta.com/api/v1/users?after=200unwlw0tbo8E6aVj5d7&limit=1>;
+      - <https://test.okta.com/api/v1/users?limit=1>; rel="self"
+      - <https://test.okta.com/api/v1/users?after=200unwlw0tbo8E6aVj5d7&limit=1>;
         rel="next"
       Pragma:
       - no-cache
@@ -39,7 +39,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=67FE18A5B9A1ED6DC3C38942C38ACCA4; Path=/; Secure; HttpOnly
+      - JSESSIONID=SANITIZED_SESSION_ID_000000000000; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
