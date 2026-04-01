@@ -63370,6 +63370,7 @@ components:
       enum:
         - CNAME
         - TXT
+        - CAA
     DRStatusItem:
       description: Status whether a domain has been failed over or not
       type: object
@@ -64698,6 +64699,7 @@ components:
       enum:
         - CNAME
         - TXT
+        - CAA
     EmailDomainResponse:
       allOf:
         - $ref: '#/components/schemas/BaseEmailDomain'
