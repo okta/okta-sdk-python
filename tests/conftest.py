@@ -17,7 +17,9 @@ from pytest_recording._vcr import use_cassette
 TEST_OKTA_URL = "https://test.okta.com"
 B_TEST_OKTA_URL = b"https://test.okta.com"
 URL_REGEX = r"https://(?:[\w-]+\.oktapreview\.com|dev-\d+\.okta\.com)"
-B_URL_REGEX = rb"https://(?:[\w-]+\.oktapreview\.com|dev-\d+\.okta\.com)"# Bare hostnames for content-security-policy headers (no https:// prefix)
+B_URL_REGEX = rb"https://(?:[\w-]+\.oktapreview\.com|dev-\d+\.okta\.com)"
+
+# Bare hostnames for content-security-policy headers (no https:// prefix)
 BARE_HOST_ADMIN_REGEX = r"dev-\d+-admin\.okta\.com"
 BARE_HOST_KERBEROS_REGEX = r"dev-\d+\.kerberos\.okta\.com"
 BARE_HOST_REGEX = r"dev-\d+\.okta\.com"
