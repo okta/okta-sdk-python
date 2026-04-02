@@ -23,12 +23,12 @@ Do not edit the class manually.
 import datetime
 import io
 import json
+import logging
 import mimetypes
 import os
 import re
 import tempfile
 from enum import Enum
-from PIL import Image
 from typing import Tuple, Optional, List, Dict, Union
 from urllib.parse import quote
 
@@ -48,6 +48,8 @@ from okta.exceptions.exceptions import (
 )
 
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
+
+logger = logging.getLogger("okta-sdk-python")
 
 
 class ApiClient:
@@ -205,8 +207,7 @@ class ApiClient:
         :param _request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the authentication
                               in the spec for a single request.
-        :return: tuple of form (path, http_method, query_params, header_params,
-            body, post_params, files)
+        :return: tuple of (method, url, header_params, body, post_params)
         """
 
         config = self.configuration
@@ -578,21 +579,14 @@ class ApiClient:
             elif isinstance(v, bytes):
                 filedata = v
 
-                # Validate file size
-                if len(filedata) < 4:
-                    raise ValueError(f"File data too small ({len(filedata)} bytes) - minimum 4 bytes required")
-                if len(filedata) > 2 * 1024 * 1024:  # 2MB limit (matches Okta's background image limit)
-                    raise ValueError(f"File data too large ({len(filedata)} bytes) - maximum 2MB allowed")
-
                 # Detect file type from magic bytes
-                # Note: This is client-side validation only. Okta API performs
-                # comprehensive server-side image validation as the security boundary.
-                if filedata.startswith(b'\x89PNG\r\n\x1a\n'):  # Full PNG signature
+                # Note: This is client-side detection for correct Content-Type
+                # assignment. Okta API performs server-side image validation
+                # as the security boundary.
+                if filedata.startswith(b'\x89PNG\r\n\x1a\n'):
                     filename = f"{k}.png"
                     mimetype = "image/png"
-                elif filedata.startswith(b'\xFF\xD8\xFF\xE0') or \
-                        filedata.startswith(b'\xFF\xD8\xFF\xE1') or \
-                        filedata.startswith(b'\xFF\xD8\xFF\xDB'):  # JPEG variants
+                elif filedata.startswith(b'\xFF\xD8'):  # All JPEG variants start with SOI marker
                     filename = f"{k}.jpg"
                     mimetype = "image/jpeg"
                 elif filedata.startswith(b'GIF87a') or filedata.startswith(b'GIF89a'):
@@ -602,6 +596,7 @@ class ApiClient:
                     # For unknown types, attempt PIL validation if available
                     pil_validated = False
                     try:
+                        from PIL import Image  # Lazy import — Pillow is optional
                         img = Image.open(io.BytesIO(filedata))
                         img.verify()  # Verify it's actually a valid image
                         format_to_ext = {'PNG': 'png', 'JPEG': 'jpg', 'GIF': 'gif'}
@@ -610,17 +605,24 @@ class ApiClient:
                         mimetype = f"image/{ext if ext != 'jpg' else 'jpeg'}"
                         pil_validated = True
                     except ImportError:
-                        # PIL not available - continue to fallback
-                        pass
+                        logger.warning(
+                            "Could not detect file type from magic bytes and "
+                            "Pillow is not installed for advanced detection. "
+                            "Install it with: pip install pillow"
+                        )
                     except Exception:
-                        # PIL validation failed - file may not be a valid image
-                        pass
+                        logger.warning(
+                            "File type detection failed — the file may not "
+                            "be a valid image. Okta accepts PNG, JPEG, and "
+                            "GIF formats only."
+                        )
 
                     if not pil_validated:
-                        # Fallback: Default to PNG with warning
-                        # Server-side validation will reject if not a valid image
-                        filename = f"{k}.png"
-                        mimetype = "image/png"
+                        # Fallback: default to application/octet-stream for
+                        # unrecognized types; server-side validation will
+                        # reject if the file is not a valid image.
+                        filename = f"{k}.bin"
+                        mimetype = "application/octet-stream"
             else:
                 raise ValueError("Unsupported file value")
             params.append(tuple([k, tuple([filename, filedata, mimetype])]))
