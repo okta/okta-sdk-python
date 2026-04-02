@@ -23,6 +23,7 @@ Do not edit the class manually.
 import asyncio
 import json
 import logging
+import mimetypes
 import os
 
 import aiohttp
@@ -33,6 +34,11 @@ from okta.errors.okta_api_error import OktaAPIError
 from okta.exceptions import HTTPException, OktaAPIException
 
 logger = logging.getLogger("okta-sdk-python")
+
+
+def _remove_content_type_header(headers: dict) -> dict:
+    """Remove Content-Type header to let aiohttp.FormData set it with boundary."""
+    return {k: v for k, v in headers.items() if k.lower() != "content-type"}
 
 
 class HTTPClient:
@@ -93,7 +99,6 @@ class HTTPClient:
             logger.debug(f"Request: {request}")
             # Create a local copy of headers to avoid mutating shared state
             request_headers = {**self._default_headers, **request["headers"]}
-            # Prepare request parameters
             params = {
                 "method": request["method"],
                 "url": request["url"],
@@ -102,34 +107,52 @@ class HTTPClient:
             if request["data"]:
                 params["data"] = json.dumps(request["data"])
             elif request["form"]:
-                # Check if this is a file upload or form data
-                if "file" in request["form"]:
-                    # File upload
-                    filename = ""
-                    if isinstance(request["form"]["file"], str):
-                        filename = request["form"]["file"].split("/")[-1]
+                # Check if this is a file upload (list of tuples) or regular form data (dict)
+                if isinstance(request["form"], list) and len(request["form"]) > 0:
+                    # Format: [(field_name, (filename, filedata, mimetype)), ...]
                     data = aiohttp.FormData()
-                    data.add_field(
-                        "file",
-                        open(request["form"]["file"], "rb"),
-                        filename=filename,
-                        content_type=request_headers["Content-Type"],
-                    )
+                    for field_name, file_tuple in request["form"]:
+                        if isinstance(file_tuple, tuple) and len(file_tuple) == 3:
+                            # This is a file field: (filename, filedata, mimetype)
+                            filename, filedata, mimetype = file_tuple
+                            data.add_field(
+                                field_name,
+                                filedata,
+                                filename=filename,
+                                content_type=mimetype,
+                            )
+                        else:
+                            # Regular form field
+                            data.add_field(field_name, file_tuple)
                     params["data"] = data
-                else:
-                    # Regular form data (e.g., OAuth client_assertion)
-                    # For application/x-www-form-urlencoded, let aiohttp handle encoding
-                    # by not setting Content-Type header manually
-                    if request_headers.get("Content-Type") == "application/x-www-form-urlencoded":
-                        # Create headers without Content-Type for this request
-                        params["headers"] = {
-                            k: v for k, v in request_headers.items()
-                            if k != "Content-Type"
-                        }
-                    params["data"] = request["form"]
+                    # Remove Content-Type header - aiohttp.FormData will set it with boundary
+                    params["headers"] = _remove_content_type_header(request_headers)
+                elif isinstance(request["form"], dict):
+                    # Legacy path: dict-based form data
+                    if "file" in request["form"]:
+                        # File upload with file path (legacy)
+                        filename = ""
+                        if isinstance(request["form"]["file"], str):
+                            filename = request["form"]["file"].split("/")[-1]
+                        data = aiohttp.FormData()
+                        with open(request["form"]["file"], "rb") as f:
+                            file_data = f.read()
+                        mimetype = mimetypes.guess_type(filename)[0] or "application/octet-stream"
+                        data.add_field("file", file_data, filename=filename, content_type=mimetype)
+                        params["data"] = data
+                        # Remove Content-Type header - aiohttp.FormData will set it with boundary
+                        params["headers"] = _remove_content_type_header(request_headers)
+                    else:
+                        # Regular form data (e.g., OAuth client_assertion)
+                        # For url-encoded forms, let aiohttp handle encoding
+                        ct = next((v for k, v in request_headers.items()
+                                   if k.lower() == "content-type"), None)
+                        if ct == "application/x-www-form-urlencoded":
+                            params["headers"] = _remove_content_type_header(request_headers)
+                        params["data"] = request["form"]
             json_data = request.get("json")
-            # empty json param may cause issue, so include it if needed only
-            # more details: https://github.com/okta/okta-sdk-python/issues/131
+            # Only include json param when present; empty value causes issues
+            # (ref: https://github.com/okta/okta-sdk-python/issues/131)
             if json_data:
                 params["json"] = json_data
             if self._timeout:

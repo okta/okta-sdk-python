@@ -77,6 +77,9 @@ setup(
     url="https://github.com/okta/okta-sdk-python",
     keywords=["OpenAPI", "OpenAPI-Generator", "Okta Admin Management"],
     install_requires=REQUIRES,
+    extras_require={
+        "images": ["pillow >= 9.0.0"],
+    },
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
     license="Apache-2.0",
