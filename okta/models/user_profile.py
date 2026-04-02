@@ -188,9 +188,7 @@ class UserProfile(BaseModel):
         "https://datatracker.ietf.org/doc/html/rfc1808).",
         alias="profileUrl",
     )
-    second_email: Optional[
-        Annotated[str, Field(min_length=5, strict=True, max_length=100)]
-    ] = Field(
+    second_email: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(
         default=None,
         description="The secondary email address of the user typically used for account recovery. For validation, "
         "see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).",
