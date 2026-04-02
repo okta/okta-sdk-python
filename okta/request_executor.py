@@ -121,8 +121,8 @@ class RequestExecutor:
         method: str,
         url: str,
         body: dict = None,
-        headers: dict = {},
-        form: dict = {},
+        headers: dict = None,
+        form=None,
         oauth=False,
         keep_empty_params=False,
     ):
@@ -133,9 +133,12 @@ class RequestExecutor:
             method (str): HTTP Method to be used
             url (str): URL to send request to
             body (dict, optional): Request body. Defaults to None.
-            headers (dict, optional): Request headers. Defaults to {}.
+            headers (dict, optional): Request headers. Defaults to None.
+            form (dict or list, optional): Form data. Dict for url-encoded forms,
+                list of tuples for multipart file uploads. Defaults to None.
             oauth: Should use oauth? Defaults to False.
-            keep_empty_params: Should request body keep parameters with empty values? Defaults to False.
+            keep_empty_params: Should request body keep parameters with empty
+                values? Defaults to False.
 
         Returns:
             dict, Exception: Tuple of Dictionary repr of HTTP request and
@@ -146,6 +149,8 @@ class RequestExecutor:
 
         # Build request
         # Get predetermined headers and build URL
+        if headers is None:
+            headers = {}
         headers = {**self._custom_headers, **headers}
         headers = {**self._default_headers, **headers}
         if self._config["client"]["orgUrl"] not in url:

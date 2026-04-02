@@ -45,7 +45,6 @@ REQUIRES = [
     "PyYAML >= 6.0.2",
     "requests >= 2.32.3",
     "xmltodict >= 0.14.2",
-    "pillow >= 12.1.1",
 ]
 
 def get_version():
@@ -78,6 +77,9 @@ setup(
     url="https://github.com/okta/okta-sdk-python",
     keywords=["OpenAPI", "OpenAPI-Generator", "Okta Admin Management"],
     install_requires=REQUIRES,
+    extras_require={
+        "images": ["pillow >= 9.0.0"],
+    },
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
     license="Apache-2.0",

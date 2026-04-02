@@ -131,11 +131,16 @@ class HTTPClient:
                         # Remove Content-Type header - aiohttp.FormData will set it with boundary
                         params["headers"] = _remove_content_type_header(request_headers)
                     else:
-                        # Remove Content-Type header - aiohttp.FormData will set it with boundary
-                        if request_headers.get("Content-Type") == "application/x-www-form-urlencoded":
+                        # Regular form data (e.g., OAuth client_assertion)
+                        # For url-encoded forms, let aiohttp handle encoding
+                        ct = next((v for k, v in request_headers.items()
+                                   if k.lower() == "content-type"), None)
+                        if ct == "application/x-www-form-urlencoded":
                             params["headers"] = _remove_content_type_header(request_headers)
                         params["data"] = request["form"]
             json_data = request.get("json")
+            # Only include json param when present; empty value causes issues
+            # (ref: https://github.com/okta/okta-sdk-python/issues/131)
             if json_data:
                 params["json"] = json_data
             if self._timeout:
