@@ -82223,7 +82223,6 @@ components:
           type: string
           format: email
           description: The secondary email address of the user typically used for account recovery. For validation, see [RFC 5322 Section 3.2.3](https://datatracker.ietf.org/doc/html/rfc5322#section-3.2.3).
-          minLength: 5
           maxLength: 100
           nullable: true
         state:
