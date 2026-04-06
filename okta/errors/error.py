@@ -9,13 +9,18 @@
 # coding: utf-8
 
 
-class Error:
+class Error(Exception):
     """
-    Base Error Class
+    Base Error Class for Okta SDK errors.
+
+    Inherits from Exception so that Okta errors can be caught with
+    ``except Exception`` and satisfy type checkers that expect error
+    return values to be Exception subclasses.
     """
 
-    def __init__(self):
-        self.message = ""
+    def __init__(self, message=""):
+        self.message = message
+        super().__init__(self.message)
 
     def __repr__(self):
         return str({"message": self.message})

@@ -13,14 +13,21 @@ import json
 import logging
 import time
 from http import HTTPStatus
+from typing import Any, Dict
 
+from okta.constants import (
+    DPOP_USER_AGENT_EXTENSION,
+    LOGGER_NAME,
+    MAX_DPOP_NONCE_RETRIES,
+)
 from okta.error_messages import ERROR_MESSAGE_429_MISSING_DATE_X_RESET
+from okta.errors.dpop_errors import get_dpop_error_message, is_dpop_error
 from okta.http_client import HTTPClient
 from okta.oauth import OAuth
 from okta.user_agent import UserAgent
-from okta.utils import convert_date_time_to_seconds
+from okta.utils import convert_date_time_to_seconds, truncate_url
 
-logger = logging.getLogger("okta-sdk-python")
+logger = logging.getLogger(LOGGER_NAME)
 
 
 class RequestExecutor:
@@ -33,11 +40,12 @@ class RequestExecutor:
 
     def __init__(self, config, cache, http_client=None):
         """
-        Constructor for Request Executor object for Okta Client
+        Constructor for Request Executor object for Okta Client.
 
-        Arguments:
-            config {dict} -- This dictionary contains the configuration
-                             of the Request Executor
+        Args:
+            config (dict): Configuration dictionary with client settings.
+            cache (Cache): Cache instance (OktaCache or NoOpCache).
+            http_client (type, optional): HTTP client class. Defaults to HTTPClient.
         """
         # Raise Value Error if numerical inputs are invalid (< 0)
         self._request_timeout = config["client"].get("requestTimeout", 0)
@@ -69,6 +77,10 @@ class RequestExecutor:
             ).get_user_agent_string(),
             "Accept": "application/json",
         }
+
+        # Track if using OAuth mode (avoids hasattr checks later)
+        self._is_oauth_mode = self._authorization_mode == "PrivateKey"
+        self._oauth = None  # Set below only when using PrivateKey mode
 
         # SSWS or Bearer header
         token_type = config["client"]["authorizationMode"]
@@ -121,8 +133,8 @@ class RequestExecutor:
         method: str,
         url: str,
         body: dict = None,
-        headers: dict = {},
-        form: dict = {},
+        headers: dict = None,
+        form: dict = None,
         oauth=False,
         keep_empty_params=False,
     ):
@@ -133,7 +145,8 @@ class RequestExecutor:
             method (str): HTTP Method to be used
             url (str): URL to send request to
             body (dict, optional): Request body. Defaults to None.
-            headers (dict, optional): Request headers. Defaults to {}.
+            headers (dict, optional): Request headers. Defaults to None.
+            form (dict, optional): Form data. Defaults to None.
             oauth: Should use oauth? Defaults to False.
             keep_empty_params: Should request body keep parameters with empty values? Defaults to False.
 
@@ -141,8 +154,13 @@ class RequestExecutor:
             dict, Exception: Tuple of Dictionary repr of HTTP request and
             exception raised during execution
         """
+        if headers is None:
+            headers = {}
+        if form is None:
+            form = {}
+
         # Base HTTP Request
-        request = {"method": method}
+        request: Dict[str, Any] = {"method": method}
 
         # Build request
         # Get predetermined headers and build URL
@@ -152,21 +170,70 @@ class RequestExecutor:
             url = self._config["client"]["orgUrl"] + url
 
         # OAuth
-        if self._authorization_mode == "PrivateKey" and not oauth:
-            # check if access token exists
+        if self._is_oauth_mode and not oauth:
+            # check if access token exists (cached as tuple: (token, token_type))
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
-                access_token = self._cache.get("OKTA_ACCESS_TOKEN")
+                cached_value = self._cache.get("OKTA_ACCESS_TOKEN")
+                # Handle both old (string) and new (tuple) cache format for backward compatibility
+                if isinstance(cached_value, tuple) and len(cached_value) == 2:
+                    access_token, token_type = cached_value
+                else:
+                    # Legacy format: just the token string
+                    # If DPoP is enabled, we cannot safely assume this is a Bearer token
+                    # Invalidate cache and fetch fresh token to avoid auth failures
+                    if self._oauth.is_dpop_enabled():
+                        logger.warning(
+                            "Cached token found in legacy format (string) with DPoP enabled. "
+                            "Invalidating cache to fetch fresh DPoP token."
+                        )
+                        self._cache.delete("OKTA_ACCESS_TOKEN")
+                        # Fall through to token generation below
+                        access_token = None
+                        token_type = "Bearer"
+                    else:
+                        # Non-DPoP mode: safe to assume Bearer
+                        access_token = cached_value
+                        token_type = "Bearer"
             else:
-                # if not, make one
+                access_token = None
+                token_type = "Bearer"
+
+            # Generate token if not cached or cache was invalidated
+            if access_token is None:
                 # Generate using private key provided
-                access_token, error = await self._oauth.get_access_token()
+                # Note: Token expiry and renewal logic is handled internally by
+                # OAuth.get_oauth_token() - we trust the OAuth class to manage
+                # token lifecycle and only request new tokens when needed
+                access_token, token_type, error = await self._oauth.get_oauth_token()
                 # return error if problem retrieving token
                 if error:
                     return (None, error)
+                # Cache token and type as atomic tuple to prevent cache inconsistency
+                self._cache.add("OKTA_ACCESS_TOKEN", (access_token, token_type))
 
-            # finally, add to header and cache
-            headers.update({"Authorization": f"Bearer {access_token}"})
-            self._cache.add("OKTA_ACCESS_TOKEN", access_token)
+            # Add Authorization header with token type
+            headers.update({"Authorization": f"{token_type} {access_token}"})
+
+            # Add DPoP header for API requests if using DPoP token
+            if token_type == "DPoP":
+                dpop_generator = self._oauth.get_dpop_generator()
+                if dpop_generator:
+                    # Generate DPoP proof with access token hash.
+                    # Nonce management is handled internally by the
+                    # generator (falls back to stored nonce automatically).
+                    dpop_proof = dpop_generator.generate_proof_jwt(
+                        http_method=method,
+                        http_url=url,
+                        access_token=access_token,
+                    )
+
+                    # Add DPoP header and user agent extension
+                    headers.update({
+                        "DPoP": dpop_proof,
+                        "x-okta-user-agent-extended": DPOP_USER_AGENT_EXTENSION
+                    })
+
+                    logger.debug("Added DPoP proof to %s request to %s", method, truncate_url(url))
 
         # Add content type header if request body exists
         if body:
@@ -196,7 +263,7 @@ class RequestExecutor:
         _, response, response_body, error = await self.fire_request(request)
 
         if error is not None:
-            return (None, error)
+            return (None, None, error)
 
         _, error = self._http_client.check_response_for_error(
             request["url"], response, response_body
@@ -204,7 +271,7 @@ class RequestExecutor:
 
         return response, response_body, error
 
-    async def fire_request(self, request):
+    async def fire_request(self, request: dict):
         """
         Send Request using HTTP Client
 
@@ -212,8 +279,11 @@ class RequestExecutor:
             request (dict): HTTP request in dictionary format
 
         Returns:
-            aiohttp.RequestInfo, aiohttp.ClientResponse, json, Exception: Tuple
-            of request, response object, response json, and error if raised
+            Tuple: (request_info, response, response_body, error)
+                - request_info: aiohttp.RequestInfo or None
+                - response: aiohttp.ClientResponse or None
+                - response_body: Response body as string
+                - error: Exception if raised, None otherwise
         """
         # Retrieve URL from request and generate cache key
         url = request["url"]
@@ -281,18 +351,69 @@ class RequestExecutor:
 
         headers = res_details.headers
 
+        # Handle DPoP nonce challenges (401 or 400 with dpop-nonce header)
+        if (
+            self._is_oauth_mode
+            and self._oauth.is_dpop_enabled()
+            and res_details.status in (400, 401)
+        ):
+            # Note: aiohttp.ClientResponse.headers is CIMultiDictProxy (case-insensitive per RFC 9110)
+            dpop_nonce = headers.get('dpop-nonce')
+
+            if dpop_nonce:
+                logger.debug(
+                    "Received DPoP nonce in %d response "
+                    "- updating for future requests",
+                    res_details.status,
+                )
+                dpop_generator = self._oauth.get_dpop_generator()
+                if dpop_generator:
+                    dpop_generator.set_nonce(dpop_nonce)
+
+                # Check if this is a use_dpop_nonce error — if so, retry the request
+                should_retry = False
+                try:
+                    body = json.loads(resp_body) if isinstance(resp_body, str) else resp_body
+                    error_code = body.get('error', '') if isinstance(body, dict) else ''
+                    if error_code:
+                        if is_dpop_error(error_code):
+                            logger.error(
+                                "DPoP Error (%s): %s",
+                                error_code, get_dpop_error_message(error_code),
+                            )
+                        if error_code == 'use_dpop_nonce' and dpop_generator:
+                            should_retry = True
+                except (json.JSONDecodeError, ValueError):
+                    pass  # Response body is not valid JSON — skip error check
+
+                # Retry with the new nonce for use_dpop_nonce errors (RFC 9449 Section 8).
+                # Allow up to MAX_DPOP_NONCE_RETRIES attempts (consistent with token endpoint).
+                if should_retry and attempts < MAX_DPOP_NONCE_RETRIES:
+                    logger.debug("Retrying API request with server-provided DPoP nonce")
+                    # Read token from OAuth object directly (avoids cache race condition)
+                    access_token, token_type = self._oauth.get_current_token()
+
+                    if access_token and token_type == "DPoP":
+                        dpop_proof = dpop_generator.generate_proof_jwt(
+                            http_method=request["method"],
+                            http_url=request["url"],
+                            access_token=access_token,
+                            nonce=dpop_nonce
+                        )
+                        request["headers"]["DPoP"] = dpop_proof
+                        # Retry the request (count as 1 attempt to prevent infinite loops)
+                        return await self.fire_request_helper(request, attempts + 1, request_start_time)
+
         if attempts < max_retries and self.is_retryable_status(res_details.status):
             date_time = headers.get("Date", "")
             if date_time:
                 date_time = convert_date_time_to_seconds(date_time)
 
             # Get X-Rate-Limit-Reset header
+            # Note: aiohttp.ClientResponse.headers is CIMultiDictProxy (case-insensitive per RFC 9110)
+            # so we don't need to check both uppercase and lowercase variants
             retry_limit_reset_headers = list(
                 map(float, headers.getall("X-Rate-Limit-Reset", []))
-            )
-            # header might be in lowercase, so check this too
-            retry_limit_reset_headers.extend(
-                list(map(float, headers.getall("x-rate-limit-reset", [])))
             )
             retry_limit_reset = (
                 min(retry_limit_reset_headers)
@@ -304,10 +425,6 @@ class RequestExecutor:
             retry_limit_limit_headers = list(
                 map(float, headers.getall("X-Rate-Limit-Limit", []))
             )
-            # header might be in lowercase, so check this too
-            retry_limit_limit_headers.extend(
-                list(map(float, headers.getall("x-rate-limit-limit", [])))
-            )
             retry_limit_limit = (
                 min(retry_limit_limit_headers)
                 if len(retry_limit_limit_headers) > 0
@@ -317,10 +434,6 @@ class RequestExecutor:
             # Get X-Rate-Limit-Remaining Header
             retry_limit_remaining_headers = list(
                 map(float, headers.getall("X-Rate-Limit-Remaining", []))
-            )
-            # header might be in lowercase, so check this too
-            retry_limit_remaining_headers.extend(
-                list(map(float, headers.getall("x-rate-limit-remaining", [])))
             )
             retry_limit_remaining = (
                 min(retry_limit_remaining_headers)
@@ -346,15 +459,16 @@ class RequestExecutor:
                 # backoff
                 backoff_seconds = self.calculate_backoff(retry_limit_reset, date_time)
                 logger.info(
-                    f"Hit rate limit. Retry request in {backoff_seconds} seconds."
+                    "Hit rate limit. Retry request in %s seconds.", backoff_seconds,
                 )
-                logger.debug(f"Value of retry_limit_reset: {retry_limit_reset}")
-                logger.debug(f"Value of date_time: {date_time}")
+                logger.debug("Value of retry_limit_reset: %s", retry_limit_reset)
+                logger.debug("Value of date_time: %s", date_time)
                 await self.pause_for_backoff(backoff_seconds)
                 if (
                     current_req_start_time + backoff_seconds
                 ) - request_start_time > req_timeout and req_timeout > 0:
-                    return (None, res_details, resp_body, resp_body)
+                    return (None, res_details, resp_body,
+                            Exception("Request Timeout exceeded."))
 
             # Setup retry request
             attempts += 1
@@ -404,9 +518,6 @@ class RequestExecutor:
             and status == HTTPStatus.TOO_MANY_REQUESTS
         )
 
-    def parse_response(self, request, response):
-        pass
-
     def calculate_backoff(self, retry_limit_reset, date_time):
         return retry_limit_reset - date_time + 1
 
@@ -415,6 +526,14 @@ class RequestExecutor:
 
     def set_custom_headers(self, headers):
         self._custom_headers.update(headers)
+
+    def clear_authorization_header(self):
+        """Remove the Authorization header from default headers."""
+        self._default_headers.pop("Authorization", None)
+
+    def clear_cached_token(self):
+        """Remove the cached OAuth access token from the cache."""
+        self._cache.delete("OKTA_ACCESS_TOKEN")
 
     def set_session(self, session):
         self._http_client.set_session(session)

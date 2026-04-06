@@ -9,38 +9,32 @@
 {{>partial_header}}
 
 import datetime
-from dateutil.parser import parse
-from enum import Enum
 import json
 import mimetypes
 import os
 import re
 import tempfile
+from enum import Enum
+from typing import Tuple, Optional, List, Dict, Union
+from urllib.parse import quote
 
 from blinker import signal
-from urllib.parse import quote
-from typing import Tuple, Optional, List, Dict, Union
+from dateutil.parser import parse
 from pydantic import SecretStr
 from pydash.strings import camel_case
 {{#tornado}}
 import tornado.gen
 {{/tornado}}
 
-from {{packageName}}.configuration import Configuration
-from {{packageName}}.api_response import ApiResponse, T as ApiResponseT
-import {{modelPackage}}
+import {{packageName}}.models
 from {{packageName}} import rest
+from {{packageName}}.api_response import ApiResponse, T as ApiResponseT
+from {{packageName}}.call_info import CallInfo
+from {{packageName}}.configuration import Configuration
 from {{packageName}}.exceptions.exceptions import (
     ApiValueError,
     ApiException,
-    BadRequestException,
-    UnauthorizedException,
-    ForbiddenException,
-    NotFoundException,
-    ServiceException
 )
-
-from okta.call_info import CallInfo
 
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
 
@@ -74,31 +68,43 @@ class ApiClient:
     _pool = None
 
     def __init__(
-        self,
-        configuration=None,
-        header_name=None,
-        header_value=None,
-        cookie=None
+        self, configuration=None, header_name=None, header_value=None, cookie=None
     ) -> None:
-        self.call_api_started = signal('call_api_started')
-        self.call_api_complete = signal('call_api_complete')
+        self.call_api_started = signal("call_api_started")
+        self.call_api_complete = signal("call_api_complete")
 
         # use default configuration if none is provided
         if configuration is None:
             configuration = Configuration.get_default()
-        self.configuration = Configuration(
-            host=configuration["client"]["orgUrl"],
-            access_token=configuration["client"]["token"],
-            api_key=configuration["client"].get("privateKey", None),
-            authorization_mode=configuration["client"].get("authorizationMode", "SSWS"),
-        )
+
+        # Build Configuration with DPoP support if present
+        config_params = {
+            "host": configuration["client"]["orgUrl"],
+            "access_token": configuration["client"].get("token", None),  # Use .get() to handle PrivateKey mode
+            "api_key": configuration["client"].get("privateKey", None),
+            "authorization_mode": configuration["client"].get("authorizationMode", "SSWS"),
+        }
+
+        # Store DPoP parameters in Configuration for completeness.
+        # NOTE: DPoP proof generation and header injection are handled
+        # entirely by RequestExecutor → OAuth → DPoPProofGenerator.
+        # The Configuration object stores these values but they are NOT
+        # consumed by the synchronous urllib3/RESTClientObject path.
+        if configuration["client"].get("dpopEnabled", False):
+            config_params.update({
+                "dpop_enabled": True,
+                "dpop_private_key": configuration["client"].get("privateKey"),
+                "dpop_key_rotation_interval": configuration["client"].get("dpopKeyRotationInterval", 86400),
+            })
+
+        self.configuration = Configuration(**config_params)
 
         if self.configuration.event_listeners is not None:
-            if len(self.configuration.event_listeners['call_api_started']) > 0:
+            if len(self.configuration.event_listeners["call_api_started"]) > 0:
                 for listener in self.configuration.event_listeners["call_api_started"]:
                     self.call_api_started.connect(listener)
-            if len(self.configuration.event_listeners['call_api_complete']) > 0:
-                for listener in self.configuration.event_listeners['call_api_complete']:
+            if len(self.configuration.event_listeners["call_api_complete"]) > 0:
+                for listener in self.configuration.event_listeners["call_api_complete"]:
                     self.call_api_complete.connect(listener)
 
         self.rest_client = rest.RESTClientObject(self.configuration)
@@ -107,7 +113,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = '{{{httpUserAgent}}}{{^httpUserAgent}}OpenAPI-Generator/1.0.0/python{{/httpUserAgent}}'
+        self.user_agent = "OpenAPI-Generator/1.0.0/python"
         self.client_side_validation = self.configuration.client_side_validation
 
 {{#asyncio}}
