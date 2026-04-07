@@ -32,6 +32,7 @@ import {{packageName}}.models
 from {{packageName}} import rest
 from {{packageName}}.api_response import ApiResponse, T as ApiResponseT
 from {{packageName}}.call_info import CallInfo
+from {{packageName}}.constants import LOGGER_NAME
 from {{packageName}}.configuration import Configuration
 from {{packageName}}.exceptions.exceptions import (
     ApiValueError,
@@ -40,7 +41,7 @@ from {{packageName}}.exceptions.exceptions import (
 
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
 
-logger = logging.getLogger("okta-sdk-python")
+logger = logging.getLogger(LOGGER_NAME)
 
 
 class ApiClient:

@@ -29,11 +29,12 @@ import os
 import aiohttp
 import xmltodict
 
+from okta.constants import LOGGER_NAME
 from okta.errors.http_error import HTTPError
 from okta.errors.okta_api_error import OktaAPIError
 from okta.exceptions import HTTPException, OktaAPIException
 
-logger = logging.getLogger("okta-sdk-python")
+logger = logging.getLogger(LOGGER_NAME)
 
 
 def _remove_content_type_header(headers: dict) -> dict:
