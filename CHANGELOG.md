@@ -1,5 +1,29 @@
 # Okta Python SDK Changelog
 
+# 3.4.0
+
+## Added
+* Implemented Demonstrating Proof-of-Possession (DPoP) for OAuth 2.0 (RFC 9449 compliant) to cryptographically bind access tokens to client keys and prevent token theft and replay attacks.
+* Added a thread-safe `DPoPProofGenerator` class featuring automatic key rotation, nonce management with auto-retry, and access token hash computation.
+* Introduced a new `get_oauth_token()` method that returns a 3-tuple including `token_type`.
+* Added support for a new tuple-based file upload format `[(field_name, (filename, filedata, mimetype))]` for multipart requests.
+* Added `Pillow` as an optional dependency, allowing users to install it via `pip install okta[images]`.
+* Added the `CAA` DNS record type to the `DNSRecordTypeDomains` enum to support custom domain operations returning CAA records.
+
+## Changed
+* Maintained backward compatibility for the legacy `get_access_token()` method, which continues to return a 2-tuple.
+* Replaced bare `except` clauses with specific exceptions and swapped bypassable `assert` statements for proper security exceptions.
+* Updated Mustache templates to preserve DPoP configurations in code generation.
+
+## Fixed
+* Fixed multipart file upload handling (such as theme image uploads) by removing the manual `Content-Type` header, which allows `aiohttp` to automatically set the proper boundary parameters.
+* Removed the `minLength: 5` constraint from `UserProfile.secondEmail` in the OpenAPI spec and Pydantic models to correctly deserialize user profiles with empty string secondary emails.
+* Fixed critical Pydantic validation errors on custom domain API endpoints (`create`, `get`, `replace`, `verify`, and `list`) by properly deserializing `CAA` records.
+* Fixed a bug where the `request_executor` timeout returned a raw string instead of an `Exception`.
+* Fixed invalid default parameter usage in `cache.get()` and restored cache cleanup logic to prevent the reuse of expired tokens.
+* Removed `threading.RLock` to prevent `asyncio` deadlocks and consolidated duplicate access token hash computations.
+* Fixed a redundant `get_dpop_error_message()` call in the `oauth` module.
+
 # 3.3.0
 
 ## Features & Enhancements
