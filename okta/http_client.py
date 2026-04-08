@@ -135,11 +135,10 @@ class HTTPClient:
                         filename = ""
                         if isinstance(request["form"]["file"], str):
                             filename = request["form"]["file"].split("/")[-1]
-                        data = aiohttp.FormData()
-                        with open(request["form"]["file"], "rb") as f:
-                            file_data = f.read()
                         mimetype = mimetypes.guess_type(filename)[0] or "application/octet-stream"
-                        data.add_field("file", file_data, filename=filename, content_type=mimetype)
+                        data = aiohttp.FormData()
+                        file_handle = open(request["form"]["file"], "rb")
+                        data.add_field("file", file_handle, filename=filename, content_type=mimetype)
                         params["data"] = data
                         # Remove Content-Type header - aiohttp.FormData will set it with boundary
                         params["headers"] = _remove_content_type_header(request_headers)

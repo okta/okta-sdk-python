@@ -138,8 +138,6 @@ class RequestExecutor:
         oauth=False,
         keep_empty_params=False,
     ):
-    async def create_request(self, method: str, url: str, body: dict = None,
-                             headers: dict = None, form=None, oauth=False, keep_empty_params=False):
         """
         Creates request for request executor's HTTP client.
 

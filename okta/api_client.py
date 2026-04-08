@@ -599,9 +599,10 @@ class ApiClient:
                     try:
                         from PIL import Image  # Lazy import — Pillow is optional
                         img = Image.open(io.BytesIO(filedata))
+                        img_format = img.format  # Read format before verify() resets the object
                         img.verify()  # Verify it's actually a valid image
                         format_to_ext = {'PNG': 'png', 'JPEG': 'jpg', 'GIF': 'gif'}
-                        ext = format_to_ext.get(img.format, 'png')
+                        ext = format_to_ext.get(img_format, 'png')
                         filename = f"{k}.{ext}"
                         mimetype = f"image/{ext if ext != 'jpg' else 'jpeg'}"
                         pil_validated = True
@@ -626,7 +627,7 @@ class ApiClient:
                         mimetype = "application/octet-stream"
             else:
                 raise ValueError("Unsupported file value")
-            params.append(tuple([k, tuple([filename, filedata, mimetype])]))
+            params.append((k, (filename, filedata, mimetype)))
         return params
 
     def select_header_accept(self, accepts: List[str]) -> Optional[str]:

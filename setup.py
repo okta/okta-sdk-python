@@ -78,7 +78,7 @@ setup(
     keywords=["OpenAPI", "OpenAPI-Generator", "Okta Admin Management"],
     install_requires=REQUIRES,
     extras_require={
-        "images": ["pillow >= 9.0.0"],
+        "images": ["pillow >= 9.0.0, < 12"],
     },
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
