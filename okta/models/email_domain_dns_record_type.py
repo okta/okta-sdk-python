@@ -38,7 +38,6 @@ class EmailDomainDNSRecordType(str, Enum):
     """
     CNAME = "CNAME"
     TXT = "TXT"
-    CAA = "CAA"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
