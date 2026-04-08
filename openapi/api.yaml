@@ -64699,7 +64699,6 @@ components:
       enum:
         - CNAME
         - TXT
-        - CAA
     EmailDomainResponse:
       allOf:
         - $ref: '#/components/schemas/BaseEmailDomain'
