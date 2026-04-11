@@ -51,11 +51,11 @@ class ByDurationExpiry(BaseModel):
             return value
 
         if not re.match(
-            r"^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$",
+            r"^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$",
             value,
         ):
             raise ValueError(
-                r"must validate the regular expression /^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$/"
+                r"must validate the regular expression /^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$/"
             )
         return value
 

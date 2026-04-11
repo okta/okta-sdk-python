@@ -130,6 +130,44 @@ class GracePeriodExpiry(BaseModel):
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
+        # If no match found and the data is a primitive value, retry by wrapping
+        # it into each oneOf schema's single-property structure. This handles API
+        # responses where a scalar is returned for a oneOf field whose schemas
+        # are single-property objects.
+        if match == 0:
+            try:
+                _parsed_value = json.loads(json_str)
+            except (json.JSONDecodeError, TypeError):
+                _parsed_value = None
+            if _parsed_value is not None and isinstance(
+                _parsed_value, (str, int, float, bool)
+            ):
+                _retry_error_messages = []
+                # retry ByDateTimeExpiry with wrapped primitive
+                try:
+                    _model_fields = list(ByDateTimeExpiry.model_fields.keys())
+                    if len(_model_fields) == 1:
+                        instance.actual_instance = ByDateTimeExpiry.model_validate(
+                            {_model_fields[0]: _parsed_value}
+                        )
+                        match += 1
+                except (ValidationError, ValueError) as e:
+                    _retry_error_messages.append(str(e))
+                # retry ByDurationExpiry with wrapped primitive
+                try:
+                    _model_fields = list(ByDurationExpiry.model_fields.keys())
+                    if len(_model_fields) == 1:
+                        instance.actual_instance = ByDurationExpiry.model_validate(
+                            {_model_fields[0]: _parsed_value}
+                        )
+                        match += 1
+                except (ValidationError, ValueError) as e:
+                    _retry_error_messages.append(str(e))
+                if match > 0:
+                    error_messages = _retry_error_messages
+                else:
+                    error_messages.extend(_retry_error_messages)
+
         if match > 1:
             # more than 1 match
             raise ValueError(
