@@ -1,5 +1,10 @@
 # Okta Python SDK Changelog
 
+# 3.4.1
+
+## Fixed
+* Fixed Primitive Fallback for oneOf Deserialization in Device Assurance Model.
+
 # 3.4.0
 
 ## Added
