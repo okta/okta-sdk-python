@@ -62100,7 +62100,7 @@ components:
         value:
           type: string
           description: A time duration in ISO 8601 duration format.
-          pattern: ^P(?:$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?:\d)(\d+H)?(\d+M)?(\d+S)?)?$
+          pattern: ^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d)(\d+H)?(\d+M)?(\d+S)?)?$
     CAPTCHAInstance:
       title: CAPTCHAInstance
       description: ''
@@ -65855,6 +65855,7 @@ components:
       type: object
       properties:
         expiry:
+          x-okta-primitive-fallback: true
           oneOf:
             - $ref: '#/components/schemas/ByDateTimeExpiry'
             - $ref: '#/components/schemas/ByDurationExpiry'

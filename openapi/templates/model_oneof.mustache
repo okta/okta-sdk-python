@@ -167,6 +167,40 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
         {{/isContainer}}
         {{/composedSchemas.oneOf}}
 
+        {{#vendorExtensions.x-okta-primitive-fallback}}
+        # If no match found and the data is a primitive value, retry by wrapping
+        # it into each oneOf schema's single-property structure. This handles API
+        # responses where a scalar is returned for a oneOf field whose schemas
+        # are single-property objects.
+        if match == 0:
+            try:
+                _parsed_value = json.loads(json_str)
+            except (json.JSONDecodeError, TypeError):
+                _parsed_value = None
+            if _parsed_value is not None and isinstance(_parsed_value, (str, int, float, bool)):
+                _retry_error_messages = []
+                {{#composedSchemas.oneOf}}
+                {{^isContainer}}
+                {{^isPrimitiveType}}
+                {{! Only retry non-primitive, non-container schemas. Primitive oneOf
+                    schemas would have already matched during the initial attempt above. }}
+                # retry {{{dataType}}} with wrapped primitive
+                try:
+                    _model_fields = list({{{dataType}}}.model_fields.keys())
+                    if len(_model_fields) == 1:
+                        instance.actual_instance = {{{dataType}}}.model_validate({_model_fields[0]: _parsed_value})
+                        match += 1
+                except (ValidationError, ValueError) as e:
+                    _retry_error_messages.append(str(e))
+                {{/isPrimitiveType}}
+                {{/isContainer}}
+                {{/composedSchemas.oneOf}}
+                if match > 0:
+                    error_messages = _retry_error_messages
+                else:
+                    error_messages.extend(_retry_error_messages)
+        {{/vendorExtensions.x-okta-primitive-fallback}}
+
         if match > 1:
             # more than 1 match
             raise ValueError("Multiple matches found when deserializing the JSON string into {{{classname}}} with oneOf schemas: {{#oneOf}}{{{.}}}{{^-last}}, {{/-last}}{{/oneOf}}. Details: " + ", ".join(error_messages))
