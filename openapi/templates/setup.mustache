@@ -70,7 +70,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     name=NAME,
-    version="3.4.1",
+    version="3.4.2",
     description="Python SDK for the Okta Management API",
     author="Okta, Inc.",
     author_email="developer-community-products@okta.com",

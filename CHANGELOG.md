@@ -1,5 +1,16 @@
 # Okta Python SDK Changelog
 
+# 3.4.2
+
+## Security
+* Resolved Dependabot security alerts by upgrading runtime dependencies to their latest secure versions: `aenum` 3.1.16, `aiohttp` 3.13.4, `pydash` 8.0.6, `PyJWT` 2.12.0, `PyYAML` 6.0.3, `requests` 2.33.0, and `xmltodict` 1.0.2. ([#525](https://github.com/okta/okta-sdk-python/pull/525))
+* Upgraded `pytest` to 9.0.3 and `pytest-asyncio` to 1.3.0 to address security and vulnerability concerns. ([#527](https://github.com/okta/okta-sdk-python/pull/527))
+
+## Changed
+* Bumped development and testing dependencies: `flake8` 7.3.0, `pyfakefs` 5.10.2, `pytest-mock` 3.15.1, `pytest-recording` 0.13.4, `tox` 4.30.3, and `twine` 6.2.0. ([#525](https://github.com/okta/okta-sdk-python/pull/525))
+* Upgraded GitHub Actions to current major releases: `actions/checkout` v6 and `actions/setup-python` v6 to resolve Node.js runtime deprecation warnings. ([#525](https://github.com/okta/okta-sdk-python/pull/525))
+* Updated OpenAPI Generator mustache templates (`requirements.mustache`, `setup.mustache`, `pyproject.mustache`, `test-requirements.mustache`) to reflect the new dependency versions for consistent future code generation. ([#525](https://github.com/okta/okta-sdk-python/pull/525))
+
 # 3.4.1
 
 ## Fixed

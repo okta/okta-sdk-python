@@ -1,7 +1,7 @@
 templateDir: ./templates
 outputDir: ..
 packageName: okta
-packageVersion: 3.4.1
+packageVersion: 3.4.2
 useOneOfDiscriminatorLookup: true
 files:
   okta/okta_configuration.mustache:
