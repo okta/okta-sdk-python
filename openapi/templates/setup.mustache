@@ -33,18 +33,18 @@ from setuptools import setup, find_packages  # noqa: H301
 NAME = "okta"
 PYTHON_REQUIRES = ">=3.10"
 REQUIRES = [
-    "aenum >= 3.1.11",
-    "aiohttp >= 3.12.14",
+    "aenum >= 3.1.16",
+    "aiohttp >= 3.13.4",
     "blinker >= 1.9.0",
     'jwcrypto >= 1.5.6',
     "pycryptodomex >= 3.23.0",
     "pydantic >= 2.11.3",
-    "pydash >= 8.0.5",
-    "PyJWT >= 2.10.1",
+    "pydash >= 8.0.6",
+    "PyJWT >= 2.12.0",
     "python-dateutil >= 2.9.0.post0",
-    "PyYAML >= 6.0.2",
-    "requests >= 2.32.3",
-    "xmltodict >= 0.14.2",
+    "PyYAML >= 6.0.3",
+    "requests >= 2.33.0",
+    "xmltodict >= 1.0.2",
 ]
 
 def get_version():
