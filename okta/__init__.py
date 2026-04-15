@@ -21,7 +21,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.4.1"
+__version__ = "3.4.2"
 
 import importlib as _importlib
 import threading as _threading
