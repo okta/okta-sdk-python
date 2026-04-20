@@ -1,4 +1,4 @@
-aenum==3.1.16
+aenum==3.1.17
 aiohttp==3.13.4
 blinker==1.9.0
 jwcrypto==1.5.6
