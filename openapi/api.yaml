@@ -77143,19 +77143,9 @@ components:
       required:
         - allowMultipleAcsEndpoints
         - assertionSigned
-        - audience
-        - authnContextClassRef
-        - destination
-        - digestAlgorithm
         - honorForceAuthn
-        - idpIssuer
-        - recipient
         - requestCompressed
         - responseSigned
-        - signatureAlgorithm
-        - ssoAcsUrl
-        - subjectNameIdFormat
-        - subjectNameIdTemplate
     SamlAssertionEncryption:
       description: Determines if the app supports encrypted assertions
       type: object
