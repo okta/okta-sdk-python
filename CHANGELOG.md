@@ -1,5 +1,13 @@
 # Okta Python SDK Changelog
 
+# 3.4.3
+
+## Bug Fixes
+* Fixed a deserialization crash in `list_applications()` that occurred when processing partially configured SAML applications. The `SamlApplicationSettingsSignOn` schema was updated to remove overly strict `required` constraints on 10 fields (including `audience`, `idpIssuer`, `ssoAcsUrl`, and `recipient`), allowing the SDK to successfully parse valid API responses without throwing validation errors (#536).
+
+## Security & Dependencies
+* Upgraded package dependencies to resolve flagged Dependabot security alerts (#537, #538).
+
 # 3.4.2
 
 ## Security
