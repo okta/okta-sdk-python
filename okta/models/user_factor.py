@@ -42,6 +42,7 @@ if TYPE_CHECKING:
     from okta.models.user_factor_email import UserFactorEmail
     from okta.models.user_factor_push import UserFactorPush
     from okta.models.user_factor_security_question import UserFactorSecurityQuestion
+    from okta.models.user_factor_signed_nonce import UserFactorSignedNonce
     from okta.models.user_factor_sms import UserFactorSMS
     from okta.models.user_factor_token import UserFactorToken
     from okta.models.user_factor_token_hardware import UserFactorTokenHardware
@@ -113,6 +114,7 @@ class UserFactor(BaseModel):
         "email": "UserFactorEmail",
         "push": "UserFactorPush",
         "question": "UserFactorSecurityQuestion",
+        "signed_nonce": "UserFactorSignedNonce",
         "sms": "UserFactorSMS",
         "token": "UserFactorToken",
         "token:hardware": "UserFactorTokenHardware",
@@ -148,6 +150,7 @@ class UserFactor(BaseModel):
             UserFactorEmail,
             UserFactorPush,
             UserFactorSecurityQuestion,
+            UserFactorSignedNonce,
             UserFactorSMS,
             UserFactorToken,
             UserFactorTokenHardware,
@@ -207,6 +210,7 @@ class UserFactor(BaseModel):
             UserFactorEmail,
             UserFactorPush,
             UserFactorSecurityQuestion,
+            UserFactorSignedNonce,
             UserFactorSMS,
             UserFactorToken,
             UserFactorTokenHardware,
@@ -242,6 +246,11 @@ class UserFactor(BaseModel):
             if object_type == cls.__name__:
                 return cls.model_validate(obj)
             return models.UserFactorSecurityQuestion.from_dict(obj)
+        if object_type == "UserFactorSignedNonce":
+            # Check if the discriminator maps to the same class to avoid infinite recursion
+            if object_type == cls.__name__:
+                return cls.model_validate(obj)
+            return models.UserFactorSignedNonce.from_dict(obj)
         if object_type == "UserFactorSMS":
             # Check if the discriminator maps to the same class to avoid infinite recursion
             if object_type == cls.__name__:
