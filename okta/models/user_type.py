@@ -25,11 +25,14 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
+from datetime import datetime
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing_extensions import Self
+
+from okta.models.user_type_links import UserTypeLinks
 
 
 class UserType(BaseModel):
@@ -40,8 +43,58 @@ class UserType(BaseModel):
     replace of an existing user (but not a partial update).
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(default=None, description="The ID of the user type")
-    __properties: ClassVar[List[str]] = ["id"]
+    created: Optional[datetime] = Field(
+        default=None, description="A timestamp from when the user type was created"
+    )
+    created_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The user ID of the account that created the user type",
+        alias="createdBy",
+    )
+    default: Optional[StrictBool] = Field(
+        default=None,
+        description="A boolean value to indicate if this is the default user type",
+    )
+    description: Optional[StrictStr] = Field(
+        default=None, description="The human-readable description of the user type"
+    )
+    display_name: Optional[StrictStr] = Field(
+        default=None,
+        description="The human-readable name of the user type",
+        alias="displayName",
+    )
+    id: Optional[StrictStr] = Field(
+        default=None, description="The unique key for the user type"
+    )
+    last_updated: Optional[datetime] = Field(
+        default=None,
+        description="A timestamp from when the user type was most recently updated",
+        alias="lastUpdated",
+    )
+    last_updated_by: Optional[StrictStr] = Field(
+        default=None,
+        description="The user ID of the most recent account to edit the user type",
+        alias="lastUpdatedBy",
+    )
+    name: Optional[StrictStr] = Field(
+        default=None,
+        description="The name of the user type. The name must start with A-Z or a-z "
+        "and contain only A-Z, a-z, 0-9, or underscore (_) characters. This value "
+        "becomes read-only after creation and can't be updated.",
+    )
+    links: Optional[UserTypeLinks] = Field(default=None, alias="_links")
+    __properties: ClassVar[List[str]] = [
+        "created",
+        "createdBy",
+        "default",
+        "description",
+        "displayName",
+        "id",
+        "lastUpdated",
+        "lastUpdatedBy",
+        "name",
+        "_links",
+    ]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,13 +126,28 @@ class UserType(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: Set[str] = set(
+            [
+                "created",
+                "created_by",
+                "default",
+                "last_updated",
+                "last_updated_by",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            if not isinstance(self.links, dict):
+                _dict["_links"] = self.links.to_dict()
+            else:
+                _dict["_links"] = self.links
+
         return _dict
 
     @classmethod
@@ -91,5 +159,22 @@ class UserType(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"id": obj.get("id")})
+        _obj = cls.model_validate(
+            {
+                "created": obj.get("created"),
+                "createdBy": obj.get("createdBy"),
+                "default": obj.get("default"),
+                "description": obj.get("description"),
+                "displayName": obj.get("displayName"),
+                "id": obj.get("id"),
+                "lastUpdated": obj.get("lastUpdated"),
+                "lastUpdatedBy": obj.get("lastUpdatedBy"),
+                "name": obj.get("name"),
+                "_links": (
+                    UserTypeLinks.from_dict(obj["_links"])
+                    if obj.get("_links") is not None
+                    else None
+                ),
+            }
+        )
         return _obj
