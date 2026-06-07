@@ -57789,19 +57789,19 @@ components:
           items:
             type: string
             enum:
-              - PASSWORD
-              - SECURITY_QUESTION
-              - SMS
-              - VOICE
-              - EMAIL
-              - PUSH
-              - SIGNED_NONCE
-              - OTP
-              - TOTP
-              - WEBAUTHN
-              - DUO
-              - IDP
-              - CERT
+              - password
+              - security_question
+              - sms
+              - voice
+              - email
+              - push
+              - signed_nonce
+              - otp
+              - totp
+              - webauthn
+              - duo
+              - idp
+              - cert
           type: array
         reauthenticateIn:
           description: The duration after which the user must re-authenticate regardless of user activity. This re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).
@@ -57814,13 +57814,13 @@ components:
           items:
             type: string
             enum:
-              - SECURITY_KEY
-              - PHONE
-              - EMAIL
-              - PASSWORD
-              - SECURITY_QUESTION
-              - APP
-              - FEDERATED
+              - security_key
+              - phone
+              - email
+              - password
+              - security_question
+              - app
+              - federated
           type: array
     AccessPolicyConstraints:
       description: Specifies constraints for the authenticator. Constraints are logically evaluated such that only one constraint object needs to be satisfied. But, within a constraint object, each constraint property must be satisfied.
