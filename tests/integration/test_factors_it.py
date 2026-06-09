@@ -219,6 +219,69 @@ class TestFactorsResource:
                 errors.append(exc)
             assert len(errors) == 0
 
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_factors_signed_nonce(self, fs):
+        """
+        Regression test for OKTA-1152856.
+
+        Verifies that `list_factors()` correctly deserializes the Okta
+        FastPass `signed_nonce` factor type into a `UserFactorSignedNonce`
+        instance (with a populated `UserFactorSignedNonceProfile`) instead
+        of raising a Pydantic discriminator ValidationError.
+
+        Note: `signed_nonce` cannot be enrolled via the Factors API (it is
+        provisioned through the Okta Verify authenticator enrollment
+        flow). This test therefore relies on a pre-existing FastPass-
+        enrolled user in the test org; it discovers that user by
+        iterating `list_users()` and inspecting each user's factors.
+        """
+        # Instantiate Mock Client
+        client = MockOktaClient(fs)
+
+        users, _, err = await client.list_users()
+        assert err is None
+        assert users is not None and len(users) > 0
+
+        signed_nonce_user = None
+        signed_nonce_factor = None
+        for user in users:
+            factors, _, factors_err = await client.list_factors(user.id)
+            assert factors_err is None
+            if not factors:
+                continue
+            for factor in factors:
+                if isinstance(factor, models.UserFactorSignedNonce):
+                    signed_nonce_user = user
+                    signed_nonce_factor = factor
+                    break
+            if signed_nonce_factor is not None:
+                break
+
+        assert signed_nonce_user is not None, (
+            "No user enrolled with the signed_nonce (Okta FastPass) factor was "
+            "found in the test org. Enroll Okta Verify for a test user before "
+            "re-recording this cassette."
+        )
+
+        # Discriminator routed to the correct subclass
+        assert isinstance(signed_nonce_factor, models.UserFactorSignedNonce)
+        assert signed_nonce_factor.factor_type == models.UserFactorType.SIGNED_NONCE
+        assert signed_nonce_factor.provider == "OKTA"
+        assert signed_nonce_factor.id is not None
+
+        # Nested profile deserialized into the new generated model
+        assert signed_nonce_factor.profile is not None
+        assert isinstance(
+            signed_nonce_factor.profile, models.UserFactorSignedNonceProfile
+        )
+
+        # If the profile carries JWK key material, ensure each key entry
+        # is also routed to the dedicated profile-key model.
+        if signed_nonce_factor.profile.keys:
+            for key in signed_nonce_factor.profile.keys:
+                assert isinstance(key, models.UserFactorSignedNonceProfileKey)
+
     @pytest.mark.skip(reason="SDK bug: user_factor_links.py from_dict expects dict but API returns list for resend field")
     @pytest.mark.vcr()
     @pytest.mark.asyncio
