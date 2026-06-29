@@ -12,16 +12,12 @@ interactions:
     uri: https://test.okta.com/api/v1/users
   response:
     body:
-      string: '[{"id":"00unwlw0tbo8E6aVj5d7","status":"ACTIVE","created":"2025-03-19T08:01:48.000Z","activated":null,"statusChanged":"2025-03-19T09:20:48.000Z","lastLogin":"2026-06-04T06:38:19.000Z","lastUpdated":"2025-03-19T09:20:48.000Z","passwordChanged":"2025-03-19T09:20:48.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Binoy","lastName":"Oza","mobilePhone":null,"secondEmail":null,"login":"binoy.oza@okta.com","email":"binoy.oza@okta.com"},"credentials":{"password":{},"emails":[{"value":"binoy.oza@okta.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7"}}},{"id":"00upynhrehMaqXPgU5d7","status":"ACTIVE","created":"2025-08-07T13:11:36.000Z","activated":"2025-08-07T13:11:36.000Z","statusChanged":"2025-08-07T13:11:36.000Z","lastLogin":null,"lastUpdated":"2025-08-07T13:11:36.000Z","passwordChanged":"2025-08-07T13:11:36.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"John","lastName":"Doe-Assign-User-Role","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Assign-User-Role@example.com","email":"John.Doe-Assign-User-Role@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Assign-User-Role@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00upynhrehMaqXPgU5d7"}}},{"id":"00urimiriwkS090165d7","status":"ACTIVE","created":"2025-11-17T11:41:28.000Z","activated":"2025-11-17T11:41:28.000Z","statusChanged":"2025-11-20T07:32:46.000Z","lastLogin":"2025-11-25T10:47:16.000Z","lastUpdated":"2025-11-20T07:32:46.000Z","passwordChanged":"2025-11-20T07:32:46.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"bob","lastName":"tables","mobilePhone":null,"secondEmail":null,"login":"bob@tables.fake","email":"bob@tables.fake"},"credentials":{"password":{},"emails":[{"value":"bob@tables.fake","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00urimiriwkS090165d7"}}},{"id":"00uron9tssJTT01de5d7","status":"ACTIVE","created":"2025-11-27T19:26:19.000Z","activated":"2025-11-28T04:17:25.000Z","statusChanged":"2025-11-28T04:20:27.000Z","lastLogin":"2025-12-08T14:05:06.000Z","lastUpdated":"2025-11-28T04:20:27.000Z","passwordChanged":"2025-11-28T04:20:27.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Aniket","lastName":"Anil
-        Kumar","mobilePhone":null,"secondEmail":null,"login":"aniket@okta.com","email":"aniket@okta.com"},"credentials":{"password":{},"emails":[{"value":"aniket@okta.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uron9tssJTT01de5d7"}}},{"id":"00usr26thxUMNcwqC5d7","status":"ACTIVE","created":"2026-01-31T16:40:03.000Z","activated":"2026-01-31T16:40:04.000Z","statusChanged":"2026-01-31T16:41:07.000Z","lastLogin":"2026-01-31T16:41:07.000Z","lastUpdated":"2026-01-31T16:41:07.000Z","passwordChanged":"2026-01-31T16:41:07.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Test","lastName":"Client
-        sdk","mobilePhone":null,"secondEmail":null,"login":"test@clientsdk.com","email":"test@clientsdk.com"},"credentials":{"password":{},"emails":[{"value":"test@clientsdk.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00usr26thxUMNcwqC5d7"}}},{"id":"00utrpra8lYbNAGHR5d7","status":"ACTIVE","created":"2026-03-25T06:44:24.000Z","activated":"2026-03-25T06:44:25.000Z","statusChanged":"2026-03-25T06:46:57.000Z","lastLogin":"2026-03-25T06:54:46.000Z","lastUpdated":"2026-03-25T06:46:57.000Z","passwordChanged":"2026-03-25T06:46:57.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Prachi","lastName":"Pandey","mobilePhone":null,"secondEmail":null,"login":"prachi.pandey@okta.com","email":"prachi.pandey@okta.com"},"credentials":{"password":{},"emails":[{"value":"prachi.pandey@okta.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00utrpra8lYbNAGHR5d7"}}},{"id":"00uuyg8e0tP0FcSQo5d7","status":"ACTIVE","created":"2026-06-02T10:38:43.000Z","activated":"2026-06-02T10:38:44.000Z","statusChanged":"2026-06-02T10:38:44.000Z","lastLogin":"2026-06-02T10:42:40.000Z","lastUpdated":"2026-06-02T10:38:44.000Z","passwordChanged":"2026-06-02T10:38:44.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Sagar","lastName":"V","mobilePhone":null,"secondEmail":null,"login":"sagar.viswanatha@okta.com","email":"sagar.viswanatha@okta.com"},"credentials":{"password":{},"emails":[{"value":"sagar.viswanatha@okta.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uuyg8e0tP0FcSQo5d7"}}},{"id":"00uowwcs8cTcBPGMc5d7","status":"PASSWORD_EXPIRED","created":"2025-05-27T08:13:06.000Z","activated":"2025-05-27T08:13:06.000Z","statusChanged":"2025-05-27T08:13:06.000Z","lastLogin":null,"lastUpdated":"2025-05-27T08:13:06.000Z","passwordChanged":"2025-05-27T08:13:06.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Isaac","lastName":"Brock","mobilePhone":"555-415-1337","secondEmail":null,"login":"isaac.brock@example.com","email":"isaac.brock@example.com"},"credentials":{"password":{},"emails":[{"value":"isaac.brock@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uowwcs8cTcBPGMc5d7"}}},{"id":"00uowxt3ozKl39Oex5d7","status":"PASSWORD_EXPIRED","created":"2025-05-27T09:22:32.000Z","activated":"2025-05-27T09:22:32.000Z","statusChanged":"2025-05-27T09:22:32.000Z","lastLogin":null,"lastUpdated":"2025-05-27T09:22:32.000Z","passwordChanged":"2025-05-27T09:22:32.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Sample","lastName":"Sample","mobilePhone":"555-415-1337","secondEmail":null,"login":"sample.sample@example.com","email":"sample.sample@example.com"},"credentials":{"password":{},"emails":[{"value":"sample.sample@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uowxt3ozKl39Oex5d7"}}},{"id":"00uowylh4548byr6w5d7","status":"PASSWORD_EXPIRED","created":"2025-05-27T10:16:29.000Z","activated":"2025-05-27T10:16:30.000Z","statusChanged":"2025-05-27T10:16:30.000Z","lastLogin":null,"lastUpdated":"2025-05-27T10:16:30.000Z","passwordChanged":"2025-05-27T10:16:30.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Sample1","lastName":"Sample1","mobilePhone":"555-415-1337","secondEmail":null,"login":"sample1.sample1@example.com","email":"sample1.sample1@example.com"},"credentials":{"password":{},"emails":[{"value":"sample1.sample1@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uowylh4548byr6w5d7"}}},{"id":"00uozv8kk7SGP9IKF5d7","status":"PASSWORD_EXPIRED","created":"2025-06-02T04:36:18.000Z","activated":"2025-06-02T04:36:18.000Z","statusChanged":"2025-06-02T04:36:18.000Z","lastLogin":null,"lastUpdated":"2025-06-02T04:36:18.000Z","passwordChanged":"2025-06-02T04:36:18.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Sample12","lastName":"Sample12","mobilePhone":"555-415-1337","secondEmail":null,"login":"sample12.sample12@example.com","email":"sample12.sample12@example.com"},"credentials":{"password":{},"emails":[{"value":"sample12.sample12@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uozv8kk7SGP9IKF5d7"}}},{"id":"00uqh31ktvIde3jcq5d7","status":"PASSWORD_EXPIRED","created":"2025-09-09T13:35:11.000Z","activated":"2025-09-09T13:35:11.000Z","statusChanged":"2025-09-09T13:35:11.000Z","lastLogin":null,"lastUpdated":"2025-09-09T13:35:11.000Z","passwordChanged":"2025-09-09T13:35:11.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Sample121","lastName":"Sample121","mobilePhone":"555-415-1337","secondEmail":null,"login":"sample12.sample121@example.com","email":"sample12.sample121@example.com"},"credentials":{"password":{},"emails":[{"value":"sample12.sample121@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uqh31ktvIde3jcq5d7"}}},{"id":"00ushjf1hmpOzKEqR5d7","status":"PASSWORD_EXPIRED","created":"2026-01-16T15:30:07.000Z","activated":"2026-01-16T15:30:08.000Z","statusChanged":"2026-01-16T15:30:08.000Z","lastLogin":null,"lastUpdated":"2026-01-16T15:30:08.000Z","passwordChanged":"2026-01-16T15:30:07.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Manmohan","lastName":"Shaw","mobilePhone":null,"secondEmail":null,"login":"manmohan.shaw@okta.com","email":"manmohan.shaw@okta.com"},"credentials":{"password":{},"emails":[{"value":"manmohan.shaw@okta.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00ushjf1hmpOzKEqR5d7"}}},{"id":"00utbu9afurlD9N3o5d7","status":"PASSWORD_EXPIRED","created":"2026-02-26T19:20:45.000Z","activated":"2026-02-26T19:20:45.000Z","statusChanged":"2026-02-26T19:20:45.000Z","lastLogin":null,"lastUpdated":"2026-02-26T19:20:45.000Z","passwordChanged":"2026-02-26T19:20:45.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"TestUserdceaae85","lastName":"LastNamedceaae85","mobilePhone":"555-415-1337","secondEmail":null,"login":"testuserdceaae85@example.com","email":"testuserdceaae85@example.com"},"credentials":{"password":{},"emails":[{"value":"testuserdceaae85@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00utbu9afurlD9N3o5d7"}}},{"id":"00utwqn7x6aISME9M5d7","status":"PASSWORD_EXPIRED","created":"2026-04-02T07:40:49.000Z","activated":"2026-04-02T07:40:49.000Z","statusChanged":"2026-04-02T07:40:49.000Z","lastLogin":null,"lastUpdated":"2026-04-02T07:40:49.000Z","passwordChanged":"2026-04-02T07:40:49.000Z","type":{"id":"otynwlw0pkLLUgtNG5d7"},"profile":{"firstName":"Isaac121","lastName":"Brock121","mobilePhone":"555-415-1337","secondEmail":"","login":"isaac.brock121@example.com","email":"isaac.brock121@example.com"},"credentials":{"password":{},"emails":[{"value":"isaac.brock121@example.com","status":"VERIFIED","type":"PRIMARY"},{"value":"","status":"VERIFIED","type":"SECONDARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00utwqn7x6aISME9M5d7"}}}]'
+      string: '[{"id":"00uFAKEFASTPASS000001","status":"ACTIVE","created":"2025-01-01T00:00:00.000Z","activated":null,"statusChanged":"2025-01-01T00:00:00.000Z","lastLogin":"2025-01-01T00:00:00.000Z","lastUpdated":"2025-01-01T00:00:00.000Z","passwordChanged":"2025-01-01T00:00:00.000Z","type":{"id":"otyFAKEUSERTYPE000001"},"profile":{"firstName":"Jane","lastName":"Doe-Signed-Nonce","mobilePhone":null,"secondEmail":null,"login":"jane.doe-signed-nonce@example.com","email":"jane.doe-signed-nonce@example.com"},"credentials":{"password":{},"emails":[{"value":"jane.doe-signed-nonce@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001"}}}]'
     headers:
       Cache-Control:
       - no-cache, no-store
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json
       Date:
@@ -29,34 +25,19 @@ interactions:
       Expires:
       - '0'
       Link:
-      - <https://dev-20982288.okta.com/api/v1/users?limit=200>; rel="self"
+      - <https://test.okta.com/api/v1/users?limit=200>; rel="self"
       Pragma:
       - no-cache
       Server:
       - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=1792FD6002309367151DC18D2370A461; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy: frame-ancestors 'self'
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
       x-content-type-options:
       - nosniff
-      x-okta-request-id:
-      - 59d84181d42748b70ee6e18811b24a7f
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
@@ -78,17 +59,15 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7/factors
+    uri: https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001/factors
   response:
     body:
-      string: '[{"id":"crpnwmp5pcpELVg0Y5d7","factorType":"signed_nonce","provider":"OKTA","vendorName":"OKTA","status":"ACTIVE","created":"2025-03-19T09:21:27.000Z","lastUpdated":"2025-03-19T09:21:27.000Z","profile":{"credentialId":"binoy.oza@okta.com","deviceType":"SmartPhone_IPhone","name":"CVG3GF7X5P","platform":"IOS","version":"18.3.2","keys":[{"kty":"EC","use":"sig","kid":"default","jwkType":"proofOfPossession","x":"0M18P_3jzp58KAYDy41cB1N6JwhkDnXxaqbBVscZxVA","y":"4AeD4KOHGhN1P0uSyO170-tU0ZIuC_K2eC72olTPuZw","crv":"P-256"},{"kty":"EC","use":"sig","kid":"default","jwkType":"userVerification","x":"R0iBIuMUR6wA4JKShqIke4FxcapHHnKE1WPkNT_8P2I","y":"qjEXEEU99DixvuLEF9q3rQYYT4LRYQ022q6GTW4Ye-E","crv":"P-256"},{"kty":"EC","use":"sig","kid":"default","jwkType":"userVerificationBioOrPin","x":"dyjq_GhQu-drEwxp3bq4X_vdpEheUKCz37TO13BC5CU","y":"8x6G_DIXtWoNfblyhDLpWzP5a6FF7zVaejcXDLsQaqw","crv":"P-256"}]},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7/factors/crpnwmp5pcpELVg0Y5d7","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7","hints":{"allow":["GET"]}}}},{"id":"ostnwmp5pabaPon1M5d7","factorType":"token:software:totp","provider":"OKTA","vendorName":"OKTA","status":"ACTIVE","created":"2025-03-19T09:21:27.000Z","lastUpdated":"2025-03-19T09:21:27.000Z","profile":{"credentialId":"binoy.oza@okta.com"},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7/factors/ostnwmp5pabaPon1M5d7","hints":{"allow":["GET","DELETE"]}},"verify":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7/factors/ostnwmp5pabaPon1M5d7/verify","hints":{"allow":["POST"]}},"user":{"href":"https://test.okta.com/api/v1/users/00unwlw0tbo8E6aVj5d7","hints":{"allow":["GET"]}}}}]'
+      string: '[{"id":"crpFAKESIGNEDNONCE0001","factorType":"signed_nonce","provider":"OKTA","vendorName":"OKTA","status":"ACTIVE","created":"2025-01-01T00:00:00.000Z","lastUpdated":"2025-01-01T00:00:00.000Z","profile":{"credentialId":"jane.doe-signed-nonce@example.com","deviceType":"SmartPhone_IPhone","name":"FAKEDEVICE01","platform":"IOS","version":"18.0.0","keys":[{"kty":"EC","use":"sig","kid":"default","jwkType":"proofOfPossession","x":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","y":"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB","crv":"P-256"},{"kty":"EC","use":"sig","kid":"default","jwkType":"userVerification","x":"CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC","y":"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD","crv":"P-256"},{"kty":"EC","use":"sig","kid":"default","jwkType":"userVerificationBioOrPin","x":"EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE","y":"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF","crv":"P-256"}]},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001/factors/crpFAKESIGNEDNONCE0001","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001","hints":{"allow":["GET"]}}}},{"id":"ostFAKETOTP000000001","factorType":"token:software:totp","provider":"OKTA","vendorName":"OKTA","status":"ACTIVE","created":"2025-01-01T00:00:00.000Z","lastUpdated":"2025-01-01T00:00:00.000Z","profile":{"credentialId":"jane.doe-signed-nonce@example.com"},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001/factors/ostFAKETOTP000000001","hints":{"allow":["GET","DELETE"]}},"verify":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001/factors/ostFAKETOTP000000001/verify","hints":{"allow":["POST"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001","hints":{"allow":["GET"]}}}}]'
     headers:
       Cache-Control:
       - no-cache, no-store
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json
       Date:
@@ -99,43 +78,14 @@ interactions:
       - no-cache
       Server:
       - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=E41E7C3B95A85FE876768F5E9A824183; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
-        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
-        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
-        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
-        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
-        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
-        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
-        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
-        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
-        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
-        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
-        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
-        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
       x-content-type-options:
       - nosniff
-      x-okta-request-id:
-      - 38faa7a94db82b5870dc55895684d60d
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:

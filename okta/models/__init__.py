@@ -232,7 +232,7 @@ _MODEL_GROUPS = {
         'UserFactorEmail',
         'UserFactorPush',
         'UserFactorSecurityQuestion',
-        "UserFactorSignedNonce",
+        'UserFactorSignedNonce',
         'UserFactorSMS',
         'UserFactorToken',
         'UserFactorTokenHardware',
