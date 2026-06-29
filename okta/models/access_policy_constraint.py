@@ -99,24 +99,24 @@ class AccessPolicyConstraint(BaseModel):
         for i in value:
             if i not in set(
                 [
-                    "PASSWORD",
-                    "SECURITY_QUESTION",
-                    "SMS",
-                    "VOICE",
-                    "EMAIL",
-                    "PUSH",
-                    "SIGNED_NONCE",
-                    "OTP",
-                    "TOTP",
-                    "WEBAUTHN",
-                    "DUO",
-                    "IDP",
-                    "CERT",
+                    "password",
+                    "security_question",
+                    "sms",
+                    "voice",
+                    "email",
+                    "push",
+                    "signed_nonce",
+                    "otp",
+                    "totp",
+                    "webauthn",
+                    "duo",
+                    "idp",
+                    "cert",
                 ]
             ):
                 raise ValueError(
-                    "each list item must be one of ('PASSWORD', 'SECURITY_QUESTION', 'SMS', 'VOICE', 'EMAIL', 'PUSH', "
-                    "'SIGNED_NONCE', 'OTP', 'TOTP', 'WEBAUTHN', 'DUO', 'IDP', 'CERT')"
+                    "each list item must be one of ('password', 'security_question', 'sms', 'voice', 'email', 'push', "
+                    "'signed_nonce', 'otp', 'totp', 'webauthn', 'duo', 'idp', 'cert')"
                 )
         return value
 
@@ -129,18 +129,18 @@ class AccessPolicyConstraint(BaseModel):
         for i in value:
             if i not in set(
                 [
-                    "SECURITY_KEY",
-                    "PHONE",
-                    "EMAIL",
-                    "PASSWORD",
-                    "SECURITY_QUESTION",
-                    "APP",
-                    "FEDERATED",
+                    "security_key",
+                    "phone",
+                    "email",
+                    "password",
+                    "security_question",
+                    "app",
+                    "federated",
                 ]
             ):
                 raise ValueError(
-                    "each list item must be one of ('SECURITY_KEY', 'PHONE', 'EMAIL', 'PASSWORD', 'SECURITY_QUESTION', "
-                    "'APP', 'FEDERATED')"
+                    "each list item must be one of ('security_key', 'phone', 'email', 'password', 'security_question', "
+                    "'app', 'federated')"
                 )
         return value
 
