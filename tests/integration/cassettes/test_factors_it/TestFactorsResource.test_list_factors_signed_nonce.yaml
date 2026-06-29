@@ -1,0 +1,100 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/users
+  response:
+    body:
+      string: '[{"id":"00uFAKEFASTPASS000001","status":"ACTIVE","created":"2025-01-01T00:00:00.000Z","activated":null,"statusChanged":"2025-01-01T00:00:00.000Z","lastLogin":"2025-01-01T00:00:00.000Z","lastUpdated":"2025-01-01T00:00:00.000Z","passwordChanged":"2025-01-01T00:00:00.000Z","type":{"id":"otyFAKEUSERTYPE000001"},"profile":{"firstName":"Jane","lastName":"Doe-Signed-Nonce","mobilePhone":null,"secondEmail":null,"login":"jane.doe-signed-nonce@example.com","email":"jane.doe-signed-nonce@example.com"},"credentials":{"password":{},"emails":[{"value":"jane.doe-signed-nonce@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001"}}}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 09 Jun 2026 06:04:03 GMT
+      Expires:
+      - '0'
+      Link:
+      - <https://test.okta.com/api/v1/users?limit=200>; rel="self"
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '49'
+      x-rate-limit-reset:
+      - '1780985103'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001/factors
+  response:
+    body:
+      string: '[{"id":"crpFAKESIGNEDNONCE0001","factorType":"signed_nonce","provider":"OKTA","vendorName":"OKTA","status":"ACTIVE","created":"2025-01-01T00:00:00.000Z","lastUpdated":"2025-01-01T00:00:00.000Z","profile":{"credentialId":"jane.doe-signed-nonce@example.com","deviceType":"SmartPhone_IPhone","name":"FAKEDEVICE01","platform":"IOS","version":"18.0.0","keys":[{"kty":"EC","use":"sig","kid":"default","jwkType":"proofOfPossession","x":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","y":"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB","crv":"P-256"},{"kty":"EC","use":"sig","kid":"default","jwkType":"userVerification","x":"CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC","y":"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD","crv":"P-256"},{"kty":"EC","use":"sig","kid":"default","jwkType":"userVerificationBioOrPin","x":"EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE","y":"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF","crv":"P-256"}]},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001/factors/crpFAKESIGNEDNONCE0001","hints":{"allow":["GET","DELETE"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001","hints":{"allow":["GET"]}}}},{"id":"ostFAKETOTP000000001","factorType":"token:software:totp","provider":"OKTA","vendorName":"OKTA","status":"ACTIVE","created":"2025-01-01T00:00:00.000Z","lastUpdated":"2025-01-01T00:00:00.000Z","profile":{"credentialId":"jane.doe-signed-nonce@example.com"},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001/factors/ostFAKETOTP000000001","hints":{"allow":["GET","DELETE"]}},"verify":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001/factors/ostFAKETOTP000000001/verify","hints":{"allow":["POST"]}},"user":{"href":"https://test.okta.com/api/v1/users/00uFAKEFASTPASS000001","hints":{"allow":["GET"]}}}}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 09 Jun 2026 06:04:04 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-rate-limit-limit:
+      - '50'
+      x-rate-limit-remaining:
+      - '48'
+      x-rate-limit-reset:
+      - '1780985103'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

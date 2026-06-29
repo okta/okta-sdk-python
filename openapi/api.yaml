@@ -81003,6 +81003,7 @@ components:
           email: '#/components/schemas/UserFactorEmail'
           push: '#/components/schemas/UserFactorPush'
           question: '#/components/schemas/UserFactorSecurityQuestion'
+          signed_nonce: '#/components/schemas/UserFactorSignedNonce'
           sms: '#/components/schemas/UserFactorSMS'
           token: '#/components/schemas/UserFactorToken'
           token:hardware: '#/components/schemas/UserFactorTokenHardware'
@@ -81771,6 +81772,99 @@ components:
           description: ID for the factor credential
           example: dade.murphy@example.com
           type: string
+    UserFactorSignedNonce:
+      title: signed_nonce
+      description: |-
+        `signed_nonce` is the factor type for [Okta FastPass](https://help.okta.com/oie/en-us/content/topics/identity-engine/devices/fp/fp-main.htm). You can't use the Factors API to enroll or activate Okta FastPass (`signed_nonce`) for a user. Use the [Okta Verify](https://help.okta.com/en-us/content/topics/mobile/okta-verify-overview.htm) authenticator enrollment flow instead.
+
+        You can use the Factors API to list and delete `signed_nonce` factors.
+      allOf:
+        - $ref: '#/components/schemas/UserFactor'
+        - type: object
+          properties:
+            factorType:
+              example: signed_nonce
+            profile:
+              $ref: '#/components/schemas/UserFactorSignedNonceProfile'
+            provider:
+              enum:
+                - OKTA
+    UserFactorSignedNonceProfile:
+      description: Profile for the Okta FastPass (signed nonce) factor
+      type: object
+      readOnly: true
+      properties:
+        credentialId:
+          description: ID for the factor credential
+          example: dade.murphy@example.com
+          type: string
+        deviceType:
+          description: Type of device
+          example: SmartPhone_IPhone
+          type: string
+        name:
+          description: Name of the device
+          example: My Phone
+          type: string
+        platform:
+          description: OS platform of the associated device
+          example: IOS
+          type: string
+        version:
+          description: OS version of the associated device
+          example: '17.2'
+          type: string
+        keys:
+          description: Cryptographic keys associated with the signed nonce factor
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFactorSignedNonceProfileKey'
+    UserFactorSignedNonceProfileKey:
+      description: JSON Web Key (JWK) for signed nonce verification
+      type: object
+      properties:
+        kty:
+          description: Key type
+          type: string
+          enum:
+            - RSA
+            - EC
+        use:
+          description: Key usage
+          type: string
+          example: sig
+        kid:
+          description: Key ID
+          type: string
+          example: default
+        jwkType:
+          description: Purpose of the key
+          type: string
+          enum:
+            - proofOfPossession
+            - userVerification
+            - userVerificationBioOrPin
+        e:
+          description: RSA public exponent (present only for RSA keys)
+          type: string
+        n:
+          description: RSA modulus (present only for RSA keys)
+          type: string
+        crv:
+          description: EC curve name (present only for EC keys)
+          type: string
+          example: P-256
+        x:
+          description: EC x-coordinate (present only for EC keys)
+          type: string
+        y:
+          description: EC y-coordinate (present only for EC keys)
+          type: string
+        x5c:
+          description: X.509 certificate chain
+          type: array
+          items:
+            type: string
     UserFactorYubikeyOtpToken:
       type: object
       properties:
