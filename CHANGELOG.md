@@ -1,5 +1,11 @@
 # Okta Python SDK Changelog
 
+# 3.4.4
+
+## Fixed
+* Fixed a `ValidationError` crash in `list_factors()` when processing users enrolled in Okta FastPass. Added missing `signed_nonce` discriminator mapping and three new component schemas (`UserFactorSignedNonce`, `UserFactorSignedNonceProfile`, `UserFactorSignedNonceProfileKey`) to properly deserialize FastPass factor payloads ([#311](https://github.com/okta/okta-sdk-python/issues/311), [387](https://github.com/okta/okta-sdk-python/issues/387)).
+* Fixed enum case mismatches in `AccessPolicyConstraint`, `KnowledgeConstraint`, and `PossessionConstraint` models. The `methods` and `types` fields now correctly accept lowercase values (e.g., `"password"`, `"push"`, `"webauthn"`) to align with actual API responses, resolving `ValidationError` exceptions raised by `list_policy_rules()` ([#548](https://github.com/okta/okta-sdk-python/issues/548)).
+
 # 3.4.3
 
 ## Bug Fixes
