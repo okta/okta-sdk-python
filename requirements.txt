@@ -1,7 +1,7 @@
 aenum==3.1.17
 aiohttp==3.13.5
 blinker==1.9.0
-jwcrypto==1.5.7
+jwcrypto==1.5.8
 pycryptodomex==3.23.0
 pydantic==2.11.3
 pydash==8.0.6
