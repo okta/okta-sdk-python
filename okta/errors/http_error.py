@@ -17,5 +17,6 @@ class HTTPError(Error):
         self.url = url
         self.response_headers = response_details.headers
         self.stack = ""
-        self.message = f"HTTP {self.status} {response_body}"
+        self.response_body = response_body
+        self.message = f"HTTP {self.status}"
         super().__init__(self.message)
