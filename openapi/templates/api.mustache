@@ -68,6 +68,21 @@ class {{classname}}(ApiClient):
         response, response_body, error = await self._request_executor.execute(request)
         {{/returnType}}
 
+        # A transport-level failure (e.g. a dropped/reset connection or a timeout)
+        # makes execute() return a None response with the error set. Return that
+        # error before dereferencing response below, otherwise response.status
+        # raises AttributeError: 'NoneType' object has no attribute 'status'.
+        if response is None:
+            {{#returnType}}
+            if {{returnType}} is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+            {{/returnType}}
+            {{^returnType}}
+            return (None, error)
+            {{/returnType}}
+
         if response_body == '' or response.status == 204:
             response_data = RESTResponse(response)
             resp = ApiResponse(
