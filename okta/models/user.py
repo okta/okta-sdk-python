@@ -36,7 +36,7 @@ from okta.models.user_credentials import UserCredentials
 from okta.models.user_links import UserLinks
 from okta.models.user_profile import UserProfile
 from okta.models.user_status import UserStatus
-from okta.models.user_type import UserType
+from okta.models.user_type_ref import UserTypeRef
 
 
 class User(BaseModel):
@@ -87,7 +87,7 @@ class User(BaseModel):
         "the user's state is transitioning.",
         alias="transitioningToStatus",
     )
-    type: Optional[UserType] = None
+    type: Optional[UserTypeRef] = None
     embedded: Optional[Dict[str, Dict[str, Any]]] = Field(
         default=None,
         description="Embedded resources related to the user using the [JSON Hypertext Application Language]("
@@ -278,7 +278,7 @@ class User(BaseModel):
                 "statusChanged": obj.get("statusChanged"),
                 "transitioningToStatus": obj.get("transitioningToStatus"),
                 "type": (
-                    UserType.from_dict(obj["type"])
+                    UserTypeRef.from_dict(obj["type"])
                     if obj.get("type") is not None
                     else None
                 ),

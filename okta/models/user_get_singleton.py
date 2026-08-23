@@ -37,7 +37,7 @@ from okta.models.user_get_singleton_all_of_embedded import UserGetSingletonAllOf
 from okta.models.user_links import UserLinks
 from okta.models.user_profile import UserProfile
 from okta.models.user_status import UserStatus
-from okta.models.user_type import UserType
+from okta.models.user_type_ref import UserTypeRef
 
 
 class UserGetSingleton(BaseModel):
@@ -88,7 +88,7 @@ class UserGetSingleton(BaseModel):
         "the user's state is transitioning.",
         alias="transitioningToStatus",
     )
-    type: Optional[UserType] = None
+    type: Optional[UserTypeRef] = None
     embedded: Optional[UserGetSingletonAllOfEmbedded] = Field(
         default=None, alias="_embedded"
     )
@@ -281,7 +281,7 @@ class UserGetSingleton(BaseModel):
                 "statusChanged": obj.get("statusChanged"),
                 "transitioningToStatus": obj.get("transitioningToStatus"),
                 "type": (
-                    UserType.from_dict(obj["type"])
+                    UserTypeRef.from_dict(obj["type"])
                     if obj.get("type") is not None
                     else None
                 ),
