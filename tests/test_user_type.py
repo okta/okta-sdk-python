@@ -20,7 +20,12 @@ set of fields defined by the component schema.
 
 from datetime import datetime, timezone
 
+from pydantic import ValidationError
+
+import pytest
+
 from okta.models.user_type import UserType
+from okta.models.user_type_ref import UserTypeRef
 
 FULL_PAYLOAD = {
     "id": "oty123",
