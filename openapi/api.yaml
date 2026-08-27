@@ -80711,6 +80711,13 @@ components:
             id:
               type: string
               description: The ID of the user type
+    UserTypeRef:
+      type: object
+      description: The user type that determines the schema for the user's profile...
+      properties:
+        id:
+          type: string
+          description: The ID of the user type
     User:
       type: object
       properties:
@@ -80773,15 +80780,7 @@ components:
             - DEPROVISIONED
             - PROVISIONED
         type:
-          type: object
-          description: |-
-            The user type that determines the schema for the user's profile. The `type` property is a map that identifies the [User Types](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/#tag/UserType).
-
-            Currently it contains a single element, `id`. It can be specified when creating a new user, and can be updated by an admin on a full replace of an existing user (but not a partial update).
-          properties:
-            id:
-              type: string
-              description: The ID of the user type
+          $ref: '#/components/schemas/UserTypeRef'
         _embedded:
           type: object
           description: Embedded resources related to the user using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification

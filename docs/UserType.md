@@ -1,12 +1,20 @@
 # UserType
 
-The user type that determines the schema for the user's profile. The `type` property is a map that identifies the [User Types](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/UserType/#tag/UserType).  Currently it contains a single element, `id`. It can be specified when creating a new user, and can be updated by an admin on a full replace of an existing user (but not a partial update).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | The ID of the user type | [optional] 
+**created** | **datetime** | A timestamp from when the user type was created | [optional] [readonly] 
+**created_by** | **str** | The user ID of the account that created the user type | [optional] [readonly] 
+**default** | **bool** | A boolean value to indicate if this is the default user type | [optional] [readonly] 
+**description** | **str** | The human-readable description of the user type | [optional] 
+**display_name** | **str** | The human-readable name of the user type | 
+**id** | **str** | The unique key for the user type | [optional] [readonly] 
+**last_updated** | **datetime** | A timestamp from when the user type was most recently updated | [optional] [readonly] 
+**last_updated_by** | **str** | The user ID of the most recent account to edit the user type | [optional] [readonly] 
+**name** | **str** | The name of the user type. The name must start with A-Z or a-z and contain only A-Z, a-z, 0-9, or underscore (_) characters. This value becomes read-only after creation and can&#39;t be updated. | 
+**links** | [**UserTypeLinks**](UserTypeLinks.md) |  | [optional] 
 
 ## Example
 

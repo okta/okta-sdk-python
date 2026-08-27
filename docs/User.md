@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **status** | [**UserStatus**](UserStatus.md) |  | [optional] 
 **status_changed** | **datetime** | The timestamp when the status of the user last changed | [optional] [readonly] 
 **transitioning_to_status** | **str** | The target status of an in-progress asynchronous status transition. This property is only returned if the user&#39;s state is transitioning. | [optional] [readonly] 
-**type** | [**UserType**](UserType.md) |  | [optional] 
+**type** | [**UserTypeRef**](UserTypeRef.md) |  | [optional] 
 **embedded** | **Dict[str, object]** | Embedded resources related to the user using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification | [optional] [readonly] 
 **links** | [**UserLinks**](UserLinks.md) |  | [optional] 
 
