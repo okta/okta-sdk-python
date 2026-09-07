@@ -1,5 +1,10 @@
 # Okta Python SDK Changelog
 
+# 3.4.5
+
+## Fixed
+* Fixed the `UserType` model being generated with only an `id` field, causing all other properties (`name`, `displayName`, `description`, `created`, `createdBy`, `default`, `lastUpdated`, `lastUpdatedBy`, `_links`) to be silently dropped when deserializing `/api/v1/meta/types/user/*` responses. Root cause was a schema name collision in `openapi/api.yaml`: the inline anonymous object on `User.type` was auto-promoted by OpenAPI Generator 7.x to a model named `UserType`, shadowing the real `UserType` component schema. Resolved by extracting the inline `User.type` object into a new `UserTypeRef` component and `$ref`ing it from `User.type`, so the real `UserType` component now generates with all defined fields. The on-wire JSON shape of `User.type` is unchanged. PR [#575](https://github.com/okta/okta-sdk-python/pull/575)
+
 # 3.4.4
 
 ## Fixed
