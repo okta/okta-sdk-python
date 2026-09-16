@@ -15,8 +15,8 @@ interactions:
     uri: https://test.okta.com/api/v1/authorizationServers
   response:
     body:
-      string: '{"id":"aussdomg3nRN8aLWm5d7","name":"python_sdk_clients_server","description":"Test
-        Auth Server for Clients API","audiences":["api://test"],"issuer":"https://test.okta.com/oauth2/aussdomg3nRN8aLWm5d7","issuerMode":"DYNAMIC","status":"ACTIVE","created":"2026-01-12T14:29:46.000Z","lastUpdated":"2026-01-12T14:29:46.000Z","credentials":{"signing":{"kid":"RrKiY03DtB0hZVe6i52KsxC9XdUoPqMTYg9MfzHQnqE","rotationMode":"AUTO","lastRotated":"2026-01-12T14:29:46.000Z","nextRotation":"2026-04-12T14:29:46.000Z"}},"default":false,"_links":{"rotateKey":{"href":"https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/credentials/lifecycle/keyRotate","hints":{"allow":["POST"]}},"metadata":[{"name":"oauth-authorization-server","href":"https://test.okta.com/oauth2/aussdomg3nRN8aLWm5d7/.well-known/oauth-authorization-server","hints":{"allow":["GET"]}},{"name":"openid-configuration","href":"https://test.okta.com/oauth2/aussdomg3nRN8aLWm5d7/.well-known/openid-configuration","hints":{"allow":["GET"]}}],"keys":{"href":"https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/credentials/keys","hints":{"allow":["GET"]}},"claims":{"href":"https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/claims","hints":{"allow":["GET","POST"]}},"policies":{"href":"https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/policies","hints":{"allow":["GET","POST"]}},"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7","hints":{"allow":["GET","DELETE","PUT"]}},"scopes":{"href":"https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/scopes","hints":{"allow":["GET","POST"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/lifecycle/deactivate","hints":{"allow":["POST"]}}}}'
+      string: '{"id":"auswyvyr9iBsviais5d7","name":"python_sdk_clients_server","description":"Test
+        Auth Server for Clients API","audiences":["api://test"],"issuer":"https://test.okta.com/oauth2/auswyvyr9iBsviais5d7","issuerMode":"DYNAMIC","status":"ACTIVE","created":"2026-09-16T08:17:49.000Z","lastUpdated":"2026-09-16T08:17:49.000Z","credentials":{"signing":{"kid":"pPKNeLPNcNKWrmLudGlFZO7oDu9J8oq8vkMJPLO70Co","rotationMode":"AUTO","lastRotated":"2026-09-16T08:17:49.000Z","nextRotation":"2026-12-15T08:17:49.000Z"}},"default":false,"_links":{"rotateKey":{"href":"https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/credentials/lifecycle/keyRotate","hints":{"allow":["POST"]}},"metadata":[{"name":"oauth-authorization-server","href":"https://test.okta.com/.well-known/oauth-authorization-server/oauth2/auswyvyr9iBsviais5d7","hints":{"allow":["GET"]}},{"name":"openid-configuration","href":"https://test.okta.com/oauth2/auswyvyr9iBsviais5d7/.well-known/openid-configuration","hints":{"allow":["GET"]}}],"resourceServerCredentialsKeys":{"href":"https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/resourceservercredentials/keys","hints":{"allow":["GET"]}},"keys":{"href":"https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/credentials/keys","hints":{"allow":["GET"]}},"claims":{"href":"https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/claims","hints":{"allow":["GET","POST"]}},"policies":{"href":"https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/policies","hints":{"allow":["GET","POST"]}},"self":{"href":"https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7","hints":{"allow":["GET","DELETE","PUT"]}},"scopes":{"href":"https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/scopes","hints":{"allow":["GET","POST"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/lifecycle/deactivate","hints":{"allow":["POST"]}}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -25,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jan 2026 14:29:47 GMT
+      - Wed, 16 Sep 2026 08:17:50 GMT
       Expires:
       - '0'
       Pragma:
@@ -37,31 +37,28 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=78164D695B2610BD6231B90DF7AE72BB; Path=/; Secure; HttpOnly
+      - JSESSIONID=E7D8F23E6CB321AAD74721776D01DC72; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
       - chunked
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -69,13 +66,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 77eea3f18a23ec8291860e757749e83a
+      - 374dc45879099f08150427dcb5666be5
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
       - '49'
       x-rate-limit-reset:
-      - '1768228246'
+      - '1789546729'
       x-xss-protection:
       - '0'
     status:
@@ -101,7 +98,7 @@ interactions:
     uri: https://test.okta.com/api/v1/apps
   response:
     body:
-      string: '{"errorCode":"E0000001","errorSummary":"Api validation failed: generalSettings","errorLink":"E0000001","errorId":"oae0U0zhvULQQ6TzV4gmuafqA","errorCauses":[{"errorSummary":"Cannot
+      string: '{"errorCode":"E0000001","errorSummary":"Api validation failed: generalSettings","errorLink":"E0000001","errorId":"oaecVvznm3fSJyd_00ykRUowg","errorCauses":[{"errorSummary":"Cannot
         create application instance. Maximum number of instances has been reached."}]}'
     headers:
       Cache-Control:
@@ -111,7 +108,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jan 2026 14:29:48 GMT
+      - Wed, 16 Sep 2026 08:17:51 GMT
       Expires:
       - '0'
       Pragma:
@@ -123,31 +120,28 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=4E675F9939F3662923539C56EC3DC8F0; Path=/; Secure; HttpOnly
+      - JSESSIONID=93A641EDB6C42845D4AE33D737228B1E; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
       - chunked
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -155,13 +149,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 8fb52adc583ee2ef642a5276a345d227
+      - 6d9b9298cf9e12fad23171d5979d9d07
       x-rate-limit-limit:
       - '10'
       x-rate-limit-remaining:
       - '9'
       x-rate-limit-reset:
-      - '1768228248'
+      - '1789546731'
       x-xss-protection:
       - '0'
     status:
@@ -174,8 +168,6 @@ interactions:
       - application/json
       Authorization:
       - SSWS myAPIToken
-      Content-Type:
-      - application/json
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
@@ -185,9 +177,16 @@ interactions:
       string: '[{"id":"0oanwlw0oco6NshA65d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:saasure:0oanwlw0oco6NshA65d7","name":"saasure","label":"Okta
         Admin Console","status":"ACTIVE","lastUpdated":"2025-04-24T16:03:48.000Z","created":"2025-03-19T08:01:45.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{"admin":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"admin","href":"https://test.okta.com/home/saasure/0oanwlw0oco6NshA65d7/2","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/okta_admin_app.da3325676d57eaf566cb786dd0c7a819.png","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp13cg3r0SMK5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0oco6NshA65d7/lifecycle/deactivate"}}},{"id":"0oanwlw0so3WcfOQi5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:okta_enduser:0oanwlw0so3WcfOQi5d7","name":"okta_enduser","label":"Okta
         Dashboard","status":"ACTIVE","lastUpdated":"2025-05-08T17:56:48.000Z","created":"2025-03-19T08:01:48.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/logo","hints":{"allow":["POST"]}},"appLinks":[],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/okta-logo-end-user-dashboard.fc6d8fdbcb8cb4c933d009e71456cec6.svg","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14eRfwWzKF5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0so3WcfOQi5d7/lifecycle/deactivate"}}},{"id":"0oanwlw0swSpMND6F5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:okta_browser_plugin:0oanwlw0swSpMND6F5d7","name":"okta_browser_plugin","label":"Okta
-        Browser Plugin","status":"ACTIVE","lastUpdated":"2025-03-19T08:01:48.000Z","created":"2025-03-19T08:01:48.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/logo","hints":{"allow":["POST"]}},"appLinks":[],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/okta-logo-browser-plugin.1db9f55776407dfc548a5d6985ff280a.svg","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14eRfwWzKF5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/lifecycle/deactivate"}}},{"id":"0oanxflnkoMfZkgM05d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:zoomus:0oanxflnkoMfZkgM05d7","name":"zoomus","label":"Zoom","status":"ACTIVE","lastUpdated":"2025-03-20T16:16:21.000Z","created":"2025-03-20T16:16:20.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{"login":true}},"features":[],"signOnMode":"SAML_2_0","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"8jn49cpSBmcfB2f1ZTnEDevwRU_TdXHTYE-DEwyN3GM"}},"universalLogout":null,"settings":{"app":{"subDomain":"acme","audience_uri":null,"acs_url":null},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null},"signOn":{"defaultRelayState":null,"ssoAcsUrlOverride":null,"audienceOverride":null,"recipientOverride":null,"destinationOverride":null,"attributeStatements":[],"configuredAttributeStatements":[{"type":"GROUP","name":"IMGroup","namespace":null,"filterType":null,"filterValue":null},{"type":"GROUP","name":"UserGroup","namespace":null,"filterType":null,"filterValue":null}]}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/zoomus/0oanxflnkoMfZkgM05d7/setup/help/SAML_2_0/external-doc","type":"text/html"},"metadata":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/sso/saml/metadata","type":"application/xml"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"login","href":"https://test.okta.com/home/zoomus/0oanxflnkoMfZkgM05d7/1835","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfs4tu254Ei6Ee3ll5d6","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanxflnkoMfZkgM05d7/lifecycle/deactivate"}}},{"id":"0oarim2u5gYaSNb525d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:test-cwo-app-2:0oarim2u5gYaSNb525d7","name":"test-cwo-app-2","label":"Todo0
-        - Cross App Access (XAA) Sample Resource App","status":"ACTIVE","lastUpdated":"2025-11-17T11:09:26.000Z","created":"2025-11-17T11:04:32.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"login":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{"redirectURI":"http://localhost:5001/openid/callback/customer1"},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/test-cwo-app-2/0oarim2u5gYaSNb525d7/setup/help/OPENID_CONNECT/external-doc","type":"text/html"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"login","href":"https://test.okta.com/home/test-cwo-app-2/0oarim2u5gYaSNb525d7/alnoun1wzgkubAeAV0g7","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfsqb1g7n64dCGWcM5d7","type":"image/png"}],"clientCredentials":[{"name":"secrets","href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/credentials/secrets"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/lifecycle/deactivate"}}},{"id":"0oarim2ze64Kzfw4J5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:test-cwo-app:0oarim2ze64Kzfw4J5d7","name":"test-cwo-app","label":"Agent0
-        - Cross App Access (XAA) Sample Requesting App","status":"ACTIVE","lastUpdated":"2025-11-17T11:09:11.000Z","created":"2025-11-17T11:03:58.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"test-cwo-app_link":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{"redirectURI":"http://localhost:5000/openid/callback/customer1","postLogoutUri":null},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/test-cwo-app/0oarim2ze64Kzfw4J5d7/setup/help/OPENID_CONNECT/external-doc","type":"text/html"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"test-cwo-app_link","href":"https://test.okta.com/home/test-cwo-app/0oarim2ze64Kzfw4J5d7/alnff91hn7spvrpRg0w6","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfsqb1gmdyY61WmEw5d7","type":"image/png"}],"clientCredentials":[{"name":"secrets","href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/credentials/secrets"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/lifecycle/deactivate"}}},{"id":"0oasczw8pwvSV49w25d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:oidc_client:0oasczw8pwvSV49w25d7","name":"oidc_client","label":"python_sdk_clients_app","status":"ACTIVE","lastUpdated":"2026-01-10T15:00:23.000Z","created":"2026-01-10T15:00:23.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"oidc_client_link":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"},"oauthClient":{"autoKeyRotation":true,"client_id":"0oasczw8pwvSV49w25d7","token_endpoint_auth_method":"client_secret_post","pkce_required":true}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null},"oauthClient":{"client_uri":"https://example.com","logo_uri":"https://example.com/logo.png","redirect_uris":["https://example.com/callback"],"response_types":["code"],"grant_types":["authorization_code","refresh_token"],"application_type":"web","consent_method":"TRUSTED","issuer_mode":"DYNAMIC","refresh_token":{"rotation_type":"STATIC"},"idp_initiated_login":{"mode":"DISABLED","default_scope":[]},"wildcard_redirect":"DISABLED","dpop_bound_access_tokens":false}},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oasczw8pwvSV49w25d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"oidc_client_link","href":"https://test.okta.com/home/oidc_client/0oasczw8pwvSV49w25d7/aln177a159h7Zf52X0g8","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oasczw8pwvSV49w25d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oasczw8pwvSV49w25d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png","type":"image/png"}],"clientCredentials":[{"name":"secrets","href":"https://test.okta.com/api/v1/apps/0oasczw8pwvSV49w25d7/credentials/secrets"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oasczw8pwvSV49w25d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oasczw8pwvSV49w25d7/lifecycle/deactivate"}}}]'
+        Browser Plugin","status":"ACTIVE","lastUpdated":"2025-03-19T08:01:48.000Z","created":"2025-03-19T08:01:48.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/logo","hints":{"allow":["POST"]}},"appLinks":[],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/okta-logo-browser-plugin.1db9f55776407dfc548a5d6985ff280a.svg","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14eRfwWzKF5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oanwlw0swSpMND6F5d7/lifecycle/deactivate"}}},{"id":"0oarim2u5gYaSNb525d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:test-cwo-app-2:0oarim2u5gYaSNb525d7","name":"test-cwo-app-2","label":"Todo0
+        - Cross App Access (XAA) Sample Resource App","status":"ACTIVE","lastUpdated":"2026-02-03T15:27:47.000Z","created":"2025-11-17T11:04:32.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"login":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{"redirectURI":"http://localhost:5001/openid/callback/customer1"},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/test-cwo-app-2/0oarim2u5gYaSNb525d7/setup/help/OPENID_CONNECT/external-doc","type":"text/html"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"login","href":"https://test.okta.com/home/test-cwo-app-2/0oarim2u5gYaSNb525d7/alnoun1wzgkubAeAV0g7","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfsqb1g7n64dCGWcM5d7","type":"image/png"}],"clientCredentials":[{"name":"secrets","href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/credentials/secrets"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oarim2u5gYaSNb525d7/lifecycle/deactivate"}}},{"id":"0oarim2ze64Kzfw4J5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:test-cwo-app:0oarim2ze64Kzfw4J5d7","name":"test-cwo-app","label":"Agent0
+        - Cross App Access (XAA) Sample Requesting App","status":"ACTIVE","lastUpdated":"2026-02-03T15:27:47.000Z","created":"2025-11-17T11:03:58.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"test-cwo-app_link":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"}},"universalLogout":null,"settings":{"app":{"redirectURI":"http://localhost:5000/openid/callback/customer1","postLogoutUri":null},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/test-cwo-app/0oarim2ze64Kzfw4J5d7/setup/help/OPENID_CONNECT/external-doc","type":"text/html"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"test-cwo-app_link","href":"https://test.okta.com/home/test-cwo-app/0oarim2ze64Kzfw4J5d7/alnff91hn7spvrpRg0w6","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfsqb1gmdyY61WmEw5d7","type":"image/png"}],"clientCredentials":[{"name":"secrets","href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/credentials/secrets"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oarim2ze64Kzfw4J5d7/lifecycle/deactivate"}}},{"id":"0oasr47jshyh7mHjX5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:oidc_client:0oasr47jshyh7mHjX5d7","name":"oidc_client","label":"My
+        Python Client App","status":"INACTIVE","lastUpdated":"2026-02-23T17:03:29.000Z","created":"2026-01-31T20:03:42.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"oidc_client_link":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"},"oauthClient":{"autoKeyRotation":true,"client_id":"0oasr47jshyh7mHjX5d7","token_endpoint_auth_method":"client_secret_basic","pkce_required":true}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":true,"notes":{"admin":null,"enduser":null},"oauthClient":{"client_uri":null,"logo_uri":null,"redirect_uris":["http://localhost:8080/callback"],"post_logout_redirect_uris":["com.okta.dev-20982288:/"],"response_types":["code"],"grant_types":["authorization_code","refresh_token","password"],"application_type":"native","consent_method":"REQUIRED","issuer_mode":"DYNAMIC","refresh_token":{"rotation_type":"STATIC"},"idp_initiated_login":{"mode":"DISABLED","default_scope":[]},"wildcard_redirect":"DISABLED","dpop_bound_access_tokens":false}},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oasr47jshyh7mHjX5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"oidc_client_link","href":"https://test.okta.com/home/oidc_client/0oasr47jshyh7mHjX5d7/aln177a159h7Zf52X0g8","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"activate":{"href":"https://test.okta.com/api/v1/apps/0oasr47jshyh7mHjX5d7/lifecycle/activate"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oasr47jshyh7mHjX5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oasr47jshyh7mHjX5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png","type":"image/png"}],"clientCredentials":[{"name":"secrets","href":"https://test.okta.com/api/v1/apps/0oasr47jshyh7mHjX5d7/credentials/secrets"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmsgy4vwheBsP5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oasr47jshyh7mHjX5d7/users"}}},{"id":"0oatg2rifcNmWduAD5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:oidc_client:0oatg2rifcNmWduAD5d7","name":"oidc_client","label":"Python
+        SDK Service App","status":"INACTIVE","lastUpdated":"2026-03-27T11:06:51.000Z","created":"2026-03-03T17:50:12.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"oidc_client_link":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"},"oauthClient":{"autoKeyRotation":true,"client_id":"0oatg2rifcNmWduAD5d7","token_endpoint_auth_method":"private_key_jwt","pkce_required":false}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null},"oauthClient":{"client_uri":null,"logo_uri":null,"redirect_uris":[],"response_types":["token"],"grant_types":["client_credentials"],"jwks":{"keys":[{"kty":"RSA","id":"pkstg2ybjvFM3k0GJ5d7","status":"ACTIVE","kid":"Sm6obGYYFoy7HVPE7_n10QEaqi4A5K2fjD8N3mNSO_w","use":"sig","e":"AQAB","n":"qZQi1sYB_RzYS3M7TZXaCFOoxJi8JQxwx6z5gcUNQqAFwk7rwmWNNIR2wwi-qkn08IgbALJF2DHRSq2UGuyVUpyyOUdSCkpmkFJXnLLGeRanyWQyWA-0RK0mQZwwHZc2zFE9r2u4He55D5wxIZnSGnm6jCfBAACI50f53IAPNRNu2ykd4whXSWuh3psyjuu8cfudWeH4YRpPo0PfDdgiipvguecCVDwvZ3bO-n_LD_MUjxO61iA8QdByBiVQXisWQKKGxluyvJNSy_V0BzLk3BBjO6ag5_b9rdIhWLIaUCAruYJCTmcz0x5IXCM4oo7nIna4AcexjGbFBFhifOQlnQ"}]},"application_type":"service","consent_method":"REQUIRED","issuer_mode":"DYNAMIC","idp_initiated_login":{"mode":"DISABLED","default_scope":[]},"wildcard_redirect":"DISABLED","dpop_bound_access_tokens":false}},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oatg2rifcNmWduAD5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"oidc_client_link","href":"https://test.okta.com/home/oidc_client/0oatg2rifcNmWduAD5d7/aln177a159h7Zf52X0g8","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"activate":{"href":"https://test.okta.com/api/v1/apps/0oatg2rifcNmWduAD5d7/lifecycle/activate"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oatg2rifcNmWduAD5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oatg2rifcNmWduAD5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png","type":"image/png"}],"clientCredentials":[{"name":"jwks","href":"https://test.okta.com/api/v1/apps/0oatg2rifcNmWduAD5d7/credentials/jwks"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oatg2rifcNmWduAD5d7/users"}}},{"id":"0oatmmyfucU7Ckjkn5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:mfa_rdp:0oatmmyfucU7Ckjkn5d7","name":"mfa_rdp","label":"Microsoft
+        RDP (MFA)","status":"ACTIVE","lastUpdated":"2026-03-15T21:00:02.000Z","created":"2026-03-15T21:00:01.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"mfaAppHelpLink":true}},"features":[],"signOnMode":"MFA_AS_SERVICE","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{}},"universalLogout":null,"settings":{"app":{"mfaAppInstanceId":"0oatmmyfup6NNicCf5d7"},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null}},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oatmmyfucU7Ckjkn5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"mfaAppHelpLink","href":"https://test.okta.com/home/mfa_rdp/0oatmmyfucU7Ckjkn5d7/aln1e1z4s1bGqg49m0g8","type":"text/html"}],"policies":{"href":"https://test.okta.com/api/v1/apps/0oatmmyfucU7Ckjkn5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oatmmyfucU7Ckjkn5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfs1d899pjkub6h4v1d8","type":"image/png"}],"users":{"href":"https://test.okta.com/api/v1/apps/0oatmmyfucU7Ckjkn5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oatmmyfucU7Ckjkn5d7/lifecycle/deactivate"}}},{"id":"0oattc0c5jBYoelji5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:oidc_client:0oattc0c5jBYoelji5d7","name":"oidc_client","label":"My
+        Web App","status":"INACTIVE","lastUpdated":"2026-03-27T11:16:01.000Z","created":"2026-03-27T11:07:12.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"oidc_client_link":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"},"oauthClient":{"autoKeyRotation":true,"client_id":"0oattc0c5jBYoelji5d7","token_endpoint_auth_method":"private_key_jwt","pkce_required":false}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":true,"notes":{"admin":null,"enduser":null},"oauthClient":{"client_uri":null,"logo_uri":null,"redirect_uris":["http://localhost:8080/authorization-code/callback"],"post_logout_redirect_uris":["http://localhost:8080"],"response_types":["code"],"grant_types":["client_credentials","authorization_code"],"jwks":{"keys":[{"kty":"RSA","id":"pksttce5dzYMtqx425d7","status":"ACTIVE","kid":"JVfM6p6MCZW0ffgfBI8tjOzIEL9oe3bMxWsqK2sb0qg","use":"sig","e":"AQAB","n":"rOXgMUQ4N1B6a0REyW5OzSj0YG9oT3E3ghve0_wHsrMtqKiBqucmrepmMbW1nsSSZM0KNt_72ubQQHu6LzFibBZVCJrTZxHDldkBxk8Mlp8RCG78hHHPLfV6_9-5IEluqDAG8yY7E4klvt0jpgCowNmvYMdpzB9GOPGMb1MYUtdj9MKlmGQhBOe9pkTLS_C_O81Tbenr8bWkzuxZcwlih7ls4s-CZg7CCESw-LZQHpx3DPO6l_-ha_PpZTfY0p8Im6-niM9eViTubnx1T0qmKU-dfeGeHglb7lr6H6_MuAWP53NmYhLmaNFequRUrh27HNCHKdxs14faNgrumQCl2w"}]},"application_type":"web","consent_method":"REQUIRED","issuer_mode":"DYNAMIC","idp_initiated_login":{"mode":"DISABLED","default_scope":[]},"wildcard_redirect":"DISABLED","dpop_bound_access_tokens":true}},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oattc0c5jBYoelji5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"oidc_client_link","href":"https://test.okta.com/home/oidc_client/0oattc0c5jBYoelji5d7/aln177a159h7Zf52X0g8","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"activate":{"href":"https://test.okta.com/api/v1/apps/0oattc0c5jBYoelji5d7/lifecycle/activate"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oattc0c5jBYoelji5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oattc0c5jBYoelji5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png","type":"image/png"}],"clientCredentials":[{"name":"jwks","href":"https://test.okta.com/api/v1/apps/0oattc0c5jBYoelji5d7/credentials/jwks"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oattc0c5jBYoelji5d7/users"}}},{"id":"0oauqz6imo1avOeHV5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:oidc_client:0oauqz6imo1avOeHV5d7","name":"oidc_client","label":"My
+        Native App","status":"ACTIVE","lastUpdated":"2026-07-23T06:08:52.000Z","created":"2026-05-21T18:03:26.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":true,"web":true},"appLinks":{"oidc_client_link":true}},"features":[],"signOnMode":"OPENID_CONNECT","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"YAC_CqBzpba6NOipi2Eo6nbzZZcCWPGeGxKxCkeB_8c"},"oauthClient":{"autoKeyRotation":true,"client_id":"0oauqz6imo1avOeHV5d7","token_endpoint_auth_method":"none","pkce_required":true}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null},"oauthClient":{"client_uri":null,"logo_uri":null,"redirect_uris":["com.okta.dev-20982288:/callback"],"post_logout_redirect_uris":["com.okta.dev-20982288:/"],"response_types":["code"],"grant_types":["authorization_code","refresh_token","urn:ietf:params:oauth:grant-type:device_code"],"jwks":{"keys":[{"kty":"RSA","id":"pksvq7md43n1pv1KP5d7","status":"ACTIVE","kid":"oponexOzu5U4A2BU8KyAsQYD_jggrKaLCvAdLgyrN3c","use":"sig","e":"AQAB","n":"7f5x5UrEPgDSlRxP99u8KPsO8JzoUEgXqoBXZW9xpYtvq8zknQeBjrOcmoGoscrfSHlp7mbXt5CMSbt_dq0XXyHbj--JFfJzB8cs5zwql5kln28Uo3WwDOdxX3nS7S_-ePNFDJBm4lYQsNY5FPZ1fiyJciLFov7Uj6exaRPgKg3U-0-3uyRY-16qQ6sT89UN2YFIuALMbBCeg5kytFX2dHDAike0ZpbAPI3WGS67fOwUBZu8ftn8O8T7NevtHLJ3-g-HDbV8umjfmosDrXB-XK59ZYwE78Fk2EoyqMsDpkUCeCSYVRKYhdEYcg7N5iT5cCzH1qSAlmSsmXV3vSWFkw"}]},"application_type":"native","consent_method":"REQUIRED","issuer_mode":"DYNAMIC","refresh_token":{"rotation_type":"STATIC"},"idp_initiated_login":{"mode":"DISABLED","default_scope":[]},"wildcard_redirect":"DISABLED","dpop_bound_access_tokens":false}},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oauqz6imo1avOeHV5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"oidc_client_link","href":"https://test.okta.com/home/oidc_client/0oauqz6imo1avOeHV5d7/aln177a159h7Zf52X0g8","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oauqz6imo1avOeHV5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oauqz6imo1avOeHV5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oauqz6imo1avOeHV5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oauqz6imo1avOeHV5d7/lifecycle/deactivate"}}},{"id":"0oavllyibhuN8XldK5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:dev-20982288_bug345samlattrstmts_4:0oavllyibhuN8XldK5d7","name":"dev-20982288_bug345samlattrstmts_4","label":"Bug345
+        - SAML Attr Stmts","status":"INACTIVE","lastUpdated":"2026-07-06T07:15:30.000Z","created":"2026-07-05T20:08:54.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{"dev-20982288_bug345samlattrstmts_4_link":true}},"features":[],"signOnMode":"SAML_2_0","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"GdVCudXtTcMsHabC_iZ87i-x_3VRU3N0n7zalTo8O1Q"}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"notes":{"admin":null,"enduser":null},"signOn":{"defaultRelayState":null,"ssoAcsUrl":"http://testorgone.okta","idpIssuer":"http://www.okta.com/${org.externalKey}","audience":"bug345-saml-audience","recipient":"http://testorgone.okta","destination":"http://testorgone.okta","subjectNameIdTemplate":"${user.userName}","subjectNameIdFormat":"urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified","responseSigned":true,"assertionSigned":true,"signatureAlgorithm":"RSA_SHA256","digestAlgorithm":"SHA256","honorForceAuthn":true,"authnContextClassRef":"urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport","spIssuer":null,"requestCompressed":false,"attributeStatements":[{"type":"EXPRESSION","name":"email","namespace":"urn:oasis:names:tc:SAML:2.0:attrname-format:basic","values":["user.email"]},{"type":"GROUP","name":"groups","namespace":"urn:oasis:names:tc:SAML:2.0:attrname-format:basic","filterType":"STARTS_WITH","filterValue":"eng-"}],"inlineHooks":[],"assertionEncryption":{"enabled":false},"allowMultipleAcsEndpoints":false,"acsEndpoints":[],"samlSignedRequestEnabled":false,"slo":{"enabled":false}}},"_links":{"help":{"href":"https://dev-20982288-admin.okta.com/app/dev-20982288_bug345samlattrstmts_4/0oavllyibhuN8XldK5d7/setup/help/SAML_2_0/instructions","type":"text/html"},"metadata":{"href":"https://test.okta.com/api/v1/apps/0oavllyibhuN8XldK5d7/sso/saml/metadata","type":"application/xml"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oavllyibhuN8XldK5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"dev-20982288_bug345samlattrstmts_4_link","href":"https://test.okta.com/home/dev-20982288_bug345samlattrstmts_4/0oavllyibhuN8XldK5d7/alnvlm5cj5vKIMcqk5d7","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"activate":{"href":"https://test.okta.com/api/v1/apps/0oavllyibhuN8XldK5d7/lifecycle/activate"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oavllyibhuN8XldK5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oavllyibhuN8XldK5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oavllyibhuN8XldK5d7/users"}}},{"id":"0oavlm1b76WaPce6P5d7","orn":"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:dev-20982288_bug345swaapp_2:0oavlm1b76WaPce6P5d7","name":"dev-20982288_bug345swaapp_2","label":"Bug345
+        - SWA App","status":"INACTIVE","lastUpdated":"2026-07-23T05:53:10.000Z","created":"2026-07-05T20:11:05.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{"dev-20982288_bug345swaapp_2_link":true}},"features":[],"signOnMode":"AUTO_LOGIN","credentials":{"scheme":"ADMIN_SETS_CREDENTIALS","userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"revealPassword":false,"signing":{}},"universalLogout":null,"settings":{"app":{},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"manualProvisioning":false,"implicitAssignment":false,"signOn":{"redirectUrl":"","loginUrl":"https://example.com/login"}},"_links":{"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oavlm1b76WaPce6P5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"dev-20982288_bug345swaapp_2_link","href":"https://test.okta.com/home/dev-20982288_bug345swaapp_2/0oavlm1b76WaPce6P5d7/alnvlm61zzWWLDhY85d7","type":"text/html"}],"profileEnrollment":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14geJLJ3fx5d7"},"activate":{"href":"https://test.okta.com/api/v1/apps/0oavlm1b76WaPce6P5d7/lifecycle/activate"},"policies":{"href":"https://test.okta.com/api/v1/apps/0oavlm1b76WaPce6P5d7/policies","hints":{"allow":["PUT"]}},"groups":{"href":"https://test.okta.com/api/v1/apps/0oavlm1b76WaPce6P5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png","type":"image/png"}],"accessPolicy":{"href":"https://test.okta.com/api/v1/policies/rstnwmp14ceJQ76Lj5d7"},"users":{"href":"https://test.okta.com/api/v1/apps/0oavlm1b76WaPce6P5d7/users"}}}]'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -198,7 +197,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jan 2026 14:29:49 GMT
+      - Wed, 16 Sep 2026 08:17:52 GMT
       Expires:
       - '0'
       Link:
@@ -212,7 +211,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=CF1053FB6E491F87A224F67B40ACC984; Path=/; Secure; HttpOnly
+      - JSESSIONID=B1BA280CD089DBFC26946F20AA3B12AC; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -221,24 +220,21 @@ interactions:
       - Accept-Encoding
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -246,13 +242,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 0b147585682e32738fce07c779a804ca
+      - a053fc5061608d4c0c0949023675d3c7
       x-rate-limit-limit:
       - '10'
       x-rate-limit-remaining:
       - '8'
       x-rate-limit-reset:
-      - '1768228248'
+      - '1789546731'
       x-xss-protection:
       - '0'
     status:
@@ -265,12 +261,10 @@ interactions:
       - application/json
       Authorization:
       - SSWS myAPIToken
-      Content-Type:
-      - application/json
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/clients
+    uri: https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/clients
   response:
     body:
       string: '[]'
@@ -284,7 +278,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jan 2026 14:29:51 GMT
+      - Wed, 16 Sep 2026 08:17:54 GMT
       Expires:
       - '0'
       Pragma:
@@ -296,7 +290,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=2A17BC2A9B20A76BBC6DE49957F0F76A; Path=/; Secure; HttpOnly
+      - JSESSIONID=681D2B91BD004056BA393603A718A24F; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -305,24 +299,21 @@ interactions:
       - Accept-Encoding
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -330,13 +321,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 55194908844933e02910115602ad2cbb
+      - ecd468905c130bffaa37d0503888575e
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
       - '48'
       x-rate-limit-reset:
-      - '1768228246'
+      - '1789546729'
       x-xss-protection:
       - '0'
     status:
@@ -349,16 +340,14 @@ interactions:
       - application/json
       Authorization:
       - SSWS myAPIToken
-      Content-Type:
-      - application/json
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/clients/0oa_dummy_client_id/tokens
+    uri: https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/clients/0oanwlw0oco6NshA65d7/tokens
   response:
     body:
       string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
-        0oa_dummy_client_id (PublicClientApp)","errorLink":"E0000007","errorId":"oae5MirbesCTy-MBe8J-HfMZA","errorCauses":[]}'
+        0oanwlw0oco6NshA65d7 (PublicClientApp)","errorLink":"E0000007","errorId":"oae2puHeuu4RqmbtYm9gtacnw","errorCauses":[]}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -369,7 +358,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jan 2026 14:29:52 GMT
+      - Wed, 16 Sep 2026 08:17:55 GMT
       Expires:
       - '0'
       Pragma:
@@ -381,7 +370,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=112BFBB9319E110D4B113B4366C4E065; Path=/; Secure; HttpOnly
+      - JSESSIONID=E324590FB8E8740C2A96028CAA21BF6B; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -390,24 +379,21 @@ interactions:
       - Accept-Encoding
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -415,13 +401,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 7703a7aca4fbb8f4b8a4e25198f1c7b5
+      - 21eaad133587cbddeedbb007a4bf7ffb
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
       - '47'
       x-rate-limit-reset:
-      - '1768228246'
+      - '1789546729'
       x-xss-protection:
       - '0'
     status:
@@ -434,16 +420,14 @@ interactions:
       - application/json
       Authorization:
       - SSWS myAPIToken
-      Content-Type:
-      - application/json
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/clients/0oa_dummy_client_id/tokens?expand=scope&limit=10
+    uri: https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/clients/0oanwlw0oco6NshA65d7/tokens?expand=scope&limit=10
   response:
     body:
       string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
-        0oa_dummy_client_id (PublicClientApp)","errorLink":"E0000007","errorId":"oaeZ1x8yVIoRNyBOKqRLiX8XA","errorCauses":[]}'
+        0oanwlw0oco6NshA65d7 (PublicClientApp)","errorLink":"E0000007","errorId":"oaeQ8VR10nAQvKiwSyBQPNz9w","errorCauses":[]}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -454,7 +438,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jan 2026 14:29:53 GMT
+      - Wed, 16 Sep 2026 08:17:56 GMT
       Expires:
       - '0'
       Pragma:
@@ -466,7 +450,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=C241BDF3622FF608F320FE275D0A153A; Path=/; Secure; HttpOnly
+      - JSESSIONID=8030226329421B527CC9C3842A2C3CEE; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -475,24 +459,21 @@ interactions:
       - Accept-Encoding
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -500,13 +481,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 947d820978b458aa9b61ef13573424e9
+      - 086af35fc16a17f75e5bdf7f6af39155
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
       - '46'
       x-rate-limit-reset:
-      - '1768228246'
+      - '1789546729'
       x-xss-protection:
       - '0'
     status:
@@ -519,16 +500,14 @@ interactions:
       - application/json
       Authorization:
       - SSWS myAPIToken
-      Content-Type:
-      - application/json
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: DELETE
-    uri: https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/clients/0oa_dummy_client_id/tokens
+    uri: https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/clients/0oanwlw0oco6NshA65d7/tokens
   response:
     body:
       string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
-        0oa_dummy_client_id (PublicClientApp)","errorLink":"E0000007","errorId":"oaegkcsGEgiQxaPFOeRcpt85A","errorCauses":[]}'
+        0oanwlw0oco6NshA65d7 (PublicClientApp)","errorLink":"E0000007","errorId":"oaegr7VECIpQFWFj3XCHWhSNA","errorCauses":[]}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -539,7 +518,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jan 2026 14:29:54 GMT
+      - Wed, 16 Sep 2026 08:17:57 GMT
       Expires:
       - '0'
       Pragma:
@@ -551,7 +530,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=25302B721A5871A8104F3619F5D00E6C; Path=/; Secure; HttpOnly
+      - JSESSIONID=7CDEA80F54C1977A7824C21DA9B1BAE5; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -560,24 +539,21 @@ interactions:
       - Accept-Encoding
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -585,13 +561,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - ed04c3125857a7ceab4eed2a82078a98
+      - 97aee15038f0f223cc33e15cda2892b8
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
       - '45'
       x-rate-limit-reset:
-      - '1768228246'
+      - '1789546729'
       x-xss-protection:
       - '0'
     status:
@@ -604,16 +580,14 @@ interactions:
       - application/json
       Authorization:
       - SSWS myAPIToken
-      Content-Type:
-      - application/json
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7/clients/0oa_dummy_client_id/tokens
+    uri: https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7/clients/0oanwlw0oco6NshA65d7/tokens
   response:
     body:
       string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
-        0oa_dummy_client_id (PublicClientApp)","errorLink":"E0000007","errorId":"oae2RPZxeU4SG21jw7iFp9bSg","errorCauses":[]}'
+        0oanwlw0oco6NshA65d7 (PublicClientApp)","errorLink":"E0000007","errorId":"oaetAbD0jr0QyyZzcgOgfOZxA","errorCauses":[]}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -624,7 +598,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jan 2026 14:29:55 GMT
+      - Wed, 16 Sep 2026 08:17:58 GMT
       Expires:
       - '0'
       Pragma:
@@ -636,7 +610,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=BDB6FDC9FC06675D7E6B9525C969686A; Path=/; Secure; HttpOnly
+      - JSESSIONID=72BB08CF9621862466A48AA2291E2CAD; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -645,24 +619,21 @@ interactions:
       - Accept-Encoding
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -670,13 +641,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - faf502388e4e280fcb0d96bb2d1a01f0
+      - 8da9c631d1165a1cd00942bd334ed122
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
       - '44'
       x-rate-limit-reset:
-      - '1768228246'
+      - '1789546729'
       x-xss-protection:
       - '0'
     status:
@@ -689,12 +660,10 @@ interactions:
       - application/json
       Authorization:
       - SSWS myAPIToken
-      Content-Type:
-      - application/json
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: DELETE
-    uri: https://test.okta.com/api/v1/authorizationServers/aussdomg3nRN8aLWm5d7
+    uri: https://test.okta.com/api/v1/authorizationServers/auswyvyr9iBsviais5d7
   response:
     body:
       string: ''
@@ -704,7 +673,7 @@ interactions:
       Connection:
       - keep-alive
       Date:
-      - Mon, 12 Jan 2026 14:29:56 GMT
+      - Wed, 16 Sep 2026 08:17:59 GMT
       Expires:
       - '0'
       Pragma:
@@ -716,29 +685,26 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=801FFDE94347FE0A244C081700673E03; Path=/; Secure; HttpOnly
+      - JSESSIONID=BFC1D15F147F9F69F09CDC0A9344D030; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       accept-ch:
       - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
+      content-security-policy: 'default-src ''self'' test.okta.com *.oktacdn.com;
+        connect-src ''self'' test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
+        *.mapbox.com test.kerberos.okta.com *.authenticatorlocalprod.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.okta.com data: *.ingest.sentry.io;
+        script-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        style-src ''unsafe-inline'' ''self'' ''report-sample'' test.okta.com *.oktacdn.com;
+        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com *.vidyard.com
+        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com *.tiles.mapbox.com
+        *.mapbox.com *.vidyard.com data: blob:; font-src ''self'' test.okta.com data:
+        *.oktacdn.com fonts.gstatic.com; frame-ancestors ''self'''
       p3p:
       - CP="HONK"
       referrer-policy:
@@ -746,13 +712,13 @@ interactions:
       x-frame-options:
       - SAMEORIGIN
       x-okta-request-id:
-      - 74c83e2db1d1e2f8313338ec210ee41d
+      - ab8f5df90f3cbf0c60585628b183c7bb
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
       - '43'
       x-rate-limit-reset:
-      - '1768228246'
+      - '1789546729'
       x-xss-protection:
       - '0'
     status:
