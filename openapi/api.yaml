@@ -77140,12 +77140,6 @@ components:
         subjectNameIdTemplate:
           type: string
           description: Template for app user's username when a user is assigned to the app
-      required:
-        - allowMultipleAcsEndpoints
-        - assertionSigned
-        - honorForceAuthn
-        - requestCompressed
-        - responseSigned
     SamlAssertionEncryption:
       description: Determines if the app supports encrypted assertions
       type: object

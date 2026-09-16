@@ -59,14 +59,16 @@ class SamlApplicationSettingsSignOn(BaseModel):
         description="An array of ACS endpoints. You can configure a maximum of 100 endpoints.",
         alias="acsEndpoints",
     )
-    allow_multiple_acs_endpoints: StrictBool = Field(
+    allow_multiple_acs_endpoints: Optional[StrictBool] = Field(
+        default=None,
         description="Determines whether the app allows you to configure multiple ACS URIs",
         alias="allowMultipleAcsEndpoints",
     )
     assertion_encryption: Optional[SamlAssertionEncryption] = Field(
         default=None, alias="assertionEncryption"
     )
-    assertion_signed: StrictBool = Field(
+    assertion_signed: Optional[StrictBool] = Field(
+        default=None,
         description="Determines whether the SAML assertion is digitally signed",
         alias="assertionSigned",
     )
@@ -121,7 +123,8 @@ class SamlApplicationSettingsSignOn(BaseModel):
         description="Determines the digest algorithm used to digitally sign the SAML assertion and response",
         alias="digestAlgorithm",
     )
-    honor_force_authn: StrictBool = Field(
+    honor_force_authn: Optional[StrictBool] = Field(
+        default=None,
         description="Set to `true` to prompt users for their credentials when a SAML request has the `ForceAuthn` attribute "
         "set to `true`",
         alias="honorForceAuthn",
@@ -148,11 +151,13 @@ class SamlApplicationSettingsSignOn(BaseModel):
         "https://help.okta.com/en-us/Content/Topics/Apps/CASB-config-guide.htm).",
         alias="recipientOverride",
     )
-    request_compressed: StrictBool = Field(
+    request_compressed: Optional[StrictBool] = Field(
+        default=None,
         description="Determines whether the SAML request is expected to be compressed",
         alias="requestCompressed",
     )
-    response_signed: StrictBool = Field(
+    response_signed: Optional[StrictBool] = Field(
+        default=None,
         description="Determines whether the SAML authentication response message is digitally signed by the IdP > **Note:** "
         "Either (or both) `responseSigned` or `assertionSigned` must be `TRUE`.",
         alias="responseSigned",
