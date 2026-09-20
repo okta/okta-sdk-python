@@ -23752,7 +23752,7 @@ components:
       maxLength: 75
       example: your-event-source-name
       type: string
-      pattern: ^[a-zA-Z0-9.\-_]$
+      pattern: ^[a-zA-Z0-9.\-_]+$
     AwsRegion:
       description: The destination AWS region where your event source is located
       type: string
