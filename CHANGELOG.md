@@ -1,5 +1,10 @@
 # Okta Python SDK Changelog
 
+# 3.4.6
+
+## Fixed
+* Fixed a `ValidationError` crash in `list_applications()` when a response page contained App Catalog / OIN SAML apps whose `settings.signOn` payload omitted boolean attributes. Removed five booleans (`allowMultipleAcsEndpoints`, `assertionSigned`, `honorForceAuthn`, `requestCompressed`, `responseSigned`) from the `required` list of the `SamlApplicationSettingsSignOn` schema so they generate as `Optional[StrictBool]` with a `None` default. These override-type apps legitimately omit these fields on GET (they carry only override deltas), and marking them `required` caused a single such app to fail deserialization for the entire paginated response. Completes the pattern applied to ten string attributes on the same schema in 3.4.3 ([#546](https://github.com/okta/okta-sdk-python/issues/546), [#580](https://github.com/okta/okta-sdk-python/pull/580)).
+
 # 3.4.5
 
 ## Fixed
