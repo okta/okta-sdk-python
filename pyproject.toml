@@ -10,18 +10,18 @@ keywords = ["OpenAPI", "OpenAPI-Generator", "Okta Admin Management"]
 include = ["okta/py.typed"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 
 urllib3 = ">= 1.25.3"
-python-dateutil = ">=2.8.2"
-pydantic = ">=2"
+python-dateutil = ">=2.9.0.post0"
+pydantic = ">=2.11.3"
 typing-extensions = ">=4.7.1"
 
 [tool.poetry.dev-dependencies]
 pytest = ">=9.0.3"
 tox = ">=4.30.3"
 flake8 = ">=7.3.0"
-types-python-dateutil = ">=2.8.19.14"
+types-python-dateutil = ">=2.8.19"
 mypy = "1.4.1"
 
 
