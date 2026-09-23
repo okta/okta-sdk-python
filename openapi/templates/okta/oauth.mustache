@@ -79,7 +79,7 @@ class OAuth:
                 )
                 raise ValueError(
                     "DPoP requires 'pycryptodomex' and 'jwcrypto' libraries. "
-                    "Install with: pip install pycryptodomex>=3.23.0 jwcrypto>=1.5.6"
+                    "Install with: pip install pycryptodomex>=3.23.0 jwcrypto>=1.5.8"
                 ) from error
 
             try:
