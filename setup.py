@@ -34,16 +34,16 @@ NAME = "okta"
 PYTHON_REQUIRES = ">=3.10"
 REQUIRES = [
     "aenum >= 3.1.17",
-    "aiohttp >= 3.13.5",
+    "aiohttp >= 3.14.3",
     "blinker >= 1.9.0",
-    'jwcrypto >= 1.5.7',
+    'jwcrypto >= 1.5.8',
     "pycryptodomex >= 3.23.0",
     "pydantic >= 2.11.3",
     "pydash >= 8.0.6",
-    "PyJWT >= 2.12.1",
+    "PyJWT >= 2.13.0",
     "python-dateutil >= 2.9.0.post0",
     "PyYAML >= 6.0.3",
-    "requests >= 2.33.0",
+    "requests >= 2.34.2",
     "xmltodict >= 1.0.4",
 ]
 
@@ -78,7 +78,7 @@ setup(
     keywords=["OpenAPI", "OpenAPI-Generator", "Okta Admin Management"],
     install_requires=REQUIRES,
     extras_require={
-        "images": ["pillow >= 9.0.0, < 12"],
+        "images": ["pillow >= 9.0.0, < 13"],
     },
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
