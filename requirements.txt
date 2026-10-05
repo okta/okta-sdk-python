@@ -17,6 +17,6 @@ pyfakefs==6.2.0
 pytest==9.0.3
 pytest-asyncio==1.4.0
 pytest-mock==3.15.1
-pytest-recording==0.13.4
+pytest-recording==0.14.0
 tox==4.30.3
 twine==6.2.0
