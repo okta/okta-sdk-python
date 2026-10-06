@@ -64528,9 +64528,11 @@ components:
         - type: object
           properties:
             asns:
-              allOf:
-                - $ref: '#/components/schemas/NetworkZoneAsns'
-                - description: An array of ASNs for a Network Zone
+              type: array
+              description: An array of ASNs for a Network Zone
+              items:
+                type: string
+              maximum: 75
             proxyType:
               type: string
               description: The proxy type used for a Dynamic Network Zone
@@ -64545,9 +64547,12 @@ components:
                 Tor: Use Tor Anonymizer proxy for the Dynamic Zone.
                 NotTorAnonymizer: Use a non Tor Anonymizer proxy for the Dynamic Zone.
             locations:
-              allOf:
-                - $ref: '#/components/schemas/NetworkZoneLocationArray'
-                - description: An array of geolocations for a Dynamic Network Zone
+              type: array
+              description: An array of geolocations for a Dynamic Network Zone
+              items:
+                $ref: '#/components/schemas/NetworkZoneLocation'
+              maximum: 75
+              nullable: true
     ECKeyJWK:
       description: Elliptic curve key in JSON Web Key (JWK) format. It's used during enrollment to encrypt fulfillment requests to Yubico, or during activation to verify Yubico's JWS (JSON Web Signature) objects in fulfillment responses. The currently agreed protocol uses P-384.
       type: object
@@ -64925,13 +64930,17 @@ components:
               description: The list of ASNs associated with an Enhanced Dynamic Network Zone
               properties:
                 include:
-                  allOf:
-                    - $ref: '#/components/schemas/NetworkZoneAsns'
-                    - description: An array of ASNs to include for an Enhanced Dynamic Network Zone
+                  type: array
+                  description: An array of ASNs to include for an Enhanced Dynamic Network Zone
+                  items:
+                    type: string
+                  maximum: 75
                 exclude:
-                  allOf:
-                    - $ref: '#/components/schemas/NetworkZoneAsns'
-                    - description: An array of ASNs to exclude for an Enhanced Dynamic Network Zone
+                  type: array
+                  description: An array of ASNs to exclude for an Enhanced Dynamic Network Zone
+                  items:
+                    type: string
+                  maximum: 75
             locations:
               x-okta-lifecycle:
                 lifecycle: GA
@@ -64941,13 +64950,19 @@ components:
               description: The list of geolocations to include or exclude for an Enhanced Dynamic Network Zone
               properties:
                 include:
-                  allOf:
-                    - $ref: '#/components/schemas/NetworkZoneLocationArray'
-                    - description: An array of geolocations to include for an Enhanced Dynamic Network Zone
+                  type: array
+                  description: An array of geolocations to include for an Enhanced Dynamic Network Zone
+                  items:
+                    $ref: '#/components/schemas/NetworkZoneLocation'
+                  maximum: 75
+                  nullable: true
                 exclude:
-                  allOf:
-                    - $ref: '#/components/schemas/NetworkZoneLocationArray'
-                    - description: An array of geolocations to exclude for an Enhanced Dynamic Network Zone
+                  type: array
+                  description: An array of geolocations to exclude for an Enhanced Dynamic Network Zone
+                  items:
+                    $ref: '#/components/schemas/NetworkZoneLocation'
+                  maximum: 75
+                  nullable: true
             ipServiceCategories:
               x-okta-lifecycle:
                 lifecycle: GA

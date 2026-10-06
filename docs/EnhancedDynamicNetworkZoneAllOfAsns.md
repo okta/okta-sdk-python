@@ -6,8 +6,8 @@ The list of ASNs associated with an Enhanced Dynamic Network Zone
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**include** | [**EnhancedDynamicNetworkZoneAllOfAsnsInclude**](EnhancedDynamicNetworkZoneAllOfAsnsInclude.md) |  | [optional] 
-**exclude** | [**EnhancedDynamicNetworkZoneAllOfAsnsExclude**](EnhancedDynamicNetworkZoneAllOfAsnsExclude.md) |  | [optional] 
+**include** | **List[str]** | An array of ASNs to include for an Enhanced Dynamic Network Zone | [optional] 
+**exclude** | **List[str]** | An array of ASNs to exclude for an Enhanced Dynamic Network Zone | [optional] 
 
 ## Example
 
