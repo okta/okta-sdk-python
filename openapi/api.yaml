@@ -74259,8 +74259,8 @@ components:
         The following policy types are available with Identity Engine: `ACCESS_POLICY`, `PROFILE_ENROLLMENT`, `POST_AUTH_SESSION`, <x-lifecycle class="ea"></x-lifecycle> `DEVICE_SIGNAL_COLLECTION`, `ENTITY_RISK`.
       type: string
       enum:
-        - <x-lifecycle class="ea"></x-lifecycle> DEVICE_SIGNAL_COLLECTION
         - ACCESS_POLICY
+        - DEVICE_SIGNAL_COLLECTION
         - ENTITY_RISK
         - IDP_DISCOVERY
         - MFA_ENROLL
