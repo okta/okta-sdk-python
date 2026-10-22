@@ -64532,7 +64532,7 @@ components:
               description: An array of ASNs for a Network Zone
               items:
                 type: string
-              maximum: 75
+              maxItems: 75
             proxyType:
               type: string
               description: The proxy type used for a Dynamic Network Zone
@@ -64551,7 +64551,7 @@ components:
               description: An array of geolocations for a Dynamic Network Zone
               items:
                 $ref: '#/components/schemas/NetworkZoneLocation'
-              maximum: 75
+              maxItems: 75
               nullable: true
     ECKeyJWK:
       description: Elliptic curve key in JSON Web Key (JWK) format. It's used during enrollment to encrypt fulfillment requests to Yubico, or during activation to verify Yubico's JWS (JSON Web Signature) objects in fulfillment responses. The currently agreed protocol uses P-384.
@@ -64934,13 +64934,13 @@ components:
                   description: An array of ASNs to include for an Enhanced Dynamic Network Zone
                   items:
                     type: string
-                  maximum: 75
+                  maxItems: 75
                 exclude:
                   type: array
                   description: An array of ASNs to exclude for an Enhanced Dynamic Network Zone
                   items:
                     type: string
-                  maximum: 75
+                  maxItems: 75
             locations:
               x-okta-lifecycle:
                 lifecycle: GA
@@ -64954,14 +64954,14 @@ components:
                   description: An array of geolocations to include for an Enhanced Dynamic Network Zone
                   items:
                     $ref: '#/components/schemas/NetworkZoneLocation'
-                  maximum: 75
+                  maxItems: 75
                   nullable: true
                 exclude:
                   type: array
                   description: An array of geolocations to exclude for an Enhanced Dynamic Network Zone
                   items:
                     $ref: '#/components/schemas/NetworkZoneLocation'
-                  maximum: 75
+                  maxItems: 75
                   nullable: true
             ipServiceCategories:
               x-okta-lifecycle:
@@ -64976,13 +64976,13 @@ components:
                   description: IP services to include for an Enhanced Dynamic Network Zone
                   items:
                     $ref: '#/components/schemas/IPServiceCategory'
-                  maximum: 75
+                  maxItems: 75
                 exclude:
                   type: array
                   description: IP services to exclude for an Enhanced Dynamic Network Zone
                   items:
                     $ref: '#/components/schemas/IPServiceCategory'
-                  maximum: 75
+                  maxItems: 75
     EnrollmentActivationRequest:
       description: Enrollment Initialization Request
       type: object
@@ -69987,11 +69987,6 @@ components:
       enum:
         - CIDR
         - RANGE
-    NetworkZoneAsns:
-      items:
-        type: string
-      maximum: 75
-      type: array
     NetworkZoneLocation:
       type: object
       properties:
@@ -70009,12 +70004,6 @@ components:
             (Optional) The ISO 3166-2 region code appended to the country code (`countryCode-regionCode`), or `null` if empty.
             Don't use continent codes since they are treated as generic codes for undesignated regions.
             <br>For example: `CA` (for `US-CA` country and region code)
-    NetworkZoneLocationArray:
-      items:
-        $ref: '#/components/schemas/NetworkZoneLocation'
-      maximum: 75
-      nullable: true
-      type: array
     NetworkZoneStatus:
       description: Network Zone status
       type: string

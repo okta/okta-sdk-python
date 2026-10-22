@@ -29,6 +29,7 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 
@@ -37,11 +38,11 @@ class EnhancedDynamicNetworkZoneAllOfAsns(BaseModel):
     The list of ASNs associated with an Enhanced Dynamic Network Zone
     """  # noqa: E501
 
-    include: Optional[List[StrictStr]] = Field(
+    include: Optional[Annotated[List[StrictStr], Field(max_length=75)]] = Field(
         default=None,
         description="An array of ASNs to include for an Enhanced Dynamic Network Zone",
     )
-    exclude: Optional[List[StrictStr]] = Field(
+    exclude: Optional[Annotated[List[StrictStr], Field(max_length=75)]] = Field(
         default=None,
         description="An array of ASNs to exclude for an Enhanced Dynamic Network Zone",
     )

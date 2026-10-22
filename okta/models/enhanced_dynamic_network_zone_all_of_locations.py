@@ -29,6 +29,7 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.network_zone_location import NetworkZoneLocation
@@ -39,13 +40,17 @@ class EnhancedDynamicNetworkZoneAllOfLocations(BaseModel):
     The list of geolocations to include or exclude for an Enhanced Dynamic Network Zone
     """  # noqa: E501
 
-    include: Optional[List[NetworkZoneLocation]] = Field(
-        default=None,
-        description="An array of geolocations to include for an Enhanced Dynamic Network Zone",
+    include: Optional[Annotated[List[NetworkZoneLocation], Field(max_length=75)]] = (
+        Field(
+            default=None,
+            description="An array of geolocations to include for an Enhanced Dynamic Network Zone",
+        )
     )
-    exclude: Optional[List[NetworkZoneLocation]] = Field(
-        default=None,
-        description="An array of geolocations to exclude for an Enhanced Dynamic Network Zone",
+    exclude: Optional[Annotated[List[NetworkZoneLocation], Field(max_length=75)]] = (
+        Field(
+            default=None,
+            description="An array of geolocations to exclude for an Enhanced Dynamic Network Zone",
+        )
     )
     __properties: ClassVar[List[str]] = ["include", "exclude"]
 

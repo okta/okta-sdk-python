@@ -33,6 +33,9 @@ from okta.models.enhanced_dynamic_network_zone import EnhancedDynamicNetworkZone
 from okta.models.enhanced_dynamic_network_zone_all_of_asns import (
     EnhancedDynamicNetworkZoneAllOfAsns,
 )
+from okta.models.enhanced_dynamic_network_zone_all_of_ip_service_categories import (
+    EnhancedDynamicNetworkZoneAllOfIpServiceCategories,
+)
 from okta.models.enhanced_dynamic_network_zone_all_of_locations import (
     EnhancedDynamicNetworkZoneAllOfLocations,
 )
@@ -214,11 +217,14 @@ class TestNetworkZoneEdgeCases:
     """Remaining generated paths on the affected models: None / model-instance input,
     string helpers, nested JSON helpers, _links, nullable locations and proxyType."""
 
+    IP_SERVICE_CATEGORIES = {"include": ["ALL_ANONYMIZERS"], "exclude": []}
+
     ALL_MODELS = [
         DynamicNetworkZone,
         EnhancedDynamicNetworkZone,
         EnhancedDynamicNetworkZoneAllOfAsns,
         EnhancedDynamicNetworkZoneAllOfLocations,
+        EnhancedDynamicNetworkZoneAllOfIpServiceCategories,
     ]
 
     @pytest.mark.parametrize("model", ALL_MODELS)
@@ -232,6 +238,7 @@ class TestNetworkZoneEdgeCases:
             (EnhancedDynamicNetworkZone, FULL_EDNZ_PAYLOAD),
             (EnhancedDynamicNetworkZoneAllOfAsns, FULL_EDNZ_PAYLOAD["asns"]),
             (EnhancedDynamicNetworkZoneAllOfLocations, FULL_EDNZ_PAYLOAD["locations"]),
+            (EnhancedDynamicNetworkZoneAllOfIpServiceCategories, IP_SERVICE_CATEGORIES),
         ],
     )
     def test_from_dict_accepts_model_instance(self, model, payload):
@@ -246,6 +253,7 @@ class TestNetworkZoneEdgeCases:
             (EnhancedDynamicNetworkZone, FULL_EDNZ_PAYLOAD, "64496"),
             (EnhancedDynamicNetworkZoneAllOfAsns, FULL_EDNZ_PAYLOAD["asns"], "64496"),
             (EnhancedDynamicNetworkZoneAllOfLocations, FULL_EDNZ_PAYLOAD["locations"], "US-CA"),
+            (EnhancedDynamicNetworkZoneAllOfIpServiceCategories, IP_SERVICE_CATEGORIES, "ALL_ANONYMIZERS"),
         ],
     )
     def test_to_str_includes_array_values(self, model, payload, expected):
@@ -262,6 +270,13 @@ class TestNetworkZoneEdgeCases:
         )
 
         assert json.loads(locations.to_json()) == FULL_EDNZ_PAYLOAD["locations"]
+
+    def test_ip_service_categories_json_round_trip(self):
+        categories = EnhancedDynamicNetworkZoneAllOfIpServiceCategories.from_json(
+            json.dumps(self.IP_SERVICE_CATEGORIES)
+        )
+
+        assert json.loads(categories.to_json()) == self.IP_SERVICE_CATEGORIES
 
     @pytest.mark.parametrize(
         "model, payload",
@@ -290,6 +305,69 @@ class TestNetworkZoneEdgeCases:
     def test_dynamic_zone_rejects_unknown_proxy_type(self):
         with pytest.raises(ValidationError):
             DynamicNetworkZone.from_dict({**FULL_DNZ_PAYLOAD, "proxyType": "NotAProxyType"})
+
+
+MAX_ITEMS = 75
+
+
+def _items(kind, count):
+    """Build `count` synthetic entries of the item type for `kind`."""
+    if kind == "locations":
+        return [{"country": "US"} for _ in range(count)]
+    if kind == "ip_service_categories":
+        return ["ALL_ANONYMIZERS"] * count
+    return [str(64496 + i) for i in range(count)]
+
+
+class TestNetworkZoneArrayMaxItems:
+    """The upstream spec declares `maxItems: 75` on every network zone array, which
+    generates `Field(max_length=75)`. Validation applies on parse, on construction,
+    and on assignment (the models set validate_assignment=True)."""
+
+    CASES = [
+        (DynamicNetworkZone, "asns", "asns"),
+        (DynamicNetworkZone, "locations", "locations"),
+        (EnhancedDynamicNetworkZoneAllOfAsns, "include", "asns"),
+        (EnhancedDynamicNetworkZoneAllOfAsns, "exclude", "asns"),
+        (EnhancedDynamicNetworkZoneAllOfLocations, "include", "locations"),
+        (EnhancedDynamicNetworkZoneAllOfLocations, "exclude", "locations"),
+        (EnhancedDynamicNetworkZoneAllOfIpServiceCategories, "include", "ip_service_categories"),
+        (EnhancedDynamicNetworkZoneAllOfIpServiceCategories, "exclude", "ip_service_categories"),
+    ]
+
+    @staticmethod
+    def _payload(model, field, kind, count):
+        if model is DynamicNetworkZone:
+            return {**BASE_ZONE, "type": "DYNAMIC", field: _items(kind, count)}
+        return {field: _items(kind, count)}
+
+    @pytest.mark.parametrize("model, field, kind", CASES)
+    def test_accepts_max_items(self, model, field, kind):
+        instance = model.from_dict(self._payload(model, field, kind, MAX_ITEMS))
+
+        assert len(getattr(instance, field)) == MAX_ITEMS
+
+    @pytest.mark.parametrize("model, field, kind", CASES)
+    def test_rejects_more_than_max_items(self, model, field, kind):
+        with pytest.raises(ValidationError) as exc:
+            model.from_dict(self._payload(model, field, kind, MAX_ITEMS + 1))
+
+        assert exc.value.errors()[0]["type"] == "too_long"
+
+    @pytest.mark.parametrize("model, field, kind", CASES)
+    def test_rejects_more_than_max_items_on_assignment(self, model, field, kind):
+        instance = model.from_dict(self._payload(model, field, kind, 1))
+        too_many = model.from_dict(self._payload(model, field, kind, MAX_ITEMS)).model_dump()[field]
+        too_many.append(too_many[0])
+
+        with pytest.raises(ValidationError):
+            setattr(instance, field, too_many)
+
+    def test_parent_zone_rejects_oversized_nested_list(self):
+        payload = {**BASE_ZONE, "type": "DYNAMIC_V2", "asns": {"include": _items("asns", MAX_ITEMS + 1)}}
+
+        with pytest.raises(ValidationError):
+            NetworkZone.from_dict(payload)
 
 
 class TestRemovedWrapperModels:

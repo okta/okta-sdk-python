@@ -29,6 +29,7 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictStr, field_validator
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
@@ -41,7 +42,7 @@ class DynamicNetworkZone(NetworkZone):
     DynamicNetworkZone
     """  # noqa: E501
 
-    asns: Optional[List[StrictStr]] = Field(
+    asns: Optional[Annotated[List[StrictStr], Field(max_length=75)]] = Field(
         default=None, description="An array of ASNs for a Network Zone"
     )
     proxy_type: Optional[StrictStr] = Field(
@@ -49,8 +50,11 @@ class DynamicNetworkZone(NetworkZone):
         description="The proxy type used for a Dynamic Network Zone",
         alias="proxyType",
     )
-    locations: Optional[List[NetworkZoneLocation]] = Field(
-        default=None, description="An array of geolocations for a Dynamic Network Zone"
+    locations: Optional[Annotated[List[NetworkZoneLocation], Field(max_length=75)]] = (
+        Field(
+            default=None,
+            description="An array of geolocations for a Dynamic Network Zone",
+        )
     )
     __properties: ClassVar[List[str]] = [
         "created",
