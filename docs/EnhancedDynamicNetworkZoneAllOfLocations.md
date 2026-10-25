@@ -6,8 +6,8 @@ The list of geolocations to include or exclude for an Enhanced Dynamic Network Z
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**include** | [**EnhancedDynamicNetworkZoneAllOfLocationsInclude**](EnhancedDynamicNetworkZoneAllOfLocationsInclude.md) |  | [optional] 
-**exclude** | [**EnhancedDynamicNetworkZoneAllOfLocationsExclude**](EnhancedDynamicNetworkZoneAllOfLocationsExclude.md) |  | [optional] 
+**include** | [**List[NetworkZoneLocation]**](NetworkZoneLocation.md) | An array of geolocations to include for an Enhanced Dynamic Network Zone | [optional] 
+**exclude** | [**List[NetworkZoneLocation]**](NetworkZoneLocation.md) | An array of geolocations to exclude for an Enhanced Dynamic Network Zone | [optional] 
 
 ## Example
 

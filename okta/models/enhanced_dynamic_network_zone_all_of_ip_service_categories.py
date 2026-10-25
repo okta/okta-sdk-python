@@ -29,6 +29,7 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
+from typing_extensions import Annotated
 from typing_extensions import Self
 
 from okta.models.ip_service_category import IPServiceCategory
@@ -39,11 +40,11 @@ class EnhancedDynamicNetworkZoneAllOfIpServiceCategories(BaseModel):
     IP services, such as a proxy or VPN, to include or exclude for an Enhanced Dynamic Network Zone
     """  # noqa: E501
 
-    include: Optional[List[IPServiceCategory]] = Field(
+    include: Optional[Annotated[List[IPServiceCategory], Field(max_length=75)]] = Field(
         default=None,
         description="IP services to include for an Enhanced Dynamic Network Zone",
     )
-    exclude: Optional[List[IPServiceCategory]] = Field(
+    exclude: Optional[Annotated[List[IPServiceCategory], Field(max_length=75)]] = Field(
         default=None,
         description="IP services to exclude for an Enhanced Dynamic Network Zone",
     )

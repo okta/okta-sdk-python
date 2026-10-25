@@ -28,15 +28,11 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
+from typing_extensions import Annotated
 from typing_extensions import Self
 
-from okta.models.enhanced_dynamic_network_zone_all_of_locations_exclude import (
-    EnhancedDynamicNetworkZoneAllOfLocationsExclude,
-)
-from okta.models.enhanced_dynamic_network_zone_all_of_locations_include import (
-    EnhancedDynamicNetworkZoneAllOfLocationsInclude,
-)
+from okta.models.network_zone_location import NetworkZoneLocation
 
 
 class EnhancedDynamicNetworkZoneAllOfLocations(BaseModel):
@@ -44,8 +40,18 @@ class EnhancedDynamicNetworkZoneAllOfLocations(BaseModel):
     The list of geolocations to include or exclude for an Enhanced Dynamic Network Zone
     """  # noqa: E501
 
-    include: Optional[EnhancedDynamicNetworkZoneAllOfLocationsInclude] = None
-    exclude: Optional[EnhancedDynamicNetworkZoneAllOfLocationsExclude] = None
+    include: Optional[Annotated[List[NetworkZoneLocation], Field(max_length=75)]] = (
+        Field(
+            default=None,
+            description="An array of geolocations to include for an Enhanced Dynamic Network Zone",
+        )
+    )
+    exclude: Optional[Annotated[List[NetworkZoneLocation], Field(max_length=75)]] = (
+        Field(
+            default=None,
+            description="An array of geolocations to exclude for an Enhanced Dynamic Network Zone",
+        )
+    )
     __properties: ClassVar[List[str]] = ["include", "exclude"]
 
     model_config = ConfigDict(
@@ -85,19 +91,29 @@ class EnhancedDynamicNetworkZoneAllOfLocations(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of include
+        # override the default output from pydantic by calling `to_dict()` of each item in include (list)
+        _items = []
         if self.include:
-            if not isinstance(self.include, dict):
-                _dict["include"] = self.include.to_dict()
-            else:
-                _dict["include"] = self.include
-
-        # override the default output from pydantic by calling `to_dict()` of exclude
+            for _item in self.include:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["include"] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in exclude (list)
+        _items = []
         if self.exclude:
-            if not isinstance(self.exclude, dict):
-                _dict["exclude"] = self.exclude.to_dict()
-            else:
-                _dict["exclude"] = self.exclude
+            for _item in self.exclude:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["exclude"] = _items
+        # set to None if include (nullable) is None
+        # and model_fields_set contains the field
+        if self.include is None and "include" in self.model_fields_set:
+            _dict["include"] = None
+
+        # set to None if exclude (nullable) is None
+        # and model_fields_set contains the field
+        if self.exclude is None and "exclude" in self.model_fields_set:
+            _dict["exclude"] = None
 
         return _dict
 
@@ -113,16 +129,12 @@ class EnhancedDynamicNetworkZoneAllOfLocations(BaseModel):
         _obj = cls.model_validate(
             {
                 "include": (
-                    EnhancedDynamicNetworkZoneAllOfLocationsInclude.from_dict(
-                        obj["include"]
-                    )
+                    [NetworkZoneLocation.from_dict(_item) for _item in obj["include"]]
                     if obj.get("include") is not None
                     else None
                 ),
                 "exclude": (
-                    EnhancedDynamicNetworkZoneAllOfLocationsExclude.from_dict(
-                        obj["exclude"]
-                    )
+                    [NetworkZoneLocation.from_dict(_item) for _item in obj["exclude"]]
                     if obj.get("exclude") is not None
                     else None
                 ),

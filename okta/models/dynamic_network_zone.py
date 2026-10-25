@@ -29,14 +29,12 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
 from pydantic import ConfigDict, Field, StrictStr, field_validator
+from typing_extensions import Annotated
 from typing_extensions import Self
 
-from okta.models.dynamic_network_zone_all_of_asns import DynamicNetworkZoneAllOfAsns
-from okta.models.dynamic_network_zone_all_of_locations import (
-    DynamicNetworkZoneAllOfLocations,
-)
 from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from okta.models.network_zone import NetworkZone
+from okta.models.network_zone_location import NetworkZoneLocation
 
 
 class DynamicNetworkZone(NetworkZone):
@@ -44,13 +42,20 @@ class DynamicNetworkZone(NetworkZone):
     DynamicNetworkZone
     """  # noqa: E501
 
-    asns: Optional[DynamicNetworkZoneAllOfAsns] = None
+    asns: Optional[Annotated[List[StrictStr], Field(max_length=75)]] = Field(
+        default=None, description="An array of ASNs for a Network Zone"
+    )
     proxy_type: Optional[StrictStr] = Field(
         default=None,
         description="The proxy type used for a Dynamic Network Zone",
         alias="proxyType",
     )
-    locations: Optional[DynamicNetworkZoneAllOfLocations] = None
+    locations: Optional[Annotated[List[NetworkZoneLocation], Field(max_length=75)]] = (
+        Field(
+            default=None,
+            description="An array of geolocations for a Dynamic Network Zone",
+        )
+    )
     __properties: ClassVar[List[str]] = [
         "created",
         "id",
@@ -122,19 +127,17 @@ class DynamicNetworkZone(NetworkZone):
             else:
                 _dict["_links"] = self.links
 
-        # override the default output from pydantic by calling `to_dict()` of asns
-        if self.asns:
-            if not isinstance(self.asns, dict):
-                _dict["asns"] = self.asns.to_dict()
-            else:
-                _dict["asns"] = self.asns
-
-        # override the default output from pydantic by calling `to_dict()` of locations
+        # override the default output from pydantic by calling `to_dict()` of each item in locations (list)
+        _items = []
         if self.locations:
-            if not isinstance(self.locations, dict):
-                _dict["locations"] = self.locations.to_dict()
-            else:
-                _dict["locations"] = self.locations
+            for _item in self.locations:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["locations"] = _items
+        # set to None if locations (nullable) is None
+        # and model_fields_set contains the field
+        if self.locations is None and "locations" in self.model_fields_set:
+            _dict["locations"] = None
 
         return _dict
 
@@ -162,14 +165,10 @@ class DynamicNetworkZone(NetworkZone):
                     if obj.get("_links") is not None
                     else None
                 ),
-                "asns": (
-                    DynamicNetworkZoneAllOfAsns.from_dict(obj["asns"])
-                    if obj.get("asns") is not None
-                    else None
-                ),
+                "asns": obj.get("asns"),
                 "proxyType": obj.get("proxyType"),
                 "locations": (
-                    DynamicNetworkZoneAllOfLocations.from_dict(obj["locations"])
+                    [NetworkZoneLocation.from_dict(_item) for _item in obj["locations"]]
                     if obj.get("locations") is not None
                     else None
                 ),

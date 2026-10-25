@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**asns** | [**DynamicNetworkZoneAllOfAsns**](DynamicNetworkZoneAllOfAsns.md) |  | [optional] 
+**asns** | **List[str]** | An array of ASNs for a Network Zone | [optional] 
 **proxy_type** | **str** | The proxy type used for a Dynamic Network Zone | [optional] 
-**locations** | [**DynamicNetworkZoneAllOfLocations**](DynamicNetworkZoneAllOfLocations.md) |  | [optional] 
+**locations** | [**List[NetworkZoneLocation]**](NetworkZoneLocation.md) | An array of geolocations for a Dynamic Network Zone | [optional] 
 
 ## Example
 

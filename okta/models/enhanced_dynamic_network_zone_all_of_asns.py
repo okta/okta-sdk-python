@@ -28,15 +28,9 @@ import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing_extensions import Annotated
 from typing_extensions import Self
-
-from okta.models.enhanced_dynamic_network_zone_all_of_asns_exclude import (
-    EnhancedDynamicNetworkZoneAllOfAsnsExclude,
-)
-from okta.models.enhanced_dynamic_network_zone_all_of_asns_include import (
-    EnhancedDynamicNetworkZoneAllOfAsnsInclude,
-)
 
 
 class EnhancedDynamicNetworkZoneAllOfAsns(BaseModel):
@@ -44,8 +38,14 @@ class EnhancedDynamicNetworkZoneAllOfAsns(BaseModel):
     The list of ASNs associated with an Enhanced Dynamic Network Zone
     """  # noqa: E501
 
-    include: Optional[EnhancedDynamicNetworkZoneAllOfAsnsInclude] = None
-    exclude: Optional[EnhancedDynamicNetworkZoneAllOfAsnsExclude] = None
+    include: Optional[Annotated[List[StrictStr], Field(max_length=75)]] = Field(
+        default=None,
+        description="An array of ASNs to include for an Enhanced Dynamic Network Zone",
+    )
+    exclude: Optional[Annotated[List[StrictStr], Field(max_length=75)]] = Field(
+        default=None,
+        description="An array of ASNs to exclude for an Enhanced Dynamic Network Zone",
+    )
     __properties: ClassVar[List[str]] = ["include", "exclude"]
 
     model_config = ConfigDict(
@@ -85,20 +85,6 @@ class EnhancedDynamicNetworkZoneAllOfAsns(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of include
-        if self.include:
-            if not isinstance(self.include, dict):
-                _dict["include"] = self.include.to_dict()
-            else:
-                _dict["include"] = self.include
-
-        # override the default output from pydantic by calling `to_dict()` of exclude
-        if self.exclude:
-            if not isinstance(self.exclude, dict):
-                _dict["exclude"] = self.exclude.to_dict()
-            else:
-                _dict["exclude"] = self.exclude
-
         return _dict
 
     @classmethod
@@ -111,17 +97,6 @@ class EnhancedDynamicNetworkZoneAllOfAsns(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "include": (
-                    EnhancedDynamicNetworkZoneAllOfAsnsInclude.from_dict(obj["include"])
-                    if obj.get("include") is not None
-                    else None
-                ),
-                "exclude": (
-                    EnhancedDynamicNetworkZoneAllOfAsnsExclude.from_dict(obj["exclude"])
-                    if obj.get("exclude") is not None
-                    else None
-                ),
-            }
+            {"include": obj.get("include"), "exclude": obj.get("exclude")}
         )
         return _obj
