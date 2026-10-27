@@ -17,7 +17,7 @@ import hashlib
 from datetime import datetime as dt
 from enum import Enum
 from typing import Any
-from urllib.parse import urlsplit, urlunsplit, urlparse, urlunparse
+from urllib.parse import urlsplit, urlunsplit
 
 from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH, EPOCH_YEAR
 
@@ -48,7 +48,7 @@ def normalize_dpop_url(url: str) -> str:
         >>> normalize_dpop_url('https://example.com/api/users?limit=10#section1')
         'https://example.com/api/users'
     """
-    parsed = urlparse(url)
+    parsed = urlsplit(url)
 
     # Validate that URL has required components for DPoP htu claim
     if not parsed.scheme or not parsed.netloc:
@@ -57,11 +57,10 @@ def normalize_dpop_url(url: str) -> str:
             "URL must include scheme (https) and netloc (domain)."
         )
 
-    return urlunparse((
+    return urlunsplit((
         parsed.scheme,   # scheme (http/https)
         parsed.netloc,   # network location (host:port)
         parsed.path,     # path
-        '',              # params (deprecated, kept for compatibility)
         '',              # query (empty per RFC 9449)
         ''               # fragment (empty per RFC 9449)
     ))
