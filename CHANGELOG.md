@@ -1,5 +1,20 @@
 # Okta Python SDK Changelog
 
+# 3.4.7
+
+## Fixed
+* Fixed a `ValidationError` crash in `list_network_zones()` and `get_network_zone()` for `DYNAMIC` and `DYNAMIC_V2` zones with `asns` or `locations` values, including empty arrays. The `allOf` wrappers on these array fields in `openapi/api.yaml` generated empty object models instead of lists; the fields now generate as `List[str]` and `List[NetworkZoneLocation]`, aligned with the upstream spec. The six empty wrapper models (`DynamicNetworkZoneAllOf{Asns,Locations}` and `EnhancedDynamicNetworkZoneAllOf{Asns,Locations}{Include,Exclude}`) are removed; use the plain lists instead. Network Zone `asns`, `locations` and `ipServiceCategories` lists are now limited to 75 entries. PR [#601](https://github.com/okta/okta-sdk-python/pull/601)
+
+## Security
+* Resolved Dependabot security alerts by upgrading runtime dependencies: `aiohttp` 3.14.4 ([#603](https://github.com/okta/okta-sdk-python/pull/603)) and `PyJWT` 2.15.1 ([#599](https://github.com/okta/okta-sdk-python/pull/599)).
+* Upgraded `jwcrypto` to 1.6.1 ([#591](https://github.com/okta/okta-sdk-python/pull/591)) and the `urllib3` minimum to 2.8.0 ([#585](https://github.com/okta/okta-sdk-python/pull/585)) to pick up upstream security releases.
+* Added a `virtualenv` >= 21.14.9 development dependency to resolve Dependabot security alerts for the version pulled in transitively by `tox`.
+
+## Dependencies
+* Bumped runtime dependencies: `pydantic` 2.14.0 ([#604](https://github.com/okta/okta-sdk-python/pull/604)), `pydash` 8.1.0 ([#595](https://github.com/okta/okta-sdk-python/pull/595)), and `typing-extensions` >= 4.16.0 ([#586](https://github.com/okta/okta-sdk-python/pull/586)).
+* Bumped development and testing dependencies: `flake8` 7.4.1 ([#588](https://github.com/okta/okta-sdk-python/pull/588)), `mypy` 2.4.0 ([#598](https://github.com/okta/okta-sdk-python/pull/598)), `pytest` 9.1.1 ([#589](https://github.com/okta/okta-sdk-python/pull/589)), `pytest-mock` 3.16.0 ([#597](https://github.com/okta/okta-sdk-python/pull/597)), `pytest-randomly` >= 5.0.0 ([#592](https://github.com/okta/okta-sdk-python/pull/592)), `pytest-recording` 0.14.0 ([#596](https://github.com/okta/okta-sdk-python/pull/596)), `tox` 4.65.0 ([#605](https://github.com/okta/okta-sdk-python/pull/605)), `types-python-dateutil` >= 2.9.0.20260807 ([#593](https://github.com/okta/okta-sdk-python/pull/593)), and `virtualenv` >= 21.14.9.
+* Updated OpenAPI Generator mustache templates (`requirements.mustache`, `setup.mustache`, `pyproject.mustache`, `test-requirements.mustache`) to reflect the new dependency versions for consistent future code generation.
+
 # 3.4.6
 
 ## Fixed
