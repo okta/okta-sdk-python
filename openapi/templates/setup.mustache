@@ -34,11 +34,11 @@ NAME = "okta"
 PYTHON_REQUIRES = ">=3.10"
 REQUIRES = [
     "aenum >= 3.1.17",
-    "aiohttp >= 3.14.4",
+    "aiohttp >= 3.14.5",
     "blinker >= 1.9.0",
     'jwcrypto >= 1.6.1',
     "pycryptodomex >= 3.23.0",
-    "pydantic >= 2.14.0",
+    "pydantic >= 2.14.1",
     "pydash >= 8.1.0",
     "PyJWT >= 2.15.1",
     "python-dateutil >= 2.9.0.post0",

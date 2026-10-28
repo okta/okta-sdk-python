@@ -14,16 +14,17 @@ python = "^3.10"
 
 urllib3 = ">= 2.8.0"
 python-dateutil = ">=2.9.0.post0"
-pydantic = ">=2.14.0"
+pydantic = ">=2.14.1"
 typing-extensions = ">=4.16.0"
 
 [tool.poetry.dev-dependencies]
 pytest = ">=9.1.1"
 tox = ">=4.65.0"
 flake8 = ">=7.4.1"
-types-python-dateutil = ">=2.9.0.20260807"
+types-python-dateutil = ">=2.9.0.20261021"
 mypy = "2.4.0"
 virtualenv = ">=21.14.9"
+filelock = ">=4.2.1"
 
 
 [build-system]
