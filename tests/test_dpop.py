@@ -162,6 +162,27 @@ class TestDPoPProofGenerator(unittest.TestCase):
         # htu should be clean
         self.assertEqual(decoded['htu'], 'https://example.okta.com/api/v1/users')
 
+    def test_url_parsing_preserves_path_parameters(self):
+        """Signed proofs retain the complete path while excluding query/fragment."""
+        paths = (
+            '/api/v1/users;view=full',
+            '/api/v1/users;',
+            '/api/v1/users;x=1;y=2',
+            '/api/v1/users%3Bview=full',
+            '/api/v1/teams;view=full/users',
+        )
+        for path in paths:
+            with self.subTest(path=path):
+                expected = 'https://example.okta.com' + path
+                proof = self.generator.generate_proof_jwt(
+                    'GET', expected + '?limit=10#section'
+                )
+                public_key = jwt.PyJWK.from_dict(
+                    jwt.get_unverified_header(proof)['jwk']
+                ).key
+                claims = jwt.decode(proof, public_key, algorithms=['RS256'])
+                self.assertEqual(claims['htu'], expected)
+
     def test_generate_proof_with_nonce(self):
         """Test DPoP proof generation with nonce."""
         proof = self.generator.generate_proof_jwt(
