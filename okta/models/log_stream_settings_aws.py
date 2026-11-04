@@ -55,9 +55,9 @@ class LogStreamSettingsAws(BaseModel):
     @field_validator("event_source_name")
     def event_source_name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
-        if not re.match(r"^[a-zA-Z0-9.\-_]$", value):
+        if not re.match(r"^[a-zA-Z0-9.\-_]+$", value):
             raise ValueError(
-                r"must validate the regular expression /^[a-zA-Z0-9.\-_]$/"
+                r"must validate the regular expression /^[a-zA-Z0-9.\-_]+$/"
             )
         return value
 
