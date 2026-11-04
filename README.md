@@ -555,7 +555,7 @@ The SDK now provides helper functions that handle pagination automatically:
 
 ```python
 from okta.client import Client as OktaClient
-from okta import paginate_all
+from okta.pagination import paginate_all
 
 async def fetch_all_users(okta_client):
     """Fetch all users automatically"""
@@ -563,7 +563,7 @@ async def fetch_all_users(okta_client):
 
     # Automatically paginate through all users
     async for user in paginate_all(
-        okta_client.list_users_with_http_info,
+        okta_client.list_users,
         limit=200  # Items per page
     ):
         all_users.append(user)
@@ -575,13 +575,13 @@ async def fetch_all_users(okta_client):
 #### Method 2: `paginate_pages()` - Process in Batches
 
 ```python
-from okta import paginate_pages
+from okta.pagination import paginate_pages
 
 async def process_users_in_batches(okta_client):
     """Process users page by page"""
 
     async for page_data, page_num, has_more in paginate_pages(
-        okta_client.list_users_with_http_info,
+        okta_client.list_users,
         limit=100,
         max_pages=5  # Optional: limit number of pages
     ):
@@ -598,14 +598,14 @@ async def process_users_in_batches(okta_client):
 #### Method 3: `PaginationHelper` - Manual Control
 
 ```python
-from okta import PaginationHelper
+from okta.pagination import PaginationHelper
 
 async def manual_pagination(okta_client):
     """Manually control pagination"""
     after_cursor = None
 
     while True:
-        users, response, error = await okta_client.list_users_with_http_info(
+        users, response, error = await okta_client.list_users(
             limit=200,
             after=after_cursor
         )
@@ -679,7 +679,7 @@ Extract the pagination cursor from response headers.
 
 **Example:**
 ```python
-users, response, error = await client.list_users_with_http_info(limit=100)
+users, response, error = await client.list_users(limit=100)
 next_cursor = PaginationHelper.extract_next_cursor(response.headers)
 if next_cursor:
     print(f"Next page available with cursor: {next_cursor}")
@@ -711,7 +711,7 @@ async def paginate_users(okta_client):
 
     while True:
         # Use _with_http_info to get response headers
-        users, response, error = await okta_client.list_users_with_http_info(
+        users, response, error = await okta_client.list_users(
             limit=200,  # Maximum per page
             after=after_cursor
         )
@@ -795,7 +795,7 @@ Most list operations support pagination:
 ```python
 import asyncio
 from okta.client import Client as OktaClient
-from okta import paginate_all
+from okta.pagination import paginate_all
 
 async def main():
     config = {
@@ -807,7 +807,7 @@ async def main():
 
     # Collect all users
     all_users = [user async for user in paginate_all(
-        client.list_users_with_http_info,
+        client.list_users,
         limit=200
     )]
 
@@ -822,7 +822,7 @@ if __name__ == "__main__":
 ```python
 import asyncio
 from okta.client import Client as OktaClient
-from okta import paginate_pages
+from okta.pagination import paginate_pages
 
 async def process_users_in_batches():
     config = {
@@ -834,7 +834,7 @@ async def process_users_in_batches():
     total_processed = 0
 
     async for page_data, page_num, has_more in paginate_pages(
-        client.list_users_with_http_info,
+        client.list_users,
         limit=200
     ):
         # Process this batch
@@ -860,7 +860,7 @@ if __name__ == "__main__":
 ```python
 import asyncio
 from okta.client import Client as OktaClient
-from okta import paginate_all
+from okta.pagination import paginate_all
 
 async def fetch_active_applications():
     config = {
@@ -896,7 +896,7 @@ if __name__ == "__main__":
 ```python
 import asyncio
 from okta.client import Client as OktaClient
-from okta import PaginationHelper
+from okta.pagination import PaginationHelper
 
 async def manual_pagination_example():
     config = {
